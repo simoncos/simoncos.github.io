@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哈巴雪山速攀实战复盘 (2025.10)</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --warning-color: #e67e22;
+            --danger-color: #e74c3c;
+            --success-color: #27ae60;
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header & Stats */
+        header {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 { margin: 0 0 10px 0; color: var(--primary-color); }
+        .subtitle { color: #666; margin-bottom: 20px; }
+
+        .stat-box {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 1.4em; font-weight: 800; color: var(--accent-color); display: block; }
+        .stat-label { font-size: 0.85em; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Main Layout - 2 Columns */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Equal width columns */
+            gap: 20px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-top: 4px solid transparent;
+        }
+        
+        /* Card Border Colors for visual distinction */
+        .card.timeline-card { border-top-color: var(--primary-color); }
+        .card.terrain-card { border-top-color: var(--primary-color); }
+        .card.gear-card { border-top-color: var(--success-color); }
+        .card.tips-card { border-top-color: var(--warning-color); }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.25em;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* Timeline Styles */
+        .timeline-item {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 15px;
+            border-left: 2px solid #eee;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+        .time { font-weight: bold; color: var(--primary-color); font-size: 0.95em; }
+        .elevation { color: var(--danger-color); font-size: 0.85em; font-weight: bold; background: #fff0f0; padding: 2px 6px; border-radius: 4px; margin-left: 5px;}
+        .desc { font-size: 0.9em; color: #555; margin-top: 4px; }
+
+        /* Gear List */
+        .gear-list { list-style: none; padding: 0; margin: 0; }
+        .gear-list li {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            align-items: flex-start;
+        }
+        .gear-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        
+        .gear-tag {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            color: white;
+            margin-right: 10px;
+            white-space: nowrap;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .tag-blackhorse { background-color: var(--warning-color); }
+        .tag-core { background-color: var(--accent-color); }
+        .tag-lesson { background-color: var(--danger-color); }
+        .tag-god { background-color: #9b59b6; }
+
+        .gear-content strong { display: block; color: #333; font-size: 0.95em; }
+        .gear-content span { font-size: 0.85em; color: #666; display: block; margin-top: 2px; }
+
+        /* Tips List */
+        .tips-list { list-style: none; padding: 0; margin: 0; }
+        .tips-list li {
+            margin-bottom: 12px;
+            background: #fff9f0;
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 3px solid var(--warning-color);
+        }
+        .tips-title { font-weight: bold; font-size: 0.95em; color: #d35400; display: block; margin-bottom: 4px; }
+        .tips-text { font-size: 0.85em; color: #555; }
+
+        /* Terrain & Fitness */
+        .section-block { margin-bottom: 15px; }
+        .section-title { font-weight: bold; color: var(--primary-color); font-size: 1em; margin-bottom: 5px; display: block; }
+        .section-list { padding-left: 20px; margin: 0; font-size: 0.9em; color: #555; }
+        .section-list li { margin-bottom: 4px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content { grid-template-columns: 1fr; }
+            .stat-box { gap: 20px; }
+            .stat-item { flex: 1 1 40%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>哈巴雪山 (5396m) 实战复盘</h1>
+        <div class="subtitle">2025.10.02 | 丽江-哈巴村-冲顶 | 两天一夜速通版</div>
+        
+        <div class="stat-box">
+            <div class="stat-item">
+                <span class="stat-value">11.5h</span>
+                <span class="stat-label">冲顶往返</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">1300m</span>
+                <span class="stat-label">单日爬升</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">~20%</span>
+                <span class="stat-label">雨雪天登顶率</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">7天</span>
+                <span class="stat-label">行前体能突击</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <!-- 左栏：行程与环境 -->
+        <div class="column">
+            <!-- 行程卡片 -->
+            <div class="card timeline-card">
+                <h2>🗓️ 极速行程 (Day 0-2)</h2>
+                <div class="timeline-item">
+                    <span class="time">Day 0 22:00</span> <span class="elevation">2400m</span>
+                    <div class="desc">飞抵丽江，连夜整理物资，睡眠仅4.5h。</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="time">Day 1 06:00</span> <span class="elevation">2400m -> 4100m</span>
+                    <div class="desc">乘车至哈巴村，换乘骡子至大本营(BC)。<br><strong>决策：</strong>雨天泥泞，骑骡子节省了宝贵体力。</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="time">Day 2 03:00</span> <span class="elevation">4100m -> 5396m</span>
+                    <div class="desc"><strong>冲顶：</strong>雨雪交加。4500m换装，4900m绝望坡。<br>09:31 登顶。</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="time">Day 2 14:30</span> <span class="elevation">5396m -> 1900m</span>
+                    <div class="desc">下撤回BC，骑骡回村，乘车回丽江。<br><strong>状态：</strong>高反呕吐，极度疲惫。</div>
+                </div>
+            </div>
+
+            <!-- 地形与体能卡片 -->
+            <div class="card terrain-card">
+                <h2>🏔️ 关键路段 & 体能</h2>
+                
+                <div class="section-block">
+                    <span class="section-title">1. 碎石坡 (4500m+)</span>
+                    <ul class="section-list">
+                        <li><strong>地形：</strong>乱石穿空，混合冰雪。</li>
+                        <li><strong>体验：</strong>"跳跳乐"，需冰爪抓地，虽难走但有趣。</li>
+                        <li><strong>策略：</strong>信任装备，大胆踩踏。</li>
+                    </ul>
+                </div>
+
+                <div class="section-block">
+                    <span class="section-title">2. 绝望坡 (4900m-5300m)</span>
+                    <ul class="section-list">
+                        <li><strong>地形：</strong>45度雪坡，深雪，暗坑。</li>
+                        <li><strong>难点：</strong>缺氧+体能极限+风雪迷眼。</li>
+                        <li><strong>下撤：</strong>比上山更难。雪软易滑，不要死盯脚下。</li>
+                    </ul>
+                </div>
+
+                <div style="border-top: 1px dashed #eee; margin: 15px 0;"></div>
+
+                <div class="section-block">
+                    <span class="section-title">💪 体能准备 (7天突击)</span>
+                    <ul class="section-list">
+                        <li><strong>核心：</strong>爬楼梯 (100层/300m爬升)，30分钟/次，共5次。</li>
+                        <li><strong>恢复：</strong>辅酶Q10 + 氨糖 + 维D + 12点前睡觉。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右栏：装备与经验 -->
+        <div class="column">
+            <!-- 装备卡片 -->
+            <div class="card gear-card">
+                <h2>🎒 装备实战红黑榜</h2>
+                <ul class="gear-list">
+                    <li>
+                        <span class="gear-tag tag-blackhorse">MVP黑马</span>
+                        <div class="gear-content">
+                            <strong>长款雨衣 (迪卡侬)</strong>
+                            <span>全程雨雪，冲锋衣扛不住。雨衣作最外层防风防水，还能缩手取暖。</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="gear-tag tag-god">S级神器</span>
+                        <div class="gear-content">
+                            <strong>登山杖</strong>
+                            <span>下山必备。过雪线后取出，极大缓解膝盖压力，提升速度。</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="gear-tag tag-core">核心</span>
+                        <div class="gear-content">
+                            <strong>冰爪 (长齿) & 冰镐</strong>
+                            <span>碎石坡和绝望坡的命根子。冰镐绝望坡不离手，防滑坠。</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="gear-tag tag-lesson">教训</span>
+                        <div class="gear-content">
+                            <strong>鞋袜防水系统</strong>
+                            <span>全湿导致失温风险。<strong>改进：</strong>袜子上套保鲜膜，牺牲透气换防水。</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="gear-tag tag-lesson">教训</span>
+                        <div class="gear-content">
+                            <strong>保温杯固定</strong>
+                            <span>未固定导致滑落。热水是救命物资，必须用快挂锁死。</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 避坑指南卡片 -->
+            <div class="card tips-card">
+                <h2>⚠️ 避坑与生存指南</h2>
+                <ul class="tips-list">
+                    <li>
+                        <span class="tips-title">关于高反与药物</span>
+                        <span class="tips-text">大本营(4100m)头痛失眠是常态。协作建议不要乱吃药（含葡萄糖），以免掩盖身体真实反应。</span>
+                    </li>
+                    <li>
+                        <span class="tips-title">大本营生存环境</span>
+                        <span class="tips-text">雨天地面是“屎状泥泞”，厕所体验极差。号称有WiFi但连不上，做好失联准备。</span>
+                    </li>
+                    <li>
+                        <span class="tips-title">协作的使用</span>
+                        <span class="tips-text">建议请协作背包（钞能力），节省体能冲顶。协作不一定拉你，但会指路和保障安全。</span>
+                    </li>
+                    <li>
+                        <span class="tips-title">防失温策略</span>
+                        <span class="tips-text">4500m换衣：冲锋衣内穿排骨羽绒。手套湿透后，手缩进雨衣袖子里取暖很有效。</span>
+                    </li>
+                    <li>
+                        <span class="tips-title">心态管理</span>
+                        <span class="tips-text">不要去想还差多少，"Just do it"。直到不得不停下来为止。留有余量，不要为了面子硬撑。</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; color: #888; font-size: 0.9em; margin-top: 40px; padding-bottom: 20px;">
+        <p>“人如果不沉醉于什么，就仿佛活不下去。” —— 谨以此纪念2025哈巴之行</p>
+    </footer>
+</div>
+
+</body>
+</html>

@@ -329,7 +329,7 @@ This memoir about Haba Snow Mountain contains rich first-hand experiences and pr
     - Upper body: base layer → fleece → down puffer → shell → rain poncho
     - Lower body: pants → fleece → shell pants → gaiters
     - Hands: thin waterproof gloves + backup thick ski gloves
-    - Feet: thick socks + high-cut waterproof boots + crampons; consider cling film for extra waterproofing
+    - Feet: thick socks + high-cut waterproof boots + crampons; consider plastic wrap for extra waterproofing
   - **Thermos:** Tie it down securely to avoid losing it.
 - **Base Camp conditions:**
   - Lodging is relatively basic (multi-person rooms; electricity; poor network).
@@ -407,4 +407,6 @@ You can save the code as an `.html` file and open it in a browser, or just view 
 
 *(To fit platform display, the HTML was manually converted to an image.)*
 
-![Haba Snow Mountain Speed-Ascent Field Debrief Dashboard](assets/images/gemini-summary.png)
+<iframe class="embedded-page" src="assets/pages/my-haba-snow-mountain-journey-gemini-summary.en.html" title="Haba Snow Mountain Speed-Ascent Field Debrief Dashboard" loading="lazy"></iframe>
+
+[Open the dashboard in a new tab](assets/pages/my-haba-snow-mountain-journey-gemini-summary.en.html)

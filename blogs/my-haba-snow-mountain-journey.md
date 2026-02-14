@@ -386,5 +386,7 @@ date: 2026-01-20
 
 *(为适应平台显示，已手动将html转为图片)*
 
-![哈巴雪山速攀实战复盘可视化大屏](assets/images/gemini-summary.png)
+<iframe class="embedded-page" src="assets/pages/my-haba-snow-mountain-journey-gemini-summary.html" title="哈巴雪山速攀实战复盘可视化大屏" loading="lazy"></iframe>
+
+[在新标签页打开可视化大屏](assets/pages/my-haba-snow-mountain-journey-gemini-summary.html)
 

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haba Snow Mountain Speed Climb Review (2025.10)</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --warning-color: #e67e22;
+            --danger-color: #e74c3c;
+            --success-color: #27ae60;
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header & Stats */
+        header {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 { margin: 0 0 10px 0; color: var(--primary-color); }
+        .subtitle { color: #666; margin-bottom: 20px; font-weight: 500; }
+
+        .stat-box {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 1.4em; font-weight: 800; color: var(--accent-color); display: block; }
+        .stat-label { font-size: 0.75em; color: #888; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+        /* Main Layout - 2 Columns */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Equal width columns */
+            gap: 20px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-top: 4px solid transparent;
+        }
+        
+        /* Card Border Colors */
+        .card.timeline-card { border-top-color: var(--primary-color); }
+        .card.terrain-card { border-top-color: var(--primary-color); }
+        .card.gear-card { border-top-color: var(--success-color); }
+        .card.tips-card { border-top-color: var(--warning-color); }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.25em;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* Timeline Styles */
+        .timeline-item {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 15px;
+            border-left: 2px solid #eee;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+        .time { font-weight: bold; color: var(--primary-color); font-size: 0.95em; }
+        .elevation { color: var(--danger-color); font-size: 0.85em; font-weight: bold; background: #fff0f0; padding: 2px 6px; border-radius: 4px; margin-left: 5px;}
+        .desc { font-size: 0.9em; color: #555; margin-top: 4px; }
+
+        /* Gear List */
+        .gear-list { list-style: none; padding: 0; margin: 0; }
+        .gear-list li {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            align-items: flex-start;
+        }
+        .gear-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        
+        .gear-tag {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            color: white;
+            margin-right: 10px;
+            white-space: nowrap;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 2px;
+            text-transform: uppercase;
+        }
+        .tag-blackhorse { background-color: var(--warning-color); }
+        .tag-core { background-color: var(--accent-color); }
+        .tag-lesson { background-color: var(--danger-color); }
+        .tag-god { background-color: #9b59b6; }
+
+        .gear-content strong { display: block; color: #333; font-size: 0.95em; }
+        .gear-content span { font-size: 0.85em; color: #666; display: block; margin-top: 2px; }
+
+        /* Tips List */
+        .tips-list { list-style: none; padding: 0; margin: 0; }
+        .tips-list li {
+            margin-bottom: 12px;
+            background: #fff9f0;
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 3px solid var(--warning-color);
+        }
+        .tips-title { font-weight: bold; font-size: 0.95em; color: #d35400; display: block; margin-bottom: 4px; }
+        .tips-text { font-size: 0.85em; color: #555; }
+
+        /* Terrain & Fitness */
+        .section-block { margin-bottom: 15px; }
+        .section-title { font-weight: bold; color: var(--primary-color); font-size: 1em; margin-bottom: 5px; display: block; }
+        .section-list { padding-left: 20px; margin: 0; font-size: 0.9em; color: #555; }
+        .section-list li { margin-bottom: 4px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content { grid-template-columns: 1fr; }
+            .stat-box { gap: 20px; }
+            .stat-item { flex: 1 1 40%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Haba Snow Mountain (5396m) Review</h1>
+        <div class="subtitle">Oct 2, 2025 | Lijiang - Haba Village - Summit | 2 Days 1 Night Speed Run</div>
+        
+        <div class="stat-box">
+            <div class="stat-item">
+                <span class="stat-value">11.5h</span>
+                <span class="stat-label">Round Trip</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">1300m</span>
+                <span class="stat-label">Elev. Gain</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">~20%</span>
+                <span class="stat-label">Success Rate (Rain)</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">7 Days</span>
+                <span class="stat-label">Prep Training</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <!-- Left Column: Timeline & Environment -->
+        <div class="column">
+            <!-- Timeline Card -->
+            <div class="card timeline-card">
+                <h2>🗓️ Speed Itinerary (Day 0-2)</h2>
+                <div class="timeline-item">
+                    <span class="time">Day 0 22:00</span> <span class="elevation">2400m</span>
+                    <div class="desc">Arrived in Lijiang, packed gear overnight. Only 4.5h sleep.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="time">Day 1 06:00</span> <span class="elevation">2400m -> 4100m</span>
+                    <div class="desc">Car to Haba Village, Mule to Base Camp (BC).<br><strong>Decision:</strong> Due to rain and mud, riding a mule saved vital energy.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="time">Day 2 03:00</span> <span class="elevation">4100m -> 5396m</span>
+                    <div class="desc"><strong>Summit Push:</strong> Rain & Snow. Gear change at 4500m. Despair Slope at 4900m.<br>09:31 Summited.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="time">Day 2 14:30</span> <span class="elevation">5396m -> 1900m</span>
+                    <div class="desc">Descended to BC, mule to village, car to Lijiang.<br><strong>Status:</strong> Altitude sickness (vomiting), extreme exhaustion.</div>
+                </div>
+            </div>
+
+            <!-- Terrain & Fitness Card -->
+            <div class="card terrain-card">
+                <h2>🏔️ Terrain & Fitness</h2>
+                
+                <div class="section-block">
+                    <span class="section-title">1. Scree Slope (4500m+)</span>
+                    <ul class="section-list">
+                        <li><strong>Terrain:</strong> Loose rocks, mixed ice/snow.</li>
+                        <li><strong>Experience:</strong> "Platforming game". Crampons needed for grip. Difficult but fun.</li>
+                        <li><strong>Strategy:</strong> Trust your gear, step boldly.</li>
+                    </ul>
+                </div>
+
+                <div class="section-block">
+                    <span class="section-title">2. Despair Slope (4900m-5300m)</span>
+                    <ul class="section-list">
+                        <li><strong>Terrain:</strong> 45° snow slope, deep snow, hidden pits.</li>
+                        <li><strong>Difficulty:</strong> Hypoxia + Physical limit + Blinding snow.</li>
+                        <li><strong>Descent:</strong> Harder than ascent. Soft snow is slippery. Don't stare at your feet.</li>
+                    </ul>
+                </div>
+
+                <div style="border-top: 1px dashed #eee; margin: 15px 0;"></div>
+
+                <div class="section-block">
+                    <span class="section-title">💪 Prep Training (7 Days)</span>
+                    <ul class="section-list">
+                        <li><strong>Core:</strong> Stair climbing (100 floors/300m gain), 30min/session, 5 sessions.</li>
+                        <li><strong>Recovery:</strong> CoQ10 + Glucosamine + Vit D + Sleep before midnight.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Gear & Tips -->
+        <div class="column">
+            <!-- Gear Card -->
+            <div class="card gear-card">
+                <h2>🎒 Gear: The Good & The Bad</h2>
+                <ul class="gear-list">
+                    <li>
+                        <span class="gear-tag tag-blackhorse">MVP</span>
+                        <div class="gear-content">
+                            <strong>Long Raincoat (Decathlon)</strong>
+                            <span>Rain/snow throughout. Hardshell wasn't enough. Raincoat as outer layer blocked wind/water; kept hands inside for warmth.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="gear-tag tag-god">S-Tier</span>
+                        <div class="gear-content">
+                            <strong>Trekking Poles</strong>
+                            <span>Essential for descent. Deployed after crossing the snow line. Saved knees and boosted speed significantly.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="gear-tag tag-core">Core</span>
+                        <div class="gear-content">
+                            <strong>Crampons (Long) & Ice Axe</strong>
+                            <span>Life-savers on Scree & Despair slopes. Ice axe never left hand on steep sections to prevent sliding.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="gear-tag tag-lesson">Lesson</span>
+                        <div class="gear-content">
+                            <strong>Waterproofing (Shoes/Socks)</strong>
+                            <span>Wet feet = Hypothermia risk. <strong>Fix:</strong> Wrap socks in plastic wrap. Sacrifice breathability for dryness.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="gear-tag tag-lesson">Lesson</span>
+                        <div class="gear-content">
+                            <strong>Thermos Security</strong>
+                            <span>Dropped it due to loose carry. Hot water is a lifeline; must be secured with a carabiner.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tips Card -->
+            <div class="card tips-card">
+                <h2>⚠️ Survival Guide & Tips</h2>
+                <ul class="tips-list">
+                    <li>
+                        <span class="tips-title">Altitude & Meds</span>
+                        <span class="tips-text">Headaches/Insomnia at BC (4100m) are normal. Guides advise against random meds (even glucose) to avoid masking symptoms.</span>
+                    </li>
+                    <li>
+                        <span class="tips-title">Base Camp Conditions</span>
+                        <span class="tips-text">Rainy ground turns into "poop-like mud". Toilets are terrible. WiFi exists but rarely works—expect to be offline.</span>
+                    </li>
+                    <li>
+                        <span class="tips-title">Using Guides/Porters</span>
+                        <span class="tips-text">Pay for a porter to carry your bag to save energy for the summit. Guides might not pull you, but they ensure safety and route finding.</span>
+                    </li>
+                    <li>
+                        <span class="tips-title">Hypothermia Prevention</span>
+                        <span class="tips-text">Change at 4500m: Down jacket under shell. If gloves get wet, retract hands into raincoat sleeves—very effective.</span>
+                    </li>
+                    <li>
+                        <span class="tips-title">Mindset</span>
+                        <span class="tips-text">Don't think about "how far left", just do it. Stop only when you absolutely must. Leave energy in reserve; don't ego-push.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; color: #888; font-size: 0.9em; margin-top: 40px; padding-bottom: 20px;">
+        <p>“If a man is not drunk on something, he cannot survive.” — Commemorating Haba 2025</p>
+    </footer>
+</div>
+
+</body>
+</html>
