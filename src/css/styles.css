@@ -714,6 +714,33 @@ footer p {
     box-shadow: 0 0 3px rgba(0, 198, 255, 0.3);  /* Glowing effect */
 }
 
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    padding: 8px 10px;
+    font-size: 14px;
+    line-height: 1;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #666;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0.9;
+    z-index: 1000;
+}
+
+.back-to-top:hover {
+    opacity: 1;
+}
+
+.dark-mode .back-to-top {
+    background-color: #444;
+    color: #fff;
+    border-color: #666;
+}
+
 /* Styles for series list */
 .series-posts li {
     display: block;
