@@ -384,8 +384,6 @@ date: 2026-01-20
 
 你可以将以下代码保存为 `.html` 文件在浏览器中打开，或者直接查看渲染后的布局思路。
 
-*(为适应平台显示，已手动将html转为图片)*
-
 <iframe class="embedded-page" src="assets/pages/my-haba-snow-mountain-journey-gemini-summary.html" title="哈巴雪山速攀实战复盘可视化大屏" loading="lazy"></iframe>
 
 [在新标签页打开可视化大屏](assets/pages/my-haba-snow-mountain-journey-gemini-summary.html)
