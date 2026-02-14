@@ -228,6 +228,25 @@ nav ul li a.active {
     margin-bottom: 20px;
 }
 
+.lang-switch {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.lang-switch-link {
+    text-decoration: none;
+    color: #666;
+    padding: 1px 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+.lang-switch-link:hover {
+    background-color: #f0f0f0;
+}
+
 .read-more {
     display: inline-block;
     margin-top: 0.5em;

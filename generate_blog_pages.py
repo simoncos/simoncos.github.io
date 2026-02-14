@@ -209,6 +209,26 @@ def generate_blog_post(markdown_path, md_file, html_file, metadata, html_content
     """Generate and save individual blog post"""
     try:
         title, content = extract_title_and_content(html_content)
+
+        md_path = Path('blogs') / md_file
+        if md_file.endswith('.en.md'):
+            paired_md_file = md_file[:-len('.en.md')] + '.md'
+            paired_label = '中文'
+            paired_html_file = paired_md_file.replace('.md', '.html')
+        else:
+            paired_md_file = md_file[:-len('.md')] + '.en.md'
+            paired_label = 'English'
+            paired_html_file = paired_md_file.replace('.md', '.html')
+
+        paired_md_path = Path('blogs') / paired_md_file
+        if paired_md_path.exists():
+            lang_switch_html = (
+                f'<div class="lang-switch">'
+                f'<a class="lang-switch-link" href="{paired_html_file}">{paired_label}</a>'
+                f'</div>'
+            )
+        else:
+            lang_switch_html = ''
         
         blog_posts.append({
             "title": title,
@@ -245,6 +265,7 @@ def generate_blog_post(markdown_path, md_file, html_file, metadata, html_content
         page_content = page_content.replace('{{CONTENT}}', html_content)
         page_content = page_content.replace('{{BACKLINKS}}', json.dumps(backlinks[html_file]))
         page_content = page_content.replace('{{TAGS}}', tags_html)
+        page_content = page_content.replace('{{LANG_SWITCH}}', lang_switch_html)
 
         with open(os.path.join('blogs', html_file), 'w', encoding='utf-8') as f:
             f.write(page_content)
