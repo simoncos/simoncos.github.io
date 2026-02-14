@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Posts - My Personal Website</title>
+    <title data-page-title="Blog Posts - [owner]'s Website">Blog Posts - My Personal Website</title>
     <link rel="stylesheet" href="src/css/styles.css">
+    <script src="src/js/site-config.js"></script>
     <script src="src/js/load-nav.js"></script>
     <script src="src/js/dark-mode.js"></script>
 </head>
 <body>
     <header>
-        <h1>My Personal Website</h1>
+        <h1 data-site-title>My Personal Website</h1>
     </header>
     <div id="navigation-placeholder"></div>
     <div class="container">
@@ -18,7 +19,7 @@
         {{BLOG_LISTINGS}}
     </div>
     <footer>
-        <p>&copy; <script>document.write(new Date().getFullYear())</script> Your Name. All rights reserved.</p>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>Your Name</span>. All rights reserved.</p>
     </footer>
 </body>
 </html>

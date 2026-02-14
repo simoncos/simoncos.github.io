@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const blogList = document.getElementById('blog-list');
+    const siteConfig = window.SITE_CONFIG || {};
+    const resolvePath = typeof siteConfig.resolvePath === 'function'
+        ? siteConfig.resolvePath.bind(siteConfig)
+        : (relativePath) => relativePath;
 
     if (!blogList) {
         return;
@@ -8,7 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show loading state
     blogList.innerHTML = '<li>Loading blog posts...</li>';
     
-    const dataCandidates = ['data/blog_data.json', '/data/blog_data.json'];
+    const dataCandidates = [
+        resolvePath('data/blog_data.json'),
+        'data/blog_data.json',
+        '/data/blog_data.json'
+    ];
 
     const fetchBlogData = async () => {
         let lastError = null;

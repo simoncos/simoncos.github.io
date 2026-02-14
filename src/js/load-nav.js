@@ -1,8 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const siteConfig = window.SITE_CONFIG || {};
+    const basePath = siteConfig.basePath || '/';
+    const resolvePath = typeof siteConfig.resolvePath === 'function'
+        ? siteConfig.resolvePath.bind(siteConfig)
+        : (relativePath) => `${basePath}${relativePath.replace(/^\//, '')}`;
     const isBlogPage = window.location.pathname.includes('/blogs/');
-    const basePrefix = isBlogPage ? '../' : './';
 
-    fetch(`${basePrefix}navigation.html`)
+    fetch(resolvePath('navigation.html'))
         .then(response => response.text())
         .then(data => {
             document.getElementById('navigation-placeholder').innerHTML = data;
@@ -17,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const page = link.dataset.page;
 
                 if (page) {
-                    link.setAttribute('href', `${basePrefix}${page}`);
+                    link.setAttribute('href', resolvePath(page));
                 }
 
                 if ((isBlogPage && page === 'blogs.html') || page === currentPage) {
