@@ -309,22 +309,36 @@ def load_template(template_path):
 def get_creation_date(file_path):
     return datetime.fromtimestamp(os.path.getctime(file_path))
 
+def parse_frontmatter_date(date_str):
+    if not date_str:
+        return None
+
+    date_str = str(date_str).strip()
+    for fmt in ("%Y-%m-%d", "%Y.%m.%d", "%Y/%m/%d"):
+        try:
+            return datetime.strptime(date_str, fmt)
+        except ValueError:
+            continue
+    return None
+
 def generate_blogs_page(blog_posts):
     """Generate the blogs listing page with error handling"""
     try:
-        # Sort blog posts by creation date (newest first)
-        sorted_posts = sorted(
-            blog_posts, 
-            key=lambda x: get_creation_date(os.path.join('blogs', x['markdown'])), 
-            reverse=True
-        )
+        def get_post_datetime(post):
+            dt = parse_frontmatter_date(post.get('date'))
+            if dt:
+                return dt
+            return get_creation_date(os.path.join('blogs', post['markdown']))
+
+        # Sort blog posts by frontmatter date (newest first), fallback to file creation date
+        sorted_posts = sorted(blog_posts, key=get_post_datetime, reverse=True)
         
         # Group posts by month
         posts_by_month = defaultdict(list)
         for post in sorted_posts:
             try:
-                date = get_creation_date(os.path.join('blogs', post['markdown']))
-                month_key = date.strftime("%B %Y")
+                dt = get_post_datetime(post)
+                month_key = dt.strftime("%B %Y")
                 posts_by_month[month_key].append(post)
             except Exception as e:
                 logging.error(f"Error processing post for listing: {post['markdown']}: {str(e)}")
@@ -341,12 +355,12 @@ def generate_blogs_page(blog_posts):
                         md_content = md_file.read()
                         metadata, content = parse_metadata(md_content)
                         excerpt = content.split('\n\n')[0][:200] + '...' if len(content) > 200 else content
-                    
-                    date = get_creation_date(os.path.join('blogs', post['markdown']))
+
+                    dt = get_post_datetime(post)
                     post_html = f"""
                     <article class="blog-preview">
                         <h4><a href="blogs/{post['file']}">{post['title']}</a></h4>
-                        <p class="post-meta">Posted on {date.strftime('%B %d, %Y')}</p>
+                        <p class="post-meta">Posted on {dt.strftime('%B %d, %Y')}</p>
                         <p>{excerpt}</p>
                         <a href="blogs/{post['file']}" class="read-more">Read more</a>
                     </article>
