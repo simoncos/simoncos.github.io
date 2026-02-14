@@ -17,7 +17,7 @@ I’m in Kunming now. I’ve just finished washing every piece of gear I brought
 - 09.20 Confirmed the plan with a friend and bought flights
 - 09.29 22:00 Flew direct and arrived in Lijiang
 - 09.30 06:00 Drove to Haba Village, then rode mules to Base Camp
-- 10.01 03:00 Set off, 09:30 reached the summit, 14:30 back to Base Camp; rode mules back to Haba Village; drove back to Lijiang
+- 10.01 03:00 Set off, 09:30 reached the summit, 14:30 back to Base Camp; rode mules back to Haba Village; took car back to Lijiang
 
 ### Pre-trip prep
 
@@ -237,7 +237,7 @@ I obviously couldn’t wear my boots anymore. I borrowed a pair of slippers, the
 
 ![](assets/images/Image_20260120230220_21_88.jpg)
 
-On the drive, a sudden strong wave hit me. I tore open a vomit bag and emptied my stomach a few times, which made an aunt in front tell the driver to slow down—she said I made her dizzy. I explained that it was probably altitude sickness. But after that vomit, I felt strangely refreshed. So the earlier stomach discomfort really was an altitude symptom after all.
+On the drive, a sudden strong wave hit me. I tore open a vomit bag and emptied my stomach, which made an aunt in front tell the driver to slow down—she said I made her dizzy. I explained that it was probably altitude sickness. But after that vomit, I felt strangely refreshed. So the earlier stomach discomfort really was an altitude symptom after all.
 
 In the following days in Kunming, besides being sore all over, the unprotected parts of my face peeled in patches—probably from cold wind. Another lesson.
 
