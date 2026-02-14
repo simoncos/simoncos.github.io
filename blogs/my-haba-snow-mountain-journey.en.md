@@ -107,7 +107,7 @@ There’s a lot to say about these mandatory pieces of equipment.
 
 - Harness + safety rope: a set of gear that’s hard to put on. Official guidance requires using it on Despair Slope, but in reality I saw basically no assistant making anyone use it. You’re even far from the fixed rope on about half of the slope. My guess: for every short segment, an ascender needs to be unlocked and locked; most climbers are beginners and likely need an assistant’s help, which is too slow and time-consuming. Also, above the snow line there are hidden holes and traps under the snow; compared to the fixed-rope line, assistants will prefer routes that people have already packed down and made safer, or routes they’re more familiar with. For me, this safety system only really mattered on the steepest section when descending from the summit: the assistant held the rope to prevent me from sliding away, and I could also pull for extra leverage.
 
-These mandatory items together probably weigh around 5 kg (about 10 jin; 1 jin ≈ 0.5 kg). If you carry your own pack on summit day, that weight is yours. If the assistant carries it, the only weight you can really save is roughly the weight of one set of crampons.
+These mandatory items together probably weigh around 5 kg. If you carry your own pack on summit day, that weight is yours. If the assistant carries it, the only weight you can really save is roughly the weight of one set of crampons.
 
 Since we’re talking gear, here’s the full clothing and equipment I carried during the summit push:
 
@@ -241,7 +241,7 @@ On the drive, a sudden strong wave hit me. I tore open a vomit bag and emptied m
 
 In the following days in Kunming, besides being sore all over, the unprotected parts of my face peeled in patches—probably from cold wind. Another lesson.
 
-By rights the trip consumed a lot. Yet when I finally got back to Hong Kong and weighed myself, I was somehow 0.5 kg (one jin) heavier than before. My explanation: Yunnan food is too good.
+By rights the trip consumed a lot. Yet when I finally got back to Hong Kong and weighed myself, I was somehow 0.5 kg heavier than before. My explanation: Yunnan food is too good.
 
 ### Aftertaste
 
