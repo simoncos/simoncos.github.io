@@ -249,8 +249,9 @@ def generate_blog_post(markdown_path, md_file, html_file, metadata, html_content
         with open(os.path.join('blogs', html_file), 'w', encoding='utf-8') as f:
             f.write(page_content)
 
-        if 'series' in metadata:
-            series_data[metadata['series']].append({
+        series_name = metadata.get('series', '').strip()
+        if series_name:
+            series_data[series_name].append({
                 'title': title,
                 'file': html_file,
                 'part': metadata.get('series_part', '')
