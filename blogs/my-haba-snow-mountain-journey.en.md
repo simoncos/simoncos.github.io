@@ -111,11 +111,11 @@ These mandatory items together probably weigh around 5 kg (about 10 jin; 1 jin �
 
 Since we’re talking gear, here’s the full clothing and equipment I carried during the summit push:
 
-Upper body: quick-dry base layer, fleece, down puffer, hardshell, long rain poncho
-Lower body: quick-dry pants, fleece, shell pants, gaiters
-Hands: two pairs of thin waterproof outdoor gloves, one pair of thick ski gloves
-Feet: two pairs of outdoor socks, two pairs of long wool socks, high-cut waterproof hiking boots, crampons
-Head: wool beanie, fleece balaclava, sunglasses, headlamp, helmet
+- Upper body: quick-dry base layer, fleece, down puffer, hardshell, long rain poncho
+- Lower body: quick-dry pants, fleece, shell pants, gaiters
+- Hands: two pairs of thin waterproof outdoor gloves, one pair of thick ski gloves
+- Feet: two pairs of outdoor socks, two pairs of long wool socks, high-cut waterproof hiking boots, crampons
+- Head: wool beanie, fleece balaclava, sunglasses, headlamp, helmet
 
 Two details are worth highlighting:
 
