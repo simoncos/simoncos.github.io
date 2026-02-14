@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Series - My Personal Website</title>
+    <link rel="stylesheet" href="src/css/styles.css">
+    <script src="src/js/load-nav.js"></script>
+    <script src="src/js/dark-mode.js"></script>
+</head>
+<body>
+    <header>
+        <h1>My Personal Website</h1>
+    </header>
+    <div id="navigation-placeholder"></div>
+    <div class="container">
+        <h2>Blog Series</h2>
+        <ul id="series-list" class="series-list"></ul>
+    </div>
+
+    <script>
+        async function loadSeriesData() {
+            try {
+                const response = await fetch('data/series_data.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const seriesData = await response.json();
+                const seriesList = document.getElementById('series-list');
+
+                for (const [seriesName, posts] of Object.entries(seriesData)) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <h3>${seriesName}</h3>
+                        <ul class="series-posts">
+                            ${posts.sort((a, b) => {
+                                const partA = parseInt(a.part) || 0;
+                                const partB = parseInt(b.part) || 0;
+                                return partA - partB;
+                            }).map(post => `
+                                <li>${post.part ? `Part ${post.part}: ` : ''}<a href="blogs/${post.file}">${post.title}</a></li>
+                            `).join('')}
+                        </ul>
+                    `;
+                    seriesList.appendChild(li);
+                }
+            } catch (error) {
+                console.error('Error loading series data:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadSeriesData);
+    </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tags - My Personal Website</title>
+    <link rel="stylesheet" href="src/css/styles.css">
+    <script src="src/js/load-nav.js"></script>
+    <script src="src/js/dark-mode.js"></script>
+    <style>
+        .tag-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .tag-list li {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .tag-list a {
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            color: #333;
+        }
+        .tag-list a:hover {
+            background-color: #e0e0e0;
+        }
+        .tag-section {
+            margin-bottom: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .active-tag {
+            font-weight: bold;
+            background-color: #d0d0d0;
+        }
+        .all-tags {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Personal Website</h1>
+    </header>
+    <div id="navigation-placeholder"></div>
+    <div class="container">
+        <h2>Tags</h2>
+        <ul id="tag-list" class="tag-list">
+            <!-- Tag list will be dynamically populated -->
+        </ul>
+        <div id="tag-sections"></div>
+        <div id="all-tags" class="all-tags hidden">
+            <h3>All Tags</h3>
+            <!-- All tags and their blogs will be dynamically populated here -->
+        </div>
+    </div>
+
+    <script>
+        function populateTagList(tagsData) {
+            const tagList = document.getElementById('tag-list');
+            const allOption = document.createElement('li');
+            const allLink = document.createElement('a');
+            allLink.href = '#all';
+            allLink.textContent = 'All';
+            allLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showAllTags(tagsData);
+            });
+            allOption.appendChild(allLink);
+            tagList.appendChild(allOption);
+
+            Object.keys(tagsData).forEach(tag => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `#${tag}`;
+                a.textContent = tag;
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showTagPosts(tag);
+                });
+                li.appendChild(a);
+                tagList.appendChild(li);
+            });
+        }
+
+        function createTagSections(tagsData) {
+            const tagSections = document.getElementById('tag-sections');
+            Object.entries(tagsData).forEach(([tag, posts]) => {
+                const section = document.createElement('div');
+                section.id = tag;
+                section.classList.add('tag-section', 'hidden');
+                const h3 = document.createElement('h3');
+                h3.textContent = tag;
+                section.appendChild(h3);
+                const ul = document.createElement('ul');
+                posts.forEach(post => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = `blogs/${post.file}`;
+                    a.textContent = post.title;
+                    li.appendChild(a);
+                    ul.appendChild(li);
+                });
+                section.appendChild(ul);
+                tagSections.appendChild(section);
+            });
+        }
+
+        function showTagPosts(tag) {
+            document.querySelectorAll('.tag-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(tag).classList.remove('hidden');
+            document.getElementById('all-tags').classList.add('hidden');
+            document.querySelectorAll('.tag-list a').forEach(a => {
+                a.classList.remove('active-tag');
+            });
+            document.querySelector(`.tag-list a[href="#${tag}"]`).classList.add('active-tag');
+        }
+
+        function showAllTags(tagsData) {
+            document.querySelectorAll('.tag-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            const allTagsSection = document.getElementById('all-tags');
+            allTagsSection.innerHTML = '<h3>All Tags</h3>';
+            Object.entries(tagsData).forEach(([tag, posts]) => {
+                const tagSection = document.createElement('div');
+                tagSection.innerHTML = `<h4>${tag}</h4>`;
+                const ul = document.createElement('ul');
+                posts.forEach(post => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = `blogs/${post.file}`;
+                    a.textContent = post.title;
+                    li.appendChild(a);
+                    ul.appendChild(li);
+                });
+                tagSection.appendChild(ul);
+                allTagsSection.appendChild(tagSection);
+            });
+            allTagsSection.classList.remove('hidden');
+            document.querySelectorAll('.tag-list a').forEach(a => {
+                a.classList.remove('active-tag');
+            });
+            document.querySelector('.tag-list a[href="#all"]').classList.add('active-tag');
+        }
+
+        function showRelevantPosts() {
+            const hash = window.location.hash.slice(1);
+            if (hash === 'all' || !hash) {
+                showAllTags(tagsData);
+            } else if (hash) {
+                showTagPosts(hash);
+            }
+        }
+
+        let tagsData;
+
+        fetch('data/tags_data.json')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Tags data loaded:', data);
+                tagsData = data;
+                if (Object.keys(data).length === 0) {
+                    console.log('Tags data is empty');
+                    document.getElementById('tag-sections').innerHTML = '<p>No tags found.</p>';
+                } else {
+                    populateTagList(data);
+                    createTagSections(data);
+                    showRelevantPosts();  // This will now show all tags by default
+                }
+            })
+            .catch(error => {
+                console.error('Error loading tags data:', error);
+                document.getElementById('tag-sections').innerHTML = '<p>Error loading tags data.</p>';
+            });
+
+        window.addEventListener('hashchange', showRelevantPosts);
+    </script>
+</body>
+</html>

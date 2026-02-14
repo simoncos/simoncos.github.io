@@ -1,0 +1,729 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    position: relative;  /* For absolute positioning of the toggle button */
+}
+
+nav {
+    background-color: #f4f4f4;
+    padding: 0.5rem;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+nav ul li a.active {
+    color: #0066cc;
+    font-weight: bold;
+}
+
+.container {
+    width: 80%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    border-top: none; /* Ensure no border above the container */
+}
+
+/* Blog styles */
+.blog-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.metadata {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.backlinks {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+/* Tags page styles */
+.tag-list, #backlinks-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tag-list li, #backlinks-list li {
+    display: inline-block;
+    margin-right: 6px; /* Reduced */
+    margin-bottom: 3px; /* Reduced */
+}
+
+.tag-list a, #backlinks-list a {
+    text-decoration: none;
+    color: #666;
+}
+
+/* Specific styles for tags */
+.tag-list a {
+    padding: 1px 5px; /* Slightly reduced padding */
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+.tag-list a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Specific styles for backlinks */
+#backlinks-list a {
+    color: #0066cc;
+    transition: color 0.2s ease;
+}
+
+#backlinks-list a:hover {
+    color: #004499;
+    text-decoration: underline;
+}
+
+.tag-section {
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.active-tag {
+    font-weight: bold;
+    background-color: #d0d0d0;
+}
+
+/* Series page styles */
+.series-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.series-list li {
+    margin-bottom: 20px;
+}
+
+.series-posts {
+    margin-left: 20px;
+}
+
+/* Blog post tags */
+.post-tags, .post-backlinks {
+    margin-top: 1em;
+    padding-top: 0.5em;
+    border-top: 1px solid #e0e0e0;
+    /* Removed background-color */
+}
+
+.post-tags h3, .post-backlinks h3 {
+    font-size: 1em;  /* Same size as content */
+    font-weight: bold;
+    margin: 0 0 0.2em 0; /* Reduced bottom margin */
+    color: #333;
+}
+
+.blog-tags {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.blog-tags ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.blog-tags li {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.blog-tags a {
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    color: #333;
+    font-size: 0.9em;
+}
+
+.blog-tags a:hover {
+    background-color: #e0e0e0;
+}
+
+.container h2 {
+    margin-top: 2em;
+    /* Remove this line to get rid of the border */
+    /* border-bottom: 1px solid #ccc; */
+    padding-bottom: 0.5em;
+}
+
+.container ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.container ul li {
+    margin-bottom: 0.5em;
+}
+
+.container ul li a {
+    text-decoration: none;
+    color: #0066cc;
+}
+
+.container ul li a:hover {
+    text-decoration: underline;
+}
+
+.blog-preview {
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #eee;
+}
+
+.blog-preview h3 {
+    margin-bottom: 0.5em;
+}
+
+.blog-preview h3 a {
+    text-decoration: none;
+    color: #333;
+}
+
+.blog-preview h3 a:hover {
+    color: #0066cc;
+}
+
+.post-meta {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 0.5em;
+    text-decoration: none;
+    color: #0066cc;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+.blog-post {
+    font-size: 1em;  /* Base font size for the entire blog post */
+    line-height: 1.6;
+}
+
+.blog-post h1 {
+    font-size: 2.5em;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.blog-post h2 {
+    font-size: 2em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: #444;
+}
+
+.blog-post h3 {
+    font-size: 1.7em;
+    margin-top: 1.2em;
+    margin-bottom: 0.5em;
+    color: #555;
+}
+
+.blog-post h4 {
+    font-size: 1.4em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    color: #666;
+}
+
+.blog-post h5 {
+    font-size: 1.2em;
+    margin-top: 0.8em;
+    margin-bottom: 0.5em;
+    color: #777;
+}
+
+.blog-post h6 {
+    font-size: 1em;
+    margin-top: 0.6em;
+    margin-bottom: 0.5em;
+    color: #888;
+}
+
+.post-content {
+    margin-bottom: 1em; /* Reduced from 2em */
+}
+
+.post-tags, .post-backlinks {
+    margin-top: 1em;
+    padding-top: 0.5em;
+    border-top: 1px solid #e0e0e0;
+    /* Removed background-color */
+}
+
+.post-tags h3, .post-backlinks h3 {
+    font-size: 1em;  /* Same size as content */
+    font-weight: bold;
+    margin: 0 0 0.2em 0; /* Reduced bottom margin */
+    color: #333;
+}
+
+.tag-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tag-list li {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.tag-list a {
+    text-decoration: none;
+    background-color: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #333;
+}
+
+.tag-list a:hover {
+    background-color: #e0e0e0;
+}
+
+#backlinks-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#backlinks-list li {
+    display: block;  /* Changed from inline-block to block */
+    margin-bottom: 8px;  /* Added more space between items */
+    position: relative;  /* For bullet styling */
+    padding-left: 15px;  /* Space for bullet */
+}
+
+#backlinks-list li:before {
+    content: "•";  /* Bullet point */
+    position: absolute;
+    left: 0;
+    color: #666;
+}
+
+.dark-mode #backlinks-list li:before {
+    color: #999;  /* Lighter bullet color for dark mode */
+}
+
+#backlinks-list a {
+    text-decoration: none;
+    color: #0066cc;
+}
+
+#backlinks-list a:hover {
+    text-decoration: underline;
+}
+
+/* Add these styles for the blog listings page */
+.blog-preview {
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #eee;
+}
+
+.blog-preview h4 {
+    margin-bottom: 0.5em;
+}
+
+.blog-preview h4 a {
+    text-decoration: none;
+    color: #333;
+}
+
+.blog-preview h4 a:hover {
+    color: #0066cc;
+}
+
+.blog-preview .post-meta {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 1em;
+}
+
+.blog-preview .read-more {
+    display: inline-block;
+    margin-top: 0.5em;
+    text-decoration: none;
+    color: #0066cc;
+    font-weight: bold;
+}
+
+.blog-preview .read-more:hover {
+    text-decoration: underline;
+}
+
+/* Blog post styles */
+.blog-post h1 {
+    font-size: 2.5em;
+    margin-top: 0; /* Ensure no extra space above the title */
+    margin-bottom: 0.5em;
+    color: #333;
+    border-bottom: none; /* Ensure no border under the main title */
+}
+
+.blog-post h2 {
+    font-size: 2em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: #444;
+}
+
+.blog-post h3 {
+    font-size: 1.7em;
+    margin-top: 1.2em;
+    margin-bottom: 0.5em;
+    color: #555;
+}
+
+.blog-post h4 {
+    font-size: 1.4em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    color: #666;
+}
+
+.blog-post h5 {
+    font-size: 1.2em;
+    margin-top: 0.8em;
+    margin-bottom: 0.5em;
+    color: #777;
+}
+
+.blog-post h6 {
+    font-size: 1em;
+    margin-top: 0.6em;
+    margin-bottom: 0.5em;
+    color: #888;
+}
+
+.blog-post p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+}
+
+.post-content img,
+.blog-post img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+}
+
+.post-content figure,
+.blog-post figure {
+    margin: 1.25rem 0;
+}
+
+.post-content figure img,
+.blog-post figure img {
+    margin: 0 auto;
+}
+
+/* Add more specific styles for other elements in your blog posts as needed */
+
+/* Add a separator between tags and backlinks if they're adjacent */
+.post-tags + .post-backlinks {
+    margin-top: 0.5em; /* Reduced */
+    padding-top: 0.5em; /* Reduced */
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Dark mode styles */
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+.dark-mode header {
+    background-color: #2d2d2d;
+}
+
+.dark-mode nav {
+    background-color: #2d2d2d;
+}
+
+.dark-mode nav ul li a {
+    color: #e0e0e0;
+}
+
+.dark-mode nav ul li a.active {
+    color: #66b3ff;
+}
+
+.dark-mode .container {
+    background-color: #1a1a1a;
+}
+
+.dark-mode a {
+    color: #66b3ff;
+}
+
+.dark-mode .blog-preview {
+    border-bottom-color: #333;
+}
+
+.dark-mode .post-meta {
+    color: #999;
+}
+
+.dark-mode .tag-list a {
+    background-color: #2d2d2d;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+.dark-mode .tag-list a:hover {
+    background-color: #3d3d3d;
+}
+
+/* Dark mode toggle button styles */
+.dark-mode-container {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+#dark-mode-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+#dark-mode-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Table of Contents styles */
+.table-of-contents {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.dark-mode .table-of-contents {
+    background-color: #2d2d2d;
+    border-color: #444;
+}
+
+.table-of-contents h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2em;
+}
+
+.table-of-contents ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.table-of-contents li {
+    margin-bottom: 0.5rem;
+}
+
+.table-of-contents a {
+    text-decoration: none;
+    color: #0066cc;
+    transition: color 0.2s;
+}
+
+.table-of-contents a:hover {
+    color: #004499;
+}
+
+.toc-h2 {
+    font-weight: bold;
+}
+
+.toc-h3 {
+    padding-left: 1.5rem;
+    font-size: 0.95em;
+}
+
+.toc-h4 {
+    padding-left: 3rem;
+    font-size: 0.9em;
+}
+
+/* Active TOC link */
+.table-of-contents a.active {
+    color: #004499;
+    font-weight: bold;
+}
+
+/* Dark mode header colors */
+.dark-mode .blog-post h1,
+.dark-mode h1 {
+    color: #ffffff;
+}
+
+.dark-mode .blog-post h2,
+.dark-mode h2 {
+    color: #f0f0f0;
+}
+
+.dark-mode .blog-post h3,
+.dark-mode h3 {
+    color: #e0e0e0;
+}
+
+.dark-mode .blog-post h4,
+.dark-mode h4 {
+    color: #d0d0d0;
+}
+
+.dark-mode .blog-post h5,
+.dark-mode h5 {
+    color: #c0c0c0;
+}
+
+.dark-mode .blog-post h6,
+.dark-mode h6 {
+    color: #b0b0b0;
+}
+
+.dark-mode .post-tags h3,
+.dark-mode .post-backlinks h3 {
+    color: #e0e0e0;
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.dark-mode footer {
+    border-top-color: #444;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Progress bar styles */
+#progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.1);  /* Light gray background */
+    z-index: 1000;
+}
+
+#reading-progress {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(to right, #4a90e2, #67b26f);  /* Blue to green gradient */
+    transition: width 0.1s ease;
+    border-radius: 0 2px 2px 0;  /* Rounded right edge */
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);  /* Subtle shadow */
+}
+
+/* Dark mode progress bar */
+.dark-mode #progress-container {
+    background-color: rgba(255, 255, 255, 0.1);  /* Slightly visible in dark mode */
+}
+
+.dark-mode #reading-progress {
+    background: linear-gradient(to right, #00c6ff, #0072ff);  /* Bright blue gradient */
+    box-shadow: 0 0 3px rgba(0, 198, 255, 0.3);  /* Glowing effect */
+}
+
+/* Styles for series list */
+.series-posts li {
+    display: block;
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 8px;
+}
+
+.series-posts li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #666;
+}
+
+.dark-mode .series-posts li:before {
+    color: #999;
+}
+
+/* Styles for tags page links */
+#tag-sections ul li,
+#all-tags ul li {
+    display: block;
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 8px;
+}
+
+#tag-sections ul li:before,
+#all-tags ul li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #666;
+}
+
+.dark-mode #tag-sections ul li:before,
+.dark-mode #all-tags ul li:before {
+    color: #999;
+}

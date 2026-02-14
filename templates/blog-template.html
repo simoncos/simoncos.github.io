@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}} | Your Name's Blog</title>
+    <link rel="stylesheet" href="../src/css/styles.css">
+    <script src="../src/js/load-nav.js"></script>
+    <script src="../src/js/dark-mode.js"></script>
+    <script src="../src/js/toc-generator.js"></script>
+    <script src="../src/js/progress-bar.js"></script>
+</head>
+<body>
+    <header>
+        <h1>My Personal Website</h1>
+    </header>
+    <div id="navigation-placeholder"></div>
+    <div class="container">
+        <article class="blog-post">
+            <div class="post-content">
+                {{CONTENT}}
+            </div>
+            <div class="post-tags">
+                <h3>Tags:</h3>
+                {{TAGS}}
+            </div>
+            <div class="post-backlinks">
+                <h3>Backlinks:</h3>
+                <ul id="backlinks-list"></ul>
+            </div>
+        </article>
+    </div>
+    <footer>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> Your Name. All rights reserved.</p>
+    </footer>
+    <div id="progress-container">
+        <div id="reading-progress"></div>
+    </div>
+    <script>
+        // Script to populate backlinks
+        document.addEventListener('DOMContentLoaded', function() {
+            var backlinks = JSON.parse('{{BACKLINKS}}');
+            var backlinkslist = document.getElementById('backlinks-list');
+            if (backlinks.length === 0) {
+                backlinkslist.innerHTML = '<li>No backlinks found.</li>';
+            } else {
+                backlinks.forEach(function(link) {
+                    var li = document.createElement('li');
+                    var a = document.createElement('a');
+                    a.href = link.file;
+                    a.textContent = link.title;
+                    li.appendChild(a);
+                    backlinkslist.appendChild(li);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
