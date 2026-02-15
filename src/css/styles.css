@@ -331,6 +331,37 @@ nav ul li a.active {
     margin-bottom: 1em; /* Reduced from 2em */
 }
 
+/* Restore Markdown list markers inside blog post content */
+.post-content ul,
+.post-content ol {
+    padding-left: 1.25rem;
+    margin: 0 0 1em 0;
+}
+
+.post-content ul {
+    list-style: disc;
+}
+
+.post-content ol {
+    list-style: decimal;
+}
+
+.post-content li {
+    margin-bottom: 0.35em;
+}
+
+.post-content ul ul {
+    list-style: circle;
+}
+
+.post-content ul ul ul {
+    list-style: square;
+}
+
+.post-content ol ol {
+    list-style: lower-alpha;
+}
+
 /* Blog layout: TOC sidebar on desktop, inline on mobile */
 .post-layout {
     display: block;
