@@ -52,6 +52,10 @@ nav ul li a.active {
     max-width: 1100px;
 }
 
+.post-title {
+    margin-top: 0;
+}
+
 /* Blog styles */
 .blog-content {
     max-width: 800px;
@@ -233,6 +237,10 @@ nav ul li a.active {
     margin-bottom: 20px;
 }
 
+.post-meta > div {
+    margin: 0;
+}
+
 .lang-switch {
     display: flex;
     justify-content: flex-end;
@@ -342,6 +350,11 @@ nav ul li a.active {
     .toc-container {
         flex: 0 0 280px;
         margin: 0;
+    }
+
+    /* Align the title with the main content column (not the TOC column). */
+    .post-title {
+        margin-left: 300px;
     }
 
     .post-main {

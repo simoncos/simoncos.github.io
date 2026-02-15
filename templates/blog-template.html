@@ -20,9 +20,14 @@
     <div class="container blog-container">
         <article class="blog-post">
             {{LANG_SWITCH}}
+            <h1 class="post-title">{{TITLE}}</h1>
             <div class="post-layout">
                 <aside id="toc-container" class="toc-container" aria-label="Table of contents"></aside>
                 <div class="post-main">
+                    <div class="post-meta">
+                        <div>Created: {{CREATED}}</div>
+                        <div>Last Updated: {{UPDATED}}</div>
+                    </div>
                     <div class="post-content">
                         {{CONTENT}}
                     </div>

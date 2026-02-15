@@ -255,14 +255,12 @@ def generate_blog_post(markdown_path, md_file, html_file, metadata, html_content
 
         tags_html = '<ul class="tag-list">' + ''.join([f'<li><a href="../tags.html#{tag}">{tag}</a></li>' for tag in tags]) + '</ul>'
 
-        html_content = f"""
-        <h1>{title}</h1>
-        <p class="post-meta">Created: {created} | Last Updated: {updated}</p>
-        {content}
-        """
+        rendered_post_content = content
 
         page_content = template.replace('{{TITLE}}', title)
-        page_content = page_content.replace('{{CONTENT}}', html_content)
+        page_content = page_content.replace('{{CONTENT}}', rendered_post_content)
+        page_content = page_content.replace('{{CREATED}}', created)
+        page_content = page_content.replace('{{UPDATED}}', updated)
         page_content = page_content.replace('{{BACKLINKS}}', json.dumps(backlinks[html_file]))
         page_content = page_content.replace('{{TAGS}}', tags_html)
         page_content = page_content.replace('{{LANG_SWITCH}}', lang_switch_html)
