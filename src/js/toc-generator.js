@@ -1,5 +1,8 @@
 function generateTOC() {
     const content = document.querySelector('.post-content');
+    if (!content) {
+        return null;
+    }
     const headings = content.querySelectorAll('h2, h3, h4');
     
     if (headings.length === 0) {
@@ -8,9 +11,6 @@ function generateTOC() {
 
     const toc = document.createElement('div');
     toc.className = 'table-of-contents';
-    const title = document.createElement('h3');
-    title.textContent = 'Table of Contents';
-    toc.appendChild(title);
 
     const list = document.createElement('ul');
     
@@ -39,14 +39,37 @@ function generateTOC() {
     });
 
     toc.appendChild(list);
-    return toc;
+
+    const details = document.createElement('details');
+    details.className = 'toc-details';
+    // Desktop: expanded by default. Mobile: collapsed by default.
+    const isDesktop = typeof window !== 'undefined'
+        && typeof window.matchMedia === 'function'
+        && window.matchMedia('(min-width: 900px)').matches;
+    details.open = Boolean(isDesktop);
+
+    const summary = document.createElement('summary');
+    summary.className = 'toc-summary';
+    summary.textContent = 'Table of Contents';
+
+    details.appendChild(summary);
+    details.appendChild(toc);
+    return details;
 }
 
 // Initialize TOC when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const toc = generateTOC();
     if (toc) {
+        const tocContainer = document.getElementById('toc-container');
+        if (tocContainer) {
+            tocContainer.appendChild(toc);
+            return;
+        }
+
         const container = document.querySelector('.post-content');
-        container.insertBefore(toc, container.firstChild);
+        if (container) {
+            container.insertBefore(toc, container.firstChild);
+        }
     }
 }); 
