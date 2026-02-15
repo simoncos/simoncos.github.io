@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastScrollY = window.scrollY;
     const minDelta = 8;
     let rafPending = false;
+    let enableHideAfterPixels = Math.max(200, Math.floor(window.innerHeight * 0.6));
 
     function setScrollDirectionHidden(isHidden) {
         const className = 'scroll-direction-hidden';
@@ -53,8 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const isScrollingDown = delta > 0;
 
         // Hide while scrolling down; show while scrolling up.
-        // Keep visible near the very top for discoverability.
-        if (currentScrollY < 50) {
+        // Keep visible near the top (and generally within the first screen) for discoverability.
+        if (currentScrollY < enableHideAfterPixels) {
             setScrollDirectionHidden(false);
         } else {
             setScrollDirectionHidden(isScrollingDown);
@@ -73,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', () => {
+        enableHideAfterPixels = Math.max(200, Math.floor(window.innerHeight * 0.6));
         lastScrollY = window.scrollY;
         update();
     });
