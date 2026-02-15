@@ -20,6 +20,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const minDelta = 8;
     let rafPending = false;
     let enableHideAfterPixels = Math.max(200, Math.floor(window.innerHeight * 0.6));
+    const autoHideDelayMs = 5000;
+    let autoHideTimeoutId = null;
+
+    function clearAutoHideTimer() {
+        if (autoHideTimeoutId !== null) {
+            window.clearTimeout(autoHideTimeoutId);
+            autoHideTimeoutId = null;
+        }
+    }
+
+    function scheduleAutoHide() {
+        clearAutoHideTimer();
+
+        if (!isMobileViewport()) {
+            return;
+        }
+
+        // Don't auto-hide while still near the top.
+        if (window.scrollY < enableHideAfterPixels) {
+            return;
+        }
+
+        // Don't auto-hide an expanded TOC.
+        if (tocDetails && tocDetails.open) {
+            return;
+        }
+
+        autoHideTimeoutId = window.setTimeout(() => {
+            if (!isMobileViewport()) {
+                return;
+            }
+            if (window.scrollY < enableHideAfterPixels) {
+                return;
+            }
+            if (tocDetails && tocDetails.open) {
+                return;
+            }
+
+            setScrollDirectionHidden(true);
+        }, autoHideDelayMs);
+    }
 
     function setScrollDirectionHidden(isHidden) {
         const className = 'scroll-direction-hidden';
@@ -32,6 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (backToTopButton) {
             backToTopButton.classList.toggle(className, isHidden);
+        }
+
+        if (!isHidden) {
+            scheduleAutoHide();
+        } else {
+            clearAutoHideTimer();
         }
     }
 
@@ -73,6 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('touchstart', scheduleAutoHide, { passive: true });
+    window.addEventListener('click', scheduleAutoHide, { passive: true });
     window.addEventListener('resize', () => {
         enableHideAfterPixels = Math.max(200, Math.floor(window.innerHeight * 0.6));
         lastScrollY = window.scrollY;
@@ -88,6 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (tocDetails.open) {
                 setScrollDirectionHidden(false);
                 lastScrollY = window.scrollY;
+                clearAutoHideTimer();
+            } else {
+                scheduleAutoHide();
             }
         });
     }
