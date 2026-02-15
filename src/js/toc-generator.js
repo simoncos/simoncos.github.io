@@ -81,6 +81,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const tocContainer = document.getElementById('toc-container');
         if (tocContainer) {
             tocContainer.appendChild(toc);
+
+            const tocDetails = tocContainer.querySelector('details.toc-details');
+            if (tocDetails) {
+                document.addEventListener('click', (e) => {
+                    if (isDesktopViewport()) {
+                        return;
+                    }
+
+                    if (!tocDetails.open) {
+                        return;
+                    }
+
+                    const target = e.target;
+                    if (!(target instanceof Node)) {
+                        return;
+                    }
+
+                    // Collapse TOC when tapping/clicking anywhere outside the TOC.
+                    if (!tocDetails.contains(target)) {
+                        tocDetails.open = false;
+                    }
+                }, true);
+            }
             return;
         }
 
