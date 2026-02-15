@@ -504,6 +504,10 @@ nav ul li a.active {
     margin-bottom: 1em;
 }
 
+.blog-preview .blog-excerpt {
+    white-space: pre-line;
+}
+
 .blog-preview .read-more {
     display: inline-block;
     margin-top: 0.5em;

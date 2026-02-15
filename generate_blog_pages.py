@@ -2,6 +2,7 @@ import os
 import sys
 import re
 import json
+import html as html_lib
 import markdown
 import logging
 from datetime import datetime
@@ -10,7 +11,7 @@ from markdown.inlinepatterns import InlineProcessor
 from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 from xml.etree import ElementTree
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString
 from pathlib import Path
 
 # Set up logging
@@ -319,6 +320,133 @@ def parse_frontmatter_date(date_str):
             continue
     return None
 
+def build_post_excerpt(markdown_body, word_limit=100, cjk_char_limit=100):
+    """Build a plain-text excerpt from markdown body.
+
+    - Strips the top-level title (first H1) if present.
+    - Removes code blocks.
+    - Returns first `word_limit` words for space-delimited languages.
+    - For CJK-heavy text without spaces, falls back to first `cjk_char_limit` characters.
+    """
+    try:
+        html_content = markdown.markdown(
+            markdown_body,
+            extensions=[
+                'markdown.extensions.fenced_code',
+                'markdown.extensions.attr_list',
+                AnnotateExtension(),
+            ],
+        )
+        soup = BeautifulSoup(html_content, 'html.parser')
+
+        h1 = soup.find('h1')
+        if h1:
+            h1.extract()
+
+        for tag in soup.find_all(['pre', 'code']):
+            tag.decompose()
+
+        for li in soup.find_all('li'):
+            # Prefix list items so bullets remain visible after text extraction.
+            if li.contents:
+                li.insert(0, NavigableString('• '))
+            else:
+                li.string = '•'
+
+        # Keep block/line separation so previews don't become one huge line.
+        text = soup.get_text('\n', strip=True)
+    except Exception:
+        text = re.sub(r'```.*?```', ' ', markdown_body, flags=re.DOTALL)
+        text = re.sub(r'`[^`]*`', ' ', text)
+        text = re.sub(r'!\[[^\]]*\]\([^)]*\)', ' ', text)
+        text = re.sub(r'\[[^\]]*\]\([^)]*\)', ' ', text)
+        text = re.sub(r'<[^>]+>', ' ', text)
+        text = text.strip()
+
+    # Normalize whitespace but keep newlines as separators.
+    text = re.sub(r'\r\n?', '\n', text)
+    text = re.sub(r'[ \t\f\v]+', ' ', text)
+    text = re.sub(r'\n{3,}', '\n\n', text).strip()
+    if not text:
+        return ''
+
+    cjk_count = len(re.findall(r'[\u4e00-\u9fff]', text))
+    latin_count = len(re.findall(r'[A-Za-z0-9]', text))
+
+    lines = [ln.strip() for ln in text.split('\n')]
+    lines = [ln for ln in lines if ln]
+    if not lines:
+        return ''
+
+    merged_lines = []
+    i = 0
+    while i < len(lines):
+        if lines[i] in ('-', '•') and i + 1 < len(lines):
+            merged_lines.append(f"• {lines[i + 1].lstrip()}")
+            i += 2
+            continue
+        merged_lines.append(lines[i])
+        i += 1
+    lines = merged_lines
+
+    def render_bullets(line):
+        # Convert markdown unordered list markers into visible bullets for previews.
+        m = re.match(r'^([-*+])\s+(.*)$', line)
+        if m:
+            return f"• {m.group(2)}"
+        return line
+
+    # Heuristic: for CJK-heavy posts, show first N CJK characters while preserving lines.
+    if cjk_count > 0 and cjk_count >= latin_count:
+        out_lines = []
+        cjk_seen = 0
+        for ln in lines:
+            ln_cjk = len(re.findall(r'[\u4e00-\u9fff]', ln))
+            if cjk_seen + ln_cjk <= cjk_char_limit:
+                out_lines.append(render_bullets(ln))
+                cjk_seen += ln_cjk
+                continue
+
+            # Need to slice within this line
+            remaining = max(0, cjk_char_limit - cjk_seen)
+            if remaining == 0:
+                break
+
+            sliced = []
+            kept_cjk = 0
+            for ch in ln:
+                if re.match(r'[\u4e00-\u9fff]', ch):
+                    if kept_cjk >= remaining:
+                        break
+                    kept_cjk += 1
+                sliced.append(ch)
+            out_lines.append(render_bullets(''.join(sliced).rstrip()) + '...')
+            break
+
+        return '\n'.join(out_lines)
+
+    # Word-based excerpt while preserving lines.
+    out_lines = []
+    words_seen = 0
+    for ln in lines:
+        ln_words = ln.split()
+        if not ln_words:
+            continue
+
+        if words_seen + len(ln_words) <= word_limit:
+            out_lines.append(render_bullets(ln))
+            words_seen += len(ln_words)
+            continue
+
+        remaining = max(0, word_limit - words_seen)
+        if remaining == 0:
+            break
+
+        out_lines.append(render_bullets(' '.join(ln_words[:remaining])) + '...')
+        break
+
+    return '\n'.join(out_lines)
+
 def generate_blogs_page(blog_posts):
     """Generate the blogs listing page with error handling"""
     try:
@@ -352,14 +480,15 @@ def generate_blogs_page(blog_posts):
                     with open(os.path.join('blogs', post['markdown']), 'r', encoding='utf-8') as md_file:
                         md_content = md_file.read()
                         metadata, content = parse_metadata(md_content)
-                        excerpt = content.split('\n\n')[0][:200] + '...' if len(content) > 200 else content
+                        excerpt_text = build_post_excerpt(content, word_limit=100)
+                        excerpt = html_lib.escape(excerpt_text)
 
                     dt = get_post_datetime(post)
                     post_html = f"""
                     <article class="blog-preview">
                         <h4><a href="blogs/{post['file']}">{post['title']}</a></h4>
                         <p class="post-meta">Posted on {dt.strftime('%B %d, %Y')}</p>
-                        <p>{excerpt}</p>
+                        <p class="blog-excerpt">{excerpt}</p>
                         <a href="blogs/{post['file']}" class="read-more">Read more</a>
                     </article>
                     """
