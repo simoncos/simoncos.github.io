@@ -112,6 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function onScroll() {
+        // Any scroll activity should reset the auto-hide timer.
+        scheduleAutoHide();
+
         if (rafPending) {
             return;
         }
