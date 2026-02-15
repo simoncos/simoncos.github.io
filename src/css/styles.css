@@ -864,6 +864,18 @@ footer p {
     border-color: #666;
 }
 
+/* Mobile: hide sticky UI when scrolling down */
+@media (max-width: 899px) {
+    .scroll-direction-hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .toc-container.scroll-direction-hidden {
+        visibility: hidden;
+    }
+}
+
 /* Styles for series list */
 .series-posts li {
     display: block;
