@@ -8,6 +8,7 @@
     <script src="src/js/site-config.js"></script>
     <script src="src/js/load-nav.js"></script>
     <script src="src/js/dark-mode.js"></script>
+    <script src="src/js/preview-toggle.js"></script>
 </head>
 <body>
     <header>
@@ -16,6 +17,12 @@
     <div id="navigation-placeholder"></div>
     <div class="container">
         <h2>Blog Posts</h2>
+        <div class="preview-toggle">
+            <label>
+                <input type="checkbox" id="preview-toggle" checked>
+                Show previews
+            </label>
+        </div>
         {{BLOG_LISTINGS}}
     </div>
     <footer>

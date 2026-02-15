@@ -12,6 +12,7 @@ from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 from xml.etree import ElementTree
 from bs4 import BeautifulSoup, NavigableString
+from urllib.parse import quote
 from pathlib import Path
 
 # Set up logging
@@ -483,11 +484,22 @@ def generate_blogs_page(blog_posts):
                         excerpt_text = build_post_excerpt(content, word_limit=100)
                         excerpt = html_lib.escape(excerpt_text)
 
+                        tags = [tag.strip() for tag in metadata.get('tags', '').split(',') if tag.strip()]
+                        if tags:
+                            tags_items = ''.join(
+                                f'<li><a href="tags.html#{quote(tag)}">{html_lib.escape(tag)}</a></li>'
+                                for tag in tags
+                            )
+                            tags_html = f'<ul class="tag-list blog-preview-tags">{tags_items}</ul>'
+                        else:
+                            tags_html = ''
+
                     dt = get_post_datetime(post)
                     post_html = f"""
                     <article class="blog-preview">
                         <h4><a href="blogs/{post['file']}">{post['title']}</a></h4>
                         <p class="post-meta">Posted on {dt.strftime('%B %d, %Y')}</p>
+                        {tags_html}
                         <p class="blog-excerpt">{excerpt}</p>
                         <a href="blogs/{post['file']}" class="read-more">Read more</a>
                     </article>
