@@ -1,8 +1,17 @@
+function isDesktopViewport() {
+    return (
+        typeof window !== 'undefined'
+        && typeof window.matchMedia === 'function'
+        && window.matchMedia('(min-width: 900px)').matches
+    );
+}
+
 function generateTOC() {
     const content = document.querySelector('.post-content');
     if (!content) {
         return null;
     }
+
     const titleHeading = document.querySelector('.post-title');
     const contentHeadings = Array.from(content.querySelectorAll('h2, h3, h4'));
     const headings = titleHeading ? [titleHeading, ...contentHeadings] : contentHeadings;
@@ -35,6 +44,14 @@ function generateTOC() {
             heading.scrollIntoView({ behavior: 'smooth' });
             // Update URL without scrolling
             history.pushState(null, null, link.href);
+
+            // Mobile UX: collapse TOC after navigation.
+            if (!isDesktopViewport()) {
+                const details = link.closest('details');
+                if (details) {
+                    details.open = false;
+                }
+            }
         });
 
         li.appendChild(link);
@@ -46,10 +63,7 @@ function generateTOC() {
     const details = document.createElement('details');
     details.className = 'toc-details';
     // Desktop: expanded by default. Mobile: collapsed by default.
-    const isDesktop = typeof window !== 'undefined'
-        && typeof window.matchMedia === 'function'
-        && window.matchMedia('(min-width: 900px)').matches;
-    details.open = Boolean(isDesktop);
+    details.open = Boolean(isDesktopViewport());
 
     const summary = document.createElement('summary');
     summary.className = 'toc-summary';
