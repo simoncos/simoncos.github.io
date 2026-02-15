@@ -64,7 +64,7 @@ def parse_metadata(md_content):
             'tags': '',
             'series': '',
             'series_part': '',
-            'date': datetime.now().strftime('%Y-%m-%d')
+            'date': ''
         }
         
         metadata_match = re.match(r'---\n(.*?)\n---\n', md_content, re.DOTALL)
@@ -91,12 +91,29 @@ def get_file_times(file_path):
     """Get file creation and modification times with error handling"""
     try:
         stats = os.stat(file_path)
-        created = datetime.fromtimestamp(stats.st_ctime).strftime('%Y-%m-%d %H:%M:%S')
+        created = datetime.fromtimestamp(stats.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
         updated = datetime.fromtimestamp(stats.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
         return created, updated
     except OSError as e:
         logging.error(f"Error getting file times for {file_path}: {str(e)}")
         return datetime.now().strftime('%Y-%m-%d %H:%M:%S'), datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+def get_file_times_with_metadata(file_path, metadata_date):
+    """Prefer frontmatter date for created time, use file mtime for updated."""
+    try:
+        stats = os.stat(file_path)
+        updated = datetime.fromtimestamp(stats.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
+    except OSError as e:
+        logging.error(f"Error getting file times for {file_path}: {str(e)}")
+        updated = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    created_dt = parse_frontmatter_date(metadata_date)
+    if created_dt:
+        created = created_dt.strftime('%Y-%m-%d %H:%M:%S')
+    else:
+        created = updated
+
+    return created, updated
 
 def update_image_paths(content):
     """Update image paths with error handling"""
@@ -152,7 +169,17 @@ def generate_blog_pages():
                 continue
 
         # Save data files
-        save_json_data(blog_posts, 'blog_data.json')
+        blog_data = load_existing_blog_data()
+        previous_posts = blog_data.get('posts', [])
+        previous_markdown = {post.get('markdown') for post in previous_posts if post.get('markdown')}
+        current_markdown = {post.get('markdown') for post in blog_posts if post.get('markdown')}
+
+        new_post_detected = len(current_markdown - previous_markdown) > 0
+        last_updated = blog_data.get('last_updated')
+        if new_post_detected or not last_updated:
+            last_updated = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        save_json_data({'last_updated': last_updated, 'posts': blog_posts}, 'blog_data.json')
         save_json_data(series_data, 'series_data.json')
         save_json_data(tags_data, 'tags_data.json')
 
@@ -237,7 +264,7 @@ def generate_blog_post(markdown_path, md_file, html_file, metadata, html_content
             "file": html_file,
             "markdown": md_file,
             "html_content": html_content,
-            "date": metadata.get('date', datetime.now().strftime('%Y-%m-%d'))
+            "date": metadata.get('date', '')
         })
 
         tags = metadata.get('tags', '').split(',')
@@ -253,9 +280,12 @@ def generate_blog_post(markdown_path, md_file, html_file, metadata, html_content
         for link_text, link_url in links:
             backlinks[link_url].append({"title": title, "file": html_file})
 
-        created, updated = get_file_times(markdown_path)  # Now markdown_path is available
+        created, updated = get_file_times_with_metadata(markdown_path, metadata.get('date', ''))
 
-        tags_html = '<ul class="tag-list">' + ''.join([f'<li><a href="../tags.html#{tag}">{tag}</a></li>' for tag in tags]) + '</ul>'
+        tags_html = '<ul class="tag-list">' + ''.join([
+            f'<li><a href="../tags.html#{quote(tag)}">{html_lib.escape(tag)}</a></li>'
+            for tag in tags
+        ]) + '</ul>'
 
         rendered_post_content = content
 
@@ -307,7 +337,25 @@ def load_template(template_path):
         raise BlogGenerationError(f"Failed to load template: {str(e)}")
 
 def get_creation_date(file_path):
-    return datetime.fromtimestamp(os.path.getctime(file_path))
+    return datetime.fromtimestamp(os.path.getmtime(file_path))
+
+def load_existing_blog_data():
+    """Load existing blog_data.json if present to preserve last_updated."""
+    filepath = os.path.join('data', 'blog_data.json')
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        if isinstance(data, list):
+            return {'last_updated': None, 'posts': data}
+        if isinstance(data, dict) and isinstance(data.get('posts'), list):
+            return data
+    except FileNotFoundError:
+        return {'last_updated': None, 'posts': []}
+    except Exception as e:
+        logging.error(f"Error loading blog_data.json: {str(e)}")
+        return {'last_updated': None, 'posts': []}
+
+    return {'last_updated': None, 'posts': []}
 
 def parse_frontmatter_date(date_str):
     if not date_str:

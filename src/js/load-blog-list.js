@@ -38,10 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     fetchBlogData()
         .then(data => {
-            const posts = Array.isArray(data) ? data : [];
+            const posts = Array.isArray(data) ? data : (data.posts || []);
+            const lastUpdated = Array.isArray(data) ? null : data.last_updated;
             const updateElement = document.getElementById('blog-list-updated');
             if (updateElement) {
-                updateElement.textContent = `Last updated: ${new Date().toLocaleString()}`;
+                updateElement.textContent = lastUpdated ? `Last updated: ${lastUpdated}` : '';
             }
 
             if (posts.length === 0) {
