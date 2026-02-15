@@ -645,6 +645,14 @@ nav ul li a.active {
     margin-bottom: 2rem;
 }
 
+@media (min-width: 900px) {
+    /* Keep the sidebar TOC from growing too tall on desktop */
+    .toc-container .table-of-contents {
+        max-height: calc(100vh - 120px);
+        overflow: auto;
+    }
+}
+
 .dark-mode .table-of-contents {
     background-color: #2d2d2d;
     border-color: #444;
@@ -663,17 +671,27 @@ nav ul li a.active {
 }
 
 .table-of-contents li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
 }
 
 .table-of-contents a {
+    display: block;
     text-decoration: none;
     color: #0066cc;
     transition: color 0.2s;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+    line-height: 1.35;
 }
 
 .table-of-contents a:hover {
     color: #004499;
+}
+
+.toc-h1 {
+    font-weight: bold;
 }
 
 .toc-h2 {

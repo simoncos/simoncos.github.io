@@ -3,7 +3,9 @@ function generateTOC() {
     if (!content) {
         return null;
     }
-    const headings = content.querySelectorAll('h2, h3, h4');
+    const titleHeading = document.querySelector('.post-title');
+    const contentHeadings = Array.from(content.querySelectorAll('h2, h3, h4'));
+    const headings = titleHeading ? [titleHeading, ...contentHeadings] : contentHeadings;
     
     if (headings.length === 0) {
         return null;
@@ -24,6 +26,7 @@ function generateTOC() {
         const link = document.createElement('a');
         link.href = `#${heading.id}`;
         link.textContent = heading.textContent;
+        link.title = heading.textContent;
         link.className = `toc-${heading.tagName.toLowerCase()}`;
         
         // Smooth scroll to heading when clicking TOC link
