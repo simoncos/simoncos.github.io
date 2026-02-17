@@ -7,7 +7,7 @@ date: 2026-01-20
 
 translation: GPT-5.2
 
-*(This article is about 11,600 Chinese characters long and is written entirely by a human. If it feels too long, you can jump straight to the AI Bonus section at the end.)*
+* TLDR; This article is about 7500 words written entirely by a human. If it feels too long, you can jump straight to the AI Bonus section at the end.*
 
 I’m in Kunming now. I’ve just finished washing every piece of gear I brought back from the summit. Before the memory gets “washed out” too much as well, I want to pour it all out while it’s still fresh.
 
