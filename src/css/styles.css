@@ -1,3 +1,50 @@
+:root {
+    /* Shared */
+    --white: #fff;
+
+    /* Light Theme */
+    --link-color: #0066cc;
+    --link-hover-color: #004499;
+    --neutral-gray: #666;
+    --neutral-gray-dark: #999;
+    --text-muted-1: #777;
+    --text-muted-2: #888;
+    --gray-333: #333;
+    --gray-444: #444;
+    --gray-555: #555;
+    --surface-nav: #f4f4f4;
+    --surface-soft: #f0f0f0;
+    --surface-soft-hover: #e0e0e0;
+    --surface-muted: #d0d0d0;
+    --border-light: #ccc;
+    --border-soft: #eee;
+    --border-muted: #e0e0e0;
+    --toc-surface: #f8f9fa;
+    --toc-border: #e9ecef;
+
+    /* Dark Theme */
+    --dark-link-color: #66b3ff;
+    --dark-link-hover-color: #99ccff;
+    --dark-bg: #1a1a1a;
+    --dark-surface: #2d2d2d;
+    --dark-surface-hover: #3d3d3d;
+    --dark-text-primary: #e0e0e0;
+    --dark-text-secondary: #d0d0d0;
+    --dark-text-tertiary: #c0c0c0;
+    --dark-text-quaternary: #b0b0b0;
+
+    /* Effects / Progress */
+    --overlay-light: rgba(255, 255, 255, 0.1);
+    --progress-track-light: rgba(0, 0, 0, 0.1);
+    --progress-track-dark: rgba(255, 255, 255, 0.1);
+    --progress-gradient-light-start: #4a90e2;
+    --progress-gradient-light-end: #67b26f;
+    --progress-gradient-dark-start: #00c6ff;
+    --progress-gradient-dark-end: #0072ff;
+    --progress-shadow-light: rgba(0, 0, 0, 0.2);
+    --progress-shadow-dark: rgba(0, 198, 255, 0.3);
+}
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -6,15 +53,15 @@ body {
 }
 
 header {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--gray-333);
+    color: var(--white);
     text-align: center;
     padding: 1rem;
     position: relative;  /* For absolute positioning of the toggle button */
 }
 
 nav {
-    background-color: #f4f4f4;
+    background-color: var(--surface-nav);
     padding: 0.5rem;
 }
 
@@ -31,11 +78,11 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #333;
+    color: var(--gray-333);
 }
 
 nav ul li a.active {
-    color: #0066cc;
+    color: var(--link-color);
     font-weight: bold;
 }
 
@@ -72,14 +119,14 @@ nav ul li a.active {
 
 .metadata {
     font-size: 0.9em;
-    color: #666;
+    color: var(--neutral-gray);
     margin-bottom: 20px;
 }
 
 .backlinks {
     margin-top: 20px;
     padding: 10px;
-    background-color: #f0f0f0;
+    background-color: var(--surface-soft);
     border-radius: 5px;
 }
 
@@ -98,29 +145,29 @@ nav ul li a.active {
 
 .tag-list a, #backlinks-list a {
     text-decoration: none;
-    color: #666;
+    color: var(--neutral-gray);
 }
 
 /* Specific styles for tags */
 .tag-list a {
     padding: 1px 5px; /* Slightly reduced padding */
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-light);
     border-radius: 3px;
     transition: background-color 0.2s ease;
 }
 
 .tag-list a:hover {
-    background-color: #f0f0f0;
+    background-color: var(--surface-soft);
 }
 
 /* Specific styles for backlinks */
 #backlinks-list a {
-    color: #0066cc;
+    color: var(--link-color);
     transition: color 0.2s ease;
 }
 
 #backlinks-list a:hover {
-    color: #004499;
+    color: var(--link-hover-color);
     text-decoration: underline;
 }
 
@@ -134,7 +181,7 @@ nav ul li a.active {
 
 .active-tag {
     font-weight: bold;
-    background-color: #d0d0d0;
+    background-color: var(--surface-muted);
 }
 
 /* Series page styles */
@@ -155,7 +202,7 @@ nav ul li a.active {
 .post-tags, .post-backlinks {
     margin-top: 1em;
     padding-top: 0.5em;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--border-muted);
     /* Removed background-color */
 }
 
@@ -163,7 +210,7 @@ nav ul li a.active {
     font-size: 1em;  /* Same size as content */
     font-weight: bold;
     margin: 0 0 0.2em 0; /* Reduced bottom margin */
-    color: #333;
+    color: var(--gray-333);
 }
 
 .blog-tags {
@@ -185,20 +232,20 @@ nav ul li a.active {
 .blog-tags a {
     text-decoration: none;
     padding: 5px 10px;
-    background-color: #f0f0f0;
+    background-color: var(--surface-soft);
     border-radius: 3px;
-    color: #333;
+    color: var(--gray-333);
     font-size: 0.9em;
 }
 
 .blog-tags a:hover {
-    background-color: #e0e0e0;
+    background-color: var(--surface-soft-hover);
 }
 
 .container h2 {
     margin-top: 2em;
     /* Remove this line to get rid of the border */
-    /* border-bottom: 1px solid #ccc; */
+    /* border-bottom: 1px solid var(--border-light); */
     padding-bottom: 0.5em;
 }
 
@@ -213,7 +260,7 @@ nav ul li a.active {
 
 .container ul li a {
     text-decoration: none;
-    color: #0066cc;
+    color: var(--link-color);
 }
 
 .container ul li a:hover {
@@ -223,7 +270,7 @@ nav ul li a.active {
 .blog-preview {
     margin-bottom: 2em;
     padding-bottom: 1em;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-soft);
 }
 
 .preview-toggle {
@@ -265,16 +312,20 @@ nav ul li a.active {
 
 .blog-preview h3 a {
     text-decoration: none;
-    color: #333;
+    color: var(--link-color);
 }
 
 .blog-preview h3 a:hover {
-    color: #0066cc;
+    color: var(--link-hover-color);
+}
+
+.dark-mode .blog-preview h3 a {
+    color: var(--dark-link-color);
 }
 
 .post-meta {
     font-style: italic;
-    color: #666;
+    color: var(--neutral-gray);
     margin-bottom: 20px;
 }
 
@@ -290,15 +341,15 @@ nav ul li a.active {
 
 .lang-switch-link {
     text-decoration: none;
-    color: #666;
+    color: var(--neutral-gray);
     padding: 1px 6px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-light);
     border-radius: 3px;
     transition: background-color 0.2s ease;
 }
 
 .lang-switch-link:hover {
-    background-color: #f0f0f0;
+    background-color: var(--surface-soft);
 }
 
 .embedded-page {
@@ -313,7 +364,7 @@ nav ul li a.active {
     display: inline-block;
     margin-top: 0.5em;
     text-decoration: none;
-    color: #0066cc;
+    color: var(--link-color);
     font-weight: bold;
 }
 
@@ -330,42 +381,42 @@ nav ul li a.active {
     font-size: 2.5em;
     margin-top: 0;
     margin-bottom: 0.5em;
-    color: #333;
+    color: var(--gray-333);
 }
 
 .blog-post h2 {
     font-size: 2em;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
-    color: #444;
+    color: var(--gray-444);
 }
 
 .blog-post h3 {
     font-size: 1.7em;
     margin-top: 1.2em;
     margin-bottom: 0.5em;
-    color: #555;
+    color: var(--gray-555);
 }
 
 .blog-post h4 {
     font-size: 1.4em;
     margin-top: 1em;
     margin-bottom: 0.5em;
-    color: #666;
+    color: var(--neutral-gray);
 }
 
 .blog-post h5 {
     font-size: 1.2em;
     margin-top: 0.8em;
     margin-bottom: 0.5em;
-    color: #777;
+    color: var(--text-muted-1);
 }
 
 .blog-post h6 {
     font-size: 1em;
     margin-top: 0.6em;
     margin-bottom: 0.5em;
-    color: #888;
+    color: var(--text-muted-2);
 }
 
 .post-content {
@@ -443,7 +494,7 @@ nav ul li a.active {
 .post-tags, .post-backlinks {
     margin-top: 1em;
     padding-top: 0.5em;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--border-muted);
     /* Removed background-color */
 }
 
@@ -451,7 +502,7 @@ nav ul li a.active {
     font-size: 1em;  /* Same size as content */
     font-weight: bold;
     margin: 0 0 0.2em 0; /* Reduced bottom margin */
-    color: #333;
+    color: var(--gray-333);
 }
 
 .tag-list {
@@ -468,14 +519,14 @@ nav ul li a.active {
 
 .tag-list a {
     text-decoration: none;
-    background-color: #f0f0f0;
+    background-color: var(--surface-soft);
     padding: 2px 6px;
     border-radius: 3px;
-    color: #333;
+    color: var(--gray-333);
 }
 
 .tag-list a:hover {
-    background-color: #e0e0e0;
+    background-color: var(--surface-soft-hover);
 }
 
 #backlinks-list {
@@ -495,16 +546,16 @@ nav ul li a.active {
     content: "•";  /* Bullet point */
     position: absolute;
     left: 0;
-    color: #666;
+    color: var(--neutral-gray);
 }
 
 .dark-mode #backlinks-list li:before {
-    color: #999;  /* Lighter bullet color for dark mode */
+    color: var(--neutral-gray-dark);  /* Lighter bullet color for dark mode */
 }
 
 #backlinks-list a {
     text-decoration: none;
-    color: #0066cc;
+    color: var(--link-color);
 }
 
 #backlinks-list a:hover {
@@ -515,7 +566,7 @@ nav ul li a.active {
 .blog-preview {
     margin-bottom: 2em;
     padding-bottom: 1em;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-soft);
 }
 
 .blog-preview h4 {
@@ -524,16 +575,20 @@ nav ul li a.active {
 
 .blog-preview h4 a {
     text-decoration: none;
-    color: #333;
+    color: var(--link-color);
 }
 
 .blog-preview h4 a:hover {
-    color: #0066cc;
+    color: var(--link-hover-color);
+}
+
+.dark-mode .blog-preview h4 a {
+    color: var(--dark-link-color);
 }
 
 .blog-preview .post-meta {
     font-size: 0.9em;
-    color: #666;
+    color: var(--neutral-gray);
     margin-bottom: 1em;
 }
 
@@ -545,7 +600,7 @@ nav ul li a.active {
     display: inline-block;
     margin-top: 0.5em;
     text-decoration: none;
-    color: #0066cc;
+    color: var(--link-color);
     font-weight: bold;
 }
 
@@ -565,7 +620,7 @@ nav ul li a.active {
     font-size: 2.5em;
     margin-top: 0; /* Ensure no extra space above the title */
     margin-bottom: 0.5em;
-    color: #333;
+    color: var(--gray-333);
     border-bottom: none; /* Ensure no border under the main title */
 }
 
@@ -573,35 +628,35 @@ nav ul li a.active {
     font-size: 2em;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
-    color: #444;
+    color: var(--gray-444);
 }
 
 .blog-post h3 {
     font-size: 1.7em;
     margin-top: 1.2em;
     margin-bottom: 0.5em;
-    color: #555;
+    color: var(--gray-555);
 }
 
 .blog-post h4 {
     font-size: 1.4em;
     margin-top: 1em;
     margin-bottom: 0.5em;
-    color: #666;
+    color: var(--neutral-gray);
 }
 
 .blog-post h5 {
     font-size: 1.2em;
     margin-top: 0.8em;
     margin-bottom: 0.5em;
-    color: #777;
+    color: var(--text-muted-1);
 }
 
 .blog-post h6 {
     font-size: 1em;
     margin-top: 0.6em;
     margin-bottom: 0.5em;
-    color: #888;
+    color: var(--text-muted-2);
 }
 
 .blog-post p {
@@ -633,55 +688,88 @@ nav ul li a.active {
 .post-tags + .post-backlinks {
     margin-top: 0.5em; /* Reduced */
     padding-top: 0.5em; /* Reduced */
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--border-muted);
 }
 
 /* Dark mode styles */
 .dark-mode {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
+    background-color: var(--dark-bg);
+    color: var(--dark-text-primary);
 }
 
 .dark-mode header {
-    background-color: #2d2d2d;
+    background-color: var(--dark-surface);
 }
 
 .dark-mode nav {
-    background-color: #2d2d2d;
+    background-color: var(--dark-surface);
 }
 
 .dark-mode nav ul li a {
-    color: #e0e0e0;
+    color: var(--dark-text-primary);
 }
 
 .dark-mode nav ul li a.active {
-    color: #66b3ff;
+    color: var(--dark-link-color);
 }
 
 .dark-mode .container {
-    background-color: #1a1a1a;
+    background-color: var(--dark-bg);
 }
 
 .dark-mode a {
-    color: #66b3ff;
+    color: var(--dark-link-color);
+}
+
+.dark-mode .container ul li a,
+.dark-mode #backlinks-list a,
+.dark-mode .read-more,
+.dark-mode .blog-preview .read-more,
+.dark-mode .table-of-contents a,
+.dark-mode .table-of-contents a.active {
+    color: var(--dark-link-color);
+}
+
+.dark-mode .container ul li a:visited,
+.dark-mode #backlinks-list a:visited,
+.dark-mode .read-more:visited,
+.dark-mode .blog-preview .read-more:visited,
+.dark-mode .blog-preview h3 a:visited,
+.dark-mode .blog-preview h4 a:visited,
+.dark-mode .table-of-contents a:visited,
+.dark-mode .table-of-contents a.active:visited,
+.dark-mode .tag-list a:visited {
+    color: var(--dark-link-color);
+}
+
+.dark-mode #backlinks-list a:hover,
+.dark-mode .table-of-contents a:hover,
+.dark-mode .table-of-contents a.active:hover {
+    color: var(--dark-link-hover-color);
+}
+
+.dark-mode .blog-preview h3 a:hover,
+.dark-mode .blog-preview h4 a:hover {
+    color: var(--dark-link-hover-color);
 }
 
 .dark-mode .blog-preview {
-    border-bottom-color: #333;
+    border-bottom-color: var(--gray-333);
 }
 
 .dark-mode .post-meta {
-    color: #999;
+    color: var(--neutral-gray-dark);
 }
 
 .dark-mode .tag-list a {
-    background-color: #2d2d2d;
-    border-color: #444;
-    color: #e0e0e0;
+    background-color: var(--dark-surface);
+    border-color: var(--gray-444);
+    color: var(--dark-link-color);
 }
 
 .dark-mode .tag-list a:hover {
-    background-color: #3d3d3d;
+    background-color: var(--dark-surface-hover);
+    color: var(--dark-link-hover-color);
 }
 
 /* Dark mode toggle button styles */
@@ -702,7 +790,7 @@ nav ul li a.active {
 }
 
 #dark-mode-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--overlay-light);
 }
 
 /* Table of Contents styles */
@@ -716,8 +804,8 @@ nav ul li a.active {
     margin-bottom: 0.5rem;
     display: block;
     padding: 0.5rem 0.75rem;
-    background-color: #f8f9fa;
-    border: 1px solid #e9ecef;
+    background-color: var(--toc-surface);
+    border: 1px solid var(--toc-border);
     border-radius: 4px;
 }
 
@@ -726,13 +814,13 @@ nav ul li a.active {
 }
 
 .dark-mode .toc-summary {
-    background-color: #2d2d2d;
-    border-color: #444;
+    background-color: var(--dark-surface);
+    border-color: var(--gray-444);
 }
 
 .table-of-contents {
-    background-color: #f8f9fa;
-    border: 1px solid #e9ecef;
+    background-color: var(--toc-surface);
+    border: 1px solid var(--toc-border);
     border-radius: 4px;
     padding: 1rem;
     margin-bottom: 2rem;
@@ -747,8 +835,8 @@ nav ul li a.active {
 }
 
 .dark-mode .table-of-contents {
-    background-color: #2d2d2d;
-    border-color: #444;
+    background-color: var(--dark-surface);
+    border-color: var(--gray-444);
 }
 
 .table-of-contents h3 {
@@ -770,7 +858,7 @@ nav ul li a.active {
 .table-of-contents a {
     display: block;
     text-decoration: none;
-    color: #0066cc;
+    color: var(--link-color);
     transition: color 0.2s;
     white-space: normal;
     overflow-wrap: anywhere;
@@ -780,7 +868,7 @@ nav ul li a.active {
 }
 
 .table-of-contents a:hover {
-    color: #004499;
+    color: var(--link-hover-color);
 }
 
 .toc-h1 {
@@ -803,44 +891,44 @@ nav ul li a.active {
 
 /* Active TOC link */
 .table-of-contents a.active {
-    color: #004499;
+    color: var(--link-hover-color);
     font-weight: bold;
 }
 
 /* Dark mode header colors */
 .dark-mode .blog-post h1,
 .dark-mode h1 {
-    color: #ffffff;
+    color: var(--white);
 }
 
 .dark-mode .blog-post h2,
 .dark-mode h2 {
-    color: #f0f0f0;
+    color: var(--surface-soft);
 }
 
 .dark-mode .blog-post h3,
 .dark-mode h3 {
-    color: #e0e0e0;
+    color: var(--dark-text-primary);
 }
 
 .dark-mode .blog-post h4,
 .dark-mode h4 {
-    color: #d0d0d0;
+    color: var(--dark-text-secondary);
 }
 
 .dark-mode .blog-post h5,
 .dark-mode h5 {
-    color: #c0c0c0;
+    color: var(--dark-text-tertiary);
 }
 
 .dark-mode .blog-post h6,
 .dark-mode h6 {
-    color: #b0b0b0;
+    color: var(--dark-text-quaternary);
 }
 
 .dark-mode .post-tags h3,
 .dark-mode .post-backlinks h3 {
-    color: #e0e0e0;
+    color: var(--dark-text-primary);
 }
 
 /* Footer styles */
@@ -848,11 +936,11 @@ footer {
     text-align: center;
     padding: 1rem;
     margin-top: 2rem;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--border-muted);
 }
 
 .dark-mode footer {
-    border-top-color: #444;
+    border-top-color: var(--gray-444);
 }
 
 footer p {
@@ -866,27 +954,27 @@ footer p {
     left: 0;
     width: 100%;
     height: 4px;
-    background-color: rgba(0, 0, 0, 0.1);  /* Light gray background */
+    background-color: var(--progress-track-light);  /* Light gray background */
     z-index: 1000;
 }
 
 #reading-progress {
     height: 100%;
     width: 0;
-    background: linear-gradient(to right, #4a90e2, #67b26f);  /* Blue to green gradient */
+    background: linear-gradient(to right, var(--progress-gradient-light-start), var(--progress-gradient-light-end));  /* Blue to green gradient */
     transition: width 0.1s ease;
     border-radius: 0 2px 2px 0;  /* Rounded right edge */
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);  /* Subtle shadow */
+    box-shadow: 0 0 2px var(--progress-shadow-light);  /* Subtle shadow */
 }
 
 /* Dark mode progress bar */
 .dark-mode #progress-container {
-    background-color: rgba(255, 255, 255, 0.1);  /* Slightly visible in dark mode */
+    background-color: var(--progress-track-dark);  /* Slightly visible in dark mode */
 }
 
 .dark-mode #reading-progress {
-    background: linear-gradient(to right, #00c6ff, #0072ff);  /* Bright blue gradient */
-    box-shadow: 0 0 3px rgba(0, 198, 255, 0.3);  /* Glowing effect */
+    background: linear-gradient(to right, var(--progress-gradient-dark-start), var(--progress-gradient-dark-end));  /* Bright blue gradient */
+    box-shadow: 0 0 3px var(--progress-shadow-dark);  /* Glowing effect */
 }
 
 /* Back to top button */
@@ -897,9 +985,9 @@ footer p {
     padding: 8px 10px;
     font-size: 14px;
     line-height: 1;
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #666;
+    background-color: var(--gray-333);
+    color: var(--white);
+    border: 1px solid var(--neutral-gray);
     border-radius: 6px;
     cursor: pointer;
     opacity: 0.9;
@@ -911,9 +999,9 @@ footer p {
 }
 
 .dark-mode .back-to-top {
-    background-color: #444;
-    color: #fff;
-    border-color: #666;
+    background-color: var(--gray-444);
+    color: var(--white);
+    border-color: var(--neutral-gray);
 }
 
 /* Mobile: hide sticky UI when scrolling down */
@@ -940,11 +1028,11 @@ footer p {
     content: "•";
     position: absolute;
     left: 0;
-    color: #666;
+    color: var(--neutral-gray);
 }
 
 .dark-mode .series-posts li:before {
-    color: #999;
+    color: var(--neutral-gray-dark);
 }
 
 /* Styles for tags page links */
@@ -961,10 +1049,10 @@ footer p {
     content: "•";
     position: absolute;
     left: 0;
-    color: #666;
+    color: var(--neutral-gray);
 }
 
 .dark-mode #tag-sections ul li:before,
 .dark-mode #all-tags ul li:before {
-    color: #999;
+    color: var(--neutral-gray-dark);
 }
