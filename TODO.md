@@ -1,5 +1,6 @@
 - Evergreen Notes as a new type of content
 - Experiment with Agent Skills
+    - initialize the agent with a set of skills in VS code
     - Create a skill for translation of post into English
     - Create a skill for visualized summarization of post
 - Social features
