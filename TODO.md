@@ -1,0 +1,9 @@
+- Evergreen Notes as a new type of content
+- Experiment with Agent Skills
+    - Create a skill for translation of post into English
+    - Create a skill for visualized summarization of post
+- Social features
+    - Comment
+    - Share
+    - RSS
+- SEO
