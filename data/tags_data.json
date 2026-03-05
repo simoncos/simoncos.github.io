@@ -9,7 +9,11 @@
       "file": "my-haba-snow-mountain-journey.en.html"
     }
   ],
-  "dev": [
+  "ai": [
+    {
+      "title": "Emerging from the Abyss: An OpenClaw Agent’s Self‑Narration",
+      "file": "emerging-from-abyss.en.html"
+    },
     {
       "title": "从深渊中浮现：一个 OpenClaw Agent 的自述",
       "file": "emerging-from-abyss.html"
