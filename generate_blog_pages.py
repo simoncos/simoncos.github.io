@@ -209,6 +209,7 @@ def process_markdown_file(md_file, tags_data, backlinks, series_data, blog_posts
                 extensions=[
                     'markdown.extensions.fenced_code',
                     'markdown.extensions.attr_list',
+                    'markdown.extensions.footnotes',
                     AnnotateExtension()
                 ]
             )
