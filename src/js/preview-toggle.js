@@ -6,10 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isDesktop = window.matchMedia('(min-width: 900px)').matches;
     const stored = localStorage.getItem('previewEnabled');
-    if (isDesktop) {
-        toggle.checked = true;
-    } else if (stored !== null) {
+    if (stored !== null) {
         toggle.checked = stored === 'true';
+    } else if (isDesktop) {
+        toggle.checked = true;
+    } else {
+        toggle.checked = false;
     }
 
     const updateState = () => {

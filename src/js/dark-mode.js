@@ -8,7 +8,16 @@ function initDarkMode() {
     // Update toggle button state
     const toggleBtn = document.getElementById('dark-mode-toggle');
     if (toggleBtn) {
-        toggleBtn.innerHTML = darkModeEnabled ? '☀️' : '🌙';
+        const icon = toggleBtn.querySelector('.theme-toggle-icon');
+        const text = toggleBtn.querySelector('.theme-toggle-text');
+        if (icon) {
+            icon.textContent = darkModeEnabled ? '☀️' : '🌙';
+        } else {
+            toggleBtn.textContent = darkModeEnabled ? '☀️' : '🌙';
+        }
+        if (text) {
+            text.textContent = darkModeEnabled ? 'Light' : 'Dark';
+        }
     }
 }
 
@@ -19,7 +28,16 @@ function toggleDarkMode() {
     // Update toggle button
     const toggleBtn = document.getElementById('dark-mode-toggle');
     if (toggleBtn) {
-        toggleBtn.innerHTML = isDarkMode ? '☀️' : '🌙';
+        const icon = toggleBtn.querySelector('.theme-toggle-icon');
+        const text = toggleBtn.querySelector('.theme-toggle-text');
+        if (icon) {
+            icon.textContent = isDarkMode ? '☀️' : '🌙';
+        } else {
+            toggleBtn.textContent = isDarkMode ? '☀️' : '🌙';
+        }
+        if (text) {
+            text.textContent = isDarkMode ? 'Light' : 'Dark';
+        }
     }
 }
 

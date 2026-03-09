@@ -396,15 +396,16 @@ def build_post_excerpt(markdown_body, word_limit=100, cjk_char_limit=100):
         for tag in soup.find_all(['pre', 'code']):
             tag.decompose()
 
-        for li in soup.find_all('li'):
-            # Prefix list items so bullets remain visible after text extraction.
-            if li.contents:
-                li.insert(0, NavigableString('• '))
-            else:
-                li.string = '•'
+        segments = []
+        for element in soup.find_all(['p', 'li', 'h2', 'h3', 'h4', 'h5', 'h6']):
+            segment = ' '.join(element.stripped_strings)
+            if not segment:
+                continue
+            if element.name == 'li':
+                segment = f'• {segment}'
+            segments.append(segment)
 
-        # Keep block/line separation so previews don't become one huge line.
-        text = soup.get_text('\n', strip=True)
+        text = '\n'.join(segments) if segments else soup.get_text(' ', strip=True)
     except Exception:
         text = re.sub(r'```.*?```', ' ', markdown_body, flags=re.DOTALL)
         text = re.sub(r'`[^`]*`', ' ', text)
@@ -415,7 +416,11 @@ def build_post_excerpt(markdown_body, word_limit=100, cjk_char_limit=100):
 
     # Normalize whitespace but keep newlines as separators.
     text = re.sub(r'\r\n?', '\n', text)
+    text = re.sub(r'\[\^[^\]]+\]', '', text)
     text = re.sub(r'[ \t\f\v]+', ' ', text)
+    text = re.sub(r'\s+([,.;:!?])', r'\1', text)
+    text = re.sub(r'([([{“‘])\s+', r'\1', text)
+    text = re.sub(r'\s+([)\]}”’])', r'\1', text)
     text = re.sub(r'\n{3,}', '\n\n', text).strip()
     if not text:
         return ''
@@ -497,6 +502,9 @@ def build_post_excerpt(markdown_body, word_limit=100, cjk_char_limit=100):
 
     return '\n'.join(out_lines)
 
+def infer_language_label(file_name):
+    return 'EN' if file_name.endswith('.en.html') else '中文'
+
 def generate_blogs_page(blog_posts):
     """Generate the blogs listing page with error handling"""
     try:
@@ -523,7 +531,10 @@ def generate_blogs_page(blog_posts):
         # Generate HTML content
         html_content = []
         for month, posts in posts_by_month.items():
-            month_content = [f"<h3>{month}</h3>"]
+            month_content = [
+                '<section class="archive-month">',
+                f'<div class="archive-month-header"><h3 class="archive-month-title">{month}</h3><p class="archive-month-note">{len(posts)} post{"s" if len(posts) != 1 else ""}</p></div>'
+            ]
             
             for post in posts:
                 try:
@@ -546,8 +557,10 @@ def generate_blogs_page(blog_posts):
                     dt = get_post_datetime(post)
                     post_html = f"""
                     <article class="blog-preview">
-                        <h4><a href="blogs/{post['file']}">{post['title']}</a></h4>
-                        <p class="post-meta">Posted on {dt.strftime('%B %d, %Y')}</p>
+                        <div class="blog-preview-header">
+                            <div class="blog-preview-meta"><span class="meta-pill">{infer_language_label(post['file'])}</span><span>{dt.strftime('%B %d, %Y')}</span></div>
+                            <h4><a href="blogs/{post['file']}">{post['title']}</a></h4>
+                        </div>
                         {tags_html}
                         <p class="blog-excerpt">{excerpt}</p>
                         <a href="blogs/{post['file']}" class="read-more">Read more</a>
@@ -558,6 +571,7 @@ def generate_blogs_page(blog_posts):
                     logging.error(f"Error generating preview for {post['markdown']}: {str(e)}")
                     continue
             
+            month_content.append('</section>')
             html_content.extend(month_content)
         
         # Load and apply template
