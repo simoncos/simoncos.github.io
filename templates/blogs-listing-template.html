@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-page-title="Blog Posts - [owner]'s Website">Blog Posts - My Personal Website</title>
+    <title data-page-title="Blog Posts - [owner]'s Website">Blog Posts - simoncos's site</title>
     <link rel="stylesheet" href="src/css/styles.css">
     <script src="src/js/site-config.js"></script>
     <script src="src/js/load-nav.js"></script>
@@ -11,22 +11,35 @@
     <script src="src/js/preview-toggle.js"></script>
 </head>
 <body>
-    <header>
-        <h1 data-site-title>My Personal Website</h1>
+    <header class="site-header">
+        <div class="header-inner">
+            <p class="site-kicker">Archive</p>
+            <h1 data-site-title>simoncos's site</h1>
+        </div>
     </header>
     <div id="navigation-placeholder"></div>
-    <div class="container">
-        <h2>Blog Posts</h2>
-        <div class="preview-toggle">
-            <label>
-                <input type="checkbox" id="preview-toggle" checked>
-                Show previews
-            </label>
-        </div>
-        {{BLOG_LISTINGS}}
+    <div class="container page-shell">
+        <section class="page-intro">
+            <div class="page-intro-header">
+                <div>
+                    <p class="section-kicker">Writing archive</p>
+                    <h2>Blog posts</h2>
+                </div>
+            </div>
+            <p class="page-lede">A reverse-chronological archive of essays, technical notes, and bilingual pieces. Toggle previews when you want a denser scanning mode.</p>
+            <div class="preview-toggle">
+                <label>
+                    <input type="checkbox" id="preview-toggle">
+                    Show previews
+                </label>
+            </div>
+        </section>
+        <section class="blog-archive">
+            {{BLOG_LISTINGS}}
+        </section>
     </div>
     <footer>
-        <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>Your Name</span>. All rights reserved.</p>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>simoncos</span>. All rights reserved.</p>
     </footer>
 </body>
 </html>

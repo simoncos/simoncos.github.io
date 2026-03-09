@@ -11,24 +11,27 @@
     <script src="src/js/load-blog-list.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1 data-site-title>simoncos's site</h1>
+    <header class="site-header">
+        <div class="header-inner">
+            <p class="site-kicker">Notes from building, shipping, and thinking</p>
+            <h1 data-site-title>simoncos's site</h1>
+        </div>
     </header>
     <div id="navigation-placeholder"></div>
-    <div class="container">
-        <section id="home">
-            <!-- <h2>Welcome to My Website</h2> -->
-            <!-- <p>This is the home page of my site. Feel free to explore!</p> -->
-        </section>
-
-        <section id="blog">
-            <h2>My Blog</h2>
-            <p id="blog-list-updated" class="post-meta" style="font-size: 0.9em; color: #666;"></p>
-            <ul id="blog-list" class="blog-list"></ul>
+    <div class="container page-shell">
+        <section id="blog" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Recent writing</p>
+                    <h2>Latest posts</h2>
+                </div>
+                <p id="blog-list-updated" class="section-meta"></p>
+            </div>
+            <ul id="blog-list" class="blog-list recent-post-list"></ul>
         </section>
     </div>
     <footer>
-        <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>Your Name</span>. All rights reserved.</p>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>simoncos</span>. All rights reserved.</p>
     </footer>
 </body>
 </html>
