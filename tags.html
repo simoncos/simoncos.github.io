@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-page-title="Tags - [owner]'s Website">Tags - My Personal Website</title>
+    <title data-page-title="Tags - [owner]'s Website">Tags - simoncos's site</title>
     <link rel="stylesheet" href="src/css/styles.css">
     <script src="src/js/site-config.js"></script>
     <script src="src/js/load-nav.js"></script>
@@ -13,7 +13,7 @@
     <header class="site-header">
         <div class="header-inner">
             <p class="site-kicker">Tags</p>
-            <h1 data-site-title>My Personal Website</h1>
+            <h1 data-site-title>simoncos's site</h1>
         </div>
     </header>
     <div id="navigation-placeholder"></div>
@@ -24,12 +24,13 @@
                     <p class="section-kicker">Discovery</p>
                     <h2>Browse by tag</h2>
                 </div>
-                <button id="show-all-tags" class="all-tags-toggle" type="button">Show all tags</button>
             </div>
             <p class="page-lede">Start from a topic and jump into the posts attached to it. The tag system is intentionally lightweight, so this page should stay fast to scan.</p>
+        </section>
+        <section class="tag-filter-row" aria-label="Tag filter">
             <ul id="tag-list" class="tag-list"></ul>
         </section>
-        <section id="tag-sections" class="page-shell"></section>
+        <section id="tag-sections" class="page-shell hidden"></section>
         <section id="all-tags" class="all-tags hidden"></section>
     </div>
 
@@ -83,11 +84,14 @@
         }
 
         function showTagPosts(tag) {
+            const tagSections = document.getElementById('tag-sections');
+            const allTagsSection = document.getElementById('all-tags');
             document.querySelectorAll('.tag-section').forEach(section => {
                 section.classList.add('hidden');
             });
+            tagSections.classList.remove('hidden');
             document.getElementById(tag).classList.remove('hidden');
-            document.getElementById('all-tags').classList.add('hidden');
+            allTagsSection.classList.add('hidden');
             document.querySelectorAll('.tag-list a').forEach(a => {
                 a.classList.remove('active-tag');
             });
@@ -95,11 +99,13 @@
         }
 
         function showAllTags(tagsData) {
+            const tagSections = document.getElementById('tag-sections');
             document.querySelectorAll('.tag-section').forEach(section => {
                 section.classList.add('hidden');
             });
             const allTagsSection = document.getElementById('all-tags');
-            allTagsSection.innerHTML = '<h3>All Tags</h3>';
+            tagSections.classList.add('hidden');
+            allTagsSection.innerHTML = '';
             Object.entries(tagsData).forEach(([tag, posts]) => {
                 const tagSection = document.createElement('section');
                 tagSection.className = 'tag-overview-block';
@@ -141,7 +147,9 @@
                 tagsData = data;
                 if (Object.keys(data).length === 0) {
                     console.log('Tags data is empty');
-                    document.getElementById('tag-sections').innerHTML = '<p>No tags found.</p>';
+                    const tagSections = document.getElementById('tag-sections');
+                    tagSections.innerHTML = '<p>No tags found.</p>';
+                    tagSections.classList.remove('hidden');
                 } else {
                     populateTagList(data);
                     createTagSections(data);
@@ -150,14 +158,15 @@
             })
             .catch(error => {
                 console.error('Error loading tags data:', error);
-                document.getElementById('tag-sections').innerHTML = '<p>Error loading tags data.</p>';
+                const tagSections = document.getElementById('tag-sections');
+                tagSections.innerHTML = '<p>Error loading tags data.</p>';
+                tagSections.classList.remove('hidden');
             });
 
-        document.getElementById('show-all-tags').addEventListener('click', () => showAllTags(tagsData));
         window.addEventListener('hashchange', showRelevantPosts);
     </script>
     <footer>
-        <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>Your Name</span>. All rights reserved.</p>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>simoncos</span>. All rights reserved.</p>
     </footer>
 </body>
 </html>
