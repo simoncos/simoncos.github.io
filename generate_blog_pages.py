@@ -396,15 +396,16 @@ def build_post_excerpt(markdown_body, word_limit=100, cjk_char_limit=100):
         for tag in soup.find_all(['pre', 'code']):
             tag.decompose()
 
-        for li in soup.find_all('li'):
-            # Prefix list items so bullets remain visible after text extraction.
-            if li.contents:
-                li.insert(0, NavigableString('• '))
-            else:
-                li.string = '•'
+        segments = []
+        for element in soup.find_all(['p', 'li', 'h2', 'h3', 'h4', 'h5', 'h6']):
+            segment = ' '.join(element.stripped_strings)
+            if not segment:
+                continue
+            if element.name == 'li':
+                segment = f'• {segment}'
+            segments.append(segment)
 
-        # Keep block/line separation so previews don't become one huge line.
-        text = soup.get_text('\n', strip=True)
+        text = '\n'.join(segments) if segments else soup.get_text(' ', strip=True)
     except Exception:
         text = re.sub(r'```.*?```', ' ', markdown_body, flags=re.DOTALL)
         text = re.sub(r'`[^`]*`', ' ', text)
@@ -415,7 +416,11 @@ def build_post_excerpt(markdown_body, word_limit=100, cjk_char_limit=100):
 
     # Normalize whitespace but keep newlines as separators.
     text = re.sub(r'\r\n?', '\n', text)
+    text = re.sub(r'\[\^[^\]]+\]', '', text)
     text = re.sub(r'[ \t\f\v]+', ' ', text)
+    text = re.sub(r'\s+([,.;:!?])', r'\1', text)
+    text = re.sub(r'([([{“‘])\s+', r'\1', text)
+    text = re.sub(r'\s+([)\]}”’])', r'\1', text)
     text = re.sub(r'\n{3,}', '\n\n', text).strip()
     if not text:
         return ''
