@@ -10,26 +10,42 @@
     <script src="src/js/dark-mode.js"></script>
 </head>
 <body>
-    <header>
-        <h1 data-site-title>My Personal Website</h1>
+    <header class="site-header">
+        <div class="header-inner">
+            <p class="site-kicker">About</p>
+            <h1 data-site-title>My Personal Website</h1>
+        </div>
     </header>
     <div id="navigation-placeholder"></div>
-    <div class="container">
-        <h2>About Me</h2>
-        <ul>
-            <li>simoncos | Che ZHAO (趙澈) | connecting the dots.</li>
-            <li>A full stack builder in AI / Data, based in Hong Kong.</li>
-        </ul>
-        <h2>Contact Me</h2>
-        <ul>
-            <li>Email: <a href="mailto:l.z.simon@hotmail.com">l.z.simon@hotmail.com</a></li>
-            <li>LinkedIn: <a href="https://www.linkedin.com/in/chezhao/" target="_blank">https://www.linkedin.com/in/chezhao/</a></li>
-            <li>X: <a href="https://x.com/simonc_os" target="_blank">@simonc_os</a></li>
-            <li>GitHub: <a href="https://github.com/simoncos" target="_blank">https://github.com/simoncos</a></li>
-        </ul>
-        <p>
-            I typically respond within 24-48 hours. Looking forward to hearing from you!
-        </p>
+    <div class="container page-shell">
+        <section class="page-intro">
+            <p class="section-kicker">Profile</p>
+            <h2>simoncos | Che ZHAO (趙澈)</h2>
+            <p class="page-lede">Full-stack builder in AI and data, based in Hong Kong. This site connects technical work, long-form writing, and the kinds of experiences that usually get left out of a portfolio.</p>
+        </section>
+
+        <section class="about-grid">
+            <div class="content-section">
+                <p class="section-kicker">What I do</p>
+                <h2>Connecting the dots between systems and lived reality.</h2>
+                <ul class="about-points">
+                    <li>I build across data, AI, product logic, and end-to-end implementation.</li>
+                    <li>I write to make technical decisions legible and personal experiences analyzable.</li>
+                    <li>I care about interfaces that feel intentional, not just functional.</li>
+                </ul>
+            </div>
+            <div class="panel">
+                <p class="section-kicker">Contact</p>
+                <h2>Reach out</h2>
+                <ul class="contact-list">
+                    <li>Email: <a href="mailto:l.z.simon@hotmail.com">l.z.simon@hotmail.com</a></li>
+                    <li>LinkedIn: <a href="https://www.linkedin.com/in/chezhao/" target="_blank" rel="noreferrer">chezhao</a></li>
+                    <li>X: <a href="https://x.com/simonc_os" target="_blank" rel="noreferrer">@simonc_os</a></li>
+                    <li>GitHub: <a href="https://github.com/simoncos" target="_blank" rel="noreferrer">simoncos</a></li>
+                </ul>
+                <p>I typically respond within 24 to 48 hours.</p>
+            </div>
+        </section>
     </div>
     <footer>
         <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>Your Name</span>. All rights reserved.</p>

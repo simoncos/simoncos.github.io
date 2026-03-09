@@ -11,19 +11,32 @@
     <script src="src/js/preview-toggle.js"></script>
 </head>
 <body>
-    <header>
-        <h1 data-site-title>My Personal Website</h1>
+    <header class="site-header">
+        <div class="header-inner">
+            <p class="site-kicker">Archive</p>
+            <h1 data-site-title>My Personal Website</h1>
+        </div>
     </header>
     <div id="navigation-placeholder"></div>
-    <div class="container">
-        <h2>Blog Posts</h2>
-        <div class="preview-toggle">
-            <label>
-                <input type="checkbox" id="preview-toggle" checked>
-                Show previews
-            </label>
-        </div>
-        {{BLOG_LISTINGS}}
+    <div class="container page-shell">
+        <section class="page-intro">
+            <div class="page-intro-header">
+                <div>
+                    <p class="section-kicker">Writing archive</p>
+                    <h2>Blog posts</h2>
+                </div>
+                <div class="preview-toggle">
+                    <label>
+                        <input type="checkbox" id="preview-toggle" checked>
+                        Show previews
+                    </label>
+                </div>
+            </div>
+            <p class="page-lede">A reverse-chronological archive of essays, technical notes, and bilingual pieces. Toggle previews when you want a denser scanning mode.</p>
+        </section>
+        <section class="blog-archive">
+            {{BLOG_LISTINGS}}
+        </section>
     </div>
     <footer>
         <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>Your Name</span>. All rights reserved.</p>
