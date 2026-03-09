@@ -28,5 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     link.classList.add('active');
                 }
             });
+
+            if (typeof initDarkMode === 'function') {
+                initDarkMode();
+            }
         });
 });

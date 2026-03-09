@@ -8,56 +8,29 @@
     <script src="src/js/site-config.js"></script>
     <script src="src/js/load-nav.js"></script>
     <script src="src/js/dark-mode.js"></script>
-    <style>
-        .tag-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .tag-list li {
-            display: inline-block;
-            margin-right: 10px;
-            margin-bottom: 10px;
-        }
-        .tag-list a {
-            text-decoration: none;
-            padding: 5px 10px;
-            background-color: #f0f0f0;
-            border-radius: 3px;
-            color: #333;
-        }
-        .tag-list a:hover {
-            background-color: #e0e0e0;
-        }
-        .tag-section {
-            margin-bottom: 20px;
-        }
-        .hidden {
-            display: none;
-        }
-        .active-tag {
-            font-weight: bold;
-            background-color: #d0d0d0;
-        }
-        .all-tags {
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
-    <header>
-        <h1 data-site-title>My Personal Website</h1>
+    <header class="site-header">
+        <div class="header-inner">
+            <p class="site-kicker">Tags</p>
+            <h1 data-site-title>My Personal Website</h1>
+        </div>
     </header>
     <div id="navigation-placeholder"></div>
-    <div class="container">
-        <h2>Tags</h2>
-        <ul id="tag-list" class="tag-list">
-            <!-- Tag list will be dynamically populated -->
-        </ul>
-        <div id="tag-sections"></div>
-        <div id="all-tags" class="all-tags hidden">
-            <h3>All Tags</h3>
-            <!-- All tags and their blogs will be dynamically populated here -->
-        </div>
+    <div class="container page-shell">
+        <section class="page-intro">
+            <div class="page-intro-header">
+                <div>
+                    <p class="section-kicker">Discovery</p>
+                    <h2>Browse by tag</h2>
+                </div>
+                <button id="show-all-tags" class="all-tags-toggle" type="button">Show all tags</button>
+            </div>
+            <p class="page-lede">Start from a topic and jump into the posts attached to it. The tag system is intentionally lightweight, so this page should stay fast to scan.</p>
+            <ul id="tag-list" class="tag-list"></ul>
+        </section>
+        <section id="tag-sections" class="page-shell"></section>
+        <section id="all-tags" class="all-tags hidden"></section>
     </div>
 
     <script>
@@ -91,12 +64,10 @@
         function createTagSections(tagsData) {
             const tagSections = document.getElementById('tag-sections');
             Object.entries(tagsData).forEach(([tag, posts]) => {
-                const section = document.createElement('div');
+                const section = document.createElement('section');
                 section.id = tag;
                 section.classList.add('tag-section', 'hidden');
-                const h3 = document.createElement('h3');
-                h3.textContent = tag;
-                section.appendChild(h3);
+                section.innerHTML = `<div class="tag-meta"><span class="meta-pill">Tag</span><span>${posts.length} post${posts.length === 1 ? '' : 's'}</span></div><h3>${tag}</h3>`;
                 const ul = document.createElement('ul');
                 posts.forEach(post => {
                     const li = document.createElement('li');
@@ -130,8 +101,9 @@
             const allTagsSection = document.getElementById('all-tags');
             allTagsSection.innerHTML = '<h3>All Tags</h3>';
             Object.entries(tagsData).forEach(([tag, posts]) => {
-                const tagSection = document.createElement('div');
-                tagSection.innerHTML = `<h4>${tag}</h4>`;
+                const tagSection = document.createElement('section');
+                tagSection.className = 'tag-overview-block';
+                tagSection.innerHTML = `<div class="tag-meta"><span class="meta-pill">Tag</span><span>${posts.length} post${posts.length === 1 ? '' : 's'}</span></div><h4>${tag}</h4>`;
                 const ul = document.createElement('ul');
                 posts.forEach(post => {
                     const li = document.createElement('li');
@@ -181,6 +153,7 @@
                 document.getElementById('tag-sections').innerHTML = '<p>Error loading tags data.</p>';
             });
 
+        document.getElementById('show-all-tags').addEventListener('click', () => showAllTags(tagsData));
         window.addEventListener('hashchange', showRelevantPosts);
     </script>
     <footer>

@@ -51,17 +51,42 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             blogList.innerHTML = '';
+            const inferLanguage = (fileName) => fileName && fileName.endsWith('.en.html') ? 'EN' : '中文';
+            const formatDate = (dateValue) => {
+                if (!dateValue) {
+                    return 'Undated';
+                }
+                const date = new Date(dateValue);
+                if (Number.isNaN(date.getTime())) {
+                    return dateValue;
+                }
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+            };
             posts.sort((a, b) => {
                 const dateA = a.date ? new Date(a.date).getTime() : 0;
                 const dateB = b.date ? new Date(b.date).getTime() : 0;
                 return dateB - dateA;
             })
+                .slice(0, 6)
                 .forEach(post => {
                     const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = `blogs/${post.file}`;
-                    a.textContent = post.title;
-                    li.appendChild(a);
+                    li.className = 'recent-post-card';
+                    li.innerHTML = `
+                        <a class="recent-post-link" href="blogs/${post.file}">
+                            <span class="recent-post-main">
+                                <span class="recent-post-meta">
+                                    <span class="meta-pill">${inferLanguage(post.file)}</span>
+                                    <span>${formatDate(post.date)}</span>
+                                </span>
+                                <span class="recent-post-title">${post.title}</span>
+                            </span>
+                            <span class="recent-post-summary">Open post</span>
+                        </a>
+                    `;
                     blogList.appendChild(li);
                 });
         })
