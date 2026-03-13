@@ -1003,6 +1003,95 @@ body.dark-mode .blog-post code {
     margin: 1.6rem 0;
 }
 
+.post-content sup,
+.blog-post sup {
+    line-height: 0;
+}
+
+.post-content a.footnote-ref,
+.blog-post a.footnote-ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    margin-left: 0.12rem;
+    padding: 0 0.32rem;
+    border-radius: 999px;
+    background: rgba(22, 89, 197, 0.1);
+    color: var(--accent-strong);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    vertical-align: super;
+}
+
+body.dark-mode .post-content a.footnote-ref,
+body.dark-mode .blog-post a.footnote-ref {
+    background: rgba(124, 226, 255, 0.14);
+    color: var(--dark-link-color);
+}
+
+.post-content .footnote,
+.blog-post .footnote {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.96rem;
+}
+
+body.dark-mode .post-content .footnote,
+body.dark-mode .blog-post .footnote {
+    border-top-color: var(--dark-border);
+    color: var(--dark-text-secondary);
+}
+
+.post-content .footnote ol,
+.blog-post .footnote ol {
+    padding-left: 1.25rem;
+}
+
+.post-content a.footnote-backref,
+.blog-post a.footnote-backref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.45rem;
+    padding: 0.1rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface-strong);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.post-content a.footnote-backref:hover,
+.blog-post a.footnote-backref:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+    background: rgba(22, 89, 197, 0.06);
+}
+
+body.dark-mode .post-content a.footnote-backref,
+body.dark-mode .blog-post a.footnote-backref {
+    border-color: var(--dark-border);
+    background: var(--dark-surface);
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .post-content a.footnote-backref:hover,
+body.dark-mode .blog-post a.footnote-backref:hover {
+    color: var(--dark-text-primary);
+    border-color: var(--dark-border-strong);
+    background: var(--dark-surface-hover);
+}
+
 .embedded-page {
     width: 100%;
     min-height: 620px;
