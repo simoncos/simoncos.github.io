@@ -8,6 +8,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="src/css/styles.css?v=20260313b">
     <script src="src/js/site-config.js"></script>
+    <script src="src/js/i18n.js"></script>
+    <script src="src/js/article-groups.js"></script>
     <script src="src/js/load-nav.js"></script>
     <script src="src/js/dark-mode.js"></script>
     <script src="src/js/load-blog-list.js" defer></script>
@@ -15,7 +17,7 @@
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <p class="site-kicker">Notes from building, shipping, and thinking</p>
+            <p class="site-kicker" data-i18n="site_kicker_home">Projects, writing, and field notes</p>
             <h1 data-site-title>simoncos's site</h1>
         </div>
     </header>
@@ -24,8 +26,8 @@
         <section id="blog" class="content-section">
             <div class="section-heading">
                 <div>
-                    <p class="section-kicker">Recent writing</p>
-                    <h2>Latest posts</h2>
+                    <p class="section-kicker" data-i18n="recent_writing">Recent writing</p>
+                    <h2 data-i18n="latest_posts">Latest posts</h2>
                 </div>
                 <p id="blog-list-updated" class="section-meta"></p>
             </div>

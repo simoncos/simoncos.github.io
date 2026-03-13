@@ -171,6 +171,97 @@ def localize_footnotes(html_content, is_english=False):
 
     return str(soup)
 
+
+def infer_language_code(file_name):
+    return 'en' if '.en.' in file_name else 'zh'
+
+
+def infer_group_id(file_name):
+    if file_name.endswith('.en.md'):
+        return file_name[:-len('.en.md')]
+    if file_name.endswith('.en.html'):
+        return file_name[:-len('.en.html')]
+    if file_name.endswith('.md'):
+        return file_name[:-len('.md')]
+    if file_name.endswith('.html'):
+        return file_name[:-len('.html')]
+    return file_name
+
+
+def warn_on_metadata_divergence(group_id, reference_post, candidate_post):
+    reference_metadata = reference_post.get('metadata', {})
+    candidate_metadata = candidate_post.get('metadata', {})
+
+    comparisons = {
+        'date': (reference_post.get('date', ''), candidate_post.get('date', '')),
+        'tags': (reference_post.get('tags', []), candidate_post.get('tags', [])),
+        'series': (reference_metadata.get('series', ''), candidate_metadata.get('series', '')),
+        'series_part': (reference_metadata.get('series_part', ''), candidate_metadata.get('series_part', '')),
+    }
+
+    for field_name, (reference_value, candidate_value) in comparisons.items():
+        if reference_value != candidate_value:
+            logging.warning(
+                "Metadata divergence in group %s for %s: %s != %s",
+                group_id,
+                field_name,
+                reference_value,
+                candidate_value,
+            )
+
+
+def build_article_groups(posts):
+    grouped_posts = defaultdict(dict)
+    for post in posts:
+        grouped_posts[post['group_id']][post['language']] = post
+
+    article_groups = []
+    for group_id, languages in grouped_posts.items():
+        reference_post = languages.get('zh') or languages.get('en') or next(iter(languages.values()))
+
+        for language_code, post in languages.items():
+            if post is reference_post:
+                continue
+            warn_on_metadata_divergence(group_id, reference_post, post)
+
+        reference_metadata = reference_post.get('metadata', {})
+        series_name = reference_metadata.get('series', '').strip()
+        series_part = reference_metadata.get('series_part', '').strip()
+
+        group_entry = {
+            'id': group_id,
+            'date': reference_post.get('date', ''),
+            'tags': reference_post.get('tags', []),
+            'series': {
+                'name': series_name,
+                'part': series_part,
+            } if series_name else None,
+            'languages': {},
+        }
+
+        for language_code in ('zh', 'en'):
+            if language_code not in languages:
+                continue
+
+            post = languages[language_code]
+            group_entry['languages'][language_code] = {
+                'title': post.get('title', ''),
+                'file': post.get('file', ''),
+                'markdown': post.get('markdown', ''),
+                'html_content': post.get('html_content', ''),
+                'rendered_content': post.get('rendered_content', ''),
+                'excerpt': post.get('excerpt', ''),
+                'available': True,
+            }
+
+        article_groups.append(group_entry)
+
+    article_groups.sort(
+        key=lambda group: parse_frontmatter_date(group.get('date', '')) or datetime.min,
+        reverse=True,
+    )
+    return article_groups
+
 def generate_blog_pages():
     """Main blog generation function with error handling"""
     try:
@@ -195,10 +286,13 @@ def generate_blog_pages():
                 logging.error(f"Error collecting {md_file}: {str(e)}")
                 continue
 
+        article_groups = build_article_groups(blog_posts)
+        article_group_map = {group['id']: group for group in article_groups}
+
         # Second pass: render each post
         for post in blog_posts:
             try:
-                render_blog_post(post, template)
+                render_blog_post(post, template, article_group_map)
             except Exception as e:
                 logging.error(f"Error rendering {post.get('markdown')}: {str(e)}")
                 continue
@@ -215,6 +309,7 @@ def generate_blog_pages():
             last_updated = datetime.now().strftime('%Y-%m-%d')
 
         save_json_data({'last_updated': last_updated, 'posts': blog_posts}, 'blog_data.json')
+        save_json_data({'last_updated': last_updated, 'groups': article_groups}, 'article_groups.json')
         save_json_data(series_data, 'series_data.json')
         save_json_data(tags_data, 'tags_data.json')
 
@@ -253,6 +348,7 @@ def collect_markdown_file(md_file, tags_data, series_data, blog_posts):
 
         html_content = localize_footnotes(html_content, is_english=md_file.endswith('.en.md'))
         title, rendered_post_content = extract_title_and_content(html_content)
+        excerpt = build_post_excerpt(content)
 
         tags = metadata.get('tags', '').split(',')
         tags = [tag.strip() for tag in tags if tag.strip()]
@@ -274,8 +370,11 @@ def collect_markdown_file(md_file, tags_data, series_data, blog_posts):
             "title": title,
             "file": html_file,
             "markdown": md_file,
+            "group_id": infer_group_id(md_file),
+            "language": infer_language_code(md_file),
             "html_content": html_content,
             "rendered_content": rendered_post_content,
+            "excerpt": excerpt,
             "date": metadata.get('date', ''),
             "metadata": metadata,
             "markdown_path": markdown_path,
@@ -287,7 +386,7 @@ def collect_markdown_file(md_file, tags_data, series_data, blog_posts):
         raise BlogGenerationError(f"Failed to collect markdown file: {str(e)}")
 
 
-def render_blog_post(post, template):
+def render_blog_post(post, template, article_group_map):
     """Render and save individual blog post."""
     try:
         md_file = post['markdown']
@@ -298,20 +397,16 @@ def render_blog_post(post, template):
         markdown_path = post['markdown_path']
         tags = post['tags']
 
-        if md_file.endswith('.en.md'):
-            paired_md_file = md_file[:-len('.en.md')] + '.md'
-            paired_label = '中文'
-            paired_html_file = paired_md_file.replace('.md', '.html')
-        else:
-            paired_md_file = md_file[:-len('.md')] + '.en.md'
-            paired_label = 'English'
-            paired_html_file = paired_md_file.replace('.md', '.html')
+        article_group = article_group_map.get(post['group_id'], {})
+        article_languages = article_group.get('languages', {})
+        target_language = 'zh' if post['language'] == 'en' else 'en'
+        paired_entry = article_languages.get(target_language)
+        paired_label = '中文' if target_language == 'zh' else 'English'
 
-        paired_md_path = Path('blogs') / paired_md_file
-        if paired_md_path.exists():
+        if paired_entry and paired_entry.get('file'):
             lang_switch_html = (
                 f'<div class="lang-switch">'
-                f'<a class="lang-switch-link" href="{paired_html_file}">{paired_label}</a>'
+                f'<a class="lang-switch-link" data-language-switch data-target-language="{target_language}" href="{paired_entry["file"]}">{paired_label}</a>'
                 f'</div>'
             )
         else:
@@ -325,6 +420,11 @@ def render_blog_post(post, template):
         ]) + '</ul>'
 
         page_content = template.replace('{{TITLE}}', title)
+        page_content = page_content.replace('{{PAGE_LANGUAGE}}', 'zh-CN' if post['language'] == 'zh' else 'en')
+        page_content = page_content.replace('{{ARTICLE_GROUP_ID}}', post['group_id'])
+        page_content = page_content.replace('{{ARTICLE_LANGUAGE}}', post['language'])
+        page_content = page_content.replace('{{ARTICLE_EN_FILE}}', article_languages.get('en', {}).get('file', ''))
+        page_content = page_content.replace('{{ARTICLE_ZH_FILE}}', article_languages.get('zh', {}).get('file', ''))
         page_content = page_content.replace('{{CONTENT}}', rendered_post_content)
         page_content = page_content.replace('{{CREATED}}', created)
         page_content = page_content.replace('{{UPDATED}}', updated)
@@ -404,8 +504,14 @@ def build_post_excerpt(markdown_body, word_limit=100, cjk_char_limit=100):
     - For CJK-heavy text without spaces, falls back to first `cjk_char_limit` characters.
     """
     try:
-        html_content = markdown.markdown(
+        sanitized_markdown = re.sub(
+            r'^\[\^[^\]]+\]:.*(?:\n(?: {4,}|\t).*)*',
+            '',
             markdown_body,
+            flags=re.MULTILINE,
+        )
+        html_content = markdown.markdown(
+            sanitized_markdown,
             extensions=[
                 'markdown.extensions.fenced_code',
                 'markdown.extensions.attr_list',
@@ -432,7 +538,8 @@ def build_post_excerpt(markdown_body, word_limit=100, cjk_char_limit=100):
 
         text = '\n'.join(segments) if segments else soup.get_text(' ', strip=True)
     except Exception:
-        text = re.sub(r'```.*?```', ' ', markdown_body, flags=re.DOTALL)
+        text = re.sub(r'^\[\^[^\]]+\]:.*(?:\n(?: {4,}|\t).*)*', '', markdown_body, flags=re.MULTILINE)
+        text = re.sub(r'```.*?```', ' ', text, flags=re.DOTALL)
         text = re.sub(r'`[^`]*`', ' ', text)
         text = re.sub(r'!\[[^\]]*\]\([^)]*\)', ' ', text)
         text = re.sub(r'\[[^\]]*\]\([^)]*\)', ' ', text)

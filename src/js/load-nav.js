@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const siteConfig = window.SITE_CONFIG || {};
+    const i18n = window.SITE_I18N || {};
     const basePath = siteConfig.basePath || '/';
     const resolvePath = typeof siteConfig.resolvePath === 'function'
         ? siteConfig.resolvePath.bind(siteConfig)
@@ -18,7 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const page = link.dataset.page;
 
             if (page) {
-                link.setAttribute('href', resolvePath(page));
+                const resolvedHref = resolvePath(page);
+                link.setAttribute(
+                    'href',
+                    typeof i18n.resolveLocalizedUrl === 'function'
+                        ? i18n.resolveLocalizedUrl(resolvedHref)
+                        : resolvedHref
+                );
             }
 
             if ((isBlogPage && page === 'blogs.html') || page === currentPage) {
@@ -33,23 +40,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 <nav aria-label="Primary navigation">
                     <div class="nav-inner">
                         <ul>
-                            <li><a href="#" data-page="index.html">Home</a></li>
-                            <li><a href="#" data-page="blogs.html">Blogs</a></li>
-                            <li><a href="#" data-page="tags.html">Tags</a></li>
-                            <li><a href="#" data-page="series.html">Series</a></li>
-                            <li><a href="#" data-page="about.html">About</a></li>
+                            <li><a href="#" data-page="index.html" data-i18n="nav_home">Home</a></li>
+                            <li><a href="#" data-page="blogs.html" data-i18n="nav_blogs">Blogs</a></li>
+                            <li><a href="#" data-page="tags.html" data-i18n="nav_tags">Tags</a></li>
+                            <li><a href="#" data-page="series.html" data-i18n="nav_series">Series</a></li>
+                            <li><a href="#" data-page="about.html" data-i18n="nav_about">About</a></li>
                         </ul>
-                        <div class="dark-mode-container">
-                            <button id="dark-mode-toggle" class="theme-toggle" type="button" onclick="toggleDarkMode()" title="Toggle dark mode" aria-label="Toggle dark mode">
-                                <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
-                                <span class="theme-toggle-text">Theme</span>
-                            </button>
+                        <div class="site-nav-controls">
+                            <div class="site-language-switch" data-i18n-aria-label="language_switcher" aria-label="Language switcher">
+                                <button class="site-language-button" type="button" data-site-language="en">EN</button>
+                                <button class="site-language-button" type="button" data-site-language="zh">中文</button>
+                            </div>
+                            <div class="dark-mode-container">
+                                <button id="dark-mode-toggle" class="theme-toggle" type="button" onclick="toggleDarkMode()" title="Toggle theme" aria-label="Toggle theme">
+                                    <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </nav>
             </div>
         `;
         applyActiveNavState();
+
+        if (typeof i18n.localizeDocument === 'function') {
+            i18n.localizeDocument(navigationPlaceholder);
+        }
+
+        if (typeof i18n.updateLanguageSwitcherState === 'function') {
+            i18n.updateLanguageSwitcherState(navigationPlaceholder);
+        }
 
         if (typeof initDarkMode === 'function') {
             initDarkMode();
@@ -66,6 +86,14 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             navigationPlaceholder.innerHTML = data;
             applyActiveNavState();
+
+            if (typeof i18n.localizeDocument === 'function') {
+                i18n.localizeDocument(navigationPlaceholder);
+            }
+
+            if (typeof i18n.updateLanguageSwitcherState === 'function') {
+                i18n.updateLanguageSwitcherState(navigationPlaceholder);
+            }
 
             if (typeof initDarkMode === 'function') {
                 initDarkMode();

@@ -8,63 +8,30 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="src/css/styles.css?v=20260313b">
     <script src="src/js/site-config.js"></script>
+    <script src="src/js/i18n.js"></script>
+    <script src="src/js/article-groups.js"></script>
     <script src="src/js/load-nav.js"></script>
     <script src="src/js/dark-mode.js"></script>
+    <script src="src/js/load-series-page.js" defer></script>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <p class="site-kicker">Series</p>
+            <p class="site-kicker" data-i18n="series">Series</p>
             <h1 data-site-title>simoncos's site</h1>
         </div>
     </header>
     <div id="navigation-placeholder"></div>
     <div class="container page-shell">
         <section class="page-intro">
-            <p class="section-kicker">Structured reading</p>
-            <h2>Blog series</h2>
-            <p class="page-lede">Collections of posts that belong together. Use this view when you want continuity rather than a reverse-chronological feed.</p>
+            <p class="section-kicker" data-i18n="structured_reading">Structured reading</p>
+            <h2 data-i18n="blog_series">Blog series</h2>
+            <p class="page-lede" data-i18n="series_lede">Posts that follow the same line of thought. Use this view when you want an arc rather than a timeline.</p>
         </section>
         <section class="content-section">
             <ul id="series-list" class="series-list"></ul>
         </section>
     </div>
-
-    <script>
-        async function loadSeriesData() {
-            try {
-                const response = await fetch('data/series_data.json');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const seriesData = await response.json();
-                const seriesList = document.getElementById('series-list');
-
-                for (const [seriesName, posts] of Object.entries(seriesData)) {
-                    const li = document.createElement('li');
-                    li.className = 'series-card';
-                    li.innerHTML = `
-                        <div class="series-meta"><span class="meta-pill">Series</span><span>${posts.length} post${posts.length === 1 ? '' : 's'}</span></div>
-                        <h3>${seriesName}</h3>
-                        <ul class="series-posts">
-                            ${posts.sort((a, b) => {
-                                const partA = parseInt(a.part) || 0;
-                                const partB = parseInt(b.part) || 0;
-                                return partA - partB;
-                            }).map(post => `
-                                <li>${post.part ? `Part ${post.part}: ` : ''}<a href="blogs/${post.file}">${post.title}</a></li>
-                            `).join('')}
-                        </ul>
-                    `;
-                    seriesList.appendChild(li);
-                }
-            } catch (error) {
-                console.error('Error loading series data:', error);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', loadSeriesData);
-    </script>
     <footer>
         <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>simoncos</span>. All rights reserved.</p>
     </footer>

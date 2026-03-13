@@ -8,13 +8,16 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="src/css/styles.css?v=20260313b">
     <script src="src/js/site-config.js"></script>
+    <script src="src/js/i18n.js"></script>
+    <script src="src/js/article-groups.js"></script>
     <script src="src/js/load-nav.js"></script>
     <script src="src/js/dark-mode.js"></script>
+    <script src="src/js/load-tags-page.js" defer></script>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <p class="site-kicker">Tags</p>
+            <p class="site-kicker" data-i18n="tags">Tags</p>
             <h1 data-site-title>simoncos's site</h1>
         </div>
     </header>
@@ -23,11 +26,11 @@
         <section class="page-intro">
             <div class="page-intro-header">
                 <div>
-                    <p class="section-kicker">Discovery</p>
-                    <h2>Browse by tag</h2>
+                    <p class="section-kicker" data-i18n="discovery">Discovery</p>
+                    <h2 data-i18n="browse_by_tag">Browse by tag</h2>
                 </div>
             </div>
-            <p class="page-lede">Start from a topic and jump into the posts attached to it. The tag system is intentionally lightweight, so this page should stay fast to scan.</p>
+            <p class="page-lede" data-i18n="tags_lede">Start from a topic and branch out from there. The tag system stays intentionally lightweight, so this page remains quick to scan.</p>
         </section>
         <section class="tag-filter-row" aria-label="Tag filter">
             <ul id="tag-list" class="tag-list"></ul>
@@ -35,138 +38,6 @@
         <section id="tag-sections" class="page-shell hidden"></section>
         <section id="all-tags" class="all-tags hidden"></section>
     </div>
-
-    <script>
-        function populateTagList(tagsData) {
-            const tagList = document.getElementById('tag-list');
-            const allOption = document.createElement('li');
-            const allLink = document.createElement('a');
-            allLink.href = '#all';
-            allLink.textContent = 'All';
-            allLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                showAllTags(tagsData);
-            });
-            allOption.appendChild(allLink);
-            tagList.appendChild(allOption);
-
-            Object.keys(tagsData).forEach(tag => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = `#${tag}`;
-                a.textContent = tag;
-                a.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    showTagPosts(tag);
-                });
-                li.appendChild(a);
-                tagList.appendChild(li);
-            });
-        }
-
-        function createTagSections(tagsData) {
-            const tagSections = document.getElementById('tag-sections');
-            Object.entries(tagsData).forEach(([tag, posts]) => {
-                const section = document.createElement('section');
-                section.id = tag;
-                section.classList.add('tag-section', 'hidden');
-                section.innerHTML = `<div class="tag-meta"><span class="meta-pill">Tag</span><span>${posts.length} post${posts.length === 1 ? '' : 's'}</span></div><h3>${tag}</h3>`;
-                const ul = document.createElement('ul');
-                posts.forEach(post => {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = `blogs/${post.file}`;
-                    a.textContent = post.title;
-                    li.appendChild(a);
-                    ul.appendChild(li);
-                });
-                section.appendChild(ul);
-                tagSections.appendChild(section);
-            });
-        }
-
-        function showTagPosts(tag) {
-            const tagSections = document.getElementById('tag-sections');
-            const allTagsSection = document.getElementById('all-tags');
-            document.querySelectorAll('.tag-section').forEach(section => {
-                section.classList.add('hidden');
-            });
-            tagSections.classList.remove('hidden');
-            document.getElementById(tag).classList.remove('hidden');
-            allTagsSection.classList.add('hidden');
-            document.querySelectorAll('.tag-list a').forEach(a => {
-                a.classList.remove('active-tag');
-            });
-            document.querySelector(`.tag-list a[href="#${tag}"]`).classList.add('active-tag');
-        }
-
-        function showAllTags(tagsData) {
-            const tagSections = document.getElementById('tag-sections');
-            document.querySelectorAll('.tag-section').forEach(section => {
-                section.classList.add('hidden');
-            });
-            const allTagsSection = document.getElementById('all-tags');
-            tagSections.classList.add('hidden');
-            allTagsSection.innerHTML = '';
-            Object.entries(tagsData).forEach(([tag, posts]) => {
-                const tagSection = document.createElement('section');
-                tagSection.className = 'tag-overview-block';
-                tagSection.innerHTML = `<div class="tag-meta"><span class="meta-pill">Tag</span><span>${posts.length} post${posts.length === 1 ? '' : 's'}</span></div><h4>${tag}</h4>`;
-                const ul = document.createElement('ul');
-                posts.forEach(post => {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = `blogs/${post.file}`;
-                    a.textContent = post.title;
-                    li.appendChild(a);
-                    ul.appendChild(li);
-                });
-                tagSection.appendChild(ul);
-                allTagsSection.appendChild(tagSection);
-            });
-            allTagsSection.classList.remove('hidden');
-            document.querySelectorAll('.tag-list a').forEach(a => {
-                a.classList.remove('active-tag');
-            });
-            document.querySelector('.tag-list a[href="#all"]').classList.add('active-tag');
-        }
-
-        function showRelevantPosts() {
-            const hash = window.location.hash.slice(1);
-            if (hash === 'all' || !hash) {
-                showAllTags(tagsData);
-            } else if (hash) {
-                showTagPosts(hash);
-            }
-        }
-
-        let tagsData;
-
-        fetch('data/tags_data.json')
-            .then(response => response.json())
-            .then(data => {
-                console.log('Tags data loaded:', data);
-                tagsData = data;
-                if (Object.keys(data).length === 0) {
-                    console.log('Tags data is empty');
-                    const tagSections = document.getElementById('tag-sections');
-                    tagSections.innerHTML = '<p>No tags found.</p>';
-                    tagSections.classList.remove('hidden');
-                } else {
-                    populateTagList(data);
-                    createTagSections(data);
-                    showRelevantPosts();  // This will now show all tags by default
-                }
-            })
-            .catch(error => {
-                console.error('Error loading tags data:', error);
-                const tagSections = document.getElementById('tag-sections');
-                tagSections.innerHTML = '<p>Error loading tags data.</p>';
-                tagSections.classList.remove('hidden');
-            });
-
-        window.addEventListener('hashchange', showRelevantPosts);
-    </script>
     <footer>
         <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>simoncos</span>. All rights reserved.</p>
     </footer>

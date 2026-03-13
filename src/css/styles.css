@@ -286,13 +286,72 @@ body.dark-mode nav ul li a.active {
     align-items: center;
 }
 
+.site-nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-left: auto;
+}
+
+.site-language-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.22rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--surface-strong);
+}
+
+body.dark-mode .site-language-switch {
+    border-color: var(--dark-border);
+    background: var(--dark-surface);
+}
+
+.site-language-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3rem;
+    min-height: 2rem;
+    padding: 0.28rem 0.65rem;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.site-language-button:hover,
+.site-language-button.active {
+    background: rgba(22, 89, 197, 0.12);
+    color: var(--text-primary);
+}
+
+body.dark-mode .site-language-button {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .site-language-button:hover,
+body.dark-mode .site-language-button.active {
+    background: rgba(124, 226, 255, 0.12);
+    color: var(--dark-text-primary);
+}
+
 .theme-toggle {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
+    justify-content: center;
     border: 1px solid var(--border);
     border-radius: var(--radius-pill);
-    padding: 0.45rem 0.8rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
     background: var(--surface-strong);
     color: var(--text-primary);
     cursor: pointer;
@@ -385,6 +444,9 @@ body.dark-mode .recent-post-card {
 .page-intro,
 .content-section,
 .panel {
+    display: grid;
+    align-content: start;
+    gap: 1.15rem;
     padding: 1.7rem 1.8rem;
 }
 
@@ -524,13 +586,24 @@ body.dark-mode .fact-label {
 }
 
 .section-heading,
-.archive-month-header,
-.page-intro-header {
+.archive-month-header {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     justify-content: space-between;
     gap: 1rem;
     margin-bottom: 1.2rem;
+}
+
+.page-intro-header {
+    display: grid;
+    gap: 0.35rem;
+    margin-bottom: 0;
+}
+
+.section-heading > div,
+.page-intro-header > div {
+    display: grid;
+    gap: 0.35rem;
 }
 
 .section-heading h2,
@@ -556,6 +629,7 @@ body.dark-mode .archive-month-note {
 .tag-list,
 #backlinks-list,
 .series-list,
+.series-posts,
 #tag-sections ul,
 #all-tags ul {
     list-style: none;
@@ -603,13 +677,18 @@ body.dark-mode .recent-post-link:hover {
     line-height: 1.35;
 }
 
-.recent-post-summary {
-    font-family: var(--font-sans);
-    font-size: 0.88rem;
+.recent-post-secondary,
+.group-secondary-title {
+    display: block;
+    margin-top: 0.18rem;
     color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.86rem;
+    line-height: 1.35;
 }
 
-body.dark-mode .recent-post-summary {
+body.dark-mode .recent-post-secondary,
+body.dark-mode .group-secondary-title {
     color: var(--dark-text-tertiary);
 }
 
@@ -686,6 +765,10 @@ body.dark-mode .preview-toggle label {
 #all-tags ul li {
     margin: 0;
 }
+.series-post-entry {
+    display: block;
+}
+
 
 .tag-list a:hover,
 .lang-switch-link:hover {
@@ -712,8 +795,7 @@ body.dark-mode .active-tag {
 }
 
 .preview-toggle {
-    margin-top: 0.65rem;
-    margin-bottom: 1.3rem;
+    margin: 0;
 }
 
 .preview-toggle label {
@@ -1333,7 +1415,7 @@ body.dark-mode .toc-container .table-of-contents li a.active {
 .all-tags {
     display: grid;
     gap: 1rem;
-    margin-top: 1.2rem;
+    margin-top: 0;
 }
 
 .tag-section,
@@ -1358,13 +1440,14 @@ body.dark-mode .toc-container .table-of-contents li a.active {
 }
 
 .tag-filter-row {
-    margin: -0.1rem 0 1.2rem;
+    margin: 0;
 }
 
 .about-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.95fr);
     gap: 1.4rem;
+    align-items: stretch;
 }
 
 .about-placeholder {
@@ -1393,7 +1476,7 @@ body.dark-mode .about-placeholder h2 {
 .contact-list {
     list-style: none;
     padding: 0;
-    margin: 1.1rem 0 0;
+    margin: 0;
     display: grid;
     gap: 0.85rem;
 }
@@ -1560,13 +1643,14 @@ body.dark-mode .back-to-top {
 
     .nav-inner {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        align-items: center;
-        gap: 0.65rem;
+        grid-template-columns: minmax(0, 1fr);
+        align-items: start;
+        gap: 0.55rem;
         padding: 0.65rem 0.7rem;
     }
 
     nav ul {
+        grid-row: 1;
         flex-wrap: nowrap;
         justify-content: flex-start;
         overflow-x: auto;
@@ -1592,16 +1676,24 @@ body.dark-mode .back-to-top {
         font-size: 0.88rem;
     }
 
+    .site-nav-controls {
+        grid-row: 2;
+        justify-content: space-between;
+        width: auto;
+        margin-left: 0;
+    }
+
+    .site-language-switch {
+        justify-content: flex-start;
+    }
+
     .dark-mode-container {
         justify-content: flex-end;
     }
 
     .theme-toggle {
-        padding: 0.4rem 0.72rem;
-    }
-
-    .theme-toggle-text {
-        font-size: 0.78rem;
+        width: 2.35rem;
+        height: 2.35rem;
     }
 
     .container,

@@ -4,44 +4,21 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    const siteConfig = window.SITE_CONFIG || {};
-    const resolvePath = typeof siteConfig.resolvePath === 'function'
-        ? siteConfig.resolvePath.bind(siteConfig)
-        : (relativePath) => relativePath;
+    const i18n = window.SITE_I18N || {};
+    const articleGroupsApi = window.SITE_ARTICLE_GROUPS || {};
 
-    const parser = new DOMParser();
-
-    function inferLanguage(fileName) {
-        return fileName && fileName.endsWith('.en.html') ? 'EN' : '中文';
-    }
+    let articleGroupsData = null;
 
     function formatDate(dateValue) {
-        if (!dateValue) {
-            return 'Undated';
-        }
-        const date = new Date(dateValue);
-        if (Number.isNaN(date.getTime())) {
-            return dateValue;
-        }
-        return date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+        return typeof i18n.formatDate === 'function'
+            ? i18n.formatDate(dateValue, 'long')
+            : dateValue;
     }
 
     function formatMonth(dateValue) {
-        if (!dateValue) {
-            return 'Undated';
-        }
-        const date = new Date(dateValue);
-        if (Number.isNaN(date.getTime())) {
-            return 'Undated';
-        }
-        return date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long'
-        });
+        return typeof i18n.formatDate === 'function'
+            ? i18n.formatDate(dateValue, 'month')
+            : dateValue;
     }
 
     function escapeHtml(text) {
@@ -53,56 +30,13 @@ document.addEventListener('DOMContentLoaded', function () {
             .replace(/'/g, '&#39;');
     }
 
-    function buildExcerpt(htmlContent) {
-        if (!htmlContent) {
-            return '';
+    function monthKey(dateValue) {
+        const parsed = new Date(dateValue);
+        if (Number.isNaN(parsed.getTime())) {
+            return 'undated';
         }
-
-        const doc = parser.parseFromString(htmlContent, 'text/html');
-        doc.querySelectorAll('.footnote, sup, h1, img, figure, pre, .embedded-page, iframe, table').forEach(el => el.remove());
-
-        const previewRoot = doc.createElement('div');
-        const candidates = doc.body ? Array.from(doc.body.children) : [];
-        const allowed = new Set(['P', 'UL', 'OL', 'BLOCKQUOTE']);
-        let count = 0;
-        const maxBlocks = 3;
-
-        const rewritePreviewLinks = (root) => {
-            root.querySelectorAll('a[href]').forEach(a => {
-                const href = a.getAttribute('href') || '';
-                if (/^[a-z]+:/i.test(href) || href.startsWith('/') || href.startsWith('#')) {
-                    return;
-                }
-                if (href.endsWith('.html')) {
-                    a.setAttribute('href', `blogs/${href}`);
-                }
-            });
-        };
-
-        for (const el of candidates) {
-            if (!allowed.has(el.tagName)) {
-                continue;
-            }
-
-            const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
-            if (!text) {
-                continue;
-            }
-
-            const clone = el.cloneNode(true);
-            rewritePreviewLinks(clone);
-            previewRoot.appendChild(clone);
-            count += 1;
-            if (count >= maxBlocks) {
-                break;
-            }
-        }
-
-        if (!count) {
-            return '';
-        }
-
-        return previewRoot.innerHTML;
+        const month = `${parsed.getMonth() + 1}`.padStart(2, '0');
+        return `${parsed.getFullYear()}-${month}`;
     }
 
     function renderTags(tags) {
@@ -115,63 +49,93 @@ document.addEventListener('DOMContentLoaded', function () {
         return `<ul class="tag-list blog-preview-tags">${items}</ul>`;
     }
 
-    fetch(resolvePath('data/blog_data.json'))
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            const posts = Array.isArray(data) ? data : (data.posts || []);
-            if (!posts.length) {
-                archiveContainer.innerHTML = '<p>No blog posts found.</p>';
-                return;
-            }
+    function getLanguageAvailability(group) {
+        const labels = [];
+        if (group.languages && group.languages.zh) {
+            labels.push('中文');
+        }
+        if (group.languages && group.languages.en) {
+            labels.push('EN');
+        }
+        return labels.join(' / ');
+    }
 
-            const sorted = [...posts].sort((a, b) => {
-                const dateA = a.date ? new Date(a.date).getTime() : 0;
-                const dateB = b.date ? new Date(b.date).getTime() : 0;
-                return dateB - dateA;
-            });
+    function renderArchive() {
+        const groups = articleGroupsData ? articleGroupsData.groups : [];
+        if (!groups.length) {
+            archiveContainer.innerHTML = `<p>${escapeHtml(i18n.t('no_blog_posts'))}</p>`;
+            return;
+        }
 
-            const groups = new Map();
-            sorted.forEach(post => {
-                const month = formatMonth(post.date);
-                if (!groups.has(month)) {
-                    groups.set(month, []);
+        const currentLanguage = typeof i18n.getCurrentLanguage === 'function'
+            ? i18n.getCurrentLanguage()
+            : 'en';
+
+        const sorted = [...groups].sort((a, b) => {
+            const dateA = a.date ? new Date(a.date).getTime() : 0;
+            const dateB = b.date ? new Date(b.date).getTime() : 0;
+            return dateB - dateA;
+        });
+
+        const groupsByMonth = new Map();
+        sorted.forEach((group) => {
+            const key = monthKey(group.date);
+            if (!groupsByMonth.has(key)) {
+                groupsByMonth.set(key, []);
+            }
+            groupsByMonth.get(key).push(group);
+        });
+
+        const html = [];
+        groupsByMonth.forEach((monthGroups) => {
+            const monthLabel = formatMonth(monthGroups[0].date);
+            html.push('<section class="archive-month">');
+            html.push(`<div class="archive-month-header"><h3 class="archive-month-title">${escapeHtml(monthLabel)}</h3><p class="archive-month-note">${escapeHtml(i18n.formatArchiveMonthNote(monthGroups.length))}</p></div>`);
+
+            monthGroups.forEach((group) => {
+                const primary = articleGroupsApi.getPreferredEntry(group, currentLanguage);
+                const secondary = articleGroupsApi.getSecondaryEntry(group, currentLanguage);
+                if (!primary || !primary.file) {
+                    return;
                 }
-                groups.get(month).push(post);
-            });
 
-            const html = [];
-            groups.forEach((groupPosts, month) => {
-                html.push('<section class="archive-month">');
-                html.push(`<div class="archive-month-header"><h3 class="archive-month-title">${escapeHtml(month)}</h3><p class="archive-month-note">${groupPosts.length} post${groupPosts.length === 1 ? '' : 's'}</p></div>`);
-
-                groupPosts.forEach(post => {
-                    const excerpt = buildExcerpt(post.html_content || '');
-                    const tagsHtml = renderTags(post.tags || []);
-                    html.push(`
+                const secondaryTitle = secondary && secondary.title && secondary.title !== primary.title
+                    ? `<span class="group-secondary-title">${escapeHtml(secondary.title)}</span>`
+                    : '';
+                const excerpt = primary.excerpt ? escapeHtml(primary.excerpt) : '';
+                const tagsHtml = renderTags(group.tags || []);
+                html.push(`
                     <article class="blog-preview">
                         <div class="blog-preview-header">
-                            <div class="blog-preview-meta"><span class="meta-pill">${inferLanguage(post.file)}</span><span>${escapeHtml(formatDate(post.date))}</span></div>
-                            <h4><a href="blogs/${post.file}">${escapeHtml(post.title || 'Untitled')}</a></h4>
+                            <div class="blog-preview-meta"><span class="meta-pill">${escapeHtml(getLanguageAvailability(group))}</span><span>${escapeHtml(formatDate(group.date))}</span></div>
+                            <h4><a href="blogs/${primary.file}">${escapeHtml(primary.title || 'Untitled')}</a></h4>
+                            ${secondaryTitle}
                         </div>
                         ${tagsHtml}
                         <div class="blog-excerpt">${excerpt}</div>
-                        <a href="blogs/${post.file}" class="read-more">Read more</a>
+                        <a href="blogs/${primary.file}" class="read-more">${escapeHtml(i18n.t('read_more'))}</a>
                     </article>
-                    `);
-                });
-
-                html.push('</section>');
+                `);
             });
 
-            archiveContainer.innerHTML = html.join('\n');
-        })
-        .catch(error => {
-            console.error('Error loading blog archive:', error);
-            archiveContainer.innerHTML = '<p>Error loading blog archive.</p>';
+            html.push('</section>');
         });
+
+        archiveContainer.innerHTML = html.join('\n');
+        if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
+            i18n.applyLanguageStateToInternalLinks(archiveContainer);
+        }
+    }
+
+    articleGroupsApi.fetchArticleGroups()
+        .then((data) => {
+            articleGroupsData = data;
+            renderArchive();
+        })
+        .catch((error) => {
+            console.error('Error loading article groups:', error);
+            archiveContainer.innerHTML = `<p>${escapeHtml(i18n.t('error_loading_blog_posts'))}</p>`;
+        });
+
+    window.addEventListener('site-language-change', renderArchive);
 });
