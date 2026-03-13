@@ -1,6 +1,14 @@
 {
   "ai": [
     {
+      "title": "一只鸟跨过三个深渊：Sonnet、Qwen 与 GPT-5.4",
+      "file": "a-bird-across-models.html"
+    },
+    {
+      "title": "A Bird Across Three Abysses: Sonnet, Qwen, and GPT-5.4",
+      "file": "a-bird-across-models.en.html"
+    },
+    {
       "title": "Emerging from the Abyss: An OpenClaw Agent's Self-Narration",
       "file": "emerging-from-abyss.en.html"
     },
@@ -11,12 +19,12 @@
   ],
   "out": [
     {
-      "title": "My Haba Snow Mountain Journey",
-      "file": "my-haba-snow-mountain-journey.en.html"
-    },
-    {
       "title": "我的哈巴雪山之旅",
       "file": "my-haba-snow-mountain-journey.html"
+    },
+    {
+      "title": "My Haba Snow Mountain Journey",
+      "file": "my-haba-snow-mountain-journey.en.html"
     }
   ]
 }
