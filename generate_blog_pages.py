@@ -88,28 +88,29 @@ def find_links(content):
     return re.findall(r'\[([^\]]+)\]\(([^)]+\.html)\)', content)
 
 def get_file_times(file_path):
-    """Get file creation and modification times with error handling"""
+    """Get file creation and modification dates with error handling."""
     try:
         stats = os.stat(file_path)
-        created = datetime.fromtimestamp(stats.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
-        updated = datetime.fromtimestamp(stats.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
+        created = datetime.fromtimestamp(stats.st_mtime).strftime('%Y-%m-%d')
+        updated = datetime.fromtimestamp(stats.st_mtime).strftime('%Y-%m-%d')
         return created, updated
     except OSError as e:
         logging.error(f"Error getting file times for {file_path}: {str(e)}")
-        return datetime.now().strftime('%Y-%m-%d %H:%M:%S'), datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        today = datetime.now().strftime('%Y-%m-%d')
+        return today, today
 
 def get_file_times_with_metadata(file_path, metadata_date):
-    """Prefer frontmatter date for created time, use file mtime for updated."""
+    """Prefer frontmatter date for created date, use file mtime for updated date."""
     try:
         stats = os.stat(file_path)
-        updated = datetime.fromtimestamp(stats.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
+        updated = datetime.fromtimestamp(stats.st_mtime).strftime('%Y-%m-%d')
     except OSError as e:
         logging.error(f"Error getting file times for {file_path}: {str(e)}")
-        updated = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        updated = datetime.now().strftime('%Y-%m-%d')
 
     created_dt = parse_frontmatter_date(metadata_date)
     if created_dt:
-        created = created_dt.strftime('%Y-%m-%d %H:%M:%S')
+        created = created_dt.strftime('%Y-%m-%d')
     else:
         created = updated
 
@@ -207,7 +208,7 @@ def generate_blog_pages():
         new_post_detected = len(current_markdown - previous_markdown) > 0
         last_updated = blog_data.get('last_updated')
         if new_post_detected or not last_updated:
-            last_updated = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            last_updated = datetime.now().strftime('%Y-%m-%d')
 
         save_json_data({'last_updated': last_updated, 'posts': blog_posts}, 'blog_data.json')
         save_json_data(series_data, 'series_data.json')
