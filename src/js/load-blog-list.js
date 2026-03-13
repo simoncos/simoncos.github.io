@@ -42,7 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const lastUpdated = Array.isArray(data) ? null : data.last_updated;
             const updateElement = document.getElementById('blog-list-updated');
             if (updateElement) {
-                updateElement.textContent = lastUpdated ? `Last updated: ${lastUpdated}` : '';
+                const normalizedLastUpdated = lastUpdated ? String(lastUpdated).slice(0, 10) : '';
+                updateElement.textContent = normalizedLastUpdated ? `Last updated: ${normalizedLastUpdated}` : '';
             }
 
             if (posts.length === 0) {
