@@ -85,7 +85,14 @@ def parse_metadata(md_content):
         raise BlogGenerationError(f"Failed to parse metadata: {str(e)}")
 
 def find_links(content):
-    return re.findall(r'\[([^\]]+)\]\(([^)]+\.html)\)', content)
+    """Find HTML links in rendered post content."""
+    soup = BeautifulSoup(content, 'html.parser')
+    links = []
+    for a in soup.find_all('a', href=True):
+        href = a['href']
+        if href.endswith('.html'):
+            links.append((a.get_text(strip=True), href))
+    return links
 
 def get_file_times(file_path):
     """Get file creation and modification dates with error handling."""
@@ -191,12 +198,20 @@ def generate_blog_pages():
             logging.warning("No markdown files found in blogs directory")
             return []
 
-        # Process markdown files
+        # First pass: collect metadata/content/backlinks across all posts
         for md_file in markdown_files:
             try:
-                process_markdown_file(md_file, tags_data, backlinks, series_data, blog_posts, template)
+                collect_markdown_file(md_file, tags_data, backlinks, series_data, blog_posts)
             except Exception as e:
-                logging.error(f"Error processing {md_file}: {str(e)}")
+                logging.error(f"Error collecting {md_file}: {str(e)}")
+                continue
+
+        # Second pass: render each post with the complete backlinks map
+        for post in blog_posts:
+            try:
+                render_blog_post(post, backlinks, template)
+            except Exception as e:
+                logging.error(f"Error rendering {post.get('markdown')}: {str(e)}")
                 continue
 
         # Save data files
@@ -221,19 +236,18 @@ def generate_blog_pages():
         logging.error(f"Error generating blog pages: {str(e)}")
         raise BlogGenerationError(f"Failed to generate blog pages: {str(e)}")
 
-def process_markdown_file(md_file, tags_data, backlinks, series_data, blog_posts, template):
-    """Process individual markdown file with error handling"""
+def collect_markdown_file(md_file, tags_data, backlinks, series_data, blog_posts):
+    """Collect metadata, content, links, and indexes for a markdown file."""
     try:
         markdown_path = os.path.join('blogs', md_file)
         html_file = md_file.replace('.md', '.html')
-        
+
         with open(markdown_path, 'r', encoding='utf-8') as file:
             md_content = file.read()
-            
+
         metadata, content = parse_metadata(md_content)
         content = update_image_paths(content)
-        
-        # Convert markdown to HTML
+
         try:
             html_content = markdown.markdown(
                 content,
@@ -249,31 +263,56 @@ def process_markdown_file(md_file, tags_data, backlinks, series_data, blog_posts
             raise BlogGenerationError(f"Markdown conversion failed: {str(e)}")
 
         html_content = localize_footnotes(html_content, is_english=md_file.endswith('.en.md'))
+        title, rendered_post_content = extract_title_and_content(html_content)
 
-        # Generate and save the blog post
-        generate_blog_post(
-            markdown_path,  # Pass the markdown_path
-            md_file, 
-            html_file, 
-            metadata, 
-            html_content,
-            tags_data, 
-            backlinks, 
-            series_data, 
-            blog_posts, 
-            template
-        )
+        tags = metadata.get('tags', '').split(',')
+        tags = [tag.strip() for tag in tags if tag.strip()]
+        for tag in tags:
+            tags_data[tag].append({
+                'title': title,
+                'file': html_file
+            })
+
+        links = find_links(rendered_post_content)
+        for link_text, link_url in links:
+            backlinks[link_url].append({"title": title, "file": html_file})
+
+        series_name = metadata.get('series', '').strip()
+        if series_name:
+            series_data[series_name].append({
+                'title': title,
+                'file': html_file,
+                'part': metadata.get('series_part', '')
+            })
+
+        blog_posts.append({
+            "title": title,
+            "file": html_file,
+            "markdown": md_file,
+            "html_content": html_content,
+            "rendered_content": rendered_post_content,
+            "date": metadata.get('date', ''),
+            "metadata": metadata,
+            "markdown_path": markdown_path,
+            "tags": tags,
+        })
 
     except Exception as e:
-        logging.error(f"Error processing markdown file {md_file}: {str(e)}")
-        raise BlogGenerationError(f"Failed to process markdown file: {str(e)}")
+        logging.error(f"Error collecting markdown file {md_file}: {str(e)}")
+        raise BlogGenerationError(f"Failed to collect markdown file: {str(e)}")
 
-def generate_blog_post(markdown_path, md_file, html_file, metadata, html_content, tags_data, backlinks, series_data, blog_posts, template):
-    """Generate and save individual blog post"""
+
+def render_blog_post(post, backlinks, template):
+    """Render and save individual blog post after backlinks are fully collected."""
     try:
-        title, content = extract_title_and_content(html_content)
+        md_file = post['markdown']
+        html_file = post['file']
+        metadata = post['metadata']
+        title = post['title']
+        rendered_post_content = post['rendered_content']
+        markdown_path = post['markdown_path']
+        tags = post['tags']
 
-        md_path = Path('blogs') / md_file
         if md_file.endswith('.en.md'):
             paired_md_file = md_file[:-len('.en.md')] + '.md'
             paired_label = '中文'
@@ -292,27 +331,6 @@ def generate_blog_post(markdown_path, md_file, html_file, metadata, html_content
             )
         else:
             lang_switch_html = ''
-        
-        blog_posts.append({
-            "title": title,
-            "file": html_file,
-            "markdown": md_file,
-            "html_content": html_content,
-            "date": metadata.get('date', '')
-        })
-
-        tags = metadata.get('tags', '').split(',')
-        tags = [tag.strip() for tag in tags if tag.strip()]
-
-        for tag in tags:
-            tags_data[tag].append({
-                'title': title,
-                'file': html_file
-            })
-
-        links = find_links(content)
-        for link_text, link_url in links:
-            backlinks[link_url].append({"title": title, "file": html_file})
 
         created, updated = get_file_times_with_metadata(markdown_path, metadata.get('date', ''))
 
@@ -320,8 +338,6 @@ def generate_blog_post(markdown_path, md_file, html_file, metadata, html_content
             f'<li><a href="../tags.html#{quote(tag)}">{html_lib.escape(tag)}</a></li>'
             for tag in tags
         ]) + '</ul>'
-
-        rendered_post_content = content
 
         page_content = template.replace('{{TITLE}}', title)
         page_content = page_content.replace('{{CONTENT}}', rendered_post_content)
@@ -334,17 +350,9 @@ def generate_blog_post(markdown_path, md_file, html_file, metadata, html_content
         with open(os.path.join('blogs', html_file), 'w', encoding='utf-8') as f:
             f.write(page_content)
 
-        series_name = metadata.get('series', '').strip()
-        if series_name:
-            series_data[series_name].append({
-                'title': title,
-                'file': html_file,
-                'part': metadata.get('series_part', '')
-            })
-
     except Exception as e:
-        logging.error(f"Error generating blog post {md_file}: {str(e)}")
-        raise BlogGenerationError(f"Failed to generate blog post: {str(e)}")
+        logging.error(f"Error rendering blog post {post.get('markdown')}: {str(e)}")
+        raise BlogGenerationError(f"Failed to render blog post: {str(e)}")
 
 def save_json_data(data, filename):
     """Save JSON data with error handling"""
