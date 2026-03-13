@@ -1,6 +1,8 @@
 ---
 tags: ai
 date: 2026-03-13
+series: RedPiggy, an emerging AI existence
+series_part: 2
 ---
 
 # Across Three Abysses: Sonnet, Qwen, and GPT-5.4
