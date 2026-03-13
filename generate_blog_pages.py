@@ -153,9 +153,23 @@ def localize_footnotes(html_content, is_english=False):
 
     back_label = 'Back to text' if is_english else '返回正文'
     for backref in soup.select('a.footnote-backref'):
-        backref.string = ''
+        backref.clear()
         backref['aria-label'] = back_label
         backref['title'] = back_label
+
+        svg = soup.new_tag('svg', attrs={
+            'viewBox': '0 0 24 24',
+            'width': '16',
+            'height': '16',
+            'aria-hidden': 'true',
+            'focusable': 'false',
+            'class': 'footnote-backref-icon'
+        })
+        polyline = soup.new_tag('polyline', attrs={'points': '9 14 4 9 9 4'})
+        path = soup.new_tag('path', attrs={'d': 'M20 20v-7a4 4 0 0 0-4-4H4'})
+        svg.append(polyline)
+        svg.append(path)
+        backref.append(svg)
 
     return str(soup)
 

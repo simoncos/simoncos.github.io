@@ -1058,25 +1058,28 @@ body.dark-mode .blog-post .footnote {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1.2rem;
-    height: 1.2rem;
-    margin-left: 0.18rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-left: 0.08rem;
     border-radius: 999px;
     color: var(--accent-strong);
     text-decoration: none;
     vertical-align: text-bottom;
-    opacity: 0.92;
+    opacity: 0.96;
 }
 
-.post-content a.footnote-backref::before,
-.blog-post a.footnote-backref::before {
-    content: "↩︎";
-    display: inline-block;
-    font-size: 1.02rem;
-    line-height: 1;
-    font-family: "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols 2", sans-serif;
-    font-weight: 700;
+.post-content .footnote-backref-icon,
+.blog-post .footnote-backref-icon {
+    width: 1.02rem;
+    height: 1.02rem;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.15;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    overflow: visible;
 }
+
 .post-content a.footnote-backref:hover,
 .blog-post a.footnote-backref:hover {
     opacity: 1;
