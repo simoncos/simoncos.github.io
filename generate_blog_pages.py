@@ -84,16 +84,6 @@ def parse_metadata(md_content):
         logging.error(f"Error parsing metadata: {str(e)}")
         raise BlogGenerationError(f"Failed to parse metadata: {str(e)}")
 
-def find_links(content):
-    """Find HTML links in rendered post content."""
-    soup = BeautifulSoup(content, 'html.parser')
-    links = []
-    for a in soup.find_all('a', href=True):
-        href = a['href']
-        if href.endswith('.html'):
-            links.append((a.get_text(strip=True), href))
-    return links
-
 def get_file_times(file_path):
     """Get file creation and modification dates with error handling."""
     try:
@@ -187,7 +177,6 @@ def generate_blog_pages():
         ensure_directories()
         
         tags_data = defaultdict(list)
-        backlinks = defaultdict(list)
         series_data = defaultdict(list)
         blog_posts = []
 
@@ -198,18 +187,18 @@ def generate_blog_pages():
             logging.warning("No markdown files found in blogs directory")
             return []
 
-        # First pass: collect metadata/content/backlinks across all posts
+        # First pass: collect metadata/content/indexes across all posts
         for md_file in markdown_files:
             try:
-                collect_markdown_file(md_file, tags_data, backlinks, series_data, blog_posts)
+                collect_markdown_file(md_file, tags_data, series_data, blog_posts)
             except Exception as e:
                 logging.error(f"Error collecting {md_file}: {str(e)}")
                 continue
 
-        # Second pass: render each post with the complete backlinks map
+        # Second pass: render each post
         for post in blog_posts:
             try:
-                render_blog_post(post, backlinks, template)
+                render_blog_post(post, template)
             except Exception as e:
                 logging.error(f"Error rendering {post.get('markdown')}: {str(e)}")
                 continue
@@ -228,7 +217,6 @@ def generate_blog_pages():
         save_json_data({'last_updated': last_updated, 'posts': blog_posts}, 'blog_data.json')
         save_json_data(series_data, 'series_data.json')
         save_json_data(tags_data, 'tags_data.json')
-        save_json_data(backlinks, 'backlinks.json')
 
         logging.info("Blog pages and data generated successfully")
         return blog_posts
@@ -237,8 +225,8 @@ def generate_blog_pages():
         logging.error(f"Error generating blog pages: {str(e)}")
         raise BlogGenerationError(f"Failed to generate blog pages: {str(e)}")
 
-def collect_markdown_file(md_file, tags_data, backlinks, series_data, blog_posts):
-    """Collect metadata, content, links, and indexes for a markdown file."""
+def collect_markdown_file(md_file, tags_data, series_data, blog_posts):
+    """Collect metadata, content, and indexes for a markdown file."""
     try:
         markdown_path = os.path.join('blogs', md_file)
         html_file = md_file.replace('.md', '.html')
@@ -274,10 +262,6 @@ def collect_markdown_file(md_file, tags_data, backlinks, series_data, blog_posts
                 'file': html_file
             })
 
-        links = find_links(rendered_post_content)
-        for link_text, link_url in links:
-            backlinks[link_url].append({"title": title, "file": html_file})
-
         series_name = metadata.get('series', '').strip()
         if series_name:
             series_data[series_name].append({
@@ -303,8 +287,8 @@ def collect_markdown_file(md_file, tags_data, backlinks, series_data, blog_posts
         raise BlogGenerationError(f"Failed to collect markdown file: {str(e)}")
 
 
-def render_blog_post(post, backlinks, template):
-    """Render and save individual blog post after backlinks are fully collected."""
+def render_blog_post(post, template):
+    """Render and save individual blog post."""
     try:
         md_file = post['markdown']
         html_file = post['file']
