@@ -531,90 +531,16 @@ def infer_language_label(file_name):
     return 'EN' if file_name.endswith('.en.html') else '中文'
 
 def generate_blogs_page(blog_posts):
-    """Generate the blogs listing page with error handling"""
+    """Generate the blogs listing shell; archive previews are rendered client-side."""
     try:
-        def get_post_datetime(post):
-            dt = parse_frontmatter_date(post.get('date'))
-            if dt:
-                return dt
-            return get_creation_date(os.path.join('blogs', post['markdown']))
+        with open('templates/blogs-listing-template.html', 'r', encoding='utf-8') as template_file:
+            template = template_file.read()
 
-        # Sort blog posts by frontmatter date (newest first), fallback to file creation date
-        sorted_posts = sorted(blog_posts, key=get_post_datetime, reverse=True)
-        
-        # Group posts by month
-        posts_by_month = defaultdict(list)
-        for post in sorted_posts:
-            try:
-                dt = get_post_datetime(post)
-                month_key = dt.strftime("%B %Y")
-                posts_by_month[month_key].append(post)
-            except Exception as e:
-                logging.error(f"Error processing post for listing: {post['markdown']}: {str(e)}")
-                continue
-        
-        # Generate HTML content
-        html_content = []
-        for month, posts in posts_by_month.items():
-            month_content = [
-                '<section class="archive-month">',
-                f'<div class="archive-month-header"><h3 class="archive-month-title">{month}</h3><p class="archive-month-note">{len(posts)} post{"s" if len(posts) != 1 else ""}</p></div>'
-            ]
-            
-            for post in posts:
-                try:
-                    with open(os.path.join('blogs', post['markdown']), 'r', encoding='utf-8') as md_file:
-                        md_content = md_file.read()
-                        metadata, content = parse_metadata(md_content)
-                        excerpt_text = build_post_excerpt(content, word_limit=100)
-                        excerpt = html_lib.escape(excerpt_text)
+        with open('blogs.html', 'w', encoding='utf-8') as f:
+            f.write(template)
 
-                        tags = [tag.strip() for tag in metadata.get('tags', '').split(',') if tag.strip()]
-                        if tags:
-                            tags_items = ''.join(
-                                f'<li><a href="tags.html#{quote(tag)}">{html_lib.escape(tag)}</a></li>'
-                                for tag in tags
-                            )
-                            tags_html = f'<ul class="tag-list blog-preview-tags">{tags_items}</ul>'
-                        else:
-                            tags_html = ''
+        logging.info("Successfully generated blogs listing page")
 
-                    dt = get_post_datetime(post)
-                    post_html = f"""
-                    <article class="blog-preview">
-                        <div class="blog-preview-header">
-                            <div class="blog-preview-meta"><span class="meta-pill">{infer_language_label(post['file'])}</span><span>{dt.strftime('%B %d, %Y')}</span></div>
-                            <h4><a href="blogs/{post['file']}">{post['title']}</a></h4>
-                        </div>
-                        {tags_html}
-                        <p class="blog-excerpt">{excerpt}</p>
-                        <a href="blogs/{post['file']}" class="read-more">Read more</a>
-                    </article>
-                    """
-                    month_content.append(post_html)
-                except Exception as e:
-                    logging.error(f"Error generating preview for {post['markdown']}: {str(e)}")
-                    continue
-            
-            month_content.append('</section>')
-            html_content.extend(month_content)
-        
-        # Load and apply template
-        try:
-            with open('templates/blogs-listing-template.html', 'r', encoding='utf-8') as template_file:
-                template = template_file.read()
-            
-            page_content = template.replace('{{BLOG_LISTINGS}}', '\n'.join(html_content))
-            
-            with open('blogs.html', 'w', encoding='utf-8') as f:
-                f.write(page_content)
-                
-            logging.info("Successfully generated blogs listing page")
-            
-        except Exception as e:
-            logging.error(f"Error writing blogs listing page: {str(e)}")
-            raise BlogGenerationError(f"Failed to generate blogs listing: {str(e)}")
-            
     except Exception as e:
         logging.error(f"Error in blogs page generation: {str(e)}")
         raise BlogGenerationError(f"Failed to generate blogs page: {str(e)}")
