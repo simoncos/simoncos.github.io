@@ -143,6 +143,22 @@ def extract_title_and_content(html_content):
         content = html_content
     return title, content
 
+
+def localize_footnotes(html_content, is_english=False):
+    """Improve footnote ref/backref rendering for readability across browsers."""
+    soup = BeautifulSoup(html_content, 'html.parser')
+
+    for ref in soup.select('a.footnote-ref'):
+        ref['aria-label'] = 'Footnote' if is_english else '脚注'
+
+    back_label = 'Back to text' if is_english else '返回正文'
+    for backref in soup.select('a.footnote-backref'):
+        backref.string = back_label
+        backref['aria-label'] = back_label
+        backref['title'] = back_label
+
+    return str(soup)
+
 def generate_blog_pages():
     """Main blog generation function with error handling"""
     try:
@@ -216,6 +232,8 @@ def process_markdown_file(md_file, tags_data, backlinks, series_data, blog_posts
         except Exception as e:
             logging.error(f"Markdown conversion error in {md_file}: {str(e)}")
             raise BlogGenerationError(f"Markdown conversion failed: {str(e)}")
+
+        html_content = localize_footnotes(html_content, is_english=md_file.endswith('.en.md'))
 
         # Generate and save the blog post
         generate_blog_post(
