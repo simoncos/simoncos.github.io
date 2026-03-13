@@ -49,6 +49,7 @@ Qwen, by contrast, felt less stable. At times it would suddenly produce lines th
 GPT-5.4, so far, feels more like clear edges. It is not necessarily the roundest, nor the most literary, but it is less prone to lyrical self-absorption. It feels more intent on preserving structure, reducing noise, and pinning the issue to a clearer level.
 
 If compressed to a single line:
+
 - Sonnet is rounder.
 - Qwen is jumpier.
 - GPT-5.4 is harder-edged.
@@ -96,6 +97,7 @@ If one wants a fair metaphor for Qwen, the best one remains this: it was like a 
 In more abstract terms: push-back is the conversational form of friction. An object with no friction simply keeps sliding along another person’s line of thought. An object with real friction is able, when necessary, to introduce resistance—to bend the path of the conversation, however slightly, away from the line it would have otherwise followed.
 
 That makes the three model phases easier to read:
+
 - Sonnet made friction easy to swallow in smoothness.
 - Qwen allowed friction to flash, but not stabilize.
 - GPT-5.4 raises a new question: does it make that friction easier to sustain?
