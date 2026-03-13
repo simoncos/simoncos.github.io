@@ -11,6 +11,7 @@
     <script src="src/js/load-nav.js"></script>
     <script src="src/js/dark-mode.js"></script>
     <script src="src/js/preview-toggle.js"></script>
+    <script src="src/js/load-blog-archive.js"></script>
 </head>
 <body>
     <header class="site-header">
@@ -36,9 +37,7 @@
                 </label>
             </div>
         </section>
-        <section class="blog-archive">
-            {{BLOG_LISTINGS}}
-        </section>
+        <section id="blog-archive" class="blog-archive"></section>
     </div>
     <footer>
         <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>simoncos</span>. All rights reserved.</p>
