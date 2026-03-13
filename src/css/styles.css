@@ -177,7 +177,7 @@ body.dark-mode .site-header h1 {
 }
 
 .article-page .site-header {
-    padding: 1.8rem 1.5rem 0.3rem;
+    padding: 1.8rem 1.5rem 0.75rem;
 }
 
 .article-page .site-header h1 {
@@ -1528,7 +1528,7 @@ body.dark-mode .back-to-top {
 
     .article-page .site-header {
         padding-top: 3.6rem;
-        padding-bottom: 0.35rem;
+        padding-bottom: 0.8rem;
     }
 
     .site-header h1,
