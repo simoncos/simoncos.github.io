@@ -67,6 +67,18 @@ document.addEventListener('DOMContentLoaded', function () {
         let count = 0;
         const maxBlocks = 3;
 
+        const rewritePreviewLinks = (root) => {
+            root.querySelectorAll('a[href]').forEach(a => {
+                const href = a.getAttribute('href') || '';
+                if (/^[a-z]+:/i.test(href) || href.startsWith('/') || href.startsWith('#')) {
+                    return;
+                }
+                if (href.endsWith('.html')) {
+                    a.setAttribute('href', `blogs/${href}`);
+                }
+            });
+        };
+
         for (const el of candidates) {
             if (!allowed.has(el.tagName)) {
                 continue;
@@ -78,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const clone = el.cloneNode(true);
+            rewritePreviewLinks(clone);
             previewRoot.appendChild(clone);
             count += 1;
             if (count >= maxBlocks) {
