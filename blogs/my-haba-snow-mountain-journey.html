@@ -6,7 +6,7 @@
     <title data-blog-title="我的哈巴雪山之旅 | [owner]'s Blog">我的哈巴雪山之旅 | simoncos's Blog</title>
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
-    <link rel="stylesheet" href="../src/css/styles.css?v=20260313b?v=20260313b">
+    <link rel="stylesheet" href="../src/css/styles.css?v=20260313b">
     <script src="../src/js/site-config.js"></script>
     <script src="../src/js/load-nav.js"></script>
     <script src="../src/js/dark-mode.js"></script>
@@ -14,6 +14,7 @@
     <script src="../src/js/progress-bar.js"></script>
     <script src="../src/js/back-to-top.js"></script>
     <script src="../src/js/mobile-scroll-ui.js"></script>
+    <script src="../src/js/load-backlinks.js"></script>
 </head>
 <body class="article-page">
     <header class="site-header">
@@ -368,24 +369,5 @@
     <div id="progress-container">
         <div id="reading-progress"></div>
     </div>
-    <script>
-        // Script to populate backlinks
-        document.addEventListener('DOMContentLoaded', function() {
-            var backlinks = JSON.parse('[]');
-            var backlinkslist = document.getElementById('backlinks-list');
-            if (backlinks.length === 0) {
-                backlinkslist.innerHTML = '<li>No backlinks found.</li>';
-            } else {
-                backlinks.forEach(function(link) {
-                    var li = document.createElement('li');
-                    var a = document.createElement('a');
-                    a.href = link.file;
-                    a.textContent = link.title;
-                    li.appendChild(a);
-                    backlinkslist.appendChild(li);
-                });
-            }
-        });
-    </script>
 </body>
 </html>

@@ -228,6 +228,7 @@ def generate_blog_pages():
         save_json_data({'last_updated': last_updated, 'posts': blog_posts}, 'blog_data.json')
         save_json_data(series_data, 'series_data.json')
         save_json_data(tags_data, 'tags_data.json')
+        save_json_data(backlinks, 'backlinks.json')
 
         logging.info("Blog pages and data generated successfully")
         return blog_posts
@@ -343,7 +344,6 @@ def render_blog_post(post, backlinks, template):
         page_content = page_content.replace('{{CONTENT}}', rendered_post_content)
         page_content = page_content.replace('{{CREATED}}', created)
         page_content = page_content.replace('{{UPDATED}}', updated)
-        page_content = page_content.replace('{{BACKLINKS}}', json.dumps(backlinks[html_file]))
         page_content = page_content.replace('{{TAGS}}', tags_html)
         page_content = page_content.replace('{{LANG_SWITCH}}', lang_switch_html)
 
