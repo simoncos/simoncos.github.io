@@ -153,7 +153,7 @@ def localize_footnotes(html_content, is_english=False):
 
     back_label = 'Back to text' if is_english else '返回正文'
     for backref in soup.select('a.footnote-backref'):
-        backref.string = back_label
+        backref.string = ''
         backref['aria-label'] = back_label
         backref['title'] = back_label
 
