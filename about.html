@@ -8,39 +8,39 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="src/css/styles.css?v=20260313b">
     <script src="src/js/site-config.js"></script>
+    <script src="src/js/i18n.js"></script>
     <script src="src/js/load-nav.js"></script>
     <script src="src/js/dark-mode.js"></script>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <p class="site-kicker">About</p>
+            <p class="site-kicker" data-i18n="about">About</p>
             <h1 data-site-title>simoncos's site</h1>
         </div>
     </header>
     <div id="navigation-placeholder"></div>
     <div class="container page-shell">
         <section class="page-intro">
-            <p class="section-kicker">Profile</p>
+            <p class="section-kicker" data-i18n="about_profile">Profile</p>
             <h2>simoncos | Che ZHAO (趙澈)</h2>
-            <p class="page-lede">Full-stack builder in AI and data, based in Hong Kong. This site connects technical work, long-form writing, and the kinds of experiences that usually get left out of a portfolio.</p>
+            <p class="page-lede" data-i18n="about_lede">I am a full-stack builder working across AI and data, based in Hong Kong. This site brings together technical work, long-form writing, and the parts of experience that usually get edited out of a portfolio.</p>
         </section>
 
         <section class="about-grid">
             <div class="content-section about-placeholder">
-                <p class="section-kicker">What I do</p>
-                <h2>Connecting the dots between systems and lived reality.</h2>
+                <p class="section-kicker" data-i18n="about_what_i_do">What I do</p>
+                <h2 data-i18n="about_what_i_do_title">Connecting the dots.</h2>
             </div>
             <div class="panel">
-                <p class="section-kicker">Contact</p>
-                <h2>Reach out</h2>
+                <p class="section-kicker" data-i18n="about_contact">Contact</p>
+                <h2 data-i18n="about_reach_out">Get in touch</h2>
                 <ul class="contact-list">
-                    <li>Email: <a href="mailto:l.z.simon@hotmail.com">l.z.simon@hotmail.com</a></li>
-                    <li>LinkedIn: <a href="https://www.linkedin.com/in/chezhao/" target="_blank" rel="noreferrer">chezhao</a></li>
-                    <li>X: <a href="https://x.com/simonc_os" target="_blank" rel="noreferrer">@simonc_os</a></li>
-                    <li>GitHub: <a href="https://github.com/simoncos" target="_blank" rel="noreferrer">simoncos</a></li>
+                    <li><span data-i18n="about_contact_email">Email</span>: <a href="mailto:l.z.simon@hotmail.com">l.z.simon@hotmail.com</a></li>
+                    <li><span data-i18n="about_contact_linkedin">LinkedIn</span>: <a href="https://www.linkedin.com/in/chezhao/" target="_blank" rel="noreferrer">chezhao</a></li>
+                    <li><span data-i18n="about_contact_x">X</span>: <a href="https://x.com/simonc_os" target="_blank" rel="noreferrer">@simonc_os</a></li>
+                    <li><span data-i18n="about_contact_github">GitHub</span>: <a href="https://github.com/simoncos" target="_blank" rel="noreferrer">simoncos</a></li>
                 </ul>
-                <p>I typically respond within 24 to 48 hours.</p>
             </div>
         </section>
     </div>

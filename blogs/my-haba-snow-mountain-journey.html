@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="../src/css/styles.css?v=20260313b">
     <script src="../src/js/site-config.js"></script>
+    <script src="../src/js/i18n.js"></script>
+    <script src="../src/js/article-groups.js"></script>
     <script src="../src/js/load-nav.js"></script>
     <script src="../src/js/dark-mode.js"></script>
     <script src="../src/js/toc-generator.js"></script>
@@ -15,11 +17,12 @@
     <script src="../src/js/back-to-top.js"></script>
     <script src="../src/js/mobile-scroll-ui.js"></script>
     <script src="../src/js/load-backlinks.js"></script>
+    <script src="../src/js/load-post-series.js"></script>
 </head>
-<body class="article-page">
+<body class="article-page" data-article-group="my-haba-snow-mountain-journey" data-article-language="zh" data-article-en-file="my-haba-snow-mountain-journey.en.html" data-article-zh-file="my-haba-snow-mountain-journey.html">
     <header class="site-header">
         <div class="header-inner">
-            <p class="site-kicker">Article</p>
+            <p class="site-kicker" data-i18n="article">Article</p>
             <h1 data-site-title>simoncos's site</h1>
         </div>
     </header>
@@ -33,9 +36,9 @@
                 <aside id="toc-container" class="toc-container" aria-label="Table of contents"></aside>
                 <div class="post-main">
                     <div class="post-meta">
-                        <div class="post-meta-item"><span class="post-meta-label">Created</span><span>2026-01-20</span></div>
-                        <div class="post-meta-item"><span class="post-meta-label">Updated</span><span>2026-02-28</span></div>
-                        <div class="lang-switch"><a class="lang-switch-link" href="my-haba-snow-mountain-journey.en.html">English</a></div>
+                        <div class="post-meta-item"><span class="post-meta-label" data-i18n="created">Created</span><span data-date="2026-01-20" data-date-format="medium">2026-01-20</span></div>
+                        <div class="post-meta-item"><span class="post-meta-label" data-i18n="updated">Updated</span><span data-date="2026-02-19" data-date-format="medium">2026-02-19</span></div>
+                        <div class="lang-switch"><a class="lang-switch-link" data-language-switch data-target-language="en" href="my-haba-snow-mountain-journey.en.html">English</a></div>
                     </div>
                     <div class="post-content">
                         
@@ -350,13 +353,17 @@
 <iframe class="embedded-page" loading="lazy" src="assets/pages/my-haba-snow-mountain-journey-gemini-summary.html" title="哈巴雪山速攀实战复盘可视化大屏"></iframe>
 <p><a href="assets/pages/my-haba-snow-mountain-journey-gemini-summary.html">在新标签页打开可视化大屏</a></p>
                     </div>
+                    <div class="post-backlinks">
+                        <h3 data-i18n="backlinks">Backlinks</h3>
+                        <ul id="backlinks-list"></ul>
+                    </div>
                     <div class="post-tags">
-                        <h3>Tags:</h3>
+                        <h3 data-i18n="tags">Tags</h3>
                         <ul class="tag-list"><li><a href="../tags.html#out">out</a></li></ul>
                     </div>
-                    <div class="post-backlinks">
-                        <h3>Backlinks:</h3>
-                        <ul id="backlinks-list"></ul>
+                    <div class="post-series">
+                        <h3 data-i18n="series">Series</h3>
+                        <ul id="series-post-list"></ul>
                     </div>
                 </div>
             </div>

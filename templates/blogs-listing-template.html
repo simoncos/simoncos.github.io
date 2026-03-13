@@ -8,6 +8,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="src/css/styles.css?v=20260313b">
     <script src="src/js/site-config.js"></script>
+    <script src="src/js/i18n.js"></script>
+    <script src="src/js/article-groups.js"></script>
     <script src="src/js/load-nav.js"></script>
     <script src="src/js/dark-mode.js"></script>
     <script src="src/js/preview-toggle.js"></script>
@@ -16,7 +18,7 @@
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <p class="site-kicker">Archive</p>
+            <p class="site-kicker" data-i18n="site_kicker_blog">Blog</p>
             <h1 data-site-title>simoncos's site</h1>
         </div>
     </header>
@@ -25,15 +27,15 @@
         <section class="page-intro">
             <div class="page-intro-header">
                 <div>
-                    <p class="section-kicker">Writing archive</p>
-                    <h2>Blog posts</h2>
+                    <p class="section-kicker" data-i18n="writing_archive">Writing archive</p>
+                    <h2 data-i18n="blog_posts">Blog posts</h2>
                 </div>
             </div>
-            <p class="page-lede">A reverse-chronological archive of essays, technical notes, and bilingual pieces. Toggle previews when you want a denser scanning mode.</p>
+            <p class="page-lede" data-i18n="archive_lede">Essays, technical notes, and other long-form posts, newest first. Turn previews on when you want to scan quickly.</p>
             <div class="preview-toggle">
                 <label>
                     <input type="checkbox" id="preview-toggle">
-                    Show previews
+                    <span data-i18n="show_previews">Show previews</span>
                 </label>
             </div>
         </section>
