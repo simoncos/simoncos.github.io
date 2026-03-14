@@ -1124,8 +1124,8 @@ body.dark-mode .post-content sup[id^="fnref:"]:target a.footnote-ref,
 body.dark-mode .blog-post sup[id^="fnref:"]:target a.footnote-ref,
 body.dark-mode .post-content sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref,
 body.dark-mode .blog-post sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref {
-    background: rgba(255, 214, 102, 0.46);
-    box-shadow: 0 0 0 1px rgba(255, 214, 102, 0.5), 0 0 0 0.24rem rgba(255, 214, 102, 0.2);
+    background: #ffd666;
+    box-shadow: 0 0 0 1px #e6b84a, 0 0 0 0.2rem rgba(255, 214, 102, 0.12);
     color: #241400;
 }
 
@@ -1197,8 +1197,8 @@ body.dark-mode .post-content .footnote li:target,
 body.dark-mode .blog-post .footnote li:target,
 body.dark-mode .post-content .footnote li.footnote-target-animate,
 body.dark-mode .blog-post .footnote li.footnote-target-animate {
-    background: rgba(255, 214, 102, 0.24);
-    box-shadow: 0 0 0 1px rgba(255, 214, 102, 0.42), 0 0 0 0.22rem rgba(255, 214, 102, 0.16);
+    background: #ffd666;
+    box-shadow: 0 0 0 1px #e6b84a, 0 0 0 0.18rem rgba(255, 214, 102, 0.12);
 }
 
 
