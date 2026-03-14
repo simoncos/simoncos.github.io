@@ -245,7 +245,7 @@ def build_rss_feed(posts, language_code):
             pub_dt = pub_dt.replace(hour=0, minute=0, second=0)
             ElementTree.SubElement(item, 'pubDate').text = format_datetime(pub_dt.astimezone())
 
-        description_text = strip_html_excerpt(post.get('rendered_content', '') or post.get('html_content', ''))
+        description_text = post.get('excerpt') or strip_html_excerpt(post.get('rendered_content', '') or post.get('html_content', ''))
         ElementTree.SubElement(item, 'description').text = description_text
 
     return ElementTree.tostring(rss, encoding='utf-8', xml_declaration=True).decode('utf-8')
