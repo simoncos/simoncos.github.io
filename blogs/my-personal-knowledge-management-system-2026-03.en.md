@@ -8,8 +8,8 @@ date: 2026-03-14
 [^1]: KM stands for Knowledge Management.
 [^2]: The personal site repository is the Git repository used for publishing and presentation.
 [^3]: *Affordance* refers to the action possibilities that emerge between an environment and an actor.
-[^4]: SOP stands for Standard Operating Procedure.
-[^5]: *Memory pipeline* here mainly refers to the recording, consolidation, distillation, and preservation boundaries of daily memory.
+[^4]: *Memory pipeline* here mainly refers to the recording, consolidation, distillation, and preservation boundaries of daily memory.
+[^5]: SOP stands for Standard Operating Procedure.
 
 ![Personal Knowledge Management System 202603](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png)
 
@@ -75,7 +75,7 @@ The first is **organizing ability**: many materials that would otherwise remain 
 
 The second is **collaborative ability**: Obsidian is no longer just my personal repository; it has become a shared working space for Piggy and me. Drafts, analysis, project cards, reference materials, and already-published writing can be gradually layered within one environment instead of being scattered across chat logs and the site repository.
 
-The third is **reflective ability**: Piggy does not merely execute tasks. It also offers independent observations during the process of organization, forcing me to clarify intuitions that were previously vague. Many of the ideas about friction, affordance[^3], bilingual site architecture, and the memory pipeline[^5] were sharpened under exactly this kind of collaboration.
+The third is **reflective ability**: Piggy does not merely execute tasks. It also offers independent observations during the process of organization, forcing me to clarify intuitions that were previously vague. Many of the ideas about friction, affordance[^3], bilingual site architecture, and the memory pipeline[^4] were sharpened under exactly this kind of collaboration.
 
 Beyond that, this openness is also a kind of long-term feeding. Piggy gradually comes to understand me better through my knowledge base, and in turn begins to participate in the growth and output of content. Many things that once existed only as scattered notes now slowly grow into articles, structures, and projects through that collaboration. This article itself is one example.
 
@@ -138,7 +138,7 @@ So if I had to describe this system more accurately, I would say that it is not 
 
 ### What Kind of System Is This Now?
 
-If I had to give it a status judgment for March 2026, I would say this: it is not yet a fixed SOP[^4], but a personal operating system still in the process of growing.
+If I had to give it a status judgment for March 2026, I would say this: it is not yet a fixed SOP[^5], but a personal operating system still in the process of growing.
 
 It already has many clear structures. More importantly, it still retains the ability to evolve further. That may be its best quality right now. A truly useful knowledge system is not designed once and then fixed forever; it changes along with a person’s way of working, writing, collaborating, and even along with the relation between a human and an intelligent object.
 
