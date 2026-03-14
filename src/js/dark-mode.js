@@ -1,42 +1,134 @@
-function updateDarkModeToggleState() {
-    const toggleBtn = document.getElementById('dark-mode-toggle');
-    const darkModeEnabled = document.body.classList.contains('dark-mode');
+const THEME_MODE_STORAGE_KEY = 'themeMode';
+const LEGACY_DARK_MODE_KEY = 'darkMode';
+const DARK_MODE_CLASS = 'dark-mode';
 
-    if (toggleBtn) {
-        const icon = toggleBtn.querySelector('.theme-toggle-icon');
-        const i18n = window.SITE_I18N || {};
+const systemThemeQuery =
+    typeof window.matchMedia === 'function'
+        ? window.matchMedia('(prefers-color-scheme: dark)')
+        : null;
 
-        if (icon) {
-            icon.textContent = darkModeEnabled ? '☀️' : '🌙';
-        } else {
-            toggleBtn.textContent = darkModeEnabled ? '☀️' : '🌙';
+function getStoredThemeMode() {
+    try {
+        const explicit = localStorage.getItem(THEME_MODE_STORAGE_KEY);
+        if (explicit === 'system' || explicit === 'dark' || explicit === 'light') {
+            return explicit;
         }
 
-        if (typeof i18n.t === 'function') {
-            const label = darkModeEnabled ? i18n.t('switch_to_light_mode') : i18n.t('switch_to_dark_mode');
-            toggleBtn.setAttribute('title', label);
-            toggleBtn.setAttribute('aria-label', label);
+        const legacy = localStorage.getItem(LEGACY_DARK_MODE_KEY);
+        if (legacy === 'true') {
+            return 'dark';
         }
+        if (legacy === 'false') {
+            return 'light';
+        }
+    } catch (_error) {
+        // ignore storage failures
+    }
+
+    return 'system';
+}
+
+function persistThemeMode(mode) {
+    try {
+        localStorage.setItem(THEME_MODE_STORAGE_KEY, mode);
+        localStorage.removeItem(LEGACY_DARK_MODE_KEY);
+    } catch (_error) {
+        // ignore storage failures
     }
 }
 
-// Check for saved dark mode preference
-function initDarkMode() {
-    const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
-    if (darkModeEnabled) {
-        document.body.classList.add('dark-mode');
+function getEffectiveDarkMode(mode = getStoredThemeMode()) {
+    if (mode === 'dark') {
+        return true;
+    }
+    if (mode === 'light') {
+        return false;
+    }
+    return !!(systemThemeQuery && systemThemeQuery.matches);
+}
+
+function applyThemeMode(mode = getStoredThemeMode()) {
+    const isDarkMode = getEffectiveDarkMode(mode);
+    document.body.classList.toggle(DARK_MODE_CLASS, isDarkMode);
+    document.documentElement.setAttribute('data-theme-mode', mode);
+    updateDarkModeToggleState(mode, isDarkMode);
+}
+
+function getNextThemeMode(currentMode) {
+    if (currentMode === 'system') return 'dark';
+    if (currentMode === 'dark') return 'light';
+    return 'system';
+}
+
+function updateDarkModeToggleState(mode = getStoredThemeMode(), isDarkMode = getEffectiveDarkMode(mode)) {
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+
+    if (!toggleBtn) {
+        return;
     }
 
-    updateDarkModeToggleState();
+    const icon = toggleBtn.querySelector('.theme-toggle-icon');
+    const i18n = window.SITE_I18N || {};
+    const nextMode = getNextThemeMode(mode);
+
+    const icons = {
+        system: '◐',
+        dark: '☀️',
+        light: '🌙'
+    };
+
+    const labelKeys = {
+        system: 'theme_mode_system',
+        dark: 'theme_mode_dark',
+        light: 'theme_mode_light'
+    };
+
+    if (icon) {
+        icon.textContent = icons[mode] || (isDarkMode ? '☀️' : '🌙');
+    } else {
+        toggleBtn.textContent = icons[mode] || (isDarkMode ? '☀️' : '🌙');
+    }
+
+    const currentLabel = typeof i18n.t === 'function'
+        ? i18n.t(labelKeys[mode] || 'theme')
+        : `Theme: ${mode}`;
+    const nextLabel = typeof i18n.t === 'function'
+        ? i18n.t(labelKeys[nextMode] || 'theme')
+        : `Theme: ${nextMode}`;
+
+    toggleBtn.setAttribute('title', `${currentLabel} → ${nextLabel}`);
+    toggleBtn.setAttribute('aria-label', `${currentLabel} → ${nextLabel}`);
+    toggleBtn.setAttribute('data-theme-mode', mode);
+}
+
+function initDarkMode() {
+    applyThemeMode(getStoredThemeMode());
 }
 
 function toggleDarkMode() {
-    const isDarkMode = document.body.classList.toggle('dark-mode');
-    localStorage.setItem('darkMode', isDarkMode);
-
-    updateDarkModeToggleState();
+    const nextMode = getNextThemeMode(getStoredThemeMode());
+    persistThemeMode(nextMode);
+    applyThemeMode(nextMode);
 }
 
-// Initialize dark mode on page load
-document.addEventListener('DOMContentLoaded', initDarkMode); 
-window.addEventListener('site-language-change', updateDarkModeToggleState);
+if (systemThemeQuery) {
+    const handleSystemThemeChange = function () {
+        if (getStoredThemeMode() === 'system') {
+            applyThemeMode('system');
+        }
+    };
+
+    if (typeof systemThemeQuery.addEventListener === 'function') {
+        systemThemeQuery.addEventListener('change', handleSystemThemeChange);
+    } else if (typeof systemThemeQuery.addListener === 'function') {
+        systemThemeQuery.addListener(handleSystemThemeChange);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initDarkMode);
+window.addEventListener('site-language-change', function () {
+    applyThemeMode(getStoredThemeMode());
+});
+
+window.initDarkMode = initDarkMode;
+window.toggleDarkMode = toggleDarkMode;
