@@ -1177,8 +1177,10 @@ body.dark-mode .blog-post .footnote {
 .post-content .footnote li,
 .blog-post .footnote li {
     scroll-margin-top: 6.5rem;
+    padding: 0.2rem 0.45rem;
+    margin: 0 -0.45rem;
     border-radius: 0.75rem;
-    transition: background-color 0.22s ease, box-shadow 0.22s ease;
+    transition: background-color 0.22s ease, box-shadow 0.22s ease, color 0.22s ease;
 }
 
 .post-content .footnote li:target,
