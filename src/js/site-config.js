@@ -9,7 +9,7 @@
 
     const siteConfig = {
         ownerName: 'simoncos',
-        siteTitle: 'simoncos\'s site',
+        siteTitle: 'simonc site',
         basePath: detectedBasePath,
         resolvePath(relativePath) {
             const normalized = relativePath.replace(/^\//, '');
@@ -30,12 +30,12 @@
 
         const pageTitleElement = document.querySelector('title[data-page-title]');
         if (pageTitleElement) {
-            document.title = pageTitleElement.getAttribute('data-page-title').replace(/\[owner\]/g, siteConfig.ownerName);
+            document.title = pageTitleElement.getAttribute('data-page-title').replace(/\[owner\]/g, siteConfig.ownerName).replace(/\[site\]/g, siteConfig.siteTitle);
         }
 
         const blogTitleElement = document.querySelector('title[data-blog-title]');
         if (blogTitleElement) {
-            document.title = blogTitleElement.getAttribute('data-blog-title').replace(/\[owner\]/g, siteConfig.ownerName);
+            document.title = blogTitleElement.getAttribute('data-blog-title').replace(/\[owner\]/g, siteConfig.ownerName).replace(/\[site\]/g, siteConfig.siteTitle);
         }
     });
 })();
