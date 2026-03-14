@@ -6,7 +6,7 @@ date: 2026-03-14
 # My Personal Knowledge Management System, 2026-03
 
 [^1]: KM stands for Knowledge Management.
-[^2]: The personal site repository is the Git repository used for publishing and presentation.
+[^2]: The personal site repository is the Git repository used for publishing and presentation. The site itself is available at https://simoncos.github.io/ .
 [^3]: *Affordance* refers to the action possibilities that emerge between an environment and an actor.
 [^4]: *Memory pipeline* here mainly refers to the recording, consolidation, distillation, and preservation boundaries of daily memory.
 [^5]: SOP stands for Standard Operating Procedure.
