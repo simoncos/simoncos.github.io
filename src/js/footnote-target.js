@@ -2,12 +2,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const animatedClass = 'footnote-target-animate';
     const animatedRefClass = 'footnote-ref-target-animate';
 
-    function retriggerAnimation(element, className) {
+    function retriggerHighlight(element, className) {
         if (!element) return;
         element.classList.remove(className);
-        // Force reflow so the animation can replay reliably
         void element.offsetWidth;
         element.classList.add(className);
+        setTimeout(function () {
+            element.classList.remove(className);
+        }, 1600);
     }
 
     document.addEventListener('click', function (event) {
@@ -20,20 +22,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const className = href.startsWith('#fnref:') ? animatedRefClass : animatedClass;
 
-        // wait until browser finishes the hash jump, then animate target
         requestAnimationFrame(function () {
             requestAnimationFrame(function () {
-                retriggerAnimation(target, className);
+                retriggerHighlight(target, className);
             });
         });
-    });
-
-    document.addEventListener('animationend', function (event) {
-        if (event.target.classList.contains(animatedClass)) {
-            event.target.classList.remove(animatedClass);
-        }
-        if (event.target.classList.contains(animatedRefClass)) {
-            event.target.classList.remove(animatedRefClass);
-        }
     });
 });
