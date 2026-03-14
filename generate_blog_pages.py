@@ -14,6 +14,7 @@ from xml.etree import ElementTree
 from bs4 import BeautifulSoup, NavigableString
 from urllib.parse import quote
 from pathlib import Path
+from email.utils import format_datetime
 
 # Set up logging
 logging.basicConfig(
@@ -188,6 +189,74 @@ def infer_group_id(file_name):
     return file_name
 
 
+def absolute_site_url(path=''):
+    base = 'https://simoncos.github.io/'
+    normalized = path.lstrip('/')
+    return f"{base}{normalized}"
+
+
+def strip_html_excerpt(html_content, max_length=280):
+    soup = BeautifulSoup(html_content, 'html.parser')
+    text = ' '.join(soup.stripped_strings)
+    text = re.sub(r'\s+', ' ', text).strip()
+    if len(text) <= max_length:
+        return text
+    return text[:max_length].rstrip() + '…'
+
+
+def build_rss_feed(posts, language_code):
+    rss = ElementTree.Element('rss', attrib={
+        'version': '2.0',
+        'xmlns:atom': 'http://www.w3.org/2005/Atom'
+    })
+    channel = ElementTree.SubElement(rss, 'channel')
+
+    title = 'simonc site RSS (中文)' if language_code == 'zh' else 'simonc site RSS (English)'
+    description = '中文文章订阅' if language_code == 'zh' else 'English posts feed'
+    feed_name = f'feed.{language_code}.xml'
+
+    ElementTree.SubElement(channel, 'title').text = title
+    ElementTree.SubElement(channel, 'link').text = absolute_site_url()
+    ElementTree.SubElement(channel, 'description').text = description
+    ElementTree.SubElement(channel, 'language').text = 'zh-CN' if language_code == 'zh' else 'en'
+    ElementTree.SubElement(channel, 'generator').text = 'generate_blog_pages.py'
+    ElementTree.SubElement(channel, 'lastBuildDate').text = format_datetime(datetime.now().astimezone())
+
+    atom_link = ElementTree.SubElement(channel, '{http://www.w3.org/2005/Atom}link')
+    atom_link.set('href', absolute_site_url(feed_name))
+    atom_link.set('rel', 'self')
+    atom_link.set('type', 'application/rss+xml')
+
+    filtered_posts = [post for post in posts if post.get('language') == language_code]
+    filtered_posts.sort(
+        key=lambda post: parse_frontmatter_date(post.get('date', '')) or datetime.min,
+        reverse=True,
+    )
+
+    for post in filtered_posts:
+        item = ElementTree.SubElement(channel, 'item')
+        link = absolute_site_url(f"blogs/{post.get('file', '')}")
+        ElementTree.SubElement(item, 'title').text = post.get('title', '')
+        ElementTree.SubElement(item, 'link').text = link
+        ElementTree.SubElement(item, 'guid').text = link
+
+        pub_dt = parse_frontmatter_date(post.get('date', ''))
+        if pub_dt:
+            pub_dt = pub_dt.replace(hour=0, minute=0, second=0)
+            ElementTree.SubElement(item, 'pubDate').text = format_datetime(pub_dt.astimezone())
+
+        description_text = strip_html_excerpt(post.get('rendered_content', '') or post.get('html_content', ''))
+        ElementTree.SubElement(item, 'description').text = description_text
+
+    return ElementTree.tostring(rss, encoding='utf-8', xml_declaration=True).decode('utf-8')
+
+
+def save_rss_feed(posts, language_code):
+    feed_content = build_rss_feed(posts, language_code)
+    Path(f'feed.{language_code}.xml').write_text(feed_content, encoding='utf-8')
+    logging.info(f"Successfully saved feed.{language_code}.xml")
+
+
 def warn_on_metadata_divergence(group_id, reference_post, candidate_post):
     reference_metadata = reference_post.get('metadata', {})
     candidate_metadata = candidate_post.get('metadata', {})
@@ -312,8 +381,10 @@ def generate_blog_pages():
         save_json_data({'last_updated': last_updated, 'groups': article_groups}, 'article_groups.json')
         save_json_data(series_data, 'series_data.json')
         save_json_data(tags_data, 'tags_data.json')
+        save_rss_feed(blog_posts, 'zh')
+        save_rss_feed(blog_posts, 'en')
 
-        logging.info("Blog pages and data generated successfully")
+        logging.info("Blog pages, data, and RSS feeds generated successfully")
         return blog_posts
 
     except Exception as e:
