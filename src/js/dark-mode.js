@@ -73,8 +73,8 @@ function updateDarkModeToggleState(mode = getStoredThemeMode(), isDarkMode = get
 
     const icons = {
         system: '◐',
-        dark: '☀️',
-        light: '🌙'
+        dark: '🌙',
+        light: '☀️'
     };
 
     const labelKeys = {
