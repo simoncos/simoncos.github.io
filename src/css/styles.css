@@ -1197,8 +1197,9 @@ body.dark-mode .post-content .footnote li:target,
 body.dark-mode .blog-post .footnote li:target,
 body.dark-mode .post-content .footnote li.footnote-target-animate,
 body.dark-mode .blog-post .footnote li.footnote-target-animate {
-    background: #ffd666;
-    box-shadow: 0 0 0 1px #e6b84a, 0 0 0 0.18rem rgba(255, 214, 102, 0.12);
+    background: rgba(255, 214, 102, 0.28);
+    box-shadow: 0 0 0 1px #e6b84a, 0 0 0 0.18rem rgba(255, 214, 102, 0.1);
+    color: #fff7df;
 }
 
 
