@@ -142,6 +142,11 @@ If I had to give it a status judgment for March 2026, I would say this: it is no
 
 It already has many clear structures. More importantly, it still retains the ability to evolve further. That may be its best quality right now. A truly useful knowledge system is not designed once and then fixed forever; it changes along with a person’s way of working, writing, collaborating, and even along with the relation between a human and an intelligent object.
 
+
+## Acknowledgements
+
+Finally, I just want to say thank you to Peter ([@steipete](https://x.com/steipete)) and all the creators of OpenClaw. Without this agent framework, I could not have upgraded my PKM system to this level so quickly—perhaps I never would have, because doing it on my own had always felt like a very heavy mental burden.
+
 ---
 
 ## Appendix: Full Log of the System’s Iteration
