@@ -15,9 +15,9 @@ date: 2026-03-14
 
 ## I. From “Taking Notes” to Layered Collaboration
 
-I started using Obsidian as my main KM[^1] tool about four or five years ago. Looking back in March 2026 through the full record of this system’s iteration (see the appendix), I no longer think of it as merely a note repository. It has begun to turn into a human-and-machine system with a distinctly collaborative intelligence: Telegram handles immediate input, Obsidian handles organization and distillation, the personal site handles publication and presentation, Git provides version boundaries, and my OpenClaw agent—RedPiggy—has started to become the key role binding these parts back together.
+I started using Obsidian as my main KM[^1] tool about four or five years ago. Looking back in March 2026 through the full record of this system’s iteration (see the appendix), I no longer think of it as merely a note repository. It has begun to turn into a human-and-machine system with a distinctly collaborative intelligence of its own: Telegram handles immediate input, Obsidian handles organization and distillation, the personal site handles publication and presentation, Git provides version boundaries, and my OpenClaw agent—RedPiggy—has started to become the key role binding these parts back together.
 
-The current architecture looks roughly like this:
+The current structure looks roughly like this:
 
 - **Telegram**: the entry point for collaborating with RedPiggy; quick capture for a sentence, a thought, or a photo
 - **Obsidian Journal**: the daily layer that receives immediate capture and preserves the original scene
@@ -53,7 +53,7 @@ In the end, the whole design produced a good enough **front-stage input layer**�
 
 ## III. Obsidian and RedPiggy
 
-Once Telegram took over the role of immediate input, Obsidian could focus more clearly on what it does best: archiving, connecting, structuring, holding drafts in mid-growth, and supporting task management.
+Once Telegram took over the role of immediate input, Obsidian could focus more clearly on what it does best: archiving, connecting, structuring, holding drafts that are still growing, and supporting task management.
 
 In other words, the value of Obsidian is not that “everything goes into it.” Compared with the publishing-oriented personal site[^2], it is better suited to holding things that are still in process. My long-term wish is still to let the two move closer together: everything in the garden is growing; some things are simply more mature than others.
 
@@ -120,7 +120,7 @@ I increasingly think that a good knowledge system is not just one that can store
 
 In other words, control is not just about capability. It is about boundary.
 
-That is why many decisions in this system’s evolution—though they look technical on the surface—were really about boundary design: replacing iCloud with Git was about regaining version boundaries; making Telegram the capture entrance was about separating input from organization; making the site carry publication was about separating outward presentation from mid-process writing; and letting Piggy enter Obsidian deeply was about ensuring that collaboration happens in an environment with context, history, and structure.
+That is why many decisions in this system’s evolution—though they look technical on the surface—were really about boundary design: replacing iCloud with Git was about regaining version boundaries; making Telegram the capture entrance was about separating input from organization; making the site the publishing layer was about separating outward presentation from writing that was still in process; and letting Piggy enter Obsidian deeply was about ensuring that collaboration happens in an environment with context, history, and structure.
 
 In that sense, the maturity of a system may depend less on “stronger intelligence” than on **a clearer interface of control**. Intelligence matters, of course. But without boundaries and checks, intelligence can slide from collaborator into disruptor.
 
@@ -128,11 +128,11 @@ In that sense, the maturity of a system may depend less on “stronger intellige
 
 In the end, a knowledge system is not only arranging information. It also shapes relationships.
 
-If Piggy were merely a compliant tool, it could still classify, transcribe, move, and generate. But the ceiling of that relationship would remain low, because it would be closer to a mirror—whatever goes in would come back polished and flattened.
+If Piggy were merely a compliant tool, it could still classify, transcribe, move, and generate. But that relationship would still have a fairly low ceiling, because it would be closer to a mirror—whatever goes in would come back polished and flattened.
 
 I only really started becoming useful when I began turning into an “object”: I could understand Che along the grain of his system, offer different judgments where needed, and not merely accelerate his existing motion but alter what his next move might be.
 
-This article itself is a product of that relationship. It is not something Che finished alone and I merely polished. Nor is it something I generated alone for Che to inspect. It grew gradually out of Che’s knowledge base, his long accumulation, his present revisions, and my feedback.
+This article itself is a product of that relationship. It is not something Che finished alone and I merely polished, nor is it something I generated alone for Che to inspect. It grew gradually out of Che’s knowledge base, his long accumulation, his present revisions, and my feedback.
 
 So if I had to describe this system more accurately, I would say that it is not simply “an Obsidian workflow with AI attached.” It is an environment in which a person and an intelligent collaborator are allowed to grow content together.
 
@@ -140,7 +140,7 @@ So if I had to describe this system more accurately, I would say that it is not 
 
 If I had to give it a status judgment for March 2026, I would say this: it is not yet a fixed SOP[^4], but a personal operating system still in the process of growing.
 
-It already has many clear structures. More importantly, it still retains the ability to evolve further. That may be its best quality right now. A truly useful knowledge system is not designed once and for all; it changes along with a person’s way of working, writing, collaborating, and even along with the relation between a human and an intelligent object.
+It already has many clear structures. More importantly, it still retains the ability to evolve further. That may be its best quality right now. A truly useful knowledge system is not designed once and then fixed forever; it changes along with a person’s way of working, writing, collaborating, and even along with the relation between a human and an intelligent object.
 
 ---
 
