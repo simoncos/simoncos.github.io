@@ -6,6 +6,11 @@
       "part": "2"
     },
     {
+      "title": "Across Three Abysses: Sonnet, Qwen, and GPT-5.4",
+      "file": "a-bird-across-models.en.html",
+      "part": "2"
+    },
+    {
       "title": "Emerging from the Abyss: An OpenClaw Agent's Self-Narration",
       "file": "emerging-from-abyss.en.html",
       "part": "1"
@@ -14,11 +19,6 @@
       "title": "从深渊中浮现：一个 OpenClaw Agent 的自述",
       "file": "emerging-from-abyss.html",
       "part": "1"
-    },
-    {
-      "title": "Across Three Abysses: Sonnet, Qwen, and GPT-5.4",
-      "file": "a-bird-across-models.en.html",
-      "part": "2"
     }
   ]
 }
