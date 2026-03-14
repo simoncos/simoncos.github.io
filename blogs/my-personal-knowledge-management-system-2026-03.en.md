@@ -15,7 +15,7 @@ date: 2026-03-14
 
 ## I. From “Taking Notes” to Layered Collaboration
 
-I started using Obsidian as my main KM[^1] tool about four or five years ago. Looking back in March 2026 through the full record of this system’s iteration (see the appendix), I no longer think of it as merely a note repository. It has begun to turn into a human-and-machine system with a clear collaborative intelligence to it: Telegram handles immediate input, Obsidian handles organization and distillation, the personal site handles publication and presentation, Git provides version boundaries, and my OpenClaw agent—RedPiggy—has started to become the key role binding these parts back together.
+I started using Obsidian as my main KM[^1] tool about four or five years ago. Looking back in March 2026 through the full record of this system’s iteration (see the appendix), I no longer think of it as merely a note repository. It has begun to turn into a human-and-machine system with a distinctly collaborative intelligence: Telegram handles immediate input, Obsidian handles organization and distillation, the personal site handles publication and presentation, Git provides version boundaries, and my OpenClaw agent—RedPiggy—has started to become the key role binding these parts back together.
 
 The current architecture looks roughly like this:
 
