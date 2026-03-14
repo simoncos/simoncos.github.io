@@ -56,9 +56,13 @@
 
 html {
     scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: clip;
 }
 
 body {
+    max-width: 100%;
+    overflow-x: clip;
     margin: 0;
     min-height: 100vh;
     font-family: var(--font-sans);
@@ -94,6 +98,13 @@ body.dark-mode::before {
     background-image:
         linear-gradient(rgba(197, 214, 255, 0.032) 1px, transparent 1px),
         linear-gradient(90deg, rgba(197, 214, 255, 0.032) 1px, transparent 1px);
+}
+
+@supports not (overflow: clip) {
+    html,
+    body {
+        overflow-x: hidden;
+    }
 }
 
 a {
