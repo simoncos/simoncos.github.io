@@ -1108,14 +1108,22 @@ body.dark-mode .blog-post code {
 }
 
 .post-content sup[id^="fnref:"]:target a.footnote-ref,
-.blog-post sup[id^="fnref:"]:target a.footnote-ref {
-    animation: footnote-ref-target-flash 1.15s ease-out;
+.blog-post sup[id^="fnref:"]:target a.footnote-ref,
+.post-content sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref,
+.blog-post sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref {
     background: rgba(22, 89, 197, 0.12);
     box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.18);
 }
 
+.post-content sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref,
+.blog-post sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref {
+    animation: footnote-ref-target-flash 1.5s ease-out 1;
+}
+
 body.dark-mode .post-content sup[id^="fnref:"]:target a.footnote-ref,
-body.dark-mode .blog-post sup[id^="fnref:"]:target a.footnote-ref {
+body.dark-mode .blog-post sup[id^="fnref:"]:target a.footnote-ref,
+body.dark-mode .post-content sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref,
+body.dark-mode .blog-post sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref {
     background: rgba(124, 226, 255, 0.16);
     box-shadow: 0 0 0 1px rgba(124, 226, 255, 0.2);
 }
@@ -1173,26 +1181,34 @@ body.dark-mode .blog-post .footnote {
 }
 
 .post-content .footnote li:target,
-.blog-post .footnote li:target {
-    animation: footnote-target-flash 1.35s ease-out;
+.blog-post .footnote li:target,
+.post-content .footnote li.footnote-target-animate,
+.blog-post .footnote li.footnote-target-animate {
     background: rgba(22, 89, 197, 0.1);
     box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.16);
 }
 
+.post-content .footnote li.footnote-target-animate,
+.blog-post .footnote li.footnote-target-animate {
+    animation: footnote-target-flash 1.8s ease-out 1;
+}
+
 body.dark-mode .post-content .footnote li:target,
-body.dark-mode .blog-post .footnote li:target {
+body.dark-mode .blog-post .footnote li:target,
+body.dark-mode .post-content .footnote li.footnote-target-animate,
+body.dark-mode .blog-post .footnote li.footnote-target-animate {
     background: rgba(124, 226, 255, 0.12);
     box-shadow: 0 0 0 1px rgba(124, 226, 255, 0.18);
 }
 
 @keyframes footnote-target-flash {
-    0% {
+    0%, 18%, 36% {
         background: rgba(255, 191, 71, 0.34);
         box-shadow: 0 0 0 1px rgba(255, 191, 71, 0.42), 0 0 0 0.38rem rgba(255, 191, 71, 0.16);
     }
-    55% {
-        background: rgba(255, 191, 71, 0.18);
-        box-shadow: 0 0 0 1px rgba(255, 191, 71, 0.26), 0 0 0 0.2rem rgba(255, 191, 71, 0.08);
+    9%, 27%, 45% {
+        background: rgba(22, 89, 197, 0.1);
+        box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.16);
     }
     100% {
         background: rgba(22, 89, 197, 0.1);
@@ -1201,15 +1217,15 @@ body.dark-mode .blog-post .footnote li:target {
 }
 
 @keyframes footnote-ref-target-flash {
-    0% {
+    0%, 18%, 36% {
         background: rgba(255, 191, 71, 0.62);
         box-shadow: 0 0 0 1px rgba(255, 191, 71, 0.6), 0 0 0 0.42rem rgba(255, 191, 71, 0.2);
         transform: translateY(-1px) scale(1.06);
     }
-    45% {
-        background: rgba(255, 191, 71, 0.36);
-        box-shadow: 0 0 0 1px rgba(255, 191, 71, 0.38), 0 0 0 0.24rem rgba(255, 191, 71, 0.12);
-        transform: translateY(-0.5px) scale(1.03);
+    9%, 27%, 45% {
+        background: rgba(22, 89, 197, 0.12);
+        box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.18);
+        transform: translateY(0) scale(1);
     }
     100% {
         background: rgba(22, 89, 197, 0.12);
