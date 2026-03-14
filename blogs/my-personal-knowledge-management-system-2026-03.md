@@ -6,7 +6,7 @@ date: 2026-03-14
 # 我的个人知识管理系统 2026-03
 
 [^1]: KM：Knowledge Management，知识管理。
-[^2]: 个人站点仓库：对应的 Git 仓库，用于发布与呈现。
+[^2]: 个人站点仓库：对应的 Git 仓库，用于发布与呈现，地址为 https://simoncos.github.io/ 。
 [^3]: affordance：可供性，环境向行动者提供的可行动可能。
 [^4]: memory pipeline：这里主要指 daily memory 的记录、整理、提炼与保留边界。
 [^5]: SOP：Standard Operating Procedure，标准作业流程。
