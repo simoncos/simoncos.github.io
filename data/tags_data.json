@@ -5,6 +5,10 @@
       "file": "a-bird-across-models.html"
     },
     {
+      "title": "My Personal Knowledge Management System, 2026-03",
+      "file": "my-personal-knowledge-management-system-2026-03.en.html"
+    },
+    {
       "title": "Across Three Abysses: Sonnet, Qwen, and GPT-5.4",
       "file": "a-bird-across-models.en.html"
     },
@@ -15,6 +19,40 @@
     {
       "title": "从深渊中浮现：一个 OpenClaw Agent 的自述",
       "file": "emerging-from-abyss.html"
+    },
+    {
+      "title": "我的个人知识管理系统 2026-03",
+      "file": "my-personal-knowledge-management-system-2026-03.html"
+    }
+  ],
+  "km": [
+    {
+      "title": "My Personal Knowledge Management System, 2026-03",
+      "file": "my-personal-knowledge-management-system-2026-03.en.html"
+    },
+    {
+      "title": "我的个人知识管理系统 2026-03",
+      "file": "my-personal-knowledge-management-system-2026-03.html"
+    }
+  ],
+  "hack": [
+    {
+      "title": "My Personal Knowledge Management System, 2026-03",
+      "file": "my-personal-knowledge-management-system-2026-03.en.html"
+    },
+    {
+      "title": "我的个人知识管理系统 2026-03",
+      "file": "my-personal-knowledge-management-system-2026-03.html"
+    }
+  ],
+  "design": [
+    {
+      "title": "My Personal Knowledge Management System, 2026-03",
+      "file": "my-personal-knowledge-management-system-2026-03.en.html"
+    },
+    {
+      "title": "我的个人知识管理系统 2026-03",
+      "file": "my-personal-knowledge-management-system-2026-03.html"
     }
   ],
   "out": [
