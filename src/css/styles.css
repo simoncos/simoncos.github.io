@@ -1110,14 +1110,14 @@ body.dark-mode .blog-post code {
 .post-content sup[id^="fnref:"]:target a.footnote-ref,
 .blog-post sup[id^="fnref:"]:target a.footnote-ref {
     animation: footnote-ref-target-flash 1.6s ease-out;
-    background: rgba(22, 89, 197, 0.18);
-    box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.22);
+    background: rgba(22, 89, 197, 0.3);
+    box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.34), 0 0 0 0.28rem rgba(22, 89, 197, 0.14);
 }
 
 body.dark-mode .post-content sup[id^="fnref:"]:target a.footnote-ref,
 body.dark-mode .blog-post sup[id^="fnref:"]:target a.footnote-ref {
-    background: rgba(124, 226, 255, 0.22);
-    box-shadow: 0 0 0 1px rgba(124, 226, 255, 0.24);
+    background: rgba(124, 226, 255, 0.34);
+    box-shadow: 0 0 0 1px rgba(124, 226, 255, 0.34), 0 0 0 0.28rem rgba(124, 226, 255, 0.16);
 }
 
 .post-content a.footnote-ref,
@@ -1198,12 +1198,12 @@ body.dark-mode .blog-post .footnote li:target {
 
 @keyframes footnote-ref-target-flash {
     0% {
-        background: rgba(22, 89, 197, 0.28);
-        box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.3);
+        background: rgba(22, 89, 197, 0.42);
+        box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.42), 0 0 0 0.36rem rgba(22, 89, 197, 0.18);
     }
     100% {
-        background: rgba(22, 89, 197, 0.18);
-        box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.22);
+        background: rgba(22, 89, 197, 0.3);
+        box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.34), 0 0 0 0.28rem rgba(22, 89, 197, 0.14);
     }
 }
 
