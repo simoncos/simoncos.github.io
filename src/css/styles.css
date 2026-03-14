@@ -1146,6 +1146,37 @@ body.dark-mode .blog-post .footnote {
     padding-left: 1.25rem;
 }
 
+.post-content .footnote li,
+.blog-post .footnote li {
+    scroll-margin-top: 6.5rem;
+    border-radius: 0.75rem;
+    transition: background-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.post-content .footnote li:target,
+.blog-post .footnote li:target {
+    animation: footnote-target-flash 1.8s ease-out;
+    background: rgba(22, 89, 197, 0.12);
+    box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.18);
+}
+
+body.dark-mode .post-content .footnote li:target,
+body.dark-mode .blog-post .footnote li:target {
+    background: rgba(124, 226, 255, 0.14);
+    box-shadow: 0 0 0 1px rgba(124, 226, 255, 0.2);
+}
+
+@keyframes footnote-target-flash {
+    0% {
+        background: rgba(22, 89, 197, 0.2);
+        box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.28);
+    }
+    100% {
+        background: rgba(22, 89, 197, 0.12);
+        box-shadow: 0 0 0 1px rgba(22, 89, 197, 0.18);
+    }
+}
+
 .post-content a.footnote-backref,
 .blog-post a.footnote-backref {
     display: inline-flex;
