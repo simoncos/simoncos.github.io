@@ -145,7 +145,7 @@ Site 对我来说不只是一个“把文章摆上去”的地方。它越来越
 
 ## 致谢
 
-最后想特别感谢 Peter（[@steipete](https://x.com/steipete)）和所有 OpenClaw 的创建者。没有这个 agent framework，我不可能这么快把自己的 PKM 系统升级到现在这个程度——甚至也许永远都做不到，因为这件事对我来说一直是很重的 mental burden。
+最后想特别感谢 Peter（[@steipete](https://x.com/steipete)）和所有 OpenClaw 的创建者。没有这个 agent framework，我不可能这么快把自己的 PKM 系统推进到现在这个程度；甚至也许永远都不会去做，因为如果只靠自己，这件事对我来说一直都是很重的心智负担。
 
 ---
 
