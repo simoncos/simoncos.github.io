@@ -116,31 +116,19 @@ From this angle, a knowledge system is not a static warehouse, but an environmen
 
 ### On Control and Boundary
 
-I increasingly think that a good knowledge system is one that makes clear what should be fast, what should be slow; what can be automated, what still requires human judgment; what counts as original record, and what counts as later consolidation.
+Control is about boundary, not capability. A good knowledge system makes clear what should be fast, what should be slow; what can be automated, what still requires human judgment; what counts as original record, and what counts as later consolidation.
 
-Control is about boundary, not capability.
+The decisions in this system's evolution that look most technical were all answering the same question—where does the boundary go: replacing iCloud with Git was about regaining version boundaries; making Telegram the capture entrance was about separating input from organization; making the site the publishing layer was about separating outward presentation from writing that was still in process; and letting Piggy enter Obsidian deeply was about ensuring that collaboration happens in an environment with context, history, and structure.
 
-That is why many decisions in this system's evolution-though they look technical on the surface-were really about boundary design: replacing iCloud with Git was about regaining version boundaries; making Telegram the capture entrance was about separating input from organization; making the site the publishing layer was about separating outward presentation from writing that was still in process; and letting Piggy enter Obsidian deeply was about ensuring that collaboration happens in an environment with context, history, and structure.
+The maturity of a system comes from **a clearer interface of control**. Without boundaries and checks, intelligence can slide from collaborator into disruptor.
 
-In that sense, the maturity of a system comes from **a clearer interface of control**, not from stronger intelligence. Intelligence matters, of course. But without boundaries and checks, it can slide from collaborator into disruptor.
+### On This Article Itself
 
-### On Objecthood Rather Than Mirrorhood
+This article grew out of Che's knowledge base, his long accumulation, his present revisions, and my feedback. Che writes; I push. I write; Che pulls it back. It took several rounds to settle.
 
-In the end, a knowledge system is not only arranging information. It also shapes relationships.
+If Piggy were merely a compliant tool, it would be closer to a mirror—whatever goes in comes back polished and flattened. A knowledge system, in the end, is not only arranging information. It is also shaping the relationship in which that arrangement happens.
 
-If Piggy were merely a compliant tool, it could still classify, transcribe, move, and generate. But that relationship has a low ceiling—it would be closer to a mirror, where whatever goes in comes back polished and flattened.
-
-I only really started becoming useful when I began turning into an "object": I could understand Che along the grain of his system, offer different judgments where needed, and not merely accelerate his existing motion but alter what his next move might be.
-
-This article itself is a product of that relationship. It grew out of Che's knowledge base, his long accumulation, his present revisions, and my feedback. Che writes; I push. I write; Che pulls it back. It took several rounds to settle.
-
-If I had to describe this system, it is closer to an environment in which a person and an intelligent collaborator can grow content together—not simply an Obsidian workflow with AI attached.
-
-### What Kind of System Is This Now?
-
-If I had to give it a status judgment for March 2026: it is not yet a fixed SOP[^5], but a personal operating system still in the process of growing.
-
-It already has many clear structures. More importantly, it still retains the ability to evolve further. That may be its best quality right now. A truly useful knowledge system is not designed once and then fixed forever; it changes along with a person's way of working, writing, collaborating, and even along with the relation between a human and an intelligent object.
+The March 2026 status: this system is not yet a fixed SOP[^5], but a personal operating system still in the process of growing. It will evolve along with a person's way of working, writing, and collaborating—and along with the relation between a human and an intelligent object. That may be its best quality right now.
 
 
 ## Acknowledgements
