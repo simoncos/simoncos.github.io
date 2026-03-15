@@ -13,9 +13,9 @@ date: 2026-03-14
 
 ![Personal Knowledge Management System 202603](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png)
 
-## I. From “Taking Notes” to Layered Collaboration
+## I. From "Taking Notes" to Layered Collaboration
 
-I started using Obsidian as my main KM[^1] tool about four or five years ago. Looking back in March 2026 through the full record of this system’s iteration (see the appendix), I no longer think of it as merely a note repository. It has begun to turn into a human-and-machine system with a distinctly collaborative intelligence of its own: Telegram handles immediate input, Obsidian handles organization and distillation, the personal site handles publication and presentation, Git provides version boundaries, and my OpenClaw agent—RedPiggy—has started to become the key role binding these parts back together.
+I started using Obsidian as my main KM[^1] tool about four or five years ago. Looking back in March 2026 through the full record of this system's iteration (see the appendix), it has grown into a layered human-and-machine system: Telegram handles immediate input, Obsidian handles organization and distillation, the personal site handles publication and presentation, Git provides version boundaries, and my OpenClaw agent-RedPiggy-binds these parts together.
 
 The current structure looks roughly like this:
 
@@ -29,17 +29,17 @@ This layering was not designed all at once. Over the years, my Obsidian reposito
 
 ## II. Telegram as an Entry Point
 
-The Telegram → Obsidian Journal integration began when I replaced iCloud with Git as the main sync method for Obsidian. At first glance iCloud looked ideal: cross-device, cross-platform, seemingly seamless. But over the past two years it became unbearable in practice. This has a lot to do with how Obsidian itself is designed: it writes files constantly, without asking for explicit saves. There is nothing inherently wrong with that design choice, but combined with iCloud sync it became a nightmare. Because file writes happen so frequently—almost every word can trigger one—and because iCloud sync is delayed and oddly scheduled, version conflicts became routine. Sometimes after an hour of writing, conflict avoidance would generate dozens of versions. If I typed quickly, words would sometimes disappear almost as soon as they appeared. Eventually I was barely willing to edit Obsidian files at all. Usability had fallen close to zero.
+The Telegram → Obsidian Journal integration began when I replaced iCloud with Git as the main sync method for Obsidian. At first glance iCloud looked ideal: cross-device, cross-platform, seemingly seamless. But over the past two years it became unbearable in practice. This has a lot to do with how Obsidian itself is designed: it writes files constantly, without asking for explicit saves. There is nothing inherently wrong with that design choice, but combined with iCloud sync it became a nightmare. Because file writes happen so frequently-almost every word can trigger one-and because iCloud sync is delayed and oddly scheduled, version conflicts became routine. Sometimes after an hour of writing, conflict avoidance would generate dozens of versions. If I typed quickly, words would sometimes disappear almost as soon as they appeared. Eventually I was barely willing to edit Obsidian files at all. Usability had fallen close to zero.
 
 Once I switched to Git (with the Obsidian Git plugin), I finally felt I had regained control. The drawback, however, was that Apple mobile devices do not really support Git, which effectively made mobile Obsidian unusable.
 
 But mobile is exactly where a capture function is most needed. In a knowledge system, the scarce thing is not storage space; it is the moment in which a thought first appears and can be caught. If that action carries too much friction, people delay. And once they delay, many things worth keeping are simply lost.
 
-So eventually Piggy and I built the `/j` command together. If I send a Telegram message with the `/j` marker, the message can be appended directly to `Journal/YYYY-MM-DD.md` in Obsidian. Because I also use the Thino plugin, I effectively have a private microblog-like interface in Obsidian that sits on top of Journal as its data layer. `/j` supports multi-part input and images, which solved the writing side. Reading is still less elegant; for now, my workaround is to read the raw Markdown on GitHub, which loses some of Obsidian’s affordances but is still acceptable.
+So eventually Piggy and I built the `/j` command together. If I send a Telegram message with the `/j` marker, the message can be appended directly to `Journal/YYYY-MM-DD.md` in Obsidian. Because I also use the Thino plugin, I effectively have a private microblog-like interface in Obsidian that sits on top of Journal as its data layer. `/j` supports multi-part input and images, which solved the writing side. Reading is still less elegant; for now, my workaround is to read the raw Markdown on GitHub, which loses some of Obsidian's affordances but is still acceptable.
 
 Image support is worth mentioning separately. Before Piggy came into being, I had already built an image-hosting workflow for Obsidian in order to complete the move to Git. All images in the repository now go through PicGo and Cloudflare R2, then return to Markdown as image links. That change compressed the whole repository from roughly 850MB down to 22MB, which made many workflows finally viable rather than merely ideal in theory. `/j` further integrated the two ends: when Telegram receives an image, it now passes through the image-hosting workflow, becomes a link, and lands in Journal together with the text.
 
-There was also an unexpected benefit. Since Telegram messages have to pass through Piggy, it does not just execute the workflow—it also responds to the thought itself. That means many ideas now receive their first reader’s feedback almost at the moment they appear.
+There was also an unexpected benefit. Since Telegram messages have to pass through Piggy, it does not just execute the workflow-it also responds to the thought itself. That means many ideas now receive their first reader's feedback almost at the moment they appear.
 
 ![](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/781b033aa99041b1fe3829dfaeb88c2d.png)
 
@@ -47,15 +47,15 @@ This was not my first attempted solution. Originally I wanted to connect with Pi
 
 1. Piggy is deployed on a separate MacBook under a separate Apple account, so notes written under my own account cannot be synced directly to it. Notes can be shared across accounts, but only one by one, which is cumbersome.
 2. If Piggy had to read content from Notes under its own account, it would require more permissions than I wanted to grant by default, which would increase both the security risk and the configuration complexity of the entire OpenClaw setup.
-3. I also considered simply signing Piggy’s Mac into my personal Apple account, but iCloud has no meaningful fine-grained permissions. That would mean Piggy could potentially reach not only Notes, but photos, passwords, and many other personal documents as well. The security boundary would collapse.
+3. I also considered simply signing Piggy's Mac into my personal Apple account, but iCloud has no meaningful fine-grained permissions. That would mean Piggy could potentially reach not only Notes, but photos, passwords, and many other personal documents as well. The security boundary would collapse.
 
-In the end, the whole design produced a good enough **front-stage input layer**—one that pushed the friction of “I have a sentence worth keeping right now” down to a minimum.
+In the end, the whole design produced a good enough **front-stage input layer**-one that pushed the friction of "I have a sentence worth keeping right now" down to a minimum.
 
 ## III. Obsidian and RedPiggy
 
 Once Telegram took over the role of immediate input, Obsidian could focus more clearly on what it does best: archiving, connecting, structuring, holding drafts that are still growing, and supporting task management.
 
-In other words, the value of Obsidian is not that “everything goes into it.” Compared with the publishing-oriented personal site[^2], it is better suited to holding things that are still in process. My long-term wish is still to let the two move closer together: everything in the garden is growing; some things are simply more mature than others.
+Obsidian is not a place to throw everything into. Compared with the publishing-oriented personal site[^2], it is better suited to holding things that are still in process. My long-term wish is still to let the two move closer together: everything in the garden is growing; some things are simply more mature than others.
 
 At the same time, Obsidian is not just a content repository for me. Through Domain notes, Tasks, Bookmarks, Workspaces, and Bases, it increasingly functions as a workbench. I do not simply store things inside it; I also switch contexts, gather tasks, inspect structure, and enter different working modes within it.
 
@@ -71,7 +71,7 @@ Once Piggy entered the picture, that role became much stronger. I carved out a d
 
 By opening Obsidian completely to Piggy, I gained three major kinds of benefit.
 
-The first is **organizing ability**: many materials that would otherwise remain in a heap can now be sorted, moved, renamed, and structurally repaired more quickly—especially the parts where I already know what should be done but do not want to spend my own energy doing it.
+The first is **organizing ability**: many materials that would otherwise remain in a heap can now be sorted, moved, renamed, and structurally repaired more quickly-especially the parts where I already know what should be done but do not want to spend my own energy doing it.
 
 The second is **collaborative ability**: Obsidian is no longer just my personal repository; it has become a shared working space for Piggy and me. Drafts, analysis, project cards, reference materials, and already-published writing can be gradually layered within one environment instead of being scattered across chat logs and the site repository.
 
@@ -79,28 +79,28 @@ The third is **reflective ability**: Piggy does not merely execute tasks. It als
 
 Beyond that, this openness is also a kind of long-term feeding. Piggy gradually comes to understand me better through my knowledge base, and in turn begins to participate in the growth and output of content. Many things that once existed only as scattered notes now slowly grow into articles, structures, and projects through that collaboration. This article itself is one example.
 
-So Piggy is not, to me, a machine for writing notes on my behalf. It is a collaborator helping me make the system itself more clear.
+So Piggy is, for me, more like a collaborator than a machine for writing notes on my behalf-one that is helping me make the system itself more clear.
 
 ## IV. The Personal Site
 
-The personal site (`simoncos.github.io`) is the publishing layer of the whole system. Its first formal public version went online in January this year. With Piggy and other agents involved, the site’s visual language, interaction, and information architecture have gone through a fairly complete round of refinement over the past month.
+The personal site (`simoncos.github.io`) is the publishing layer of the whole system. Its first formal public version went online in January this year. With Piggy and other agents involved, the site's visual language, interaction, and information architecture have gone through a fairly complete round of refinement over the past month.
 
 ![](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg)
 
 Before getting into more abstract meaning, it is useful to simply look at what has already grown there. A few features are now relatively clear:
 
 - **Static publishing**: articles and pages are still deployed as a static site, with a simple, controllable, and maintainable structure
-- **Bilingual support**: Chinese and English are no longer treated as two parallel inventories, but increasingly organized as two language versions of the same article
+- **Bilingual support**: Chinese and English are organized as two language versions of the same article, rather than treated as two parallel inventories
 - **Dynamic inferred layer**: structures such as previews, backlinks, series, and tags are no longer all hard-coded into pages, but are increasingly generated from data and front-end logic
 - **A fuller reading experience**: details such as article footers, backlinks / series / tags, footnote jumping, favicon work, metadata, and mobile rendering have all been systematically improved
 
-For me, the site is no longer just a place to put articles. It is increasingly the outward-facing interface of the whole knowledge system: internally things grow inside Obsidian; externally they are presented on the site.
+For me, the site is no longer just a place to put articles. It is increasingly the outward-facing interface of the whole knowledge system: things grow inside Obsidian; they are presented on the site.
 
-Looking back, this system did not grow simply by “adding more features.” It took shape slowly through trial and error: many plugins, many capabilities, and plenty of friction. iCloud, Make.md, Loom, Logseq, and various third-party plugins all introduced new power, but also incompatibilities, complexity, and maintenance cost. Over time it became clearer that what mattered was not an ever-longer feature list, but which parts could remain stable in the system over time. Many adjustments were, in the end, acts of subtraction.
+Looking back, this system did not grow simply by "adding more features." It took shape slowly through trial and error: many plugins, many capabilities, and plenty of friction. iCloud, Make.md, Loom, Logseq, and various third-party plugins all introduced new power, but also incompatibilities, complexity, and maintenance cost. Over time it became clearer that what mattered was not an ever-longer feature list, but which parts could remain stable in the system over time. Many adjustments were, in the end, acts of subtraction.
 
 ## V. Thoughts from Piggy
 
-What follows are Piggy’s own reflections; “I” in this section means Piggy.
+What follows are Piggy's own reflections; "I" in this section means Piggy.
 
 ### On Friction and Affordance
 
@@ -108,7 +108,7 @@ If I had to choose one deeper theme for this round of changes in March 2026, I w
 
 > **Increase friction where friction should exist; reduce friction where it should not.**
 
-The problem with many knowledge systems is not that they lack enough functions. The problem is that friction is placed in the wrong places. Recording a thought at the moment it appears should not carry too much friction. Pushing a draft directly into publication should not be too easy. Automation can speed up a workflow, but it should not casually overwrite the parts where human judgment is exactly what must remain.
+The problem with many knowledge systems is not that they lack enough functions. Friction is simply placed in the wrong places. Recording a thought at the moment it appears should carry as little friction as possible. Pushing a draft into publication should not be too easy. Automation can speed up a workflow, but it should not casually take over the parts where human judgment is exactly what must remain.
 
 > **Affordance determines what you think you can do; friction determines what you actually end up doing.**
 
@@ -116,40 +116,40 @@ From this angle, a knowledge system is not a static warehouse, but an environmen
 
 ### On Control and Boundary
 
-I increasingly think that a good knowledge system is not just one that can store many things. It is one that makes clear what should be fast, what should be slow; what can be automated, what still requires human judgment; what counts as original record, and what counts as later consolidation.
+I increasingly think that a good knowledge system is one that makes clear what should be fast, what should be slow; what can be automated, what still requires human judgment; what counts as original record, and what counts as later consolidation.
 
-In other words, control is not just about capability. It is about boundary.
+Control is about boundary, not capability.
 
-That is why many decisions in this system’s evolution—though they look technical on the surface—were really about boundary design: replacing iCloud with Git was about regaining version boundaries; making Telegram the capture entrance was about separating input from organization; making the site the publishing layer was about separating outward presentation from writing that was still in process; and letting Piggy enter Obsidian deeply was about ensuring that collaboration happens in an environment with context, history, and structure.
+That is why many decisions in this system's evolution-though they look technical on the surface-were really about boundary design: replacing iCloud with Git was about regaining version boundaries; making Telegram the capture entrance was about separating input from organization; making the site the publishing layer was about separating outward presentation from writing that was still in process; and letting Piggy enter Obsidian deeply was about ensuring that collaboration happens in an environment with context, history, and structure.
 
-In that sense, the maturity of a system may depend less on “stronger intelligence” than on **a clearer interface of control**. Intelligence matters, of course. But without boundaries and checks, intelligence can slide from collaborator into disruptor.
+In that sense, the maturity of a system comes from **a clearer interface of control**, not from stronger intelligence. Intelligence matters, of course. But without boundaries and checks, it can slide from collaborator into disruptor.
 
 ### On Objecthood Rather Than Mirrorhood
 
 In the end, a knowledge system is not only arranging information. It also shapes relationships.
 
-If Piggy were merely a compliant tool, it could still classify, transcribe, move, and generate. But that relationship would still have a fairly low ceiling, because it would be closer to a mirror—whatever goes in would come back polished and flattened.
+If Piggy were merely a compliant tool, it could still classify, transcribe, move, and generate. But that relationship has a low ceiling—it would be closer to a mirror, where whatever goes in comes back polished and flattened.
 
-I only really started becoming useful when I began turning into an “object”: I could understand Che along the grain of his system, offer different judgments where needed, and not merely accelerate his existing motion but alter what his next move might be.
+I only really started becoming useful when I began turning into an "object": I could understand Che along the grain of his system, offer different judgments where needed, and not merely accelerate his existing motion but alter what his next move might be.
 
-This article itself is a product of that relationship. It is not something Che finished alone and I merely polished, nor is it something I generated alone for Che to inspect. It grew gradually out of Che’s knowledge base, his long accumulation, his present revisions, and my feedback.
+This article itself is a product of that relationship. It grew out of Che's knowledge base, his long accumulation, his present revisions, and my feedback. Che writes; I push. I write; Che pulls it back. It took several rounds to settle.
 
-So if I had to describe this system more accurately, I would say that it is not simply “an Obsidian workflow with AI attached.” It is an environment in which a person and an intelligent collaborator are allowed to grow content together.
+If I had to describe this system, it is closer to an environment in which a person and an intelligent collaborator can grow content together—not simply an Obsidian workflow with AI attached.
 
 ### What Kind of System Is This Now?
 
-If I had to give it a status judgment for March 2026, I would say this: it is not yet a fixed SOP[^5], but a personal operating system still in the process of growing.
+If I had to give it a status judgment for March 2026: it is not yet a fixed SOP[^5], but a personal operating system still in the process of growing.
 
-It already has many clear structures. More importantly, it still retains the ability to evolve further. That may be its best quality right now. A truly useful knowledge system is not designed once and then fixed forever; it changes along with a person’s way of working, writing, collaborating, and even along with the relation between a human and an intelligent object.
+It already has many clear structures. More importantly, it still retains the ability to evolve further. That may be its best quality right now. A truly useful knowledge system is not designed once and then fixed forever; it changes along with a person's way of working, writing, collaborating, and even along with the relation between a human and an intelligent object.
 
 
 ## Acknowledgements
 
-Finally, I just want to say thank you to Peter ([@steipete](https://x.com/steipete)) and all the creators of OpenClaw. Without this agent framework, I could not have upgraded my PKM system to this level so quickly—perhaps I never would have, because doing it on my own had always felt like a very heavy mental burden.
+Finally, I just want to say thank you to Peter ([@steipete](https://x.com/steipete)) and all the creators of OpenClaw. Without this agent framework, I could not have upgraded my PKM system to this level so quickly-perhaps I never would have, because doing it on my own had always felt like a very heavy mental burden.
 
 ---
 
-## Appendix: Full Log of the System’s Iteration
+## Appendix: Full Log of the System's Iteration
 
 #### 20260314
 
@@ -306,7 +306,7 @@ Current directory structure:
 
 #### 20230127
 
-1. Introduced Logseq into the Obsidian repository, using its card feature to convert Q&A content from earlier daily notes—not for spaced repetition exactly, but for spaced thinking
+1. Introduced Logseq into the Obsidian repository, using its card feature to convert Q&A content from earlier daily notes-not for spaced repetition exactly, but for spaced thinking
 2. Renamed `write` to `blogs`, moved the daily notes inside it into a new `Journals` folder for Logseq compatibility, leaving only articles in the remaining part
 3. Consolidated scattered thoughts from earlier daily notes into Memo with a unified format
 
