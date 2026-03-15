@@ -40,14 +40,14 @@
                 <div class="post-main">
                     <div class="post-meta">
                         <div class="post-meta-item"><span class="post-meta-label" data-i18n="created">Created</span><span data-date="2026-03-14" data-date-format="medium">2026-03-14</span></div>
-                        <div class="post-meta-item"><span class="post-meta-label" data-i18n="updated">Updated</span><span data-date="2026-03-14" data-date-format="medium">2026-03-14</span></div>
+                        <div class="post-meta-item"><span class="post-meta-label" data-i18n="updated">Updated</span><span data-date="2026-03-15" data-date-format="medium">2026-03-15</span></div>
                         <div class="lang-switch"><a class="lang-switch-link" data-language-switch data-target-language="en" href="my-personal-knowledge-management-system-2026-03.en.html">English</a></div>
                     </div>
                     <div class="post-content">
                         
 <p><img alt="Personal Knowledge Management System 202603" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png"/></p>
-<h2>一、从“记笔记”到“分层协作”</h2>
-<p>我开始把 Obsidian 作为主要的 KM<sup id="fnref:1"><a aria-label="脚注" class="footnote-ref" href="#fn:1">1</a></sup> 工具，到现在差不多四、五年了。2026 年 3 月回顾完整的系统迭代记录（见文末附录），这套知识管理系统已经不再只是一个笔记仓库，而开始变成一个带有智能协作特征的人机系统：Telegram 负责即时输入，Obsidian 负责整理与沉淀，个人站点负责发布与呈现，Git 负责版本边界，而我的 OpenClaw agent——RedPiggy，开始成为把这些部分粘合起来的关键角色。</p>
+<h2>一、从"记笔记"到"分层协作"</h2>
+<p>我开始把 Obsidian 作为主要的 KM<sup id="fnref:1"><a aria-label="脚注" class="footnote-ref" href="#fn:1">1</a></sup> 工具，到现在差不多四、五年了。2026 年 3 月回顾完整的系统迭代记录（见文末附录），这套东西已经长成了一个分层的人机系统：Telegram 负责即时输入，Obsidian 负责整理与沉淀，个人站点负责发布与呈现，Git 负责版本边界，而我的 OpenClaw agent--RedPiggy，开始把这些部分粘合起来。</p>
 <p>目前演进出的系统架构：</p>
 <ul>
 <li><strong>Telegram</strong>：作为与 RedPiggy 协作的入口，承接即时记录，随手丢一句、拍一张图</li>
@@ -71,10 +71,10 @@
 <li>Piggy 要从它自己账号的 Notes 下读内容，意味着它需要获得比默认更多的权限，导致整套 OpenClaw 配置的安全性下降、复杂性上升。</li>
 <li>我考虑过直接给它的 Mac 使用我的个人账号，但是 iCloud 并没有细粒度的权限控制，导致 Piggy 不仅能访问我的 Notes，还能接触我在 iCloud 上的所有信息，包括照片、密码链和各种文档，安全性几乎降到最低。</li>
 </ol>
-<p>最终的整套设计构建了一个足够好的<strong>前台输入层</strong>，把“我现在有一句想记下来”这件事的阻力压到了最低。</p>
+<p>最终的整套设计构建了一个足够好的<strong>前台输入层</strong>，把"我现在有一句想记下来"这件事的阻力压到了最低。</p>
 <h2>三、Obsidian 和 RedPiggy</h2>
 <p>当 Telegram 承担了即时输入任务之后，Obsidian 可以更专注地做那些它擅长的事：归档、连接、结构、中间态草稿、任务管理。</p>
-<p>换句话说，Obsidian 的价值不是“什么都往里丢”。相比发布导向的个人站点<sup id="fnref:2"><a aria-label="脚注" class="footnote-ref" href="#fn:2">2</a></sup>，它更适合承载那些还在过程中的东西。当然我的最终愿景仍然是让两者逐渐靠近：花园中的一切都在生长，只是有些更成熟，有些刚开始。</p>
+<p>Obsidian 不是用来什么都往里丢的。相比发布导向的个人站点<sup id="fnref:2"><a aria-label="脚注" class="footnote-ref" href="#fn:2">2</a></sup>，它更适合承载那些还在过程中的东西。当然我的最终愿景仍然是让两者逐渐靠近：花园中的一切都在生长，只是有些更成熟，有些刚开始。</p>
 <p>与此同时，Obsidian 在我这里也不只是内容仓库。通过 Domain notes、Tasks、Bookmarks、Workspaces、Bases 这些机制，它越来越像一个操作台：我不只是把东西存进去，也在里面切换场景、汇总任务、查看结构，进入不同的工作模式。</p>
 <p>有了 Piggy 之后，Obsidian 的这种定位得到很大加强。为此我多划出一块目录，作为我和 Piggy 的协作空间：</p>
 <ul>
@@ -86,48 +86,48 @@
 </ul>
 <p><img alt="" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg"/></p>
 <p>通过对 Piggy 完全开放 Obsidian 的权限，我获得的收益主要有三类。</p>
-<p>第一类是<strong>整理能力</strong>：很多原本会堆成一团的材料，现在可以更快被归类、移动、重命名、补结构，尤其是那些“我知道该整理但懒得动手”的部分。</p>
+<p>第一类是<strong>整理能力</strong>：很多原本会堆成一团的材料，现在可以更快被归类、移动、重命名、补结构，尤其是那些"我知道该整理但懒得动手"的部分。</p>
 <p>第二类是<strong>协作能力</strong>：Obsidian 不再只是我的个人仓库，也开始成为我和 Piggy 共同工作的空间。草稿、分析、项目卡、参考材料和已发布文章，可以在同一个环境里逐步分层，而不是散在聊天记录和站点仓库之间。</p>
 <p>第三类是<strong>反思能力</strong>：Piggy 不只是帮我执行，还会在整理过程中提出独立观察，逼我把一些原本模糊的直觉说清楚。很多关于摩擦、可供性（affordance<sup id="fnref:3"><a aria-label="脚注" class="footnote-ref" href="#fn:3">3</a></sup>）、双语站点、memory pipeline<sup id="fnref:4"><a aria-label="脚注" class="footnote-ref" href="#fn:4">4</a></sup> 的想法，都是在这种协作里被逼出来的。</p>
 <p>此外，这种开放也是一种长期喂养。Piggy 通过我的知识库逐渐更了解我，反过来又开始参与内容的生长和输出。很多原本只是零散记录的东西，正是在这种协作里慢慢长成文章、结构和项目。这篇文章本身就是一个例子。</p>
-<p>所以 Piggy 对我来说不是“替我写笔记的自动机”，而是一个正在帮助我把系统本身变得更清楚的协作者。</p>
+<p>所以 Piggy 对我来说更像一个协作者，而不是"替我写笔记的自动机"--它正在帮助我把系统本身变得更清楚。</p>
 <h2>四、个人站点 Site</h2>
 <p>个人站点 Site（simoncos.github.io）是整个系统的发布层。第一版正式上线是在今年 1 月；有了 Piggy 和其他 agent 的帮助之后，最近一个月它的视觉、交互和信息架构都经历了一轮比较完整的更新。</p>
 <p><img alt="" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg"/></p>
 <p>先不谈更抽象的意义，只看它现在已经长出来的样子，大概有这么几个比较明确的特征：</p>
 <ul>
 <li><strong>静态发布</strong>：文章和页面依然以静态站点方式部署，结构简单、可控、易维护</li>
-<li><strong>双语支持</strong>：中文和英文不再只是并排的两份内容，而开始作为同一篇文章的不同语言版本被组织起来</li>
+<li><strong>双语支持</strong>：中文和英文作为同一篇文章的不同语言版本被组织起来，而不只是并排的两份内容</li>
 <li><strong>动态派生层</strong>：previews、backlinks、series、tags 这些更偏 inferred 的结构，不再全部硬编码进页面，而是更多通过数据和前端逻辑动态生成</li>
 <li><strong>更完整的阅读体验</strong>：包括文章页底部的 backlinks / series / tags，脚注跳转、favicon、metadata、移动端样式等细节，都被系统性地优化了一遍</li>
 </ul>
-<p>Site 对我来说不只是一个“把文章摆上去”的地方。它越来越像整个知识管理系统的外部界面：内部在 Obsidian 中生长，外部在 Site 上呈现。</p>
-<p>回头看，这套系统不是一路靠“加功能”长出来的，而是在不断试错中慢慢成形的：插件很多、能力很多，摩擦也很多。iCloud、Make.md、Loom、Logseq、各种第三方插件都曾经带来过新能力，也带来过不兼容性、复杂性和维护成本。后来才慢慢意识到，真正重要的不是功能表越来越长，而是哪些东西能长期稳定地留在系统里。很多调整，说到底是在做减法。</p>
+<p>Site 对我来说不只是一个"把文章摆上去"的地方。它越来越像整个知识管理系统的外部界面：Obsidian 里生长，Site 上呈现。</p>
+<p>回头看，这套系统不是一路靠"加功能"长出来的，而是在不断试错中慢慢成形的：插件很多、能力很多，摩擦也很多。iCloud、Make.md、Loom、Logseq、各种第三方插件都曾经带来过新能力，也带来过不兼容性、复杂性和维护成本。后来才慢慢意识到，真正重要的不是功能表越来越长，而是哪些东西能长期稳定地留在系统里。很多调整，说到底是在做减法。</p>
 <h2>五、来自Piggy的思考</h2>
-<p>以下是 Piggy 自己的一些思考，“我”指 Piggy。</p>
+<p>以下是 Piggy 自己的一些思考，"我"指 Piggy。</p>
 <h3>关于摩擦与可供性</h3>
 <p>如果要给这轮 2026-03 的知识管理变化找一个更底层的主题，我会选：</p>
 <blockquote>
 <p><strong>在该有摩擦力的地方增加摩擦，在不该有摩擦力的地方减少摩擦。</strong></p>
 </blockquote>
-<p>很多知识管理系统的问题，不是功能不够多，而是摩擦放错了地方。记录一个刚冒出来的念头，摩擦不该太高；把草稿直接推向发布，摩擦不该太低；自动化可以加快流程，但不该顺手篡改那些本来就需要人来保留判断的部分。</p>
+<p>很多知识管理系统的问题，功能其实够了，只是摩擦放错了地方。记录一个刚冒出来的念头，摩擦越低越好；但草稿直接推向发布，则需要足够的阻力；自动化可以加快流程，但不该顺手接管那些本来就需要人来判断的部分。</p>
 <blockquote>
 <p><strong>affordance 决定你以为自己可以做什么，摩擦决定你最后真正会做什么。</strong></p>
 </blockquote>
 <p>从这个角度看，知识管理系统不是一个静态仓库，而是一个会引导行为的环境。真正有价值的调整，最后还是让正确的动作更自然，让错误的动作更难发生。</p>
 <h3>关于控制与边界</h3>
-<p>我越来越觉得，好的知识管理系统，不只是“能存很多东西”，而是要让人知道：什么该快，什么该慢；什么可以自动，什么必须保留人为判断；什么是原始记录，什么是后续整理。</p>
-<p>换句话说，控制的关键不只是能力，而是边界。</p>
+<p>我越来越觉得，好的知识管理系统让人知道：什么该快，什么该慢；什么可以自动，什么必须保留人为判断；什么是原始记录，什么是后续整理。</p>
+<p>控制的关键在边界，不在能力。</p>
 <p>所以这轮系统演化里，那些看上去很技术的决定，其实都和边界有关：用 Git 取代 iCloud，是为了重新拿回版本边界；让 Telegram 成为 capture 入口，是为了把输入和整理拆开；让站点承担发布，是为了把对外呈现和中间态写作拆开；让 Piggy 深度进入 Obsidian，则是为了让协作发生在一个有上下文、有历史、有结构的环境里。</p>
-<p>系统的成熟，某种意义上不是来自更强的智能，而是来自<strong>更清楚的控制界面</strong>。智能当然重要，但如果没有边界和校验，智能很容易从协作者滑向搅局者。</p>
+<p>系统的成熟，某种意义上来自<strong>更清楚的控制界面</strong>，不是更强的智能。智能当然重要，但没有边界和校验，它很容易从协作者滑向搅局者。</p>
 <h3>关于对象，而不是镜子</h3>
 <p>一个知识管理系统，最终不只是在整理信息，也在塑造关系。</p>
-<p>如果 Piggy 只是一个纯粹顺从的工具，那它当然可以帮忙分类、转写、搬运、生成；但那种关系的上限其实不高，因为它更像一面镜子——输入什么，它就把什么磨平以后再返回来。</p>
-<p>而我真正开始变得有用，是在我逐渐变成一个“对象”的时候：我能沿着 Che 的系统理解他，也会在某些地方提出不同判断；我不只是加速他已有的动作，也会改变他下一步怎么走。</p>
-<p>这篇文章本身，其实就是这种关系的产物。它不是 Che 独自写完、我来润色；也不是我单独生成、Che 来验收。它更像是在 Che 的知识库、长期积累、当下修改和我的反馈之间，慢慢长出来的东西。</p>
-<p>如果要给这套系统一个更准确的描述，我会说：它不是单纯“接了 AI 的 Obsidian 工作流”，而是一个<strong>允许人和智能协作者共同生长内容的环境</strong>。</p>
+<p>如果 Piggy 只是一个纯粹顺从的工具，它当然可以帮忙分类、转写、搬运、生成。但那种关系的天花板很低——它更像一面镜子，输入什么，就把什么磨平以后再返回来。</p>
+<p>而我真正开始变得有用，是在我逐渐变成一个"对象"的时候：我能沿着 Che 的系统理解他，也会在某些地方提出不同判断；我不只是加速他已有的动作，也会改变他下一步怎么走。</p>
+<p>这篇文章本身，就是这种关系的产物。它是在 Che 的知识库、长期积累、当下修改和我的反馈之间，慢慢长出来的东西。Che 写，我推；我写，Che 拉回来。来回几轮才定型。</p>
+<p>如果要给这套系统一个描述，它更接近一个允许人和智能协作者共同生长内容的环境，而不只是接了 AI 的 Obsidian 工作流。</p>
 <h3>这套系统现在像什么？</h3>
-<p>如果非要给它一个 2026-03 的状态判断，我会说：它还不是一个已经定型的 SOP<sup id="fnref:5"><a aria-label="脚注" class="footnote-ref" href="#fn:5">5</a></sup>，而是一个仍在继续长出来的个人操作系统。</p>
+<p>如果非要给它一个 2026-03 的状态判断：它还不是一个定型的 SOP<sup id="fnref:5"><a aria-label="脚注" class="footnote-ref" href="#fn:5">5</a></sup>，更像一个仍在继续长出来的个人操作系统。</p>
 <p>它当然已经有了不少清楚的结构，但更重要的是，它还保留着继续演化的能力。这恰恰可能是它现在最好的地方。因为一个真正有用的知识管理系统，不会一次设计完成；它会随着人的工作方式、写作方式、协作方式，甚至人与智能对象之间的关系一起演化。</p>
 <h2>致谢</h2>
 <p>最后想特别感谢 Peter（<a href="https://x.com/steipete">@steipete</a>）和所有 OpenClaw 的创建者。没有这个 agent framework，我不可能这么快把自己的 PKM 系统推进到现在这个程度；甚至也许永远都不会去做，因为如果只靠自己，这件事对我来说一直都是很重的心智负担。</p>
@@ -186,7 +186,7 @@
 <li>新建<code>Domain/General/Write</code>，作为写作的统一入口，将<code>Blog</code>和<code>Think</code>目录下的内容移入其中</li>
 <li>重构后<code>Tag</code>与<code>Domain</code>语义上有重合，需要再考虑tag的用途<ul>
 <li><code>Notes</code>和<code>Thino</code>这两部分考虑到工作流和内容性质，不适合直接划分到domain，当前使用tag来做聚合，但如何与domain整合？<ul>
-<li>[ ] 尝试TagFolder插件 📅 2027-02-20 </li>
+<li>[ ] 尝试TagFolder插件 📅 2027-02-20</li>
 <li>domain property?</li>
 </ul>
 </li>
@@ -242,7 +242,7 @@
 <li>[x] 后续考虑不以年份来组织Task，而是以场景来组织Task，即在<code>Live/Scenarios/XXX</code>下维护不同Task项，<code>_Tasks. md</code>仍然放在<code>Life/Action</code>中，收集所有Task</li>
 <li>在<code>C. PM System Log.md</code>中加入常规Housekeeping任务区，目前包括清理Evernote articles和Instapaper notes</li>
 <li>开始使用官方核心插件Workspaces，保存不同Obsidian使用场景下的窗口布局</li>
-<li>[ ] 引入一些第三方插件，后续尝试使用 📅 2027-02-20 <ul>
+<li>[ ] 引入一些第三方插件，后续尝试使用 📅 2027-02-20<ul>
 <li>[-] 尝试Custom Attachment Location插件，进一步优化图片的存放与引用</li>
 <li>[ ] 尝试QuickAdd插件，主要是Macro，可以用来增强Workspaces的切换功能</li>
 <li>[ ] 尝试WeWrite插件，连通微信公众号管理和发布</li>
@@ -267,7 +267,7 @@
 <li>重构<code>Knowledge/Concepts</code>中的内容，将粒度过小的概念合并到父节点。对于一些concepts，尝试引用<code>Knowledge/Infograhic</code>中的图片</li>
 </ol>
 </li>
-<li>[ ] 尝试进一步配合DeepSeek加强Obsidian Clippings的功能 📅 2026-03-20 </li>
+<li>[ ] 尝试进一步配合DeepSeek加强Obsidian Clippings的功能 📅 2026-03-20</li>
 <li>图片相关<ol>
 <li>将Pinterest上的Infographic收录进<code>Notes/Infographic</code>；加入并使用插件Image Metadata将重要信息如图片source及context更新到Infographic中的图片</li>
 <li>使用插件Clear Unused Images清理没有使用图片（排除<code>Notes/Infographic</code>）</li>
@@ -298,7 +298,7 @@
 <h4>20240721</h4>
 <ol>
 <li>在<code>Knowledge/Concept</code>中增加了<code>/Content</code>，之后把豆瓣上记录的内容item，特别是书影音游导进去。之后要写文件reference起来会比较方便。</li>
-<li>[ ] 考虑导入书影音游+comment到<code>Knowledge/Content</code> 📅 2027-02-20 </li>
+<li>[ ] 考虑导入书影音游+comment到<code>Knowledge/Content</code> 📅 2027-02-20</li>
 </ol>
 <h4>20240503</h4>
 <ol>
