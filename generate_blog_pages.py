@@ -246,9 +246,24 @@ def build_rss_feed(posts, language_code):
             ElementTree.SubElement(item, 'pubDate').text = format_datetime(pub_dt.astimezone())
 
         description_text = post.get('excerpt') or strip_html_excerpt(post.get('rendered_content', '') or post.get('html_content', ''))
-        ElementTree.SubElement(item, 'description').text = description_text
+        desc_el = ElementTree.SubElement(item, 'description')
+        # Use a placeholder so ElementTree doesn't escape our CDATA wrapper.
+        # Line breaks will be injected as <br/> after serialization.
+        desc_el.text = f'CDATA_PLACEHOLDER_START{description_text}CDATA_PLACEHOLDER_END'
 
-    return ElementTree.tostring(rss, encoding='utf-8', xml_declaration=True).decode('utf-8')
+    xml_str = ElementTree.tostring(rss, encoding='utf-8', xml_declaration=True).decode('utf-8')
+    # Replace escaped placeholders and convert \n to <br/> inside CDATA blocks.
+    import re as _re
+    def _inject_cdata(m):
+        inner = m.group(1).replace('&#10;', '<br/>').replace('\n', '<br/>')
+        return f'<![CDATA[{inner}]]>'
+    xml_str = _re.sub(
+        r'CDATA_PLACEHOLDER_START(.*?)CDATA_PLACEHOLDER_END',
+        _inject_cdata,
+        xml_str,
+        flags=_re.DOTALL,
+    )
+    return xml_str
 
 
 def save_rss_feed(posts, language_code):
