@@ -195,6 +195,32 @@ def absolute_site_url(path=''):
     return f"{base}{normalized}"
 
 
+def make_links_absolute(html_content, article_url):
+    """Rewrite relative href/src values to absolute URLs.
+
+    - Fragment-only links (#fn:1) → article_url + #fn:1
+    - Root-relative links (/blogs/foo.html) → site_base + /blogs/foo.html
+    - Already-absolute links and mailto: left unchanged.
+    """
+    from urllib.parse import urljoin
+    site_base = absolute_site_url().rstrip('/')
+    soup = BeautifulSoup(html_content, 'html.parser')
+    for tag in soup.find_all(True):
+        for attr in ('href', 'src'):
+            val = tag.get(attr)
+            if not val:
+                continue
+            if val.startswith('http://') or val.startswith('https://') or val.startswith('mailto:'):
+                continue
+            if val.startswith('#'):
+                tag[attr] = article_url + val
+            elif val.startswith('/'):
+                tag[attr] = site_base + val
+            else:
+                tag[attr] = urljoin(article_url, val)
+    return str(soup)
+
+
 def strip_html_excerpt(html_content, max_length=280):
     soup = BeautifulSoup(html_content, 'html.parser')
     text = ' '.join(soup.stripped_strings)
@@ -436,6 +462,8 @@ def collect_markdown_file(md_file, tags_data, series_data, blog_posts):
             raise BlogGenerationError(f"Markdown conversion failed: {str(e)}")
 
         html_content = localize_footnotes(html_content, is_english=md_file.endswith('.en.md'))
+        article_url = absolute_site_url(f'blogs/{html_file}')
+        html_content = make_links_absolute(html_content, article_url)
         title, rendered_post_content = extract_title_and_content(html_content)
         excerpt = build_post_excerpt(content)
 
