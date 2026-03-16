@@ -196,6 +196,19 @@ def absolute_site_url(path=''):
     return f"{base}{normalized}"
 
 
+def get_site_version():
+    """Return version string from git describe, e.g. v1.0 or v1.0-3-gabcdef."""
+    try:
+        import subprocess
+        result = subprocess.run(
+            ['git', 'describe', '--tags', '--always'],
+            capture_output=True, text=True, check=True
+        )
+        return result.stdout.strip()
+    except Exception:
+        return 'unknown'
+
+
 def make_links_absolute(html_content, article_url):
     """Rewrite relative href/src values to absolute URLs.
 
@@ -546,6 +559,7 @@ def render_blog_post(post, template, article_group_map):
         page_content = page_content.replace('{{UPDATED}}', updated)
         page_content = page_content.replace('{{TAGS}}', tags_html)
         page_content = page_content.replace('{{LANG_SWITCH}}', lang_switch_html)
+        page_content = page_content.replace('{{SITE_VERSION}}', get_site_version())
 
         with open(os.path.join('blogs', html_file), 'w', encoding='utf-8') as f:
             f.write(page_content)
@@ -760,7 +774,7 @@ def generate_blogs_page(blog_posts):
             template = template_file.read()
 
         with open('blogs.html', 'w', encoding='utf-8') as f:
-            f.write(template)
+            f.write(template.replace('{{SITE_VERSION}}', get_site_version()))
 
         logging.info("Successfully generated blogs listing page")
 
