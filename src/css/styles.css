@@ -1585,6 +1585,13 @@ footer p {
     margin: 0;
 }
 
+.site-version {
+    font-size: 0.7rem;
+    opacity: 0.4;
+    margin-top: 0.4rem !important;
+    font-family: monospace;
+}
+
 #progress-container {
     position: fixed;
     top: 0;
