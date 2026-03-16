@@ -3,6 +3,7 @@ import sys
 import re
 import json
 import html as html_lib
+from html import unescape as html_unescape
 import markdown
 import logging
 from datetime import datetime
@@ -12,7 +13,7 @@ from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 from xml.etree import ElementTree
 from bs4 import BeautifulSoup, NavigableString
-from urllib.parse import quote
+from urllib.parse import quote, urljoin
 from pathlib import Path
 from email.utils import format_datetime
 
@@ -202,7 +203,6 @@ def make_links_absolute(html_content, article_url):
     - Root-relative links (/blogs/foo.html) → site_base + /blogs/foo.html
     - Already-absolute links and mailto: left unchanged.
     """
-    from urllib.parse import urljoin
     site_base = absolute_site_url().rstrip('/')
     soup = BeautifulSoup(html_content, 'html.parser')
     for tag in soup.find_all(True):
@@ -272,8 +272,11 @@ def build_rss_feed(posts, language_code):
             ElementTree.SubElement(item, 'pubDate').text = format_datetime(pub_dt.astimezone())
 
         # Use full HTML content for rich RSS reading experience.
+        # Absolutize links so footnotes and cross-references work outside the site.
         # Fall back to excerpt if html_content is missing.
         full_html = post.get('html_content', '') or post.get('rendered_content', '')
+        if full_html:
+            full_html = make_links_absolute(full_html, link)
         description_text = full_html if full_html else (post.get('excerpt') or strip_html_excerpt(''))
         desc_el = ElementTree.SubElement(item, 'description')
         # Use a placeholder so ElementTree doesn't escape our CDATA wrapper.
@@ -281,16 +284,14 @@ def build_rss_feed(posts, language_code):
 
     xml_str = ElementTree.tostring(rss, encoding='utf-8', xml_declaration=True).decode('utf-8')
     # Replace escaped placeholders and unescape HTML entities inside CDATA blocks.
-    import re as _re
-    from html import unescape as _unescape
     def _inject_cdata(m):
-        inner = _unescape(m.group(1))
+        inner = html_unescape(m.group(1))
         return f'<![CDATA[{inner}]]>'
-    xml_str = _re.sub(
+    xml_str = re.sub(
         r'CDATA_PLACEHOLDER_START(.*?)CDATA_PLACEHOLDER_END',
         _inject_cdata,
         xml_str,
-        flags=_re.DOTALL,
+        flags=re.DOTALL,
     )
     return xml_str
 
@@ -462,8 +463,6 @@ def collect_markdown_file(md_file, tags_data, series_data, blog_posts):
             raise BlogGenerationError(f"Markdown conversion failed: {str(e)}")
 
         html_content = localize_footnotes(html_content, is_english=md_file.endswith('.en.md'))
-        article_url = absolute_site_url(f'blogs/{html_file}')
-        html_content = make_links_absolute(html_content, article_url)
         title, rendered_post_content = extract_title_and_content(html_content)
         excerpt = build_post_excerpt(content)
 
