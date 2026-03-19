@@ -1865,3 +1865,103 @@ body.dark-mode .back-to-top {
         bottom: 0.85rem;
     }
 }
+
+
+.projects-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    background: rgba(255, 251, 244, 0.78);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+}
+
+body.dark-mode .project-card {
+    background: rgba(17, 27, 43, 0.88);
+    border-color: var(--dark-border);
+}
+
+.project-card-media {
+    display: block;
+    aspect-ratio: 5 / 3;
+    background: linear-gradient(135deg, rgba(22, 89, 197, 0.12), rgba(11, 114, 133, 0.18));
+}
+
+.project-card-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-card-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.3rem 1.35rem 1.4rem;
+}
+
+.project-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+}
+
+body.dark-mode .project-card-meta {
+    color: var(--dark-text-tertiary);
+}
+
+.project-card h3 {
+    margin: 0;
+    font-size: 1.45rem;
+    line-height: 1.15;
+}
+
+.project-card h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.project-card h3 a:hover {
+    color: var(--accent);
+}
+
+body.dark-mode .project-card h3 a:hover {
+    color: var(--dark-link-color);
+}
+
+.project-card-subtitle {
+    margin: -0.25rem 0 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+body.dark-mode .project-card-subtitle {
+    color: var(--dark-text-secondary);
+}
+
+.project-card-summary {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+body.dark-mode .project-card-summary {
+    color: var(--dark-text-secondary);
+}
+
+.project-card .read-more {
+    margin-top: auto;
+    align-self: flex-start;
+}
