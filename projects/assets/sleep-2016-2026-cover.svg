@@ -1,0 +1,48 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D1320"/>
+      <stop offset="1" stop-color="#16243A"/>
+    </linearGradient>
+    <linearGradient id="lineA" x1="120" y1="190" x2="1030" y2="190" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7CE2FF" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#7CE2FF"/>
+    </linearGradient>
+    <linearGradient id="lineB" x1="120" y1="420" x2="1030" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#91A8FF" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#91A8FF"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#1659C5"/>
+      <stop offset="1" stop-color="#0B7285"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" rx="36" fill="url(#bg)"/>
+  <g opacity="0.35">
+    <path d="M0 84H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
+    <path d="M0 180H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
+    <path d="M0 276H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
+    <path d="M0 372H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
+    <path d="M0 468H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
+    <path d="M0 564H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
+    <path d="M0 660H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
+  </g>
+  <g opacity="0.7">
+    <rect x="130" y="392" width="52" height="168" rx="10" fill="url(#bar)"/>
+    <rect x="210" y="340" width="52" height="220" rx="10" fill="url(#bar)"/>
+    <rect x="290" y="280" width="52" height="280" rx="10" fill="url(#bar)"/>
+    <rect x="370" y="198" width="52" height="362" rx="10" fill="url(#bar)"/>
+    <rect x="450" y="150" width="52" height="410" rx="10" fill="url(#bar)"/>
+    <rect x="530" y="208" width="52" height="352" rx="10" fill="url(#bar)"/>
+    <rect x="610" y="318" width="52" height="242" rx="10" fill="url(#bar)"/>
+    <rect x="690" y="346" width="52" height="214" rx="10" fill="url(#bar)"/>
+    <rect x="770" y="360" width="52" height="200" rx="10" fill="url(#bar)"/>
+  </g>
+  <path d="M122 454C182 454 188 392 242 392C312 392 310 210 384 210C444 210 452 166 504 166C582 166 592 316 658 316C722 316 720 336 790 336C844 336 844 378 902 378C962 378 978 442 1030 442" stroke="url(#lineA)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M122 478C182 478 192 446 244 446C308 446 314 430 372 430C444 430 456 406 506 406C582 406 600 430 660 430C718 430 732 496 788 496C860 496 864 474 924 474C978 474 992 522 1030 522" stroke="url(#lineB)" stroke-width="6" stroke-linecap="round" stroke-dasharray="10 14"/>
+  <circle cx="504" cy="166" r="10" fill="#7CE2FF"/>
+  <circle cx="790" cy="336" r="10" fill="#7CE2FF"/>
+  <circle cx="924" cy="474" r="10" fill="#91A8FF"/>
+  <text x="120" y="98" fill="#EDF3FF" font-family="Aptos, Segoe UI, sans-serif" font-size="56" font-weight="700">十年睡眠档案</text>
+  <text x="120" y="144" fill="#C4D0E6" font-family="Aptos, Segoe UI, sans-serif" font-size="28">A personal data essay built from 3,656 nights</text>
+</svg>

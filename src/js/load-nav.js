@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ? siteConfig.resolvePath.bind(siteConfig)
         : (relativePath) => `${basePath}${relativePath.replace(/^\//, '')}`;
     const isBlogPage = window.location.pathname.includes('/blogs/');
+    const isProjectPage = window.location.pathname.includes('/projects/');
     const navigationPlaceholder = document.getElementById('navigation-placeholder');
 
     function applyActiveNavState() {
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 );
             }
 
-            if ((isBlogPage && page === 'blogs.html') || page === currentPage) {
+            if ((isBlogPage && page === 'blogs.html') || (isProjectPage && page === 'projects.html') || page === currentPage) {
                 link.classList.add('active');
             }
         });
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <ul>
                             <li><a href="#" data-page="index.html" data-i18n="nav_home">Home</a></li>
                             <li><a href="#" data-page="blogs.html" data-i18n="nav_blogs">Blogs</a></li>
+                            <li><a href="#" data-page="projects.html" data-i18n="nav_projects">Projects</a></li>
                             <li><a href="#" data-page="tags.html" data-i18n="nav_tags">Tags</a></li>
                             <li><a href="#" data-page="series.html" data-i18n="nav_series">Series</a></li>
                             <li><a href="#" data-page="about.html" data-i18n="nav_about">About</a></li>
