@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-03-19",
+  "last_updated": "2026-03-22",
   "projects": [
     {
       "id": "sleep-2016-2026",
       "type": "data_essay",
-      "date": "2026-03-19",
+      "date": "2026-03-22",
       "cover": "projects/assets/sleep-2016-2026-cover.svg",
       "title": {
         "zh": "十年睡眠档案",
@@ -19,8 +19,8 @@
         "en": "A ten-year SleepCycle-based project built from 3,656 nights of personal sleep records."
       },
       "paths": {
-        "zh": "projects/sleep-2016-2026.html",
-        "en": "projects/sleep-2016-2026.en.html"
+        "zh": "projects/sleep/",
+        "en": "projects/sleep/"
       },
       "featured": true
     }
