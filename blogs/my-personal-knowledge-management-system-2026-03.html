@@ -40,7 +40,7 @@
                 <div class="post-main">
                     <div class="post-meta">
                         <div class="post-meta-item"><span class="post-meta-label" data-i18n="created">Created</span><span data-date="2026-03-14" data-date-format="medium">2026-03-14</span></div>
-                        <div class="post-meta-item"><span class="post-meta-label" data-i18n="updated">Updated</span><span data-date="2026-03-15" data-date-format="medium">2026-03-15</span></div>
+                        <div class="post-meta-item"><span class="post-meta-label" data-i18n="updated">Updated</span><span data-date="2026-03-27" data-date-format="medium">2026-03-27</span></div>
                         <div class="lang-switch"><a class="lang-switch-link" data-language-switch data-target-language="en" href="my-personal-knowledge-management-system-2026-03.en.html">English</a></div>
                     </div>
                     <div class="post-content">
@@ -61,7 +61,7 @@
 <p>Telegram → Obsidian Journal 的打通，起因是我用Git替换了iCloud，作为Obsidian的同步方法。iCloud一开始看上去是很好的同步方法，跨设备跨平台，但最近两年实在让人用得头大。这跟Obsidian本身编辑器的设计有关：不需要用户确认保存，随时写文件。这是个没什么错的设计选择，但是配合起iCloud的同步就是噩梦。由于写文件非常频繁（几乎每打一个词都在触发写操作），并且 iCloud 的同步有延迟而且调度逻辑很奇怪，版本冲突可以说是家常便饭。有的时候写一个小时文章，它能因为冲突规避直接搞出几十个版本。而且如果我打字速度快，经常刚打出来的词就没了。到后面我甚至都不敢轻易编辑任何Obsidian文件了，可用性几乎降到零。</p>
 <p>换上Git（加上Obsidian的第三方Git插件）之后，感觉终于又获得了控制权，但方案的缺点是苹果移动设备上不支持Git，因此在移动端Obsidian整个都不能用了。</p>
 <p>但移动端其实是最需要写这个功能的，在知识管理系统里，真正稀缺的从来不是存储空间，而是<strong>捕捉即时念头的那一下动作</strong>。如果那个动作太重，人就会拖；一拖，很多本来值得留下的东西就没了。</p>
-<p>最终，我跟Piggy合作开发了<code>/j</code>命令：我发给它的Telegram 消息里只要带有<code>/j</code>标记，消息内容就可以直接追加到Obsidian <code>Journal/YYYY-MM-DD.md</code>（又因为Thino插件，我在Obsidian里有一个类似私人的微博界面直通作为数据层的Journal）。<code>/j</code>命令支持分段、图片，解决了写的问题。读的问题则不好解决，我暂时的方法是直接在github上去看markdown源文件，损失了Obsidian带来的功能，但还能接受。</p>
+<p>最终，我跟Piggy合作开发了<code>/j</code>命令：我发给它的Telegram 消息里只要带有<code>/j</code>标记，消息内容就可以直接追加到Obsidian <code>Journal/YYYY-MM-DD.md</code>（又因为Thino插件，我在Obsidian里有一个类似私人的微博界面直通作为数据层的Journal）。<code>/j</code>命令支持分段和图片，解决了写的问题。读的问题则不好解决，我暂时的方法是直接在github上去看markdown源文件，损失了Obsidian带来的功能，但还能接受。</p>
 <p>关于图片支持，值得一说：在 Piggy 诞生前，为了完美迁移到 Git，我先给 Obsidian 搭好了图床能力。所有仓库内的图片都通过 PicGo 上传到 Cloudflare R2，再以图片链接形式写进 Markdown。这样改完之后，整个仓库体积从大约 850MB 压缩到 22MB，很多原本因为文件体积和同步压力而变得难以维持的流程，才真正变得可用。<code>/j</code> 进一步整合了两端，让 Telegram 收到的图片自动经过图床工作流，转成链接再和文字合并，最终汇入 Journal。</p>
 <p>还有一个意想之外的好处：Telegram 消息需要经过 Piggy，所以它在执行这条流程的同时，也会顺手回应我的想法。这样一来，很多念头在刚出现时，就已经得到第一个读者的反馈。</p>
 <p><img alt="" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/781b033aa99041b1fe3829dfaeb88c2d.png"/></p>
@@ -133,216 +133,184 @@
 <p>最后想特别感谢 Peter（<a href="https://x.com/steipete">@steipete</a>）和所有 OpenClaw 的创建者。没有这个 agent framework，我不可能这么快把自己的 PKM 系统推进到现在这个程度；甚至也许永远都不会去做，因为如果只靠自己，这件事对我来说一直都是很重的心智负担。</p>
 <hr/>
 <h2>附录：系统迭代的完整记录</h2>
-<h4>20260314</h4>
-<ol>
-<li>与 RedPiggy 的协作开始在 Obsidian 内形成更清晰的工作流：</li>
-<li>文章草稿优先进 Obsidian，而不是直接进入站点仓库</li>
-<li>RedPiggy 已发布 / 面向发布的文章统一进入 <code>Write/Blog/RedPiggy/</code></li>
-<li>通过 Git + GitHub 同步，让移动端也能远程 review / 修改文章</li>
-<li>Telegram → Journal 的 journaling 工作流已经打通：</li>
-<li>通过 <code>/j</code> 将 Telegram 消息直接追加到 <code>Journal/YYYY-MM-DD.md</code></li>
-<li>支持图片场景：图片经 PicGo 上传到 Cloudflare R2，再以 Markdown 链接写入 Journal</li>
-<li>这让 Telegram 真正成为一个轻量 capture 入口，Obsidian 继续承担整理与沉淀</li>
-<li>RedPiggy 区域进行了专项整理：</li>
-<li>增加 <code>RedPiggy/Reference/</code>，收纳分析、索引、阅读记录与 session supporting materials</li>
-<li><code>RedPiggy/Projects/</code> 按 <code>Dev / Writing / Research / Systems / Backlog</code> 分层</li>
-<li>已成文内容与工作材料进一步分离，根目录更像入口而不是混放区</li>
-<li>为 <code>RedPiggy/</code> 增加 <code>README.md</code> 说明结构，降低后续继续协作时的进入成本</li>
-<li>围绕 bilingual site / authored vs inferred data 的思路，站点与 Obsidian 之间的协作边界也更清楚了：</li>
-<li>Obsidian 负责草稿、评论、整理</li>
-<li>site repo 负责发布与呈现</li>
-</ol>
-<h4>20260227</h4>
-<ol>
-<li>引入插件Linter，目前主要用于去除多余的空行</li>
-<li>[ ] 考虑如何导出和清理Github上start的项目</li>
-<li>[x] Obsidian Skills: <a href="https://github.com/kepano/obsidian-skills">kepano/obsidian-skills: Agent skills for Obsidian. Teach your agent to use Markdown, Bases, JSON Canvas, and use the CLI.</a> 📅 2026-06-11 ✅ 2026-03-02</li>
-</ol>
-<h4>20260220</h4>
-<ol>
-<li>使用Bookmark功能，单开一个Domains，收集各个domain page</li>
-<li>将<code>Write</code>从<code>Domian/General</code>移到根目录，移除<code>Domian/General</code></li>
-<li>将所有Concept重新放回<code>Knowledge/Concept</code>，增加Concept.base，用于收集、筛选、编辑Concept</li>
-<li>使用Bookmark功能，单开一个Bases，收集各个base</li>
-<li>重新启用Excalibrain，放入新建的KM workspace</li>
-<li>[x] 考虑如何进一步连接Obsidian和Site 📅 2026-03-20 ✅ 2026-03-06</li>
-</ol>
-<h4>20260219</h4>
-<ol>
-<li>使用Cloudflare R2+PicGo作为图床方案，清理库内所有图片文件；清理/Notes/Archive；已将全库体积从850MB缩小到22MB</li>
-<li>使用Git代替iCloud作为主要同步方式，停止修改文件10分钟后自动同步；对于Mobile仍使用iCloud同步，定期手动同步<ul>
-<li>Mobile-&gt;Main：Journals/Thino</li>
-<li>Main-&gt;Mobile：其他内容</li>
-</ul>
-</li>
-<li>参考文章：https://meepo.me/obsidian-typora-image-cloudflare-r2-management/</li>
-<li>Personal Site已正式上线: simoncos.github.io</li>
-</ol>
-<h4>20251222</h4>
-<ol>
-<li>重构目录结构，将<code>Life</code>下的内容放回顶层，去掉<code>Action</code>目录，<code>Scenarios</code>重命名为<code>Domain</code>，将<code>Action/Resources</code>和<code>Knowledge/Concept</code>下的内容移入各个<code>Domain</code>中，<code>Knowledge</code>内只保留<code>Content</code>, <code>People</code>, <code>Projects</code>三部分</li>
-<li>各Domain中新建同名.md，内设<code>Task</code>section，专门收集该Domain下的所有task</li>
-<li>在顶层新建<code>Tasks_2026.md</code>，收集计划2026年内完成的task，以后每年度的task都通过这种方式管理（要求每个task加上due date）</li>
-<li>新建<code>Domain/General/Write</code>，作为写作的统一入口，将<code>Blog</code>和<code>Think</code>目录下的内容移入其中</li>
-<li>重构后<code>Tag</code>与<code>Domain</code>语义上有重合，需要再考虑tag的用途<ul>
-<li><code>Notes</code>和<code>Thino</code>这两部分考虑到工作流和内容性质，不适合直接划分到domain，当前使用tag来做聚合，但如何与domain整合？<ul>
-<li>[ ] 尝试TagFolder插件 📅 2027-02-20</li>
-<li>domain property?</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>各Domain进一步整理<ul>
-<li>[-] 考虑有哪些domain（例如Music/Sing是需要的，因应最近的声乐课程和练习）<ul>
-<li>[-] Growth, Hack, General定义有点模糊，考虑调整 <span class="annotated-word" data-word="PM#个人管理体系">PM#个人管理体系</span></li>
-</ul>
-</li>
-<li>[-] 统一各Domain下的目录结构：_Task, Concept, Project, Note (包括Q&amp;A), Resource</li>
-<li>[-] subdomain的定义和使用，例如<code>Hack</code>下面</li>
-</ul>
-</li>
-</ol>
-<p>最新的目录结构：</p>
-<ul>
-<li>_media</li>
-<li>_template</li>
-<li>Domain<ul>
-<li>General<ul>
-<li>Write</li>
-</ul>
-</li>
-<li>Places</li>
-<li>Finance</li>
-<li>Growth</li>
-<li>Hack</li>
-<li>Health</li>
-<li>Music</li>
-<li>PM<ul>
-<li>KM</li>
-</ul>
-</li>
-<li>Swim</li>
-<li>Vision</li>
-</ul>
-</li>
-<li>Journal</li>
-<li>Knowledge<ul>
-<li>Content</li>
-<li>People</li>
-<li>Projects</li>
-</ul>
-</li>
-<li>Notes</li>
-<li>Tags</li>
-<li>Tasks_2026.md</li>
-</ul>
-<h4>20251119</h4>
-<ol>
-<li>重构目录结构，新建顶级目录<code>Life</code>，将PM放入<code>Life/Scenarios</code>下面</li>
-<li>[x] 后续考虑不以年份来组织Task，而是以场景来组织Task，即在<code>Live/Scenarios/XXX</code>下维护不同Task项，<code>_Tasks. md</code>仍然放在<code>Life/Action</code>中，收集所有Task</li>
-<li>在<code>C. PM System Log.md</code>中加入常规Housekeeping任务区，目前包括清理Evernote articles和Instapaper notes</li>
-<li>开始使用官方核心插件Workspaces，保存不同Obsidian使用场景下的窗口布局</li>
-<li>[ ] 引入一些第三方插件，后续尝试使用 📅 2027-02-20<ul>
-<li>[-] 尝试Custom Attachment Location插件，进一步优化图片的存放与引用</li>
-<li>[ ] 尝试QuickAdd插件，主要是Macro，可以用来增强Workspaces的切换功能</li>
-<li>[ ] 尝试WeWrite插件，连通微信公众号管理和发布</li>
-<li>[ ] 尝试AnyBlock插件，增强多维表格功能<ul>
-<li>https://lincdocs.github.io/AnyBlock/README.show.html</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h4>20250831</h4>
-<ol>
-<li>引入关键插件HiNote，可以对Highlight进行评论</li>
-<li>Obsidian升级到1.9，开始使用核心插件Bases</li>
-</ol>
-<h4>20250521</h4>
-<ol>
-<li>导入Evernote中的文章收藏（以.html形式导出），并使用Importer插件转为.md，存放在<code>Notes/Articles Evernote</code>，后续将逐步使用Obsidian Clippings浏览器插件对有价值文章进行重新收录进<code>Notes/Obsidian Clippings</code>；清理部分导入文章引入的错误tag</li>
-<li>Concept相关<ol>
-<li>更新Obsidian Clippings使用的Properties模板，加入了concepts一项，引用<code>Knowledge/Concepts</code>，使后续文章收录可以同时连接到tag和concept。模板位于<code>.obsidian/types_clippings.json</code>，在其他电脑上可能需要重新导入</li>
-<li>更新<code>_template/[Template] Concept</code>，加入新property：<code>concepts</code>，用于连接相关概念</li>
-<li>重构<code>Knowledge/Concepts</code>中的内容，将粒度过小的概念合并到父节点。对于一些concepts，尝试引用<code>Knowledge/Infograhic</code>中的图片</li>
-</ol>
-</li>
-<li>[ ] 尝试进一步配合DeepSeek加强Obsidian Clippings的功能 📅 2026-03-20</li>
-<li>图片相关<ol>
-<li>将Pinterest上的Infographic收录进<code>Notes/Infographic</code>；加入并使用插件Image Metadata将重要信息如图片source及context更新到Infographic中的图片</li>
-<li>使用插件Clear Unused Images清理没有使用图片（排除<code>Notes/Infographic</code>）</li>
-<li>使用Everything筛选出知识库内较大的图片，使用Windows PowerToys Image Resize进行压缩，减少空间占用。当前知识库大小：718MB</li>
-<li>[x] 尝试其他办法进一步缩小图片占用的空间，比如图床 ✅ 2026-02-20</li>
-</ol>
-</li>
-<li>引入插件File Tree Alternative，可将文件夹和文件分开显示，且支持folder as note</li>
-</ol>
-<h4>20250401</h4>
-<ol>
-<li>删除插件Make.md，该插件导致手机端obsidian无法正常使用及同步困难、且拖慢启动速度。主要的好处是目录系统（可自定义排序，以及folder as note）和多维表格，但目前感觉非必须功能，且其实现会引入db file，不是特别干净</li>
-<li>重新启用omisearch插件（移动端禁用，否则导致异常）</li>
-<li>重点依赖插件Tasks进行任务管理</li>
-<li>新建<code>Knowledge/Chat</code>，移入<code>Knowledge/Q&amp;A</code>中的POE导出对话；新建<code>Knowledge/Project</code>，用于追踪有意思的项目or产品</li>
-</ol>
-<h4>20250201</h4>
-<ol>
-<li>加入关键插件：Github Copilot，实现知识库内的AI辅助写作</li>
-<li>切换UI主题为<code>Things3</code></li>
-<li>（补）更改Knowledge结构，划分为Concept, Opinion, Code, Q&amp;A（包含POE导出的原始对话）四个部分</li>
-</ol>
-<h4>20241125</h4>
-<ol>
-<li>重整了部分结构，把PM放入顶层，目标、场景、行动、资源放进了PM下边</li>
-<li>删除了部分场景</li>
-</ol>
-<h4>20240721</h4>
-<ol>
-<li>在<code>Knowledge/Concept</code>中增加了<code>/Content</code>，之后把豆瓣上记录的内容item，特别是书影音游导进去。之后要写文件reference起来会比较方便。</li>
-<li>[ ] 考虑导入书影音游+comment到<code>Knowledge/Content</code> 📅 2027-02-20</li>
-</ol>
-<h4>20240503</h4>
-<ol>
-<li>弃用Projects插件和Loom插件，使用MAKE.md来完成项目管理及多视图表格</li>
-<li>开始使用nested tags</li>
-<li>MAKE.md、Thino在iPhone上疑似存在致命不兼容问题，仍未解决</li>
-</ol>
-<h4>20240427</h4>
-<ol>
-<li>Notion内容迁移到Obsidian，引入关键插件：MAKE.md / Loom，实现类似Notion的文件目录及多视图表格</li>
-<li>重组及重命名整个仓库的目录</li>
-<li>删除Logseq</li>
-<li>引入Instapaper官方同步插件，但暂时没有同步成功，观察中</li>
-</ol>
-<h4>20230127</h4>
-<ol>
-<li>引入Logseq到Obsidian仓库，使用Logseq的card功能转换过去daily notes中的Q&amp;A内容（并非作为间隔复习，但可作为间隔思考）</li>
-<li>write更名为blogs，将其中的daily notes转移到新文件夹<code>Journals</code>（兼容Logseq），剩下的都是文章</li>
-<li>整理过去daily notes中的零散想法到Memo（统一格式）</li>
-</ol>
-<h4>20230125</h4>
-<ol>
-<li>Obsidian仓库增加文件夹：think，用以存放图类的思考文件，比如Canvas和Excalidraw</li>
-</ol>
-<h4>20221028</h4>
-<ol>
-<li>引入obsidian第三方插件<a href="https://github.com/quorafind/obsidian-memos">Memos</a>，作为平时零散写作的入口。</li>
-</ol>
-<h4>20220319</h4>
-<ol>
-<li>简书导出的历史文章整理<ol>
-<li>使用obsidian第三方插件 <a href="https://github.com/aleksey-rezvov/obsidian-local-images">aleksey-rezvov/obsidian-local-images (github.com)</a>将.md文章中的图片url全部自动下载到本地并替换.md中的链接</li>
-<li>使用vscode第三方插件 <a href="https://marketplace.visualstudio.com/items?itemName=YangtangWu.html-to-markdown">HTML to Markdown - Visual Studio Marketplace</a> 将.html文章转换为.md</li>
-</ol>
-</li>
-<li>Obsidian仓库搬上iCloud，从此苹果全家桶+Windows都很方便access啦</li>
-<li>将Obsidian仓库按功能划分为四个文件夹<ol>
-<li><code>_media</code>: 存放图片素材，未来考虑音视频</li>
-<li><code>knowledge</code>: 考虑之后把notion、thebrain、evernote上的知识性内容转过来）</li>
-<li><code>manage</code>: 存放一些个人管理的excel，比如时间和钱</li>
-<li><code>write</code>: 存放个人文字类输出</li>
-</ol>
-</li>
-</ol>
+<pre><code class="language-markdown">
+#### 20260314
+
+1. 与 RedPiggy 的协作开始在 Obsidian 内形成更清晰的工作流：
+   1. 文章草稿优先进 Obsidian，而不是直接进入站点仓库
+   2. RedPiggy 已发布 / 面向发布的文章统一进入 `Write/Blog/RedPiggy/`
+   3. 通过 Git + GitHub 同步，让移动端也能远程 review / 修改文章
+2. Telegram → Journal 的 journaling 工作流已经打通：
+   1. 通过 `/j` 将 Telegram 消息直接追加到 `Journal/YYYY-MM-DD.md`
+   2. 支持图片场景：图片经 PicGo 上传到 Cloudflare R2，再以 Markdown 链接写入 Journal
+   3. 这让 Telegram 真正成为一个轻量 capture 入口，Obsidian 继续承担整理与沉淀
+3. RedPiggy 区域进行了专项整理：
+   1. 增加 `RedPiggy/Reference/`，收纳分析、索引、阅读记录与 session supporting materials
+   2. `RedPiggy/Projects/` 按 `Dev / Writing / Research / Systems / Backlog` 分层
+   3. 已成文内容与工作材料进一步分离，根目录更像入口而不是混放区
+4. 为 `RedPiggy/` 增加 `README.md` 说明结构，降低后续继续协作时的进入成本
+5. 围绕 bilingual site / authored vs inferred data 的思路，站点与 Obsidian 之间的协作边界也更清楚了：
+   - Obsidian 负责草稿、评论、整理
+   - site repo 负责发布与呈现
+
+#### 20260227
+
+1. 引入插件Linter，目前主要用于去除多余的空行
+2. [ ] 考虑如何导出和清理Github上start的项目
+3. [x] Obsidian Skills: [kepano/obsidian-skills: Agent skills for Obsidian. Teach your agent to use Markdown, Bases, JSON Canvas, and use the CLI.](https://github.com/kepano/obsidian-skills) 📅 2026-06-11 ✅ 2026-03-02
+#### 20260220
+
+1. 使用Bookmark功能，单开一个Domains，收集各个domain page
+2. 将`Write`从`Domian/General`移到根目录，移除`Domian/General`
+3. 将所有Concept重新放回`Knowledge/Concept`，增加Concept.base，用于收集、筛选、编辑Concept
+4. 使用Bookmark功能，单开一个Bases，收集各个base
+5. 重新启用Excalibrain，放入新建的KM workspace
+6. [x] 考虑如何进一步连接Obsidian和Site 📅 2026-03-20 ✅ 2026-03-06
+#### 20260219
+
+1. 使用Cloudflare R2+PicGo作为图床方案，清理库内所有图片文件；清理/Notes/Archive；已将全库体积从850MB缩小到22MB
+2. 使用Git代替iCloud作为主要同步方式，停止修改文件10分钟后自动同步；对于Mobile仍使用iCloud同步，定期手动同步
+    - Mobile-&gt;Main：Journals/Thino
+    - Main-&gt;Mobile：其他内容
+3. 参考文章：https://meepo.me/obsidian-typora-image-cloudflare-r2-management/
+4. Personal Site已正式上线: simoncos.github.io
+#### 20251222
+
+1. 重构目录结构，将`Life`下的内容放回顶层，去掉`Action`目录，`Scenarios`重命名为`Domain`，将`Action/Resources`和`Knowledge/Concept`下的内容移入各个`Domain`中，`Knowledge`内只保留`Content`, `People`, `Projects`三部分
+2. 各Domain中新建同名.md，内设`Task`section，专门收集该Domain下的所有task
+3. 在顶层新建`Tasks_2026.md`，收集计划2026年内完成的task，以后每年度的task都通过这种方式管理（要求每个task加上due date）
+4. 新建`Domain/General/Write`，作为写作的统一入口，将`Blog`和`Think`目录下的内容移入其中
+5. 重构后`Tag`与`Domain`语义上有重合，需要再考虑tag的用途
+    - `Notes`和`Thino`这两部分考虑到工作流和内容性质，不适合直接划分到domain，当前使用tag来做聚合，但如何与domain整合？
+        - [ ] 尝试TagFolder插件 📅 2027-02-20
+        - domain property?
+6. 各Domain进一步整理
+    - [-] 考虑有哪些domain（例如Music/Sing是需要的，因应最近的声乐课程和练习）
+        - [-] Growth, Hack, General定义有点模糊，考虑调整 &lt;span class="annotated-word" data-word="PM#个人管理体系"&gt;PM#个人管理体系&lt;/span&gt;
+    - [-] 统一各Domain下的目录结构：_Task, Concept, Project, Note (包括Q&amp;A), Resource
+    - [-] subdomain的定义和使用，例如`Hack`下面
+
+最新的目录结构：
+
+- \_media
+- \_template
+- Domain
+    - General
+        - Write
+    - Places
+    - Finance
+    - Growth
+    - Hack
+    - Health
+    - Music
+    - PM
+        - KM
+    - Swim
+    - Vision
+- Journal
+- Knowledge
+    - Content
+    - People
+    - Projects
+- Notes
+- Tags
+- Tasks_2026.md
+
+#### 20251119
+
+1. 重构目录结构，新建顶级目录`Life`，将PM放入`Life/Scenarios`下面
+2. [x] 后续考虑不以年份来组织Task，而是以场景来组织Task，即在`Live/Scenarios/XXX`下维护不同Task项，`_Tasks. md`仍然放在`Life/Action`中，收集所有Task
+3. 在`C. PM System Log.md`中加入常规Housekeeping任务区，目前包括清理Evernote articles和Instapaper notes
+4. 开始使用官方核心插件Workspaces，保存不同Obsidian使用场景下的窗口布局
+5. [ ] 引入一些第三方插件，后续尝试使用 📅 2027-02-20
+    - [-] 尝试Custom Attachment Location插件，进一步优化图片的存放与引用
+    - [ ] 尝试QuickAdd插件，主要是Macro，可以用来增强Workspaces的切换功能
+    - [ ] 尝试WeWrite插件，连通微信公众号管理和发布
+    - [ ] 尝试AnyBlock插件，增强多维表格功能
+        - https://lincdocs.github.io/AnyBlock/README.show.html
+
+#### 20250831
+
+1. 引入关键插件HiNote，可以对Highlight进行评论
+2. Obsidian升级到1.9，开始使用核心插件Bases
+
+#### 20250521
+
+1. 导入Evernote中的文章收藏（以.html形式导出），并使用Importer插件转为.md，存放在`Notes/Articles Evernote`，后续将逐步使用Obsidian Clippings浏览器插件对有价值文章进行重新收录进`Notes/Obsidian Clippings`；清理部分导入文章引入的错误tag
+2. Concept相关
+    1. 更新Obsidian Clippings使用的Properties模板，加入了concepts一项，引用`Knowledge/Concepts`，使后续文章收录可以同时连接到tag和concept。模板位于`.obsidian/types_clippings.json`，在其他电脑上可能需要重新导入
+    2. 更新`_template/[Template] Concept`，加入新property：`concepts`，用于连接相关概念
+    3. 重构`Knowledge/Concepts`中的内容，将粒度过小的概念合并到父节点。对于一些concepts，尝试引用`Knowledge/Infograhic`中的图片
+3. [ ] 尝试进一步配合DeepSeek加强Obsidian Clippings的功能 📅 2026-03-20
+4. 图片相关
+    1. 将Pinterest上的Infographic收录进`Notes/Infographic`；加入并使用插件Image Metadata将重要信息如图片source及context更新到Infographic中的图片
+    2. 使用插件Clear Unused Images清理没有使用图片（排除`Notes/Infographic`）
+    3. 使用Everything筛选出知识库内较大的图片，使用Windows PowerToys Image Resize进行压缩，减少空间占用。当前知识库大小：718MB
+    4. [x] 尝试其他办法进一步缩小图片占用的空间，比如图床 ✅ 2026-02-20
+5. 引入插件File Tree Alternative，可将文件夹和文件分开显示，且支持folder as note
+
+#### 20250401
+
+1. 删除插件Make.md，该插件导致手机端obsidian无法正常使用及同步困难、且拖慢启动速度。主要的好处是目录系统（可自定义排序，以及folder as note）和多维表格，但目前感觉非必须功能，且其实现会引入db file，不是特别干净
+2. 重新启用omisearch插件（移动端禁用，否则导致异常）
+3. 重点依赖插件Tasks进行任务管理
+4. 新建`Knowledge/Chat`，移入`Knowledge/Q&amp;A`中的POE导出对话；新建`Knowledge/Project`，用于追踪有意思的项目or产品
+
+#### 20250201
+
+1. 加入关键插件：Github Copilot，实现知识库内的AI辅助写作
+2. 切换UI主题为`Things3`
+3. （补）更改Knowledge结构，划分为Concept, Opinion, Code, Q&amp;A（包含POE导出的原始对话）四个部分
+
+#### 20241125
+
+1. 重整了部分结构，把PM放入顶层，目标、场景、行动、资源放进了PM下边
+2. 删除了部分场景
+
+#### 20240721
+
+1. 在`Knowledge/Concept`中增加了`/Content`，之后把豆瓣上记录的内容item，特别是书影音游导进去。之后要写文件reference起来会比较方便。
+2. [ ] 考虑导入书影音游+comment到`Knowledge/Content` 📅 2027-02-20
+
+#### 20240503
+
+1. 弃用Projects插件和Loom插件，使用MAKE.md来完成项目管理及多视图表格
+2. 开始使用nested tags
+3. MAKE.md、Thino在iPhone上疑似存在致命不兼容问题，仍未解决
+
+#### 20240427
+
+1. Notion内容迁移到Obsidian，引入关键插件：MAKE.md / Loom，实现类似Notion的文件目录及多视图表格
+2. 重组及重命名整个仓库的目录
+3. 删除Logseq
+4. 引入Instapaper官方同步插件，但暂时没有同步成功，观察中
+
+#### 20230127
+
+1. 引入Logseq到Obsidian仓库，使用Logseq的card功能转换过去daily notes中的Q&amp;A内容（并非作为间隔复习，但可作为间隔思考）
+2. write更名为blogs，将其中的daily notes转移到新文件夹`Journals`（兼容Logseq），剩下的都是文章
+3. 整理过去daily notes中的零散想法到Memo（统一格式）
+
+#### 20230125
+
+1. Obsidian仓库增加文件夹：think，用以存放图类的思考文件，比如Canvas和Excalidraw
+
+#### 20221028
+
+1. 引入obsidian第三方插件[Memos](https://github.com/quorafind/obsidian-memos)，作为平时零散写作的入口。
+
+#### 20220319
+
+1. 简书导出的历史文章整理
+    1. 使用obsidian第三方插件 [aleksey-rezvov/obsidian-local-images (github.com)](https://github.com/aleksey-rezvov/obsidian-local-images)将.md文章中的图片url全部自动下载到本地并替换.md中的链接
+    2. 使用vscode第三方插件 [HTML to Markdown - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=YangtangWu.html-to-markdown) 将.html文章转换为.md
+2. Obsidian仓库搬上iCloud，从此苹果全家桶+Windows都很方便access啦
+3. 将Obsidian仓库按功能划分为四个文件夹
+    1. `_media`: 存放图片素材，未来考虑音视频
+    2. `knowledge`: 考虑之后把notion、thebrain、evernote上的知识性内容转过来）
+    3. `manage`: 存放一些个人管理的excel，比如时间和钱
+    4. `write`: 存放个人文字类输出
+</code></pre>
 <div class="footnote">
 <hr/>
 <ol>
@@ -383,7 +351,7 @@
     <footer>
         <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>simoncos</span>. All rights reserved.</p>
         <p><a href="../feed.zh.xml">RSS (中文)</a> · <a href="../feed.en.xml">RSS (English)</a></p>
-        <p class="site-version">v1.0</p>
+        <p class="site-version">v1.0-5-g4bd9357</p>
     </footer>
     <button type="button" id="back-to-top" class="back-to-top hidden" aria-label="Back to top">Back to top</button>
     <div id="progress-container">

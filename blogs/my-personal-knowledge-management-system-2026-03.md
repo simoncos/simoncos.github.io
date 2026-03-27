@@ -12,7 +12,6 @@ date: 2026-03-14
 [^5]: SOP：Standard Operating Procedure，标准作业流程。
 
 ![Personal Knowledge Management System 202603](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png)
-
 ## 一、从"记笔记"到"分层协作"
 
 我开始把 Obsidian 作为主要的 KM[^1] 工具，到现在差不多四、五年了。2026 年 3 月回顾完整的系统迭代记录（见文末附录），这套东西已经长成了一个分层的人机系统：Telegram 负责即时输入，Obsidian 负责整理与沉淀，个人站点负责发布与呈现，Git 负责版本边界，而我的 OpenClaw agent--RedPiggy，开始把这些部分粘合起来。
@@ -35,7 +34,7 @@ Telegram → Obsidian Journal 的打通，起因是我用Git替换了iCloud，�
 
 但移动端其实是最需要写这个功能的，在知识管理系统里，真正稀缺的从来不是存储空间，而是**捕捉即时念头的那一下动作**。如果那个动作太重，人就会拖；一拖，很多本来值得留下的东西就没了。
 
-最终，我跟Piggy合作开发了`/j`命令：我发给它的Telegram 消息里只要带有`/j`标记，消息内容就可以直接追加到Obsidian `Journal/YYYY-MM-DD.md`（又因为Thino插件，我在Obsidian里有一个类似私人的微博界面直通作为数据层的Journal）。`/j`命令支持分段、图片，解决了写的问题。读的问题则不好解决，我暂时的方法是直接在github上去看markdown源文件，损失了Obsidian带来的功能，但还能接受。
+最终，我跟Piggy合作开发了`/j`命令：我发给它的Telegram 消息里只要带有`/j`标记，消息内容就可以直接追加到Obsidian `Journal/YYYY-MM-DD.md`（又因为Thino插件，我在Obsidian里有一个类似私人的微博界面直通作为数据层的Journal）。`/j`命令支持分段和图片，解决了写的问题。读的问题则不好解决，我暂时的方法是直接在github上去看markdown源文件，损失了Obsidian带来的功能，但还能接受。
 
 关于图片支持，值得一说：在 Piggy 诞生前，为了完美迁移到 Git，我先给 Obsidian 搭好了图床能力。所有仓库内的图片都通过 PicGo 上传到 Cloudflare R2，再以图片链接形式写进 Markdown。这样改完之后，整个仓库体积从大约 850MB 压缩到 22MB，很多原本因为文件体积和同步压力而变得难以维持的流程，才真正变得可用。`/j` 进一步整合了两端，让 Telegram 收到的图片自动经过图床工作流，转成链接再和文字合并，最终汇入 Journal。
 
@@ -150,6 +149,8 @@ Site 对我来说不只是一个"把文章摆上去"的地方。它越来越像�
 ---
 
 ## 附录：系统迭代的完整记录
+
+```markdown
 
 #### 20260314
 
@@ -327,3 +328,4 @@ Site 对我来说不只是一个"把文章摆上去"的地方。它越来越像�
 	2. `knowledge`: 考虑之后把notion、thebrain、evernote上的知识性内容转过来）
 	3. `manage`: 存放一些个人管理的excel，比如时间和钱
 	4. `write`: 存放个人文字类输出
+```
