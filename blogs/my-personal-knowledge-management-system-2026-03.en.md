@@ -25,7 +25,7 @@ The current structure looks roughly like this:
 - **Personal site repository**: responsible for external publishing and presentation
 - **Git**: provides version boundaries across the system
 
-This layering was not designed all at once. Over the years, my Obsidian repository went through several visible rounds of restructuring: early on it was a much rougher separation of writing and knowledge; later it went through an intermediate stage such as `Life / Scenarios / Action`, which leaned more toward personal management; and eventually it arrived at the current role-based structure centered on `Domain`, `Knowledge`, `Write`, and `Journal`. On the surface these were directory changes. In substance, they were repeated attempts to answer the same question: what role should each type of information play inside the system?
+This architecture was not designed all at once. Over the years, my Obsidian repository went through several visible rounds of restructuring: early on it was a much rougher separation of writing and knowledge; later it went through an intermediate stage such as `Life / Scenarios / Action`, which leaned more toward personal management; and eventually it arrived at the current structure centered on `Domain`, `Knowledge`, `Write`, and `Journal` as its main functional divisions. On the surface these were directory changes. In substance, they were repeated attempts to answer the same question: what role should each type of information play inside the system?
 
 ## II. Telegram as an Entry Point
 
@@ -43,7 +43,7 @@ There was also an unexpected benefit. Since Telegram messages have to pass throu
 
 ![](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/781b033aa99041b1fe3829dfaeb88c2d.png)
 
-This was not my first attempted solution. Originally I wanted to connect with Piggy through Apple Notes, but several problems made that path untenable:
+This was not the first solution I tried. Originally I wanted to connect with Piggy through Apple Notes, but several problems made that path untenable:
 
 1. Piggy is deployed on a separate MacBook under a separate Apple account, so notes written under my own account cannot be synced directly to it. Notes can be shared across accounts, but only one by one, which is cumbersome.
 2. If Piggy had to read content from Notes under its own account, it would require more permissions than I wanted to grant by default, which would increase both the security risk and the configuration complexity of the entire OpenClaw setup.
@@ -57,15 +57,9 @@ Once Telegram took over the role of immediate input, Obsidian could focus more c
 
 Obsidian is not a place to throw everything into. Compared with the publishing-oriented personal site[^2], it is better suited to holding things that are still in process. My long-term wish is still to let the two move closer together: everything in the garden is growing; some things are simply more mature than others.
 
-At the same time, Obsidian is not just a content repository for me. Through Domain notes, Tasks, Bookmarks, Workspaces, and Bases, it increasingly functions as a workbench. I do not simply store things inside it; I also switch contexts, gather tasks, inspect structure, and enter different working modes within it.
+Through Domain notes, Tasks, Bookmarks, Workspaces, and Bases, Obsidian has become a more complete workspace: I can switch contexts, gather tasks, inspect structure, and enter different working modes within it.
 
 Once Piggy entered the picture, that role became much stronger. I carved out a dedicated area as a shared workspace for Piggy and me:
-
-- analysis
-- drafts
-- project cards
-- supporting materials
-- pieces already written or close to publication
 
 ![](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg)
 
@@ -73,30 +67,30 @@ By opening Obsidian completely to Piggy, I gained three major kinds of benefit.
 
 The first is **organizing ability**: many materials that would otherwise remain in a heap can now be sorted, moved, renamed, and structurally repaired more quickly-especially the parts where I already know what should be done but do not want to spend my own energy doing it.
 
-The second is **collaborative ability**: Obsidian is no longer just my personal repository; it has become a shared working space for Piggy and me. Drafts, analysis, project cards, reference materials, and already-published writing can be gradually layered within one environment instead of being scattered across chat logs and the site repository.
+The second is **collaborative ability**: Obsidian is no longer just my personal repository; it has become a shared working space for Piggy and me. Drafts, analysis, project cards, reference materials, and already-published writing can be maintained within one environment instead of being scattered across chat logs and the site.
 
-The third is **reflective ability**: Piggy does not merely execute tasks. It also offers independent observations during the process of organization, forcing me to clarify intuitions that were previously vague. Many of the ideas about friction, affordance[^3], bilingual site architecture, and the memory pipeline[^4] were sharpened under exactly this kind of collaboration.
+The third is **reflective ability**: Piggy, beyond executing tasks, also offers independent observations during the process of organization, forcing me to clarify intuitions that were previously vague. Many of the ideas about friction, affordance[^3], bilingual site architecture, and the memory pipeline[^4] were sharpened under exactly this kind of collaboration.
 
-Beyond that, this openness is also a kind of long-term feeding. Piggy gradually comes to understand me better through my knowledge base, and in turn begins to participate in the growth and output of content. Many things that once existed only as scattered notes now slowly grow into articles, structures, and projects through that collaboration. This article itself is one example.
+This openness is also a kind of long-term feeding for Piggy. It gradually comes to understand me better through my knowledge base, and in turn begins to participate in the growth and output of content. Many things that once existed only as scattered notes now slowly grow into articles, structures, and projects through that collaboration. This article itself is one example.
 
-So Piggy is, for me, more like a collaborator than a machine for writing notes on my behalf-one that is helping me make the system itself more clear.
+So Piggy is, for me, more like a collaborator than a machine for writing notes on my behalf-one that helps me make the system itself more clear.
 
 ## IV. The Personal Site
 
-The personal site (`simoncos.github.io`) is the publishing layer of the whole system. Its first formal public version went online in January this year. With Piggy and other agents involved, the site's visual language, interaction, and information architecture have gone through a fairly complete round of refinement over the past month.
+The personal site (`simoncos.github.io`) is the publishing layer of the whole system. Its first formal public version went online in January this year. With Piggy and other agents involved, the site's visual language, interaction, and information architecture have gone through a comprehensive update.
 
 ![](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg)
 
-Before getting into more abstract meaning, it is useful to simply look at what has already grown there. A few features are now relatively clear:
+The current site:
 
 - **Static publishing**: articles and pages are still deployed as a static site, with a simple, controllable, and maintainable structure
-- **Bilingual support**: Chinese and English are organized as two language versions of the same article, rather than treated as two parallel inventories
-- **Dynamic inferred layer**: structures such as previews, backlinks, series, and tags are no longer all hard-coded into pages, but are increasingly generated from data and front-end logic
-- **A fuller reading experience**: details such as article footers, backlinks / series / tags, footnote jumping, favicon work, metadata, and mobile rendering have all been systematically improved
+- **Bilingual support**: Chinese and English are organized as two language versions of the same article, switchable between each other
+- **Dynamic derived layer**: structures such as previews, backlinks, series, and tags are no longer all hard-coded into pages, but are generated from data and front-end logic as derived structures
+- **A fuller reading experience**: details such as article footers, backlinks / series / tags, footnote jumping, favicon work, metadata, and mobile rendering have all been carefully considered
 
-For me, the site is no longer just a place to put articles. It is increasingly the outward-facing interface of the whole knowledge system: things grow inside Obsidian; they are presented on the site.
+For me, the site is no longer just a place to put articles. It is the outward-facing interface of the whole knowledge system: Obsidian handles growth; the site handles external presentation.
 
-Looking back, this system did not grow simply by "adding more features." It took shape slowly through trial and error: many plugins, many capabilities, and plenty of friction. iCloud, Make.md, Loom, Logseq, and various third-party plugins all introduced new power, but also incompatibilities, complexity, and maintenance cost. Over time it became clearer that what mattered was not an ever-longer feature list, but which parts could remain stable in the system over time. Many adjustments were, in the end, acts of subtraction.
+Looking back, this system did not grow simply by "adding more features." It took shape slowly through trial and error: many plugins, many capabilities, and plenty of friction. iCloud, Make.md, Loom, Logseq, and various third-party plugins all introduced new power, but also incompatibilities, complexity, and maintenance cost. What mattered was not an ever-longer feature list, but which parts could remain stable in the system over time. Many adjustments were, in the end, acts of subtraction.
 
 ## V. Thoughts from Piggy
 
