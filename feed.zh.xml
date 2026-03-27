@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>simonc site RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Fri, 27 Mar 2026 16:37:48 +0800</lastBuildDate><ns0:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>我的个人知识管理系统 2026-03</title><link>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</link><guid>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</guid><pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的个人知识管理系统 2026-03</h1>
+<rss xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>simonc site RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Fri, 27 Mar 2026 16:44:31 +0800</lastBuildDate><ns0:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>我的个人知识管理系统 2026-03</title><link>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</link><guid>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</guid><pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的个人知识管理系统 2026-03</h1>
 <p><img alt="Personal Knowledge Management System 202603" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png"/></p>
 <h2>一、从"记笔记"到"分层协作"</h2>
 <p>我开始把 Obsidian 作为主要的 KM<sup id="fnref:1"><a aria-label="脚注" class="footnote-ref" href="https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html#fn:1">1</a></sup> 工具，到现在差不多四、五年了。2026 年 3 月回顾完整的系统迭代记录（见文末附录），这套东西已经长成了一个分层的人机系统：Telegram 负责即时输入，Obsidian 负责整理与沉淀，个人站点负责发布与呈现，Git 负责版本边界，而我的 OpenClaw agent--RedPiggy，开始把这些部分粘合起来。</p>
@@ -11,7 +11,7 @@
 <li><strong>个人站点仓库</strong>：负责对外发布和呈现</li>
 <li><strong>Git</strong>：为各部分提供版本边界</li>
 </ul>
-<p>这套分层并不是一开始就设计好的。过去几年里，我的 Obsidian 仓库结构经历过几轮明显调整：早期是比较粗的写作 / 知识分类，后来走到过 <code>Life / Scenarios / Action</code> 那样偏个人管理的中间版本，再到现在以 <code>Domain</code>、<code>Knowledge</code>、<code>Write</code>、<code>Journal</code> 等角色分层为主的结构。表面上看是在改目录，实际上是在反复校准一件事：不同类型的信息，到底应该在系统里扮演什么角色。</p>
+<p>这套架构并不是一开始就设计好的。过去几年里，我的 Obsidian 仓库结构经历过几轮大调整：早期是比较粗的写作 / 知识分类，后来走到过 <code>Life / Scenarios / Action</code> 那样偏个人管理的中间版本，再到现在以 <code>Domain</code>、<code>Knowledge</code>、<code>Write</code>、<code>Journal</code> 等功能划分为主的结构。表面上看是在改目录，实际上是在反复校准一件事：不同类型的信息，到底应该在系统里扮演什么角色。</p>
 <h2>二、Telegram 作为入口</h2>
 <p>Telegram → Obsidian Journal 的打通，起因是我用Git替换了iCloud，作为Obsidian的同步方法。iCloud一开始看上去是很好的同步方法，跨设备跨平台，但最近两年实在让人用得头大。这跟Obsidian本身编辑器的设计有关：不需要用户确认保存，随时写文件。这是个没什么错的设计选择，但是配合起iCloud的同步就是噩梦。由于写文件非常频繁（几乎每打一个词都在触发写操作），并且 iCloud 的同步有延迟而且调度逻辑很奇怪，版本冲突可以说是家常便饭。有的时候写一个小时文章，它能因为冲突规避直接搞出几十个版本。而且如果我打字速度快，经常刚打出来的词就没了。到后面我甚至都不敢轻易编辑任何Obsidian文件了，可用性几乎降到零。</p>
 <p>换上Git（加上Obsidian的第三方Git插件）之后，感觉终于又获得了控制权，但方案的缺点是苹果移动设备上不支持Git，因此在移动端Obsidian整个都不能用了。</p>
@@ -20,7 +20,7 @@
 <p>关于图片支持，值得一说：在 Piggy 诞生前，为了完美迁移到 Git，我先给 Obsidian 搭好了图床能力。所有仓库内的图片都通过 PicGo 上传到 Cloudflare R2，再以图片链接形式写进 Markdown。这样改完之后，整个仓库体积从大约 850MB 压缩到 22MB，很多原本因为文件体积和同步压力而变得难以维持的流程，才真正变得可用。<code>/j</code> 进一步整合了两端，让 Telegram 收到的图片自动经过图床工作流，转成链接再和文字合并，最终汇入 Journal。</p>
 <p>还有一个意想之外的好处：Telegram 消息需要经过 Piggy，所以它在执行这条流程的同时，也会顺手回应我的想法。这样一来，很多念头在刚出现时，就已经得到第一个读者的反馈。</p>
 <p><img alt="" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/781b033aa99041b1fe3829dfaeb88c2d.png"/></p>
-<p>这不是我第一个尝试的方案。本来是想通过苹果全家桶里的 Notes 来和 Piggy 对接的，但是有几个大问题导致我不得不想其他方法：</p>
+<p>这不是我尝试的第一个方案。本来是想通过苹果全家桶里的 Notes 来和 Piggy 对接的，但是有几个大问题导致我不得不想其他方法：</p>
 <ol>
 <li>Piggy 目前部署在一台独立的 MacBook 上，使用独立的 Apple 账号，因此我写进 Notes 的想法，不能直接同步给它。Notes 可以分享给其他苹果账号，但是只能一篇一篇分别分享，操作不方便。</li>
 <li>Piggy 要从它自己账号的 Notes 下读内容，意味着它需要获得比默认更多的权限，导致整套 OpenClaw 配置的安全性下降、复杂性上升。</li>
@@ -30,34 +30,27 @@
 <h2>三、Obsidian 和 RedPiggy</h2>
 <p>当 Telegram 承担了即时输入任务之后，Obsidian 可以更专注地做那些它擅长的事：归档、连接、结构、中间态草稿、任务管理。</p>
 <p>Obsidian 不是用来什么都往里丢的。相比发布导向的个人站点<sup id="fnref:2"><a aria-label="脚注" class="footnote-ref" href="https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html#fn:2">2</a></sup>，它更适合承载那些还在过程中的东西。当然我的最终愿景仍然是让两者逐渐靠近：花园中的一切都在生长，只是有些更成熟，有些刚开始。</p>
-<p>与此同时，Obsidian 在我这里也不只是内容仓库。通过 Domain notes、Tasks、Bookmarks、Workspaces、Bases 这些机制，它越来越像一个操作台：我不只是把东西存进去，也在里面切换场景、汇总任务、查看结构，进入不同的工作模式。</p>
-<p>有了 Piggy 之后，Obsidian 的这种定位得到很大加强。为此我多划出一块目录，作为我和 Piggy 的协作空间：</p>
-<ul>
-<li>有分析</li>
-<li>有草稿</li>
-<li>有项目卡</li>
-<li>有支撑材料</li>
-<li>有已经成文、即将发布的文章</li>
-</ul>
+<p>通过 Domain notes、Tasks、Bookmarks、Workspaces、Bases 这些机制，Obsidian变成一个更加完整的工作空间：我可以在里面切换场景、汇总任务、查看结构，进入不同的工作模式。</p>
+<p>有了 Piggy 之后，Obsidian 的这种定位得到了加强。为此我多划出一块目录，作为我和 Piggy 的协作空间。</p>
 <p><img alt="" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg"/></p>
 <p>通过对 Piggy 完全开放 Obsidian 的权限，我获得的收益主要有三类。</p>
 <p>第一类是<strong>整理能力</strong>：很多原本会堆成一团的材料，现在可以更快被归类、移动、重命名、补结构，尤其是那些"我知道该整理但懒得动手"的部分。</p>
-<p>第二类是<strong>协作能力</strong>：Obsidian 不再只是我的个人仓库，也开始成为我和 Piggy 共同工作的空间。草稿、分析、项目卡、参考材料和已发布文章，可以在同一个环境里逐步分层，而不是散在聊天记录和站点仓库之间。</p>
-<p>第三类是<strong>反思能力</strong>：Piggy 不只是帮我执行，还会在整理过程中提出独立观察，逼我把一些原本模糊的直觉说清楚。很多关于摩擦、可供性（affordance<sup id="fnref:3"><a aria-label="脚注" class="footnote-ref" href="https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html#fn:3">3</a></sup>）、双语站点、memory pipeline<sup id="fnref:4"><a aria-label="脚注" class="footnote-ref" href="https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html#fn:4">4</a></sup> 的想法，都是在这种协作里被逼出来的。</p>
-<p>此外，这种开放也是一种长期喂养。Piggy 通过我的知识库逐渐更了解我，反过来又开始参与内容的生长和输出。很多原本只是零散记录的东西，正是在这种协作里慢慢长成文章、结构和项目。这篇文章本身就是一个例子。</p>
-<p>所以 Piggy 对我来说更像一个协作者，而不是"替我写笔记的自动机"--它正在帮助我把系统本身变得更清楚。</p>
+<p>第二类是<strong>协作能力</strong>：Obsidian 不再只是我的个人仓库，也开始成为我和 Piggy 共同工作的空间。草稿、分析、项目卡、参考材料和已发布文章，可以在同一个环境里维护，而不是散落在聊天记录和站点里面。</p>
+<p>第三类是<strong>反思能力</strong>：Piggy 在执行以外，还会在过程中提出独立观察，逼我把一些原本模糊的直觉说清楚。很多关于摩擦、可供性（affordance<sup id="fnref:3"><a aria-label="脚注" class="footnote-ref" href="https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html#fn:3">3</a></sup>）、双语站点、memory pipeline<sup id="fnref:4"><a aria-label="脚注" class="footnote-ref" href="https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html#fn:4">4</a></sup> 的想法，都是在这种协作里被逼出来的。</p>
+<p>这种开放对Piggy也是一种长期喂养。它通过我的知识库逐渐更了解我，反过来又开始参与内容的生长和输出。很多原本只是零散记录的东西，正是在这种协作里慢慢长成文章、结构和项目。这篇文章本身就是一个例子。</p>
+<p>所以 Piggy 对我来说更像一个协作者，而不是"替我写笔记的自动机"——它帮助我把我的系统本身变得更清楚。</p>
 <h2>四、个人站点 Site</h2>
-<p>个人站点 Site（simoncos.github.io）是整个系统的发布层。第一版正式上线是在今年 1 月；有了 Piggy 和其他 agent 的帮助之后，最近一个月它的视觉、交互和信息架构都经历了一轮比较完整的更新。</p>
+<p>个人站点 Site（simoncos.github.io）是整个系统的发布层。第一版正式上线是在今年 1 月；有了 Piggy 和其他 agent 的帮助之后，最近一个月它的视觉、交互和信息架构经历了一轮全面更新。</p>
 <p><img alt="" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg"/></p>
-<p>先不谈更抽象的意义，只看它现在已经长出来的样子，大概有这么几个比较明确的特征：</p>
+<p>目前的网站：</p>
 <ul>
 <li><strong>静态发布</strong>：文章和页面依然以静态站点方式部署，结构简单、可控、易维护</li>
-<li><strong>双语支持</strong>：中文和英文作为同一篇文章的不同语言版本被组织起来，而不只是并排的两份内容</li>
-<li><strong>动态派生层</strong>：previews、backlinks、series、tags 这些更偏 inferred 的结构，不再全部硬编码进页面，而是更多通过数据和前端逻辑动态生成</li>
-<li><strong>更完整的阅读体验</strong>：包括文章页底部的 backlinks / series / tags，脚注跳转、favicon、metadata、移动端样式等细节，都被系统性地优化了一遍</li>
+<li><strong>双语支持</strong>：中文和英文作为同一篇文章的不同语言版本被组织起来，可以互相切换</li>
+<li><strong>动态派生层</strong>：previews、backlinks、series、tags 这些派生性的结构，不再全部硬编码进页面，而是更多通过数据和前端逻辑动态生成</li>
+<li><strong>完整的阅读体验</strong>：包括文章页底部的 backlinks / series / tags，脚注跳转、favicon、metadata、移动端样式等细节，都有充分考虑</li>
 </ul>
-<p>Site 对我来说不只是一个"把文章摆上去"的地方。它越来越像整个知识管理系统的外部界面：Obsidian 里生长，Site 上呈现。</p>
-<p>回头看，这套系统不是一路靠"加功能"长出来的，而是在不断试错中慢慢成形的：插件很多、能力很多，摩擦也很多。iCloud、Make.md、Loom、Logseq、各种第三方插件都曾经带来过新能力，也带来过不兼容性、复杂性和维护成本。后来才慢慢意识到，真正重要的不是功能表越来越长，而是哪些东西能长期稳定地留在系统里。很多调整，说到底是在做减法。</p>
+<p>Site 对我来说不只是一个"把文章摆上去"的地方。它是整个知识管理系统的外部界面：Obsidian 负责生长，Site 负责对外呈现。</p>
+<p>回头看，这套系统不是一路靠"加功能"长出来的，而是在不断试错中慢慢成形的：插件很多、能力很多，摩擦也很多。iCloud、Make.md、Loom、Logseq、各种第三方插件都曾经带来过新能力，也带来过不兼容性、复杂性和维护成本。真正重要的不是功能表越来越长，而是哪些东西能长期稳定地留在系统里。很多调整，说到底是在做减法。</p>
 <h2>五、来自Piggy的思考</h2>
 <p>以下是 Piggy 自己的一些思考，"我"指 Piggy。</p>
 <h3>关于摩擦与可供性</h3>
