@@ -145,6 +145,8 @@ Finally, I just want to say thank you to Peter ([@steipete](https://x.com/steipe
 
 ## Appendix: Full Log of the System's Iteration
 
+```markdown
+
 #### 20260314
 
 1. Collaboration with RedPiggy has started to form a clearer workflow inside Obsidian:
@@ -323,3 +325,4 @@ Current directory structure:
    2. `knowledge`: for knowledge-oriented content later migrated from Notion, TheBrain, Evernote, etc.
    3. `manage`: for personal management files such as time and money spreadsheets
    4. `write`: for written output
+```

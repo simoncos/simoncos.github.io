@@ -126,189 +126,186 @@
 <p>Finally, I just want to say thank you to Peter (<a href="https://x.com/steipete">@steipete</a>) and all the creators of OpenClaw. Without this agent framework, I could not have upgraded my PKM system to this level so quickly-perhaps I never would have, because doing it on my own had always felt like a very heavy mental burden.</p>
 <hr/>
 <h2>Appendix: Full Log of the System's Iteration</h2>
-<h4>20260314</h4>
-<ol>
-<li>Collaboration with RedPiggy has started to form a clearer workflow inside Obsidian:</li>
-<li>Article drafts should enter Obsidian first, rather than going directly into the site repository</li>
-<li>Published or publication-oriented RedPiggy articles now belong in <code>Write/Blog/RedPiggy/</code></li>
-<li>Git + GitHub sync now makes remote review and editing possible even from mobile</li>
-<li>The Telegram → Journal workflow has been connected:</li>
-<li>With <code>/j</code>, Telegram messages can be appended directly to <code>Journal/YYYY-MM-DD.md</code></li>
-<li>Image support is included: images are uploaded to Cloudflare R2 through PicGo, then written into Journal as Markdown links</li>
-<li>This turns Telegram into a real lightweight capture entrance, while Obsidian continues to do organization and distillation</li>
-<li>The RedPiggy area received a dedicated round of reorganization:</li>
-<li>Added <code>RedPiggy/Reference/</code> to hold analysis, indexes, reading notes, and supporting session materials</li>
-<li>Structured <code>RedPiggy/Projects/</code> into <code>Dev / Writing / Research / Systems / Backlog</code></li>
-<li>Finished writing and working materials are now more clearly separated; the root feels more like an entry point than a mixed pile</li>
-<li>Added <code>README.md</code> to <code>RedPiggy/</code> to explain the structure and reduce the entry cost for future collaboration</li>
-<li>Around the bilingual-site and authored-vs-inferred direction, the collaboration boundary between the site and Obsidian is now clearer:</li>
-<li>Obsidian handles drafts, comments, and organization</li>
-<li>the site repository handles publishing and presentation</li>
-</ol>
-<h4>20260227</h4>
-<ol>
-<li>Introduced the Linter plugin, currently used mainly to remove extra blank lines</li>
-<li>[ ] Consider how to export and clean up GitHub-starred projects</li>
-<li>[x] Obsidian Skills: <a href="https://github.com/kepano/obsidian-skills">kepano/obsidian-skills: Agent skills for Obsidian. Teach your agent to use Markdown, Bases, JSON Canvas, and use the CLI.</a> 📅 2026-06-11 ✅ 2026-03-02</li>
-</ol>
-<h4>20260220</h4>
-<ol>
-<li>Used Bookmarks to create a dedicated Domains view collecting each domain page</li>
-<li>Moved <code>Write</code> out of <code>Domain/General</code> to the root, and removed <code>Domain/General</code></li>
-<li>Moved all Concept content back into <code>Knowledge/Concept</code>, and added <code>Concept.base</code> for collecting, filtering, and editing concepts</li>
-<li>Used Bookmarks to create a dedicated Bases view collecting each base</li>
-<li>Re-enabled Excalibrain and placed it into a new KM workspace</li>
-<li>[x] Consider how to connect Obsidian and the site more deeply 📅 2026-03-20 ✅ 2026-03-06</li>
-</ol>
-<h4>20260219</h4>
-<ol>
-<li>Adopted Cloudflare R2 + PicGo as the image-hosting solution, cleaned all image files from the repository, cleaned <code>/Notes/Archive</code>, and reduced the whole vault from 850MB to 22MB</li>
-<li>Replaced iCloud with Git as the primary sync method; the vault now auto-syncs after 10 minutes without modification. iCloud is still used on mobile and synced manually when needed</li>
-<li>Mobile → Main: Journals/Thino</li>
-<li>Main → Mobile: everything else</li>
-<li>Reference article: https://meepo.me/obsidian-typora-image-cloudflare-r2-management/</li>
-<li>Personal site officially launched: simoncos.github.io</li>
-</ol>
-<h4>20251222</h4>
-<ol>
-<li>Reworked the directory structure: removed <code>Action</code>, renamed <code>Scenarios</code> to <code>Domain</code>, moved <code>Life</code> content back to the root, and moved <code>Action/Resources</code> and <code>Knowledge/Concept</code> content into their corresponding domains. <code>Knowledge</code> now keeps only <code>Content</code>, <code>People</code>, and <code>Projects</code></li>
-<li>Added same-named notes under each Domain, with a <code>Task</code> section to collect tasks in that domain</li>
-<li>Added <code>Tasks_2026.md</code> at the root to collect tasks planned for completion in 2026; future yearly task lists will follow the same pattern, with due dates required</li>
-<li>Added <code>Domain/General/Write</code> as a unified writing entrance, moving <code>Blog</code> and <code>Think</code> content into it</li>
-<li>After the restructuring, <code>Tag</code> and <code>Domain</code> overlap semantically and need further consideration</li>
-<li><code>Notes</code> and <code>Thino</code> are currently aggregated with tags because their workflow and content nature do not fit neatly into a domain</li>
-<li>[ ] Try the TagFolder plugin 📅 2027-02-20</li>
-<li>domain property?</li>
-<li>Continue refining each Domain</li>
-<li>[-] Reconsider which domains are needed (for example <code>Music/Sing</code>, given recent vocal lessons and practice)</li>
-<li>[-] The definitions of Growth, Hack, and General are still a bit fuzzy; consider adjusting them <span class="annotated-word" data-word="PM#个人管理体系">PM#个人管理体系</span></li>
-<li>[-] Unify the structure under each Domain: _Task, Concept, Project, Note (including Q&amp;A), Resource</li>
-<li>[-] Define and use subdomains, for example under <code>Hack</code></li>
-</ol>
-<p>Current directory structure:</p>
-<ul>
-<li><code>_media</code></li>
-<li><code>_template</code></li>
-<li>Domain</li>
-<li>General<ul>
-<li>Write</li>
-</ul>
-</li>
-<li>Places</li>
-<li>Finance</li>
-<li>Growth</li>
-<li>Hack</li>
-<li>Health</li>
-<li>Music</li>
-<li>PM<ul>
-<li>KM</li>
-</ul>
-</li>
-<li>Swim</li>
-<li>Vision</li>
-<li>Journal</li>
-<li>Knowledge</li>
-<li>Content</li>
-<li>People</li>
-<li>Projects</li>
-<li>Notes</li>
-<li>Tags</li>
-<li>Tasks_2026.md</li>
-</ul>
-<h4>20251119</h4>
-<ol>
-<li>Reworked the structure, created top-level <code>Life</code>, and moved PM under <code>Life/Scenarios</code></li>
-<li>[x] Consider organizing tasks by scenario rather than by year; maintain tasks under <code>Life/Scenarios/XXX</code>, with <code>_Tasks.md</code> still collecting all tasks under <code>Life/Action</code></li>
-<li>Added a routine housekeeping section to <code>C. PM System Log.md</code>, currently including cleanup of Evernote articles and Instapaper notes</li>
-<li>Began using the official Workspaces core plugin to save layouts for different Obsidian usage scenarios</li>
-<li>[ ] Introduce and experiment with more third-party plugins 📅 2027-02-20</li>
-<li>[-] Try Custom Attachment Location to further optimize image storage and referencing</li>
-<li>[ ] Try QuickAdd, mainly its macro feature, to enhance workspace switching</li>
-<li>[ ] Try WeWrite for connecting to WeChat publication management</li>
-<li>[ ] Try AnyBlock to enhance multidimensional table features</li>
-</ol>
-<h4>20250831</h4>
-<ol>
-<li>Introduced the HiNote plugin, which allows comments on highlights</li>
-<li>Upgraded Obsidian to 1.9 and began using the core Bases plugin</li>
-</ol>
-<h4>20250521</h4>
-<ol>
-<li>Imported article collections from Evernote (exported as HTML), converted them into Markdown with the Importer plugin, and stored them in <code>Notes/Articles Evernote</code>; high-value items would later be re-collected via the Obsidian Clippings browser plugin into <code>Notes/Obsidian Clippings</code>; also cleaned some incorrect tags introduced during import</li>
-<li>Concept-related changes</li>
-<li>Updated the Properties template used by Obsidian Clippings to include a <code>concepts</code> field pointing to <code>Knowledge/Concepts</code>, so future collected articles can connect to both tags and concepts</li>
-<li>Updated <code>_template/[Template] Concept</code> to add the <code>concepts</code> property</li>
-<li>Reworked content in <code>Knowledge/Concepts</code>, merging overly granular concepts into parent nodes; for some concepts, attempted to reference images from <code>Knowledge/Infographic</code></li>
-<li>[ ] Try further collaboration with DeepSeek to enhance the Obsidian Clippings workflow 📅 2026-03-20</li>
-<li>Image-related changes</li>
-<li>Collected infographics from Pinterest into <code>Notes/Infographic</code>; used the Image Metadata plugin to add source and context information to important images</li>
-<li>Used Clear Unused Images to remove unused images (excluding <code>Notes/Infographic</code>)</li>
-<li>Used Everything to find large images in the vault, then compressed them via Windows PowerToys Image Resize; vault size at that time: 718MB</li>
-<li>[x] Try other ways to reduce image storage further, such as image hosting ✅ 2026-02-20</li>
-<li>Introduced File Tree Alternative, which separates folders and files visually and supports folder-as-note</li>
-</ol>
-<h4>20250401</h4>
-<ol>
-<li>Removed Make.md because it caused severe problems on mobile Obsidian, made sync difficult, and slowed startup. Its main benefits had been directory features and table-like views, but those no longer felt worth the cost</li>
-<li>Re-enabled omisearch (disabled on mobile to avoid errors)</li>
-<li>Relied primarily on the Tasks plugin for task management</li>
-<li>Added <code>Knowledge/Chat</code>, moving POE-exported conversations from <code>Knowledge/Q&amp;A</code>; also added <code>Knowledge/Project</code> to track interesting projects or products</li>
-</ol>
-<h4>20250201</h4>
-<ol>
-<li>Added the key plugin GitHub Copilot to enable AI-assisted writing inside the vault</li>
-<li>Switched the UI theme to <code>Things3</code></li>
-<li>(Supplementary) Reworked the Knowledge structure into Concept, Opinion, Code, and Q&amp;A (including POE-exported raw conversations)</li>
-</ol>
-<h4>20241125</h4>
-<ol>
-<li>Reorganized part of the structure, moving PM to the top level and putting goals, scenarios, actions, and resources beneath it</li>
-<li>Removed some scenarios</li>
-</ol>
-<h4>20240721</h4>
-<ol>
-<li>Added <code>/Content</code> under <code>Knowledge/Concept</code>; later this would be used to import Douban items, especially books, films, music, and games, making future writing and reference easier</li>
-<li>[ ] Consider importing books / films / music / games and related comments into <code>Knowledge/Content</code> 📅 2027-02-20</li>
-</ol>
-<h4>20240503</h4>
-<ol>
-<li>Abandoned the Projects and Loom plugins in favor of MAKE.md for project management and multi-view tables</li>
-<li>Began using nested tags</li>
-<li>MAKE.md and Thino appeared to have severe incompatibility problems on iPhone, still unresolved at the time</li>
-</ol>
-<h4>20240427</h4>
-<ol>
-<li>Migrated Notion content into Obsidian, introducing the key plugins MAKE.md and Loom to emulate Notion-like file directories and multi-view tables</li>
-<li>Reorganized and renamed the entire repository structure</li>
-<li>Removed Logseq</li>
-<li>Introduced the official Instapaper sync plugin, though sync was not yet working successfully</li>
-</ol>
-<h4>20230127</h4>
-<ol>
-<li>Introduced Logseq into the Obsidian repository, using its card feature to convert Q&amp;A content from earlier daily notes-not for spaced repetition exactly, but for spaced thinking</li>
-<li>Renamed <code>write</code> to <code>blogs</code>, moved the daily notes inside it into a new <code>Journals</code> folder for Logseq compatibility, leaving only articles in the remaining part</li>
-<li>Consolidated scattered thoughts from earlier daily notes into Memo with a unified format</li>
-</ol>
-<h4>20230125</h4>
-<ol>
-<li>Added the folder <code>think</code> to the Obsidian repository for diagrammatic thinking files such as Canvas and Excalidraw</li>
-</ol>
-<h4>20221028</h4>
-<ol>
-<li>Introduced the third-party Obsidian plugin Memos as an entry point for fragmented everyday writing</li>
-</ol>
-<h4>20220319</h4>
-<ol>
-<li>Organized historical articles exported from Jianshu</li>
-<li>Used the third-party plugin <code>obsidian-local-images</code> to automatically download image URLs into local files and replace the links in Markdown articles</li>
-<li>Used the VS Code extension HTML to Markdown to convert HTML articles into Markdown</li>
-<li>Moved the Obsidian repository onto iCloud, making it accessible across Apple devices and Windows</li>
-<li>At that time the repository was divided into four functional folders:</li>
-<li><code>_media</code>: image materials, with audio/video considered for the future</li>
-<li><code>knowledge</code>: for knowledge-oriented content later migrated from Notion, TheBrain, Evernote, etc.</li>
-<li><code>manage</code>: for personal management files such as time and money spreadsheets</li>
-<li><code>write</code>: for written output</li>
-</ol>
+<pre><code class="language-markdown">
+#### 20260314
+
+1. Collaboration with RedPiggy has started to form a clearer workflow inside Obsidian:
+   1. Article drafts should enter Obsidian first, rather than going directly into the site repository
+   2. Published or publication-oriented RedPiggy articles now belong in `Write/Blog/RedPiggy/`
+   3. Git + GitHub sync now makes remote review and editing possible even from mobile
+2. The Telegram → Journal workflow has been connected:
+   1. With `/j`, Telegram messages can be appended directly to `Journal/YYYY-MM-DD.md`
+   2. Image support is included: images are uploaded to Cloudflare R2 through PicGo, then written into Journal as Markdown links
+   3. This turns Telegram into a real lightweight capture entrance, while Obsidian continues to do organization and distillation
+3. The RedPiggy area received a dedicated round of reorganization:
+   1. Added `RedPiggy/Reference/` to hold analysis, indexes, reading notes, and supporting session materials
+   2. Structured `RedPiggy/Projects/` into `Dev / Writing / Research / Systems / Backlog`
+   3. Finished writing and working materials are now more clearly separated; the root feels more like an entry point than a mixed pile
+4. Added `README.md` to `RedPiggy/` to explain the structure and reduce the entry cost for future collaboration
+5. Around the bilingual-site and authored-vs-inferred direction, the collaboration boundary between the site and Obsidian is now clearer:
+   - Obsidian handles drafts, comments, and organization
+   - the site repository handles publishing and presentation
+
+#### 20260227
+
+1. Introduced the Linter plugin, currently used mainly to remove extra blank lines
+2. [ ] Consider how to export and clean up GitHub-starred projects
+3. [x] Obsidian Skills: [kepano/obsidian-skills: Agent skills for Obsidian. Teach your agent to use Markdown, Bases, JSON Canvas, and use the CLI.](https://github.com/kepano/obsidian-skills) 📅 2026-06-11 ✅ 2026-03-02
+
+#### 20260220
+
+1. Used Bookmarks to create a dedicated Domains view collecting each domain page
+2. Moved `Write` out of `Domain/General` to the root, and removed `Domain/General`
+3. Moved all Concept content back into `Knowledge/Concept`, and added `Concept.base` for collecting, filtering, and editing concepts
+4. Used Bookmarks to create a dedicated Bases view collecting each base
+5. Re-enabled Excalibrain and placed it into a new KM workspace
+6. [x] Consider how to connect Obsidian and the site more deeply 📅 2026-03-20 ✅ 2026-03-06
+
+#### 20260219
+
+1. Adopted Cloudflare R2 + PicGo as the image-hosting solution, cleaned all image files from the repository, cleaned `/Notes/Archive`, and reduced the whole vault from 850MB to 22MB
+2. Replaced iCloud with Git as the primary sync method; the vault now auto-syncs after 10 minutes without modification. iCloud is still used on mobile and synced manually when needed
+   - Mobile → Main: Journals/Thino
+   - Main → Mobile: everything else
+3. Reference article: https://meepo.me/obsidian-typora-image-cloudflare-r2-management/
+4. Personal site officially launched: simoncos.github.io
+
+#### 20251222
+
+1. Reworked the directory structure: removed `Action`, renamed `Scenarios` to `Domain`, moved `Life` content back to the root, and moved `Action/Resources` and `Knowledge/Concept` content into their corresponding domains. `Knowledge` now keeps only `Content`, `People`, and `Projects`
+2. Added same-named notes under each Domain, with a `Task` section to collect tasks in that domain
+3. Added `Tasks_2026.md` at the root to collect tasks planned for completion in 2026; future yearly task lists will follow the same pattern, with due dates required
+4. Added `Domain/General/Write` as a unified writing entrance, moving `Blog` and `Think` content into it
+5. After the restructuring, `Tag` and `Domain` overlap semantically and need further consideration
+   - `Notes` and `Thino` are currently aggregated with tags because their workflow and content nature do not fit neatly into a domain
+   - [ ] Try the TagFolder plugin 📅 2027-02-20
+   - domain property?
+6. Continue refining each Domain
+   - [-] Reconsider which domains are needed (for example `Music/Sing`, given recent vocal lessons and practice)
+   - [-] The definitions of Growth, Hack, and General are still a bit fuzzy; consider adjusting them &lt;span class="annotated-word" data-word="PM#个人管理体系"&gt;PM#个人管理体系&lt;/span&gt;
+   - [-] Unify the structure under each Domain: _Task, Concept, Project, Note (including Q&amp;A), Resource
+   - [-] Define and use subdomains, for example under `Hack`
+
+Current directory structure:
+
+- `_media`
+- `_template`
+- Domain
+  - General
+    - Write
+  - Places
+  - Finance
+  - Growth
+  - Hack
+  - Health
+  - Music
+  - PM
+    - KM
+  - Swim
+  - Vision
+- Journal
+- Knowledge
+  - Content
+  - People
+  - Projects
+- Notes
+- Tags
+- Tasks_2026.md
+
+#### 20251119
+
+1. Reworked the structure, created top-level `Life`, and moved PM under `Life/Scenarios`
+2. [x] Consider organizing tasks by scenario rather than by year; maintain tasks under `Life/Scenarios/XXX`, with `_Tasks.md` still collecting all tasks under `Life/Action`
+3. Added a routine housekeeping section to `C. PM System Log.md`, currently including cleanup of Evernote articles and Instapaper notes
+4. Began using the official Workspaces core plugin to save layouts for different Obsidian usage scenarios
+5. [ ] Introduce and experiment with more third-party plugins 📅 2027-02-20
+   - [-] Try Custom Attachment Location to further optimize image storage and referencing
+   - [ ] Try QuickAdd, mainly its macro feature, to enhance workspace switching
+   - [ ] Try WeWrite for connecting to WeChat publication management
+   - [ ] Try AnyBlock to enhance multidimensional table features
+
+#### 20250831
+
+1. Introduced the HiNote plugin, which allows comments on highlights
+2. Upgraded Obsidian to 1.9 and began using the core Bases plugin
+
+#### 20250521
+
+1. Imported article collections from Evernote (exported as HTML), converted them into Markdown with the Importer plugin, and stored them in `Notes/Articles Evernote`; high-value items would later be re-collected via the Obsidian Clippings browser plugin into `Notes/Obsidian Clippings`; also cleaned some incorrect tags introduced during import
+2. Concept-related changes
+   1. Updated the Properties template used by Obsidian Clippings to include a `concepts` field pointing to `Knowledge/Concepts`, so future collected articles can connect to both tags and concepts
+   2. Updated `_template/[Template] Concept` to add the `concepts` property
+   3. Reworked content in `Knowledge/Concepts`, merging overly granular concepts into parent nodes; for some concepts, attempted to reference images from `Knowledge/Infographic`
+3. [ ] Try further collaboration with DeepSeek to enhance the Obsidian Clippings workflow 📅 2026-03-20
+4. Image-related changes
+   1. Collected infographics from Pinterest into `Notes/Infographic`; used the Image Metadata plugin to add source and context information to important images
+   2. Used Clear Unused Images to remove unused images (excluding `Notes/Infographic`)
+   3. Used Everything to find large images in the vault, then compressed them via Windows PowerToys Image Resize; vault size at that time: 718MB
+   4. [x] Try other ways to reduce image storage further, such as image hosting ✅ 2026-02-20
+5. Introduced File Tree Alternative, which separates folders and files visually and supports folder-as-note
+
+#### 20250401
+
+1. Removed Make.md because it caused severe problems on mobile Obsidian, made sync difficult, and slowed startup. Its main benefits had been directory features and table-like views, but those no longer felt worth the cost
+2. Re-enabled omisearch (disabled on mobile to avoid errors)
+3. Relied primarily on the Tasks plugin for task management
+4. Added `Knowledge/Chat`, moving POE-exported conversations from `Knowledge/Q&amp;A`; also added `Knowledge/Project` to track interesting projects or products
+
+#### 20250201
+
+1. Added the key plugin GitHub Copilot to enable AI-assisted writing inside the vault
+2. Switched the UI theme to `Things3`
+3. (Supplementary) Reworked the Knowledge structure into Concept, Opinion, Code, and Q&amp;A (including POE-exported raw conversations)
+
+#### 20241125
+
+1. Reorganized part of the structure, moving PM to the top level and putting goals, scenarios, actions, and resources beneath it
+2. Removed some scenarios
+
+#### 20240721
+
+1. Added `/Content` under `Knowledge/Concept`; later this would be used to import Douban items, especially books, films, music, and games, making future writing and reference easier
+2. [ ] Consider importing books / films / music / games and related comments into `Knowledge/Content` 📅 2027-02-20
+
+#### 20240503
+
+1. Abandoned the Projects and Loom plugins in favor of MAKE.md for project management and multi-view tables
+2. Began using nested tags
+3. MAKE.md and Thino appeared to have severe incompatibility problems on iPhone, still unresolved at the time
+
+#### 20240427
+
+1. Migrated Notion content into Obsidian, introducing the key plugins MAKE.md and Loom to emulate Notion-like file directories and multi-view tables
+2. Reorganized and renamed the entire repository structure
+3. Removed Logseq
+4. Introduced the official Instapaper sync plugin, though sync was not yet working successfully
+
+#### 20230127
+
+1. Introduced Logseq into the Obsidian repository, using its card feature to convert Q&amp;A content from earlier daily notes-not for spaced repetition exactly, but for spaced thinking
+2. Renamed `write` to `blogs`, moved the daily notes inside it into a new `Journals` folder for Logseq compatibility, leaving only articles in the remaining part
+3. Consolidated scattered thoughts from earlier daily notes into Memo with a unified format
+
+#### 20230125
+
+1. Added the folder `think` to the Obsidian repository for diagrammatic thinking files such as Canvas and Excalidraw
+
+#### 20221028
+
+1. Introduced the third-party Obsidian plugin Memos as an entry point for fragmented everyday writing
+
+#### 20220319
+
+1. Organized historical articles exported from Jianshu
+   1. Used the third-party plugin `obsidian-local-images` to automatically download image URLs into local files and replace the links in Markdown articles
+   2. Used the VS Code extension HTML to Markdown to convert HTML articles into Markdown
+2. Moved the Obsidian repository onto iCloud, making it accessible across Apple devices and Windows
+3. At that time the repository was divided into four functional folders:
+   1. `_media`: image materials, with audio/video considered for the future
+   2. `knowledge`: for knowledge-oriented content later migrated from Notion, TheBrain, Evernote, etc.
+   3. `manage`: for personal management files such as time and money spreadsheets
+   4. `write`: for written output
+</code></pre>
 <div class="footnote">
 <hr/>
 <ol>
@@ -349,7 +346,7 @@
     <footer>
         <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>simoncos</span>. All rights reserved.</p>
         <p><a href="../feed.zh.xml">RSS (中文)</a> · <a href="../feed.en.xml">RSS (English)</a></p>
-        <p class="site-version">v1.0-6-g063351d</p>
+        <p class="site-version">v1.0-7-g5d86976</p>
     </footer>
     <button type="button" id="back-to-top" class="back-to-top hidden" aria-label="Back to top">Back to top</button>
     <div id="progress-container">
