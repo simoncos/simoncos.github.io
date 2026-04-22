@@ -83,7 +83,7 @@
         zh: {
             nav_home: '首页',
             nav_blogs: '博客',
-            nav_projects: 'Projects',
+            nav_projects: '项目',
             nav_tags: '标签',
             nav_series: '系列',
             nav_about: '关于',
