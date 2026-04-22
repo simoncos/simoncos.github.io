@@ -1,48 +1,112 @@
-<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="720" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0D1320"/>
-      <stop offset="1" stop-color="#16243A"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D1117"/>
+      <stop offset="1" stop-color="#161B22"/>
     </linearGradient>
-    <linearGradient id="lineA" x1="120" y1="190" x2="1030" y2="190" gradientUnits="userSpaceOnUse">
+    <linearGradient id="lineMain" x1="520" y1="180" x2="1100" y2="180" gradientUnits="userSpaceOnUse">
       <stop stop-color="#7CE2FF" stop-opacity="0.2"/>
       <stop offset="1" stop-color="#7CE2FF"/>
     </linearGradient>
-    <linearGradient id="lineB" x1="120" y1="420" x2="1030" y2="420" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#91A8FF" stop-opacity="0.15"/>
-      <stop offset="1" stop-color="#91A8FF"/>
-    </linearGradient>
-    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
-      <stop stop-color="#1659C5"/>
-      <stop offset="1" stop-color="#0B7285"/>
-    </linearGradient>
   </defs>
-  <rect width="1200" height="720" rx="36" fill="url(#bg)"/>
-  <g opacity="0.35">
-    <path d="M0 84H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
-    <path d="M0 180H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
-    <path d="M0 276H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
-    <path d="M0 372H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
-    <path d="M0 468H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
-    <path d="M0 564H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
-    <path d="M0 660H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
+
+  <!-- Background -->
+  <rect width="1200" height="630" rx="16" fill="url(#bg)"/>
+
+  <!-- Subtle grid lines -->
+  <g opacity="0.15">
+    <path d="M0 105H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
+    <path d="M0 210H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
+    <path d="M0 315H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
+    <path d="M0 420H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
+    <path d="M0 525H1200" stroke="#C5D6FF" stroke-opacity="0.08"/>
   </g>
-  <g opacity="0.7">
-    <rect x="130" y="392" width="52" height="168" rx="10" fill="url(#bar)"/>
-    <rect x="210" y="340" width="52" height="220" rx="10" fill="url(#bar)"/>
-    <rect x="290" y="280" width="52" height="280" rx="10" fill="url(#bar)"/>
-    <rect x="370" y="198" width="52" height="362" rx="10" fill="url(#bar)"/>
-    <rect x="450" y="150" width="52" height="410" rx="10" fill="url(#bar)"/>
-    <rect x="530" y="208" width="52" height="352" rx="10" fill="url(#bar)"/>
-    <rect x="610" y="318" width="52" height="242" rx="10" fill="url(#bar)"/>
-    <rect x="690" y="346" width="52" height="214" rx="10" fill="url(#bar)"/>
-    <rect x="770" y="360" width="52" height="200" rx="10" fill="url(#bar)"/>
+
+  <!-- Accent bar left -->
+  <rect x="60" y="72" width="4" height="60" rx="2" fill="#7CE2FF"/>
+
+  <!-- Title -->
+  <text x="78" y="108" fill="#E6EDF3" font-family="Inter, -apple-system, sans-serif" font-size="48" font-weight="700">十年睡眠数据</text>
+  <text x="78" y="148" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="24">我们能挖掘到什么？</text>
+
+  <!-- Metadata line -->
+  <text x="78" y="188" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="18">SleepCycle · 2016–2026</text>
+
+  <!-- Metrics row -->
+  <g>
+    <text x="78" y="252" fill="#7CE2FF" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="700">3,656</text>
+    <text x="78" y="278" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="16">个夜晚</text>
   </g>
-  <path d="M122 454C182 454 188 392 242 392C312 392 310 210 384 210C444 210 452 166 504 166C582 166 592 316 658 316C722 316 720 336 790 336C844 336 844 378 902 378C962 378 978 442 1030 442" stroke="url(#lineA)" stroke-width="8" stroke-linecap="round"/>
-  <path d="M122 478C182 478 192 446 244 446C308 446 314 430 372 430C444 430 456 406 506 406C582 406 600 430 660 430C718 430 732 496 788 496C860 496 864 474 924 474C978 474 992 522 1030 522" stroke="url(#lineB)" stroke-width="6" stroke-linecap="round" stroke-dasharray="10 14"/>
-  <circle cx="504" cy="166" r="10" fill="#7CE2FF"/>
-  <circle cx="790" cy="336" r="10" fill="#7CE2FF"/>
-  <circle cx="924" cy="474" r="10" fill="#91A8FF"/>
-  <text x="120" y="98" fill="#EDF3FF" font-family="Aptos, Segoe UI, sans-serif" font-size="56" font-weight="700">十年睡眠档案</text>
-  <text x="120" y="144" fill="#C4D0E6" font-family="Aptos, Segoe UI, sans-serif" font-size="28">A personal data essay built from 3,656 nights</text>
+  <g>
+    <text x="250" y="252" fill="#E6EDF3" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="700">10</text>
+    <text x="250" y="278" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="16">年记录</text>
+  </g>
+  <g>
+    <text x="400" y="252" fill="#3FB950" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="700">83.3%</text>
+    <text x="400" y="278" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="16">均值质量</text>
+  </g>
+  <g>
+    <text x="590" y="252" fill="#FFA657" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="700">4.7</text>
+    <text x="590" y="278" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="16">BD峰/小时</text>
+  </g>
+
+  <!-- Insight bullets -->
+  <g>
+    <rect x="78" y="310" width="10" height="10" rx="2" fill="#3FB950"/>
+    <text x="98" y="320" fill="#E6EDF3" font-family="Inter, -apple-system, sans-serif" font-size="15">靶向游泳 +2.7% 质量</text>
+  </g>
+  <g>
+    <rect x="78" y="340" width="10" height="10" rx="2" fill="#F85149"/>
+    <text x="98" y="350" fill="#E6EDF3" font-family="Inter, -apple-system, sans-serif" font-size="15">旅行奔波 −11.2% 质量</text>
+  </g>
+  <g>
+    <rect x="78" y="370" width="10" height="10" rx="2" fill="#7CE2FF"/>
+    <text x="98" y="380" fill="#E6EDF3" font-family="Inter, -apple-system, sans-serif" font-size="15">睡眠债：次夜入睡前移 148 分钟</text>
+  </g>
+  <g>
+    <rect x="78" y="400" width="10" height="10" rx="2" fill="#7D8590"/>
+    <text x="98" y="410" fill="#E6EDF3" font-family="Inter, -apple-system, sans-serif" font-size="15">连续两晚好眠 → 次夜质量 90.7%</text>
+  </g>
+
+  <!-- Divider -->
+  <rect x="500" y="80" width="1" height="350" fill="#30363D" opacity="0.5"/>
+
+  <!-- Chart area -->
+  <text x="520" y="100" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="14">月度睡眠质量 2016–2026</text>
+
+  <!-- Y-axis labels -->
+  <text x="508" y="185" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="12" text-anchor="end">90</text>
+  <text x="508" y="280" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="12" text-anchor="end">85</text>
+  <text x="508" y="375" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="12" text-anchor="end">80</text>
+
+  <!-- Y-axis grid -->
+  <g opacity="0.15">
+    <line x1="520" y1="180" x2="1100" y2="180" stroke="#C5D6FF" stroke-dasharray="4 4"/>
+    <line x1="520" y1="275" x2="1100" y2="275" stroke="#C5D6FF" stroke-dasharray="4 4"/>
+    <line x1="520" y1="370" x2="1100" y2="370" stroke="#C5D6FF" stroke-dasharray="4 4"/>
+  </g>
+
+  <!-- X-axis labels -->
+  <text x="520" y="410" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="12">2016</text>
+  <text x="640" y="410" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="12">2018</text>
+  <text x="760" y="410" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="12">2020</text>
+  <text x="880" y="410" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="12">2022</text>
+  <text x="1000" y="410" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="12">2024</text>
+  <text x="1080" y="410" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="12">2026</text>
+
+  <!-- Main data line -->
+  <path d="M520 320 C560 310, 580 290, 620 280 C660 270, 680 250, 720 240 C740 235, 750 190, 760 180 C780 200, 800 310, 820 330 C840 340, 860 310, 880 290 C900 280, 920 295, 940 310 C960 320, 980 340, 1000 335 C1020 330, 1060 320, 1100 325" stroke="#7CE2FF" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- Annotation: 封控期 (peak) -->
+  <circle cx="760" cy="180" r="6" fill="#3FB950"/>
+  <line x1="760" y1="186" x2="760" y2="210" stroke="#3FB950" stroke-width="1"/>
+  <text x="760" y="225" fill="#3FB950" font-family="Inter, -apple-system, sans-serif" font-size="13" text-anchor="middle">封控期</text>
+
+  <!-- Annotation: COVID (trough) -->
+  <circle cx="940" cy="310" r="6" fill="#F85149"/>
+  <line x1="940" y1="304" x2="940" y2="280" stroke="#F85149" stroke-width="1"/>
+  <text x="940" y="272" fill="#F85149" font-family="Inter, -apple-system, sans-serif" font-size="13" text-anchor="middle">COVID</text>
+
+  <!-- URL footer -->
+  <text x="78" y="580" fill="#7D8590" font-family="Inter, -apple-system, sans-serif" font-size="13" opacity="0.6">simoncos-project-previews.vercel.app/sleep</text>
 </svg>
