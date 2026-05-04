@@ -1670,17 +1670,18 @@
         if (title2) title2.textContent = 'Quality comparison: alcohol vs caffeine vs baseline';
 
         const years = Object.keys(wine.yearly_pct || {}).sort();
+        const yearNums = years.map(Number);
         Plotly.newPlot('chart-event-freq', [
-          { x: years, y: years.map(y => (wine.yearly_pct || {})[y] || 0), type: 'scatter', mode: 'lines+markers', name: 'Alcohol', line: { color: THEME.red, width: 2.5 }, marker: { size: 6 } },
-          { x: years, y: years.map(y => (caff.yearly_pct || {})[y] || 0), type: 'scatter', mode: 'lines+markers', name: 'Caffeine (tea/coffee)', line: { color: THEME.gold, width: 2.5 }, marker: { size: 6 } }
+          { x: yearNums, y: years.map(y => (wine.yearly_pct || {})[y] || 0), type: 'scatter', mode: 'lines+markers', name: 'Alcohol', line: { color: THEME.red, width: 2.5 }, marker: { size: 6 } },
+          { x: yearNums, y: years.map(y => (caff.yearly_pct || {})[y] || 0), type: 'scatter', mode: 'lines+markers', name: 'Caffeine (tea/coffee)', line: { color: THEME.gold, width: 2.5 }, marker: { size: 6 } }
         ], {
           ...plotDefaults,
           yaxis: { ...plotDefaults.yaxis, title: 'Frequency %', ticksuffix: '%' },
-          xaxis: { ...plotDefaults.xaxis, title: '', type: 'category' },
+          xaxis: { ...plotDefaults.xaxis, title: '', type: 'linear', tickmode: 'array', tickvals: yearNums, ticktext: years, range: [yearNums[0] - 0.5, yearNums[yearNums.length - 1] + 0.5] },
           legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
           margin: { t: 10, r: 70, b: 45, l: 55 },
           annotations: years.includes('2026') ? [{
-            x: '2026', y: 0, xref: 'x', yref: 'paper',
+            x: 2026, y: 0, xref: 'x', yref: 'paper',
             text: '* data through Mar; spike likely driven by Lunar New Year holiday cluster', showarrow: false,
             font: { color: THEME.muted, size: 10 }, xanchor: 'center', yanchor: 'bottom'
           }] : []
