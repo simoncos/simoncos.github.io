@@ -21,7 +21,7 @@
     <rect x="58" y="58" width="214" height="404" rx="24" fill="#182033"/>
     <rect x="82" y="88" width="62" height="8" rx="4" fill="#dfe9ec" opacity=".52"/>
     <rect x="82" y="114" width="152" height="28" rx="8" fill="#ffffff" opacity=".09"/>
-    <g font-family="Inter, ui-sans-serif, sans-serif" font-size="15" fill="#dfe9ec" opacity=".88">
+    <g font-family="Inter, ui-sans-serif, sans-serif" font-size="16" fill="#dfe9ec" opacity=".92">
       <text x="104" y="136">_media</text>
       <text x="104" y="174">Domain</text>
       <text x="122" y="202" opacity=".64">Finance · Health · PM</text>
@@ -32,34 +32,34 @@
       <text x="104" y="378">RedPiggy</text>
       <text x="104" y="418">Write · Journal</text>
     </g>
-    <g fill="none" stroke="#dfe9ec" stroke-opacity=".45" stroke-width="1.6">
+    <g fill="none" stroke="#dfe9ec" stroke-opacity=".45" stroke-width="1.8">
       <path d="M88 128l8 5-8 5"/><path d="M90 169l6 6 6-6"/><path d="M90 237l6 6 6-6"/><path d="M90 305l6 6 6-6"/><path d="M88 373l8 5-8 5"/><path d="M88 412l8 5-8 5"/>
       <path d="M110 182v22M110 250v22M110 318v22" opacity=".32"/>
     </g>
   </g>
 
   <!-- translation layer -->
-  <path d="M272 170C334 170 334 132 396 132" fill="none" stroke="#182033" stroke-opacity=".34" stroke-width="3" stroke-linecap="round"/>
-  <path d="M272 252C342 252 344 238 396 238" fill="none" stroke="#0b7285" stroke-opacity=".66" stroke-width="3.4" stroke-linecap="round"/>
-  <path d="M272 332C338 332 338 352 396 352" fill="none" stroke="#182033" stroke-opacity=".30" stroke-width="3" stroke-linecap="round"/>
+  <path d="M272 170C334 170 334 132 396 132" fill="none" stroke="#182033" stroke-opacity=".34" stroke-width="3.7" stroke-linecap="round"/>
+  <path d="M272 252C342 252 344 238 396 238" fill="none" stroke="#0b7285" stroke-opacity=".66" stroke-width="3.7" stroke-linecap="round"/>
+  <path d="M272 332C338 332 338 352 396 352" fill="none" stroke="#182033" stroke-opacity=".30" stroke-width="3.7" stroke-linecap="round"/>
   <circle cx="396" cy="238" r="8" fill="#0b7285"/>
 
   <!-- architecture cards -->
   <g font-family="Inter, Noto Sans SC, ui-sans-serif, sans-serif">
     <g filter="url(#shadow)">
       <rect x="396" y="80" width="284" height="86" rx="20" fill="#ffffff" fill-opacity=".68" stroke="#182033" stroke-opacity=".18"/>
-      <text x="424" y="116" font-size="16" font-weight="700" fill="#0b7285" letter-spacing="2">INPUTS</text>
-      <text x="424" y="143" font-size="20" font-weight="300" fill="#182033">Notes / Clippings / Chat</text>
+      <text x="424" y="116" font-size="17" font-weight="700" fill="#0b7285" letter-spacing="2">INPUTS</text>
+      <text x="424" y="143" font-size="21" font-weight="300" fill="#182033">Notes / Clippings / Chat</text>
     </g>
     <g filter="url(#shadow)">
       <rect x="396" y="194" width="284" height="86" rx="20" fill="#ffffff" fill-opacity=".78" stroke="#0b7285" stroke-opacity=".36"/>
-      <text x="424" y="230" font-size="16" font-weight="700" fill="#0b7285" letter-spacing="2">KNOWLEDGE</text>
-      <text x="424" y="257" font-size="20" font-weight="300" fill="#182033">Concept / People / Projects</text>
+      <text x="424" y="230" font-size="17" font-weight="700" fill="#0b7285" letter-spacing="2">KNOWLEDGE</text>
+      <text x="424" y="257" font-size="21" font-weight="300" fill="#182033">Concept / People / Projects</text>
     </g>
     <g filter="url(#shadow)">
       <rect x="396" y="308" width="284" height="86" rx="20" fill="#ffffff" fill-opacity=".68" stroke="#182033" stroke-opacity=".18"/>
-      <text x="424" y="344" font-size="16" font-weight="700" fill="#1659c5" letter-spacing="2">USE CASES</text>
-      <text x="424" y="371" font-size="20" font-weight="300" fill="#182033">Domain / Write / Journal</text>
+      <text x="424" y="344" font-size="17" font-weight="700" fill="#1659c5" letter-spacing="2">USE CASES</text>
+      <text x="424" y="371" font-size="21" font-weight="300" fill="#182033">Domain / Write / Journal</text>
     </g>
   </g>
 
@@ -68,7 +68,7 @@
     <path d="M458 418H640"/>
     <path d="M486 442H612"/>
   </g>
-  <g font-family="Inter, ui-sans-serif, sans-serif" font-size="14" fill="#4d5a72">
+  <g font-family="Inter, ui-sans-serif, sans-serif" font-size="15" fill="#3f4b5f">
     <text x="430" y="452">templates · tags · tasks as operating layer</text>
   </g>
 </svg>
