@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">AI 时代的个人信息系统 talk cover</title>
+  <desc id="desc">Swiss-style abstract cover for the talk deck.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8f5ee"/>
+      <stop offset="1" stop-color="#dfe9ec"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#182033" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <rect width="1200" height="720" fill="url(#grid)"/>
+  <circle cx="910" cy="180" r="210" fill="#0b7285" opacity="0.16"/>
+  <circle cx="280" cy="560" r="180" fill="#1659c5" opacity="0.12"/>
+  <g fill="none" stroke="#182033" stroke-width="3" opacity="0.72">
+    <path d="M210 360H430C490 360 500 270 560 270H760"/>
+    <path d="M210 430H500C570 430 560 520 640 520H920"/>
+    <path d="M520 210H760C850 210 840 360 930 360"/>
+  </g>
+  <g fill="#182033">
+    <circle cx="210" cy="360" r="10"/>
+    <circle cx="760" cy="270" r="10"/>
+    <circle cx="930" cy="360" r="10"/>
+    <circle cx="920" cy="520" r="10"/>
+  </g>
+  <text x="84" y="118" fill="#0b7285" font-family="Inter, Noto Sans SC, sans-serif" font-size="28" font-weight="700" letter-spacing="8">TALK · 2026</text>
+  <text x="82" y="218" fill="#182033" font-family="Inter, Noto Sans SC, sans-serif" font-size="74" font-weight="300">AI 时代的</text>
+  <text x="82" y="302" fill="#182033" font-family="Inter, Noto Sans SC, sans-serif" font-size="84" font-weight="700">个人信息系统</text>
+  <text x="86" y="632" fill="#4d5a72" font-family="Inter, Noto Sans SC, sans-serif" font-size="28" font-weight="400">Capture · Memory · Retrieval · Action</text>
+</svg>
