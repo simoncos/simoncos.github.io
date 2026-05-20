@@ -1979,6 +1979,18 @@ body.dark-mode .meta-pill--project {
     color: #bc8cff;
 }
 
+.meta-pill--gallery {
+    border-color: rgba(11, 114, 133, 0.22);
+    background: rgba(11, 114, 133, 0.08);
+    color: var(--accent);
+}
+
+body.dark-mode .meta-pill--gallery {
+    border-color: rgba(124, 226, 255, 0.24);
+    background: rgba(124, 226, 255, 0.08);
+    color: var(--dark-link-color);
+}
+
 .meta-pill--blog {
     /* inherits default .meta-pill styles */
 }
