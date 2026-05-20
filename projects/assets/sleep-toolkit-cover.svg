@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Sleep Toolkit project cover</title>
+  <desc id="desc">Abstract cover for the Sleep Toolkit web app and CLI.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1320"/>
+      <stop offset="1" stop-color="#111b2b"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7ce2ff"/>
+      <stop offset="1" stop-color="#91a8ff"/>
+    </linearGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" fill="none" stroke="#edf3ff" stroke-opacity="0.06"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <rect width="1200" height="720" fill="url(#grid)"/>
+  <rect x="82" y="92" width="1036" height="536" rx="34" fill="#0a1019" stroke="#7ce2ff" stroke-opacity="0.22"/>
+  <g transform="translate(130 150)">
+    <text x="0" y="0" fill="#7ce2ff" font-family="Inter, sans-serif" font-size="28" font-weight="700" letter-spacing="8">PROJECT · WEB APP / CLI</text>
+    <text x="0" y="110" fill="#edf3ff" font-family="Inter, Noto Sans SC, sans-serif" font-size="88" font-weight="700">Sleep Toolkit</text>
+    <text x="0" y="170" fill="#c4d0e6" font-family="Inter, Noto Sans SC, sans-serif" font-size="34" font-weight="400">SleepCycle CSV → JSON · HTML · PDF</text>
+  </g>
+  <g transform="translate(150 450)" fill="none" stroke="url(#cyan)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 70 C60 30 120 110 180 70 S300 30 360 70 S480 110 540 70 S660 30 720 70 S840 110 900 70" opacity="0.95"/>
+    <path d="M0 120 C80 70 150 170 230 120 S390 70 470 120 S630 170 710 120 S850 70 930 120" opacity="0.42"/>
+  </g>
+  <g transform="translate(760 250)">
+    <rect x="0" y="0" width="280" height="170" rx="18" fill="#111b2b" stroke="#7ce2ff" stroke-opacity="0.28"/>
+    <rect x="28" y="36" width="160" height="12" rx="6" fill="#7ce2ff" opacity="0.85"/>
+    <rect x="28" y="72" width="218" height="12" rx="6" fill="#91a8ff" opacity="0.65"/>
+    <rect x="28" y="108" width="96" height="12" rx="6" fill="#edf3ff" opacity="0.4"/>
+  </g>
+</svg>
