@@ -1,15 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img"><defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8f5ee"/><stop offset="1" stop-color="#dfe9ec"/></linearGradient>
-  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#182033" stroke-opacity="0.07" stroke-width="1"/></pattern>
-</defs>
-<rect width="640" height="360" fill="url(#bg)"/>
-<rect width="640" height="360" fill="url(#grid)"/>
-<circle cx="500" cy="80" r="120" fill="#16745c" opacity="0.14"/>
-<circle cx="125" cy="300" r="100" fill="#1659c5" opacity="0.10"/>
-<path d="M145 95h160c35 0 55 18 55 50v150H200c-35 0-55-18-55-50z" fill="none" stroke="#182033" stroke-width="3" opacity=".65"/>
-<path d="M360 95h135v200H360z" fill="none" stroke="#182033" stroke-width="3" opacity=".65"/>
-<path d="M360 105v190" stroke="#16745c" stroke-width="4"/>
-<path d="M185 135h110M398 135h70" stroke="#182033" stroke-width="2" opacity=".28"/>
-<path d="M185 170h110M398 170h70" stroke="#182033" stroke-width="2" opacity=".28"/>
-<path d="M185 205h110M398 205h70" stroke="#182033" stroke-width="2" opacity=".28"/>
-<path d="M185 240h110M398 240h70" stroke="#182033" stroke-width="2" opacity=".28"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Reading highlights into notes">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfaf6"/>
+      <stop offset="1" stop-color="#f0ece3"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#182033" stroke-opacity="0.055" stroke-width="1"/>
+    </pattern>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#182033" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="640" height="360" rx="28" fill="url(#bg)"/>
+  <rect width="640" height="360" rx="28" fill="url(#grid)"/>
+  <circle cx="510" cy="78" r="118" fill="#0b7285" opacity="0.105"/>
+  <circle cx="125" cy="300" r="96" fill="#1659c5" opacity="0.075"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+
+    <path d="M148 98c48-18 92-10 132 20v140c-38-28-82-36-132-18z" fill="#fff" fill-opacity=".56" stroke="#182033" stroke-opacity=".42" stroke-width="2.2" filter="url(#softShadow)"/>
+    <path d="M280 118c42-30 88-38 136-20v142c-48-18-94-10-136 18z" fill="#fff" fill-opacity=".48" stroke="#182033" stroke-opacity=".36" stroke-width="2.2" filter="url(#softShadow)"/>
+    <path d="M180 142h56M180 168h76M180 194h42" stroke="#182033" stroke-opacity=".26" stroke-width="2.4"/>
+    <path d="M314 146h68M314 172h54M314 198h74" stroke="#182033" stroke-opacity=".22" stroke-width="2.4"/>
+    <path d="M184 168h76" stroke="#0b7285" stroke-opacity=".72" stroke-width="5"/>
+    <path d="M280 118v140" stroke="#182033" stroke-opacity=".26" stroke-width="2"/>
+    <path d="M416 98v58l-16-12-16 12v-52" fill="#0b7285" fill-opacity=".28" stroke="#0b7285" stroke-opacity=".65" stroke-width="1.8"/>
+
+  </g>
+</svg>

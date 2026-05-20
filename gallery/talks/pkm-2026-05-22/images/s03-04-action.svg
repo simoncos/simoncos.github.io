@@ -1,18 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img"><defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8f5ee"/><stop offset="1" stop-color="#dfe9ec"/></linearGradient>
-  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#182033" stroke-opacity="0.07" stroke-width="1"/></pattern>
-</defs>
-<rect width="640" height="360" fill="url(#bg)"/>
-<rect width="640" height="360" fill="url(#grid)"/>
-<circle cx="500" cy="80" r="120" fill="#0b7285" opacity="0.14"/>
-<circle cx="125" cy="300" r="100" fill="#1659c5" opacity="0.10"/>
-<rect x="105" y="96" width="145" height="92" rx="14" fill="none" stroke="#182033" stroke-width="3" opacity=".65"/>
-<rect x="390" y="170" width="145" height="92" rx="14" fill="none" stroke="#182033" stroke-width="3" opacity=".65"/>
-<path d="M250 142C318 142 315 216 390 216" fill="none" stroke="#0b7285" stroke-width="5"/>
-<path d="M390 216l-32-15 1 32z" fill="#0b7285"/>
-<circle cx="145" cy="128" r="6" fill="#0b7285"/>
-<circle cx="175" cy="128" r="6" fill="#0b7285"/>
-<circle cx="205" cy="128" r="6" fill="#0b7285"/>
-<circle cx="430" cy="202" r="6" fill="#0b7285"/>
-<circle cx="460" cy="202" r="6" fill="#0b7285"/>
-<circle cx="490" cy="202" r="6" fill="#0b7285"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Note becomes actions and outputs">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfaf6"/>
+      <stop offset="1" stop-color="#f0ece3"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#182033" stroke-opacity="0.055" stroke-width="1"/>
+    </pattern>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#182033" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="640" height="360" rx="28" fill="url(#bg)"/>
+  <rect width="640" height="360" rx="28" fill="url(#grid)"/>
+  <circle cx="510" cy="78" r="118" fill="#0b7285" opacity="0.105"/>
+  <circle cx="125" cy="300" r="96" fill="#1659c5" opacity="0.075"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+
+    <rect x="86" y="118" width="132" height="102" rx="18" fill="rgba(255,255,255,.56)" stroke="#182033" stroke-opacity=".42" stroke-width="2.2" filter="url(#softShadow)"/>
+    <path d="M112 150H178" fill="none" stroke="#182033" stroke-opacity="0.3" stroke-width="2.2"/>
+<path d="M112 167H196" fill="none" stroke="#182033" stroke-opacity="0.3" stroke-width="2.2"/>
+<path d="M112 184H164" fill="none" stroke="#182033" stroke-opacity="0.3" stroke-width="2.2"/>
+    <path d="M218 168H302V128H392" fill="none" stroke="#182033" stroke-opacity=".48" stroke-width="3"/>
+    <path d="M302 168V210H392" fill="none" stroke="#182033" stroke-opacity=".38" stroke-width="3"/>
+    <path d="M302 168H392" fill="none" stroke="#1659c5" stroke-opacity=".68" stroke-width="3.6"/>
+    <circle cx="302" cy="168" r="8" fill="#182033" opacity="0.52"/> <circle cx="392" cy="168" r="9" fill="#1659c5" opacity="0.95"/>
+    <rect x="392" y="96" width="118" height="64" rx="14" fill="#fff" fill-opacity=".52" stroke="#182033" stroke-opacity=".32" stroke-width="2"/>
+    <path d="M414 124h12m-6-6v12" stroke="#182033" stroke-opacity=".34" stroke-width="2"/><path d="M444 120H482" fill="none" stroke="#182033" stroke-opacity="0.25" stroke-width="2"/>
+<path d="M444 133H468" fill="none" stroke="#182033" stroke-opacity="0.25" stroke-width="2"/>
+    <rect x="392" y="176" width="118" height="64" rx="14" fill="#fff" fill-opacity=".52" stroke="#182033" stroke-opacity=".32" stroke-width="2"/>
+    <path d="M414 208l10 10 20-24" fill="none" stroke="#0b7285" stroke-opacity=".85" stroke-width="3"/><path d="M454 198H488" fill="none" stroke="#182033" stroke-opacity="0.25" stroke-width="2"/>
+<path d="M454 211H476" fill="none" stroke="#182033" stroke-opacity="0.25" stroke-width="2"/>
+
+  </g>
+</svg>
