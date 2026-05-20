@@ -1,26 +1,26 @@
 {
-  "last_updated": "2026-04-23",
+  "last_updated": "2026-05-20",
   "projects": [
     {
-      "id": "sleep-2016-2026",
-      "type": "data_essay",
-      "date": "2026-04-23",
-      "cover": "projects/assets/sleep-2016-2026-cover.svg",
+      "id": "sleep-toolkit",
+      "type": "tool",
+      "date": "2026-05-06",
+      "cover": "projects/assets/sleep-toolkit-cover.svg",
       "title": {
-        "zh": "十年睡眠档案：数据分析",
-        "en": "Ten Years of Sleep Records, Analyzed"
+        "zh": "Sleep Toolkit",
+        "en": "Sleep Toolkit"
       },
       "subtitle": {
-        "zh": "一份私人数据自述",
-        "en": "A Personal Data Essay"
+        "zh": "SleepCycle CSV 分析工具 · Web App / CLI",
+        "en": "SleepCycle CSV analyzer · Web App / CLI"
       },
       "summary": {
-        "zh": "基于 3,656 个夜晚的 SleepCycle 记录，回看十年的睡眠、身体与生活变化。",
-        "en": "A ten-year SleepCycle-based project built from 3,656 nights of personal sleep records."
+        "zh": "一个持续维护、对外可用的睡眠数据分析工具：上传 SleepCycle CSV，生成结构化 JSON、交互式 HTML 报告和 PDF。",
+        "en": "A maintained public tool for SleepCycle exports: upload a CSV and generate structured JSON, an interactive HTML report, and a PDF."
       },
       "paths": {
-        "zh": "projects/sleep-2016-2026.html",
-        "en": "projects/sleep-2016-2026.en.html"
+        "zh": "https://sleep-toolkit-production.up.railway.app",
+        "en": "https://sleep-toolkit-production.up.railway.app"
       },
       "featured": true
     }
