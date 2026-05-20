@@ -1873,6 +1873,11 @@ body.dark-mode .back-to-top {
     gap: 1.5rem;
 }
 
+#projects-gallery {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
 .project-card {
     display: flex;
     flex-direction: column;
@@ -1889,10 +1894,23 @@ body.dark-mode .project-card {
     border-color: var(--dark-border);
 }
 
+.project-card--compact {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.42fr) 1fr;
+    align-items: stretch;
+    max-width: 980px;
+    min-height: 0;
+}
+
 .project-card-media {
     display: block;
     aspect-ratio: 5 / 3;
     background: linear-gradient(135deg, rgba(22, 89, 197, 0.12), rgba(11, 114, 133, 0.18));
+}
+
+.project-card-media--compact {
+    aspect-ratio: auto;
+    min-height: 100%;
 }
 
 .project-card-media img {
@@ -1908,6 +1926,11 @@ body.dark-mode .project-card {
     flex-direction: column;
     gap: 0.9rem;
     padding: 1.3rem 1.35rem 1.4rem;
+}
+
+.project-card-body--compact {
+    gap: 0.7rem;
+    padding: 1.15rem 1.25rem;
 }
 
 .project-card-meta {
@@ -1964,6 +1987,17 @@ body.dark-mode .project-card-summary {
 .project-card .read-more {
     margin-top: auto;
     align-self: flex-start;
+}
+
+@media (max-width: 760px) {
+    .project-card--compact {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card-media--compact {
+        aspect-ratio: 5 / 3;
+        min-height: 0;
+    }
 }
 
 /* ── Post-type pill variants ── */
