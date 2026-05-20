@@ -72,13 +72,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const typeLabel = typeKey && typeof i18n.t === 'function' ? i18n.t(typeKey) : project.type || '';
 
             return `
-                <article class="project-card">
-                    <a class="project-card-media" href="${escapeHtml(href)}">
+                <article class="project-card project-card--compact">
+                    <a class="project-card-media project-card-media--compact" href="${escapeHtml(href)}">
                         <img src="${escapeHtml(project.cover || '')}" alt="${escapeHtml(title)} cover">
                     </a>
-                    <div class="project-card-body">
+                    <div class="project-card-body project-card-body--compact">
                         <div class="project-card-meta">
-                            ${typeLabel ? `<span class="meta-pill">${escapeHtml(typeLabel)}</span>` : ''}
+                            ${typeLabel ? `<span class="meta-pill meta-pill--project">${escapeHtml(typeLabel)}</span>` : ''}
                             ${project.date ? `<span>${escapeHtml(formatDate(project.date))}</span>` : ''}
                         </div>
                         <h3><a href="${escapeHtml(href)}">${escapeHtml(title)}</a></h3>
