@@ -1,26 +1,26 @@
 {
-  "last_updated": "2026-05-20",
+  "last_updated": "2026-06-06",
   "items": [
     {
-      "id": "pkm-2026-05-22-talk",
+      "id": "pkm-2026-06-07-talk",
       "type": "talk",
-      "date": "2026-05-22",
+      "date": "2026-06-07",
       "cover": "gallery/assets/pkm-2026-05-22-cover.svg",
       "title": {
         "zh": "AI 时代的个人信息系统",
         "en": "Personal Information Systems in the AI Era"
       },
       "subtitle": {
-        "zh": "30 分钟分享 · HTML slides",
-        "en": "30-minute talk · HTML slides"
+        "zh": "45 分钟分享 · HTML slides",
+        "en": "45-minute talk · HTML slides"
       },
       "summary": {
-        "zh": "一场面向金融从业者的分享：信息如何从收藏、笔记和对话里重新回到判断与行动。",
-        "en": "A talk for finance professionals on how saved information, notes, and conversations can return to judgment and action."
+        "zh": "一场面向金融与科技从业者的升级版分享：从真实问题出发，展示个人信息系统如何把捕捉、知识库、Agent、项目孵化和安全边界连成工作流。",
+        "en": "An upgraded talk for finance and technology professionals, showing how capture, knowledge bases, agents, project incubation, and safety boundaries can form a working personal information system."
       },
       "paths": {
-        "zh": "gallery/talks/pkm-2026-05-22/index.html",
-        "en": "gallery/talks/pkm-2026-05-22/index.html"
+        "zh": "gallery/talks/pkm-2026-06-07/index.html",
+        "en": "gallery/talks/pkm-2026-06-07/index.html"
       },
       "skipLangRewrite": true,
       "featured": true
