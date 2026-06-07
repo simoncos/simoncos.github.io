@@ -1836,6 +1836,28 @@ body.canvas-mode #deck > section:not([data-slide-family="appendix"]):not(.split)
   font-size:max(18px,1.05vw)!important;
   line-height:1.36!important;
 }
+#deck > section[data-contact-slide="true"] .talk-resource-caption{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:.48vh!important;
+}
+#deck > section[data-contact-slide="true"] .talk-open-note{
+  color:var(--text-secondary)!important;
+  font-size:max(15px,.86vw)!important;
+  line-height:1.34!important;
+}
+#deck > section[data-contact-slide="true"] .talk-pdf-link{
+  width:fit-content!important;
+  color:var(--accent)!important;
+  font-size:max(16px,.94vw)!important;
+  font-weight:600!important;
+  line-height:1.28!important;
+  text-decoration:none!important;
+}
+#deck > section[data-contact-slide="true"] .talk-pdf-link:hover{
+  text-decoration:underline!important;
+  text-underline-offset:.16em!important;
+}
 
 /* === 2026-06-06 S18 Bullet Card Pass ===
    Keep the restored copy, but break each decision card into scannable points. */
