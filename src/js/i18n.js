@@ -92,7 +92,10 @@
             post_count_other: '{count} posts',
             archive_month_note_one: '1 post',
             archive_month_note_other: '{count} posts',
-            series_part: 'Part {part}'
+            series_part: 'Part {part}',
+            page_not_found_title: 'Page not found',
+            page_not_found_lede: "The page you're looking for doesn't exist, or may have moved.",
+            back_to_home: 'Back to home'
         },
         zh: {
             nav_home: '首页',
@@ -182,7 +185,10 @@
             post_count_other: '{count} 篇文章',
             archive_month_note_one: '1 篇文章',
             archive_month_note_other: '{count} 篇文章',
-            series_part: '第 {part} 篇'
+            series_part: '第 {part} 篇',
+            page_not_found_title: '页面不存在',
+            page_not_found_lede: '你要找的页面不存在，或者已经移动到其他位置。',
+            back_to_home: '回到首页'
         }
     };
 

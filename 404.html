@@ -4,130 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-page-title="404 - [site]">404 - simonc site</title>
+    <meta name="robots" content="noindex">
+    <meta name="description" content="The requested page on simonc site was not found.">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
-    <link rel="stylesheet" href="/src/css/styles.css?v=20260313b">
+    <link rel="stylesheet" href="/src/css/styles.css?v=20260607a">
     <script src="/src/js/site-config.js"></script>
     <script src="/src/js/i18n.js"></script>
     <script src="/src/js/load-nav.js"></script>
     <script src="/src/js/dark-mode.js"></script>
-    <style>
-        .error-section {
-            position: relative;
-            isolation: isolate;
-            overflow: hidden;
-            min-height: clamp(23rem, 48vh, 32rem);
-            display: grid;
-            align-content: center;
-            gap: 1.05rem;
-            padding: clamp(2rem, 5vw, 4.5rem);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-card);
-            background:
-                linear-gradient(135deg, var(--bg-elevated) 0%, rgba(223, 240, 239, 0.48) 100%);
-            box-shadow: var(--shadow-soft);
-            backdrop-filter: blur(16px);
-        }
-
-        .error-section::after {
-            content: "404";
-            position: absolute;
-            right: clamp(-0.7rem, 4vw, 2.4rem);
-            bottom: clamp(-1.4rem, -1vw, -0.2rem);
-            z-index: -1;
-            color: rgba(24, 32, 51, 0.07);
-            font-size: clamp(8rem, 21vw, 15.5rem);
-            font-weight: 800;
-            letter-spacing: 0;
-            line-height: 0.72;
-        }
-
-        .error-code {
-            width: fit-content;
-            margin: 0 0 0.15rem;
-            color: var(--accent);
-            font-size: 0.82rem;
-            font-weight: 800;
-            letter-spacing: 0;
-            line-height: 1;
-            text-transform: uppercase;
-        }
-
-        .error-section h2 {
-            margin: 0;
-            max-width: 12ch;
-            font-size: clamp(2.3rem, 5vw, 4.6rem);
-            line-height: 0.96;
-            letter-spacing: 0;
-        }
-
-        .error-section .page-lede {
-            max-width: 38ch;
-            font-size: clamp(1rem, 1.5vw, 1.16rem);
-        }
-
-        .back-home {
-            gap: 0.45em;
-            width: fit-content;
-            margin-top: 0.6rem;
-            letter-spacing: 0;
-        }
-
-        body.dark-mode .error-section {
-            border-color: var(--dark-border);
-            background:
-                linear-gradient(135deg, var(--dark-bg-elevated) 0%, rgba(124, 226, 255, 0.08) 100%);
-        }
-
-        body.dark-mode .error-section::after {
-            color: rgba(237, 243, 255, 0.1);
-        }
-
-        body.dark-mode .error-code {
-            color: var(--dark-link-color);
-        }
-
-        @media (max-width: 720px) {
-            .site-nav-shell nav {
-                border-radius: var(--radius-soft);
-            }
-
-            .site-nav-shell .nav-inner {
-                display: grid;
-                grid-template-columns: 1fr;
-                align-items: start;
-                gap: 0.65rem;
-            }
-
-            .site-nav-shell nav ul {
-                flex-wrap: wrap;
-                row-gap: 0.2rem;
-            }
-
-            .site-nav-controls {
-                margin-left: 0;
-                justify-content: flex-start;
-            }
-
-            .error-section {
-                min-height: 21rem;
-                padding: 2rem 1.35rem 2.25rem;
-                gap: 0.95rem;
-            }
-
-            .error-section::after {
-                right: -1rem;
-                bottom: -0.65rem;
-                font-size: clamp(6.5rem, 38vw, 9.5rem);
-                opacity: 0.72;
-            }
-
-            .error-section h2 {
-                max-width: 10ch;
-                font-size: clamp(2.15rem, 12vw, 3.4rem);
-            }
-        }
-    </style>
 </head>
 <body>
     <header class="site-header">
@@ -140,19 +25,19 @@
     <div class="container page-shell">
         <section class="error-section" aria-labelledby="error-title">
             <p class="error-code">404</p>
-            <h2 id="error-title">Page not found</h2>
-            <p class="page-lede">The page you're looking for doesn't exist, or may have moved.</p>
+            <h2 id="error-title" data-i18n="page_not_found_title">Page not found</h2>
+            <p class="page-lede" data-i18n="page_not_found_lede">The page you're looking for doesn't exist, or may have moved.</p>
             <a href="/" class="button-link back-home">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M8 1.5L1.5 7.5H3V13.5H6.5V10H9.5V13.5H13V7.5H14.5L8 1.5Z" fill="currentColor"/>
                 </svg>
-                Back to home
+                <span data-i18n="back_to_home">Back to home</span>
             </a>
         </section>
     </div>
     <footer>
         <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>simoncos</span>. All rights reserved.</p>
-        <p class="site-version">v1.0</p>
+        <p class="site-version" data-site-version="site-config">talk-2026-05-22-final-6-g538d434</p>
     </footer>
 </body>
 </html>

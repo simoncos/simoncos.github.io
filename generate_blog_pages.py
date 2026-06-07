@@ -243,6 +243,14 @@ def strip_html_excerpt(html_content, max_length=280):
     return text[:max_length].rstrip() + '…'
 
 
+def build_meta_description(text, max_length=180):
+    """Return a compact one-line description suitable for meta attributes."""
+    description = re.sub(r'\s+', ' ', text or '').strip()
+    if len(description) <= max_length:
+        return description
+    return description[:max_length].rstrip() + '...'
+
+
 def build_rss_feed(posts, language_code):
     rss = ElementTree.Element('rss', attrib={
         'version': '2.0',
@@ -542,6 +550,9 @@ def render_blog_post(post, template, article_group_map):
             lang_switch_html = ''
 
         created, updated = get_file_times_with_metadata(markdown_path, metadata.get('date', ''))
+        canonical_url = absolute_site_url(f"blogs/{html_file}")
+        meta_description = build_meta_description(post.get('excerpt') or title)
+        og_locale = 'zh_CN' if post['language'] == 'zh' else 'en_US'
 
         tags_html = '<ul class="tag-list">' + ''.join([
             f'<li><a href="../tags.html#{quote(tag)}">{html_lib.escape(tag)}</a></li>'
@@ -549,6 +560,10 @@ def render_blog_post(post, template, article_group_map):
         ]) + '</ul>'
 
         page_content = template.replace('{{TITLE}}', title)
+        page_content = page_content.replace('{{TITLE_ATTR}}', html_lib.escape(title, quote=True))
+        page_content = page_content.replace('{{META_DESCRIPTION}}', html_lib.escape(meta_description, quote=True))
+        page_content = page_content.replace('{{CANONICAL_URL}}', canonical_url)
+        page_content = page_content.replace('{{OG_LOCALE}}', og_locale)
         page_content = page_content.replace('{{PAGE_LANGUAGE}}', 'zh-CN' if post['language'] == 'zh' else 'en')
         page_content = page_content.replace('{{ARTICLE_GROUP_ID}}', post['group_id'])
         page_content = page_content.replace('{{ARTICLE_LANGUAGE}}', post['language'])

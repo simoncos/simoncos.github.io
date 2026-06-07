@@ -16,19 +16,41 @@ This distinction matters more than a blanket rule like “everything should be s
 - generated article pages in `blogs/*.html`
 - root pages like `index.html`, `about.html`, `tags.html`, `series.html`, `blogs.html`
 - site assets, icons, and CSS/JS
+- `sitemap.xml` and `robots.txt` for the public crawl surface
 
 ### Generated JSON
 - `data/blog_data.json`
+- `data/article_groups.json`
 - `data/tags_data.json`
 - `data/series_data.json`
+- `data/projects_data.json`
+- `data/gallery_data.json`
 
 Python generator still owns metadata extraction, markdown conversion, and the stable data indexes needed by the UI.
 
+`article_groups.json` is now the primary public article index. It groups bilingual article variants and carries the fields needed by archive, tags, series, homepage, backlinks, and language switching. `tags_data.json` and `series_data.json` are still generated for compatibility, but the current tags and series pages render from `article_groups.json`.
+
+`projects_data.json` and `gallery_data.json` are hand-maintained lightweight indexes for non-blog public surfaces. They should contain only stable presentation metadata and paths, not duplicate full page content.
+
 ### Dynamic / client-rendered
-- **tags** page renders from `tags_data.json`
-- **series** page renders from `series_data.json`
-- **backlinks** are inferred client-side from `blog_data.json` (`html_content`)
-- **blog previews** on `blogs.html` are rendered client-side from generated `html_content`
+- **home** page merges article groups and projects into a recent list
+- **blogs** page renders archive groups from `article_groups.json`
+- **tags** page derives tag sections from `article_groups.json`
+- **series** page derives reading paths from `article_groups.json`
+- **backlinks** are inferred client-side from generated article HTML content
+- **blog previews** use generated excerpts/content rather than reparsing markdown in the browser
+
+### Hand-authored shell
+
+Root pages share the same shell pattern: favicon/RSS links, `site-config.js`, `i18n.js`, `load-nav.js`, `dark-mode.js`, and `src/css/styles.css`.
+
+Because these pages are still hand-authored, drift is easy:
+- nav fallback must stay aligned with `navigation.html`
+- CSS cache keys must stay aligned across pages and templates
+- generated pages get their footer version from `generate_blog_pages.py`
+- hand-authored pages get their visible footer version from `site-config.js`
+
+Run `python3 scripts/check_site.py` before publishing structural changes.
 
 ## Why backlinks and previews are dynamic
 
