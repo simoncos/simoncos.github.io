@@ -10,6 +10,7 @@
     const siteConfig = {
         ownerName: 'simoncos',
         siteTitle: 'simonc site',
+        siteVersion: 'talk-2026-05-22-final-6-g538d434',
         basePath: detectedBasePath,
         resolvePath(relativePath) {
             const normalized = relativePath.replace(/^\//, '');
@@ -26,6 +27,10 @@
 
         document.querySelectorAll('[data-site-title]').forEach(function (element) {
             element.textContent = siteConfig.siteTitle;
+        });
+
+        document.querySelectorAll('[data-site-version="site-config"]').forEach(function (element) {
+            element.textContent = siteConfig.siteVersion;
         });
 
         const pageTitleElement = document.querySelector('title[data-page-title]');
