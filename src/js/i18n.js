@@ -229,7 +229,15 @@
         }
     }
 
-    let currentLanguage = getLanguageFromUrl() || getStoredLanguage() || DEFAULT_LANGUAGE;
+    function getArticleLanguageFromPath(pathname = window.location.pathname) {
+        const normalizedPath = String(pathname || '');
+        if (!/\/blogs\/[^/]+\.html$/i.test(normalizedPath)) {
+            return null;
+        }
+        return normalizedPath.endsWith('.en.html') ? 'en' : 'zh';
+    }
+
+    let currentLanguage = getLanguageFromUrl() || getArticleLanguageFromPath() || getStoredLanguage() || DEFAULT_LANGUAGE;
 
     function persistLanguage(language) {
         try {
@@ -434,6 +442,7 @@
         SUPPORTED_LANGUAGES,
         getCurrentLanguage: () => currentLanguage,
         getLanguageFromUrl,
+        getArticleLanguageFromPath,
         hasExplicitLanguage,
         setCurrentLanguage,
         t,

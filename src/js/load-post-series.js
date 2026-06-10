@@ -45,7 +45,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 : '';
 
             if (group.id === currentGroup.id) {
-                li.innerHTML = `<strong>${prefix}${entry.title}</strong>`;
+                const strong = document.createElement('strong');
+                strong.textContent = `${prefix}${entry.title}`;
+                li.appendChild(strong);
             } else {
                 const a = document.createElement('a');
                 a.href = entry.file;

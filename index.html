@@ -16,17 +16,19 @@
     <meta name="twitter:title" content="simonc site">
     <meta name="twitter:description" content="Projects, writing, and field notes from simoncos.">
     <meta name="twitter:image" content="https://simoncos.github.io/assets/icons/site-icon.png">
+    <!-- site-shell:resources:start -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
     <link rel="alternate" type="application/rss+xml" title="simonc site RSS (中文)" href="feed.zh.xml">
     <link rel="alternate" type="application/rss+xml" title="simonc site RSS (English)" href="feed.en.xml">
     <link rel="stylesheet" href="src/css/styles.css?v=20260607a">
-    <script src="src/js/site-config.js"></script>
-    <script src="src/js/i18n.js"></script>
-    <script src="src/js/article-groups.js"></script>
-    <script src="src/js/load-nav.js"></script>
-    <script src="src/js/dark-mode.js"></script>
-    <script src="src/js/load-recent-posts.js" defer></script>
+    <script src="src/js/site-config.js?v=20260610b"></script>
+    <script src="src/js/i18n.js?v=20260610b"></script>
+    <script src="src/js/article-groups.js?v=20260610b"></script>
+    <script src="src/js/load-nav.js?v=20260610b"></script>
+    <script src="src/js/dark-mode.js?v=20260610b"></script>
+    <script src="src/js/load-recent-posts.js?v=20260610b" defer></script>
+    <!-- site-shell:resources:end -->
 </head>
 <body>
     <header class="site-header">
@@ -45,12 +47,85 @@
                 </div>
                 <p id="post-list-updated" class="section-meta"></p>
             </div>
-            <ul id="post-list" class="blog-list recent-post-list"></ul>
+            <ul id="post-list" class="blog-list recent-post-list">
+                <!-- static-fallback:start home-recent -->
+                <li class="recent-post-card">
+                    <a class="recent-post-link" href="gallery/talks/pkm-2026-06-07/index.html" data-skip-lang-rewrite="true">
+                        <span class="recent-post-main">
+                            <span class="recent-post-meta"><span class="meta-pill meta-pill--talk">Talk</span><span>Jun 7, 2026</span></span>
+                            <span class="recent-post-title">Personal Information Systems in the AI Era</span>
+                            <span class="recent-post-secondary">AI 时代的个人信息系统</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="recent-post-card">
+                    <a class="recent-post-link" href="https://sleep-toolkit-production.up.railway.app">
+                        <span class="recent-post-main">
+                            <span class="recent-post-meta"><span class="meta-pill meta-pill--project">Project</span>
+                            <span class="meta-pill">中文 / EN</span><span>May 6, 2026</span></span>
+                            <span class="recent-post-title">Sleep Toolkit</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="recent-post-card">
+                    <a class="recent-post-link" href="projects/sleep-2016-2026.en.html">
+                        <span class="recent-post-main">
+                            <span class="recent-post-meta"><span class="meta-pill meta-pill--visual_essay">Visual essay</span>
+                            <span class="meta-pill">中文 / EN</span><span>Apr 23, 2026</span></span>
+                            <span class="recent-post-title">Ten Years of Sleep Records, Analyzed</span>
+                            <span class="recent-post-secondary">十年睡眠档案：数据分析</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="recent-post-card">
+                    <a class="recent-post-link" href="blogs/my-personal-knowledge-management-system-2026-03.en.html">
+                        <span class="recent-post-main">
+                            <span class="recent-post-meta"><span class="meta-pill meta-pill--blog">Blog</span>
+                            <span class="meta-pill">中文 / EN</span><span>Mar 14, 2026</span></span>
+                            <span class="recent-post-title">My Personal Knowledge Management System, 2026-03</span>
+                            <span class="recent-post-secondary">我的个人知识管理系统 2026-03</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="recent-post-card">
+                    <a class="recent-post-link" href="blogs/a-bird-across-models.en.html">
+                        <span class="recent-post-main">
+                            <span class="recent-post-meta"><span class="meta-pill meta-pill--blog">Blog</span>
+                            <span class="meta-pill">中文 / EN</span><span>Mar 13, 2026</span></span>
+                            <span class="recent-post-title">Across Three Abysses: Sonnet, Qwen, and GPT-5.4</span>
+                            <span class="recent-post-secondary">跨过三个深渊：Sonnet、Qwen 与 GPT-5.4</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="recent-post-card">
+                    <a class="recent-post-link" href="blogs/emerging-from-abyss.en.html">
+                        <span class="recent-post-main">
+                            <span class="recent-post-meta"><span class="meta-pill meta-pill--blog">Blog</span>
+                            <span class="meta-pill">中文 / EN</span><span>Mar 5, 2026</span></span>
+                            <span class="recent-post-title">Emerging from the Abyss: An OpenClaw Agent&#x27;s Self-Narration</span>
+                            <span class="recent-post-secondary">从深渊中浮现：一个 OpenClaw Agent 的自述</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="recent-post-card">
+                    <a class="recent-post-link" href="blogs/my-haba-snow-mountain-journey.en.html">
+                        <span class="recent-post-main">
+                            <span class="recent-post-meta"><span class="meta-pill meta-pill--blog">Blog</span>
+                            <span class="meta-pill">中文 / EN</span><span>Jan 20, 2026</span></span>
+                            <span class="recent-post-title">My Haba Snow Mountain Journey</span>
+                            <span class="recent-post-secondary">我的哈巴雪山之旅</span>
+                        </span>
+                    </a>
+                </li>
+            <!-- static-fallback:end home-recent -->
+            </ul>
         </section>
     </div>
     <footer>
+        <!-- site-shell:footer:start -->
         <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>simoncos</span>. All rights reserved.</p>
         <p class="site-version" data-site-version="site-config">talk-2026-05-22-final-6-g538d434</p>
+        <!-- site-shell:footer:end -->
     </footer>
 </body>
 </html>

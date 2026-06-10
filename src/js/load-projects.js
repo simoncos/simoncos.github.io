@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return `
                 <article class="project-card project-card--compact">
                     <a class="project-card-media project-card-media--compact" href="${escapeHtml(href)}">
-                        <img src="${escapeHtml(project.cover || '')}" alt="${escapeHtml(title)} cover">
+                        <img src="${escapeHtml(project.cover || '')}" alt="${escapeHtml(title)} cover" loading="lazy" decoding="async">
                     </a>
                     <div class="project-card-body project-card-body--compact">
                         <div class="project-card-meta">

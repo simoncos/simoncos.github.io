@@ -16,23 +16,25 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="My Personal Knowledge Management System, 2026-03">
     <meta name="twitter:description" content="I. From &quot;Taking Notes&quot; to Layered Collaboration I started using Obsidian as my main KM tool about four or five years ago. Looking back in March 2026 through the full record of this...">
+    <!-- site-shell:resources:start -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
     <link rel="alternate" type="application/rss+xml" title="simonc site RSS (中文)" href="../feed.zh.xml">
     <link rel="alternate" type="application/rss+xml" title="simonc site RSS (English)" href="../feed.en.xml">
     <link rel="stylesheet" href="../src/css/styles.css?v=20260607a">
-    <script src="../src/js/site-config.js"></script>
-    <script src="../src/js/i18n.js"></script>
-    <script src="../src/js/article-groups.js"></script>
-    <script src="../src/js/load-nav.js"></script>
-    <script src="../src/js/dark-mode.js"></script>
-    <script src="../src/js/toc-generator.js"></script>
-    <script src="../src/js/progress-bar.js"></script>
-    <script src="../src/js/back-to-top.js"></script>
-    <script src="../src/js/mobile-scroll-ui.js"></script>
-    <script src="../src/js/footnote-target.js"></script>
-    <script src="../src/js/load-backlinks.js"></script>
-    <script src="../src/js/load-post-series.js"></script>
+    <script src="../src/js/site-config.js?v=20260610b"></script>
+    <script src="../src/js/i18n.js?v=20260610b"></script>
+    <script src="../src/js/article-groups.js?v=20260610b"></script>
+    <script src="../src/js/load-nav.js?v=20260610b"></script>
+    <script src="../src/js/dark-mode.js?v=20260610b"></script>
+    <script src="../src/js/toc-generator.js?v=20260610b"></script>
+    <script src="../src/js/progress-bar.js?v=20260610b"></script>
+    <script src="../src/js/back-to-top.js?v=20260610b"></script>
+    <script src="../src/js/mobile-scroll-ui.js?v=20260610b"></script>
+    <script src="../src/js/footnote-target.js?v=20260610b"></script>
+    <script src="../src/js/load-backlinks.js?v=20260610b"></script>
+    <script src="../src/js/load-post-series.js?v=20260610b"></script>
+    <!-- site-shell:resources:end -->
 </head>
 <body class="article-page" data-article-group="my-personal-knowledge-management-system-2026-03" data-article-language="en" data-article-en-file="my-personal-knowledge-management-system-2026-03.en.html" data-article-zh-file="my-personal-knowledge-management-system-2026-03.html">
     <header class="site-header">
@@ -57,7 +59,7 @@
                     </div>
                     <div class="post-content">
                         
-<p><img alt="Personal Knowledge Management System 202603" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png"/></p>
+<p><img alt="Personal Knowledge Management System 202603" decoding="async" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png"/></p>
 <h2>I. From "Taking Notes" to Layered Collaboration</h2>
 <p>I started using Obsidian as my main KM<sup id="fnref:1"><a aria-label="Footnote" class="footnote-ref" href="#fn:1">1</a></sup> tool about four or five years ago. Looking back in March 2026 through the full record of this system's iteration (see the appendix), it has grown into a layered human-and-machine system: Telegram handles immediate input, Obsidian handles organization and distillation, the personal site handles publication and presentation, Git provides version boundaries, and my OpenClaw agent-RedPiggy-binds these parts together.</p>
 <p>The current structure looks roughly like this:</p>
@@ -76,7 +78,7 @@
 <p>So eventually Piggy and I built the <code>/j</code> command together. If I send a Telegram message with the <code>/j</code> marker, the message can be appended directly to <code>Journal/YYYY-MM-DD.md</code> in Obsidian. Because I also use the Thino plugin, I effectively have a private microblog-like interface in Obsidian that sits on top of Journal as its data layer. <code>/j</code> supports multi-part input and images, which solved the writing side. Reading is still less elegant; for now, my workaround is to read the raw Markdown on GitHub, which loses some of Obsidian's affordances but is still acceptable.</p>
 <p>Image support is worth mentioning separately. Before Piggy came into being, I had already built an image-hosting workflow for Obsidian in order to complete the move to Git. All images in the repository now go through PicGo and Cloudflare R2, then return to Markdown as image links. That change compressed the whole repository from roughly 850MB down to 22MB, which made many workflows finally viable rather than merely ideal in theory. <code>/j</code> further integrated the two ends: when Telegram receives an image, it now passes through the image-hosting workflow, becomes a link, and lands in Journal together with the text.</p>
 <p>There was also an unexpected benefit. Since Telegram messages have to pass through Piggy, it does not just execute the workflow-it also responds to the thought itself. That means many ideas now receive their first reader's feedback almost at the moment they appear.</p>
-<p><img alt="" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/781b033aa99041b1fe3829dfaeb88c2d.png"/></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/781b033aa99041b1fe3829dfaeb88c2d.png"/></p>
 <p>This was not the first solution I tried. Originally I wanted to connect with Piggy through Apple Notes, but several problems made that path untenable:</p>
 <ol>
 <li>Piggy is deployed on a separate MacBook under a separate Apple account, so notes written under my own account cannot be synced directly to it. Notes can be shared across accounts, but only one by one, which is cumbersome.</li>
@@ -89,7 +91,7 @@
 <p>Obsidian is not a place to throw everything into. Compared with the publishing-oriented personal site<sup id="fnref:2"><a aria-label="Footnote" class="footnote-ref" href="#fn:2">2</a></sup>, it is better suited to holding things that are still in process. My long-term wish is still to let the two move closer together: everything in the garden is growing; some things are simply more mature than others.</p>
 <p>Through Domain notes, Tasks, Bookmarks, Workspaces, and Bases, Obsidian has become a more complete workspace: I can switch contexts, gather tasks, inspect structure, and enter different working modes within it.</p>
 <p>Once Piggy entered the picture, that role became much stronger. I carved out a dedicated area as a shared workspace for Piggy and me:</p>
-<p><img alt="" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg"/></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg"/></p>
 <p>By opening Obsidian completely to Piggy, I gained three major kinds of benefit.</p>
 <p>The first is <strong>organizing ability</strong>: many materials that would otherwise remain in a heap can now be sorted, moved, renamed, and structurally repaired more quickly-especially the parts where I already know what should be done but do not want to spend my own energy doing it.</p>
 <p>The second is <strong>collaborative ability</strong>: Obsidian is no longer just my personal repository; it has become a shared working space for Piggy and me. Drafts, analysis, project cards, reference materials, and already-published writing can be maintained within one environment instead of being scattered across chat logs and the site.</p>
@@ -98,7 +100,7 @@
 <p>So Piggy is, for me, more like a collaborator than a machine for writing notes on my behalf-one that helps me make the system itself more clear.</p>
 <h2>IV. The Personal Site</h2>
 <p>The personal site (<code>simoncos.github.io</code>) is the publishing layer of the whole system. Its first formal public version went online in January this year. With Piggy and other agents involved, the site's visual language, interaction, and information architecture have gone through a comprehensive update.</p>
-<p><img alt="" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg"/></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg"/></p>
 <p>The current site:</p>
 <ul>
 <li><strong>Static publishing</strong>: articles and pages are still deployed as a static site, with a simple, controllable, and maintainable structure</li>
@@ -356,9 +358,11 @@ Current directory structure:
         </article>
     </div>
     <footer>
+        <!-- site-shell:footer:start -->
         <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-owner-name>simoncos</span>. All rights reserved.</p>
         <p><a href="../feed.zh.xml">RSS (中文)</a> · <a href="../feed.en.xml">RSS (English)</a></p>
-        <p class="site-version">talk-2026-05-22-final-6-g538d434</p>
+        <p class="site-version">talk-2026-05-22-final-7-gbc9b302</p>
+        <!-- site-shell:footer:end -->
     </footer>
     <button type="button" id="back-to-top" class="back-to-top hidden" aria-label="Back to top">Back to top</button>
     <div id="progress-container">

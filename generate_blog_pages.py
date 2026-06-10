@@ -3,6 +3,7 @@ import sys
 import re
 import json
 import html as html_lib
+import struct
 from html import unescape as html_unescape
 import markdown
 import logging
@@ -13,7 +14,7 @@ from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 from xml.etree import ElementTree
 from bs4 import BeautifulSoup, NavigableString
-from urllib.parse import quote, urljoin
+from urllib.parse import quote, unquote, urljoin, urlparse
 from pathlib import Path
 from email.utils import format_datetime
 
@@ -174,6 +175,183 @@ def localize_footnotes(html_content, is_english=False):
     return str(soup)
 
 
+def parse_dimension_value(value):
+    if not value:
+        return None
+    normalized = str(value).strip()
+    match = re.match(r'^([0-9]+(?:\.[0-9]+)?)(?:px)?$', normalized)
+    if not match:
+        return None
+    number = float(match.group(1))
+    if number <= 0:
+        return None
+    return int(round(number))
+
+
+def read_svg_dimensions(path):
+    try:
+        text = path.read_text(encoding='utf-8', errors='ignore')[:8192]
+    except OSError:
+        return None
+
+    svg_match = re.search(r'<svg\b(?P<attrs>[^>]*)>', text, re.I | re.S)
+    if not svg_match:
+        return None
+
+    attrs = svg_match.group('attrs')
+
+    def attr(name):
+        match = re.search(rf'\b{name}\s*=\s*["\']([^"\']+)["\']', attrs, re.I)
+        return match.group(1) if match else ''
+
+    width = parse_dimension_value(attr('width'))
+    height = parse_dimension_value(attr('height'))
+    if width and height:
+        return width, height
+
+    view_box = attr('viewBox')
+    parts = view_box.replace(',', ' ').split()
+    if len(parts) == 4:
+        try:
+            width = int(round(float(parts[2])))
+            height = int(round(float(parts[3])))
+        except ValueError:
+            return None
+        if width > 0 and height > 0:
+            return width, height
+
+    return None
+
+
+def read_jpeg_dimensions(path):
+    start_of_frame_markers = {
+        0xC0, 0xC1, 0xC2, 0xC3,
+        0xC5, 0xC6, 0xC7,
+        0xC9, 0xCA, 0xCB,
+        0xCD, 0xCE, 0xCF,
+    }
+    try:
+        with path.open('rb') as file:
+            if file.read(2) != b'\xff\xd8':
+                return None
+
+            while True:
+                byte = file.read(1)
+                while byte and byte != b'\xff':
+                    byte = file.read(1)
+                while byte == b'\xff':
+                    byte = file.read(1)
+                if not byte:
+                    return None
+
+                marker = byte[0]
+                if marker == 0xD9 or marker == 0xDA:
+                    return None
+                if 0xD0 <= marker <= 0xD7:
+                    continue
+
+                length_bytes = file.read(2)
+                if len(length_bytes) != 2:
+                    return None
+                length = struct.unpack('>H', length_bytes)[0]
+                if length < 2:
+                    return None
+
+                if marker in start_of_frame_markers:
+                    segment = file.read(length - 2)
+                    if len(segment) < 5:
+                        return None
+                    height = struct.unpack('>H', segment[1:3])[0]
+                    width = struct.unpack('>H', segment[3:5])[0]
+                    if width > 0 and height > 0:
+                        return width, height
+                    return None
+
+                file.seek(length - 2, os.SEEK_CUR)
+    except OSError:
+        return None
+
+
+def read_image_dimensions(path):
+    suffix = path.suffix.lower()
+    if suffix == '.svg':
+        return read_svg_dimensions(path)
+
+    try:
+        with path.open('rb') as file:
+            header = file.read(24)
+    except OSError:
+        return None
+
+    if header.startswith(b'\x89PNG\r\n\x1a\n') and len(header) >= 24:
+        width, height = struct.unpack('>II', header[16:24])
+        if width > 0 and height > 0:
+            return width, height
+
+    if header.startswith(b'GIF87a') or header.startswith(b'GIF89a'):
+        width, height = struct.unpack('<HH', header[6:10])
+        if width > 0 and height > 0:
+            return width, height
+
+    if suffix in ('.jpg', '.jpeg') or header.startswith(b'\xff\xd8'):
+        return read_jpeg_dimensions(path)
+
+    return None
+
+
+def resolve_local_article_image(src):
+    parsed = urlparse(src or '')
+    if parsed.scheme or parsed.netloc or not parsed.path:
+        return None
+
+    raw_path = unquote(parsed.path)
+    root = Path.cwd().resolve()
+    if raw_path.startswith('/'):
+        candidate = root / raw_path.lstrip('/')
+    else:
+        candidate = root / 'blogs' / raw_path
+
+    try:
+        candidate = candidate.resolve()
+        candidate.relative_to(root)
+    except (OSError, ValueError):
+        return None
+
+    return candidate if candidate.exists() else None
+
+
+def optimize_article_images(html_content):
+    """Add browser image scheduling hints to generated article HTML."""
+    soup = BeautifulSoup(html_content, 'html.parser')
+    dimension_cache = {}
+
+    for index, image in enumerate(soup.find_all('img')):
+        image['decoding'] = 'async'
+        if index > 0:
+            image['loading'] = 'lazy'
+        elif image.get('loading') == 'lazy':
+            del image['loading']
+
+        source = image.get('src') or ''
+        local_path = resolve_local_article_image(source)
+        if not local_path:
+            continue
+
+        dimensions = dimension_cache.get(local_path)
+        if local_path not in dimension_cache:
+            dimensions = read_image_dimensions(local_path)
+            dimension_cache[local_path] = dimensions
+
+        if not dimensions:
+            continue
+
+        width, height = dimensions
+        image.setdefault('width', str(width))
+        image.setdefault('height', str(height))
+
+    return str(soup)
+
+
 def infer_language_code(file_name):
     return 'en' if '.en.' in file_name else 'zh'
 
@@ -198,6 +376,10 @@ def absolute_site_url(path=''):
 
 def get_site_version():
     """Return version string from git describe, e.g. v1.0 or v1.0-3-gabcdef."""
+    override = os.environ.get('SITE_VERSION_OVERRIDE')
+    if override:
+        return override
+
     try:
         import subprocess
         result = subprocess.run(
@@ -252,10 +434,9 @@ def build_meta_description(text, max_length=180):
 
 
 def build_rss_feed(posts, language_code):
-    rss = ElementTree.Element('rss', attrib={
-        'version': '2.0',
-        'xmlns:atom': 'http://www.w3.org/2005/Atom'
-    })
+    ElementTree.register_namespace('atom', 'http://www.w3.org/2005/Atom')
+
+    rss = ElementTree.Element('rss', attrib={'version': '2.0'})
     channel = ElementTree.SubElement(rss, 'channel')
 
     title = 'simonc site RSS (中文)' if language_code == 'zh' else 'simonc site RSS (English)'
@@ -397,6 +578,97 @@ def build_article_groups(posts):
     )
     return article_groups
 
+
+def summarize_backlink_source(group):
+    languages = {}
+    for language_code, entry in (group.get('languages') or {}).items():
+        if not entry or not entry.get('file'):
+            continue
+        languages[language_code] = {
+            'title': entry.get('title', ''),
+            'file': entry.get('file', ''),
+        }
+
+    return {
+        'group_id': group.get('id', ''),
+        'date': group.get('date', ''),
+        'languages': languages,
+    }
+
+
+def group_links_to_files(group, target_files):
+    for entry in (group.get('languages') or {}).values():
+        html_content = entry.get('html_content') if entry else ''
+        if not html_content:
+            continue
+
+        soup = BeautifulSoup(html_content, 'html.parser')
+        for anchor in soup.find_all('a', href=True):
+            if anchor.get('href') in target_files:
+                return True
+
+    return False
+
+
+def build_backlinks_data(article_groups, last_updated):
+    files = {}
+    for target_group in article_groups:
+        target_files = {
+            entry.get('file')
+            for entry in (target_group.get('languages') or {}).values()
+            if entry and entry.get('file')
+        }
+        if not target_files:
+            continue
+
+        backlinks = []
+        for source_group in article_groups:
+            if source_group.get('id') == target_group.get('id'):
+                continue
+            if group_links_to_files(source_group, target_files):
+                backlinks.append(summarize_backlink_source(source_group))
+
+        backlinks.sort(
+            key=lambda item: parse_frontmatter_date(item.get('date', '')) or datetime.min,
+            reverse=True,
+        )
+
+        for file_name in sorted(target_files):
+            files[file_name] = backlinks
+
+    return {
+        'last_updated': last_updated,
+        'files': files,
+    }
+
+
+def build_article_index(article_groups, last_updated):
+    indexed_groups = []
+    for group in article_groups:
+        indexed_group = {
+            'id': group.get('id', ''),
+            'date': group.get('date', ''),
+            'tags': group.get('tags', []),
+            'series': group.get('series'),
+            'languages': {},
+        }
+
+        for language_code, entry in (group.get('languages') or {}).items():
+            indexed_group['languages'][language_code] = {
+                'title': entry.get('title', ''),
+                'file': entry.get('file', ''),
+                'markdown': entry.get('markdown', ''),
+                'excerpt': entry.get('excerpt', ''),
+                'available': entry.get('available', True),
+            }
+
+        indexed_groups.append(indexed_group)
+
+    return {
+        'last_updated': last_updated,
+        'groups': indexed_groups,
+    }
+
 def generate_blog_pages():
     """Main blog generation function with error handling"""
     try:
@@ -413,13 +685,18 @@ def generate_blog_pages():
             logging.warning("No markdown files found in blogs directory")
             return []
 
+        failures = []
+
         # First pass: collect metadata/content/indexes across all posts
         for md_file in markdown_files:
             try:
                 collect_markdown_file(md_file, tags_data, series_data, blog_posts)
             except Exception as e:
                 logging.error(f"Error collecting {md_file}: {str(e)}")
-                continue
+                failures.append(f"collect {md_file}: {str(e)}")
+
+        if failures:
+            raise BlogGenerationError("Article collection failed:\n- " + "\n- ".join(failures))
 
         article_groups = build_article_groups(blog_posts)
         article_group_map = {group['id']: group for group in article_groups}
@@ -430,7 +707,10 @@ def generate_blog_pages():
                 render_blog_post(post, template, article_group_map)
             except Exception as e:
                 logging.error(f"Error rendering {post.get('markdown')}: {str(e)}")
-                continue
+                failures.append(f"render {post.get('markdown')}: {str(e)}")
+
+        if failures:
+            raise BlogGenerationError("Article rendering failed:\n- " + "\n- ".join(failures))
 
         # Save data files
         blog_data = load_existing_blog_data()
@@ -445,6 +725,8 @@ def generate_blog_pages():
 
         save_json_data({'last_updated': last_updated, 'posts': blog_posts}, 'blog_data.json')
         save_json_data({'last_updated': last_updated, 'groups': article_groups}, 'article_groups.json')
+        save_json_data(build_article_index(article_groups, last_updated), 'article_index.json')
+        save_json_data(build_backlinks_data(article_groups, last_updated), 'backlinks_data.json')
         save_json_data(series_data, 'series_data.json')
         save_json_data(tags_data, 'tags_data.json')
         save_rss_feed(blog_posts, 'zh')
@@ -484,6 +766,7 @@ def collect_markdown_file(md_file, tags_data, series_data, blog_posts):
             raise BlogGenerationError(f"Markdown conversion failed: {str(e)}")
 
         html_content = localize_footnotes(html_content, is_english=md_file.endswith('.en.md'))
+        html_content = optimize_article_images(html_content)
         title, rendered_post_content = extract_title_and_content(html_content)
         excerpt = build_post_excerpt(content)
 
