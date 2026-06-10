@@ -48,6 +48,14 @@
     --dark-text-quaternary: #8693ad;
     --dark-link-color: #7ce2ff;
     --dark-link-hover-color: #b6f0ff;
+    --page-background-color: #f8f5ee;
+    --page-background-image:
+        radial-gradient(circle at top, rgba(22, 89, 197, 0.08), transparent 32%),
+        linear-gradient(180deg, #f8f5ee 0%, var(--bg) 34%, #efe7da 100%);
+    --dark-page-background-color: #11192a;
+    --dark-page-background-image:
+        radial-gradient(circle at top, rgba(124, 226, 255, 0.12), transparent 28%),
+        linear-gradient(180deg, #11192a 0%, var(--dark-bg) 40%, #0a1019 100%);
 }
 
 * {
@@ -58,6 +66,14 @@ html {
     scroll-behavior: smooth;
     max-width: 100%;
     overflow-x: clip;
+    background-color: var(--page-background-color);
+    background-image: var(--page-background-image);
+}
+
+html.dark-mode {
+    color-scheme: dark;
+    background-color: var(--dark-page-background-color);
+    background-image: var(--dark-page-background-image);
 }
 
 body {
@@ -68,9 +84,8 @@ body {
     font-family: var(--font-sans);
     font-size: 18px;
     line-height: 1.7;
-    background:
-        radial-gradient(circle at top, rgba(22, 89, 197, 0.08), transparent 32%),
-        linear-gradient(180deg, #f8f5ee 0%, var(--bg) 34%, #efe7da 100%);
+    background-color: var(--page-background-color);
+    background-image: var(--page-background-image);
     color: var(--text-primary);
 }
 
@@ -86,15 +101,14 @@ body::before {
     mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.26), transparent 72%);
 }
 
-body.dark-mode {
+:is(body.dark-mode, html.dark-mode body) {
     color-scheme: dark;
-    background:
-        radial-gradient(circle at top, rgba(124, 226, 255, 0.12), transparent 28%),
-        linear-gradient(180deg, #11192a 0%, var(--dark-bg) 40%, #0a1019 100%);
+    background-color: var(--dark-page-background-color);
+    background-image: var(--dark-page-background-image);
     color: var(--dark-text-primary);
 }
 
-body.dark-mode::before {
+:is(body.dark-mode, html.dark-mode body)::before {
     background-image:
         linear-gradient(rgba(197, 214, 255, 0.032) 1px, transparent 1px),
         linear-gradient(90deg, rgba(197, 214, 255, 0.032) 1px, transparent 1px);
@@ -117,11 +131,11 @@ a:hover {
     color: var(--accent);
 }
 
-body.dark-mode a {
+:is(body.dark-mode, html.dark-mode body) a {
     color: var(--dark-link-color);
 }
 
-body.dark-mode a:hover {
+:is(body.dark-mode, html.dark-mode body) a:hover {
     color: var(--dark-link-hover-color);
 }
 
@@ -140,10 +154,10 @@ summary:focus-visible {
     outline-offset: 3px;
 }
 
-body.dark-mode a:focus-visible,
-body.dark-mode button:focus-visible,
-body.dark-mode input:focus-visible,
-body.dark-mode summary:focus-visible {
+:is(body.dark-mode, html.dark-mode body) a:focus-visible,
+:is(body.dark-mode, html.dark-mode body) button:focus-visible,
+:is(body.dark-mode, html.dark-mode body) input:focus-visible,
+:is(body.dark-mode, html.dark-mode body) summary:focus-visible {
     outline-color: rgba(124, 226, 255, 0.36);
 }
 
@@ -170,7 +184,7 @@ body.dark-mode summary:focus-visible {
     color: var(--accent);
 }
 
-body.dark-mode .site-kicker {
+:is(body.dark-mode, html.dark-mode body) .site-kicker {
     color: var(--dark-link-color);
 }
 
@@ -183,7 +197,7 @@ body.dark-mode .site-kicker {
     color: var(--text-primary);
 }
 
-body.dark-mode .site-header h1 {
+:is(body.dark-mode, html.dark-mode body) .site-header h1 {
     color: var(--dark-text-primary);
 }
 
@@ -223,7 +237,7 @@ nav {
     backdrop-filter: blur(18px);
 }
 
-body.dark-mode nav {
+:is(body.dark-mode, html.dark-mode body) nav {
     border-color: var(--dark-border);
     background: var(--dark-bg-elevated);
 }
@@ -277,16 +291,16 @@ nav ul li a.active {
     box-shadow: inset 0 0 0 1px rgba(22, 89, 197, 0.14);
 }
 
-body.dark-mode nav ul li a {
+:is(body.dark-mode, html.dark-mode body) nav ul li a {
     color: var(--dark-text-secondary);
 }
 
-body.dark-mode nav ul li a:hover {
+:is(body.dark-mode, html.dark-mode body) nav ul li a:hover {
     color: var(--dark-text-primary);
     background: rgba(197, 214, 255, 0.08);
 }
 
-body.dark-mode nav ul li a.active {
+:is(body.dark-mode, html.dark-mode body) nav ul li a.active {
     color: var(--dark-text-primary);
     background: rgba(124, 226, 255, 0.12);
     box-shadow: inset 0 0 0 1px rgba(124, 226, 255, 0.14);
@@ -314,7 +328,7 @@ body.dark-mode nav ul li a.active {
     background: var(--surface-strong);
 }
 
-body.dark-mode .site-language-switch {
+:is(body.dark-mode, html.dark-mode body) .site-language-switch {
     border-color: var(--dark-border);
     background: var(--dark-surface);
 }
@@ -344,12 +358,12 @@ body.dark-mode .site-language-switch {
     color: var(--text-primary);
 }
 
-body.dark-mode .site-language-button {
+:is(body.dark-mode, html.dark-mode body) .site-language-button {
     color: var(--dark-text-secondary);
 }
 
-body.dark-mode .site-language-button:hover,
-body.dark-mode .site-language-button.active {
+:is(body.dark-mode, html.dark-mode body) .site-language-button:hover,
+:is(body.dark-mode, html.dark-mode body) .site-language-button.active {
     background: rgba(124, 226, 255, 0.12);
     color: var(--dark-text-primary);
 }
@@ -374,13 +388,13 @@ body.dark-mode .site-language-button.active {
     border-color: var(--border-strong);
 }
 
-body.dark-mode .theme-toggle {
+:is(body.dark-mode, html.dark-mode body) .theme-toggle {
     border-color: var(--dark-border);
     background: var(--dark-surface);
     color: var(--dark-text-primary);
 }
 
-body.dark-mode .theme-toggle:hover {
+:is(body.dark-mode, html.dark-mode body) .theme-toggle:hover {
     border-color: var(--dark-border-strong);
     background: var(--dark-surface-hover);
 }
@@ -435,19 +449,19 @@ body.dark-mode .theme-toggle:hover {
     backdrop-filter: blur(16px);
 }
 
-body.dark-mode .page-intro,
-body.dark-mode .hero-section,
-body.dark-mode .content-section,
-body.dark-mode .panel,
-body.dark-mode .blog-preview,
-body.dark-mode .tag-section,
-body.dark-mode .tag-overview-block,
-body.dark-mode .series-card,
-body.dark-mode .post-tags,
-body.dark-mode .post-backlinks,
-body.dark-mode .table-of-contents,
-body.dark-mode .toc-summary,
-body.dark-mode .recent-post-card {
+:is(body.dark-mode, html.dark-mode body) .page-intro,
+:is(body.dark-mode, html.dark-mode body) .hero-section,
+:is(body.dark-mode, html.dark-mode body) .content-section,
+:is(body.dark-mode, html.dark-mode body) .panel,
+:is(body.dark-mode, html.dark-mode body) .blog-preview,
+:is(body.dark-mode, html.dark-mode body) .tag-section,
+:is(body.dark-mode, html.dark-mode body) .tag-overview-block,
+:is(body.dark-mode, html.dark-mode body) .series-card,
+:is(body.dark-mode, html.dark-mode body) .post-tags,
+:is(body.dark-mode, html.dark-mode body) .post-backlinks,
+:is(body.dark-mode, html.dark-mode body) .table-of-contents,
+:is(body.dark-mode, html.dark-mode body) .toc-summary,
+:is(body.dark-mode, html.dark-mode body) .recent-post-card {
     border-color: var(--dark-border);
     background: var(--dark-bg-elevated);
 }
@@ -487,10 +501,10 @@ body.dark-mode .recent-post-card {
     color: var(--text-secondary);
 }
 
-body.dark-mode .page-lede,
-body.dark-mode .hero-copy p,
-body.dark-mode .page-intro p,
-body.dark-mode .panel p {
+:is(body.dark-mode, html.dark-mode body) .page-lede,
+:is(body.dark-mode, html.dark-mode body) .hero-copy p,
+:is(body.dark-mode, html.dark-mode body) .page-intro p,
+:is(body.dark-mode, html.dark-mode body) .panel p {
     color: var(--dark-text-secondary);
 }
 
@@ -502,7 +516,7 @@ body.dark-mode .panel p {
     color: var(--accent);
 }
 
-body.dark-mode .section-kicker {
+:is(body.dark-mode, html.dark-mode body) .section-kicker {
     color: var(--dark-link-color);
 }
 
@@ -547,12 +561,12 @@ body.dark-mode .section-kicker {
     background: rgba(24, 32, 51, 0.04);
 }
 
-body.dark-mode .button-link.secondary {
+:is(body.dark-mode, html.dark-mode body) .button-link.secondary {
     color: var(--dark-text-primary);
     border-color: var(--dark-border-strong);
 }
 
-body.dark-mode .button-link.secondary:hover {
+:is(body.dark-mode, html.dark-mode body) .button-link.secondary:hover {
     background: rgba(197, 214, 255, 0.06);
 }
 
@@ -616,16 +630,16 @@ body.dark-mode .button-link.secondary:hover {
     letter-spacing: 0;
 }
 
-body.dark-mode .error-section {
+:is(body.dark-mode, html.dark-mode body) .error-section {
     border-color: var(--dark-border);
     background: linear-gradient(135deg, var(--dark-bg-elevated) 0%, rgba(124, 226, 255, 0.08) 100%);
 }
 
-body.dark-mode .error-section::after {
+:is(body.dark-mode, html.dark-mode body) .error-section::after {
     color: rgba(237, 243, 255, 0.1);
 }
 
-body.dark-mode .error-code {
+:is(body.dark-mode, html.dark-mode body) .error-code {
     color: var(--dark-link-color);
 }
 
@@ -646,7 +660,7 @@ body.dark-mode .error-code {
     border: 1px solid rgba(22, 89, 197, 0.12);
 }
 
-body.dark-mode .hero-facts li {
+:is(body.dark-mode, html.dark-mode body) .hero-facts li {
     background: var(--dark-surface);
     border-color: rgba(124, 226, 255, 0.12);
 }
@@ -660,7 +674,7 @@ body.dark-mode .hero-facts li {
     color: var(--text-muted);
 }
 
-body.dark-mode .fact-label {
+:is(body.dark-mode, html.dark-mode body) .fact-label {
     color: var(--dark-text-tertiary);
 }
 
@@ -704,8 +718,8 @@ body.dark-mode .fact-label {
     color: var(--text-muted);
 }
 
-body.dark-mode .section-meta,
-body.dark-mode .archive-month-note {
+:is(body.dark-mode, html.dark-mode body) .section-meta,
+:is(body.dark-mode, html.dark-mode body) .archive-month-note {
     color: var(--dark-text-tertiary);
 }
 
@@ -746,7 +760,7 @@ body.dark-mode .archive-month-note {
     background: rgba(22, 89, 197, 0.05);
 }
 
-body.dark-mode .recent-post-link:hover {
+:is(body.dark-mode, html.dark-mode body) .recent-post-link:hover {
     background: rgba(124, 226, 255, 0.06);
 }
 
@@ -771,8 +785,8 @@ body.dark-mode .recent-post-link:hover {
     line-height: 1.35;
 }
 
-body.dark-mode .recent-post-secondary,
-body.dark-mode .group-secondary-title {
+:is(body.dark-mode, html.dark-mode body) .recent-post-secondary,
+:is(body.dark-mode, html.dark-mode body) .group-secondary-title {
     color: var(--dark-text-tertiary);
 }
 
@@ -790,11 +804,11 @@ body.dark-mode .group-secondary-title {
     color: var(--text-muted);
 }
 
-body.dark-mode .recent-post-meta,
-body.dark-mode .blog-preview-meta,
-body.dark-mode .post-meta,
-body.dark-mode .tag-meta,
-body.dark-mode .series-meta {
+:is(body.dark-mode, html.dark-mode body) .recent-post-meta,
+:is(body.dark-mode, html.dark-mode body) .blog-preview-meta,
+:is(body.dark-mode, html.dark-mode body) .post-meta,
+:is(body.dark-mode, html.dark-mode body) .tag-meta,
+:is(body.dark-mode, html.dark-mode body) .series-meta {
     color: var(--dark-text-tertiary);
 }
 
@@ -821,12 +835,12 @@ body.dark-mode .series-meta {
     text-transform: uppercase;
 }
 
-body.dark-mode .meta-pill,
-body.dark-mode .lang-switch-link,
-body.dark-mode .tag-list a,
-body.dark-mode .tag-list button,
-body.dark-mode .all-tags-toggle,
-body.dark-mode .preview-toggle label {
+:is(body.dark-mode, html.dark-mode body) .meta-pill,
+:is(body.dark-mode, html.dark-mode body) .lang-switch-link,
+:is(body.dark-mode, html.dark-mode body) .tag-list a,
+:is(body.dark-mode, html.dark-mode body) .tag-list button,
+:is(body.dark-mode, html.dark-mode body) .all-tags-toggle,
+:is(body.dark-mode, html.dark-mode body) .preview-toggle label {
     border-color: rgba(124, 226, 255, 0.14);
     background: var(--dark-surface);
     color: var(--dark-text-secondary);
@@ -860,8 +874,8 @@ body.dark-mode .preview-toggle label {
     background: var(--surface-accent);
 }
 
-body.dark-mode .tag-list a:hover,
-body.dark-mode .lang-switch-link:hover {
+:is(body.dark-mode, html.dark-mode body) .tag-list a:hover,
+:is(body.dark-mode, html.dark-mode body) .lang-switch-link:hover {
     color: var(--dark-text-primary);
     background: var(--dark-surface-hover);
 }
@@ -872,7 +886,7 @@ body.dark-mode .lang-switch-link:hover {
     border-color: rgba(22, 89, 197, 0.26) !important;
 }
 
-body.dark-mode .active-tag {
+:is(body.dark-mode, html.dark-mode body) .active-tag {
     background: rgba(124, 226, 255, 0.12) !important;
     color: var(--dark-text-primary) !important;
     border-color: rgba(124, 226, 255, 0.24) !important;
@@ -934,7 +948,7 @@ body.dark-mode .active-tag {
     color: var(--accent-strong);
 }
 
-body.dark-mode .blog-preview h4 a:hover {
+:is(body.dark-mode, html.dark-mode body) .blog-preview h4 a:hover {
     color: var(--dark-link-color);
 }
 
@@ -948,7 +962,7 @@ body.dark-mode .blog-preview h4 a:hover {
     white-space: pre-line;
 }
 
-body.dark-mode .blog-excerpt {
+:is(body.dark-mode, html.dark-mode body) .blog-excerpt {
     color: var(--dark-text-secondary);
 }
 
@@ -1114,7 +1128,7 @@ body.dark-mode .blog-excerpt {
     font-style: italic;
 }
 
-body.dark-mode .post-content blockquote {
+:is(body.dark-mode, html.dark-mode body) .post-content blockquote {
     color: var(--dark-text-secondary);
     border-left-color: var(--dark-link-color);
 }
@@ -1134,8 +1148,8 @@ body.dark-mode .post-content blockquote {
     font-size: 0.92em;
 }
 
-body.dark-mode .post-content code,
-body.dark-mode .blog-post code {
+:is(body.dark-mode, html.dark-mode body) .post-content code,
+:is(body.dark-mode, html.dark-mode body) .blog-post code {
     background: rgba(124, 226, 255, 0.12);
 }
 
@@ -1193,10 +1207,10 @@ body.dark-mode .blog-post code {
 .blog-post sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref {
 }
 
-body.dark-mode .post-content sup[id^="fnref:"]:target a.footnote-ref,
-body.dark-mode .blog-post sup[id^="fnref:"]:target a.footnote-ref,
-body.dark-mode .post-content sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref,
-body.dark-mode .blog-post sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref {
+:is(body.dark-mode, html.dark-mode body) .post-content sup[id^="fnref:"]:target a.footnote-ref,
+:is(body.dark-mode, html.dark-mode body) .blog-post sup[id^="fnref:"]:target a.footnote-ref,
+:is(body.dark-mode, html.dark-mode body) .post-content sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref,
+:is(body.dark-mode, html.dark-mode body) .blog-post sup[id^="fnref:"].footnote-ref-target-animate a.footnote-ref {
     background: #ffd666;
     box-shadow: 0 0 0 1px #e6b84a, 0 0 0 0.2rem rgba(255, 214, 102, 0.12);
     color: #241400;
@@ -1221,8 +1235,8 @@ body.dark-mode .blog-post sup[id^="fnref:"].footnote-ref-target-animate a.footno
     vertical-align: super;
 }
 
-body.dark-mode .post-content a.footnote-ref,
-body.dark-mode .blog-post a.footnote-ref {
+:is(body.dark-mode, html.dark-mode body) .post-content a.footnote-ref,
+:is(body.dark-mode, html.dark-mode body) .blog-post a.footnote-ref {
     background: rgba(124, 226, 255, 0.14);
     color: var(--dark-link-color);
 }
@@ -1236,8 +1250,8 @@ body.dark-mode .blog-post a.footnote-ref {
     font-size: 0.96rem;
 }
 
-body.dark-mode .post-content .footnote,
-body.dark-mode .blog-post .footnote {
+:is(body.dark-mode, html.dark-mode body) .post-content .footnote,
+:is(body.dark-mode, html.dark-mode body) .blog-post .footnote {
     border-top-color: var(--dark-border);
     color: var(--dark-text-secondary);
 }
@@ -1268,10 +1282,10 @@ body.dark-mode .blog-post .footnote {
 .blog-post .footnote li.footnote-target-animate {
 }
 
-body.dark-mode .post-content .footnote li:target,
-body.dark-mode .blog-post .footnote li:target,
-body.dark-mode .post-content .footnote li.footnote-target-animate,
-body.dark-mode .blog-post .footnote li.footnote-target-animate {
+:is(body.dark-mode, html.dark-mode body) .post-content .footnote li:target,
+:is(body.dark-mode, html.dark-mode body) .blog-post .footnote li:target,
+:is(body.dark-mode, html.dark-mode body) .post-content .footnote li.footnote-target-animate,
+:is(body.dark-mode, html.dark-mode body) .blog-post .footnote li.footnote-target-animate {
     background: rgba(255, 214, 102, 0.28);
     box-shadow: 0 0 0 1px #e6b84a, 0 0 0 0.18rem rgba(255, 214, 102, 0.1);
     color: #fff7df;
@@ -1311,8 +1325,8 @@ body.dark-mode .blog-post .footnote li.footnote-target-animate {
     transform: translateY(-0.5px);
 }
 
-body.dark-mode .post-content a.footnote-backref,
-body.dark-mode .blog-post a.footnote-backref {
+:is(body.dark-mode, html.dark-mode body) .post-content a.footnote-backref,
+:is(body.dark-mode, html.dark-mode body) .blog-post a.footnote-backref {
     color: var(--dark-link-color);
 }
 
@@ -1325,7 +1339,7 @@ body.dark-mode .blog-post a.footnote-backref {
     background: var(--surface-strong);
 }
 
-body.dark-mode .embedded-page {
+:is(body.dark-mode, html.dark-mode body) .embedded-page {
     border-color: var(--dark-border);
     background: var(--dark-surface);
 }
@@ -1360,7 +1374,7 @@ body.dark-mode .embedded-page {
     background: rgba(255, 251, 244, 0.5);
 }
 
-body.dark-mode .toc-summary {
+:is(body.dark-mode, html.dark-mode body) .toc-summary {
     color: var(--dark-text-tertiary);
     border-color: rgba(197, 214, 255, 0.08);
     background: rgba(18, 27, 43, 0.42);
@@ -1375,7 +1389,7 @@ body.dark-mode .toc-summary {
     background: rgba(255, 251, 244, 0.38);
 }
 
-body.dark-mode .table-of-contents {
+:is(body.dark-mode, html.dark-mode body) .table-of-contents {
     border-color: rgba(197, 214, 255, 0.08);
     background: rgba(18, 27, 43, 0.32);
 }
@@ -1390,7 +1404,7 @@ body.dark-mode .table-of-contents {
     color: var(--text-muted);
 }
 
-body.dark-mode .table-of-contents h3 {
+:is(body.dark-mode, html.dark-mode body) .table-of-contents h3 {
     color: var(--dark-text-quaternary);
 }
 
@@ -1423,15 +1437,15 @@ body.dark-mode .table-of-contents h3 {
     font-weight: 600;
 }
 
-body.dark-mode .table-of-contents a {
+:is(body.dark-mode, html.dark-mode body) .table-of-contents a {
     color: var(--dark-text-tertiary);
 }
 
-body.dark-mode .table-of-contents a:hover {
+:is(body.dark-mode, html.dark-mode body) .table-of-contents a:hover {
     color: var(--dark-text-primary);
 }
 
-body.dark-mode .table-of-contents a.active {
+:is(body.dark-mode, html.dark-mode body) .table-of-contents a.active {
     color: var(--dark-link-color);
 }
 
@@ -1499,10 +1513,10 @@ body.dark-mode .table-of-contents a.active {
     color: var(--text-muted);
 }
 
-body.dark-mode #backlinks-list li::before,
-body.dark-mode .series-posts li::before,
-body.dark-mode #tag-sections ul li::before,
-body.dark-mode #all-tags ul li::before {
+:is(body.dark-mode, html.dark-mode body) #backlinks-list li::before,
+:is(body.dark-mode, html.dark-mode body) .series-posts li::before,
+:is(body.dark-mode, html.dark-mode body) #tag-sections ul li::before,
+:is(body.dark-mode, html.dark-mode body) #all-tags ul li::before {
     color: var(--dark-text-quaternary);
 }
 
@@ -1522,11 +1536,11 @@ body.dark-mode #all-tags ul li::before {
     color: var(--accent-strong);
 }
 
-body.dark-mode #backlinks-list a:hover,
-body.dark-mode .series-posts a:hover,
-body.dark-mode #tag-sections a:hover,
-body.dark-mode #all-tags a:hover,
-body.dark-mode .container ul li a:hover {
+:is(body.dark-mode, html.dark-mode body) #backlinks-list a:hover,
+:is(body.dark-mode, html.dark-mode body) .series-posts a:hover,
+:is(body.dark-mode, html.dark-mode body) #tag-sections a:hover,
+:is(body.dark-mode, html.dark-mode body) #all-tags a:hover,
+:is(body.dark-mode, html.dark-mode body) .container ul li a:hover {
     color: var(--dark-link-color);
 }
 
@@ -1543,15 +1557,15 @@ body.dark-mode .container ul li a:hover {
     font-weight: 600;
 }
 
-body.dark-mode .toc-container .table-of-contents li a {
+:is(body.dark-mode, html.dark-mode body) .toc-container .table-of-contents li a {
     color: var(--dark-text-tertiary);
 }
 
-body.dark-mode .toc-container .table-of-contents li a:hover {
+:is(body.dark-mode, html.dark-mode body) .toc-container .table-of-contents li a:hover {
     color: var(--dark-text-primary);
 }
 
-body.dark-mode .toc-container .table-of-contents li a.active {
+:is(body.dark-mode, html.dark-mode body) .toc-container .table-of-contents li a.active {
     color: var(--dark-link-color);
 }
 
@@ -1606,12 +1620,12 @@ body.dark-mode .toc-container .table-of-contents li a.active {
     color: var(--text-secondary);
 }
 
-body.dark-mode .about-placeholder {
+:is(body.dark-mode, html.dark-mode body) .about-placeholder {
     background: linear-gradient(180deg, rgba(124, 226, 255, 0.06), rgba(124, 226, 255, 0.025));
     border-color: rgba(124, 226, 255, 0.18);
 }
 
-body.dark-mode .about-placeholder h2 {
+:is(body.dark-mode, html.dark-mode body) .about-placeholder h2 {
     color: var(--dark-text-secondary);
 }
 
@@ -1632,8 +1646,8 @@ body.dark-mode .about-placeholder h2 {
     border: 1px solid rgba(22, 89, 197, 0.1);
 }
 
-body.dark-mode .about-points li,
-body.dark-mode .contact-list li {
+:is(body.dark-mode, html.dark-mode body) .about-points li,
+:is(body.dark-mode, html.dark-mode body) .contact-list li {
     background: var(--dark-surface);
     border-color: rgba(124, 226, 255, 0.12);
 }
@@ -1649,7 +1663,7 @@ footer {
     color: var(--text-muted);
 }
 
-body.dark-mode footer {
+:is(body.dark-mode, html.dark-mode body) footer {
     border-top-color: var(--dark-border);
     color: var(--dark-text-tertiary);
 }
@@ -1683,11 +1697,11 @@ footer p {
     transition: width 0.1s ease;
 }
 
-body.dark-mode #progress-container {
+:is(body.dark-mode, html.dark-mode body) #progress-container {
     background-color: var(--progress-track-dark);
 }
 
-body.dark-mode #reading-progress {
+:is(body.dark-mode, html.dark-mode body) #reading-progress {
     background: linear-gradient(to right, var(--progress-gradient-dark-start), var(--progress-gradient-dark-end));
     box-shadow: 0 0 3px var(--progress-shadow-dark);
 }
@@ -1706,7 +1720,7 @@ body.dark-mode #reading-progress {
     cursor: pointer;
 }
 
-body.dark-mode .back-to-top {
+:is(body.dark-mode, html.dark-mode body) .back-to-top {
     border-color: var(--dark-border-strong);
     background: var(--dark-bg-elevated);
     color: var(--dark-text-primary);
@@ -1919,8 +1933,8 @@ body.dark-mode .back-to-top {
         border-color: rgba(34, 48, 74, 0.12);
     }
 
-    body.dark-mode .toc-summary,
-    body.dark-mode .table-of-contents {
+    :is(body.dark-mode, html.dark-mode body) .toc-summary,
+    :is(body.dark-mode, html.dark-mode body) .table-of-contents {
         background: var(--dark-surface);
         border-color: rgba(197, 214, 255, 0.14);
     }
@@ -1980,7 +1994,7 @@ body.dark-mode .back-to-top {
     overflow: hidden;
 }
 
-body.dark-mode .project-card {
+:is(body.dark-mode, html.dark-mode body) .project-card {
     background: rgba(17, 27, 43, 0.88);
     border-color: var(--dark-border);
 }
@@ -2033,7 +2047,7 @@ body.dark-mode .project-card {
     font-size: 0.92rem;
 }
 
-body.dark-mode .project-card-meta {
+:is(body.dark-mode, html.dark-mode body) .project-card-meta {
     color: var(--dark-text-tertiary);
 }
 
@@ -2052,7 +2066,7 @@ body.dark-mode .project-card-meta {
     color: var(--accent);
 }
 
-body.dark-mode .project-card h3 a:hover {
+:is(body.dark-mode, html.dark-mode body) .project-card h3 a:hover {
     color: var(--dark-link-color);
 }
 
@@ -2062,7 +2076,7 @@ body.dark-mode .project-card h3 a:hover {
     font-size: 1rem;
 }
 
-body.dark-mode .project-card-subtitle {
+:is(body.dark-mode, html.dark-mode body) .project-card-subtitle {
     color: var(--dark-text-secondary);
 }
 
@@ -2071,7 +2085,7 @@ body.dark-mode .project-card-subtitle {
     color: var(--text-secondary);
 }
 
-body.dark-mode .project-card-summary {
+:is(body.dark-mode, html.dark-mode body) .project-card-summary {
     color: var(--dark-text-secondary);
 }
 
@@ -2098,7 +2112,7 @@ body.dark-mode .project-card-summary {
     color: #6941c6;
 }
 
-body.dark-mode .meta-pill--project {
+:is(body.dark-mode, html.dark-mode body) .meta-pill--project {
     border-color: rgba(188, 140, 255, 0.22);
     background: rgba(188, 140, 255, 0.08);
     color: #bc8cff;
@@ -2110,7 +2124,7 @@ body.dark-mode .meta-pill--project {
     color: var(--accent);
 }
 
-body.dark-mode .meta-pill--gallery {
+:is(body.dark-mode, html.dark-mode body) .meta-pill--gallery {
     border-color: rgba(124, 226, 255, 0.24);
     background: rgba(124, 226, 255, 0.08);
     color: var(--dark-link-color);

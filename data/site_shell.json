@@ -1,6 +1,7 @@
 {
-  "css_version": "20260607a",
-  "js_version": "20260610b",
+  "css_version": "20260610c",
+  "js_version": "20260610c",
+  "theme_init": "theme-init.js",
   "icons": {
     "favicon": "assets/icons/favicon-32.png",
     "apple_touch_icon": "assets/icons/apple-touch-icon.png"
