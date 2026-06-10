@@ -239,12 +239,13 @@ def render_project_cards(projects_payload: dict) -> str:
         paths = project.get("paths") or {}
         href = paths.get("en") or paths.get("zh") or "#"
         title = localized(project.get("title"), "en")
+        modifier = "featured" if not cards else "compact"
         cards.append(
-            f'''            <article class="project-card project-card--compact">
-                <a class="project-card-media project-card-media--compact" href="{escape(href)}">
+            f'''            <article class="project-card project-card--{modifier}">
+                <a class="project-card-media project-card-media--{modifier}" href="{escape(href)}">
                     <img src="{escape(project.get("cover"))}" alt="{escape(title)} cover" loading="lazy" decoding="async">
                 </a>
-                <div class="project-card-body project-card-body--compact">
+                <div class="project-card-body project-card-body--{modifier}">
                     <div class="project-card-meta"><span class="meta-pill meta-pill--project">{escape(type_label(project.get("type", "")))}</span><span>{escape(format_day(project.get("date", "")))}</span></div>
                     <h3><a href="{escape(href)}">{escape(title)}</a></h3>
                     <p class="project-card-subtitle">{escape(localized(project.get("subtitle"), "en"))}</p>
