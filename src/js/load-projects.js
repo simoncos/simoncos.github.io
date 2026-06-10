@@ -63,20 +63,24 @@ document.addEventListener('DOMContentLoaded', function () {
             return db - da;
         });
 
-        gallery.innerHTML = sorted.map((project) => {
+        gallery.classList.toggle('projects-gallery--single', sorted.length === 1);
+
+        gallery.innerHTML = sorted.map((project, index) => {
             const title = getLocalizedValue(project.title, language);
             const subtitle = getLocalizedValue(project.subtitle, language);
             const summary = getLocalizedValue(project.summary, language);
             const href = getLocalizedPath(project, language);
             const typeKey = project.type ? `project_type_${project.type}` : '';
             const typeLabel = typeKey && typeof i18n.t === 'function' ? i18n.t(typeKey) : project.type || '';
+            const isFeatured = index === 0;
+            const cardModifier = isFeatured ? 'featured' : 'compact';
 
             return `
-                <article class="project-card project-card--compact">
-                    <a class="project-card-media project-card-media--compact" href="${escapeHtml(href)}">
+                <article class="project-card project-card--${cardModifier}">
+                    <a class="project-card-media project-card-media--${cardModifier}" href="${escapeHtml(href)}">
                         <img src="${escapeHtml(project.cover || '')}" alt="${escapeHtml(title)} cover" loading="lazy" decoding="async">
                     </a>
-                    <div class="project-card-body project-card-body--compact">
+                    <div class="project-card-body project-card-body--${cardModifier}">
                         <div class="project-card-meta">
                             ${typeLabel ? `<span class="meta-pill meta-pill--project">${escapeHtml(typeLabel)}</span>` : ''}
                             ${project.date ? `<span>${escapeHtml(formatDate(project.date))}</span>` : ''}
