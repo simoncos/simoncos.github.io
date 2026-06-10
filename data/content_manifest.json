@@ -1,9 +1,44 @@
 {
-  "last_updated": "2026-06-07",
+  "last_updated": "2026-06-10",
+  "surface_last_updated": {
+    "projects": "2026-05-20",
+    "gallery": "2026-06-07"
+  },
   "items": [
+    {
+      "id": "sleep-toolkit",
+      "type": "tool",
+      "surfaces": [
+        "projects",
+        "home"
+      ],
+      "date": "2026-05-06",
+      "cover": "projects/assets/sleep-toolkit-cover.svg",
+      "title": {
+        "zh": "Sleep Toolkit",
+        "en": "Sleep Toolkit"
+      },
+      "subtitle": {
+        "zh": "SleepCycle CSV 分析工具 · Web App / CLI",
+        "en": "SleepCycle CSV analyzer · Web App / CLI"
+      },
+      "summary": {
+        "zh": "一个持续维护、对外可用的睡眠数据分析工具：上传 SleepCycle CSV，生成结构化 JSON、交互式 HTML 报告和 PDF。",
+        "en": "A maintained public tool for SleepCycle exports: upload a CSV and generate structured JSON, an interactive HTML report, and a PDF."
+      },
+      "paths": {
+        "zh": "https://sleep-toolkit-production.up.railway.app",
+        "en": "https://sleep-toolkit-production.up.railway.app"
+      },
+      "featured": true
+    },
     {
       "id": "pkm-2026-06-07-talk",
       "type": "talk",
+      "surfaces": [
+        "gallery",
+        "home"
+      ],
       "date": "2026-06-07",
       "cover": "gallery/assets/pkm-2026-05-22-cover.svg",
       "title": {
@@ -28,6 +63,10 @@
     {
       "id": "sleep-2016-2026",
       "type": "visual_essay",
+      "surfaces": [
+        "gallery",
+        "home"
+      ],
       "date": "2026-04-23",
       "cover": "gallery/assets/sleep-2016-2026-cover.svg",
       "title": {

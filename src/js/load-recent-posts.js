@@ -1,8 +1,8 @@
 /**
  * load-recent-posts.js
- * Merges blog posts (article_groups.json) and projects (projects_data.json)
- * into a unified recent-posts list on the homepage, sorted by date descending.
- */
+     * Merges blog posts, projects, and gallery items
+     * into a unified recent-posts list on the homepage, sorted by date descending.
+     */
 document.addEventListener('DOMContentLoaded', function () {
     const postList = document.getElementById('post-list');
     const updatedEl = document.getElementById('post-list-updated');
@@ -89,21 +89,57 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 
+    /**
+     * Normalize a gallery entry into a unified post object.
+     */
+    function galleryItemToPost(item, language) {
+        if (!item.paths) return null;
+        const href = item.paths[language] || item.paths.en || item.paths.zh || '#';
+        const zhTitle = getLocalizedValue(item.title, 'zh');
+        const enTitle = getLocalizedValue(item.title, 'en');
+        const primaryTitle = getLocalizedValue(item.title, language);
+        const secondaryTitle = language === 'zh' ? enTitle : (enTitle !== zhTitle ? zhTitle : '');
+
+        const langAvail = item.skipLangRewrite
+            ? ''
+            : [
+                item.paths.zh ? '中文' : null,
+                item.paths.en ? 'EN' : null,
+            ].filter(Boolean).join(' / ');
+
+        return {
+            type: item.type || 'gallery',
+            date: item.date,
+            primaryTitle,
+            secondaryTitle: secondaryTitle !== primaryTitle ? secondaryTitle : '',
+            href,
+            langAvail,
+            skipLangRewrite: item.skipLangRewrite === true
+        };
+    }
+
     function typePillLabel(type, language) {
         if (type === 'project') return language === 'zh' ? '项目' : 'Project';
+        if (type === 'talk') return language === 'zh' ? 'Talk' : 'Talk';
+        if (type === 'visual_essay') return language === 'zh' ? 'Visual Essay' : 'Visual essay';
+        if (type === 'demo') return language === 'zh' ? 'Demo' : 'Demo';
+        if (type === 'artifact') return language === 'zh' ? 'Artifact' : 'Artifact';
         return language === 'zh' ? '博客' : 'Blog';
     }
 
-    function renderPosts(blogData, projectsPayload) {
+    function renderPosts(blogData, projectsPayload, galleryPayload) {
         const language = getCurrentLanguage();
         const blogGroups = blogData ? blogData.groups : [];
         const projects = projectsPayload && Array.isArray(projectsPayload.projects)
             ? projectsPayload.projects : [];
+        const galleryItems = galleryPayload && Array.isArray(galleryPayload.items)
+            ? galleryPayload.items : [];
 
         // Build unified post list
         const posts = [
             ...blogGroups.map(g => blogGroupToPost(g, language)).filter(Boolean),
             ...projects.map(p => projectToPost(p, language)).filter(Boolean),
+            ...galleryItems.map(item => galleryItemToPost(item, language)).filter(Boolean),
         ].sort((a, b) => {
             const da = a.date ? new Date(a.date).getTime() : 0;
             const db = b.date ? new Date(b.date).getTime() : 0;
@@ -115,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const dates = [
                 blogData && blogData.lastUpdated,
                 projectsPayload && projectsPayload.last_updated,
+                galleryPayload && galleryPayload.last_updated,
             ].filter(Boolean).map(d => new Date(d).getTime());
             const latestMs = dates.length ? Math.max(...dates) : 0;
             if (latestMs) {
@@ -138,8 +175,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 : '';
             const li = document.createElement('li');
             li.className = 'recent-post-card';
+            const skipLangRewrite = post.skipLangRewrite ? ' data-skip-lang-rewrite="true"' : '';
             li.innerHTML = `
-                <a class="recent-post-link" href="${escapeHtml(post.href)}">
+                <a class="recent-post-link" href="${escapeHtml(post.href)}"${skipLangRewrite}>
                     <span class="recent-post-main">
                         <span class="recent-post-meta">
                             <span class="meta-pill meta-pill--${escapeHtml(post.type)}">${escapeHtml(typeLabel)}</span>
@@ -169,9 +207,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const projectsPromise = fetch(resolvePath('data/projects_data.json'))
             .then(r => r.ok ? r.json() : null)
             .catch(() => null);
+        const galleryPromise = fetch(resolvePath('data/gallery_data.json'))
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null);
 
-        Promise.all([blogPromise, projectsPromise])
-            .then(([blogData, projectsPayload]) => renderPosts(blogData, projectsPayload))
+        Promise.all([blogPromise, projectsPromise, galleryPromise])
+            .then(([blogData, projectsPayload, galleryPayload]) => renderPosts(blogData, projectsPayload, galleryPayload))
             .catch(err => {
                 console.error('Error loading posts:', err);
                 postList.innerHTML = `<li>${escapeHtml(i18n.t ? i18n.t('error_loading_blog_posts') : 'Error loading posts.')}</li>`;

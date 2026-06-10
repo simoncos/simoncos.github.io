@@ -103,12 +103,23 @@ function updateDarkModeToggleState(mode = getStoredThemeMode(), isDarkMode = get
 
 function initDarkMode() {
     applyThemeMode(getStoredThemeMode());
+    bindDarkModeToggle();
 }
 
 function toggleDarkMode() {
     const nextMode = getNextThemeMode(getStoredThemeMode());
     persistThemeMode(nextMode);
     applyThemeMode(nextMode);
+}
+
+function bindDarkModeToggle() {
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    if (!toggleBtn || toggleBtn.dataset.themeToggleBound === 'true') {
+        return;
+    }
+
+    toggleBtn.addEventListener('click', toggleDarkMode);
+    toggleBtn.dataset.themeToggleBound = 'true';
 }
 
 if (systemThemeQuery) {

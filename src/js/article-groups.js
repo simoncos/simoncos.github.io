@@ -19,12 +19,21 @@
 
     async function fetchArticleGroups() {
         if (!cachedPromise) {
-            cachedPromise = fetch(resolvePath('data/article_groups.json'))
+            cachedPromise = fetch(resolvePath('data/article_index.json'))
                 .then((response) => {
                     if (!response.ok) {
-                        throw new Error(`article_groups ${response.status}`);
+                        throw new Error(`article_index ${response.status}`);
                     }
                     return response.json();
+                })
+                .catch((error) => {
+                    console.warn('Error loading article index, falling back to article groups:', error);
+                    return fetch(resolvePath('data/article_groups.json')).then((response) => {
+                        if (!response.ok) {
+                            throw new Error(`article_groups ${response.status}`);
+                        }
+                        return response.json();
+                    });
                 })
                 .then((payload) => {
                     const normalized = normalizePayload(payload);

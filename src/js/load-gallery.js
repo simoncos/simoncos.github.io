@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return `
                 <article class="project-card gallery-card">
                     <a class="project-card-media" href="${escapeHtml(href)}" data-skip-lang-rewrite="${item.skipLangRewrite ? 'true' : 'false'}">
-                        <img src="${escapeHtml(item.cover || '')}" alt="${escapeHtml(title)} cover">
+                        <img src="${escapeHtml(item.cover || '')}" alt="${escapeHtml(title)} cover" loading="lazy" decoding="async">
                     </a>
                     <div class="project-card-body">
                         <div class="project-card-meta">
