@@ -71,6 +71,11 @@ def render_resource_block(config: dict[str, Any], page: dict[str, Any]) -> str:
                 f'title="{feed["title"]}" href="{prefixed(asset_prefix, feed["href"])}">'
             )
 
+    theme_init = config.get("theme_init")
+    if theme_init:
+        src = prefixed(asset_prefix, f"src/js/{theme_init}") + f"?v={config['js_version']}"
+        lines.append(f'    <script src="{src}"></script>')
+
     lines.append(
         f'    <link rel="stylesheet" href="{prefixed(asset_prefix, "src/css/styles.css")}?v={config["css_version"]}">'
     )

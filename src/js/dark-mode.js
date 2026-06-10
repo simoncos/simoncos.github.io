@@ -49,8 +49,12 @@ function getEffectiveDarkMode(mode = getStoredThemeMode()) {
 
 function applyThemeMode(mode = getStoredThemeMode()) {
     const isDarkMode = getEffectiveDarkMode(mode);
-    document.body.classList.toggle(DARK_MODE_CLASS, isDarkMode);
+    document.documentElement.classList.toggle(DARK_MODE_CLASS, isDarkMode);
     document.documentElement.setAttribute('data-theme-mode', mode);
+    document.documentElement.setAttribute('data-effective-theme', isDarkMode ? 'dark' : 'light');
+    if (document.body) {
+        document.body.classList.toggle(DARK_MODE_CLASS, isDarkMode);
+    }
     updateDarkModeToggleState(mode, isDarkMode);
 }
 
