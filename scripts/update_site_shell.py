@@ -7,6 +7,7 @@ import argparse
 import json
 import re
 import sys
+from html import escape
 from pathlib import Path
 from typing import Any
 
@@ -46,6 +47,29 @@ def normalize_script(script: str | dict[str, Any]) -> dict[str, Any]:
     return script
 
 
+def render_attrs(attrs: dict[str, Any]) -> str:
+    parts = []
+    for name, value in attrs.items():
+        if value is True:
+            parts.append(f" {escape(name, quote=True)}")
+        elif value not in (False, None):
+            parts.append(f' {escape(name, quote=True)}="{escape(str(value), quote=True)}"')
+    return "".join(parts)
+
+
+def render_script_tag(entry: dict[str, Any], asset_prefix: str, config: dict[str, Any]) -> str:
+    if entry.get("external_src"):
+        src = entry["external_src"]
+    else:
+        src = prefixed(asset_prefix, f"src/js/{entry['src']}") + f"?v={config['js_version']}"
+
+    attrs = {"src": src}
+    if entry.get("defer"):
+        attrs["defer"] = True
+    attrs.update(entry.get("attrs") or {})
+    return f"    <script{render_attrs(attrs)}></script>"
+
+
 def render_resource_block(config: dict[str, Any], page: dict[str, Any]) -> str:
     asset_prefix = page.get("asset_prefix", "")
     profile_name = page["script_profile"]
@@ -82,9 +106,7 @@ def render_resource_block(config: dict[str, Any], page: dict[str, Any]) -> str:
 
     for script in scripts:
         entry = normalize_script(script)
-        attrs = " defer" if entry.get("defer") else ""
-        src = prefixed(asset_prefix, f"src/js/{entry['src']}") + f"?v={config['js_version']}"
-        lines.append(f'    <script src="{src}"{attrs}></script>')
+        lines.append(render_script_tag(entry, asset_prefix, config))
 
     lines.append(f"    <!-- {RESOURCE_END} -->")
     return "\n".join(lines)
