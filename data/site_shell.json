@@ -1,6 +1,6 @@
 {
   "css_version": "20260610d",
-  "js_version": "20260620a",
+  "js_version": "20260620b",
   "theme_init": "theme-init.js",
   "icons": {
     "favicon": "assets/icons/favicon-32.png",
@@ -23,8 +23,11 @@
       "load-nav.js",
       "dark-mode.js",
       {
-        "src": "analytics.js",
-        "defer": true
+        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
+        "defer": true,
+        "attrs": {
+          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
+        }
       }
     ],
     "home": [
@@ -34,8 +37,11 @@
       "load-nav.js",
       "dark-mode.js",
       {
-        "src": "analytics.js",
-        "defer": true
+        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
+        "defer": true,
+        "attrs": {
+          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
+        }
       },
       {
         "src": "load-recent-posts.js",
@@ -50,8 +56,11 @@
       "dark-mode.js",
       "preview-toggle.js",
       {
-        "src": "analytics.js",
-        "defer": true
+        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
+        "defer": true,
+        "attrs": {
+          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
+        }
       },
       "load-blog-archive.js"
     ],
@@ -62,8 +71,11 @@
       "load-nav.js",
       "dark-mode.js",
       {
-        "src": "analytics.js",
-        "defer": true
+        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
+        "defer": true,
+        "attrs": {
+          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
+        }
       },
       {
         "src": "load-tags-page.js",
@@ -77,8 +89,11 @@
       "load-nav.js",
       "dark-mode.js",
       {
-        "src": "analytics.js",
-        "defer": true
+        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
+        "defer": true,
+        "attrs": {
+          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
+        }
       },
       {
         "src": "load-series-page.js",
@@ -91,8 +106,11 @@
       "load-nav.js",
       "dark-mode.js",
       {
-        "src": "analytics.js",
-        "defer": true
+        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
+        "defer": true,
+        "attrs": {
+          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
+        }
       },
       "load-projects.js"
     ],
@@ -102,8 +120,11 @@
       "load-nav.js",
       "dark-mode.js",
       {
-        "src": "analytics.js",
-        "defer": true
+        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
+        "defer": true,
+        "attrs": {
+          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
+        }
       },
       "load-gallery.js"
     ],
@@ -120,8 +141,11 @@
       "footnote-target.js",
       "load-backlinks.js",
       {
-        "src": "analytics.js",
-        "defer": true
+        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
+        "defer": true,
+        "attrs": {
+          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
+        }
       },
       "load-post-series.js"
     ]
