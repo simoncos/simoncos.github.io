@@ -1,0 +1,4 @@
+interface:
+  display_name: "Site Copy and IA"
+  short_description: "Keep public site copy and IA reader-facing"
+  default_prompt: "Use $site-copy-and-ia to review or rewrite simonc site public copy, nav labels, page framing, and bilingual IA."
