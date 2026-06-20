@@ -28,7 +28,6 @@
     <script src="src/js/load-nav.js?v=20260620b"></script>
     <script src="src/js/dark-mode.js?v=20260620b"></script>
     <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
-    <script src="src/js/load-projects.js?v=20260620b"></script>
     <!-- site-shell:resources:end -->
 </head>
 <body>
@@ -43,26 +42,59 @@
         <section class="projects-overview" aria-labelledby="projects-page-title">
             <div class="projects-overview-copy">
                 <p class="section-kicker" data-i18n="projects_kicker">Projects</p>
-                <h2 id="projects-page-title" data-i18n="projects_overview_title">Project work</h2>
-                <p class="page-lede" data-i18n="projects_lede">Independent project pages, data essays, and other standalone works that do not quite belong in the regular writing archive.</p>
+                <h2 id="projects-page-title" data-i18n="projects_overview_title">Project observatory</h2>
+                <p class="page-lede" data-i18n="projects_lede">Projects here include the live tool, related writing, inputs, outputs, and the next question behind the work.</p>
             </div>
             <p class="projects-overview-note" data-i18n="projects_overview_note">1 maintained public project</p>
         </section>
-        <section id="projects-gallery" class="projects-gallery" aria-live="polite">
-            <!-- static-fallback:start projects-gallery -->
-            <article class="project-card project-card--featured">
-                <a class="project-card-media project-card-media--featured" href="https://sleep-toolkit-production.up.railway.app">
-                    <img src="projects/assets/sleep-toolkit-cover.svg" alt="Sleep Toolkit cover" loading="lazy" decoding="async">
-                </a>
-                <div class="project-card-body project-card-body--featured">
-                    <div class="project-card-meta"><span class="meta-pill meta-pill--project">Tool</span><span>May 6, 2026</span></div>
-                    <h3><a href="https://sleep-toolkit-production.up.railway.app">Sleep Toolkit</a></h3>
-                    <p class="project-card-subtitle">SleepCycle CSV analyzer · Web App / CLI</p>
-                    <p class="project-card-summary">A maintained public tool for SleepCycle exports: upload a CSV and generate structured JSON, an interactive HTML report, and a PDF.</p>
-                    <a class="read-more" href="https://sleep-toolkit-production.up.railway.app">Open project</a>
+        <section class="project-observatory" aria-labelledby="project-observatory-title">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker" data-i18n="project_observatory_kicker">Observatory</p>
+                    <h2 id="project-observatory-title" data-i18n="project_observatory_title">Sleep Toolkit: from raw records to readable reports.</h2>
+                </div>
+                <p class="section-meta" data-i18n="project_observatory_updated">Status: maintained public tool</p>
+            </div>
+            <article class="observatory-card">
+                <div class="observatory-primary">
+                    <div class="project-card-meta">
+                        <span class="meta-pill meta-pill--project" data-i18n="project_observatory_status">Maintained</span>
+                        <span class="meta-pill" data-i18n="project_observatory_kind">Data tool</span>
+                    </div>
+                    <h3>Sleep Toolkit</h3>
+                    <p data-i18n="project_observatory_summary">A practical bridge between raw SleepCycle exports and readable reports: structured JSON, interactive HTML, and PDF output.</p>
+                </div>
+                <dl class="observatory-grid">
+                    <div>
+                        <dt data-i18n="project_observatory_input_label">Input</dt>
+                        <dd data-i18n="project_observatory_input">SleepCycle CSV exports and long-running personal sleep records.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="project_observatory_output_label">Output</dt>
+                        <dd data-i18n="project_observatory_output">JSON, interactive report, PDF, and reusable analysis language.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="project_observatory_links_label">Connected artifacts</dt>
+                        <dd><a href="projects/sleep-2016-2026.en.html" data-i18n="project_observatory_links">Ten-year sleep visual essay</a></dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="project_observatory_next_label">Next question</dt>
+                        <dd data-i18n="project_observatory_next">How should personal data tools explain uncertainty, habits, and behavior change without pretending to be medical advice?</dd>
+                    </div>
+                </dl>
+                <div class="observatory-surfaces" aria-label="Public surfaces">
+                    <a class="observatory-surface-card" href="https://sleep-toolkit-production.up.railway.app">
+                        <span class="meta-pill meta-pill--project" data-i18n="project_observatory_surface_app_type">App</span>
+                        <strong data-i18n="project_observatory_surface_app_title">Sleep Toolkit web app</strong>
+                        <span data-i18n="project_observatory_surface_app_text">Upload a SleepCycle CSV and generate structured analysis outputs.</span>
+                    </a>
+                    <a class="observatory-surface-card" href="projects/sleep-2016-2026.en.html">
+                        <span class="meta-pill meta-pill--visual_essay" data-i18n="project_observatory_surface_essay_type">Visual essay</span>
+                        <strong data-i18n="project_observatory_surface_essay_title">Ten years of sleep records</strong>
+                        <span data-i18n="project_observatory_surface_essay_text">The long-form narrative and data story that explains the project context.</span>
+                    </a>
                 </div>
             </article>
-            <!-- static-fallback:end projects-gallery -->
         </section>
     </div>
     <footer>

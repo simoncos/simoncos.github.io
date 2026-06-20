@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
+# AI-readable overview: https://simoncos.github.io/llms.txt
+# Agent-readable index: https://simoncos.github.io/agent-index.json
 Sitemap: https://simoncos.github.io/sitemap.xml

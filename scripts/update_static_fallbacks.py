@@ -326,9 +326,6 @@ def main() -> int:
         ROOT / "templates/blogs-listing-template.html": {
             "blog-archive": render_blog_archive(article_index),
         },
-        ROOT / "projects.html": {
-            "projects-gallery": render_project_cards(projects_payload),
-        },
         ROOT / "gallery.html": {
             "gallery-grid": render_gallery_cards(gallery_payload),
         },
