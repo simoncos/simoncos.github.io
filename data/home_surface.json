@@ -1,0 +1,221 @@
+{
+  "last_updated": "2026-06-20",
+  "layout": "signal-board",
+  "hero": {
+    "kicker": {
+      "en": "Start here",
+      "zh": "从这里开始"
+    },
+    "title": {
+      "en": "Tools, research, essays, and field notes.",
+      "zh": "工具与研究，文章与现场记录。"
+    },
+    "title_lines": {
+      "en": [
+        "Tools and research",
+        "Essays and field notes"
+      ],
+      "zh": [
+        "工具与研究",
+        "文章与现场记录"
+      ]
+    },
+    "lede": {
+      "en": "I keep the most useful recent projects, essays, and notes here. Newer work stays up front; older pieces stay findable in the index.",
+      "zh": "这里放最近值得看的项目、长文和记录。新线索放前面，旧内容留在索引里。"
+    },
+    "actions": [
+      {
+        "label": {
+          "en": "See what is active",
+          "zh": "看最近在做什么"
+        },
+        "href": "#system-map"
+      },
+      {
+        "label": {
+          "en": "About me",
+          "zh": "关于我"
+        },
+        "href": "about.html",
+        "secondary": true
+      }
+    ]
+  },
+  "status": {
+    "label": {
+      "en": "Recently",
+      "zh": "最近"
+    },
+    "items": [
+      {
+        "label": {
+          "en": "Building",
+          "zh": "构建"
+        },
+        "value": {
+          "en": "Tools, sites, prototypes",
+          "zh": "工具、站点、原型"
+        }
+      },
+      {
+        "label": {
+          "en": "Thinking",
+          "zh": "思考"
+        },
+        "value": {
+          "en": "AI, data, systems",
+          "zh": "AI、数据、系统"
+        }
+      },
+      {
+        "label": {
+          "en": "Field",
+          "zh": "现场"
+        },
+        "value": {
+          "en": "Body, places, risk",
+          "zh": "身体、地点、风险"
+        }
+      }
+    ]
+  },
+  "surface": {
+    "kicker": {
+      "en": "Featured paths",
+      "zh": "推荐入口"
+    },
+    "title": {
+      "en": "Four ways into the work.",
+      "zh": "四条线索，进入不同的内容。"
+    },
+    "items": [
+      {
+        "label": {
+          "en": "Build",
+          "zh": "构建"
+        },
+        "title": {
+          "en": "Sleep Toolkit",
+          "zh": "Sleep Toolkit"
+        },
+        "description": {
+          "en": "A maintained tool for turning SleepCycle exports into readable reports.",
+          "zh": "把 SleepCycle 导出转成可读报告的持续维护工具。"
+        },
+        "href": "https://sleep-toolkit-production.up.railway.app"
+      },
+      {
+        "label": {
+          "en": "Research",
+          "zh": "研究"
+        },
+        "title": {
+          "en": "Hermes Agent HV Analysis",
+          "zh": "Hermes Agent 横纵分析"
+        },
+        "description": {
+          "en": "Evidence, questions, and limits placed together in a public analysis.",
+          "zh": "把问题、证据和局限放在一起看的公开分析。"
+        },
+        "href": "gallery/research/hermes-agent-hv-analysis.html"
+      },
+      {
+        "label": {
+          "en": "Systems",
+          "zh": "系统"
+        },
+        "title": {
+          "en": "Personal Information Systems in the AI Era",
+          "zh": "AI 时代的个人信息系统"
+        },
+        "description": {
+          "en": "A talk about capture, memory, agents, projects, and boundaries.",
+          "zh": "关于捕捉、记忆、agent、项目和边界的演讲。"
+        },
+        "href": "gallery/talks/pkm-2026-06-07/index.html",
+        "skipLangRewrite": true
+      },
+      {
+        "label": {
+          "en": "Field notes",
+          "zh": "现场笔记"
+        },
+        "title": {
+          "en": "My Haba Snow Mountain Journey",
+          "zh": "我的哈巴雪山之旅"
+        },
+        "description": {
+          "en": "Outdoor experience, body data, risk, and lessons from outside the screen.",
+          "zh": "户外经验、身体数据、风险，以及屏幕之外的反馈。"
+        },
+        "href": "blogs/my-haba-snow-mountain-journey.en.html"
+      }
+    ]
+  },
+  "trails": {
+    "items": [
+      {
+        "pill": {
+          "en": "AI Agents",
+          "zh": "AI Agents"
+        },
+        "title": {
+          "en": "AI collaborators",
+          "zh": "AI 协作者"
+        },
+        "description": {
+          "en": "How agents help with review, research, operations, and writing.",
+          "zh": "我如何让 agent 参与审阅、研究、执行和写作。"
+        },
+        "href": "gallery/talks/pkm-2026-06-07/index.html",
+        "skipLangRewrite": true
+      },
+      {
+        "pill": {
+          "en": "Systems",
+          "zh": "Systems"
+        },
+        "title": {
+          "en": "Personal systems",
+          "zh": "个人系统"
+        },
+        "description": {
+          "en": "Notes, workflows, boundaries, publishing, and the infrastructure around work.",
+          "zh": "笔记、工作流、边界、发布，以及围绕工作长出来的基础设施。"
+        },
+        "href": "blogs/my-personal-knowledge-management-system-2026-03.en.html"
+      },
+      {
+        "pill": {
+          "en": "Data Lab",
+          "zh": "Data Lab"
+        },
+        "title": {
+          "en": "Data and body",
+          "zh": "数据与身体"
+        },
+        "description": {
+          "en": "Sleep, health, movement, and self-tracking as evidence.",
+          "zh": "把睡眠、健康、行动和自我追踪当作证据来读。"
+        },
+        "href": "projects/sleep-2016-2026.en.html"
+      },
+      {
+        "pill": {
+          "en": "Field Notes",
+          "zh": "Field Notes"
+        },
+        "title": {
+          "en": "Places and action",
+          "zh": "地点与行动"
+        },
+        "description": {
+          "en": "Outdoor notes, risk, and body feedback from outside the screen.",
+          "zh": "户外记录、风险和屏幕之外的身体反馈。"
+        },
+        "href": "blogs/my-haba-snow-mountain-journey.en.html"
+      }
+    ]
+  }
+}

@@ -29,6 +29,7 @@
     <script src="src/js/load-nav.js?v=20260620b"></script>
     <script src="src/js/dark-mode.js?v=20260620b"></script>
     <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <script src="src/js/load-home-surface.js?v=20260620b" defer></script>
     <script src="src/js/load-recent-posts.js?v=20260620b" defer></script>
     <!-- site-shell:resources:end -->
 </head>
@@ -41,6 +42,97 @@
     </header>
     <div id="navigation-placeholder"></div>
     <div class="container page-shell">
+        <section class="home-os-hero" aria-labelledby="home-os-title">
+            <div class="home-os-hero-copy">
+                <p id="home-os-kicker" class="section-kicker" data-i18n="home_os_kicker">Start here</p>
+                <h2 id="home-os-title" data-i18n="home_os_title"><span class="home-os-title-line">Tools and research</span><span class="home-os-title-line">Essays and field notes</span></h2>
+                <p id="home-os-lede" class="page-lede" data-i18n="home_os_lede">I keep the most useful recent projects, essays, and notes here. Newer work stays up front; older pieces stay findable in the index.</p>
+                <div class="hero-actions">
+                    <a id="home-os-primary-action" class="button-link" href="#system-map" data-i18n="home_os_primary_action">See what is active</a>
+                    <a id="home-os-secondary-action" class="button-link secondary" href="about.html" data-i18n="home_os_secondary_action">About me</a>
+                </div>
+            </div>
+            <aside class="home-os-status" aria-label="Current work">
+                <p id="home-os-status-label" class="fact-label" data-i18n="home_os_status_label">Recently</p>
+                <ul id="home-os-status-list" class="home-os-status-list">
+                    <li>
+                        <span data-i18n="home_os_status_capture">Building</span>
+                        <strong>Tools, sites, prototypes</strong>
+                    </li>
+                    <li>
+                        <span data-i18n="home_os_status_agents">Thinking</span>
+                        <strong>AI, data, systems</strong>
+                    </li>
+                    <li>
+                        <span data-i18n="home_os_status_publish">Field</span>
+                        <strong>Body, places, risk</strong>
+                    </li>
+                </ul>
+            </aside>
+        </section>
+
+        <section id="system-map" class="home-system-map" aria-labelledby="system-map-title">
+            <div class="section-heading">
+                <div>
+                    <p id="home-system-kicker" class="section-kicker" data-i18n="home_system_kicker">Featured paths</p>
+                    <h2 id="system-map-title" data-i18n="home_system_title">Four ways into the work.</h2>
+                </div>
+            </div>
+            <div id="home-system-grid" class="home-system-grid">
+                <a class="home-system-node" href="https://sleep-toolkit-production.up.railway.app">
+                    <span class="system-node-index">01</span>
+                    <strong data-i18n="home_system_capture_title">Build</strong>
+                    <span data-i18n="home_system_capture_text">Small tools and prototypes that solve recurring problems.</span>
+                </a>
+                <a class="home-system-node" href="gallery/research/hermes-agent-hv-analysis.html">
+                    <span class="system-node-index">02</span>
+                    <strong data-i18n="home_system_knowledge_title">Research</strong>
+                    <span data-i18n="home_system_knowledge_text">Structured investigations, comparisons, notes, and reports.</span>
+                </a>
+                <a class="home-system-node" href="gallery/talks/pkm-2026-06-07/index.html" data-skip-lang-rewrite="true">
+                    <span class="system-node-index">03</span>
+                    <strong data-i18n="home_system_agent_title">Systems</strong>
+                    <span data-i18n="home_system_agent_text">How tools, agents, memory, and publishing workflows fit together.</span>
+                </a>
+                <a class="home-system-node" href="blogs/my-haba-snow-mountain-journey.en.html">
+                    <span class="system-node-index">04</span>
+                    <strong data-i18n="home_system_artifact_title">Field notes</strong>
+                    <span data-i18n="home_system_artifact_text">Outdoor experience, body data, risk, and lessons from outside the screen.</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="home-trails" aria-labelledby="home-trails-title">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker" data-i18n="home_trails_kicker">Reading paths</p>
+                    <h2 id="home-trails-title" data-i18n="home_trails_title">Follow a thread.</h2>
+                </div>
+            </div>
+            <div id="home-trail-grid" class="home-trail-grid">
+                <a class="home-trail-card" href="gallery/talks/pkm-2026-06-07/index.html" data-skip-lang-rewrite="true">
+                    <span class="meta-pill meta-pill--talk">AI Agents</span>
+                    <strong data-i18n="home_trail_agents_title">AI collaborators</strong>
+                    <span data-i18n="home_trail_agents_text">How agents help with review, research, operations, and writing.</span>
+                </a>
+                <a class="home-trail-card" href="blogs/my-personal-knowledge-management-system-2026-03.en.html">
+                    <span class="meta-pill">Systems</span>
+                    <strong data-i18n="home_trail_pkm_title">Personal systems</strong>
+                    <span data-i18n="home_trail_pkm_text">Notes, workflows, boundaries, publishing, and the infrastructure around work.</span>
+                </a>
+                <a class="home-trail-card" href="projects/sleep-2016-2026.en.html">
+                    <span class="meta-pill meta-pill--visual_essay">Data Lab</span>
+                    <strong data-i18n="home_trail_data_title">Data and body</strong>
+                    <span data-i18n="home_trail_data_text">Sleep, health, movement, and self-tracking as evidence.</span>
+                </a>
+                <a class="home-trail-card" href="blogs/my-haba-snow-mountain-journey.en.html">
+                    <span class="meta-pill">Field Notes</span>
+                    <strong data-i18n="home_trail_field_title">Field notes</strong>
+                    <span data-i18n="home_trail_field_text">Places, risk, action, and body feedback from outside the screen.</span>
+                </a>
+            </div>
+        </section>
+
         <section id="blog" class="content-section">
             <div class="section-heading">
                 <div>

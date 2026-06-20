@@ -17,6 +17,7 @@ This distinction matters more than a blanket rule like “everything should be s
 - root pages like `index.html`, `about.html`, `tags.html`, `series.html`, `blogs.html`
 - site assets, icons, and CSS/JS
 - `sitemap.xml` and `robots.txt` for the public crawl surface
+- `llms.txt` and `agent-index.json` as curated AI/agent-readable orientation files
 
 ### Generated JSON
 - `data/blog_data.json`
@@ -31,6 +32,11 @@ Python generator still owns metadata extraction, markdown conversion, and the st
 `article_groups.json` is now the primary public article index. It groups bilingual article variants and carries the fields needed by archive, tags, series, homepage, backlinks, and language switching. `tags_data.json` and `series_data.json` are still generated for compatibility, but the current tags and series pages render from `article_groups.json`.
 
 `projects_data.json` and `gallery_data.json` are hand-maintained lightweight indexes for non-blog public surfaces. They should contain only stable presentation metadata and paths, not duplicate full page content.
+
+### AI / agent-readable
+- `llms.txt` is the concise Markdown orientation file at the site root. It should point agents to the highest-signal public surfaces rather than trying to mirror the full sitemap.
+- `agent-index.json` is the structured companion index for machines that prefer stable fields over prose.
+- These files describe public context only. They are not permission, training-control, or licensing documents; `robots.txt` keeps that separate crawl-surface role.
 
 ### Dynamic / client-rendered
 - **home** page merges article groups and projects into a recent list

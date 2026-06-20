@@ -1,0 +1,44 @@
+# simonc site
+
+> Personal site of simoncos / Che ZHAO: a live public surface for software, AI collaboration, data projects, research artifacts, essays, talks, and field notes.
+
+The motto for this site is "Connecting the dots." The site is static, bilingual, and organized as a living index rather than a fixed portfolio. English pages generally end in `.en.html`; Chinese pages use the same slug without `.en.html`. The homepage is a current editorial surface backed by `data/home_surface.json`.
+
+## Start here
+
+- [Live homepage](https://simoncos.github.io/): Current public surface and recent work.
+- [About](https://simoncos.github.io/about.html): Profile, motto, working modes, contact links, and operating principles.
+- [Projects](https://simoncos.github.io/projects.html): Project Observatory with live tools, connected artifacts, inputs, outputs, and next questions.
+- [Essays](https://simoncos.github.io/blogs.html): Long-form writing archive.
+- [Gallery](https://simoncos.github.io/gallery.html): Talks, demos, visual essays, research artifacts, and curated work paths.
+- [Series](https://simoncos.github.io/series.html): Structured reading paths.
+- [Index](https://simoncos.github.io/tags.html): Topic index.
+
+## Current project surfaces
+
+- [Personal Data Lab](https://simoncos.github.io/gallery.html#personal-data-lab): Curated path through sleep records, body feedback, tools, and field notes.
+- [Sleep Toolkit web app](https://sleep-toolkit-production.up.railway.app): Public tool for SleepCycle CSV analysis.
+- [Ten Years of Sleep Records, Analyzed](https://simoncos.github.io/projects/sleep-2016-2026.en.html): Visual essay and project context for the Sleep Toolkit work.
+
+## Key artifacts
+
+- [Personal Information Systems in the AI Era](https://simoncos.github.io/gallery/talks/pkm-2026-06-07/index.html): Talk on capture, memory, agents, projects, and boundaries.
+- [Hermes Agent HV Analysis](https://simoncos.github.io/gallery/research/hermes-agent-hv-analysis.html): Research artifact showing an evidence-first analysis format.
+- [My Personal Knowledge Management System, 2026-03](https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html): Essay on personal systems and the publishing layer.
+- [My Haba Snow Mountain Journey](https://simoncos.github.io/blogs/my-haba-snow-mountain-journey.en.html): Field note about outdoor experience, risk, and body feedback.
+
+## Data and feeds
+
+- [Agent index JSON](https://simoncos.github.io/agent-index.json): Structured machine-readable map of site surfaces.
+- [Content manifest](https://simoncos.github.io/data/content_manifest.json): Public manifest for projects, gallery, and home surfaces.
+- [Home surface JSON](https://simoncos.github.io/data/home_surface.json): Current homepage editorial state.
+- [Article index JSON](https://simoncos.github.io/data/article_groups.json): Bilingual article groups used by archive, tags, series, homepage, backlinks, and language switching.
+- [RSS Chinese](https://simoncos.github.io/feed.zh.xml): Chinese RSS feed.
+- [RSS English](https://simoncos.github.io/feed.en.xml): English RSS feed.
+
+## Notes for agents
+
+- Prefer English pages when both English and Chinese versions exist, unless the user asks for Chinese.
+- Treat `llms.txt` and `agent-index.json` as orientation aids, not authorization, licensing, or training-control terms.
+- Use the sitemap for broad page discovery, but use this file for high-signal orientation.
+- Do not infer unpublished or private information from this public site.

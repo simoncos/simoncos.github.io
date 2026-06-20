@@ -1,0 +1,146 @@
+{
+  "site": {
+    "name": "simonc site",
+    "canonical_url": "https://simoncos.github.io/",
+    "owner": "simoncos / Che ZHAO",
+    "motto": "Connecting the dots.",
+    "summary": "A live public surface for software, AI collaboration, data projects, research artifacts, essays, talks, and field notes.",
+    "last_updated": "2026-06-20"
+  },
+  "language_policy": {
+    "default_language": "en",
+    "supported_languages": ["en", "zh"],
+    "english_page_pattern": "*.en.html",
+    "chinese_page_pattern": "*.html",
+    "agent_preference": "Prefer English pages when both versions exist, unless the user asks for Chinese."
+  },
+  "entrypoints": [
+    {
+      "id": "home",
+      "label": "Live homepage",
+      "url": "https://simoncos.github.io/",
+      "purpose": "Current editorial surface and recent work."
+    },
+    {
+      "id": "about",
+      "label": "About",
+      "url": "https://simoncos.github.io/about.html",
+      "purpose": "Profile, motto, working modes, contact links, and operating principles."
+    },
+    {
+      "id": "projects",
+      "label": "Projects",
+      "url": "https://simoncos.github.io/projects.html",
+      "purpose": "Project Observatory for live tools, connected artifacts, inputs, outputs, and next questions."
+    },
+    {
+      "id": "essays",
+      "label": "Essays",
+      "url": "https://simoncos.github.io/blogs.html",
+      "purpose": "Long-form writing archive."
+    },
+    {
+      "id": "gallery",
+      "label": "Gallery",
+      "url": "https://simoncos.github.io/gallery.html",
+      "purpose": "Talks, demos, visual essays, research artifacts, and curated work paths."
+    },
+    {
+      "id": "series",
+      "label": "Series",
+      "url": "https://simoncos.github.io/series.html",
+      "purpose": "Structured reading paths."
+    },
+    {
+      "id": "index",
+      "label": "Index",
+      "url": "https://simoncos.github.io/tags.html",
+      "purpose": "Topic index."
+    }
+  ],
+  "current_surfaces": [
+    {
+      "id": "personal-data-lab",
+      "type": "curation",
+      "label": "Personal Data Lab",
+      "url": "https://simoncos.github.io/gallery.html#personal-data-lab",
+      "description": "Curated path through sleep records, body feedback, tools, and field notes."
+    },
+    {
+      "id": "sleep-toolkit",
+      "type": "web_app",
+      "label": "Sleep Toolkit web app",
+      "url": "https://sleep-toolkit-production.up.railway.app",
+      "description": "Public tool for SleepCycle CSV analysis."
+    },
+    {
+      "id": "sleep-visual-essay",
+      "type": "visual_essay",
+      "label": "Ten Years of Sleep Records, Analyzed",
+      "url": "https://simoncos.github.io/projects/sleep-2016-2026.en.html",
+      "description": "Visual essay and project context for the Sleep Toolkit work."
+    },
+    {
+      "id": "pkm-talk-2026-06-07",
+      "type": "talk",
+      "label": "Personal Information Systems in the AI Era",
+      "url": "https://simoncos.github.io/gallery/talks/pkm-2026-06-07/index.html",
+      "description": "Talk on capture, memory, agents, projects, and boundaries."
+    },
+    {
+      "id": "hermes-agent-hv-analysis",
+      "type": "research_artifact",
+      "label": "Hermes Agent HV Analysis",
+      "url": "https://simoncos.github.io/gallery/research/hermes-agent-hv-analysis.html",
+      "description": "Evidence-first research artifact."
+    }
+  ],
+  "public_data_files": [
+    {
+      "id": "llms",
+      "format": "markdown",
+      "url": "https://simoncos.github.io/llms.txt",
+      "description": "Concise AI-readable orientation file."
+    },
+    {
+      "id": "content-manifest",
+      "format": "json",
+      "url": "https://simoncos.github.io/data/content_manifest.json",
+      "description": "Public manifest for projects, gallery, and home surfaces."
+    },
+    {
+      "id": "home-surface",
+      "format": "json",
+      "url": "https://simoncos.github.io/data/home_surface.json",
+      "description": "Current homepage editorial state."
+    },
+    {
+      "id": "article-groups",
+      "format": "json",
+      "url": "https://simoncos.github.io/data/article_groups.json",
+      "description": "Bilingual article groups used by archive, tags, series, homepage, backlinks, and language switching."
+    },
+    {
+      "id": "sitemap",
+      "format": "xml",
+      "url": "https://simoncos.github.io/sitemap.xml",
+      "description": "Broad public page discovery."
+    }
+  ],
+  "feeds": [
+    {
+      "language": "zh",
+      "url": "https://simoncos.github.io/feed.zh.xml"
+    },
+    {
+      "language": "en",
+      "url": "https://simoncos.github.io/feed.en.xml"
+    }
+  ],
+  "agent_notes": [
+    "This index describes public context only.",
+    "The site should be read as a living public surface, not a fixed portfolio category.",
+    "Do not treat this file as authorization, licensing, or training-control terms.",
+    "Do not infer unpublished or private information from this public site."
+  ]
+}
