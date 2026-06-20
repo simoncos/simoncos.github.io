@@ -1,15 +1,14 @@
+"use strict";
 document.addEventListener('DOMContentLoaded', function () {
     const gallery = document.getElementById('projects-gallery');
     if (!gallery) {
         return;
     }
-
     const siteConfig = window.SITE_CONFIG || {};
     const i18n = window.SITE_I18N || {};
     const resolvePath = typeof siteConfig.resolvePath === 'function'
         ? siteConfig.resolvePath.bind(siteConfig)
         : (relativePath) => relativePath;
-
     function escapeHtml(text) {
         return String(text)
             .replace(/&/g, '&amp;')
@@ -18,26 +17,22 @@ document.addEventListener('DOMContentLoaded', function () {
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#39;');
     }
-
     function getCurrentLanguage() {
         return typeof i18n.getCurrentLanguage === 'function'
             ? i18n.getCurrentLanguage()
             : 'en';
     }
-
     function formatDate(dateValue) {
         return typeof i18n.formatDate === 'function'
             ? i18n.formatDate(dateValue, 'long')
             : dateValue;
     }
-
     function getLocalizedValue(field, language) {
         if (!field) {
             return '';
         }
         return field[language] || field.en || field.zh || '';
     }
-
     function getLocalizedPath(project, language) {
         if (!project.paths) {
             return '#';
@@ -47,24 +42,19 @@ document.addEventListener('DOMContentLoaded', function () {
             ? i18n.resolveLocalizedUrl(target, language)
             : target;
     }
-
     function renderProjects(payload) {
         const language = getCurrentLanguage();
         const projects = Array.isArray(payload.projects) ? payload.projects : [];
-
         if (!projects.length) {
             gallery.innerHTML = `<p>${escapeHtml(i18n.t('no_projects_found'))}</p>`;
             return;
         }
-
         const sorted = [...projects].sort((a, b) => {
             const da = a.date ? new Date(a.date).getTime() : 0;
             const db = b.date ? new Date(b.date).getTime() : 0;
             return db - da;
         });
-
         gallery.classList.toggle('projects-gallery--single', sorted.length === 1);
-
         gallery.innerHTML = sorted.map((project, index) => {
             const title = getLocalizedValue(project.title, language);
             const subtitle = getLocalizedValue(project.subtitle, language);
@@ -74,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const typeLabel = typeKey && typeof i18n.t === 'function' ? i18n.t(typeKey) : project.type || '';
             const isFeatured = index === 0;
             const cardModifier = isFeatured ? 'featured' : 'compact';
-
             return `
                 <article class="project-card project-card--${cardModifier}">
                     <a class="project-card-media project-card-media--${cardModifier}" href="${escapeHtml(href)}">
@@ -93,30 +82,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 </article>
             `;
         }).join('\n');
-
         if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
             i18n.applyLanguageStateToInternalLinks(gallery);
         }
     }
-
     function loadProjects() {
         gallery.innerHTML = `<p>${escapeHtml(i18n.t('loading_projects'))}</p>`;
         fetch(resolvePath('data/projects_data.json'))
             .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`projects_data ${response.status}`);
-                }
-                return response.json();
-            })
+            if (!response.ok) {
+                throw new Error(`projects_data ${response.status}`);
+            }
+            return response.json();
+        })
             .then((payload) => {
-                renderProjects(payload);
-            })
+            renderProjects(payload);
+        })
             .catch((error) => {
-                console.error('Error loading projects:', error);
-                gallery.innerHTML = `<p>${escapeHtml(i18n.t('error_loading_projects'))}</p>`;
-            });
+            console.error('Error loading projects:', error);
+            gallery.innerHTML = `<p>${escapeHtml(i18n.t('error_loading_projects'))}</p>`;
+        });
     }
-
     loadProjects();
     window.addEventListener('site-language-change', loadProjects);
 });

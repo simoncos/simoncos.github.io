@@ -1,8 +1,8 @@
+"use strict";
 (function () {
     const SUPPORTED_LANGUAGES = ['en', 'zh'];
     const STORAGE_KEY = 'siteLanguage';
     const DEFAULT_LANGUAGE = 'en';
-
     const translations = {
         en: {
             nav_home: 'Home',
@@ -195,12 +195,10 @@
             back_to_home: '回到首页'
         }
     };
-
     function normalizeLanguage(value) {
         if (!value) {
             return null;
         }
-
         const normalized = String(value).trim().toLowerCase();
         if (normalized.startsWith('en')) {
             return 'en';
@@ -208,31 +206,28 @@
         if (normalized.startsWith('zh') || normalized.startsWith('cn')) {
             return 'zh';
         }
-
         return SUPPORTED_LANGUAGES.includes(normalized) ? normalized : null;
     }
-
     function getLanguageFromUrl(url = window.location.href) {
         try {
             const parsed = new URL(url, window.location.href);
             return normalizeLanguage(parsed.searchParams.get('lang'));
-        } catch (_error) {
+        }
+        catch (_error) {
             return null;
         }
     }
-
     function hasExplicitLanguage(url = window.location.href) {
         return !!getLanguageFromUrl(url);
     }
-
     function getStoredLanguage() {
         try {
             return normalizeLanguage(window.localStorage.getItem(STORAGE_KEY));
-        } catch (_error) {
+        }
+        catch (_error) {
             return null;
         }
     }
-
     function getArticleLanguageFromPath(pathname = window.location.pathname) {
         const normalizedPath = String(pathname || '');
         if (!/\/blogs\/[^/]+\.html$/i.test(normalizedPath)) {
@@ -240,49 +235,43 @@
         }
         return normalizedPath.endsWith('.en.html') ? 'en' : 'zh';
     }
-
     let currentLanguage = getLanguageFromUrl() || getArticleLanguageFromPath() || getStoredLanguage() || DEFAULT_LANGUAGE;
-
     function persistLanguage(language) {
         try {
             window.localStorage.setItem(STORAGE_KEY, language);
-        } catch (_error) {
+        }
+        catch (_error) {
             // Ignore storage failures.
         }
     }
-
     function updateUrlLanguage(language, replace = true) {
         const url = new URL(window.location.href);
         url.searchParams.set('lang', language);
         if (replace) {
             window.history.replaceState({}, '', url.toString());
-        } else {
+        }
+        else {
             window.history.pushState({}, '', url.toString());
         }
     }
-
     function interpolate(template, params = {}) {
         return String(template).replace(/\{(\w+)\}/g, (_match, key) => {
             return Object.prototype.hasOwnProperty.call(params, key) ? params[key] : '';
         });
     }
-
     function t(key, params = {}) {
         const active = translations[currentLanguage] || translations[DEFAULT_LANGUAGE];
         const fallback = translations[DEFAULT_LANGUAGE] || {};
         return interpolate(active[key] || fallback[key] || key, params);
     }
-
     function formatDate(dateValue, style = 'medium') {
         if (!dateValue) {
             return t('undated');
         }
-
         const parsed = new Date(dateValue);
         if (Number.isNaN(parsed.getTime())) {
             return dateValue;
         }
-
         const locale = currentLanguage === 'zh' ? 'zh-CN' : 'en-US';
         const optionsByStyle = {
             short: { year: 'numeric', month: 'short', day: 'numeric' },
@@ -290,83 +279,68 @@
             long: { year: 'numeric', month: 'long', day: 'numeric' },
             month: { year: 'numeric', month: 'long' }
         };
-
         return new Intl.DateTimeFormat(locale, optionsByStyle[style] || optionsByStyle.medium).format(parsed);
     }
-
     function formatPostCount(count) {
         return count === 1 ? t('post_count_one') : t('post_count_other', { count });
     }
-
     function formatArchiveMonthNote(count) {
         return count === 1 ? t('archive_month_note_one') : t('archive_month_note_other', { count });
     }
-
     function formatSeriesPart(part) {
         return t('series_part', { part });
     }
-
     function isInternalHtmlLink(url) {
         return url.origin === window.location.origin && /\.html$/i.test(url.pathname);
     }
-
     function resolveLocalizedUrl(href, language = currentLanguage) {
         try {
             const url = new URL(href, window.location.href);
             if (!isInternalHtmlLink(url)) {
                 return url.toString();
             }
-
             if (hasExplicitLanguage()) {
                 url.searchParams.set('lang', language);
-            } else {
+            }
+            else {
                 url.searchParams.delete('lang');
             }
-
             return url.origin === window.location.origin
                 ? `${url.pathname}${url.search}${url.hash}`
                 : url.toString();
-        } catch (_error) {
+        }
+        catch (_error) {
             return href;
         }
     }
-
     function applyLanguageStateToInternalLinks(root = document) {
         root.querySelectorAll('a[href]').forEach((anchor) => {
             if (anchor.dataset.skipLangRewrite === 'true') {
                 return;
             }
-
             const rawHref = anchor.getAttribute('href') || '';
             if (!rawHref || rawHref.startsWith('#') || /^[a-z]+:/i.test(rawHref)) {
                 return;
             }
-
             anchor.setAttribute('href', resolveLocalizedUrl(rawHref));
         });
     }
-
     function localizeDocument(root = document) {
         root.querySelectorAll('[data-i18n]').forEach((element) => {
             element.textContent = t(element.dataset.i18n);
         });
-
         root.querySelectorAll('[data-i18n-aria-label]').forEach((element) => {
             element.setAttribute('aria-label', t(element.dataset.i18nAriaLabel));
         });
-
         root.querySelectorAll('[data-i18n-title]').forEach((element) => {
             element.setAttribute('title', t(element.dataset.i18nTitle));
         });
-
         root.querySelectorAll('[data-date]').forEach((element) => {
             const style = element.dataset.dateFormat || 'medium';
             element.textContent = formatDate(element.dataset.date, style);
         });
-
         applyLanguageStateToInternalLinks(root);
     }
-
     function updateLanguageSwitcherState(root = document) {
         root.querySelectorAll('[data-site-language]').forEach((element) => {
             const isActive = element.dataset.siteLanguage === currentLanguage;
@@ -374,60 +348,49 @@
             element.setAttribute('aria-pressed', isActive ? 'true' : 'false');
         });
     }
-
     function dispatchLanguageChange() {
         window.dispatchEvent(new CustomEvent('site-language-change', {
             detail: { language: currentLanguage }
         }));
     }
-
     function setCurrentLanguage(language, options = {}) {
         const normalized = normalizeLanguage(language);
         if (!normalized) {
             return currentLanguage;
         }
-
         const { persist = true, updateUrl = hasExplicitLanguage(), replace = true } = options;
         currentLanguage = normalized;
-
         if (persist) {
             persistLanguage(normalized);
         }
-
         if (updateUrl) {
             updateUrlLanguage(normalized, replace);
         }
-
         localizeDocument(document);
         updateLanguageSwitcherState(document);
         dispatchLanguageChange();
         return currentLanguage;
     }
-
     document.addEventListener('click', (event) => {
-        const languageButton = event.target.closest('[data-site-language]');
+        const eventTarget = event.target instanceof Element ? event.target : null;
+        const languageButton = eventTarget ? eventTarget.closest('[data-site-language]') : null;
         if (languageButton) {
             const targetLanguage = normalizeLanguage(languageButton.dataset.siteLanguage);
             if (!targetLanguage) {
                 return;
             }
-
             const body = document.body;
             const variantFile = body.dataset[`article${targetLanguage.toUpperCase()}File`];
             const currentFile = window.location.pathname.split('/').pop();
             const shouldNavigate = body.classList.contains('article-page') && variantFile && variantFile !== currentFile;
-
             setCurrentLanguage(targetLanguage, { updateUrl: hasExplicitLanguage(), replace: true });
-
             if (shouldNavigate) {
                 window.location.href = resolveLocalizedUrl(variantFile, targetLanguage);
             }
-
             event.preventDefault();
             return;
         }
-
-        const languageSwitchLink = event.target.closest('[data-language-switch][data-target-language]');
+        const languageSwitchLink = eventTarget ? eventTarget.closest('[data-language-switch][data-target-language]') : null;
         if (languageSwitchLink) {
             const targetLanguage = normalizeLanguage(languageSwitchLink.dataset.targetLanguage);
             if (targetLanguage) {
@@ -435,12 +398,10 @@
             }
         }
     });
-
     document.addEventListener('DOMContentLoaded', () => {
         localizeDocument(document);
         updateLanguageSwitcherState(document);
     });
-
     window.SITE_I18N = {
         DEFAULT_LANGUAGE,
         SUPPORTED_LANGUAGES,

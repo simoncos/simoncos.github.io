@@ -24,5 +24,8 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Install Node dependencies
+        run: npm install
+
       - name: Run static site checks
         run: make check

@@ -1,26 +1,22 @@
+"use strict";
 document.addEventListener('DOMContentLoaded', function () {
     const archiveContainer = document.getElementById('blog-archive');
     if (!archiveContainer) {
         return;
     }
-
     const i18n = window.SITE_I18N || {};
     const articleGroupsApi = window.SITE_ARTICLE_GROUPS || {};
-
     let articleGroupsData = null;
-
     function formatDate(dateValue) {
         return typeof i18n.formatDate === 'function'
             ? i18n.formatDate(dateValue, 'long')
             : dateValue;
     }
-
     function formatMonth(dateValue) {
         return typeof i18n.formatDate === 'function'
             ? i18n.formatDate(dateValue, 'month')
             : dateValue;
     }
-
     function escapeHtml(text) {
         return text
             .replace(/&/g, '&amp;')
@@ -29,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#39;');
     }
-
     function monthKey(dateValue) {
         const parsed = new Date(dateValue);
         if (Number.isNaN(parsed.getTime())) {
@@ -38,17 +33,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const month = `${parsed.getMonth() + 1}`.padStart(2, '0');
         return `${parsed.getFullYear()}-${month}`;
     }
-
     function renderTags(tags) {
         if (!Array.isArray(tags) || tags.length === 0) {
             return '';
         }
-        const items = tags.map(tag =>
-            `<li><a href="tags.html#${encodeURIComponent(tag)}">${escapeHtml(tag)}</a></li>`
-        ).join('');
+        const items = tags.map(tag => `<li><a href="tags.html#${encodeURIComponent(tag)}">${escapeHtml(tag)}</a></li>`).join('');
         return `<ul class="tag-list blog-preview-tags">${items}</ul>`;
     }
-
     function getLanguageAvailability(group) {
         const labels = [];
         if (group.languages && group.languages.zh) {
@@ -59,24 +50,20 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return labels.join(' / ');
     }
-
     function renderArchive() {
         const groups = articleGroupsData ? articleGroupsData.groups : [];
         if (!groups.length) {
             archiveContainer.innerHTML = `<p>${escapeHtml(i18n.t('no_blog_posts'))}</p>`;
             return;
         }
-
         const currentLanguage = typeof i18n.getCurrentLanguage === 'function'
             ? i18n.getCurrentLanguage()
             : 'en';
-
         const sorted = [...groups].sort((a, b) => {
             const dateA = a.date ? new Date(a.date).getTime() : 0;
             const dateB = b.date ? new Date(b.date).getTime() : 0;
             return dateB - dateA;
         });
-
         const groupsByMonth = new Map();
         sorted.forEach((group) => {
             const key = monthKey(group.date);
@@ -85,20 +72,17 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             groupsByMonth.get(key).push(group);
         });
-
         const html = [];
         groupsByMonth.forEach((monthGroups) => {
             const monthLabel = formatMonth(monthGroups[0].date);
             html.push('<section class="archive-month">');
             html.push(`<div class="archive-month-header"><h3 class="archive-month-title">${escapeHtml(monthLabel)}</h3><p class="archive-month-note">${escapeHtml(i18n.formatArchiveMonthNote(monthGroups.length))}</p></div>`);
-
             monthGroups.forEach((group) => {
                 const primary = articleGroupsApi.getPreferredEntry(group, currentLanguage);
                 const secondary = articleGroupsApi.getSecondaryEntry(group, currentLanguage);
                 if (!primary || !primary.file) {
                     return;
                 }
-
                 const secondaryTitle = secondary && secondary.title && secondary.title !== primary.title
                     ? `<span class="group-secondary-title">${escapeHtml(secondary.title)}</span>`
                     : '';
@@ -117,25 +101,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     </article>
                 `);
             });
-
             html.push('</section>');
         });
-
         archiveContainer.innerHTML = html.join('\n');
         if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
             i18n.applyLanguageStateToInternalLinks(archiveContainer);
         }
     }
-
     articleGroupsApi.fetchArticleGroups()
         .then((data) => {
-            articleGroupsData = data;
-            renderArchive();
-        })
+        articleGroupsData = data;
+        renderArchive();
+    })
         .catch((error) => {
-            console.error('Error loading article groups:', error);
-            archiveContainer.innerHTML = `<p>${escapeHtml(i18n.t('error_loading_blog_posts'))}</p>`;
-        });
-
+        console.error('Error loading article groups:', error);
+        archiveContainer.innerHTML = `<p>${escapeHtml(i18n.t('error_loading_blog_posts'))}</p>`;
+    });
     window.addEventListener('site-language-change', renderArchive);
 });

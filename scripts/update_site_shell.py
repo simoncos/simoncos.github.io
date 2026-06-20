@@ -14,7 +14,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 SHELL_CONFIG_PATH = ROOT / "data/site_shell.json"
-SITE_CONFIG_PATH = ROOT / "src/js/site-config.js"
+SITE_CONFIG_PATH = ROOT / "src/ts/site-config.ts"
 
 RESOURCE_START = "site-shell:resources:start"
 RESOURCE_END = "site-shell:resources:end"
@@ -121,7 +121,7 @@ def render_footer_block(config: dict[str, Any], page: dict[str, Any], version_fa
     lines = [
         f"        <!-- {FOOTER_START} -->",
         (
-            '        <p>&copy; <script>document.write(new Date().getFullYear())</script> '
+            '        <p>&copy; <span data-current-year>2026</span> '
             '<span data-owner-name>simoncos</span>. All rights reserved.</p>'
         ),
     ]
