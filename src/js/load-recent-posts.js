@@ -1,3 +1,4 @@
+"use strict";
 /**
  * load-recent-posts.js
      * Merges blog posts, projects, and gallery items
@@ -6,15 +7,14 @@
 document.addEventListener('DOMContentLoaded', function () {
     const postList = document.getElementById('post-list');
     const updatedEl = document.getElementById('post-list-updated');
-    if (!postList) return;
-
+    if (!postList)
+        return;
     const siteConfig = window.SITE_CONFIG || {};
     const i18n = window.SITE_I18N || {};
     const articleGroupsApi = window.SITE_ARTICLE_GROUPS || {};
     const resolvePath = typeof siteConfig.resolvePath === 'function'
         ? siteConfig.resolvePath.bind(siteConfig)
         : (p) => p;
-
     function escapeHtml(text) {
         return String(text)
             .replace(/&/g, '&amp;')
@@ -23,32 +23,29 @@ document.addEventListener('DOMContentLoaded', function () {
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#39;');
     }
-
     function formatDate(dateValue) {
         return typeof i18n.formatDate === 'function'
             ? i18n.formatDate(dateValue, 'short')
             : dateValue;
     }
-
     function getCurrentLanguage() {
         return typeof i18n.getCurrentLanguage === 'function'
             ? i18n.getCurrentLanguage()
             : 'en';
     }
-
     function getLocalizedValue(field, language) {
-        if (!field) return '';
+        if (!field)
+            return '';
         return field[language] || field.en || field.zh || '';
     }
-
     /**
      * Normalize a blog group into a unified post object.
      */
     function blogGroupToPost(group, language) {
         const primary = articleGroupsApi.getPreferredEntry(group, language);
         const secondary = articleGroupsApi.getSecondaryEntry(group, language);
-        if (!primary || !primary.file) return null;
-
+        if (!primary || !primary.file)
+            return null;
         return {
             type: 'blog',
             date: group.date,
@@ -62,23 +59,21 @@ document.addEventListener('DOMContentLoaded', function () {
             ].filter(Boolean).join(' / ')
         };
     }
-
     /**
      * Normalize a project entry into a unified post object.
      */
     function projectToPost(project, language) {
-        if (!project.paths) return null;
+        if (!project.paths)
+            return null;
         const href = project.paths[language] || project.paths.en || project.paths.zh || '#';
         const zhTitle = getLocalizedValue(project.title, 'zh');
         const enTitle = getLocalizedValue(project.title, 'en');
         const primaryTitle = getLocalizedValue(project.title, language);
         const secondaryTitle = language === 'zh' ? enTitle : (enTitle !== zhTitle ? zhTitle : '');
-
         const langAvail = [
             project.paths.zh ? '中文' : null,
             project.paths.en ? 'EN' : null,
         ].filter(Boolean).join(' / ');
-
         return {
             type: 'project',
             date: project.date,
@@ -88,25 +83,23 @@ document.addEventListener('DOMContentLoaded', function () {
             langAvail
         };
     }
-
     /**
      * Normalize a gallery entry into a unified post object.
      */
     function galleryItemToPost(item, language) {
-        if (!item.paths) return null;
+        if (!item.paths)
+            return null;
         const href = item.paths[language] || item.paths.en || item.paths.zh || '#';
         const zhTitle = getLocalizedValue(item.title, 'zh');
         const enTitle = getLocalizedValue(item.title, 'en');
         const primaryTitle = getLocalizedValue(item.title, language);
         const secondaryTitle = language === 'zh' ? enTitle : (enTitle !== zhTitle ? zhTitle : '');
-
         const langAvail = item.skipLangRewrite
             ? ''
             : [
                 item.paths.zh ? '中文' : null,
                 item.paths.en ? 'EN' : null,
             ].filter(Boolean).join(' / ');
-
         return {
             type: item.type || 'gallery',
             date: item.date,
@@ -117,16 +110,19 @@ document.addEventListener('DOMContentLoaded', function () {
             skipLangRewrite: item.skipLangRewrite === true
         };
     }
-
     function typePillLabel(type, language) {
-        if (type === 'project') return language === 'zh' ? '项目' : 'Project';
-        if (type === 'talk') return language === 'zh' ? 'Talk' : 'Talk';
-        if (type === 'visual_essay') return language === 'zh' ? 'Visual Essay' : 'Visual essay';
-        if (type === 'demo') return language === 'zh' ? 'Demo' : 'Demo';
-        if (type === 'artifact') return language === 'zh' ? 'Artifact' : 'Artifact';
+        if (type === 'project')
+            return language === 'zh' ? '项目' : 'Project';
+        if (type === 'talk')
+            return language === 'zh' ? 'Talk' : 'Talk';
+        if (type === 'visual_essay')
+            return language === 'zh' ? 'Visual Essay' : 'Visual essay';
+        if (type === 'demo')
+            return language === 'zh' ? 'Demo' : 'Demo';
+        if (type === 'artifact')
+            return language === 'zh' ? 'Artifact' : 'Artifact';
         return language === 'zh' ? '博客' : 'Blog';
     }
-
     function renderPosts(blogData, projectsPayload, galleryPayload) {
         const language = getCurrentLanguage();
         const blogGroups = blogData ? blogData.groups : [];
@@ -134,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
             ? projectsPayload.projects : [];
         const galleryItems = galleryPayload && Array.isArray(galleryPayload.items)
             ? galleryPayload.items : [];
-
         // Build unified post list
         const posts = [
             ...blogGroups.map(g => blogGroupToPost(g, language)).filter(Boolean),
@@ -145,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const db = b.date ? new Date(b.date).getTime() : 0;
             return db - da;
         });
-
         // Update "last updated" — take the most recent date across both sources
         if (updatedEl) {
             const dates = [
@@ -157,16 +151,15 @@ document.addEventListener('DOMContentLoaded', function () {
             if (latestMs) {
                 const latestDate = new Date(latestMs).toISOString().slice(0, 10);
                 updatedEl.textContent = `${i18n.t ? i18n.t('last_updated') : 'Last updated'}: ${formatDate(latestDate)}`;
-            } else {
+            }
+            else {
                 updatedEl.textContent = '';
             }
         }
-
         if (!posts.length) {
             postList.innerHTML = `<li>${escapeHtml(i18n.t ? i18n.t('no_blog_posts') : 'No posts found.')}</li>`;
             return;
         }
-
         postList.innerHTML = '';
         posts.slice(0, 8).forEach(post => {
             const typeLabel = typePillLabel(post.type, language);
@@ -191,34 +184,28 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
             postList.appendChild(li);
         });
-
         if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
             i18n.applyLanguageStateToInternalLinks(postList);
         }
     }
-
     function load() {
         postList.innerHTML = `<li>${escapeHtml(i18n.t ? i18n.t('loading_blog_posts') : 'Loading...')}</li>`;
-
         const blogPromise = articleGroupsApi.fetchArticleGroups
             ? articleGroupsApi.fetchArticleGroups()
             : Promise.resolve(null);
-
         const projectsPromise = fetch(resolvePath('data/projects_data.json'))
             .then(r => r.ok ? r.json() : null)
             .catch(() => null);
         const galleryPromise = fetch(resolvePath('data/gallery_data.json'))
             .then(r => r.ok ? r.json() : null)
             .catch(() => null);
-
         Promise.all([blogPromise, projectsPromise, galleryPromise])
             .then(([blogData, projectsPayload, galleryPayload]) => renderPosts(blogData, projectsPayload, galleryPayload))
             .catch(err => {
-                console.error('Error loading posts:', err);
-                postList.innerHTML = `<li>${escapeHtml(i18n.t ? i18n.t('error_loading_blog_posts') : 'Error loading posts.')}</li>`;
-            });
+            console.error('Error loading posts:', err);
+            postList.innerHTML = `<li>${escapeHtml(i18n.t ? i18n.t('error_loading_blog_posts') : 'Error loading posts.')}</li>`;
+        });
     }
-
     load();
     window.addEventListener('site-language-change', load);
 });

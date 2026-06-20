@@ -44,6 +44,13 @@ Python generator still owns metadata extraction, markdown conversion, and the st
 
 Root pages share the same shell pattern: favicon/RSS links, `site-config.js`, `i18n.js`, `load-nav.js`, `dark-mode.js`, and `src/css/styles.css`.
 
+Client-side site code is authored in TypeScript and compiled to browser JavaScript:
+- `src/ts/*.ts` compiles to tracked `src/js/*.js` for the main shared site scripts.
+- `gallery/talks/pkm-2026-06-07/deck.ts` and `deck.mts` compile to the talk deck's `deck.js` and `deck.mjs`.
+- `projects/assets/sleep-2016-2026*.ts` compiles to the Sleep essay chart bundles loaded by the two Sleep project pages.
+
+The compiled JavaScript remains tracked because GitHub Pages serves this repo directly. Run `npm run build:ts` before publishing script changes; `make check` runs the TypeScript build first. The only remaining unconverted `.js` file is `gallery/talks/pkm-2026-06-07/assets/motion.min.js`, a third-party minified ESM vendor asset.
+
 Because these pages are still hand-authored, drift is easy:
 - nav fallback must stay aligned with `navigation.html`
 - CSS cache keys must stay aligned across pages and templates
