@@ -1,6 +1,6 @@
 ---
 name: site-smoke-test
-description: Verify `simoncos.github.io` and related project-preview deployments after publishing, frontend edits, gallery/project IA changes, or slide-deck updates. Use when Codex needs a structured PASS/FAIL smoke test with live URL evidence, browser checks, asset checks, RSS checks, and deploy-freshness diagnostics. Not for designing the UI; use `frontend-design` first when the task is visual design.
+description: Verify `simoncos.github.io` and related project-preview deployments after publishing, frontend edits, homepage/Gallery/Projects/About IA changes, AI-readable entrypoint changes, or slide-deck updates. Use when Codex needs a structured PASS/FAIL smoke test with live URL evidence, browser checks, asset checks, RSS checks, generated-data checks, and deploy-freshness diagnostics. Not for designing the UI; use `frontend-design` first when the task is visual design.
 ---
 
 # Site Smoke Test
@@ -22,6 +22,8 @@ Run relevant checks and report PASS/FAIL with evidence:
 - Blog archive loads.
 - Latest post opens and renders.
 - Gallery and Projects pages are checked when either IA or JSON changed.
+- Homepage live surface renders when `data/home_surface.json` or homepage copy changed.
+- `llms.txt` and `agent-index.json` return HTTP 200 when AI/agent-readable orientation changed.
 - Dark mode and language toggles work.
 - Both RSS feeds return HTTP 200.
 - Key assets referenced by changed pages return HTTP 200.
@@ -30,8 +32,11 @@ For Gallery/Projects changes, also verify backing JSON files:
 
 - `/data/gallery_data.json`
 - `/data/projects_data.json`
+- `/data/home_surface.json` when homepage live surface changed
 
-Confirm the semantic split when relevant: Gallery is for talks, demos, visual essays, and artifacts; Projects is for maintained tools and deployed systems.
+Confirm the semantic split when relevant: Gallery is for talks, demos, visual essays, research artifacts, and curated paths; Projects is for maintained tools and deployed systems.
+
+For copy or IA changes, check at least one Chinese mobile viewport. Large Chinese headings and navigation labels can pass source checks while wrapping poorly.
 
 ## Slide Deck Checks
 
