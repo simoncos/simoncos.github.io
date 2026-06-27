@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-06-20",
-  "layout": "signal-board",
+  "last_updated": "2026-06-25",
+  "layout": "route-journal",
   "hero": {
     "kicker": {
       "en": "Start here",
@@ -8,6 +8,10 @@
     },
     "title": {
       "en": "Tools, research, essays, and field notes.",
+      "zh": "工具与研究，文章与现场记录。"
+    },
+    "accessible_title": {
+      "en": "Tools and research. Essays and field notes.",
       "zh": "工具与研究，文章与现场记录。"
     },
     "title_lines": {
@@ -103,6 +107,15 @@
           "en": "A maintained tool for turning SleepCycle exports into readable reports.",
           "zh": "把 SleepCycle 导出转成可读报告的持续维护工具。"
         },
+        "action_label": {
+          "en": "Read more",
+          "zh": "进入工具"
+        },
+        "media": "projects/assets/sleep-toolkit-cover.svg",
+        "media_alt": {
+          "en": "Sleep Toolkit report preview",
+          "zh": "Sleep Toolkit 报告预览"
+        },
         "href": "https://sleep-toolkit-production.up.railway.app"
       },
       {
@@ -117,6 +130,15 @@
         "description": {
           "en": "Evidence, questions, and limits placed together in a public analysis.",
           "zh": "把问题、证据和局限放在一起看的公开分析。"
+        },
+        "action_label": {
+          "en": "Read analysis",
+          "zh": "读分析"
+        },
+        "media": "gallery/talks/pkm-2026-06-07/images/s15-hv-analysis.svg",
+        "media_alt": {
+          "en": "HV analysis network preview",
+          "zh": "横纵分析网络预览"
         },
         "href": "gallery/research/hermes-agent-hv-analysis.html"
       },
@@ -133,6 +155,15 @@
           "en": "A talk about capture, memory, agents, projects, and boundaries.",
           "zh": "关于捕捉、记忆、agent、项目和边界的演讲。"
         },
+        "action_label": {
+          "en": "Watch or read",
+          "zh": "看演讲"
+        },
+        "media": "gallery/talks/pkm-2026-06-07/images/s05-system-architecture.png",
+        "media_alt": {
+          "en": "Personal system architecture diagram",
+          "zh": "个人系统架构图"
+        },
         "href": "gallery/talks/pkm-2026-06-07/index.html",
         "skipLangRewrite": true
       },
@@ -148,6 +179,15 @@
         "description": {
           "en": "Outdoor experience, body data, risk, and lessons from outside the screen.",
           "zh": "户外经验、身体数据、风险，以及屏幕之外的反馈。"
+        },
+        "action_label": {
+          "en": "Field notes",
+          "zh": "读现场笔记"
+        },
+        "media": "gallery/talks/pkm-2026-06-07/images/s16-incubator-hiking.png",
+        "media_alt": {
+          "en": "Hiking planning map preview",
+          "zh": "徒步规划地图预览"
         },
         "href": "blogs/my-haba-snow-mountain-journey.en.html"
       }

@@ -33,9 +33,14 @@
             return Array.isArray(value) ? value.filter(Boolean).map(String) : [];
         }
 
-        function setTitleLines(id: string, lines: string[], fallback: string) {
+        function setTitleLines(id: string, lines: string[], fallback: string, accessibleLabel: string) {
             const element = document.getElementById(id);
             if (!element) return;
+
+            const label = accessibleLabel || fallback || lines.join(' ');
+            if (label) {
+                element.setAttribute('aria-label', label);
+            }
 
             if (!lines.length) {
                 element.textContent = fallback;
@@ -98,12 +103,15 @@
 
         function createSystemCard(item: any, index: number, language: string) {
             const anchor = document.createElement('a');
-            anchor.className = 'home-system-node';
+            anchor.className = `home-system-node route-node route-node-${index + 1}`;
             applyLinkOptions(anchor, item, language);
 
             const indexEl = document.createElement('span');
             indexEl.className = 'system-node-index';
             indexEl.textContent = String(index + 1).padStart(2, '0');
+
+            const copy = document.createElement('span');
+            copy.className = 'route-node-copy';
 
             const title = document.createElement('strong');
             title.textContent = getLocalizedValue(item.title || item.label, language);
@@ -111,7 +119,33 @@
             const description = document.createElement('span');
             description.textContent = getLocalizedValue(item.description, language);
 
-            anchor.append(indexEl, title, description);
+            copy.append(title, description);
+
+            const actionLabel = getLocalizedValue(item.action_label, language);
+            if (actionLabel) {
+                const action = document.createElement('span');
+                action.className = 'route-node-action';
+                action.textContent = actionLabel;
+                copy.appendChild(action);
+            }
+
+            anchor.append(indexEl, copy);
+
+            const mediaSrc = getLocalizedValue(item.media, language) || item.media;
+            if (mediaSrc) {
+                const media = document.createElement('span');
+                media.className = 'route-node-media';
+
+                const image = document.createElement('img');
+                image.src = resolvePath(mediaSrc);
+                image.alt = getLocalizedValue(item.media_alt, language) || '';
+                image.loading = 'lazy';
+                image.decoding = 'async';
+
+                media.appendChild(image);
+                anchor.appendChild(media);
+            }
+
             return anchor;
         }
 
@@ -130,7 +164,11 @@
             const description = document.createElement('span');
             description.textContent = getLocalizedValue(item.description, language);
 
-            anchor.append(pill, title, description);
+            const start = document.createElement('span');
+            start.className = 'home-trail-start';
+            start.textContent = language === 'zh' ? '顺着读' : 'Start this path';
+
+            anchor.append(pill, title, description, start);
             return anchor;
         }
 
@@ -160,7 +198,8 @@
                 setTitleLines(
                     'home-os-title',
                     getLocalizedLines(payload.hero.title_lines, language),
-                    getLocalizedValue(payload.hero.title, language)
+                    getLocalizedValue(payload.hero.title, language),
+                    getLocalizedValue(payload.hero.accessible_title, language)
                 );
                 setText('home-os-lede', getLocalizedValue(payload.hero.lede, language));
                 const actions = Array.isArray(payload.hero.actions) ? payload.hero.actions : [];

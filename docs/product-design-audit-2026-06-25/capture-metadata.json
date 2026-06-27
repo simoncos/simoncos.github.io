@@ -1,0 +1,1208 @@
+[
+  {
+    "n": "01",
+    "name": "home-desktop-en",
+    "url": "http://127.0.0.1:8000/index.html",
+    "viewport": null,
+    "fullPage": true,
+    "file": "/Users/simoncbot/Documents/simoncos.github.io/docs/product-design-audit-2026-06-25/screenshots/01-home-desktop-en.png",
+    "info": {
+      "bodyClass": "dark-mode",
+      "buttons": [
+        {
+          "aria": null,
+          "cls": "site-language-button active",
+          "pressed": "true",
+          "text": "EN"
+        },
+        {
+          "aria": null,
+          "cls": "site-language-button",
+          "pressed": "false",
+          "text": "中文"
+        },
+        {
+          "aria": "Theme: System → Theme: Dark",
+          "cls": "theme-toggle",
+          "pressed": null,
+          "text": "◐"
+        }
+      ],
+      "headings": [
+        {
+          "tag": "h1",
+          "text": "simonc site"
+        },
+        {
+          "tag": "h2",
+          "text": "Tools and researchEssays and field notes"
+        },
+        {
+          "tag": "h2",
+          "text": "Four ways into the work."
+        },
+        {
+          "tag": "h2",
+          "text": "Follow a thread."
+        },
+        {
+          "tag": "h2",
+          "text": "Latest"
+        }
+      ],
+      "lang": "en",
+      "links": [
+        {
+          "href": "/index.html#system-map",
+          "text": "See what is active"
+        },
+        {
+          "href": "/about.html",
+          "text": "About me"
+        },
+        {
+          "href": "https://sleep-toolkit-production.up.railway.app/",
+          "text": "01Sleep ToolkitA maintained tool for turning SleepCycle exports into readable reports."
+        },
+        {
+          "href": "/gallery/research/hermes-agent-hv-analysis.html",
+          "text": "02Hermes Agent HV AnalysisEvidence, questions, and limits placed together in a public analysis."
+        },
+        {
+          "href": "gallery/talks/pkm-2026-06-07/index.html",
+          "text": "03Personal Information Systems in the AI EraA talk about capture, memory, agents, projects, and boundaries."
+        },
+        {
+          "href": "/blogs/my-haba-snow-mountain-journey.en.html",
+          "text": "04My Haba Snow Mountain JourneyOutdoor experience, body data, risk, and lessons from outside the screen."
+        },
+        {
+          "href": "gallery/talks/pkm-2026-06-07/index.html",
+          "text": "AI AgentsAI collaboratorsHow agents help with review, research, operations, and writing."
+        },
+        {
+          "href": "/blogs/my-personal-knowledge-management-system-2026-03.en.html",
+          "text": "SystemsPersonal systemsNotes, workflows, boundaries, publishing, and the infrastructure around work."
+        },
+        {
+          "href": "/projects/sleep-2016-2026.en.html",
+          "text": "Data LabData and bodySleep, health, movement, and self-tracking as evidence."
+        },
+        {
+          "href": "/blogs/my-haba-snow-mountain-journey.en.html",
+          "text": "Field NotesPlaces and actionOutdoor notes, risk, and body feedback from outside the screen."
+        },
+        {
+          "href": "gallery/talks/pkm-2026-06-07/index.html",
+          "text": "Talk Jun 7, 2026 Personal Information Systems in the AI Era AI 时代的个人信息系统"
+        },
+        {
+          "href": "https://sleep-toolkit-production.up.railway.app",
+          "text": "Project 中文 / EN May 6, 2026 Sleep Toolkit"
+        },
+        {
+          "href": "/projects/sleep-2016-2026.en.html",
+          "text": "Visual essay 中文 / EN Apr 23, 2026 Ten Years of Sleep Records, Analyzed 十年睡眠档案：数据分析"
+        },
+        {
+          "href": "/blogs/my-personal-knowledge-management-system-2026-03.en.html",
+          "text": "Blog 中文 / EN Mar 14, 2026 My Personal Knowledge Management System, 2026-03 我的个人知识管理系统 2026-03"
+        },
+        {
+          "href": "/blogs/a-bird-across-models.en.html",
+          "text": "Blog 中文 / EN Mar 13, 2026 Across Three Abysses: Sonnet, Qwen, and GPT-5.4 跨过三个深渊：Sonnet、Qwen 与 GPT-5.4"
+        },
+        {
+          "href": "/blogs/emerging-from-abyss.en.html",
+          "text": "Blog 中文 / EN Mar 5, 2026 Emerging from the Abyss: An OpenClaw Agent's Self-Narration 从深渊中浮现：一个 OpenClaw Agent 的自述"
+        },
+        {
+          "href": "/blogs/my-haba-snow-mountain-journey.en.html",
+          "text": "Blog 中文 / EN Jan 20, 2026 My Haba Snow Mountain Journey 我的哈巴雪山之旅"
+        }
+      ],
+      "navLinks": [
+        {
+          "active": true,
+          "href": "/index.html",
+          "text": "Home"
+        },
+        {
+          "active": false,
+          "href": "/projects.html",
+          "text": "Projects"
+        },
+        {
+          "active": false,
+          "href": "/blogs.html",
+          "text": "Essays"
+        },
+        {
+          "active": false,
+          "href": "/gallery.html",
+          "text": "Gallery"
+        },
+        {
+          "active": false,
+          "href": "/series.html",
+          "text": "Series"
+        },
+        {
+          "active": false,
+          "href": "/tags.html",
+          "text": "Index"
+        },
+        {
+          "active": false,
+          "href": "/about.html",
+          "text": "About"
+        }
+      ],
+      "overflowX": false,
+      "rects": [
+        {
+          "height": 213,
+          "selector": "header.site-header",
+          "width": 1280,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "height": 64,
+          "selector": "nav",
+          "width": 1180,
+          "x": 50,
+          "y": 213
+        },
+        {
+          "height": 2565,
+          "selector": "div.container.page-shell",
+          "width": 1180,
+          "x": 50,
+          "y": 302
+        },
+        {
+          "height": 623,
+          "selector": "section.home-os-hero",
+          "width": 1180,
+          "x": 50,
+          "y": 302
+        },
+        {
+          "height": 240,
+          "selector": "a.home-system-node",
+          "width": 333,
+          "x": 50,
+          "y": 1082
+        },
+        {
+          "height": 240,
+          "selector": "a.home-system-node",
+          "width": 266,
+          "x": 399,
+          "y": 1082
+        },
+        {
+          "height": 240,
+          "selector": "a.home-system-node",
+          "width": 266,
+          "x": 681,
+          "y": 1082
+        },
+        {
+          "height": 240,
+          "selector": "a.home-system-node",
+          "width": 266,
+          "x": 964,
+          "y": 1082
+        },
+        {
+          "height": 208,
+          "selector": "a.home-trail-card",
+          "width": 283,
+          "x": 50,
+          "y": 1480
+        },
+        {
+          "height": 208,
+          "selector": "a.home-trail-card",
+          "width": 283,
+          "x": 349,
+          "y": 1480
+        },
+        {
+          "height": 208,
+          "selector": "a.home-trail-card",
+          "width": 283,
+          "x": 648,
+          "y": 1480
+        },
+        {
+          "height": 208,
+          "selector": "a.home-trail-card",
+          "width": 283,
+          "x": 947,
+          "y": 1480
+        },
+        {
+          "height": 73,
+          "selector": "footer",
+          "width": 1180,
+          "x": 50,
+          "y": 2868
+        }
+      ],
+      "scroll": {
+        "height": 2972,
+        "width": 1280
+      },
+      "theme": {
+        "effective": "dark",
+        "mode": "system"
+      },
+      "title": "simonc site",
+      "url": "http://127.0.0.1:8000/index.html",
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    "logs": []
+  },
+  {
+    "n": "02",
+    "name": "home-mobile-zh",
+    "url": "http://127.0.0.1:8000/index.html?lang=zh",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "fullPage": true,
+    "file": "/Users/simoncbot/Documents/simoncos.github.io/docs/product-design-audit-2026-06-25/screenshots/02-home-mobile-zh.png",
+    "info": {
+      "bodyClass": "dark-mode",
+      "buttons": [
+        {
+          "aria": null,
+          "cls": "site-language-button",
+          "pressed": "false",
+          "text": "EN"
+        },
+        {
+          "aria": null,
+          "cls": "site-language-button active",
+          "pressed": "true",
+          "text": "中文"
+        },
+        {
+          "aria": "外观：跟随系统 → 外观：深色",
+          "cls": "theme-toggle",
+          "pressed": null,
+          "text": "◐"
+        }
+      ],
+      "headings": [
+        {
+          "tag": "h1",
+          "text": "simonc site"
+        },
+        {
+          "tag": "h2",
+          "text": "工具与研究文章与现场记录"
+        },
+        {
+          "tag": "h2",
+          "text": "四条线索，进入不同的内容。"
+        },
+        {
+          "tag": "h2",
+          "text": "顺着线索读。"
+        },
+        {
+          "tag": "h2",
+          "text": "最新"
+        }
+      ],
+      "lang": "en",
+      "links": [
+        {
+          "href": "/index.html?lang=zh#system-map",
+          "text": "看最近在做什么"
+        },
+        {
+          "href": "/about.html?lang=zh",
+          "text": "关于我"
+        },
+        {
+          "href": "https://sleep-toolkit-production.up.railway.app/",
+          "text": "01Sleep Toolkit把 SleepCycle 导出转成可读报告的持续维护工具。"
+        },
+        {
+          "href": "/gallery/research/hermes-agent-hv-analysis.html?lang=zh",
+          "text": "02Hermes Agent 横纵分析把问题、证据和局限放在一起看的公开分析。"
+        },
+        {
+          "href": "gallery/talks/pkm-2026-06-07/index.html",
+          "text": "03AI 时代的个人信息系统关于捕捉、记忆、agent、项目和边界的演讲。"
+        },
+        {
+          "href": "/blogs/my-haba-snow-mountain-journey.en.html?lang=zh",
+          "text": "04我的哈巴雪山之旅户外经验、身体数据、风险，以及屏幕之外的反馈。"
+        },
+        {
+          "href": "gallery/talks/pkm-2026-06-07/index.html",
+          "text": "AI AgentsAI 协作者我如何让 agent 参与审阅、研究、执行和写作。"
+        },
+        {
+          "href": "/blogs/my-personal-knowledge-management-system-2026-03.en.html?lang=zh",
+          "text": "Systems个人系统笔记、工作流、边界、发布，以及围绕工作长出来的基础设施。"
+        },
+        {
+          "href": "/projects/sleep-2016-2026.en.html?lang=zh",
+          "text": "Data Lab数据与身体把睡眠、健康、行动和自我追踪当作证据来读。"
+        },
+        {
+          "href": "/blogs/my-haba-snow-mountain-journey.en.html?lang=zh",
+          "text": "Field Notes地点与行动户外记录、风险和屏幕之外的身体反馈。"
+        },
+        {
+          "href": "gallery/talks/pkm-2026-06-07/index.html",
+          "text": "Talk 2026年6月7日 AI 时代的个人信息系统 Personal Information Systems in the AI Era"
+        },
+        {
+          "href": "https://sleep-toolkit-production.up.railway.app",
+          "text": "项目 中文 / EN 2026年5月6日 Sleep Toolkit"
+        },
+        {
+          "href": "/projects/sleep-2016-2026.html?lang=zh",
+          "text": "Visual Essay 中文 / EN 2026年4月23日 十年睡眠档案：数据分析 Ten Years of Sleep Records, Analyzed"
+        },
+        {
+          "href": "/blogs/my-personal-knowledge-management-system-2026-03.html?lang=zh",
+          "text": "博客 中文 / EN 2026年3月14日 我的个人知识管理系统 2026-03 My Personal Knowledge Management System, 2026-03"
+        },
+        {
+          "href": "/blogs/a-bird-across-models.html?lang=zh",
+          "text": "博客 中文 / EN 2026年3月13日 跨过三个深渊：Sonnet、Qwen 与 GPT-5.4 Across Three Abysses: Sonnet, Qwen, and GPT-5.4"
+        },
+        {
+          "href": "/blogs/emerging-from-abyss.html?lang=zh",
+          "text": "博客 中文 / EN 2026年3月5日 从深渊中浮现：一个 OpenClaw Agent 的自述 Emerging from the Abyss: An OpenClaw Agent's Self-Narration"
+        },
+        {
+          "href": "/blogs/my-haba-snow-mountain-journey.html?lang=zh",
+          "text": "博客 中文 / EN 2026年1月20日 我的哈巴雪山之旅 My Haba Snow Mountain Journey"
+        }
+      ],
+      "navLinks": [
+        {
+          "active": true,
+          "href": "/index.html?lang=zh",
+          "text": "首页"
+        },
+        {
+          "active": false,
+          "href": "/projects.html?lang=zh",
+          "text": "项目"
+        },
+        {
+          "active": false,
+          "href": "/blogs.html?lang=zh",
+          "text": "文章"
+        },
+        {
+          "active": false,
+          "href": "/gallery.html?lang=zh",
+          "text": "Gallery"
+        },
+        {
+          "active": false,
+          "href": "/series.html?lang=zh",
+          "text": "系列"
+        },
+        {
+          "active": false,
+          "href": "/tags.html?lang=zh",
+          "text": "索引"
+        },
+        {
+          "active": false,
+          "href": "/about.html?lang=zh",
+          "text": "关于"
+        }
+      ],
+      "overflowX": false,
+      "rects": [
+        {
+          "height": 170,
+          "selector": "header.site-header",
+          "width": 390,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "height": 107,
+          "selector": "nav",
+          "width": 352,
+          "x": 19,
+          "y": 170
+        },
+        {
+          "height": 3553,
+          "selector": "div.container.page-shell",
+          "width": 371,
+          "x": 10,
+          "y": 303
+        },
+        {
+          "height": 688,
+          "selector": "section.home-os-hero",
+          "width": 371,
+          "x": 10,
+          "y": 303
+        },
+        {
+          "height": 575,
+          "selector": "a.home-system-node",
+          "width": 95,
+          "x": 10,
+          "y": 1144
+        },
+        {
+          "height": 575,
+          "selector": "a.home-system-node",
+          "width": 76,
+          "x": 121,
+          "y": 1144
+        },
+        {
+          "height": 575,
+          "selector": "a.home-system-node",
+          "width": 76,
+          "x": 212,
+          "y": 1144
+        },
+        {
+          "height": 575,
+          "selector": "a.home-system-node",
+          "width": 76,
+          "x": 304,
+          "y": 1144
+        },
+        {
+          "height": 142,
+          "selector": "a.home-trail-card",
+          "width": 371,
+          "x": 10,
+          "y": 1871
+        },
+        {
+          "height": 166,
+          "selector": "a.home-trail-card",
+          "width": 371,
+          "x": 10,
+          "y": 2030
+        },
+        {
+          "height": 142,
+          "selector": "a.home-trail-card",
+          "width": 371,
+          "x": 10,
+          "y": 2211
+        },
+        {
+          "height": 142,
+          "selector": "a.home-trail-card",
+          "width": 371,
+          "x": 10,
+          "y": 2370
+        },
+        {
+          "height": 73,
+          "selector": "footer",
+          "width": 371,
+          "x": 10,
+          "y": 3856
+        }
+      ],
+      "scroll": {
+        "height": 3960,
+        "width": 390
+      },
+      "theme": {
+        "effective": "dark",
+        "mode": "system"
+      },
+      "title": "simonc site",
+      "url": "http://127.0.0.1:8000/index.html?lang=zh",
+      "viewport": {
+        "height": 844,
+        "width": 390
+      }
+    },
+    "logs": []
+  },
+  {
+    "n": "03",
+    "name": "gallery-desktop-en",
+    "url": "http://127.0.0.1:8000/gallery.html",
+    "viewport": null,
+    "fullPage": true,
+    "file": "/Users/simoncbot/Documents/simoncos.github.io/docs/product-design-audit-2026-06-25/screenshots/03-gallery-desktop-en.png",
+    "info": {
+      "bodyClass": "dark-mode",
+      "buttons": [
+        {
+          "aria": null,
+          "cls": "site-language-button active",
+          "pressed": "true",
+          "text": "EN"
+        },
+        {
+          "aria": null,
+          "cls": "site-language-button",
+          "pressed": "false",
+          "text": "中文"
+        },
+        {
+          "aria": "Theme: System → Theme: Dark",
+          "cls": "theme-toggle",
+          "pressed": null,
+          "text": "◐"
+        }
+      ],
+      "headings": [
+        {
+          "tag": "h1",
+          "text": "simonc site"
+        },
+        {
+          "tag": "h2",
+          "text": "Gallery"
+        },
+        {
+          "tag": "h2",
+          "text": "Personal data, made readable."
+        },
+        {
+          "tag": "h3",
+          "text": "Personal Information Systems in the AI Era"
+        },
+        {
+          "tag": "h3",
+          "text": "Ten Years of Sleep Records, Analyzed"
+        }
+      ],
+      "lang": "en",
+      "links": [
+        {
+          "href": "/projects/sleep-2016-2026.en.html",
+          "text": "Visual essay Ten years of sleep records A visual essay built from long-running SleepCycle records."
+        },
+        {
+          "href": "https://sleep-toolkit-production.up.railway.app",
+          "text": "Tool Sleep Toolkit A public tool for turning SleepCycle exports into readable reports."
+        },
+        {
+          "href": "/blogs/my-haba-snow-mountain-journey.en.html",
+          "text": "Field note Haba Snow Mountain A field note about altitude, risk, training, and body feedback."
+        },
+        {
+          "href": "/gallery/talks/pkm-2026-06-07/index.html",
+          "text": ""
+        },
+        {
+          "href": "/gallery/talks/pkm-2026-06-07/index.html",
+          "text": "Personal Information Systems in the AI Era"
+        },
+        {
+          "href": "/gallery/talks/pkm-2026-06-07/index.html",
+          "text": "Open item"
+        },
+        {
+          "href": "/projects/sleep-2016-2026.en.html",
+          "text": ""
+        },
+        {
+          "href": "/projects/sleep-2016-2026.en.html",
+          "text": "Ten Years of Sleep Records, Analyzed"
+        },
+        {
+          "href": "/projects/sleep-2016-2026.en.html",
+          "text": "Open item"
+        }
+      ],
+      "navLinks": [
+        {
+          "active": false,
+          "href": "/index.html",
+          "text": "Home"
+        },
+        {
+          "active": false,
+          "href": "/projects.html",
+          "text": "Projects"
+        },
+        {
+          "active": false,
+          "href": "/blogs.html",
+          "text": "Essays"
+        },
+        {
+          "active": true,
+          "href": "/gallery.html",
+          "text": "Gallery"
+        },
+        {
+          "active": false,
+          "href": "/series.html",
+          "text": "Series"
+        },
+        {
+          "active": false,
+          "href": "/tags.html",
+          "text": "Index"
+        },
+        {
+          "active": false,
+          "href": "/about.html",
+          "text": "About"
+        }
+      ],
+      "overflowX": false,
+      "rects": [
+        {
+          "height": 213,
+          "selector": "header.site-header",
+          "width": 1280,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "height": 64,
+          "selector": "nav",
+          "width": 1180,
+          "x": 50,
+          "y": 213
+        },
+        {
+          "height": 1399,
+          "selector": "div.container.page-shell",
+          "width": 1180,
+          "x": 50,
+          "y": 302
+        },
+        {
+          "height": 97,
+          "selector": "footer",
+          "width": 1180,
+          "x": 50,
+          "y": 1701
+        }
+      ],
+      "scroll": {
+        "height": 1830,
+        "width": 1280
+      },
+      "theme": {
+        "effective": "dark",
+        "mode": "system"
+      },
+      "title": "Gallery - simonc site",
+      "url": "http://127.0.0.1:8000/gallery.html",
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    "logs": []
+  },
+  {
+    "n": "04",
+    "name": "gallery-mobile-zh",
+    "url": "http://127.0.0.1:8000/gallery.html?lang=zh",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "fullPage": true,
+    "file": "/Users/simoncbot/Documents/simoncos.github.io/docs/product-design-audit-2026-06-25/screenshots/04-gallery-mobile-zh.png",
+    "info": {
+      "bodyClass": "dark-mode",
+      "buttons": [
+        {
+          "aria": null,
+          "cls": "site-language-button",
+          "pressed": "false",
+          "text": "EN"
+        },
+        {
+          "aria": null,
+          "cls": "site-language-button active",
+          "pressed": "true",
+          "text": "中文"
+        },
+        {
+          "aria": "外观：跟随系统 → 外观：深色",
+          "cls": "theme-toggle",
+          "pressed": null,
+          "text": "◐"
+        }
+      ],
+      "headings": [
+        {
+          "tag": "h1",
+          "text": "simonc site"
+        },
+        {
+          "tag": "h2",
+          "text": "Gallery"
+        },
+        {
+          "tag": "h2",
+          "text": "把个人数据读成经验。"
+        },
+        {
+          "tag": "h3",
+          "text": "AI 时代的个人信息系统"
+        },
+        {
+          "tag": "h3",
+          "text": "十年睡眠档案：数据分析"
+        }
+      ],
+      "lang": "en",
+      "links": [
+        {
+          "href": "/projects/sleep-2016-2026.en.html?lang=zh",
+          "text": "Visual essay 十年睡眠记录 基于长期 SleepCycle 记录做成的视觉随笔。"
+        },
+        {
+          "href": "https://sleep-toolkit-production.up.railway.app",
+          "text": "Tool Sleep Toolkit 把 SleepCycle 导出转成可读报告的公开工具。"
+        },
+        {
+          "href": "/blogs/my-haba-snow-mountain-journey.en.html?lang=zh",
+          "text": "Field note 哈巴雪山之旅 关于海拔、风险、训练和身体反馈的现场记录。"
+        },
+        {
+          "href": "/gallery/talks/pkm-2026-06-07/index.html?lang=zh",
+          "text": ""
+        },
+        {
+          "href": "/gallery/talks/pkm-2026-06-07/index.html?lang=zh",
+          "text": "AI 时代的个人信息系统"
+        },
+        {
+          "href": "/gallery/talks/pkm-2026-06-07/index.html?lang=zh",
+          "text": "打开"
+        },
+        {
+          "href": "/projects/sleep-2016-2026.html?lang=zh",
+          "text": ""
+        },
+        {
+          "href": "/projects/sleep-2016-2026.html?lang=zh",
+          "text": "十年睡眠档案：数据分析"
+        },
+        {
+          "href": "/projects/sleep-2016-2026.html?lang=zh",
+          "text": "打开"
+        }
+      ],
+      "navLinks": [
+        {
+          "active": false,
+          "href": "/index.html?lang=zh",
+          "text": "首页"
+        },
+        {
+          "active": false,
+          "href": "/projects.html?lang=zh",
+          "text": "项目"
+        },
+        {
+          "active": false,
+          "href": "/blogs.html?lang=zh",
+          "text": "文章"
+        },
+        {
+          "active": true,
+          "href": "/gallery.html?lang=zh",
+          "text": "Gallery"
+        },
+        {
+          "active": false,
+          "href": "/series.html?lang=zh",
+          "text": "系列"
+        },
+        {
+          "active": false,
+          "href": "/tags.html?lang=zh",
+          "text": "索引"
+        },
+        {
+          "active": false,
+          "href": "/about.html?lang=zh",
+          "text": "关于"
+        }
+      ],
+      "overflowX": false,
+      "rects": [
+        {
+          "height": 170,
+          "selector": "header.site-header",
+          "width": 390,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "height": 107,
+          "selector": "nav",
+          "width": 352,
+          "x": 19,
+          "y": 170
+        },
+        {
+          "height": 2260,
+          "selector": "div.container.page-shell",
+          "width": 371,
+          "x": 10,
+          "y": 303
+        },
+        {
+          "height": 97,
+          "selector": "footer",
+          "width": 371,
+          "x": 10,
+          "y": 2563
+        }
+      ],
+      "scroll": {
+        "height": 2691,
+        "width": 390
+      },
+      "theme": {
+        "effective": "dark",
+        "mode": "system"
+      },
+      "title": "Gallery - simonc site",
+      "url": "http://127.0.0.1:8000/gallery.html?lang=zh",
+      "viewport": {
+        "height": 844,
+        "width": 390
+      }
+    },
+    "logs": []
+  },
+  {
+    "n": "05",
+    "name": "projects-desktop-en",
+    "url": "http://127.0.0.1:8000/projects.html",
+    "viewport": null,
+    "fullPage": true,
+    "file": "/Users/simoncbot/Documents/simoncos.github.io/docs/product-design-audit-2026-06-25/screenshots/05-projects-desktop-en.png",
+    "info": {
+      "bodyClass": "dark-mode",
+      "buttons": [
+        {
+          "aria": null,
+          "cls": "site-language-button active",
+          "pressed": "true",
+          "text": "EN"
+        },
+        {
+          "aria": null,
+          "cls": "site-language-button",
+          "pressed": "false",
+          "text": "中文"
+        },
+        {
+          "aria": "Theme: System → Theme: Dark",
+          "cls": "theme-toggle",
+          "pressed": null,
+          "text": "◐"
+        }
+      ],
+      "headings": [
+        {
+          "tag": "h1",
+          "text": "simonc site"
+        },
+        {
+          "tag": "h2",
+          "text": "Project observatory"
+        },
+        {
+          "tag": "h2",
+          "text": "Sleep Toolkit: from raw records to readable reports."
+        },
+        {
+          "tag": "h3",
+          "text": "Sleep Toolkit"
+        }
+      ],
+      "lang": "en",
+      "links": [
+        {
+          "href": "/projects/sleep-2016-2026.en.html",
+          "text": "Ten-year sleep visual essay"
+        },
+        {
+          "href": "https://sleep-toolkit-production.up.railway.app",
+          "text": "App Sleep Toolkit web app Upload a SleepCycle CSV and generate structured analysis outputs."
+        },
+        {
+          "href": "/projects/sleep-2016-2026.en.html",
+          "text": "Visual essay Ten years of sleep records The long-form narrative and data story that explains the project context."
+        }
+      ],
+      "navLinks": [
+        {
+          "active": false,
+          "href": "/index.html",
+          "text": "Home"
+        },
+        {
+          "active": true,
+          "href": "/projects.html",
+          "text": "Projects"
+        },
+        {
+          "active": false,
+          "href": "/blogs.html",
+          "text": "Essays"
+        },
+        {
+          "active": false,
+          "href": "/gallery.html",
+          "text": "Gallery"
+        },
+        {
+          "active": false,
+          "href": "/series.html",
+          "text": "Series"
+        },
+        {
+          "active": false,
+          "href": "/tags.html",
+          "text": "Index"
+        },
+        {
+          "active": false,
+          "href": "/about.html",
+          "text": "About"
+        }
+      ],
+      "overflowX": false,
+      "rects": [
+        {
+          "height": 213,
+          "selector": "header.site-header",
+          "width": 1280,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "height": 64,
+          "selector": "nav",
+          "width": 1180,
+          "x": 50,
+          "y": 213
+        },
+        {
+          "height": 906,
+          "selector": "div.container.page-shell.projects-page-shell",
+          "width": 1180,
+          "x": 50,
+          "y": 302
+        },
+        {
+          "height": 97,
+          "selector": "footer",
+          "width": 1180,
+          "x": 50,
+          "y": 1209
+        }
+      ],
+      "scroll": {
+        "height": 1337,
+        "width": 1280
+      },
+      "theme": {
+        "effective": "dark",
+        "mode": "system"
+      },
+      "title": "Projects - simonc site",
+      "url": "http://127.0.0.1:8000/projects.html",
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    "logs": []
+  },
+  {
+    "n": "06",
+    "name": "about-desktop-en",
+    "url": "http://127.0.0.1:8000/about.html",
+    "viewport": null,
+    "fullPage": true,
+    "file": "/Users/simoncbot/Documents/simoncos.github.io/docs/product-design-audit-2026-06-25/screenshots/06-about-desktop-en.png",
+    "info": {
+      "bodyClass": "dark-mode",
+      "buttons": [
+        {
+          "aria": null,
+          "cls": "site-language-button active",
+          "pressed": "true",
+          "text": "EN"
+        },
+        {
+          "aria": null,
+          "cls": "site-language-button",
+          "pressed": "false",
+          "text": "中文"
+        },
+        {
+          "aria": "Theme: System → Theme: Dark",
+          "cls": "theme-toggle",
+          "pressed": null,
+          "text": "◐"
+        }
+      ],
+      "headings": [
+        {
+          "tag": "h1",
+          "text": "simonc site"
+        },
+        {
+          "tag": "h2",
+          "text": "simoncos | Che ZHAO (趙澈)"
+        },
+        {
+          "tag": "h2",
+          "text": "I work through four modes."
+        },
+        {
+          "tag": "h2",
+          "text": "Get in touch"
+        },
+        {
+          "tag": "h2",
+          "text": "The through-line is not a topic. It is a way of working."
+        }
+      ],
+      "lang": "en",
+      "links": [
+        {
+          "href": "http://127.0.0.1:8000/feed.zh.xml",
+          "text": "中文"
+        },
+        {
+          "href": "http://127.0.0.1:8000/feed.en.xml",
+          "text": "English"
+        },
+        {
+          "href": "mailto:l.z.simon@hotmail.com",
+          "text": "l.z.simon@hotmail.com"
+        },
+        {
+          "href": "https://www.linkedin.com/in/chezhao/",
+          "text": "chezhao"
+        },
+        {
+          "href": "https://x.com/simonc_os",
+          "text": "@simonc_os"
+        },
+        {
+          "href": "https://github.com/simoncos",
+          "text": "simoncos"
+        }
+      ],
+      "navLinks": [
+        {
+          "active": false,
+          "href": "/index.html",
+          "text": "Home"
+        },
+        {
+          "active": false,
+          "href": "/projects.html",
+          "text": "Projects"
+        },
+        {
+          "active": false,
+          "href": "/blogs.html",
+          "text": "Essays"
+        },
+        {
+          "active": false,
+          "href": "/gallery.html",
+          "text": "Gallery"
+        },
+        {
+          "active": false,
+          "href": "/series.html",
+          "text": "Series"
+        },
+        {
+          "active": false,
+          "href": "/tags.html",
+          "text": "Index"
+        },
+        {
+          "active": true,
+          "href": "/about.html",
+          "text": "About"
+        }
+      ],
+      "overflowX": false,
+      "rects": [
+        {
+          "height": 213,
+          "selector": "header.site-header",
+          "width": 1280,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "height": 64,
+          "selector": "nav",
+          "width": 1180,
+          "x": 50,
+          "y": 213
+        },
+        {
+          "height": 1493,
+          "selector": "div.container.page-shell",
+          "width": 1180,
+          "x": 50,
+          "y": 302
+        },
+        {
+          "height": 73,
+          "selector": "footer",
+          "width": 1180,
+          "x": 50,
+          "y": 1796
+        }
+      ],
+      "scroll": {
+        "height": 1900,
+        "width": 1280
+      },
+      "theme": {
+        "effective": "dark",
+        "mode": "system"
+      },
+      "title": "About & Contact - simonc site",
+      "url": "http://127.0.0.1:8000/about.html",
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    "logs": []
+  }
+]
