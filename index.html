@@ -21,84 +21,107 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
     <link rel="alternate" type="application/rss+xml" title="simonc site RSS (中文)" href="feed.zh.xml">
     <link rel="alternate" type="application/rss+xml" title="simonc site RSS (English)" href="feed.en.xml">
-    <script src="src/js/theme-init.js?v=20260620b"></script>
-    <link rel="stylesheet" href="src/css/styles.css?v=20260610d">
-    <script src="src/js/site-config.js?v=20260620b"></script>
-    <script src="src/js/i18n.js?v=20260620b"></script>
-    <script src="src/js/article-groups.js?v=20260620b"></script>
-    <script src="src/js/load-nav.js?v=20260620b"></script>
-    <script src="src/js/dark-mode.js?v=20260620b"></script>
+    <script src="src/js/theme-init.js?v=20260626a"></script>
+    <link rel="stylesheet" href="src/css/styles.css?v=20260626b">
+    <script src="src/js/site-config.js?v=20260626a"></script>
+    <script src="src/js/i18n.js?v=20260626a"></script>
+    <script src="src/js/article-groups.js?v=20260626a"></script>
+    <script src="src/js/load-nav.js?v=20260626a"></script>
+    <script src="src/js/dark-mode.js?v=20260626a"></script>
     <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
-    <script src="src/js/load-home-surface.js?v=20260620b" defer></script>
-    <script src="src/js/load-recent-posts.js?v=20260620b" defer></script>
+    <script src="src/js/load-home-surface.js?v=20260626a" defer></script>
+    <script src="src/js/load-recent-posts.js?v=20260626a" defer></script>
     <!-- site-shell:resources:end -->
 </head>
-<body>
+<body class="home-page" data-home-layout="route-journal">
     <header class="site-header">
         <div class="header-inner">
             <p class="site-kicker" data-i18n="site_kicker_home">Projects, writing, and field notes</p>
             <h1 data-site-title>simonc site</h1>
-                    </div>
+        </div>
     </header>
     <div id="navigation-placeholder"></div>
-    <div class="container page-shell">
-        <section class="home-os-hero" aria-labelledby="home-os-title">
+    <div class="container page-shell home-route-shell">
+        <section id="system-map" class="home-os-hero home-route-hero" aria-labelledby="home-os-title">
             <div class="home-os-hero-copy">
                 <p id="home-os-kicker" class="section-kicker" data-i18n="home_os_kicker">Start here</p>
-                <h2 id="home-os-title" data-i18n="home_os_title"><span class="home-os-title-line">Tools and research</span><span class="home-os-title-line">Essays and field notes</span></h2>
+                <h2 id="home-os-title" data-i18n="home_os_title" data-i18n-aria-label="home_os_title_accessible" aria-label="Tools and research. Essays and field notes."><span class="home-os-title-line">Tools and research</span><span class="home-os-title-line">Essays and field notes</span></h2>
                 <p id="home-os-lede" class="page-lede" data-i18n="home_os_lede">I keep the most useful recent projects, essays, and notes here. Newer work stays up front; older pieces stay findable in the index.</p>
                 <div class="hero-actions">
                     <a id="home-os-primary-action" class="button-link" href="#system-map" data-i18n="home_os_primary_action">See what is active</a>
                     <a id="home-os-secondary-action" class="button-link secondary" href="about.html" data-i18n="home_os_secondary_action">About me</a>
                 </div>
+                <aside class="home-os-status home-route-legend" aria-label="Current work">
+                    <p id="home-os-status-label" class="fact-label" data-i18n="home_os_status_label">Recently</p>
+                    <ul id="home-os-status-list" class="home-os-status-list">
+                        <li>
+                            <span data-i18n="home_os_status_capture">Building</span>
+                            <strong>Tools, sites, prototypes</strong>
+                        </li>
+                        <li>
+                            <span data-i18n="home_os_status_agents">Thinking</span>
+                            <strong>AI, data, systems</strong>
+                        </li>
+                        <li>
+                            <span data-i18n="home_os_status_publish">Field</span>
+                            <strong>Body, places, risk</strong>
+                        </li>
+                    </ul>
+                </aside>
             </div>
-            <aside class="home-os-status" aria-label="Current work">
-                <p id="home-os-status-label" class="fact-label" data-i18n="home_os_status_label">Recently</p>
-                <ul id="home-os-status-list" class="home-os-status-list">
-                    <li>
-                        <span data-i18n="home_os_status_capture">Building</span>
-                        <strong>Tools, sites, prototypes</strong>
-                    </li>
-                    <li>
-                        <span data-i18n="home_os_status_agents">Thinking</span>
-                        <strong>AI, data, systems</strong>
-                    </li>
-                    <li>
-                        <span data-i18n="home_os_status_publish">Field</span>
-                        <strong>Body, places, risk</strong>
-                    </li>
-                </ul>
-            </aside>
-        </section>
 
-        <section id="system-map" class="home-system-map" aria-labelledby="system-map-title">
-            <div class="section-heading">
-                <div>
+            <div class="home-route-map" aria-labelledby="system-map-title">
+                <div class="route-map-heading">
                     <p id="home-system-kicker" class="section-kicker" data-i18n="home_system_kicker">Featured paths</p>
                     <h2 id="system-map-title" data-i18n="home_system_title">Four ways into the work.</h2>
                 </div>
-            </div>
-            <div id="home-system-grid" class="home-system-grid">
-                <a class="home-system-node" href="https://sleep-toolkit-production.up.railway.app">
+                <p class="route-map-note" data-i18n="home_route_note">Notes are for today. Systems are for the long run.</p>
+                <div id="home-system-grid" class="home-system-grid">
+                <a class="home-system-node route-node route-node-1" href="https://sleep-toolkit-production.up.railway.app">
                     <span class="system-node-index">01</span>
-                    <strong data-i18n="home_system_capture_title">Build</strong>
-                    <span data-i18n="home_system_capture_text">Small tools and prototypes that solve recurring problems.</span>
+                    <span class="route-node-copy">
+                        <strong>Sleep Toolkit</strong>
+                        <span>A maintained tool for turning SleepCycle exports into readable reports.</span>
+                        <span class="route-node-action">Read more</span>
+                    </span>
+                    <span class="route-node-media">
+                        <img src="projects/assets/sleep-toolkit-cover.svg" alt="Sleep Toolkit report preview" loading="lazy" decoding="async">
+                    </span>
                 </a>
-                <a class="home-system-node" href="gallery/research/hermes-agent-hv-analysis.html">
+                <a class="home-system-node route-node route-node-2" href="gallery/research/hermes-agent-hv-analysis.html">
                     <span class="system-node-index">02</span>
-                    <strong data-i18n="home_system_knowledge_title">Research</strong>
-                    <span data-i18n="home_system_knowledge_text">Structured investigations, comparisons, notes, and reports.</span>
+                    <span class="route-node-copy">
+                        <strong>Hermes Agent HV Analysis</strong>
+                        <span>Evidence, questions, and limits placed together in a public analysis.</span>
+                        <span class="route-node-action">Read analysis</span>
+                    </span>
+                    <span class="route-node-media">
+                        <img src="gallery/talks/pkm-2026-06-07/images/s15-hv-analysis.svg" alt="HV analysis network preview" loading="lazy" decoding="async">
+                    </span>
                 </a>
-                <a class="home-system-node" href="gallery/talks/pkm-2026-06-07/index.html" data-skip-lang-rewrite="true">
+                <a class="home-system-node route-node route-node-3" href="gallery/talks/pkm-2026-06-07/index.html" data-skip-lang-rewrite="true">
                     <span class="system-node-index">03</span>
-                    <strong data-i18n="home_system_agent_title">Systems</strong>
-                    <span data-i18n="home_system_agent_text">How tools, agents, memory, and publishing workflows fit together.</span>
+                    <span class="route-node-copy">
+                        <strong>Personal Information Systems in the AI Era</strong>
+                        <span>A talk about capture, memory, agents, projects, and boundaries.</span>
+                        <span class="route-node-action">Watch or read</span>
+                    </span>
+                    <span class="route-node-media">
+                        <img src="gallery/talks/pkm-2026-06-07/images/s05-system-architecture.png" alt="Personal system architecture diagram" loading="lazy" decoding="async">
+                    </span>
                 </a>
-                <a class="home-system-node" href="blogs/my-haba-snow-mountain-journey.en.html">
+                <a class="home-system-node route-node route-node-4" href="blogs/my-haba-snow-mountain-journey.en.html">
                     <span class="system-node-index">04</span>
-                    <strong data-i18n="home_system_artifact_title">Field notes</strong>
-                    <span data-i18n="home_system_artifact_text">Outdoor experience, body data, risk, and lessons from outside the screen.</span>
+                    <span class="route-node-copy">
+                        <strong>My Haba Snow Mountain Journey</strong>
+                        <span>Outdoor experience, body data, risk, and lessons from outside the screen.</span>
+                        <span class="route-node-action">Field notes</span>
+                    </span>
+                    <span class="route-node-media">
+                        <img src="gallery/talks/pkm-2026-06-07/images/s16-incubator-hiking.png" alt="Hiking planning map preview" loading="lazy" decoding="async">
+                    </span>
                 </a>
+                </div>
             </div>
         </section>
 
@@ -114,26 +137,30 @@
                     <span class="meta-pill meta-pill--talk">AI Agents</span>
                     <strong data-i18n="home_trail_agents_title">AI collaborators</strong>
                     <span data-i18n="home_trail_agents_text">How agents help with review, research, operations, and writing.</span>
+                    <span class="home-trail-start">Start this path</span>
                 </a>
                 <a class="home-trail-card" href="blogs/my-personal-knowledge-management-system-2026-03.en.html">
                     <span class="meta-pill">Systems</span>
                     <strong data-i18n="home_trail_pkm_title">Personal systems</strong>
                     <span data-i18n="home_trail_pkm_text">Notes, workflows, boundaries, publishing, and the infrastructure around work.</span>
+                    <span class="home-trail-start">Start this path</span>
                 </a>
                 <a class="home-trail-card" href="projects/sleep-2016-2026.en.html">
                     <span class="meta-pill meta-pill--visual_essay">Data Lab</span>
                     <strong data-i18n="home_trail_data_title">Data and body</strong>
                     <span data-i18n="home_trail_data_text">Sleep, health, movement, and self-tracking as evidence.</span>
+                    <span class="home-trail-start">Start this path</span>
                 </a>
                 <a class="home-trail-card" href="blogs/my-haba-snow-mountain-journey.en.html">
                     <span class="meta-pill">Field Notes</span>
                     <strong data-i18n="home_trail_field_title">Field notes</strong>
                     <span data-i18n="home_trail_field_text">Places, risk, action, and body feedback from outside the screen.</span>
+                    <span class="home-trail-start">Start this path</span>
                 </a>
             </div>
         </section>
 
-        <section id="blog" class="content-section">
+        <section id="blog" class="content-section home-dispatches">
             <div class="section-heading">
                 <div>
                     <p class="section-kicker" data-i18n="recent_writing">Recent writing</p>
@@ -141,6 +168,7 @@
                 </div>
                 <p id="post-list-updated" class="section-meta"></p>
             </div>
+            <div class="home-dispatch-layout">
             <ul id="post-list" class="blog-list recent-post-list">
                 <!-- static-fallback:start home-recent -->
                 <li class="recent-post-card">
@@ -213,6 +241,38 @@
                 </li>
             <!-- static-fallback:end home-recent -->
             </ul>
+                <aside class="home-field-note" aria-labelledby="home-field-note-title">
+                    <p class="section-kicker" data-i18n="home_field_note_kicker">Field note</p>
+                    <h3 id="home-field-note-title" data-i18n="home_field_note_title">This is a living index.</h3>
+                    <p data-i18n="home_field_note_text">It grows, shifts, and gets better with use.</p>
+                    <dl>
+                        <div>
+                            <dt data-i18n="home_field_note_work">Work</dt>
+                            <dd data-i18n="home_field_note_work_value">All work lives in public.</dd>
+                        </div>
+                        <div>
+                            <dt data-i18n="home_field_note_place">Coordinates</dt>
+                            <dd>39.95&deg;N, 116.32&deg;E / UTC+8</dd>
+                        </div>
+                    </dl>
+                </aside>
+            </div>
+            <a class="home-dispatch-link" href="blogs.html" data-i18n="home_dispatch_all">Browse all essays, projects, and notes</a>
+        </section>
+
+        <section class="home-bottom-routes" aria-label="Index and contact">
+            <a href="tags.html">
+                <span class="section-kicker" data-i18n="home_bottom_index_kicker">Index & archive</span>
+                <strong data-i18n="home_bottom_index_title">Older projects, essays, series, and notes.</strong>
+            </a>
+            <a href="about.html">
+                <span class="section-kicker" data-i18n="home_bottom_about_kicker">About this site</span>
+                <strong data-i18n="home_bottom_about_title">Built from curiosity, notes, and repetition.</strong>
+            </a>
+            <a href="mailto:simoncos.personal@gmail.com">
+                <span class="section-kicker" data-i18n="home_bottom_connect_kicker">Connect</span>
+                <strong data-i18n="home_bottom_connect_title">Email, RSS, GitHub, and code.</strong>
+            </a>
         </section>
     </div>
     <footer>
