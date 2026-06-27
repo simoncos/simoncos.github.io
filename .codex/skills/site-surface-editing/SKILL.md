@@ -30,6 +30,7 @@ Use this skill for source-of-truth and verification discipline on the main perso
 4. Prefer small schema additions over ad hoc DOM-only hacks when homepage content needs controlled layout, for example `title_lines` for stable bilingual hero breaks.
 5. When adding a curated surface such as Personal Data Lab, decide whether it is a page section, a Gallery item, a Projects item, or a machine-readable entry. Do not duplicate the same object across sections unless the IA requires it.
 6. If a public label changes, search for it across HTML, TS, compiled JS after build, `llms.txt`, `agent-index.json`, and docs.
+7. If `src/css/styles.css` changes, bump `data/site_shell.json` `css_version`, then regenerate shared shells and generated blog pages. Confirm the served HTML references the new `styles.css?v=` key so local and deployed browsers do not keep stale CSS.
 
 ## Checks
 
@@ -39,11 +40,15 @@ Run the relevant subset, and run the full set before handing back broad surface 
 npm run build:ts
 npm run check:ts
 jq empty agent-index.json data/home_surface.json data/site_shell.json data/content_manifest.json
+python3 scripts/update_site_shell.py
+python3 generate_blog_pages.py
 python3 scripts/check_site.py
 python3 scripts/update_site_shell.py --check
 python3 scripts/update_static_fallbacks.py --check
 python3 scripts/update_surface_data.py --check
+python3 scripts/check_blog_generation.py
 find src/js -name '*.js' -print0 | xargs -0 -n 1 node --check
+rg -n "styles.css\\?v=" --glob "*.html" .
 git diff --check
 ```
 
