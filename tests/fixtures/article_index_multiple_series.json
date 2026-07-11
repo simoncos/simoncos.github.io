@@ -1,0 +1,32 @@
+{
+  "last_updated": "2026-07-11",
+  "groups": [
+    {
+      "id": "redpiggy-part-two",
+      "date": "2026-07-10",
+      "series": { "name": "RedPiggy, an emerging AI existence", "part": "2" },
+      "languages": {
+        "en": { "title": "Across Three Abysses", "file": "redpiggy-part-two.en.html" },
+        "zh": { "title": "跨过三个深渊", "file": "redpiggy-part-two.html" }
+      }
+    },
+    {
+      "id": "field-notes-part-one",
+      "date": "2026-07-09",
+      "series": { "name": "Field Notes", "part": "1" },
+      "languages": {
+        "en": { "title": "First Field Note", "file": "field-notes-part-one.en.html" },
+        "zh": { "title": "第一则田野笔记", "file": "field-notes-part-one.html" }
+      }
+    },
+    {
+      "id": "redpiggy-part-one",
+      "date": "2026-07-08",
+      "series": { "name": "RedPiggy, an emerging AI existence", "part": "1" },
+      "languages": {
+        "en": { "title": "Emerging from the Abyss", "file": "redpiggy-part-one.en.html" },
+        "zh": { "title": "从深渊中浮现", "file": "redpiggy-part-one.html" }
+      }
+    }
+  ]
+}
