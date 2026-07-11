@@ -405,6 +405,7 @@ class SurfaceContractTests(unittest.TestCase):
 
     def test_personal_data_lab_is_a_compact_title_only_curation_rail(self):
         gallery_html = (ROOT / "gallery.html").read_text()
+        css = (ROOT / "src/css/styles.css").read_text()
         rail_match = re.search(
             r'<section id="personal-data-lab"[^>]*>(?P<content>.*?)</section>',
             gallery_html,
@@ -418,6 +419,20 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertNotIn("project-card-summary", rail)
         self.assertNotIn("personal-data-path-type", rail)
         self.assertNotIn("<small", rail)
+
+        fallback_end = gallery_html.index("<!-- static-fallback:end gallery-grid -->")
+        rail_start = gallery_html.index('<section id="personal-data-lab"')
+        self.assertLess(fallback_end, rail_start)
+
+        rail_grid_row_owners = []
+        for selector_group, body in non_media_css_rules(css):
+            if ".gallery-board .personal-data-lab--strip" in split_css_selectors(selector_group):
+                if "grid-row" in declaration_names(body):
+                    rail_grid_row_owners.append(selector_group)
+        self.assertFalse(
+            rail_grid_row_owners,
+            f"Personal Data Lab must follow the six cards by DOM auto-placement: {rail_grid_row_owners}",
+        )
 
     def test_home_mixed_content_feed_uses_recent_updates_label(self):
         index_html = (ROOT / "index.html").read_text()

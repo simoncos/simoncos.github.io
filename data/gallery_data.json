@@ -24,6 +24,10 @@
       },
       "skipLangRewrite": true,
       "featured": true,
+      "surfaceMembership": [
+        "gallery",
+        "home"
+      ],
       "galleryCardClass": "gallery-card--hero",
       "galleryOrder": 1,
       "sectionId": "gallery-talks"
@@ -50,6 +54,10 @@
         "en": "projects/sleep-2016-2026.en.html"
       },
       "featured": true,
+      "surfaceMembership": [
+        "gallery",
+        "home"
+      ],
       "galleryCardClass": "gallery-card--wide",
       "galleryOrder": 2,
       "sectionId": "gallery-visual-essays"
@@ -79,7 +87,10 @@
       "featured": false,
       "galleryCardClass": "gallery-card--research",
       "galleryOrder": 3,
-      "sectionId": "gallery-research-artifacts"
+      "sectionId": "gallery-research-artifacts",
+      "surfaceMembership": [
+        "gallery"
+      ]
     },
     {
       "id": "haba-snow-mountain",
@@ -105,7 +116,10 @@
       "featured": false,
       "galleryCardClass": "gallery-card--field",
       "galleryOrder": 4,
-      "sectionId": "gallery-field-notes"
+      "sectionId": "gallery-field-notes",
+      "surfaceMembership": [
+        "gallery"
+      ]
     },
     {
       "id": "ai-personal-information-system",
@@ -131,7 +145,10 @@
       "skipLangRewrite": true,
       "featured": false,
       "galleryCardClass": "gallery-card--system-map",
-      "galleryOrder": 6
+      "galleryOrder": 6,
+      "surfaceMembership": [
+        "gallery"
+      ]
     },
     {
       "id": "sleep-toolkit",
@@ -155,6 +172,11 @@
         "en": "https://sleep-toolkit-production.up.railway.app"
       },
       "featured": true,
+      "surfaceMembership": [
+        "projects",
+        "home",
+        "gallery"
+      ],
       "galleryCardClass": "gallery-card--tool",
       "galleryOrder": 5
     }

@@ -133,7 +133,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const projects = projectsPayload && Array.isArray(projectsPayload.projects)
             ? projectsPayload.projects : [];
         const galleryItems = galleryPayload && Array.isArray(galleryPayload.items)
-            ? galleryPayload.items : [];
+            ? galleryPayload.items.filter((item) => (
+                Array.isArray(item.surfaceMembership) && item.surfaceMembership.includes('home')
+            ))
+            : [];
 
         // Build unified post list
         const posts = [
