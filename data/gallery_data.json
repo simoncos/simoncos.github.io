@@ -5,7 +5,7 @@
       "id": "pkm-2026-06-07-talk",
       "type": "talk",
       "date": "2026-06-07",
-      "cover": "gallery/assets/gallery-hero-network.png",
+      "cover": "gallery/assets/gallery-hero-network-v2.webp",
       "title": {
         "zh": "AI 时代的个人信息系统",
         "en": "Personal Information Systems in the AI Era"
@@ -29,7 +29,7 @@
       "id": "sleep-2016-2026",
       "type": "visual_essay",
       "date": "2026-04-23",
-      "cover": "gallery/assets/gallery-card-sleep-records.png",
+      "cover": "gallery/assets/gallery-card-sleep-records-v2.webp",
       "title": {
         "zh": "十年睡眠记录：视觉随笔",
         "en": "Ten Years of Sleep Records"

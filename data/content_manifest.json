@@ -43,7 +43,7 @@
       "cover": "gallery/assets/pkm-2026-05-22-cover.svg",
       "surfaceOverrides": {
         "gallery": {
-          "cover": "gallery/assets/gallery-hero-network.png"
+          "cover": "gallery/assets/gallery-hero-network-v2.webp"
         }
       },
       "title": {
@@ -76,7 +76,7 @@
       "cover": "gallery/assets/sleep-2016-2026-cover.svg",
       "surfaceOverrides": {
         "gallery": {
-          "cover": "gallery/assets/gallery-card-sleep-records.png",
+          "cover": "gallery/assets/gallery-card-sleep-records-v2.webp",
           "title": {
             "zh": "十年睡眠记录：视觉随笔",
             "en": "Ten Years of Sleep Records"
