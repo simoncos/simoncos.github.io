@@ -46,6 +46,28 @@ class SeriesIndexTests(unittest.TestCase):
         self.assertIn("Emerging from the Abyss", match.group("content"))
         self.assertIn("Across Three Abysses", match.group("content"))
 
+    def test_static_fallback_rejects_incomplete_or_unsafe_preferred_entries_atomically(self):
+        fallbacks = load_script("series_static_safety", "scripts/update_static_fallbacks.py")
+        fixture = json.loads(FIXTURE.read_text())
+
+        for malformed_entry in (
+            {"title": "", "file": "redpiggy-part-two.en.html"},
+            {"title": "Missing file", "file": ""},
+            {"title": "Unsafe", "file": 'unsafe.html" onclick="alert(1)'},
+            {"title": "Traversal", "file": "../outside.html"},
+        ):
+            with self.subTest(entry=malformed_entry):
+                payload = json.loads(json.dumps(fixture))
+                payload["groups"][0]["languages"]["en"] = malformed_entry
+                self.assertEqual(fallbacks.render_series_index(payload), "")
+
+    def test_superseded_series_selector_arms_are_removed(self):
+        css = (ROOT / "src/css/styles.css").read_text()
+
+        self.assertNotIn(".series-card", css)
+        self.assertNotIn(".series-meta", css)
+        self.assertNotIn(".series-posts", css)
+
 
 if __name__ == "__main__":
     unittest.main()

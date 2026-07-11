@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
 import sys
 from collections import OrderedDict
 from datetime import datetime
@@ -284,14 +285,38 @@ def series_part_value(group: dict) -> tuple[int, str]:
     return part, str(group.get("id") or "")
 
 
+def valid_local_article_filename(value: object) -> bool:
+    return (
+        isinstance(value, str)
+        and re.fullmatch(r"[a-zA-Z0-9][a-zA-Z0-9._-]*\.html", value) is not None
+        and ".." not in value
+    )
+
+
+def complete_article_entry(entry: object) -> bool:
+    return (
+        isinstance(entry, dict)
+        and isinstance(entry.get("title"), str)
+        and bool(entry["title"].strip())
+        and valid_local_article_filename(entry.get("file"))
+    )
+
+
+def series_group_key(group: dict, series_name: str) -> str:
+    series = group.get("series") or {}
+    return str(group.get("id") or f'{series_name}:{series.get("part", "")}')
+
+
 def render_series_index(article_index: dict) -> str:
     series_groups: dict[str, list[dict]] = {}
     for group in article_index.get("groups", []):
         series = group.get("series") or {}
         series_name = series.get("name")
-        primary = preferred_entry(group, "en")
-        if not isinstance(series_name, str) or not series_name.strip() or not primary or not primary.get("file"):
+        if not isinstance(series_name, str) or not series_name.strip():
             continue
+        primary = preferred_entry(group, "en")
+        if not complete_article_entry(primary):
+            return ""
         series_groups.setdefault(series_name, []).append(group)
 
     rows = []
@@ -301,16 +326,21 @@ def render_series_index(article_index: dict) -> str:
         for group in groups:
             primary = preferred_entry(group, "en")
             secondary = secondary_entry(group, "en")
+            primary_title = primary["title"].strip()
+            secondary_value = secondary.get("title") if isinstance(secondary, dict) else ""
+            secondary_value = secondary_value.strip() if isinstance(secondary_value, str) else ""
             secondary_title = (
-                f'\n                                <span class="group-secondary-title">{escape(secondary.get("title"))}</span>'
-                if secondary and secondary.get("title") != primary.get("title")
+                f'\n                                <span class="group-secondary-title">{escape(secondary_value)}</span>'
+                if secondary_value and secondary_value != primary_title
                 else ""
             )
             part = (group.get("series") or {}).get("part")
             part_label = f'<span class="series-post-part">Part {escape(part)}</span>' if part else ""
+            group_key = series_group_key(group, series_name)
+            href = f'blogs/{primary["file"]}'
             parts.append(
                 f'''                        <li class="series-part-row">{part_label}
-                            <span class="series-post-entry"><a href="blogs/{escape(primary.get("file"))}">{escape(primary.get("title"))}</a>{secondary_title}
+                            <span class="series-post-entry"><a data-series-group="{escape(group_key)}" href="{escape(href)}">{escape(primary_title)}</a>{secondary_title}
                             </span>
                         </li>'''
             )

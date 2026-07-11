@@ -226,7 +226,6 @@ summary:focus-visible {
 .blog-preview,
 .tag-section,
 .tag-overview-block,
-.series-card,
 .post-tags,
 .post-backlinks,
 .recent-post-card {
@@ -244,7 +243,6 @@ summary:focus-visible {
 :is(body.dark-mode, html.dark-mode body) .blog-preview,
 :is(body.dark-mode, html.dark-mode body) .tag-section,
 :is(body.dark-mode, html.dark-mode body) .tag-overview-block,
-:is(body.dark-mode, html.dark-mode body) .series-card,
 :is(body.dark-mode, html.dark-mode body) .post-tags,
 :is(body.dark-mode, html.dark-mode body) .post-backlinks,
 :is(body.dark-mode, html.dark-mode body) .table-of-contents,
@@ -872,7 +870,6 @@ body[data-home-layout="dispatch"] .home-trail-grid {
 .tag-list,
 #backlinks-list,
 .series-list,
-.series-posts,
 #tag-sections ul,
 #all-tags ul {
     list-style: none;
@@ -938,8 +935,7 @@ body[data-home-layout="dispatch"] .home-trail-grid {
 .recent-post-meta,
 .blog-preview-meta,
 .post-meta,
-.tag-meta,
-.series-meta {
+.tag-meta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -952,8 +948,7 @@ body[data-home-layout="dispatch"] .home-trail-grid {
 :is(body.dark-mode, html.dark-mode body) .recent-post-meta,
 :is(body.dark-mode, html.dark-mode body) .blog-preview-meta,
 :is(body.dark-mode, html.dark-mode body) .post-meta,
-:is(body.dark-mode, html.dark-mode body) .tag-meta,
-:is(body.dark-mode, html.dark-mode body) .series-meta {
+:is(body.dark-mode, html.dark-mode body) .tag-meta {
     color: var(--dark-text-tertiary);
 }
 
@@ -1003,7 +998,6 @@ body[data-home-layout="dispatch"] .home-trail-grid {
 
 .tag-list li,
 #backlinks-list li,
-.series-posts li,
 #tag-sections ul li,
 #all-tags ul li {
     margin: 0;
@@ -1633,7 +1627,6 @@ body[data-home-layout="dispatch"] .home-trail-grid {
 }
 
 #backlinks-list,
-.series-posts,
 #tag-sections ul,
 #all-tags ul {
     display: grid;
@@ -1641,7 +1634,6 @@ body[data-home-layout="dispatch"] .home-trail-grid {
 }
 
 #backlinks-list li,
-.series-posts li,
 #tag-sections ul li,
 #all-tags ul li {
     position: relative;
@@ -1649,7 +1641,6 @@ body[data-home-layout="dispatch"] .home-trail-grid {
 }
 
 #backlinks-list li::before,
-.series-posts li::before,
 #tag-sections ul li::before,
 #all-tags ul li::before {
     content: "•";
@@ -1659,14 +1650,12 @@ body[data-home-layout="dispatch"] .home-trail-grid {
 }
 
 :is(body.dark-mode, html.dark-mode body) #backlinks-list li::before,
-:is(body.dark-mode, html.dark-mode body) .series-posts li::before,
 :is(body.dark-mode, html.dark-mode body) #tag-sections ul li::before,
 :is(body.dark-mode, html.dark-mode body) #all-tags ul li::before {
     color: var(--dark-text-quaternary);
 }
 
 #backlinks-list a,
-.series-posts a,
 #tag-sections a,
 #all-tags a,
 .container ul li a {
@@ -1674,7 +1663,6 @@ body[data-home-layout="dispatch"] .home-trail-grid {
 }
 
 #backlinks-list a:hover,
-.series-posts a:hover,
 #tag-sections a:hover,
 #all-tags a:hover,
 .container ul li a:hover {
@@ -1682,7 +1670,6 @@ body[data-home-layout="dispatch"] .home-trail-grid {
 }
 
 :is(body.dark-mode, html.dark-mode body) #backlinks-list a:hover,
-:is(body.dark-mode, html.dark-mode body) .series-posts a:hover,
 :is(body.dark-mode, html.dark-mode body) #tag-sections a:hover,
 :is(body.dark-mode, html.dark-mode body) #all-tags a:hover,
 :is(body.dark-mode, html.dark-mode body) .container ul li a:hover {
@@ -1721,14 +1708,12 @@ body[data-home-layout="dispatch"] .home-trail-grid {
 }
 
 .tag-section,
-.tag-overview-block,
-.series-card {
+.tag-overview-block {
     padding: 1.2rem 1.3rem;
 }
 
 .tag-section h3,
-.tag-overview-block h4,
-.series-card h3 {
+.tag-overview-block h4 {
     margin: 0 0 0.85rem;
 }
 
@@ -2133,7 +2118,6 @@ footer p {
     .blog-preview,
     .tag-section,
     .tag-overview-block,
-    .series-card,
     .post-tags,
     .post-backlinks,
     .toc-summary,
@@ -3046,7 +3030,6 @@ body::before {
 .content-section,
 .panel,
 .blog-preview,
-.series-card,
 .tag-section,
 .tag-overview-block,
 .recent-post-card,
@@ -3066,7 +3049,6 @@ body::before {
 .content-section,
 .panel,
 .blog-preview,
-.series-card,
 .tag-section,
 .tag-overview-block,
 .recent-post-card,
@@ -3123,7 +3105,6 @@ body::before {
 :is(body.dark-mode, html.dark-mode body) .content-section,
 :is(body.dark-mode, html.dark-mode body) .panel,
 :is(body.dark-mode, html.dark-mode body) .blog-preview,
-:is(body.dark-mode, html.dark-mode body) .series-card,
 :is(body.dark-mode, html.dark-mode body) .tag-section,
 :is(body.dark-mode, html.dark-mode body) .tag-overview-block,
 :is(body.dark-mode, html.dark-mode body) .recent-post-card,
