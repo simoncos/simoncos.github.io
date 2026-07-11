@@ -23,7 +23,10 @@
         "en": "gallery/talks/pkm-2026-06-07/index.html"
       },
       "skipLangRewrite": true,
-      "featured": true
+      "featured": true,
+      "galleryCardClass": "gallery-card--hero",
+      "galleryOrder": 1,
+      "sectionId": "gallery-talks"
     },
     {
       "id": "sleep-2016-2026",
@@ -46,7 +49,114 @@
         "zh": "projects/sleep-2016-2026.html",
         "en": "projects/sleep-2016-2026.en.html"
       },
-      "featured": true
+      "featured": true,
+      "galleryCardClass": "gallery-card--wide",
+      "galleryOrder": 2,
+      "sectionId": "gallery-visual-essays"
+    },
+    {
+      "id": "hermes-agent-hv-analysis",
+      "type": "artifact",
+      "date": "2026",
+      "cover": "gallery/assets/gallery-card-hermes-v2.webp",
+      "title": {
+        "zh": "Hermes Agent / HV 分析",
+        "en": "Hermes Agent / HV Analysis"
+      },
+      "subtitle": {
+        "zh": "",
+        "en": ""
+      },
+      "summary": {
+        "zh": "关于 Agent 系统的证据、问题和边界。",
+        "en": "Evidence, questions, and limits in agent systems."
+      },
+      "paths": {
+        "zh": "gallery/talks/pkm-2026-06-07/index.html",
+        "en": "gallery/talks/pkm-2026-06-07/index.html"
+      },
+      "skipLangRewrite": true,
+      "featured": false,
+      "galleryCardClass": "gallery-card--research",
+      "galleryOrder": 3,
+      "sectionId": "gallery-research-artifacts"
+    },
+    {
+      "id": "haba-snow-mountain",
+      "type": "field_note",
+      "date": "2026",
+      "cover": "gallery/assets/gallery-card-haba-field-v2.jpg",
+      "title": {
+        "zh": "哈巴雪山之旅",
+        "en": "Haba Snow Mountain"
+      },
+      "subtitle": {
+        "zh": "",
+        "en": ""
+      },
+      "summary": {
+        "zh": "一篇关于海拔、风险、训练和身体反馈的现场笔记。",
+        "en": "A field note about altitude, risk, training, and body feedback."
+      },
+      "paths": {
+        "zh": "blogs/my-haba-snow-mountain-journey.html",
+        "en": "blogs/my-haba-snow-mountain-journey.en.html"
+      },
+      "featured": false,
+      "galleryCardClass": "gallery-card--field",
+      "galleryOrder": 4,
+      "sectionId": "gallery-field-notes"
+    },
+    {
+      "id": "ai-personal-information-system",
+      "type": "visual_essay",
+      "date": "2026",
+      "cover": "gallery/assets/gallery-card-system-map-v2.webp",
+      "title": {
+        "zh": "AI 时代的个人信息系统",
+        "en": "AI personal information system"
+      },
+      "subtitle": {
+        "zh": "",
+        "en": ""
+      },
+      "summary": {
+        "zh": "关于捕捉、记忆、检索和行动的视觉地图。",
+        "en": "A visual map of capture, memory, retrieval, and action."
+      },
+      "paths": {
+        "zh": "gallery/talks/pkm-2026-06-07/index.html",
+        "en": "gallery/talks/pkm-2026-06-07/index.html"
+      },
+      "skipLangRewrite": true,
+      "featured": false,
+      "galleryCardClass": "gallery-card--system-map",
+      "galleryOrder": 6
+    },
+    {
+      "id": "sleep-toolkit",
+      "type": "tool",
+      "date": "2025",
+      "cover": "gallery/assets/gallery-card-sleep-toolkit-v2.webp",
+      "title": {
+        "zh": "Sleep Toolkit",
+        "en": "Sleep Toolkit"
+      },
+      "subtitle": {
+        "zh": "睡眠数据报告工具",
+        "en": "A sleep data reporting tool"
+      },
+      "summary": {
+        "zh": "一个把 SleepCycle 导出数据转成可读报告的公开工具。",
+        "en": "A public tool for turning SleepCycle exports into readable reports."
+      },
+      "paths": {
+        "zh": "https://sleep-toolkit-production.up.railway.app",
+        "en": "https://sleep-toolkit-production.up.railway.app"
+      },
+      "featured": true,
+      "galleryCardClass": "gallery-card--tool",
+      "galleryOrder": 5
     }
   ]
 }

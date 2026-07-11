@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function formatDate(dateValue) {
+        if (/^\d{4}$/.test(dateValue)) {
+            return dateValue;
+        }
         return typeof i18n.formatDate === 'function'
             ? i18n.formatDate(dateValue, 'long')
             : dateValue;
@@ -78,29 +81,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const sorted = [...items].sort((a, b) => {
+            const orderA = Number.isFinite(a.galleryOrder) ? a.galleryOrder : Number.MAX_SAFE_INTEGER;
+            const orderB = Number.isFinite(b.galleryOrder) ? b.galleryOrder : Number.MAX_SAFE_INTEGER;
+            if (orderA !== orderB) {
+                return orderA - orderB;
+            }
             const da = a.date ? new Date(a.date).getTime() : 0;
             const db = b.date ? new Date(b.date).getTime() : 0;
             return db - da;
         });
 
-        const anchoredTypes = new Set<string>();
-
-        gallery.innerHTML = sorted.map((item, index) => {
+        gallery.innerHTML = sorted.map((item) => {
             const title = getLocalizedValue(item.title, language);
             const subtitle = getLocalizedValue(item.subtitle, language);
             const summary = getLocalizedValue(item.summary, language);
             const href = getLocalizedPath(item, language);
             const label = typeLabel(item.type);
-            const cardClass = index === 0 ? ' gallery-card--hero' : index === 1 ? ' gallery-card--wide' : '';
-            let anchorId = '';
-
-            if (item.type === 'talk' && !anchoredTypes.has('talk')) {
-                anchorId = 'gallery-talks';
-                anchoredTypes.add('talk');
-            } else if (item.type === 'visual_essay' && !anchoredTypes.has('visual_essay')) {
-                anchorId = 'gallery-visual-essays';
-                anchoredTypes.add('visual_essay');
-            }
+            const cardClass = item.galleryCardClass ? ` ${escapeHtml(item.galleryCardClass)}` : '';
+            const anchorId = item.sectionId || '';
 
             return `
                 <article${anchorId ? ` id="${escapeHtml(anchorId)}"` : ''} class="project-card gallery-card${cardClass}">
