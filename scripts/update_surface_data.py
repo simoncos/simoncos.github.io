@@ -41,6 +41,9 @@ PROJECTED_FIELDS = (
     "featuredDetail",
     "facts",
     "actions",
+    "galleryCardClass",
+    "galleryOrder",
+    "sectionId",
 )
 
 SURFACE_OVERRIDE_FIELDS = PROJECTED_FIELDS + ("surfaces",)
@@ -59,10 +62,12 @@ def dump_json(payload: dict) -> str:
 
 
 def parse_date(value: str) -> datetime:
-    try:
-        return datetime.strptime(value or "", "%Y-%m-%d")
-    except ValueError:
-        return datetime.min
+    for date_format in ("%Y-%m-%d", "%Y"):
+        try:
+            return datetime.strptime(value or "", date_format)
+        except ValueError:
+            continue
+    return datetime.min
 
 
 def non_empty_string(value: object) -> bool:
@@ -236,6 +241,19 @@ def validate_project_projection(project: dict, path: str, errors: list[str]) -> 
         errors.append(f"{path}.featured must be a boolean")
 
 
+def validate_gallery_projection(item: dict, path: str, errors: list[str]) -> None:
+    for field in ("id", "type", "date", "cover", "galleryCardClass"):
+        if not non_empty_string(item.get(field)):
+            errors.append(f"{path}.{field} must be a non-empty string")
+    for field in ("title", "summary"):
+        validate_localized(item.get(field), f"{path}.{field}", errors)
+    validate_paths(item.get("paths"), f"{path}.paths", errors)
+    if not isinstance(item.get("galleryOrder"), int) or item["galleryOrder"] < 1:
+        errors.append(f"{path}.galleryOrder must be a positive integer")
+    if "sectionId" in item and not non_empty_string(item["sectionId"]):
+        errors.append(f"{path}.sectionId must be a non-empty string when provided")
+
+
 def validate_manifest(manifest: dict) -> list[str]:
     errors: list[str] = []
     seen_ids: set[str] = set()
@@ -300,6 +318,14 @@ def validate_manifest(manifest: dict) -> list[str]:
                     errors.append(f"data/content_manifest.json: duplicate projected Projects id {projected_id}")
                 else:
                     projected_project_ids.add(projected_id)
+
+        if isinstance(surfaces, list) and "gallery" in surfaces:
+            gallery_item = project_item(item, "gallery")
+            validate_gallery_projection(
+                gallery_item,
+                f"data/content_manifest.json: {label} gallery",
+                errors,
+            )
 
         for field in ("type", "date", "title", "subtitle", "summary", "paths"):
             if field not in item:

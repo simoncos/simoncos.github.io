@@ -376,6 +376,49 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertRegex(i18n, r"gallery_sections_label\s*:\s*['\"]Gallery sections['\"]")
         self.assertRegex(i18n, r"gallery_sections_label\s*:\s*['\"]作品章节索引['\"]")
 
+    def test_gallery_collection_is_a_manifest_backed_six_card_mosaic(self):
+        manifest = json.loads((ROOT / "data/content_manifest.json").read_text())
+        gallery_html = (ROOT / "gallery.html").read_text()
+        gallery_items = [item for item in manifest["items"] if "gallery" in item["surfaces"]]
+        grid_match = re.search(
+            r'<!-- static-fallback:start gallery-grid -->(?P<content>.*?)<!-- static-fallback:end gallery-grid -->',
+            gallery_html,
+            re.S,
+        )
+
+        self.assertEqual(len(gallery_items), 6)
+        self.assertEqual(
+            {item["id"] for item in gallery_items},
+            {
+                "pkm-2026-06-07-talk",
+                "sleep-2016-2026",
+                "hermes-agent-hv-analysis",
+                "haba-snow-mountain",
+                "sleep-toolkit",
+                "ai-personal-information-system",
+            },
+        )
+        self.assertIsNotNone(grid_match)
+        self.assertEqual(grid_match.group("content").count('class="project-card gallery-card'), 6)
+        after_grid = gallery_html[grid_match.end():gallery_html.index('<section id="personal-data-lab"')]
+        self.assertNotIn('class="project-card gallery-card', after_grid)
+
+    def test_personal_data_lab_is_a_compact_title_only_curation_rail(self):
+        gallery_html = (ROOT / "gallery.html").read_text()
+        rail_match = re.search(
+            r'<section id="personal-data-lab"[^>]*>(?P<content>.*?)</section>',
+            gallery_html,
+            re.S,
+        )
+
+        self.assertIsNotNone(rail_match)
+        rail = rail_match.group("content")
+        self.assertEqual(rail.count('class="personal-data-reference"'), 3)
+        self.assertNotIn("project-card", rail)
+        self.assertNotIn("project-card-summary", rail)
+        self.assertNotIn("personal-data-path-type", rail)
+        self.assertNotIn("<small", rail)
+
     def test_home_mixed_content_feed_uses_recent_updates_label(self):
         index_html = (ROOT / "index.html").read_text()
         i18n = (ROOT / "src/ts/i18n.ts").read_text()

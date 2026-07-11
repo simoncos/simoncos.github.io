@@ -66,6 +66,7 @@ def type_label(item_type: str) -> str:
         "demo": "Demo",
         "artifact": "Artifact",
         "tool": "Tool",
+        "field_note": "Field note",
     }
     return labels.get(item_type, item_type.replace("_", " ").title() if item_type else "Item")
 
@@ -403,21 +404,19 @@ def render_projects_content(projects_payload: dict) -> str:
 
 def render_gallery_cards(gallery_payload: dict) -> str:
     cards = []
-    anchored_types = set()
-    for index, item in enumerate(sorted(gallery_payload.get("items", []), key=lambda item: item.get("date") or "", reverse=True)):
+    gallery_items = sorted(
+        gallery_payload.get("items", []),
+        key=lambda item: (item.get("galleryOrder", float("inf")), item.get("date") or ""),
+    )
+    for item in gallery_items:
         paths = item.get("paths") or {}
         href = paths.get("en") or paths.get("zh") or "#"
         title = localized(item.get("title"), "en")
+        subtitle = localized(item.get("subtitle"), "en")
+        subtitle_html = f'\n                    <p class="project-card-subtitle">{escape(subtitle)}</p>' if subtitle else ""
         skip_attr = ' data-skip-lang-rewrite="true"' if item.get("skipLangRewrite") else ""
-        card_class = " gallery-card--hero" if index == 0 else " gallery-card--wide" if index == 1 else ""
-        anchor_id = ""
-        item_type = item.get("type")
-        if item_type == "talk" and item_type not in anchored_types:
-            anchor_id = "gallery-talks"
-            anchored_types.add(item_type)
-        elif item_type == "visual_essay" and item_type not in anchored_types:
-            anchor_id = "gallery-visual-essays"
-            anchored_types.add(item_type)
+        card_class = f' {item.get("galleryCardClass", "")}'.rstrip()
+        anchor_id = item.get("sectionId") or ""
         id_attr = f' id="{anchor_id}"' if anchor_id else ""
         cards.append(
             f'''            <article{id_attr} class="project-card gallery-card{card_class}">
@@ -426,8 +425,7 @@ def render_gallery_cards(gallery_payload: dict) -> str:
                 </a>
                 <div class="project-card-body">
                     <div class="project-card-meta"><span class="meta-pill meta-pill--gallery">{escape(type_label(item.get("type", "")))}</span><span>{escape(format_day(item.get("date", ""), short_month=True))}</span></div>
-                    <h3><a href="{escape(href)}"{skip_attr}>{escape(title)}</a></h3>
-                    <p class="project-card-subtitle">{escape(localized(item.get("subtitle"), "en"))}</p>
+                    <h3><a href="{escape(href)}"{skip_attr}>{escape(title)}</a></h3>{subtitle_html}
                     <p class="project-card-summary">{escape(localized(item.get("summary"), "en"))}</p>
                     <a class="read-more" href="{escape(href)}"{skip_attr}>Open item</a>
                 </div>

@@ -5315,6 +5315,116 @@ body.previews-off .essays-index-page .blog-excerpt,
     display: none;
 }
 
+/* Gallery curation stays a compact set of references, not a second card collection. */
+.gallery-board .personal-data-lab--strip {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: minmax(15rem, 1.2fr) repeat(3, minmax(0, 1fr));
+    gap: 0;
+    min-height: 5.8rem;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--editorial-rule);
+    border-radius: 0.42rem;
+    background: rgba(255, 253, 247, 0.48);
+}
+
+.gallery-board .personal-data-lab--strip .personal-data-lab-heading,
+.gallery-board .personal-data-lab--strip .personal-data-reference {
+    display: flex;
+    align-items: center;
+    min-height: 5.8rem;
+    padding: 0.9rem 1.1rem;
+    border-right: 1px solid var(--editorial-rule);
+}
+
+.gallery-board .personal-data-lab--strip .personal-data-lab-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.gallery-board .personal-data-lab--strip .section-kicker {
+    margin: 0;
+    color: var(--editorial-accent);
+    font-size: 0.92rem;
+    letter-spacing: 0.07em;
+    text-transform: none;
+}
+
+.gallery-board .personal-data-lab--strip h2 {
+    display: none;
+}
+
+.gallery-board .personal-data-lab--strip .page-lede {
+    display: block;
+    max-width: 20rem;
+    margin: 0;
+    color: var(--editorial-muted);
+    font-size: 0.76rem;
+    line-height: 1.42;
+}
+
+.gallery-board .personal-data-lab--strip .personal-data-references {
+    display: contents;
+}
+
+.gallery-board .personal-data-lab--strip .personal-data-reference {
+    color: var(--editorial-ink);
+    font-family: var(--editorial-serif);
+    font-size: clamp(1rem, 1.16vw, 1.16rem);
+    line-height: 1.1;
+    text-decoration: none;
+}
+
+.gallery-board .personal-data-lab--strip .personal-data-reference:last-child {
+    border-right: 0;
+}
+
+.gallery-board .personal-data-lab--strip .personal-data-reference:hover {
+    color: var(--editorial-accent);
+    background: color-mix(in srgb, var(--editorial-accent) 5%, transparent);
+}
+
+@media (max-width: 1040px) {
+    .gallery-board .personal-data-lab--strip {
+        grid-template-columns: minmax(0, 1fr) repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery-board .personal-data-lab--strip .personal-data-lab-heading {
+        grid-row: span 2;
+    }
+
+    .gallery-board .personal-data-lab--strip .personal-data-lab-heading,
+    .gallery-board .personal-data-lab--strip .personal-data-reference {
+        min-height: 4.7rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .gallery-board .personal-data-lab--strip {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-board .personal-data-lab--strip .personal-data-lab-heading {
+        grid-row: auto;
+    }
+
+    .gallery-board .personal-data-lab--strip .personal-data-lab-heading,
+    .gallery-board .personal-data-lab--strip .personal-data-reference {
+        min-height: 0;
+        padding: 0.82rem 1rem;
+        border-right: 0;
+        border-bottom: 1px solid var(--editorial-rule);
+    }
+
+    .gallery-board .personal-data-lab--strip .personal-data-reference:last-child {
+        border-bottom: 0;
+    }
+}
+
 @media (max-width: 640px) {
     .about-profile-page .about-identity h2 {
         font-size: clamp(2.02rem, 10.4vw, 2.55rem);
