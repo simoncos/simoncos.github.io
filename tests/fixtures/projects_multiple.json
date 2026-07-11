@@ -5,18 +5,18 @@
       "id": "alpha-project",
       "type": "tool",
       "date": "2026-07-11",
-      "cover": "projects/assets/alpha.svg",
+      "cover": "projects/assets/sleep-toolkit-cover.svg",
       "title": {"en": "Alpha Project", "zh": "Alpha 项目"},
       "subtitle": {"en": "Alpha subtitle", "zh": "Alpha 副标题"},
       "summary": {"en": "Alpha summary.", "zh": "Alpha 摘要。"},
-      "paths": {"en": "projects/alpha.en.html", "zh": "projects/alpha.html"},
+      "paths": {"en": "projects/alpha.en.html?view=full#results", "zh": "projects/alpha.html?view=full#results"},
       "featured": true,
       "status": {"en": "Maintained", "zh": "持续维护"},
       "featuredDetail": {
         "kicker": {"en": "Featured project", "zh": "精选项目"},
         "body": {"en": "Alpha featured detail.", "zh": "Alpha 精选详情。"},
         "media": {
-          "src": "projects/assets/alpha-report.svg",
+          "src": "projects/assets/sleep-2016-2026-cover.svg",
           "alt": {"en": "Alpha report preview", "zh": "Alpha 报告预览"},
           "kicker": {"en": "Alpha report", "zh": "Alpha 报告"},
           "title": {"en": "Report preview", "zh": "报告预览"}
@@ -29,15 +29,17 @@
         {"label": {"en": "Input", "zh": "输入"}, "value": {"en": "Alpha records", "zh": "Alpha 记录"}}
       ],
       "actions": [
-        {"id": "open", "label": {"en": "Open Alpha", "zh": "打开 Alpha"}, "paths": {"en": "projects/alpha.en.html", "zh": "projects/alpha.html"}}
+        {"id": "open", "label": {"en": "Open Alpha", "zh": "打开 Alpha"}, "paths": {"en": "projects/alpha.en.html?view=full#results", "zh": "projects/alpha.html?view=full#results"}}
       ],
-      "surfaces": []
+      "surfaces": [
+        {"label": "A", "title": {"en": "Alpha report", "zh": "Alpha 报告"}, "summary": {"en": "Open Alpha.", "zh": "打开 Alpha。"}, "actionId": "open"}
+      ]
     },
     {
       "id": "beta-project",
       "type": "data_essay",
       "date": "2026-07-10",
-      "cover": "projects/assets/beta.svg",
+      "cover": "projects/assets/sleep-2016-2026-cover.svg",
       "title": {"en": "Beta Project", "zh": "Beta 项目"},
       "subtitle": {"en": "Beta subtitle", "zh": "Beta 副标题"},
       "summary": {"en": "Beta summary.", "zh": "Beta 摘要。"},
@@ -48,18 +50,24 @@
         "kicker": {"en": "Project", "zh": "项目"},
         "body": {"en": "Beta detail.", "zh": "Beta 详情。"},
         "media": {
-          "src": "projects/assets/beta.svg",
+          "src": "projects/assets/sleep-2016-2026-cover.svg",
           "alt": {"en": "Beta preview", "zh": "Beta 预览"},
           "kicker": {"en": "Beta", "zh": "Beta"},
           "title": {"en": "Preview", "zh": "预览"}
         },
-        "metrics": []
+        "metrics": [
+          {"label": {"en": "Entries", "zh": "条目"}, "value": "20"}
+        ]
       },
-      "facts": [],
+      "facts": [
+        {"label": {"en": "Input", "zh": "输入"}, "value": {"en": "Beta records", "zh": "Beta 记录"}}
+      ],
       "actions": [
         {"id": "open", "label": {"en": "Open Beta", "zh": "打开 Beta"}, "paths": {"en": "projects/beta.en.html", "zh": "projects/beta.html"}}
       ],
-      "surfaces": []
+      "surfaces": [
+        {"label": "A", "title": {"en": "Beta essay", "zh": "Beta 随笔"}, "summary": {"en": "Read Beta.", "zh": "阅读 Beta。"}, "actionId": "open"}
+      ]
     }
   ]
 }

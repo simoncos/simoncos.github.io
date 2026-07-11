@@ -9,6 +9,7 @@ import json
 import sys
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,6 +61,171 @@ def parse_date(value: str) -> datetime:
         return datetime.min
 
 
+def non_empty_string(value: object) -> bool:
+    return isinstance(value, str) and bool(value.strip())
+
+
+def validate_localized(value: object, path: str, errors: list[str], *, allow_plain: bool = False) -> None:
+    if allow_plain and non_empty_string(value):
+        return
+    if not isinstance(value, dict) or not all(non_empty_string(value.get(language)) for language in ("en", "zh")):
+        errors.append(f"{path} must contain non-empty en and zh strings")
+
+
+def safe_content_path(value: object) -> bool:
+    if not non_empty_string(value):
+        return False
+    candidate = value.strip()
+    if any(character in candidate for character in ('"', "'", "<", ">", "\r", "\n", "\t")):
+        return False
+    try:
+        parsed = urlsplit(candidate)
+    except ValueError:
+        return False
+    if parsed.scheme:
+        return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
+    return not candidate.startswith("//")
+
+
+def validate_paths(value: object, path: str, errors: list[str]) -> None:
+    if not isinstance(value, dict):
+        errors.append(f"{path} must be an object with en and zh paths")
+        return
+    for language in ("en", "zh"):
+        if not safe_content_path(value.get(language)):
+            errors.append(f"{path}.{language} must be a safe path or HTTP(S) URL")
+
+
+def validate_project_override(override: object, path: str, errors: list[str]) -> None:
+    if not isinstance(override, dict):
+        errors.append(f"{path} must be an object")
+        return
+
+    required_fields = ("status", "featuredDetail", "facts", "actions", "surfaces")
+    for field in required_fields:
+        if field not in override:
+            errors.append(f"{path} is missing {field}")
+
+    unknown_fields = sorted(set(override) - set(SURFACE_OVERRIDE_FIELDS))
+    if unknown_fields:
+        errors.append(f"{path} has unknown fields {unknown_fields}")
+
+    for field in ("title", "subtitle", "summary", "status"):
+        if field in override:
+            validate_localized(override[field], f"{path}.{field}", errors)
+    if "paths" in override:
+        validate_paths(override["paths"], f"{path}.paths", errors)
+
+    detail = override.get("featuredDetail")
+    if not isinstance(detail, dict):
+        if "featuredDetail" in override:
+            errors.append(f"{path}.featuredDetail must be an object")
+    else:
+        for field in ("kicker", "body", "media", "metrics"):
+            if field not in detail:
+                errors.append(f"{path}.featuredDetail is missing {field}")
+        for field in ("kicker", "body"):
+            if field in detail:
+                validate_localized(detail[field], f"{path}.featuredDetail.{field}", errors)
+
+        media = detail.get("media")
+        if isinstance(media, dict):
+            for field in ("src", "alt", "kicker", "title"):
+                if field not in media:
+                    errors.append(f"{path}.featuredDetail.media is missing {field}")
+            if not non_empty_string(media.get("src")):
+                errors.append(f"{path}.featuredDetail.media.src must be a non-empty string")
+            for field in ("alt", "kicker", "title"):
+                if field in media:
+                    validate_localized(media[field], f"{path}.featuredDetail.media.{field}", errors)
+        elif "media" in detail:
+            errors.append(f"{path}.featuredDetail.media must be an object")
+
+        metrics = detail.get("metrics")
+        if not isinstance(metrics, list) or not metrics:
+            if "metrics" in detail:
+                errors.append(f"{path}.featuredDetail.metrics must be a non-empty list")
+        else:
+            for index, metric in enumerate(metrics):
+                metric_path = f"{path}.featuredDetail.metrics[{index}]"
+                if not isinstance(metric, dict):
+                    errors.append(f"{metric_path} must be an object")
+                    continue
+                validate_localized(metric.get("label"), f"{metric_path}.label", errors)
+                validate_localized(metric.get("value"), f"{metric_path}.value", errors, allow_plain=True)
+
+    actions = override.get("actions")
+    action_ids: set[str] = set()
+    duplicate_action_ids = False
+    if not isinstance(actions, list) or not actions:
+        if "actions" in override:
+            errors.append(f"{path}.actions must be a non-empty list")
+    else:
+        for index, action in enumerate(actions):
+            action_path = f"{path}.actions[{index}]"
+            if not isinstance(action, dict):
+                errors.append(f"{action_path} must be an object")
+                continue
+            action_id = action.get("id")
+            if not non_empty_string(action_id):
+                errors.append(f"{action_path}.id must be a non-empty string")
+            elif action_id in action_ids:
+                duplicate_action_ids = True
+            else:
+                action_ids.add(action_id)
+            validate_localized(action.get("label"), f"{action_path}.label", errors)
+            validate_paths(action.get("paths"), f"{action_path}.paths", errors)
+        if duplicate_action_ids:
+            errors.append(f"{path}.action ids must be unique")
+
+    facts = override.get("facts")
+    if not isinstance(facts, list) or not facts:
+        if "facts" in override:
+            errors.append(f"{path}.facts must be a non-empty list")
+    else:
+        for index, fact in enumerate(facts):
+            fact_path = f"{path}.facts[{index}]"
+            if not isinstance(fact, dict):
+                errors.append(f"{fact_path} must be an object")
+                continue
+            validate_localized(fact.get("label"), f"{fact_path}.label", errors)
+            validate_localized(fact.get("value"), f"{fact_path}.value", errors)
+            if "meta" in fact:
+                validate_localized(fact["meta"], f"{fact_path}.meta", errors, allow_plain=True)
+            action_id = fact.get("actionId")
+            if action_id is not None and action_id not in action_ids:
+                errors.append(f"{fact_path} has unknown actionId {action_id!r}")
+
+    project_surfaces = override.get("surfaces")
+    if not isinstance(project_surfaces, list) or not project_surfaces:
+        if "surfaces" in override:
+            errors.append(f"{path}.surfaces must be a non-empty list")
+    else:
+        for index, surface in enumerate(project_surfaces):
+            surface_path = f"{path}.surfaces[{index}]"
+            if not isinstance(surface, dict):
+                errors.append(f"{surface_path} must be an object")
+                continue
+            if not non_empty_string(surface.get("label")):
+                errors.append(f"{surface_path}.label must be a non-empty string")
+            validate_localized(surface.get("title"), f"{surface_path}.title", errors)
+            validate_localized(surface.get("summary"), f"{surface_path}.summary", errors)
+            action_id = surface.get("actionId")
+            if action_id not in action_ids:
+                errors.append(f"{surface_path} has unknown actionId {action_id!r}")
+
+
+def validate_project_projection(project: dict, path: str, errors: list[str]) -> None:
+    for field in ("id", "type", "date", "cover"):
+        if not non_empty_string(project.get(field)):
+            errors.append(f"{path}.{field} must be a non-empty string")
+    for field in ("title", "subtitle", "summary", "status"):
+        validate_localized(project.get(field), f"{path}.{field}", errors)
+    validate_paths(project.get("paths"), f"{path}.paths", errors)
+    if not isinstance(project.get("featured"), bool):
+        errors.append(f"{path}.featured must be a boolean")
+
+
 def validate_manifest(manifest: dict) -> list[str]:
     errors: list[str] = []
     seen_ids: set[str] = set()
@@ -99,6 +265,20 @@ def validate_manifest(manifest: dict) -> list[str]:
                         errors.append(
                             f"data/content_manifest.json: {label} surfaceOverrides.{override_surface} must be an object"
                         )
+
+        if isinstance(surfaces, list) and "projects" in surfaces:
+            projects_override = surface_overrides.get("projects") if isinstance(surface_overrides, dict) else None
+            validate_project_override(
+                projects_override,
+                f"data/content_manifest.json: {label} surfaceOverrides.projects",
+                errors,
+            )
+            if isinstance(projects_override, dict):
+                validate_project_projection(
+                    project_item(item, "projects"),
+                    f"data/content_manifest.json: {label} project",
+                    errors,
+                )
 
         for field in ("type", "date", "title", "subtitle", "summary", "paths"):
             if field not in item:
