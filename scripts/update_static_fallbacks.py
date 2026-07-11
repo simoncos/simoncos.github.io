@@ -144,6 +144,8 @@ def project_posts(projects_payload: dict) -> list[dict]:
 def gallery_posts(gallery_payload: dict) -> list[dict]:
     posts = []
     for item in gallery_payload.get("items", []):
+        if "home" not in (item.get("surfaceMembership") or []):
+            continue
         paths = item.get("paths") or {}
         href = paths.get("en") or paths.get("zh") or "#"
         primary_title = localized(item.get("title"), "en")

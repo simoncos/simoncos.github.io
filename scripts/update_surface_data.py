@@ -343,6 +343,9 @@ def project_item(item: dict, surface: str) -> dict:
         if field in item:
             projected[field] = copy.deepcopy(item[field])
 
+    if surface == "gallery":
+        projected["surfaceMembership"] = copy.deepcopy(item.get("surfaces") or [])
+
     surface_overrides = item.get("surfaceOverrides") or {}
     allowed_override_fields = PROJECTS_OVERRIDE_FIELDS if surface == "projects" else SURFACE_OVERRIDE_FIELDS
     for field, value in (surface_overrides.get(surface) or {}).items():

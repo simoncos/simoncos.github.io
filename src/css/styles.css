@@ -5044,7 +5044,6 @@ body.previews-off .essays-index-page .blog-excerpt,
 
 .gallery-board .personal-data-lab--strip {
     grid-column: 1 / -1;
-    grid-row: 3;
     display: grid;
     grid-template-columns: minmax(18rem, 1.05fr) repeat(3, minmax(0, 1fr)) minmax(12rem, 0.8fr);
     gap: 0;
@@ -5318,7 +5317,6 @@ body.previews-off .essays-index-page .blog-excerpt,
 /* Gallery curation stays a compact set of references, not a second card collection. */
 .gallery-board .personal-data-lab--strip {
     grid-column: 1 / -1;
-    grid-row: 3;
     display: grid;
     grid-template-columns: minmax(15rem, 1.2fr) repeat(3, minmax(0, 1fr));
     gap: 0;
