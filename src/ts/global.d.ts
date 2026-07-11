@@ -5,6 +5,7 @@ interface SiteConfig {
     ownerName?: string;
     siteTitle?: string;
     siteVersion?: string;
+    assetVersion?: string;
     basePath?: string;
     resolvePath?: (relativePath: string) => string;
 }

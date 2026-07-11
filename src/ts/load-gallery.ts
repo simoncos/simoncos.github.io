@@ -9,6 +9,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const resolvePath = typeof siteConfig.resolvePath === 'function'
         ? siteConfig.resolvePath.bind(siteConfig)
         : (relativePath) => relativePath;
+    const resolveVersionedPath = (relativePath: string) => {
+        const resolvedPath = resolvePath(relativePath);
+        const assetVersion = siteConfig.assetVersion || '';
+
+        if (!assetVersion) {
+            return resolvedPath;
+        }
+
+        const separator = resolvedPath.includes('?') ? '&' : '?';
+        return `${resolvedPath}${separator}v=${encodeURIComponent(assetVersion)}`;
+    };
 
     function escapeHtml(text) {
         return String(text)
@@ -72,15 +83,27 @@ document.addEventListener('DOMContentLoaded', function () {
             return db - da;
         });
 
-        gallery.innerHTML = sorted.map((item) => {
+        const anchoredTypes = new Set<string>();
+
+        gallery.innerHTML = sorted.map((item, index) => {
             const title = getLocalizedValue(item.title, language);
             const subtitle = getLocalizedValue(item.subtitle, language);
             const summary = getLocalizedValue(item.summary, language);
             const href = getLocalizedPath(item, language);
             const label = typeLabel(item.type);
+            const cardClass = index === 0 ? ' gallery-card--hero' : index === 1 ? ' gallery-card--wide' : '';
+            let anchorId = '';
+
+            if (item.type === 'talk' && !anchoredTypes.has('talk')) {
+                anchorId = 'gallery-talks';
+                anchoredTypes.add('talk');
+            } else if (item.type === 'visual_essay' && !anchoredTypes.has('visual_essay')) {
+                anchorId = 'gallery-visual-essays';
+                anchoredTypes.add('visual_essay');
+            }
 
             return `
-                <article class="project-card gallery-card">
+                <article${anchorId ? ` id="${escapeHtml(anchorId)}"` : ''} class="project-card gallery-card${cardClass}">
                     <a class="project-card-media" href="${escapeHtml(href)}" data-skip-lang-rewrite="${item.skipLangRewrite ? 'true' : 'false'}">
                         <img src="${escapeHtml(item.cover || '')}" alt="${escapeHtml(title)} cover" loading="lazy" decoding="async">
                     </a>
@@ -104,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     gallery.innerHTML = `<p>${escapeHtml(t('loading_gallery_items'))}</p>`;
-    fetch(resolvePath('data/gallery_data.json'))
+    fetch(resolveVersionedPath('data/gallery_data.json'))
         .then((response) => {
             if (!response.ok) {
                 throw new Error(`gallery_data ${response.status}`);
@@ -118,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     window.addEventListener('site-language-change', function () {
-        fetch(resolvePath('data/gallery_data.json'))
+        fetch(resolveVersionedPath('data/gallery_data.json'))
             .then((response) => response.ok ? response.json() : { items: [] })
             .then(render)
             .catch(() => {});

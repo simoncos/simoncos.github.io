@@ -5,6 +5,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const resolvePath = typeof siteConfig.resolvePath === 'function'
         ? siteConfig.resolvePath.bind(siteConfig)
         : (relativePath) => `${basePath}${relativePath.replace(/^\//, '')}`;
+    const resolveVersionedPath = (relativePath: string) => {
+        const resolvedPath = resolvePath(relativePath);
+        const assetVersion = siteConfig.assetVersion || '';
+
+        if (!assetVersion) {
+            return resolvedPath;
+        }
+
+        const separator = resolvedPath.includes('?') ? '&' : '?';
+        return `${resolvedPath}${separator}v=${encodeURIComponent(assetVersion)}`;
+    };
     const isBlogPage = window.location.pathname.includes('/blogs/');
     const isProjectPage = window.location.pathname.includes('/projects/');
     const navigationPlaceholder = document.getElementById('navigation-placeholder');
@@ -15,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ? 'index.html'
             : currentPath.split('/').pop();
         const navLinks = document.querySelectorAll<HTMLAnchorElement>('#navigation-placeholder a');
+        let activeLink: HTMLAnchorElement | null = null;
 
         navLinks.forEach(link => {
             const page = link.dataset.page;
@@ -29,10 +41,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 );
             }
 
+            link.classList.remove('active');
+            link.removeAttribute('aria-current');
+
             if ((isBlogPage && page === 'blogs.html') || (isProjectPage && page === 'projects.html') || page === currentPage) {
                 link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+                activeLink = link;
             }
         });
+
+        if (activeLink && window.matchMedia('(max-width: 820px)').matches) {
+            window.requestAnimationFrame(() => {
+                activeLink?.scrollIntoView({
+                    block: 'nearest',
+                    inline: 'nearest',
+                    behavior: 'auto'
+                });
+            });
+        }
     }
 
     function renderFallbackNav() {
@@ -56,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                             <div class="dark-mode-container">
                                 <button id="dark-mode-toggle" class="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
-                                    <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+                                    <span class="theme-toggle-label" aria-hidden="true">Theme</span>
                                 </button>
                             </div>
                         </div>
@@ -79,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    fetch(resolvePath('navigation.html'))
+    fetch(resolveVersionedPath('navigation.html'))
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Failed to load navigation: ${response.status}`);

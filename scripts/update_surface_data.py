@@ -78,6 +78,22 @@ def validate_manifest(manifest: dict) -> list[str]:
             if unknown:
                 errors.append(f"data/content_manifest.json: {label} has unknown surfaces {unknown}")
 
+        surface_overrides = item.get("surfaceOverrides")
+        if surface_overrides is not None:
+            if not isinstance(surface_overrides, dict):
+                errors.append(f"data/content_manifest.json: {label} surfaceOverrides must be an object")
+            else:
+                unknown_override_surfaces = sorted(set(surface_overrides) - {"projects", "gallery", "home"})
+                if unknown_override_surfaces:
+                    errors.append(
+                        f"data/content_manifest.json: {label} has unknown surfaceOverrides {unknown_override_surfaces}"
+                    )
+                for override_surface, override_value in surface_overrides.items():
+                    if not isinstance(override_value, dict):
+                        errors.append(
+                            f"data/content_manifest.json: {label} surfaceOverrides.{override_surface} must be an object"
+                        )
+
         for field in ("type", "date", "title", "subtitle", "summary", "paths"):
             if field not in item:
                 errors.append(f"data/content_manifest.json: {label} is missing {field}")
@@ -88,11 +104,17 @@ def validate_manifest(manifest: dict) -> list[str]:
     return errors
 
 
-def project_item(item: dict) -> dict:
+def project_item(item: dict, surface: str) -> dict:
     projected = {}
     for field in PROJECTED_FIELDS:
         if field in item:
             projected[field] = copy.deepcopy(item[field])
+
+    surface_overrides = item.get("surfaceOverrides") or {}
+    for field, value in (surface_overrides.get(surface) or {}).items():
+        if field in PROJECTED_FIELDS:
+            projected[field] = copy.deepcopy(value)
+
     return projected
 
 
@@ -104,7 +126,7 @@ def latest_date(items: list[dict]) -> str:
 def build_surface_payload(manifest: dict, surface: str) -> dict:
     spec = SURFACE_SPECS[surface]
     items = [
-        project_item(item)
+        project_item(item, surface)
         for item in manifest.get("items", [])
         if surface in (item.get("surfaces") or [])
     ]

@@ -1,48 +1,222 @@
-**Product Design QA - Editorial Route Journal Homepage**
+**Source Visual Truth**
+- Projects selected B: `/Users/simoncbot/.codex/generated_images/019efd42-6abb-7432-a493-3a070cd32a54/ig_0405b795e9ddb5f7016a4524df6be0819b87f98e9a666608d6.png`
+- Essays selected B: `/Users/simoncbot/.codex/generated_images/019efd42-6abb-7432-a493-3a070cd32a54/ig_0405b795e9ddb5f7016a45259c5e10819bb3b16a0e09679ed0.png`
+- Gallery selected option 2: `/Users/simoncbot/.codex/generated_images/019efd42-6abb-7432-a493-3a070cd32a54/ig_0ab759c9578b2840016a452c0539ac819ba03b3c33a3a616b7.png`
+- About selected A: `/Users/simoncbot/.codex/generated_images/019efd42-6abb-7432-a493-3a070cd32a54/ig_0405b795e9ddb5f7016a4526ab0b48819bb6268ea1dfdda715.png`
 
-source visual truth path: `/Users/simoncbot/.codex/generated_images/019efd42-6abb-7432-a493-3a070cd32a54/ig_05fdf17970bf6c67016a3e662189d88199838e5bfd176a2ca7.png`
-implementation screenshot path: `/Users/simoncbot/Documents/simoncos.github.io/docs/product-design-audit-2026-06-25/verification/07-home-route-desktop-full-en.png`
-mobile screenshot path: `/Users/simoncbot/Documents/simoncos.github.io/docs/product-design-audit-2026-06-25/verification/06-home-route-mobile-zh.png`
-viewport: desktop 1440 x 2600, mobile 390 x 1400
-state: local static homepage at `http://127.0.0.1:5199/index.html`, light theme, English desktop and Chinese mobile
-full-view comparison evidence: `/Users/simoncbot/Documents/simoncos.github.io/docs/product-design-audit-2026-06-25/verification/08-route-journal-comparison.png`
-focused region comparison evidence: not separately cropped; the full-view board renders the above-the-fold route map, reading paths, dispatch table, field note, and bottom links at sufficient size for this pass.
+**Implementation Evidence**
+- local URL: `http://127.0.0.1:5199/`
+- desktop Projects: `/private/tmp/simoncos-layout-fix/final-projects.png`
+- desktop Essays: `/private/tmp/simoncos-layout-fix/final-blogs.png`
+- desktop Gallery: `/private/tmp/simoncos-layout-fix/final-gallery.png`
+- desktop About: `/private/tmp/simoncos-layout-fix/final-about.png`
+- mobile Essays: `/private/tmp/simoncos-layout-fix/final-mobile-blogs.png`
+- mobile Gallery: `/private/tmp/simoncos-layout-fix/final-mobile-gallery.png`
+- mobile About: `/private/tmp/simoncos-layout-fix/final-mobile-about.png`
+- dark Projects: `/private/tmp/simoncos-layout-fix/final-dark-projects.png`
+
+**Full-View Comparison Evidence**
+- Projects comparison: `/private/tmp/simoncos-layout-fix/comparison-projects.png`
+- Essays comparison: `/private/tmp/simoncos-layout-fix/comparison-blogs.png`
+- Gallery comparison: `/private/tmp/simoncos-layout-fix/comparison-gallery.png`
+- About comparison: `/private/tmp/simoncos-layout-fix/comparison-about.png`
+
+**Viewport**
+- Desktop light comparison: 1440 x 1024.
+- Mobile layout check: 390 x 844, Chinese UI state.
+- Dark theme check: 1440 x 1024.
+
+**State**
+- Projects route: `body.projects-index-page`
+- Essays route: `body.essays-index-page`
+- Gallery route: `body.gallery-index-page`
+- About route: `body.about-profile-page`
+- CSS and JS cache key: `20260702b`
 
 **Findings**
-
-- No actionable P0/P1/P2 findings remain.
-  Location: Home desktop and mobile.
-  Evidence: the implementation preserves the selected Editorial Route Journal concept: compact publication chrome, large editorial lead, route-based featured nodes, reading lanes, dispatch table, and field-note side rail. Desktop and mobile captures both report `scrollWidth` equal to viewport width.
-  Impact: the local homepage is usable for review at `5199` and no core layout or responsiveness issue blocks handoff.
-  Fix: none required before handoff.
+- P1 fixed: The previous Projects implementation used a large page title, right-side facts, and a separate project-index card pattern. It now follows the selected ledger mock: top metadata rail, project hero, wide report preview, horizontal fact rows, and project surface rows.
+- P1 fixed: The previous Essays implementation inserted a featured-card board that made the archive feel scattered. It now uses the selected archive layout: large title, compact copy, article ledger rows, and a right filter/RSS rail. Runtime archive rendering and static fallback now share the same row structure.
+- P1 fixed: The previous Gallery implementation read as two generic project cards plus a disconnected Personal Data Lab strip. It now uses a single image-led mosaic, tighter filter rail, and a data-lab strip in the same visual system.
+- P1 fixed: The previous About implementation had nested cards and a fragmented work-mode grid. It now reads as a profile sheet with facts, row-based work modes, row-based contact links, and reduced explanatory heading weight.
+- P2 fixed: Header/title collisions on Essays and Gallery were caused by title columns that were too narrow for the display serif. The title grid columns were widened and spacing tightened.
+- P2 fixed: Projects had a cropped report preview and double divider before the fact rows. The image now uses contained rendering and the duplicate rule was removed.
+- P2 fixed: Mobile layouts have no horizontal overflow; nav height is 82px on the 390px Chinese viewport and 83px on tablet; page rows collapse into single-column ledgers.
 
 **Required Fidelity Surfaces**
-
-- Fonts and typography: passed. The implementation uses the existing site sans for shell/navigation and a second serif stack for editorial headings, matching the source direction more closely after the QA patch.
-- Spacing and layout rhythm: passed. The route map, reading paths, dispatch table, and bottom links follow the source hierarchy. The implementation is slightly more compact than the mock but retains the intended editorial-route rhythm.
-- Colors and visual tokens: passed. The warm paper base, ink text, teal/cobalt/forest/rust accents, and low-contrast route texture are represented without reverting to the previous dark panel grid.
-- Image quality and asset fidelity: passed. Visible feature media uses real site assets: Sleep Toolkit cover, HV analysis graphic, system architecture image, and hiking preview. No visible placeholder boxes are left.
-- Copy and content: passed. Required homepage content, bilingual state, feature entries, reading paths, and latest dispatches are present.
+- Fonts and typography: serif display hierarchy and sans uppercase labels now match the selected editorial direction more closely; large explanatory headings on About were removed.
+- Spacing and layout rhythm: four pages now share one ledger/page-frame system with consistent 1240px desktop frame, section rules, row rhythm, and reduced card nesting.
+- Colors and visual tokens: light and dark routes use existing editorial paper/ink/accent/rule tokens; dark Projects screenshot shows no light-background residue.
+- Image quality and asset fidelity: implementation uses existing project/gallery SVG assets. Gallery remains constrained by the current two real gallery records rather than the six-item mock.
+- Copy and content: page intros were removed or compressed; remaining text is aligned with existing site content and i18n keys.
 
 **Patches Made Since Previous QA Pass**
+- Replaced Projects page structure with `ledger-topline`, `project-ledger-hero`, `project-ledger-facts`, and `project-surfaces-ledger`.
+- Replaced Essays listing template with archive top, archive layout, and right rail; updated `scripts/update_static_fallbacks.py` and `src/ts/load-blog-archive.ts` to output row-based article previews.
+- Reworked Gallery into `gallery-archive-top` plus `gallery-showcase`, keeping generated gallery fallback intact.
+- Reworked About into profile/facts/modes/contact/principles ledger sections, removing card-heavy nested panels.
+- Added consolidation CSS for shared selected-page frame, desktop/mobile ledger rows, dark-state overrides, and tighter Gallery/About/Essays typography.
+- Added i18n keys for new filter/preview/principle labels.
+- Bumped shared shell cache key to `20260702b` and regenerated shell/blog/fallback outputs.
 
-- Reduced the route-journal desktop brand weight so the first viewport is closer to the source mock.
-- Added a serif editorial type layer for hero, reading, dispatch, and field-note headings.
-- Fixed mobile route-heading wrapping and confirmed mobile `scrollWidth` remains 390px.
+**Follow-Up Polish**
+- P3: Gallery can better match the six-card source mock once more real image-led artifacts exist. Current implementation keeps the content honest and uses two real records.
+- P3: Projects report preview uses the existing sleep-cover asset, so chart details differ from the mock. Replacing it with a dedicated report-chart asset would improve fidelity.
 
-**Follow-up Polish**
+**Verification**
+- `npm run build:ts`
+- `npm run check:ts`
+- `jq empty agent-index.json data/home_surface.json data/site_shell.json data/content_manifest.json data/gallery_data.json data/projects_data.json`
+- `python3 scripts/check_site.py`
+- `python3 scripts/update_site_shell.py --check`
+- `python3 scripts/update_static_fallbacks.py --check`
+- `python3 scripts/update_surface_data.py --check`
+- `python3 scripts/check_blog_generation.py`
+- `find src/js -name '*.js' -print0 | xargs -0 -n 1 node --check`
+- `git diff --check`
 
-- P3: A later iteration could place the nav on the same horizontal line as the brand, as in the mock, if we want an even tighter masthead.
-- P3: The dispatch table could gain a more deliberate date/action column treatment after reviewing real content density.
+**MoA Visual QA Follow-Up - 2026-07-02**
 
-final result: passed
+Scope:
+- MoA review after the selected Projects B, Essays B, Gallery option 2, and About A implementation.
+- Focused on layout coherence, responsive density, theme switching, navigation semantics, and static-vs-generated drift.
 
-**Latest Visual QA Follow-up - 2026-06-26**
+After-fix evidence:
+- desktop Projects: `/private/tmp/simoncos-moa-visual-qa-after/desktop-projects.png`
+- desktop Essays: `/private/tmp/simoncos-moa-visual-qa-after/desktop-blogs.png`
+- desktop Gallery: `/private/tmp/simoncos-moa-visual-qa-after/desktop-gallery.png`
+- desktop About: `/private/tmp/simoncos-moa-visual-qa-after/desktop-about.png`
+- tablet Gallery: `/private/tmp/simoncos-moa-visual-qa-after/tablet-gallery.png`
+- mobile Projects: `/private/tmp/simoncos-moa-visual-qa-after/mobile-zh-projects.png`
+- mobile Essays: `/private/tmp/simoncos-moa-visual-qa-after/mobile-zh-blogs.png`
+- mobile Gallery: `/private/tmp/simoncos-moa-visual-qa-after/mobile-zh-gallery.png`
+- mobile About: `/private/tmp/simoncos-moa-visual-qa-after/mobile-zh-about.png`
+- dark Gallery: `/private/tmp/simoncos-moa-visual-qa-after/dark-gallery.png`
 
-The previous `final result: passed` applies to the first Editorial Route Journal build captured in the comparison board above.
+Decision updates:
+- Accepted: Projects no longer duplicates the top action, and connected-artifact count now matches the visible inventory.
+- Accepted: Essays metadata now says Essays instead of Blog Posts; archive rows are denser with shorter excerpts.
+- Accepted: Gallery filter labels are real section anchors, not static faux controls; desktop first viewport now exposes the Personal Data Lab strip.
+- Accepted: About mobile facts collapse cleanly, and the name divider no longer creates a stray mobile line.
+- Accepted: Primary nav active state now sets `aria-current="page"` and scrolls the active item into view on narrow viewports.
+- Accepted: Navigation fetch is versioned with the asset key, preventing stale `navigation.html` from preserving old theme markup.
+- Accepted: Theme toggle now self-heals its hidden label and renders icon-only system/light/dark states; dark mode background and text colors switch correctly.
 
-After user review, the layout was judged too visually messy. A targeted CSS tuning pass was applied to replace the scattered absolute-positioned route-node map with a bounded desktop grid, reduce foreground route decoration, standardize feature card media, and reset mobile feature cards to a true single-column stack.
+Runtime metrics:
+- Desktop viewport: 1440 x 1024; tablet viewport: 768 x 1024; mobile viewport: 390 x 844.
+- All checked pages report `overflowX=0`.
+- Active nav links are visible in every checked viewport and report `aria-current=page`.
+- Light theme uses `rgb(251, 247, 238)` page background; dark Gallery uses `rgb(16, 23, 36)` background and `rgb(237, 243, 255)` body text.
+- Gallery desktop: first card bottom `891`, Personal Data Lab top `905` in a 1024px viewport, so the next section is visibly present.
 
-Follow-up evidence note: after-fix Chrome screenshots could not be captured in this turn because escalated local Chrome rendering hit the current usage limit. See `/Users/simoncbot/Documents/simoncos.github.io/docs/product-design-audit-2026-06-25/visual-qa-2026-06-26/acceptance.md`.
+Verification delta:
+- `npm run build:ts`
+- `npm run check:ts`
+- `jq empty agent-index.json data/home_surface.json data/site_shell.json data/content_manifest.json`
+- `python3 scripts/check_site.py`
+- `python3 scripts/update_site_shell.py --check`
+- `python3 scripts/update_static_fallbacks.py --check`
+- `python3 scripts/update_surface_data.py --check`
+- `python3 scripts/check_blog_generation.py`
+- `find src/js -name '*.js' -exec node --check {} \;`
+- `git diff --check`
 
-latest visual qa result: targeted tuning applied; after-screenshot verification pending
+**final result: passed**
+
+**MoA Visual QA Follow-Up - 2026-07-02 Gallery second pass**
+
+Scope:
+- Second MoA review after Gallery was still visually far from the selected option 2 direction.
+- Focused on Gallery asset fidelity, board density, Personal Data Lab treatment, mobile filter behavior, About mobile title, and theme stability.
+
+Agent findings:
+- P1: Gallery card imagery still read as generic implementation assets rather than the visual-board reference.
+- P1: Personal Data Lab was too sparse and disconnected from the board.
+- P2: Desktop Gallery let the footer/version area intrude too early and weakened the mock's full-board impression.
+- P2: Mobile Gallery filters wrapped awkwardly; About mobile title needed tighter handling.
+- P2: Dark mode needed another media/marker check after Gallery asset changes.
+
+Fixes:
+- Replaced the Gallery board imagery with cropped mock-aligned runtime assets for the talk, sleep records, Hermes/HV, Haba, toolkit, and system-map cards.
+- Added versioned Gallery data fetching so `data/gallery_data.json` cannot preserve stale cover art.
+- Widened the Gallery frame to `1340px`, tightened the board, moved the footer below the first desktop viewport, and hid the build hash from the page footer.
+- Converted the mobile Gallery filter into a single-line horizontal scroller with no page-level overflow.
+- Reworked Personal Data Lab into denser metric cells with pure-CSS markers that render correctly in light and dark modes.
+- Kept the compact About mobile title treatment from the first MoA fix.
+
+Final evidence:
+- desktop Gallery light: `/private/tmp/simoncos-moa-visual-qa-20260702-final/desktop-gallery-headless-v2.png`
+- mobile Gallery light: `/private/tmp/simoncos-moa-visual-qa-20260702-final/mobile-gallery-headless-v2.png`
+- desktop Gallery dark: `/private/tmp/simoncos-moa-visual-qa-20260702-final/dark-gallery-headless-v2.png`
+- mobile About: `/private/tmp/simoncos-moa-visual-qa-20260702-final/mobile-about-headless.png`
+
+Runtime metrics:
+- Desktop Gallery 1440 x 1024: `cardCount=6`, `overflowX=0`, hero `217/505`, Personal Data Lab `804/882`, footer starts at `1010`, `siteVersionDisplay=none`.
+- Mobile Gallery 390 x 844: `cardCount=6`, `overflowX=0`, filter is a deliberate horizontal scroller (`331px` viewport, `422px` content), hero `330/626`.
+- Mobile About 390 x 844: `overflowX=0`, overflowing element list empty.
+- Dark Gallery 1440 x 1024: `overflowX=0`, body background `rgb(16, 23, 36)`, body text `rgb(237, 243, 255)`, `darkClass=true`.
+
+Remaining P3:
+- The mobile filter rail is intentionally horizontally scrollable because all Gallery sections remain exposed as real anchors.
+- The Haba card is now image-led and closer to the mock, but still uses an available generated route/field composite rather than a fully bespoke map interaction.
+
+**final result: passed**
+
+**Gallery Fidelity Follow-Up - 2026-07-02**
+
+Scope:
+- Targeted Gallery page image-to-code pass after user reported that Gallery still differed materially from the selected visual direction.
+- Baseline visual source: `/Users/simoncbot/.codex/generated_images/019efd42-6abb-7432-a493-3a070cd32a54/ig_0ab759c9578b2840016a452c0539ac819ba03b3c33a3a616b7.png`.
+
+Evidence:
+- final desktop Gallery: `/private/tmp/simoncos-gallery-fidelity/gallery-desktop-1440x1024-final.png`
+- final mobile Gallery: `/private/tmp/simoncos-gallery-fidelity/gallery-mobile-390x844-final.png`
+- final side-by-side comparison: `/private/tmp/simoncos-gallery-fidelity/gallery-reference-vs-implementation-final.png`
+- generated runtime asset: `gallery/assets/gallery-hero-network.png`
+
+Decision updates:
+- Accepted: Gallery now renders as a six-card visual board with a full-width Personal Data Lab strip, instead of two dynamic cards plus disconnected secondary content.
+- Accepted: Desktop header/nav rhythm is compact enough for the selected Gallery mock; Gallery title, lede, and filters sit in one horizontal band.
+- Accepted: Runtime data and static fallback both use the same talk cover asset, avoiding old dynamic-data drift.
+- Accepted: Haba field note now uses a mountain/field image instead of the previous shoe close-up.
+- Accepted: Mobile Gallery collapses to a single column without horizontal overflow; top filter and active nav are visible without clipped labels.
+- Accepted: Hero image no longer contains visible text residue behind the editable card title.
+
+Runtime metrics:
+- Desktop 1440 x 1024: `cardCount=6`, `overflowX=0`, hero top/bottom `217/505`, Personal Data Lab top/bottom `804/882`.
+- Mobile 390 x 844: `cardCount=6`, `overflowX=0`, card width `351`, active Gallery nav visible, first Home nav label visible.
+
+Remaining P3:
+- The selected mock's Haba card includes a route-map composite; the runtime uses an available real field image instead of inventing a map asset.
+- The runtime page footer appears in the bottom of the 1024px viewport because the implemented content is real and slightly denser than the mock.
+
+**final result: passed**
+
+**Image Gen Gallery Refinement - 2026-07-02**
+
+Scope:
+- Implemented the latest Image Gen Gallery direction as the runtime target.
+- Baseline visual source: `/Users/simoncbot/.codex/generated_images/019efd42-6abb-7432-a493-3a070cd32a54/ig_0e2921ad63fa0b41016a466df970dc8193a55dc4c453692146.png`.
+
+Fixes:
+- Rebuilt the Gallery desktop board around a tall left hero, compact filter rail, editorial card grid, and integrated Personal Data Lab strip.
+- Shortened Gallery and Personal Data Lab copy so the page reads as a visual archive rather than a text-heavy intro.
+- Cropped transformed media inside card frames to prevent Haba and hero asset text residue from bleeding into card body text.
+- Changed mobile Gallery filters from a clipped horizontal rail to a compact two-line wrap.
+- Tightened Gallery mobile nav so all labels are visible at 390px.
+- Preserved existing language/theme controls instead of adding the mock's nonfunctional search icon.
+
+Final evidence:
+- desktop Gallery light: `/private/tmp/simoncos-gallery-imagegen-refinement/gallery-light-desktop-1440x1024-final.png`
+- mobile Gallery light: `/private/tmp/simoncos-gallery-imagegen-refinement/gallery-light-mobile-390x844-final.png`
+- desktop Gallery dark: `/private/tmp/simoncos-gallery-imagegen-refinement/gallery-dark-desktop-1440x1024-final.png`
+
+Runtime metrics:
+- Desktop Gallery 1440 x 1024: `cardCount=6`, `overflowX=0`, theme `light`, hero `325/866`, Personal Data Lab `881/1030`.
+- Mobile Gallery 390 x 844: `cardCount=6`, `overflowX=0`, filters wrap to `331px` without scroll, theme `light`, hero `382/678`.
+- Dark Gallery 1440 x 1024: `overflowX=0`, theme `dark`, body background `rgb(16, 23, 36)`, body text `rgb(237, 243, 255)`.
+
+Remaining P3:
+- Desktop Personal Data Lab intentionally starts inside the first 1024px viewport and extends a few pixels below the fold because the implemented page keeps real nav and footer spacing.
+- Some card imagery remains generated/static rather than bespoke per-card illustrations; all visible text duplication and clipping issues from the latest pass were removed.
+
+**final result: passed**

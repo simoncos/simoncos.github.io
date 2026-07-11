@@ -5,7 +5,7 @@
       "id": "pkm-2026-06-07-talk",
       "type": "talk",
       "date": "2026-06-07",
-      "cover": "gallery/assets/pkm-2026-05-22-cover.svg",
+      "cover": "gallery/assets/gallery-hero-network.png",
       "title": {
         "zh": "AI 时代的个人信息系统",
         "en": "Personal Information Systems in the AI Era"
@@ -29,18 +29,18 @@
       "id": "sleep-2016-2026",
       "type": "visual_essay",
       "date": "2026-04-23",
-      "cover": "gallery/assets/sleep-2016-2026-cover.svg",
+      "cover": "gallery/assets/gallery-card-sleep-records.png",
       "title": {
-        "zh": "十年睡眠档案：数据分析",
-        "en": "Ten Years of Sleep Records, Analyzed"
+        "zh": "十年睡眠记录：视觉随笔",
+        "en": "Ten Years of Sleep Records"
       },
       "subtitle": {
-        "zh": "一份私人数据自述",
-        "en": "A Personal Data Essay"
+        "zh": "私人数据视觉随笔",
+        "en": "A personal data visual essay"
       },
       "summary": {
-        "zh": "基于 3,656 个夜晚的 SleepCycle 记录，回看十年的睡眠、身体与生活变化。",
-        "en": "A ten-year SleepCycle-based project built from 3,656 nights of personal sleep records."
+        "zh": "把长期睡眠记录整理成一篇关于节律、身体和生活变化的视觉随笔。",
+        "en": "A visual essay that turns long-term sleep records into a story about rhythm, body, and life changes."
       },
       "paths": {
         "zh": "projects/sleep-2016-2026.html",
