@@ -44,6 +44,10 @@ PROJECTED_FIELDS = (
 )
 
 SURFACE_OVERRIDE_FIELDS = PROJECTED_FIELDS + ("surfaces",)
+PROJECTS_FORBIDDEN_OVERRIDE_FIELDS = ("id", "date")
+PROJECTS_OVERRIDE_FIELDS = tuple(
+    field for field in SURFACE_OVERRIDE_FIELDS if field not in PROJECTS_FORBIDDEN_OVERRIDE_FIELDS
+)
 
 
 def load_json(path: Path) -> dict:
@@ -106,7 +110,13 @@ def validate_project_override(override: object, path: str, errors: list[str]) ->
         if field not in override:
             errors.append(f"{path} is missing {field}")
 
-    unknown_fields = sorted(set(override) - set(SURFACE_OVERRIDE_FIELDS))
+    for field in PROJECTS_FORBIDDEN_OVERRIDE_FIELDS:
+        if field in override:
+            errors.append(f"{path} cannot override {field}")
+
+    unknown_fields = sorted(
+        set(override) - set(PROJECTS_OVERRIDE_FIELDS) - set(PROJECTS_FORBIDDEN_OVERRIDE_FIELDS)
+    )
     if unknown_fields:
         errors.append(f"{path} has unknown fields {unknown_fields}")
 
@@ -229,6 +239,7 @@ def validate_project_projection(project: dict, path: str, errors: list[str]) -> 
 def validate_manifest(manifest: dict) -> list[str]:
     errors: list[str] = []
     seen_ids: set[str] = set()
+    projected_project_ids: set[str] = set()
     items = manifest.get("items")
     if not isinstance(items, list):
         return ["data/content_manifest.json: items must be a list"]
@@ -274,11 +285,21 @@ def validate_manifest(manifest: dict) -> list[str]:
                 errors,
             )
             if isinstance(projects_override, dict):
+                projected_project = project_item(item, "projects")
                 validate_project_projection(
-                    project_item(item, "projects"),
+                    projected_project,
                     f"data/content_manifest.json: {label} project",
                     errors,
                 )
+                projected_id = projected_project.get("id")
+            else:
+                projected_id = item.get("id")
+
+            if non_empty_string(projected_id):
+                if projected_id in projected_project_ids:
+                    errors.append(f"data/content_manifest.json: duplicate projected Projects id {projected_id}")
+                else:
+                    projected_project_ids.add(projected_id)
 
         for field in ("type", "date", "title", "subtitle", "summary", "paths"):
             if field not in item:
@@ -297,8 +318,9 @@ def project_item(item: dict, surface: str) -> dict:
             projected[field] = copy.deepcopy(item[field])
 
     surface_overrides = item.get("surfaceOverrides") or {}
+    allowed_override_fields = PROJECTS_OVERRIDE_FIELDS if surface == "projects" else SURFACE_OVERRIDE_FIELDS
     for field, value in (surface_overrides.get(surface) or {}).items():
-        if field in SURFACE_OVERRIDE_FIELDS:
+        if field in allowed_override_fields:
             projected[field] = copy.deepcopy(value)
 
     return projected

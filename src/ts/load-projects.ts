@@ -194,11 +194,17 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!isNonEmptyString(payload.last_updated)) {
             return 'last_updated must be a non-empty string';
         }
+        const projectIds = new Set();
         for (let index = 0; index < payload.projects.length; index += 1) {
             const error = validateProject(payload.projects[index], index);
             if (error) {
                 return error;
             }
+            const projectId = payload.projects[index].id;
+            if (projectIds.has(projectId)) {
+                return 'project ids must be unique';
+            }
+            projectIds.add(projectId);
         }
         return '';
     }
