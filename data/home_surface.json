@@ -140,7 +140,8 @@
           "en": "HV analysis network preview",
           "zh": "横纵分析网络预览"
         },
-        "href": "gallery/research/hermes-agent-hv-analysis.html"
+        "href": "gallery/research/hermes-agent-hv-analysis.html",
+        "skipLangRewrite": true
       },
       {
         "label": {
@@ -189,7 +190,10 @@
           "en": "Hiking planning map preview",
           "zh": "徒步规划地图预览"
         },
-        "href": "blogs/my-haba-snow-mountain-journey.en.html"
+        "paths": {
+          "en": "blogs/my-haba-snow-mountain-journey.en.html",
+          "zh": "blogs/my-haba-snow-mountain-journey.html"
+        }
       }
     ]
   },
@@ -224,7 +228,10 @@
           "en": "Notes and essays on how systems behave and how I think about them.",
           "zh": "关于系统如何运转，以及我如何理解它们的笔记和文章。"
         },
-        "href": "blogs/my-personal-knowledge-management-system-2026-03.en.html"
+        "paths": {
+          "en": "blogs/my-personal-knowledge-management-system-2026-03.en.html",
+          "zh": "blogs/my-personal-knowledge-management-system-2026-03.html"
+        }
       },
       {
         "pill": {
@@ -239,7 +246,10 @@
           "en": "Field notes on travel, training, and decisions in the real world.",
           "zh": "关于旅行、训练和现实决策的现场记录。"
         },
-        "href": "projects/sleep-2016-2026.en.html"
+        "paths": {
+          "en": "projects/sleep-2016-2026.en.html",
+          "zh": "projects/sleep-2016-2026.html"
+        }
       },
       {
         "pill": {
@@ -254,7 +264,10 @@
           "en": "Outdoor notes, risk, and body feedback from outside the screen.",
           "zh": "户外记录、风险和屏幕之外的身体反馈。"
         },
-        "href": "blogs/my-haba-snow-mountain-journey.en.html"
+        "paths": {
+          "en": "blogs/my-haba-snow-mountain-journey.en.html",
+          "zh": "blogs/my-haba-snow-mountain-journey.html"
+        }
       }
     ]
   }

@@ -28,16 +28,24 @@ class SurfaceContractTests(unittest.TestCase):
     def test_home_links_have_localized_paths_for_bilingual_internal_targets(self):
         surface = json.loads((ROOT / "data/home_surface.json").read_text())
         renderer = (ROOT / "src/ts/load-home-surface.ts").read_text()
+        index_html = (ROOT / "index.html").read_text()
 
         content_items = surface["surface"]["items"] + surface["trails"]["items"]
         invalid_items = []
         for item in content_items:
             href = item.get("href", "")
-            if not href or href.startswith(("#", "http:", "https:")) or item.get("skipLangRewrite"):
+            if item.get("skipLangRewrite") or href.startswith(("#", "http:", "https:")):
                 continue
             paths = item.get("paths")
-            if not isinstance(paths, dict) or not {"en", "zh"}.issubset(paths) or href.endswith(".en.html"):
-                invalid_items.append(href)
+            valid_paths = (
+                isinstance(paths, dict)
+                and {"en", "zh"}.issubset(paths)
+                and all(isinstance(paths[language], str) and paths[language] for language in ("en", "zh"))
+            )
+            if not valid_paths or href.endswith(".en.html"):
+                invalid_items.append(href or item.get("title", {}).get("en", "<missing href>"))
+                continue
+            self.assertIn(f'href="{paths["en"]}"', index_html)
         self.assertFalse(invalid_items, f"invalid bilingual home links: {invalid_items}")
 
         self.assertIn("item.paths", renderer)
@@ -60,7 +68,9 @@ class SurfaceContractTests(unittest.TestCase):
         gallery_html = (ROOT / "gallery.html").read_text()
         i18n = (ROOT / "src/ts/i18n.ts").read_text()
 
+        self.assertRegex(gallery_html, r'<nav\b[^>]*class="gallery-section-index"')
         self.assertIn('aria-label="Gallery sections"', gallery_html)
+        self.assertIn('data-i18n-aria-label="gallery_sections_label"', gallery_html)
         self.assertNotIn("gallery-filter-tabs", gallery_html)
         self.assertIn('data-i18n="gallery_section_index"', gallery_html)
         self.assertIn('data-i18n="gallery_overview"', gallery_html)
@@ -72,20 +82,28 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertNotRegex(all_link.group(0), r'class="[^"]*\bactive\b"')
         self.assertNotIn("aria-current", all_link.group(0))
         self.assertIn("gallery_section_index", i18n)
+        self.assertIn("gallery_sections_label", i18n)
         self.assertIn("gallery_overview", i18n)
         self.assertRegex(i18n, r"gallery_section_index\s*:\s*['\"]Section index['\"]")
         self.assertRegex(i18n, r"gallery_overview\s*:\s*['\"]Overview['\"]")
         self.assertRegex(i18n, r"gallery_section_index\s*:\s*['\"]章节索引['\"]")
         self.assertRegex(i18n, r"gallery_overview\s*:\s*['\"]概览['\"]")
+        self.assertRegex(i18n, r"gallery_sections_label\s*:\s*['\"]Gallery sections['\"]")
+        self.assertRegex(i18n, r"gallery_sections_label\s*:\s*['\"]作品章节索引['\"]")
 
     def test_home_mixed_content_feed_uses_recent_updates_label(self):
         index_html = (ROOT / "index.html").read_text()
         i18n = (ROOT / "src/ts/i18n.ts").read_text()
 
         self.assertIn('data-i18n="recent_updates"', index_html)
+        self.assertIn('data-i18n="latest_activity"', index_html)
         self.assertNotIn('data-i18n="recent_writing"', index_html)
         self.assertRegex(i18n, r"recent_updates\s*:\s*['\"]Recent updates['\"]")
         self.assertRegex(i18n, r"recent_updates\s*:\s*['\"]最近更新['\"]")
+        self.assertRegex(i18n, r"latest_activity\s*:\s*['\"]Latest activity['\"]")
+        self.assertRegex(i18n, r"latest_activity\s*:\s*['\"]最新动态['\"]")
+        self.assertRegex(i18n, r"home_dispatch_all\s*:\s*['\"]Browse all writing['\"]")
+        self.assertRegex(i18n, r"home_dispatch_all\s*:\s*['\"]浏览全部文章['\"]")
 
 
 if __name__ == "__main__":

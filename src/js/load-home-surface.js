@@ -52,7 +52,11 @@
             });
         }
         function resolveHref(item, language) {
-            const href = getLocalizedValue(item.href, language) || item.href || '#';
+            const paths = item.paths && typeof item.paths === 'object' ? item.paths : null;
+            const href = (paths && (paths[language] || paths.en || paths.zh))
+                || getLocalizedValue(item.href, language)
+                || item.href
+                || '#';
             if (item.skipLangRewrite) {
                 return href;
             }
