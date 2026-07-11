@@ -69,6 +69,44 @@ def declaration_names(body):
     }
 
 
+def split_css_selectors(selector_group):
+    selectors = []
+    start = 0
+    depth = 0
+    for index, character in enumerate(selector_group):
+        if character in "([":
+            depth += 1
+        elif character in ")]":
+            depth -= 1
+        elif character == "," and depth == 0:
+            selectors.append(selector_group[start:index].strip())
+            start = index + 1
+    selectors.append(selector_group[start:].strip())
+    return {selector for selector in selectors if selector}
+
+
+def shared_dark_target(selector):
+    dark_prefix = ":is(body.dark-mode, html.dark-mode body) "
+    if not selector.startswith(dark_prefix):
+        return None
+    target = selector.removeprefix(dark_prefix)
+    shared_targets = {
+        ".site-kicker",
+        ".site-header h1",
+        "nav",
+        "nav ul li a",
+        "nav ul li a:hover",
+        "nav ul li a.active",
+        ".site-language-switch",
+        ".site-language-button",
+        ".site-language-button:hover",
+        ".site-language-button.active",
+        ".theme-toggle",
+        ".theme-toggle:hover",
+    }
+    return target if target in shared_targets else None
+
+
 class SurfaceContractTests(unittest.TestCase):
     def test_shared_shell_properties_have_one_non_media_owner(self):
         css = (ROOT / "src/css/styles.css").read_text()
@@ -95,7 +133,7 @@ class SurfaceContractTests(unittest.TestCase):
         }
         owners = {}
         for selector_group, body in non_media_css_rules(css):
-            selectors = {selector.strip() for selector in selector_group.split(",")}
+            selectors = split_css_selectors(selector_group)
             for selector in selectors & shared_selectors:
                 for property_name in declaration_names(body):
                     owners.setdefault((selector, property_name), []).append(selector_group)
@@ -110,11 +148,40 @@ class SurfaceContractTests(unittest.TestCase):
         before_canonical = css.split("/* Shared site shell */", 1)[0]
         pre_canonical_owners = []
         for selector_group, _ in non_media_css_rules(before_canonical):
-            selectors = {selector.strip() for selector in selector_group.split(",")}
+            selectors = split_css_selectors(selector_group)
             pre_canonical_owners.extend(sorted(selectors & shared_selectors))
         self.assertFalse(
             pre_canonical_owners,
             f"generic shared-shell owners before canonical block: {pre_canonical_owners}",
+        )
+
+    def test_shared_dark_shell_properties_have_one_canonical_owner(self):
+        css = (ROOT / "src/css/styles.css").read_text()
+        owners = {}
+        for selector_group, body in non_media_css_rules(css):
+            for selector in split_css_selectors(selector_group):
+                target = shared_dark_target(selector)
+                if target:
+                    for property_name in declaration_names(body):
+                        owners.setdefault((target, property_name), []).append(selector_group)
+
+        duplicates = {
+            f"{target}::{property_name}": selector_groups
+            for (target, property_name), selector_groups in owners.items()
+            if len(selector_groups) > 1
+        }
+        self.assertFalse(duplicates, f"duplicate non-media dark shared-shell ownership: {duplicates}")
+
+        before_canonical = css.split("/* Shared site shell */", 1)[0]
+        pre_canonical_owners = []
+        for selector_group, _ in non_media_css_rules(before_canonical):
+            for selector in split_css_selectors(selector_group):
+                target = shared_dark_target(selector)
+                if target:
+                    pre_canonical_owners.append(target)
+        self.assertFalse(
+            pre_canonical_owners,
+            f"dark shared-shell owners before canonical block: {pre_canonical_owners}",
         )
 
     def test_design_tokens_have_one_canonical_root_definition(self):

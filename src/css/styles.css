@@ -182,14 +182,6 @@ summary:focus-visible {
     display: none !important;
 }
 
-:is(body.dark-mode, html.dark-mode body) .site-kicker {
-    color: var(--dark-link-color);
-}
-
-:is(body.dark-mode, html.dark-mode body) .site-header h1 {
-    color: var(--dark-text-primary);
-}
-
 .article-page .site-header {
     padding: 1.8rem 1.5rem 0.75rem;
 }
@@ -206,52 +198,6 @@ summary:focus-visible {
 
 .article-page nav {
     margin-bottom: 0.2rem;
-}
-
-:is(body.dark-mode, html.dark-mode body) nav {
-    border-color: var(--dark-border);
-    background: var(--dark-bg-elevated);
-}
-
-:is(body.dark-mode, html.dark-mode body) nav ul li a {
-    color: var(--dark-text-secondary);
-}
-
-:is(body.dark-mode, html.dark-mode body) nav ul li a:hover {
-    color: var(--dark-text-primary);
-    background: rgba(197, 214, 255, 0.08);
-}
-
-:is(body.dark-mode, html.dark-mode body) nav ul li a.active {
-    color: var(--dark-text-primary);
-    background: rgba(124, 226, 255, 0.12);
-    box-shadow: inset 0 0 0 1px rgba(124, 226, 255, 0.14);
-}
-
-:is(body.dark-mode, html.dark-mode body) .site-language-switch {
-    border-color: var(--dark-border);
-    background: var(--dark-surface);
-}
-
-:is(body.dark-mode, html.dark-mode body) .site-language-button {
-    color: var(--dark-text-secondary);
-}
-
-:is(body.dark-mode, html.dark-mode body) .site-language-button:hover,
-:is(body.dark-mode, html.dark-mode body) .site-language-button.active {
-    background: rgba(124, 226, 255, 0.12);
-    color: var(--dark-text-primary);
-}
-
-:is(body.dark-mode, html.dark-mode body) .theme-toggle {
-    border-color: var(--dark-border);
-    background: var(--dark-surface);
-    color: var(--dark-text-primary);
-}
-
-:is(body.dark-mode, html.dark-mode body) .theme-toggle:hover {
-    border-color: var(--dark-border-strong);
-    background: var(--dark-surface-hover);
 }
 
 .container {
@@ -5663,10 +5609,6 @@ body.previews-off .essays-index-page .blog-excerpt,
     background: rgba(255, 253, 247, 0.44);
 }
 
-:is(body.dark-mode, html.dark-mode body) .theme-toggle,
-:is(body.dark-mode, html.dark-mode body) .site-language-button,
-:is(body.dark-mode, html.dark-mode body) nav ul li a,
-:is(body.dark-mode, html.dark-mode body) .site-header h1,
 :is(body.dark-mode, html.dark-mode body) .compact-page-heading h2,
 :is(body.dark-mode, html.dark-mode body) .project-feature-copy h2,
 :is(body.dark-mode, html.dark-mode body) .project-index-panel h2,
@@ -5676,33 +5618,6 @@ body.previews-off .essays-index-page .blog-excerpt,
 :is(body.dark-mode, html.dark-mode body) .about-identity h2,
 :is(body.dark-mode, html.dark-mode body) .about-ledger .about-motto strong {
     color: var(--editorial-ink);
-}
-
-:is(body.dark-mode, html.dark-mode body) nav {
-    border-color: var(--editorial-rule);
-    background: transparent;
-}
-
-:is(body.dark-mode, html.dark-mode body) nav ul li a:hover,
-:is(body.dark-mode, html.dark-mode body) nav ul li a.active {
-    background: transparent;
-    color: var(--editorial-accent);
-    box-shadow: inset 0 -2px 0 var(--editorial-accent);
-}
-
-:is(body.dark-mode, html.dark-mode body) .site-language-switch {
-    border-color: transparent;
-    background: transparent;
-}
-
-:is(body.dark-mode, html.dark-mode body) .site-language-button:hover,
-:is(body.dark-mode, html.dark-mode body) .site-language-button.active {
-    background: transparent;
-    color: var(--editorial-accent);
-}
-
-:is(body.dark-mode, html.dark-mode body) .theme-toggle {
-    background: transparent;
 }
 
 :is(body.dark-mode, html.dark-mode body) .compact-page-note,
@@ -8407,6 +8322,51 @@ nav ul li a.active::after {
         -0.32rem -0.32rem 0 -0.24rem currentColor,
         0.32rem -0.32rem 0 -0.24rem currentColor,
         -0.32rem 0.32rem 0 -0.24rem currentColor;
+}
+
+/* Shared site shell: dark mode */
+:is(body.dark-mode, html.dark-mode body) .site-kicker {
+    color: var(--dark-link-color);
+}
+
+:is(body.dark-mode, html.dark-mode body) .site-header h1,
+:is(body.dark-mode, html.dark-mode body) nav ul li a,
+:is(body.dark-mode, html.dark-mode body) .site-language-button,
+:is(body.dark-mode, html.dark-mode body) .theme-toggle {
+    color: var(--editorial-ink);
+}
+
+:is(body.dark-mode, html.dark-mode body) nav {
+    border-color: var(--editorial-rule);
+    background: transparent;
+}
+
+:is(body.dark-mode, html.dark-mode body) nav ul li a:hover,
+:is(body.dark-mode, html.dark-mode body) nav ul li a.active {
+    background: transparent;
+    color: var(--editorial-accent);
+    box-shadow: inset 0 -2px 0 var(--editorial-accent);
+}
+
+:is(body.dark-mode, html.dark-mode body) .site-language-switch {
+    border-color: transparent;
+    background: transparent;
+}
+
+:is(body.dark-mode, html.dark-mode body) .site-language-button:hover,
+:is(body.dark-mode, html.dark-mode body) .site-language-button.active {
+    background: transparent;
+    color: var(--editorial-accent);
+}
+
+:is(body.dark-mode, html.dark-mode body) .theme-toggle {
+    border-color: var(--dark-border);
+    background: transparent;
+}
+
+:is(body.dark-mode, html.dark-mode body) .theme-toggle:hover {
+    border-color: var(--dark-border-strong);
+    background: var(--dark-surface-hover);
 }
 
 @media (max-width: 899px) {
