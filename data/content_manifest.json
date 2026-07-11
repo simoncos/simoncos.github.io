@@ -30,7 +30,106 @@
         "zh": "https://sleep-toolkit-production.up.railway.app",
         "en": "https://sleep-toolkit-production.up.railway.app"
       },
-      "featured": true
+      "featured": true,
+      "surfaceOverrides": {
+        "projects": {
+          "subtitle": {
+            "zh": "从原始记录到可读报告。",
+            "en": "From raw records to readable reports."
+          },
+          "status": {
+            "zh": "持续维护",
+            "en": "Maintained"
+          },
+          "featuredDetail": {
+            "kicker": {
+              "zh": "精选项目 · 持续维护",
+              "en": "Featured project · maintained"
+            },
+            "body": {
+              "zh": "一个持续维护的工具，把长期 SleepCycle 导出转成结构化 JSON、交互式 HTML 报告和 PDF 输出。默认私有、本地运行，数据所有权留在自己手里。",
+              "en": "A maintained tool that turns long-running SleepCycle exports into structured JSON, interactive HTML reports, and PDF outputs. Private by design, running locally with full data ownership."
+            },
+            "media": {
+              "src": "projects/assets/sleep-2016-2026-cover.svg",
+              "alt": {
+                "zh": "Sleep Toolkit 报告预览",
+                "en": "Sleep Toolkit report preview"
+              },
+              "kicker": {
+                "zh": "睡眠报告 · 2025 年 5 月",
+                "en": "Sleep report · May 2025"
+              },
+              "title": {
+                "zh": "报告预览",
+                "en": "Report preview"
+              }
+            },
+            "metrics": [
+              {
+                "label": {"zh": "夜晚", "en": "Nights"},
+                "value": "3,656"
+              },
+              {
+                "label": {"zh": "年份", "en": "Years"},
+                "value": "10"
+              },
+              {
+                "label": {"zh": "输出", "en": "Outputs"},
+                "value": "JSON · HTML · PDF"
+              }
+            ]
+          },
+          "facts": [
+            {
+              "label": {"zh": "输入", "en": "Input"},
+              "value": {"zh": "SleepCycle CSV 导出，以及长期积累的个人睡眠记录。", "en": "SleepCycle CSV exports and long-running personal sleep records."},
+              "meta": {"zh": "Apple Health 数据 · 10 年", "en": "Apple Health data · 10 years"}
+            },
+            {
+              "label": {"zh": "输出", "en": "Output"},
+              "value": {"zh": "JSON、交互式报告、PDF。", "en": "JSON · interactive report · PDF."},
+              "meta": "JSON · Interactive HTML · PDF"
+            },
+            {
+              "label": {"zh": "关联产物", "en": "Connected artifacts"},
+              "value": {"zh": "十年睡眠视觉随笔", "en": "Ten-year sleep visual essay"},
+              "meta": {"zh": "1 个条目", "en": "1 item"}
+            },
+            {
+              "label": {"zh": "下一步问题", "en": "Next question"},
+              "value": {"zh": "个人数据工具如何解释不确定性、习惯和行为变化，同时不假装自己是医疗建议？", "en": "How should personal data tools explain uncertainty, habits, and behavior change without pretending to be medical advice?"},
+              "actionId": "essay"
+            }
+          ],
+          "actions": [
+            {
+              "id": "open",
+              "label": {"zh": "打开 Sleep Toolkit", "en": "Open Sleep Toolkit"},
+              "paths": {"zh": "https://sleep-toolkit-production.up.railway.app", "en": "https://sleep-toolkit-production.up.railway.app"}
+            },
+            {
+              "id": "essay",
+              "label": {"zh": "阅读数据随笔", "en": "Read data essay"},
+              "paths": {"zh": "projects/sleep-2016-2026.html", "en": "projects/sleep-2016-2026.en.html"}
+            }
+          ],
+          "surfaces": [
+            {
+              "label": "A",
+              "title": {"zh": "Sleep Toolkit Web App", "en": "Sleep Toolkit web app"},
+              "summary": {"zh": "上传 SleepCycle CSV，并生成结构化分析输出。", "en": "Upload a SleepCycle CSV and generate structured analysis outputs."},
+              "actionId": "open"
+            },
+            {
+              "label": "B",
+              "title": {"zh": "十年睡眠记录", "en": "Ten years of sleep records"},
+              "summary": {"zh": "解释项目背景的长文叙事和数据故事。", "en": "The long-form narrative and data story that explains the project context."},
+              "actionId": "essay"
+            }
+          ]
+        }
+      }
     },
     {
       "id": "pkm-2026-06-07-talk",

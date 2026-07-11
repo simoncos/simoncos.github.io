@@ -36,7 +36,13 @@ PROJECTED_FIELDS = (
     "paths",
     "skipLangRewrite",
     "featured",
+    "status",
+    "featuredDetail",
+    "facts",
+    "actions",
 )
+
+SURFACE_OVERRIDE_FIELDS = PROJECTED_FIELDS + ("surfaces",)
 
 
 def load_json(path: Path) -> dict:
@@ -112,7 +118,7 @@ def project_item(item: dict, surface: str) -> dict:
 
     surface_overrides = item.get("surfaceOverrides") or {}
     for field, value in (surface_overrides.get(surface) or {}).items():
-        if field in PROJECTED_FIELDS:
+        if field in SURFACE_OVERRIDE_FIELDS:
             projected[field] = copy.deepcopy(value)
 
     return projected

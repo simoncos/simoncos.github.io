@@ -1,0 +1,65 @@
+{
+  "last_updated": "2026-07-11",
+  "projects": [
+    {
+      "id": "alpha-project",
+      "type": "tool",
+      "date": "2026-07-11",
+      "cover": "projects/assets/alpha.svg",
+      "title": {"en": "Alpha Project", "zh": "Alpha 项目"},
+      "subtitle": {"en": "Alpha subtitle", "zh": "Alpha 副标题"},
+      "summary": {"en": "Alpha summary.", "zh": "Alpha 摘要。"},
+      "paths": {"en": "projects/alpha.en.html", "zh": "projects/alpha.html"},
+      "featured": true,
+      "status": {"en": "Maintained", "zh": "持续维护"},
+      "featuredDetail": {
+        "kicker": {"en": "Featured project", "zh": "精选项目"},
+        "body": {"en": "Alpha featured detail.", "zh": "Alpha 精选详情。"},
+        "media": {
+          "src": "projects/assets/alpha-report.svg",
+          "alt": {"en": "Alpha report preview", "zh": "Alpha 报告预览"},
+          "kicker": {"en": "Alpha report", "zh": "Alpha 报告"},
+          "title": {"en": "Report preview", "zh": "报告预览"}
+        },
+        "metrics": [
+          {"label": {"en": "Records", "zh": "记录"}, "value": "100"}
+        ]
+      },
+      "facts": [
+        {"label": {"en": "Input", "zh": "输入"}, "value": {"en": "Alpha records", "zh": "Alpha 记录"}}
+      ],
+      "actions": [
+        {"id": "open", "label": {"en": "Open Alpha", "zh": "打开 Alpha"}, "paths": {"en": "projects/alpha.en.html", "zh": "projects/alpha.html"}}
+      ],
+      "surfaces": []
+    },
+    {
+      "id": "beta-project",
+      "type": "data_essay",
+      "date": "2026-07-10",
+      "cover": "projects/assets/beta.svg",
+      "title": {"en": "Beta Project", "zh": "Beta 项目"},
+      "subtitle": {"en": "Beta subtitle", "zh": "Beta 副标题"},
+      "summary": {"en": "Beta summary.", "zh": "Beta 摘要。"},
+      "paths": {"en": "projects/beta.en.html", "zh": "projects/beta.html"},
+      "featured": false,
+      "status": {"en": "Archived", "zh": "已归档"},
+      "featuredDetail": {
+        "kicker": {"en": "Project", "zh": "项目"},
+        "body": {"en": "Beta detail.", "zh": "Beta 详情。"},
+        "media": {
+          "src": "projects/assets/beta.svg",
+          "alt": {"en": "Beta preview", "zh": "Beta 预览"},
+          "kicker": {"en": "Beta", "zh": "Beta"},
+          "title": {"en": "Preview", "zh": "预览"}
+        },
+        "metrics": []
+      },
+      "facts": [],
+      "actions": [
+        {"id": "open", "label": {"en": "Open Beta", "zh": "打开 Beta"}, "paths": {"en": "projects/beta.en.html", "zh": "projects/beta.html"}}
+      ],
+      "surfaces": []
+    }
+  ]
+}
