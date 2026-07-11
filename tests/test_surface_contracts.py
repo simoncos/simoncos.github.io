@@ -289,6 +289,58 @@ class SurfaceContractTests(unittest.TestCase):
             with self.subTest(page=page):
                 self.assertEqual(main_count((ROOT / page).read_text()), 1)
 
+    def test_home_and_tags_use_canonical_page_content_frames(self):
+        index_html = (ROOT / "index.html").read_text()
+        tags_html = (ROOT / "tags.html").read_text()
+
+        self.assertRegex(index_html, r'<main\b[^>]*\bhome-page-content\b')
+        self.assertRegex(tags_html, r'<main\b[^>]*\btags-page-content\b')
+
+    def test_canonical_home_and_tags_content_has_compact_responsive_owners(self):
+        css = (ROOT / "src/css/styles.css").read_text()
+        marker = "/* Canonical Home and Tags page content */"
+
+        self.assertEqual(css.count(marker), 1)
+        page_content = css.split(marker, 1)[1].split("/* Shared site shell */", 1)[0]
+        frame_width = "min(calc(100% - (2 * var(--home-layout-gutter))), var(--home-layout-width))"
+
+        self.assertIn(f"width: {frame_width};", css_block(page_content, ".home-page-content"))
+        self.assertIn(f"width: {frame_width};", css_block(page_content, ".tags-page-content"))
+        self.assertIn("grid-template-columns: repeat(3, minmax(0, 1fr));", css_block(page_content, ".home-trail-grid"))
+        self.assertIn(
+            "grid-template-columns: repeat(2, minmax(0, 1fr));",
+            css_block(page_content, ".tags-page-content .tag-list"),
+        )
+        self.assertIn("@media (max-width: 899px)", page_content)
+        self.assertIn("@media (max-width: 520px)", page_content)
+        self.assertIn("min-width: 0;", css_block(page_content, ".tags-page-content .page-intro .page-lede"))
+
+    def test_tags_filter_label_has_localized_static_fallback(self):
+        tags_html = (ROOT / "tags.html").read_text()
+        i18n = (ROOT / "src/ts/i18n.ts").read_text()
+
+        self.assertIn('aria-label="Tag filter"', tags_html)
+        self.assertIn('data-i18n-aria-label="tags_filter_label"', tags_html)
+        self.assertRegex(i18n, r"tags_filter_label\s*:\s*['\"]Tag filter['\"]")
+        self.assertRegex(i18n, r"tags_filter_label\s*:\s*['\"]标签筛选['\"]")
+
+    def test_canonical_page_content_resets_legacy_card_and_list_treatments(self):
+        css = (ROOT / "src/css/styles.css").read_text()
+        page_content = css.split("/* Canonical Home and Tags page content */", 1)[1].split(
+            "/* Shared site shell */", 1
+        )[0]
+
+        self.assertIn("border: 0;", css_block(page_content, ".home-page-content .home-system-node"))
+        self.assertIn("border: 0;", css_block(page_content, ".home-page-content .home-trail-card"))
+        self.assertIn(
+            "display: none;",
+            css_block(page_content, "#tag-sections .tag-section li::before"),
+        )
+        self.assertIn(
+            ":is(body.dark-mode, html.dark-mode body) .tags-page-content .tag-section",
+            page_content,
+        )
+
     def test_tags_use_page_h2_and_tag_group_h3_headings(self):
         tags_html = (ROOT / "tags.html").read_text()
         tags_renderer = (ROOT / "src/ts/load-tags-page.ts").read_text()
