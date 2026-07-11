@@ -228,6 +228,40 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertIn("@media (max-width: 520px)", css)
         self.assertIn("@media (max-width: 380px)", css)
 
+    def test_essays_and_about_use_the_canonical_shell_aligned_ledger_frame(self):
+        css = (ROOT / "src/css/styles.css").read_text()
+        marker = "/* Canonical Essays and About page content */"
+        shell_width = "min(calc(100% - (2 * var(--site-shell-gutter))), var(--site-shell-width))"
+
+        self.assertEqual(css.count(marker), 1)
+        page_content = css.split(marker, 1)[1].split("/* Shared site shell */", 1)[0]
+        self.assertIn(
+            ".essays-index-page .page-ledger-frame,\n.about-profile-page .page-ledger-frame",
+            page_content,
+        )
+        self.assertIn(f"width: {shell_width};", page_content)
+        self.assertIn("@media (max-width: 820px)", page_content)
+        self.assertIn("@media (max-width: 430px)", page_content)
+        self.assertIn("overflow-wrap: anywhere;", css_block(page_content, ".essays-index-page .blog-preview h4"))
+
+        for path, required in {
+            "blogs.html": ("essays-page-shell", "page-ledger-frame", "blog-archive", "preview-toggle", "essays-rail"),
+            "templates/blogs-listing-template.html": ("essays-page-shell", "page-ledger-frame", "blog-archive", "preview-toggle", "essays-rail"),
+            "about.html": ("about-page-shell", "page-ledger-frame", "about-contact-first", "about-motto", "contact-list"),
+        }.items():
+            with self.subTest(path=path):
+                html = (ROOT / path).read_text()
+                for class_name in required:
+                    self.assertIn(class_name, html)
+
+    def test_essays_and_about_have_no_superseded_route_only_css_owners(self):
+        css = (ROOT / "src/css/styles.css").read_text()
+        obsolete_selectors = (".essay-feature-board",)
+
+        for selector in obsolete_selectors:
+            with self.subTest(selector=selector):
+                self.assertNotIn(selector, css)
+
     def test_final_shared_navigation_rules_have_no_home_or_gallery_selectors(self):
         css = (ROOT / "src/css/styles.css").read_text()
         marker = "/* Shared site shell */"
