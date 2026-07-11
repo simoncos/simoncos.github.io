@@ -24,17 +24,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function preserveStaticFallback(reason: string) {
         if (hasMeaningfulStaticFallback()) {
+            seriesList.innerHTML = staticFallback;
             console.warn(`Series data unavailable; preserving static fallback: ${reason}`);
             return true;
         }
         return false;
     }
 
-    function hasRenderableEntry(group: ArticleGroup) {
-        return Object.values(group.languages || {}).some((entry) => (
-            entry && typeof entry.title === 'string' && entry.title.trim()
-            && typeof entry.file === 'string' && entry.file.trim()
-        ));
+    function isValidLocalArticleFilename(value: unknown): value is string {
+        return typeof value === 'string'
+            && /^[a-z0-9][a-z0-9._-]*\.html$/i.test(value)
+            && !value.includes('..');
+    }
+
+    function isCompleteEntry(entry: ArticleEntry | null): entry is ArticleEntry {
+        return !!entry
+            && typeof entry.title === 'string'
+            && !!entry.title.trim()
+            && isValidLocalArticleFilename(entry.file);
     }
 
     function partValue(group: ArticleGroup) {
@@ -42,40 +49,93 @@ document.addEventListener('DOMContentLoaded', function () {
         return Number.isFinite(value) ? value : Number.MAX_SAFE_INTEGER;
     }
 
-    function seriesRows(data: ArticleGroupsData | null) {
+    function seriesGroupKey(group: ArticleGroup, seriesName: string) {
+        return String(group.id || `${seriesName}:${group.series && group.series.part || ''}`);
+    }
+
+    function existingLinkSuffixes() {
+        const suffixes = new Map<string, string>();
+        if (typeof seriesList.querySelectorAll !== 'function') {
+            return suffixes;
+        }
+
+        seriesList.querySelectorAll<HTMLAnchorElement>('a[data-series-group][href]').forEach((anchor) => {
+            const groupKey = anchor.dataset.seriesGroup;
+            const rawHref = anchor.getAttribute('href');
+            if (!groupKey || !rawHref) {
+                return;
+            }
+            try {
+                const url = new URL(rawHref, window.location.href);
+                suffixes.set(groupKey, `${url.search}${url.hash}`);
+            } catch (_error) {
+                // Ignore malformed pre-existing links and render the validated local target.
+            }
+        });
+        return suffixes;
+    }
+
+    function seriesRows(data: ArticleGroupsData | null, currentLanguage: string) {
         if (!data || !Array.isArray(data.groups) || data.groups.length === 0) {
             return null;
         }
 
-        const seriesMap = new Map<string, ArticleGroup[]>();
+        if (typeof articleGroupsApi.getPreferredEntry !== 'function') {
+            return null;
+        }
+
+        const seriesMap = new Map<string, Array<{
+            group: ArticleGroup;
+            entry: ArticleEntry;
+            secondary: ArticleEntry | null;
+            groupKey: string;
+        }>>();
+        let invalidSeriesGroup = false;
         data.groups.forEach((group) => {
             const seriesName = group && group.series && group.series.name;
-            if (typeof seriesName !== 'string' || !seriesName.trim() || !hasRenderableEntry(group)) {
+            if (typeof seriesName !== 'string' || !seriesName.trim()) {
                 return;
             }
+
+            const entry = articleGroupsApi.getPreferredEntry(group, currentLanguage);
+            if (!isCompleteEntry(entry)) {
+                invalidSeriesGroup = true;
+                return;
+            }
+            const secondary = typeof articleGroupsApi.getSecondaryEntry === 'function'
+                ? articleGroupsApi.getSecondaryEntry(group, currentLanguage)
+                : null;
             if (!seriesMap.has(seriesName)) {
                 seriesMap.set(seriesName, []);
             }
-            seriesMap.get(seriesName)?.push(group);
+            seriesMap.get(seriesName)?.push({
+                group,
+                entry: { ...entry, title: entry.title.trim(), file: entry.file.trim() },
+                secondary,
+                groupKey: seriesGroupKey(group, seriesName)
+            });
         });
 
-        if (!seriesMap.size) {
+        if (invalidSeriesGroup || !seriesMap.size) {
             return null;
         }
 
         return [...seriesMap.entries()]
             .sort(([nameA], [nameB]) => nameA.localeCompare(nameB))
-            .map(([seriesName, groups]) => ({
+            .map(([seriesName, items]) => ({
                 seriesName,
-                groups: groups.sort((groupA, groupB) => (
-                    partValue(groupA) - partValue(groupB)
-                    || String(groupA.id || '').localeCompare(String(groupB.id || ''))
+                items: items.sort((itemA, itemB) => (
+                    partValue(itemA.group) - partValue(itemB.group)
+                    || String(itemA.group.id || '').localeCompare(String(itemB.group.id || ''))
                 ))
             }));
     }
 
     function renderSeriesPage() {
-        const rows = seriesRows(articleGroupsData);
+        const currentLanguage = typeof i18n.getCurrentLanguage === 'function'
+            ? i18n.getCurrentLanguage()
+            : 'en';
+        const rows = seriesRows(articleGroupsData, currentLanguage);
         if (!rows) {
             if (!preserveStaticFallback('invalid, empty, or series-free article groups payload')) {
                 seriesList.innerHTML = `<li>${escapeHtml(i18n.t('no_series_found'))}</li>`;
@@ -83,32 +143,27 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const currentLanguage = typeof i18n.getCurrentLanguage === 'function'
-            ? i18n.getCurrentLanguage()
-            : 'en';
+        const linkSuffixes = existingLinkSuffixes();
 
-        seriesList.innerHTML = rows.map(({ seriesName, groups }) => `
+        seriesList.innerHTML = rows.map(({ seriesName, items }) => `
             <li class="series-ledger-row">
-                <div class="series-ledger-meta"><span class="meta-pill">${escapeHtml(i18n.t('series'))}</span><span>${escapeHtml(i18n.formatPostCount(groups.length))}</span></div>
+                <div class="series-ledger-meta"><span class="meta-pill">${escapeHtml(i18n.t('series'))}</span><span>${escapeHtml(i18n.formatPostCount(items.length))}</span></div>
                 <div class="series-ledger-body">
                     <h3>${escapeHtml(seriesName)}</h3>
                     <ol class="series-part-list">
-                    ${groups.map((group) => {
-                        const entry = articleGroupsApi.getPreferredEntry(group, currentLanguage);
-                        if (!entry || !entry.file) {
-                            return '';
-                        }
+                    ${items.map(({ group, entry, secondary, groupKey }) => {
                         const prefix = group.series && group.series.part
                             ? escapeHtml(i18n.formatSeriesPart(group.series.part))
                             : '';
-                        const secondary = articleGroupsApi.getSecondaryEntry(group, currentLanguage);
-                        const secondaryTitle = secondary && secondary.title && secondary.title !== entry.title
-                            ? `<span class="group-secondary-title">${escapeHtml(secondary.title)}</span>`
+                        const secondaryTitle = secondary && typeof secondary.title === 'string'
+                            && secondary.title.trim() && secondary.title.trim() !== entry.title
+                            ? `<span class="group-secondary-title">${escapeHtml(secondary.title.trim())}</span>`
                             : '';
                         const partLabel = prefix
                             ? `<span class="series-post-part">${prefix}</span>`
                             : '';
-                        return `<li class="series-part-row">${partLabel}<span class="series-post-entry"><a href="blogs/${entry.file}">${escapeHtml(entry.title)}</a>${secondaryTitle}</span></li>`;
+                        const href = `blogs/${entry.file}${linkSuffixes.get(groupKey) || ''}`;
+                        return `<li class="series-part-row">${partLabel}<span class="series-post-entry"><a data-series-group="${escapeHtml(groupKey)}" href="${escapeHtml(href)}">${escapeHtml(entry.title)}</a>${secondaryTitle}</span></li>`;
                     }).join('')}
                     </ol>
                 </div>
