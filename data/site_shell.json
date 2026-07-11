@@ -1,5 +1,5 @@
 {
-  "css_version": "20260711b",
+  "css_version": "20260711c",
   "js_version": "20260711b",
   "theme_init": "theme-init.js",
   "icons": {
@@ -216,7 +216,7 @@
       "script_profile": "blog_listing",
       "head_rss": true,
       "footer_rss": true,
-      "footer_version": "template"
+      "footer_version": "site_config"
     },
     {
       "path": "templates/blog-template.html",
@@ -224,7 +224,7 @@
       "script_profile": "article",
       "head_rss": true,
       "footer_rss": true,
-      "footer_version": "template"
+      "footer_version": "site_config"
     }
   ]
 }
