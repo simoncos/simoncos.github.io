@@ -262,6 +262,26 @@ class SurfaceContractTests(unittest.TestCase):
             with self.subTest(selector=selector):
                 self.assertNotIn(selector, css)
 
+    def test_about_rejects_viewport_filling_relaxation_owners(self):
+        css = (ROOT / "src/css/styles.css").read_text()
+        marker = "/* Canonical Essays and About page content */"
+        before_canonical = css.split(marker, 1)[0]
+
+        self.assertNotIn("/* About relaxation pass:", before_canonical)
+        obsolete_min_height = re.findall(
+            r"\.about-profile-page \.(?:about-page-shell|about-contact-first)\s*\{[^}]*\bmin-height\s*:",
+            before_canonical,
+            re.S,
+        )
+        self.assertFalse(obsolete_min_height, f"obsolete About min-height owners: {obsolete_min_height}")
+
+        canonical = css.split(marker, 1)[1].split("/* Shared site shell */", 1)[0]
+        tablet = canonical.split("@media (max-width: 980px)", 1)[1].split("@media (max-width: 820px)", 1)[0]
+        contact = css_block(tablet, ".about-profile-page .about-contact-first")
+        self.assertIn("grid-auto-rows: max-content;", contact)
+        self.assertIn("align-content: start;", contact)
+        self.assertNotIn("min-height:", contact)
+
     def test_final_shared_navigation_rules_have_no_home_or_gallery_selectors(self):
         css = (ROOT / "src/css/styles.css").read_text()
         marker = "/* Shared site shell */"
