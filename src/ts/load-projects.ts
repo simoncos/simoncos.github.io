@@ -52,6 +52,157 @@ document.addEventListener('DOMContentLoaded', function () {
         return field[language] || field.en || field.zh || '';
     }
 
+    function isNonEmptyString(value) {
+        return typeof value === 'string' && value.trim().length > 0;
+    }
+
+    function isLocalized(value, allowPlain = false) {
+        if (allowPlain && isNonEmptyString(value)) {
+            return true;
+        }
+        return Boolean(
+            value
+            && typeof value === 'object'
+            && isNonEmptyString(value.en)
+            && isNonEmptyString(value.zh)
+        );
+    }
+
+    function isSafePath(value) {
+        if (!isNonEmptyString(value) || /["'<>\r\n\t]/.test(value)) {
+            return false;
+        }
+        if (/^[a-z][a-z\d+.-]*:/i.test(value)) {
+            return /^https?:\/\/[^/]+/i.test(value);
+        }
+        return !value.startsWith('//');
+    }
+
+    function hasLocalizedPaths(value) {
+        return Boolean(
+            value
+            && typeof value === 'object'
+            && isSafePath(value.en)
+            && isSafePath(value.zh)
+        );
+    }
+
+    function validateProject(project, index) {
+        const prefix = `projects[${index}]`;
+        if (!project || typeof project !== 'object' || Array.isArray(project)) {
+            return `${prefix} must be an object`;
+        }
+        for (const field of ['id', 'type', 'date', 'cover']) {
+            if (!isNonEmptyString(project[field])) {
+                return `${prefix}.${field} must be a non-empty string`;
+            }
+        }
+        for (const field of ['title', 'subtitle', 'summary', 'status']) {
+            if (!isLocalized(project[field])) {
+                return `${prefix}.${field} must contain non-empty en and zh strings`;
+            }
+        }
+        if (!hasLocalizedPaths(project.paths)) {
+            return `${prefix}.paths must contain safe en and zh paths`;
+        }
+        if (typeof project.featured !== 'boolean') {
+            return `${prefix}.featured must be a boolean`;
+        }
+
+        const detail = project.featuredDetail;
+        if (!detail || typeof detail !== 'object' || Array.isArray(detail)) {
+            return `${prefix}.featuredDetail must be an object`;
+        }
+        if (!isLocalized(detail.kicker) || !isLocalized(detail.body)) {
+            return `${prefix}.featuredDetail copy must contain non-empty en and zh strings`;
+        }
+        const media = detail.media;
+        if (!media || typeof media !== 'object' || Array.isArray(media) || !isNonEmptyString(media.src)) {
+            return `${prefix}.featuredDetail.media must contain a source`;
+        }
+        for (const field of ['alt', 'kicker', 'title']) {
+            if (!isLocalized(media[field])) {
+                return `${prefix}.featuredDetail.media.${field} must contain non-empty en and zh strings`;
+            }
+        }
+        if (!Array.isArray(detail.metrics) || !detail.metrics.length || detail.metrics.some((metric) => (
+            !metric
+            || typeof metric !== 'object'
+            || !isLocalized(metric.label)
+            || !isLocalized(metric.value, true)
+        ))) {
+            return `${prefix}.featuredDetail.metrics must be a non-empty valid list`;
+        }
+
+        if (!Array.isArray(project.actions) || !project.actions.length) {
+            return `${prefix}.actions must be a non-empty list`;
+        }
+        const actionIds = new Set();
+        for (const action of project.actions) {
+            if (!action || typeof action !== 'object' || !isNonEmptyString(action.id)) {
+                return `${prefix}.actions must contain valid objects and ids`;
+            }
+            if (actionIds.has(action.id)) {
+                return `${prefix}.action ids must be unique`;
+            }
+            actionIds.add(action.id);
+            if (!isLocalized(action.label) || !hasLocalizedPaths(action.paths)) {
+                return `${prefix}.actions must contain localized labels and safe paths`;
+            }
+        }
+
+        if (!Array.isArray(project.facts) || !project.facts.length) {
+            return `${prefix}.facts must be a non-empty list`;
+        }
+        for (const fact of project.facts) {
+            if (!fact || typeof fact !== 'object' || !isLocalized(fact.label) || !isLocalized(fact.value)) {
+                return `${prefix}.facts must contain localized objects`;
+            }
+            if (fact.meta !== undefined && !isLocalized(fact.meta, true)) {
+                return `${prefix}.facts meta must be localized or a non-empty string`;
+            }
+            if (fact.actionId !== undefined && !actionIds.has(fact.actionId)) {
+                return `${prefix}.facts contains an unknown actionId`;
+            }
+        }
+
+        if (!Array.isArray(project.surfaces) || !project.surfaces.length) {
+            return `${prefix}.surfaces must be a non-empty list`;
+        }
+        for (const surface of project.surfaces) {
+            if (
+                !surface
+                || typeof surface !== 'object'
+                || !isNonEmptyString(surface.label)
+                || !isLocalized(surface.title)
+                || !isLocalized(surface.summary)
+                || !actionIds.has(surface.actionId)
+            ) {
+                return `${prefix}.surfaces must contain localized objects with valid actionId references`;
+            }
+        }
+        return '';
+    }
+
+    function validateProjectsPayload(payload) {
+        if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+            return 'payload must be an object';
+        }
+        if (!Array.isArray(payload.projects) || !payload.projects.length) {
+            return 'projects must be a non-empty array';
+        }
+        if (!isNonEmptyString(payload.last_updated)) {
+            return 'last_updated must be a non-empty string';
+        }
+        for (let index = 0; index < payload.projects.length; index += 1) {
+            const error = validateProject(payload.projects[index], index);
+            if (error) {
+                return error;
+            }
+        }
+        return '';
+    }
+
     function localizedPath(paths, language) {
         if (!paths) {
             return '#';
@@ -155,14 +306,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderProjects(payload) {
         const language = getCurrentLanguage();
-        const projects = Array.isArray(payload.projects)
-            ? [...payload.projects].sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
-            : [];
-        if (!projects.length) {
-            featuredTarget.innerHTML = `<p>${escapeHtml(t('no_projects_found'))}</p>`;
-            ledgerTarget.innerHTML = '';
-            return;
-        }
+        const projects = [...payload.projects]
+            .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
 
         const featured = projects.find((project) => project.featured) || projects[0];
         renderFeatured(featured, language);
@@ -193,11 +338,15 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then((payload) => {
+            const validationError = validateProjectsPayload(payload);
+            if (validationError) {
+                throw new Error(`Invalid projects payload: ${validationError}`);
+            }
             projectsPayload = payload;
             renderProjects(payload);
         })
         .catch((error) => {
-            console.error('Error loading projects:', error);
+            console.error('Failed to load projects data; preserving static fallback:', error);
         });
 
     window.addEventListener('site-language-change', function () {
