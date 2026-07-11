@@ -5467,98 +5467,6 @@ body:not(.home-page) .page-shell {
     }
 }
 
-/* About relaxation pass: let the sparse content breathe across the viewport. */
-.about-profile-page .about-page-shell {
-    min-height: calc(100svh - 13.5rem);
-}
-
-.about-profile-page .about-contact-first {
-    box-sizing: border-box;
-    min-height: min(36rem, calc(100svh - 15.25rem));
-    gap: 2.35rem;
-    align-items: center;
-    padding: 3rem 0;
-}
-
-.about-profile-page .about-contact-first .about-identity {
-    gap: 1.05rem;
-}
-
-.about-profile-page .about-contact-first .about-motto {
-    padding-top: 0.95rem;
-}
-
-.about-profile-page .about-contact-first .about-fact-list div {
-    padding: 1.05rem 0;
-}
-
-.about-profile-page .about-contact-first .contact-list li {
-    padding: 0.95rem 0;
-}
-
-@media (min-height: 900px) and (min-width: 981px) {
-    .about-profile-page .about-contact-first {
-        min-height: min(46rem, calc(100svh - 15.5rem));
-        padding: 4.5rem 0;
-    }
-}
-
-@media (max-width: 980px) {
-    .about-profile-page .about-page-shell {
-        min-height: calc(100svh - 12rem);
-    }
-
-    .about-profile-page .about-contact-first {
-        min-height: min(42rem, calc(100svh - 13.25rem));
-        gap: 2rem;
-        padding: 2.4rem 0;
-    }
-
-    .about-profile-page .about-contact-first .about-fact-list div {
-        padding-top: 0.15rem;
-    }
-}
-
-@media (max-width: 720px) {
-    .about-profile-page .about-page-shell {
-        min-height: auto;
-    }
-
-    .about-profile-page .about-contact-first {
-        min-height: calc(100svh - 10.75rem);
-        align-content: space-between;
-        align-items: start;
-        gap: 1.05rem;
-        padding: 1.15rem 0 1.5rem;
-    }
-
-    .about-profile-page .about-contact-first .about-identity {
-        gap: 0.85rem;
-    }
-
-    .about-profile-page .about-contact-first .about-motto {
-        padding-top: 0.82rem;
-    }
-
-    .about-profile-page .about-contact-first .contact-list li {
-        padding: 0.72rem 0;
-    }
-
-    .about-profile-page .about-contact-first .about-fact-list {
-        padding-top: 0.9rem;
-    }
-}
-
-@media (max-width: 380px) {
-    .about-profile-page .about-contact-first {
-        gap: 1.25rem;
-    }
-
-    .about-profile-page .about-contact-first .contact-list li {
-        padding: 0.68rem 0;
-    }
-}
-
 /* Series index: compact reading-ledger rows, scoped away from the shared shell. */
 .series-index-page .series-page-shell {
     align-content: start;
@@ -7015,6 +6923,8 @@ body.previews-off .essays-index-page .blog-excerpt,
 @media (max-width: 980px) {
     .about-profile-page .about-contact-first {
         grid-template-columns: minmax(0, 0.82fr) minmax(20rem, 0.78fr);
+        grid-auto-rows: max-content;
+        align-content: start;
     }
 
     .about-profile-page .about-contact-first .about-contact-ledger {
