@@ -275,6 +275,61 @@ def render_blog_archive(article_index: dict) -> str:
     return "\n".join(sections)
 
 
+def series_part_value(group: dict) -> tuple[int, str]:
+    series = group.get("series") or {}
+    try:
+        part = int(str(series.get("part", "")).strip())
+    except (TypeError, ValueError):
+        part = sys.maxsize
+    return part, str(group.get("id") or "")
+
+
+def render_series_index(article_index: dict) -> str:
+    series_groups: dict[str, list[dict]] = {}
+    for group in article_index.get("groups", []):
+        series = group.get("series") or {}
+        series_name = series.get("name")
+        primary = preferred_entry(group, "en")
+        if not isinstance(series_name, str) or not series_name.strip() or not primary or not primary.get("file"):
+            continue
+        series_groups.setdefault(series_name, []).append(group)
+
+    rows = []
+    for series_name in sorted(series_groups):
+        parts = []
+        groups = sorted(series_groups[series_name], key=series_part_value)
+        for group in groups:
+            primary = preferred_entry(group, "en")
+            secondary = secondary_entry(group, "en")
+            secondary_title = (
+                f'\n                                <span class="group-secondary-title">{escape(secondary.get("title"))}</span>'
+                if secondary and secondary.get("title") != primary.get("title")
+                else ""
+            )
+            part = (group.get("series") or {}).get("part")
+            part_label = f'<span class="series-post-part">Part {escape(part)}</span>' if part else ""
+            parts.append(
+                f'''                        <li class="series-part-row">{part_label}
+                            <span class="series-post-entry"><a href="blogs/{escape(primary.get("file"))}">{escape(primary.get("title"))}</a>{secondary_title}
+                            </span>
+                        </li>'''
+            )
+        count = len(groups)
+        count_label = "1 part" if count == 1 else f"{count} parts"
+        rows.append(
+            f'''                <li class="series-ledger-row">
+                    <div class="series-ledger-meta"><span class="meta-pill">Series</span><span>{count_label}</span></div>
+                    <div class="series-ledger-body">
+                        <h3>{escape(series_name)}</h3>
+                        <ol class="series-part-list">
+{chr(10).join(parts)}
+                        </ol>
+                    </div>
+                </li>'''
+        )
+    return "\n".join(rows)
+
+
 def render_project_cards(projects_payload: dict) -> str:
     cards = []
     for project in sorted(projects_payload.get("projects", []), key=lambda item: item.get("date") or "", reverse=True):
@@ -512,6 +567,9 @@ def main() -> int:
         },
         ROOT / "projects.html": {
             "projects-content": render_projects_content(projects_payload),
+        },
+        ROOT / "series.html": {
+            "series-index": render_series_index(article_index),
         },
     }
 
