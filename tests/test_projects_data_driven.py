@@ -181,6 +181,30 @@ class ProjectsDataDrivenTests(unittest.TestCase):
         errors = surface_data.validate_manifest(manifest)
         self.assertTrue(any("paths.zh must be a safe path or HTTP(S) URL" in error for error in errors), errors)
 
+    def test_project_manifest_forbids_identity_and_order_overrides(self):
+        surface_data = load_script("update_surface_data_identity", "scripts/update_surface_data.py")
+
+        for field, value in (("id", "replacement-id"), ("date", "not-a-date")):
+            with self.subTest(field=field):
+                manifest = project_manifest()
+                projects_override(manifest)[field] = value
+                errors = surface_data.validate_manifest(manifest)
+                self.assertTrue(
+                    any(f"surfaceOverrides.projects cannot override {field}" in error for error in errors),
+                    errors,
+                )
+
+    def test_project_manifest_rejects_duplicate_projected_project_ids(self):
+        surface_data = load_script("update_surface_data_project_ids", "scripts/update_surface_data.py")
+        manifest = project_manifest()
+        duplicate = copy.deepcopy(manifest["items"][0])
+        duplicate["date"] = "2026-05-05"
+        manifest["items"].append(duplicate)
+
+        errors = surface_data.validate_manifest(manifest)
+
+        self.assertTrue(any("duplicate projected Projects id sleep-toolkit" in error for error in errors), errors)
+
     def test_project_manifest_rejects_unknown_action_references(self):
         surface_data = load_script("update_surface_data_refs", "scripts/update_surface_data.py")
 
@@ -302,6 +326,20 @@ class ProjectsDataDrivenTests(unittest.TestCase):
                 self.assertEqual(result["after"]["projects-ledger"]["innerHTML"], "<article>LEDGER FALLBACK</article>")
                 self.assertEqual(result["after"]["projects-summary"]["textContent"], "SUMMARY FALLBACK")
                 self.assertTrue(any("Invalid projects payload" in error for error in result["errors"]), result["errors"])
+
+    def test_runtime_preserves_fallback_for_duplicate_project_ids(self):
+        payload = json.loads(FIXTURE.read_text())
+        payload["projects"][1]["id"] = payload["projects"][0]["id"]
+
+        result = run_projects_runtime(payload)
+
+        self.assertEqual(result["after"]["project-featured"]["innerHTML"], "<p>FEATURE FALLBACK</p>")
+        self.assertEqual(result["after"]["projects-ledger"]["innerHTML"], "<article>LEDGER FALLBACK</article>")
+        self.assertEqual(result["after"]["projects-summary"]["textContent"], "SUMMARY FALLBACK")
+        self.assertTrue(
+            any("Invalid projects payload" in error and "project ids must be unique" in error for error in result["errors"]),
+            result["errors"],
+        )
 
     def test_runtime_rerenders_chinese_and_preserves_query_hash_paths(self):
         result = run_projects_runtime(json.loads(FIXTURE.read_text()), rerender_language="zh")
