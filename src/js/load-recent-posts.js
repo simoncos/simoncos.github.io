@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
             project.paths.en ? 'EN' : null,
         ].filter(Boolean).join(' / ');
         return {
+            id: project.id || '',
             type: 'project',
             date: project.date,
             primaryTitle,
@@ -101,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 item.paths.en ? 'EN' : null,
             ].filter(Boolean).join(' / ');
         return {
+            id: item.id || '',
             type: item.type || 'gallery',
             date: item.date,
             primaryTitle,
@@ -109,6 +111,33 @@ document.addEventListener('DOMContentLoaded', function () {
             langAvail,
             skipLangRewrite: item.skipLangRewrite === true
         };
+    }
+    function canonicalHomeTarget(href) {
+        try {
+            const target = new URL(href, 'https://simoncos.github.io/');
+            target.hash = '';
+            target.pathname = target.pathname.replace(/\/+$/, '') || '/';
+            return target.toString();
+        }
+        catch (_error) {
+            return String(href || '').split('#', 1)[0].replace(/\/+$/, '');
+        }
+    }
+    function deduplicateHomePosts(posts) {
+        const seenIds = new Set();
+        const seenTargets = new Set();
+        return posts.filter((post) => {
+            const identity = post.id || '';
+            const target = canonicalHomeTarget(post.href);
+            if ((identity && seenIds.has(identity)) || (target && seenTargets.has(target))) {
+                return false;
+            }
+            if (identity)
+                seenIds.add(identity);
+            if (target)
+                seenTargets.add(target);
+            return true;
+        });
     }
     function typePillLabel(type, language) {
         if (type === 'project')
@@ -132,10 +161,13 @@ document.addEventListener('DOMContentLoaded', function () {
             ? galleryPayload.items.filter((item) => (Array.isArray(item.surfaceMembership) && item.surfaceMembership.includes('home')))
             : [];
         // Build unified post list
-        const posts = [
-            ...blogGroups.map(g => blogGroupToPost(g, language)).filter(Boolean),
+        const surfacePosts = deduplicateHomePosts([
             ...projects.map(p => projectToPost(p, language)).filter(Boolean),
             ...galleryItems.map(item => galleryItemToPost(item, language)).filter(Boolean),
+        ]);
+        const posts = [
+            ...blogGroups.map(g => blogGroupToPost(g, language)).filter(Boolean),
+            ...surfacePosts,
         ].sort((a, b) => {
             const da = a.date ? new Date(a.date).getTime() : 0;
             const db = b.date ? new Date(b.date).getTime() : 0;

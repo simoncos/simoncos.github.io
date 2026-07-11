@@ -1,0 +1,54 @@
+{
+  "projectsPayload": {
+    "projects": [
+      {
+        "id": "sleep-toolkit",
+        "type": "tool",
+        "date": "2026-05-06",
+        "title": {"en": "Sleep Toolkit", "zh": "Sleep Toolkit"},
+        "subtitle": {"en": "Project projection", "zh": "项目投影"},
+        "summary": {"en": "Authoritative project metadata.", "zh": "权威项目元数据。"},
+        "paths": {
+          "en": "https://sleep-toolkit-production.up.railway.app/",
+          "zh": "https://sleep-toolkit-production.up.railway.app/"
+        }
+      },
+      {
+        "id": "unique-project",
+        "type": "tool",
+        "date": "2026-05-05",
+        "title": {"en": "Unique project", "zh": "独立项目"},
+        "subtitle": {"en": "Project only", "zh": "仅项目"},
+        "summary": {"en": "A distinct project.", "zh": "一个独立项目。"},
+        "paths": {"en": "projects/unique.en.html", "zh": "projects/unique.html"}
+      }
+    ]
+  },
+  "galleryPayload": {
+    "items": [
+      {
+        "id": "sleep-toolkit",
+        "type": "tool",
+        "date": "2025",
+        "title": {"en": "Sleep Toolkit gallery view", "zh": "Sleep Toolkit 作品视图"},
+        "subtitle": {"en": "Gallery projection", "zh": "作品投影"},
+        "summary": {"en": "Older gallery metadata.", "zh": "较旧的作品元数据。"},
+        "paths": {
+          "en": "https://sleep-toolkit-production.up.railway.app",
+          "zh": "https://sleep-toolkit-production.up.railway.app"
+        },
+        "surfaceMembership": ["projects", "home", "gallery"]
+      },
+      {
+        "id": "unique-gallery",
+        "type": "artifact",
+        "date": "2026-05-04",
+        "title": {"en": "Unique gallery", "zh": "独立作品"},
+        "subtitle": {"en": "Gallery only", "zh": "仅作品"},
+        "summary": {"en": "A distinct gallery item.", "zh": "一个独立作品。"},
+        "paths": {"en": "gallery/unique.html", "zh": "gallery/unique.html"},
+        "surfaceMembership": ["gallery", "home"]
+      }
+    ]
+  }
+}

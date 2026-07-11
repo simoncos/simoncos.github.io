@@ -10,7 +10,7 @@ import sys
 from collections import OrderedDict
 from datetime import datetime
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urljoin, urlsplit, urlunsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -126,6 +126,7 @@ def project_posts(projects_payload: dict) -> list[dict]:
         secondary_title = localized(project.get("title"), "zh")
         posts.append(
             {
+                "id": project.get("id", ""),
                 "type": "project",
                 "date": project.get("date", ""),
                 "primary_title": primary_title,
@@ -152,6 +153,7 @@ def gallery_posts(gallery_payload: dict) -> list[dict]:
         secondary_title = localized(item.get("title"), "zh")
         posts.append(
             {
+                "id": item.get("id", ""),
                 "type": item.get("type") or "gallery",
                 "date": item.get("date", ""),
                 "primary_title": primary_title,
@@ -167,8 +169,32 @@ def gallery_posts(gallery_payload: dict) -> list[dict]:
     return posts
 
 
+def canonical_home_target(value: str) -> str:
+    parsed = urlsplit(urljoin("https://simoncos.github.io/", value or ""))
+    normalized_path = parsed.path.rstrip("/") or "/"
+    return urlunsplit((parsed.scheme.lower(), parsed.netloc.lower(), normalized_path, parsed.query, ""))
+
+
+def deduplicate_home_posts(posts: list[dict]) -> list[dict]:
+    unique_posts = []
+    seen_ids = set()
+    seen_targets = set()
+    for post in posts:
+        identity = post.get("id") or ""
+        target = canonical_home_target(post.get("href") or "")
+        if (identity and identity in seen_ids) or (target and target in seen_targets):
+            continue
+        if identity:
+            seen_ids.add(identity)
+        if target:
+            seen_targets.add(target)
+        unique_posts.append(post)
+    return unique_posts
+
+
 def render_home(article_index: dict, projects_payload: dict, gallery_payload: dict) -> str:
-    posts = blog_posts(article_index) + project_posts(projects_payload) + gallery_posts(gallery_payload)
+    surface_posts = deduplicate_home_posts(project_posts(projects_payload) + gallery_posts(gallery_payload))
+    posts = blog_posts(article_index) + surface_posts
     posts.sort(key=lambda item: item.get("date") or "", reverse=True)
     items = []
     for post in posts[:8]:

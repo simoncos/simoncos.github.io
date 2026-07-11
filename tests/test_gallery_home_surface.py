@@ -28,9 +28,10 @@ def gallery_item(item_id, title, memberships):
     }
 
 
-def run_recent_posts(gallery_payload):
+def run_recent_posts(projects_payload, gallery_payload):
     runtime_path = json.dumps(str(ROOT / "src/js/load-recent-posts.js"))
-    payload = json.dumps(gallery_payload)
+    projects = json.dumps(projects_payload)
+    gallery = json.dumps(gallery_payload)
     script = f"""
 const rendered = [];
 const postList = {{
@@ -59,7 +60,7 @@ global.window = {{
 }};
 global.fetch = (path) => Promise.resolve({{
   ok: true,
-  json: () => Promise.resolve(path.includes('projects_data') ? {{ projects: [] }} : {payload})
+  json: () => Promise.resolve(path.includes('projects_data') ? {projects} : {gallery})
 }});
 require({runtime_path});
 setTimeout(() => process.stdout.write(JSON.stringify(rendered)), 0);
@@ -106,10 +107,39 @@ class GalleryHomeSurfaceTests(unittest.TestCase):
             ]
         }
 
-        rendered = run_recent_posts(gallery_payload)
+        rendered = run_recent_posts({"projects": []}, gallery_payload)
 
         self.assertNotIn("Gallery only", rendered)
         self.assertIn("Home gallery", rendered)
+
+    def test_static_home_recent_prefers_project_for_shared_identity_or_target(self):
+        static_fallbacks = load_script("gallery_home_dedup_static", "scripts/update_static_fallbacks.py")
+        fixture = json.loads((ROOT / "tests/fixtures/home_recent_cross_surface.json").read_text())
+
+        rendered = static_fallbacks.render_home(
+            {"groups": []},
+            fixture["projectsPayload"],
+            fixture["galleryPayload"],
+        )
+
+        self.assertEqual(rendered.count("sleep-toolkit-production.up.railway.app"), 1)
+        self.assertIn("meta-pill--project", rendered)
+        self.assertIn("May 6, 2026", rendered)
+        self.assertNotIn("Sleep Toolkit gallery view", rendered)
+        self.assertIn("Unique project", rendered)
+        self.assertIn("Unique gallery", rendered)
+
+    def test_runtime_home_recent_prefers_project_for_shared_identity_or_target(self):
+        fixture = json.loads((ROOT / "tests/fixtures/home_recent_cross_surface.json").read_text())
+
+        rendered = run_recent_posts(fixture["projectsPayload"], fixture["galleryPayload"])
+
+        self.assertEqual(rendered.count("sleep-toolkit-production.up.railway.app"), 1)
+        self.assertIn("meta-pill--project", rendered)
+        self.assertIn("2026-05-06", rendered)
+        self.assertNotIn("Sleep Toolkit gallery view", rendered)
+        self.assertIn("Unique project", rendered)
+        self.assertIn("Unique gallery", rendered)
 
 
 if __name__ == "__main__":
