@@ -31,7 +31,92 @@ def css_block(css, selector):
     return match.group("body")
 
 
+def non_media_css_rules(css):
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+
+    def collect(text):
+        rules = []
+        cursor = 0
+        while cursor < len(text):
+            block_start = text.find("{", cursor)
+            if block_start < 0:
+                break
+            prelude = text[cursor:block_start].strip()
+            depth = 1
+            block_end = block_start + 1
+            while block_end < len(text) and depth:
+                if text[block_end] == "{":
+                    depth += 1
+                elif text[block_end] == "}":
+                    depth -= 1
+                block_end += 1
+            body = text[block_start + 1:block_end - 1]
+            if prelude.startswith("@"):
+                if not prelude.startswith(("@media", "@keyframes")):
+                    rules.extend(collect(body))
+            elif prelude:
+                rules.append((prelude, body))
+            cursor = block_end
+        return rules
+
+    return collect(css)
+
+
+def declaration_names(body):
+    return {
+        match.group("property")
+        for match in re.finditer(r"(?m)^\s*(?P<property>-{0,2}[a-zA-Z][\w-]*)\s*:", body)
+    }
+
+
 class SurfaceContractTests(unittest.TestCase):
+    def test_shared_shell_properties_have_one_non_media_owner(self):
+        css = (ROOT / "src/css/styles.css").read_text()
+        shared_selectors = {
+            ".site-header",
+            ".header-inner",
+            ".site-kicker",
+            ".site-header h1",
+            "#navigation-placeholder",
+            ".site-nav-shell",
+            "nav",
+            ".nav-inner",
+            "nav ul",
+            "nav ul li",
+            "nav ul li a",
+            ".site-nav-controls",
+            ".site-language-switch",
+            ".site-language-button",
+            ".dark-mode-container",
+            ".theme-toggle",
+            ".theme-toggle-icon",
+            ".theme-toggle-text",
+            ".theme-toggle-label",
+        }
+        owners = {}
+        for selector_group, body in non_media_css_rules(css):
+            selectors = {selector.strip() for selector in selector_group.split(",")}
+            for selector in selectors & shared_selectors:
+                for property_name in declaration_names(body):
+                    owners.setdefault((selector, property_name), []).append(selector_group)
+
+        duplicates = {
+            f"{selector}::{property_name}": selector_groups
+            for (selector, property_name), selector_groups in owners.items()
+            if len(selector_groups) > 1
+        }
+        self.assertFalse(duplicates, f"duplicate non-media shared-shell ownership: {duplicates}")
+
+        before_canonical = css.split("/* Shared site shell */", 1)[0]
+        pre_canonical_owners = []
+        for selector_group, _ in non_media_css_rules(before_canonical):
+            selectors = {selector.strip() for selector in selector_group.split(",")}
+            pre_canonical_owners.extend(sorted(selectors & shared_selectors))
+        self.assertFalse(
+            pre_canonical_owners,
+            f"generic shared-shell owners before canonical block: {pre_canonical_owners}",
+        )
+
     def test_design_tokens_have_one_canonical_root_definition(self):
         css = (ROOT / "src/css/styles.css").read_text()
         root_blocks = re.findall(r"(?m)^:root\s*\{(?P<body>.*?)^\}", css, re.S)
