@@ -39,6 +39,14 @@ def format_day(date_value: str, *, short_month: bool = False) -> str:
     return f"{month} {parsed.day}, {parsed.year}"
 
 
+def format_day_parts(date_value: str) -> tuple[str, str]:
+    try:
+        parsed = datetime.strptime(date_value, "%Y-%m-%d")
+    except ValueError:
+        return date_value, ""
+    return f"{parsed.strftime('%b')} {parsed.day}", str(parsed.year)
+
+
 def month_label(date_value: str) -> str:
     try:
         parsed = datetime.strptime(date_value, "%Y-%m-%d")
@@ -214,14 +222,17 @@ def render_blog_archive(article_index: dict) -> str:
                 for tag in group.get("tags", [])
             )
             tags_html = f'\n                    <ul class="tag-list blog-preview-tags">{tags}</ul>' if tags else ""
+            date_month_day, date_year = format_day_parts(group.get("date", ""))
             articles.append(
                 f'''                <article class="blog-preview">
+                    <time class="blog-preview-date" datetime="{escape(group.get("date", ""))}"><span>{escape(date_month_day)}</span><span>{escape(date_year)}</span></time>
+                    <span class="blog-preview-lang">EN</span>
                     <div class="blog-preview-header">
                         <div class="blog-preview-meta"><span class="meta-pill">{escape(language_availability(group.get("languages") or {}))}</span><span>{escape(format_day(group.get("date", "")))}</span></div>
                         <h4><a href="blogs/{escape(primary.get("file"))}">{escape(primary.get("title"))}</a></h4>{secondary_title}
                     </div>{tags_html}
                     <div class="blog-excerpt">{escape(excerpt(primary.get("excerpt", "")))}</div>
-                    <a href="blogs/{escape(primary.get("file"))}" class="read-more">Read more</a>
+                    <a href="blogs/{escape(primary.get("file"))}" class="read-more">Read →</a>
                 </article>'''
             )
         sections.append(
@@ -259,13 +270,24 @@ def render_project_cards(projects_payload: dict) -> str:
 
 def render_gallery_cards(gallery_payload: dict) -> str:
     cards = []
-    for item in sorted(gallery_payload.get("items", []), key=lambda item: item.get("date") or "", reverse=True):
+    anchored_types = set()
+    for index, item in enumerate(sorted(gallery_payload.get("items", []), key=lambda item: item.get("date") or "", reverse=True)):
         paths = item.get("paths") or {}
         href = paths.get("en") or paths.get("zh") or "#"
         title = localized(item.get("title"), "en")
         skip_attr = ' data-skip-lang-rewrite="true"' if item.get("skipLangRewrite") else ""
+        card_class = " gallery-card--hero" if index == 0 else " gallery-card--wide" if index == 1 else ""
+        anchor_id = ""
+        item_type = item.get("type")
+        if item_type == "talk" and item_type not in anchored_types:
+            anchor_id = "gallery-talks"
+            anchored_types.add(item_type)
+        elif item_type == "visual_essay" and item_type not in anchored_types:
+            anchor_id = "gallery-visual-essays"
+            anchored_types.add(item_type)
+        id_attr = f' id="{anchor_id}"' if anchor_id else ""
         cards.append(
-            f'''            <article class="project-card gallery-card">
+            f'''            <article{id_attr} class="project-card gallery-card{card_class}">
                 <a class="project-card-media" href="{escape(href)}"{skip_attr}>
                     <img src="{escape(item.get("cover"))}" alt="{escape(title)} cover" loading="lazy" decoding="async">
                 </a>

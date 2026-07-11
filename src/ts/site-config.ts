@@ -11,6 +11,7 @@
         ownerName: 'simoncos',
         siteTitle: 'simonc site',
         siteVersion: 'talk-2026-05-22-final-6-g538d434',
+        assetVersion: scriptUrl ? scriptUrl.searchParams.get('v') || '' : '',
         basePath: detectedBasePath,
         resolvePath(relativePath) {
             const normalized = relativePath.replace(/^\//, '');

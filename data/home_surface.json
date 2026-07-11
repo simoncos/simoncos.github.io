@@ -3,8 +3,8 @@
   "layout": "route-journal",
   "hero": {
     "kicker": {
-      "en": "Start here",
-      "zh": "从这里开始"
+      "en": "Tools, research, and field notes",
+      "zh": "工具、研究和现场记录"
     },
     "title": {
       "en": "Tools, research, essays, and field notes.",
@@ -86,12 +86,12 @@
   },
   "surface": {
     "kicker": {
-      "en": "Featured paths",
-      "zh": "推荐入口"
+      "en": "Current Index",
+      "zh": "当前索引"
     },
     "title": {
-      "en": "Four ways into the work.",
-      "zh": "四条线索，进入不同的内容。"
+      "en": "Current Index",
+      "zh": "当前索引"
     },
     "items": [
       {
@@ -201,12 +201,12 @@
           "zh": "AI Agents"
         },
         "title": {
-          "en": "AI collaborators",
-          "zh": "AI 协作者"
+          "en": "Building",
+          "zh": "构建"
         },
         "description": {
-          "en": "How agents help with review, research, operations, and writing.",
-          "zh": "我如何让 agent 参与审阅、研究、执行和写作。"
+          "en": "Things I build and maintain: products, systems, and experiments.",
+          "zh": "我持续构建和维护的产品、系统和实验。"
         },
         "href": "gallery/talks/pkm-2026-06-07/index.html",
         "skipLangRewrite": true
@@ -217,12 +217,12 @@
           "zh": "Systems"
         },
         "title": {
-          "en": "Personal systems",
-          "zh": "个人系统"
+          "en": "Thinking",
+          "zh": "思考"
         },
         "description": {
-          "en": "Notes, workflows, boundaries, publishing, and the infrastructure around work.",
-          "zh": "笔记、工作流、边界、发布，以及围绕工作长出来的基础设施。"
+          "en": "Notes and essays on how systems behave and how I think about them.",
+          "zh": "关于系统如何运转，以及我如何理解它们的笔记和文章。"
         },
         "href": "blogs/my-personal-knowledge-management-system-2026-03.en.html"
       },
@@ -232,12 +232,12 @@
           "zh": "Data Lab"
         },
         "title": {
-          "en": "Data and body",
-          "zh": "数据与身体"
+          "en": "Field",
+          "zh": "现场"
         },
         "description": {
-          "en": "Sleep, health, movement, and self-tracking as evidence.",
-          "zh": "把睡眠、健康、行动和自我追踪当作证据来读。"
+          "en": "Field notes on travel, training, and decisions in the real world.",
+          "zh": "关于旅行、训练和现实决策的现场记录。"
         },
         "href": "projects/sleep-2016-2026.en.html"
       },

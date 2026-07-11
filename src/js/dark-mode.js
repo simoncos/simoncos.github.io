@@ -59,30 +59,45 @@ function getNextThemeMode(currentMode) {
         return 'light';
     return 'system';
 }
+function getThemeToggleLabel(toggleBtn) {
+    let label = toggleBtn.querySelector('.theme-toggle-label');
+    if (!label) {
+        toggleBtn.textContent = '';
+        label = document.createElement('span');
+        label.className = 'theme-toggle-label';
+        label.setAttribute('aria-hidden', 'true');
+        toggleBtn.append(label);
+    }
+    return label;
+}
 function updateDarkModeToggleState(mode = getStoredThemeMode(), isDarkMode = getEffectiveDarkMode(mode)) {
     const toggleBtn = document.getElementById('dark-mode-toggle');
     if (!toggleBtn) {
         return;
     }
-    const icon = toggleBtn.querySelector('.theme-toggle-icon');
+    const label = getThemeToggleLabel(toggleBtn);
     const i18n = window.SITE_I18N || {};
     const nextMode = getNextThemeMode(mode);
-    const icons = {
-        system: '◐',
-        dark: '🌙',
-        light: '☀️'
-    };
     const labelKeys = {
         system: 'theme_mode_system',
         dark: 'theme_mode_dark',
         light: 'theme_mode_light'
     };
-    if (icon) {
-        icon.textContent = icons[mode] || (isDarkMode ? '☀️' : '🌙');
-    }
-    else {
-        toggleBtn.textContent = icons[mode] || (isDarkMode ? '☀️' : '🌙');
-    }
+    const compactLabels = {
+        en: {
+            system: 'Auto',
+            dark: 'Dark',
+            light: 'Light'
+        },
+        zh: {
+            system: '自动',
+            dark: '深色',
+            light: '浅色'
+        }
+    };
+    const language = typeof i18n.getCurrentLanguage === 'function' ? i18n.getCurrentLanguage() : 'en';
+    const activeLabels = language === 'zh' ? compactLabels.zh : compactLabels.en;
+    label.textContent = activeLabels[mode] || activeLabels.system;
     const currentLabel = typeof i18n.t === 'function'
         ? i18n.t(labelKeys[mode] || 'theme')
         : `Theme: ${mode}`;

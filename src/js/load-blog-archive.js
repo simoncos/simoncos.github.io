@@ -17,6 +17,16 @@ document.addEventListener('DOMContentLoaded', function () {
             ? i18n.formatDate(dateValue, 'month')
             : dateValue;
     }
+    function formatDateParts(dateValue) {
+        const parsed = new Date(dateValue);
+        if (Number.isNaN(parsed.getTime())) {
+            return { day: dateValue || '', year: '' };
+        }
+        return {
+            day: parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+            year: String(parsed.getFullYear())
+        };
+    }
     function escapeHtml(text) {
         return text
             .replace(/&/g, '&amp;')
@@ -88,8 +98,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     : '';
                 const excerpt = primary.excerpt ? escapeHtml(primary.excerpt) : '';
                 const tagsHtml = renderTags(group.tags || []);
+                const dateParts = formatDateParts(group.date);
+                const languageLabel = currentLanguage === 'zh' ? '中文' : 'EN';
                 html.push(`
                     <article class="blog-preview">
+                        <time class="blog-preview-date" datetime="${escapeHtml(group.date || '')}"><span>${escapeHtml(dateParts.day)}</span><span>${escapeHtml(dateParts.year)}</span></time>
+                        <span class="blog-preview-lang">${escapeHtml(languageLabel)}</span>
                         <div class="blog-preview-header">
                             <div class="blog-preview-meta"><span class="meta-pill">${escapeHtml(getLanguageAvailability(group))}</span><span>${escapeHtml(formatDate(group.date))}</span></div>
                             <h4><a href="blogs/${primary.file}">${escapeHtml(primary.title || 'Untitled')}</a></h4>
@@ -97,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                         ${tagsHtml}
                         <div class="blog-excerpt">${excerpt}</div>
-                        <a href="blogs/${primary.file}" class="read-more">${escapeHtml(i18n.t('read_more'))}</a>
+                        <a href="blogs/${primary.file}" class="read-more">${escapeHtml(i18n.t('read_more'))} →</a>
                     </article>
                 `);
             });

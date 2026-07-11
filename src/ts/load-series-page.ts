@@ -54,13 +54,16 @@ document.addEventListener('DOMContentLoaded', function () {
                             return '';
                         }
                         const prefix = group.series && group.series.part
-                            ? `${escapeHtml(i18n.formatSeriesPart(group.series.part))}: `
+                            ? escapeHtml(i18n.formatSeriesPart(group.series.part))
                             : '';
                         const secondary = articleGroupsApi.getSecondaryEntry(group, currentLanguage);
                         const secondaryTitle = secondary && secondary.title && secondary.title !== entry.title
                             ? `<span class="group-secondary-title">${escapeHtml(secondary.title)}</span>`
                             : '';
-                        return `<li><span class="series-post-entry">${prefix}<a href="blogs/${entry.file}">${escapeHtml(entry.title)}</a>${secondaryTitle}</span></li>`;
+                        const partLabel = prefix
+                            ? `<span class="series-post-part">${prefix}</span>`
+                            : '';
+                        return `<li>${partLabel}<span class="series-post-entry"><a href="blogs/${entry.file}">${escapeHtml(entry.title)}</a>${secondaryTitle}</span></li>`;
                     }).join('')}
                 </ul>
             </li>

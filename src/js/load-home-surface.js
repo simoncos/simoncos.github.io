@@ -143,7 +143,7 @@
             description.textContent = getLocalizedValue(item.description, language);
             const start = document.createElement('span');
             start.className = 'home-trail-start';
-            start.textContent = language === 'zh' ? '顺着读' : 'Start this path';
+            start.textContent = language === 'zh' ? '探索' : 'Explore';
             anchor.append(pill, title, description, start);
             return anchor;
         }
@@ -184,7 +184,10 @@
             }
         }
         function load() {
-            fetch(resolvePath('data/home_surface.json'))
+            const assetVersion = siteConfig.assetVersion
+                ? `?v=${encodeURIComponent(siteConfig.assetVersion)}`
+                : '';
+            fetch(`${resolvePath('data/home_surface.json')}${assetVersion}`)
                 .then(response => response.ok ? response.json() : null)
                 .then(payload => {
                 if (!payload)

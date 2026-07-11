@@ -1,6 +1,6 @@
 {
-  "css_version": "20260626b",
-  "js_version": "20260626a",
+  "css_version": "20260705c",
+  "js_version": "20260705b",
   "theme_init": "theme-init.js",
   "icons": {
     "favicon": "assets/icons/favicon-32.png",
