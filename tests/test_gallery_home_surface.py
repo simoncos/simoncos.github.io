@@ -1,4 +1,5 @@
 import importlib.util
+import copy
 import json
 import subprocess
 import unittest
@@ -76,6 +77,69 @@ setTimeout(() => process.stdout.write(JSON.stringify(rendered)), 0);
 
 
 class GalleryHomeSurfaceTests(unittest.TestCase):
+    def test_gallery_manifest_requires_localized_descriptive_alt_text(self):
+        surface_data = load_script("gallery_alt_validation", "scripts/update_surface_data.py")
+        manifest = json.loads((ROOT / "data/content_manifest.json").read_text())
+
+        for item in manifest["items"]:
+            if "gallery" not in item["surfaces"]:
+                continue
+            projected = surface_data.project_item(item, "gallery")
+            with self.subTest(item=item["id"]):
+                self.assertEqual(
+                    surface_data.validate_manifest({"items": [copy.deepcopy(item)]}),
+                    [],
+                )
+                self.assertIn("alt", projected)
+                if "alt" in projected:
+                    self.assertEqual(set(projected["alt"]), {"en", "zh"})
+                    self.assertTrue(all(projected["alt"][language].strip() for language in ("en", "zh")))
+
+    def test_gallery_manifest_rejects_attribute_injection_metadata(self):
+        surface_data = load_script("gallery_metadata_validation", "scripts/update_surface_data.py")
+        manifest = json.loads((ROOT / "data/content_manifest.json").read_text())
+        gallery_item_record = next(item for item in manifest["items"] if "gallery" in item["surfaces"])
+
+        cases = (
+            ("galleryCardClass", 'gallery-card--safe\" data-pwned=\"yes'),
+            ("sectionId", 'gallery-safe\" onclick=\"alert(1)'),
+        )
+        for field, value in cases:
+            with self.subTest(field=field):
+                candidate = copy.deepcopy(gallery_item_record)
+                candidate.setdefault("surfaceOverrides", {}).setdefault("gallery", {})[field] = value
+                errors = surface_data.validate_manifest({"items": [candidate]})
+                self.assertTrue(any(field in error and "safe" in error for error in errors), errors)
+
+    def test_gallery_manifest_rejects_duplicate_section_ids_and_order(self):
+        surface_data = load_script("gallery_duplicate_validation", "scripts/update_surface_data.py")
+        manifest = json.loads((ROOT / "data/content_manifest.json").read_text())
+        gallery_items = [copy.deepcopy(item) for item in manifest["items"] if "gallery" in item["surfaces"]][:2]
+        first = surface_data.project_item(gallery_items[0], "gallery")
+        second_override = gallery_items[1].setdefault("surfaceOverrides", {}).setdefault("gallery", {})
+        second_override["galleryOrder"] = first["galleryOrder"]
+        second_override["sectionId"] = first.get("sectionId") or "gallery-duplicate"
+        gallery_items[0].setdefault("surfaceOverrides", {}).setdefault("gallery", {})["sectionId"] = second_override["sectionId"]
+
+        errors = surface_data.validate_manifest({"items": gallery_items})
+
+        self.assertTrue(any("duplicate Gallery order" in error for error in errors), errors)
+        self.assertTrue(any("duplicate Gallery section id" in error for error in errors), errors)
+
+    def test_gallery_fallback_escapes_metadata_attributes_at_output_boundary(self):
+        static_fallbacks = load_script("gallery_fallback_escaping", "scripts/update_static_fallbacks.py")
+        payload = json.loads((ROOT / "data/gallery_data.json").read_text())
+        item = copy.deepcopy(payload["items"][0])
+        item["galleryCardClass"] = 'gallery-card--safe\" data-pwned=\"yes'
+        item["sectionId"] = 'gallery-safe\" onclick=\"alert(1)'
+
+        rendered = static_fallbacks.render_gallery_cards({"items": [item]})
+
+        self.assertNotRegex(rendered, r'\sonclick="')
+        self.assertNotRegex(rendered, r'\sdata-pwned="')
+        self.assertIn("&quot; onclick=&quot;alert(1)", rendered)
+        self.assertIn("&quot; data-pwned=&quot;yes", rendered)
+
     def test_gallery_projection_preserves_explicit_surface_membership(self):
         surface_data = load_script("gallery_home_surface_data", "scripts/update_surface_data.py")
         manifest = json.loads((ROOT / "data/content_manifest.json").read_text())

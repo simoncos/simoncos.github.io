@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -31,6 +32,7 @@ PROJECTED_FIELDS = (
     "type",
     "date",
     "cover",
+    "alt",
     "title",
     "subtitle",
     "summary",
@@ -51,6 +53,8 @@ PROJECTS_FORBIDDEN_OVERRIDE_FIELDS = ("id", "date")
 PROJECTS_OVERRIDE_FIELDS = tuple(
     field for field in SURFACE_OVERRIDE_FIELDS if field not in PROJECTS_FORBIDDEN_OVERRIDE_FIELDS
 )
+GALLERY_CARD_CLASS_RE = re.compile(r"^gallery-card--[a-z0-9]+(?:-[a-z0-9]+)*$")
+GALLERY_SECTION_ID_RE = re.compile(r"^gallery-[a-z0-9]+(?:-[a-z0-9]+)*$")
 
 
 def load_json(path: Path) -> dict:
@@ -85,7 +89,9 @@ def safe_content_path(value: object) -> bool:
     if not non_empty_string(value):
         return False
     candidate = value.strip()
-    if any(character in candidate for character in ('"', "'", "<", ">", "\r", "\n", "\t")):
+    if any(character in candidate for character in ('"', "'", "<", ">", "\\")):
+        return False
+    if any(character.isspace() for character in candidate) or re.search(r"%(?![0-9a-fA-F]{2})", candidate):
         return False
     try:
         parsed = urlsplit(candidate)
@@ -93,7 +99,9 @@ def safe_content_path(value: object) -> bool:
         return False
     if parsed.scheme:
         return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
-    return not candidate.startswith("//")
+    if candidate.startswith("//") or not parsed.path:
+        return False
+    return not any(segment in {".", ".."} for segment in parsed.path.split("/"))
 
 
 def validate_paths(value: object, path: str, errors: list[str]) -> None:
@@ -242,22 +250,31 @@ def validate_project_projection(project: dict, path: str, errors: list[str]) -> 
 
 
 def validate_gallery_projection(item: dict, path: str, errors: list[str]) -> None:
-    for field in ("id", "type", "date", "cover", "galleryCardClass"):
+    for field in ("id", "type", "date"):
         if not non_empty_string(item.get(field)):
             errors.append(f"{path}.{field} must be a non-empty string")
-    for field in ("title", "summary"):
+    if not safe_content_path(item.get("cover")):
+        errors.append(f"{path}.cover must be a safe path or HTTP(S) URL")
+    for field in ("title", "summary", "alt"):
         validate_localized(item.get(field), f"{path}.{field}", errors)
     validate_paths(item.get("paths"), f"{path}.paths", errors)
+    gallery_card_class = item.get("galleryCardClass")
+    if not non_empty_string(gallery_card_class) or not GALLERY_CARD_CLASS_RE.fullmatch(gallery_card_class):
+        errors.append(f"{path}.galleryCardClass must be a safe gallery-card--* token")
     if not isinstance(item.get("galleryOrder"), int) or item["galleryOrder"] < 1:
         errors.append(f"{path}.galleryOrder must be a positive integer")
-    if "sectionId" in item and not non_empty_string(item["sectionId"]):
-        errors.append(f"{path}.sectionId must be a non-empty string when provided")
+    if "sectionId" in item:
+        section_id = item["sectionId"]
+        if not non_empty_string(section_id) or not GALLERY_SECTION_ID_RE.fullmatch(section_id):
+            errors.append(f"{path}.sectionId must be a safe gallery-* token when provided")
 
 
 def validate_manifest(manifest: dict) -> list[str]:
     errors: list[str] = []
     seen_ids: set[str] = set()
     projected_project_ids: set[str] = set()
+    gallery_orders: set[int] = set()
+    gallery_section_ids: set[str] = set()
     items = manifest.get("items")
     if not isinstance(items, list):
         return ["data/content_manifest.json: items must be a list"]
@@ -326,6 +343,18 @@ def validate_manifest(manifest: dict) -> list[str]:
                 f"data/content_manifest.json: {label} gallery",
                 errors,
             )
+            gallery_order = gallery_item.get("galleryOrder")
+            if isinstance(gallery_order, int):
+                if gallery_order in gallery_orders:
+                    errors.append(f"data/content_manifest.json: duplicate Gallery order {gallery_order}")
+                gallery_orders.add(gallery_order)
+            gallery_section_id = gallery_item.get("sectionId")
+            if non_empty_string(gallery_section_id):
+                if gallery_section_id in gallery_section_ids:
+                    errors.append(
+                        f"data/content_manifest.json: duplicate Gallery section id {gallery_section_id}"
+                    )
+                gallery_section_ids.add(gallery_section_id)
 
         for field in ("type", "date", "title", "subtitle", "summary", "paths"):
             if field not in item:

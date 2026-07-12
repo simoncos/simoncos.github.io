@@ -85,6 +85,24 @@ def split_css_selectors(selector_group):
     return {selector for selector in selectors if selector}
 
 
+def route_content_selector(selector):
+    emitted_route_fragments = (
+        ".essays-archive-",
+        ".essay-archive-list",
+        ".essays-rail",
+        ".essays-index-page .archive-month",
+        ".essays-index-page .blog-preview",
+        ".essays-index-page.previews-off .blog-excerpt",
+        "body.previews-off .essays-index-page .blog-excerpt",
+        ".about-profile-page .about-contact-first",
+    )
+    return any(fragment in selector for fragment in emitted_route_fragments)
+
+
+def compact_gallery_rail_selector(selector):
+    return ".gallery-board .personal-data-lab--strip" in selector
+
+
 def shared_dark_target(selector):
     dark_prefix = ":is(body.dark-mode, html.dark-mode body) "
     if not selector.startswith(dark_prefix):
@@ -261,6 +279,42 @@ class SurfaceContractTests(unittest.TestCase):
         for selector in obsolete_selectors:
             with self.subTest(selector=selector):
                 self.assertNotIn(selector, css)
+
+    def test_emitted_essays_and_about_properties_have_one_non_media_owner(self):
+        css = (ROOT / "src/css/styles.css").read_text()
+        owners = {}
+
+        for selector_group, body in non_media_css_rules(css):
+            for selector in split_css_selectors(selector_group):
+                if route_content_selector(selector):
+                    for property_name in declaration_names(body):
+                        owners.setdefault((selector, property_name), []).append(selector_group)
+
+        duplicates = {
+            f"{selector}::{property_name}": selector_groups
+            for (selector, property_name), selector_groups in owners.items()
+            if len(selector_groups) > 1
+        }
+        self.assertFalse(duplicates, f"duplicate Essays/About non-media ownership: {duplicates}")
+
+    def test_compact_gallery_rail_properties_have_one_non_media_owner(self):
+        css = (ROOT / "src/css/styles.css").read_text()
+        owners = {}
+
+        for selector_group, body in non_media_css_rules(css):
+            for selector in split_css_selectors(selector_group):
+                if compact_gallery_rail_selector(selector):
+                    for property_name in declaration_names(body):
+                        owners.setdefault((selector, property_name), []).append(selector_group)
+
+        duplicates = {
+            f"{selector}::{property_name}": selector_groups
+            for (selector, property_name), selector_groups in owners.items()
+            if len(selector_groups) > 1
+        }
+        self.assertFalse(duplicates, f"duplicate compact Gallery rail non-media ownership: {duplicates}")
+        self.assertNotIn(".personal-data-path", css)
+        self.assertNotIn(".personal-data-link", css)
 
     def test_about_rejects_viewport_filling_relaxation_owners(self):
         css = (ROOT / "src/css/styles.css").read_text()

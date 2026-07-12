@@ -528,13 +528,13 @@ def render_gallery_cards(gallery_payload: dict) -> str:
         subtitle = localized(item.get("subtitle"), "en")
         subtitle_html = f'\n                    <p class="project-card-subtitle">{escape(subtitle)}</p>' if subtitle else ""
         skip_attr = ' data-skip-lang-rewrite="true"' if item.get("skipLangRewrite") else ""
-        card_class = f' {item.get("galleryCardClass", "")}'.rstrip()
+        card_class = f' {escape(item.get("galleryCardClass", ""))}'.rstrip()
         anchor_id = item.get("sectionId") or ""
-        id_attr = f' id="{anchor_id}"' if anchor_id else ""
+        id_attr = f' id="{escape(anchor_id)}"' if anchor_id else ""
         cards.append(
             f'''            <article{id_attr} class="project-card gallery-card{card_class}">
                 <a class="project-card-media" href="{escape(href)}"{skip_attr}>
-                    <img src="{escape(item.get("cover"))}" alt="{escape(title)} cover" loading="lazy" decoding="async">
+                    <img src="{escape(item.get("cover"))}" alt="{escape(localized(item.get("alt"), "en"))}" loading="lazy" decoding="async">
                 </a>
                 <div class="project-card-body">
                     <div class="project-card-meta"><span class="meta-pill meta-pill--gallery">{escape(type_label(item.get("type", "")))}</span><span>{escape(format_day(item.get("date", ""), short_month=True))}</span></div>
