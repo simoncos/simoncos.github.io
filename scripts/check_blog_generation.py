@@ -112,6 +112,7 @@ def main() -> int:
 
         env = os.environ.copy()
         env["SITE_VERSION_OVERRIDE"] = site_version()
+        env["TZ"] = "UTC"
         result = subprocess.run(
             [sys.executable, "generate_blog_pages.py"],
             cwd=temp_root,

@@ -7,7 +7,7 @@ import struct
 from html import unescape as html_unescape
 import markdown
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 from markdown.inlinepatterns import InlineProcessor
 from markdown.extensions import Extension
@@ -17,6 +17,8 @@ from bs4 import BeautifulSoup, NavigableString
 from urllib.parse import quote, unquote, urljoin, urlparse
 from pathlib import Path
 from email.utils import format_datetime
+
+SITE_TIMEZONE = timezone(timedelta(hours=8))
 
 # Set up logging
 logging.basicConfig(
@@ -448,7 +450,7 @@ def build_rss_feed(posts, language_code):
     ElementTree.SubElement(channel, 'description').text = description
     ElementTree.SubElement(channel, 'language').text = 'zh-CN' if language_code == 'zh' else 'en'
     ElementTree.SubElement(channel, 'generator').text = 'generate_blog_pages.py'
-    ElementTree.SubElement(channel, 'lastBuildDate').text = format_datetime(datetime.now().astimezone())
+    ElementTree.SubElement(channel, 'lastBuildDate').text = format_datetime(datetime.now(SITE_TIMEZONE))
 
     atom_link = ElementTree.SubElement(channel, '{http://www.w3.org/2005/Atom}link')
     atom_link.set('href', absolute_site_url(feed_name))
@@ -470,8 +472,8 @@ def build_rss_feed(posts, language_code):
 
         pub_dt = parse_frontmatter_date(post.get('date', ''))
         if pub_dt:
-            pub_dt = pub_dt.replace(hour=0, minute=0, second=0)
-            ElementTree.SubElement(item, 'pubDate').text = format_datetime(pub_dt.astimezone())
+            pub_dt = pub_dt.replace(hour=0, minute=0, second=0, tzinfo=SITE_TIMEZONE)
+            ElementTree.SubElement(item, 'pubDate').text = format_datetime(pub_dt)
 
         # Use full HTML content for rich RSS reading experience.
         # Absolutize links so footnotes and cross-references work outside the site.
