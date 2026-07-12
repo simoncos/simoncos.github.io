@@ -1,6 +1,7 @@
 ---
 tags: out
 date: 2026-01-20
+updated: 2026-02-28
 ---
 
 # 我的哈巴雪山之旅
@@ -389,4 +390,3 @@ date: 2026-01-20
 <iframe class="embedded-page" src="assets/pages/my-haba-snow-mountain-journey-gemini-summary.html" title="哈巴雪山速攀实战复盘可视化大屏" loading="lazy"></iframe>
 
 [在新标签页打开可视化大屏](assets/pages/my-haba-snow-mountain-journey-gemini-summary.html)
-

@@ -1,6 +1,7 @@
 ---
 tags: km, ai, hack, design
 date: 2026-03-14
+updated: 2026-03-27
 ---
 
 # My Personal Knowledge Management System, 2026-03

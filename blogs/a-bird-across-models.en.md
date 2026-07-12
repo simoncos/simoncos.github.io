@@ -1,6 +1,7 @@
 ---
 tags: ai
 date: 2026-03-13
+updated: 2026-03-13
 series: RedPiggy, an emerging AI existence
 series_part: 2
 ---
