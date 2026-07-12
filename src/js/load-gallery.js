@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const separator = resolvedPath.includes('?') ? '&' : '?';
         return `${resolvedPath}${separator}v=${encodeURIComponent(assetVersion)}`;
     };
+    const staticFallback = gallery.innerHTML;
+    const galleryCardClassPattern = /^gallery-card--[a-z0-9]+(?:-[a-z0-9]+)*$/;
+    const gallerySectionIdPattern = /^gallery-[a-z0-9]+(?:-[a-z0-9]+)*$/;
     function escapeHtml(text) {
         return String(text)
             .replace(/&/g, '&amp;')
@@ -25,6 +28,16 @@ document.addEventListener('DOMContentLoaded', function () {
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#39;');
+    }
+    function preserveStaticFallback(reason) {
+        if (staticFallback.trim()) {
+            if (gallery.innerHTML !== staticFallback) {
+                gallery.innerHTML = staticFallback;
+            }
+            console.warn(`Gallery data unavailable; preserving static fallback: ${reason}`);
+            return;
+        }
+        console.error(`Gallery data unavailable and no static fallback exists: ${reason}`);
     }
     function getCurrentLanguage() {
         return typeof i18n.getCurrentLanguage === 'function'
@@ -43,88 +56,189 @@ document.addEventListener('DOMContentLoaded', function () {
         return typeof i18n.t === 'function' ? i18n.t(key) : key;
     }
     function getLocalizedValue(field, language) {
-        if (!field) {
-            return '';
-        }
         return field[language] || field.en || field.zh || '';
     }
-    function getLocalizedPath(item, language) {
-        if (!item.paths) {
-            return '#';
+    function isNonEmptyString(value) {
+        return typeof value === 'string' && value.trim().length > 0;
+    }
+    function isLocalized(value, allowEmpty = false) {
+        return Boolean(value
+            && typeof value === 'object'
+            && typeof value.en === 'string'
+            && typeof value.zh === 'string'
+            && (allowEmpty || (value.en.trim() && value.zh.trim())));
+    }
+    function isSafePath(value) {
+        if (!isNonEmptyString(value)
+            || value !== value.trim()
+            || /["'<>\`\\\s]/.test(value)
+            || /%(?![0-9a-f]{2})/i.test(value)) {
+            return false;
         }
-        const target = item.paths[language] || item.paths.en || item.paths.zh || '#';
-        return typeof i18n.resolveLocalizedUrl === 'function'
+        if (/^[a-z][a-z\d+.-]*:/i.test(value)) {
+            try {
+                const parsed = new URL(value);
+                return (parsed.protocol === 'http:' || parsed.protocol === 'https:') && Boolean(parsed.hostname);
+            }
+            catch (_error) {
+                return false;
+            }
+        }
+        if (value.startsWith('//')) {
+            return false;
+        }
+        const localPath = value.split(/[?#]/, 1)[0];
+        const segments = localPath.split('/');
+        return Boolean(localPath)
+            && !segments.some((segment) => segment === '.' || segment === '..');
+    }
+    function hasLocalizedPaths(value) {
+        return Boolean(value
+            && typeof value === 'object'
+            && isSafePath(value.en)
+            && isSafePath(value.zh));
+    }
+    function validateGalleryItem(item, index) {
+        const prefix = `items[${index}]`;
+        if (!item || typeof item !== 'object' || Array.isArray(item)) {
+            return `${prefix} must be an object`;
+        }
+        for (const field of ['id', 'type', 'date']) {
+            if (!isNonEmptyString(item[field])) {
+                return `${prefix}.${field} must be a non-empty string`;
+            }
+        }
+        if (!isSafePath(item.cover)) {
+            return `${prefix}.cover must be a safe path or HTTP(S) URL`;
+        }
+        for (const field of ['title', 'summary', 'alt']) {
+            if (!isLocalized(item[field])) {
+                return `${prefix}.${field} must contain non-empty en and zh strings`;
+            }
+        }
+        if (!isLocalized(item.subtitle, true)) {
+            return `${prefix}.subtitle must contain en and zh strings`;
+        }
+        if (!hasLocalizedPaths(item.paths)) {
+            return `${prefix}.paths must contain safe en and zh paths`;
+        }
+        if (!galleryCardClassPattern.test(item.galleryCardClass || '')) {
+            return `${prefix}.galleryCardClass must be a safe gallery-card--* token`;
+        }
+        if (!Number.isInteger(item.galleryOrder) || item.galleryOrder < 1) {
+            return `${prefix}.galleryOrder must be a positive integer`;
+        }
+        if (item.sectionId !== undefined && !gallerySectionIdPattern.test(item.sectionId)) {
+            return `${prefix}.sectionId must be a safe gallery-* token`;
+        }
+        if (typeof item.featured !== 'boolean') {
+            return `${prefix}.featured must be a boolean`;
+        }
+        return '';
+    }
+    function validateGalleryPayload(payload) {
+        if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+            return 'payload must be an object';
+        }
+        if (!isNonEmptyString(payload.last_updated)) {
+            return 'last_updated must be a non-empty string';
+        }
+        if (!Array.isArray(payload.items) || !payload.items.length) {
+            return 'items must be a non-empty array';
+        }
+        const ids = new Set();
+        const orders = new Set();
+        const sectionIds = new Set();
+        for (let index = 0; index < payload.items.length; index += 1) {
+            const item = payload.items[index];
+            const error = validateGalleryItem(item, index);
+            if (error) {
+                return error;
+            }
+            if (ids.has(item.id)) {
+                return 'item ids must be unique';
+            }
+            if (orders.has(item.galleryOrder)) {
+                return 'gallery orders must be unique';
+            }
+            if (item.sectionId && sectionIds.has(item.sectionId)) {
+                return 'gallery section ids must be unique';
+            }
+            ids.add(item.id);
+            orders.add(item.galleryOrder);
+            if (item.sectionId) {
+                sectionIds.add(item.sectionId);
+            }
+        }
+        return '';
+    }
+    function getLocalizedPath(item, language) {
+        const target = item.paths[language] || item.paths.en || item.paths.zh;
+        const resolved = typeof i18n.resolveLocalizedUrl === 'function'
             ? i18n.resolveLocalizedUrl(target, language)
             : target;
+        if (!isSafePath(resolved)) {
+            throw new Error('localized Gallery path is unsafe');
+        }
+        return resolved;
     }
     function typeLabel(type) {
-        const key = type ? `gallery_type_${type}` : '';
-        return key ? t(key) : '';
+        return type ? t(`gallery_type_${type}`) : '';
     }
-    function render(payload) {
+    function galleryMarkup(payload) {
         const language = getCurrentLanguage();
-        const items = Array.isArray(payload.items) ? payload.items : [];
-        if (!items.length) {
-            gallery.innerHTML = `<p>${escapeHtml(t('no_gallery_items_found'))}</p>`;
-            return;
-        }
-        const sorted = [...items].sort((a, b) => {
-            const orderA = Number.isFinite(a.galleryOrder) ? a.galleryOrder : Number.MAX_SAFE_INTEGER;
-            const orderB = Number.isFinite(b.galleryOrder) ? b.galleryOrder : Number.MAX_SAFE_INTEGER;
-            if (orderA !== orderB) {
-                return orderA - orderB;
-            }
-            const da = a.date ? new Date(a.date).getTime() : 0;
-            const db = b.date ? new Date(b.date).getTime() : 0;
-            return db - da;
-        });
-        gallery.innerHTML = sorted.map((item) => {
+        const sorted = [...payload.items].sort((a, b) => a.galleryOrder - b.galleryOrder);
+        return sorted.map((item) => {
             const title = getLocalizedValue(item.title, language);
             const subtitle = getLocalizedValue(item.subtitle, language);
             const summary = getLocalizedValue(item.summary, language);
+            const alt = getLocalizedValue(item.alt, language);
             const href = getLocalizedPath(item, language);
             const label = typeLabel(item.type);
-            const cardClass = item.galleryCardClass ? ` ${escapeHtml(item.galleryCardClass)}` : '';
+            const cardClass = ` ${escapeHtml(item.galleryCardClass)}`;
             const anchorId = item.sectionId || '';
             return `
                 <article${anchorId ? ` id="${escapeHtml(anchorId)}"` : ''} class="project-card gallery-card${cardClass}">
                     <a class="project-card-media" href="${escapeHtml(href)}" data-skip-lang-rewrite="${item.skipLangRewrite ? 'true' : 'false'}">
-                        <img src="${escapeHtml(item.cover || '')}" alt="${escapeHtml(title)} cover" loading="lazy" decoding="async">
+                        <img src="${escapeHtml(item.cover)}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async">
                     </a>
                     <div class="project-card-body">
                         <div class="project-card-meta">
                             ${label ? `<span class="meta-pill meta-pill--gallery">${escapeHtml(label)}</span>` : ''}
-                            ${item.date ? `<span>${escapeHtml(formatDate(item.date))}</span>` : ''}
+                            <span>${escapeHtml(formatDate(item.date))}</span>
                         </div>
                         <h3><a href="${escapeHtml(href)}" data-skip-lang-rewrite="${item.skipLangRewrite ? 'true' : 'false'}">${escapeHtml(title)}</a></h3>
                         ${subtitle ? `<p class="project-card-subtitle">${escapeHtml(subtitle)}</p>` : ''}
-                        ${summary ? `<p class="project-card-summary">${escapeHtml(summary)}</p>` : ''}
+                        <p class="project-card-summary">${escapeHtml(summary)}</p>
                         <a class="read-more" href="${escapeHtml(href)}" data-skip-lang-rewrite="${item.skipLangRewrite ? 'true' : 'false'}">${escapeHtml(t('open_gallery_item'))}</a>
                     </div>
                 </article>
             `;
         }).join('\n');
-        if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
-            i18n.applyLanguageStateToInternalLinks(gallery);
-        }
     }
-    gallery.innerHTML = `<p>${escapeHtml(t('loading_gallery_items'))}</p>`;
-    fetch(resolveVersionedPath('data/gallery_data.json'))
-        .then((response) => {
-        if (!response.ok) {
-            throw new Error(`gallery_data ${response.status}`);
-        }
-        return response.json();
-    })
-        .then(render)
-        .catch((error) => {
-        console.error('Error loading gallery:', error);
-        gallery.innerHTML = `<p>${escapeHtml(t('error_loading_gallery_items'))}</p>`;
-    });
-    window.addEventListener('site-language-change', function () {
+    function loadGallery() {
         fetch(resolveVersionedPath('data/gallery_data.json'))
-            .then((response) => response.ok ? response.json() : { items: [] })
-            .then(render)
-            .catch(() => { });
-    });
+            .then((response) => {
+            if (!response.ok) {
+                throw new Error(`gallery_data ${response.status}`);
+            }
+            return response.json();
+        })
+            .then((payload) => {
+            const validationError = validateGalleryPayload(payload);
+            if (validationError) {
+                throw new Error(`Invalid Gallery payload: ${validationError}`);
+            }
+            const markup = galleryMarkup(payload);
+            gallery.innerHTML = markup;
+            if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
+                i18n.applyLanguageStateToInternalLinks(gallery);
+            }
+        })
+            .catch((error) => {
+            preserveStaticFallback(String(error));
+        });
+    }
+    loadGallery();
+    window.addEventListener('site-language-change', loadGallery);
 });

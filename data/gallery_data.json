@@ -28,6 +28,10 @@
         "gallery",
         "home"
       ],
+      "alt": {
+        "zh": "AI 时代个人信息系统演示中的网络关系图",
+        "en": "Network map from Personal Information Systems in the AI Era"
+      },
       "galleryCardClass": "gallery-card--hero",
       "galleryOrder": 1,
       "sectionId": "gallery-talks"
@@ -58,6 +62,10 @@
         "gallery",
         "home"
       ],
+      "alt": {
+        "zh": "十年睡眠记录的时间序列可视化",
+        "en": "Timeline visualization of ten years of sleep records"
+      },
       "galleryCardClass": "gallery-card--wide",
       "galleryOrder": 2,
       "sectionId": "gallery-visual-essays"
@@ -67,6 +75,10 @@
       "type": "artifact",
       "date": "2026",
       "cover": "gallery/assets/gallery-card-hermes-v2.webp",
+      "alt": {
+        "zh": "Hermes Agent 的 HV 分析关系图",
+        "en": "Hermes Agent HV analysis diagram"
+      },
       "title": {
         "zh": "Hermes Agent / HV 分析",
         "en": "Hermes Agent / HV Analysis"
@@ -97,6 +109,10 @@
       "type": "field_note",
       "date": "2026",
       "cover": "gallery/assets/gallery-card-haba-field-v2.jpg",
+      "alt": {
+        "zh": "登山者沿哈巴雪山固定绳攀登",
+        "en": "Climbers following a fixed rope on Haba Snow Mountain"
+      },
       "title": {
         "zh": "哈巴雪山之旅",
         "en": "Haba Snow Mountain"
@@ -126,6 +142,10 @@
       "type": "visual_essay",
       "date": "2026",
       "cover": "gallery/assets/gallery-card-system-map-v2.webp",
+      "alt": {
+        "zh": "AI 个人信息系统的捕捉、记忆、检索与行动地图",
+        "en": "Map of capture, memory, retrieval, and action in an AI personal information system"
+      },
       "title": {
         "zh": "AI 时代的个人信息系统",
         "en": "AI personal information system"
@@ -177,6 +197,10 @@
         "home",
         "gallery"
       ],
+      "alt": {
+        "zh": "Sleep Toolkit 睡眠报告界面预览",
+        "en": "Sleep Toolkit interface preview"
+      },
       "galleryCardClass": "gallery-card--tool",
       "galleryOrder": 5
     }

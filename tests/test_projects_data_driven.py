@@ -68,6 +68,7 @@ global.window = {{
     applyLanguageStateToInternalLinks: () => {{}},
     t: (key) => ({{
       project_details_label: language === 'zh' ? '项目详情' : 'Project details',
+      project_signals_suffix: language === 'zh' ? '信号' : 'signals',
       project_surfaces_title: language === 'zh' ? '项目入口' : 'Project surfaces',
       projects_count_singular: language === 'zh' ? '1 个项目' : '1 project',
       projects_count_plural: language === 'zh' ? '{{count}} 个项目' : '{{count}} projects',
@@ -350,6 +351,13 @@ class ProjectsDataDrivenTests(unittest.TestCase):
         self.assertIn("持续维护", ledger)
         self.assertIn('href="projects/alpha.html?view=full&amp;lang=zh#results"', featured)
         self.assertNotIn("projects/alpha.en.html", featured)
+
+    def test_runtime_localizes_featured_metrics_aria_label_in_chinese(self):
+        result = run_projects_runtime(json.loads(FIXTURE.read_text()), rerender_language="zh")
+        featured = result["after"]["project-featured"]["innerHTML"]
+
+        self.assertIn('aria-label="Alpha 项目 信号"', featured)
+        self.assertNotIn('aria-label="Alpha 项目 signals"', featured)
 
     def test_runtime_escapes_hostile_text_and_attribute_values(self):
         payload = json.loads(FIXTURE.read_text())

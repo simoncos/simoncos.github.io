@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <strong>${escapeHtml(localized(media.title, language))}</strong>
                 </figcaption>
                 <img src="${escapeHtml(media.src)}" alt="${escapeHtml(localized(media.alt, language))}" loading="lazy" decoding="async">
-                ${metrics ? `<dl class="project-report-metrics" aria-label="${escapeHtml(localized(project.title, language))} signals">${metrics}</dl>` : ''}
+                ${metrics ? `<dl class="project-report-metrics" aria-label="${escapeHtml(localized(project.title, language))} ${escapeHtml(t('project_signals_suffix'))}">${metrics}</dl>` : ''}
             </figure>
         ` : '';
         const facts = (project.facts || []).map((fact) => {
