@@ -57,6 +57,12 @@ def prepare_temp_repo(temp_root: Path) -> None:
     for rel in ("blogs", "templates", "data"):
         copy_path(ROOT / rel, temp_root / rel)
 
+    # A fresh Git checkout does not preserve source mtimes. Normalize them here
+    # so the local drift check catches generators that accidentally depend on mtime.
+    fixed_timestamp = 946684800  # 2000-01-01T00:00:00Z
+    for markdown_path in (temp_root / "blogs").glob("*.md"):
+        os.utime(markdown_path, (fixed_timestamp, fixed_timestamp))
+
 
 def generated_paths() -> list[str]:
     paths = list(GENERATED_DATA)

@@ -1,6 +1,7 @@
 ---
 tags: out
 date: 2026-01-20
+updated: 2026-02-28
 ---
 # My Haba Snow Mountain Journey
 

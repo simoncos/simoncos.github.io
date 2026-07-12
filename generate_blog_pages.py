@@ -67,7 +67,8 @@ def parse_metadata(md_content):
             'tags': '',
             'series': '',
             'series_part': '',
-            'date': ''
+            'date': '',
+            'updated': ''
         }
         
         metadata_match = re.match(r'---\n(.*?)\n---\n', md_content, re.DOTALL)
@@ -99,20 +100,19 @@ def get_file_times(file_path):
         today = datetime.now().strftime('%Y-%m-%d')
         return today, today
 
-def get_file_times_with_metadata(file_path, metadata_date):
-    """Prefer frontmatter date for created date, use file mtime for updated date."""
+def get_file_times_with_metadata(file_path, metadata_date, metadata_updated=''):
+    """Prefer deterministic frontmatter dates, with mtime only as a legacy fallback."""
     try:
         stats = os.stat(file_path)
-        updated = datetime.fromtimestamp(stats.st_mtime).strftime('%Y-%m-%d')
+        fallback_date = datetime.fromtimestamp(stats.st_mtime).strftime('%Y-%m-%d')
     except OSError as e:
         logging.error(f"Error getting file times for {file_path}: {str(e)}")
-        updated = datetime.now().strftime('%Y-%m-%d')
+        fallback_date = datetime.now().strftime('%Y-%m-%d')
 
     created_dt = parse_frontmatter_date(metadata_date)
-    if created_dt:
-        created = created_dt.strftime('%Y-%m-%d')
-    else:
-        created = updated
+    updated_dt = parse_frontmatter_date(metadata_updated)
+    created = created_dt.strftime('%Y-%m-%d') if created_dt else fallback_date
+    updated = updated_dt.strftime('%Y-%m-%d') if updated_dt else created
 
     return created, updated
 
@@ -680,7 +680,7 @@ def generate_blog_pages():
 
         template = load_template('templates/blog-template.html')
         
-        markdown_files = [f for f in os.listdir('blogs') if f.endswith('.md')]
+        markdown_files = sorted(f for f in os.listdir('blogs') if f.endswith('.md'))
         if not markdown_files:
             logging.warning("No markdown files found in blogs directory")
             return []
@@ -832,7 +832,11 @@ def render_blog_post(post, template, article_group_map):
         else:
             lang_switch_html = ''
 
-        created, updated = get_file_times_with_metadata(markdown_path, metadata.get('date', ''))
+        created, updated = get_file_times_with_metadata(
+            markdown_path,
+            metadata.get('date', ''),
+            metadata.get('updated', ''),
+        )
         canonical_url = absolute_site_url(f"blogs/{html_file}")
         meta_description = build_meta_description(post.get('excerpt') or title)
         og_locale = 'zh_CN' if post['language'] == 'zh' else 'en_US'
