@@ -239,3 +239,27 @@ Verification:
 - Full suite re-run and green: `npm run build:ts`, `npm run check:ts`, `jq empty` on manifests, `scripts/check_site.py`, `scripts/update_site_shell.py --check`, `scripts/update_static_fallbacks.py --check`, `scripts/update_surface_data.py --check`, `scripts/check_blog_generation.py`, `node --check` on `src/js`, `git diff --check`.
 
 **final result: passed**
+
+**Home Ledger Alignment - 2026-07-14**
+
+Scope:
+- Brought the homepage into the same ledger/page-frame system as Projects, Essays, Gallery, and About. Home previously kept the old card-heavy layout: the hero and Current Index sat inside a tinted gradient-edged card, Reading Paths had a broken grid with large phantom gaps, Recent Updates rendered as a floating card with misaligned dates, and action arrows used ASCII "->".
+
+Fixes:
+- Added the shared `ledger-topline` rail to the homepage (Home / kicker / updated date, with an "Index & archive →" action) with new `home_topline_*` i18n keys in English and Chinese; the duplicated hero kicker is now hidden.
+- Flattened the hero: removed the card border, gradient background, shadow, and rainbow bottom bar in light and dark modes; the hero now closes with a single editorial rule like other pages.
+- Flattened Recent Updates: removed the `content-section` card border/background/shadow (light and dark) so it reads as a right rail behind a vertical rule; pinned title and date to one row on desktop and stacked them title-first on mobile.
+- Fixed Reading Paths: hidden fourth card rule and mobile single-column rules were being overridden by higher-specificity base rules (`.home-page-content` prefix added); removed the 3.15rem phantom margin above titles; added `align-content: start` so the stretched grid no longer inflates the heading and card rows.
+- Replaced the CSS-generated ASCII " ->" arrow suffix with a real " →" to match the arrows used on other pages.
+- Fixed mobile `home-system-node` sizing rules (899px and 520px blocks) that lost the same specificity fight.
+- Bumped the shared shell cache key to `20260714a`, propagated to all pages, and regenerated blog pages and RSS feeds.
+
+Runtime evidence:
+- Desktop Home 1440 x 1024, light and dark: flat ledger frame, topline rail, aligned Reading Paths / Recent Updates kickers, `overflowX=0`.
+- Mobile Home 390 x 844, English and Chinese: single-column ledger rows, stacked recent rows (title above date), topline localizes via `home_topline_*` keys, `overflowX=0`.
+- Regression pass at 1440 x 1024 on blogs, projects, gallery, about, series, and tags: all `overflowX=0`, no visual drift from the shared cache-key bump.
+
+Verification:
+- Full suite green: `npm run build:ts`, `npm run check:ts`, `jq empty` on manifests, `scripts/check_site.py`, `scripts/update_site_shell.py --check`, `scripts/update_static_fallbacks.py --check`, `scripts/update_surface_data.py --check`, `scripts/check_blog_generation.py` (after `generate_blog_pages.py`), `node --check` on `src/js`, `git diff --check`.
+
+**final result: passed**
