@@ -8,6 +8,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const i18n = window.SITE_I18N || {};
     const articleGroupsApi = window.SITE_ARTICLE_GROUPS || {};
     const currentFile = window.location.pathname.split('/').pop();
+    const backlinksSection = backlinksList.closest('.post-backlinks') as HTMLElement | null;
+
+    function setBacklinksVisible(visible: boolean) {
+        if (backlinksSection) {
+            backlinksSection.style.display = visible ? '' : 'none';
+        }
+    }
+
+    function hideBacklinks() {
+        backlinksList.innerHTML = '';
+        setBacklinksVisible(false);
+    }
     const resolvePath = typeof siteConfig.resolvePath === 'function'
         ? siteConfig.resolvePath.bind(siteConfig)
         : (relativePath) => relativePath;
@@ -31,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderBacklinkItems(backlinks) {
         if (!backlinks.length) {
-            backlinksList.innerHTML = `<li>${i18n.t('no_backlinks_found')}</li>`;
+            hideBacklinks();
             return;
         }
 
@@ -52,9 +64,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (!backlinksList.children.length) {
-            backlinksList.innerHTML = `<li>${i18n.t('no_backlinks_found')}</li>`;
+            hideBacklinks();
             return;
         }
+
+        setBacklinksVisible(true);
 
         if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
             i18n.applyLanguageStateToInternalLinks(backlinksList);
@@ -85,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function renderBacklinksFromArticleGroups() {
         const currentGroupInfo = articleGroupsApi.getGroupByFile(articleGroupsData, currentFile);
         if (!currentGroupInfo || !currentGroupInfo.group) {
-            backlinksList.innerHTML = `<li>${i18n.t('no_backlinks_found')}</li>`;
+            hideBacklinks();
             return;
         }
 
@@ -114,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
         if (!backlinks.length) {
-            backlinksList.innerHTML = `<li>${i18n.t('no_backlinks_found')}</li>`;
+            hideBacklinks();
             return;
         }
 
@@ -127,6 +141,8 @@ document.addEventListener('DOMContentLoaded', function () {
             li.appendChild(a);
             backlinksList.appendChild(li);
         });
+
+        setBacklinksVisible(backlinksList.children.length > 0);
 
         if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
             i18n.applyLanguageStateToInternalLinks(backlinksList);
@@ -143,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function loadArticleGroupsFallback() {
         if (typeof articleGroupsApi.fetchArticleGroups !== 'function') {
-            backlinksList.innerHTML = `<li>${i18n.t('error_loading_backlinks')}</li>`;
+            hideBacklinks();
             return;
         }
 
@@ -154,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch((error) => {
                 console.error('Error loading grouped backlinks:', error);
-                backlinksList.innerHTML = `<li>${i18n.t('error_loading_backlinks')}</li>`;
+                hideBacklinks();
             });
     }
 

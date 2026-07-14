@@ -294,3 +294,22 @@ Verification:
 - Cache key bumped to `20260714c`; shell propagated, blog outputs regenerated; check suite green.
 
 **final result: passed**
+
+**Hollow Content Sweep - 2026-07-14**
+
+Scope:
+- After the Recently-legend removal, swept every page for the same class of problem: sections that look like content but carry no information, or purely repeat content shown elsewhere.
+
+Findings and fixes:
+- Article pages: posts without backlinks or a series rendered whole sections reading "Backlinks — No backlinks found." and "Series — No series." The renderers (`load-backlinks.ts`, `load-post-series.ts`) now hide the entire section when there is nothing to show, and show it only with real items (verified: haba post hides both; the abyss series post still shows its 2-part series and real backlinks).
+- Projects: the bottom "Project ledger" listed exactly one row — the same Sleep Toolkit already presented as the featured hero above. Both the static generator (`update_static_fallbacks.py`) and the runtime renderer (`load-projects.ts`) now ship the section `hidden` when the only ledger entry is the featured project; it reappears automatically once a second project exists.
+- Home hero action: "See what is active →" pointed at `#system-map`, the hero section itself — clicking scrolled nowhere. It now points at `#blog` (Latest activity), matching its label in both languages.
+- Home Reading Paths: the Building/Thinking/Field cards were the same abstract triad as the removed legend, and their links duplicated Current Index items. Replaced with the three real site sections — Projects / Essays / Gallery — each reusing its page's existing description copy (en + zh) and linking to the index page. i18n keys renamed to `home_trail_projects|essays|gallery_*`; `data/home_surface.json` trails updated to match; the fourth (hidden) card removed.
+
+Reviewed and left alone:
+- Gallery's Personal Data Lab strip (part of the approved option-2 mock, presented as a curated path), About's Location/Open-here facts (short but factual), Essays filters/RSS rail (functional).
+
+Verification:
+- Full suite green; article/projects/home re-verified in the browser: hidden-when-empty behavior confirmed on both empty and non-empty posts, projects ledger hidden statically and at runtime, home trails render the three real sections in en and zh data paths.
+
+**final result: passed**
