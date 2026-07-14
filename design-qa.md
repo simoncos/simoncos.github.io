@@ -220,3 +220,22 @@ Remaining P3:
 - Some card imagery remains generated/static rather than bespoke per-card illustrations; all visible text duplication and clipping issues from the latest pass were removed.
 
 **final result: passed**
+
+**Projects Report Preview Asset - 2026-07-14**
+
+Scope:
+- Closed the remaining P3 from Follow-Up Polish: the Projects report preview reused `projects/assets/sleep-2016-2026-cover.svg` (the data-essay cover), so the chart read as essay art rather than a Sleep Toolkit report.
+
+Fixes:
+- Added a dedicated hand-authored asset `projects/assets/sleep-report-preview.svg`: a dark report panel with a monthly-report metadata rail, "Average nightly sleep" hero stat, a 12-month nightly-average line chart with a dashed 7 h reference, an emphasized latest-month point, and a footer facts row consistent with the page metrics (3,656 nights · 2016–2026 · JSON / HTML / PDF).
+- Panel background matches the report-card image plate (`#111a28`) so `object-fit: contain` letterboxing is seamless in both themes; line hue follows the editorial accent family and passes >=3:1 contrast against the panel.
+- Pointed `data/content_manifest.json` projects `featuredDetail.media.src` at the new asset and regenerated `data/projects_data.json` and the `projects.html` static fallback. The data-essay cover and its og:image usage are unchanged.
+
+Runtime evidence:
+- Desktop Projects 1440 x 1024, light and dark: report card renders the new chart with seamless panel edges.
+- Mobile Projects 390 x 844: single-column card keeps the chart legible with no horizontal overflow.
+
+Verification:
+- Full suite re-run and green: `npm run build:ts`, `npm run check:ts`, `jq empty` on manifests, `scripts/check_site.py`, `scripts/update_site_shell.py --check`, `scripts/update_static_fallbacks.py --check`, `scripts/update_surface_data.py --check`, `scripts/check_blog_generation.py`, `node --check` on `src/js`, `git diff --check`.
+
+**final result: passed**

@@ -37,7 +37,7 @@
           "en": "A maintained tool that turns long-running SleepCycle exports into structured JSON, interactive HTML reports, and PDF outputs. Private by design, running locally with full data ownership."
         },
         "media": {
-          "src": "projects/assets/sleep-2016-2026-cover.svg",
+          "src": "projects/assets/sleep-report-preview.svg",
           "alt": {
             "zh": "Sleep Toolkit 报告预览",
             "en": "Sleep Toolkit report preview"
