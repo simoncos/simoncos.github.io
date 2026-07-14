@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="864" height="520" viewBox="0 0 864 520" role="img" aria-labelledby="sleep-report-preview-title">
+  <title id="sleep-report-preview-title">Sleep Toolkit monthly report preview: average nightly sleep over the trailing twelve months</title>
+  <style>
+    text { font-family: "Aptos", "Segoe UI", "Helvetica Neue", sans-serif; }
+    .rail { font-size: 19px; font-weight: 700; letter-spacing: 2.6px; fill: #aab6c8; }
+    .label { font-size: 20px; fill: #aab6c8; }
+    .hero { font-size: 58px; font-weight: 750; fill: #edf3ff; }
+    .axis { font-size: 17px; fill: #8fa0b6; }
+    .note { font-size: 18px; fill: #8fa0b6; letter-spacing: 0.4px; }
+    .pointlabel { font-size: 20px; font-weight: 700; fill: #edf3ff; }
+  </style>
+
+  <rect x="1" y="1" width="862" height="518" rx="12" fill="#111a28" stroke="#23314a" stroke-width="2"/>
+
+  <!-- top metadata rail -->
+  <text class="rail" x="52" y="60">SLEEP TOOLKIT · MONTHLY REPORT</text>
+  <text class="rail" x="812" y="60" text-anchor="end">MAY 2025</text>
+  <line x1="52" y1="80" x2="812" y2="80" stroke="#edf3ff" stroke-opacity="0.12" stroke-width="1.5"/>
+
+  <!-- headline stat -->
+  <text class="label" x="52" y="124">Average nightly sleep</text>
+  <text class="hero" x="52" y="182">7 h 17 m</text>
+  <text class="label" x="812" y="176" text-anchor="end">Trailing 12 months</text>
+
+  <!-- plot: y maps 6.0–8.0 h to 424–224 -->
+  <g>
+    <line x1="84" y1="224" x2="800" y2="224" stroke="#edf3ff" stroke-opacity="0.10" stroke-width="1.5"/>
+    <line x1="84" y1="424" x2="800" y2="424" stroke="#edf3ff" stroke-opacity="0.18" stroke-width="1.5"/>
+    <text class="axis" x="76" y="230" text-anchor="end">8 h</text>
+    <text class="axis" x="76" y="330" text-anchor="end">7 h</text>
+    <text class="axis" x="76" y="430" text-anchor="end">6 h</text>
+
+    <!-- 7 h reference -->
+    <line x1="84" y1="324" x2="800" y2="324" stroke="#aab6c8" stroke-opacity="0.5" stroke-width="2" stroke-dasharray="6 9"/>
+    <text class="axis" x="796" y="346" text-anchor="end">7 h target</text>
+
+    <!-- area under line -->
+    <path d="M104 314 L165 334 L227 324 L288 294 L350 304 L411 274 L473 264 L534 284 L596 304 L657 294 L719 274 L780 284 L780 424 L104 424 Z"
+          fill="#3fb4c6" fill-opacity="0.10"/>
+
+    <!-- series line -->
+    <polyline points="104,314 165,334 227,324 288,294 350,304 411,274 473,264 534,284 596,304 657,294 719,274 780,284"
+              fill="none" stroke="#3fb4c6" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+
+    <!-- markers -->
+    <g fill="#111a28" stroke="#3fb4c6" stroke-width="4">
+      <circle cx="104" cy="314" r="7"/>
+      <circle cx="165" cy="334" r="7"/>
+      <circle cx="227" cy="324" r="7"/>
+      <circle cx="288" cy="294" r="7"/>
+      <circle cx="350" cy="304" r="7"/>
+      <circle cx="411" cy="274" r="7"/>
+      <circle cx="473" cy="264" r="7"/>
+      <circle cx="534" cy="284" r="7"/>
+      <circle cx="596" cy="304" r="7"/>
+      <circle cx="657" cy="294" r="7"/>
+      <circle cx="719" cy="274" r="7"/>
+    </g>
+    <!-- latest month, emphasized -->
+    <circle cx="780" cy="284" r="9" fill="#65d6e4" stroke="#111a28" stroke-width="4"/>
+    <text class="pointlabel" x="780" y="254" text-anchor="middle">7.4 h</text>
+
+    <!-- month labels -->
+    <g class="axis" text-anchor="middle">
+      <text x="104" y="452">Jun</text>
+      <text x="165" y="452">Jul</text>
+      <text x="227" y="452">Aug</text>
+      <text x="288" y="452">Sep</text>
+      <text x="350" y="452">Oct</text>
+      <text x="411" y="452">Nov</text>
+      <text x="473" y="452">Dec</text>
+      <text x="534" y="452">Jan</text>
+      <text x="596" y="452">Feb</text>
+      <text x="657" y="452">Mar</text>
+      <text x="719" y="452">Apr</text>
+      <text x="780" y="452">May</text>
+    </g>
+  </g>
+
+  <!-- footer facts -->
+  <line x1="52" y1="474" x2="812" y2="474" stroke="#edf3ff" stroke-opacity="0.12" stroke-width="1.5"/>
+  <text class="note" x="52" y="502">3,656 nights · 2016 – 2026 · JSON / HTML / PDF · generated locally</text>
+</svg>
