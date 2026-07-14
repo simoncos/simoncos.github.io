@@ -286,3 +286,11 @@ Verification:
 - Full suite green: `npm run build:ts`, `npm run check:ts`, `jq empty` on manifests, `scripts/check_site.py`, `scripts/update_site_shell.py --check`, `scripts/update_static_fallbacks.py --check`, `scripts/update_surface_data.py --check`, `scripts/check_blog_generation.py` (after `generate_blog_pages.py`), `node --check` on `src/js`, `git diff --check`.
 
 **final result: passed**
+
+**Home Recently Legend Removal - 2026-07-14**
+
+- User feedback: the restored "Recently" legend (Building/Thinking/Field) read as filler — category labels with no real content, duplicating what Current Index already shows concretely.
+- Reverted: the legend is hidden again (`.home-route-legend` back in the route-journal hide list) and its row styling removed; the hero left column returns to intentional editorial whitespace.
+- Cache key bumped to `20260714c`; shell propagated, blog outputs regenerated; check suite green.
+
+**final result: passed**
