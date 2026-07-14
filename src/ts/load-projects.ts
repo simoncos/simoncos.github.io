@@ -319,6 +319,12 @@ document.addEventListener('DOMContentLoaded', function () {
         renderFeatured(featured, language);
         renderLedger(projects, language);
 
+        // A one-project ledger only repeats the featured project above it.
+        const ledgerSection = ledgerTarget.closest('.projects-ledger-list') as HTMLElement | null;
+        if (ledgerSection) {
+            ledgerSection.hidden = projects.length === 1 && projects[0].id === featured.id;
+        }
+
         if (summaryTarget) {
             summaryTarget.textContent = projects.length === 1
                 ? t('projects_count_singular')

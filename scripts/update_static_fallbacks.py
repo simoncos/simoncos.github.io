@@ -448,6 +448,10 @@ def render_projects_content(projects_payload: dict) -> str:
                 </div>'''
         )
 
+    # A one-project ledger only repeats the featured project above it, so ship it hidden.
+    ledger_is_redundant = len(projects) == 1 and projects[0].get("id") == featured.get("id")
+    ledger_hidden_attr = " hidden" if ledger_is_redundant else ""
+
     ledger_rows = []
     for index, project in enumerate(projects, start=1):
         primary_action = (project.get("actions") or [None])[0]
@@ -507,7 +511,7 @@ def render_projects_content(projects_payload: dict) -> str:
 {chr(10).join(surfaces)}
             </section>
         </div>
-        <section class="projects-ledger-list" aria-labelledby="projects-ledger-title">
+        <section class="projects-ledger-list"{ledger_hidden_attr} aria-labelledby="projects-ledger-title">
             <h2 id="projects-ledger-title" data-i18n="project_ledger_title">Project ledger</h2>
             <div id="projects-ledger">
 {chr(10).join(ledger_rows)}

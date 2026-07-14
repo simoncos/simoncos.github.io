@@ -7,7 +7,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const i18n = window.SITE_I18N || {};
     const articleGroupsApi = window.SITE_ARTICLE_GROUPS || {};
     const currentFile = window.location.pathname.split('/').pop();
+    const seriesSection = seriesList.closest('.post-series');
     let articleGroupsData = null;
+    function setSeriesVisible(visible) {
+        if (seriesSection) {
+            seriesSection.style.display = visible ? '' : 'none';
+        }
+    }
     function renderSeries() {
         const currentGroupInfo = articleGroupsApi.getGroupByFile(articleGroupsData, currentFile);
         const currentGroup = currentGroupInfo && currentGroupInfo.group;
@@ -15,7 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
             ? i18n.getCurrentLanguage()
             : 'en';
         if (!currentGroup || !currentGroup.series || !currentGroup.series.name) {
-            seriesList.innerHTML = `<li>${i18n.t('no_series')}</li>`;
+            seriesList.innerHTML = '';
+            setSeriesVisible(false);
             return;
         }
         const items = articleGroupsData.groups
@@ -50,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             seriesList.appendChild(li);
         });
+        setSeriesVisible(seriesList.children.length > 0);
         if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
             i18n.applyLanguageStateToInternalLinks(seriesList);
         }
@@ -61,7 +69,8 @@ document.addEventListener('DOMContentLoaded', function () {
     })
         .catch((error) => {
         console.error('Error loading grouped series data:', error);
-        seriesList.innerHTML = `<li>${i18n.t('error_loading_post_series')}</li>`;
+        seriesList.innerHTML = '';
+        setSeriesVisible(false);
     });
     window.addEventListener('site-language-change', renderSeries);
 });
