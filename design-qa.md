@@ -263,3 +263,26 @@ Verification:
 - Full suite green: `npm run build:ts`, `npm run check:ts`, `jq empty` on manifests, `scripts/check_site.py`, `scripts/update_site_shell.py --check`, `scripts/update_static_fallbacks.py --check`, `scripts/update_surface_data.py --check`, `scripts/check_blog_generation.py` (after `generate_blog_pages.py`), `node --check` on `src/js`, `git diff --check`.
 
 **final result: passed**
+
+**Sitewide Ledger Consistency Pass - 2026-07-14**
+
+Scope:
+- Full-site audit follow-up covering the two pages that had missed the redesign (article reading pages and 404) plus a batch of smaller inconsistencies found across About, Essays dark mode, Tags, Gallery, and Home.
+
+Fixes:
+- Article pages (`blogs/*.html`): post title and in-article h1-h4 now use the editorial serif with ink color and neutral letter-spacing; the language switch is a flat accent "中文/EN →" link instead of a rounded chip; the mobile table-of-contents summary and desktop TOC are flat with editorial rules; backlinks/tags/series blocks are flat rule-topped sections with uppercase accent labels; in-article tag chips are flat text links; the "Article" header kicker is hidden to match every other page.
+- 404: rebuilt as a ledger page (`body.error-page`, `page-ledger-frame`) with an "Error 404" kicker, serif "Page not found" title, muted lede, and a flat "Back to home →" link; removed the tinted card, gradient pill button, house icon, and watermark 404 in both themes.
+- About: identity scale raised (name to clamp 2.5-3.2rem, motto to 1.35rem), column ratios rebalanced toward profile and contact, section padding deepened, contact rows taller, and the CJK name parenthesis outdented so a wrapped "（趙澈）" no longer reads as indented.
+- Essays: dark mode archive rows are now flat (the old elevated card background no longer bleeds through); the preview toggle is a flat uppercase control with the duplicated "Preview" label removed and editorial accent on the checkbox.
+- Tags: removed the repeated zero-information "TAGS" pill from every section in the runtime renderer; the left meta now shows only the post count.
+- Gallery: removed the stray filler rule after the section-index filter row (it doubled with the section border), and re-anchored the filter nav into the explicit grid column so it stays left-aligned.
+- Home: restored the "Recently" legend under the hero actions as flat ledger rows (Building/Thinking/Field), filling the previously empty left column; data and i18n were already present.
+- Bumped the shared shell cache key to `20260714b`, propagated to all pages, regenerated blog pages and RSS.
+
+Runtime evidence:
+- Article desktop/mobile/dark, 404 desktop/mobile/dark, About desktop/dark, Essays dark, Tags desktop, Gallery top, Home desktop/mobile: all render in the shared editorial system with `overflowX=0`.
+
+Verification:
+- Full suite green: `npm run build:ts`, `npm run check:ts`, `jq empty` on manifests, `scripts/check_site.py`, `scripts/update_site_shell.py --check`, `scripts/update_static_fallbacks.py --check`, `scripts/update_surface_data.py --check`, `scripts/check_blog_generation.py` (after `generate_blog_pages.py`), `node --check` on `src/js`, `git diff --check`.
+
+**final result: passed**

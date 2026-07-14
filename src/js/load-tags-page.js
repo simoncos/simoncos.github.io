@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
             allTagsSection.classList.remove('hidden');
             allTagsSection.innerHTML = [...tagMap.entries()].map(([tag, groups]) => `
                 <section class="tag-overview-block">
-                    <div class="tag-meta"><span class="meta-pill">${escapeHtml(i18n.t('tags'))}</span><span>${escapeHtml(i18n.formatPostCount(groups.length))}</span></div>
+                    <div class="tag-meta"><span>${escapeHtml(i18n.formatPostCount(groups.length))}</span></div>
                     <h3>${escapeHtml(tag)}</h3>
                     <ul>${groups.map((group) => renderGroupItem(group, currentLanguage)).join('')}</ul>
                 </section>
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         tagSections.innerHTML = `
             <section id="${escapeHtml(hash)}" class="tag-section">
-                <div class="tag-meta"><span class="meta-pill">${escapeHtml(i18n.t('tags'))}</span><span>${escapeHtml(i18n.formatPostCount(groups.length))}</span></div>
+                <div class="tag-meta"><span>${escapeHtml(i18n.formatPostCount(groups.length))}</span></div>
                 <h3>${escapeHtml(hash)}</h3>
                 <ul>${groups.map((group) => renderGroupItem(group, currentLanguage)).join('')}</ul>
             </section>
