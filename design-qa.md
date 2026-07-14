@@ -220,3 +220,69 @@ Remaining P3:
 - Some card imagery remains generated/static rather than bespoke per-card illustrations; all visible text duplication and clipping issues from the latest pass were removed.
 
 **final result: passed**
+
+**Projects Report Preview Asset - 2026-07-14**
+
+Scope:
+- Closed the remaining P3 from Follow-Up Polish: the Projects report preview reused `projects/assets/sleep-2016-2026-cover.svg` (the data-essay cover), so the chart read as essay art rather than a Sleep Toolkit report.
+
+Fixes:
+- Added a dedicated hand-authored asset `projects/assets/sleep-report-preview.svg`: a dark report panel with a monthly-report metadata rail, "Average nightly sleep" hero stat, a 12-month nightly-average line chart with a dashed 7 h reference, an emphasized latest-month point, and a footer facts row consistent with the page metrics (3,656 nights · 2016–2026 · JSON / HTML / PDF).
+- Panel background matches the report-card image plate (`#111a28`) so `object-fit: contain` letterboxing is seamless in both themes; line hue follows the editorial accent family and passes >=3:1 contrast against the panel.
+- Pointed `data/content_manifest.json` projects `featuredDetail.media.src` at the new asset and regenerated `data/projects_data.json` and the `projects.html` static fallback. The data-essay cover and its og:image usage are unchanged.
+
+Runtime evidence:
+- Desktop Projects 1440 x 1024, light and dark: report card renders the new chart with seamless panel edges.
+- Mobile Projects 390 x 844: single-column card keeps the chart legible with no horizontal overflow.
+
+Verification:
+- Full suite re-run and green: `npm run build:ts`, `npm run check:ts`, `jq empty` on manifests, `scripts/check_site.py`, `scripts/update_site_shell.py --check`, `scripts/update_static_fallbacks.py --check`, `scripts/update_surface_data.py --check`, `scripts/check_blog_generation.py`, `node --check` on `src/js`, `git diff --check`.
+
+**final result: passed**
+
+**Home Ledger Alignment - 2026-07-14**
+
+Scope:
+- Brought the homepage into the same ledger/page-frame system as Projects, Essays, Gallery, and About. Home previously kept the old card-heavy layout: the hero and Current Index sat inside a tinted gradient-edged card, Reading Paths had a broken grid with large phantom gaps, Recent Updates rendered as a floating card with misaligned dates, and action arrows used ASCII "->".
+
+Fixes:
+- Added the shared `ledger-topline` rail to the homepage (Home / kicker / updated date, with an "Index & archive →" action) with new `home_topline_*` i18n keys in English and Chinese; the duplicated hero kicker is now hidden.
+- Flattened the hero: removed the card border, gradient background, shadow, and rainbow bottom bar in light and dark modes; the hero now closes with a single editorial rule like other pages.
+- Flattened Recent Updates: removed the `content-section` card border/background/shadow (light and dark) so it reads as a right rail behind a vertical rule; pinned title and date to one row on desktop and stacked them title-first on mobile.
+- Fixed Reading Paths: hidden fourth card rule and mobile single-column rules were being overridden by higher-specificity base rules (`.home-page-content` prefix added); removed the 3.15rem phantom margin above titles; added `align-content: start` so the stretched grid no longer inflates the heading and card rows.
+- Replaced the CSS-generated ASCII " ->" arrow suffix with a real " →" to match the arrows used on other pages.
+- Fixed mobile `home-system-node` sizing rules (899px and 520px blocks) that lost the same specificity fight.
+- Bumped the shared shell cache key to `20260714a`, propagated to all pages, and regenerated blog pages and RSS feeds.
+
+Runtime evidence:
+- Desktop Home 1440 x 1024, light and dark: flat ledger frame, topline rail, aligned Reading Paths / Recent Updates kickers, `overflowX=0`.
+- Mobile Home 390 x 844, English and Chinese: single-column ledger rows, stacked recent rows (title above date), topline localizes via `home_topline_*` keys, `overflowX=0`.
+- Regression pass at 1440 x 1024 on blogs, projects, gallery, about, series, and tags: all `overflowX=0`, no visual drift from the shared cache-key bump.
+
+Verification:
+- Full suite green: `npm run build:ts`, `npm run check:ts`, `jq empty` on manifests, `scripts/check_site.py`, `scripts/update_site_shell.py --check`, `scripts/update_static_fallbacks.py --check`, `scripts/update_surface_data.py --check`, `scripts/check_blog_generation.py` (after `generate_blog_pages.py`), `node --check` on `src/js`, `git diff --check`.
+
+**final result: passed**
+
+**Sitewide Ledger Consistency Pass - 2026-07-14**
+
+Scope:
+- Full-site audit follow-up covering the two pages that had missed the redesign (article reading pages and 404) plus a batch of smaller inconsistencies found across About, Essays dark mode, Tags, Gallery, and Home.
+
+Fixes:
+- Article pages (`blogs/*.html`): post title and in-article h1-h4 now use the editorial serif with ink color and neutral letter-spacing; the language switch is a flat accent "中文/EN →" link instead of a rounded chip; the mobile table-of-contents summary and desktop TOC are flat with editorial rules; backlinks/tags/series blocks are flat rule-topped sections with uppercase accent labels; in-article tag chips are flat text links; the "Article" header kicker is hidden to match every other page.
+- 404: rebuilt as a ledger page (`body.error-page`, `page-ledger-frame`) with an "Error 404" kicker, serif "Page not found" title, muted lede, and a flat "Back to home →" link; removed the tinted card, gradient pill button, house icon, and watermark 404 in both themes.
+- About: identity scale raised (name to clamp 2.5-3.2rem, motto to 1.35rem), column ratios rebalanced toward profile and contact, section padding deepened, contact rows taller, and the CJK name parenthesis outdented so a wrapped "（趙澈）" no longer reads as indented.
+- Essays: dark mode archive rows are now flat (the old elevated card background no longer bleeds through); the preview toggle is a flat uppercase control with the duplicated "Preview" label removed and editorial accent on the checkbox.
+- Tags: removed the repeated zero-information "TAGS" pill from every section in the runtime renderer; the left meta now shows only the post count.
+- Gallery: removed the stray filler rule after the section-index filter row (it doubled with the section border), and re-anchored the filter nav into the explicit grid column so it stays left-aligned.
+- Home: restored the "Recently" legend under the hero actions as flat ledger rows (Building/Thinking/Field), filling the previously empty left column; data and i18n were already present.
+- Bumped the shared shell cache key to `20260714b`, propagated to all pages, regenerated blog pages and RSS.
+
+Runtime evidence:
+- Article desktop/mobile/dark, 404 desktop/mobile/dark, About desktop/dark, Essays dark, Tags desktop, Gallery top, Home desktop/mobile: all render in the shared editorial system with `overflowX=0`.
+
+Verification:
+- Full suite green: `npm run build:ts`, `npm run check:ts`, `jq empty` on manifests, `scripts/check_site.py`, `scripts/update_site_shell.py --check`, `scripts/update_static_fallbacks.py --check`, `scripts/update_surface_data.py --check`, `scripts/check_blog_generation.py` (after `generate_blog_pages.py`), `node --check` on `src/js`, `git diff --check`.
+
+**final result: passed**
