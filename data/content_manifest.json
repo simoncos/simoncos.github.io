@@ -86,64 +86,127 @@
             },
             "metrics": [
               {
-                "label": {"zh": "夜晚", "en": "Nights"},
+                "label": {
+                  "zh": "夜晚",
+                  "en": "Nights"
+                },
                 "value": "3,656"
               },
               {
-                "label": {"zh": "年份", "en": "Years"},
+                "label": {
+                  "zh": "年份",
+                  "en": "Years"
+                },
                 "value": "10"
               },
               {
-                "label": {"zh": "输出", "en": "Outputs"},
+                "label": {
+                  "zh": "输出",
+                  "en": "Outputs"
+                },
                 "value": "JSON · HTML · PDF"
               }
             ]
           },
           "facts": [
             {
-              "label": {"zh": "输入", "en": "Input"},
-              "value": {"zh": "SleepCycle CSV 导出，以及长期积累的个人睡眠记录。", "en": "SleepCycle CSV exports and long-running personal sleep records."},
-              "meta": {"zh": "Apple Health 数据 · 10 年", "en": "Apple Health data · 10 years"}
+              "label": {
+                "zh": "输入",
+                "en": "Input"
+              },
+              "value": {
+                "zh": "SleepCycle CSV 导出，以及长期积累的个人睡眠记录。",
+                "en": "SleepCycle CSV exports and long-running personal sleep records."
+              },
+              "meta": {
+                "zh": "Apple Health 数据 · 10 年",
+                "en": "Apple Health data · 10 years"
+              }
             },
             {
-              "label": {"zh": "输出", "en": "Output"},
-              "value": {"zh": "JSON、交互式报告、PDF。", "en": "JSON · interactive report · PDF."},
+              "label": {
+                "zh": "输出",
+                "en": "Output"
+              },
+              "value": {
+                "zh": "JSON、交互式报告、PDF。",
+                "en": "JSON · interactive report · PDF."
+              },
               "meta": "JSON · Interactive HTML · PDF"
             },
             {
-              "label": {"zh": "关联产物", "en": "Connected artifacts"},
-              "value": {"zh": "十年睡眠视觉随笔", "en": "Ten-year sleep visual essay"},
-              "meta": {"zh": "1 个条目", "en": "1 item"}
+              "label": {
+                "zh": "关联产物",
+                "en": "Connected artifacts"
+              },
+              "value": {
+                "zh": "十年睡眠视觉随笔",
+                "en": "Ten-year sleep visual essay"
+              },
+              "meta": {
+                "zh": "1 个条目",
+                "en": "1 item"
+              }
             },
             {
-              "label": {"zh": "下一步问题", "en": "Next question"},
-              "value": {"zh": "个人数据工具如何解释不确定性、习惯和行为变化，同时不假装自己是医疗建议？", "en": "How should personal data tools explain uncertainty, habits, and behavior change without pretending to be medical advice?"},
+              "label": {
+                "zh": "下一步问题",
+                "en": "Next question"
+              },
+              "value": {
+                "zh": "个人数据工具如何解释不确定性、习惯和行为变化，同时不假装自己是医疗建议？",
+                "en": "How should personal data tools explain uncertainty, habits, and behavior change without pretending to be medical advice?"
+              },
               "actionId": "essay"
             }
           ],
           "actions": [
             {
               "id": "open",
-              "label": {"zh": "打开 Sleep Toolkit", "en": "Open Sleep Toolkit"},
-              "paths": {"zh": "https://sleep-toolkit-production.up.railway.app", "en": "https://sleep-toolkit-production.up.railway.app"}
+              "label": {
+                "zh": "打开 Sleep Toolkit",
+                "en": "Open Sleep Toolkit"
+              },
+              "paths": {
+                "zh": "https://sleep-toolkit-production.up.railway.app",
+                "en": "https://sleep-toolkit-production.up.railway.app"
+              }
             },
             {
               "id": "essay",
-              "label": {"zh": "阅读数据随笔", "en": "Read data essay"},
-              "paths": {"zh": "projects/sleep-2016-2026.html", "en": "projects/sleep-2016-2026.en.html"}
+              "label": {
+                "zh": "阅读数据随笔",
+                "en": "Read data essay"
+              },
+              "paths": {
+                "zh": "projects/sleep-2016-2026.html",
+                "en": "projects/sleep-2016-2026.en.html"
+              }
             }
           ],
           "surfaces": [
             {
               "label": "A",
-              "title": {"zh": "Sleep Toolkit Web App", "en": "Sleep Toolkit web app"},
-              "summary": {"zh": "上传 SleepCycle CSV，并生成结构化分析输出。", "en": "Upload a SleepCycle CSV and generate structured analysis outputs."},
+              "title": {
+                "zh": "Sleep Toolkit Web App",
+                "en": "Sleep Toolkit web app"
+              },
+              "summary": {
+                "zh": "上传 SleepCycle CSV，并生成结构化分析输出。",
+                "en": "Upload a SleepCycle CSV and generate structured analysis outputs."
+              },
               "actionId": "open"
             },
             {
               "label": "B",
-              "title": {"zh": "十年睡眠记录", "en": "Ten years of sleep records"},
-              "summary": {"zh": "解释项目背景的长文叙事和数据故事。", "en": "The long-form narrative and data story that explains the project context."},
+              "title": {
+                "zh": "十年睡眠记录",
+                "en": "Ten years of sleep records"
+              },
+              "summary": {
+                "zh": "解释项目背景的长文叙事和数据故事。",
+                "en": "The long-form narrative and data story that explains the project context."
+              },
               "actionId": "essay"
             }
           ]
@@ -307,39 +370,6 @@
       "galleryCardClass": "gallery-card--field",
       "galleryOrder": 4,
       "sectionId": "gallery-field-notes"
-    },
-    {
-      "id": "ai-personal-information-system",
-      "type": "visual_essay",
-      "surfaces": [
-        "gallery"
-      ],
-      "date": "2026",
-      "cover": "gallery/assets/gallery-card-system-map-v2.webp",
-      "alt": {
-        "zh": "AI 个人信息系统的捕捉、记忆、检索与行动地图",
-        "en": "Map of capture, memory, retrieval, and action in an AI personal information system"
-      },
-      "title": {
-        "zh": "AI 时代的个人信息系统",
-        "en": "AI personal information system"
-      },
-      "subtitle": {
-        "zh": "",
-        "en": ""
-      },
-      "summary": {
-        "zh": "关于捕捉、记忆、检索和行动的视觉地图。",
-        "en": "A visual map of capture, memory, retrieval, and action."
-      },
-      "paths": {
-        "zh": "gallery/talks/pkm-2026-06-07/index.html",
-        "en": "gallery/talks/pkm-2026-06-07/index.html"
-      },
-      "skipLangRewrite": true,
-      "featured": false,
-      "galleryCardClass": "gallery-card--system-map",
-      "galleryOrder": 6
     }
   ]
 }
