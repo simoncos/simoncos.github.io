@@ -138,39 +138,6 @@
       ]
     },
     {
-      "id": "ai-personal-information-system",
-      "type": "visual_essay",
-      "date": "2026",
-      "cover": "gallery/assets/gallery-card-system-map-v2.webp",
-      "alt": {
-        "zh": "AI 个人信息系统的捕捉、记忆、检索与行动地图",
-        "en": "Map of capture, memory, retrieval, and action in an AI personal information system"
-      },
-      "title": {
-        "zh": "AI 时代的个人信息系统",
-        "en": "AI personal information system"
-      },
-      "subtitle": {
-        "zh": "",
-        "en": ""
-      },
-      "summary": {
-        "zh": "关于捕捉、记忆、检索和行动的视觉地图。",
-        "en": "A visual map of capture, memory, retrieval, and action."
-      },
-      "paths": {
-        "zh": "gallery/talks/pkm-2026-06-07/index.html",
-        "en": "gallery/talks/pkm-2026-06-07/index.html"
-      },
-      "skipLangRewrite": true,
-      "featured": false,
-      "galleryCardClass": "gallery-card--system-map",
-      "galleryOrder": 6,
-      "surfaceMembership": [
-        "gallery"
-      ]
-    },
-    {
       "id": "sleep-toolkit",
       "type": "tool",
       "date": "2025",
