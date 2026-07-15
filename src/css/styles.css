@@ -4560,13 +4560,6 @@ body:not(.home-page) .page-shell {
         grid-row: auto;
     }
 
-    /* The strip only repeats cards shown directly above in the single-column board. */
-    .gallery-index-page .personal-data-lab,
-    .gallery-index-page .gallery-board .personal-data-lab--strip,
-    .gallery-index-page .gallery-section-index a[href="#personal-data-lab"] {
-        display: none;
-    }
-
     /* The light system-map artwork vanishes when letterboxed into a short frame. */
     .gallery-board .gallery-card--system-map .project-card-media img {
         object-fit: cover;
@@ -4675,39 +4668,11 @@ body:not(.home-page) .page-shell {
 }
 
 @media (max-width: 1040px) {
-    .gallery-board .personal-data-lab--strip {
-        grid-template-columns: minmax(0, 1fr) repeat(2, minmax(0, 1fr));
-    }
-
-    .gallery-board .personal-data-lab--strip .personal-data-lab-heading {
-        grid-row: span 2;
-    }
-
-    .gallery-board .personal-data-lab--strip .personal-data-lab-heading,
-    .gallery-board .personal-data-lab--strip .personal-data-reference {
-        min-height: 4.7rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .gallery-board .personal-data-lab--strip {
-        grid-template-columns: 1fr;
-    }
-
-    .gallery-board .personal-data-lab--strip .personal-data-lab-heading {
-        grid-row: auto;
-    }
-
-    .gallery-board .personal-data-lab--strip .personal-data-lab-heading,
-    .gallery-board .personal-data-lab--strip .personal-data-reference {
-        min-height: 0;
-        padding: 0.82rem 1rem;
-        border-right: 0;
-        border-bottom: 1px solid var(--editorial-rule);
-    }
-
-    .gallery-board .personal-data-lab--strip .personal-data-reference:last-child {
-        border-bottom: 0;
+    /* Below the wide-board layout the strip only repeats cards shown directly above. */
+    .gallery-index-page .personal-data-lab,
+    .gallery-index-page .gallery-board .personal-data-lab--strip,
+    .gallery-index-page .gallery-section-index a[href="#personal-data-lab"] {
+        display: none;
     }
 }
 
@@ -5074,6 +5039,10 @@ body:not(.home-page) .page-shell {
     .projects-index-page .project-feature-actions {
         justify-content: flex-start;
     }
+}
+
+.projects-ledger-list[hidden] {
+    display: none;
 }
 
 .projects-ledger-list {
