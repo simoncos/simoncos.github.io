@@ -356,3 +356,21 @@ Verification:
 - Full suite green; breakpoint boundaries and ledger visibility verified in the browser at 1440/1041/1040/768/390.
 
 **final result: passed**
+
+**Gallery Duplicate-Entry Removal - 2026-07-15**
+
+Scope:
+- Owner decision: entries already shown at the top of a page must not repeat below. Applied to the two remaining Gallery duplications.
+
+Changes:
+- Removed the `ai-personal-information-system` manifest item (gallery-only): its card linked to the same destination as the hero talk card (`gallery/talks/pkm-2026-06-07/index.html`) under a near-identical name. The board is now five cards, all distinct artifacts with distinct destinations.
+- Removed the Personal Data Lab strip entirely (markup, section-index anchor, i18n keys, and its CSS blocks): on every width it only repeated cards shown directly above. This supersedes the earlier mobile/tablet hide.
+- Rebalanced the desktop mosaic for five cards: the Sleep Toolkit tool card now spans the full second row beside the hero.
+- Cleaned the orphaned `gallery-card--system-map` CSS. One cleanup regression was caught and fixed during verification: removing a selector that terminated shared multi-selector rules left dangling selector lists that swallowed the following rule (card titles disappeared); the shared rules were restored with the dead selector stripped.
+
+Verified:
+- Desktop 1440 light/dark: five-card board with no hole, all titles present, research artwork panel intact in dark mode.
+- Mobile 390: five distinct cards, uppercase type labels, no duplicates, no overflow.
+- Full check suite green; manifest and gallery data validated.
+
+**final result: passed**
