@@ -338,3 +338,21 @@ Known content-level note (left for owner decision):
 - The "AI personal information system" visual-essay card links to the same destination as the talk card (`gallery/talks/pkm-2026-06-07/index.html`). Visually they are now clearly distinct, but they remain two entries pointing at one artifact.
 
 **final result: passed**
+
+**Small-Frame and Breakpoint Sweep - 2026-07-15**
+
+Scope:
+- Follow-up sweep after the mobile-gallery fix, looking for the same failure classes on every page at 390px, 768px, and dark mobile: duplicated content, sections collapsing without separation, and light artwork vanishing in small frames.
+
+Findings and fixes:
+- Projects (all widths): the previous Project-ledger fix set the `hidden` attribute, but the author rule `.projects-ledger-list { display: grid }` overrides the UA default for `[hidden]`, so the duplicate section was still visible everywhere — the earlier verification checked the DOM property instead of computed display. Added `.projects-ledger-list[hidden] { display: none; }`; verified `display: none` at 1440/768/390.
+- Gallery tablet (641-1040px): the Personal Data Lab strip rendered as a broken half-collapsed grid ("Haba Snow Mountain" orphaned on its own row) while still duplicating the cards above. The hide (strip + section-index anchor) now applies at ≤1040px instead of ≤640px; the wide-board desktop treatment is unchanged at ≥1041px (boundary verified). Removed the now-dead ≤600px strip-collapse rules.
+- Home mobile: the Current Index thumbnail for "Personal Information Systems in the AI Era" used the light architecture diagram, which washes out to a near-white block at 5.8rem — same class as the gallery system-map issue. Swapped to the talk's existing dark network artwork (`gallery-hero-network-v2.webp`, already the gallery hero for the same item) in `data/home_surface.json` and the static markup, with updated alt text.
+
+Checked clean:
+- Home/Projects/Essays/Series/Tags/About/article pages at 390px, Home/Projects at 768px, Home/Gallery dark mobile: no duplication, no overflow, all images legible.
+
+Verification:
+- Full suite green; breakpoint boundaries and ledger visibility verified in the browser at 1440/1041/1040/768/390.
+
+**final result: passed**
