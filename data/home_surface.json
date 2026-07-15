@@ -34,7 +34,7 @@
           "en": "See what is active",
           "zh": "看最近在做什么"
         },
-        "href": "#system-map"
+        "href": "#blog"
       },
       {
         "label": {
@@ -201,73 +201,48 @@
     "items": [
       {
         "pill": {
-          "en": "AI Agents",
-          "zh": "AI Agents"
+          "en": "Projects",
+          "zh": "项目"
         },
         "title": {
-          "en": "Building",
-          "zh": "构建"
+          "en": "Projects",
+          "zh": "项目"
         },
         "description": {
           "en": "Things I build and maintain: products, systems, and experiments.",
           "zh": "我持续构建和维护的产品、系统和实验。"
         },
-        "href": "gallery/talks/pkm-2026-06-07/index.html",
-        "skipLangRewrite": true
+        "href": "projects.html"
       },
       {
         "pill": {
-          "en": "Systems",
-          "zh": "Systems"
+          "en": "Essays",
+          "zh": "文章"
         },
         "title": {
-          "en": "Thinking",
-          "zh": "思考"
+          "en": "Essays",
+          "zh": "文章"
         },
         "description": {
           "en": "Notes and essays on how systems behave and how I think about them.",
           "zh": "关于系统如何运转，以及我如何理解它们的笔记和文章。"
         },
-        "paths": {
-          "en": "blogs/my-personal-knowledge-management-system-2026-03.en.html",
-          "zh": "blogs/my-personal-knowledge-management-system-2026-03.html"
-        }
+        "href": "blogs.html"
       },
       {
         "pill": {
-          "en": "Data Lab",
-          "zh": "Data Lab"
+          "en": "Gallery",
+          "zh": "作品"
         },
         "title": {
-          "en": "Field",
-          "zh": "现场"
+          "en": "Gallery",
+          "zh": "作品"
         },
         "description": {
-          "en": "Field notes on travel, training, and decisions in the real world.",
-          "zh": "关于旅行、训练和现实决策的现场记录。"
+          "en": "Talks, demos, visual essays, and research artifacts.",
+          "zh": "演讲、Demo、视觉随笔和研究产物。"
         },
-        "paths": {
-          "en": "projects/sleep-2016-2026.en.html",
-          "zh": "projects/sleep-2016-2026.html"
-        }
-      },
-      {
-        "pill": {
-          "en": "Field Notes",
-          "zh": "Field Notes"
-        },
-        "title": {
-          "en": "Places and action",
-          "zh": "地点与行动"
-        },
-        "description": {
-          "en": "Outdoor notes, risk, and body feedback from outside the screen.",
-          "zh": "户外记录、风险和屏幕之外的身体反馈。"
-        },
-        "paths": {
-          "en": "blogs/my-haba-snow-mountain-journey.en.html",
-          "zh": "blogs/my-haba-snow-mountain-journey.html"
-        }
+        "href": "gallery.html"
       }
     ]
   }

@@ -288,6 +288,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const featured = projects.find((project) => project.featured) || projects[0];
         renderFeatured(featured, language);
         renderLedger(projects, language);
+        // A one-project ledger only repeats the featured project above it.
+        const ledgerSection = ledgerTarget.closest('.projects-ledger-list');
+        if (ledgerSection) {
+            ledgerSection.hidden = projects.length === 1 && projects[0].id === featured.id;
+        }
         if (summaryTarget) {
             summaryTarget.textContent = projects.length === 1
                 ? t('projects_count_singular')

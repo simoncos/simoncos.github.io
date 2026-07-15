@@ -5280,53 +5280,13 @@ body:not(.home-page) .page-shell {
     color: var(--editorial-ink);
 }
 
+.home-route-legend,
 .home-route-map .route-map-heading h2,
 .route-map-note,
 .route-node-action,
 .home-field-note,
 .home-bottom-routes {
     display: none;
-}
-
-.home-page-content .home-os-status,
-:is(body.dark-mode, html.dark-mode body) .home-page-content .home-os-status {
-    align-content: start;
-    gap: 0.2rem;
-    margin-top: 2.1rem;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-}
-
-.home-page-content .home-os-status .fact-label {
-    margin: 0 0 0.3rem;
-    text-transform: uppercase;
-}
-
-.home-page-content .home-os-status-list {
-    gap: 0;
-}
-
-.home-page-content .home-os-status-list li,
-:is(body.dark-mode, html.dark-mode body) .home-page-content .home-os-status-list li {
-    grid-template-columns: minmax(5.5rem, 0.4fr) minmax(0, 1fr);
-    padding: 0.52rem 0;
-    border-top: 1px solid var(--editorial-rule);
-}
-
-.home-page-content .home-os-status-list span,
-:is(body.dark-mode, html.dark-mode body) .home-page-content .home-os-status-list span {
-    color: var(--editorial-muted);
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-}
-
-.home-page-content .home-os-status-list strong {
-    color: var(--editorial-ink);
-    font-size: 0.92rem;
-    font-weight: 600;
 }
 
 .home-route-map {
