@@ -4547,6 +4547,7 @@ body:not(.home-page) .page-shell {
 
     .gallery-board {
         grid-template-columns: 1fr;
+        gap: 1.15rem;
     }
 
     .gallery-board .gallery-card--hero,
@@ -4557,6 +4558,25 @@ body:not(.home-page) .page-shell {
     .gallery-board .gallery-card--system-map {
         grid-column: 1 / -1;
         grid-row: auto;
+    }
+
+    /* The strip only repeats cards shown directly above in the single-column board. */
+    .gallery-index-page .personal-data-lab,
+    .gallery-index-page .gallery-board .personal-data-lab--strip,
+    .gallery-index-page .gallery-section-index a[href="#personal-data-lab"] {
+        display: none;
+    }
+
+    /* The light system-map artwork vanishes when letterboxed into a short frame. */
+    .gallery-board .gallery-card--system-map .project-card-media img {
+        object-fit: cover;
+    }
+
+    /* Louder type labels so single-column cards self-identify their section. */
+    .gallery-index-page .gallery-card .project-card-meta .meta-pill {
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
     }
 
     .gallery-board .gallery-card {

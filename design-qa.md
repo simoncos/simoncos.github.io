@@ -313,3 +313,28 @@ Verification:
 - Full suite green; article/projects/home re-verified in the browser: hidden-when-empty behavior confirmed on both empty and non-empty posts, projects ledger hidden statically and at runtime, home trails render the three real sections in en and zh data paths.
 
 **final result: passed**
+
+**Mobile Gallery Deduplication - 2026-07-15**
+
+Scope:
+- User feedback: on the 390px Gallery, sections had no visible separation, so "Personal Information Systems" and the sleep essay appeared to show up twice.
+
+Root causes:
+- The Personal Data Lab strip collapses on mobile into three bare text rows ("Ten years of sleep records / Sleep Toolkit / Haba Snow Mountain") that literally repeat cards directly above in the single-column board.
+- The "AI personal information system" card artwork (a light network map) letterboxed via `object-fit: contain` into a short mobile frame rendered as near-blank, making the card read as a broken duplicate of the similarly named talk card.
+- Card type labels were too quiet to distinguish sections in a single column.
+
+Fixes (all scoped to the ≤640px gallery block):
+- Hide the Personal Data Lab strip and its section-index anchor on mobile (desktop keeps both; a same-specificity later rule required a higher-specificity hide selector).
+- Render the system-map card image with `object-fit: cover` so the artwork fills the frame and reads clearly.
+- Uppercase, letter-spaced type labels (VISUAL ESSAY / ARTIFACT / FIELD NOTE / TOOL) so single-column cards self-identify; board gap widened to 1.15rem.
+
+Verified:
+- Mobile 390px full page: no duplicate rows, system-map artwork visible, all six card images load, `overflowX=0`.
+- Desktop 1440px: Personal Data Lab strip and its filter anchor unchanged.
+- Cache key bumped to `20260715a`; shell propagated, blog outputs regenerated; check suite green.
+
+Known content-level note (left for owner decision):
+- The "AI personal information system" visual-essay card links to the same destination as the talk card (`gallery/talks/pkm-2026-06-07/index.html`). Visually they are now clearly distinct, but they remain two entries pointing at one artifact.
+
+**final result: passed**
