@@ -313,3 +313,64 @@ Verification:
 - Full suite green; article/projects/home re-verified in the browser: hidden-when-empty behavior confirmed on both empty and non-empty posts, projects ledger hidden statically and at runtime, home trails render the three real sections in en and zh data paths.
 
 **final result: passed**
+
+**Mobile Gallery Deduplication - 2026-07-15**
+
+Scope:
+- User feedback: on the 390px Gallery, sections had no visible separation, so "Personal Information Systems" and the sleep essay appeared to show up twice.
+
+Root causes:
+- The Personal Data Lab strip collapses on mobile into three bare text rows ("Ten years of sleep records / Sleep Toolkit / Haba Snow Mountain") that literally repeat cards directly above in the single-column board.
+- The "AI personal information system" card artwork (a light network map) letterboxed via `object-fit: contain` into a short mobile frame rendered as near-blank, making the card read as a broken duplicate of the similarly named talk card.
+- Card type labels were too quiet to distinguish sections in a single column.
+
+Fixes (all scoped to the ≤640px gallery block):
+- Hide the Personal Data Lab strip and its section-index anchor on mobile (desktop keeps both; a same-specificity later rule required a higher-specificity hide selector).
+- Render the system-map card image with `object-fit: cover` so the artwork fills the frame and reads clearly.
+- Uppercase, letter-spaced type labels (VISUAL ESSAY / ARTIFACT / FIELD NOTE / TOOL) so single-column cards self-identify; board gap widened to 1.15rem.
+
+Verified:
+- Mobile 390px full page: no duplicate rows, system-map artwork visible, all six card images load, `overflowX=0`.
+- Desktop 1440px: Personal Data Lab strip and its filter anchor unchanged.
+- Cache key bumped to `20260715a`; shell propagated, blog outputs regenerated; check suite green.
+
+Known content-level note (left for owner decision):
+- The "AI personal information system" visual-essay card links to the same destination as the talk card (`gallery/talks/pkm-2026-06-07/index.html`). Visually they are now clearly distinct, but they remain two entries pointing at one artifact.
+
+**final result: passed**
+
+**Small-Frame and Breakpoint Sweep - 2026-07-15**
+
+Scope:
+- Follow-up sweep after the mobile-gallery fix, looking for the same failure classes on every page at 390px, 768px, and dark mobile: duplicated content, sections collapsing without separation, and light artwork vanishing in small frames.
+
+Findings and fixes:
+- Projects (all widths): the previous Project-ledger fix set the `hidden` attribute, but the author rule `.projects-ledger-list { display: grid }` overrides the UA default for `[hidden]`, so the duplicate section was still visible everywhere — the earlier verification checked the DOM property instead of computed display. Added `.projects-ledger-list[hidden] { display: none; }`; verified `display: none` at 1440/768/390.
+- Gallery tablet (641-1040px): the Personal Data Lab strip rendered as a broken half-collapsed grid ("Haba Snow Mountain" orphaned on its own row) while still duplicating the cards above. The hide (strip + section-index anchor) now applies at ≤1040px instead of ≤640px; the wide-board desktop treatment is unchanged at ≥1041px (boundary verified). Removed the now-dead ≤600px strip-collapse rules.
+- Home mobile: the Current Index thumbnail for "Personal Information Systems in the AI Era" used the light architecture diagram, which washes out to a near-white block at 5.8rem — same class as the gallery system-map issue. Swapped to the talk's existing dark network artwork (`gallery-hero-network-v2.webp`, already the gallery hero for the same item) in `data/home_surface.json` and the static markup, with updated alt text.
+
+Checked clean:
+- Home/Projects/Essays/Series/Tags/About/article pages at 390px, Home/Projects at 768px, Home/Gallery dark mobile: no duplication, no overflow, all images legible.
+
+Verification:
+- Full suite green; breakpoint boundaries and ledger visibility verified in the browser at 1440/1041/1040/768/390.
+
+**final result: passed**
+
+**Gallery Duplicate-Entry Removal - 2026-07-15**
+
+Scope:
+- Owner decision: entries already shown at the top of a page must not repeat below. Applied to the two remaining Gallery duplications.
+
+Changes:
+- Removed the `ai-personal-information-system` manifest item (gallery-only): its card linked to the same destination as the hero talk card (`gallery/talks/pkm-2026-06-07/index.html`) under a near-identical name. The board is now five cards, all distinct artifacts with distinct destinations.
+- Removed the Personal Data Lab strip entirely (markup, section-index anchor, i18n keys, and its CSS blocks): on every width it only repeated cards shown directly above. This supersedes the earlier mobile/tablet hide.
+- Rebalanced the desktop mosaic for five cards: the Sleep Toolkit tool card now spans the full second row beside the hero.
+- Cleaned the orphaned `gallery-card--system-map` CSS. One cleanup regression was caught and fixed during verification: removing a selector that terminated shared multi-selector rules left dangling selector lists that swallowed the following rule (card titles disappeared); the shared rules were restored with the dead selector stripped.
+
+Verified:
+- Desktop 1440 light/dark: five-card board with no hole, all titles present, research artwork panel intact in dark mode.
+- Mobile 390: five distinct cards, uppercase type labels, no duplicates, no overflow.
+- Full check suite green; manifest and gallery data validated.
+
+**final result: passed**

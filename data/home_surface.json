@@ -160,10 +160,10 @@
           "en": "Watch or read",
           "zh": "看演讲"
         },
-        "media": "gallery/talks/pkm-2026-06-07/images/s05-system-architecture.png",
+        "media": "gallery/assets/gallery-hero-network-v2.webp",
         "media_alt": {
-          "en": "Personal system architecture diagram",
-          "zh": "个人系统架构图"
+          "en": "Network map from Personal Information Systems in the AI Era",
+          "zh": "AI 时代个人信息系统演讲中的网络关系图"
         },
         "href": "gallery/talks/pkm-2026-06-07/index.html",
         "skipLangRewrite": true
