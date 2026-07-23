@@ -92,7 +92,12 @@ Links on accent-colored cards may be invisible; override link color for those ca
 2. Identify canonical deck directory and site talk directory; avoid hardcoded PKM paths.
 3. Sync `index.html`, `images/`, and `assets/` from canonical to site artifact.
 4. Verify canonical/site `index.html` SHA256 match when intended identical.
-5. Commit/push source and site changes.
-6. Wait for GitHub Pages rebuild (`sleep 15`), then verify live URL: HTTP 200, expected slide count, key strings/styles, and local runtime assets (e.g. `assets/motion.min.js`).
+5. If commit and push are explicitly in scope, keep source and site changes in
+   their owning repos and review both diffs before performing those operations.
+6. After an authorized push, wait for the GitHub Pages rebuild, then verify the
+   live URL: HTTP 200, expected slide count, key strings/styles, and local
+   runtime assets (e.g. `assets/motion.min.js`).
 7. Capture/inspect touched high-risk slides: screenshots, card grids, dense appendix pages, footer notes, contact/QR.
-8. If formal/final release, tag both source and site repos (e.g. `talk-YYYY-MM-DD-final`) and push tags.
+8. If a separately authorized formal/final release requires tags, tag the
+   intended source and site revisions and push tags only after confirming the
+   exact names and scope.

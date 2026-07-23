@@ -1,16 +1,15 @@
 ---
-name: site-smoke-test
-description: Verify `simoncos.github.io` and related project-preview deployments after publishing, frontend edits, homepage/Gallery/Projects/About IA changes, AI-readable entrypoint changes, or slide-deck updates. Use when Codex needs a structured PASS/FAIL smoke test with live URL evidence, browser checks, asset checks, RSS checks, generated-data checks, and deploy-freshness diagnostics. Not for designing the UI; use `frontend-design` first when the task is visual design.
+name: simoncos-site-smoke-test
+description: Verify the simoncos.github.io site after publishing, frontend edits, homepage/Gallery/Projects/About IA changes, AI-readable entrypoint changes, feed changes, or slide-deck updates. Use when Codex needs structured PASS/FAIL evidence for live URLs, browser behavior, assets, feeds, generated data, and deployment freshness in this repository. Project-previews index releases belong to that repo's project-previews-index-release skill.
 ---
 
-# Site Smoke Test
+# Simoncos Site Smoke Test
 
 Prove the live site or preview still works after a change. Prefer programmatic checks for reachability and DOM state, then screenshots only when visual layout matters.
 
 ## Targets
 
 - Main site: `https://simoncos.github.io`
-- Project previews: `https://simoncos-project-previews.vercel.app/<slug>/`
 - Feeds: `/feed.zh.xml` and `/feed.en.xml`
 
 ## Main Site Checklist
@@ -51,17 +50,16 @@ For HTML deck visual edits, grep checks are not enough. Render or capture touche
 
 Use `references/slide-deck-verification.md` for the detailed screenshot workflow.
 
-## Project Preview Checks
+## Scope Boundary
 
-For `project-previews`:
+This skill verifies the main site and site-owned talk artifacts. For the
+`project-previews` launchpad, use that repository's
+`project-previews-index-release` skill. For a separately deployed product,
+follow the owning project's release skill and verify its stable URL there.
 
-- Verify the live subpath returns the expected page, not just the Vercel root.
-- Check key JS/CSS/JSON assets return 200.
-- Check live HTML contains expected markers from the current source.
-- For data-backed dashboards, verify primary JSON freshness metadata.
-- If the live page is stale after push, run the deploy path from `frontend-preview-dev`.
-
-Use `references/project-previews.md` and `references/dashboard-data-loading.md` when those surfaces are involved.
+Verification is read-only by default. Editing, committing, pushing, deploying,
+tagging, or changing GitHub Pages configuration are separate operations and
+require task authorization; a failed smoke test does not authorize remediation.
 
 ## Reporting Format
 
@@ -81,5 +79,3 @@ State whether each failure looks like deploy drift, content issue, asset issue, 
 ## References
 
 - `references/slide-deck-verification.md`: deck screenshot and layout checks.
-- `references/project-previews.md`: Vercel preview verification.
-- `references/dashboard-data-loading.md`: data-heavy dashboard checks.
