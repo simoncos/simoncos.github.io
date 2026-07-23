@@ -1,0 +1,4 @@
+interface:
+  display_name: "Simoncos Site Smoke Test"
+  short_description: "Verify the live Simoncos site and feeds"
+  default_prompt: "Use $simoncos-site-smoke-test to verify the live Simoncos site after a change."

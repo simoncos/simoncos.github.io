@@ -1,4 +1,0 @@
-interface:
-  display_name: "Site Smoke Test"
-  short_description: "Verify live site, previews, and agent entrypoints"
-  default_prompt: "Use $site-smoke-test to verify the live site or project preview after a change."
