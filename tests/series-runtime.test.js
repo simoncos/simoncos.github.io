@@ -47,7 +47,7 @@ function anchorNodes(root) {
 
 async function renderSeries(payload, { language = 'en', fallback = '<li>Static fallback</li>', reject = null } = {}) {
     let currentLanguage = language;
-    const pageUrl = new URL(`http://site.test/series.html?lang=${language}`);
+    const pageUrl = new URL(`http://site.test/blogs.html?lang=${language}`);
     const seriesList = {
         innerHTML: fallback,
         querySelectorAll() {
@@ -80,6 +80,7 @@ async function renderSeries(payload, { language = 'en', fallback = '<li>Static f
                 t: (key) => key,
                 formatPostCount: (count) => `${count} parts`,
                 formatSeriesPart: (part) => `${currentLanguage === 'zh' ? '第' : 'Part '}${part}${currentLanguage === 'zh' ? '篇' : ''}`,
+                formatSeriesCount: (count) => `${count} parts`,
                 applyLanguageStateToInternalLinks(root) {
                     root.querySelectorAll('a[href]').forEach((anchor) => {
                         const rawHref = anchor.getAttribute('href');

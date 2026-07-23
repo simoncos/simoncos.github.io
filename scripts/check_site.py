@@ -139,8 +139,6 @@ def expected_sitemap_urls() -> set[str]:
             "gallery.html",
             "blogs.html",
             "projects.html",
-            "tags.html",
-            "series.html",
             "about.html",
         )
     }

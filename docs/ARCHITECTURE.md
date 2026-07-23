@@ -14,7 +14,7 @@ This distinction matters more than a blanket rule like “everything should be s
 ### Static / generated
 - blog post markdown in `blogs/*.md`
 - generated article pages in `blogs/*.html`
-- root pages like `index.html`, `about.html`, `tags.html`, `series.html`, `blogs.html`
+- root pages like `index.html`, `about.html`, and `blogs.html`; `tags.html` and `series.html` remain lightweight compatibility redirects
 - site assets, icons, and CSS/JS
 - `sitemap.xml` and `robots.txt` for the public crawl surface
 - `llms.txt` and `agent-index.json` as curated AI/agent-readable orientation files
@@ -29,7 +29,7 @@ This distinction matters more than a blanket rule like “everything should be s
 
 Python generator still owns metadata extraction, markdown conversion, and the stable data indexes needed by the UI.
 
-`article_groups.json` is now the primary public article index. It groups bilingual article variants and carries the fields needed by archive, tags, series, homepage, backlinks, and language switching. `tags_data.json` and `series_data.json` are still generated for compatibility, but the current tags and series pages render from `article_groups.json`.
+`article_groups.json` is now the primary public article index. It groups bilingual article variants and carries the fields needed by the Essays archive, topic filters, reading paths, homepage, backlinks, and language switching. `tags_data.json` and `series_data.json` are still generated for compatibility.
 
 `projects_data.json` and `gallery_data.json` are hand-maintained lightweight indexes for non-blog public surfaces. They should contain only stable presentation metadata and paths, not duplicate full page content.
 
@@ -40,9 +40,8 @@ Python generator still owns metadata extraction, markdown conversion, and the st
 
 ### Dynamic / client-rendered
 - **home** page merges article groups and projects into a recent list
-- **blogs** page renders archive groups from `article_groups.json`
-- **tags** page derives tag sections from `article_groups.json`
-- **series** page derives reading paths from `article_groups.json`
+- **blogs** page renders the archive, reading paths, and topic index from `article_groups.json`
+- **tags** and **series** preserve old links by redirecting into the corresponding Essays sections
 - **backlinks** are inferred client-side from generated article HTML content
 - **blog previews** use generated excerpts/content rather than reparsing markdown in the browser
 

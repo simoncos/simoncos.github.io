@@ -60,6 +60,7 @@ interface SiteI18n {
     formatPostCount?: (count: number) => string;
     formatArchiveMonthNote?: (count: number) => string;
     formatSeriesPart?: (part: string | number) => string;
+    formatSeriesCount?: (count: number) => string;
     localizeDocument?: (root?: ParentNode) => void;
     applyLanguageStateToInternalLinks?: (root?: ParentNode) => void;
     resolveLocalizedUrl?: (href: string, language?: string) => string;

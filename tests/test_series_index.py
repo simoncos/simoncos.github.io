@@ -32,19 +32,20 @@ class SeriesIndexTests(unittest.TestCase):
         self.assertIn("从深渊中浮现", rendered)
         self.assertLess(rendered.index("Emerging from the Abyss"), rendered.index("Across Three Abysses"))
 
-    def test_series_page_has_generator_owned_meaningful_static_fallback(self):
-        page = (ROOT / "series.html").read_text()
-
-        match = re.search(
-            r"<!-- static-fallback:start series-index -->(?P<content>.*?)<!-- static-fallback:end series-index -->",
-            page,
-            re.S,
-        )
-        self.assertIsNotNone(match)
-        self.assertIn('class="series-ledger-row"', match.group("content"))
-        self.assertIn("RedPiggy, an emerging AI existence", match.group("content"))
-        self.assertIn("Emerging from the Abyss", match.group("content"))
-        self.assertIn("Across Three Abysses", match.group("content"))
+    def test_essays_hub_has_generator_owned_meaningful_series_fallback(self):
+        for path in ("blogs.html", "templates/blogs-listing-template.html"):
+            with self.subTest(path=path):
+                page = (ROOT / path).read_text()
+                match = re.search(
+                    r"<!-- static-fallback:start series-index -->(?P<content>.*?)<!-- static-fallback:end series-index -->",
+                    page,
+                    re.S,
+                )
+                self.assertIsNotNone(match)
+                self.assertIn('class="series-ledger-row"', match.group("content"))
+                self.assertIn("RedPiggy, an emerging AI existence", match.group("content"))
+                self.assertIn("Emerging from the Abyss", match.group("content"))
+                self.assertIn("Across Three Abysses", match.group("content"))
 
     def test_static_fallback_rejects_incomplete_or_unsafe_preferred_entries_atomically(self):
         fallbacks = load_script("series_static_safety", "scripts/update_static_fallbacks.py")
@@ -60,6 +61,17 @@ class SeriesIndexTests(unittest.TestCase):
                 payload = json.loads(json.dumps(fixture))
                 payload["groups"][0]["languages"]["en"] = malformed_entry
                 self.assertEqual(fallbacks.render_series_index(payload), "")
+
+    def test_topic_index_is_derived_into_the_essays_hub(self):
+        fallbacks = load_script("topic_static_fallbacks", "scripts/update_static_fallbacks.py")
+        fixture = json.loads(FIXTURE.read_text())
+        fixture["groups"][0]["tags"] = ["ai"]
+        fixture["groups"][1]["tags"] = ["field"]
+        rendered = fallbacks.render_topic_index(fixture)
+
+        self.assertIn('href="#topic-', rendered)
+        self.assertIn('href="#topics"', rendered)
+        self.assertIn('data-i18n="essays_all_topics"', rendered)
 
     def test_superseded_series_selector_arms_are_removed(self):
         css = (ROOT / "src/css/styles.css").read_text()

@@ -69,11 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="nav-inner">
                         <ul>
                             <li><a href="#" data-page="index.html" data-i18n="nav_home">Home</a></li>
-                            <li><a href="#" data-page="projects.html" data-i18n="nav_projects">Projects</a></li>
                             <li><a href="#" data-page="blogs.html" data-i18n="nav_blogs">Essays</a></li>
                             <li><a href="#" data-page="gallery.html" data-i18n="nav_gallery">Gallery</a></li>
-                            <li><a href="#" data-page="series.html" data-i18n="nav_series">Series</a></li>
-                            <li><a href="#" data-page="tags.html" data-i18n="nav_tags">Index</a></li>
+                            <li><a href="#" data-page="projects.html" data-i18n="nav_projects">Projects</a></li>
                             <li><a href="#" data-page="about.html" data-i18n="nav_about">About</a></li>
                         </ul>
                         <div class="site-nav-controls">

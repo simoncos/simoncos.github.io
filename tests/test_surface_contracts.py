@@ -263,8 +263,8 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertIn("overflow-wrap: anywhere;", css_block(page_content, ".essays-index-page .blog-preview h4"))
 
         for path, required in {
-            "blogs.html": ("essays-page-shell", "page-ledger-frame", "blog-archive", "preview-toggle", "essays-rail"),
-            "templates/blogs-listing-template.html": ("essays-page-shell", "page-ledger-frame", "blog-archive", "preview-toggle", "essays-rail"),
+            "blogs.html": ("essays-page-shell", "page-ledger-frame", "blog-archive", "preview-toggle", "essays-view-index", "series-list", "topic-list"),
+            "templates/blogs-listing-template.html": ("essays-page-shell", "page-ledger-frame", "blog-archive", "preview-toggle", "essays-view-index", "series-list", "topic-list"),
             "about.html": ("about-page-shell", "page-ledger-frame", "about-contact-first", "about-motto", "contact-list"),
         }.items():
             with self.subTest(path=path):
@@ -392,19 +392,20 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertIn("item.paths", renderer)
         self.assertIn("paths[language]", renderer)
 
-    def test_index_and_tags_have_one_main_landmark_each(self):
-        for page in ("index.html", "tags.html"):
+    def test_index_and_compatibility_redirects_have_one_main_landmark_each(self):
+        for page in ("index.html", "tags.html", "series.html"):
             with self.subTest(page=page):
                 self.assertEqual(main_count((ROOT / page).read_text()), 1)
 
-    def test_home_and_tags_use_canonical_page_content_frames(self):
-        index_html = (ROOT / "index.html").read_text()
-        tags_html = (ROOT / "tags.html").read_text()
+    def test_legacy_series_and_tags_redirect_into_essays(self):
+        for page, fragment in (("series.html", "reading-paths"), ("tags.html", "topics")):
+            with self.subTest(page=page):
+                html = (ROOT / page).read_text()
+                self.assertIn('href="https://simoncos.github.io/blogs.html"', html)
+                self.assertIn(f"blogs.html#{fragment}", html)
+                self.assertIn('name="robots" content="noindex"', html)
 
-        self.assertRegex(index_html, r'<main\b[^>]*\bhome-page-content\b')
-        self.assertRegex(tags_html, r'<main\b[^>]*\btags-page-content\b')
-
-    def test_canonical_home_and_tags_content_has_compact_responsive_owners(self):
+    def test_canonical_home_content_has_compact_responsive_owners(self):
         css = (ROOT / "src/css/styles.css").read_text()
         marker = "/* Canonical Home and Tags page content */"
 
@@ -413,48 +414,39 @@ class SurfaceContractTests(unittest.TestCase):
         frame_width = "min(calc(100% - (2 * var(--home-layout-gutter))), var(--home-layout-width))"
 
         self.assertIn(f"width: {frame_width};", css_block(page_content, ".home-page-content"))
-        self.assertIn(f"width: {frame_width};", css_block(page_content, ".tags-page-content"))
         self.assertIn("grid-template-columns: repeat(3, minmax(0, 1fr));", css_block(page_content, ".home-trail-grid"))
-        self.assertIn(
-            "grid-template-columns: repeat(2, minmax(0, 1fr));",
-            css_block(page_content, ".tags-page-content .tag-list"),
-        )
         self.assertIn("@media (max-width: 899px)", page_content)
         self.assertIn("@media (max-width: 520px)", page_content)
-        self.assertIn("min-width: 0;", css_block(page_content, ".tags-page-content .page-intro .page-lede"))
 
-    def test_tags_filter_label_has_localized_static_fallback(self):
-        tags_html = (ROOT / "tags.html").read_text()
+    def test_essays_discovery_labels_have_localized_static_fallbacks(self):
+        essays_html = (ROOT / "templates/blogs-listing-template.html").read_text()
         i18n = (ROOT / "src/ts/i18n.ts").read_text()
 
-        self.assertIn('aria-label="Tag filter"', tags_html)
-        self.assertIn('data-i18n-aria-label="tags_filter_label"', tags_html)
-        self.assertRegex(i18n, r"tags_filter_label\s*:\s*['\"]Tag filter['\"]")
-        self.assertRegex(i18n, r"tags_filter_label\s*:\s*['\"]标签筛选['\"]")
+        self.assertIn('aria-label="Essay browsing"', essays_html)
+        self.assertIn('data-i18n-aria-label="essays_view_label"', essays_html)
+        self.assertIn('aria-label="Essay discovery"', essays_html)
+        self.assertIn('data-i18n-aria-label="essays_discovery_label"', essays_html)
+        self.assertRegex(i18n, r"essays_view_label\s*:\s*['\"]Essay browsing['\"]")
+        self.assertRegex(i18n, r"essays_view_label\s*:\s*['\"]文章浏览方式['\"]")
 
-    def test_canonical_page_content_resets_legacy_card_and_list_treatments(self):
+    def test_essays_discovery_uses_ledger_rows_not_cards(self):
         css = (ROOT / "src/css/styles.css").read_text()
-        page_content = css.split("/* Canonical Home and Tags page content */", 1)[1].split(
+        page_content = css.split("/* Canonical Essays and About page content */", 1)[1].split(
             "/* Shared site shell */", 1
         )[0]
 
-        self.assertIn("border: 0;", css_block(page_content, ".home-page-content .home-system-node"))
-        self.assertIn("border: 0;", css_block(page_content, ".home-page-content .home-trail-card"))
-        self.assertIn(
-            "display: none;",
-            css_block(page_content, "#tag-sections .tag-section li::before"),
-        )
-        self.assertIn(
-            ":is(body.dark-mode, html.dark-mode body) .tags-page-content .tag-section",
-            page_content,
-        )
+        self.assertIn("border-bottom: 1px solid var(--editorial-rule);", css_block(page_content, ".essays-topic-list li"))
+        self.assertIn("border-left: 1px solid var(--editorial-rule);", css_block(page_content, ".essays-rail"))
+        self.assertNotIn("box-shadow:", css_block(page_content, ".essays-reading-paths .series-ledger-body h4"))
 
-    def test_tags_use_page_h2_and_tag_group_h3_headings(self):
-        tags_html = (ROOT / "tags.html").read_text()
+    def test_essays_hub_uses_page_h2_and_discovery_h3_h4_headings(self):
+        essays_html = (ROOT / "templates/blogs-listing-template.html").read_text()
         tags_renderer = (ROOT / "src/ts/load-tags-page.ts").read_text()
+        series_renderer = (ROOT / "src/ts/load-series-page.ts").read_text()
 
-        self.assertRegex(tags_html, r"<h2\b")
-        self.assertIn("<h3>${escapeHtml(hash)}</h3>", tags_renderer)
+        self.assertRegex(essays_html, r"<h2\b")
+        self.assertIn("<h3", essays_html)
+        self.assertIn("<h4>${escapeHtml(seriesName)}</h4>", series_renderer)
         self.assertNotIn("<h4>", tags_renderer)
 
     def test_gallery_navigation_is_a_section_index_with_overview_entry(self):

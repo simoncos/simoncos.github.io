@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     const i18n = window.SITE_I18N || {};
     const articleGroupsApi = window.SITE_ARTICLE_GROUPS || {};
+    const seriesCount = document.getElementById('essays-series-count');
     let articleGroupsData = null;
     const staticFallback = seriesList.innerHTML;
     function escapeHtml(text) {
@@ -115,17 +116,23 @@ document.addEventListener('DOMContentLoaded', function () {
             : 'en';
         const rows = seriesRows(articleGroupsData, currentLanguage);
         if (!rows) {
+            if (seriesCount) {
+                seriesCount.textContent = '0';
+            }
             if (!preserveStaticFallback('invalid, empty, or series-free article groups payload')) {
                 seriesList.innerHTML = `<li>${escapeHtml(i18n.t('no_series_found'))}</li>`;
             }
             return;
         }
+        if (seriesCount) {
+            seriesCount.textContent = String(rows.length);
+        }
         const linkSuffixes = existingLinkSuffixes();
         seriesList.innerHTML = rows.map(({ seriesName, items }) => `
             <li class="series-ledger-row">
-                <div class="series-ledger-meta"><span class="meta-pill">${escapeHtml(i18n.t('series'))}</span><span>${escapeHtml(i18n.formatPostCount(items.length))}</span></div>
                 <div class="series-ledger-body">
-                    <h3>${escapeHtml(seriesName)}</h3>
+                    <h4>${escapeHtml(seriesName)}</h4>
+                    <p class="series-part-count">${escapeHtml(i18n.formatSeriesCount(items.length))}</p>
                     <ol class="series-part-list">
                     ${items.map(({ group, entry, secondary, groupKey }) => {
             const prefix = group.series && group.series.part
