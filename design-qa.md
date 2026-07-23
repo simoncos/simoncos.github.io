@@ -374,3 +374,56 @@ Verified:
 - Full check suite green; manifest and gallery data validated.
 
 **final result: passed**
+
+**Essays / Series / Index Consolidation - 2026-07-24**
+
+**Comparison target**
+- Source visual truth: `/Users/simoncbot/.codex/generated_images/019f8fd3-2bf6-7472-9b4c-b1369e38f92e/call_GMQ6Fbqq7yaBbEcbopM0dfpx.png`
+- Browser-rendered implementation: `/private/tmp/simoncos-essays-hub-implementation-pass4-viewport.png`
+- Full-view comparison: `/private/tmp/simoncos-essays-hub-comparison-pass4.png`
+- Route and state: `http://127.0.0.1:5204/blogs.html?lang=en`, dark theme, English, previews off.
+- CSS viewport: 1440 x 1024 at device density 1.
+- Source pixels: 1487 x 1058. Implementation pixels: 1440 x 1024.
+- Density normalization: source and implementation were both normalized to 1440 x 1024 before horizontal side-by-side comparison.
+
+**Findings**
+- No actionable P0, P1, or P2 differences remain.
+- Fonts and typography: the existing site serif/sans pairing, weights, hierarchy, line lengths, and title wrapping follow the source. The implementation uses production text rather than rasterized mock text; the remaining antialiasing difference is expected.
+- Spacing and layout rhythm: the hero, three-view index, 70/30 archive-discovery split, month ledger, and right-rail rules align with the source proportions. The final desktop frame keeps all primary content readable without horizontal overflow.
+- Colors and visual tokens: the existing dark editorial background, cream display text, muted copy, cyan accent, and fine rules match the selected design and retain the site's established tokens.
+- Image quality and asset fidelity: the selected design contains no raster imagery, illustration, logo treatment, or non-standard icon asset that required generation or replacement.
+- Copy and content: the archive, one reading path, six topic rows, counts, RSS action, and bilingual labels use real project data and match the design's information architecture.
+- Focused-region review: separate inspection of the hero/view index and the reading-path/topic rail was sufficient because the full-view comparison preserves readable text at 1440 x 1024. No additional crop exposed a new mismatch.
+
+**Comparison history**
+- Pass 1 evidence: `/private/tmp/simoncos-essays-hub-comparison-pass3.png`.
+  - [P2] The view index and archive began about 25-30 px lower than the source.
+  - [P2] Full-height tab dividers read as boxed cells instead of short ledger separators.
+  - [P2] The reading-path title wrapped, increasing rail height and pushing Topics below the source rhythm.
+- Fixes:
+  - Tightened the view-index and desktop archive offsets.
+  - Replaced full-height tab borders with centered 1.25rem separators.
+  - Adjusted the reading-path display size so the real series title stays on one line at the reference viewport.
+  - Allowed preview-off article titles to use the fourth grid track vacated by the hidden read-more action.
+- Post-fix evidence: `/private/tmp/simoncos-essays-hub-comparison-pass4.png`; all three P2 findings are resolved.
+
+**Responsive and interaction evidence**
+- Mobile Chinese viewport: 390 x 844, no horizontal overflow (`scrollWidth = 390`).
+- Mobile overview screenshot: `/private/tmp/simoncos-essays-hub-mobile-zh-viewport.png`.
+- Mobile discovery screenshot: `/private/tmp/simoncos-essays-hub-mobile-zh-rail2.png`.
+- Topic filter: AI shows 3 posts in March; All topics restores 4 posts across 2 months and exposes the active `aria-current` state.
+- Preview control: on shows 4 excerpts and 4 read-more actions; off hides all excerpts and restores the compact ledger.
+- Language control: English-to-Chinese rerender localizes the hero, tabs, archive labels, reading path, topics, and RSS without overflow.
+- Compatibility redirects: `series.html?lang=zh` resolves to `blogs.html?lang=zh#reading-paths`; `tags.html?lang=en#ai` resolves to `blogs.html?lang=en#topic-ai`.
+- Browser console: no errors.
+
+**Verification**
+- `make check`: passed.
+- `node --test tests/*.test.js`: 14 passed.
+- Consolidation-specific Python tests: 12 passed.
+- Full Python discovery still reports 6 pre-existing failures in unrelated Projects, Gallery, and Home contracts; this change introduces no additional failure.
+
+**Follow-up Polish**
+- None required for handoff.
+
+**final result: passed**

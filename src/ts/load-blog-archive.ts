@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const i18n = window.SITE_I18N || {};
     const articleGroupsApi = window.SITE_ARTICLE_GROUPS || {};
+    const latestCount = document.getElementById('essays-latest-count');
 
     let articleGroupsData = null;
 
@@ -56,9 +57,22 @@ document.addEventListener('DOMContentLoaded', function () {
             return '';
         }
         const items = tags.map(tag =>
-            `<li><a href="tags.html#${encodeURIComponent(tag)}">${escapeHtml(tag)}</a></li>`
+            `<li><a href="#topic-${encodeURIComponent(tag)}">${escapeHtml(tag)}</a></li>`
         ).join('');
         return `<ul class="tag-list blog-preview-tags">${items}</ul>`;
+    }
+
+    function activeTopic() {
+        const match = window.location.hash.match(/^#topic-(.+)$/);
+        if (!match) {
+            return '';
+        }
+
+        try {
+            return decodeURIComponent(match[1]);
+        } catch (_error) {
+            return '';
+        }
     }
 
     function getLanguageAvailability(group) {
@@ -74,6 +88,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderArchive() {
         const groups = articleGroupsData ? articleGroupsData.groups : [];
+        if (latestCount) {
+            latestCount.textContent = String(groups.length);
+        }
         if (!groups.length) {
             archiveContainer.innerHTML = `<p>${escapeHtml(i18n.t('no_blog_posts'))}</p>`;
             return;
@@ -83,11 +100,20 @@ document.addEventListener('DOMContentLoaded', function () {
             ? i18n.getCurrentLanguage()
             : 'en';
 
-        const sorted = [...groups].sort((a, b) => {
+        const topic = activeTopic();
+        const filteredGroups = topic
+            ? groups.filter(group => Array.isArray(group.tags) && group.tags.includes(topic))
+            : groups;
+        const sorted = [...filteredGroups].sort((a, b) => {
             const dateA = a.date ? new Date(a.date).getTime() : 0;
             const dateB = b.date ? new Date(b.date).getTime() : 0;
             return dateB - dateA;
         });
+
+        if (!sorted.length) {
+            archiveContainer.innerHTML = `<p>${escapeHtml(i18n.t('no_blog_posts'))}</p>`;
+            return;
+        }
 
         const groupsByMonth = new Map();
         sorted.forEach((group) => {
@@ -154,4 +180,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     window.addEventListener('site-language-change', renderArchive);
+    window.addEventListener('hashchange', () => {
+        renderArchive();
+        if (activeTopic() && window.matchMedia('(max-width: 820px)').matches) {
+            document.getElementById('latest-essays')?.scrollIntoView({
+                block: 'start',
+                behavior: 'smooth'
+            });
+        }
+    });
 });

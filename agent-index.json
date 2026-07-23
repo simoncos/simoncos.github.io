@@ -37,25 +37,13 @@
       "id": "essays",
       "label": "Essays",
       "url": "https://simoncos.github.io/blogs.html",
-      "purpose": "Long-form writing archive."
+      "purpose": "Long-form writing archive with structured reading paths and topic discovery."
     },
     {
       "id": "gallery",
       "label": "Gallery",
       "url": "https://simoncos.github.io/gallery.html",
       "purpose": "Talks, demos, visual essays, research artifacts, and curated work paths."
-    },
-    {
-      "id": "series",
-      "label": "Series",
-      "url": "https://simoncos.github.io/series.html",
-      "purpose": "Structured reading paths."
-    },
-    {
-      "id": "index",
-      "label": "Index",
-      "url": "https://simoncos.github.io/tags.html",
-      "purpose": "Topic index."
     }
   ],
   "current_surfaces": [
@@ -118,7 +106,7 @@
       "id": "article-groups",
       "format": "json",
       "url": "https://simoncos.github.io/data/article_groups.json",
-      "description": "Bilingual article groups used by archive, tags, series, homepage, backlinks, and language switching."
+      "description": "Bilingual article groups used by the Essays archive, reading paths, topics, homepage, backlinks, and language switching."
     },
     {
       "id": "sitemap",

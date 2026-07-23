@@ -9,10 +9,8 @@ The motto for this site is "Connecting the dots." The site is static, bilingual,
 - [Live homepage](https://simoncos.github.io/): Current public surface and recent work.
 - [About](https://simoncos.github.io/about.html): Profile, motto, working modes, contact links, and operating principles.
 - [Projects](https://simoncos.github.io/projects.html): Project Observatory with live tools, connected artifacts, inputs, outputs, and next questions.
-- [Essays](https://simoncos.github.io/blogs.html): Long-form writing archive.
+- [Essays](https://simoncos.github.io/blogs.html): Long-form writing archive with structured reading paths and topic discovery.
 - [Gallery](https://simoncos.github.io/gallery.html): Talks, demos, visual essays, research artifacts, and curated work paths.
-- [Series](https://simoncos.github.io/series.html): Structured reading paths.
-- [Index](https://simoncos.github.io/tags.html): Topic index.
 
 ## Current project surfaces
 
@@ -32,7 +30,7 @@ The motto for this site is "Connecting the dots." The site is static, bilingual,
 - [Agent index JSON](https://simoncos.github.io/agent-index.json): Structured machine-readable map of site surfaces.
 - [Content manifest](https://simoncos.github.io/data/content_manifest.json): Public manifest for projects, gallery, and home surfaces.
 - [Home surface JSON](https://simoncos.github.io/data/home_surface.json): Current homepage editorial state.
-- [Article index JSON](https://simoncos.github.io/data/article_groups.json): Bilingual article groups used by archive, tags, series, homepage, backlinks, and language switching.
+- [Article index JSON](https://simoncos.github.io/data/article_groups.json): Bilingual article groups used by the Essays archive, reading paths, topics, homepage, backlinks, and language switching.
 - [RSS Chinese](https://simoncos.github.io/feed.zh.xml): Chinese RSS feed.
 - [RSS English](https://simoncos.github.io/feed.en.xml): English RSS feed.
 

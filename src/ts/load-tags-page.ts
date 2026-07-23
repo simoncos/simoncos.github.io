@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const tagList = document.getElementById('tag-list');
-    const tagSections = document.getElementById('tag-sections');
-    const allTagsSection = document.getElementById('all-tags');
-    if (!tagList || !tagSections || !allTagsSection) {
+    const topicList = document.getElementById('topic-list');
+    if (!topicList) {
         return;
     }
 
     const i18n = window.SITE_I18N || {};
     const articleGroupsApi = window.SITE_ARTICLE_GROUPS || {};
+    const topicsCount = document.getElementById('essays-topics-count');
+    const staticFallback = topicList.innerHTML;
     let articleGroupsData = null;
 
     function escapeHtml(text) {
@@ -19,109 +19,80 @@ document.addEventListener('DOMContentLoaded', function () {
             .replace(/'/g, '&#39;');
     }
 
-    function buildTagMap() {
-        const tagMap = new Map();
-        (articleGroupsData ? articleGroupsData.groups : []).forEach((group) => {
-            (group.tags || []).forEach((tag) => {
-                if (!tagMap.has(tag)) {
-                    tagMap.set(tag, []);
-                }
-                tagMap.get(tag).push(group);
-            });
-        });
-
-        return new Map([...tagMap.entries()].sort((a, b) => a[0].localeCompare(b[0])));
+    function displayTopic(tag) {
+        const normalized = String(tag || '');
+        if (/^(ai|km)$/i.test(normalized)) {
+            return normalized.toUpperCase();
+        }
+        return normalized.charAt(0).toUpperCase() + normalized.slice(1);
     }
 
-    function renderGroupItem(group, currentLanguage) {
-        const primary = articleGroupsApi.getPreferredEntry(group, currentLanguage);
-        const secondary = articleGroupsApi.getSecondaryEntry(group, currentLanguage);
-        if (!primary || !primary.file) {
+    function activeTopic() {
+        const match = window.location.hash.match(/^#topic-(.+)$/);
+        if (!match) {
             return '';
         }
-
-        const secondaryTitle = secondary && secondary.title && secondary.title !== primary.title
-            ? `<span class="group-secondary-title">${escapeHtml(secondary.title)}</span>`
-            : '';
-        return `<li><a href="blogs/${primary.file}">${escapeHtml(primary.title)}</a>${secondaryTitle}</li>`;
-    }
-
-    function renderTagList(tagMap) {
-        const currentHash = window.location.hash || '#all';
-        const items = [`<li><a href="#all" class="${currentHash === '#all' ? 'active-tag' : ''}">${escapeHtml(i18n.t('all'))}</a></li>`];
-        tagMap.forEach((_groups, tag) => {
-            const isActive = currentHash === `#${tag}`;
-            items.push(`<li><a href="#${encodeURIComponent(tag)}" class="${isActive ? 'active-tag' : ''}">${escapeHtml(tag)}</a></li>`);
-        });
-        tagList.innerHTML = items.join('');
-    }
-
-    function renderSections(tagMap) {
-        const currentLanguage = typeof i18n.getCurrentLanguage === 'function'
-            ? i18n.getCurrentLanguage()
-            : 'en';
-        const hash = decodeURIComponent((window.location.hash || '#all').slice(1));
-
-        if (!tagMap.size) {
-            tagSections.classList.remove('hidden');
-            allTagsSection.classList.add('hidden');
-            tagSections.innerHTML = `<p>${escapeHtml(i18n.t('no_tags_found'))}</p>`;
-            return;
+        try {
+            return decodeURIComponent(match[1]);
+        } catch (_error) {
+            return '';
         }
+    }
 
-        if (!hash || hash === 'all') {
-            tagSections.classList.add('hidden');
-            allTagsSection.classList.remove('hidden');
-            allTagsSection.innerHTML = [...tagMap.entries()].map(([tag, groups]) => `
-                <section class="tag-overview-block">
-                    <div class="tag-meta"><span>${escapeHtml(i18n.formatPostCount(groups.length))}</span></div>
-                    <h3>${escapeHtml(tag)}</h3>
-                    <ul>${groups.map((group) => renderGroupItem(group, currentLanguage)).join('')}</ul>
-                </section>
-            `).join('');
-            if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
-                i18n.applyLanguageStateToInternalLinks(allTagsSection);
+    function buildTopicMap() {
+        const topicMap = new Map();
+        (articleGroupsData ? articleGroupsData.groups : []).forEach((group) => {
+            (group.tags || []).forEach((tag) => {
+                topicMap.set(tag, (topicMap.get(tag) || 0) + 1);
+            });
+        });
+        return new Map([...topicMap.entries()].sort(([tagA], [tagB]) => tagA.localeCompare(tagB)));
+    }
+
+    function preserveStaticFallback(reason) {
+        if (!staticFallback.trim()) {
+            return false;
+        }
+        topicList.innerHTML = staticFallback;
+        console.warn(`Topic data unavailable; preserving static fallback: ${reason}`);
+        return true;
+    }
+
+    function renderTopics() {
+        const topicMap = buildTopicMap();
+        if (!topicMap.size) {
+            if (!preserveStaticFallback('empty or topic-free article groups payload')) {
+                topicList.innerHTML = `<li>${escapeHtml(i18n.t('no_tags_found'))}</li>`;
             }
             return;
         }
 
-        const groups = tagMap.get(hash);
-        tagSections.classList.remove('hidden');
-        allTagsSection.classList.add('hidden');
-        if (!groups || !groups.length) {
-            tagSections.innerHTML = `<p>${escapeHtml(i18n.t('no_tags_found'))}</p>`;
-            return;
+        const selectedTopic = activeTopic();
+        const allCount = topicMap.size + 1;
+        if (topicsCount) {
+            topicsCount.textContent = String(allCount);
         }
 
-        tagSections.innerHTML = `
-            <section id="${escapeHtml(hash)}" class="tag-section">
-                <div class="tag-meta"><span>${escapeHtml(i18n.formatPostCount(groups.length))}</span></div>
-                <h3>${escapeHtml(hash)}</h3>
-                <ul>${groups.map((group) => renderGroupItem(group, currentLanguage)).join('')}</ul>
-            </section>
-        `;
-        if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
-            i18n.applyLanguageStateToInternalLinks(tagSections);
-        }
-    }
-
-    function renderPage() {
-        const tagMap = buildTagMap();
-        renderTagList(tagMap);
-        renderSections(tagMap);
+        const rows = [...topicMap.entries()].map(([tag, count]) => {
+            const isActive = selectedTopic === tag;
+            return `<li><a href="#topic-${encodeURIComponent(tag)}"${isActive ? ' class="active-topic" aria-current="true"' : ''}><span>${escapeHtml(displayTopic(tag))}</span><span>${escapeHtml(count)}</span></a></li>`;
+        });
+        rows.push(`<li><a href="#topics"${selectedTopic ? '' : ' class="active-topic" aria-current="true"'}><span>${escapeHtml(i18n.t('essays_all_topics'))}</span><span>${escapeHtml(allCount)}</span></a></li>`);
+        topicList.innerHTML = rows.join('');
     }
 
     articleGroupsApi.fetchArticleGroups()
         .then((data) => {
             articleGroupsData = data;
-            renderPage();
+            renderTopics();
         })
         .catch((error) => {
-            console.error('Error loading grouped tags:', error);
-            tagSections.classList.remove('hidden');
-            tagSections.innerHTML = `<p>${escapeHtml(i18n.t('error_loading_tags'))}</p>`;
+            if (!preserveStaticFallback(String(error))) {
+                console.error('Error loading grouped topics:', error);
+                topicList.innerHTML = `<li>${escapeHtml(i18n.t('error_loading_tags'))}</li>`;
+            }
         });
 
-    window.addEventListener('hashchange', renderPage);
-    window.addEventListener('site-language-change', renderPage);
+    window.addEventListener('hashchange', renderTopics);
+    window.addEventListener('site-language-change', renderTopics);
 });

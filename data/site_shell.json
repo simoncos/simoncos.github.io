@@ -1,6 +1,6 @@
 {
-  "css_version": "20260715a",
-  "js_version": "20260715a",
+  "css_version": "20260724a",
+  "js_version": "20260724a",
   "theme_init": "theme-init.js",
   "icons": {
     "favicon": "assets/icons/favicon-32.png",
@@ -66,43 +66,9 @@
           "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
         }
       },
-      "load-blog-archive.js"
-    ],
-    "tags": [
-      "site-config.js",
-      "i18n.js",
-      "article-groups.js",
-      "load-nav.js",
-      "dark-mode.js",
-      {
-        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
-        "defer": true,
-        "attrs": {
-          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
-        }
-      },
-      {
-        "src": "load-tags-page.js",
-        "defer": true
-      }
-    ],
-    "series": [
-      "site-config.js",
-      "i18n.js",
-      "article-groups.js",
-      "load-nav.js",
-      "dark-mode.js",
-      {
-        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
-        "defer": true,
-        "attrs": {
-          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
-        }
-      },
-      {
-        "src": "load-series-page.js",
-        "defer": true
-      }
+      "load-blog-archive.js",
+      "load-series-page.js",
+      "load-tags-page.js"
     ],
     "projects": [
       "site-config.js",
@@ -170,22 +136,6 @@
       "path": "about.html",
       "asset_prefix": "",
       "script_profile": "basic",
-      "head_rss": true,
-      "footer_rss": false,
-      "footer_version": "site_config"
-    },
-    {
-      "path": "tags.html",
-      "asset_prefix": "",
-      "script_profile": "tags",
-      "head_rss": true,
-      "footer_rss": false,
-      "footer_version": "site_config"
-    },
-    {
-      "path": "series.html",
-      "asset_prefix": "",
-      "script_profile": "series",
       "head_rss": true,
       "footer_rss": false,
       "footer_version": "site_config"

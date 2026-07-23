@@ -844,7 +844,7 @@ def render_blog_post(post, template, article_group_map):
         og_locale = 'zh_CN' if post['language'] == 'zh' else 'en_US'
 
         tags_html = '<ul class="tag-list">' + ''.join([
-            f'<li><a href="../tags.html#{quote(tag)}">{html_lib.escape(tag)}</a></li>'
+            f'<li><a href="../blogs.html#topic-{quote(tag)}">{html_lib.escape(tag)}</a></li>'
             for tag in tags
         ]) + '</ul>'
 

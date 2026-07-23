@@ -250,7 +250,7 @@ def render_blog_archive(article_index: dict) -> str:
                 else ""
             )
             tags = "".join(
-                f'<li><a href="tags.html#{quote(str(tag))}">{escape(tag)}</a></li>'
+                f'<li><a href="#topic-{quote(str(tag))}">{escape(tag)}</a></li>'
                 for tag in group.get("tags", [])
             )
             tags_html = f'\n                    <ul class="tag-list blog-preview-tags">{tags}</ul>' if tags else ""
@@ -348,15 +348,36 @@ def render_series_index(article_index: dict) -> str:
         count_label = "1 part" if count == 1 else f"{count} parts"
         rows.append(
             f'''                <li class="series-ledger-row">
-                    <div class="series-ledger-meta"><span class="meta-pill">Series</span><span>{count_label}</span></div>
                     <div class="series-ledger-body">
-                        <h3>{escape(series_name)}</h3>
+                        <h4>{escape(series_name)}</h4>
+                        <p class="series-part-count">{count_label}</p>
                         <ol class="series-part-list">
 {chr(10).join(parts)}
                         </ol>
                     </div>
                 </li>'''
         )
+    return "\n".join(rows)
+
+
+def render_topic_index(article_index: dict) -> str:
+    topic_counts: dict[str, int] = {}
+    for group in article_index.get("groups", []):
+        for tag in group.get("tags") or []:
+            topic = str(tag)
+            topic_counts[topic] = topic_counts.get(topic, 0) + 1
+
+    def display_topic(topic: str) -> str:
+        return topic.upper() if topic.lower() in {"ai", "km"} else topic[:1].upper() + topic[1:]
+
+    rows = [
+        f'                <li><a href="#topic-{quote(topic)}"><span>{escape(display_topic(topic))}</span><span>{count}</span></a></li>'
+        for topic, count in sorted(topic_counts.items())
+    ]
+    all_count = len(topic_counts) + 1
+    rows.append(
+        f'                <li><a href="#topics"><span data-i18n="essays_all_topics">All topics</span><span>{all_count}</span></a></li>'
+    )
     return "\n".join(rows)
 
 
@@ -592,18 +613,19 @@ def main() -> int:
         },
         ROOT / "blogs.html": {
             "blog-archive": render_blog_archive(article_index),
+            "series-index": render_series_index(article_index),
+            "topic-index": render_topic_index(article_index),
         },
         ROOT / "templates/blogs-listing-template.html": {
             "blog-archive": render_blog_archive(article_index),
+            "series-index": render_series_index(article_index),
+            "topic-index": render_topic_index(article_index),
         },
         ROOT / "gallery.html": {
             "gallery-grid": render_gallery_cards(gallery_payload),
         },
         ROOT / "projects.html": {
             "projects-content": render_projects_content(projects_payload),
-        },
-        ROOT / "series.html": {
-            "series-index": render_series_index(article_index),
         },
     }
 
