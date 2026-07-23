@@ -9,5 +9,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": ["sleep-2016-2026.ts", "sleep-2016-2026.en.ts"]
+  "files": ["sleep-2016-2026.ts", "sleep-2016-2026.en.ts", "sleep-essay-ui.ts"]
 }

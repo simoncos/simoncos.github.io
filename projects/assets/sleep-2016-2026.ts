@@ -2184,15 +2184,12 @@ if (document.readyState === 'loading') {
 (function() {
   const bar = document.getElementById('back-bar');
   if (!bar) return;
-  let lastY = window.scrollY;
   window.addEventListener('scroll', function() {
     const y = window.scrollY;
-    // Show when scrolling up AND past 400px from top
-    if (y > 400 && y < lastY) {
+    if (y > 400) {
       bar.classList.add('visible');
     } else {
       bar.classList.remove('visible');
     }
-    lastY = y;
   }, { passive: true });
 })();
