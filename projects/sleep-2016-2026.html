@@ -24,6 +24,9 @@
 
 <!-- Canonical -->
 <link rel="canonical" href="https://simoncos.github.io/projects/sleep-2016-2026.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/projects/sleep-2016-2026.html">
+<link rel="alternate" hreflang="en" href="https://simoncos.github.io/projects/sleep-2016-2026.en.html">
+<link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/projects/sleep-2016-2026.en.html">
 
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
@@ -388,12 +391,20 @@
     .hero-stat-num { font-size: 1.8rem; }
   }
 </style>
+<link rel="stylesheet" href="assets/sleep-essay-editorial.css?v=20260724">
 </head>
 <body>
 
-<div id="back-bar">
+<a class="skip-link" href="#essay-main">跳到正文</a>
+
+<div id="back-bar" aria-label="文章快捷导航">
   <a href="../projects.html">← Projects</a>
   <span class="back-title">十年睡眠数据：我们能挖掘到什么？</span>
+  <span class="back-actions">
+    <a class="back-contents-link" href="#essay-contents">目录</a>
+    <a class="language-link" href="sleep-2016-2026.en.html" lang="en">EN</a>
+  </span>
+  <span id="reading-progress" aria-hidden="true"></span>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -422,13 +433,132 @@
       <span class="hero-stat-label">平均实际睡眠时长</span>
     </div>
   </div>
+  <div class="hero-actions">
+    <a class="hero-action" href="#key-findings">先看五个结论</a>
+    <a class="hero-action secondary" href="#essay-contents">按章节深入</a>
+  </div>
 </div>
 
+<main id="essay-main">
+<!-- ═══ EDITORIAL BRIEF ═══ -->
+<section id="key-findings" class="editorial-intro" aria-labelledby="key-findings-title">
+  <div class="container">
+    <p class="section-label">先读这一页</p>
+    <h2 id="key-findings-title" class="section-title">十年记录，先带走这五件事</h2>
+    <p class="editorial-lede">
+      这不是一份通用睡眠指南，而是一份个人长期记录。它最有价值的地方，不是给每个人同一套答案，
+      而是把节律、身体信号、环境和主观感受放到同一条时间线上，看哪些模式反复出现。
+    </p>
+
+    <ol class="findings-list">
+      <li class="finding-item">
+        <div>
+          <h3><a href="#rhythm">几点入睡，比多数睡前仪式更稳定</a></h3>
+          <p>把变量放在一起比较后，晚睡仍是最稳定的负面信号；它对第二天情绪的影响，比对应用分数更深。</p>
+          <span class="finding-confidence">相对较强 · 多种分析口径一致</span>
+        </div>
+      </li>
+      <li class="finding-item">
+        <div>
+          <h3><a href="#measurement">应用分数和真实早晨并不总是同一回事</a></h3>
+          <p>即使质量分达到 90 以上，仍有一部分早晨被标记为 Bad。动作和声音无法覆盖醒来后的完整感受。</p>
+          <span class="finding-confidence">相对较强 · 传感器与主观记录对照</span>
+        </div>
+      </li>
+      <li class="finding-item">
+        <div>
+          <h3><a href="#health">呼吸相关信号值得重视，但不能自行诊断</a></h3>
+          <p>打呼噜和呼吸中断估算值在后期持续抬升，并与正式诊断和治疗时间线出现呼应；它们仍只是消费级设备信号。</p>
+          <span class="finding-confidence">需医疗验证 · 不等同临床 AHI</span>
+        </div>
+      </li>
+      <li class="finding-item">
+        <div>
+          <h3><a href="#exercise">运动有效，但“累”不是同一种累</a></h3>
+          <p>结构化、低步数的运动与较好睡眠同时出现；旅行、徒步和无结构体力消耗则往往叠加晚睡与呼吸负担。</p>
+          <span class="finding-confidence">探索性 · 仍可能受情境混杂</span>
+        </div>
+      </li>
+      <li class="finding-item">
+        <div>
+          <h3><a href="#afterword">数据的价值，是把模糊不适变成可以追问的问题</a></h3>
+          <p>十年记录没有给出神秘法则，但让“为什么总觉得不对”变成了可以定位、复查和继续实验的线索。</p>
+          <span class="finding-confidence">个人结论 · 仍在继续记录</span>
+        </div>
+      </li>
+    </ol>
+
+    <aside class="medical-boundary" aria-label="医学与数据边界">
+      <strong>医学边界：</strong>
+      本文是个人观察性分析，不构成诊断或治疗建议。文中的 BD 指 SleepCycle 估算的呼吸中断信号，
+      不等同于临床睡眠检查中的 AHI。持续打呼噜、呼吸停顿、晨起头痛或白天过度困倦，应交由专业医生和正式睡眠检查评估。
+      参见
+      <a href="https://aasm.org/advocacy/position-statements/consumer-sleep-technology/">AASM 消费级睡眠技术立场声明</a>
+      与
+      <a href="https://www.fda.gov/consumers/consumer-updates/always-tired-you-may-have-sleep-apnea">FDA 睡眠呼吸暂停说明</a>。
+    </aside>
+  </div>
+</section>
+
+<nav id="essay-contents" class="chapter-nav" aria-label="文章目录">
+  <div class="chapter-nav-inner">
+    <span class="chapter-nav-label">目录</span>
+    <a class="chapter-link" href="#overview">01 全量</a>
+    <a class="chapter-link" href="#rhythm">02 节律</a>
+    <a class="chapter-link" href="#behavior">03 行为</a>
+    <a class="chapter-link" href="#events">04 事件</a>
+    <a class="chapter-link" href="#exercise">05 运动</a>
+    <a class="chapter-link" href="#health">06 健康</a>
+    <a class="chapter-link" href="#environment">07 环境</a>
+    <a class="chapter-link" href="#mood">08 情绪</a>
+    <a class="chapter-link" href="#measurement">09 衡量</a>
+    <a class="chapter-link" href="#model">10 模型</a>
+    <a class="chapter-link" href="#afterword">11 后记</a>
+  </div>
+</nav>
+
+<section id="method" class="editorial-method" aria-labelledby="method-title">
+  <div class="container">
+    <div class="method-card">
+      <div class="method-card-header">
+        <div>
+          <p class="section-label">阅读方法</p>
+          <h2 id="method-title">这篇文章如何得到结论</h2>
+          <p>正文混合了描述统计、标签相关性、时间线对照和多变量模型。它们回答的问题不同，证据力度也不同。</p>
+        </div>
+        <p class="method-window">
+          <strong>数据窗口</strong>
+          SleepCycle CSV · 2016-02-13—2026-03-18<br>
+          3,656 个有效夜晚 · 单一个体长期观察
+        </p>
+      </div>
+      <div class="method-grid">
+        <div class="method-item">
+          <h3>记录层</h3>
+          <p>入睡、起床、时长、应用分数、声音与自定义标签；缺失率和功能上线时间并不一致。</p>
+        </div>
+        <div class="method-item">
+          <h3>比较层</h3>
+          <p>先看年度与月度趋势，再比较带有或不带有某一标签的夜晚。相关性不自动代表因果。</p>
+        </div>
+        <div class="method-item">
+          <h3>模型层</h3>
+          <p>把近期变量放进同一个模型，观察控制其他因素后仍保留多少解释力；反事实模拟仍不是因果证明。</p>
+        </div>
+        <div class="method-item">
+          <h3>解释层</h3>
+          <p>医学诊断、旅行和生活事件只用于对照时间线。应用算法升级造成的阶段数据断裂不用于长期结论。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ 01 / 全量数据 ═══ -->
-<div class="section">
+<div class="section" id="overview" role="region" aria-labelledby="overview-title">
   <div class="container">
     <p class="section-label">01 / 全量数据</p>
-    <h2 class="section-title">十年，摊开来看</h2>
+    <h2 id="overview-title" class="section-title"><a class="section-heading-anchor" href="#overview">十年，摊开来看</a></h2>
     <p class="prose">
       先来看看这份原始数据集本身。
       从 2016 年 2 月到 2026 年 3 月，App 里一共留下了 <strong>3,656 个有效夜晚</strong>
@@ -441,7 +571,7 @@
   <div class="wide-container">
     <div class="chart-card">
       <h3>入睡时间 × 实际睡眠时长 × 质量（颜色），按年份可筛选</h3>
-      <div id="scatter-selector" class="scatter-selector"></div>
+      <div id="scatter-selector" class="scatter-selector" role="group" aria-label="按年份筛选散点图"></div>
       <div id="chart-scatter" style="height:500px"></div>
     </div>
   </div>
@@ -463,10 +593,10 @@
 </div>
 
 <!-- ═══ 02 / 时长与时间 ═══ -->
-<div class="section">
+<div class="section" id="rhythm" role="region" aria-labelledby="rhythm-title">
   <div class="container">
     <p class="section-label">02 / 时长与时间</p>
-    <h2 class="section-title">睡了多久，几点上床</h2>
+    <h2 id="rhythm-title" class="section-title"><a class="section-heading-anchor" href="#rhythm">睡了多久，几点上床</a></h2>
     <p class="prose">
       首先是睡眠时长，它与睡眠质量并不总是同向移动。
       <strong>2020 年的高质量伴随着最长的时长（年均 <em>7.8h</em>）</strong>，
@@ -634,16 +764,16 @@
     <p class="prose">
       这些发现或许揭示了一个有意思的生物学现实：睡眠系统是一个极度厌恶方差的稳态系统。
       试图通过"周末狂睡 12 小时"来偿还工作日欠下的睡眠债，至少在我这里是有点行不通的。
-      唯一有效的还债方式，不是延长单次睡眠的长度，而是老老实实地回到基线，连续几天保持稳定的就寝时间，等待神经系统的过度唤醒缓慢平息。
+      在这份记录里，更可靠的恢复方式不是延长某一个夜晚，而是回到基线：连续几天保持稳定的就寝时间，让状态逐步恢复。
       或许规律性确实比时长更重要。
     </p>
   </div>
 
 <!-- ═══ 03 / 行为与睡眠质量 ═══ -->
-<div class="section">
+<div class="section" id="behavior" role="region" aria-labelledby="behavior-title">
   <div class="container">
     <p class="section-label">03 / 行为与睡眠质量</p>
-    <h2 class="section-title">是什么在影响睡眠？</h2>
+    <h2 id="behavior-title" class="section-title"><a class="section-heading-anchor" href="#behavior">是什么在影响睡眠？</a></h2>
     <p class="prose">
       我在Sleep Cycle里加了一些自定义的标签，在睡前和醒后都可以修改。
       十年下来，这些标签形成了一个行为数据库，为更有趣的分析提供了基础。
@@ -662,7 +792,7 @@
   <div class="container">
     <div class="callout good">
       <strong>按摩效果最显著 (<em>+5.8%</em>)</strong>：264 次按摩记录，对应夜晚平均质量高达 <em>89.1%</em>，
-      是所有标签里提升最明显的。按摩不只是放松肌肉，它实质性地垫高了睡眠的底盘。
+      是所有标签里提升最明显的。在这份记录里，按摩夜晚对应的睡眠底盘更高；但这仍是相关性，也可能受当天状态和场景影响。
     </div>
     <div class="callout bad">
       <strong>旅行 (<em>-10.0%</em>) 和咖啡因 (<em>-9.7%</em>)：双重惩罚</strong>：在旅行途中，睡眠质量平均掉 10%；
@@ -680,10 +810,10 @@
 
 
 <!-- ═══ 04 / 事件分析 ═══ -->
-<div class="section">
+<div class="section" id="events" role="region" aria-labelledby="events-title">
   <div class="container">
     <p class="section-label">04 / 事件分析</p>
-    <h2 class="section-title">事件深入分析</h2>
+    <h2 id="events-title" class="section-title"><a class="section-heading-anchor" href="#events">事件深入分析</a></h2>
     <p class="prose">
       前一节是一个总体比较：哪些事件整体上更伤睡眠，哪些相对更友好。
       这一节把几个值得展开的事件单独拎出来看——
@@ -693,7 +823,7 @@
     <!-- 05 · Event selector chips -->
     <div style="margin: 1.5rem 0;">
       <div style="color: var(--text-muted); font-size:0.85rem; margin-bottom:0.6rem;">选择事件：</div>
-      <div id="event-selector" style="display:flex; flex-wrap:wrap; gap:0.55rem;">
+      <div id="event-selector" role="group" aria-label="选择事件" style="display:flex; flex-wrap:wrap; gap:0.55rem;">
 
         <button type="button" class="event-chip active" data-event-key="stimulants">酒精与咖啡因</button>
         <button type="button" class="event-chip" data-event-key="sick">生病</button>
@@ -789,7 +919,7 @@
     <p class="prose">
       出行夜晚只占全部记录的 <strong>3.7%（135 晚）</strong>，但影响极为稳定：平均质量 <strong>73.3%</strong>，比 baseline 低 <strong>10.4 分</strong>。
       在所有高频行为标签里，它是最可预测的负面项——几乎每次出行都会带来质量下降，说明了稳定的睡眠环境对睡眠质量有多重要。
-      但数据也揭示了一件反直觉的事：<strong>真正的元凶不是出行本身，而是伴随出行的行为模式</strong>。
+      但数据也揭示了一件反直觉的事：<strong>出行本身可能不是唯一因素，伴随出行的行为模式更值得追踪</strong>。
     </p>
   </div>
   <div class="wide-container">
@@ -880,10 +1010,10 @@
 
 
 <!-- ═══ 05 / 疲劳与运动 ═══ -->
-<div class="section">
+<div class="section" id="exercise" role="region" aria-labelledby="exercise-title">
   <div class="container">
     <p class="section-label">05 / 疲劳与运动</p>
-    <h2 class="section-title">走路不管用，游泳有帮助</h2>
+    <h2 id="exercise-title" class="section-title"><a class="section-heading-anchor" href="#exercise">走路不管用，游泳有帮助</a></h2>
 
     <p class="prose">
       几乎所有的睡眠卫生建议都会讲同一句话："白天多运动，把自己累趴下，晚上就能睡个好觉。"
@@ -905,7 +1035,8 @@
   <div class="container">
     <div class="callout bad">
       <strong>疲劳的代价（<em>Tax of Fatigue</em>）</strong>：高强度、无结构的体力消耗并没有换来"更深的恢复"；
-      它更可能引起夜间上呼吸道肌肉的过度松弛或轻度炎症，让本就狭窄的气道更容易被部分堵塞，微觉醒随之增加，睡眠结构也随之被打碎。
+      一种可能解释是夜间上呼吸道肌肉过度松弛或轻度炎症，让本就狭窄的气道更容易被部分堵塞。
+      但这份数据没有直接测量炎症、气道张力或微觉醒，因此这里只能把它当作等待医学验证的机制假设。
     </div>
 
     <p class="prose" style="margin-top: 2rem;">
@@ -939,10 +1070,10 @@
 </div>
 
 <!-- ═══ 06 / 长期攻防战 ═══ -->
-<div class="section">
+<div class="section" id="health" role="region" aria-labelledby="health-title">
   <div class="container">
     <p class="section-label">06 / 长期攻防战</p>
-    <h2 class="section-title">与健康问题的抗争</h2>
+    <h2 id="health-title" class="section-title"><a class="section-heading-anchor" href="#health">与健康问题的抗争</a></h2>
     <p class="prose" style="margin-top:0">
       健康问题是睡眠质量最大的杀手。
     </p>
@@ -970,9 +1101,9 @@
   <div class="container">
     <div class="callout warn">
       <strong>乙流留下的开关</strong>：2020 年 1 月末的那场严重乙流（当时曾一度被怀疑是 COVID，
-      后来检测条件改善才确认为乙流），是打呼噜出现的绝对分水岭。
-      上呼吸道感染引起鼻黏膜急剧炎症、咽部肌肉松弛；而在症状消退后，
-      气道的物理结构已经悄悄发生了改变。这个"开关"被按下后，就再也没有真正关上。
+      后来检测条件改善才确认为乙流），与打呼噜信号的明显分水岭重合。
+      时间线显示感染前后出现了持续转折，但它无法证明这次感染永久改变了气道结构。
+      更谨慎的说法是：从这一时期起，打呼噜信号再也没有真正回到此前基线，后续诊断为这条线提供了更多背景。
       两年后（2022 年 12 月）COVID 首次感染，2023 年打呼噜均值从 13 分钟跳跃至 <em>33 分钟</em>，
       呼吸中断数据也开始频繁被记录到。到 2024 年 8 月二次 COVID、9 月甲流连续打击后，
       2025 年呼吸中断已经攀升至 <em>8.5 次/小时</em>。
@@ -1065,20 +1196,20 @@
       从 2020 年乙流开始的呼吸系统连带问题已经跨越了六年。
       目前 BD 6.9 次/小时相对于正常参考值（&lt;5）依然偏高，距离医学意义上的「解决」还有距离。
       鼻窦炎和囊肿仍在持续监控；颈椎症状是另一条并行的暗线，同样和这几年的上呼吸道感染脱不了干系，需要长期干预。
-      但至少，数据曲线证明了它在往正确的方向走。在这份长达十年的档案里，这已经是值得被特别标注的一笔。
+      但至少，数据曲线与主观改善指向了相同方向。在这份长达十年的档案里，这已经是值得被特别标注的一笔。
     </div>
   </div>
 </div>
 
 <!-- ═══ 07 / 环境与触发器 ═══ -->
-<div class="section">
+<div class="section" id="environment" role="region" aria-labelledby="environment-title">
   <div class="container">
     <p class="section-label">07 / 环境与触发器</p>
-    <h2 class="section-title">冷空气伤睡，雨夜反而好</h2>
+    <h2 id="environment-title" class="section-title"><a class="section-heading-anchor" href="#environment">冷空气伤睡，雨夜反而好</a></h2>
     <p class="prose">
       SleepCycle 偶尔会记录当晚的天气和室温。十年里共有 755 个夜晚留下了有效的室温记录，占全部数据的 20%。
       把这些夜晚和呼吸负担放在一起对比，会看到一条很物理的规律：
-      <strong>冷空气是脆弱气道的直接放大器。</strong>
+      <strong>偏冷夜晚与更重的呼吸负担稳定地同时出现。</strong>
     </p>
     <p class="prose">
       气温越低，打呼噜的时间越长，呼吸中断（BD）也越频繁。
@@ -1094,9 +1225,9 @@
   </div>
   <div class="container">
     <div class="callout bad">
-      <strong>不是冷让人睡得差，是冷让气道变窄</strong>：对于健康人来说，偏凉的室温可能有助于睡眠。
-      但对于带有鼻窦炎/囊肿的受损气道来说，冷空气会刺激鼻黏膜血管充血肿胀，导致气道更加狭窄。
-      数据在这里展示的不是主观的"冷暖感知"，而是纯粹的物理压迫。
+      <strong>冷夜与更重的呼吸负担同时出现</strong>：对于健康人来说，偏凉的室温可能有助于睡眠。
+      在我的记录里，偏冷夜晚对应更长的打呼噜时间和更高的 BD 估算值；鼻腔炎症和气道狭窄是一种可能解释，
+      但数据没有直接测量鼻腔通畅度，不能单独证明机制。
     </div>
 
     <p class="prose" style="margin-top: 2rem;">
@@ -1115,10 +1246,9 @@
   </div>
   <div class="container">
     <div class="callout good">
-      <strong>湿度与白噪音的胜利</strong>：雨夜的改善很可能是双重的。
-      物理层面上，高湿度空气让呼吸道保持湿润，黏膜不易干燥，打呼噜的烈度随之减轻；
-      声学层面上，持续的雨声是天然的白噪音，覆盖掉了可能让人微觉醒的环境杂音。
-      雨夜，是我这套脆弱睡眠系统最喜欢的自然环境。
+      <strong>两个待验证的解释：湿度与白噪音</strong>。雨夜同时伴随更低的打呼噜估算值和更好的主观感受。
+      较高湿度可能让呼吸道更舒适，持续雨声也可能遮蔽环境杂音；但数据并未直接记录湿度、雨声音量或微觉醒，
+      因此它们应被视为下一步实验线索，而不是已经确认的机制。
     </div>
 
     <h3 style="margin-top: 2rem; margin-bottom: 0.8rem; color: var(--text);">物理环境与行为的诚实</h3>
@@ -1166,10 +1296,10 @@
 
 
 <!-- ═══ 08 / 情绪记录 ═══ -->
-<div class="section">
+<div class="section" id="mood" role="region" aria-labelledby="mood-title">
   <div class="container">
     <p class="section-label">08 / 情绪记录</p>
-    <h2 class="section-title">算法看不见的那条线</h2>
+    <h2 id="mood-title" class="section-title"><a class="section-heading-anchor" href="#mood">算法看不见的那条线</a></h2>
     <p class="prose">
       SleepCycle 在醒来时要求我报告状态：Good / OK / Bad / Not set。
       这十年里，<strong>Bad 占所有有效记录的 38%</strong>——
@@ -1240,10 +1370,10 @@
 </div>
 
 <!-- ═══ 09 / 两种衡量 ═══ -->
-<div class="section">
+<div class="section" id="measurement" role="region" aria-labelledby="measurement-title">
   <div class="container">
     <p class="section-label">09 / 两种衡量</p>
-    <h2 class="section-title">两种衡量，两种现实</h2>
+    <h2 id="measurement-title" class="section-title"><a class="section-heading-anchor" href="#measurement">两种衡量，两种现实</a></h2>
     <p class="prose">
       SleepCycle 的质量分数是一个不透明的黑盒——它基于手机麦克风和加速度计推算睡眠阶段，最终给出一个 0-100% 的数字。但这个数字到底在量化什么？
     </p>
@@ -1293,10 +1423,10 @@
 </div>
 
 <!-- ═══ 10 / 机器学到了什么 ═══ -->
-<div class="section">
+<div class="section" id="model" role="region" aria-labelledby="model-title">
   <div class="container">
     <p class="section-label">10 / 机器学到了什么</p>
-    <h2 class="section-title">当变量开始彼此竞争</h2>
+    <h2 id="model-title" class="section-title"><a class="section-heading-anchor" href="#model">当变量开始彼此竞争</a></h2>
     <p class="prose">
       前面的章节基本都是一次只看一个变量：晚睡怎样，旅行怎样，某些标签怎样。到这里我想把这些碎片放回一个统一的空间里。
       我用近几年的夜晚训练了一个模型，然后换了一个更诚实的问题：<strong>当入睡时间、这些标签、近期状态和上下文一起竞争时，到底谁还站得住？</strong><sup style="font-size:0.72em; color:var(--text-muted); margin-left:0.15em;">1</sup>
@@ -1360,10 +1490,10 @@
 </div>
 
 <!-- ═══ 11 / 后记 ═══ -->
-<div class="section" style="border-bottom:none">
+<div class="section" id="afterword" role="region" aria-labelledby="afterword-title" style="border-bottom:none">
   <div class="container">
     <p class="section-label">11 / 后记</p>
-    <h2 class="section-title">数字能告诉我什么</h2>
+    <h2 id="afterword-title" class="section-title"><a class="section-heading-anchor" href="#afterword">数字能告诉我什么</a></h2>
     <p class="prose">
       这是一篇极其个人的睡眠分析，但它底下的问题也许并不独特：睡眠是多维的，环境的影响比多数人以为的更大，而算法打出的分数和你真正走进去的那个早晨，并不总是同一回事。
     </p>
@@ -1380,7 +1510,7 @@
       “明天多睡补回来”这种想法，在我身上并不成立。身体更倾向于通过提前入睡来还债，而不是把某一个夜晚拉长。恢复节律，比单次加量更重要。
     </p>
     <p class="prose">
-      如果有慢性呼吸道问题，冷空气和干燥就是真正的放大器。潮湿的夜晚不只是更舒服，它们对脆弱的气道往往也更友好。
+      在我的记录里，偏冷、偏干燥的夜晚经常与更重的呼吸信号同时出现；潮湿夜晚则相对温和。这个模式值得继续追踪，具体机制仍需要专业评估。
     </p>
     <p class="prose">
       如果经常觉得“评分挺高但感觉不对”，那就更相信自己的感觉。算法测量的是动作和声音，它不测量你必须度过的那个早晨。
@@ -1395,7 +1525,7 @@
     </div>
     </div>
   </div>
-</div>
+</main>
 
 <footer>
   <p>Quantified Self Essay · simoncos · 2026</p>
@@ -1403,7 +1533,8 @@
 </footer>
 
 <!-- ═══ SCRIPTS ═══ -->
-<script src="assets/sleep-2016-2026.js?v=20260620ts"></script>
+<script src="assets/sleep-2016-2026.js?v=20260724-editorial"></script>
+<script src="assets/sleep-essay-ui.js?v=20260724"></script>
 
 </body>
 </html>

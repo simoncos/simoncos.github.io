@@ -24,6 +24,9 @@
 
 <!-- Canonical -->
 <link rel="canonical" href="https://simoncos.github.io/projects/sleep-2016-2026.en.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/projects/sleep-2016-2026.html">
+<link rel="alternate" hreflang="en" href="https://simoncos.github.io/projects/sleep-2016-2026.en.html">
+<link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/projects/sleep-2016-2026.en.html">
 
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
@@ -387,12 +390,20 @@
     .hero-stat-num { font-size: 1.8rem; }
   }
 </style>
+<link rel="stylesheet" href="assets/sleep-essay-editorial.css?v=20260724">
 </head>
 <body>
 
-<div id="back-bar">
+<a class="skip-link" href="#essay-main">Skip to the essay</a>
+
+<div id="back-bar" aria-label="Essay shortcuts">
   <a href="../projects.html">← Projects</a>
   <span class="back-title">10 Years of Sleep Data: What Can We Uncover?</span>
+  <span class="back-actions">
+    <a class="back-contents-link" href="#essay-contents">Contents</a>
+    <a class="language-link" href="sleep-2016-2026.html" lang="zh-Hans">中文</a>
+  </span>
+  <span id="reading-progress" aria-hidden="true"></span>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -421,13 +432,134 @@
       <span class="hero-stat-label">Avg Actual Sleep</span>
     </div>
   </div>
+  <div class="hero-actions">
+    <a class="hero-action" href="#key-findings">Start with five findings</a>
+    <a class="hero-action secondary" href="#essay-contents">Explore by chapter</a>
+  </div>
 </div>
 
+<main id="essay-main">
+<!-- ═══ EDITORIAL BRIEF ═══ -->
+<section id="key-findings" class="editorial-intro" aria-labelledby="key-findings-title">
+  <div class="container">
+    <p class="section-label">Read this first</p>
+    <h2 id="key-findings-title" class="section-title">Five things to take from ten years of records</h2>
+    <p class="editorial-lede">
+      This is not a universal sleep guide. It is one person's long-running record.
+      Its value lies in putting rhythm, physical signals, environment, and subjective experience on the same timeline,
+      then asking which patterns keep returning.
+    </p>
+
+    <ol class="findings-list">
+      <li class="finding-item">
+        <div>
+          <h3><a href="#rhythm">Bedtime is more consistent than most bedtime rituals</a></h3>
+          <p>When the variables compete, late sleep remains the most stable negative signal—and it weighs more heavily on next-morning mood than on the app score.</p>
+          <span class="finding-confidence">Relatively strong · consistent across analyses</span>
+        </div>
+      </li>
+      <li class="finding-item">
+        <div>
+          <h3><a href="#measurement">The app score and the lived morning are not the same reality</a></h3>
+          <p>Even among nights scoring 90 or higher, some mornings are still marked Bad. Movement and sound cannot capture the full experience of waking up.</p>
+          <span class="finding-confidence">Relatively strong · sensor and mood records compared</span>
+        </div>
+      </li>
+      <li class="finding-item">
+        <div>
+          <h3><a href="#health">Breathing signals matter, but they are not a diagnosis</a></h3>
+          <p>Estimated snoring and breathing-disruption signals rise in the later years and echo parts of the clinical timeline; they remain consumer-device estimates.</p>
+          <span class="finding-confidence">Needs clinical validation · not medical AHI</span>
+        </div>
+      </li>
+      <li class="finding-item">
+        <div>
+          <h3><a href="#exercise">Exercise helps, but not every kind of fatigue is equal</a></h3>
+          <p>Structured, low-step exercise appears alongside better sleep, while travel, hiking, and unstructured exertion often arrive with later nights and heavier breathing burden.</p>
+          <span class="finding-confidence">Exploratory · context may still confound</span>
+        </div>
+      </li>
+      <li class="finding-item">
+        <div>
+          <h3><a href="#afterword">The data turns vague unease into a question you can investigate</a></h3>
+          <p>Ten years did not uncover a secret law. It made “something feels off” specific enough to locate, revisit, and keep testing.</p>
+          <span class="finding-confidence">Personal conclusion · the record continues</span>
+        </div>
+      </li>
+    </ol>
+
+    <aside class="medical-boundary" aria-label="Medical and data boundary">
+      <strong>Medical boundary:</strong>
+      This is personal observational analysis, not diagnosis or treatment advice. “BD” in this essay means SleepCycle's estimated breathing-disruption signal;
+      it is not the clinical AHI measured in a sleep study. Persistent snoring, witnessed pauses, morning headaches, or excessive daytime sleepiness
+      should be assessed by a clinician and, when appropriate, a formal sleep test.
+      See the
+      <a href="https://aasm.org/advocacy/position-statements/consumer-sleep-technology/">AASM position on consumer sleep technology</a>
+      and the
+      <a href="https://www.fda.gov/consumers/consumer-updates/always-tired-you-may-have-sleep-apnea">FDA overview of sleep apnea</a>.
+    </aside>
+  </div>
+</section>
+
+<nav id="essay-contents" class="chapter-nav" aria-label="Essay contents">
+  <div class="chapter-nav-inner">
+    <span class="chapter-nav-label">Contents</span>
+    <a class="chapter-link" href="#overview">01 Overview</a>
+    <a class="chapter-link" href="#rhythm">02 Rhythm</a>
+    <a class="chapter-link" href="#behavior">03 Behavior</a>
+    <a class="chapter-link" href="#events">04 Events</a>
+    <a class="chapter-link" href="#exercise">05 Exercise</a>
+    <a class="chapter-link" href="#health">06 Health</a>
+    <a class="chapter-link" href="#environment">07 Environment</a>
+    <a class="chapter-link" href="#mood">08 Mood</a>
+    <a class="chapter-link" href="#measurement">09 Measures</a>
+    <a class="chapter-link" href="#model">10 Model</a>
+    <a class="chapter-link" href="#afterword">11 Afterword</a>
+  </div>
+</nav>
+
+<section id="method" class="editorial-method" aria-labelledby="method-title">
+  <div class="container">
+    <div class="method-card">
+      <div class="method-card-header">
+        <div>
+          <p class="section-label">How to read the evidence</p>
+          <h2 id="method-title">How this essay reaches its conclusions</h2>
+          <p>The essay combines descriptive statistics, tag associations, timeline comparisons, and a multivariable model. They answer different questions and carry different evidential weight.</p>
+        </div>
+        <p class="method-window">
+          <strong>Data window</strong>
+          SleepCycle CSV · 2016-02-13—2026-03-18<br>
+          3,656 valid nights · one-person longitudinal record
+        </p>
+      </div>
+      <div class="method-grid">
+        <div class="method-item">
+          <h3>Record layer</h3>
+          <p>Bedtime, wake time, duration, app score, sound signals, and custom tags; coverage and feature start dates vary.</p>
+        </div>
+        <div class="method-item">
+          <h3>Comparison layer</h3>
+          <p>Yearly and monthly trends come first, followed by nights with and without a tag. Association does not establish causation.</p>
+        </div>
+        <div class="method-item">
+          <h3>Model layer</h3>
+          <p>Recent variables compete in one model to show what retains explanatory weight. Counterfactual simulations remain non-causal.</p>
+        </div>
+        <div class="method-item">
+          <h3>Interpretation layer</h3>
+          <p>Diagnoses, travel, and life events contextualize the timeline. Sleep-stage discontinuities caused by app changes are excluded from long-term conclusions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ 01 / Full Dataset ═══ -->
-<div class="section">
+<div class="section" id="overview" role="region" aria-labelledby="overview-title">
   <div class="container">
     <p class="section-label">01 / Full Dataset</p>
-    <h2 class="section-title">Ten Years, Laid Out</h2>
+    <h2 id="overview-title" class="section-title"><a class="section-heading-anchor" href="#overview">Ten Years, Laid Out</a></h2>
     <p class="prose">
       Let's start with the raw dataset itself.
       From February 2016 to March 2026, the App recorded a total of <strong>3,656 Valid Nights</strong>.
@@ -440,7 +572,7 @@
   <div class="wide-container">
     <div class="chart-card">
       <h3>Bedtime × Actual Sleep × Quality (color), filterable by year</h3>
-      <div id="scatter-selector" class="scatter-selector"></div>
+      <div id="scatter-selector" class="scatter-selector" role="group" aria-label="Filter the scatter plot by year"></div>
       <div id="chart-scatter" style="height:500px"></div>
     </div>
   </div>
@@ -462,10 +594,10 @@
 </div>
 
 <!-- ═══ 02 / Duration & Time ═══ -->
-<div class="section">
+<div class="section" id="rhythm" role="region" aria-labelledby="rhythm-title">
   <div class="container">
     <p class="section-label">02 / Duration & Time</p>
-    <h2 class="section-title">How Long, How Late</h2>
+    <h2 id="rhythm-title" class="section-title"><a class="section-heading-anchor" href="#rhythm">How Long, How Late</a></h2>
     <p class="prose">
       First, sleep duration—which doesn't always move in the same direction as sleep quality.
       <strong>2020's high quality came with the longest duration (annual average of <em>7.8h</em>)</strong>,
@@ -636,16 +768,16 @@
   <div class="container">
     <p class="prose">
       These findings may reveal a cold biological reality: the sleep system is a homeostatic system that intensely dislikes variance.
-      Attempting to repay weekday sleep debt by "sleeping 12 hours on weekends" doesn't work physiologically.
-      The only effective way to repay debt isn't extending single sleep sessions, but honestly returning to baseline—maintaining stable bedtimes across several consecutive days, waiting for the nervous system's hyperarousal to gradually subside.
+      In this record, trying to repay weekday sleep debt with one very long night does not show a reliable payoff.
+      The steadier recovery pattern is a return to baseline—several consecutive nights with a stable bedtime, allowing the system to settle gradually.
     </p>
   </div>
 
 <!-- ═══ 03 / Behavior & Sleep Quality ═══ -->
-<div class="section">
+<div class="section" id="behavior" role="region" aria-labelledby="behavior-title">
   <div class="container">
     <p class="section-label">03 / Behavior & Sleep Quality</p>
-    <h2 class="section-title">What's Affecting Sleep?</h2>
+    <h2 id="behavior-title" class="section-title"><a class="section-heading-anchor" href="#behavior">What's Affecting Sleep?</a></h2>
     <p class="prose">
       I added a set of custom tags in Sleep Cycle to note what happened before bed and after waking.
       Over ten years, these tags have built up a behavioral database that makes more interesting analysis possible.
@@ -664,7 +796,7 @@
   <div class="container">
     <div class="callout good">
       <strong>Massage Has the Most Significant Effect (<em>+5.8%</em>)</strong>: 264 massage records, corresponding nights averaged <em>89.1%</em> quality,
-      the strongest improvement of all tags. Massage doesn't just relax muscles—in the data it materially raises the sleep floor.
+      the strongest improvement of all tags. In this record, massage nights sit on a higher sleep floor; this is still an association and may reflect the state or setting of those days.
     </div>
     <div class="callout bad">
       <strong>Travel (<em>-10.0%</em>) and Caffeine (<em>-9.7%</em>): Double Penalty</strong>: During travel, sleep quality drops on average by 10%;
@@ -682,10 +814,10 @@
 
 
 <!-- ═══ 04 / Event Analysis ═══ -->
-<div class="section">
+<div class="section" id="events" role="region" aria-labelledby="events-title">
   <div class="container">
     <p class="section-label">04 / Event Analysis</p>
-    <h2 class="section-title">A Closer Look at Key Events</h2>
+    <h2 id="events-title" class="section-title"><a class="section-heading-anchor" href="#events">A Closer Look at Key Events</a></h2>
     <p class="prose">
       The previous section was a broad comparison: which events overall hurt sleep more, which were relatively friendlier.
       This section pulls out a few events worth examining individually—
@@ -695,7 +827,7 @@
     <!-- 05 · Event selector chips -->
     <div style="margin: 1.5rem 0;">
       <div style="color: var(--text-muted); font-size:0.85rem; margin-bottom:0.6rem;">Select an event:</div>
-      <div id="event-selector" style="display:flex; flex-wrap:wrap; gap:0.55rem;">
+      <div id="event-selector" role="group" aria-label="Choose an event" style="display:flex; flex-wrap:wrap; gap:0.55rem;">
 
         <button type="button" class="event-chip active" data-event-key="stimulants">Alcohol &amp; Caffeine</button>
         <button type="button" class="event-chip" data-event-key="sick">Illness</button>
@@ -791,7 +923,7 @@
     <p class="prose">
       Travel nights account for just <strong>3.7% (135 nights)</strong> of all records, but the damage is remarkably consistent: average quality <strong>73.3%</strong>, a full <strong>10.4 points</strong> below baseline.
       Among all high-frequency behavior tags, travel is the most predictable negative factor — almost every trip brings a quality drop, underscoring how much stable sleep environment matters.
-      But the data reveals something counterintuitive: <strong>the real culprit isn't travel itself, it's the behavior patterns that come with it</strong>.
+      But the data reveals something counterintuitive: <strong>travel may not be the only factor; the behavior patterns that come with it deserve closer tracking</strong>.
     </p>
   </div>
   <div class="wide-container">
@@ -887,10 +1019,10 @@
 
 
 <!-- ═══ 05 / Fatigue & Exercise ═══ -->
-<div class="section">
+<div class="section" id="exercise" role="region" aria-labelledby="exercise-title">
   <div class="container">
     <p class="section-label">05 / Fatigue & Exercise</p>
-    <h2 class="section-title">Walking Doesn't Work — Swimming Does</h2>
+    <h2 id="exercise-title" class="section-title"><a class="section-heading-anchor" href="#exercise">Walking Doesn't Work — Swimming Does</a></h2>
 
     <p class="prose">
       Almost every piece of sleep hygiene advice repeats the same line: "Move more during the day, tire yourself out, and you'll sleep well at night."
@@ -913,7 +1045,8 @@
   <div class="container">
     <div class="callout bad">
       <strong>Tax of Fatigue</strong>: high-intensity, unstructured physical exertion didn't translate into "deeper recovery."
-      More likely, it nudged the nighttime airway muscles toward excessive relaxation or mild inflammation, making an already narrow airway more prone to partial obstruction—micro-arousals go up, and sleep architecture gets fragmented as a result.
+      One possible explanation is greater airway-muscle relaxation or mild inflammation, making an already narrow airway more prone to partial obstruction.
+      The record does not directly measure inflammation, airway tone, or micro-arousals, so this remains a mechanism to test clinically rather than a demonstrated cause.
     </div>
 
     <p class="prose" style="margin-top: 2rem;">
@@ -925,7 +1058,7 @@
     <p class="prose">
       To rule out a statistical artifact, I ran a stricter comparison: exclude every night tagged with sickness, alcohol, caffeine, or late bedtime, then compare each exercise type's sleep performance against the "local baseline" of where it actually happened.
       The conclusion didn't water down—on this cleaner baseline, <strong>targeted exercise still lifted sleep quality by 2.7%</strong>, while hiking and travel rushing took off 2.9% and 11.2% respectively.
-      Put another way: unstructured physical depletion really does damage sleep architecture, and what actually raises the sleep floor is the kind of movement that mostly asks the heart, lungs, and muscles to work without grinding down the joints.
+      Put another way: in this record, unstructured physical depletion aligns with poorer sleep, while movement that works the heart, lungs, and muscles without grinding down the joints aligns with a higher sleep floor.
     </p>
   </div>
 
@@ -946,10 +1079,10 @@
 </div>
 
 <!-- ═══ 06 / Long-term Health Battles ═══ -->
-<div class="section">
+<div class="section" id="health" role="region" aria-labelledby="health-title">
   <div class="container">
     <p class="section-label">06 / Long-term Health Battles</p>
-    <h2 class="section-title">The Long Battle with Health</h2>
+    <h2 id="health-title" class="section-title"><a class="section-heading-anchor" href="#health">The Long Battle with Health</a></h2>
     <p class="prose" style="margin-top:0">
       Health issues are the biggest killer of sleep quality.
     </p>
@@ -976,9 +1109,9 @@
   </div>
   <div class="container">
     <div class="callout warn">
-      <strong>The Switch Left by Influenza B</strong>: The severe Influenza B infection in late January 2020 (initially highly suspected to be COVID, later confirmed as flu B when testing improved) was the absolute watershed moment for snoring.
-      Upper respiratory infection caused acute nasal mucosa inflammation and pharyngeal muscle relaxation; after symptoms subsided,
-      the physical structure of the airway had quietly changed. Once this "switch" was pressed, it never truly turned off.
+      <strong>The Inflection Around Influenza B</strong>: The severe Influenza B infection in late January 2020 (initially highly suspected to be COVID, later confirmed as flu B when testing improved) coincides with a clear watershed in the snoring signal.
+      The timeline shows a sustained change around the infection, but it cannot prove that this event permanently altered the airway's structure.
+      The more careful claim is that snoring signals never returned to their earlier baseline after this period, and later diagnoses add context to that shift.
       Two years later (December 2022) came the first COVID infection; in 2023, average snoring time jumped from 13 minutes to <em>33 minutes</em>,
       and breathing disruption data started being recorded frequently. After consecutive hits from second COVID in August 2024 and influenza A in September,
       breathing disruptions climbed to <em>8.5 events/hour</em> by 2025.
@@ -1075,14 +1208,14 @@
 </div>
 
 <!-- ═══ 07 / Environment & Triggers ═══ -->
-<div class="section">
+<div class="section" id="environment" role="region" aria-labelledby="environment-title">
   <div class="container">
     <p class="section-label">07 / Environment & Triggers</p>
-    <h2 class="section-title">Cold Air Hurts Sleep, Rainy Nights Are Surprisingly Good</h2>
+    <h2 id="environment-title" class="section-title"><a class="section-heading-anchor" href="#environment">Cold Air Hurts Sleep, Rainy Nights Are Surprisingly Good</a></h2>
     <p class="prose">
       SleepCycle occasionally records the night's weather and room temperature. Over ten years, 755 nights have valid room temperature readings—about 20% of the dataset.
       Lining these nights up against respiratory burden reveals a very physical pattern:
-      <strong>cold air is a direct amplifier for a vulnerable airway.</strong>
+      <strong>colder nights consistently coincide with heavier breathing burden in this record.</strong>
     </p>
     <p class="prose">
       The lower the temperature, the longer the snoring and the more frequent the breathing disruptions (BD).
@@ -1098,9 +1231,9 @@
   </div>
   <div class="container">
     <div class="callout bad">
-      <strong>Cold doesn't make you sleep badly—it makes your airway narrower</strong>: for people without respiratory issues, a cool room often helps sleep.
-      But for an already-damaged airway (sinusitis + cysts), cold air inflames the nasal mucosa and engorges its blood vessels, shrinking a channel that was already narrow.
-      What the data shows here isn't a subjective "feels cold / feels warm"—it's plain mechanical compression.
+      <strong>Colder nights coincide with heavier breathing burden</strong>: for people without respiratory issues, a cool room often helps sleep.
+      In my record, colder nights align with longer snoring estimates and higher estimated BD. Nasal inflammation and airway narrowing are plausible explanations,
+      but the dataset does not directly measure nasal patency and cannot establish the mechanism on its own.
     </div>
 
     <p class="prose" style="margin-top: 2rem;">
@@ -1119,10 +1252,9 @@
   </div>
   <div class="container">
     <div class="callout good">
-      <strong>The quiet win of humidity and white noise</strong>: the improvement on rainy nights is likely double.
-      On the physical side, humid air keeps the airway moist and the mucosa from drying out, which in turn softens the intensity of snoring.
-      On the acoustic side, steady rain is natural white noise, covering up the kinds of ambient sounds that would otherwise tip me into micro-arousals.
-      Rainy nights are, it turns out, this fragile sleep system's favorite natural environment.
+      <strong>Two hypotheses to test: humidity and white noise.</strong> Rainy nights coincide with lower snoring estimates and better subjective mornings.
+      Higher humidity may make the airway more comfortable, while steady rain may mask environmental noise; the dataset does not directly record humidity,
+      rain volume, or micro-arousals, so these are leads for a future experiment rather than confirmed mechanisms.
     </div>
 
     <h3 style="margin-top: 2rem; margin-bottom: 0.8rem; color: var(--text);">Physical Environment and Behavioral Honesty</h3>
@@ -1172,10 +1304,10 @@
 
 
 <!-- ═══ 08 / Mood Records ═══ -->
-<div class="section">
+<div class="section" id="mood" role="region" aria-labelledby="mood-title">
   <div class="container">
     <p class="section-label">08 / Mood Records</p>
-    <h2 class="section-title">The Line the Algorithm Cannot See</h2>
+    <h2 id="mood-title" class="section-title"><a class="section-heading-anchor" href="#mood">The Line the Algorithm Cannot See</a></h2>
     <p class="prose">
       SleepCycle asks me to report my state upon waking: Good / OK / Bad / Not set.
       Over these ten years, <strong>Bad accounts for 38% of all valid records</strong>—
@@ -1246,10 +1378,10 @@
 </div>
 
 <!-- ═══ 09 / Two Measurements ═══ -->
-<div class="section">
+<div class="section" id="measurement" role="region" aria-labelledby="measurement-title">
   <div class="container">
     <p class="section-label">09 / Two Measurements</p>
-    <h2 class="section-title">Two Measurements, Two Realities</h2>
+    <h2 id="measurement-title" class="section-title"><a class="section-heading-anchor" href="#measurement">Two Measurements, Two Realities</a></h2>
     <p class="prose">
       SleepCycle's quality score is an opaque black box—it estimates sleep stages from the phone's microphone and accelerometer, and spits out a single 0–100% number. But what, really, is that number measuring?
     </p>
@@ -1299,10 +1431,10 @@
 </div>
 
 <!-- ═══ 10 / What the Machine Learned ═══ -->
-<div class="section">
+<div class="section" id="model" role="region" aria-labelledby="model-title">
   <div class="container">
     <p class="section-label">10 / What the Machine Learned</p>
-    <h2 class="section-title">When the Variables Compete</h2>
+    <h2 id="model-title" class="section-title"><a class="section-heading-anchor" href="#model">When the Variables Compete</a></h2>
     <p class="prose">
       Everything so far has looked at sleep one piece at a time — bedtime here, a tag there, a rough night over there. In this section I let those pieces compete at once.
       I trained a model on my more recent nights and asked a more honest question: <strong>when bedtime, tags, recent history, and context are all in the room together, which ones still carry weight?</strong><sup style="font-size:0.72em; color:var(--text-muted); margin-left:0.15em;">1</sup>
@@ -1367,10 +1499,10 @@
 </div>
 
 <!-- ═══ 11 / Afterword ═══ -->
-<div class="section" style="border-bottom:none">
+<div class="section" id="afterword" role="region" aria-labelledby="afterword-title" style="border-bottom:none">
   <div class="container">
     <p class="section-label">11 / Afterword</p>
-    <h2 class="section-title">What Can the Numbers Tell Me</h2>
+    <h2 id="afterword-title" class="section-title"><a class="section-heading-anchor" href="#afterword">What Can the Numbers Tell Me</a></h2>
     <p class="prose">
       This is an extremely personal sleep analysis, but the questions underneath it probably aren't unique: sleep is multidimensional, the environment matters more than most people think, and the score an algorithm gives you and the morning you actually walk into are not always the same thing.
     </p>
@@ -1387,7 +1519,7 @@
       “I'll sleep more tomorrow” does not really hold up. The body seems to repay debt by going to bed earlier, not by stretching a single night. Restoring rhythm matters more than adding volume.
     </p>
     <p class="prose">
-      If you have chronic respiratory issues, cold air and dryness are real amplifiers. Humid nights are not just more pleasant; they are often materially easier on a fragile airway.
+      In my record, colder and drier nights often coincide with heavier breathing signals, while humid nights look gentler. The pattern is worth tracking; its mechanism still needs clinical assessment.
     </p>
     <p class="prose">
       And if you often feel the score looks fine but something is off, trust the feeling. The algorithm measures movement and sound. It does not measure the morning you have to live through.
@@ -1402,7 +1534,7 @@
     </div>
     </div>
   </div>
-</div>
+</main>
 
 <footer>
   <p>Quantified Self Essay · simoncos · 2026</p>
@@ -1410,7 +1542,8 @@
 </footer>
 
 <!-- ═══ SCRIPTS ═══ -->
-<script src="assets/sleep-2016-2026.en.js?v=20260620ts"></script>
+<script src="assets/sleep-2016-2026.en.js?v=20260724-editorial"></script>
+<script src="assets/sleep-essay-ui.js?v=20260724"></script>
 
 </body>
 </html>
