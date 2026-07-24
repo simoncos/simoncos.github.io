@@ -8,7 +8,6 @@ labs.forEach((lab) => {
     const orbLabel = lab.querySelector("[data-pretext-orb-label]");
     const orbNote = lab.querySelector("[data-pretext-orb-note]");
     const liveCopy = lab.querySelector("[data-pretext-live]");
-    const motionToggle = lab.querySelector("[data-pretext-motion-toggle]");
     const presetButtons = Array.from(lab.querySelectorAll("[data-pretext-preset]"));
     const copyNodes = Array.from(lab.querySelectorAll("[data-pretext-copy]"));
     if (!stage ||
@@ -18,7 +17,6 @@ labs.forEach((lab) => {
         !orbLabel ||
         !orbNote ||
         !liveCopy ||
-        !motionToggle ||
         presetButtons.length === 0 ||
         copyNodes.length !== presetButtons.length) {
         return;
@@ -51,7 +49,6 @@ labs.forEach((lab) => {
     let orbX = 0;
     let orbY = 0;
     let drag = null;
-    let autoMotion = !reduceMotion.matches;
     let visible = true;
     let animationFrame = 0;
     let lastLayoutAt = -Infinity;
@@ -184,16 +181,6 @@ labs.forEach((lab) => {
         orb.style.transform = `translate3d(${orbX - metrics.radius}px, ${orbY - metrics.radius}px, 0)`;
         commitLines(layoutText());
     }
-    function updateMotionControl() {
-        motionToggle.setAttribute("aria-pressed", String(autoMotion));
-        motionToggle.textContent = autoMotion
-            ? isChinese
-                ? "暂停动态"
-                : "Pause motion"
-            : isChinese
-                ? "播放动态"
-                : "Play motion";
-    }
     function selectPreset(index, snapToPreset = true) {
         selectedPreset = (index + presets.length) % presets.length;
         const preset = presets[selectedPreset];
@@ -221,7 +208,7 @@ labs.forEach((lab) => {
     }
     function animate(now) {
         animationFrame = window.requestAnimationFrame(animate);
-        if (!visible || !autoMotion || drag || reduceMotion.matches || !prepared)
+        if (!visible || drag || reduceMotion.matches || !prepared)
             return;
         if (now - lastLayoutAt < 32)
             return;
@@ -249,8 +236,6 @@ labs.forEach((lab) => {
             orbX,
             orbY,
         };
-        autoMotion = false;
-        updateMotionControl();
         orb.setPointerCapture(event.pointerId);
         lab.setAttribute("data-pretext-dragging", "");
     });
@@ -290,12 +275,6 @@ labs.forEach((lab) => {
             selectPreset(index);
         });
     });
-    motionToggle.addEventListener("click", () => {
-        autoMotion = !autoMotion;
-        updateMotionControl();
-        if (!autoMotion)
-            render();
-    });
     const observer = new ResizeObserver((entries) => {
         const entry = entries[0];
         if (!entry)
@@ -322,7 +301,6 @@ labs.forEach((lab) => {
         ]);
         lab.classList.add("is-pretext-ready");
         source.setAttribute("aria-hidden", "true");
-        updateMotionControl();
         selectPreset(0, false);
         render();
         animationFrame = window.requestAnimationFrame(animate);
