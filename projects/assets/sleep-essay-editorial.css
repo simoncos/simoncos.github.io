@@ -352,15 +352,8 @@ html {
   scroll-margin-top: 6.9rem;
 }
 
-.pretext-lab-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.8rem;
-}
-
 .pretext-invitation {
+  margin-bottom: 0.8rem;
   color: color-mix(in srgb, var(--pretext-lens-color) 72%, white);
   font-size: 0.72rem;
   font-weight: 700;
@@ -368,30 +361,8 @@ html {
   text-transform: uppercase;
 }
 
-.pretext-motion-toggle,
 .pretext-preset-list {
   display: none;
-}
-
-.is-pretext-ready .pretext-motion-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 42px;
-  padding: 0.55rem 0.9rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--text-muted);
-  font: inherit;
-  font-size: 0.72rem;
-  font-weight: 650;
-  cursor: pointer;
-}
-
-.is-pretext-ready .pretext-motion-toggle[aria-pressed="true"] {
-  border-color: color-mix(in srgb, var(--pretext-lens-color) 45%, var(--border));
-  color: var(--text);
 }
 
 .is-pretext-ready .pretext-preset-list {
@@ -576,7 +547,6 @@ html {
   pointer-events: none;
 }
 
-.pretext-motion-toggle:focus-visible,
 .pretext-preset-list button:focus-visible,
 .pretext-orb:focus-visible {
   outline: 2px solid var(--pretext-lens-color);
@@ -701,10 +671,6 @@ html {
   .method-card-header,
   .method-grid {
     grid-template-columns: 1fr;
-  }
-
-  .pretext-lab-header {
-    align-items: center;
   }
 
   .pretext-stage {
