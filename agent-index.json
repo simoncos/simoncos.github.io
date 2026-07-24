@@ -5,7 +5,7 @@
     "owner": "simoncos / Che ZHAO",
     "motto": "Connecting the dots.",
     "summary": "A live public surface for software, AI collaboration, data projects, research artifacts, essays, talks, and field notes.",
-    "last_updated": "2026-06-20"
+    "last_updated": "2026-07-24"
   },
   "language_policy": {
     "default_language": "en",
@@ -31,7 +31,7 @@
       "id": "projects",
       "label": "Projects",
       "url": "https://simoncos.github.io/projects.html",
-      "purpose": "Project Observatory for live tools, connected artifacts, inputs, outputs, and next questions."
+      "purpose": "Index of maintained tools and systems; each project opens into its context, outputs, and related work."
     },
     {
       "id": "essays",
@@ -47,6 +47,13 @@
     }
   ],
   "current_surfaces": [
+    {
+      "id": "sleep-toolkit-project",
+      "type": "project",
+      "label": "Sleep Toolkit",
+      "url": "https://simoncos.github.io/projects/sleep-toolkit.en.html",
+      "description": "Project context, report preview, and routes to the web app and data essay."
+    },
     {
       "id": "personal-data-lab",
       "type": "curation",

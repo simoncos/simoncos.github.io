@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const featuredTarget = document.getElementById('project-featured');
-    const ledgerTarget = document.getElementById('projects-ledger');
+    const indexTarget = document.getElementById('projects-index');
+    const detailTarget = document.getElementById('project-detail');
     const summaryTarget = document.getElementById('projects-summary');
     const updatedTarget = document.getElementById('projects-updated');
-    if (!featuredTarget || !ledgerTarget) {
+    if (!indexTarget && !detailTarget) {
         return;
     }
 
@@ -223,20 +223,12 @@ document.addEventListener('DOMContentLoaded', function () {
         return (project.actions || []).find((action) => action.id === actionId);
     }
 
-    function renderAction(action, language, className = '') {
-        if (!action) {
-            return '';
+    function renderDetail(project, language) {
+        if (!detailTarget) {
+            return;
         }
-        const classAttribute = className ? ` class="${escapeHtml(className)}"` : '';
-        return `<a${classAttribute} href="${escapeHtml(localizedPath(action.paths, language))}">${escapeHtml(localized(action.label, language))}</a>`;
-    }
-
-    function renderFeatured(project, language) {
         const detail = project.featuredDetail || {};
         const media = detail.media || {};
-        const actions = (project.actions || [])
-            .map((action) => renderAction(action, language, 'read-more'))
-            .join('\n');
         const metrics = (detail.metrics || []).map((metric) => `
             <div>
                 <dt>${escapeHtml(localized(metric.label, language))}</dt>
@@ -249,15 +241,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     <span>${escapeHtml(localized(media.kicker, language))}</span>
                     <strong>${escapeHtml(localized(media.title, language))}</strong>
                 </figcaption>
-                <img src="${escapeHtml(media.src)}" alt="${escapeHtml(localized(media.alt, language))}" loading="lazy" decoding="async">
+                <img src="${escapeHtml(resolvePath(media.src))}" alt="${escapeHtml(localized(media.alt, language))}" loading="lazy" decoding="async">
                 ${metrics ? `<dl class="project-report-metrics" aria-label="${escapeHtml(localized(project.title, language))} ${escapeHtml(t('project_signals_suffix'))}">${metrics}</dl>` : ''}
             </figure>
         ` : '';
         const facts = (project.facts || []).map((fact) => {
-            const action = findAction(project, fact.actionId);
-            const meta = action
-                ? renderAction(action, language)
-                : escapeHtml(localized(fact.meta, language));
+            const meta = escapeHtml(localized(fact.meta, language));
             return `
                 <div>
                     <dt>${escapeHtml(localized(fact.label, language))}</dt>
@@ -266,16 +255,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             `;
         }).join('');
-        const surfaces = (project.surfaces || []).map((surface) => `
-            <div class="project-surface-row">
-                <span>${escapeHtml(surface.label)}</span>
-                <strong>${escapeHtml(localized(surface.title, language))}</strong>
-                <span>${escapeHtml(localized(surface.summary, language))}</span>
-                ${renderAction(findAction(project, surface.actionId), language)}
-            </div>
-        `).join('');
+        const actionCards = (project.surfaces || []).map((surface) => {
+            const action = findAction(project, surface.actionId);
+            if (!action) {
+                return '';
+            }
+            const modifier = surface.actionId === 'open' ? 'primary' : 'secondary';
+            const arrow = surface.actionId === 'open' ? '↗' : '→';
+            return `
+                <a class="project-action-card project-action-card--${modifier}" href="${escapeHtml(localizedPath(action.paths, language))}">
+                    <span class="project-action-card-kind">${escapeHtml(surface.label)}</span>
+                    <strong>${escapeHtml(localized(surface.title, language))}</strong>
+                    <span class="project-action-card-summary">${escapeHtml(localized(surface.summary, language))}</span>
+                    <span class="project-action-card-cta">${escapeHtml(localized(action.label, language))}<span aria-hidden="true">${arrow}</span></span>
+                </a>
+            `;
+        }).join('');
 
-        featuredTarget.innerHTML = `
+        detailTarget.innerHTML = `
+            <nav class="project-detail-breadcrumb" aria-label="${escapeHtml(t('projects_back_to_all'))}">
+                <a href="${escapeHtml(resolvePath('projects.html'))}">← ${escapeHtml(t('projects_back_to_all'))}</a>
+                <span aria-hidden="true">/</span>
+                <span>${escapeHtml(localized(project.title, language))}</span>
+                <span class="project-detail-status"><span class="status-dot" aria-hidden="true"></span>${escapeHtml(localized(project.status, language))}</span>
+            </nav>
             <section class="project-ledger-hero" aria-labelledby="project-feature-title">
                 <div class="project-feature-number" aria-hidden="true">01</div>
                 <div class="project-feature-copy">
@@ -283,28 +286,51 @@ document.addEventListener('DOMContentLoaded', function () {
                     <h2 id="project-feature-title">${escapeHtml(localized(project.title, language))}</h2>
                     <p class="project-feature-subtitle">${escapeHtml(localized(project.subtitle, language))}</p>
                     <p>${escapeHtml(localized(detail.body, language))}</p>
-                    <div class="project-feature-actions">${actions}</div>
+                    ${actionCards ? `
+                    <section class="project-actions-panel" id="project-actions" aria-labelledby="project-actions-title">
+                        <h3 id="project-actions-title">${escapeHtml(t('project_surfaces_title'))}</h3>
+                        <div class="project-feature-actions">${actionCards}</div>
+                    </section>
+                    ` : ''}
                 </div>
                 ${mediaHtml}
             </section>
             ${facts ? `<section class="project-ledger-facts" aria-label="${escapeHtml(t('project_details_label'))}"><dl>${facts}</dl></section>` : ''}
-            ${surfaces ? `<section class="project-surfaces-ledger" id="project-surfaces" aria-labelledby="project-surfaces-title"><h2 id="project-surfaces-title">${escapeHtml(t('project_surfaces_title'))}</h2>${surfaces}</section>` : ''}
         `;
     }
 
-    function renderLedger(projects, language) {
-        ledgerTarget.innerHTML = projects.map((project, index) => {
-            const primaryAction = (project.actions || [])[0];
+    function projectTypeLabel(project) {
+        if (project.type === 'tool') {
+            return t('project_type_tool');
+        }
+        return project.type.replace(/_/g, ' ');
+    }
+
+    function renderIndex(projects, language) {
+        if (!indexTarget) {
+            return;
+        }
+        indexTarget.innerHTML = projects.map((project, index) => {
+            const href = localizedPath(project.paths, language);
             return `
-                <article class="project-ledger-row" data-project-id="${escapeHtml(project.id)}">
-                    <span class="project-ledger-index">${String(index + 1).padStart(2, '0')}</span>
-                    <div class="project-ledger-name">
-                        <strong>${escapeHtml(localized(project.title, language))}</strong>
-                        <span>${escapeHtml(localized(project.subtitle, language))}</span>
-                    </div>
-                    <span class="project-ledger-status">${escapeHtml(localized(project.status, language))}</span>
-                    <p>${escapeHtml(localized(project.summary, language))}</p>
-                    ${renderAction(primaryAction, language)}
+                <article class="project-index-entry" data-project-id="${escapeHtml(project.id)}">
+                    <a class="project-index-card" href="${escapeHtml(href)}">
+                        <span class="project-index-number">${String(index + 1).padStart(2, '0')}</span>
+                        <span class="project-index-media">
+                            <img src="${escapeHtml(resolvePath(project.cover))}" alt="" loading="lazy" decoding="async">
+                        </span>
+                        <span class="project-index-copy">
+                            <span class="project-index-meta">
+                                <span>${escapeHtml(projectTypeLabel(project))}</span>
+                                <span><span class="status-dot" aria-hidden="true"></span>${escapeHtml(localized(project.status, language))}</span>
+                                <time datetime="${escapeHtml(project.date)}">${escapeHtml(project.date.slice(0, 4))}</time>
+                            </span>
+                            <strong class="project-index-title">${escapeHtml(localized(project.title, language))}</strong>
+                            <span class="project-index-subtitle">${escapeHtml(localized(project.subtitle, language))}</span>
+                            <span class="project-index-summary">${escapeHtml(localized(project.summary, language))}</span>
+                            <span class="project-index-cta">${escapeHtml(t('project_view_action'))}<span aria-hidden="true">→</span></span>
+                        </span>
+                    </a>
                 </article>
             `;
         }).join('');
@@ -315,14 +341,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const projects = [...payload.projects]
             .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
 
-        const featured = projects.find((project) => project.featured) || projects[0];
-        renderFeatured(featured, language);
-        renderLedger(projects, language);
-
-        // A one-project ledger only repeats the featured project above it.
-        const ledgerSection = ledgerTarget.closest('.projects-ledger-list') as HTMLElement | null;
-        if (ledgerSection) {
-            ledgerSection.hidden = projects.length === 1 && projects[0].id === featured.id;
+        if (indexTarget) {
+            renderIndex(projects, language);
+        }
+        if (detailTarget) {
+            const projectId = detailTarget.dataset.projectId || '';
+            const project = projects.find((item) => item.id === projectId);
+            if (project) {
+                renderDetail(project, language);
+            } else {
+                console.error(`Project detail not found: ${projectId}`);
+            }
         }
 
         if (summaryTarget) {
@@ -337,8 +366,12 @@ document.addEventListener('DOMContentLoaded', function () {
             updatedTarget.textContent = `${t('projects_updated_prefix')} ${formatted}`;
         }
         if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
-            i18n.applyLanguageStateToInternalLinks(featuredTarget);
-            i18n.applyLanguageStateToInternalLinks(ledgerTarget);
+            if (indexTarget) {
+                i18n.applyLanguageStateToInternalLinks(indexTarget);
+            }
+            if (detailTarget) {
+                i18n.applyLanguageStateToInternalLinks(detailTarget);
+            }
         }
     }
 

@@ -412,132 +412,149 @@ def project_action(project: dict, action_id: str) -> dict | None:
     )
 
 
-def render_project_action(action: dict, *, language: str = "en", class_name: str = "") -> str:
-    paths = action.get("paths") or {}
-    href = paths.get(language) or paths.get("en") or paths.get("zh") or "#"
-    class_attr = f' class="{escape(class_name)}"' if class_name else ""
-    return f'<a{class_attr} href="{escape(href)}">{escape(localized(action.get("label"), language))}</a>'
-
-
 def render_projects_content(projects_payload: dict) -> str:
     projects = sorted(
         projects_payload.get("projects", []),
-        key=lambda item: (bool(item.get("featured")), item.get("date") or ""),
+        key=lambda item: item.get("date") or "",
         reverse=True,
     )
     if not projects:
         return '<p class="projects-empty">No projects yet.</p>'
 
-    featured = projects[0]
-    detail = featured.get("featuredDetail") or {}
-    media = detail.get("media") or {}
-    actions = featured.get("actions") or []
-    action_links = "\n                    ".join(
-        render_project_action(action, class_name="read-more") for action in actions
+    cards = []
+    for index, project in enumerate(projects, start=1):
+        paths = project.get("paths") or {}
+        href = paths.get("en") or paths.get("zh") or "#"
+        project_type = "Tool" if project.get("type") == "tool" else type_label(project.get("type", ""))
+        cards.append(
+            f'''            <article class="project-index-entry" data-project-id="{escape(project.get("id"))}">
+                <a class="project-index-card" href="{escape(href)}">
+                    <span class="project-index-number">{index:02d}</span>
+                    <span class="project-index-media"><img src="{escape(project.get("cover"))}" alt="" loading="lazy" decoding="async"></span>
+                    <span class="project-index-copy">
+                        <span class="project-index-meta"><span>{escape(project_type)}</span><span><span class="status-dot" aria-hidden="true"></span>{escape(localized(project.get("status"), "en"))}</span><time datetime="{escape(project.get("date"))}">{escape(str(project.get("date") or "")[:4])}</time></span>
+                        <strong class="project-index-title">{escape(localized(project.get("title"), "en"))}</strong>
+                        <span class="project-index-subtitle">{escape(localized(project.get("subtitle"), "en"))}</span>
+                        <span class="project-index-summary">{escape(localized(project.get("summary"), "en"))}</span>
+                        <span class="project-index-cta">View project<span aria-hidden="true">→</span></span>
+                    </span>
+                </a>
+            </article>'''
+        )
+
+    return f'''        <div id="projects-index" class="projects-index-list">
+{chr(10).join(cards)}
+        </div>'''
+
+
+def render_project_detail(projects_payload: dict, project_id: str, language: str) -> str:
+    project = next(
+        (item for item in projects_payload.get("projects", []) if item.get("id") == project_id),
+        None,
     )
+    if not project:
+        return '<p class="projects-empty">Project not found.</p>'
+
+    labels = {
+        "en": {
+            "all_projects": "All projects",
+            "choose_path": "Choose a path",
+            "details": "Project details",
+            "signals": "signals",
+        },
+        "zh": {
+            "all_projects": "全部项目",
+            "choose_path": "选择入口",
+            "details": "项目详情",
+            "signals": "信号",
+        },
+    }[language]
+    detail = project.get("featuredDetail") or {}
+    media = detail.get("media") or {}
     metrics = "\n".join(
         f'''                        <div>
-                            <dt>{escape(localized(metric.get("label")))}</dt>
-                            <dd>{escape(localized(metric.get("value")))}</dd>
+                            <dt>{escape(localized(metric.get("label"), language))}</dt>
+                            <dd>{escape(localized(metric.get("value"), language))}</dd>
                         </div>'''
         for metric in detail.get("metrics", [])
     )
     facts = []
-    for fact in featured.get("facts", []):
-        meta = localized(fact.get("meta"))
-        action = project_action(featured, fact.get("actionId", ""))
-        if action:
-            meta = render_project_action(action)
+    for fact in project.get("facts", []):
+        meta = localized(fact.get("meta"), language)
         facts.append(
             f'''                    <div>
-                        <dt>{escape(localized(fact.get("label")))}</dt>
-                        <dd>{escape(localized(fact.get("value")))}</dd>
-                        {f'<dd class="ledger-row-meta">{meta}</dd>' if meta else ''}
+                        <dt>{escape(localized(fact.get("label"), language))}</dt>
+                        <dd>{escape(localized(fact.get("value"), language))}</dd>
+                        {f'<dd class="ledger-row-meta">{escape(meta)}</dd>' if meta else ''}
                     </div>'''
         )
 
-    surfaces = []
-    for surface in featured.get("surfaces", []):
-        action = project_action(featured, surface.get("actionId", ""))
-        action_html = render_project_action(action) if action else ""
-        surfaces.append(
-            f'''                <div class="project-surface-row">
-                    <span>{escape(surface.get("label"))}</span>
-                    <strong>{escape(localized(surface.get("title")))}</strong>
-                    <span>{escape(localized(surface.get("summary")))}</span>
-                    {action_html}
-                </div>'''
-        )
-
-    # A one-project ledger only repeats the featured project above it, so ship it hidden.
-    ledger_is_redundant = len(projects) == 1 and projects[0].get("id") == featured.get("id")
-    ledger_hidden_attr = " hidden" if ledger_is_redundant else ""
-
-    ledger_rows = []
-    for index, project in enumerate(projects, start=1):
-        primary_action = (project.get("actions") or [None])[0]
-        action_html = render_project_action(primary_action) if primary_action else ""
-        ledger_rows.append(
-            f'''                <article class="project-ledger-row" data-project-id="{escape(project.get("id"))}">
-                    <span class="project-ledger-index">{index:02d}</span>
-                    <div class="project-ledger-name">
-                        <strong>{escape(localized(project.get("title")))}</strong>
-                        <span>{escape(localized(project.get("subtitle")))}</span>
-                    </div>
-                    <span class="project-ledger-status">{escape(localized(project.get("status")))}</span>
-                    <p>{escape(localized(project.get("summary")))}</p>
-                    {action_html}
-                </article>'''
+    action_cards = []
+    for surface in project.get("surfaces", []):
+        action = project_action(project, surface.get("actionId", ""))
+        if not action:
+            continue
+        paths = action.get("paths") or {}
+        href = paths.get(language) or paths.get("en") or paths.get("zh") or "#"
+        modifier = "primary" if surface.get("actionId") == "open" else "secondary"
+        arrow = "↗" if surface.get("actionId") == "open" else "→"
+        action_cards.append(
+            f'''                        <a class="project-action-card project-action-card--{modifier}" href="{escape(href)}">
+                            <span class="project-action-card-kind">{escape(surface.get("label"))}</span>
+                            <strong>{escape(localized(surface.get("title"), language))}</strong>
+                            <span class="project-action-card-summary">{escape(localized(surface.get("summary"), language))}</span>
+                            <span class="project-action-card-cta">{escape(localized(action.get("label"), language))}<span aria-hidden="true">{arrow}</span></span>
+                        </a>'''
         )
 
     metrics_html = (
-        f'''                <dl class="project-report-metrics" aria-label="{escape(localized(featured.get("title")))} signals">
+        f'''                <dl class="project-report-metrics" aria-label="{escape(localized(project.get("title"), language))} {escape(labels["signals"])}">
 {metrics}
                 </dl>'''
         if metrics else ""
     )
+    media_src = "/" + str(media.get("src") or "").lstrip("/")
     media_html = (
         f'''            <figure class="project-report-card project-report-ledger">
                 <figcaption>
-                    <span>{escape(localized(media.get("kicker")))}</span>
-                    <strong>{escape(localized(media.get("title")))}</strong>
+                    <span>{escape(localized(media.get("kicker"), language))}</span>
+                    <strong>{escape(localized(media.get("title"), language))}</strong>
                 </figcaption>
-                <img src="{escape(media.get("src"))}" alt="{escape(localized(media.get("alt")))}" loading="lazy" decoding="async">
+                <img src="{escape(media_src)}" alt="{escape(localized(media.get("alt"), language))}" loading="lazy" decoding="async">
 {metrics_html}
             </figure>'''
         if media.get("src") else ""
     )
 
-    return f'''        <div id="project-featured" data-project-id="{escape(featured.get("id"))}">
+    return f'''        <div id="project-detail" data-project-id="{escape(project.get("id"))}">
+            <nav class="project-detail-breadcrumb" aria-label="{escape(labels["all_projects"])}">
+                <a href="/projects.html">← {escape(labels["all_projects"])}</a>
+                <span aria-hidden="true">/</span>
+                <span>{escape(localized(project.get("title"), language))}</span>
+                <span class="project-detail-status"><span class="status-dot" aria-hidden="true"></span>{escape(localized(project.get("status"), language))}</span>
+            </nav>
             <section class="project-ledger-hero" aria-labelledby="project-feature-title">
                 <div class="project-feature-number" aria-hidden="true">01</div>
                 <div class="project-feature-copy">
-                    <p class="section-kicker">{escape(localized(detail.get("kicker")))}</p>
-                    <h2 id="project-feature-title">{escape(localized(featured.get("title")))}</h2>
-                    <p class="project-feature-subtitle">{escape(localized(featured.get("subtitle")))}</p>
-                    <p>{escape(localized(detail.get("body")))}</p>
-                    <div class="project-feature-actions">
-                    {action_links}
-                    </div>
+                    <p class="section-kicker">{escape(localized(detail.get("kicker"), language))}</p>
+                    <h2 id="project-feature-title">{escape(localized(project.get("title"), language))}</h2>
+                    <p class="project-feature-subtitle">{escape(localized(project.get("subtitle"), language))}</p>
+                    <p>{escape(localized(detail.get("body"), language))}</p>
+                    <section class="project-actions-panel" id="project-actions" aria-labelledby="project-actions-title">
+                        <h3 id="project-actions-title">{escape(labels["choose_path"])}</h3>
+                        <div class="project-feature-actions">
+{chr(10).join(action_cards)}
+                        </div>
+                    </section>
                 </div>
 {media_html}
             </section>
-            <section class="project-ledger-facts" aria-label="Project details">
+            <section class="project-ledger-facts" aria-label="{escape(labels["details"])}">
                 <dl>
 {chr(10).join(facts)}
                 </dl>
             </section>
-            <section class="project-surfaces-ledger" id="project-surfaces" aria-labelledby="project-surfaces-title">
-                <h2 id="project-surfaces-title">Project surfaces</h2>
-{chr(10).join(surfaces)}
-            </section>
-        </div>
-        <section class="projects-ledger-list"{ledger_hidden_attr} aria-labelledby="projects-ledger-title">
-            <h2 id="projects-ledger-title" data-i18n="project_ledger_title">Project ledger</h2>
-            <div id="projects-ledger">
-{chr(10).join(ledger_rows)}
-            </div>
-        </section>'''
+        </div>'''
 
 
 def render_gallery_cards(gallery_payload: dict) -> str:
@@ -626,6 +643,12 @@ def main() -> int:
         },
         ROOT / "projects.html": {
             "projects-content": render_projects_content(projects_payload),
+        },
+        ROOT / "projects/sleep-toolkit.en.html": {
+            "project-detail-content": render_project_detail(projects_payload, "sleep-toolkit", "en"),
+        },
+        ROOT / "projects/sleep-toolkit.html": {
+            "project-detail-content": render_project_detail(projects_payload, "sleep-toolkit", "zh"),
         },
     }
 

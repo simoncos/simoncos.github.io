@@ -1,6 +1,6 @@
 {
-  "css_version": "20260724b",
-  "js_version": "20260724a",
+  "css_version": "20260724d",
+  "js_version": "20260724c",
   "theme_init": "theme-init.js",
   "icons": {
     "favicon": "assets/icons/favicon-32.png",
@@ -143,6 +143,22 @@
     {
       "path": "projects.html",
       "asset_prefix": "",
+      "script_profile": "projects",
+      "head_rss": true,
+      "footer_rss": true,
+      "footer_version": "site_config"
+    },
+    {
+      "path": "projects/sleep-toolkit.en.html",
+      "asset_prefix": "../",
+      "script_profile": "projects",
+      "head_rss": true,
+      "footer_rss": true,
+      "footer_version": "site_config"
+    },
+    {
+      "path": "projects/sleep-toolkit.html",
+      "asset_prefix": "../",
       "script_profile": "projects",
       "head_rss": true,
       "footer_rss": true,
