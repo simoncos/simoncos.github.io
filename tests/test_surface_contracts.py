@@ -392,6 +392,43 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertIn("item.paths", renderer)
         self.assertIn("paths[language]", renderer)
 
+    def test_home_current_index_uses_published_order_and_sleep_essay(self):
+        surface = json.loads((ROOT / "data/home_surface.json").read_text())
+        renderer = (ROOT / "src/ts/load-home-surface.ts").read_text()
+        index_html = (ROOT / "index.html").read_text()
+        items = surface["surface"]["items"]
+
+        self.assertEqual(
+            [item["date"] for item in items],
+            sorted((item["date"] for item in items), reverse=True),
+        )
+        self.assertEqual(
+            [item["title"]["en"] for item in items],
+            [
+                "Personal Information Systems in the AI Era",
+                "Hermes Agent HV Analysis",
+                "Ten Years of Sleep Records, Analyzed",
+                "My Haba Snow Mountain Journey",
+            ],
+        )
+        self.assertNotIn("sleep-toolkit-production.up.railway.app", json.dumps(surface))
+        self.assertEqual(
+            items[2]["paths"],
+            {
+                "en": "projects/sleep-2016-2026.en.html",
+                "zh": "projects/sleep-2016-2026.html",
+            },
+        )
+        self.assertEqual(
+            items[3]["media"],
+            "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/8636a1a47ea2beb545dcbac8495c1dc2.jpg",
+        )
+        self.assertNotIn("s16-incubator-hiking.png", index_html)
+        self.assertIn("resolveMediaSource", renderer)
+
+        title_positions = [index_html.index(f"<strong>{item['title']['en']}</strong>") for item in items]
+        self.assertEqual(title_positions, sorted(title_positions))
+
     def test_index_and_compatibility_redirects_have_one_main_landmark_each(self):
         for page in ("index.html", "tags.html", "series.html"):
             with self.subTest(page=page):

@@ -64,6 +64,9 @@
                 ? i18n.resolveLocalizedUrl(href, language)
                 : href;
         }
+        function resolveMediaSource(value) {
+            return /^https?:\/\//i.test(value) ? value : resolvePath(value);
+        }
         function applyLinkOptions(anchor, item, language) {
             anchor.href = resolveHref(item, language);
             if (item.skipLangRewrite) {
@@ -125,7 +128,7 @@
                 const media = document.createElement('span');
                 media.className = 'route-node-media';
                 const image = document.createElement('img');
-                image.src = resolvePath(mediaSrc);
+                image.src = resolveMediaSource(mediaSrc);
                 image.alt = getLocalizedValue(item.media_alt, language) || '';
                 image.loading = 'lazy';
                 image.decoding = 'async';

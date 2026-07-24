@@ -70,6 +70,10 @@
                 : href;
         }
 
+        function resolveMediaSource(value: string) {
+            return /^https?:\/\//i.test(value) ? value : resolvePath(value);
+        }
+
         function applyLinkOptions(anchor: HTMLAnchorElement, item: any, language: string) {
             anchor.href = resolveHref(item, language);
             if (item.skipLangRewrite) {
@@ -141,7 +145,7 @@
                 media.className = 'route-node-media';
 
                 const image = document.createElement('img');
-                image.src = resolvePath(mediaSrc);
+                image.src = resolveMediaSource(mediaSrc);
                 image.alt = getLocalizedValue(item.media_alt, language) || '';
                 image.loading = 'lazy';
                 image.decoding = 'async';

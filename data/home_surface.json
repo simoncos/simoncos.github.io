@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-25",
+  "last_updated": "2026-07-24",
   "layout": "route-journal",
   "hero": {
     "kicker": {
@@ -95,55 +95,7 @@
     },
     "items": [
       {
-        "label": {
-          "en": "Build",
-          "zh": "构建"
-        },
-        "title": {
-          "en": "Sleep Toolkit",
-          "zh": "Sleep Toolkit"
-        },
-        "description": {
-          "en": "A maintained tool for turning SleepCycle exports into readable reports.",
-          "zh": "把 SleepCycle 导出转成可读报告的持续维护工具。"
-        },
-        "action_label": {
-          "en": "Read more",
-          "zh": "进入工具"
-        },
-        "media": "projects/assets/sleep-toolkit-cover.svg",
-        "media_alt": {
-          "en": "Sleep Toolkit report preview",
-          "zh": "Sleep Toolkit 报告预览"
-        },
-        "href": "https://sleep-toolkit-production.up.railway.app"
-      },
-      {
-        "label": {
-          "en": "Research",
-          "zh": "研究"
-        },
-        "title": {
-          "en": "Hermes Agent HV Analysis",
-          "zh": "Hermes Agent 横纵分析"
-        },
-        "description": {
-          "en": "Evidence, questions, and limits placed together in a public analysis.",
-          "zh": "把问题、证据和局限放在一起看的公开分析。"
-        },
-        "action_label": {
-          "en": "Read analysis",
-          "zh": "读分析"
-        },
-        "media": "gallery/talks/pkm-2026-06-07/images/s15-hv-analysis.svg",
-        "media_alt": {
-          "en": "HV analysis network preview",
-          "zh": "横纵分析网络预览"
-        },
-        "href": "gallery/research/hermes-agent-hv-analysis.html",
-        "skipLangRewrite": true
-      },
-      {
+        "date": "2026-06-07",
         "label": {
           "en": "Systems",
           "zh": "系统"
@@ -169,6 +121,61 @@
         "skipLangRewrite": true
       },
       {
+        "date": "2026-05-21",
+        "label": {
+          "en": "Research",
+          "zh": "研究"
+        },
+        "title": {
+          "en": "Hermes Agent HV Analysis",
+          "zh": "Hermes Agent 横纵分析"
+        },
+        "description": {
+          "en": "Evidence, questions, and limits placed together in a public analysis.",
+          "zh": "把问题、证据和局限放在一起看的公开分析。"
+        },
+        "action_label": {
+          "en": "Read analysis",
+          "zh": "读分析"
+        },
+        "media": "gallery/talks/pkm-2026-06-07/images/s15-hv-analysis.svg",
+        "media_alt": {
+          "en": "HV analysis network preview",
+          "zh": "横纵分析网络预览"
+        },
+        "href": "gallery/research/hermes-agent-hv-analysis.html",
+        "skipLangRewrite": true
+      },
+      {
+        "date": "2026-04-23",
+        "label": {
+          "en": "Essay",
+          "zh": "随笔"
+        },
+        "title": {
+          "en": "Ten Years of Sleep Records, Analyzed",
+          "zh": "十年睡眠档案：数据分析"
+        },
+        "description": {
+          "en": "A visual essay built from 3,656 nights of SleepCycle records, tracing sleep, body, and life across a decade.",
+          "zh": "基于 3,656 个夜晚的 SleepCycle 记录，回看十年的睡眠、身体与生活变化。"
+        },
+        "action_label": {
+          "en": "Read essay",
+          "zh": "阅读随笔"
+        },
+        "media": "projects/assets/sleep-2016-2026-cover.svg",
+        "media_alt": {
+          "en": "Ten years of sleep records visual essay cover",
+          "zh": "十年睡眠记录视觉随笔封面"
+        },
+        "paths": {
+          "en": "projects/sleep-2016-2026.en.html",
+          "zh": "projects/sleep-2016-2026.html"
+        }
+      },
+      {
+        "date": "2026-01-20",
         "label": {
           "en": "Field notes",
           "zh": "现场笔记"
@@ -185,10 +192,10 @@
           "en": "Field notes",
           "zh": "读现场笔记"
         },
-        "media": "gallery/talks/pkm-2026-06-07/images/s16-incubator-hiking.png",
+        "media": "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/8636a1a47ea2beb545dcbac8495c1dc2.jpg",
         "media_alt": {
-          "en": "Hiking planning map preview",
-          "zh": "徒步规划地图预览"
+          "en": "Climbers ascending a snowy slope on Haba Snow Mountain",
+          "zh": "攀登者沿哈巴雪山雪坡上行"
         },
         "paths": {
           "en": "blogs/my-haba-snow-mountain-journey.en.html",
