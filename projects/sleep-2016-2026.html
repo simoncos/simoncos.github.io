@@ -391,7 +391,7 @@
     .hero-stat-num { font-size: 1.8rem; }
   }
 </style>
-<link rel="stylesheet" href="assets/sleep-essay-editorial.css?v=20260724">
+<link rel="stylesheet" href="assets/sleep-essay-editorial.css?v=20260724b">
 </head>
 <body>
 
@@ -409,33 +409,68 @@
 
 <!-- ═══ HERO ═══ -->
 <div class="hero">
-  <p class="hero-kicker">量化自我 · 2016-2026</p>
-  <h1>十年睡眠数据<br>我们能挖掘到什么？</h1>
-  <p class="hero-sub">
-    2016 年 2 月，我第一次打开一个叫 SleepCycle 的应用。此后每一个夜晚，手机都静静地躺在床头，记录着关于睡眠的一切。
-    十年过去，这些数字堆成了一份出奇丰富的生活档案。在 AI 的帮助下，我第一次将它们摊开来仔细玩味。
-  </p>
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <span class="hero-stat-num">3,656</span>
-      <span class="hero-stat-label">有效夜晚</span>
+  <div class="hero-shell">
+    <div class="hero-copy">
+      <p class="hero-kicker">量化自我 · 2016-2026</p>
+      <h1>十年睡眠数据<br><span class="hero-title-line">我们能挖掘<br class="hero-title-mobile-break">到什么？</span></h1>
+      <p class="hero-sub">
+        2016 年 2 月，我第一次打开一个叫 SleepCycle 的应用。此后每一个夜晚，手机都静静地躺在床头，记录着关于睡眠的一切。
+        十年过去，这些数字堆成了一份出奇丰富的生活档案。在 AI 的帮助下，我第一次将它们摊开来仔细玩味。
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">3,656</span>
+          <span class="hero-stat-label">有效夜晚</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">10.1</span>
+          <span class="hero-stat-label">年跨度</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">83.2%</span>
+          <span class="hero-stat-label">平均睡眠质量</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">7.1h</span>
+          <span class="hero-stat-label">平均实际睡眠时长</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a class="hero-action" href="#key-findings">先看五个结论</a>
+        <a class="hero-action secondary" href="#essay-contents">按章节深入</a>
+      </div>
     </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">10.1</span>
-      <span class="hero-stat-label">年跨度</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">83.2%</span>
-      <span class="hero-stat-label">平均睡眠质量</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">7.1h</span>
-      <span class="hero-stat-label">平均实际睡眠时长</span>
-    </div>
-  </div>
-  <div class="hero-actions">
-    <a class="hero-action" href="#key-findings">先看五个结论</a>
-    <a class="hero-action secondary" href="#essay-contents">按章节深入</a>
+
+    <aside id="pretext-lab" class="pretext-lab" data-pretext-lab aria-label="十年记录的四条线索">
+      <div class="pretext-lab-header">
+        <p class="pretext-invitation">十年记录 · 四条线索</p>
+        <button class="pretext-motion-toggle" type="button" data-pretext-motion-toggle aria-pressed="true">暂停动态</button>
+      </div>
+
+      <div class="pretext-preset-list" role="group" aria-label="选择阅读线索">
+        <button type="button" data-pretext-preset aria-pressed="true">节律</button>
+        <button type="button" data-pretext-preset aria-pressed="false">呼吸</button>
+        <button type="button" data-pretext-preset aria-pressed="false">情境</button>
+        <button type="button" data-pretext-preset aria-pressed="false">感受</button>
+      </div>
+
+      <div class="pretext-stage" data-pretext-stage>
+        <div class="pretext-lines" data-pretext-lines aria-hidden="true"></div>
+        <button class="pretext-orb" type="button" data-pretext-orb>
+          <span data-pretext-orb-label>节律</span>
+          <small data-pretext-orb-note>29.7% 短夜</small>
+        </button>
+        <p class="pretext-stage-hint" aria-hidden="true">拖动镜头 · 点击切换线索</p>
+      </div>
+
+      <div class="pretext-fallback" data-pretext-source>
+        <p data-pretext-copy>2024 年，卧床不足 7 小时的夜晚升至 26.9%；2025 年又到 29.7%。晚睡不是偶发插曲，而是这十年里最稳定、也最需要修正的节律偏移。把变量放在一起比较后，晚睡仍是第一变量，对第二天情绪的影响比对应用分数更深。</p>
+        <p data-pretext-copy>到 2025 年，消费级设备估算的呼吸中断升至每小时 8.5 次。这个信号不能代替临床检查，却让打呼、咳嗽与后来出现的诊断落在了同一条时间线上。它不是答案，而是一条需要由专业检查接手的预警线索。</p>
+        <p data-pretext-copy>旅行夜晚的睡眠质量平均低 10.0%，咖啡因夜晚低 9.7%。但标签不是单独的原因：它们常与晚睡、短卧床和无结构疲劳一起出现。标签更像原因留下的痕迹，而不是原因本身。</p>
+        <p data-pretext-copy>模型测试里，仍有 14% 的夜晚质量分不低于 80，第二天情绪却很差。睡眠最终要解释的，不只是一个分数，而是醒来后必须度过的那个早晨。动作与声音能给出分数，却测不到那个早晨。</p>
+      </div>
+      <p class="pretext-a11y-copy" data-pretext-live aria-live="polite"></p>
+    </aside>
   </div>
 </div>
 
@@ -551,39 +586,6 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<section id="pretext-lab" class="pretext-lab" data-pretext-lab aria-labelledby="pretext-lab-title">
-  <div class="container">
-    <div class="pretext-lab-header">
-      <div>
-        <p class="section-label">换个角度</p>
-        <h2 id="pretext-lab-title">四个变量，四种读法</h2>
-      </div>
-      <button class="pretext-motion-toggle" type="button" data-pretext-motion-toggle aria-pressed="true">暂停动态</button>
-    </div>
-
-    <div class="pretext-preset-list" role="group" aria-label="选择变量镜头">
-      <button type="button" data-pretext-preset aria-pressed="true">节律</button>
-      <button type="button" data-pretext-preset aria-pressed="false">呼吸</button>
-      <button type="button" data-pretext-preset aria-pressed="false">情境</button>
-      <button type="button" data-pretext-preset aria-pressed="false">感受</button>
-    </div>
-
-    <div class="pretext-stage" data-pretext-stage>
-      <div class="pretext-lines" data-pretext-lines aria-hidden="true"></div>
-      <button class="pretext-orb" type="button" data-pretext-orb>
-        <span data-pretext-orb-label>节律</span>
-        <small data-pretext-orb-note>入睡时间</small>
-      </button>
-      <p class="pretext-stage-hint" aria-hidden="true">拖动镜头 · 点击切换变量</p>
-    </div>
-
-    <p class="pretext-fallback" data-pretext-source>
-      十年记录没有给出万能公式。它反复指向四类变量：节律、呼吸、情境，以及醒来后的真实感受。
-      晚睡是最稳定的负面信号；消费级分数和主观早晨并不总是一致；旅行、疾病与无结构疲劳往往同时出现。
-    </p>
   </div>
 </section>
 
@@ -1568,7 +1570,7 @@
 <!-- ═══ SCRIPTS ═══ -->
 <script src="assets/sleep-2016-2026.js?v=20260724-editorial"></script>
 <script src="assets/sleep-essay-ui.js?v=20260724"></script>
-<script type="module" src="assets/sleep-essay-pretext-lab.js?v=20260724-lab"></script>
+<script type="module" src="assets/sleep-essay-pretext-lab.js?v=20260724-hero"></script>
 
 </body>
 </html>

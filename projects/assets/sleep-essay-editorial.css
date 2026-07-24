@@ -52,6 +52,49 @@ html {
   will-change: transform;
 }
 
+.hero {
+  min-height: calc(100svh - 43px);
+  padding: clamp(5.5rem, 8vw, 8rem) clamp(2rem, 5vw, 7rem);
+}
+
+.hero-shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(410px, 0.88fr) minmax(520px, 1.12fr);
+  gap: clamp(3.5rem, 6vw, 7rem);
+  align-items: center;
+  width: min(100%, 1500px);
+  margin: 0 auto;
+}
+
+.hero-copy {
+  min-width: 0;
+}
+
+.hero-copy h1 {
+  font-size: clamp(2.75rem, 3.75vw, 3.45rem);
+}
+
+.hero-title-line {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero-title-mobile-break {
+  display: none;
+}
+
+.hero .hero-sub {
+  max-width: 640px;
+  margin-bottom: 2.5rem;
+}
+
+.hero .hero-stats {
+  flex-wrap: wrap;
+  gap: 2rem clamp(1.5rem, 3vw, 3rem);
+}
+
 .hero-actions {
   position: relative;
   z-index: 1;
@@ -305,28 +348,24 @@ html {
 
 .pretext-lab {
   --pretext-lens-color: var(--accent);
-  padding: 1rem 0 5.5rem;
+  min-width: 0;
   scroll-margin-top: 6.9rem;
-  border-bottom: 1px solid var(--divider);
-  background:
-    radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--pretext-lens-color) 7%, transparent), transparent 42%),
-    var(--bg);
 }
 
 .pretext-lab-header {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 2rem;
-  align-items: end;
-  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
 }
 
-.pretext-lab-header h2 {
-  margin-bottom: 0.55rem;
-  color: var(--text);
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  line-height: 1.2;
-  letter-spacing: -0.035em;
+.pretext-invitation {
+  color: color-mix(in srgb, var(--pretext-lens-color) 72%, white);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .pretext-motion-toggle,
@@ -359,7 +398,7 @@ html {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
 }
 
 .pretext-preset-list button {
@@ -383,14 +422,18 @@ html {
 .pretext-stage {
   position: relative;
   display: none;
-  height: 390px;
+  height: 460px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--pretext-lens-color) 28%, var(--border));
+  border-radius: 22px;
   background:
-    linear-gradient(rgba(13, 17, 23, 0.72), rgba(13, 17, 23, 0.92)),
+    radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--pretext-lens-color) 9%, transparent), transparent 45%),
+    linear-gradient(rgba(13, 17, 23, 0.76), rgba(13, 17, 23, 0.96)),
     radial-gradient(circle, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-  background-size: auto, 28px 28px;
+  background-size: auto, auto, 28px 28px;
+  box-shadow:
+    0 26px 80px rgba(0, 0, 0, 0.34),
+    0 0 70px color-mix(in srgb, var(--pretext-lens-color) 8%, transparent);
   contain: layout paint;
   isolation: isolate;
 }
@@ -490,10 +533,17 @@ html {
 }
 
 .pretext-fallback {
-  padding: 1.5rem 0;
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.25rem 0 0;
   color: var(--text-muted);
   font-size: 0.92rem;
   line-height: 1.8;
+}
+
+.pretext-fallback p {
+  padding-left: 1rem;
+  border-left: 2px solid color-mix(in srgb, var(--pretext-lens-color) 35%, var(--border));
 }
 
 .is-pretext-ready .pretext-fallback {
@@ -501,6 +551,15 @@ html {
   width: 1px;
   height: 1px;
   padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.pretext-a11y-copy {
+  position: absolute;
+  width: 1px;
+  height: 1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
@@ -560,7 +619,41 @@ html {
   }
 }
 
+@media (max-width: 1100px) {
+  .hero-shell {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    width: min(100%, 900px);
+  }
+
+  .hero-copy {
+    max-width: 720px;
+  }
+}
+
 @media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: 5rem 1.5rem 4.5rem;
+  }
+
+  .hero-shell {
+    gap: 3.5rem;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.5rem, 11vw, 3rem);
+  }
+
+  .hero-title-line {
+    display: inline;
+    white-space: normal;
+  }
+
+  .hero-title-mobile-break {
+    display: initial;
+  }
+
   .hero-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -610,22 +703,12 @@ html {
     grid-template-columns: 1fr;
   }
 
-  .pretext-lab {
-    padding-bottom: 4.5rem;
-  }
-
   .pretext-lab-header {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    align-items: start;
-  }
-
-  .is-pretext-ready .pretext-motion-toggle {
-    justify-self: start;
+    align-items: center;
   }
 
   .pretext-stage {
-    height: 510px;
+    height: 430px;
     border-radius: 14px;
   }
 
