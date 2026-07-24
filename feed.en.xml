@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simonc site RSS (English)</title><link>https://simoncos.github.io/</link><description>English posts feed</description><language>en</language><generator>generate_blog_pages.py</generator><lastBuildDate>Fri, 24 Jul 2026 15:38:16 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.en.xml" rel="self" type="application/rss+xml" /><item><title>My Personal Knowledge Management System, 2026-03</title><link>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html</link><guid>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html</guid><pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>My Personal Knowledge Management System, 2026-03</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simonc site RSS (English)</title><link>https://simoncos.github.io/</link><description>English posts feed</description><language>en</language><generator>generate_blog_pages.py</generator><lastBuildDate>Fri, 24 Jul 2026 20:13:07 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.en.xml" rel="self" type="application/rss+xml" /><item><title>My Personal Knowledge Management System, 2026-03</title><link>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html</link><guid>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html</guid><pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>My Personal Knowledge Management System, 2026-03</h1>
 <p><img alt="Personal Knowledge Management System 202603" decoding="async" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png"/></p>
 <h2>I. From "Taking Notes" to Layered Collaboration</h2>
 <p>I started using Obsidian as my main KM<sup id="fnref:1"><a aria-label="Footnote" class="footnote-ref" href="https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html#fn:1">1</a></sup> tool about four or five years ago. Looking back in March 2026 through the full record of this system's iteration (see the appendix), it has grown into a layered human-and-machine system: Telegram handles immediate input, Obsidian handles organization and distillation, the personal site handles publication and presentation, Git provides version boundaries, and my OpenClaw agent-RedPiggy-binds these parts together.</p>
@@ -597,15 +597,37 @@ Current directory structure:
 <p>The assistant found a sheltered spot, took off the backpack, and asked me to pull out my crampons. He told me to eat and drink enough and then leave the backpack behind. Only then did I realize: ah, we’re at that stage already. The coldness smacking my cheeks became more tangible—it was rain mixed with snow.</p>
 <p>This is the turning point of the whole route, probably called the scree slope: the technical section starts here. Compared to the earlier monotonous uphill, this part was genuinely fun. I’d describe it as a kind of parkour where crampons, ice axe, hands, and feet are all used—like a jumping game. Crampons are both love and hate. I quickly learned firsthand what it means for crampons to lock together when your feet cross (again: the Nama Peak tragedy). The hem of my long poncho also risked being stepped on. But beyond those annoyances, the feeling crampons gave me was: power. Those complex, interlocking boulders—you can actually walk straight over them. Snow and thin ice on the rocks clearly recorded the tooth marks left by my assistant and the people before him (who were already out of sight), so you know someone has been there, but you still can’t quite believe it: what, you can step on that angle? The body convinces the mind before the mind agrees.</p>
 <p>Maybe because it was interesting, this segment felt like it passed quickly. Jump-jump, and suddenly there were no more rocks ahead—only a vast white expanse. Despair Slope began. At this point I felt I’d reached a stamina bottleneck. Still the same: don’t think about anything; take as many steps as you can; keep going until you have to turn around.</p>
-<p>Why is it called “Despair Slope”?</p>
-<ul>
-<li>Gradient: around 45 degrees, requires real control of your center of gravity</li>
-<li>Terrain: a snow slope. In October it felt like 20–30 cm of snow; uneven thickness; the top layer is looser and hard to stand firmly on. Snow covers the underlying terrain; hidden holes and cracks are dangerous. Some sections get packed by many feet and “mines” get cleared, but the surface also becomes more slippery.</li>
-<li>Gain: from 4,900 to 5,300 m—400 m of climbing. Combine altitude, gradient, and terrain, and this is absolutely not an ordinary 400 m.</li>
-</ul>
-<p><img alt="" decoding="async" loading="lazy" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/93d98c360cf1aae1b93a79dd43d1efb4.jpeg"/></p>
+<section aria-labelledby="desperate-slope-title" class="haba-flow-scene" id="desperate-slope-reading">
+<header class="haba-flow-header">
+<p class="haba-flow-kicker">Despair Slope</p>
+<h4 id="desperate-slope-title">Between 4,900 and 5,300 m</h4>
+<p>Four hundred meters of gain, compounded by altitude, gradient, and snow—this was no ordinary 400 meters.</p>
+</header>
+<div class="haba-flow-stage" data-haba-flow-stage="">
+<canvas aria-hidden="true" class="haba-flow-canvas" data-haba-flow-canvas="" hidden=""></canvas>
+<figure class="haba-flow-photo" data-haba-obstacle="">
+<img alt="Despair Slope on Haba Snow Mountain in driving snow" decoding="async" loading="lazy" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/93d98c360cf1aae1b93a79dd43d1efb4.jpeg"/>
+<figcaption>Above the snow line, visibility shrank to a few dozen meters.</figcaption>
+</figure>
+<aside aria-label="Despair Slope, by the numbers" class="haba-flow-evidence" data-haba-obstacle="">
+<p class="haba-flow-label">Despair Slope, by the numbers</p>
+<dl>
+<div><dt>Gradient</dt><dd>about 45°</dd></div>
+<div><dt>Gain</dt><dd>4,900 → 5,300 m</dd></div>
+<div><dt>Snow</dt><dd>about 20–30 cm</dd></div>
+</dl>
+<p>Loose snow hid holes and cracks; the well-trodden line was slicker.</p>
+</aside>
+<blockquote class="haba-flow-annotation" data-haba-obstacle="">
+<p>“Axe in. Left foot, right foot, stop—then bow.”</p>
+<cite>The same “New Year bow” rhythm, over and over</cite>
+</blockquote>
+<div class="haba-flow-static" data-haba-flow-static="">
 <p>Snow slapped my face chaotically. I didn’t wear ski goggles; instead I had clip-on sunglasses over my prescription glasses. The lenses stayed blurred; I could barely see the path under my feet. Looking left and right, everything was a thick gray-white; visibility maybe tens of meters. Every upward step required kicking hard into the snow, stabilizing with crampons, planting the ice axe into the snow ahead, leaning my weight onto it, and then taking the next step. Axe in, left foot, right foot, stop—bend low for a breath—repeat. I fell several times because the snow wasn’t compacted, or because my crampons locked. With snow attacking from the ground and from the air, even with the poncho and other gear, my gloves (I’d already switched to the last pair) and boots were soaked. I could clearly feel the fabric swelling from absorbed water in both hands and feet.</p>
 <p>As stamina drained, I had to stop after seven or eight steps, then five or six steps, resting in that bent-over, hands-on-axe posture to breathe. Lack of water was another big problem: both my water and my assistant’s water were left at the scree slope and we didn’t bring them up. I was so thirsty my mouth tasted bitter. Later I seriously considered stuffing a mouthful of untouched snow, but I didn’t know whether my throat and stomach could handle it. Fortunately, near the summit there were more people again. I saw a guy with a bottle of Coke on his pack. I asked him and he said he also had a bottle of water in his bag, and he let me gulp a few mouthfuls. Ice-cold life itself! He offered to give me the whole bottle; I refused and told him that water is far too precious in a place like this—no matter what, it’s better he keeps it.</p>
+</div>
+</div>
+</section>
 <p>Another thing I’m grateful for: my assistant had a very “introvert” vibe. Unlike some stories online, he didn’t drag or pull me step by step. He just demonstrated and led, letting me feel it and grind it out myself. He did get increasingly sharp-tongued (“Focus and walk properly.” “How did you mess your crampons up like this? Can’t fix it—fine, just like this.” “Stop talking to me, walk faster, get to the top and then you’ll be impressive.” “How can you be that thirsty? We’ve done this so many times, we know it well…”), but he never once urged me to retreat.</p>
 <p>Finally I heard people ahead saying they could see the sign, that someone was taking photos. I looked up. All I could see was a small, blurry shadow in the upper-left of my vision. They said there were only a few steps left. But I still couldn’t move. And yet, step by step, I dragged myself up.</p>
 <p><img alt="" decoding="async" loading="lazy" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/4274e16cc6981c973f6d3d0a6609dd86.jpeg"/></p>

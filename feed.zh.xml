@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simonc site RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Fri, 24 Jul 2026 15:38:16 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>我的个人知识管理系统 2026-03</title><link>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</link><guid>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</guid><pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的个人知识管理系统 2026-03</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simonc site RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Fri, 24 Jul 2026 20:13:07 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>我的个人知识管理系统 2026-03</title><link>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</link><guid>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</guid><pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的个人知识管理系统 2026-03</h1>
 <p><img alt="Personal Knowledge Management System 202603" decoding="async" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png"/></p>
 <h2>一、从"记笔记"到"分层协作"</h2>
 <p>我开始把 Obsidian 作为主要的 KM<sup id="fnref:1"><a aria-label="脚注" class="footnote-ref" href="https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html#fn:1">1</a></sup> 工具，到现在差不多四、五年了。2026 年 3 月回顾完整的系统迭代记录（见文末附录），这套东西已经长成了一个分层的人机系统：Telegram 负责即时输入，Obsidian 负责整理与沉淀，个人站点负责发布与呈现，Git 负责版本边界，而我的 OpenClaw agent--RedPiggy，开始把这些部分粘合起来。</p>
@@ -595,15 +595,37 @@
 <p>小哥找了一个遮蔽处，脱下背包让我把冰爪拿出来，要我充分补给然后把背包留下。直到这时我才意识到，啊，原来我们已经来到这个阶段了。扑在脸颊上的冰冷变得更具实感，是雨夹雪。</p>
 <p>这是整个登顶路线的转折点，应该叫碎石坡，技术路段由此开始。相对前面枯燥的向上，这一段走起来是非常有趣的，我把它形容成是一种冰爪、冰镐、手脚全方位运用的跳跳乐。冰爪着实让人又爱又恨，很快我就亲身领会了什么叫冰爪交叠会摔跤（再次cue那玛峰悲剧）。长雨衣下摆也有被踩到的风险。在这些麻烦之外，冰爪带给我的感觉，就是强大。那些错综复杂的大石块，你居然可以直接在上面行走。石上的积雪/薄冰清晰记录了小哥以及更前面人（已见不到人影）的齿印，所以你会非常明确地意识到有人走过那里，但又觉得不太相信：啥，那个角度你可以直接踏上去吗？但身体比大脑先被说服。</p>
 <p>大概是因为有趣，这一段感觉挺快就过去了。跳着跳着，前方突然没有石头了，变成了一片茫茫的白，绝望坡开始了。这时我感觉自己的体力已经到了一个瓶颈区。还是那样，什么都不想，能走几步就走几步吧，一直走到不得不回头。</p>
-<p>绝望坡为何名为绝望？</p>
-<ul>
-<li>坡度：45度左右，对身体重心控制有一定要求</li>
-<li>地形：雪坡，10月份体感大概有20-30厘米厚的雪，厚度并不均匀，最表面的雪更松，不容易踩稳。雪掩盖了下面的地形，隐藏着的窟窿缝隙是很危险的。有部分路段因为前面的人都走，雪会踩实一些，也排了一遍暗雷，但是路面也会变得更滑。</li>
-<li>爬升：4900-5300，共400米爬升，结合海拔、坡度、地形的影响，这真不是普普通通的400米</li>
-</ul>
-<p><img alt="" decoding="async" loading="lazy" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/93d98c360cf1aae1b93a79dd43d1efb4.jpeg"/></p>
+<section aria-labelledby="desperate-slope-title" class="haba-flow-scene" id="desperate-slope-reading">
+<header class="haba-flow-header">
+<p class="haba-flow-kicker">绝望坡</p>
+<h4 id="desperate-slope-title">在 4900–5300 米之间</h4>
+<p>四百米爬升，叠上海拔、坡度和积雪，这真不是普普通通的四百米。</p>
+</header>
+<div class="haba-flow-stage" data-haba-flow-stage="">
+<canvas aria-hidden="true" class="haba-flow-canvas" data-haba-flow-canvas="" hidden=""></canvas>
+<figure class="haba-flow-photo" data-haba-obstacle="">
+<img alt="风雪中的哈巴雪山绝望坡" decoding="async" loading="lazy" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/93d98c360cf1aae1b93a79dd43d1efb4.jpeg"/>
+<figcaption>雪线之上，能见度只剩几十米。</figcaption>
+</figure>
+<aside aria-label="绝望坡数据" class="haba-flow-evidence" data-haba-obstacle="">
+<p class="haba-flow-label">绝望坡数据</p>
+<dl>
+<div><dt>坡度</dt><dd>约 45°</dd></div>
+<div><dt>爬升</dt><dd>4900 → 5300 m</dd></div>
+<div><dt>积雪</dt><dd>约 20–30 cm</dd></div>
+</dl>
+<p>松雪掩盖了窟窿和缝隙；踩实的路径又会更滑。</p>
+</aside>
+<blockquote class="haba-flow-annotation" data-haba-obstacle="">
+<p>“双手一插，左脚、右脚、停，再叩首。”</p>
+<cite>循环往复的“拜年剑法”</cite>
+</blockquote>
+<div class="haba-flow-static" data-haba-flow-static="">
 <p>雪在脸上胡乱地拍，我没有戴雪镜，而是眼镜外夹的墨镜片。镜片一直处于模糊的状态，堪堪能看到脚下的路。向左右望去，都是一片浓稠的灰白，能见度大概几十米。向上的每一步都要用力踢进雪中，靠冰爪稳住支点，再将冰镐插进前方的雪里，将重心倚靠上去，再进行下一步。双手一插，左脚、右脚、停，再叩首，循环往复的拜年剑法。途中因为滑倒，雪没踩实，或者冰爪死锁摔了好几次，在地上的雪和空中的雪交叉袭击下，虽然有雨衣等装备，我的手套（已经换完了最后一双）和鞋子都湿透了，手和脚都能明显感受到布料的吸水膨胀。</p>
 <p>体力持续消耗，到后面变成了七八步、五六步就得停一停，用拜年的姿势喘息片刻。缺水是另一大问题，我和小哥的水都放在了碎石坡没带，渴到嘴里有一种很苦涩的味道。到后来我认真考虑过塞一口没被人踩过的雪，但不知道我的食道和肠胃是否扛得住。幸运的是接近登顶的时候，人又多了起来，我看到一个小哥背包侧有瓶可乐，询问下他说包里还有一瓶矿泉水，拿给我灌了几口。冰凉的生命之源！小哥说那瓶水就直接给我了，我拒绝了，跟他说在这种地方水太宝贵了，怎样都还是自己留着好。</p>
+</div>
+</div>
+</section>
 <p>另一值得感谢的是，I人感的协作小哥没有像网上一些帖子那样，拉扯我一步步向上，只是示范和领路，让我自己体会和努力，虽然过程中越发毒舌（“你集中注意力好好走啊”，“你这个冰爪怎么搞成这样的，搞不定了，没办法，就这样吧”，“你别跟我说话了，快点往上走，赶快登顶了你才算厉害”，“哪会有那么渴，我们都走了很多遍了，都清楚得很”...），但始终没有劝过我下撤。</p>
 <p>终于，听见前面的人说看到牌子，看到有人在拍照了。我抬眼望去，看到的只是视野左上的一小块模糊不清的阴影。他们说只差几步了，可我就是挪不动步。但终于，还是一步步挪了上去。</p>
 <p><img alt="" decoding="async" loading="lazy" src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/4274e16cc6981c973f6d3d0a6609dd86.jpeg"/></p>

@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "build:ts": "tsc -p tsconfig.json && tsc -p gallery/talks/pkm-2026-06-07/tsconfig.json && tsc -p projects/assets/tsconfig.json",
-    "check:ts": "tsc -p tsconfig.json --noEmit && tsc -p gallery/talks/pkm-2026-06-07/tsconfig.json --noEmit && tsc -p projects/assets/tsconfig.json --noEmit"
+    "build:ts": "tsc -p tsconfig.json && tsc -p gallery/talks/pkm-2026-06-07/tsconfig.json && tsc -p projects/assets/tsconfig.json && tsc -p blogs/assets/haba-pretext.tsconfig.json",
+    "check:ts": "tsc -p tsconfig.json --noEmit && tsc -p gallery/talks/pkm-2026-06-07/tsconfig.json --noEmit && tsc -p projects/assets/tsconfig.json --noEmit && tsc -p blogs/assets/haba-pretext.tsconfig.json --noEmit"
   },
   "devDependencies": {
     "typescript": "6.0.3"

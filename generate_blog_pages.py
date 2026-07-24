@@ -90,6 +90,42 @@ def parse_metadata(md_content):
         logging.error(f"Error parsing metadata: {str(e)}")
         raise BlogGenerationError(f"Failed to parse metadata: {str(e)}")
 
+
+def parse_page_assets(value):
+    """Parse safe, article-local asset paths from comma-separated frontmatter."""
+    assets = []
+    for raw_asset in str(value or '').split(','):
+        asset = raw_asset.strip()
+        if not asset:
+            continue
+
+        parsed = urlparse(asset)
+        path_parts = [part for part in parsed.path.split('/') if part]
+        is_local_path = (
+            not parsed.scheme
+            and not parsed.netloc
+            and not asset.startswith(('/', '\\'))
+            and '..' not in path_parts
+            and re.fullmatch(r'[A-Za-z0-9._~/?=&%+-]+', asset) is not None
+        )
+        if not is_local_path:
+            raise BlogGenerationError(f"Unsafe page asset path: {asset}")
+        assets.append(asset)
+    return assets
+
+
+def build_head_extras(metadata):
+    """Render optional article-specific styles and ES modules."""
+    lines = []
+    for href in parse_page_assets(metadata.get('styles', '')):
+        lines.append(f'    <link rel="stylesheet" href="{html_lib.escape(href, quote=True)}">')
+    for src in parse_page_assets(metadata.get('module_scripts', '')):
+        lines.append(
+            f'    <script type="module" src="{html_lib.escape(src, quote=True)}"></script>'
+        )
+    return ''.join(f'{line}\n' for line in lines)
+
+
 def get_file_times(file_path):
     """Get file creation and modification dates with error handling."""
     try:
@@ -848,6 +884,8 @@ def render_blog_post(post, template, article_group_map):
             for tag in tags
         ]) + '</ul>'
 
+        head_extras = build_head_extras(metadata)
+
         page_content = template.replace('{{TITLE}}', title)
         page_content = page_content.replace('{{TITLE_ATTR}}', html_lib.escape(title, quote=True))
         page_content = page_content.replace('{{META_DESCRIPTION}}', html_lib.escape(meta_description, quote=True))
@@ -863,6 +901,7 @@ def render_blog_post(post, template, article_group_map):
         page_content = page_content.replace('{{UPDATED}}', updated)
         page_content = page_content.replace('{{TAGS}}', tags_html)
         page_content = page_content.replace('{{LANG_SWITCH}}', lang_switch_html)
+        page_content = page_content.replace('{{HEAD_EXTRAS}}', head_extras)
         page_content = page_content.replace('{{SITE_VERSION}}', get_site_version())
 
         with open(os.path.join('blogs', html_file), 'w', encoding='utf-8') as f:
