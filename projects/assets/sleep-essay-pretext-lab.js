@@ -7,33 +7,38 @@ labs.forEach((lab) => {
     const orb = lab.querySelector("[data-pretext-orb]");
     const orbLabel = lab.querySelector("[data-pretext-orb-label]");
     const orbNote = lab.querySelector("[data-pretext-orb-note]");
+    const liveCopy = lab.querySelector("[data-pretext-live]");
     const motionToggle = lab.querySelector("[data-pretext-motion-toggle]");
     const presetButtons = Array.from(lab.querySelectorAll("[data-pretext-preset]"));
+    const copyNodes = Array.from(lab.querySelectorAll("[data-pretext-copy]"));
     if (!stage ||
         !source ||
         !linesLayer ||
         !orb ||
         !orbLabel ||
         !orbNote ||
+        !liveCopy ||
         !motionToggle ||
-        presetButtons.length === 0) {
+        presetButtons.length === 0 ||
+        copyNodes.length !== presetButtons.length) {
         return;
     }
     const isChinese = document.documentElement.lang.startsWith("zh");
     const presets = isChinese
         ? [
-            { label: "节律", note: "入睡时间", fx: 0.2, fy: 0.42, color: "#7ce2ff" },
-            { label: "呼吸", note: "打呼 / BD", fx: 0.8, fy: 0.34, color: "#bc8cff" },
-            { label: "情境", note: "旅行 / 疲劳", fx: 0.72, fy: 0.66, color: "#ffa657" },
-            { label: "感受", note: "真实早晨", fx: 0.42, fy: 0.7, color: "#3fb950" },
+            { label: "节律", note: "29.7% 短夜", fx: 0.2, fy: 0.42, color: "#7ce2ff" },
+            { label: "呼吸", note: "8.5 次 / 小时", fx: 0.8, fy: 0.34, color: "#bc8cff" },
+            { label: "情境", note: "旅行 −10.0%", fx: 0.72, fy: 0.66, color: "#ffa657" },
+            { label: "感受", note: "14% 错位", fx: 0.42, fy: 0.7, color: "#3fb950" },
         ]
         : [
-            { label: "Rhythm", note: "Bedtime", fx: 0.2, fy: 0.42, color: "#7ce2ff" },
-            { label: "Breathing", note: "Snoring / BD", fx: 0.8, fy: 0.34, color: "#bc8cff" },
-            { label: "Context", note: "Travel / fatigue", fx: 0.72, fy: 0.66, color: "#ffa657" },
-            { label: "Feeling", note: "The lived morning", fx: 0.42, fy: 0.7, color: "#3fb950" },
+            { label: "Rhythm", note: "29.7% short nights", fx: 0.2, fy: 0.42, color: "#7ce2ff" },
+            { label: "Breathing", note: "8.5 events / hour", fx: 0.8, fy: 0.34, color: "#bc8cff" },
+            { label: "Context", note: "Travel −10.0%", fx: 0.72, fy: 0.66, color: "#ffa657" },
+            { label: "Feeling", note: "14% mismatch", fx: 0.42, fy: 0.7, color: "#3fb950" },
         ];
-    const rawText = source.textContent?.replace(/\s+/g, " ").trim() ?? "";
+    const copies = copyNodes.map((node) => node.textContent?.replace(/\s+/g, " ").trim() ?? "");
+    let rawText = copies[0];
     if (!rawText)
         return;
     const fontFamily = isChinese ? '"Noto Sans SC"' : '"Inter"';
@@ -151,6 +156,8 @@ labs.forEach((lab) => {
             const line = lines[index];
             if (!line) {
                 span.hidden = true;
+                if (span.textContent)
+                    span.textContent = "";
                 return;
             }
             span.hidden = false;
@@ -190,12 +197,18 @@ labs.forEach((lab) => {
     function selectPreset(index, snapToPreset = true) {
         selectedPreset = (index + presets.length) % presets.length;
         const preset = presets[selectedPreset];
+        rawText = copies[selectedPreset];
+        prepared = null;
+        preparedFontSize = 0;
         lab.style.setProperty("--pretext-lens-color", preset.color);
         orbLabel.textContent = preset.label;
         orbNote.textContent = preset.note;
+        liveCopy.textContent = isChinese
+            ? `${preset.label}：${rawText}`
+            : `${preset.label}: ${rawText}`;
         orb.setAttribute("aria-label", isChinese
-            ? `${preset.label}变量镜头：${preset.note}。拖动可改变文字排版，点击切换变量。`
-            : `${preset.label} lens: ${preset.note}. Drag to reflow the text; click to change variable.`);
+            ? `${preset.label}线索：${preset.note}。拖动可改变文字排版，点击切换线索。`
+            : `${preset.label} signal: ${preset.note}. Drag to reflow the text; click to change signal.`);
         presetButtons.forEach((button, buttonIndex) => {
             button.setAttribute("aria-pressed", String(buttonIndex === selectedPreset));
         });
@@ -308,6 +321,7 @@ labs.forEach((lab) => {
             document.fonts.load(`500 17px ${fontFamily}`),
         ]);
         lab.classList.add("is-pretext-ready");
+        source.setAttribute("aria-hidden", "true");
         updateMotionControl();
         selectPreset(0, false);
         render();
@@ -316,5 +330,6 @@ labs.forEach((lab) => {
     boot().catch(() => {
         window.cancelAnimationFrame(animationFrame);
         lab.classList.remove("is-pretext-ready");
+        source.removeAttribute("aria-hidden");
     });
 });

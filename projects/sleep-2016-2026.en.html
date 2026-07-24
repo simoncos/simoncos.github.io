@@ -390,7 +390,7 @@
     .hero-stat-num { font-size: 1.8rem; }
   }
 </style>
-<link rel="stylesheet" href="assets/sleep-essay-editorial.css?v=20260724">
+<link rel="stylesheet" href="assets/sleep-essay-editorial.css?v=20260724b">
 </head>
 <body>
 
@@ -408,33 +408,68 @@
 
 <!-- ═══ HERO ═══ -->
 <div class="hero">
-  <p class="hero-kicker">Quantified Self · 2016-2026</p>
-  <h1>10 Years of Sleep Data<br>What Can We Uncover?</h1>
-  <p class="hero-sub">
-    In February 2016, I opened an app called SleepCycle for the first time. Since then, every night, my phone has lain quietly by my bedside, recording everything about my sleep.
-    Ten years later, these numbers have accumulated into a surprisingly rich life archive. With AI's help, I was finally able to spread them all out and examine them for the first time.
-  </p>
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <span class="hero-stat-num">3,656</span>
-      <span class="hero-stat-label">Valid Nights</span>
+  <div class="hero-shell">
+    <div class="hero-copy">
+      <p class="hero-kicker">Quantified Self · 2016-2026</p>
+      <h1>10 Years of Sleep Data<br>What Can We Uncover?</h1>
+      <p class="hero-sub">
+        In February 2016, I opened an app called SleepCycle for the first time. Since then, every night, my phone has lain quietly by my bedside, recording everything about my sleep.
+        Ten years later, these numbers have accumulated into a surprisingly rich life archive. With AI's help, I was finally able to spread them all out and examine them for the first time.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">3,656</span>
+          <span class="hero-stat-label">Valid Nights</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">10.1</span>
+          <span class="hero-stat-label">Years</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">83.2%</span>
+          <span class="hero-stat-label">Avg Sleep Quality</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">7.1h</span>
+          <span class="hero-stat-label">Avg Actual Sleep</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a class="hero-action" href="#key-findings">Start with five findings</a>
+        <a class="hero-action secondary" href="#essay-contents">Explore by chapter</a>
+      </div>
     </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">10.1</span>
-      <span class="hero-stat-label">Years</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">83.2%</span>
-      <span class="hero-stat-label">Avg Sleep Quality</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">7.1h</span>
-      <span class="hero-stat-label">Avg Actual Sleep</span>
-    </div>
-  </div>
-  <div class="hero-actions">
-    <a class="hero-action" href="#key-findings">Start with five findings</a>
-    <a class="hero-action secondary" href="#essay-contents">Explore by chapter</a>
+
+    <aside id="pretext-lab" class="pretext-lab" data-pretext-lab aria-label="Four signals in ten years of records">
+      <div class="pretext-lab-header">
+        <p class="pretext-invitation">Ten years · Four signals</p>
+        <button class="pretext-motion-toggle" type="button" data-pretext-motion-toggle aria-pressed="true">Pause motion</button>
+      </div>
+
+      <div class="pretext-preset-list" role="group" aria-label="Choose a reading signal">
+        <button type="button" data-pretext-preset aria-pressed="true">Rhythm</button>
+        <button type="button" data-pretext-preset aria-pressed="false">Breathing</button>
+        <button type="button" data-pretext-preset aria-pressed="false">Context</button>
+        <button type="button" data-pretext-preset aria-pressed="false">Feeling</button>
+      </div>
+
+      <div class="pretext-stage" data-pretext-stage>
+        <div class="pretext-lines" data-pretext-lines aria-hidden="true"></div>
+        <button class="pretext-orb" type="button" data-pretext-orb>
+          <span data-pretext-orb-label>Rhythm</span>
+          <small data-pretext-orb-note>29.7% short nights</small>
+        </button>
+        <p class="pretext-stage-hint" aria-hidden="true">Drag the lens · click to change signal</p>
+      </div>
+
+      <div class="pretext-fallback" data-pretext-source>
+        <p data-pretext-copy>By 2024, nights with less than seven hours in bed had risen to 26.9%; in 2025, to 29.7%. Late sleep is not an occasional detour but the record's most persistent shift in rhythm. When the variables compete, bedtime still comes first—and it weighs more heavily on next-morning mood than on the app score.</p>
+        <p data-pretext-copy>By 2025, the consumer-device estimate for breathing disruptions had reached 8.5 events per hour. It is not a diagnosis, but it places snoring, coughing, and the later clinical timeline on the same line of evidence. It is an alarm for professional follow-up, not an answer of its own.</p>
+        <p data-pretext-copy>Sleep quality was 10.0% lower on travel nights and 9.7% lower with caffeine. Yet neither label acts alone: both often arrive with late sleep, short time in bed, and unstructured fatigue. The labels look more like traces left by a cause than causes themselves.</p>
+        <p data-pretext-copy>In the model test set, 14% of nights still scored at least 80 while the next morning felt bad. Sleep has to explain more than an app score; it has to explain the morning I actually lived. Movement and sound can produce a score, but they cannot measure that morning.</p>
+      </div>
+      <p class="pretext-a11y-copy" data-pretext-live aria-live="polite"></p>
+    </aside>
   </div>
 </div>
 
@@ -552,40 +587,6 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<section id="pretext-lab" class="pretext-lab" data-pretext-lab aria-labelledby="pretext-lab-title">
-  <div class="container">
-    <div class="pretext-lab-header">
-      <div>
-        <p class="section-label">Another angle</p>
-        <h2 id="pretext-lab-title">Four variables, four ways to read</h2>
-      </div>
-      <button class="pretext-motion-toggle" type="button" data-pretext-motion-toggle aria-pressed="true">Pause motion</button>
-    </div>
-
-    <div class="pretext-preset-list" role="group" aria-label="Choose a variable lens">
-      <button type="button" data-pretext-preset aria-pressed="true">Rhythm</button>
-      <button type="button" data-pretext-preset aria-pressed="false">Breathing</button>
-      <button type="button" data-pretext-preset aria-pressed="false">Context</button>
-      <button type="button" data-pretext-preset aria-pressed="false">Feeling</button>
-    </div>
-
-    <div class="pretext-stage" data-pretext-stage>
-      <div class="pretext-lines" data-pretext-lines aria-hidden="true"></div>
-      <button class="pretext-orb" type="button" data-pretext-orb>
-        <span data-pretext-orb-label>Rhythm</span>
-        <small data-pretext-orb-note>Bedtime</small>
-      </button>
-      <p class="pretext-stage-hint" aria-hidden="true">Drag the lens · click to change variable</p>
-    </div>
-
-    <p class="pretext-fallback" data-pretext-source>
-      Ten years of records do not yield one formula. Four variables keep returning:
-      rhythm, breathing, context, and the lived morning. Late sleep is the steadiest negative signal;
-      consumer scores and felt mornings often disagree; travel, illness, and unstructured fatigue often arrive together.
-    </p>
   </div>
 </section>
 
@@ -1578,7 +1579,7 @@
 <!-- ═══ SCRIPTS ═══ -->
 <script src="assets/sleep-2016-2026.en.js?v=20260724-editorial"></script>
 <script src="assets/sleep-essay-ui.js?v=20260724"></script>
-<script type="module" src="assets/sleep-essay-pretext-lab.js?v=20260724-lab"></script>
+<script type="module" src="assets/sleep-essay-pretext-lab.js?v=20260724-hero"></script>
 
 </body>
 </html>
