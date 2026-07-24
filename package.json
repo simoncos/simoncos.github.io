@@ -6,5 +6,8 @@
   },
   "devDependencies": {
     "typescript": "6.0.3"
+  },
+  "dependencies": {
+    "@chenglou/pretext": "^0.0.8"
   }
 }

@@ -555,6 +555,40 @@
   </div>
 </section>
 
+<section id="pretext-lab" class="pretext-lab" data-pretext-lab aria-labelledby="pretext-lab-title">
+  <div class="container">
+    <div class="pretext-lab-header">
+      <div>
+        <p class="section-label">Another angle</p>
+        <h2 id="pretext-lab-title">Four variables, four ways to read</h2>
+      </div>
+      <button class="pretext-motion-toggle" type="button" data-pretext-motion-toggle aria-pressed="true">Pause motion</button>
+    </div>
+
+    <div class="pretext-preset-list" role="group" aria-label="Choose a variable lens">
+      <button type="button" data-pretext-preset aria-pressed="true">Rhythm</button>
+      <button type="button" data-pretext-preset aria-pressed="false">Breathing</button>
+      <button type="button" data-pretext-preset aria-pressed="false">Context</button>
+      <button type="button" data-pretext-preset aria-pressed="false">Feeling</button>
+    </div>
+
+    <div class="pretext-stage" data-pretext-stage>
+      <div class="pretext-lines" data-pretext-lines aria-hidden="true"></div>
+      <button class="pretext-orb" type="button" data-pretext-orb>
+        <span data-pretext-orb-label>Rhythm</span>
+        <small data-pretext-orb-note>Bedtime</small>
+      </button>
+      <p class="pretext-stage-hint" aria-hidden="true">Drag the lens · click to change variable</p>
+    </div>
+
+    <p class="pretext-fallback" data-pretext-source>
+      Ten years of records do not yield one formula. Four variables keep returning:
+      rhythm, breathing, context, and the lived morning. Late sleep is the steadiest negative signal;
+      consumer scores and felt mornings often disagree; travel, illness, and unstructured fatigue often arrive together.
+    </p>
+  </div>
+</section>
+
 <!-- ═══ 01 / Full Dataset ═══ -->
 <div class="section" id="overview" role="region" aria-labelledby="overview-title">
   <div class="container">
@@ -1544,6 +1578,7 @@
 <!-- ═══ SCRIPTS ═══ -->
 <script src="assets/sleep-2016-2026.en.js?v=20260724-editorial"></script>
 <script src="assets/sleep-essay-ui.js?v=20260724"></script>
+<script type="module" src="assets/sleep-essay-pretext-lab.js?v=20260724-lab"></script>
 
 </body>
 </html>
