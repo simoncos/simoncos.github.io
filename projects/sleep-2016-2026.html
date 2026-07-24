@@ -554,6 +554,39 @@
   </div>
 </section>
 
+<section id="pretext-lab" class="pretext-lab" data-pretext-lab aria-labelledby="pretext-lab-title">
+  <div class="container">
+    <div class="pretext-lab-header">
+      <div>
+        <p class="section-label">换个角度</p>
+        <h2 id="pretext-lab-title">四个变量，四种读法</h2>
+      </div>
+      <button class="pretext-motion-toggle" type="button" data-pretext-motion-toggle aria-pressed="true">暂停动态</button>
+    </div>
+
+    <div class="pretext-preset-list" role="group" aria-label="选择变量镜头">
+      <button type="button" data-pretext-preset aria-pressed="true">节律</button>
+      <button type="button" data-pretext-preset aria-pressed="false">呼吸</button>
+      <button type="button" data-pretext-preset aria-pressed="false">情境</button>
+      <button type="button" data-pretext-preset aria-pressed="false">感受</button>
+    </div>
+
+    <div class="pretext-stage" data-pretext-stage>
+      <div class="pretext-lines" data-pretext-lines aria-hidden="true"></div>
+      <button class="pretext-orb" type="button" data-pretext-orb>
+        <span data-pretext-orb-label>节律</span>
+        <small data-pretext-orb-note>入睡时间</small>
+      </button>
+      <p class="pretext-stage-hint" aria-hidden="true">拖动镜头 · 点击切换变量</p>
+    </div>
+
+    <p class="pretext-fallback" data-pretext-source>
+      十年记录没有给出万能公式。它反复指向四类变量：节律、呼吸、情境，以及醒来后的真实感受。
+      晚睡是最稳定的负面信号；消费级分数和主观早晨并不总是一致；旅行、疾病与无结构疲劳往往同时出现。
+    </p>
+  </div>
+</section>
+
 <!-- ═══ 01 / 全量数据 ═══ -->
 <div class="section" id="overview" role="region" aria-labelledby="overview-title">
   <div class="container">
@@ -1535,6 +1568,7 @@
 <!-- ═══ SCRIPTS ═══ -->
 <script src="assets/sleep-2016-2026.js?v=20260724-editorial"></script>
 <script src="assets/sleep-essay-ui.js?v=20260724"></script>
+<script type="module" src="assets/sleep-essay-pretext-lab.js?v=20260724-lab"></script>
 
 </body>
 </html>
