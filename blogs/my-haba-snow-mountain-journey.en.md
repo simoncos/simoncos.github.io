@@ -1,7 +1,9 @@
 ---
 tags: out
 date: 2026-01-20
-updated: 2026-02-28
+updated: 2026-07-24
+styles: assets/haba-pretext.css?v=20260724a
+module_scripts: assets/haba-pretext.js?v=20260724a
 ---
 # My Haba Snow Mountain Journey
 
@@ -161,17 +163,37 @@ This is the turning point of the whole route, probably called the scree slope: t
 
 Maybe because it was interesting, this segment felt like it passed quickly. Jump-jump, and suddenly there were no more rocks ahead—only a vast white expanse. Despair Slope began. At this point I felt I’d reached a stamina bottleneck. Still the same: don’t think about anything; take as many steps as you can; keep going until you have to turn around.
 
-Why is it called “Despair Slope”?
-
-- Gradient: around 45 degrees, requires real control of your center of gravity
-- Terrain: a snow slope. In October it felt like 20–30 cm of snow; uneven thickness; the top layer is looser and hard to stand firmly on. Snow covers the underlying terrain; hidden holes and cracks are dangerous. Some sections get packed by many feet and “mines” get cleared, but the surface also becomes more slippery.
-- Gain: from 4,900 to 5,300 m—400 m of climbing. Combine altitude, gradient, and terrain, and this is absolutely not an ordinary 400 m.
-
-![](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/93d98c360cf1aae1b93a79dd43d1efb4.jpeg)
-
-Snow slapped my face chaotically. I didn’t wear ski goggles; instead I had clip-on sunglasses over my prescription glasses. The lenses stayed blurred; I could barely see the path under my feet. Looking left and right, everything was a thick gray-white; visibility maybe tens of meters. Every upward step required kicking hard into the snow, stabilizing with crampons, planting the ice axe into the snow ahead, leaning my weight onto it, and then taking the next step. Axe in, left foot, right foot, stop—bend low for a breath—repeat. I fell several times because the snow wasn’t compacted, or because my crampons locked. With snow attacking from the ground and from the air, even with the poncho and other gear, my gloves (I’d already switched to the last pair) and boots were soaked. I could clearly feel the fabric swelling from absorbed water in both hands and feet.
-
-As stamina drained, I had to stop after seven or eight steps, then five or six steps, resting in that bent-over, hands-on-axe posture to breathe. Lack of water was another big problem: both my water and my assistant’s water were left at the scree slope and we didn’t bring them up. I was so thirsty my mouth tasted bitter. Later I seriously considered stuffing a mouthful of untouched snow, but I didn’t know whether my throat and stomach could handle it. Fortunately, near the summit there were more people again. I saw a guy with a bottle of Coke on his pack. I asked him and he said he also had a bottle of water in his bag, and he let me gulp a few mouthfuls. Ice-cold life itself! He offered to give me the whole bottle; I refused and told him that water is far too precious in a place like this—no matter what, it’s better he keeps it.
+<section class="haba-flow-scene" id="desperate-slope-reading" aria-labelledby="desperate-slope-title">
+  <header class="haba-flow-header">
+    <p class="haba-flow-kicker">Despair Slope</p>
+    <h4 id="desperate-slope-title">Between 4,900 and 5,300 m</h4>
+    <p>Four hundred meters of gain, compounded by altitude, gradient, and snow—this was no ordinary 400 meters.</p>
+  </header>
+  <div class="haba-flow-stage" data-haba-flow-stage>
+    <canvas class="haba-flow-canvas" data-haba-flow-canvas hidden aria-hidden="true"></canvas>
+    <figure class="haba-flow-photo" data-haba-obstacle>
+      <img src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/93d98c360cf1aae1b93a79dd43d1efb4.jpeg" alt="Despair Slope on Haba Snow Mountain in driving snow">
+      <figcaption>Above the snow line, visibility shrank to a few dozen meters.</figcaption>
+    </figure>
+    <aside class="haba-flow-evidence" data-haba-obstacle aria-label="Despair Slope, by the numbers">
+      <p class="haba-flow-label">Despair Slope, by the numbers</p>
+      <dl>
+        <div><dt>Gradient</dt><dd>about 45°</dd></div>
+        <div><dt>Gain</dt><dd>4,900 → 5,300 m</dd></div>
+        <div><dt>Snow</dt><dd>about 20–30 cm</dd></div>
+      </dl>
+      <p>Loose snow hid holes and cracks; the well-trodden line was slicker.</p>
+    </aside>
+    <blockquote class="haba-flow-annotation" data-haba-obstacle>
+      <p>“Axe in. Left foot, right foot, stop—then bow.”</p>
+      <cite>The same “New Year bow” rhythm, over and over</cite>
+    </blockquote>
+    <div class="haba-flow-static" data-haba-flow-static>
+      <p>Snow slapped my face chaotically. I didn’t wear ski goggles; instead I had clip-on sunglasses over my prescription glasses. The lenses stayed blurred; I could barely see the path under my feet. Looking left and right, everything was a thick gray-white; visibility maybe tens of meters. Every upward step required kicking hard into the snow, stabilizing with crampons, planting the ice axe into the snow ahead, leaning my weight onto it, and then taking the next step. Axe in, left foot, right foot, stop—bend low for a breath—repeat. I fell several times because the snow wasn’t compacted, or because my crampons locked. With snow attacking from the ground and from the air, even with the poncho and other gear, my gloves (I’d already switched to the last pair) and boots were soaked. I could clearly feel the fabric swelling from absorbed water in both hands and feet.</p>
+      <p>As stamina drained, I had to stop after seven or eight steps, then five or six steps, resting in that bent-over, hands-on-axe posture to breathe. Lack of water was another big problem: both my water and my assistant’s water were left at the scree slope and we didn’t bring them up. I was so thirsty my mouth tasted bitter. Later I seriously considered stuffing a mouthful of untouched snow, but I didn’t know whether my throat and stomach could handle it. Fortunately, near the summit there were more people again. I saw a guy with a bottle of Coke on his pack. I asked him and he said he also had a bottle of water in his bag, and he let me gulp a few mouthfuls. Ice-cold life itself! He offered to give me the whole bottle; I refused and told him that water is far too precious in a place like this—no matter what, it’s better he keeps it.</p>
+    </div>
+  </div>
+</section>
 
 Another thing I’m grateful for: my assistant had a very “introvert” vibe. Unlike some stories online, he didn’t drag or pull me step by step. He just demonstrated and led, letting me feel it and grind it out myself. He did get increasingly sharp-tongued (“Focus and walk properly.” “How did you mess your crampons up like this? Can’t fix it—fine, just like this.” “Stop talking to me, walk faster, get to the top and then you’ll be impressive.” “How can you be that thirsty? We’ve done this so many times, we know it well…”), but he never once urged me to retreat.
 
