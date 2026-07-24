@@ -21,14 +21,14 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
     <link rel="alternate" type="application/rss+xml" title="simonc site RSS (中文)" href="feed.zh.xml">
     <link rel="alternate" type="application/rss+xml" title="simonc site RSS (English)" href="feed.en.xml">
-    <script src="src/js/theme-init.js?v=20260724a"></script>
-    <link rel="stylesheet" href="src/css/styles.css?v=20260724b">
-    <script src="src/js/site-config.js?v=20260724a"></script>
-    <script src="src/js/i18n.js?v=20260724a"></script>
-    <script src="src/js/load-nav.js?v=20260724a"></script>
-    <script src="src/js/dark-mode.js?v=20260724a"></script>
+    <script src="src/js/theme-init.js?v=20260724c"></script>
+    <link rel="stylesheet" href="src/css/styles.css?v=20260724d">
+    <script src="src/js/site-config.js?v=20260724c"></script>
+    <script src="src/js/i18n.js?v=20260724c"></script>
+    <script src="src/js/load-nav.js?v=20260724c"></script>
+    <script src="src/js/dark-mode.js?v=20260724c"></script>
     <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
-    <script src="src/js/load-projects.js?v=20260724a" defer></script>
+    <script src="src/js/load-projects.js?v=20260724c" defer></script>
     <!-- site-shell:resources:end -->
 </head>
 <body class="projects-index-page">
@@ -47,104 +47,30 @@
                 <span id="projects-summary" data-i18n="projects_overview_note">1 maintained public project</span>
                 <span><span class="status-dot" aria-hidden="true"></span><span data-i18n="projects_maintained_label">Maintained</span></span>
                 <span aria-hidden="true">/</span>
-                <span id="projects-updated" data-i18n="projects_updated_label">Updated May 20, 2026</span>
-            </div>
-            <div class="ledger-actions">
-                <a href="#project-surfaces" data-i18n="projects_index_action">Project index →</a>
+                <span id="projects-updated" data-i18n="projects_updated_label">Updated July 24, 2026</span>
             </div>
         </section>
 
-        <!-- static-fallback:start projects-content -->
-        <div id="project-featured" data-project-id="sleep-toolkit">
-            <section class="project-ledger-hero" aria-labelledby="project-feature-title">
-                <div class="project-feature-number" aria-hidden="true">01</div>
-                <div class="project-feature-copy">
-                    <p class="section-kicker">Featured project · maintained</p>
-                    <h2 id="project-feature-title">Sleep Toolkit</h2>
-                    <p class="project-feature-subtitle">From raw records to readable reports.</p>
-                    <p>A maintained tool that turns long-running SleepCycle exports into structured JSON, interactive HTML reports, and PDF outputs. Private by design, running locally with full data ownership.</p>
-                    <div class="project-feature-actions">
-                    <a class="read-more" href="https://sleep-toolkit-production.up.railway.app">Open Sleep Toolkit</a>
-                    <a class="read-more" href="projects/sleep-2016-2026.en.html">Read data essay</a>
-                    </div>
-                </div>
-            <figure class="project-report-card project-report-ledger">
-                <figcaption>
-                    <span>Sleep report · May 2025</span>
-                    <strong>Report preview</strong>
-                </figcaption>
-                <img src="projects/assets/sleep-report-preview.svg" alt="Sleep Toolkit report preview" loading="lazy" decoding="async">
-                <dl class="project-report-metrics" aria-label="Sleep Toolkit signals">
-                        <div>
-                            <dt>Nights</dt>
-                            <dd>3,656</dd>
-                        </div>
-                        <div>
-                            <dt>Years</dt>
-                            <dd>10</dd>
-                        </div>
-                        <div>
-                            <dt>Outputs</dt>
-                            <dd>JSON · HTML · PDF</dd>
-                        </div>
-                </dl>
-            </figure>
-            </section>
-            <section class="project-ledger-facts" aria-label="Project details">
-                <dl>
-                    <div>
-                        <dt>Input</dt>
-                        <dd>SleepCycle CSV exports and long-running personal sleep records.</dd>
-                        <dd class="ledger-row-meta">Apple Health data · 10 years</dd>
-                    </div>
-                    <div>
-                        <dt>Output</dt>
-                        <dd>JSON · interactive report · PDF.</dd>
-                        <dd class="ledger-row-meta">JSON · Interactive HTML · PDF</dd>
-                    </div>
-                    <div>
-                        <dt>Connected artifacts</dt>
-                        <dd>Ten-year sleep visual essay</dd>
-                        <dd class="ledger-row-meta">1 item</dd>
-                    </div>
-                    <div>
-                        <dt>Next question</dt>
-                        <dd>How should personal data tools explain uncertainty, habits, and behavior change without pretending to be medical advice?</dd>
-                        <dd class="ledger-row-meta"><a href="projects/sleep-2016-2026.en.html">Read data essay</a></dd>
-                    </div>
-                </dl>
-            </section>
-            <section class="project-surfaces-ledger" id="project-surfaces" aria-labelledby="project-surfaces-title">
-                <h2 id="project-surfaces-title">Project surfaces</h2>
-                <div class="project-surface-row">
-                    <span>A</span>
-                    <strong>Sleep Toolkit web app</strong>
-                    <span>Upload a SleepCycle CSV and generate structured analysis outputs.</span>
-                    <a href="https://sleep-toolkit-production.up.railway.app">Open Sleep Toolkit</a>
-                </div>
-                <div class="project-surface-row">
-                    <span>B</span>
-                    <strong>Ten years of sleep records</strong>
-                    <span>The long-form narrative and data story that explains the project context.</span>
-                    <a href="projects/sleep-2016-2026.en.html">Read data essay</a>
-                </div>
-            </section>
-        </div>
-        <section class="projects-ledger-list" hidden aria-labelledby="projects-ledger-title">
-            <h2 id="projects-ledger-title" data-i18n="project_ledger_title">Project ledger</h2>
-            <div id="projects-ledger">
-                <article class="project-ledger-row" data-project-id="sleep-toolkit">
-                    <span class="project-ledger-index">01</span>
-                    <div class="project-ledger-name">
-                        <strong>Sleep Toolkit</strong>
-                        <span>From raw records to readable reports.</span>
-                    </div>
-                    <span class="project-ledger-status">Maintained</span>
-                    <p>A maintained public tool for SleepCycle exports: upload a CSV and generate structured JSON, an interactive HTML report, and a PDF.</p>
-                    <a href="https://sleep-toolkit-production.up.railway.app">Open Sleep Toolkit</a>
-                </article>
-            </div>
+        <section class="projects-collection-intro" aria-label="Project collection">
+            <p data-i18n="projects_compact_note">Maintained tools and systems. Open a project for its context, outputs, and related work.</p>
         </section>
+
+        <!-- static-fallback:start projects-content -->
+        <div id="projects-index" class="projects-index-list">
+            <article class="project-index-entry" data-project-id="sleep-toolkit">
+                <a class="project-index-card" href="projects/sleep-toolkit.en.html">
+                    <span class="project-index-number">01</span>
+                    <span class="project-index-media"><img src="projects/assets/sleep-toolkit-cover.svg" alt="" loading="lazy" decoding="async"></span>
+                    <span class="project-index-copy">
+                        <span class="project-index-meta"><span>Tool</span><span><span class="status-dot" aria-hidden="true"></span>Maintained</span><time datetime="2026-05-06">2026</time></span>
+                        <strong class="project-index-title">Sleep Toolkit</strong>
+                        <span class="project-index-subtitle">From raw records to readable reports.</span>
+                        <span class="project-index-summary">A maintained public tool for SleepCycle exports: upload a CSV and generate structured JSON, an interactive HTML report, and a PDF.</span>
+                        <span class="project-index-cta">View project<span aria-hidden="true">→</span></span>
+                    </span>
+                </a>
+            </article>
+        </div>
             <!-- static-fallback:end projects-content -->
     </main>
     <footer>

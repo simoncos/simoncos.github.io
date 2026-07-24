@@ -1,6 +1,7 @@
 import importlib.util
 import copy
 import json
+import re
 import subprocess
 import unittest
 from pathlib import Path
@@ -28,8 +29,13 @@ def projects_override(manifest):
     return manifest["items"][0]["surfaceOverrides"]["projects"]
 
 
-def run_projects_runtime(payload, *, fetch_error="", rerender_language=""):
+def run_projects_runtime(payload, *, fetch_error="", rerender_language="", detail_project_id=""):
     payload_json = json.dumps(payload, ensure_ascii=False)
+    target_elements = (
+        f"'project-detail': {{ innerHTML: '<p>DETAIL FALLBACK</p>', dataset: {{ projectId: {json.dumps(detail_project_id)} }} }},"
+        if detail_project_id
+        else "'projects-index': { innerHTML: '<p>INDEX FALLBACK</p>' },"
+    )
     fetch_setup = (
         f"global.fetch = async () => {{ throw new Error({json.dumps(fetch_error)}); }};"
         if fetch_error
@@ -39,8 +45,7 @@ def run_projects_runtime(payload, *, fetch_error="", rerender_language=""):
 const fs = require('fs');
 const vm = require('vm');
 const elements = {{
-  'project-featured': {{ innerHTML: '<p>FEATURE FALLBACK</p>' }},
-  'projects-ledger': {{ innerHTML: '<article>LEDGER FALLBACK</article>' }},
+  {target_elements}
   'projects-summary': {{ textContent: 'SUMMARY FALLBACK' }},
   'projects-updated': {{ textContent: 'UPDATED FALLBACK' }}
 }};
@@ -69,7 +74,10 @@ global.window = {{
     t: (key) => ({{
       project_details_label: language === 'zh' ? '项目详情' : 'Project details',
       project_signals_suffix: language === 'zh' ? '信号' : 'signals',
-      project_surfaces_title: language === 'zh' ? '项目入口' : 'Project surfaces',
+      project_surfaces_title: language === 'zh' ? '选择入口' : 'Choose a path',
+      project_view_action: language === 'zh' ? '查看项目' : 'View project',
+      projects_back_to_all: language === 'zh' ? '全部项目' : 'All projects',
+      project_type_tool: language === 'zh' ? '工具' : 'Tool',
       projects_count_singular: language === 'zh' ? '1 个项目' : '1 project',
       projects_count_plural: language === 'zh' ? '{{count}} 个项目' : '{{count}} projects',
       projects_updated_prefix: language === 'zh' ? '更新于' : 'Updated'
@@ -239,13 +247,28 @@ class ProjectsDataDrivenTests(unittest.TestCase):
         html = (ROOT / "projects.html").read_text()
 
         self.assertIn('src="src/js/load-projects.js?', html)
-        self.assertIn('id="project-featured"', html)
-        self.assertIn('id="projects-ledger"', html)
+        self.assertIn('id="projects-index"', html)
         self.assertIn('static-fallback:start projects-content', html)
-        self.assertIn('data-i18n="project_ledger_title"', html)
+        self.assertIn('data-i18n="projects_compact_note"', html)
         self.assertIn("Sleep Toolkit", html)
-        self.assertIn("Open Sleep Toolkit", html)
-        self.assertIn("Ten years of sleep records", html)
+        self.assertIn('href="projects/sleep-toolkit.en.html"', html)
+        self.assertNotIn("sleep-toolkit-production.up.railway.app", html)
+        self.assertNotIn("Ten years of sleep records", html)
+
+    def test_project_detail_pages_have_localized_fallbacks_and_actions(self):
+        english = (ROOT / "projects/sleep-toolkit.en.html").read_text()
+        chinese = (ROOT / "projects/sleep-toolkit.html").read_text()
+
+        for html in (english, chinese):
+            self.assertIn('id="project-detail"', html)
+            self.assertIn('data-project-id="sleep-toolkit"', html)
+            self.assertIn("sleep-toolkit-production.up.railway.app", html)
+            self.assertIn("project-action-card--primary", html)
+            self.assertIn("project-action-card--secondary", html)
+        self.assertIn("Ten years of sleep records", english)
+        self.assertIn("十年睡眠记录", chinese)
+        self.assertIn("All projects", english)
+        self.assertIn("全部项目", chinese)
 
     def test_projects_i18n_keeps_only_consumed_generic_ui_keys(self):
         i18n = (ROOT / "src/ts/i18n.ts").read_text()
@@ -258,10 +281,13 @@ class ProjectsDataDrivenTests(unittest.TestCase):
             "projects_updated_prefix",
             "projects_count_singular",
             "projects_count_plural",
-            "projects_index_action",
+            "projects_compact_note",
+            "project_view_action",
+            "projects_back_to_all",
+            "project_type_tool",
             "project_details_label",
+            "project_signals_suffix",
             "project_surfaces_title",
-            "project_ledger_title",
         )
         obsolete_keys = (
             "projects_overview_title",
@@ -274,42 +300,57 @@ class ProjectsDataDrivenTests(unittest.TestCase):
             "project_fact_input",
             "project_index_title",
             "project_row_summary",
+            "projects_index_action",
+            "project_ledger_title",
         )
 
         for key in required_keys:
             with self.subTest(required=key):
-                self.assertEqual(i18n.count(f"{key}:"), 2)
+                matches = re.findall(rf"^\s*{re.escape(key)}:", i18n, re.M)
+                self.assertEqual(len(matches), 2)
         for key in obsolete_keys:
             with self.subTest(obsolete=key):
                 self.assertNotIn(f"{key}:", i18n)
 
-    def test_static_fallback_renders_feature_and_every_fixture_ledger_record(self):
+    def test_static_fallback_renders_every_fixture_project_as_index_entry(self):
         fallbacks = load_script("update_static_fallbacks", "scripts/update_static_fallbacks.py")
         fixture = json.loads(FIXTURE.read_text())
         rendered = fallbacks.render_projects_content(fixture)
 
         self.assertIn('data-project-id="alpha-project"', rendered)
-        self.assertIn('id="project-feature-title"', rendered)
-        self.assertEqual(rendered.count('class="project-ledger-row"'), 2)
+        self.assertIn('id="projects-index"', rendered)
+        self.assertEqual(rendered.count('class="project-index-entry"'), 2)
+        self.assertNotIn("project-action-card", rendered)
         self.assertIn("Alpha Project", rendered)
         self.assertIn("Beta Project", rendered)
 
-    def test_runtime_renders_feature_and_every_fixture_ledger_record(self):
-        result = run_projects_runtime(json.loads(FIXTURE.read_text()))
-        featured = result["after"]["project-featured"]["innerHTML"]
-        ledger = result["after"]["projects-ledger"]["innerHTML"]
+    def test_static_fallback_renders_localized_project_detail(self):
+        fallbacks = load_script("update_static_fallbacks_detail", "scripts/update_static_fallbacks.py")
+        fixture = json.loads(FIXTURE.read_text())
 
-        self.assertIn("Alpha Project", featured)
-        self.assertEqual(ledger.count('class="project-ledger-row"'), 2)
-        self.assertIn("Alpha Project", ledger)
-        self.assertIn("Beta Project", ledger)
+        english = fallbacks.render_project_detail(fixture, "alpha-project", "en")
+        chinese = fallbacks.render_project_detail(fixture, "alpha-project", "zh")
+
+        self.assertIn("Alpha featured detail.", english)
+        self.assertIn("Alpha 精选详情。", chinese)
+        self.assertIn("project-action-card project-action-card--primary", english)
+        self.assertIn("← All projects", english)
+        self.assertIn("← 全部项目", chinese)
+
+    def test_runtime_renders_every_fixture_project_as_index_entry(self):
+        result = run_projects_runtime(json.loads(FIXTURE.read_text()))
+        rendered = result["after"]["projects-index"]["innerHTML"]
+
+        self.assertEqual(rendered.count('class="project-index-entry"'), 2)
+        self.assertIn("Alpha Project", rendered)
+        self.assertIn("Beta Project", rendered)
+        self.assertNotIn("project-action-card", rendered)
         self.assertEqual(result["fetchUrl"], "/base/data/projects_data.json?v=fixture-v1")
 
     def test_runtime_preserves_fallback_on_fetch_rejection(self):
         result = run_projects_runtime({}, fetch_error="network down")
 
-        self.assertEqual(result["after"]["project-featured"]["innerHTML"], "<p>FEATURE FALLBACK</p>")
-        self.assertEqual(result["after"]["projects-ledger"]["innerHTML"], "<article>LEDGER FALLBACK</article>")
+        self.assertEqual(result["after"]["projects-index"]["innerHTML"], "<p>INDEX FALLBACK</p>")
         self.assertTrue(any("preserving static fallback" in error and "network down" in error for error in result["errors"]))
 
     def test_runtime_preserves_fallback_for_malformed_http_200_payloads(self):
@@ -323,8 +364,7 @@ class ProjectsDataDrivenTests(unittest.TestCase):
         for payload in malformed_payloads:
             with self.subTest(payload=payload):
                 result = run_projects_runtime(payload)
-                self.assertEqual(result["after"]["project-featured"]["innerHTML"], "<p>FEATURE FALLBACK</p>")
-                self.assertEqual(result["after"]["projects-ledger"]["innerHTML"], "<article>LEDGER FALLBACK</article>")
+                self.assertEqual(result["after"]["projects-index"]["innerHTML"], "<p>INDEX FALLBACK</p>")
                 self.assertEqual(result["after"]["projects-summary"]["textContent"], "SUMMARY FALLBACK")
                 self.assertTrue(any("Invalid projects payload" in error for error in result["errors"]), result["errors"])
 
@@ -334,8 +374,7 @@ class ProjectsDataDrivenTests(unittest.TestCase):
 
         result = run_projects_runtime(payload)
 
-        self.assertEqual(result["after"]["project-featured"]["innerHTML"], "<p>FEATURE FALLBACK</p>")
-        self.assertEqual(result["after"]["projects-ledger"]["innerHTML"], "<article>LEDGER FALLBACK</article>")
+        self.assertEqual(result["after"]["projects-index"]["innerHTML"], "<p>INDEX FALLBACK</p>")
         self.assertEqual(result["after"]["projects-summary"]["textContent"], "SUMMARY FALLBACK")
         self.assertTrue(
             any("Invalid projects payload" in error and "project ids must be unique" in error for error in result["errors"]),
@@ -343,21 +382,28 @@ class ProjectsDataDrivenTests(unittest.TestCase):
         )
 
     def test_runtime_rerenders_chinese_and_preserves_query_hash_paths(self):
-        result = run_projects_runtime(json.loads(FIXTURE.read_text()), rerender_language="zh")
-        featured = result["after"]["project-featured"]["innerHTML"]
-        ledger = result["after"]["projects-ledger"]["innerHTML"]
+        result = run_projects_runtime(
+            json.loads(FIXTURE.read_text()),
+            rerender_language="zh",
+            detail_project_id="alpha-project",
+        )
+        detail = result["after"]["project-detail"]["innerHTML"]
 
-        self.assertIn("Alpha 精选详情。", featured)
-        self.assertIn("持续维护", ledger)
-        self.assertIn('href="projects/alpha.html?view=full&amp;lang=zh#results"', featured)
-        self.assertNotIn("projects/alpha.en.html", featured)
+        self.assertIn("Alpha 精选详情。", detail)
+        self.assertIn("持续维护", detail)
+        self.assertIn('href="projects/alpha.html?view=full&amp;lang=zh#results"', detail)
+        self.assertNotIn("projects/alpha.en.html", detail)
 
     def test_runtime_localizes_featured_metrics_aria_label_in_chinese(self):
-        result = run_projects_runtime(json.loads(FIXTURE.read_text()), rerender_language="zh")
-        featured = result["after"]["project-featured"]["innerHTML"]
+        result = run_projects_runtime(
+            json.loads(FIXTURE.read_text()),
+            rerender_language="zh",
+            detail_project_id="alpha-project",
+        )
+        detail = result["after"]["project-detail"]["innerHTML"]
 
-        self.assertIn('aria-label="Alpha 项目 信号"', featured)
-        self.assertNotIn('aria-label="Alpha 项目 signals"', featured)
+        self.assertIn('aria-label="Alpha 项目 信号"', detail)
+        self.assertNotIn('aria-label="Alpha 项目 signals"', detail)
 
     def test_runtime_escapes_hostile_text_and_attribute_values(self):
         payload = json.loads(FIXTURE.read_text())
@@ -371,14 +417,13 @@ class ProjectsDataDrivenTests(unittest.TestCase):
         project["actions"][0]["label"]["en"] = '<Open & "unsafe">'
 
         result = run_projects_runtime(payload)
-        rendered = result["after"]["project-featured"]["innerHTML"] + result["after"]["projects-ledger"]["innerHTML"]
+        rendered = result["after"]["projects-index"]["innerHTML"]
 
         self.assertNotIn("<script>", rendered)
         self.assertNotIn("<svg onload", rendered)
         self.assertNotIn("<img src=x", rendered)
         self.assertIn("&lt;img src=x onerror=&quot;alert(1)&quot;&gt;", rendered)
         self.assertIn('data-project-id="alpha&quot; onmouseover=&quot;alert(1)"', rendered)
-        self.assertIn('alt="&quot; onerror=&quot;alert(1)"', rendered)
 
 
 if __name__ == "__main__":

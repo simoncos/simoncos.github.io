@@ -8,13 +8,14 @@ The motto for this site is "Connecting the dots." The site is static, bilingual,
 
 - [Live homepage](https://simoncos.github.io/): Current public surface and recent work.
 - [About](https://simoncos.github.io/about.html): Profile, motto, working modes, contact links, and operating principles.
-- [Projects](https://simoncos.github.io/projects.html): Project Observatory with live tools, connected artifacts, inputs, outputs, and next questions.
+- [Projects](https://simoncos.github.io/projects.html): Index of maintained tools and systems; open a project for its context, outputs, and related work.
 - [Essays](https://simoncos.github.io/blogs.html): Long-form writing archive with structured reading paths and topic discovery.
 - [Gallery](https://simoncos.github.io/gallery.html): Talks, demos, visual essays, research artifacts, and curated work paths.
 
 ## Current project surfaces
 
 - [Personal Data Lab](https://simoncos.github.io/gallery.html#personal-data-lab): Curated path through sleep records, body feedback, tools, and field notes.
+- [Sleep Toolkit project](https://simoncos.github.io/projects/sleep-toolkit.en.html): Project context, report preview, and routes to the tool and data essay.
 - [Sleep Toolkit web app](https://sleep-toolkit-production.up.railway.app): Public tool for SleepCycle CSV analysis.
 - [Ten Years of Sleep Records, Analyzed](https://simoncos.github.io/projects/sleep-2016-2026.en.html): Visual essay and project context for the Sleep Toolkit work.
 

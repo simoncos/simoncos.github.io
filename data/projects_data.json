@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-20",
+  "last_updated": "2026-07-24",
   "projects": [
     {
       "id": "sleep-toolkit",
@@ -19,8 +19,8 @@
         "en": "A maintained public tool for SleepCycle exports: upload a CSV and generate structured JSON, an interactive HTML report, and a PDF."
       },
       "paths": {
-        "zh": "https://sleep-toolkit-production.up.railway.app",
-        "en": "https://sleep-toolkit-production.up.railway.app"
+        "zh": "projects/sleep-toolkit.html",
+        "en": "projects/sleep-toolkit.en.html"
       },
       "featured": true,
       "status": {
@@ -33,8 +33,8 @@
           "en": "Featured project · maintained"
         },
         "body": {
-          "zh": "一个持续维护的工具，把长期 SleepCycle 导出转成结构化 JSON、交互式 HTML 报告和 PDF 输出。默认私有、本地运行，数据所有权留在自己手里。",
-          "en": "A maintained tool that turns long-running SleepCycle exports into structured JSON, interactive HTML reports, and PDF outputs. Private by design, running locally with full data ownership."
+          "zh": "把 SleepCycle 导出转成结构化 JSON、交互式 HTML 报告和 PDF。Web App 会在分析后删除上传的 CSV，并在最后访问一小时后清理临时报告；CLI 也可以完全在本地运行。",
+          "en": "Turn a SleepCycle export into structured JSON, an interactive HTML report, and a PDF. The web app deletes the uploaded CSV after analysis and clears temporary reports one hour after last access; the CLI can run entirely locally."
         },
         "media": {
           "src": "projects/assets/sleep-report-preview.svg",
@@ -82,12 +82,12 @@
             "en": "Input"
           },
           "value": {
-            "zh": "SleepCycle CSV 导出，以及长期积累的个人睡眠记录。",
-            "en": "SleepCycle CSV exports and long-running personal sleep records."
+            "zh": "一份 SleepCycle CSV 导出。",
+            "en": "One SleepCycle CSV export."
           },
           "meta": {
-            "zh": "Apple Health 数据 · 10 年",
-            "en": "Apple Health data · 10 years"
+            "zh": "最长支持长期记录",
+            "en": "Built for long-running records"
           }
         },
         {
@@ -96,35 +96,27 @@
             "en": "Output"
           },
           "value": {
-            "zh": "JSON、交互式报告、PDF。",
-            "en": "JSON · interactive report · PDF."
-          },
-          "meta": "JSON · Interactive HTML · PDF"
-        },
-        {
-          "label": {
-            "zh": "关联产物",
-            "en": "Connected artifacts"
-          },
-          "value": {
-            "zh": "十年睡眠视觉随笔",
-            "en": "Ten-year sleep visual essay"
+            "zh": "交互式报告、结构化 JSON 和可下载 PDF。",
+            "en": "Interactive report, structured JSON, and downloadable PDF."
           },
           "meta": {
-            "zh": "1 个条目",
-            "en": "1 item"
+            "zh": "一次上传，三种输出",
+            "en": "One upload, three outputs"
           }
         },
         {
           "label": {
-            "zh": "下一步问题",
-            "en": "Next question"
+            "zh": "隐私",
+            "en": "Privacy"
           },
           "value": {
-            "zh": "个人数据工具如何解释不确定性、习惯和行为变化，同时不假装自己是医疗建议？",
-            "en": "How should personal data tools explain uncertainty, habits, and behavior change without pretending to be medical advice?"
+            "zh": "CSV 分析后即删除；临时报告在最后访问一小时后清理。",
+            "en": "CSV deleted after analysis; temporary reports expire one hour after last access."
           },
-          "actionId": "essay"
+          "meta": {
+            "zh": "CLI 可完全本地运行",
+            "en": "CLI can stay entirely local"
+          }
         }
       ],
       "actions": [
@@ -146,33 +138,33 @@
             "en": "Read data essay"
           },
           "paths": {
-            "zh": "projects/sleep-2016-2026.html",
-            "en": "projects/sleep-2016-2026.en.html"
+            "zh": "/projects/sleep-2016-2026.html",
+            "en": "/projects/sleep-2016-2026.en.html"
           }
         }
       ],
       "surfaces": [
         {
-          "label": "A",
+          "label": "TOOL",
           "title": {
             "zh": "Sleep Toolkit Web App",
             "en": "Sleep Toolkit web app"
           },
           "summary": {
-            "zh": "上传 SleepCycle CSV，并生成结构化分析输出。",
-            "en": "Upload a SleepCycle CSV and generate structured analysis outputs."
+            "zh": "上传一份 CSV，直接生成报告与下载文件。",
+            "en": "Upload one CSV and generate the report and download files."
           },
           "actionId": "open"
         },
         {
-          "label": "B",
+          "label": "ESSAY",
           "title": {
             "zh": "十年睡眠记录",
             "en": "Ten years of sleep records"
           },
           "summary": {
-            "zh": "解释项目背景的长文叙事和数据故事。",
-            "en": "The long-form narrative and data story that explains the project context."
+            "zh": "从 3,656 个夜晚出发，阅读工具背后的数据故事。",
+            "en": "Follow the data story behind the tool across 3,656 nights."
           },
           "actionId": "essay"
         }

@@ -130,15 +130,17 @@
             projects_title: 'Projects',
             projects_overview_note: '1 maintained public project',
             projects_maintained_label: 'Maintained',
-            projects_updated_label: 'Updated May 20, 2026',
+            projects_updated_label: 'Updated July 24, 2026',
             projects_updated_prefix: 'Updated',
             projects_count_singular: '1 maintained public project',
             projects_count_plural: '{count} maintained public projects',
-            projects_index_action: 'Project index →',
+            projects_compact_note: 'Maintained tools and systems. Open a project for its context, outputs, and related work.',
+            project_view_action: 'View project',
+            projects_back_to_all: 'All projects',
+            project_type_tool: 'Tool',
             project_details_label: 'Project details',
             project_signals_suffix: 'signals',
-            project_surfaces_title: 'Project surfaces',
-            project_ledger_title: 'Project ledger',
+            project_surfaces_title: 'Choose a path',
             show_previews: 'Show previews',
             read_more: 'Read more',
             browse_by_tag: 'Browse by tag',
@@ -308,15 +310,17 @@
             projects_title: '项目',
             projects_overview_note: '1 个持续维护的公开项目',
             projects_maintained_label: '持续维护',
-            projects_updated_label: '更新于 2026 年 5 月 20 日',
+            projects_updated_label: '更新于 2026 年 7 月 24 日',
             projects_updated_prefix: '更新于',
             projects_count_singular: '1 个持续维护的公开项目',
             projects_count_plural: '{count} 个持续维护的公开项目',
-            projects_index_action: '项目索引 →',
+            projects_compact_note: '持续维护的工具与系统。进入项目后，可查看背景、输出和相关作品。',
+            project_view_action: '查看项目',
+            projects_back_to_all: '全部项目',
+            project_type_tool: '工具',
             project_details_label: '项目详情',
             project_signals_suffix: '信号',
-            project_surfaces_title: '项目入口',
-            project_ledger_title: '项目台账',
+            project_surfaces_title: '选择入口',
             show_previews: '显示摘要',
             read_more: '阅读全文',
             browse_by_tag: '按标签浏览',
@@ -394,14 +398,14 @@
             return null;
         }
     }
-    function getArticleLanguageFromPath(pathname = window.location.pathname) {
+    function getContentLanguageFromPath(pathname = window.location.pathname) {
         const normalizedPath = String(pathname || '');
-        if (!/\/blogs\/[^/]+\.html$/i.test(normalizedPath)) {
+        if (!/\/(?:blogs|projects)\/[^/]+\.html$/i.test(normalizedPath)) {
             return null;
         }
         return normalizedPath.endsWith('.en.html') ? 'en' : 'zh';
     }
-    let currentLanguage = getLanguageFromUrl() || getArticleLanguageFromPath() || getStoredLanguage() || DEFAULT_LANGUAGE;
+    let currentLanguage = getLanguageFromUrl() || getContentLanguageFromPath() || getStoredLanguage() || DEFAULT_LANGUAGE;
     function applyDocumentLanguage(language = currentLanguage) {
         document.documentElement.lang = language;
     }
@@ -581,7 +585,7 @@
         SUPPORTED_LANGUAGES,
         getCurrentLanguage: () => currentLanguage,
         getLanguageFromUrl,
-        getArticleLanguageFromPath,
+        getArticleLanguageFromPath: getContentLanguageFromPath,
         hasExplicitLanguage,
         setCurrentLanguage,
         t,
