@@ -240,7 +240,9 @@ html[lang="en"] .post-content > :is(p, ul, ol, dl, blockquote, h2, h3, h4, h5, h
 }
 
 .article-page .site-header {
-    padding: 1.8rem 1.5rem 0.75rem;
+    /* No horizontal padding: the nav shell below has none, so 1.5rem here
+       pushed the wordmark 24px right of the nav's left edge. */
+    padding: 1.8rem 0 0.75rem;
 }
 
 .article-page .site-header .site-title {
