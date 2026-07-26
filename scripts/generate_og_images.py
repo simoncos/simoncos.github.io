@@ -14,12 +14,6 @@ import argparse
 import sys
 from pathlib import Path
 
-try:
-    from PIL import Image, ImageDraw, ImageFont
-except ImportError:  # pragma: no cover
-    print("Pillow is required: pip3 install Pillow")
-    raise SystemExit(1)
-
 ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "assets/og"
 
@@ -58,7 +52,18 @@ CARDS = [
 ]
 
 
-def load_font(path: str, size: int):
+def load_pillow():
+    """Imported lazily: --check only looks for the files on disk, so CI does
+    not need an image library just to verify they are present."""
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+    except ImportError:
+        print("Rendering the share cards needs Pillow: pip3 install Pillow")
+        raise SystemExit(1)
+    return Image, ImageDraw, ImageFont
+
+
+def load_font(ImageFont, path: str, size: int):
     try:
         return ImageFont.truetype(path, size)
     except OSError:
@@ -83,12 +88,13 @@ def wrap(draw, text: str, font, max_width: int) -> list[str]:
 
 
 def render(card: dict) -> Path:
+    Image, ImageDraw, ImageFont = load_pillow()
     image = Image.new("RGB", (WIDTH, HEIGHT), BG)
     draw = ImageDraw.Draw(image)
 
-    kicker_font = load_font(SANS, 24)
-    title_font = load_font(SERIF_BOLD, 78)
-    subtitle_font = load_font(SANS, 30)
+    kicker_font = load_font(ImageFont, SANS, 24)
+    title_font = load_font(ImageFont, SERIF_BOLD, 78)
+    subtitle_font = load_font(ImageFont, SANS, 30)
 
     # Accent rule down the left edge, echoing the site's ledger frames.
     draw.rectangle([0, 0, 10, HEIGHT], fill=ACCENT)
@@ -111,7 +117,7 @@ def render(card: dict) -> Path:
         y += 42
 
     # Footer wordmark, baseline-aligned to the bottom margin.
-    footer_font = load_font(SERIF, 28)
+    footer_font = load_font(ImageFont, SERIF, 28)
     draw.text(
         (MARGIN, HEIGHT - MARGIN - 28), "simoncos.github.io", font=footer_font, fill=MUTED
     )
