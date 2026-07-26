@@ -270,7 +270,10 @@ html[lang="en"] .post-content > :is(p, ul, ol, dl, blockquote, h2, h3, h4, h5, h
 }
 
 .article-page .container.blog-container {
-    width: min(calc(100% - 2rem), var(--nav-width));
+    /* Share the masthead/nav frame. This used a different formula, so the
+       article content overhung the nav by ~5px below 1230px and sat up to 80px
+       inside it above that — an inset that changed sign with viewport width. */
+    width: min(calc(100% - (2 * var(--site-shell-gutter))), var(--site-shell-width));
 }
 
 .page-shell {
@@ -7341,7 +7344,8 @@ nav ul li a.active::after {
     body.gallery-index-page,
     body.series-index-page,
     body.tags-index-page,
-    body.about-profile-page
+    body.about-profile-page,
+    body.error-page
 ) > main {
     flex: 1 0 auto;
     width: min(calc(100% - (2 * var(--site-shell-gutter))), var(--site-shell-width));
