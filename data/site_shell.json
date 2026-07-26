@@ -1,6 +1,6 @@
 {
-  "css_version": "20260724d",
-  "js_version": "20260724d",
+  "css_version": "20260726a",
+  "js_version": "20260726a",
   "theme_init": "theme-init.js",
   "icons": {
     "favicon": "assets/icons/favicon-32.png",
@@ -18,10 +18,22 @@
   ],
   "script_profiles": {
     "basic": [
-      "site-config.js",
-      "i18n.js",
-      "load-nav.js",
-      "dark-mode.js",
+      {
+        "src": "site-config.js",
+        "defer": true
+      },
+      {
+        "src": "i18n.js",
+        "defer": true
+      },
+      {
+        "src": "load-nav.js",
+        "defer": true
+      },
+      {
+        "src": "dark-mode.js",
+        "defer": true
+      },
       {
         "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
         "defer": true,
@@ -31,11 +43,26 @@
       }
     ],
     "home": [
-      "site-config.js",
-      "i18n.js",
-      "article-groups.js",
-      "load-nav.js",
-      "dark-mode.js",
+      {
+        "src": "site-config.js",
+        "defer": true
+      },
+      {
+        "src": "i18n.js",
+        "defer": true
+      },
+      {
+        "src": "article-groups.js",
+        "defer": true
+      },
+      {
+        "src": "load-nav.js",
+        "defer": true
+      },
+      {
+        "src": "dark-mode.js",
+        "defer": true
+      },
       {
         "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
         "defer": true,
@@ -53,12 +80,30 @@
       }
     ],
     "blog_listing": [
-      "site-config.js",
-      "i18n.js",
-      "article-groups.js",
-      "load-nav.js",
-      "dark-mode.js",
-      "preview-toggle.js",
+      {
+        "src": "site-config.js",
+        "defer": true
+      },
+      {
+        "src": "i18n.js",
+        "defer": true
+      },
+      {
+        "src": "article-groups.js",
+        "defer": true
+      },
+      {
+        "src": "load-nav.js",
+        "defer": true
+      },
+      {
+        "src": "dark-mode.js",
+        "defer": true
+      },
+      {
+        "src": "preview-toggle.js",
+        "defer": true
+      },
       {
         "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
         "defer": true,
@@ -66,15 +111,36 @@
           "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
         }
       },
-      "load-blog-archive.js",
-      "load-series-page.js",
-      "load-tags-page.js"
+      {
+        "src": "load-blog-archive.js",
+        "defer": true
+      },
+      {
+        "src": "load-series-page.js",
+        "defer": true
+      },
+      {
+        "src": "load-tags-page.js",
+        "defer": true
+      }
     ],
     "projects": [
-      "site-config.js",
-      "i18n.js",
-      "load-nav.js",
-      "dark-mode.js",
+      {
+        "src": "site-config.js",
+        "defer": true
+      },
+      {
+        "src": "i18n.js",
+        "defer": true
+      },
+      {
+        "src": "load-nav.js",
+        "defer": true
+      },
+      {
+        "src": "dark-mode.js",
+        "defer": true
+      },
       {
         "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
         "defer": true,
@@ -88,10 +154,22 @@
       }
     ],
     "gallery": [
-      "site-config.js",
-      "i18n.js",
-      "load-nav.js",
-      "dark-mode.js",
+      {
+        "src": "site-config.js",
+        "defer": true
+      },
+      {
+        "src": "i18n.js",
+        "defer": true
+      },
+      {
+        "src": "load-nav.js",
+        "defer": true
+      },
+      {
+        "src": "dark-mode.js",
+        "defer": true
+      },
       {
         "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
         "defer": true,
@@ -99,20 +177,56 @@
           "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
         }
       },
-      "load-gallery.js"
+      {
+        "src": "load-gallery.js",
+        "defer": true
+      }
     ],
     "article": [
-      "site-config.js",
-      "i18n.js",
-      "article-groups.js",
-      "load-nav.js",
-      "dark-mode.js",
-      "toc-generator.js",
-      "progress-bar.js",
-      "back-to-top.js",
-      "mobile-scroll-ui.js",
-      "footnote-target.js",
-      "load-backlinks.js",
+      {
+        "src": "site-config.js",
+        "defer": true
+      },
+      {
+        "src": "i18n.js",
+        "defer": true
+      },
+      {
+        "src": "article-groups.js",
+        "defer": true
+      },
+      {
+        "src": "load-nav.js",
+        "defer": true
+      },
+      {
+        "src": "dark-mode.js",
+        "defer": true
+      },
+      {
+        "src": "toc-generator.js",
+        "defer": true
+      },
+      {
+        "src": "progress-bar.js",
+        "defer": true
+      },
+      {
+        "src": "back-to-top.js",
+        "defer": true
+      },
+      {
+        "src": "mobile-scroll-ui.js",
+        "defer": true
+      },
+      {
+        "src": "footnote-target.js",
+        "defer": true
+      },
+      {
+        "src": "load-backlinks.js",
+        "defer": true
+      },
       {
         "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
         "defer": true,
@@ -120,7 +234,10 @@
           "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
         }
       },
-      "load-post-series.js"
+      {
+        "src": "load-post-series.js",
+        "defer": true
+      }
     ]
   },
   "pages": [
@@ -129,16 +246,18 @@
       "asset_prefix": "",
       "script_profile": "home",
       "head_rss": true,
-      "footer_rss": false,
-      "footer_version": "site_config"
+      "footer_rss": true,
+      "footer_version": "site_config",
+      "canonical": "index.html"
     },
     {
       "path": "about.html",
       "asset_prefix": "",
       "script_profile": "basic",
       "head_rss": true,
-      "footer_rss": false,
-      "footer_version": "site_config"
+      "footer_rss": true,
+      "footer_version": "site_config",
+      "canonical": "about.html"
     },
     {
       "path": "projects.html",
@@ -146,7 +265,8 @@
       "script_profile": "projects",
       "head_rss": true,
       "footer_rss": true,
-      "footer_version": "site_config"
+      "footer_version": "site_config",
+      "canonical": "projects.html"
     },
     {
       "path": "projects/sleep-toolkit.en.html",
@@ -154,7 +274,8 @@
       "script_profile": "projects",
       "head_rss": true,
       "footer_rss": true,
-      "footer_version": "site_config"
+      "footer_version": "site_config",
+      "canonical": "projects/sleep-toolkit.en.html"
     },
     {
       "path": "projects/sleep-toolkit.html",
@@ -162,7 +283,8 @@
       "script_profile": "projects",
       "head_rss": true,
       "footer_rss": true,
-      "footer_version": "site_config"
+      "footer_version": "site_config",
+      "canonical": "projects/sleep-toolkit.html"
     },
     {
       "path": "gallery.html",
@@ -170,7 +292,8 @@
       "script_profile": "gallery",
       "head_rss": true,
       "footer_rss": true,
-      "footer_version": "site_config"
+      "footer_version": "site_config",
+      "canonical": "gallery.html"
     },
     {
       "path": "404.html",
@@ -186,7 +309,8 @@
       "script_profile": "blog_listing",
       "head_rss": true,
       "footer_rss": true,
-      "footer_version": "site_config"
+      "footer_version": "site_config",
+      "canonical": "blogs.html"
     },
     {
       "path": "templates/blog-template.html",
@@ -196,5 +320,6 @@
       "footer_rss": true,
       "footer_version": "site_config"
     }
-  ]
+  ],
+  "site_url": "https://simoncos.github.io/"
 }

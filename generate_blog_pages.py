@@ -1,9 +1,11 @@
 import os
 import sys
 import re
+import io
 import json
 import html as html_lib
 import struct
+from functools import lru_cache
 from html import unescape as html_unescape
 import markdown
 import logging
@@ -112,6 +114,181 @@ def parse_page_assets(value):
             raise BlogGenerationError(f"Unsafe page asset path: {asset}")
         assets.append(asset)
     return assets
+
+
+def og_fallback_image():
+    """The site's own share card, used when an article has no usable lead photo."""
+    return {
+        'url': absolute_site_url('assets/og/og-default.png'),
+        'width': '1200',
+        'height': '630',
+        'alt': 'simonc site — tools and research, essays and field notes',
+    }
+
+
+# Social platforms reject SVG and are unreliable with WebP, so only offer
+# formats every crawler renders.
+OG_SAFE_IMAGE_SUFFIXES = ('.png', '.jpg', '.jpeg', '.gif')
+
+
+def build_og_image(rendered_html, title):
+    """Pick the share image for an article: its lead photo, else the site card.
+
+    A lead photo makes a far better preview than a generated card, but only if
+    the crawler can actually decode it.
+    """
+    soup = BeautifulSoup(rendered_html or '', 'html.parser')
+    for image in soup.find_all('img'):
+        source = (image.get('src') or '').strip()
+        if not source:
+            continue
+
+        path = urlparse(source).path.lower()
+        if not path.endswith(OG_SAFE_IMAGE_SUFFIXES):
+            continue
+
+        width, height = image.get('width'), image.get('height')
+        if not width or not height:
+            continue
+
+        # Below roughly 600x315 platforms downgrade to a small square card.
+        if int(width) < 600 or int(height) < 315:
+            continue
+
+        return {
+            'url': urljoin(absolute_site_url('blogs/'), source),
+            'width': str(width),
+            'height': str(height),
+            'alt': (image.get('alt') or title).strip() or title,
+        }
+
+    return og_fallback_image()
+
+
+def estimate_reading_minutes(body):
+    """Rough reading time from the rendered article body (markdown also works).
+
+    Latin readers average ~230 wpm; CJK reading is usually measured in
+    characters, around 400/min. Long essays gave no length signal at all, so
+    the Haba post resorted to hand-writing "about 7500 words" in its opening.
+    """
+    text = re.sub(r'<(script|style|pre|code)\b.*?</\1>', ' ', body or '', flags=re.S | re.I)
+    text = re.sub(r'```.*?```', ' ', text, flags=re.S)
+    text = re.sub(r'!\[[^\]]*\]\([^)]*\)', ' ', text)
+    text = re.sub(r'<[^>]+>', ' ', text)
+    text = html_unescape(text)
+
+    cjk = len(re.findall(r'[一-鿿㐀-䶿]', text))
+    latin_words = len(re.findall(r"[A-Za-z0-9][A-Za-z0-9'’\-]*", text))
+
+    minutes = cjk / 400 + latin_words / 230
+    return max(1, int(round(minutes)))
+
+
+def build_article_sequence(article_groups):
+    """Map each article file to its neighbours in reverse-chronological order."""
+    ordered = []
+    for group in article_groups:
+        for language_code, entry in (group.get('languages') or {}).items():
+            if entry.get('file'):
+                ordered.append((language_code, group, entry))
+
+    sequence = {}
+    for language_code in ('en', 'zh'):
+        in_language = [item for item in ordered if item[0] == language_code]
+        for index, (_, _, entry) in enumerate(in_language):
+            previous = in_language[index - 1][2] if index > 0 else None
+            following = in_language[index + 1][2] if index + 1 < len(in_language) else None
+            # Groups are sorted newest first, so the earlier index is the newer post.
+            sequence[entry['file']] = {'newer': previous, 'older': following}
+    return sequence
+
+
+def build_post_nav(neighbours, language):
+    if not neighbours:
+        return ''
+
+    labels = {
+        'en': {'newer': 'Newer', 'older': 'Older'},
+        'zh': {'newer': '更新的一篇', 'older': '更早的一篇'},
+    }[language if language in ('en', 'zh') else 'en']
+
+    links = []
+    for direction, rel in (('newer', 'prev'), ('older', 'next')):
+        entry = neighbours.get(direction)
+        if not entry or not entry.get('file'):
+            continue
+        title = html_lib.escape(entry.get('title') or '')
+        links.append(
+            f'            <a class="post-nav-link post-nav-{direction}" rel="{rel}" '
+            f'href="{html_lib.escape(entry["file"], quote=True)}">'
+            f'<span class="post-nav-label">{labels[direction]}</span>'
+            f'<span class="post-nav-title">{title}</span></a>'
+        )
+
+    if not links:
+        return ''
+
+    heading = 'More reading' if language != 'zh' else '继续阅读'
+    return (
+        '        <nav class="post-nav" aria-label="' + heading + '">\n'
+        + '\n'.join(links) + '\n'
+        + '        </nav>'
+    )
+
+
+def build_hreflang_alternates(article_languages):
+    """Declare the article's translation pair to search engines.
+
+    Bilingual variants live at separate URLs but were not cross-referenced, so
+    each language read as an unrelated page.
+    """
+    hreflang_by_language = {'en': 'en', 'zh': 'zh-Hans'}
+    rows = []
+
+    for language, hreflang in hreflang_by_language.items():
+        entry = article_languages.get(language) or {}
+        file_name = entry.get('file')
+        if file_name:
+            url = absolute_site_url(f"blogs/{file_name}")
+            rows.append(f'    <link rel="alternate" hreflang="{hreflang}" href="{url}">')
+
+    default_entry = article_languages.get('en') or article_languages.get('zh') or {}
+    if default_entry.get('file'):
+        url = absolute_site_url(f"blogs/{default_entry['file']}")
+        rows.append(f'    <link rel="alternate" hreflang="x-default" href="{url}">')
+
+    return '\n'.join(rows)
+
+
+def build_post_meta_extra(metadata):
+    """Render optional provenance rows that belong beside Created/Updated.
+
+    `written` (when the piece was actually composed, which can predate
+    publication) and `translation` used to sit as bare paragraphs at the top of
+    the body, where they read as stray text and got scraped into the meta
+    description. They are metadata, so they render as metadata.
+    """
+    rows = []
+
+    written = (metadata.get('written') or '').strip()
+    if written:
+        rows.append(
+            '                        <div class="post-meta-item">'
+            '<span class="post-meta-label" data-i18n="written">Written</span>'
+            f'<span data-date="{html_lib.escape(written, quote=True)}" data-date-format="medium">'
+            f'{html_lib.escape(written)}</span></div>'
+        )
+
+    translation = (metadata.get('translation') or '').strip()
+    if translation:
+        rows.append(
+            '                        <div class="post-meta-item">'
+            '<span class="post-meta-label" data-i18n="translation">Translation</span>'
+            f'<span>{html_lib.escape(translation)}</span></div>'
+        )
+
+    return '\n'.join(rows)
 
 
 def build_head_extras(metadata):
@@ -231,7 +408,10 @@ def read_svg_dimensions(path):
         text = path.read_text(encoding='utf-8', errors='ignore')[:8192]
     except OSError:
         return None
+    return read_svg_dimensions_from_text(text)
 
+
+def read_svg_dimensions_from_text(text):
     svg_match = re.search(r'<svg\b(?P<attrs>[^>]*)>', text, re.I | re.S)
     if not svg_match:
         return None
@@ -262,6 +442,14 @@ def read_svg_dimensions(path):
 
 
 def read_jpeg_dimensions(path):
+    try:
+        with path.open('rb') as file:
+            return read_jpeg_dimensions_from_stream(file)
+    except OSError:
+        return None
+
+
+def read_jpeg_dimensions_from_stream(file):
     start_of_frame_markers = {
         0xC0, 0xC1, 0xC2, 0xC3,
         0xC5, 0xC6, 0xC7,
@@ -269,43 +457,42 @@ def read_jpeg_dimensions(path):
         0xCD, 0xCE, 0xCF,
     }
     try:
-        with path.open('rb') as file:
-            if file.read(2) != b'\xff\xd8':
+        if file.read(2) != b'\xff\xd8':
+            return None
+
+        while True:
+            byte = file.read(1)
+            while byte and byte != b'\xff':
+                byte = file.read(1)
+            while byte == b'\xff':
+                byte = file.read(1)
+            if not byte:
                 return None
 
-            while True:
-                byte = file.read(1)
-                while byte and byte != b'\xff':
-                    byte = file.read(1)
-                while byte == b'\xff':
-                    byte = file.read(1)
-                if not byte:
-                    return None
+            marker = byte[0]
+            if marker == 0xD9 or marker == 0xDA:
+                return None
+            if 0xD0 <= marker <= 0xD7:
+                continue
 
-                marker = byte[0]
-                if marker == 0xD9 or marker == 0xDA:
-                    return None
-                if 0xD0 <= marker <= 0xD7:
-                    continue
+            length_bytes = file.read(2)
+            if len(length_bytes) != 2:
+                return None
+            length = struct.unpack('>H', length_bytes)[0]
+            if length < 2:
+                return None
 
-                length_bytes = file.read(2)
-                if len(length_bytes) != 2:
+            if marker in start_of_frame_markers:
+                segment = file.read(length - 2)
+                if len(segment) < 5:
                     return None
-                length = struct.unpack('>H', length_bytes)[0]
-                if length < 2:
-                    return None
+                height = struct.unpack('>H', segment[1:3])[0]
+                width = struct.unpack('>H', segment[3:5])[0]
+                if width > 0 and height > 0:
+                    return width, height
+                return None
 
-                if marker in start_of_frame_markers:
-                    segment = file.read(length - 2)
-                    if len(segment) < 5:
-                        return None
-                    height = struct.unpack('>H', segment[1:3])[0]
-                    width = struct.unpack('>H', segment[3:5])[0]
-                    if width > 0 and height > 0:
-                        return width, height
-                    return None
-
-                file.seek(length - 2, os.SEEK_CUR)
+            file.seek(length - 2, os.SEEK_CUR)
     except OSError:
         return None
 
@@ -337,6 +524,57 @@ def read_image_dimensions(path):
     return None
 
 
+def read_image_dimensions_from_bytes(data, suffix=''):
+    """Parse intrinsic dimensions from the leading bytes of an image file.
+
+    Mirrors read_image_dimensions() but works on a buffer, so remote images can
+    be measured from a ranged HTTP read instead of a full download.
+    """
+    suffix = (suffix or '').lower()
+    if suffix == '.svg':
+        return read_svg_dimensions_from_text(data.decode('utf-8', errors='ignore')[:8192])
+
+    if data.startswith(b'\x89PNG\r\n\x1a\n') and len(data) >= 24:
+        width, height = struct.unpack('>II', data[16:24])
+        if width > 0 and height > 0:
+            return width, height
+
+    if data.startswith(b'GIF87a') or data.startswith(b'GIF89a'):
+        if len(data) >= 10:
+            width, height = struct.unpack('<HH', data[6:10])
+            if width > 0 and height > 0:
+                return width, height
+
+    if suffix in ('.jpg', '.jpeg') or data.startswith(b'\xff\xd8'):
+        return read_jpeg_dimensions_from_stream(io.BytesIO(data))
+
+    return None
+
+
+REMOTE_IMAGE_DIMENSIONS_PATH = Path('data/image_dimensions.json')
+
+
+@lru_cache(maxsize=1)
+def load_remote_image_dimensions():
+    """Build-time cache of intrinsic sizes for externally hosted article images.
+
+    Generation stays offline and deterministic: this only reads the checked-in
+    cache. Populate or refresh it with scripts/update_image_dimensions.py.
+    """
+    try:
+        raw = json.loads(REMOTE_IMAGE_DIMENSIONS_PATH.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return {}
+
+    dimensions = {}
+    for url, value in (raw.get('images') or {}).items():
+        width = parse_dimension_value(value.get('width'))
+        height = parse_dimension_value(value.get('height'))
+        if width and height:
+            dimensions[url] = (width, height)
+    return dimensions
+
+
 def resolve_local_article_image(src):
     parsed = urlparse(src or '')
     if parsed.scheme or parsed.netloc or not parsed.path:
@@ -362,6 +600,7 @@ def optimize_article_images(html_content):
     """Add browser image scheduling hints to generated article HTML."""
     soup = BeautifulSoup(html_content, 'html.parser')
     dimension_cache = {}
+    remote_dimensions = load_remote_image_dimensions()
 
     for index, image in enumerate(soup.find_all('img')):
         image['decoding'] = 'async'
@@ -372,20 +611,26 @@ def optimize_article_images(html_content):
 
         source = image.get('src') or ''
         local_path = resolve_local_article_image(source)
-        if not local_path:
-            continue
-
-        dimensions = dimension_cache.get(local_path)
-        if local_path not in dimension_cache:
-            dimensions = read_image_dimensions(local_path)
-            dimension_cache[local_path] = dimensions
+        if local_path:
+            dimensions = dimension_cache.get(local_path)
+            if local_path not in dimension_cache:
+                dimensions = read_image_dimensions(local_path)
+                dimension_cache[local_path] = dimensions
+        else:
+            # Article photos are hosted off-site; without width/height a lazy
+            # image reserves no space and every one of them shifts the layout.
+            dimensions = remote_dimensions.get(source)
 
         if not dimensions:
             continue
 
+        # Not setdefault(): bs4 Tag has no dict API, so tag.setdefault resolves
+        # via __getattr__ to find('setdefault') -> None and then raises.
         width, height = dimensions
-        image.setdefault('width', str(width))
-        image.setdefault('height', str(height))
+        if not image.has_attr('width'):
+            image['width'] = str(width)
+        if not image.has_attr('height'):
+            image['height'] = str(height)
 
     return str(soup)
 
@@ -738,11 +983,12 @@ def generate_blog_pages():
 
         article_groups = build_article_groups(blog_posts)
         article_group_map = {group['id']: group for group in article_groups}
+        article_sequence = build_article_sequence(article_groups)
 
         # Second pass: render each post
         for post in blog_posts:
             try:
-                render_blog_post(post, template, article_group_map)
+                render_blog_post(post, template, article_group_map, article_sequence)
             except Exception as e:
                 logging.error(f"Error rendering {post.get('markdown')}: {str(e)}")
                 failures.append(f"render {post.get('markdown')}: {str(e)}")
@@ -844,7 +1090,7 @@ def collect_markdown_file(md_file, tags_data, series_data, blog_posts):
         raise BlogGenerationError(f"Failed to collect markdown file: {str(e)}")
 
 
-def render_blog_post(post, template, article_group_map):
+def render_blog_post(post, template, article_group_map, article_sequence=None):
     """Render and save individual blog post."""
     try:
         md_file = post['markdown']
@@ -876,8 +1122,16 @@ def render_blog_post(post, template, article_group_map):
             metadata.get('updated', ''),
         )
         canonical_url = absolute_site_url(f"blogs/{html_file}")
-        meta_description = build_meta_description(post.get('excerpt') or title)
+        # An authored `description:` wins over the auto-excerpt, which otherwise
+        # scrapes whatever the article opens with -- including TLDR notes.
+        meta_description = build_meta_description(
+            metadata.get('description') or post.get('excerpt') or title
+        )
         og_locale = 'zh_CN' if post['language'] == 'zh' else 'en_US'
+        post_meta_extra = build_post_meta_extra(metadata)
+        og_image = build_og_image(rendered_post_content, title)
+        reading_minutes = estimate_reading_minutes(rendered_post_content)
+        post_nav = build_post_nav((article_sequence or {}).get(html_file), post['language'])
 
         tags_html = '<ul class="tag-list">' + ''.join([
             f'<li><a href="../blogs.html#topic-{quote(tag)}">{html_lib.escape(tag)}</a></li>'
@@ -890,7 +1144,15 @@ def render_blog_post(post, template, article_group_map):
         page_content = page_content.replace('{{TITLE_ATTR}}', html_lib.escape(title, quote=True))
         page_content = page_content.replace('{{META_DESCRIPTION}}', html_lib.escape(meta_description, quote=True))
         page_content = page_content.replace('{{CANONICAL_URL}}', canonical_url)
+        hreflang_alternates = build_hreflang_alternates(article_languages)
+        page_content = page_content.replace(
+            '\n{{HREFLANG_ALTERNATES}}', f'\n{hreflang_alternates}' if hreflang_alternates else ''
+        )
         page_content = page_content.replace('{{OG_LOCALE}}', og_locale)
+        page_content = page_content.replace('{{OG_IMAGE}}', html_lib.escape(og_image['url'], quote=True))
+        page_content = page_content.replace('{{OG_IMAGE_WIDTH}}', og_image['width'])
+        page_content = page_content.replace('{{OG_IMAGE_HEIGHT}}', og_image['height'])
+        page_content = page_content.replace('{{OG_IMAGE_ALT}}', html_lib.escape(og_image['alt'], quote=True))
         page_content = page_content.replace('{{PAGE_LANGUAGE}}', 'zh-CN' if post['language'] == 'zh' else 'en')
         page_content = page_content.replace('{{ARTICLE_GROUP_ID}}', post['group_id'])
         page_content = page_content.replace('{{ARTICLE_LANGUAGE}}', post['language'])
@@ -899,7 +1161,15 @@ def render_blog_post(post, template, article_group_map):
         page_content = page_content.replace('{{CONTENT}}', rendered_post_content)
         page_content = page_content.replace('{{CREATED}}', created)
         page_content = page_content.replace('{{UPDATED}}', updated)
+        # Consume the placeholder's own line when there is nothing to render.
+        page_content = page_content.replace(
+            '\n{{POST_META_EXTRA}}', f'\n{post_meta_extra}' if post_meta_extra else ''
+        )
         page_content = page_content.replace('{{TAGS}}', tags_html)
+        page_content = page_content.replace('{{READING_MINUTES}}', str(reading_minutes))
+        page_content = page_content.replace(
+            '\n{{POST_NAV}}', f'\n{post_nav}' if post_nav else ''
+        )
         page_content = page_content.replace('{{LANG_SWITCH}}', lang_switch_html)
         page_content = page_content.replace('{{HEAD_EXTRAS}}', head_extras)
         page_content = page_content.replace('{{SITE_VERSION}}', get_site_version())

@@ -5,6 +5,18 @@
 
     const translations = {
         en: {
+            page_title_home: 'simonc site',
+            page_desc_home: 'Projects, writing, and field notes from simoncos: AI, data, personal systems, and long-form essays.',
+            page_title_essays: 'Essays - simonc site',
+            page_desc_essays: 'Essays, reading paths, and topic-led discovery from simoncos.',
+            page_title_projects: 'Projects - simonc site',
+            page_desc_projects: 'Maintained public-facing projects from simoncos: tools, deployed systems, and data essays.',
+            page_title_gallery: 'Gallery - simonc site',
+            page_desc_gallery: 'Talks, demos, visual essays, and public artifacts from simoncos.',
+            page_title_about: 'About & Contact - simonc site',
+            page_desc_about: 'About simoncos, a full-stack builder working across AI and data in Hong Kong.',
+            skip_to_content: 'Skip to content',
+            languages_available: 'Available in',
             nav_home: 'Home',
             nav_gallery: 'Gallery',
             nav_blogs: 'Essays',
@@ -22,6 +34,9 @@
             site_kicker_blog: 'Blog',
             created: 'Created',
             updated: 'Updated',
+            written: 'Written',
+            reading_time: 'Reading',
+            translation: 'Translation',
             backlinks: 'Backlinks',
             tags: 'Tags',
             series: 'Series',
@@ -29,12 +44,13 @@
             recent_updates: 'Recent updates',
             latest_posts: 'Latest posts',
             latest_activity: 'Latest activity',
-            home_os_kicker: 'Tools, research, and field notes',
+            home_os_kicker: 'Overview',
+            home_topline_descriptor: 'Tools, research, and field notes',
             home_topline_title: 'Home',
             home_topline_updated: 'Updated Jul 24, 2026',
             home_topline_action: 'Essays & topics →',
-            home_os_title: 'Tools, research, essays, and field notes.',
-            home_os_title_accessible: 'Tools and research. Essays and field notes.',
+            home_os_title: 'Tools and research, essays and field notes.',
+            home_os_title_accessible: 'Tools and research, essays and field notes.',
             home_os_lede: 'I keep the most useful recent projects, essays, and notes here. Newer work stays up front; older pieces stay findable by topic.',
             home_os_primary_action: 'See what is active',
             home_os_secondary_action: 'About me',
@@ -60,20 +76,7 @@
             home_trail_essays_text: 'Notes and essays on how systems behave and how I think about them.',
             home_trail_gallery_title: 'Gallery',
             home_trail_gallery_text: 'Talks, demos, visual essays, and research artifacts.',
-            home_route_note: 'Notes are for today. Systems are for the long run.',
-            home_field_note_kicker: 'Field note',
-            home_field_note_title: 'This is a living index.',
-            home_field_note_text: 'It grows, shifts, and gets better with use.',
-            home_field_note_work: 'Work',
-            home_field_note_work_value: 'All work lives in public.',
-            home_field_note_place: 'Coordinates',
             home_dispatch_all: 'Browse all writing',
-            home_bottom_index_kicker: 'Essays & topics',
-            home_bottom_index_title: 'Writing, reading paths, and topic trails.',
-            home_bottom_about_kicker: 'About this site',
-            home_bottom_about_title: 'Built from curiosity, notes, and repetition.',
-            home_bottom_connect_kicker: 'Connect',
-            home_bottom_connect_title: 'Email, RSS, GitHub, and code.',
             gallery_kicker: 'Gallery',
             gallery_title: 'Gallery',
             gallery_lede: 'Talks, demos, visual essays, and research artifacts.',
@@ -130,6 +133,7 @@
             projects_title: 'Projects',
             projects_overview_note: '1 maintained public project',
             projects_maintained_label: 'Maintained',
+            projects_status_label: 'Project index status',
             projects_updated_label: 'Updated July 24, 2026',
             projects_updated_prefix: 'Updated',
             projects_count_singular: '1 maintained public project',
@@ -185,6 +189,18 @@
             back_to_home: 'Back to home'
         },
         zh: {
+            page_title_home: 'simonc site｜工具、研究与现场记录',
+            page_desc_home: 'simoncos 的项目、写作与现场记录：AI、数据、个人系统与长文。',
+            page_title_essays: '文章 - simonc site',
+            page_desc_essays: 'simoncos 的长文、阅读路径与主题索引。',
+            page_title_projects: '项目 - simonc site',
+            page_desc_projects: 'simoncos 持续维护的公开项目：工具、已部署的系统与数据长文。',
+            page_title_gallery: '作品 - simonc site',
+            page_desc_gallery: 'simoncos 的演讲、Demo、视觉随笔与公开产物。',
+            page_title_about: '关于与联系 - simonc site',
+            page_desc_about: '关于 simoncos：在香港从事 AI 与数据工作的全栈构建者。',
+            skip_to_content: '跳到正文',
+            languages_available: '可读语言：',
             nav_home: '首页',
             nav_gallery: '作品',
             nav_blogs: '文章',
@@ -202,6 +218,9 @@
             site_kicker_blog: '博客',
             created: '发布于',
             updated: '更新于',
+            written: '成文于',
+            reading_time: '阅读时长',
+            translation: '翻译',
             backlinks: '反向链接',
             tags: '标签',
             series: '系列',
@@ -209,7 +228,8 @@
             recent_updates: '最近更新',
             latest_posts: '最新内容',
             latest_activity: '最新动态',
-            home_os_kicker: '工具、研究和现场记录',
+            home_os_kicker: '概览',
+            home_topline_descriptor: '工具、研究和现场记录',
             home_topline_title: '首页',
             home_topline_updated: '更新于 2026 年 7 月 24 日',
             home_topline_action: '文章与主题 →',
@@ -240,20 +260,7 @@
             home_trail_essays_text: '关于系统如何运转，以及我如何理解它们的笔记和文章。',
             home_trail_gallery_title: '作品',
             home_trail_gallery_text: '演讲、Demo、视觉随笔和研究产物。',
-            home_route_note: '笔记用于今天，系统服务长期。',
-            home_field_note_kicker: '现场便签',
-            home_field_note_title: '这是一个持续生长的索引。',
-            home_field_note_text: '它会随着使用继续移动、收束和变好。',
-            home_field_note_work: '工作方式',
-            home_field_note_work_value: '公开地记录、构建和复用。',
-            home_field_note_place: '坐标',
             home_dispatch_all: '浏览全部文章',
-            home_bottom_index_kicker: '文章与主题',
-            home_bottom_index_title: '长文、阅读路径和主题线索。',
-            home_bottom_about_kicker: '关于本站',
-            home_bottom_about_title: '由好奇、笔记和重复构建。',
-            home_bottom_connect_kicker: '联系',
-            home_bottom_connect_title: 'Email、RSS、GitHub 和代码。',
             gallery_kicker: '作品',
             gallery_title: '作品',
             gallery_lede: '演讲、Demo、视觉随笔和研究产物。',
@@ -310,6 +317,7 @@
             projects_title: '项目',
             projects_overview_note: '1 个持续维护的公开项目',
             projects_maintained_label: '持续维护',
+            projects_status_label: '项目索引状态',
             projects_updated_label: '更新于 2026 年 7 月 24 日',
             projects_updated_prefix: '更新于',
             projects_count_singular: '1 个持续维护的公开项目',
@@ -427,7 +435,13 @@
 
     function updateUrlLanguage(language, replace = true) {
         const url = new URL(window.location.href);
-        url.searchParams.set('lang', language);
+        // English is the default, so it stays on the clean canonical URL and
+        // only the non-default language carries an explicit ?lang= marker.
+        if (language === DEFAULT_LANGUAGE) {
+            url.searchParams.delete('lang');
+        } else {
+            url.searchParams.set('lang', language);
+        }
         if (replace) {
             window.history.replaceState({}, '', url.toString());
         } else {
@@ -542,7 +556,39 @@
             element.textContent = formatDate(element.dataset.date, style);
         });
 
+        localizeReadingTime(root);
+
+        if (root === document) {
+            localizeDocumentMetadata();
+        }
+
         applyLanguageStateToInternalLinks(root);
+    }
+
+    function localizeReadingTime(root: ParentNode = document) {
+        root.querySelectorAll<HTMLElement>('[data-reading-minutes]').forEach((element) => {
+            const minutes = Number(element.getAttribute('data-reading-minutes')) || 1;
+            element.textContent = currentLanguage === 'zh' ? `${minutes} 分钟` : `${minutes} min`;
+        });
+    }
+
+    function localizeDocumentMetadata() {
+        // Shell pages serve both languages from one URL, so the title and
+        // description have to follow the language too — otherwise a shared
+        // ?lang=zh link previews in English.
+        const titleElement = document.querySelector<HTMLElement>('title[data-i18n-doc-title]');
+        if (titleElement) {
+            document.title = t(titleElement.dataset.i18nDocTitle);
+        }
+
+        document.querySelectorAll<HTMLMetaElement>('meta[data-i18n-content]').forEach((meta) => {
+            meta.setAttribute('content', t(meta.dataset.i18nContent));
+        });
+
+        const localeMeta = document.querySelector<HTMLMetaElement>('meta[property="og:locale"]');
+        if (localeMeta) {
+            localeMeta.setAttribute('content', currentLanguage === 'zh' ? 'zh_CN' : 'en_US');
+        }
     }
 
     function updateLanguageSwitcherState(root: ParentNode = document) {
@@ -595,9 +641,12 @@
             const body = document.body;
             const variantFile = body.dataset[`article${targetLanguage.toUpperCase()}File`];
             const currentFile = window.location.pathname.split('/').pop();
-            const shouldNavigate = body.classList.contains('article-page') && variantFile && variantFile !== currentFile;
+            const isArticlePage = body.classList.contains('article-page');
+            const shouldNavigate = isArticlePage && variantFile && variantFile !== currentFile;
 
-            setCurrentLanguage(targetLanguage, { updateUrl: hasExplicitLanguage(), replace: true });
+            // Articles encode language in the filename; shell pages need the
+            // ?lang= marker so the reader can share what they are looking at.
+            setCurrentLanguage(targetLanguage, { updateUrl: !isArticlePage, replace: true });
 
             if (shouldNavigate) {
                 window.location.href = resolveLocalizedUrl(variantFile, targetLanguage);

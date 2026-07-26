@@ -1,6 +1,33 @@
 User-agent: *
 Allow: /
 
+# Rendering assets must stay crawlable.
+Allow: /src/css/
+Allow: /src/js/
+
+# Working files. GitHub Pages serves the repository branch as-is, so these are
+# reachable even though nothing links to them; keep them out of the index.
+Disallow: /docs/
+Disallow: /tests/
+Disallow: /scripts/
+Disallow: /templates/
+Disallow: /src/ts/
+Disallow: /.agents/
+Disallow: /FutureBacklog/
+Disallow: /design-qa.md
+Disallow: /TODO.md
+Disallow: /Makefile
+Disallow: /generate_blog_pages.py
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /requirements.txt
+Disallow: /tsconfig.json
+Disallow: /vercel.json
+
+# Article sources: the generated .html pages are canonical, and the markdown
+# behind them would otherwise read as duplicate content.
+Disallow: /blogs/*.md$
+
 # AI-readable overview: https://simoncos.github.io/llms.txt
 # Agent-readable index: https://simoncos.github.io/agent-index.json
 Sitemap: https://simoncos.github.io/sitemap.xml

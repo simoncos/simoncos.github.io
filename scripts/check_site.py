@@ -370,6 +370,15 @@ def check_blog_image_attributes(errors: list[str]) -> None:
                 errors.append(f"{label} missing decoding=\"async\"")
             if index > 0 and attrs.get("loading") != "lazy":
                 errors.append(f"{label} missing loading=\"lazy\"")
+            if not attrs.get("alt", "").strip():
+                errors.append(f"{label} missing alt text (set it in the source markdown)")
+            # A lazy image without intrinsic size reserves no space and shifts
+            # the layout on arrival, so width/height are required either way.
+            if not attrs.get("width") or not attrs.get("height"):
+                errors.append(
+                    f"{label} missing width/height "
+                    f"(run: python3 scripts/update_image_dimensions.py)"
+                )
 
             local_path = resolve_local_html_image(html_file, source)
             if not local_path:

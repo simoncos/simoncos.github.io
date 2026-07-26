@@ -4,6 +4,8 @@ check:
 	npm run build:ts
 	python3 scripts/update_surface_data.py --check
 	python3 scripts/update_site_shell.py --check
+	python3 scripts/update_image_dimensions.py --check
+	python3 scripts/generate_og_images.py --check
 	python3 scripts/check_blog_generation.py
 	python3 scripts/check_site.py
 	python3 scripts/update_static_fallbacks.py --check
@@ -12,6 +14,7 @@ check:
 generate:
 	npm run build:ts
 	python3 scripts/update_site_shell.py
+	python3 scripts/update_image_dimensions.py
 	python3 generate_blog_pages.py
 	python3 scripts/update_surface_data.py
 	python3 scripts/update_static_fallbacks.py
