@@ -182,8 +182,9 @@
             }
             renderStatus(payload.status, language);
             if (payload.surface) {
+                // The kicker is now the section's actual heading; the separate
+                // #system-map-title duplicate it shadowed has been removed.
                 setText('home-system-kicker', getLocalizedValue(payload.surface.kicker, language));
-                setText('system-map-title', getLocalizedValue(payload.surface.title, language));
                 renderCardList('home-system-grid', payload.surface.items || [], language, 'system');
             }
             if (payload.trails) {

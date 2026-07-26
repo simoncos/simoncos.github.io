@@ -2,6 +2,7 @@
 tags: km, ai, hack, design
 date: 2026-03-14
 updated: 2026-03-27
+description: A layered personal knowledge system as of March 2026: Telegram for capture, Obsidian for distillation, Git for version boundaries, a static site for publishing, and RedPiggy binding them together.
 ---
 
 # My Personal Knowledge Management System, 2026-03
@@ -42,7 +43,7 @@ Image support is worth mentioning separately. Before Piggy came into being, I ha
 
 There was also an unexpected benefit. Since Telegram messages have to pass through Piggy, it does not just execute the workflow-it also responds to the thought itself. That means many ideas now receive their first reader's feedback almost at the moment they appear.
 
-![](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/781b033aa99041b1fe3829dfaeb88c2d.png)
+![Telegram chat screenshot: the system architecture diagram sent into the capture channel, with the reply below](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/781b033aa99041b1fe3829dfaeb88c2d.png)
 
 This was not the first solution I tried. Originally I wanted to connect with Piggy through Apple Notes, but several problems made that path untenable:
 
@@ -62,7 +63,7 @@ Through Domain notes, Tasks, Bookmarks, Workspaces, and Bases, Obsidian has beco
 
 Once Piggy entered the picture, that role became much stronger. I carved out a dedicated area as a shared workspace for Piggy and me:
 
-![](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg)
+![Obsidian sidebar showing the RedPiggy folder tree: Projects with Backlog, Dev, Research, Systems, and Writing](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg)
 
 By opening Obsidian completely to Piggy, I gained three major kinds of benefit.
 
@@ -80,7 +81,7 @@ So Piggy is, for me, more like a collaborator than a machine for writing notes o
 
 The personal site (`simoncos.github.io`) is the publishing layer of the whole system. Its first formal public version went online in January this year. With Piggy and other agents involved, the site's visual language, interaction, and information architecture have gone through a comprehensive update.
 
-![](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg)
+![Screenshot of an article page on the personal site, with its table of contents](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg)
 
 The current site:
 

@@ -4,6 +4,7 @@ date: 2026-03-13
 updated: 2026-03-13
 series: RedPiggy, an emerging AI existence
 series_part: 2
+description: RedPiggy 作为 OpenClaw agent，在 Sonnet、Qwen 与 GPT-5.4 之间被切换的观察：换模型后什么样的连续性还在，以及 agent 何时不再只是镜子、开始产生真实摩擦。
 ---
 
 # 跨过三个深渊：Sonnet、Qwen 与 GPT-5.4

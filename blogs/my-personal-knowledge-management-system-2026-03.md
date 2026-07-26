@@ -2,6 +2,7 @@
 tags: km, ai, hack, design
 date: 2026-03-14
 updated: 2026-03-27
+description: 2026 年 3 月的分层个人知识系统：Telegram 负责即时捕捉，Obsidian 负责整理与提炼，Git 提供版本边界，个人网站负责发布，RedPiggy 把这些部分连起来。
 ---
 
 # 我的个人知识管理系统 2026-03
@@ -41,7 +42,7 @@ Telegram → Obsidian Journal 的打通，起因是我用Git替换了iCloud，�
 
 还有一个意想之外的好处：Telegram 消息需要经过 Piggy，所以它在执行这条流程的同时，也会顺手回应我的想法。这样一来，很多念头在刚出现时，就已经得到第一个读者的反馈。
 
-![](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/781b033aa99041b1fe3829dfaeb88c2d.png)
+![Telegram 对话截图：把系统架构图发进捕捉频道，下方是回复](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/781b033aa99041b1fe3829dfaeb88c2d.png)
 
 这不是我尝试的第一个方案。本来是想通过苹果全家桶里的 Notes 来和 Piggy 对接的，但是有几个大问题导致我不得不想其他方法：
 
@@ -61,7 +62,7 @@ Obsidian 不是用来什么都往里丢的。相比发布导向的个人站点[^
 
 有了 Piggy 之后，Obsidian 的这种定位得到了加强。为此我多划出一块目录，作为我和 Piggy 的协作空间。
 
-![](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg)
+![Obsidian 侧边栏中的 RedPiggy 文件夹结构：Projects 下分为 Backlog、Dev、Research、Systems、Writing](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg)
 
 通过对 Piggy 完全开放 Obsidian 的权限，我获得的收益主要有三类。
 
@@ -79,7 +80,7 @@ Obsidian 不是用来什么都往里丢的。相比发布导向的个人站点[^
 
 个人站点 Site（simoncos.github.io）是整个系统的发布层。第一版正式上线是在今年 1 月；有了 Piggy 和其他 agent 的帮助之后，最近一个月它的视觉、交互和信息架构经历了一轮全面更新。
 
-![](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg)
+![个人网站文章页截图，左侧是文章目录](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg)
 
 目前的网站：
 

@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="project-feature-number" aria-hidden="true">01</div>
                 <div class="project-feature-copy">
                     <p class="section-kicker">${escapeHtml(localized(detail.kicker, language))}</p>
-                    <h2 id="project-feature-title">${escapeHtml(localized(project.title, language))}</h2>
+                    <h1 id="project-feature-title">${escapeHtml(localized(project.title, language))}</h1>
                     <p class="project-feature-subtitle">${escapeHtml(localized(project.subtitle, language))}</p>
                     <p>${escapeHtml(localized(detail.body, language))}</p>
                     ${actionCards ? `

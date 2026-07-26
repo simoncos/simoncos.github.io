@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return language === 'zh' ? 'Artifact' : 'Artifact';
         return language === 'zh' ? '博客' : 'Blog';
     }
-    function renderPosts(blogData, projectsPayload, galleryPayload) {
+    function renderPosts(blogData, projectsPayload, galleryPayload, surfacePayload) {
         const language = getCurrentLanguage();
         const blogGroups = blogData ? blogData.groups : [];
         const projects = projectsPayload && Array.isArray(projectsPayload.projects)
@@ -193,8 +193,22 @@ document.addEventListener('DOMContentLoaded', function () {
             postList.innerHTML = `<li>${escapeHtml(i18n.t ? i18n.t('no_blog_posts') : 'No posts found.')}</li>`;
             return;
         }
+        // Current Index is a curated shelf and Recent updates is a changelog.
+        // Without this filter most of the site appeared in both at once.
+        const curated = new Set();
+        ((surfacePayload && surfacePayload.surface && surfacePayload.surface.items) || []).forEach((item) => {
+            if (item.href) {
+                curated.add(item.href);
+            }
+            Object.values(item.paths || {}).forEach((path) => {
+                if (typeof path === 'string') {
+                    curated.add(path);
+                }
+            });
+        });
+        const freshPosts = posts.filter(post => !curated.has(post.href));
         postList.innerHTML = '';
-        posts.slice(0, 8).forEach(post => {
+        freshPosts.slice(0, 8).forEach(post => {
             const typeLabel = typePillLabel(post.type, language);
             const secondaryHtml = post.secondaryTitle
                 ? `<span class="recent-post-secondary">${escapeHtml(post.secondaryTitle)}</span>`
@@ -232,8 +246,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const galleryPromise = fetch(resolvePath('data/gallery_data.json'))
             .then(r => r.ok ? r.json() : null)
             .catch(() => null);
-        Promise.all([blogPromise, projectsPromise, galleryPromise])
-            .then(([blogData, projectsPayload, galleryPayload]) => renderPosts(blogData, projectsPayload, galleryPayload))
+        // Already requested by load-home-surface, so this is a cache hit.
+        const surfacePromise = fetch(resolvePath('data/home_surface.json'))
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null);
+        Promise.all([blogPromise, projectsPromise, galleryPromise, surfacePromise])
+            .then(([blogData, projectsPayload, galleryPayload, surfacePayload]) => renderPosts(blogData, projectsPayload, galleryPayload, surfacePayload))
             .catch(err => {
             console.error('Error loading posts:', err);
             postList.innerHTML = `<li>${escapeHtml(i18n.t ? i18n.t('error_loading_blog_posts') : 'Error loading posts.')}</li>`;

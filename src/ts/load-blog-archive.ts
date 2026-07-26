@@ -143,11 +143,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 const excerpt = primary.excerpt ? escapeHtml(primary.excerpt) : '';
                 const tagsHtml = renderTags(group.tags || []);
                 const dateParts = formatDateParts(group.date);
-                const languageLabel = currentLanguage === 'zh' ? '中文' : 'EN';
+                // This badge used to echo the current UI language, so it read
+                // the same on every row and said nothing about the post. Show
+                // which languages the post is actually available in, matching
+                // the home page's convention.
+                const languageLabel = getLanguageAvailability(group);
                 html.push(`
                     <article class="blog-preview">
                         <time class="blog-preview-date" datetime="${escapeHtml(group.date || '')}"><span>${escapeHtml(dateParts.day)}</span><span>${escapeHtml(dateParts.year)}</span></time>
-                        <span class="blog-preview-lang">${escapeHtml(languageLabel)}</span>
+                        <span class="blog-preview-lang"><span class="visually-hidden">${escapeHtml(i18n.t('languages_available'))} </span>${escapeHtml(languageLabel)}</span>
                         <div class="blog-preview-header">
                             <div class="blog-preview-meta"><span class="meta-pill">${escapeHtml(getLanguageAvailability(group))}</span><span>${escapeHtml(formatDate(group.date))}</span></div>
                             <h4><a href="blogs/${primary.file}">${escapeHtml(primary.title || 'Untitled')}</a></h4>

@@ -537,7 +537,7 @@ def render_project_detail(projects_payload: dict, project_id: str, language: str
                 <div class="project-feature-number" aria-hidden="true">01</div>
                 <div class="project-feature-copy">
                     <p class="section-kicker">{escape(localized(detail.get("kicker"), language))}</p>
-                    <h2 id="project-feature-title">{escape(localized(project.get("title"), language))}</h2>
+                    <h1 id="project-feature-title">{escape(localized(project.get("title"), language))}</h1>
                     <p class="project-feature-subtitle">{escape(localized(project.get("subtitle"), language))}</p>
                     <p>{escape(localized(detail.get("body"), language))}</p>
                     <section class="project-actions-panel" id="project-actions" aria-labelledby="project-actions-title">

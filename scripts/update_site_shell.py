@@ -95,6 +95,19 @@ def render_resource_block(config: dict[str, Any], page: dict[str, Any]) -> str:
                 f'title="{feed["title"]}" href="{prefixed(asset_prefix, feed["href"])}">'
             )
 
+    # Shell pages serve both languages from one URL via ?lang=, so the Chinese
+    # variant needs to be declared or search engines only ever see English.
+    canonical = page.get("canonical")
+    if canonical:
+        site = config.get("site_url", "").rstrip("/")
+        base = f"{site}/{canonical.lstrip('/')}" if canonical != "index.html" else f"{site}/"
+        for hreflang, href in (
+            ("en", base),
+            ("zh-Hans", f"{base}?lang=zh"),
+            ("x-default", base),
+        ):
+            lines.append(f'    <link rel="alternate" hreflang="{hreflang}" href="{href}">')
+
     theme_init = config.get("theme_init")
     if theme_init:
         src = prefixed(asset_prefix, f"src/js/{theme_init}") + f"?v={config['js_version']}"

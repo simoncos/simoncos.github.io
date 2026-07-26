@@ -3,25 +3,25 @@
   "layout": "route-journal",
   "hero": {
     "kicker": {
-      "en": "Tools, research, and field notes",
-      "zh": "工具、研究和现场记录"
+      "en": "Overview",
+      "zh": "概览"
     },
     "title": {
-      "en": "Tools, research, essays, and field notes.",
+      "en": "Tools and research, essays and field notes.",
       "zh": "工具与研究，文章与现场记录。"
     },
     "accessible_title": {
-      "en": "Tools and research. Essays and field notes.",
+      "en": "Tools and research, essays and field notes.",
       "zh": "工具与研究，文章与现场记录。"
     },
     "title_lines": {
       "en": [
-        "Tools and research",
-        "Essays and field notes"
+        "Tools and research,",
+        "essays and field notes."
       ],
       "zh": [
-        "工具与研究",
-        "文章与现场记录"
+        "工具与研究，",
+        "文章与现场记录。"
       ]
     },
     "lede": {
