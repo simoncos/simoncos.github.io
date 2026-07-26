@@ -188,12 +188,13 @@ summary:focus-visible {
 /* Lets keyboard users jump past the masthead, nav, and language/theme controls
    that otherwise precede the content on every page. Mirrors the pattern already
    used by the Sleep essay pages, using the shared tokens. */
-/* Latin text needs a narrower measure than CJK at the same column width:
-   760px runs ~91 characters per line, well past the comfortable 60-80. 640px
-   lands around 77. The lang attribute is kept current by i18n, so switching
-   language re-tunes the column. */
-html[lang="en"] {
-    --reading-width: 640px;
+/* Latin text needs a narrower measure than CJK: at 760px English runs ~91
+   characters per line, past the comfortable 60-80. Narrow the *text* only --
+   --reading-width also sizes the column that images and composed visuals live
+   in, and shrinking that broke the Haba flow scene, which disables itself
+   below 680px. The lang attribute is kept current by i18n. */
+html[lang="en"] .post-content > :is(p, ul, ol, dl, blockquote, h2, h3, h4, h5, h6) {
+    max-width: 640px;
 }
 
 .skip-link {
