@@ -39,6 +39,8 @@
        comfortable 35-45 range. Latin text is far narrower per character, so
        the same column runs ~91 characters -- see the html[lang] override. */
     --reading-width: 760px;
+    /* One display size for the Essays / Gallery / Projects page titles. */
+    --index-title-size: clamp(2.6rem, 4.6vw, 3.9rem);
     --nav-width: 1180px;
     --site-shell-width: 1340px;
     --site-shell-gutter: clamp(1.25rem, 1.875vw, 1.5rem);
@@ -3713,12 +3715,23 @@ body:not(.home-page) .page-shell {
     gap: 0.4rem;
 }
 
-.ledger-title-strip :is(h1, h2, .ledger-page-label),
-.gallery-archive-top :is(h1, h2), .projects-archive-top :is(h1, h2) {
+.ledger-title-strip :is(h1, h2, .ledger-page-label) {
     margin: 0;
     color: var(--editorial-ink);
     font-family: var(--editorial-serif);
     font-size: clamp(2.8rem, 5.8vw, 5rem);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: 0;
+}
+
+/* Essays, Gallery and Projects share one page-title treatment. They used to
+   run at 82px, 64px and 80px from three separate clamps. */
+.gallery-archive-top :is(h1, h2), .projects-archive-top :is(h1, h2) {
+    margin: 0;
+    color: var(--editorial-ink);
+    font-family: var(--editorial-serif);
+    font-size: var(--index-title-size);
     font-weight: 600;
     line-height: 0.95;
     letter-spacing: 0;
@@ -3882,9 +3895,10 @@ body:not(.home-page) .page-shell {
     color: var(--editorial-muted);
 }
 
+/* The divider separated the title from the description beside it; with the
+   description gone it dangled off the end of the word. */
 .gallery-archive-top :is(h1, h2), .projects-archive-top :is(h1, h2) {
-    padding-right: clamp(1rem, 2.2vw, 2rem);
-    border-right: 1px solid var(--editorial-rule);
+    padding-right: 0;
 }
 
 .blog-preview-date {
@@ -4274,7 +4288,6 @@ body:not(.home-page) .page-shell {
 .gallery-index-page .gallery-archive-top :is(h1, h2) {
     padding: 0;
     border-right: 0;
-    font-size: clamp(2.8rem, 4.8vw, 4rem);
     line-height: 0.95;
 }
 
@@ -4570,7 +4583,6 @@ body:not(.home-page) .page-shell {
     .gallery-index-page .gallery-archive-top :is(h1, h2) {
         padding-right: 0;
         border-right: 0;
-        font-size: clamp(2.5rem, 14vw, 3.35rem);
     }
 
     .gallery-index-page .gallery-archive-top > p {
@@ -6204,16 +6216,15 @@ body:not(.home-page) .page-shell {
     align-items: end;
     gap: 1rem clamp(1.5rem, 3vw, 2.5rem);
     padding: 0.25rem 0 1.15rem;
-    border-bottom: 1px solid var(--editorial-rule);
+    /* No bottom rule: the sub-nav directly below carries its own, and the two
+       sat only a few pixels apart. */
 }
 
 .essays-archive-top :is(h1, h2) {
     margin: 0;
-    padding-right: clamp(1rem, 2.2vw, 2rem);
-    border-right: 1px solid var(--editorial-rule);
     color: var(--editorial-ink);
     font-family: var(--editorial-serif);
-    font-size: clamp(3.2rem, 5.8vw, 5.15rem);
+    font-size: var(--index-title-size);
     font-weight: 600;
     line-height: 0.95;
     letter-spacing: 0;
@@ -6695,14 +6706,12 @@ body.previews-off .essays-index-page .blog-excerpt,
     align-items: baseline;
     min-width: 0;
     padding: 1.15rem 0;
+    /* 68px row pitch already separates these; a rule per row repeated the
+       same job the spacing was doing. (I had wrongly called this a dense
+       list — the dense one is the 36px topic rail, which keeps its rules.) */
     border: 0;
-    border-bottom: 1px solid var(--editorial-rule);
     border-radius: 0;
     background: transparent;
-}
-
-.about-profile-page .about-contact-first .contact-list li:last-child {
-    border-bottom: 0;
 }
 
 .about-profile-page .about-contact-first .contact-list a {
@@ -6956,7 +6965,11 @@ body.previews-off .essays-index-page .blog-excerpt,
     margin-left: auto;
 }
 
-nav {
+/* Scoped to the primary nav. As a bare element selector this also bracketed
+   every other <nav> on the site — the gallery section index, the essays view
+   tabs, the article prev/next block and the project breadcrumb all picked up
+   a stray rule above and below. */
+#navigation-placeholder nav {
     margin: 0 0 1.7rem;
     border: 0;
     border-top: 1px solid var(--editorial-rule);
@@ -7415,9 +7428,7 @@ nav ul li a.active::after {
         padding: 0.15rem 0 1rem;
     }
 
-    .essays-archive-top :is(h1, h2) {
-        font-size: clamp(2.35rem, 10vw, 2.85rem);
-    }
+
 
     .essays-index-page .blog-preview {
         grid-template-columns: 4.5rem minmax(0, 1fr);
@@ -7442,7 +7453,6 @@ nav ul li a.active::after {
     }
 
     .gallery-index-page .gallery-archive-top :is(h1, h2) {
-        font-size: clamp(2.55rem, 11vw, 3rem);
         line-height: 1;
     }
 
