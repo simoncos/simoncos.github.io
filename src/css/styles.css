@@ -41,6 +41,8 @@
     --reading-width: 760px;
     /* One display size for the Essays / Gallery / Projects page titles. */
     --index-title-size: clamp(2.6rem, 4.6vw, 3.9rem);
+    /* One size and voice for the sub-nav / status strip on every index page. */
+    --index-strip-size: clamp(0.95rem, 1.15vw, 1.02rem);
     --nav-width: 1180px;
     --site-shell-width: 1340px;
     --site-shell-gutter: clamp(1.25rem, 1.875vw, 1.5rem);
@@ -3740,7 +3742,7 @@ body:not(.home-page) .page-shell {
 .ledger-title-strip {
     color: var(--editorial-muted);
     font-family: var(--editorial-serif);
-    font-size: clamp(1rem, 1.35vw, 1.16rem);
+    font-size: var(--index-strip-size);
 }
 
 .ledger-title-strip :is(h1, h2, .ledger-page-label) {
@@ -3947,7 +3949,7 @@ body:not(.home-page) .page-shell {
     padding-top: 0;
     color: var(--editorial-ink);
     font-family: var(--editorial-serif);
-    font-size: 0.92rem;
+    font-size: var(--index-strip-size);
 }
 
 .gallery-showcase {
@@ -4303,7 +4305,6 @@ body:not(.home-page) .page-shell {
     align-items: center;
     gap: 0.55rem clamp(0.72rem, 1.55vw, 1.5rem);
     padding-top: clamp(0.8rem, 1.5vw, 1.22rem);
-    font-size: 0.86rem;
 }
 
 .gallery-index-page .gallery-section-index::after {
@@ -5069,7 +5070,6 @@ body:not(.home-page) .page-shell {
 
 .projects-index-page .ledger-title-strip {
     gap: 0.42rem 1rem;
-    font-size: clamp(0.92rem, 1.12vw, 1.03rem);
 }
 
 .projects-index-page .project-ledger-hero {
@@ -6263,11 +6263,13 @@ body:not(.home-page) .page-shell {
     min-height: 3.4rem;
     padding: 0 clamp(1.25rem, 2.5vw, 2.2rem);
     color: var(--editorial-muted);
-    font-size: 0.82rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
+    /* Matches the gallery section index and the ledger strips. This was the
+       one sub-nav in sans-serif, 800 weight, uppercase and letterspaced. */
+    font-family: var(--editorial-serif);
+    font-size: var(--index-strip-size);
+    font-weight: 400;
+    letter-spacing: 0;
     text-decoration: none;
-    text-transform: uppercase;
 }
 
 .essays-view-index a:not(:last-child)::before {
