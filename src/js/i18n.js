@@ -598,7 +598,12 @@
                 return;
             }
             const body = document.body;
-            const variantFile = body.dataset[`article${targetLanguage.toUpperCase()}File`];
+            // Read the attribute directly. Going through dataset needs the
+            // camelCase form (articleZhFile), but `targetLanguage.toUpperCase()`
+            // produced articleZHFile, which never matched — so article pages
+            // never navigated to the other language and only the chrome
+            // switched while the body stayed put.
+            const variantFile = body.getAttribute(`data-article-${targetLanguage}-file`) || '';
             const currentFile = window.location.pathname.split('/').pop();
             const isArticlePage = body.classList.contains('article-page');
             const shouldNavigate = isArticlePage && variantFile && variantFile !== currentFile;
