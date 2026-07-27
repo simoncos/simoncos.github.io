@@ -588,7 +588,8 @@ html[lang="en"] .post-content > :is(p, ul, ol, dl, blockquote, h2, h3, h4, h5, h
     gap: 1rem;
     min-width: 0;
     padding: clamp(1rem, 2vw, 1.3rem);
-    border: 1px solid rgba(34, 48, 74, 0.12);
+    /* Fill alone is enough separation; the 1px box around it added a fourth
+       framed rectangle to the hero. */
     border-radius: var(--radius-soft);
     background: rgba(255, 253, 248, 0.64);
 }
@@ -612,12 +613,8 @@ html[lang="en"] .post-content > :is(p, ul, ol, dl, blockquote, h2, h3, h4, h5, h
     gap: 0.7rem;
     align-items: baseline;
     padding: 0.78rem 0;
-    border-top: 1px solid rgba(34, 48, 74, 0.12);
 }
 
-.home-os-status-list li:first-child {
-    border-top: 0;
-}
 
 :is(body.dark-mode, html.dark-mode body) .home-os-status-list li {
     border-top-color: var(--dark-border);
@@ -2630,7 +2627,8 @@ footer p {
     display: flex;
     flex-direction: column;
     min-height: 100%;
-    border: 1px solid var(--border);
+    /* Fill plus shadow already lift the card off the page; the 1px box on top
+       put four more lines around every gallery item. */
     border-radius: 14px;
     background: rgba(255, 251, 244, 0.76);
     box-shadow: 0 18px 45px rgba(24, 32, 51, 0.07);
@@ -3949,15 +3947,15 @@ body:not(.home-page) .page-shell {
 }
 
 .gallery-card {
+    /* The surface fill already separates the card from the page; a full
+       1px box on top of it put four more lines around every item. */
     overflow: hidden;
-    border: 1px solid var(--editorial-rule);
     border-radius: 0.35rem;
     background: rgba(255, 253, 247, 0.48);
 }
 
 .gallery-card .project-card-media {
     aspect-ratio: 16 / 7.4;
-    border-bottom: 1px solid var(--editorial-rule);
 }
 
 .gallery-card .project-card-body {
@@ -4878,7 +4876,7 @@ body:not(.home-page) .page-shell {
 .project-index-media {
     overflow: hidden;
     min-height: 12.5rem;
-    border: 1px solid var(--editorial-rule);
+    /* The tinted fill defines the thumbnail; the box around it was redundant. */
     border-radius: 0.28rem;
     background: color-mix(in srgb, var(--editorial-accent) 5%, var(--editorial-paper));
 }
@@ -5637,8 +5635,9 @@ body:not(.home-page) .page-shell {
     align-items: center;
     min-height: 6.75rem;
     padding: 0.75rem 0;
+    /* Same rule as the essays archive: rows this tall are separated by their
+       own spacing, so a hairline per row only adds noise. */
     border: 0;
-    border-top: 1px solid var(--editorial-rule);
     border-radius: 0;
     background: transparent;
     box-shadow: none;
@@ -6462,8 +6461,10 @@ body:not(.home-page) .page-shell {
     align-items: start;
     min-height: 5.2rem;
     padding: 0.9rem 0;
+    /* No per-row rule: the rows are already ~5rem apart, and the month header
+       above them carries the ruled grouping. Ruling both levels made the
+       archive read as a table rather than a list. */
     border: 0;
-    border-bottom: 1px solid var(--editorial-rule);
     border-radius: 0;
     background: transparent;
     box-shadow: none;
