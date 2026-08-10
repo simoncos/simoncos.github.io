@@ -3,9 +3,11 @@ import re
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
+SITE_ORIGIN = "https://simoncos.github.io"
 
 
 class MainLandmarkParser(HTMLParser):
@@ -16,6 +18,20 @@ class MainLandmarkParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
         if tag == "main":
             self.main_count += 1
+
+
+class FragmentTargetParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.targets = set()
+
+    def handle_starttag(self, _tag, attrs):
+        attributes = dict(attrs)
+        self.targets.update(
+            attributes[key]
+            for key in ("id", "name")
+            if attributes.get(key)
+        )
 
 
 def main_count(html):
@@ -330,10 +346,21 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertFalse(obsolete_min_height, f"obsolete About min-height owners: {obsolete_min_height}")
 
         canonical = css.split(marker, 1)[1].split("/* Shared site shell */", 1)[0]
+        page_shell_blocks = re.findall(
+            r"\.about-profile-page \.about-page-shell\s*\{(?P<body>.*?)\}",
+            canonical,
+            re.S,
+        )
+        align_owners = [body for body in page_shell_blocks if "align-content" in declaration_names(body)]
+        self.assertEqual(len(align_owners), 1)
+        self.assertIn("align-content: start;", align_owners[0])
+        self.assertTrue(all("min-height:" not in body for body in page_shell_blocks))
+
         tablet = canonical.split("@media (max-width: 980px)", 1)[1].split("@media (max-width: 820px)", 1)[0]
         contact = css_block(tablet, ".about-profile-page .about-contact-first")
-        self.assertIn("grid-auto-rows: max-content;", contact)
-        self.assertIn("align-content: start;", contact)
+        self.assertIn("grid-template-columns:", contact)
+        self.assertNotIn("grid-auto-rows:", contact)
+        self.assertNotIn("align-content:", contact)
         self.assertNotIn("min-height:", contact)
 
     def test_final_shared_navigation_rules_have_no_home_or_gallery_selectors(self):
@@ -372,12 +399,16 @@ class SurfaceContractTests(unittest.TestCase):
         index_html = (ROOT / "index.html").read_text()
 
         content_items = surface["surface"]["items"] + surface["trails"]["items"]
+        shared_shell_routes = {"projects.html", "blogs.html", "gallery.html"}
         invalid_items = []
         for item in content_items:
             href = item.get("href", "")
             if item.get("skipLangRewrite") or href.startswith(("#", "http:", "https:")):
                 continue
             paths = item.get("paths")
+            if not paths and href in shared_shell_routes:
+                self.assertIn(f'href="{href}"', index_html)
+                continue
             valid_paths = (
                 isinstance(paths, dict)
                 and {"en", "zh"}.issubset(paths)
@@ -461,8 +492,8 @@ class SurfaceContractTests(unittest.TestCase):
 
         self.assertIn('aria-label="Essay browsing"', essays_html)
         self.assertIn('data-i18n-aria-label="essays_view_label"', essays_html)
-        self.assertIn('aria-label="Essay discovery"', essays_html)
-        self.assertIn('data-i18n-aria-label="essays_discovery_label"', essays_html)
+        self.assertIn('aria-labelledby="essays-discovery-title"', essays_html)
+        self.assertIn('data-i18n="essays_discovery_label"', essays_html)
         self.assertRegex(i18n, r"essays_view_label\s*:\s*['\"]Essay browsing['\"]")
         self.assertRegex(i18n, r"essays_view_label\s*:\s*['\"]文章浏览方式['\"]")
 
@@ -481,7 +512,10 @@ class SurfaceContractTests(unittest.TestCase):
         tags_renderer = (ROOT / "src/ts/load-tags-page.ts").read_text()
         series_renderer = (ROOT / "src/ts/load-series-page.ts").read_text()
 
-        self.assertRegex(essays_html, r"<h2\b")
+        self.assertIn('aria-labelledby="essays-latest-title"', essays_html)
+        self.assertIn('aria-labelledby="essays-discovery-title"', essays_html)
+        self.assertIn('<h2 id="essays-latest-title" class="visually-hidden"', essays_html)
+        self.assertIn('<h2 id="essays-discovery-title" class="visually-hidden"', essays_html)
         self.assertIn("<h3", essays_html)
         self.assertIn("<h4>${escapeHtml(seriesName)}</h4>", series_renderer)
         self.assertNotIn("<h4>", tags_renderer)
@@ -513,7 +547,7 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertRegex(i18n, r"gallery_sections_label\s*:\s*['\"]Gallery sections['\"]")
         self.assertRegex(i18n, r"gallery_sections_label\s*:\s*['\"]作品章节索引['\"]")
 
-    def test_gallery_collection_is_a_manifest_backed_six_card_mosaic(self):
+    def test_gallery_collection_is_a_manifest_backed_five_card_mosaic(self):
         manifest = json.loads((ROOT / "data/content_manifest.json").read_text())
         gallery_html = (ROOT / "gallery.html").read_text()
         gallery_items = [item for item in manifest["items"] if "gallery" in item["surfaces"]]
@@ -523,7 +557,7 @@ class SurfaceContractTests(unittest.TestCase):
             re.S,
         )
 
-        self.assertEqual(len(gallery_items), 6)
+        self.assertEqual(len(gallery_items), 5)
         self.assertEqual(
             {item["id"] for item in gallery_items},
             {
@@ -532,58 +566,71 @@ class SurfaceContractTests(unittest.TestCase):
                 "hermes-agent-hv-analysis",
                 "haba-snow-mountain",
                 "sleep-toolkit",
-                "ai-personal-information-system",
             },
         )
         self.assertIsNotNone(grid_match)
-        self.assertEqual(grid_match.group("content").count('class="project-card gallery-card'), 6)
-        after_grid = gallery_html[grid_match.end():gallery_html.index('<section id="personal-data-lab"')]
-        self.assertNotIn('class="project-card gallery-card', after_grid)
+        self.assertEqual(grid_match.group("content").count('class="project-card gallery-card'), 5)
+        self.assertEqual(gallery_html.count('class="project-card gallery-card'), 5)
 
-    def test_personal_data_lab_is_a_compact_title_only_curation_rail(self):
+    def test_gallery_does_not_restore_removed_personal_data_lab_surface(self):
+        manifest = json.loads((ROOT / "data/content_manifest.json").read_text())
         gallery_html = (ROOT / "gallery.html").read_text()
-        css = (ROOT / "src/css/styles.css").read_text()
-        rail_match = re.search(
-            r'<section id="personal-data-lab"[^>]*>(?P<content>.*?)</section>',
-            gallery_html,
-            re.S,
-        )
+        gallery_ids = {
+            item["id"]
+            for item in manifest["items"]
+            if "gallery" in item["surfaces"]
+        }
 
-        self.assertIsNotNone(rail_match)
-        rail = rail_match.group("content")
-        self.assertEqual(rail.count('class="personal-data-reference"'), 3)
-        self.assertNotIn("project-card", rail)
-        self.assertNotIn("project-card-summary", rail)
-        self.assertNotIn("personal-data-path-type", rail)
-        self.assertNotIn("<small", rail)
+        self.assertNotIn("ai-personal-information-system", gallery_ids)
+        self.assertNotIn('id="personal-data-lab"', gallery_html)
+        self.assertNotIn('class="personal-data-reference"', gallery_html)
 
-        fallback_end = gallery_html.index("<!-- static-fallback:end gallery-grid -->")
-        rail_start = gallery_html.index('<section id="personal-data-lab"')
-        self.assertLess(fallback_end, rail_start)
-
-        rail_grid_row_owners = []
-        for selector_group, body in non_media_css_rules(css):
-            if ".gallery-board .personal-data-lab--strip" in split_css_selectors(selector_group):
-                if "grid-row" in declaration_names(body):
-                    rail_grid_row_owners.append(selector_group)
-        self.assertFalse(
-            rail_grid_row_owners,
-            f"Personal Data Lab must follow the six cards by DOM auto-placement: {rail_grid_row_owners}",
-        )
-
-    def test_home_mixed_content_feed_uses_recent_updates_label(self):
+    def test_home_mixed_content_feed_uses_single_recent_updates_label(self):
         index_html = (ROOT / "index.html").read_text()
         i18n = (ROOT / "src/ts/i18n.ts").read_text()
 
         self.assertIn('data-i18n="recent_updates"', index_html)
-        self.assertIn('data-i18n="latest_activity"', index_html)
+        self.assertNotIn('data-i18n="latest_activity"', index_html)
         self.assertNotIn('data-i18n="recent_writing"', index_html)
         self.assertRegex(i18n, r"recent_updates\s*:\s*['\"]Recent updates['\"]")
         self.assertRegex(i18n, r"recent_updates\s*:\s*['\"]最近更新['\"]")
-        self.assertRegex(i18n, r"latest_activity\s*:\s*['\"]Latest activity['\"]")
-        self.assertRegex(i18n, r"latest_activity\s*:\s*['\"]最新动态['\"]")
+        self.assertNotRegex(i18n, r"latest_activity\s*:")
         self.assertRegex(i18n, r"home_dispatch_all\s*:\s*['\"]Browse all writing['\"]")
         self.assertRegex(i18n, r"home_dispatch_all\s*:\s*['\"]浏览全部文章['\"]")
+
+    def test_machine_readable_same_origin_links_and_fragments_resolve(self):
+        llms = (ROOT / "llms.txt").read_text()
+        agent_index = json.loads((ROOT / "agent-index.json").read_text())
+        urls = set(re.findall(r"\]\((https://simoncos\.github\.io/[^)]+)\)", llms))
+
+        def collect_urls(value):
+            if isinstance(value, dict):
+                for key, child in value.items():
+                    if key == "url" and isinstance(child, str):
+                        urls.add(child)
+                    else:
+                        collect_urls(child)
+            elif isinstance(value, list):
+                for child in value:
+                    collect_urls(child)
+
+        collect_urls(agent_index)
+        checked = 0
+        for url in sorted(urls):
+            parsed = urlsplit(url)
+            if f"{parsed.scheme}://{parsed.netloc}" != SITE_ORIGIN:
+                continue
+            relative_path = unquote(parsed.path.lstrip("/")) or "index.html"
+            local_path = ROOT / relative_path
+            with self.subTest(url=url):
+                self.assertTrue(local_path.is_file(), f"missing same-origin target for {url}")
+                if parsed.fragment:
+                    parser = FragmentTargetParser()
+                    parser.feed(local_path.read_text())
+                    self.assertIn(unquote(parsed.fragment), parser.targets)
+            checked += 1
+
+        self.assertGreater(checked, 0)
 
 
 if __name__ == "__main__":

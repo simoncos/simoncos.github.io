@@ -249,7 +249,7 @@ class ProjectsDataDrivenTests(unittest.TestCase):
         self.assertIn('src="src/js/load-projects.js?', html)
         self.assertIn('id="projects-index"', html)
         self.assertIn('static-fallback:start projects-content', html)
-        self.assertIn('data-i18n="projects_compact_note"', html)
+        self.assertNotIn('data-i18n="projects_compact_note"', html)
         self.assertIn("Sleep Toolkit", html)
         self.assertIn('href="projects/sleep-toolkit.en.html"', html)
         self.assertNotIn("sleep-toolkit-production.up.railway.app", html)
@@ -281,7 +281,6 @@ class ProjectsDataDrivenTests(unittest.TestCase):
             "projects_updated_prefix",
             "projects_count_singular",
             "projects_count_plural",
-            "projects_compact_note",
             "project_view_action",
             "projects_back_to_all",
             "project_type_tool",
@@ -302,6 +301,7 @@ class ProjectsDataDrivenTests(unittest.TestCase):
             "project_row_summary",
             "projects_index_action",
             "project_ledger_title",
+            "projects_compact_note",
         )
 
         for key in required_keys:

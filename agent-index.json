@@ -55,13 +55,6 @@
       "description": "Project context, report preview, and routes to the web app and data essay."
     },
     {
-      "id": "personal-data-lab",
-      "type": "curation",
-      "label": "Personal Data Lab",
-      "url": "https://simoncos.github.io/gallery.html#personal-data-lab",
-      "description": "Curated path through sleep records, body feedback, tools, and field notes."
-    },
-    {
       "id": "sleep-toolkit",
       "type": "web_app",
       "label": "Sleep Toolkit web app",
