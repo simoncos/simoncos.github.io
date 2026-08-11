@@ -572,6 +572,20 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertEqual(grid_match.group("content").count('class="project-card gallery-card'), 5)
         self.assertEqual(gallery_html.count('class="project-card gallery-card'), 5)
 
+    def test_hermes_gallery_artifact_is_public_at_its_canonical_research_route(self):
+        manifest = json.loads((ROOT / "data/content_manifest.json").read_text())
+        hermes_item = next(item for item in manifest["items"] if item["id"] == "hermes-agent-hv-analysis")
+        report_path = "gallery/research/hermes-agent-hv-analysis.html"
+        report_url = f"{SITE_ORIGIN}/{report_path}"
+        report_html = (ROOT / report_path).read_text()
+        sitemap = (ROOT / "sitemap.xml").read_text()
+
+        self.assertEqual(hermes_item["paths"], {"en": report_path, "zh": report_path})
+        self.assertIn('name="robots" content="index,follow"', report_html)
+        self.assertNotIn("noindex", report_html.lower())
+        self.assertIn(f'<link rel="canonical" href="{report_url}">', report_html)
+        self.assertIn(f"<loc>{report_url}</loc>", sitemap)
+
     def test_gallery_does_not_restore_removed_personal_data_lab_surface(self):
         manifest = json.loads((ROOT / "data/content_manifest.json").read_text())
         gallery_html = (ROOT / "gallery.html").read_text()
