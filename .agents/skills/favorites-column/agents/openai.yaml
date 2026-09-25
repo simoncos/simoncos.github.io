@@ -1,0 +1,4 @@
+interface:
+  display_name: "Favorites Column"
+  short_description: "Build the 收藏 column from Che's five-star Douban marks"
+  default_prompt: "Use $favorites-column to build or change the Favorites (收藏) column, its data rules, or the essays it links to."
