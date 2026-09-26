@@ -1,6 +1,6 @@
 ---
 name: simoncos-site-smoke-test
-description: Verify the simoncos.github.io site after publishing, frontend edits, homepage/Gallery/Projects/About IA changes, AI-readable entrypoint changes, feed changes, or slide-deck updates. Use when an agent needs structured PASS/FAIL evidence for live URLs, browser behavior, assets, feeds, generated data, and deployment freshness in this repository. Project-previews index releases belong to that repo's project-previews-index-release skill.
+description: Verify the simoncos.github.io site after publishing, frontend edits, Index/Articles/Work/Favorites/About IA changes, AI-readable entrypoint changes, feed changes, or slide-deck updates. Use when an agent needs structured PASS/FAIL evidence for live URLs, browser behavior, assets, feeds, generated data, and deployment freshness in this repository. Project-previews index releases belong to that repo's project-previews-index-release skill.
 ---
 
 # Simoncos Site Smoke Test
@@ -18,22 +18,19 @@ Run relevant checks and report PASS/FAIL with evidence:
 
 - Home loads and main navigation renders.
 - About page is reachable.
-- Blog archive loads.
+- Articles page loads; list and series views switch.
 - Latest post opens and renders.
-- Gallery and Projects pages are checked when either IA or JSON changed.
-- Homepage live surface renders when `data/home_surface.json` or homepage copy changed.
+- Work and Projects pages are checked when `data/site.json` or their IA changed; each Work type opens from its hash (`gallery.html#talks`).
+- Index Selected work stage renders when `data/site.json` `featured` or homepage copy changed.
+- Favorites index and one category page load; paging and filters work (`?filter=reviewed&page=2`).
 - `llms.txt` and `agent-index.json` return HTTP 200 when AI/agent-readable orientation changed.
 - Dark mode and language toggles work.
 - Both RSS feeds return HTTP 200.
 - Key assets referenced by changed pages return HTTP 200.
 
-For Gallery/Projects changes, also verify backing JSON files:
+Pages are generated static HTML, so check the rendered page itself; `/data/site.json` and `/data/article_index.json` should return HTTP 200 when they changed.
 
-- `/data/gallery_data.json`
-- `/data/projects_data.json`
-- `/data/home_surface.json` when homepage live surface changed
-
-Confirm the semantic split when relevant: Gallery is for talks, demos, visual essays, research artifacts, and curated paths; Projects is for maintained tools and deployed systems.
+Confirm the semantic split when relevant: Work holds projects, talks, research and visual essays; Projects is for maintained tools and deployed systems.
 
 For copy or IA changes, check at least one Chinese mobile viewport. Large Chinese headings and navigation labels can pass source checks while wrapping poorly.
 

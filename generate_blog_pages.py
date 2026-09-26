@@ -20,6 +20,10 @@ from urllib.parse import quote, unquote, urljoin, urlparse
 from pathlib import Path
 from email.utils import format_datetime
 
+sys.path.insert(0, str(Path(__file__).resolve().parent / 'scripts'))
+
+from site_shell import bi, esc, i18n_attrs  # noqa: E402
+
 SITE_TIMEZONE = timezone(timedelta(hours=8))
 
 def configure_logging():
@@ -123,7 +127,7 @@ def og_fallback_image():
         'url': absolute_site_url('assets/og/og-default.png'),
         'width': '1200',
         'height': '630',
-        'alt': 'simonc site — tools and research, essays and field notes',
+        'alt': 'simoncos — tools and research, articles and field notes',
     }
 
 
@@ -205,37 +209,68 @@ def build_article_sequence(article_groups):
     return sequence
 
 
+ARTICLE_TEXT = {
+    'en': {
+        'section': 'Articles', 'toc': 'Contents', 'created': 'Created', 'updated': 'Updated',
+        'reading': 'Reading', 'minutes': '{n} min', 'written': 'Written', 'translation': 'Translation',
+        'series': 'Series', 'part': 'Part {n}', 'tags': 'Tags', 'links_out': 'This article links to',
+        'links_in': 'Linked from', 'links_in_empty': 'No other article links here yet.',
+        'newer': 'Newer', 'older': 'Older', 'more': 'More reading', 'top': 'Back to top',
+        'other': '中文',
+    },
+    'zh': {
+        'section': '文章', 'toc': '目录', 'created': '创建', 'updated': '更新',
+        'reading': '阅读', 'minutes': '{n} 分钟', 'written': '写于', 'translation': '翻译',
+        'series': '系列', 'part': '第 {n} 篇', 'tags': '标签', 'links_out': '本文提到',
+        'links_in': '提到本文', 'links_in_empty': '暂时还没有其他文章引用这篇。',
+        'newer': '更新的一篇', 'older': '更早的一篇', 'more': '继续阅读', 'top': '回到顶部',
+        'other': 'English',
+    },
+}
+
+# Tag slugs stay as written in the frontmatter; these are their display names.
+TAG_LABELS = {
+    'ai': ('AI', 'AI'),
+    'km': ('Knowledge', '知识管理'),
+    'hack': ('Hack', 'Hack'),
+    'design': ('Design', '设计'),
+    'out': ('Outdoors', '户外'),
+    'book': ('Books', '书籍'),
+    'movie': ('Film', '影视'),
+    'music': ('Music', '音乐'),
+    'game': ('Games', '游戏'),
+}
+
+MONTH_NAMES = (
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+)
+
+
+def tag_label(tag, language):
+    en, zh = TAG_LABELS.get(tag, (tag, tag))
+    return zh if language == 'zh' else en
+
+
 def build_post_nav(neighbours, language):
     if not neighbours:
         return ''
 
-    labels = {
-        'en': {'newer': 'Newer', 'older': 'Older'},
-        'zh': {'newer': '更新的一篇', 'older': '更早的一篇'},
-    }[language if language in ('en', 'zh') else 'en']
-
-    links = []
+    text = ARTICLE_TEXT[language if language in ARTICLE_TEXT else 'en']
+    cards = []
     for direction, rel in (('newer', 'prev'), ('older', 'next')):
         entry = neighbours.get(direction)
         if not entry or not entry.get('file'):
             continue
-        title = html_lib.escape(entry.get('title') or '')
-        links.append(
-            f'            <a class="post-nav-link post-nav-{direction}" rel="{rel}" '
-            f'href="{html_lib.escape(entry["file"], quote=True)}">'
-            f'<span class="post-nav-label">{labels[direction]}</span>'
-            f'<span class="post-nav-title">{title}</span></a>'
+        cards.append(
+            f'<a class="post-nav-card post-nav-{direction}" rel="{rel}" href="{esc(entry["file"])}">'
+            f'<span class="k">{text[direction]}</span>'
+            f'<span class="post-nav-title">{esc(entry.get("title") or "")}</span></a>'
         )
 
-    if not links:
+    if not cards:
         return ''
-
-    heading = 'More reading' if language != 'zh' else '继续阅读'
-    return (
-        '        <nav class="post-nav" aria-label="' + heading + '">\n'
-        + '\n'.join(links) + '\n'
-        + '        </nav>'
-    )
+    return f'<nav class="post-nav" aria-label="{text["more"]}">' + ''.join(cards) + '</nav>'
 
 
 def build_hreflang_alternates(article_languages):
@@ -262,34 +297,104 @@ def build_hreflang_alternates(article_languages):
     return '\n'.join(rows)
 
 
-def build_post_meta_extra(metadata):
-    """Render optional provenance rows that belong beside Created/Updated.
+def meta_item(label, value):
+    return (
+        '                    <span class="meta-item">'
+        f'<span class="k">{esc(label)}</span>{value}</span>'
+    )
+
+
+def build_post_meta(metadata, language, created, updated, reading_minutes, paired_entry):
+    """Created / Updated / Reading, then optional provenance, then the link
+    to the translation.
 
     `written` (when the piece was actually composed, which can predate
     publication) and `translation` used to sit as bare paragraphs at the top of
     the body, where they read as stray text and got scraped into the meta
     description. They are metadata, so they render as metadata.
     """
-    rows = []
+    text = ARTICLE_TEXT[language]
+    rows = [
+        meta_item(text['created'], f'<span class="num">{esc(created)}</span>'),
+        meta_item(text['updated'], f'<span class="num">{esc(updated)}</span>'),
+        meta_item(text['reading'], esc(text['minutes'].format(n=reading_minutes))),
+    ]
 
     written = (metadata.get('written') or '').strip()
     if written:
-        rows.append(
-            '                        <div class="post-meta-item">'
-            '<span class="post-meta-label" data-i18n="written">Written</span>'
-            f'<span data-date="{html_lib.escape(written, quote=True)}" data-date-format="medium">'
-            f'{html_lib.escape(written)}</span></div>'
-        )
+        rows.append(meta_item(text['written'], f'<span class="num">{esc(written)}</span>'))
 
     translation = (metadata.get('translation') or '').strip()
     if translation:
+        rows.append(meta_item(text['translation'], esc(translation)))
+
+    if paired_entry and paired_entry.get('file'):
+        hreflang = 'zh-Hans' if language == 'en' else 'en'
         rows.append(
-            '                        <div class="post-meta-item">'
-            '<span class="post-meta-label" data-i18n="translation">Translation</span>'
-            f'<span>{html_lib.escape(translation)}</span></div>'
+            f'                    <a class="meta-alt" href="{esc(paired_entry["file"])}" hreflang="{hreflang}" '
+            f'data-lang-nav="{"zh" if language == "en" else "en"}">{text["other"]} ↗</a>'
         )
 
     return '\n'.join(rows)
+
+
+def assign_heading_ids(rendered_html):
+    """Give every section heading a stable anchor and collect the contents.
+
+    Ids follow the numbering the client-side contents list used to assign
+    (heading-N over h2/h3/h4 in document order, counting from 1), so links
+    into sections from before the redesign keep working.
+    """
+    soup = BeautifulSoup(rendered_html, 'html.parser')
+    entries = []
+    for index, heading in enumerate(soup.find_all(['h2', 'h3', 'h4']), start=1):
+        if not heading.get('id'):
+            heading['id'] = f'heading-{index}'
+        if heading.name in ('h2', 'h3'):
+            entries.append((heading.name, heading['id'], heading.get_text(' ', strip=True)))
+    return str(soup), entries
+
+
+def build_toc(entries, language):
+    """The sticky contents rail (wide) and the collapsible box (narrow)."""
+    if not entries:
+        return '', ''
+    text = ARTICLE_TEXT[language]
+    links = ''.join(
+        f'<a class="toc-link toc-{level}" href="#{esc(anchor)}"><span class="toc-dot" aria-hidden="true"></span>'
+        f'<span>{esc(label)}</span></a>'
+        for level, anchor, label in entries
+    )
+    aside = (
+        f'            <aside class="toc" aria-label="{text["toc"]}">'
+        f'<span class="k toc-k">{text["toc"]}</span>{links}</aside>'
+    )
+    box = (
+        '                <details class="toc-box">'
+        f'<summary><span>{text["toc"]}</span><span class="toc-sign" aria-hidden="true"></span></summary>'
+        f'<div class="toc-box-links">{links}</div></details>'
+    )
+    return aside, box
+
+
+def linked_article_files(html_content):
+    """Article files an article links to, in order of first appearance."""
+    soup = BeautifulSoup(html_content or '', 'html.parser')
+    files = []
+    for anchor in soup.find_all('a', href=True):
+        parsed = urlparse(anchor['href'])
+        if parsed.scheme and parsed.netloc != 'simoncos.github.io':
+            continue
+        path = parsed.path
+        if parsed.netloc or path.startswith('/'):
+            if not re.fullmatch(r'/blogs/[^/]+\.html', path):
+                continue
+        elif '/' in path and not re.fullmatch(r'\.\./blogs/[^/]+\.html', path):
+            continue
+        name = path.rsplit('/', 1)[-1]
+        if name.endswith('.html') and name not in files:
+            files.append(name)
+    return files
 
 
 def build_head_extras(metadata):
@@ -636,6 +741,15 @@ def optimize_article_images(html_content):
     return str(soup)
 
 
+def lead_image(rendered_html):
+    """The article's first image, as a path from the site root."""
+    image = BeautifulSoup(rendered_html or '', 'html.parser').find('img')
+    source = (image.get('src') or '').strip() if image else ''
+    if not source or urlparse(source).scheme:
+        return source
+    return f"blogs/{source}"
+
+
 def infer_language_code(file_name):
     return 'en' if '.en.' in file_name else 'zh'
 
@@ -656,23 +770,6 @@ def absolute_site_url(path=''):
     base = 'https://simoncos.github.io/'
     normalized = path.lstrip('/')
     return f"{base}{normalized}"
-
-
-def get_site_version():
-    """Return version string from git describe, e.g. v1.0 or v1.0-3-gabcdef."""
-    override = os.environ.get('SITE_VERSION_OVERRIDE')
-    if override:
-        return override
-
-    try:
-        import subprocess
-        result = subprocess.run(
-            ['git', 'describe', '--tags', '--always'],
-            capture_output=True, text=True, check=True
-        )
-        return result.stdout.strip()
-    except Exception:
-        return 'unknown'
 
 
 def make_links_absolute(html_content, article_url):
@@ -723,7 +820,7 @@ def build_rss_feed(posts, language_code):
     rss = ElementTree.Element('rss', attrib={'version': '2.0'})
     channel = ElementTree.SubElement(rss, 'channel')
 
-    title = 'simonc site RSS (中文)' if language_code == 'zh' else 'simonc site RSS (English)'
+    title = 'simoncos RSS (中文)' if language_code == 'zh' else 'simoncos RSS (English)'
     description = '中文文章订阅' if language_code == 'zh' else 'English posts feed'
     feed_name = f'feed.{language_code}.xml'
 
@@ -851,6 +948,8 @@ def build_article_groups(posts):
                 'html_content': post.get('html_content', ''),
                 'rendered_content': post.get('rendered_content', ''),
                 'excerpt': post.get('excerpt', ''),
+                'description': post.get('metadata', {}).get('description', ''),
+                'image': post.get('image', ''),
                 'available': True,
             }
 
@@ -883,14 +982,8 @@ def summarize_backlink_source(group):
 def group_links_to_files(group, target_files):
     for entry in (group.get('languages') or {}).values():
         html_content = entry.get('html_content') if entry else ''
-        if not html_content:
-            continue
-
-        soup = BeautifulSoup(html_content, 'html.parser')
-        for anchor in soup.find_all('a', href=True):
-            if anchor.get('href') in target_files:
-                return True
-
+        if html_content and set(linked_article_files(html_content)) & set(target_files):
+            return True
     return False
 
 
@@ -943,6 +1036,8 @@ def build_article_index(article_groups, last_updated):
                 'file': entry.get('file', ''),
                 'markdown': entry.get('markdown', ''),
                 'excerpt': entry.get('excerpt', ''),
+                'description': entry.get('description', ''),
+                'image': entry.get('image', ''),
                 'available': entry.get('available', True),
             }
 
@@ -981,13 +1076,25 @@ def generate_blog_pages():
             raise BlogGenerationError("Article collection failed:\n- " + "\n- ".join(failures))
 
         article_groups = build_article_groups(blog_posts)
-        article_group_map = {group['id']: group for group in article_groups}
-        article_sequence = build_article_sequence(article_groups)
+        backlinks_data = build_backlinks_data(article_groups, None)
+        context = {
+            'groups': article_groups,
+            'group_map': {group['id']: group for group in article_groups},
+            'file_index': {
+                entry['file']: group
+                for group in article_groups
+                for entry in (group.get('languages') or {}).values()
+                if entry.get('file')
+            },
+            'sequence': build_article_sequence(article_groups),
+            'backlinks': backlinks_data['files'],
+            'series_meta': load_series_meta(),
+        }
 
         # Second pass: render each post
         for post in blog_posts:
             try:
-                render_blog_post(post, template, article_group_map, article_sequence)
+                render_blog_post(post, template, context)
             except Exception as e:
                 logging.error(f"Error rendering {post.get('markdown')}: {str(e)}")
                 failures.append(f"render {post.get('markdown')}: {str(e)}")
@@ -1014,6 +1121,8 @@ def generate_blog_pages():
         save_json_data(build_backlinks_data(article_groups, last_updated), 'backlinks_data.json')
         save_rss_feed(blog_posts, 'zh')
         save_rss_feed(blog_posts, 'en')
+
+        generate_blogs_page(article_groups, context['series_meta'])
 
         logging.info("Blog pages, data, and RSS feeds generated successfully")
         return blog_posts
@@ -1052,6 +1161,7 @@ def collect_markdown_file(md_file, blog_posts):
         html_content = optimize_article_images(html_content)
         title, rendered_post_content = extract_title_and_content(html_content)
         excerpt = build_post_excerpt(content)
+        image = lead_image(rendered_post_content)
 
         tags = metadata.get('tags', '').split(',')
         tags = [tag.strip() for tag in tags if tag.strip()]
@@ -1065,6 +1175,7 @@ def collect_markdown_file(md_file, blog_posts):
             "html_content": html_content,
             "rendered_content": rendered_post_content,
             "excerpt": excerpt,
+            "image": image,
             "date": metadata.get('date', ''),
             "metadata": metadata,
             "markdown_path": markdown_path,
@@ -1076,31 +1187,113 @@ def collect_markdown_file(md_file, blog_posts):
         raise BlogGenerationError(f"Failed to collect markdown file: {str(e)}")
 
 
-def render_blog_post(post, template, article_group_map, article_sequence=None):
+def load_series_meta():
+    """Display titles and blurbs for series, keyed by their frontmatter name."""
+    try:
+        data = json.loads(Path('data/site.json').read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return {}
+    return {entry['name']: entry for entry in data.get('series', [])}
+
+
+def series_info(name, series_meta):
+    meta = series_meta.get(name) or {}
+    slug = meta.get('id') or re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
+    title = meta.get('title') or {'en': name, 'zh': name}
+    return {'id': slug, 'title': title, 'desc': meta.get('desc') or {}}
+
+
+def series_parts(article_groups, name):
+    parts = [group for group in article_groups if (group.get('series') or {}).get('name') == name]
+    return sorted(parts, key=lambda group: (int(group['series'].get('part') or 0), group.get('date', '')))
+
+
+def entry_for(group, language):
+    languages = group.get('languages') or {}
+    return languages.get(language) or languages.get('zh') or languages.get('en') or {}
+
+
+def build_post_foot(post, article_group, article_groups, file_index, group_map, backlinks, neighbours, series_meta):
+    """Series box, tags, the links in and out, and newer / older."""
+    language = post['language']
+    text = ARTICLE_TEXT[language]
+    parts = []
+
+    series = article_group.get('series')
+    if series:
+        info = series_info(series['name'], series_meta)
+        rows = []
+        for group in series_parts(article_groups, series['name']):
+            entry = entry_for(group, language)
+            current = ' aria-current="page"' if group['id'] == article_group['id'] else ''
+            rows.append(
+                f'<a href="{esc(entry.get("file", ""))}"{current}>'
+                f'<span class="series-part">{text["part"].format(n=group["series"].get("part"))}</span>'
+                f'<span>{esc(entry.get("title", ""))}</span></a>'
+            )
+        title = info['title'].get(language) or series['name']
+        parts.append(
+            f'<div class="series-box"><span class="k">{text["series"]} · {esc(title)}</span>{"".join(rows)}</div>'
+        )
+
+    if post['tags']:
+        tags = ''.join(
+            f'<a class="tag" href="../blogs.html#topic-{quote(tag)}">{esc(tag_label(tag, language))}</a>'
+            for tag in post['tags']
+        )
+        parts.append(f'<div class="article-tags"><span class="k">{text["tags"]}</span>{tags}</div>')
+
+    def link_row(group):
+        entry = entry_for(group, language)
+        return (
+            f'<a class="xref" href="{esc(entry.get("file", ""))}"><span>{esc(entry.get("title", ""))}</span>'
+            f'<span class="num">{esc(group.get("date", ""))}</span></a>'
+        )
+
+    outgoing = []
+    for file_name in linked_article_files(post['html_content']):
+        group = file_index.get(file_name)
+        if group and group['id'] != article_group['id'] and group not in outgoing:
+            outgoing.append(group)
+    boxes = []
+    if outgoing:
+        boxes.append(
+            f'<div class="xrefs"><span class="k">{text["links_out"]}</span>'
+            + ''.join(link_row(group) for group in outgoing) + '</div>'
+        )
+    incoming = [group_map[item['group_id']] for item in backlinks if item.get('group_id') in group_map]
+    if incoming:
+        boxes.append(
+            f'<div class="xrefs"><span class="k">{text["links_in"]}</span>'
+            + ''.join(link_row(group) for group in incoming) + '</div>'
+        )
+    else:
+        boxes.append(
+            f'<div class="xrefs is-empty"><span class="k">{text["links_in"]}</span>'
+            f'<span class="xrefs-empty">{text["links_in_empty"]}</span></div>'
+        )
+    parts.append(f'<section class="xref-grid">{"".join(boxes)}</section>')
+
+    post_nav = build_post_nav(neighbours, language)
+    if post_nav:
+        parts.append(post_nav)
+
+    return '\n'.join(f'                {part}' for part in parts)
+
+
+def render_blog_post(post, template, context):
     """Render and save individual blog post."""
     try:
-        md_file = post['markdown']
         html_file = post['file']
         metadata = post['metadata']
         title = post['title']
-        rendered_post_content = post['rendered_content']
         markdown_path = post['markdown_path']
-        tags = post['tags']
+        language = post['language']
+        text = ARTICLE_TEXT[language]
 
-        article_group = article_group_map.get(post['group_id'], {})
+        article_group = context['group_map'].get(post['group_id'], {})
         article_languages = article_group.get('languages', {})
-        target_language = 'zh' if post['language'] == 'en' else 'en'
-        paired_entry = article_languages.get(target_language)
-        paired_label = '中文' if target_language == 'zh' else 'English'
-
-        if paired_entry and paired_entry.get('file'):
-            lang_switch_html = (
-                f'<div class="lang-switch">'
-                f'<a class="lang-switch-link" data-language-switch data-target-language="{target_language}" href="{paired_entry["file"]}">{paired_label}</a>'
-                f'</div>'
-            )
-        else:
-            lang_switch_html = ''
+        paired_entry = article_languages.get('zh' if language == 'en' else 'en')
 
         created, updated = get_file_times_with_metadata(
             markdown_path,
@@ -1113,52 +1306,63 @@ def render_blog_post(post, template, article_group_map, article_sequence=None):
         meta_description = build_meta_description(
             metadata.get('description') or post.get('excerpt') or title
         )
-        og_locale = 'zh_CN' if post['language'] == 'zh' else 'en_US'
-        post_meta_extra = build_post_meta_extra(metadata)
-        og_image = build_og_image(rendered_post_content, title)
-        reading_minutes = estimate_reading_minutes(rendered_post_content)
-        post_nav = build_post_nav((article_sequence or {}).get(html_file), post['language'])
-
-        tags_html = '<ul class="tag-list">' + ''.join([
-            f'<li><a href="../blogs.html#topic-{quote(tag)}">{html_lib.escape(tag)}</a></li>'
-            for tag in tags
-        ]) + '</ul>'
-
-        head_extras = build_head_extras(metadata)
-
-        page_content = template.replace('{{TITLE}}', title)
-        page_content = page_content.replace('{{TITLE_ATTR}}', html_lib.escape(title, quote=True))
-        page_content = page_content.replace('{{META_DESCRIPTION}}', html_lib.escape(meta_description, quote=True))
-        page_content = page_content.replace('{{CANONICAL_URL}}', canonical_url)
-        hreflang_alternates = build_hreflang_alternates(article_languages)
-        page_content = page_content.replace(
-            '\n{{HREFLANG_ALTERNATES}}', f'\n{hreflang_alternates}' if hreflang_alternates else ''
+        og_locale = 'zh_CN' if language == 'zh' else 'en_US'
+        rendered_content, toc_entries = assign_heading_ids(post['rendered_content'])
+        og_image = build_og_image(rendered_content, title)
+        reading_minutes = estimate_reading_minutes(rendered_content)
+        toc_aside, toc_box = build_toc(toc_entries, language)
+        post_meta = build_post_meta(metadata, language, created, updated, reading_minutes, paired_entry)
+        post_foot = build_post_foot(
+            post,
+            article_group,
+            context['groups'],
+            context['file_index'],
+            context['group_map'],
+            context['backlinks'].get(html_file, []),
+            context['sequence'].get(html_file),
+            context['series_meta'],
         )
-        page_content = page_content.replace('{{OG_LOCALE}}', og_locale)
-        page_content = page_content.replace('{{OG_IMAGE}}', html_lib.escape(og_image['url'], quote=True))
-        page_content = page_content.replace('{{OG_IMAGE_WIDTH}}', og_image['width'])
-        page_content = page_content.replace('{{OG_IMAGE_HEIGHT}}', og_image['height'])
-        page_content = page_content.replace('{{OG_IMAGE_ALT}}', html_lib.escape(og_image['alt'], quote=True))
-        page_content = page_content.replace('{{PAGE_LANGUAGE}}', 'zh-CN' if post['language'] == 'zh' else 'en')
-        page_content = page_content.replace('{{ARTICLE_GROUP_ID}}', post['group_id'])
-        page_content = page_content.replace('{{ARTICLE_LANGUAGE}}', post['language'])
-        page_content = page_content.replace('{{ARTICLE_EN_FILE}}', article_languages.get('en', {}).get('file', ''))
-        page_content = page_content.replace('{{ARTICLE_ZH_FILE}}', article_languages.get('zh', {}).get('file', ''))
-        page_content = page_content.replace('{{CONTENT}}', rendered_post_content)
-        page_content = page_content.replace('{{CREATED}}', created)
-        page_content = page_content.replace('{{UPDATED}}', updated)
-        # Consume the placeholder's own line when there is nothing to render.
-        page_content = page_content.replace(
-            '\n{{POST_META_EXTRA}}', f'\n{post_meta_extra}' if post_meta_extra else ''
-        )
-        page_content = page_content.replace('{{TAGS}}', tags_html)
-        page_content = page_content.replace('{{READING_MINUTES}}', str(reading_minutes))
-        page_content = page_content.replace(
-            '\n{{POST_NAV}}', f'\n{post_nav}' if post_nav else ''
-        )
-        page_content = page_content.replace('{{LANG_SWITCH}}', lang_switch_html)
-        page_content = page_content.replace('{{HEAD_EXTRAS}}', head_extras)
-        page_content = page_content.replace('{{SITE_VERSION}}', get_site_version())
+
+        if paired_entry and paired_entry.get('file'):
+            alt_href = paired_entry['file']
+        else:
+            alt_href = f"../blogs.html?lang={'zh' if language == 'en' else 'en'}"
+
+        replacements = {
+            '{{TITLE}}': html_lib.escape(title, quote=False),
+            '{{TITLE_ATTR}}': html_lib.escape(title, quote=True),
+            '{{SECTION_LABEL}}': text['section'],
+            '{{META_DESCRIPTION}}': html_lib.escape(meta_description, quote=True),
+            '{{CANONICAL_URL}}': canonical_url,
+            '{{OG_LOCALE}}': og_locale,
+            '{{OG_IMAGE}}': html_lib.escape(og_image['url'], quote=True),
+            '{{OG_IMAGE_WIDTH}}': og_image['width'],
+            '{{OG_IMAGE_HEIGHT}}': og_image['height'],
+            '{{OG_IMAGE_ALT}}': html_lib.escape(og_image['alt'], quote=True),
+            '{{PAGE_LANGUAGE}}': 'zh-Hans' if language == 'zh' else 'en',
+            '{{ARTICLE_GROUP_ID}}': post['group_id'],
+            '{{ARTICLE_LANGUAGE}}': language,
+            '{{LANG_ALT_HREF}}': html_lib.escape(alt_href, quote=True),
+            '{{LANG_ALT_HREFLANG}}': 'zh-Hans' if language == 'en' else 'en',
+            '{{LANG_ALT}}': 'zh' if language == 'en' else 'en',
+            '{{TOP_LABEL}}': text['top'],
+            '{{HEAD_EXTRAS}}': build_head_extras(metadata),
+        }
+        # Blocks that may be empty consume their own line.
+        blocks = {
+            '{{HREFLANG_ALTERNATES}}': build_hreflang_alternates(article_languages),
+            '{{TOC_ASIDE}}': toc_aside,
+            '{{TOC_BOX}}': toc_box,
+            '{{POST_META}}': post_meta,
+            '{{POST_FOOT}}': post_foot,
+            '{{CONTENT}}': rendered_content,
+        }
+
+        page_content = template
+        for placeholder, value in blocks.items():
+            page_content = page_content.replace(f'\n{placeholder}', f'\n{value}' if value else '')
+        for placeholder, value in replacements.items():
+            page_content = page_content.replace(placeholder, value)
 
         with open(os.path.join('blogs', html_file), 'w', encoding='utf-8') as f:
             f.write(page_content)
@@ -1361,17 +1565,248 @@ def build_post_excerpt(markdown_body, word_limit=100, cjk_char_limit=100):
 
     return '\n'.join(out_lines)
 
-def infer_language_label(file_name):
-    return 'EN' if file_name.endswith('.en.html') else '中文'
+def day_label(date_value):
+    day = parse_frontmatter_date(date_value)
+    if not day:
+        return date_value, date_value
+    return f"{MONTH_NAMES[day.month - 1][:3]} {day.day}", f"{day.month} 月 {day.day} 日"
 
-def generate_blogs_page(blog_posts):
-    """Generate the blogs listing shell; archive previews are rendered client-side."""
+
+def month_label(key):
+    year, month = int(key[:4]), int(key[5:7])
+    return f"{MONTH_NAMES[month - 1]} {year}", f"{year} 年 {month} 月"
+
+
+def count_label(n):
+    return (f"{n} article" if n == 1 else f"{n} articles"), f"{n} 篇"
+
+
+def render_article_row(group, article_groups, series_meta, is_open):
+    """One row of the Articles list: date, title, other-language title,
+    series pill, and the folding excerpt."""
+    languages = group.get('languages') or {}
+    en = languages.get('en') or {}
+    zh = languages.get('zh') or {}
+    title_en = en.get('title') or zh.get('title', '')
+    title_zh = zh.get('title') or title_en
+    desc_en = en.get('description') or zh.get('description') or ''
+    desc_zh = zh.get('description') or desc_en
+    href_en = f"blogs/{(en or zh).get('file', '')}"
+    href_zh = f"blogs/{(zh or en).get('file', '')}"
+    group_id = group['id']
+    tags = group.get('tags') or []
+    day_en, day_zh = day_label(group.get('date', ''))
+
+    alt = ''
+    if title_en != title_zh:
+        alt = (
+            '<span class="arow-alt"><span data-l="en" lang="zh-Hans">'
+            f'{esc(title_zh)}</span><span data-l="zh">{esc(title_en)}</span></span>'
+        )
+
+    series_html = ''
+    series_attr = ''
+    series = group.get('series')
+    if series:
+        info = series_info(series['name'], series_meta)
+        parts = series_parts(article_groups, series['name'])
+        index = next(i for i, part in enumerate(parts) if part['id'] == group_id)
+        pips = ''.join(
+            f'<span class="pip{" is-on" if i == index else ""}"></span>' for i in range(len(parts))
+        )
+        part_en = f"{index + 1} of {len(parts)}"
+        part_zh = f"第 {index + 1} / {len(parts)} 篇"
+        series_attr = f' data-series="{esc(info["id"])}"'
+        series_html = (
+            f'<button class="series-pill" type="button" data-to-series="{esc(info["id"])}">'
+            f'<span class="pips" aria-hidden="true">{pips}</span>'
+            f'<span class="series-name">{bi(info["title"].get("en", ""), info["title"].get("zh"))}</span>'
+            f'<span class="series-of">{bi(part_en, part_zh)}</span>'
+            '<span class="series-go" aria-hidden="true">→</span></button>'
+        )
+
+    search = ' '.join([title_en, title_zh, desc_en, desc_zh]).lower()
+    bilingual = '<span class="arow-bi">中文 / EN</span>' if en and zh else ''
+    tag_pills = ''.join(
+        f'<span class="tag-label">{bi(*TAG_LABELS.get(tag, (tag, tag)))}</span>' for tag in tags
+    )
+    expanded = 'true' if is_open else 'false'
+    return '\n'.join([
+        f'                <article class="arow{" is-open" if is_open else ""}" id="a-{esc(group_id)}" '
+        f'data-tags="{esc(" ".join(tags))}"{series_attr} data-search="{esc(search)}">',
+        '                    <div class="arow-top">',
+        f'                        <span class="arow-date"><span class="num">{bi(day_en, day_zh)}</span>{bilingual}</span>',
+        '                        <span class="arow-main">',
+        f'                            <button class="arow-title" type="button" aria-expanded="{expanded}" aria-controls="ex-{esc(group_id)}">'
+        f'{bi(title_en, title_zh)}</button>',
+        f'                            {alt}{series_html}',
+        '                        </span>',
+        f'                        <button class="arow-toggle" type="button" aria-expanded="{expanded}" aria-controls="ex-{esc(group_id)}"'
+        f'{i18n_attrs(aria_label=("Toggle excerpt", "展开摘要"))}>+</button>',
+        '                    </div>',
+        f'                    <div class="arow-ex" id="ex-{esc(group_id)}">',
+        '                        <div class="arow-ex-clip"><div class="arow-ex-in">',
+        '                            <span class="arow-spacer" aria-hidden="true"></span>',
+        '                            <div class="arow-ex-body">',
+        f'                                <p>{bi(desc_en, desc_zh)}</p>',
+        '                                <div class="arow-actions">'
+        f'<a class="pill pill-ink read-pill"{i18n_attrs(href=(href_en, href_zh))}>{bi("Read", "阅读")}<span aria-hidden="true">→</span></a>'
+        f'{tag_pills}</div>',
+        '                            </div>',
+        '                        </div></div>',
+        '                    </div>',
+        '                </article>',
+    ])
+
+
+def render_series_card(info, parts, index):
+    """A series as a route: numbered parts on a line, the chosen one below."""
+    dates = sorted(group.get('date', '')[:7] for group in parts if group.get('date'))
+    span = dates[0] if dates and dates[0] == dates[-1] else (f"{dates[0]} — {dates[-1]}" if dates else '')
+    meta_en = f"{len(parts)} published" + (f" · {span}" if span else '')
+    meta_zh = f"已发布 {len(parts)} 篇" + (f" · {span}" if span else '')
+
+    nodes = []
+    details = []
+    for i, group in enumerate(parts):
+        languages = group.get('languages') or {}
+        en = languages.get('en') or {}
+        zh = languages.get('zh') or {}
+        title_en = en.get('title') or zh.get('title', '')
+        title_zh = zh.get('title') or title_en
+        desc_en = en.get('description') or zh.get('description') or ''
+        desc_zh = zh.get('description') or desc_en
+        part = group['series'].get('part') or i + 1
+        state = ' is-sel' if i == 0 else ''
+        nodes.append(
+            f'<button class="rnode{state}" type="button" data-part="{i}" aria-pressed="{"true" if i == 0 else "false"}">'
+            + ('<span class="rseg" aria-hidden="true"></span>' if i < len(parts) - 1 else '')
+            + f'<span class="rnum">{esc(part)}</span>'
+            f'<span class="rtext"><span class="rdate num">{esc(group.get("date", ""))}</span>'
+            f'<span class="rtitle">{bi(title_en, title_zh)}</span></span></button>'
+        )
+        cta = bi("Start here", "从这里开始") if i == 0 else bi("Read", "阅读")
+        href = i18n_attrs(href=(f"blogs/{(en or zh).get('file', '')}", f"blogs/{(zh or en).get('file', '')}"))
+        details.append(
+            f'<div class="spart{state}" data-part-detail="{i}">'
+            '<div class="spart-text">'
+            f'<span class="k-soft">{bi(f"Part {part}", f"第 {part} 篇")}</span>'
+            f'<span class="spart-title">{bi(title_en, title_zh)}</span>'
+            f'<p>{bi(desc_en, desc_zh)}</p></div>'
+            f'<a class="pill pill-ink read-pill"{href}>{cta}<span aria-hidden="true">→</span></a></div>'
+        )
+
+    first = parts[0]['series'].get('part') or 1
+    return '\n'.join([
+        f'            <section class="scard is-focus" id="series-{esc(info["id"])}" data-series="{esc(info["id"])}" '
+        f'style="--n:{len(parts)};--delay:{index * 0.08:.2f}s">',
+        '                <div class="scard-head">',
+        '                    <div class="scard-text">',
+        f'                        <span class="k-soft">{bi(meta_en, meta_zh)}</span>',
+        f'                        <h2>{bi(info["title"].get("en", ""), info["title"].get("zh"))}</h2>',
+        (f'                        <p>{bi(info["desc"].get("en", ""), info["desc"].get("zh"))}</p>' if info['desc'] else ''),
+        '                    </div>',
+        f'                    <span class="scard-prog num" data-prog>{bi(f"Part {first} / {len(parts)}", f"第 {first} / {len(parts)} 篇")}</span>',
+        '                </div>',
+        f'                <div class="route">{"".join(nodes)}</div>',
+        f'                <div class="sdetail"><div class="sdetail-clip">{"".join(details)}</div></div>',
+        '            </section>',
+    ])
+
+
+def render_articles_main(article_groups, series_meta):
+    groups = [group for group in article_groups if group.get('languages')]
+    counts = defaultdict(int)
+    for group in groups:
+        for tag in group.get('tags') or []:
+            counts[tag] += 1
+    tag_order = [tag for tag in TAG_LABELS if counts.get(tag)] + sorted(
+        tag for tag in counts if tag not in TAG_LABELS
+    )
+
+    chips = [
+        '<button class="chip" type="button" data-tag="all" aria-pressed="true">'
+        f'{bi("All", "全部")} <span class="seg-n">{len(groups)}</span></button>'
+    ]
+    for tag in tag_order:
+        chips.append(
+            f'<button class="chip" type="button" data-tag="{esc(tag)}" aria-pressed="false">'
+            f'{bi(*TAG_LABELS.get(tag, (tag, tag)))} <span class="seg-n">{counts[tag]}</span></button>'
+        )
+    chips.append(
+        f'<a class="rss-pill"{i18n_attrs(href=("feed.en.xml", "feed.zh.xml"))}>RSS <span aria-hidden="true">↗</span></a>'
+    )
+
+    months = defaultdict(list)
+    for group in groups:
+        months[(group.get('date') or '')[:7]].append(group)
+    month_blocks = []
+    first = True
+    for key in sorted(months, reverse=True):
+        rows = []
+        for group in months[key]:
+            rows.append(render_article_row(group, groups, series_meta, first))
+            first = False
+        label_en, label_zh = month_label(key) if key else ('Undated', '未注明日期')
+        n_en, n_zh = count_label(len(months[key]))
+        month_blocks.append('\n'.join([
+            f'            <section class="amonth" data-month="{esc(key)}">',
+            f'                <div class="amonth-head"><h2>{bi(label_en, label_zh)}</h2>'
+            f'<span class="amonth-n" data-month-count>{bi(n_en, n_zh)}</span></div>',
+            *rows,
+            '            </section>',
+        ]))
+
+    series_names = []
+    for group in groups:
+        name = (group.get('series') or {}).get('name')
+        if name and name not in series_names:
+            series_names.append(name)
+    series_cards = [
+        render_series_card(series_info(name, series_meta), series_parts(groups, name), index)
+        for index, name in enumerate(series_names)
+    ]
+
+    return '\n'.join([
+        '    <main id="main" class="articles enter" data-articles tabindex="-1">',
+        '        <section class="ahead">',
+        f'            <h1 class="page-h1">{bi("Articles", "文章")}<sup class="ahead-n num" data-shown>{len(groups)}</sup></h1>',
+        '            <div class="ahead-tools">',
+        f'                <div class="seg" role="group"{i18n_attrs(aria_label=("View", "视图"))}>'
+        '<button class="seg-btn" type="button" data-view="list" aria-pressed="true">'
+        f'{bi("All articles", "全部文章")} <span class="seg-n">{len(groups)}</span></button>'
+        '<button class="seg-btn" type="button" data-view="series" aria-pressed="false">'
+        f'{bi("Series", "系列")} <span class="seg-n">{len(series_cards)}</span></button></div>',
+        '                <label class="search" data-list-only><span class="search-icon" aria-hidden="true">⌕</span>'
+        f'<input type="search" data-search autocomplete="off"'
+        f'{i18n_attrs(placeholder=("Search titles and excerpts", "搜索标题和摘要"), aria_label=("Search titles and excerpts", "搜索标题和摘要"))}>'
+        '</label>',
+        '            </div>',
+        '        </section>',
+        '        <div class="alist-view" data-view-panel="list" id="topics">',
+        f'            <div class="tagbar" role="group"{i18n_attrs(aria_label=("Tags", "标签"))}>{"".join(chips)}</div>',
+        '            <div class="alist">',
+        *month_blocks,
+        f'                <p class="aempty" data-empty hidden>{bi("Nothing matches that yet.", "暂时没有匹配的文章。")}</p>',
+        '            </div>',
+        '        </div>',
+        '        <div class="series-view" data-view-panel="series" id="reading-paths">',
+        *series_cards,
+        '        </div>',
+        '    </main>',
+    ])
+
+
+def generate_blogs_page(article_groups, series_meta):
+    """Render the Articles page: every article and series is in the HTML;
+    articles.js only filters, folds and switches views."""
     try:
         with open('templates/blogs-listing-template.html', 'r', encoding='utf-8') as template_file:
             template = template_file.read()
 
+        page = template.replace('{{ARTICLES}}', render_articles_main(article_groups, series_meta))
         with open('blogs.html', 'w', encoding='utf-8') as f:
-            f.write(template.replace('{{SITE_VERSION}}', get_site_version()))
+            f.write(page)
 
         logging.info("Successfully generated blogs listing page")
 
@@ -1382,8 +1817,7 @@ def generate_blogs_page(blog_posts):
 if __name__ == "__main__":
     configure_logging()
     try:
-        blog_posts = generate_blog_pages()
-        generate_blogs_page(blog_posts)
+        generate_blog_pages()
     except BlogGenerationError as e:
         logging.error(f"Blog generation failed: {str(e)}")
         sys.exit(1)

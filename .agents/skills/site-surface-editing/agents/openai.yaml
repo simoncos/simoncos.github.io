@@ -1,4 +1,4 @@
 interface:
   display_name: "Site Surface Editing"
-  short_description: "Edit simonc site public surfaces safely"
-  default_prompt: "Use $site-surface-editing when changing homepage, Gallery, Projects, About, navigation, i18n, or surface data."
+  short_description: "Edit simoncos site pages safely"
+  default_prompt: "Use $site-surface-editing when changing Index, Articles, Work, Projects, Favorites, About, navigation, bilingual copy, or site data."

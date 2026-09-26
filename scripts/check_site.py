@@ -110,7 +110,9 @@ def local_target_exists(source_file: Path, raw_url: str) -> bool:
 
 
 def check_local_refs(errors: list[str]) -> None:
-    ref_attrs = {"href", "src", "poster"}
+    # data-zh-href is the Chinese twin of href (site.js swaps them), and
+    # data-float is the image a hover preview loads.
+    ref_attrs = {"href", "src", "poster", "data-zh-href", "data-float"}
     for html_file in iter_html_files():
         doc = parse_html(html_file)
         for tag, attrs in doc.tags:
@@ -161,14 +163,20 @@ def expected_sitemap_urls() -> set[str]:
     for category in favorites_payload.get("categories", []):
         expected.add(site_url_for_path(f"favorites/{category['id']}.html"))
 
-    for rel_path, collection_key in (("data/gallery_data.json", "items"), ("data/projects_data.json", "projects")):
-        payload = json.loads((ROOT / rel_path).read_text(encoding="utf-8"))
-        for item in payload.get(collection_key, []):
-            for target in (item.get("paths") or {}).values():
-                if target and not is_external(target) and target.endswith(".html"):
-                    expected.add(site_url_for_path(target))
+    site = json.loads((ROOT / "data/site.json").read_text(encoding="utf-8"))
+    for item in [*site.get("works", []), *site.get("projects", [])]:
+        for target in localized_values(item.get("href")):
+            if not is_external(target) and target.endswith(".html"):
+                expected.add(site_url_for_path(target))
 
     return expected
+
+
+def localized_values(value: object) -> list[str]:
+    """A string, or the values of an {en, zh} object."""
+    if isinstance(value, dict):
+        return [str(item) for item in value.values() if item]
+    return [str(value)] if value else []
 
 
 def check_sitemap(errors: list[str]) -> None:
@@ -236,18 +244,28 @@ def check_embedded_pages_are_noindex(errors: list[str]) -> None:
             errors.append(f"{html_file.relative_to(ROOT)}: embedded support page must declare noindex")
 
 
-def extract_data_pages(text: str) -> list[str]:
-    return re.findall(r'data-page=["\']([^"\']+)["\']', text)
+def check_site_data(errors: list[str]) -> None:
+    """Every local image and link named in data/site.json exists."""
+    site = json.loads((ROOT / "data/site.json").read_text(encoding="utf-8"))
+    keys = {"img", "href", "cover", "report_image", "essay_image", "essay_href"}
 
+    def walk(value: object, trail: str) -> None:
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if key in keys:
+                    for target in localized_values(item):
+                        parsed = urlparse(target)
+                        if parsed.scheme or not parsed.path:
+                            continue
+                        if not (ROOT / unquote(parsed.path)).exists():
+                            errors.append(f"data/site.json: {trail}.{key} is missing: {target}")
+                else:
+                    walk(item, f"{trail}.{key}")
+        elif isinstance(value, list):
+            for index, item in enumerate(value):
+                walk(item, f"{trail}[{index}]")
 
-def check_nav_fallback(errors: list[str]) -> None:
-    nav_pages = extract_data_pages((ROOT / "navigation.html").read_text(encoding="utf-8"))
-    load_nav = (ROOT / "src/js/load-nav.js").read_text(encoding="utf-8")
-    match = re.search(r"function renderFallbackNav\(\).*?navigationPlaceholder\.innerHTML = `(?P<html>.*?)`;", load_nav, re.S)
-    fallback_pages = extract_data_pages(match.group("html")) if match else []
-
-    if nav_pages != fallback_pages:
-        errors.append(f"navigation fallback drift: navigation={nav_pages}, fallback={fallback_pages}")
+    walk(site, "site")
 
 
 def is_external(value: str) -> bool:
@@ -432,23 +450,6 @@ def check_blog_image_attributes(errors: list[str]) -> None:
 
 
 def check_json_assets(errors: list[str]) -> None:
-    payload_specs = [
-        ("data/gallery_data.json", "items"),
-        ("data/projects_data.json", "projects"),
-    ]
-
-    for rel_path, collection_key in payload_specs:
-        data_path = ROOT / rel_path
-        payload = json.loads(data_path.read_text(encoding="utf-8"))
-        for item in payload.get(collection_key, []):
-            item_id = item.get("id", "<unknown>")
-            cover = item.get("cover")
-            if cover and not is_external(cover) and not (ROOT / cover).exists():
-                errors.append(f"{rel_path}: {item_id} cover is missing: {cover}")
-            for language, target in (item.get("paths") or {}).items():
-                if target and not is_external(target) and not (ROOT / target).exists():
-                    errors.append(f"{rel_path}: {item_id} {language} path is missing: {target}")
-
     index_path = ROOT / "data/article_index.json"
     if not index_path.exists():
         errors.append("data/article_index.json is missing")
@@ -504,26 +505,22 @@ def check_json_assets(errors: list[str]) -> None:
                     )
 
 
-def check_data_last_updated(errors: list[str]) -> None:
-    payload_specs = [
-        ("data/gallery_data.json", "items"),
-        ("data/projects_data.json", "projects"),
-    ]
-
-    for rel_path, collection_key in payload_specs:
-        payload = json.loads((ROOT / rel_path).read_text(encoding="utf-8"))
-        last_updated = payload.get("last_updated")
-        dated_items = [
-            item.get("date")
-            for item in payload.get(collection_key, [])
-            if item.get("date")
-        ]
-        if not last_updated or not dated_items:
-            continue
-
-        latest_item_date = max(dated_items)
-        if last_updated < latest_item_date:
-            errors.append(f"{rel_path}: last_updated {last_updated} predates latest item date {latest_item_date}")
+def check_site_updated(errors: list[str]) -> None:
+    """The footer's "Updated" date must not predate the newest dated content."""
+    shell = json.loads((ROOT / "data/site_shell.json").read_text(encoding="utf-8"))
+    site_updated = shell.get("site_updated", "")
+    site = json.loads((ROOT / "data/site.json").read_text(encoding="utf-8"))
+    dates = [str(item.get("date", ""))[:10] for item in site.get("works", [])]
+    dates += [str(item.get("updated", ""))[:10] for item in site.get("projects", [])]
+    index = json.loads((ROOT / "data/article_index.json").read_text(encoding="utf-8"))
+    for group in index.get("groups", []):
+        for entry in (group.get("languages") or {}).values():
+            dates.append(str(entry.get("date", ""))[:10])
+    dates = [value for value in dates if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value)]
+    if dates and site_updated < max(dates):
+        errors.append(
+            f"data/site_shell.json: site_updated {site_updated} predates the newest content date {max(dates)}"
+        )
 
 
 def check_css_cache_keys(errors: list[str]) -> None:
@@ -580,9 +577,9 @@ def main() -> int:
     check_local_refs(errors)
     check_sitemap(errors)
     check_embedded_pages_are_noindex(errors)
-    check_nav_fallback(errors)
+    check_site_data(errors)
     check_json_assets(errors)
-    check_data_last_updated(errors)
+    check_site_updated(errors)
     check_css_cache_keys(errors)
     check_js_cache_keys(errors)
     check_preview_domains(errors)

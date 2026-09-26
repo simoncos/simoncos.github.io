@@ -108,33 +108,33 @@ class FavoritesPageTests(unittest.TestCase):
         for category in load_payload()["categories"]:
             html = (ROOT / f"favorites/{category['id']}.html").read_text(encoding="utf-8")
             with self.subTest(category=category["id"]):
-                self.assertEqual(html.count('<li class="favorite-row'), len(category["works"]))
+                self.assertEqual(len(re.findall(r'<li class="[^"]*\bfav-row\b', html)), len(category["works"]))
                 for work in category["works"]:
                     for mark in work["marks"]:
                         if mark["review"]:
                             self.assertIn(escape(mark["review"], quote=True), html)
+                # Reviews are shown as written: never cut with an added ellipsis.
+                self.assertNotIn("…</p>", html.replace("……</p>", ""))
 
-    def test_rows_do_not_use_the_i18n_date_hook(self):
-        # i18n.ts replaces the text of every [data-date] element with a formatted date.
+    def test_rows_carry_their_marking_date_as_data(self):
         for path in (ROOT / "favorites").glob("*.html"):
+            html = path.read_text(encoding="utf-8")
             with self.subTest(path=path.name):
-                self.assertNotIn("data-date=", path.read_text(encoding="utf-8"))
+                self.assertNotIn("data-date=", html)
+                self.assertRegex(html, r'data-marked="\d{4}-\d{2}-\d{2}"')
 
-    def test_pages_are_chinese_only(self):
+    def test_system_copy_is_bilingual_and_item_content_stays_chinese(self):
+        # Che's call for v3: labels switch with the site language; titles,
+        # meta and reviews are Chinese as written.
         for path in [ROOT / "favorites.html", *sorted((ROOT / "favorites").glob("*.html"))]:
             html = path.read_text(encoding="utf-8")
             with self.subTest(path=path.name):
-                self.assertIn('<html lang="zh-Hans">', html)
-                self.assertNotIn("hreflang", html)
+                self.assertIn('<span data-l="zh" lang="zh-Hans">', html)
+                self.assertRegex(html, r'<ol class="(?:fav-list|reel-list)"[^>]*lang="zh-Hans"')
 
-    def test_nav_entry_shows_in_both_languages(self):
-        # The pages are Chinese only, but the English nav still lists the column:
-        # the site defaults to English, and hiding it there left no way in.
-        for path in ("navigation.html", "src/ts/load-nav.ts"):
-            text = (ROOT / path).read_text(encoding="utf-8")
-            with self.subTest(path=path):
-                self.assertIn('<li><a href="#" data-page="favorites.html"', text)
-                self.assertNotIn("data-nav-lang", text)
+    def test_nav_lists_the_column_in_both_languages(self):
+        site_shell = (ROOT / "scripts/site_shell.py").read_text(encoding="utf-8")
+        self.assertIn('("favorites", "favorites.html", "Favorites", "收藏")', site_shell)
 
     def test_essay_links_point_at_published_articles_with_original_dates(self):
         links = {work["link"]: work for c in load_payload()["categories"] for work in c["works"]}

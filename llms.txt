@@ -1,17 +1,17 @@
-# simonc site
+# simoncos
 
 > Personal site of simoncos / Che ZHAO: a live public surface for software, AI collaboration, data projects, research artifacts, essays, talks, and field notes.
 
-The motto for this site is "Connecting the dots." The site is static, bilingual, and organized as a living index rather than a fixed portfolio. English pages generally end in `.en.html`; Chinese pages use the same slug without `.en.html`. The homepage is a current editorial surface backed by `data/home_surface.json`.
+The motto for this site is "Connecting the dots." The site is static, bilingual, and organized as a living index rather than a fixed portfolio. It has five sections: Index, Articles, Work, Favorites and About. Articles and project pages are one language per file: English pages generally end in `.en.html`; Chinese pages use the same slug without `.en.html`. Section pages carry both languages in the HTML and switch with `?lang=zh`.
 
 ## Start here
 
-- [Live homepage](https://simoncos.github.io/): Current public surface and recent work.
-- [About](https://simoncos.github.io/about.html): Profile, motto, working modes, contact links, and operating principles.
+- [Index](https://simoncos.github.io/): Selected work, recent articles and a short changelog.
+- [About](https://simoncos.github.io/about.html): Short profile, motto and contact links.
 - [Projects](https://simoncos.github.io/projects.html): Index of maintained tools and systems; open a project for its context, outputs, and related work.
-- [Essays](https://simoncos.github.io/blogs.html): Long-form writing archive with structured reading paths and topic discovery.
-- [Gallery](https://simoncos.github.io/gallery.html): Talks, demos, visual essays, research artifacts, and curated work paths.
-- [Favorites (收藏, Chinese only)](https://simoncos.github.io/favorites.html): Every book, film, album and game rated five stars on Douban, newest first, with the short reviews as written there.
+- [Articles](https://simoncos.github.io/blogs.html): Long-form writing archive, filterable by topic, with series.
+- [Work](https://simoncos.github.io/gallery.html): Projects, talks, research artifacts and visual essays.
+- [Favorites (收藏)](https://simoncos.github.io/favorites.html): Every book, film, album and game rated five stars on Douban, newest first, with the short reviews as written there. Page chrome is bilingual; titles and reviews are in Chinese.
 
 ## Current project surfaces
 
@@ -29,9 +29,8 @@ The motto for this site is "Connecting the dots." The site is static, bilingual,
 ## Data and feeds
 
 - [Agent index JSON](https://simoncos.github.io/agent-index.json): Structured machine-readable map of site surfaces.
-- [Content manifest](https://simoncos.github.io/data/content_manifest.json): Public manifest for projects, gallery, and home surfaces.
-- [Home surface JSON](https://simoncos.github.io/data/home_surface.json): Current homepage editorial state.
-- [Article index JSON](https://simoncos.github.io/data/article_index.json): Lightweight bilingual article index used by the Essays archive, reading paths, topics, homepage, and language switching.
+- [Site data JSON](https://simoncos.github.io/data/site.json): Source data the Index, Work, project and About pages are generated from.
+- [Article index JSON](https://simoncos.github.io/data/article_index.json): Lightweight bilingual article index (titles, dates, excerpts, topics, series and translations).
 - [RSS Chinese](https://simoncos.github.io/feed.zh.xml): Chinese RSS feed.
 - [RSS English](https://simoncos.github.io/feed.en.xml): English RSS feed.
 

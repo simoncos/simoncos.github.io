@@ -1,6 +1,7 @@
 {
-  "css_version": "20260926c",
-  "js_version": "20260926c",
+  "css_version": "20260927a",
+  "js_version": "20260927a",
+  "site_updated": "2026-09-27",
   "theme_init": "theme-init.js",
   "icons": {
     "favicon": "assets/icons/favicon-32.png",
@@ -8,30 +9,20 @@
   },
   "rss_feeds": [
     {
-      "title": "simonc site RSS (中文)",
+      "lang": "zh",
+      "title": "simoncos RSS (中文)",
       "href": "feed.zh.xml"
     },
     {
-      "title": "simonc site RSS (English)",
+      "lang": "en",
+      "title": "simoncos RSS (English)",
       "href": "feed.en.xml"
     }
   ],
   "script_profiles": {
     "basic": [
       {
-        "src": "site-config.js",
-        "defer": true
-      },
-      {
-        "src": "i18n.js",
-        "defer": true
-      },
-      {
-        "src": "load-nav.js",
-        "defer": true
-      },
-      {
-        "src": "dark-mode.js",
+        "src": "site.js",
         "defer": true
       },
       {
@@ -44,23 +35,11 @@
     ],
     "home": [
       {
-        "src": "site-config.js",
+        "src": "site.js",
         "defer": true
       },
       {
-        "src": "i18n.js",
-        "defer": true
-      },
-      {
-        "src": "article-groups.js",
-        "defer": true
-      },
-      {
-        "src": "load-nav.js",
-        "defer": true
-      },
-      {
-        "src": "dark-mode.js",
+        "src": "home.js",
         "defer": true
       },
       {
@@ -69,39 +48,15 @@
         "attrs": {
           "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
         }
-      },
-      {
-        "src": "load-home-surface.js",
-        "defer": true
-      },
-      {
-        "src": "load-recent-posts.js",
-        "defer": true
       }
     ],
-    "blog_listing": [
+    "articles": [
       {
-        "src": "site-config.js",
+        "src": "site.js",
         "defer": true
       },
       {
-        "src": "i18n.js",
-        "defer": true
-      },
-      {
-        "src": "article-groups.js",
-        "defer": true
-      },
-      {
-        "src": "load-nav.js",
-        "defer": true
-      },
-      {
-        "src": "dark-mode.js",
-        "defer": true
-      },
-      {
-        "src": "preview-toggle.js",
+        "src": "articles.js",
         "defer": true
       },
       {
@@ -110,121 +65,15 @@
         "attrs": {
           "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
         }
-      },
-      {
-        "src": "load-blog-archive.js",
-        "defer": true
-      },
-      {
-        "src": "load-series-page.js",
-        "defer": true
-      },
-      {
-        "src": "load-tags-page.js",
-        "defer": true
-      }
-    ],
-    "projects": [
-      {
-        "src": "site-config.js",
-        "defer": true
-      },
-      {
-        "src": "i18n.js",
-        "defer": true
-      },
-      {
-        "src": "load-nav.js",
-        "defer": true
-      },
-      {
-        "src": "dark-mode.js",
-        "defer": true
-      },
-      {
-        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
-        "defer": true,
-        "attrs": {
-          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
-        }
-      },
-      {
-        "src": "load-projects.js",
-        "defer": true
-      }
-    ],
-    "gallery": [
-      {
-        "src": "site-config.js",
-        "defer": true
-      },
-      {
-        "src": "i18n.js",
-        "defer": true
-      },
-      {
-        "src": "load-nav.js",
-        "defer": true
-      },
-      {
-        "src": "dark-mode.js",
-        "defer": true
-      },
-      {
-        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
-        "defer": true,
-        "attrs": {
-          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
-        }
-      },
-      {
-        "src": "load-gallery.js",
-        "defer": true
       }
     ],
     "article": [
       {
-        "src": "site-config.js",
+        "src": "site.js",
         "defer": true
       },
       {
-        "src": "i18n.js",
-        "defer": true
-      },
-      {
-        "src": "article-groups.js",
-        "defer": true
-      },
-      {
-        "src": "load-nav.js",
-        "defer": true
-      },
-      {
-        "src": "dark-mode.js",
-        "defer": true
-      },
-      {
-        "src": "toc-generator.js",
-        "defer": true
-      },
-      {
-        "src": "progress-bar.js",
-        "defer": true
-      },
-      {
-        "src": "back-to-top.js",
-        "defer": true
-      },
-      {
-        "src": "mobile-scroll-ui.js",
-        "defer": true
-      },
-      {
-        "src": "footnote-target.js",
-        "defer": true
-      },
-      {
-        "src": "load-backlinks.js",
+        "src": "article.js",
         "defer": true
       },
       {
@@ -233,27 +82,49 @@
         "attrs": {
           "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
         }
+      }
+    ],
+    "work": [
+      {
+        "src": "site.js",
+        "defer": true
       },
       {
-        "src": "load-post-series.js",
+        "src": "work.js",
         "defer": true
+      },
+      {
+        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
+        "defer": true,
+        "attrs": {
+          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
+        }
+      }
+    ],
+    "board": [
+      {
+        "src": "site.js",
+        "defer": true
+      },
+      {
+        "src": "board.js",
+        "defer": true
+      },
+      {
+        "external_src": "https://static.cloudflareinsights.com/beacon.min.js",
+        "defer": true,
+        "attrs": {
+          "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
+        }
       }
     ],
     "favorites": [
       {
-        "src": "site-config.js",
+        "src": "site.js",
         "defer": true
       },
       {
-        "src": "i18n.js",
-        "defer": true
-      },
-      {
-        "src": "load-nav.js",
-        "defer": true
-      },
-      {
-        "src": "dark-mode.js",
+        "src": "favorites.js",
         "defer": true
       },
       {
@@ -262,10 +133,6 @@
         "attrs": {
           "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
         }
-      },
-      {
-        "src": "load-favorites.js",
-        "defer": true
       }
     ]
   },
@@ -274,140 +141,115 @@
       "path": "index.html",
       "asset_prefix": "",
       "script_profile": "home",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config",
+      "section": "home",
       "canonical": "index.html"
-    },
-    {
-      "path": "about.html",
-      "asset_prefix": "",
-      "script_profile": "basic",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config",
-      "canonical": "about.html"
-    },
-    {
-      "path": "projects.html",
-      "asset_prefix": "",
-      "script_profile": "projects",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config",
-      "canonical": "projects.html"
-    },
-    {
-      "path": "projects/sleep-toolkit.en.html",
-      "asset_prefix": "../",
-      "script_profile": "projects",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config",
-      "canonical": "projects/sleep-toolkit.en.html"
-    },
-    {
-      "path": "projects/sleep-toolkit.html",
-      "asset_prefix": "../",
-      "script_profile": "projects",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config",
-      "canonical": "projects/sleep-toolkit.html"
-    },
-    {
-      "path": "gallery.html",
-      "asset_prefix": "",
-      "script_profile": "gallery",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config",
-      "canonical": "gallery.html"
-    },
-    {
-      "path": "favorites.html",
-      "asset_prefix": "",
-      "script_profile": "basic",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config",
-      "canonical": "favorites.html",
-      "languages": [
-        "zh"
-      ]
-    },
-    {
-      "path": "favorites/books.html",
-      "asset_prefix": "../",
-      "script_profile": "favorites",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config",
-      "canonical": "favorites/books.html",
-      "languages": [
-        "zh"
-      ]
-    },
-    {
-      "path": "favorites/film.html",
-      "asset_prefix": "../",
-      "script_profile": "favorites",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config",
-      "canonical": "favorites/film.html",
-      "languages": [
-        "zh"
-      ]
-    },
-    {
-      "path": "favorites/music.html",
-      "asset_prefix": "../",
-      "script_profile": "favorites",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config",
-      "canonical": "favorites/music.html",
-      "languages": [
-        "zh"
-      ]
-    },
-    {
-      "path": "favorites/games.html",
-      "asset_prefix": "../",
-      "script_profile": "favorites",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config",
-      "canonical": "favorites/games.html",
-      "languages": [
-        "zh"
-      ]
-    },
-    {
-      "path": "404.html",
-      "asset_prefix": "/",
-      "script_profile": "basic",
-      "head_rss": false,
-      "footer_rss": false,
-      "footer_version": "site_config"
     },
     {
       "path": "templates/blogs-listing-template.html",
       "asset_prefix": "",
-      "script_profile": "blog_listing",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config",
+      "script_profile": "articles",
+      "section": "articles",
       "canonical": "blogs.html"
     },
     {
       "path": "templates/blog-template.html",
       "asset_prefix": "../",
       "script_profile": "article",
-      "head_rss": true,
-      "footer_rss": true,
-      "footer_version": "site_config"
+      "section": "articles",
+      "lang_toggle": "article"
+    },
+    {
+      "path": "gallery.html",
+      "asset_prefix": "",
+      "script_profile": "work",
+      "section": "work",
+      "canonical": "gallery.html"
+    },
+    {
+      "path": "projects.html",
+      "asset_prefix": "",
+      "script_profile": "basic",
+      "section": "work",
+      "canonical": "projects.html"
+    },
+    {
+      "path": "projects/sleep-toolkit.en.html",
+      "asset_prefix": "../",
+      "script_profile": "board",
+      "section": "work",
+      "canonical": "projects/sleep-toolkit.en.html",
+      "lang_pair": {
+        "lang": "zh",
+        "href": "sleep-toolkit.html"
+      },
+      "alternates": {
+        "en": "projects/sleep-toolkit.en.html",
+        "zh": "projects/sleep-toolkit.html"
+      }
+    },
+    {
+      "path": "projects/sleep-toolkit.html",
+      "asset_prefix": "../",
+      "script_profile": "board",
+      "section": "work",
+      "canonical": "projects/sleep-toolkit.html",
+      "lang_pair": {
+        "lang": "en",
+        "href": "sleep-toolkit.en.html"
+      },
+      "alternates": {
+        "en": "projects/sleep-toolkit.en.html",
+        "zh": "projects/sleep-toolkit.html"
+      }
+    },
+    {
+      "path": "favorites.html",
+      "asset_prefix": "",
+      "script_profile": "favorites",
+      "section": "favorites",
+      "canonical": "favorites.html"
+    },
+    {
+      "path": "favorites/books.html",
+      "asset_prefix": "../",
+      "script_profile": "favorites",
+      "section": "favorites",
+      "canonical": "favorites/books.html"
+    },
+    {
+      "path": "favorites/film.html",
+      "asset_prefix": "../",
+      "script_profile": "favorites",
+      "section": "favorites",
+      "canonical": "favorites/film.html"
+    },
+    {
+      "path": "favorites/music.html",
+      "asset_prefix": "../",
+      "script_profile": "favorites",
+      "section": "favorites",
+      "canonical": "favorites/music.html"
+    },
+    {
+      "path": "favorites/games.html",
+      "asset_prefix": "../",
+      "script_profile": "favorites",
+      "section": "favorites",
+      "canonical": "favorites/games.html"
+    },
+    {
+      "path": "about.html",
+      "asset_prefix": "",
+      "script_profile": "basic",
+      "section": "about",
+      "canonical": "about.html"
+    },
+    {
+      "path": "404.html",
+      "asset_prefix": "/",
+      "script_profile": "basic",
+      "section": null,
+      "head_rss": false
     }
   ],
   "site_url": "https://simoncos.github.io/"

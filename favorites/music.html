@@ -1,608 +1,205 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>音 · 收藏 - simonc site</title>
-    <meta name="description" content="音：我在豆瓣上打过五星的 96 张，按标记时间从新到旧，附豆瓣短评原文。">
+    <title data-zh="音 · 收藏 · simoncos">Music · Favorites · simoncos</title>
+    <meta name="description" content="Music: the 96 albums I rated five stars on Douban, newest mark first, with my original notes in Chinese.">
+    <meta name="author" content="simoncos">
     <link rel="canonical" href="https://simoncos.github.io/favorites/music.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="音 · 收藏 - simonc site">
-    <meta property="og:description" content="音：我在豆瓣上打过五星的 96 张，按标记时间从新到旧，附豆瓣短评原文。">
+    <meta property="og:title" content="Music · Favorites · simoncos">
+    <meta property="og:description" content="Music: the 96 albums I rated five stars on Douban, newest mark first, with my original notes in Chinese.">
     <meta property="og:url" content="https://simoncos.github.io/favorites/music.html">
-    <meta property="og:site_name" content="simonc site">
-    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="simoncos">
     <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="simonc site — tools and research, essays and field notes">
+    <meta property="og:image:alt" content="simoncos — tools and research, articles and field notes">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="音 · 收藏 - simonc site">
-    <meta name="twitter:description" content="音：我在豆瓣上打过五星的 96 张，按标记时间从新到旧，附豆瓣短评原文。">
+    <meta name="twitter:title" content="Music · Favorites · simoncos">
+    <meta name="twitter:description" content="Music: the 96 albums I rated five stars on Douban, newest mark first, with my original notes in Chinese.">
     <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
     <!-- site-shell:resources:start -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
-    <link rel="alternate" type="application/rss+xml" title="simonc site RSS (中文)" href="../feed.zh.xml">
-    <link rel="alternate" type="application/rss+xml" title="simonc site RSS (English)" href="../feed.en.xml">
-    <script src="../src/js/theme-init.js?v=20260926c"></script>
-    <link rel="stylesheet" href="../src/css/styles.css?v=20260926c">
-    <script src="../src/js/site-config.js?v=20260926c" defer></script>
-    <script src="../src/js/i18n.js?v=20260926c" defer></script>
-    <script src="../src/js/load-nav.js?v=20260926c" defer></script>
-    <script src="../src/js/dark-mode.js?v=20260926c" defer></script>
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/favorites/music.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/favorites/music.html?lang=zh">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/favorites/music.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20260927a"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20260927a">
+    <script src="../src/js/site.js?v=20260927a" defer></script>
+    <script src="../src/js/favorites.js?v=20260927a" defer></script>
     <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
-    <script src="../src/js/load-favorites.js?v=20260926c" defer></script>
     <!-- site-shell:resources:end -->
-    <noscript>
-        <style>
-            .favorites-list:not(.is-paginated) > .favorite-row:nth-child(n) { display: flex; }
-            .favorite-notes-all[hidden] { display: flex; }
-            .favorite-notes-main, .favorite-series-toggle { display: none; }
-        </style>
-    </noscript>
 </head>
-<body class="favorites-page favorites-category-page">
-    <a class="skip-link" href="#main" data-i18n="skip_to_content">跳到正文</a>
-    <header class="site-header">
-        <div class="header-inner">
-            <p class="site-kicker">收藏</p>
-            <p class="site-title" data-site-title>simonc site</p>
+<body>
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html" aria-current="page"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="?lang=zh" data-lang-toggle><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
         </div>
     </header>
-    <div id="navigation-placeholder"></div>
-    <main id="main" class="container page-shell favorites-shell" lang="zh-Hans" data-favorites-unit="张" data-favorites-per-page="20">
-        <section class="favorites-top" aria-labelledby="favorites-title">
-            <p class="favorites-breadcrumb"><a href="../favorites.html">收藏</a> /</p>
-            <h1 id="favorites-title">音</h1>
-            <nav class="favorites-switcher" aria-label="分类"><span class="favorites-switcher-label" aria-hidden="true">分类</span><a href="books.html">书<span class="favorites-count">80</span></a><a href="film.html">影<span class="favorites-count">157</span></a><a href="music.html" aria-current="page">音<span class="favorites-count">96</span></a><a href="games.html">游<span class="favorites-count">120</span></a></nav>
-        </section>
-        <div class="favorites-toolbar">
-            <fieldset class="favorites-filter" hidden><legend class="visually-hidden">按有无短评筛选</legend><button type="button" data-favorites-filter="all" aria-pressed="true"><span>全部<span class="favorites-count">96</span></span></button><button type="button" data-favorites-filter="reviewed" aria-pressed="false"><span>有短评<span class="favorites-count">26</span></span></button><button type="button" data-favorites-filter="unreviewed" aria-pressed="false"><span>没有短评<span class="favorites-count">70</span></span></button></fieldset>
-            <p class="favorites-order">按标记时间从新到旧</p>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n">01</span></a>
+        <a class="sheet-link" href="../blogs.html"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n">03</span></a>
+        <a class="sheet-link" href="../favorites.html" aria-current="page"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+<main id="main" class="fav-cat enter" tabindex="-1" data-fav-cat="music" data-per-page="20" data-unit-zh="张" data-unit-en="album|albums">
+    <div class="fav-layout">
+        <nav class="fav-rail" aria-label="Favorites categories" data-zh-aria-label="收藏分类" data-i18n="aria-label">
+            <a class="pill fav-back" href="../favorites.html">← <span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></a>
+            <a class="rail-item" href="books.html"><span class="rail-char" lang="zh-Hant" aria-hidden="true">書</span><span class="visually-hidden"><span data-l="en">Books</span><span data-l="zh" lang="zh-Hans">书</span></span><span class="rail-count num"><span data-l="en">Books · 80</span><span data-l="zh" lang="zh-Hans">80 本</span></span></a>
+            <a class="rail-item" href="film.html"><span class="rail-char" lang="zh-Hant" aria-hidden="true">影</span><span class="visually-hidden"><span data-l="en">Film &amp; TV</span><span data-l="zh" lang="zh-Hans">影</span></span><span class="rail-count num"><span data-l="en">Film &amp; TV · 157</span><span data-l="zh" lang="zh-Hans">157 部</span></span></a>
+            <a class="rail-item" href="music.html" aria-current="page"><span class="rail-char" lang="zh-Hant" aria-hidden="true">音</span><span class="visually-hidden"><span data-l="en">Music</span><span data-l="zh" lang="zh-Hans">音</span></span><span class="rail-count num"><span data-l="en">Music · 96</span><span data-l="zh" lang="zh-Hans">96 张</span></span></a>
+            <a class="rail-item" href="games.html"><span class="rail-char" lang="zh-Hant" aria-hidden="true">遊</span><span class="visually-hidden"><span data-l="en">Games</span><span data-l="zh" lang="zh-Hans">游</span></span><span class="rail-count num"><span data-l="en">Games · 120</span><span data-l="zh" lang="zh-Hans">120 款</span></span></a>
+        </nav>
+        <div class="fav-body">
+            <h1 class="visually-hidden"><span data-l="en">Music · Favorites</span><span data-l="zh" lang="zh-Hans">音 · 收藏</span></h1>
+            <div class="fav-tools">
+                <div class="seg fav-filter" role="group" data-fav-filters aria-label="Filter" data-zh-aria-label="筛选" data-i18n="aria-label"><button class="seg-btn" type="button" data-fav-filter="all" aria-pressed="true"><span data-l="en">All</span><span data-l="zh" lang="zh-Hans">全部</span> <span class="seg-n">96</span></button><button class="seg-btn" type="button" data-fav-filter="reviewed" aria-pressed="false"><span data-l="en">With notes</span><span data-l="zh" lang="zh-Hans">有短评</span> <span class="seg-n">26</span></button><button class="seg-btn" type="button" data-fav-filter="unreviewed" aria-pressed="false"><span data-l="en">Without notes</span><span data-l="zh" lang="zh-Hans">没有短评</span> <span class="seg-n">70</span></button></div>
+                <span class="fav-range num" data-fav-range>1–20 / 96</span>
+            </div>
+            <ol class="fav-list" data-fav-list tabindex="-1" lang="zh-Hans">
+            <li class="is-compact fav-row" data-marked="2025-06-11" data-reviewed="false"><time class="fav-date num" datetime="2025-06-11">2025-06-11</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1407329/">David Tao<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">陶喆 · 1997</span></div></li>
+            <li class="is-full fav-row" data-marked="2024-12-27" data-reviewed="true"><time class="fav-date num" datetime="2024-12-27">2024-12-27</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/5966149/">Soul Power Live<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">陶喆 · 2003</span><div class="fav-main"><p class="fav-review">第一遍在长途飞机上听的，暴殄天物啊</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row" data-marked="2023-01-25" data-reviewed="false"><time class="fav-date num" datetime="2023-01-25">2023-01-25</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/34552434/">Dvorák: Symphony No.9; Othello Overture<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Claudio Abbado / Berliner Philharmoniker · 1999</span></div></li>
+            <li class="is-compact fav-row" data-marked="2022-10-06" data-reviewed="false"><time class="fav-date num" datetime="2022-10-06">2022-10-06</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1422300/">Jay<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">周杰伦 · 2000</span></div></li>
+            <li class="is-full fav-row" data-marked="2022-09-09" data-reviewed="true"><time class="fav-date num" datetime="2022-09-09">2022-09-09</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/4156227/">Jyukai BEST ~Stairway to the future~<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">樹海 feat. タイナカサチ · 2010</span><div class="fav-main"><p class="fav-review">这张居然没标</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row" data-marked="2022-06-27" data-reviewed="false"><time class="fav-date num" datetime="2022-06-27">2022-06-27</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/6890516/">原色<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">杨宗纬 · 2011</span></div></li>
+            <li class="is-compact fav-row" data-marked="2022-03-25" data-reviewed="false"><time class="fav-date num" datetime="2022-03-25">2022-03-25</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1419538/">Dvorák: Symphonie No. 9; Smetana: Moldau<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Herbert von Karajan · 1993</span></div></li>
+            <li class="is-full fav-row" data-marked="2022-02-21" data-reviewed="true"><time class="fav-date num" datetime="2022-02-21">2022-02-21</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/10735523/">Sandy Lam Concert MMXI 2CD<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">林忆莲 · 2012</span><div class="fav-main"><p class="fav-review">听到《柿子》忍不住打了个五星，要是多唱几首《野花》专就好了</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row is-multi" data-marked="2022-02-20" data-reviewed="false"><time class="fav-date num" datetime="2022-02-20">2022-02-20</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/5380417/">Homogenic<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Björk · 1997</span><span class="fav-multi">· <span data-l="en">2 versions</span><span data-l="zh" lang="zh-Hans">2 个版本</span></span></div></li>
+            <li class="is-full fav-row" data-marked="2022-01-13" data-reviewed="true"><time class="fav-date num" datetime="2022-01-13">2022-01-13</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/1395303/">Mezzanine<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Massive Attack · 1998</span><div class="fav-main"><p class="fav-review">貌似比Tricky的M开头更对味一点，black milk。2022第一张五星</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row" data-marked="2021-05-30" data-reviewed="false"><time class="fav-date num" datetime="2021-05-30">2021-05-30</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/33416236/">Flamagra<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Flying Lotus · 2019</span></div></li>
+            <li class="is-full fav-row" data-marked="2021-01-16" data-reviewed="true"><time class="fav-date num" datetime="2021-01-16">2021-01-16</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/30471492/">THE ANYMAL [通常盤]<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Suchmos · 2019</span><div class="fav-main"><p class="fav-review">In the Zoo这个迷幻，You Blue I前半这个感觉是能乐（抱歉分不清日本各种传统艺能）吗？后半有点拖，here comes...那首也抓耳</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-full fav-row" data-marked="2020-12-22" data-reviewed="true"><time class="fav-date num" datetime="2020-12-22">2020-12-22</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/35292992/">冀西南林路行<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">万能青年旅店 · 2020</span><div class="fav-main"><p class="fav-review">感觉音乐性进步挺大的，噪音（《采石》）和jazz的引入还蛮惊喜的，还有弦乐、艺术摇滚、民谣。音色和风格丰富多了，应该会更耐听，但代价是失去了一些独特性，旋律性也下降不少。有朋友说好短，但我感觉烧钱怕是n倍增哈哈哈。至于词，目前只看了《郊眠寺》，“人间明暗”，可谓万青柔情版《高级动物》《无题》《幻听》</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-full fav-row" data-marked="2020-12-06" data-reviewed="true"><time class="fav-date num" datetime="2020-12-06">2020-12-06</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/26859478/">Blonde<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Frank Ocean · 2016</span><div class="fav-main"><p class="fav-review">刚开始听觉得怪怪的不太好听，但好像有点意思，至少听出来里面有很多想法，口味独特，于是先留着偶尔听听。然后就一发不可收拾，从偶尔听下变成每天听，或者找不到什么适合听的就回来听，chill时听，upset时也听…最后其中某段变成了连续几天梦中的bgm洗脑循环，然后里面的唱词和采样：be yourself-规劝，wish you godspeed-不舍与祝福，who you are-存在性问题…实在是直入人心。</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row" data-marked="2020-09-11" data-reviewed="false"><time class="fav-date num" datetime="2020-09-11">2020-09-11</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1783964/">都市触觉Ⅲ Faces &amp; PLaces<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">林忆莲 · 1990</span></div></li>
+            <li class="is-compact fav-row" data-marked="2020-08-09" data-reviewed="false"><time class="fav-date num" datetime="2020-08-09">2020-08-09</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/2380829/">風林火山:完結編<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">千住明 · 2007</span></div></li>
+            <li class="is-full fav-row" data-marked="2020-06-28" data-reviewed="true"><time class="fav-date num" datetime="2020-06-28">2020-06-28</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/2287466/">Threnody for the Victims of Hiroshima<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Krzysztof Penderecki · 1994</span><div class="fav-main"><p class="fav-review">因为《双峰》过来，古典实验。第一次听《广挽》黑暗中鸟肌跟着提琴一波一波起</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2020-06-28" data-reviewed="false"><time class="fav-date num" datetime="2020-06-28">2020-06-28</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/27071360/">Twin Peaks (Limited Event Series Soundtrack)<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Angelo Badalamenti · 2017</span></div></li>
+            <li class="is-full fav-row is-repeat" data-marked="2020-06-28" data-reviewed="true"><time class="fav-date num" datetime="2020-06-28">2020-06-28</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/1394972/">Soundtrack from Twin Peaks<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Angelo Badalamenti · 1990</span><div class="fav-main"><p class="fav-review">不用听完直接五星了，剧里欣赏过太多遍了</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row" data-marked="2020-05-09" data-reviewed="false"><time class="fav-date num" datetime="2020-05-09">2020-05-09</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/3288148/">Follow Me<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">伊藤君子 · 2004</span></div></li>
+            <li class="is-compact fav-row" data-marked="2020-04-03" data-reviewed="false"><time class="fav-date num" datetime="2020-04-03">2020-04-03</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1422314/">Maxwell Unplugged<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Maxwell · 1997</span></div></li>
+            <li class="is-compact fav-row" data-marked="2020-04-02" data-reviewed="false"><time class="fav-date num" datetime="2020-04-02">2020-04-02</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1758561/">野花<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">林忆莲 · 1991</span></div></li>
+            <li class="is-compact fav-row" data-marked="2020-03-30" data-reviewed="false"><time class="fav-date num" datetime="2020-03-30">2020-03-30</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/3035019/">梅艳芳极梦幻演唱会<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">梅艳芳 · 2002</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2020-03-30" data-reviewed="false"><time class="fav-date num" datetime="2020-03-30">2020-03-30</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/2159075/">跨越97演唱会<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">张国荣 · 2003</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2020-03-30" data-reviewed="false"><time class="fav-date num" datetime="2020-03-30">2020-03-30</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1407636/">热·情演唱会<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">张国荣 · 2000</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2020-03-30" data-reviewed="false"><time class="fav-date num" datetime="2020-03-30">2020-03-30</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1395136/">艳阳天<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">窦唯 · 1995</span></div></li>
+            <li class="is-compact fav-row" data-marked="2020-03-23" data-reviewed="false"><time class="fav-date num" datetime="2020-03-23">2020-03-23</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1799364/">Experience: Jill Scott 826+<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Jill Scott · 2001</span></div></li>
+            <li class="is-full fav-row" data-marked="2020-02-29" data-reviewed="true"><time class="fav-date num" datetime="2020-02-29">2020-02-29</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/1405324/">我去2000年<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">朴树 · 1999</span><div class="fav-main"><p class="fav-review">这是个无诗无歌的时代 ｜20220919 因为《我去2000年》和《召唤》四改五</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-full fav-row" data-marked="2020-02-05" data-reviewed="true"><time class="fav-date num" datetime="2020-02-05">2020-02-05</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/1474085/">Beautifully Human: Words and Sounds, Vol. 2<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Jill Scott · 2004</span><div class="fav-main"><p class="fav-review">第一遍，比起首专增大了气声的比重，整体性更好。听出了一些jazz和世界元素。几遍以后加到五星，很丰富。</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2020-02-05" data-reviewed="false"><time class="fav-date num" datetime="2020-02-05">2020-02-05</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1753655/">Who Is Jill Scott? Words and Sounds, Vol. 1<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Jill Scott · 2001</span></div></li>
+            <li class="is-full fav-row" data-marked="2019-12-13" data-reviewed="true"><time class="fav-date num" datetime="2019-12-13">2019-12-13</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/1422312/">Embrya<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Maxwell · 1998</span><div class="fav-main"><p class="fav-review">这张对味</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row" data-marked="2019-12-12" data-reviewed="false"><time class="fav-date num" datetime="2019-12-12">2019-12-12</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1394788/">Coming Up<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Suede · 1996</span></div></li>
+            <li class="is-full fav-row is-repeat" data-marked="2019-12-12" data-reviewed="true"><time class="fav-date num" datetime="2019-12-12">2019-12-12</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/2245151/">Gold Experience<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Prince · 1995</span><div class="fav-main"><p class="fav-review">prince的音乐总是让人感受到一种旺盛的生命力</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-full fav-row is-repeat" data-marked="2019-12-12" data-reviewed="true"><time class="fav-date num" datetime="2019-12-12">2019-12-12</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/1422311/">Maxwell&#x27;s Urban Hang Suite<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Maxwell · 1996</span><div class="fav-main"><p class="fav-review">90年代真是黄金年代啊，trip hop三巨头紧贴neo soul三专，两个大陆。不过这张听上去其实并不是很neo。比起另外两张Badu/D哥还是偏向传统r&amp;b</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-full fav-row is-repeat" data-marked="2019-12-12" data-reviewed="true"><time class="fav-date num" datetime="2019-12-12">2019-12-12</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/1465706/">MTV Unplugged<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Maxwell · 1997</span><div class="fav-main"><p class="fav-review">声线比较中性</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-full fav-row" data-marked="2019-11-18" data-reviewed="true"><time class="fav-date num" datetime="2019-11-18">2019-11-18</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/30310234/">our latest number<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">toe · 2018</span><div class="fav-main"><p class="fav-review">这张是真的灵</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row" data-marked="2019-11-06" data-reviewed="false"><time class="fav-date num" datetime="2019-11-06">2019-11-06</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1800718/">Brown Sugar<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">D&#x27;Angelo · 1995</span></div></li>
+            <li class="is-compact fav-row" data-marked="2019-11-04" data-reviewed="false"><time class="fav-date num" datetime="2019-11-04">2019-11-04</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1439054/">Worldwide Underground<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Erykah Badu · 2003</span></div></li>
+            <li class="is-full fav-row" data-marked="2019-11-01" data-reviewed="true"><time class="fav-date num" datetime="2019-11-01">2019-11-01</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/1439052/">Mama&#x27;s Gun<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Erykah Badu · 2000</span><div class="fav-main"><p class="fav-review">Badu的专真是smooth，可以无限循环</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2019-11-01" data-reviewed="false"><time class="fav-date num" datetime="2019-11-01">2019-11-01</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1439051/">Baduizm<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Erykah Badu · 1997</span></div></li>
+            <li class="is-full fav-row" data-marked="2019-10-30" data-reviewed="true"><time class="fav-date num" datetime="2019-10-30">2019-10-30</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/34780810/">Painted<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Lucky Daye · 2019</span><div class="fav-main"><p class="fav-review">基调明亮</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-full fav-row" data-marked="2019-10-08" data-reviewed="true"><time class="fav-date num" datetime="2019-10-08">2019-10-08</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/34851119/">Precipieces<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Fractal Quintet · 2014</span><div class="fav-main"><p class="fav-review">重听提到五星，jazz fusion，旋律党应该也会喜欢。</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-full fav-row" data-marked="2019-04-11" data-reviewed="true"><time class="fav-date num" datetime="2019-04-11">2019-04-11</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/26375229/">Choose Your Weapon<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Hiatus Kaiyote · 2015</span><div class="fav-main"><p class="fav-review">挺难的一张专，主要是旋律不够抓耳。单单说一下第一首抓到耳的Borderline with My Atoms：好神奇的和弦进行，有一段感觉有点像中国戏曲了。电子元素用得妙。一两个月后回来加一星：虽然难说完美，但this is my shit now</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-full fav-row" data-marked="2019-04-01" data-reviewed="true"><time class="fav-date num" datetime="2019-04-01">2019-04-01</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/33383327/">The Loop<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Shafiq Husayn · 2019</span><div class="fav-main"><p class="fav-review">被bandcamp weekly种草的第一张专辑，第7首我可以扭一百遍</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row" data-marked="2019-03-19" data-reviewed="false"><time class="fav-date num" datetime="2019-03-19">2019-03-19</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/4894045/">DUO 陈奕迅2010演唱会<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">陈奕迅 · 2010</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2019-03-19" data-reviewed="false"><time class="fav-date num" datetime="2019-03-19">2019-03-19</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1406170/">FOR SALE<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Swing · 2001</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2019-03-19" data-reviewed="false"><time class="fav-date num" datetime="2019-03-19">2019-03-19</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/26455588/">THE BAY<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Suchmos · 2015</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2019-03-19" data-reviewed="false"><time class="fav-date num" datetime="2019-03-19">2019-03-19</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/4089084/">For Long Tomorrow<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">toe · 2009</span></div></li>
+            <li class="is-full fav-row is-repeat" data-marked="2019-03-19" data-reviewed="true"><time class="fav-date num" datetime="2019-03-19">2019-03-19</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/25714841/">LMR<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Levin / Minnemann / Rudess · 2013</span><div class="fav-main"><p class="fav-review">非常丰富，复杂的同时旋律非常耐听</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row" data-marked="2019-03-16" data-reviewed="false"><time class="fav-date num" datetime="2019-03-16">2019-03-16</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1408794/">F.I.R.<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">飞儿乐团 · 2004</span></div></li>
+            <li class="is-compact fav-row" data-marked="2019-03-15" data-reviewed="false"><time class="fav-date num" datetime="2019-03-15">2019-03-15</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1436975/">十一月的萧邦<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">周杰伦 · 2005</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2019-03-15" data-reviewed="false"><time class="fav-date num" datetime="2019-03-15">2019-03-15</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1401853/">七里香<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">周杰伦 · 2004</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2019-03-15" data-reviewed="false"><time class="fav-date num" datetime="2019-03-15">2019-03-15</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/3313612/">橙月<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">方大同 · 2008</span></div></li>
+            <li class="is-compact fav-row" data-marked="2019-03-14" data-reviewed="false"><time class="fav-date num" datetime="2019-03-14">2019-03-14</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/26387160/">Peace &amp; Phunk<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Dogg Master · 2015</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2019-03-14" data-reviewed="false"><time class="fav-date num" datetime="2019-03-14">2019-03-14</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1786588/">1999<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Prince · 1982</span></div></li>
+            <li class="is-compact fav-row" data-marked="2019-03-12" data-reviewed="false"><time class="fav-date num" datetime="2019-03-12">2019-03-12</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1829741/">Call Me<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Al Green · 1973</span></div></li>
+            <li class="is-compact fav-row" data-marked="2019-02-13" data-reviewed="false"><time class="fav-date num" datetime="2019-02-13">2019-02-13</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/5352987/">Why Aren&#x27;t I Home<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Athletics · 2010</span></div></li>
+            <li class="is-compact fav-row" data-marked="2018-10-03" data-reviewed="false"><time class="fav-date num" datetime="2018-10-03">2018-10-03</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/3777782/">Injection<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Dogg Master · 2008</span></div></li>
+            <li class="is-compact fav-row" data-marked="2018-09-11" data-reviewed="false"><time class="fav-date num" datetime="2018-09-11">2018-09-11</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1394797/">Vespertine<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Björk · 2001</span></div></li>
+            <li class="is-compact fav-row" data-marked="2018-08-18" data-reviewed="false"><time class="fav-date num" datetime="2018-08-18">2018-08-18</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/4122080/">Live at Last: A Wonder Summer&#x27;s Night<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Stevie Wonder · 2009</span></div></li>
+            <li class="is-compact fav-row" data-marked="2018-07-27" data-reviewed="false"><time class="fav-date num" datetime="2018-07-27">2018-07-27</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1407383/">大热<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">张国荣 · 2000</span></div></li>
+            <li class="is-compact fav-row" data-marked="2018-07-18" data-reviewed="false"><time class="fav-date num" datetime="2018-07-18">2018-07-18</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1667562/">Hard Groove<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Roy Hargrove &amp; The RH Factor · 2003</span></div></li>
+            <li class="is-compact fav-row" data-marked="2018-07-17" data-reviewed="false"><time class="fav-date num" datetime="2018-07-17">2018-07-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/2071204/">Distractions<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Roy Hargrove &amp; The RH Factor · 2006</span></div></li>
+            <li class="is-compact fav-row" data-marked="2018-05-24" data-reviewed="false"><time class="fav-date num" datetime="2018-05-24">2018-05-24</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/14826283/">蓋亞<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">林忆莲 · 2012</span></div></li>
+            <li class="is-compact fav-row" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/4123634/">ファイナルファンタジーXIII オリジナル・サウンドトラック<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">浜渦正志 · 2010</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1406522/">叶惠美<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">周杰伦 · 2003</span></div></li>
+            <li class="is-full fav-row is-repeat" data-marked="2018-05-17" data-reviewed="true"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/27093616/">仍是异乡人<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">李剑青 · 2017</span><div class="fav-main"><p class="fav-review">弦樂真的漂亮，唱法很李宗盛，詞很鄉土 ｜ 感谢剑青，让人能在异乡的夜晚，好好地哭几场</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/26884047/">Arrival<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Jóhann Jóhannsson · 2016</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1477122/">Diablo II<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Matt Uelmen · 2000</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1455891/">Samurai Champloo: Music Record Katana<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">群星 · 2005</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1482326/">The Hits 2<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Prince · 1993</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/26684914/">HITnRUN Phase Two<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Prince · 2015</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1485219/">3121<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Prince · 2006</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/3174277/">Free Jazz Classics Vol. 3 &amp; 4<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">The Vandermark 5 · 2009</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/10529381/">機動戦士ガンダムUC オリジナルサウンドトラック3<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">澤野弘之 · 2012</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1455884/">Rahxephon O.S.T. 1<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">橋本一子 · 2005</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/6082860/">15<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">方大同 · 2011</span></div></li>
+            <li class="is-full fav-row is-repeat" data-marked="2018-05-17" data-reviewed="true"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/3888208/">Fallout 3 GNR Soundtrack<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">群星 · 2008</span><div class="fav-main"><p class="fav-review">This is Three Dog 嗷呜呜呜呜呜呜呜... 这是张很多人循环上百遍的好东西，鼓励了我穿越各种黑暗场景，免疫火蚂蚁之类的恶心惊悚生物，为游戏选好音乐的这些人才是真的有情怀</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/2299845/">黑梦<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">窦唯 · 1994</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/26386649/">Currents<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Tame Impala · 2015</span></div></li>
+            <li class="is-compact fav-row" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/25794147/">Eason&#x27;s Life 陳奕迅2013演唱會<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">陈奕迅 · 2013</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1499219/">N.E.W.S<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Prince · 2003</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/3784120/">Soul Boy<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">方大同 · 2005</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1395685/">The Dark Side of the Moon<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Pink Floyd · 1973</span></div></li>
+            <li class="is-full fav-row is-repeat" data-marked="2018-05-17" data-reviewed="true"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/1449775/">ワインレッドの心<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">玉置浩二 · 1999</span><div class="fav-main"><p class="fav-review">温润，大概是我能想到的最贴切的形容词。</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/6971772/">Assassin&#x27;s Creed Original Game Soundtrack<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Jesper Kyd · 2007</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1394902/">Di-Dar<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">王菲 · 1995</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/3603814/">H³M<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">陈奕迅 · 2009</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1754639/">青蛇<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">黄霑 / 雷颂德 · 1993</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/5344708/">万能青年旅店<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">万能青年旅店 · 2010</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1405249/">往生<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">王勇 · 1996</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/25900441/">Transistor (Original Soundtrack)<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Darren Korb · 2014</span></div></li>
+            <li class="is-full fav-row is-repeat" data-marked="2018-05-17" data-reviewed="true"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-full"><div class="fav-titleline"><a class="fav-title" href="https://music.douban.com/subject/6971193/">The Elder Scrolls V Skyrim Soundtrack<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a></div><span class="fav-meta">Jeremy Soule · 2011</span><div class="fav-main"><p class="fav-review">世界如此辽阔</p></div><div class="fav-actions"></div></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/5423757/">the Garden of sinners -劇場版「空の境界」音楽集-<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">梶浦由記 · 2011</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/10829914/">Who You Are Is Not Enough<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">Athletics · 2012</span></div></li>
+            <li class="is-compact fav-row is-repeat" data-marked="2018-05-17" data-reviewed="false"><time class="fav-date num" datetime="2018-05-17">2018-05-17</time><div class="fav-line"><a class="fav-title" href="https://music.douban.com/subject/1849980/">雨吁<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><span class="fav-meta">窦唯 · 2006</span></div></li>
+            </ol>
+            <nav class="fav-pager" data-fav-pager hidden aria-label="Pages" data-zh-aria-label="分页" data-i18n="aria-label">
+                <div class="fav-pager-row">
+                    <a class="pill fav-prev" data-fav-prev>← <span data-l="en">Previous</span><span data-l="zh" lang="zh-Hans">上一页</span></a>
+                    <ol class="fav-pages" data-fav-pages></ol>
+                    <span class="fav-pos num" data-fav-pos></span>
+                    <a class="pill pill-ink fav-next" data-fav-next><span data-l="en">Next</span><span data-l="zh" lang="zh-Hans">下一页</span> →</a>
+                </div>
+                <span class="fav-range-long num" data-fav-range-long></span>
+            </nav>
+            <section class="fav-about">
+                <h2 class="fav-about-k"><span data-l="en">About these records</span><span data-l="zh" lang="zh-Hans">关于这些记录</span></h2>
+                <p><span data-l="en">Dates are when I marked each work on Douban. Seasons of one show are merged into one entry, dated by the latest season. Ratings and reviews are as exported on May 30, 2026. Titles and reviews stay in Chinese, as written.</span><span data-l="zh" lang="zh-Hans">日期是在豆瓣上标记的日期；同一部剧的几季合成一条，排在最近一季的日期上。星级和短评是 2026 年 5 月 30 日导出时的版本，短评是写在豆瓣上的原文，一字未改。</span></p>
+            </section>
         </div>
-        <ol class="favorites-list" data-favorites-list tabindex="-1" aria-labelledby="favorites-title">
-            <li class="favorite-row favorite-row--compact" data-marked="2025-06-11" data-reviewed="false">
-                <time class="favorite-date" datetime="2025-06-11"><span>2025-06-11</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1407329/">David Tao<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2025-06-11</span>陶喆 · 1997</p>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2024-12-27" data-reviewed="true">
-                <time class="favorite-date" datetime="2024-12-27"><span>2024-12-27</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/5966149/">Soul Power Live<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">陶喆 · 2003</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">第一遍在长途飞机上听的，暴殄天物啊</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2023-01-25" data-reviewed="false">
-                <time class="favorite-date" datetime="2023-01-25"><span>2023-01-25</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/34552434/">Dvorák: Symphony No.9; Othello Overture<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2023-01-25</span>Claudio Abbado / Berliner Philharmoniker · 1999</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2022-10-06" data-reviewed="false">
-                <time class="favorite-date" datetime="2022-10-06"><span>2022-10-06</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1422300/">Jay<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2022-10-06</span>周杰伦 · 2000</p>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2022-09-09" data-reviewed="true">
-                <time class="favorite-date" datetime="2022-09-09"><span>2022-09-09</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/4156227/">Jyukai BEST ~Stairway to the future~<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">樹海 feat. タイナカサチ · 2010</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">这张居然没标</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2022-06-27" data-reviewed="false">
-                <time class="favorite-date" datetime="2022-06-27"><span>2022-06-27</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/6890516/">原色<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2022-06-27</span>杨宗纬 · 2011</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2022-03-25" data-reviewed="false">
-                <time class="favorite-date" datetime="2022-03-25"><span>2022-03-25</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1419538/">Dvorák: Symphonie No. 9; Smetana: Moldau<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2022-03-25</span>Herbert von Karajan · 1993</p>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2022-02-21" data-reviewed="true">
-                <time class="favorite-date" datetime="2022-02-21"><span>2022-02-21</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/10735523/">Sandy Lam Concert MMXI 2CD<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">林忆莲 · 2012</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">听到《柿子》忍不住打了个五星，要是多唱几首《野花》专就好了</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2022-02-20" data-reviewed="false">
-                <time class="favorite-date" datetime="2022-02-20"><span>2022-02-20</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/5380417/">Homogenic<span class="visually-hidden">（豆瓣）</span></a></h2><span class="favorite-seasons">共 2 个版本</span></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2022-02-20</span>Björk · 1997</p>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2022-01-13" data-reviewed="true">
-                <time class="favorite-date" datetime="2022-01-13"><span>2022-01-13</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1395303/">Mezzanine<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Massive Attack · 1998</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">貌似比Tricky的M开头更对味一点，black milk。2022第一张五星</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2021-05-30" data-reviewed="false">
-                <time class="favorite-date" datetime="2021-05-30"><span>2021-05-30</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/33416236/">Flamagra<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2021-05-30</span>Flying Lotus · 2019</p>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2021-01-16" data-reviewed="true">
-                <time class="favorite-date" datetime="2021-01-16"><span>2021-01-16</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/30471492/">THE ANYMAL [通常盤]<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Suchmos · 2019</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">In the Zoo这个迷幻，You Blue I前半这个感觉是能乐（抱歉分不清日本各种传统艺能）吗？后半有点拖，here comes...那首也抓耳</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2020-12-22" data-reviewed="true">
-                <time class="favorite-date" datetime="2020-12-22"><span>2020-12-22</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/35292992/">冀西南林路行<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">万能青年旅店 · 2020</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">感觉音乐性进步挺大的，噪音（《采石》）和jazz的引入还蛮惊喜的，还有弦乐、艺术摇滚、民谣。音色和风格丰富多了，应该会更耐听，但代价是失去了一些独特性，旋律性也下降不少。有朋友说好短，但我感觉烧钱怕是n倍增哈哈哈。至于词，目前只看了《郊眠寺》，“人间明暗”，可谓万青柔情版《高级动物》《无题》《幻听》</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2020-12-06" data-reviewed="true">
-                <time class="favorite-date" datetime="2020-12-06"><span>2020-12-06</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/26859478/">Blonde<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Frank Ocean · 2016</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">刚开始听觉得怪怪的不太好听，但好像有点意思，至少听出来里面有很多想法，口味独特，于是先留着偶尔听听。然后就一发不可收拾，从偶尔听下变成每天听，或者找不到什么适合听的就回来听，chill时听，upset时也听…最后其中某段变成了连续几天梦中的bgm洗脑循环，然后里面的唱词和采样：be yourself-规劝，wish you godspeed-不舍与祝福，who you are-存在性问题…实在是直入人心。</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2020-09-11" data-reviewed="false">
-                <time class="favorite-date" datetime="2020-09-11"><span>2020-09-11</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1783964/">都市触觉Ⅲ Faces &amp; PLaces<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2020-09-11</span>林忆莲 · 1990</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2020-08-09" data-reviewed="false">
-                <time class="favorite-date" datetime="2020-08-09"><span>2020-08-09</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/2380829/">風林火山:完結編<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2020-08-09</span>千住明 · 2007</p>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2020-06-28" data-reviewed="true">
-                <time class="favorite-date" datetime="2020-06-28"><span>2020-06-28</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/2287466/">Threnody for the Victims of Hiroshima<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Krzysztof Penderecki · 1994</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">因为《双峰》过来，古典实验。第一次听《广挽》黑暗中鸟肌跟着提琴一波一波起</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2020-06-28" data-reviewed="false">
-                <time class="favorite-date" datetime="2020-06-28"><span>2020-06-28</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/27071360/">Twin Peaks (Limited Event Series Soundtrack)<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2020-06-28</span>Angelo Badalamenti · 2017</p>
-            </li>
-            <li class="favorite-row favorite-row--full is-date-repeat" data-marked="2020-06-28" data-reviewed="true">
-                <time class="favorite-date" datetime="2020-06-28"><span>2020-06-28</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1394972/">Soundtrack from Twin Peaks<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Angelo Badalamenti · 1990</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">不用听完直接五星了，剧里欣赏过太多遍了</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2020-05-09" data-reviewed="false">
-                <time class="favorite-date" datetime="2020-05-09"><span>2020-05-09</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/3288148/">Follow Me<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2020-05-09</span>伊藤君子 · 2004</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2020-04-03" data-reviewed="false">
-                <time class="favorite-date" datetime="2020-04-03"><span>2020-04-03</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1422314/">Maxwell Unplugged<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2020-04-03</span>Maxwell · 1997</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2020-04-02" data-reviewed="false">
-                <time class="favorite-date" datetime="2020-04-02"><span>2020-04-02</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1758561/">野花<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2020-04-02</span>林忆莲 · 1991</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2020-03-30" data-reviewed="false">
-                <time class="favorite-date" datetime="2020-03-30"><span>2020-03-30</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/3035019/">梅艳芳极梦幻演唱会<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2020-03-30</span>梅艳芳 · 2002</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2020-03-30" data-reviewed="false">
-                <time class="favorite-date" datetime="2020-03-30"><span>2020-03-30</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/2159075/">跨越97演唱会<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2020-03-30</span>张国荣 · 2003</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2020-03-30" data-reviewed="false">
-                <time class="favorite-date" datetime="2020-03-30"><span>2020-03-30</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1407636/">热·情演唱会<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2020-03-30</span>张国荣 · 2000</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2020-03-30" data-reviewed="false">
-                <time class="favorite-date" datetime="2020-03-30"><span>2020-03-30</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1395136/">艳阳天<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2020-03-30</span>窦唯 · 1995</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2020-03-23" data-reviewed="false">
-                <time class="favorite-date" datetime="2020-03-23"><span>2020-03-23</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1799364/">Experience: Jill Scott 826+<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2020-03-23</span>Jill Scott · 2001</p>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2020-02-29" data-reviewed="true">
-                <time class="favorite-date" datetime="2020-02-29"><span>2020-02-29</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1405324/">我去2000年<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">朴树 · 1999</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">这是个无诗无歌的时代 ｜20220919 因为《我去2000年》和《召唤》四改五</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2020-02-05" data-reviewed="true">
-                <time class="favorite-date" datetime="2020-02-05"><span>2020-02-05</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1474085/">Beautifully Human: Words and Sounds, Vol. 2<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Jill Scott · 2004</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">第一遍，比起首专增大了气声的比重，整体性更好。听出了一些jazz和世界元素。几遍以后加到五星，很丰富。</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2020-02-05" data-reviewed="false">
-                <time class="favorite-date" datetime="2020-02-05"><span>2020-02-05</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1753655/">Who Is Jill Scott? Words and Sounds, Vol. 1<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2020-02-05</span>Jill Scott · 2001</p>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2019-12-13" data-reviewed="true">
-                <time class="favorite-date" datetime="2019-12-13"><span>2019-12-13</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1422312/">Embrya<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Maxwell · 1998</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">这张对味</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2019-12-12" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-12-12"><span>2019-12-12</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1394788/">Coming Up<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-12-12</span>Suede · 1996</p>
-            </li>
-            <li class="favorite-row favorite-row--full is-date-repeat" data-marked="2019-12-12" data-reviewed="true">
-                <time class="favorite-date" datetime="2019-12-12"><span>2019-12-12</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/2245151/">Gold Experience<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Prince · 1995</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">prince的音乐总是让人感受到一种旺盛的生命力</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--full is-date-repeat" data-marked="2019-12-12" data-reviewed="true">
-                <time class="favorite-date" datetime="2019-12-12"><span>2019-12-12</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1422311/">Maxwell&#x27;s Urban Hang Suite<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Maxwell · 1996</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">90年代真是黄金年代啊，trip hop三巨头紧贴neo soul三专，两个大陆。不过这张听上去其实并不是很neo。比起另外两张Badu/D哥还是偏向传统r&amp;b</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--full is-date-repeat" data-marked="2019-12-12" data-reviewed="true">
-                <time class="favorite-date" datetime="2019-12-12"><span>2019-12-12</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1465706/">MTV Unplugged<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Maxwell · 1997</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">声线比较中性</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2019-11-18" data-reviewed="true">
-                <time class="favorite-date" datetime="2019-11-18"><span>2019-11-18</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/30310234/">our latest number<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">toe · 2018</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">这张是真的灵</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2019-11-06" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-11-06"><span>2019-11-06</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1800718/">Brown Sugar<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-11-06</span>D&#x27;Angelo · 1995</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2019-11-04" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-11-04"><span>2019-11-04</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1439054/">Worldwide Underground<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-11-04</span>Erykah Badu · 2003</p>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2019-11-01" data-reviewed="true">
-                <time class="favorite-date" datetime="2019-11-01"><span>2019-11-01</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1439052/">Mama&#x27;s Gun<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Erykah Badu · 2000</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">Badu的专真是smooth，可以无限循环</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2019-11-01" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-11-01"><span>2019-11-01</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1439051/">Baduizm<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-11-01</span>Erykah Badu · 1997</p>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2019-10-30" data-reviewed="true">
-                <time class="favorite-date" datetime="2019-10-30"><span>2019-10-30</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/34780810/">Painted<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Lucky Daye · 2019</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">基调明亮</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2019-10-08" data-reviewed="true">
-                <time class="favorite-date" datetime="2019-10-08"><span>2019-10-08</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/34851119/">Precipieces<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Fractal Quintet · 2014</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">重听提到五星，jazz fusion，旋律党应该也会喜欢。</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2019-04-11" data-reviewed="true">
-                <time class="favorite-date" datetime="2019-04-11"><span>2019-04-11</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/26375229/">Choose Your Weapon<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Hiatus Kaiyote · 2015</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">挺难的一张专，主要是旋律不够抓耳。单单说一下第一首抓到耳的Borderline with My Atoms：好神奇的和弦进行，有一段感觉有点像中国戏曲了。电子元素用得妙。一两个月后回来加一星：虽然难说完美，但this is my shit now</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--full" data-marked="2019-04-01" data-reviewed="true">
-                <time class="favorite-date" datetime="2019-04-01"><span>2019-04-01</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/33383327/">The Loop<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Shafiq Husayn · 2019</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">被bandcamp weekly种草的第一张专辑，第7首我可以扭一百遍</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2019-03-19" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-03-19"><span>2019-03-19</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/4894045/">DUO 陈奕迅2010演唱会<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-03-19</span>陈奕迅 · 2010</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2019-03-19" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-03-19"><span>2019-03-19</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1406170/">FOR SALE<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-03-19</span>Swing · 2001</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2019-03-19" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-03-19"><span>2019-03-19</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/26455588/">THE BAY<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-03-19</span>Suchmos · 2015</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2019-03-19" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-03-19"><span>2019-03-19</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/4089084/">For Long Tomorrow<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-03-19</span>toe · 2009</p>
-            </li>
-            <li class="favorite-row favorite-row--full is-date-repeat" data-marked="2019-03-19" data-reviewed="true">
-                <time class="favorite-date" datetime="2019-03-19"><span>2019-03-19</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/25714841/">LMR<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Levin / Minnemann / Rudess · 2013</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">非常丰富，复杂的同时旋律非常耐听</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2019-03-16" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-03-16"><span>2019-03-16</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1408794/">F.I.R.<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-03-16</span>飞儿乐团 · 2004</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2019-03-15" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-03-15"><span>2019-03-15</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1436975/">十一月的萧邦<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-03-15</span>周杰伦 · 2005</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2019-03-15" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-03-15"><span>2019-03-15</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1401853/">七里香<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-03-15</span>周杰伦 · 2004</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2019-03-15" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-03-15"><span>2019-03-15</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/3313612/">橙月<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-03-15</span>方大同 · 2008</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2019-03-14" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-03-14"><span>2019-03-14</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/26387160/">Peace &amp; Phunk<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-03-14</span>Dogg Master · 2015</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2019-03-14" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-03-14"><span>2019-03-14</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1786588/">1999<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-03-14</span>Prince · 1982</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2019-03-12" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-03-12"><span>2019-03-12</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1829741/">Call Me<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-03-12</span>Al Green · 1973</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2019-02-13" data-reviewed="false">
-                <time class="favorite-date" datetime="2019-02-13"><span>2019-02-13</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/5352987/">Why Aren&#x27;t I Home<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2019-02-13</span>Athletics · 2010</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2018-10-03" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-10-03"><span>2018-10-03</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/3777782/">Injection<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-10-03</span>Dogg Master · 2008</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2018-09-11" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-09-11"><span>2018-09-11</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1394797/">Vespertine<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-09-11</span>Björk · 2001</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2018-08-18" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-08-18"><span>2018-08-18</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/4122080/">Live at Last: A Wonder Summer&#x27;s Night<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-08-18</span>Stevie Wonder · 2009</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2018-07-27" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-07-27"><span>2018-07-27</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1407383/">大热<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-07-27</span>张国荣 · 2000</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2018-07-18" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-07-18"><span>2018-07-18</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1667562/">Hard Groove<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-07-18</span>Roy Hargrove &amp; The RH Factor · 2003</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2018-07-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-07-17"><span>2018-07-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/2071204/">Distractions<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-07-17</span>Roy Hargrove &amp; The RH Factor · 2006</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2018-05-24" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-24"><span>2018-05-24</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/14826283/">蓋亞<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-24</span>林忆莲 · 2012</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/4123634/">ファイナルファンタジーXIII オリジナル・サウンドトラック<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>浜渦正志 · 2010</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1406522/">叶惠美<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>周杰伦 · 2003</p>
-            </li>
-            <li class="favorite-row favorite-row--full is-date-repeat" data-marked="2018-05-17" data-reviewed="true">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/27093616/">仍是异乡人<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">李剑青 · 2017</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">弦樂真的漂亮，唱法很李宗盛，詞很鄉土 ｜ 感谢剑青，让人能在异乡的夜晚，好好地哭几场</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/26884047/">Arrival<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>Jóhann Jóhannsson · 2016</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1477122/">Diablo II<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>Matt Uelmen · 2000</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1455891/">Samurai Champloo: Music Record Katana<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>群星 · 2005</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1482326/">The Hits 2<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>Prince · 1993</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/26684914/">HITnRUN Phase Two<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>Prince · 2015</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1485219/">3121<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>Prince · 2006</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/3174277/">Free Jazz Classics Vol. 3 &amp; 4<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>The Vandermark 5 · 2009</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/10529381/">機動戦士ガンダムUC オリジナルサウンドトラック3<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>澤野弘之 · 2012</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1455884/">Rahxephon O.S.T. 1<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>橋本一子 · 2005</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/6082860/">15<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>方大同 · 2011</p>
-            </li>
-            <li class="favorite-row favorite-row--full is-date-repeat" data-marked="2018-05-17" data-reviewed="true">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/3888208/">Fallout 3 GNR Soundtrack<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">群星 · 2008</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">This is Three Dog 嗷呜呜呜呜呜呜呜... 这是张很多人循环上百遍的好东西，鼓励了我穿越各种黑暗场景，免疫火蚂蚁之类的恶心惊悚生物，为游戏选好音乐的这些人才是真的有情怀</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/2299845/">黑梦<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>窦唯 · 1994</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/26386649/">Currents<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>Tame Impala · 2015</p>
-            </li>
-            <li class="favorite-row favorite-row--compact" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/25794147/">Eason&#x27;s Life 陳奕迅2013演唱會<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>陈奕迅 · 2013</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1499219/">N.E.W.S<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>Prince · 2003</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/3784120/">Soul Boy<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>方大同 · 2005</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1395685/">The Dark Side of the Moon<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>Pink Floyd · 1973</p>
-            </li>
-            <li class="favorite-row favorite-row--full is-date-repeat" data-marked="2018-05-17" data-reviewed="true">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1449775/">ワインレッドの心<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">玉置浩二 · 1999</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">温润，大概是我能想到的最贴切的形容词。</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/6971772/">Assassin&#x27;s Creed Original Game Soundtrack<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>Jesper Kyd · 2007</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1394902/">Di-Dar<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>王菲 · 1995</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/3603814/">H³M<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>陈奕迅 · 2009</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1754639/">青蛇<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>黄霑 / 雷颂德 · 1993</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/5344708/">万能青年旅店<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>万能青年旅店 · 2010</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1405249/">往生<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>王勇 · 1996</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/25900441/">Transistor (Original Soundtrack)<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>Darren Korb · 2014</p>
-            </li>
-            <li class="favorite-row favorite-row--full is-date-repeat" data-marked="2018-05-17" data-reviewed="true">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-body">
-                    <div class="favorite-head"><h2 class="favorite-title"><a href="https://music.douban.com/subject/6971193/">The Elder Scrolls V Skyrim Soundtrack<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="visually-hidden">（豆瓣）</span></a></h2><p class="favorite-meta">Jeremy Soule · 2011</p></div>
-                    <div class="favorite-notes"><p class="favorite-review">世界如此辽阔</p><button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden><span class="favorite-toggle-label">展开全文</span><svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
-                </div>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/5423757/">the Garden of sinners -劇場版「空の境界」音楽集-<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>梶浦由記 · 2011</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/10829914/">Who You Are Is Not Enough<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>Athletics · 2012</p>
-            </li>
-            <li class="favorite-row favorite-row--compact is-date-repeat" data-marked="2018-05-17" data-reviewed="false">
-                <time class="favorite-date" datetime="2018-05-17"><span>2018-05-17</span></time>
-                <div class="favorite-line"><h2 class="favorite-title"><a href="https://music.douban.com/subject/1849980/">雨吁<span class="visually-hidden">（豆瓣）</span></a></h2></div>
-                <p class="favorite-meta"><span class="favorite-date-inline" aria-hidden="true">2018-05-17</span>窦唯 · 2006</p>
-            </li>
-        </ol>
-        <nav class="favorites-pager" aria-label="分页" data-favorites-pager hidden></nav>
-    </main>
-    <footer>
-        <!-- site-shell:footer:start -->
-        <p>&copy; <span data-current-year>2026</span> <span data-owner-name>simoncos</span>. All rights reserved.</p>
-        <p><a href="../feed.zh.xml">RSS (中文)</a> · <a href="../feed.en.xml">RSS (English)</a></p>
-        <p class="site-version" data-site-version="site-config">talk-2026-05-22-final-6-g538d434</p>
-        <!-- site-shell:footer:end -->
+    </div>
+</main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 27, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-27</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
     </footer>
+    <!-- site-shell:footer:end -->
 </body>
 </html>
