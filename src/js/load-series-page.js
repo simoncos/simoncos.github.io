@@ -1,4 +1,5 @@
 "use strict";
+const seriesStaticLanguage = document.documentElement?.getAttribute('lang') || '';
 document.addEventListener('DOMContentLoaded', function () {
     const seriesList = document.getElementById('series-list');
     if (!seriesList) {
@@ -27,6 +28,25 @@ document.addEventListener('DOMContentLoaded', function () {
             return true;
         }
         return false;
+    }
+    function currentLanguage() {
+        return typeof i18n.getCurrentLanguage === 'function'
+            ? i18n.getCurrentLanguage()
+            : 'en';
+    }
+    function restoreMatchingStaticFallback() {
+        if (!hasMeaningfulStaticFallback()
+            || !seriesStaticLanguage
+            || currentLanguage() !== seriesStaticLanguage) {
+            return false;
+        }
+        if (seriesList.innerHTML !== staticFallback) {
+            seriesList.innerHTML = staticFallback;
+        }
+        if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
+            i18n.applyLanguageStateToInternalLinks(seriesList);
+        }
+        return true;
     }
     function isValidLocalArticleFilename(value) {
         return typeof value === 'string'
@@ -111,10 +131,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }));
     }
     function renderSeriesPage() {
-        const currentLanguage = typeof i18n.getCurrentLanguage === 'function'
-            ? i18n.getCurrentLanguage()
-            : 'en';
-        const rows = seriesRows(articleGroupsData, currentLanguage);
+        const language = currentLanguage();
+        const rows = seriesRows(articleGroupsData, language);
         if (!rows) {
             if (seriesCount) {
                 seriesCount.textContent = '0';
@@ -156,16 +174,31 @@ document.addEventListener('DOMContentLoaded', function () {
             i18n.applyLanguageStateToInternalLinks(seriesList);
         }
     }
-    articleGroupsApi.fetchArticleGroups()
-        .then((data) => {
-        articleGroupsData = data;
-        renderSeriesPage();
-    })
-        .catch((error) => {
-        if (!preserveStaticFallback(String(error))) {
-            console.error('Error loading grouped series page:', error);
-            seriesList.innerHTML = `<li>${escapeHtml(i18n.t('error_loading_series'))}</li>`;
+    function showSeriesPage() {
+        if (restoreMatchingStaticFallback())
+            return;
+        if (articleGroupsData)
+            renderSeriesPage();
+    }
+    function loadSeriesPage() {
+        if (articleGroupsData) {
+            showSeriesPage();
+            return;
         }
-    });
-    window.addEventListener('site-language-change', renderSeriesPage);
+        articleGroupsApi.fetchArticleGroups()
+            .then((data) => {
+            articleGroupsData = data;
+            showSeriesPage();
+        })
+            .catch((error) => {
+            if (!preserveStaticFallback(String(error))) {
+                console.error('Error loading grouped series page:', error);
+                seriesList.innerHTML = `<li>${escapeHtml(i18n.t('error_loading_series'))}</li>`;
+            }
+        });
+    }
+    if (!restoreMatchingStaticFallback()) {
+        loadSeriesPage();
+    }
+    window.addEventListener('site-language-change', loadSeriesPage);
 });

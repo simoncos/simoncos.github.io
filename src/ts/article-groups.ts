@@ -6,11 +6,7 @@
 
     let cachedPromise: Promise<ArticleGroupsData> | null = null;
 
-    function normalizePayload(payload: { last_updated?: string; groups?: ArticleGroup[] } | ArticleGroup[]): { lastUpdated: string | null; groups: ArticleGroup[] } {
-        if (Array.isArray(payload)) {
-            return { lastUpdated: null, groups: payload };
-        }
-
+    function normalizePayload(payload: { last_updated?: string; groups?: ArticleGroup[] }): { lastUpdated: string | null; groups: ArticleGroup[] } {
         return {
             lastUpdated: payload && payload.last_updated ? payload.last_updated : null,
             groups: payload && Array.isArray(payload.groups) ? payload.groups : []
@@ -26,16 +22,7 @@
                     }
                     return response.json();
                 })
-                .catch((error) => {
-                    console.warn('Error loading article index, falling back to article groups:', error);
-                    return fetch(resolvePath('data/article_groups.json')).then((response) => {
-                        if (!response.ok) {
-                            throw new Error(`article_groups ${response.status}`);
-                        }
-                        return response.json();
-                    });
-                })
-                .then((payload: { last_updated?: string; groups?: ArticleGroup[] } | ArticleGroup[]) => {
+                .then((payload: { last_updated?: string; groups?: ArticleGroup[] }) => {
                     const normalized = normalizePayload(payload);
                     const fileIndex = new Map<string, ArticleGroupFileInfo>();
 

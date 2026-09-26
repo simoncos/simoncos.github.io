@@ -1,7 +1,9 @@
-.PHONY: check generate serve
+.PHONY: check check-all generate serve
+
+TYPESCRIPT_SCOPE ?= site
 
 check:
-	npm run build:ts
+	npm run check:generated-js -- --scope $(TYPESCRIPT_SCOPE)
 	python3 scripts/update_surface_data.py --check
 	python3 scripts/update_site_shell.py --check
 	python3 scripts/update_image_dimensions.py --check
@@ -11,6 +13,9 @@ check:
 	python3 scripts/update_static_fallbacks.py --check
 	find src/js -name '*.js' -print0 | xargs -0 -n 1 node --check
 	PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_*.py'
+
+check-all:
+	$(MAKE) check TYPESCRIPT_SCOPE=all
 
 generate:
 	npm run build:ts

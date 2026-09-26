@@ -249,6 +249,8 @@
         window.addEventListener('site-language-change', function () {
             if (cachedSurface) {
                 renderSurface(cachedSurface);
+            } else {
+                load();
             }
         });
     });

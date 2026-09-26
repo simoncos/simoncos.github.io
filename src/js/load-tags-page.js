@@ -1,4 +1,5 @@
 "use strict";
+const topicsStaticLanguage = document.documentElement?.getAttribute('lang') || '';
 document.addEventListener('DOMContentLoaded', function () {
     const topicList = document.getElementById('topic-list');
     if (!topicList) {
@@ -49,8 +50,28 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!staticFallback.trim()) {
             return false;
         }
-        topicList.innerHTML = staticFallback;
+        if (topicList.innerHTML !== staticFallback) {
+            topicList.innerHTML = staticFallback;
+        }
         console.warn(`Topic data unavailable; preserving static fallback: ${reason}`);
+        return true;
+    }
+    function currentLanguage() {
+        return typeof i18n.getCurrentLanguage === 'function'
+            ? i18n.getCurrentLanguage()
+            : 'en';
+    }
+    function restoreMatchingStaticFallback() {
+        if (!staticFallback.trim()
+            || !topicsStaticLanguage
+            || currentLanguage() !== topicsStaticLanguage
+            || activeTopic()) {
+            return false;
+        }
+        topicList.innerHTML = staticFallback;
+        if (typeof i18n.localizeDocument === 'function') {
+            i18n.localizeDocument(topicList);
+        }
         return true;
     }
     function renderTopics() {
@@ -73,17 +94,32 @@ document.addEventListener('DOMContentLoaded', function () {
         rows.push(`<li><a href="#topics"${selectedTopic ? '' : ' class="active-topic" aria-current="true"'}><span>${escapeHtml(i18n.t('essays_all_topics'))}</span><span>${escapeHtml(allCount)}</span></a></li>`);
         topicList.innerHTML = rows.join('');
     }
-    articleGroupsApi.fetchArticleGroups()
-        .then((data) => {
-        articleGroupsData = data;
-        renderTopics();
-    })
-        .catch((error) => {
-        if (!preserveStaticFallback(String(error))) {
-            console.error('Error loading grouped topics:', error);
-            topicList.innerHTML = `<li>${escapeHtml(i18n.t('error_loading_tags'))}</li>`;
+    function showTopics() {
+        if (restoreMatchingStaticFallback())
+            return;
+        if (articleGroupsData)
+            renderTopics();
+    }
+    function loadTopics() {
+        if (articleGroupsData) {
+            showTopics();
+            return;
         }
-    });
-    window.addEventListener('hashchange', renderTopics);
-    window.addEventListener('site-language-change', renderTopics);
+        articleGroupsApi.fetchArticleGroups()
+            .then((data) => {
+            articleGroupsData = data;
+            showTopics();
+        })
+            .catch((error) => {
+            if (!preserveStaticFallback(String(error))) {
+                console.error('Error loading grouped topics:', error);
+                topicList.innerHTML = `<li>${escapeHtml(i18n.t('error_loading_tags'))}</li>`;
+            }
+        });
+    }
+    if (!restoreMatchingStaticFallback()) {
+        loadTopics();
+    }
+    window.addEventListener('hashchange', loadTopics);
+    window.addEventListener('site-language-change', loadTopics);
 });

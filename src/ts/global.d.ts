@@ -14,7 +14,6 @@ interface ArticleEntry {
     file?: string;
     title?: string;
     excerpt?: string;
-    html_content?: string;
     [key: string]: unknown;
 }
 

@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     const siteConfig = window.SITE_CONFIG || {};
     const i18n = window.SITE_I18N || {};
-    const articleGroupsApi = window.SITE_ARTICLE_GROUPS || {};
     const currentFile = window.location.pathname.split('/').pop();
     const backlinksSection = backlinksList.closest('.post-backlinks');
     function setBacklinksVisible(visible) {
@@ -21,8 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const resolvePath = typeof siteConfig.resolvePath === 'function'
         ? siteConfig.resolvePath.bind(siteConfig)
         : (relativePath) => relativePath;
-    const parser = new DOMParser();
-    let articleGroupsData = null;
     let backlinksData = null;
     function getCurrentLanguage() {
         return typeof i18n.getCurrentLanguage === 'function'
@@ -69,83 +66,12 @@ document.addEventListener('DOMContentLoaded', function () {
             : [];
         renderBacklinkItems(backlinks);
     }
-    function groupLinksToCurrentGroup(group, currentFiles) {
-        return Object.values(group.languages || {}).some((entry) => {
-            if (!entry || !entry.html_content) {
-                return false;
-            }
-            const doc = parser.parseFromString(entry.html_content, 'text/html');
-            return Array.from(doc.querySelectorAll('a[href]')).some((anchor) => {
-                const href = anchor.getAttribute('href') || '';
-                return currentFiles.has(href);
-            });
-        });
-    }
-    function renderBacklinksFromArticleGroups() {
-        const currentGroupInfo = articleGroupsApi.getGroupByFile(articleGroupsData, currentFile);
-        if (!currentGroupInfo || !currentGroupInfo.group) {
-            hideBacklinks();
-            return;
-        }
-        const currentLanguage = typeof i18n.getCurrentLanguage === 'function'
-            ? i18n.getCurrentLanguage()
-            : 'en';
-        const currentFiles = new Set(Object.values(currentGroupInfo.group.languages || {})
-            .map((entry) => entry && entry.file)
-            .filter(Boolean));
-        const backlinks = articleGroupsData.groups
-            .filter((group) => group.id !== currentGroupInfo.group.id)
-            .filter((group) => groupLinksToCurrentGroup(group, currentFiles))
-            .map((group) => ({
-            group,
-            entry: articleGroupsApi.getPreferredEntry(group, currentLanguage),
-            date: group.date || ''
-        }))
-            .filter((item) => item.entry && item.entry.file)
-            .sort((a, b) => {
-            const dateA = a.date ? new Date(a.date).getTime() : 0;
-            const dateB = b.date ? new Date(b.date).getTime() : 0;
-            return dateB - dateA;
-        });
-        if (!backlinks.length) {
-            hideBacklinks();
-            return;
-        }
-        backlinksList.innerHTML = '';
-        backlinks.forEach((item) => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = item.entry.file;
-            a.textContent = item.entry.title;
-            li.appendChild(a);
-            backlinksList.appendChild(li);
-        });
-        setBacklinksVisible(backlinksList.children.length > 0);
-        if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
-            i18n.applyLanguageStateToInternalLinks(backlinksList);
-        }
-    }
     function renderBacklinks() {
-        if (backlinksData) {
-            renderBacklinksFromData();
-            return;
-        }
-        renderBacklinksFromArticleGroups();
-    }
-    function loadArticleGroupsFallback() {
-        if (typeof articleGroupsApi.fetchArticleGroups !== 'function') {
+        if (!backlinksData) {
             hideBacklinks();
             return;
         }
-        articleGroupsApi.fetchArticleGroups()
-            .then((data) => {
-            articleGroupsData = data;
-            renderBacklinksFromArticleGroups();
-        })
-            .catch((error) => {
-            console.error('Error loading grouped backlinks:', error);
-            hideBacklinks();
-        });
+        renderBacklinksFromData();
     }
     fetch(resolvePath('data/backlinks_data.json'))
         .then((response) => {
@@ -159,8 +85,8 @@ document.addEventListener('DOMContentLoaded', function () {
         renderBacklinksFromData();
     })
         .catch((error) => {
-        console.warn('Error loading precomputed backlinks, falling back to article groups:', error);
-        loadArticleGroupsFallback();
+        console.warn('Error loading precomputed backlinks:', error);
+        hideBacklinks();
     });
     window.addEventListener('site-language-change', renderBacklinks);
 });

@@ -28,4 +28,4 @@ jobs:
         run: npm install
 
       - name: Run static site checks
-        run: make check
+        run: make check-all

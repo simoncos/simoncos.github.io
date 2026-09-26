@@ -1,6 +1,6 @@
 # Site Modernization Plan
 
-Last updated: 2026-06-10
+Last updated: 2026-08-31
 
 ## Goal
 
@@ -10,12 +10,12 @@ Make the site more reliable, easier to evolve, and faster on first load while pr
 
 - `python3 scripts/check_site.py` passes.
 - The site is a static GitHub Pages/Vercel-compatible repo with hand-authored root pages, generated blog pages, JSON indexes, and a few standalone artifacts.
-- Main public data files measured during review:
-  - `data/article_groups.json`: about 422 KB
-  - `data/blog_data.json`: about 424 KB
-  - `src/css/styles.css`: 2,121 lines / about 44 KB
-  - `projects/sleep-2016-2026*.html`: about 2.28 MB each
-- No blocker-level issue was found, but several release and performance risks are not yet enforced by automation.
+- Main public data files after the compatibility cleanup:
+  - `data/article_index.json`: about 7 KB
+  - `data/backlinks_data.json`: about 1.3 KB
+  - `src/css/styles.css`: about 178 KB; CSS ownership remains a future simplification area
+  - the large Sleep chart sources and compiled assets remain isolated under `projects/assets/`
+- Local checks enforce release contracts without rewriting the working tree.
 
 ## Principles
 
@@ -62,7 +62,7 @@ Acceptance:
 Near-term additions:
 
 - Every `blogs/*.md` must have generated HTML.
-- Every markdown file must appear in `data/article_groups.json`.
+- Every markdown file must appear in `data/article_index.json`.
 - `gallery_data.json` and `projects_data.json` `last_updated` must not predate their latest item date.
 - Inline event handlers such as `onclick` should be disallowed in normal site HTML.
 
@@ -76,11 +76,11 @@ Later additions:
 
 ### 2.1 Split article index from full content
 
-Current problem:
+Resolved state (2026-08-31):
 
-- `article_groups.json` and `blog_data.json` both include full `html_content` and `rendered_content`.
-- Archive, tags, series, and homepage mostly need title, date, tags, excerpt, and language mapping.
-- Backlinks are the main runtime consumer of full article HTML.
+- `article_index.json` is the single lightweight public article index.
+- `backlinks_data.json` is the single build-time relationship graph.
+- The old full-content JSON indexes and client-side backlinks parser have been retired.
 
 Target:
 
@@ -254,6 +254,26 @@ python3 -m py_compile generate_blog_pages.py scripts/check_site.py
 
 ## Execution Log
 
+### 2026-08-31
+
+Completed:
+
+- Retired `blog_data.json`, `article_groups.json`, `tags_data.json`, and `series_data.json` after confirming they had no normal runtime consumers.
+- Made `article_index.json` the sole public article index and retained `backlinks_data.json` as the build-time relationship graph.
+- Removed the ineffective full-article backlinks fallback and the unreferenced `load-blog-list` runtime.
+- Kept the static Pretext browser subset and removed the unused npm runtime dependency.
+- Changed `make check` to compile TypeScript into a temporary directory and compare all tracked JavaScript outputs without rewriting the repository.
+- Updated `llms.txt`, `agent-index.json`, architecture notes, generators, and checks to the reduced data contract.
+
+### 2026-09-01
+
+Completed:
+
+- Made generator-owned entry-page lists static-first: matching-language visits keep their existing DOM and defer JSON loading until language switching or topic filtering. Kept the separately authored Home surface data-driven until it has full generator drift ownership.
+- Split the local gate into `make check` for the shared site bundle and `make check-all` for every tracked TypeScript artifact; CI continues to run the full gate.
+- Kept the current manifest projection without adding a new abstraction, with a documented trigger to revisit only when a real output schema or demonstrated duplication appears.
+- Defined and enforced the standalone-page boundary: sitemap HTML must carry canonical Open Graph metadata and remain indexable; embedded support dashboards must be `noindex`.
+
 ### 2026-06-10
 
 Completed:
@@ -294,7 +314,8 @@ Completed:
 
 Verified:
 
-- `make check`
+- `make check` (daily shared-site gate)
+- `make check-all` (full artifact gate, used by CI)
 - `python3 -m py_compile generate_blog_pages.py scripts/check_site.py`
 - Local browser smoke test for navigation loading and theme toggle behavior.
 - `python3 generate_blog_pages.py`
@@ -314,6 +335,5 @@ Verified:
 Next:
 
 - Phase 1 and Phase 2 acceptance are now covered by local checks.
-- Remove full HTML payloads from public hot-path data after legacy compatibility is no longer needed.
 - Continue Phase 3 without a framework migration: reduce remaining CSS/JS duplication and keep generated/standalone artifacts clearly separated.
-- Decide metadata policy for standalone artifacts: sleep visual essay pages, talk deck, embedded dashboards, and research exports should either receive shared icon/RSS/meta coverage or explicit noindex/frozen-artifact treatment.
+- Apply the documented artifact policy to each new standalone HTML page at creation time; do not leave its indexability implicit.

@@ -5,7 +5,7 @@
     "owner": "simoncos / Che ZHAO",
     "motto": "Connecting the dots.",
     "summary": "A live public surface for software, AI collaboration, data projects, research artifacts, essays, talks, and field notes.",
-    "last_updated": "2026-07-24"
+    "last_updated": "2026-08-31"
   },
   "language_policy": {
     "default_language": "en",
@@ -103,10 +103,10 @@
       "description": "Current homepage editorial state."
     },
     {
-      "id": "article-groups",
+      "id": "article-index",
       "format": "json",
-      "url": "https://simoncos.github.io/data/article_groups.json",
-      "description": "Bilingual article groups used by the Essays archive, reading paths, topics, homepage, backlinks, and language switching."
+      "url": "https://simoncos.github.io/data/article_index.json",
+      "description": "Lightweight bilingual article index used by the Essays archive, reading paths, topics, homepage, and language switching."
     },
     {
       "id": "sitemap",

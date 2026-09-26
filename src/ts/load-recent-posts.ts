@@ -3,6 +3,8 @@
      * Merges blog posts, projects, and gallery items
      * into a unified recent-posts list on the homepage, sorted by date descending.
      */
+const recentPostsStaticLanguage = document.documentElement?.getAttribute('lang') || '';
+
 document.addEventListener('DOMContentLoaded', function () {
     const postList = document.getElementById('post-list');
     const updatedEl = document.getElementById('post-list-updated');
@@ -14,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const resolvePath = typeof siteConfig.resolvePath === 'function'
         ? siteConfig.resolvePath.bind(siteConfig)
         : (p) => p;
+    const staticFallback = postList.innerHTML;
+    let cachedPayloads: [any, any, any, any] | null = null;
 
     function escapeHtml(text) {
         return String(text)
@@ -247,8 +251,35 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function hasMatchingStaticFallback() {
+        return staticFallback.trim()
+            && recentPostsStaticLanguage
+            && getCurrentLanguage() === recentPostsStaticLanguage;
+    }
+
+    function restoreStaticFallback() {
+        if (!hasMatchingStaticFallback()) return false;
+        if (postList.innerHTML !== staticFallback) {
+            postList.innerHTML = staticFallback;
+        }
+        if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
+            i18n.applyLanguageStateToInternalLinks(postList);
+        }
+        return true;
+    }
+
+    function renderCurrentLanguage() {
+        if (restoreStaticFallback()) return;
+        if (cachedPayloads) {
+            renderPosts(cachedPayloads[0], cachedPayloads[1], cachedPayloads[2], cachedPayloads[3]);
+        }
+    }
+
     function load() {
-        postList.innerHTML = `<li>${escapeHtml(i18n.t ? i18n.t('loading_blog_posts') : 'Loading...')}</li>`;
+        if (cachedPayloads) {
+            renderCurrentLanguage();
+            return;
+        }
 
         const blogPromise = articleGroupsApi.fetchArticleGroups
             ? articleGroupsApi.fetchArticleGroups()
@@ -266,14 +297,17 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(() => null);
 
         Promise.all([blogPromise, projectsPromise, galleryPromise, surfacePromise])
-            .then(([blogData, projectsPayload, galleryPayload, surfacePayload]) =>
-                renderPosts(blogData, projectsPayload, galleryPayload, surfacePayload))
+            .then((payloads: [any, any, any, any]) => {
+                cachedPayloads = payloads;
+                renderCurrentLanguage();
+            })
             .catch(err => {
                 console.error('Error loading posts:', err);
-                postList.innerHTML = `<li>${escapeHtml(i18n.t ? i18n.t('error_loading_blog_posts') : 'Error loading posts.')}</li>`;
             });
     }
 
-    load();
+    if (!restoreStaticFallback()) {
+        load();
+    }
     window.addEventListener('site-language-change', load);
 });

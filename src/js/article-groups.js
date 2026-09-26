@@ -6,9 +6,6 @@
         : (relativePath) => relativePath;
     let cachedPromise = null;
     function normalizePayload(payload) {
-        if (Array.isArray(payload)) {
-            return { lastUpdated: null, groups: payload };
-        }
         return {
             lastUpdated: payload && payload.last_updated ? payload.last_updated : null,
             groups: payload && Array.isArray(payload.groups) ? payload.groups : []
@@ -22,15 +19,6 @@
                     throw new Error(`article_index ${response.status}`);
                 }
                 return response.json();
-            })
-                .catch((error) => {
-                console.warn('Error loading article index, falling back to article groups:', error);
-                return fetch(resolvePath('data/article_groups.json')).then((response) => {
-                    if (!response.ok) {
-                        throw new Error(`article_groups ${response.status}`);
-                    }
-                    return response.json();
-                });
             })
                 .then((payload) => {
                 const normalized = normalizePayload(payload);

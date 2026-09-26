@@ -20,30 +20,31 @@ This distinction matters more than a blanket rule like “everything should be s
 - `llms.txt` and `agent-index.json` as curated AI/agent-readable orientation files
 
 ### Generated JSON
-- `data/blog_data.json`
-- `data/article_groups.json`
-- `data/tags_data.json`
-- `data/series_data.json`
+- `data/article_index.json`
+- `data/backlinks_data.json`
 - `data/projects_data.json`
 - `data/gallery_data.json`
 
 Python generator still owns metadata extraction, markdown conversion, and the stable data indexes needed by the UI.
 
-`article_groups.json` is now the primary public article index. It groups bilingual article variants and carries the fields needed by the Essays archive, topic filters, reading paths, homepage, backlinks, and language switching. `tags_data.json` and `series_data.json` are still generated for compatibility.
+`article_index.json` is the primary public article index. It groups bilingual article variants and carries only the lightweight fields needed by the Essays archive, topic filters, reading paths, homepage, and language switching. `backlinks_data.json` contains the separately generated relationship graph; full article HTML stays in generated article pages and generator memory rather than public JSON indexes.
 
-`projects_data.json` and `gallery_data.json` are hand-maintained lightweight indexes for non-blog public surfaces. They should contain only stable presentation metadata and paths, not duplicate full page content.
+`projects_data.json` and `gallery_data.json` are generated lightweight projections of the hand-maintained `content_manifest.json`. They contain stable presentation metadata and paths, not duplicate full page content.
 
 ### AI / agent-readable
 - `llms.txt` is the concise Markdown orientation file at the site root. It should point agents to the highest-signal public surfaces rather than trying to mirror the full sitemap.
 - `agent-index.json` is the structured companion index for machines that prefer stable fields over prose.
 - These files describe public context only. They are not permission, training-control, or licensing documents; `robots.txt` keeps that separate crawl-surface role.
 
-### Dynamic / client-rendered
-- **home** page merges article groups and projects into a recent list
-- **blogs** page renders the archive, reading paths, and topic index from `article_groups.json`
+### Static-first / progressively enhanced
+- **home** ships generated English recent items without replacing them on first load; the separately authored Current Index and reading paths still render from `home_surface.json` because they do not yet have full generator drift ownership
+- **blogs** ships generated English archive, reading-path, and topic markup; JSON is loaded for language switching or topic filtering
+- **projects** and **gallery** keep their generated page markup untouched when it already matches the requested language
 - **tags** and **series** preserve old links by redirecting into the corresponding Essays sections
-- **backlinks** are inferred client-side from generated article HTML content
+- **backlinks** render from the build-time `backlinks_data.json` graph
 - **blog previews** use generated excerpts/content rather than reparsing markdown in the browser
+
+The generated markup is the initial rendering authority. Client renderers are progressive enhancement for language and interaction, and keep the static fallback in place when data is unavailable.
 
 ### Hand-authored shell
 
@@ -54,7 +55,17 @@ Client-side site code is authored in TypeScript and compiled to browser JavaScri
 - `gallery/talks/pkm-2026-06-07/deck.ts` and `deck.mts` compile to the talk deck's `deck.js` and `deck.mjs`.
 - `projects/assets/sleep-2016-2026*.ts` compiles to the Sleep essay chart bundles loaded by the two Sleep project pages.
 
-The compiled JavaScript remains tracked because GitHub Pages serves this repo directly. Run `npm run build:ts` before publishing script changes; `make check` runs the TypeScript build first. The only remaining unconverted `.js` file is `gallery/talks/pkm-2026-06-07/assets/motion.min.js`, a third-party minified ESM vendor asset.
+The compiled JavaScript remains tracked because GitHub Pages serves this repo directly. Run `npm run build:ts` after TypeScript changes. `make check` compiles the shared site bundle into a temporary directory and compares tracked output without rewriting the working tree. `make check-all` adds the frozen talk, Sleep essay, and Haba artifact bundles; CI runs this full gate. The only remaining unconverted `.js` file is `gallery/talks/pkm-2026-06-07/assets/motion.min.js`, a third-party minified ESM vendor asset.
+
+### Projection boundary
+
+`content_manifest.json` remains useful while one authored record feeds Projects, Gallery, and Home. Do not add another projection layer, generic schema mechanism, or override family pre-emptively. Revisit the design only when a real new output schema appears or repeated hand-maintained duplication can be demonstrated.
+
+### Public artifact metadata boundary
+
+- Every local HTML URL in `sitemap.xml` is public and indexable. It must have a title, description, matching canonical and `og:url`, plus basic Open Graph title, description, and image metadata.
+- Embedded support pages under `blogs/assets/pages/` are implementation artifacts, not standalone publications, and must declare `noindex`.
+- A new standalone artifact must be placed on one side of this boundary explicitly; being reachable in the repository is not enough to make it public.
 
 Because these pages are still hand-authored, drift is easy:
 - nav fallback must stay aligned with `navigation.html`
@@ -83,8 +94,9 @@ In short:
 1. **Transcript/data first, thesis/UI second**
    - Do not overfit implementation before the actual data flow is clear.
 
-2. **For inferred UI, prefer dynamic rendering over duplicated generator logic**
-   - especially for backlinks and previews.
+2. **For inferred UI, separate initial content from enhancement**
+   - generated static markup owns entry-page content; client rendering is reserved for language switching and filtering
+   - backlinks and previews remain dynamic because they are contextual inferred views, not duplicate authored page lists
 
 3. **For tiny cross-platform icons, inline SVG is safer than relying on glyph rendering**
    - browser/font differences are real.

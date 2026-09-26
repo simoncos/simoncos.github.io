@@ -193,9 +193,29 @@ def deduplicate_home_posts(posts: list[dict]) -> list[dict]:
     return unique_posts
 
 
-def render_home(article_index: dict, projects_payload: dict, gallery_payload: dict) -> str:
+def home_surface_targets(home_surface_payload: dict | None) -> set[str]:
+    targets: set[str] = set()
+    surface = (home_surface_payload or {}).get("surface") or {}
+    for item in surface.get("items") or []:
+        href = item.get("href")
+        if isinstance(href, str) and href:
+            targets.add(href)
+        for path in (item.get("paths") or {}).values():
+            if isinstance(path, str) and path:
+                targets.add(path)
+    return targets
+
+
+def render_home(
+    article_index: dict,
+    projects_payload: dict,
+    gallery_payload: dict,
+    home_surface_payload: dict | None = None,
+) -> str:
     surface_posts = deduplicate_home_posts(project_posts(projects_payload) + gallery_posts(gallery_payload))
     posts = blog_posts(article_index) + surface_posts
+    curated_targets = home_surface_targets(home_surface_payload)
+    posts = [post for post in posts if post.get("href") not in curated_targets]
     posts.sort(key=lambda item: item.get("date") or "", reverse=True)
     items = []
     for post in posts[:8]:
@@ -623,10 +643,16 @@ def main() -> int:
     article_index = load_json("data/article_index.json")
     projects_payload = load_json("data/projects_data.json")
     gallery_payload = load_json("data/gallery_data.json")
+    home_surface_payload = load_json("data/home_surface.json")
 
     file_specs = {
         ROOT / "index.html": {
-            "home-recent": render_home(article_index, projects_payload, gallery_payload),
+            "home-recent": render_home(
+                article_index,
+                projects_payload,
+                gallery_payload,
+                home_surface_payload,
+            ),
         },
         ROOT / "blogs.html": {
             "blog-archive": render_blog_archive(article_index),

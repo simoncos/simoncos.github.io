@@ -22,15 +22,16 @@ from email.utils import format_datetime
 
 SITE_TIMEZONE = timezone(timedelta(hours=8))
 
-# Set up logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('blog_generator.log'),
-        logging.StreamHandler()
-    ]
-)
+def configure_logging():
+    """Configure CLI logging without side effects when this module is imported."""
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler('blog_generator.log'),
+            logging.StreamHandler(),
+        ],
+    )
 
 class BlogGenerationError(Exception):
     """Custom exception for blog generation errors"""
@@ -957,8 +958,6 @@ def generate_blog_pages():
     try:
         ensure_directories()
         
-        tags_data = defaultdict(list)
-        series_data = defaultdict(list)
         blog_posts = []
 
         template = load_template('templates/blog-template.html')
@@ -973,7 +972,7 @@ def generate_blog_pages():
         # First pass: collect metadata/content/indexes across all posts
         for md_file in markdown_files:
             try:
-                collect_markdown_file(md_file, tags_data, series_data, blog_posts)
+                collect_markdown_file(md_file, blog_posts)
             except Exception as e:
                 logging.error(f"Error collecting {md_file}: {str(e)}")
                 failures.append(f"collect {md_file}: {str(e)}")
@@ -997,22 +996,22 @@ def generate_blog_pages():
             raise BlogGenerationError("Article rendering failed:\n- " + "\n- ".join(failures))
 
         # Save data files
-        blog_data = load_existing_blog_data()
-        previous_posts = blog_data.get('posts', [])
-        previous_markdown = {post.get('markdown') for post in previous_posts if post.get('markdown')}
+        existing_index = load_existing_article_index()
+        previous_markdown = {
+            entry.get('markdown')
+            for group in existing_index.get('groups', [])
+            for entry in (group.get('languages') or {}).values()
+            if entry and entry.get('markdown')
+        }
         current_markdown = {post.get('markdown') for post in blog_posts if post.get('markdown')}
 
         new_post_detected = len(current_markdown - previous_markdown) > 0
-        last_updated = blog_data.get('last_updated')
+        last_updated = existing_index.get('last_updated')
         if new_post_detected or not last_updated:
             last_updated = datetime.now().strftime('%Y-%m-%d')
 
-        save_json_data({'last_updated': last_updated, 'posts': blog_posts}, 'blog_data.json')
-        save_json_data({'last_updated': last_updated, 'groups': article_groups}, 'article_groups.json')
         save_json_data(build_article_index(article_groups, last_updated), 'article_index.json')
         save_json_data(build_backlinks_data(article_groups, last_updated), 'backlinks_data.json')
-        save_json_data(series_data, 'series_data.json')
-        save_json_data(tags_data, 'tags_data.json')
         save_rss_feed(blog_posts, 'zh')
         save_rss_feed(blog_posts, 'en')
 
@@ -1023,8 +1022,8 @@ def generate_blog_pages():
         logging.error(f"Error generating blog pages: {str(e)}")
         raise BlogGenerationError(f"Failed to generate blog pages: {str(e)}")
 
-def collect_markdown_file(md_file, tags_data, series_data, blog_posts):
-    """Collect metadata, content, and indexes for a markdown file."""
+def collect_markdown_file(md_file, blog_posts):
+    """Collect metadata and rendered content for a markdown file."""
     try:
         markdown_path = os.path.join('blogs', md_file)
         html_file = md_file.replace('.md', '.html')
@@ -1056,19 +1055,6 @@ def collect_markdown_file(md_file, tags_data, series_data, blog_posts):
 
         tags = metadata.get('tags', '').split(',')
         tags = [tag.strip() for tag in tags if tag.strip()]
-        for tag in tags:
-            tags_data[tag].append({
-                'title': title,
-                'file': html_file
-            })
-
-        series_name = metadata.get('series', '').strip()
-        if series_name:
-            series_data[series_name].append({
-                'title': title,
-                'file': html_file,
-                'part': metadata.get('series_part', '')
-            })
 
         blog_posts.append({
             "title": title,
@@ -1208,23 +1194,21 @@ def load_template(template_path):
 def get_creation_date(file_path):
     return datetime.fromtimestamp(os.path.getmtime(file_path))
 
-def load_existing_blog_data():
-    """Load existing blog_data.json if present to preserve last_updated."""
-    filepath = os.path.join('data', 'blog_data.json')
+def load_existing_article_index():
+    """Load the lightweight article index to preserve its update metadata."""
+    filepath = os.path.join('data', 'article_index.json')
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             data = json.load(f)
-        if isinstance(data, list):
-            return {'last_updated': None, 'posts': data}
-        if isinstance(data, dict) and isinstance(data.get('posts'), list):
+        if isinstance(data, dict) and isinstance(data.get('groups'), list):
             return data
     except FileNotFoundError:
-        return {'last_updated': None, 'posts': []}
+        return {'last_updated': None, 'groups': []}
     except Exception as e:
-        logging.error(f"Error loading blog_data.json: {str(e)}")
-        return {'last_updated': None, 'posts': []}
+        logging.error(f"Error loading article_index.json: {str(e)}")
+        return {'last_updated': None, 'groups': []}
 
-    return {'last_updated': None, 'posts': []}
+    return {'last_updated': None, 'groups': []}
 
 def parse_frontmatter_date(date_str):
     if not date_str:
@@ -1396,6 +1380,7 @@ def generate_blogs_page(blog_posts):
         raise BlogGenerationError(f"Failed to generate blogs page: {str(e)}")
 
 if __name__ == "__main__":
+    configure_logging()
     try:
         blog_posts = generate_blog_pages()
         generate_blogs_page(blog_posts)

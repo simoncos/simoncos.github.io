@@ -143,8 +143,8 @@ def expected_sitemap_urls() -> set[str]:
         )
     }
 
-    groups_payload = json.loads((ROOT / "data/article_groups.json").read_text(encoding="utf-8"))
-    for group in groups_payload.get("groups", []):
+    article_index = json.loads((ROOT / "data/article_index.json").read_text(encoding="utf-8"))
+    for group in article_index.get("groups", []):
         for entry in (group.get("languages") or {}).values():
             html_file = entry.get("file")
             if html_file:
@@ -191,12 +191,38 @@ def check_sitemap(errors: list[str]) -> None:
         rel = local_path.relative_to(ROOT)
         description = doc.meta(name="description")
         canonical = doc.canonical()
+        robots = doc.meta(name="robots").lower()
         if not doc.title:
             errors.append(f"{rel}: missing <title>")
         if not description:
             errors.append(f"{rel}: missing meta description")
         if canonical != loc:
             errors.append(f"{rel}: canonical {canonical!r} does not match sitemap loc {loc!r}")
+        if "noindex" in {part.strip() for part in robots.split(",")}:
+            errors.append(f"{rel}: sitemap page must not declare noindex")
+
+        required_open_graph = {
+            "og:title": doc.meta(property="og:title"),
+            "og:description": doc.meta(property="og:description"),
+            "og:image": doc.meta(property="og:image"),
+        }
+        for property_name, value in required_open_graph.items():
+            if not value:
+                errors.append(f"{rel}: missing {property_name} metadata")
+        og_url = doc.meta(property="og:url")
+        if og_url != loc:
+            errors.append(f"{rel}: og:url {og_url!r} does not match sitemap loc {loc!r}")
+
+
+def check_embedded_pages_are_noindex(errors: list[str]) -> None:
+    embedded_pages = ROOT / "blogs" / "assets" / "pages"
+    if not embedded_pages.is_dir():
+        return
+    for html_file in sorted(embedded_pages.glob("*.html")):
+        robots = parse_html(html_file).meta(name="robots").lower()
+        directives = {part.strip() for part in robots.split(",")}
+        if "noindex" not in directives:
+            errors.append(f"{html_file.relative_to(ROOT)}: embedded support page must declare noindex")
 
 
 def extract_data_pages(text: str) -> list[str]:
@@ -412,15 +438,21 @@ def check_json_assets(errors: list[str]) -> None:
                 if target and not is_external(target) and not (ROOT / target).exists():
                     errors.append(f"{rel_path}: {item_id} {language} path is missing: {target}")
 
-    groups_path = ROOT / "data/article_groups.json"
-    groups_payload = json.loads(groups_path.read_text(encoding="utf-8"))
+    index_path = ROOT / "data/article_index.json"
+    if not index_path.exists():
+        errors.append("data/article_index.json is missing")
+        return
+
+    index_payload = json.loads(index_path.read_text(encoding="utf-8"))
     markdown_index: set[str] = set()
     article_files: set[str] = set()
-    for group in groups_payload.get("groups", []):
+    for group in index_payload.get("groups", []):
         group_id = group.get("id", "<unknown>")
         for language, entry in (group.get("languages") or {}).items():
             html_file = entry.get("file")
             markdown_file = entry.get("markdown")
+            if entry.get("html_content") or entry.get("rendered_content"):
+                errors.append(f"data/article_index.json: full HTML content leaked into group {group_id}")
             if html_file:
                 article_files.add(html_file)
             if markdown_file:
@@ -436,31 +468,7 @@ def check_json_assets(errors: list[str]) -> None:
         if not (ROOT / "blogs" / html_name).exists():
             errors.append(f"{markdown_path.relative_to(ROOT)}: generated HTML is missing: {html_name}")
         if markdown_name not in markdown_index:
-            errors.append(f"{markdown_path.relative_to(ROOT)}: missing from data/article_groups.json")
-
-    index_path = ROOT / "data/article_index.json"
-    if not index_path.exists():
-        errors.append("data/article_index.json is missing")
-        return
-
-    index_payload = json.loads(index_path.read_text(encoding="utf-8"))
-    index_files: set[str] = set()
-    for group in index_payload.get("groups", []):
-        for entry in (group.get("languages") or {}).values():
-            file_name = entry.get("file")
-            markdown_file = entry.get("markdown")
-            if entry.get("html_content") or entry.get("rendered_content"):
-                errors.append(f"data/article_index.json: full HTML content leaked into group {group.get('id')}")
-            if file_name:
-                index_files.add(file_name)
-                if not (ROOT / "blogs" / file_name).exists():
-                    errors.append(f"data/article_index.json: HTML is missing: {file_name}")
-            if markdown_file and not (ROOT / "blogs" / markdown_file).exists():
-                errors.append(f"data/article_index.json: markdown is missing: {markdown_file}")
-
-    for article_file in sorted(article_files):
-        if article_file not in index_files:
-            errors.append(f"data/article_index.json: missing article file {article_file}")
+            errors.append(f"{markdown_path.relative_to(ROOT)}: missing from data/article_index.json")
 
     backlinks_path = ROOT / "data/backlinks_data.json"
     if not backlinks_path.exists():
@@ -560,6 +568,7 @@ def main() -> int:
     errors: list[str] = []
     check_local_refs(errors)
     check_sitemap(errors)
+    check_embedded_pages_are_noindex(errors)
     check_nav_fallback(errors)
     check_json_assets(errors)
     check_data_last_updated(errors)

@@ -193,6 +193,27 @@ class GalleryHomeSurfaceTests(unittest.TestCase):
         self.assertIn("Unique project", rendered)
         self.assertIn("Unique gallery", rendered)
 
+    def test_static_home_recent_excludes_items_already_curated_in_current_index(self):
+        static_fallbacks = load_script("home_recent_curated_static", "scripts/update_static_fallbacks.py")
+        article_index = json.loads((ROOT / "data/article_index.json").read_text())
+        projects_payload = json.loads((ROOT / "data/projects_data.json").read_text())
+        gallery_payload = json.loads((ROOT / "data/gallery_data.json").read_text())
+        home_surface = json.loads((ROOT / "data/home_surface.json").read_text())
+
+        rendered = static_fallbacks.render_home(
+            article_index,
+            projects_payload,
+            gallery_payload,
+            home_surface,
+        )
+
+        curated_targets = static_fallbacks.home_surface_targets(home_surface)
+        self.assertTrue(curated_targets)
+        for target in curated_targets:
+            with self.subTest(target=target):
+                self.assertNotIn(f'href="{target}"', rendered)
+        self.assertIn("Sleep Toolkit", rendered)
+
     def test_runtime_home_recent_prefers_project_for_shared_identity_or_target(self):
         fixture = json.loads((ROOT / "tests/fixtures/home_recent_cross_surface.json").read_text())
 
