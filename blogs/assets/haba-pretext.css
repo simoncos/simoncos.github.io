@@ -264,6 +264,32 @@
     }
 }
 
+/* The text flow needs a stage of at least 680px (MOBILE_BREAKPOINT in
+   haba-pretext.ts). Between 860px and about 1005px the article's contents
+   rail squeezes the column below that, so this article keeps the
+   single-column layout, with contents in the collapsible box, until the
+   two-column grid can give the stage its width. */
+@media (min-width: 860px) and (max-width: 1023.98px) {
+    .article-page .article-grid {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 760px;
+    }
+
+    .article-page .article-spacer,
+    .article-page .toc {
+        display: none;
+    }
+
+    .article-page .article-head,
+    .article-page .article-main {
+        grid-column: 1;
+    }
+
+    .article-page .toc-box {
+        display: block;
+    }
+}
+
 @media (max-width: 679px) {
     .haba-flow-scene {
         margin: 2.4rem 0 2.8rem;

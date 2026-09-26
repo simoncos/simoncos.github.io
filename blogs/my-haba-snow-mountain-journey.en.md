@@ -2,7 +2,7 @@
 tags: out
 date: 2026-01-20
 updated: 2026-07-24
-styles: assets/haba-pretext.css?v=20260724a
+styles: assets/haba-pretext.css?v=20260927a
 module_scripts: assets/haba-pretext.js?v=20260724a
 written: 2025-10-02
 translation: GPT-5.2
