@@ -79,11 +79,17 @@ def parse_html(path: Path) -> HtmlDoc:
 
 
 def iter_html_files() -> list[Path]:
-    excluded_parts = {".git", "templates", "node_modules"}
+    # Hidden directories hold tooling, not site pages. Agent worktrees under
+    # .claude/worktrees are full checkouts of other revisions and must not be
+    # checked as part of this one.
+    excluded_parts = {"templates", "node_modules"}
     return sorted(
         path
         for path in ROOT.rglob("*.html")
-        if not excluded_parts.intersection(path.relative_to(ROOT).parts)
+        if not any(
+            part.startswith(".") or part in excluded_parts
+            for part in path.relative_to(ROOT).parts[:-1]
+        )
     )
 
 
