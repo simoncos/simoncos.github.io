@@ -19,11 +19,11 @@ check-all:
 
 generate:
 	npm run build:ts
+	python3 scripts/update_site_shell.py
+	python3 scripts/update_image_dimensions.py
 	python3 generate_blog_pages.py
 	python3 scripts/build_pages.py
 	python3 scripts/update_favorites_pages.py
-	python3 scripts/update_site_shell.py
-	python3 scripts/update_image_dimensions.py
 
 serve:
 	python3 -m http.server 8000

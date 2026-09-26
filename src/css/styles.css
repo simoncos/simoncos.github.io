@@ -4129,6 +4129,19 @@ button {
         display: none;
     }
 
+    /* The English filter labels overflow at 375px with the default padding;
+       the three pills share the row instead of scrolling. */
+    .fav-filter {
+        width: 100%;
+    }
+
+    .fav-filter .seg-btn {
+        flex: 1 1 auto;
+        justify-content: center;
+        gap: 4px;
+        padding: 0 8px;
+    }
+
     .fav-row.is-repeat .fav-date {
         display: none;
     }
