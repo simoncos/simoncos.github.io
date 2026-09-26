@@ -1,5 +1,7 @@
+import importlib.util
 import json
 import re
+import tempfile
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
@@ -661,6 +663,29 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertIn('doc.meta(property="og:image")', checker)
         self.assertIn("sitemap page must not declare noindex", checker)
         self.assertIn("embedded support page must declare noindex", checker)
+
+    def test_site_checker_skips_nested_worktrees_and_hidden_directories(self):
+        spec = importlib.util.spec_from_file_location("check_site", ROOT / "scripts/check_site.py")
+        check_site = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(check_site)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            for rel_path in (
+                "index.html",
+                "blogs/post.html",
+                ".claude/worktrees/feature/index.html",
+                ".superpowers/brainstorm/mockup.html",
+                "templates/blog-template.html",
+                "node_modules/pkg/readme.html",
+            ):
+                (temp_root / rel_path).parent.mkdir(parents=True, exist_ok=True)
+                (temp_root / rel_path).write_text("<!doctype html>")
+
+            check_site.ROOT = temp_root
+            found = [path.relative_to(temp_root).as_posix() for path in check_site.iter_html_files()]
+
+        self.assertEqual(found, ["blogs/post.html", "index.html"])
 
     def test_pretext_runtime_has_one_vendored_source(self):
         package = json.loads((ROOT / "package.json").read_text())
