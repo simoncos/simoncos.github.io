@@ -2049,6 +2049,8 @@ footer p {
     }
 
     .article-page .post-main {
+        /* Stay in the reading column when the TOC rail is hidden (no section headings). */
+        grid-column: 2;
         display: grid;
         grid-template-columns: minmax(0, var(--reading-width));
         max-width: none;

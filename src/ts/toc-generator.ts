@@ -74,11 +74,14 @@ function generateTOC() {
 
     const titleHeading = document.querySelector('.post-title');
     const contentHeadings = Array.from(content.querySelectorAll('h2, h3, h4'));
-    const headings = titleHeading ? [titleHeading, ...contentHeadings] : contentHeadings;
-    
-    if (headings.length === 0) {
+
+    // The title alone is not a table of contents: an essay without section
+    // headings used to get a one-entry TOC that only pointed back at itself.
+    if (contentHeadings.length === 0) {
         return null;
     }
+
+    const headings = titleHeading ? [titleHeading, ...contentHeadings] : contentHeadings;
 
     const toc = document.createElement('div');
     toc.className = 'table-of-contents';
@@ -127,7 +130,11 @@ function generateTOC() {
 
     const summary = document.createElement('summary');
     summary.className = 'toc-summary';
-    summary.textContent = 'Table of Contents';
+    // i18n.js localizes the page before this runs, so translate now; the
+    // data-i18n key lets later language switches relabel it too.
+    const i18n = window.SITE_I18N || {};
+    summary.dataset.i18n = 'table_of_contents';
+    summary.textContent = typeof i18n.t === 'function' ? i18n.t('table_of_contents') : 'Table of Contents';
 
     details.appendChild(summary);
     details.appendChild(toc);
@@ -137,40 +144,48 @@ function generateTOC() {
 // Initialize TOC when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const toc = generateTOC();
-    if (toc) {
-        const tocContainer = document.getElementById('toc-container');
+    const tocContainer = document.getElementById('toc-container');
+
+    if (!toc) {
+        // Hide the rail rather than leave an empty "Table of Contents"
+        // landmark; the desktop grid pins .post-main to its own column.
         if (tocContainer) {
-            tocContainer.appendChild(toc);
-            trackActiveSection(tocContainer);
-
-            const tocDetails = tocContainer.querySelector<HTMLDetailsElement>('details.toc-details');
-            if (tocDetails) {
-                document.addEventListener('click', (e) => {
-                    if (isDesktopViewport()) {
-                        return;
-                    }
-
-                    if (!tocDetails.open) {
-                        return;
-                    }
-
-                    const target = e.target;
-                    if (!(target instanceof Node)) {
-                        return;
-                    }
-
-                    // Collapse TOC when tapping/clicking anywhere outside the TOC.
-                    if (!tocDetails.contains(target)) {
-                        tocDetails.open = false;
-                    }
-                }, true);
-            }
-            return;
+            tocContainer.hidden = true;
         }
-
-        const container = document.querySelector('.post-content');
-        if (container) {
-            container.insertBefore(toc, container.firstChild);
-        }
+        return;
     }
-}); 
+
+    if (tocContainer) {
+        tocContainer.appendChild(toc);
+        trackActiveSection(tocContainer);
+
+        const tocDetails = tocContainer.querySelector<HTMLDetailsElement>('details.toc-details');
+        if (tocDetails) {
+            document.addEventListener('click', (e) => {
+                if (isDesktopViewport()) {
+                    return;
+                }
+
+                if (!tocDetails.open) {
+                    return;
+                }
+
+                const target = e.target;
+                if (!(target instanceof Node)) {
+                    return;
+                }
+
+                // Collapse TOC when tapping/clicking anywhere outside the TOC.
+                if (!tocDetails.contains(target)) {
+                    tocDetails.open = false;
+                }
+            }, true);
+        }
+        return;
+    }
+
+    const container = document.querySelector('.post-content');
+    if (container) {
+        container.insertBefore(toc, container.firstChild);
+    }
+});
