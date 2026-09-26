@@ -156,6 +156,11 @@ def expected_sitemap_urls() -> set[str]:
             if html_file:
                 expected.add(site_url_for_path(f"blogs/{html_file}"))
 
+    expected.add(site_url_for_path("favorites.html"))
+    favorites_payload = json.loads((ROOT / "data/favorites.json").read_text(encoding="utf-8"))
+    for category in favorites_payload.get("categories", []):
+        expected.add(site_url_for_path(f"favorites/{category['id']}.html"))
+
     for rel_path, collection_key in (("data/gallery_data.json", "items"), ("data/projects_data.json", "projects")):
         payload = json.loads((ROOT / rel_path).read_text(encoding="utf-8"))
         for item in payload.get(collection_key, []):

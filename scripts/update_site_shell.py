@@ -97,8 +97,9 @@ def render_resource_block(config: dict[str, Any], page: dict[str, Any]) -> str:
 
     # Shell pages serve both languages from one URL via ?lang=, so the Chinese
     # variant needs to be declared or search engines only ever see English.
+    # Pages in one language only (Favorites is Chinese only) have no variant.
     canonical = page.get("canonical")
-    if canonical:
+    if canonical and len(page.get("languages", ["en", "zh"])) > 1:
         site = config.get("site_url", "").rstrip("/")
         base = f"{site}/{canonical.lstrip('/')}" if canonical != "index.html" else f"{site}/"
         for hreflang, href in (

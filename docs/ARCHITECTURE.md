@@ -24,10 +24,13 @@ This distinction matters more than a blanket rule like “everything should be s
 - `data/backlinks_data.json`
 - `data/projects_data.json`
 - `data/gallery_data.json`
+- `data/favorites.json`
 
 Python generator still owns metadata extraction, markdown conversion, and the stable data indexes needed by the UI.
 
 `article_index.json` is the primary public article index. It groups bilingual article variants and carries only the lightweight fields needed by the Essays archive, topic filters, reading paths, homepage, and language switching. `backlinks_data.json` contains the separately generated relationship graph; full article HTML stays in generated article pages and generator memory rather than public JSON indexes.
+
+`favorites.json` holds the Favorites (收藏) column: every five-star book, film, album and game from a one-off Douban export. `scripts/extract_favorites.py` writes it from the local Obsidian vault and is run by hand, never in `make check`. `scripts/update_favorites_pages.py` renders `favorites.html` and `favorites/*.html` from it; the category pages carry every work, and `load-favorites.ts` pages and filters them in the browser. The column is Chinese only, so its nav entry carries `data-nav-lang="zh"` and shows only when the page language is Chinese.
 
 `projects_data.json` and `gallery_data.json` are generated lightweight projections of the hand-maintained `content_manifest.json`. They contain stable presentation metadata and paths, not duplicate full page content.
 
