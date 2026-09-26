@@ -17,7 +17,7 @@ The column lists every work Che rated five stars on Douban in four categories (�
 
 ## First Release Scope
 
-- Chinese only. The English nav still lists it as Favorites and opens the Chinese pages (Che's call, 2026-09-26: the site defaults to English, so hiding it there hid the column).
+- Page chrome (labels, filters, pager, about notes) is bilingual since the v3 redesign (2026-09-27); titles, reviews and item metadata stay Chinese. This replaces the first release's Chinese-only pages; update the proposal's decision if it still says Chinese only.
 - No handwritten "why" line.
 - No covers: text-only layout.
 - The proposal's decisions list is the record; this list only summarizes it.
@@ -47,23 +47,22 @@ The column lists every work Che rated five stars on Douban in four categories (�
 
 - `scripts/extract_favorites.py --vault <vault root>` (or `OBSIDIAN_VAULT`) reads the vault and writes `data/favorites.json`. It needs the local vault, so it is run by hand after a new export and never in `make check`.
 - `scripts/update_favorites_pages.py` renders `favorites.html` and `favorites/{books,film,music,games}.html` from that file. `make check` runs it with `--check`. It borrows the head and footer blocks from `update_site_shell.py`, and the pages are also listed in `data/site_shell.json`, so the two scripts must keep emitting the same blocks.
-- `src/ts/load-favorites.ts` pages, filters and folds in the browser. Every work is in the HTML; without JavaScript a noscript style shows them all, with every season open.
+- `src/ts/favorites.ts` pages, filters and folds in the browser. Every work is in the HTML; without JavaScript (`:root:not(.js)` in CSS) every row shows, with every season open.
 - Game titles are "中文名 原名". An original with no CJK is split at the first space that allows it; a Japanese or traditional-Chinese original is split where the halves share the most characters. Book authors lose nationality markers and bracketed original names; `AUTHOR_FIX` holds the cases the rule gets wrong.
 
 ## Traps Found While Building
 
-- `i18n.ts` overwrites the text of every element with a `data-date` attribute with a formatted date. Rows carry `data-marked`, and a test guards it.
-- The noscript rule that reveals rows 21 onward must be at least as specific as the rule that hides them, or pages without JavaScript silently stop at 20.
+- The no-JS rule that reveals rows 21 onward must be at least as specific as the rule that hides them, or pages without JavaScript silently stop at 20.
 - From a worktree, `preview_start` serves the main checkout's launch config, not the worktree. Serve the worktree with its own static server and open that URL.
 - The essay link shares the index CTA style, which tracks letters apart and uppercases. An essay title needs both turned off, or "——" splits and "Exformation" becomes "EXFORMATION".
-- The first single-language article exposed a duplicated title on the home page: `update_static_fallbacks.py` listed the article's own title again as its "other language" title. It now drops a repeated title, as `load-recent-posts.ts` already did.
+- The first single-language article exposed a duplicated title on the home page: the home list showed the article's own title again as its "other language" title. `scripts/build_pages.py` drops a repeated title.
 
 ## Essays Linked From Items
 
 - An item links to an essay only after the essay is published on the site as an article. The proposal's data findings table lists the qualifying essays and their original dates.
 - To link one, map the work's Douban link to the article's path in `ESSAYS` in `scripts/update_favorites_pages.py` and regenerate. The link text is the article's H1, read from its Markdown, so the title lives in one place. Title marks inside it are nested as 〈〉 within the link's 《》.
 - The link shows only on rows with a short review. A work without one renders as a compact row, which has no room for it.
-- Essays are Chinese first, with an English translation beside each (`<slug>.en.md`, `translation:` names the model; Che asked for them 2026-09-26). Tags follow the work's type: `book`, `movie`, `music`, `game` (Che's choice). The work's Douban link goes on the last line (`豆瓣：[作品](链接)`), so the Essays list excerpt starts with the essay itself.
+- Essays are Chinese first, with an English translation beside each (`<slug>.en.md`, `translation:` names the model; Che asked for them 2026-09-26). Tags follow the work's type: `book`, `movie`, `music`, `game` (Che's choice). The work's Douban link goes on the last line (`豆瓣：[作品](链接)`), so the Articles list excerpt starts with the essay itself.
 - Each new article also needs a `sitemap.xml` entry; `make check` fails without one.
 - Set frontmatter `date` to the original Douban publication date. Without `date`, `generate_blog_pages.py` falls back to the file's mtime, and an old essay looks as if it was published today.
 - Do not take dates from the vault files. They have no frontmatter, and their creation and commit times date from the 2026 migration.

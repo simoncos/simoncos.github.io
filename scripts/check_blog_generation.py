@@ -31,20 +31,6 @@ RETIRED_DATA = (
 )
 
 
-def site_version() -> str:
-    try:
-        result = subprocess.run(
-            ["git", "describe", "--tags", "--always"],
-            cwd=ROOT,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-        return result.stdout.strip()
-    except Exception:
-        return "unknown"
-
-
 def copy_path(source: Path, target: Path) -> None:
     if source.is_dir():
         shutil.copytree(source, target, ignore=shutil.ignore_patterns("__pycache__"))
@@ -54,7 +40,7 @@ def copy_path(source: Path, target: Path) -> None:
 
 
 def prepare_temp_repo(temp_root: Path) -> None:
-    for rel in ("generate_blog_pages.py", "requirements.txt"):
+    for rel in ("generate_blog_pages.py", "requirements.txt", "scripts/site_shell.py"):
         copy_path(ROOT / rel, temp_root / rel)
 
     for rel in ("blogs", "templates", "data"):
@@ -120,7 +106,6 @@ def main() -> int:
         prepare_temp_repo(temp_root)
 
         env = os.environ.copy()
-        env["SITE_VERSION_OVERRIDE"] = site_version()
         env["TZ"] = "UTC"
         result = subprocess.run(
             [sys.executable, "generate_blog_pages.py"],

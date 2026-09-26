@@ -1,31 +1,38 @@
 {
   "site": {
-    "name": "simonc site",
+    "name": "simoncos",
     "canonical_url": "https://simoncos.github.io/",
     "owner": "simoncos / Che ZHAO",
     "motto": "Connecting the dots.",
     "summary": "A live public surface for software, AI collaboration, data projects, research artifacts, essays, talks, and field notes.",
-    "last_updated": "2026-08-31"
+    "last_updated": "2026-09-27"
   },
   "language_policy": {
     "default_language": "en",
     "supported_languages": ["en", "zh"],
     "english_page_pattern": "*.en.html",
     "chinese_page_pattern": "*.html",
-    "agent_preference": "Prefer English pages when both versions exist, unless the user asks for Chinese."
+    "agent_preference": "Prefer English pages when both versions exist, unless the user asks for Chinese.",
+    "section_pages": "Section pages (Index, Articles, Work, Favorites, About) carry both languages; append ?lang=zh for Chinese."
   },
   "entrypoints": [
     {
       "id": "home",
-      "label": "Live homepage",
+      "label": "Index",
       "url": "https://simoncos.github.io/",
-      "purpose": "Current editorial surface and recent work."
+      "purpose": "Selected work, recent articles and a short changelog."
     },
     {
-      "id": "about",
-      "label": "About",
-      "url": "https://simoncos.github.io/about.html",
-      "purpose": "Profile, motto, working modes, contact links, and operating principles."
+      "id": "articles",
+      "label": "Articles",
+      "url": "https://simoncos.github.io/blogs.html",
+      "purpose": "Long-form writing archive, filterable by topic, with series."
+    },
+    {
+      "id": "work",
+      "label": "Work",
+      "url": "https://simoncos.github.io/gallery.html",
+      "purpose": "Projects, talks, research artifacts and visual essays."
     },
     {
       "id": "projects",
@@ -34,23 +41,16 @@
       "purpose": "Index of maintained tools and systems; each project opens into its context, outputs, and related work."
     },
     {
-      "id": "essays",
-      "label": "Essays",
-      "url": "https://simoncos.github.io/blogs.html",
-      "purpose": "Long-form writing archive with structured reading paths and topic discovery."
-    },
-    {
-      "id": "gallery",
-      "label": "Gallery",
-      "url": "https://simoncos.github.io/gallery.html",
-      "purpose": "Talks, demos, visual essays, research artifacts, and curated work paths."
-    },
-    {
       "id": "favorites",
       "label": "Favorites (收藏)",
       "url": "https://simoncos.github.io/favorites.html",
-      "language": "zh",
-      "purpose": "Every book, film, album and game rated five stars on Douban, newest first, with the short reviews as written there. Chinese only."
+      "purpose": "Every book, film, album and game rated five stars on Douban, newest first, with the short reviews as written there. Page chrome is bilingual; titles and reviews are in Chinese."
+    },
+    {
+      "id": "about",
+      "label": "About",
+      "url": "https://simoncos.github.io/about.html",
+      "purpose": "Short profile, motto and contact links."
     }
   ],
   "current_surfaces": [
@@ -98,22 +98,16 @@
       "description": "Concise AI-readable orientation file."
     },
     {
-      "id": "content-manifest",
+      "id": "site-data",
       "format": "json",
-      "url": "https://simoncos.github.io/data/content_manifest.json",
-      "description": "Public manifest for projects, gallery, and home surfaces."
-    },
-    {
-      "id": "home-surface",
-      "format": "json",
-      "url": "https://simoncos.github.io/data/home_surface.json",
-      "description": "Current homepage editorial state."
+      "url": "https://simoncos.github.io/data/site.json",
+      "description": "Source data the Index, Work, project and About pages are generated from."
     },
     {
       "id": "article-index",
       "format": "json",
       "url": "https://simoncos.github.io/data/article_index.json",
-      "description": "Lightweight bilingual article index used by the Essays archive, reading paths, topics, homepage, and language switching."
+      "description": "Lightweight bilingual article index (titles, dates, excerpts, topics, series and translations)."
     },
     {
       "id": "favorites",

@@ -1,119 +1,151 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>收藏 - simonc site</title>
-    <meta name="description" content="我在豆瓣上打过五星的书、影、音、游，按标记时间排列，附豆瓣短评原文。">
+    <title data-zh="收藏 · simoncos">Favorites · simoncos</title>
+    <meta name="description" content="Every book, film, album and game I rated five stars on Douban, by marking date, with the original notes.">
+    <meta name="author" content="simoncos">
     <link rel="canonical" href="https://simoncos.github.io/favorites.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="收藏 - simonc site">
-    <meta property="og:description" content="我在豆瓣上打过五星的书、影、音、游，按标记时间排列，附豆瓣短评原文。">
+    <meta property="og:title" content="Favorites · simoncos">
+    <meta property="og:description" content="Every book, film, album and game I rated five stars on Douban, by marking date, with the original notes.">
     <meta property="og:url" content="https://simoncos.github.io/favorites.html">
-    <meta property="og:site_name" content="simonc site">
-    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="simoncos">
     <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="simonc site — tools and research, essays and field notes">
+    <meta property="og:image:alt" content="simoncos — tools and research, articles and field notes">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="收藏 - simonc site">
-    <meta name="twitter:description" content="我在豆瓣上打过五星的书、影、音、游，按标记时间排列，附豆瓣短评原文。">
+    <meta name="twitter:title" content="Favorites · simoncos">
+    <meta name="twitter:description" content="Every book, film, album and game I rated five stars on Douban, by marking date, with the original notes.">
     <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
     <!-- site-shell:resources:start -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
-    <link rel="alternate" type="application/rss+xml" title="simonc site RSS (中文)" href="feed.zh.xml">
-    <link rel="alternate" type="application/rss+xml" title="simonc site RSS (English)" href="feed.en.xml">
-    <script src="src/js/theme-init.js?v=20260926c"></script>
-    <link rel="stylesheet" href="src/css/styles.css?v=20260926c">
-    <script src="src/js/site-config.js?v=20260926c" defer></script>
-    <script src="src/js/i18n.js?v=20260926c" defer></script>
-    <script src="src/js/load-nav.js?v=20260926c" defer></script>
-    <script src="src/js/dark-mode.js?v=20260926c" defer></script>
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="feed.en.xml">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/favorites.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/favorites.html?lang=zh">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/favorites.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
+    <script src="src/js/theme-init.js?v=20260927a"></script>
+    <link rel="stylesheet" href="src/css/styles.css?v=20260927a">
+    <script src="src/js/site.js?v=20260927a" defer></script>
+    <script src="src/js/favorites.js?v=20260927a" defer></script>
     <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
     <!-- site-shell:resources:end -->
 </head>
-<body class="favorites-page favorites-index-page">
-    <a class="skip-link" href="#main" data-i18n="skip_to_content">跳到正文</a>
-    <header class="site-header">
-        <div class="header-inner">
-            <p class="site-kicker">收藏</p>
-            <p class="site-title" data-site-title>simonc site</p>
+<body>
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="blogs.html"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="favorites.html" aria-current="page"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="?lang=zh" data-lang-toggle><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
         </div>
     </header>
-    <div id="navigation-placeholder"></div>
-    <main id="main" class="container page-shell favorites-shell" lang="zh-Hans">
-        <section class="favorites-top favorites-index-top" aria-labelledby="favorites-title">
-            <h1 id="favorites-title">收藏</h1>
-            <p class="favorites-intro"><span>我在豆瓣上打过五星的书、影、音、游。</span><span>短评是写在豆瓣上的原文，一字未改。</span></p>
-        </section>
-        <p class="favorites-strip"><span>共 453 件</span><span aria-hidden="true">/</span><span>222 件有短评</span><span aria-hidden="true">/</span><span>豆瓣数据截至 2026 年 5 月 30 日</span></p>
-        <div class="favorites-categories">
-            <section class="favorites-category" aria-labelledby="favorites-books">
-                <header>
-                    <h2 id="favorites-books"><a href="favorites/books.html">书</a></h2>
-                    <p>80 本 · 有短评 56 本</p>
-                </header>
-                <p class="section-kicker">最近的短评</p>
-                <ol class="favorites-recent">
-                    <li><time datetime="2025-12-28">2025-12-28</time><div><a class="favorites-recent-title" href="https://book.douban.com/subject/3142127/">神之山嶺01<span class="visually-hidden">（豆瓣）</span></a><p>对我而言整个2025年里最触及灵魂的两部作品，除了《我的团长我的团》就是《神之山岭》。《我团》是从剧版看到小说，《山岭》是从动画电影看到漫画，迟早也会去看原著小说。动画收藏多年未看，在10月爬哈巴雪山一周前专门挑出来看了，爬哈巴之前和爬之后去昆明的路上都在看漫画，进度不到两本，后面中断了两个月。直到这几天趁假期又从头开始，终于看到最后。重刷完前两本的时候，我找回了动力续写之前在昆明完成大半的哈巴雪山回忆。有趣的是一些爬山细节我刚写完，就在后面的漫画里看到了类似的描绘，漫画也帮助我回忆起一些细节，属实是一种难得的共振体验。小说原作梦枕獏的《阴阳师》系列是我曾经很爱的作品，没想到多年后会在山这个话题上再相遇，并新认识了谷口治郎这位神级漫画家，精确再现了雪山带给人的压迫和震撼，人文部分也相当精彩。</p></div></li>
-                    <li><time datetime="2025-09-07">2025-09-07</time><div><a class="favorites-recent-title" href="https://book.douban.com/subject/30197331/">我的团长我的团（上下册）<span class="visually-hidden">（豆瓣）</span></a><p>（2025.9.3）抗战胜利八十年阅兵之际，我的心还沉浸在八十年前的中缅边境，又一次看着我的团一步步走向全军尽墨。光辉的人性，如果一定要由苦难与悲剧逼出，那宁愿让悲剧不要上演。落后就要挨打，因为只有强者才有机会做选择题，可以选择对弱者说毁灭你与你何干，也可以选择朝真正的命运共同体前进。走正确的路总是很难，但前提条件是明确的。（9.7) 谢谢249完整了这个故事。真正读完的那一刻，我和最后的烦啦一样，反而没有什么意难平。硬要说哪个刀子最让人难受的话，我觉得是兽医，但最让人觉得可怜的一定是阿译，永远格格不入的阿译。对与错很重要，这不是做得到做不到的问题，而关乎着我们的整个心灵图景。试问谁会喜欢毫无信念、浑浑噩噩、漫不经心、听天由命地过完一生？劝所有的读者一定尽量找完整版来看，粗计多出25%内容。</p></div></li>
-                    <li><time datetime="2025-02-01">2025-02-01</time><div><a class="favorites-recent-title" href="https://book.douban.com/subject/34841936/">紫与黑<span class="visually-hidden">（豆瓣）</span></a><p>从来没有哪本小说让我划这么多线，被圈粉了，我们的电波对上了。最喜欢的还是紫与黑来着，不过每篇都有每篇的味道。不过这书中文版名字取的不好，初以为只是一些短篇，但其实上有统一的世界观，且有几篇互相关联。</p></div></li>
-                </ol>
-                <p class="favorites-category-links"><a class="favorites-cta" href="favorites/books.html">全部 80 本<span aria-hidden="true">→</span></a><a href="favorites/books.html?filter=reviewed">只看有短评的 56 本</a></p>
-            </section>
-            <section class="favorites-category" aria-labelledby="favorites-film">
-                <header>
-                    <h2 id="favorites-film"><a href="favorites/film.html">影</a></h2>
-                    <p>157 部 · 有短评 69 部</p>
-                </header>
-                <p class="section-kicker">最近的短评</p>
-                <ol class="favorites-recent">
-                    <li><time datetime="2025-09-28">2025-09-28</time><div><a class="favorites-recent-title" href="https://movie.douban.com/subject/34967489/">神之山岭<span class="visually-hidden">（豆瓣）</span></a><p>又想起那一句：人如果不沉醉于些什么，就仿佛活不下去。人生的意义，需要每个人自己去定义，不是用语言，而是用人生本身。(看完漫画回过头来看，电影做了很大的简化，更纯粹，但远不如漫画丰富厚实）</p></div></li>
-                    <li><time datetime="2025-07-28">2025-07-28</time><div><a class="favorites-recent-title" href="https://movie.douban.com/subject/26302614/">请回答1988<span class="visually-hidden">（豆瓣）</span></a><p>该吃饭啦</p></div></li>
-                    <li><time datetime="2025-02-23">2025-02-23</time><div><a class="favorites-recent-title" href="https://movie.douban.com/subject/2997325/">我的团长我的团<span class="visually-hidden">（豆瓣）</span></a><p>九、十集连续破防，十一集差点继续破防然后被通宵对唱笑死，十二集又被招魂笑死。36集中断了几个月，因为要捡起这种重量的剧，实在需要一些心力。一口气到43集完结。这就是我心中的十星神作。</p></div></li>
-                </ol>
-                <p class="favorites-category-links"><a class="favorites-cta" href="favorites/film.html">全部 157 部<span aria-hidden="true">→</span></a><a href="favorites/film.html?filter=reviewed">只看有短评的 69 部</a></p>
-            </section>
-            <section class="favorites-category" aria-labelledby="favorites-music">
-                <header>
-                    <h2 id="favorites-music"><a href="favorites/music.html">音</a></h2>
-                    <p>96 张 · 有短评 26 张</p>
-                </header>
-                <p class="section-kicker">最近的短评</p>
-                <ol class="favorites-recent">
-                    <li><time datetime="2024-12-27">2024-12-27</time><div><a class="favorites-recent-title" href="https://music.douban.com/subject/5966149/">Soul Power Live<span class="visually-hidden">（豆瓣）</span></a><p>第一遍在长途飞机上听的，暴殄天物啊</p></div></li>
-                    <li><time datetime="2022-09-09">2022-09-09</time><div><a class="favorites-recent-title" href="https://music.douban.com/subject/4156227/">Jyukai BEST ~Stairway to the future~<span class="visually-hidden">（豆瓣）</span></a><p>这张居然没标</p></div></li>
-                    <li><time datetime="2022-02-21">2022-02-21</time><div><a class="favorites-recent-title" href="https://music.douban.com/subject/10735523/">Sandy Lam Concert MMXI 2CD<span class="visually-hidden">（豆瓣）</span></a><p>听到《柿子》忍不住打了个五星，要是多唱几首《野花》专就好了</p></div></li>
-                </ol>
-                <p class="favorites-category-links"><a class="favorites-cta" href="favorites/music.html">全部 96 张<span aria-hidden="true">→</span></a><a href="favorites/music.html?filter=reviewed">只看有短评的 26 张</a></p>
-            </section>
-            <section class="favorites-category" aria-labelledby="favorites-games">
-                <header>
-                    <h2 id="favorites-games"><a href="favorites/games.html">游</a></h2>
-                    <p>120 款 · 有短评 71 款</p>
-                </header>
-                <p class="section-kicker">最近的短评</p>
-                <ol class="favorites-recent">
-                    <li><time datetime="2025-03-10">2025-03-10</time><div><a class="favorites-recent-title" href="https://www.douban.com/game/36220588/">完美音浪<span class="visually-hidden">（豆瓣）</span></a><p>节奏加动作，组合得非常出彩。唯一不爽的事有两三场车轮战粪怪（武士那个节奏好难掌握），非常棒的音画设计，日美两开花，爽利的boss战。强力推荐喜欢这类型的玩家。hard难度12h</p></div></li>
-                    <li><time datetime="2025-02-08">2025-02-08</time><div><a class="favorites-recent-title" href="https://www.douban.com/game/26366741/">命运石之门<span class="visually-hidden">（豆瓣）</span></a><p>多年后重温，仍然觉得是神作。冗长的前几章和过多宅系元素，掩盖不住整个剧本构架的精巧：基于dmail和time leap的递归结构、两个世界线，以及双向time travel带来的最终解。</p></div></li>
-                    <li><time datetime="2025-02-01">2025-02-01</time><div><a class="favorites-recent-title" href="https://www.douban.com/game/26727125/">星露谷物语<span class="visually-hidden">（豆瓣）</span></a><p>以前电波没对上。当城市生活中失去了许多光明，田园生活显得那样宁静而悠长，一下怀念起上个月在西澳的几天。然而，为了我的肝着想，决定先停留在十几小时。｜22.1h，生怕游戏不好玩，又生怕游戏太好玩</p></div></li>
-                </ol>
-                <p class="favorites-category-links"><a class="favorites-cta" href="favorites/games.html">全部 120 款<span aria-hidden="true">→</span></a><a href="favorites/games.html?filter=reviewed">只看有短评的 71 款</a></p>
-            </section>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n">01</span></a>
+        <a class="sheet-link" href="blogs.html"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n">02</span></a>
+        <a class="sheet-link" href="gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n">03</span></a>
+        <a class="sheet-link" href="favorites.html" aria-current="page"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n">04</span></a>
+        <a class="sheet-link" href="about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+<main id="main" class="fav enter" tabindex="-1">
+    <section class="fav-head">
+        <h1 class="fav-h1"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></h1>
+        <p class="fav-intro"><span data-l="en">Every book, film, album and game I’ve rated five stars on Douban.</span><span data-l="zh" lang="zh-Hans">我在豆瓣上打过五星的书、影、音、游。</span></p>
+    </section>
+    <p class="fav-strip num"><span><span data-l="en">453 works</span><span data-l="zh" lang="zh-Hans">共 453 件</span></span><span aria-hidden="true">/</span><span><span data-l="en">222 with notes</span><span data-l="zh" lang="zh-Hans">222 件有短评</span></span><span aria-hidden="true">/</span><span><span data-l="en">Douban data as of May 30, 2026</span><span data-l="zh" lang="zh-Hans">豆瓣数据截至 2026 年 5 月 30 日</span></span></p>
+    <div class="glyphs" data-glyphs>
+        <div class="glyph is-peek" data-peek="books">
+            <a class="glyph-cover" href="favorites/books.html" tabindex="-1" aria-hidden="true"></a>
+            <a class="glyph-label" href="favorites/books.html" aria-label="Books, 80 books" data-zh-aria-label="书，80 本" data-i18n="aria-label"><span class="glyph-name"><span class="glyph-char" lang="zh-Hant">書</span><span class="glyph-en" data-l="en">Books</span></span><span class="glyph-stats num"><span class="glyph-count"><span data-l="en">80 books</span><span data-l="zh" lang="zh-Hans">80 本</span></span><span class="glyph-rev"><span data-l="en">56 with notes</span><span data-l="zh" lang="zh-Hans">有短评 56</span></span><span class="glyph-open"><span data-l="en">Open →</span><span data-l="zh" lang="zh-Hans">进入 →</span></span></span></a>
         </div>
-        <section class="favorites-about" aria-labelledby="favorites-about-title">
-            <h2 id="favorites-about-title" class="section-kicker">关于这些记录</h2>
-            <p>日期是在豆瓣上标记的日期；同一部剧的几季合成一条，排在最近一季的日期上。星级和短评是 2026 年 5 月 30 日导出时的版本。</p>
-        </section>
-    </main>
-    <footer>
-        <!-- site-shell:footer:start -->
-        <p>&copy; <span data-current-year>2026</span> <span data-owner-name>simoncos</span>. All rights reserved.</p>
-        <p><a href="feed.zh.xml">RSS (中文)</a> · <a href="feed.en.xml">RSS (English)</a></p>
-        <p class="site-version" data-site-version="site-config">talk-2026-05-22-final-6-g538d434</p>
-        <!-- site-shell:footer:end -->
+        <div class="glyph" data-peek="film">
+            <a class="glyph-cover" href="favorites/film.html" tabindex="-1" aria-hidden="true"></a>
+            <a class="glyph-label" href="favorites/film.html" aria-label="Film &amp; TV, 157 titles" data-zh-aria-label="影，157 部" data-i18n="aria-label"><span class="glyph-name"><span class="glyph-char" lang="zh-Hant">影</span><span class="glyph-en" data-l="en">Film &amp; TV</span></span><span class="glyph-stats num"><span class="glyph-count"><span data-l="en">157 titles</span><span data-l="zh" lang="zh-Hans">157 部</span></span><span class="glyph-rev"><span data-l="en">69 with notes</span><span data-l="zh" lang="zh-Hans">有短评 69</span></span><span class="glyph-open"><span data-l="en">Open →</span><span data-l="zh" lang="zh-Hans">进入 →</span></span></span></a>
+        </div>
+        <div class="glyph" data-peek="music">
+            <a class="glyph-cover" href="favorites/music.html" tabindex="-1" aria-hidden="true"></a>
+            <a class="glyph-label" href="favorites/music.html" aria-label="Music, 96 albums" data-zh-aria-label="音，96 张" data-i18n="aria-label"><span class="glyph-name"><span class="glyph-char" lang="zh-Hant">音</span><span class="glyph-en" data-l="en">Music</span></span><span class="glyph-stats num"><span class="glyph-count"><span data-l="en">96 albums</span><span data-l="zh" lang="zh-Hans">96 张</span></span><span class="glyph-rev"><span data-l="en">26 with notes</span><span data-l="zh" lang="zh-Hans">有短评 26</span></span><span class="glyph-open"><span data-l="en">Open →</span><span data-l="zh" lang="zh-Hans">进入 →</span></span></span></a>
+        </div>
+        <div class="glyph" data-peek="games">
+            <a class="glyph-cover" href="favorites/games.html" tabindex="-1" aria-hidden="true"></a>
+            <a class="glyph-label" href="favorites/games.html" aria-label="Games, 120 games" data-zh-aria-label="游，120 款" data-i18n="aria-label"><span class="glyph-name"><span class="glyph-char" lang="zh-Hant">遊</span><span class="glyph-en" data-l="en">Games</span></span><span class="glyph-stats num"><span class="glyph-count"><span data-l="en">120 games</span><span data-l="zh" lang="zh-Hans">120 款</span></span><span class="glyph-rev"><span data-l="en">71 with notes</span><span data-l="zh" lang="zh-Hans">有短评 71</span></span><span class="glyph-open"><span data-l="en">Open →</span><span data-l="zh" lang="zh-Hans">进入 →</span></span></span></a>
+        </div>
+    </div>
+    <section class="reels" data-reels>
+        <div class="reel is-on" data-reel="books">
+            <div class="reel-head">
+                <h2 class="reel-h"><span data-l="en">Latest notes · </span><span data-l="zh" lang="zh-Hans">最近的短评 · </span><span data-l="en">Books</span><span data-l="zh" lang="zh-Hans">书</span></h2>
+                <div class="reel-ctas"><a class="pill pill-ink" href="favorites/books.html"><span data-l="en">All 80 books</span><span data-l="zh" lang="zh-Hans">全部 80 本</span> <span aria-hidden="true">→</span></a><a class="pill" href="favorites/books.html?filter=reviewed"><span data-l="en">Only the 56 with notes</span><span data-l="zh" lang="zh-Hans">只看有短评的 56 本</span></a></div>
+            </div>
+            <ol class="reel-list" lang="zh-Hans">
+                <li class="reel-item"><time class="fav-date num" datetime="2025-12-28">2025-12-28</time><div class="reel-text"><a class="fav-title" href="https://book.douban.com/subject/3142127/">神之山嶺01<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><p class="fav-review">对我而言整个2025年里最触及灵魂的两部作品，除了《我的团长我的团》就是《神之山岭》。《我团》是从剧版看到小说，《山岭》是从动画电影看到漫画，迟早也会去看原著小说。动画收藏多年未看，在10月爬哈巴雪山一周前专门挑出来看了，爬哈巴之前和爬之后去昆明的路上都在看漫画，进度不到两本，后面中断了两个月。直到这几天趁假期又从头开始，终于看到最后。重刷完前两本的时候，我找回了动力续写之前在昆明完成大半的哈巴雪山回忆。有趣的是一些爬山细节我刚写完，就在后面的漫画里看到了类似的描绘，漫画也帮助我回忆起一些细节，属实是一种难得的共振体验。小说原作梦枕獏的《阴阳师》系列是我曾经很爱的作品，没想到多年后会在山这个话题上再相遇，并新认识了谷口治郎这位神级漫画家，精确再现了雪山带给人的压迫和震撼，人文部分也相当精彩。</p></div></li>
+                <li class="reel-item"><time class="fav-date num" datetime="2025-09-07">2025-09-07</time><div class="reel-text"><a class="fav-title" href="https://book.douban.com/subject/30197331/">我的团长我的团（上下册）<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><p class="fav-review">（2025.9.3）抗战胜利八十年阅兵之际，我的心还沉浸在八十年前的中缅边境，又一次看着我的团一步步走向全军尽墨。光辉的人性，如果一定要由苦难与悲剧逼出，那宁愿让悲剧不要上演。落后就要挨打，因为只有强者才有机会做选择题，可以选择对弱者说毁灭你与你何干，也可以选择朝真正的命运共同体前进。走正确的路总是很难，但前提条件是明确的。（9.7) 谢谢249完整了这个故事。真正读完的那一刻，我和最后的烦啦一样，反而没有什么意难平。硬要说哪个刀子最让人难受的话，我觉得是兽医，但最让人觉得可怜的一定是阿译，永远格格不入的阿译。对与错很重要，这不是做得到做不到的问题，而关乎着我们的整个心灵图景。试问谁会喜欢毫无信念、浑浑噩噩、漫不经心、听天由命地过完一生？劝所有的读者一定尽量找完整版来看，粗计多出25%内容。</p></div></li>
+                <li class="reel-item"><time class="fav-date num" datetime="2025-02-01">2025-02-01</time><div class="reel-text"><a class="fav-title" href="https://book.douban.com/subject/34841936/">紫与黑<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><p class="fav-review">从来没有哪本小说让我划这么多线，被圈粉了，我们的电波对上了。最喜欢的还是紫与黑来着，不过每篇都有每篇的味道。不过这书中文版名字取的不好，初以为只是一些短篇，但其实上有统一的世界观，且有几篇互相关联。</p></div></li>
+            </ol>
+        </div>
+        <div class="reel" data-reel="film">
+            <div class="reel-head">
+                <h2 class="reel-h"><span data-l="en">Latest notes · </span><span data-l="zh" lang="zh-Hans">最近的短评 · </span><span data-l="en">Film &amp; TV</span><span data-l="zh" lang="zh-Hans">影</span></h2>
+                <div class="reel-ctas"><a class="pill pill-ink" href="favorites/film.html"><span data-l="en">All 157 titles</span><span data-l="zh" lang="zh-Hans">全部 157 部</span> <span aria-hidden="true">→</span></a><a class="pill" href="favorites/film.html?filter=reviewed"><span data-l="en">Only the 69 with notes</span><span data-l="zh" lang="zh-Hans">只看有短评的 69 部</span></a></div>
+            </div>
+            <ol class="reel-list" lang="zh-Hans">
+                <li class="reel-item"><time class="fav-date num" datetime="2025-09-28">2025-09-28</time><div class="reel-text"><a class="fav-title" href="https://movie.douban.com/subject/34967489/">神之山岭<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><p class="fav-review">又想起那一句：人如果不沉醉于些什么，就仿佛活不下去。人生的意义，需要每个人自己去定义，不是用语言，而是用人生本身。(看完漫画回过头来看，电影做了很大的简化，更纯粹，但远不如漫画丰富厚实）</p></div></li>
+                <li class="reel-item"><time class="fav-date num" datetime="2025-07-28">2025-07-28</time><div class="reel-text"><a class="fav-title" href="https://movie.douban.com/subject/26302614/">请回答1988<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><p class="fav-review">该吃饭啦</p></div></li>
+                <li class="reel-item"><time class="fav-date num" datetime="2025-02-23">2025-02-23</time><div class="reel-text"><a class="fav-title" href="https://movie.douban.com/subject/2997325/">我的团长我的团<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><p class="fav-review">九、十集连续破防，十一集差点继续破防然后被通宵对唱笑死，十二集又被招魂笑死。36集中断了几个月，因为要捡起这种重量的剧，实在需要一些心力。一口气到43集完结。这就是我心中的十星神作。</p></div></li>
+            </ol>
+        </div>
+        <div class="reel" data-reel="music">
+            <div class="reel-head">
+                <h2 class="reel-h"><span data-l="en">Latest notes · </span><span data-l="zh" lang="zh-Hans">最近的短评 · </span><span data-l="en">Music</span><span data-l="zh" lang="zh-Hans">音</span></h2>
+                <div class="reel-ctas"><a class="pill pill-ink" href="favorites/music.html"><span data-l="en">All 96 albums</span><span data-l="zh" lang="zh-Hans">全部 96 张</span> <span aria-hidden="true">→</span></a><a class="pill" href="favorites/music.html?filter=reviewed"><span data-l="en">Only the 26 with notes</span><span data-l="zh" lang="zh-Hans">只看有短评的 26 张</span></a></div>
+            </div>
+            <ol class="reel-list" lang="zh-Hans">
+                <li class="reel-item"><time class="fav-date num" datetime="2024-12-27">2024-12-27</time><div class="reel-text"><a class="fav-title" href="https://music.douban.com/subject/5966149/">Soul Power Live<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><p class="fav-review">第一遍在长途飞机上听的，暴殄天物啊</p></div></li>
+                <li class="reel-item"><time class="fav-date num" datetime="2022-09-09">2022-09-09</time><div class="reel-text"><a class="fav-title" href="https://music.douban.com/subject/4156227/">Jyukai BEST ~Stairway to the future~<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><p class="fav-review">这张居然没标</p></div></li>
+                <li class="reel-item"><time class="fav-date num" datetime="2022-02-21">2022-02-21</time><div class="reel-text"><a class="fav-title" href="https://music.douban.com/subject/10735523/">Sandy Lam Concert MMXI 2CD<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><p class="fav-review">听到《柿子》忍不住打了个五星，要是多唱几首《野花》专就好了</p></div></li>
+            </ol>
+        </div>
+        <div class="reel" data-reel="games">
+            <div class="reel-head">
+                <h2 class="reel-h"><span data-l="en">Latest notes · </span><span data-l="zh" lang="zh-Hans">最近的短评 · </span><span data-l="en">Games</span><span data-l="zh" lang="zh-Hans">游</span></h2>
+                <div class="reel-ctas"><a class="pill pill-ink" href="favorites/games.html"><span data-l="en">All 120 games</span><span data-l="zh" lang="zh-Hans">全部 120 款</span> <span aria-hidden="true">→</span></a><a class="pill" href="favorites/games.html?filter=reviewed"><span data-l="en">Only the 71 with notes</span><span data-l="zh" lang="zh-Hans">只看有短评的 71 款</span></a></div>
+            </div>
+            <ol class="reel-list" lang="zh-Hans">
+                <li class="reel-item"><time class="fav-date num" datetime="2025-03-10">2025-03-10</time><div class="reel-text"><a class="fav-title" href="https://www.douban.com/game/36220588/">完美音浪<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><p class="fav-review">节奏加动作，组合得非常出彩。唯一不爽的事有两三场车轮战粪怪（武士那个节奏好难掌握），非常棒的音画设计，日美两开花，爽利的boss战。强力推荐喜欢这类型的玩家。hard难度12h</p></div></li>
+                <li class="reel-item"><time class="fav-date num" datetime="2025-02-08">2025-02-08</time><div class="reel-text"><a class="fav-title" href="https://www.douban.com/game/26366741/">命运石之门<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><p class="fav-review">多年后重温，仍然觉得是神作。冗长的前几章和过多宅系元素，掩盖不住整个剧本构架的精巧：基于dmail和time leap的递归结构、两个世界线，以及双向time travel带来的最终解。</p></div></li>
+                <li class="reel-item"><time class="fav-date num" datetime="2025-02-01">2025-02-01</time><div class="reel-text"><a class="fav-title" href="https://www.douban.com/game/26727125/">星露谷物语<span class="fav-ext" aria-hidden="true">↗</span><span class="visually-hidden">（豆瓣）</span></a><p class="fav-review">以前电波没对上。当城市生活中失去了许多光明，田园生活显得那样宁静而悠长，一下怀念起上个月在西澳的几天。然而，为了我的肝着想，决定先停留在十几小时。｜22.1h，生怕游戏不好玩，又生怕游戏太好玩</p></div></li>
+            </ol>
+        </div>
+    </section>
+    <section class="fav-about">
+        <h2 class="fav-about-k"><span data-l="en">About these records</span><span data-l="zh" lang="zh-Hans">关于这些记录</span></h2>
+        <p><span data-l="en">Dates are when I marked each work on Douban. Seasons of one show are merged into one entry, dated by the latest season. Ratings and reviews are as exported on May 30, 2026. Titles and reviews stay in Chinese, as written.</span><span data-l="zh" lang="zh-Hans">日期是在豆瓣上标记的日期；同一部剧的几季合成一条，排在最近一季的日期上。星级和短评是 2026 年 5 月 30 日导出时的版本，短评是写在豆瓣上的原文，一字未改。</span></p>
+    </section>
+</main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 27, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-27</span></span></span>
+        <span class="ftr-r"><a href="feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="feed.en.xml">RSS EN</a></span>
     </footer>
+    <!-- site-shell:footer:end -->
 </body>
 </html>

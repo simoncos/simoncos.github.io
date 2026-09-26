@@ -1,0 +1,627 @@
+{
+  "works": [
+    {
+      "id": "toolkit",
+      "kind": {
+        "en": "Project",
+        "zh": "项目"
+      },
+      "work_topic": "projects",
+      "home_topic": "build",
+      "date": "2026-05-06",
+      "title": {
+        "en": "Sleep Toolkit",
+        "zh": "Sleep Toolkit"
+      },
+      "home_desc": {
+        "en": "From raw records to readable reports: one CSV in; JSON, HTML, and PDF out.",
+        "zh": "从原始记录到可读报告：进一份 CSV，出 JSON、HTML 和 PDF。"
+      },
+      "desc": {
+        "en": "A maintained public tool: one SleepCycle CSV in; JSON, an interactive report, and a PDF out.",
+        "zh": "持续维护的公开工具：进一份 SleepCycle CSV，出 JSON、交互式报告和 PDF。"
+      },
+      "img": "gallery/assets/gallery-card-sleep-toolkit-v2.webp",
+      "href": {
+        "en": "projects/sleep-toolkit.en.html",
+        "zh": "projects/sleep-toolkit.html"
+      }
+    },
+    {
+      "id": "sleep",
+      "kind": {
+        "en": "Visual essay",
+        "zh": "视觉随笔"
+      },
+      "work_topic": "visual",
+      "home_topic": "body",
+      "date": "2026-04-23",
+      "title": {
+        "en": "Ten Years of Sleep Records, Analyzed",
+        "zh": "十年睡眠档案：数据分析"
+      },
+      "work_title": {
+        "en": "Ten Years of Sleep Records",
+        "zh": "十年睡眠记录"
+      },
+      "home_desc": {
+        "en": "A visual essay built from 3,656 nights, tracing sleep, body, and life across a decade.",
+        "zh": "基于 3,656 个夜晚的记录，回看十年的睡眠、身体与生活变化。"
+      },
+      "desc": {
+        "en": "3,656 nights of sleep records turned into a story about rhythm, body, and life changes across a decade.",
+        "zh": "把 3,656 个夜晚的睡眠记录，整理成一篇关于节律、身体和生活变化的视觉随笔。"
+      },
+      "img": "gallery/assets/gallery-card-sleep-records-v2.webp",
+      "href": {
+        "en": "projects/sleep-2016-2026.en.html",
+        "zh": "projects/sleep-2016-2026.html"
+      }
+    },
+    {
+      "id": "talk",
+      "kind": {
+        "en": "Talk",
+        "zh": "演讲"
+      },
+      "work_topic": "talks",
+      "home_topic": "think",
+      "date": "2026-06-07",
+      "single": true,
+      "title": {
+        "en": "Personal Information Systems in the AI Era",
+        "zh": "AI 时代的个人信息系统"
+      },
+      "home_desc": {
+        "en": "A 45-minute talk on how capture, knowledge bases, agents, and safety boundaries connect into one working system.",
+        "zh": "45 分钟的分享：捕捉、知识库、Agent 和安全边界，如何连成一套真正在运转的系统。"
+      },
+      "desc": {
+        "en": "A 45-minute talk for finance and technology professionals: how capture, knowledge bases, agents, project incubation, and safety boundaries form one working system.",
+        "zh": "面向金融与科技从业者的 45 分钟分享：捕捉、知识库、Agent、项目孵化和安全边界，如何连成一套在运转的系统。"
+      },
+      "img": "gallery/assets/gallery-hero-network-v2.webp",
+      "href": "gallery/talks/pkm-2026-06-07/index.html"
+    },
+    {
+      "id": "hermes",
+      "kind": {
+        "en": "Research",
+        "zh": "研究"
+      },
+      "work_kind": {
+        "en": "Research",
+        "zh": "研究产物"
+      },
+      "work_topic": "research",
+      "home_topic": "think",
+      "date": "2026-05-21",
+      "single": true,
+      "title": {
+        "en": "Hermes Agent HV Analysis",
+        "zh": "Hermes Agent 横纵分析"
+      },
+      "work_title": {
+        "en": "Hermes Agent / HV Analysis",
+        "zh": "Hermes Agent / HV 分析"
+      },
+      "home_desc": {
+        "en": "Evidence, questions, and limits in agent systems, placed side by side in a public analysis.",
+        "zh": "把 Agent 系统的问题、证据和局限放在一起看的公开分析。"
+      },
+      "desc": {
+        "en": "Evidence, questions, and limits in agent systems, placed side by side in a public analysis.",
+        "zh": "把 Agent 系统的证据、问题和边界放在一起看的公开分析。"
+      },
+      "img": "gallery/assets/gallery-card-hermes-v2.webp",
+      "href": "gallery/research/hermes-agent-hv-analysis.html"
+    }
+  ],
+  "featured": [
+    {
+      "work": "toolkit"
+    },
+    {
+      "work": "sleep"
+    },
+    {
+      "work": "talk"
+    },
+    {
+      "article": "my-haba-snow-mountain-journey",
+      "img": "gallery/assets/gallery-card-haba-field-v2.jpg",
+      "desc": {
+        "en": "Altitude, risk, training, and body feedback from outside the screen — 5,396 m.",
+        "zh": "海拔、风险、训练，以及屏幕之外的身体反馈 —— 5,396 米。"
+      }
+    },
+    {
+      "work": "hermes"
+    }
+  ],
+  "work_topics": [
+    {
+      "id": "projects",
+      "title": {
+        "en": "Projects",
+        "zh": "项目"
+      },
+      "line": {
+        "en": "Things I build and keep running.",
+        "zh": "在造、在维护的东西。"
+      },
+      "desc": {
+        "en": "Tools and systems that are maintained and running. Each opens as its own board or its own site.",
+        "zh": "持续维护、正在运行的工具和系统。每个项目打开是一块独立看板，或者一个独立的站点。"
+      },
+      "related": [
+        {
+          "label": {
+            "en": "All projects",
+            "zh": "全部项目"
+          },
+          "kind": {
+            "en": "List",
+            "zh": "列表"
+          },
+          "href": "projects.html",
+          "arrow": "→"
+        }
+      ]
+    },
+    {
+      "id": "talks",
+      "title": {
+        "en": "Talks",
+        "zh": "演讲"
+      },
+      "line": {
+        "en": "Talks, with their slides.",
+        "zh": "演讲，连同幻灯片。"
+      },
+      "desc": {
+        "en": "Talks given in person, published with their HTML slides.",
+        "zh": "线下做过的分享，连同 HTML 幻灯片一起发布。"
+      },
+      "related": [
+        {
+          "label": {
+            "en": "My PKM System, 2026-03",
+            "zh": "我的个人知识管理系统 2026-03"
+          },
+          "kind": {
+            "en": "Article",
+            "zh": "文章"
+          },
+          "href": {
+            "en": "blogs/my-personal-knowledge-management-system-2026-03.en.html",
+            "zh": "blogs/my-personal-knowledge-management-system-2026-03.html"
+          },
+          "arrow": "→"
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "title": {
+        "en": "Research",
+        "zh": "研究"
+      },
+      "line": {
+        "en": "Public analyses of systems and agents.",
+        "zh": "对系统和 Agent 的公开分析。"
+      },
+      "desc": {
+        "en": "Research artifacts that put evidence, questions, and limits side by side.",
+        "zh": "把证据、问题和局限放在一起看的研究产物。"
+      },
+      "related": [
+        {
+          "label": {
+            "en": "Across Three Abysses",
+            "zh": "跨过三个深渊"
+          },
+          "kind": {
+            "en": "Article",
+            "zh": "文章"
+          },
+          "href": {
+            "en": "blogs/a-bird-across-models.en.html",
+            "zh": "blogs/a-bird-across-models.html"
+          },
+          "arrow": "→"
+        }
+      ]
+    },
+    {
+      "id": "visual",
+      "title": {
+        "en": "Visual essays",
+        "zh": "视觉随笔"
+      },
+      "line": {
+        "en": "Personal data, told visually.",
+        "zh": "把个人数据讲成图。"
+      },
+      "desc": {
+        "en": "Long-running personal records turned into visual stories.",
+        "zh": "把长期的个人记录，整理成可以看的故事。"
+      },
+      "related": [
+        {
+          "label": {
+            "en": "Sleep Toolkit",
+            "zh": "Sleep Toolkit"
+          },
+          "kind": {
+            "en": "Project",
+            "zh": "项目"
+          },
+          "href": {
+            "en": "projects/sleep-toolkit.en.html",
+            "zh": "projects/sleep-toolkit.html"
+          },
+          "arrow": "→"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "sleep-toolkit",
+      "title": "Sleep Toolkit",
+      "cover": "gallery/assets/gallery-card-sleep-toolkit-v2.webp",
+      "status": {
+        "en": "Maintained",
+        "zh": "持续维护"
+      },
+      "years": "2025 —",
+      "tags": "Tool · Python · Web",
+      "updated": "2026-05-08",
+      "href": {
+        "en": "projects/sleep-toolkit.en.html",
+        "zh": "projects/sleep-toolkit.html"
+      },
+      "line": {
+        "en": "Turns SleepCycle exports into readable reports: JSON, interactive HTML, and PDF.",
+        "zh": "把 SleepCycle 导出转成可读报告：JSON、交互式 HTML 和 PDF。"
+      },
+      "subtitle": {
+        "en": "From raw records to readable reports.",
+        "zh": "从原始记录到可读报告。"
+      },
+      "summary": {
+        "en": "A maintained public tool. Upload one CSV and get structured JSON, an interactive report, and a PDF. The CLI can run entirely locally.",
+        "zh": "一个持续维护、对外可用的工具。上传一份 CSV，得到结构化 JSON、交互式报告和 PDF；CLI 也可以完全在本地运行。"
+      },
+      "metrics": [
+        {
+          "v": "3,656",
+          "k": {
+            "en": "nights in the author’s own record",
+            "zh": "作者自己记录的夜晚"
+          }
+        },
+        {
+          "v": "10",
+          "k": {
+            "en": "years of data",
+            "zh": "年的数据"
+          }
+        },
+        {
+          "v": "3",
+          "k": {
+            "en": "outputs per upload",
+            "zh": "种输出 / 每次上传"
+          }
+        }
+      ],
+      "links": [
+        {
+          "label": "Sleep Toolkit Web App",
+          "kind": {
+            "en": "Tool — upload a CSV",
+            "zh": "工具 —— 上传一份 CSV"
+          },
+          "href": "https://sleep-toolkit-production.up.railway.app",
+          "arrow": "↗"
+        },
+        {
+          "label": {
+            "en": "Ten years of sleep records",
+            "zh": "十年睡眠记录"
+          },
+          "kind": {
+            "en": "Data essay — the story behind the tool",
+            "zh": "数据随笔 —— 工具背后的故事"
+          },
+          "href": {
+            "en": "projects/sleep-2016-2026.en.html",
+            "zh": "projects/sleep-2016-2026.html"
+          },
+          "arrow": "→"
+        }
+      ],
+      "log": [
+        {
+          "v": "v1.0.1",
+          "d": "2026-05-08",
+          "t": {
+            "en": "PDF export no longer runs out of memory",
+            "zh": "修复 PDF 导出时内存耗尽的问题"
+          }
+        },
+        {
+          "v": "v1.0.0",
+          "d": "2026-05-06",
+          "t": {
+            "en": "Public web app: upload a CSV, get a report and a PDF",
+            "zh": "公开 Web App：上传 CSV，得到报告和 PDF"
+          }
+        },
+        {
+          "d": "2026-04-23",
+          "t": {
+            "en": "Powers the ten-year data essay",
+            "zh": "支撑十年睡眠数据随笔"
+          }
+        },
+        {
+          "d": "2026-03-20",
+          "t": {
+            "en": "Pipeline: CSV to JSON and an HTML report",
+            "zh": "流程：CSV 转 JSON 与 HTML 报告"
+          }
+        }
+      ],
+      "stages": [
+        {
+          "label": "CSV",
+          "desc": {
+            "en": "One SleepCycle export — built for records that run for years.",
+            "zh": "一份 SleepCycle 导出 —— 为以年计的长期记录而设计。"
+          }
+        },
+        {
+          "label": {
+            "en": "Analyze",
+            "zh": "分析"
+          },
+          "desc": {
+            "en": "Nights are read, normalized, and summarized into long-term patterns.",
+            "zh": "逐夜读取、整理，汇总成长期模式。"
+          }
+        },
+        {
+          "label": "JSON",
+          "desc": {
+            "en": "Structured data you can keep, diff, or feed to other tools.",
+            "zh": "结构化数据，可以保存、比对，或交给别的工具。"
+          }
+        },
+        {
+          "label": "HTML",
+          "desc": {
+            "en": "An interactive report you can read in the browser.",
+            "zh": "在浏览器里就能读的交互式报告。"
+          }
+        },
+        {
+          "label": "PDF",
+          "desc": {
+            "en": "A downloadable copy for keeping or sharing.",
+            "zh": "一份可下载、可存档或分享的副本。"
+          }
+        }
+      ],
+      "privacy": [
+        {
+          "at": "0:00",
+          "label": {
+            "en": "CSV uploaded",
+            "zh": "上传 CSV"
+          }
+        },
+        {
+          "at": "0:01",
+          "label": {
+            "en": "Report generated",
+            "zh": "生成报告"
+          }
+        },
+        {
+          "at": "0:01",
+          "label": {
+            "en": "CSV deleted",
+            "zh": "CSV 立即删除"
+          }
+        },
+        {
+          "at": "+1 h",
+          "label": {
+            "en": "Temporary report expires after last access",
+            "zh": "最后访问一小时后清理临时报告"
+          }
+        }
+      ],
+      "report_image": "projects/assets/sleep-report-preview.svg",
+      "report_caption": {
+        "en": "Report preview · May 2025",
+        "zh": "报告预览 · 2025 年 5 月"
+      },
+      "essay_image": "gallery/assets/gallery-card-sleep-records-v2.webp",
+      "essay_caption": {
+        "en": "The data essay",
+        "zh": "数据随笔"
+      },
+      "essay_href": {
+        "en": "projects/sleep-2016-2026.en.html",
+        "zh": "projects/sleep-2016-2026.html"
+      }
+    }
+  ],
+  "about": {
+    "who": {
+      "en": "Che Zhao · 趙澈 · Hong Kong",
+      "zh": "Che Zhao · 趙澈 · 香港"
+    },
+    "paragraphs": [
+      {
+        "en": [
+          [
+            "A full-stack builder working across AI and data. I make "
+          ],
+          [
+            "tools",
+            "toolkit"
+          ],
+          [
+            " I actually use, and write about how "
+          ],
+          [
+            "agents",
+            "hermes"
+          ],
+          [
+            " and information systems behave."
+          ]
+        ],
+        "zh": [
+          [
+            "在 AI 与数据方向工作的全栈构建者。我造自己真的在用的"
+          ],
+          [
+            "工具",
+            "toolkit"
+          ],
+          [
+            "，也写 "
+          ],
+          [
+            "Agent",
+            "hermes"
+          ],
+          [
+            " 和信息系统如何运转。"
+          ]
+        ]
+      },
+      {
+        "en": [
+          [
+            "I have kept "
+          ],
+          [
+            "ten years of sleep records",
+            "sleep"
+          ],
+          [
+            ", and I go to "
+          ],
+          [
+            "altitude",
+            "haba"
+          ],
+          [
+            " to check what the screen can’t tell me."
+          ]
+        ],
+        "zh": [
+          [
+            "我保留了"
+          ],
+          [
+            "十年的睡眠记录",
+            "sleep"
+          ],
+          [
+            "，也会去"
+          ],
+          [
+            "高海拔",
+            "haba"
+          ],
+          [
+            "，确认屏幕告诉不了我的东西。"
+          ]
+        ]
+      },
+      {
+        "en": [
+          [
+            "Connecting the dots."
+          ]
+        ],
+        "zh": [
+          [
+            "Connecting the dots."
+          ]
+        ]
+      }
+    ],
+    "links": {
+      "toolkit": {
+        "img": "gallery/assets/gallery-card-sleep-toolkit-v2.webp",
+        "href": {
+          "en": "projects/sleep-toolkit.en.html",
+          "zh": "projects/sleep-toolkit.html"
+        }
+      },
+      "hermes": {
+        "img": "gallery/assets/gallery-card-hermes-v2.webp",
+        "href": "gallery/research/hermes-agent-hv-analysis.html"
+      },
+      "sleep": {
+        "img": "gallery/assets/gallery-card-sleep-records-v2.webp",
+        "href": {
+          "en": "projects/sleep-2016-2026.en.html",
+          "zh": "projects/sleep-2016-2026.html"
+        }
+      },
+      "haba": {
+        "img": "gallery/assets/gallery-card-haba-field-v2.jpg",
+        "href": {
+          "en": "blogs/my-haba-snow-mountain-journey.en.html",
+          "zh": "blogs/my-haba-snow-mountain-journey.html"
+        }
+      }
+    },
+    "email": "l.z.simon@hotmail.com",
+    "contacts": [
+      {
+        "k": "LinkedIn",
+        "href": "https://www.linkedin.com/in/chezhao/"
+      },
+      {
+        "k": "X",
+        "href": "https://x.com/simonc_os"
+      },
+      {
+        "k": "GitHub",
+        "href": "https://github.com/simoncos"
+      },
+      {
+        "k": "RSS",
+        "href": {
+          "en": "feed.en.xml",
+          "zh": "feed.zh.xml"
+        }
+      }
+    ]
+  },
+  "series": [
+    {
+      "name": "RedPiggy, an emerging AI existence",
+      "id": "redpiggy",
+      "title": {
+        "en": "RedPiggy, an Emerging AI Existence",
+        "zh": "RedPiggy，一个正在浮现的 AI 存在"
+      },
+      "desc": {
+        "en": "An OpenClaw agent narrating its own continuity — and how switching models changes what it is.",
+        "zh": "一个 OpenClaw agent 讲述自己的连续性 —— 以及切换模型如何改变它是什么。"
+      }
+    }
+  ]
+}

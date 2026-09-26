@@ -2,37 +2,42 @@
 """Render the Favorites (收藏) pages from data/favorites.json.
 
 Writes favorites.html (the index) and one page per category under favorites/.
-Each category page carries every work in marking order; src/ts/load-favorites.ts
-pages and filters them in the browser, and without JavaScript all works show.
+Each category page carries every work in marking order; src/ts/favorites.ts
+pages, filters and folds them in the browser, and without JavaScript every
+work and every season shows.
 
-The shared head resources and footer come from scripts/update_site_shell.py, so
-both scripts emit the same blocks for these pages.
+System copy is bilingual like the rest of the site; titles, meta and reviews
+stay in Chinese as written. The shell comes from scripts/site_shell.py.
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 import sys
-from html import escape
 from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from update_site_shell import (  # noqa: E402
-    SHELL_CONFIG_PATH,
-    load_json,
-    render_footer_block,
-    render_resource_block,
-    site_version_fallback,
+from site_shell import (  # noqa: E402
+    bi,
+    esc,
+    i18n_attrs,
+    load_config,
+    page_config,
+    render_document,
+    render_meta,
 )
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "data/favorites.json"
-SITE_URL = "https://simoncos.github.io"
 PER_PAGE = 20
 RECENT_ON_INDEX = 3
+# A main review longer than this folds to a few lines (desktop, then narrow).
+FOLD_WIDE = 260
+FOLD_NARROW = 300
 
 # Essays on a work, keyed by the work's Douban link, pointing at the published
 # article. The link text is the article's own title, read from its Markdown.
@@ -44,31 +49,20 @@ ESSAYS: dict[str, str] = {
     "https://www.douban.com/game/35184766/": "blogs/black-myth-wukong-bosses.html",
 }
 
-EXT_ICON = (
-    '<svg class="favorite-ext" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">'
-    '<path d="M3 7L7 3M3.8 3H7v3.2" fill="none" stroke="currentColor" stroke-width="1.2" '
-    'stroke-linecap="round" stroke-linejoin="round"></path></svg>'
+# The category glyphs are traditional characters, as in the design.
+GLYPHS = {"books": "書", "film": "影", "music": "音", "games": "遊"}
+# English name, singular unit, plural unit.
+ENGLISH = {
+    "books": ("Books", "book", "books"),
+    "film": ("Film & TV", "title", "titles"),
+    "music": ("Music", "album", "albums"),
+    "games": ("Games", "game", "games"),
+}
+MONTH_NAMES = (
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
 )
-CHEVRON = (
-    '<svg class="favorite-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">'
-    '<path d="M2.5 4L5 6.5 7.5 4" fill="none" stroke="currentColor" stroke-width="1.3" '
-    'stroke-linecap="round" stroke-linejoin="round"></path></svg>'
-)
-DOT = '<span class="favorite-dot" aria-hidden="true">·</span>'
-
-# Shown before JavaScript runs, and kept when it never does: every work, and
-# every season of a merged work.
-NOSCRIPT_STYLE = """    <noscript>
-        <style>
-            .favorites-list:not(.is-paginated) > .favorite-row:nth-child(n) { display: flex; }
-            .favorite-notes-all[hidden] { display: flex; }
-            .favorite-notes-main, .favorite-series-toggle { display: none; }
-        </style>
-    </noscript>"""
-
-
-def esc(value: str) -> str:
-    return escape(value, quote=True)
+DOUBAN = '<span class="visually-hidden">（豆瓣）</span>'
 
 
 def is_reviewed(work: dict[str, Any]) -> bool:
@@ -80,168 +74,141 @@ def main_mark(work: dict[str, Any]) -> dict[str, Any]:
     return max(work["marks"], key=lambda mark: (len(mark["review"]), mark["date"]))
 
 
-def series_unit(work: dict[str, Any]) -> str:
-    return "个版本" if work["marks"][0].get("label", "").startswith("版本") else "季"
+def is_versions(work: dict[str, Any]) -> bool:
+    return work["marks"][0].get("label", "").startswith("版本")
 
 
-def shell_page(config: dict[str, Any], path: str) -> dict[str, Any]:
-    for page in config["pages"]:
-        if page["path"] == path:
-            return page
-    raise ValueError(f"data/site_shell.json: no page entry for {path}")
+def marks_label(work: dict[str, Any]) -> tuple[str, str]:
+    n = len(work["marks"])
+    if is_versions(work):
+        return f"{n} versions", f"{n} 个版本"
+    return f"{n} seasons", f"{n} 季"
 
 
-def head(config: dict[str, Any], path: str, title: str, description: str, *, noscript: bool) -> str:
-    url = f"{SITE_URL}/{path}"
-    lines = [
-        "<!DOCTYPE html>",
-        '<html lang="zh-Hans">',
-        "<head>",
-        '    <meta charset="UTF-8">',
-        '    <meta name="viewport" content="width=device-width, initial-scale=1.0">',
-        f"    <title>{esc(title)}</title>",
-        f'    <meta name="description" content="{esc(description)}">',
-        f'    <link rel="canonical" href="{url}">',
-        '    <meta property="og:type" content="website">',
-        f'    <meta property="og:title" content="{esc(title)}">',
-        f'    <meta property="og:description" content="{esc(description)}">',
-        f'    <meta property="og:url" content="{url}">',
-        '    <meta property="og:site_name" content="simonc site">',
-        '    <meta property="og:locale" content="zh_CN">',
-        f'    <meta property="og:image" content="{SITE_URL}/assets/og/og-default.png">',
-        '    <meta property="og:image:width" content="1200">',
-        '    <meta property="og:image:height" content="630">',
-        '    <meta property="og:image:alt" content="simonc site — tools and research, essays and field notes">',
-        '    <meta name="twitter:card" content="summary_large_image">',
-        f'    <meta name="twitter:title" content="{esc(title)}">',
-        f'    <meta name="twitter:description" content="{esc(description)}">',
-        f'    <meta name="twitter:image" content="{SITE_URL}/assets/og/og-default.png">',
-        render_resource_block(config, shell_page(config, path)),
-    ]
-    if noscript:
-        lines.append(NOSCRIPT_STYLE)
-    lines.append("</head>")
-    return "\n".join(lines)
+def count_label(category: dict[str, Any], n: int) -> tuple[str, str]:
+    _name, one, many = ENGLISH[category["id"]]
+    return f"{n} {one if n == 1 else many}", f"{n} {category['unit']}"
 
 
-def masthead(body_class: str) -> str:
-    return f"""<body class="{body_class}">
-    <a class="skip-link" href="#main" data-i18n="skip_to_content">跳到正文</a>
-    <header class="site-header">
-        <div class="header-inner">
-            <p class="site-kicker">收藏</p>
-            <p class="site-title" data-site-title>simonc site</p>
-        </div>
-    </header>
-    <div id="navigation-placeholder"></div>"""
+def export_label(value: str) -> tuple[str, str]:
+    year, month, day = (int(part) for part in value.split("-"))
+    return f"{MONTH_NAMES[month - 1]} {day}, {year}", f"{year} 年 {month} 月 {day} 日"
 
 
-def footer(config: dict[str, Any], path: str, version: str) -> str:
+def about_note(payload: dict[str, Any]) -> str:
+    en, zh = export_label(payload["export_date"])
+    return bi(
+        "Dates are when I marked each work on Douban. Seasons of one show are merged into one entry, "
+        f"dated by the latest season. Ratings and reviews are as exported on {en}. "
+        "Titles and reviews stay in Chinese, as written.",
+        "日期是在豆瓣上标记的日期；同一部剧的几季合成一条，排在最近一季的日期上。"
+        f"星级和短评是 {zh}导出时的版本，短评是写在豆瓣上的原文，一字未改。",
+    )
+
+
+def about_section(payload: dict[str, Any], indent: str = "    ") -> str:
+    return "\n".join([
+        f'{indent}<section class="fav-about">',
+        f'{indent}    <h2 class="fav-about-k">{bi("About these records", "关于这些记录")}</h2>',
+        f"{indent}    <p>{about_note(payload)}</p>",
+        f"{indent}</section>",
+    ])
+
+
+def essay_title(essay_path: str, lang: str) -> str:
+    source = ROOT / essay_path
+    source = source.with_suffix(".en.md") if lang == "en" else source.with_suffix(".md")
+    markdown = source.read_text(encoding="utf-8")
+    return next(line[2:].strip() for line in markdown.splitlines() if line.startswith("# "))
+
+
+def essay_link(work: dict[str, Any]) -> str:
+    essay_path = ESSAYS.get(work["link"])
+    if not essay_path:
+        return ""
+    en_path = essay_path.replace(".html", ".en.html")
+    # The article's own title marks nest as 〈〉 inside our 《》.
+    zh_title = essay_title(essay_path, "zh").replace("《", "〈").replace("》", "〉")
+    en_title = essay_title(essay_path, "en")
     return (
-        "    <footer>\n"
-        f"{render_footer_block(config, shell_page(config, path), version)}\n"
-        "    </footer>\n"
-        "</body>\n"
-        "</html>\n"
+        f'<a class="fav-essay"{i18n_attrs(href=(f"../{en_path}", f"../{essay_path}"))}>'
+        f'{bi(f"Essay: {en_title}", f"长评《{zh_title}》")}<span aria-hidden="true"> →</span></a>'
     )
 
 
 # ---------------------------------------------------------------- category pages
-def note_label(mark: dict[str, Any]) -> str:
+def title_link(work: dict[str, Any]) -> str:
     return (
-        f'<a class="favorite-note-label" href="{esc(mark["link"])}">'
-        f'<strong>{esc(mark["label"])}</strong>{DOT}<span>{mark["date"]}</span>{EXT_ICON}'
-        '<span class="visually-hidden">（豆瓣）</span></a>'
+        f'<a class="fav-title" href="{esc(work["link"])}">{esc(work["title"])}'
+        f'<span class="fav-ext" aria-hidden="true">↗</span>{DOUBAN}</a>'
     )
 
 
-def review_block(text: str, *, clampable: bool) -> str:
-    review = f'<p class="favorite-review">{esc(text)}</p>'
-    if not clampable:
-        return review
-    return (
-        review
-        + '<button type="button" class="favorite-toggle favorite-more" aria-expanded="false" hidden>'
-        + f'<span class="favorite-toggle-label">展开全文</span>{CHEVRON}</button>'
-    )
-
-
-def notes(work: dict[str, Any], row_id: str) -> str:
-    marks = work["marks"]
-    main = main_mark(work)
-    if len(marks) == 1:
-        return review_block(main["review"], clampable=True)
-
-    main_block = (
-        f'<div class="favorite-notes-main">{note_label(main)}'
-        f'{review_block(main["review"], clampable=True)}</div>'
-    )
-    all_notes = []
-    for mark in marks:
-        text = (
-            f'<p class="favorite-review">{esc(mark["review"])}</p>'
-            if mark["review"]
-            else '<p class="favorite-review-empty">没有短评</p>'
-        )
-        all_notes.append(f'<div class="favorite-note">{note_label(mark)}{text}</div>')
-    label = f"另外 {len(marks) - 1} {series_unit(work)}"
-    return (
-        main_block
-        + f'<div class="favorite-notes-all" id="{row_id}-marks" hidden>{"".join(all_notes)}</div>'
-        + f'<button type="button" class="favorite-toggle favorite-series-toggle" aria-expanded="false" '
-        f'aria-controls="{row_id}-marks" data-collapsed-label="{esc(label)}">'
-        f'<span class="favorite-toggle-label">{esc(label)}</span>{CHEVRON}</button>'
-    )
-
-
-def essay_title(essay_path: str) -> str:
-    """The article's H1, with its own title marks nested as 〈〉 inside our 《》."""
-    markdown = (ROOT / essay_path).with_suffix(".md").read_text(encoding="utf-8")
-    title = next(line[2:].strip() for line in markdown.splitlines() if line.startswith("# "))
-    return title.replace("《", "〈").replace("》", "〉")
+def original_title(work: dict[str, Any]) -> str:
+    original = work.get("original_title")
+    if not original or original == work["title"]:
+        return ""
+    return f'<span class="fav-orig">{esc(original)}</span>'
 
 
 def date_cell(date: str) -> str:
-    return f'<time class="favorite-date" datetime="{date}"><span>{date}</span></time>'
+    return f'<time class="fav-date num" datetime="{date}">{date}</time>'
 
 
-def full_row(work: dict[str, Any], row_id: str, repeat: bool) -> str:
-    original = f'<p class="favorite-original">{esc(work["original_title"])}</p>' if work.get("original_title") else ""
-    essay = ""
-    if work["link"] in ESSAYS:
-        essay_path = ESSAYS[work["link"]]
-        essay = (
-            f'<p class="favorite-essay"><a class="favorite-cta" href="../{esc(essay_path)}">'
-            f'长评《{esc(essay_title(essay_path))}》<span aria-hidden="true">→</span></a></p>'
-        )
-    classes = "favorite-row favorite-row--full" + (" is-date-repeat" if repeat else "")
+def mark_item(mark: dict[str, Any]) -> str:
+    review = f'<p class="fav-mark-review">{esc(mark["review"])}</p>' if mark["review"] else ""
     return (
-        f'            <li class="{classes}" data-marked="{work["date"]}" data-reviewed="true">\n'
-        f"                {date_cell(work['date'])}\n"
-        '                <div class="favorite-body">\n'
-        '                    <div class="favorite-head">'
-        f'<h2 class="favorite-title"><a href="{esc(work["link"])}">{esc(work["title"])}{EXT_ICON}'
-        '<span class="visually-hidden">（豆瓣）</span></a></h2>'
-        f'{original}<p class="favorite-meta">{esc(" · ".join(work["meta"]))}</p>{essay}</div>\n'
-        f'                    <div class="favorite-notes">{notes(work, row_id)}</div>\n'
-        "                </div>\n"
-        "            </li>"
+        '<li class="fav-mark"><span class="fav-mark-head">'
+        f'<a href="{esc(mark["link"])}">{esc(mark.get("label", ""))}{DOUBAN}</a>'
+        f'<span class="fav-mark-date num">{mark["date"]}</span></span>{review}</li>'
     )
 
 
-def compact_row(work: dict[str, Any], repeat: bool) -> str:
-    original = f'<span class="favorite-original">{esc(work["original_title"])}</span>' if work.get("original_title") else ""
-    seasons = f'<span class="favorite-seasons">共 {len(work["marks"])} {series_unit(work)}</span>' if len(work["marks"]) > 1 else ""
-    classes = "favorite-row favorite-row--compact" + (" is-date-repeat" if repeat else "")
-    inline_date = f'<span class="favorite-date-inline" aria-hidden="true">{work["date"]}</span>'
+def toggle_button(attr: str, closed: tuple[str, str], extra: str = "") -> str:
     return (
-        f'            <li class="{classes}" data-marked="{work["date"]}" data-reviewed="false">\n'
-        f"                {date_cell(work['date'])}\n"
-        '                <div class="favorite-line">'
-        f'<h2 class="favorite-title"><a href="{esc(work["link"])}">{esc(work["title"])}'
-        f'<span class="visually-hidden">（豆瓣）</span></a></h2>{original}{seasons}</div>\n'
-        f'                <p class="favorite-meta">{inline_date}{esc(" · ".join(work["meta"]))}</p>\n'
-        "            </li>"
+        f'<button class="pill pill-sm fav-{attr}-btn" type="button" data-fav-{attr} aria-expanded="false"{extra}>'
+        f'<span class="when-closed">{bi(*closed)}</span>'
+        f'<span class="when-open">{bi("Collapse", "收起")}</span></button>'
+    )
+
+
+def full_row(work: dict[str, Any], row_id: str, classes: list[str]) -> str:
+    marks = work["marks"]
+    main = main_mark(work)
+    multi = len(marks) > 1
+    review_length = len(main["review"])
+    if review_length > FOLD_WIDE:
+        classes.append("fold-wide")
+    if review_length > FOLD_NARROW:
+        classes.append("fold-narrow")
+    label = f'<span class="fav-main-label">{esc(main.get("label", ""))}</span>' if multi else ""
+    parts = [
+        f'<div class="fav-titleline">{title_link(work)}{original_title(work)}</div>',
+        f'<span class="fav-meta">{esc(" · ".join(filter(None, work["meta"])))}</span>',
+        essay_link(work),
+        f'<div class="fav-main">{label}<p class="fav-review">{esc(main["review"])}</p></div>',
+    ]
+    buttons = [toggle_button("fold", ("Read full note", "展开全文"))] if review_length > FOLD_WIDE else []
+    if multi:
+        parts.append(f'<ol class="fav-marks" id="{row_id}-marks">{"".join(mark_item(mark) for mark in marks)}</ol>')
+        en, zh = marks_label(work)
+        buttons.append(toggle_button("marks", (f"Show all {en}", f"展开全部 {zh}"), f' aria-controls="{row_id}-marks"'))
+    parts.append(f'<div class="fav-actions">{"".join(buttons)}</div>')
+    return (
+        f'            <li class="{" ".join(classes)}" data-marked="{work["date"]}" data-reviewed="true">'
+        f'{date_cell(work["date"])}<div class="fav-full">{"".join(part for part in parts if part)}</div></li>'
+    )
+
+
+def compact_row(work: dict[str, Any], classes: list[str]) -> str:
+    multi = ""
+    if len(work["marks"]) > 1:
+        multi = f'<span class="fav-multi">· {bi(*marks_label(work))}</span>'
+    meta = esc(" · ".join(filter(None, work["meta"])))
+    return (
+        f'            <li class="{" ".join(classes)}" data-marked="{work["date"]}" data-reviewed="false">'
+        f'{date_cell(work["date"])}<div class="fav-line">{title_link(work)}{original_title(work)}'
+        f'<span class="fav-meta">{meta}</span>{multi}</div></li>'
     )
 
 
@@ -249,30 +216,38 @@ def rows(category: dict[str, Any]) -> str:
     out = []
     previous = None
     for index, work in enumerate(category["works"]):
+        classes = ["fav-row"]
         # The default view: a date shows only when it differs from the row above on the same page.
-        repeat = index % PER_PAGE != 0 and previous == work["date"]
+        if index % PER_PAGE != 0 and previous == work["date"]:
+            classes.append("is-repeat")
+        if len(work["marks"]) > 1:
+            classes.append("is-multi")
         if is_reviewed(work):
-            out.append(full_row(work, f"{category['id']}-{index + 1}", repeat))
+            out.append(full_row(work, f"{category['id']}-{index + 1}", ["is-full", *classes]))
         else:
-            out.append(compact_row(work, repeat))
+            out.append(compact_row(work, ["is-compact", *classes]))
         previous = work["date"]
     return "\n".join(out)
 
 
-def switcher(categories: list[dict[str, Any]], active: str) -> str:
+def rail(categories: list[dict[str, Any]], active: str) -> str:
     links = []
     for category in categories:
         current = ' aria-current="page"' if category["id"] == active else ""
+        n = len(category["works"])
+        count = bi(f"{ENGLISH[category['id']][0]} · {n}", f"{n} {category['unit']}")
         links.append(
-            f'<a href="{category["id"]}.html"{current}>{category["name"]}'
-            f'<span class="favorites-count">{len(category["works"])}</span></a>'
+            f'            <a class="rail-item" href="{category["id"]}.html"{current}>'
+            f'<span class="rail-char" lang="zh-Hant" aria-hidden="true">{GLYPHS[category["id"]]}</span>'
+            f'<span class="visually-hidden">{bi(ENGLISH[category["id"]][0], category["name"])}</span>'
+            f'<span class="rail-count num">{count}</span></a>'
         )
-    return (
-        '            <nav class="favorites-switcher" aria-label="分类">'
-        '<span class="favorites-switcher-label" aria-hidden="true">分类</span>'
-        + "".join(links)
-        + "</nav>"
-    )
+    return "\n".join([
+        f'        <nav class="fav-rail"{i18n_attrs(aria_label=("Favorites categories", "收藏分类"))}>',
+        f'            <a class="pill fav-back" href="../favorites.html">← {bi("Favorites", "收藏")}</a>',
+        *links,
+        "        </nav>",
+    ])
 
 
 def filter_bar(category: dict[str, Any]) -> str:
@@ -280,128 +255,174 @@ def filter_bar(category: dict[str, Any]) -> str:
     reviewed = sum(is_reviewed(work) for work in works)
     counts = {"all": len(works), "reviewed": reviewed, "unreviewed": len(works) - reviewed}
     buttons = []
-    for key, label in (("all", "全部"), ("reviewed", "有短评"), ("unreviewed", "没有短评")):
+    for key, en, zh in (("all", "All", "全部"), ("reviewed", "With notes", "有短评"), ("unreviewed", "Without notes", "没有短评")):
         pressed = "true" if key == "all" else "false"
         buttons.append(
-            f'<button type="button" data-favorites-filter="{key}" aria-pressed="{pressed}">'
-            f'<span>{label}<span class="favorites-count">{counts[key]}</span></span></button>'
+            f'<button class="seg-btn" type="button" data-fav-filter="{key}" aria-pressed="{pressed}">'
+            f'{bi(en, zh)} <span class="seg-n">{counts[key]}</span></button>'
         )
-    return (
-        '        <div class="favorites-toolbar">\n'
-        '            <fieldset class="favorites-filter" hidden><legend class="visually-hidden">按有无短评筛选</legend>'
-        + "".join(buttons)
-        + "</fieldset>\n"
-        '            <p class="favorites-order">按标记时间从新到旧</p>\n'
-        "        </div>"
-    )
-
-
-def category_page(config: dict[str, Any], payload: dict[str, Any], category: dict[str, Any], version: str) -> str:
-    path = f"favorites/{category['id']}.html"
-    count = len(category["works"])
-    title = f"{category['name']} · 收藏 - simonc site"
-    description = f"{category['name']}：我在豆瓣上打过五星的 {count} {category['unit']}，按标记时间从新到旧，附豆瓣短评原文。"
+    first = min(PER_PAGE, len(works))
     return "\n".join([
-        head(config, path, title, description, noscript=True),
-        masthead("favorites-page favorites-category-page"),
-        f'    <main id="main" class="container page-shell favorites-shell" lang="zh-Hans" '
-        f'data-favorites-unit="{category["unit"]}" data-favorites-per-page="{PER_PAGE}">',
-        '        <section class="favorites-top" aria-labelledby="favorites-title">',
-        '            <p class="favorites-breadcrumb"><a href="../favorites.html">收藏</a> /</p>',
-        f'            <h1 id="favorites-title">{category["name"]}</h1>',
-        switcher(payload["categories"], category["id"]),
-        "        </section>",
-        filter_bar(category),
-        '        <ol class="favorites-list" data-favorites-list tabindex="-1" aria-labelledby="favorites-title">',
-        rows(category),
-        "        </ol>",
-        '        <nav class="favorites-pager" aria-label="分页" data-favorites-pager hidden></nav>',
-        "    </main>",
-        footer(config, path, version),
+        '            <div class="fav-tools">',
+        f'                <div class="seg fav-filter" role="group" data-fav-filters{i18n_attrs(aria_label=("Filter", "筛选"))}>'
+        + "".join(buttons) + "</div>",
+        f'                <span class="fav-range num" data-fav-range>1–{first} / {len(works)}</span>',
+        "            </div>",
     ])
+
+
+def pager() -> str:
+    return "\n".join([
+        f'            <nav class="fav-pager" data-fav-pager hidden{i18n_attrs(aria_label=("Pages", "分页"))}>',
+        '                <div class="fav-pager-row">',
+        f'                    <a class="pill fav-prev" data-fav-prev>← {bi("Previous", "上一页")}</a>',
+        '                    <ol class="fav-pages" data-fav-pages></ol>',
+        '                    <span class="fav-pos num" data-fav-pos></span>',
+        f'                    <a class="pill pill-ink fav-next" data-fav-next>{bi("Next", "下一页")} →</a>',
+        "                </div>",
+        '                <span class="fav-range-long num" data-fav-range-long></span>',
+        "            </nav>",
+    ])
+
+
+def category_page(config: dict[str, Any], payload: dict[str, Any], category: dict[str, Any]) -> str:
+    path = f"favorites/{category['id']}.html"
+    page = page_config(config, path)
+    works = category["works"]
+    name_en, one, many = ENGLISH[category["id"]]
+    count_en, count_zh = count_label(category, len(works))
+    main = "\n".join([
+        f'<main id="main" class="fav-cat enter" tabindex="-1" data-fav-cat="{category["id"]}" '
+        f'data-per-page="{PER_PAGE}" data-unit-zh="{esc(category["unit"])}" data-unit-en="{one}|{many}">',
+        '    <div class="fav-layout">',
+        rail(payload["categories"], category["id"]),
+        '        <div class="fav-body">',
+        f'            <h1 class="visually-hidden">{bi(f"{name_en} · Favorites", f"{category["name"]} · 收藏")}</h1>',
+        filter_bar(category),
+        '            <ol class="fav-list" data-fav-list tabindex="-1" lang="zh-Hans">',
+        rows(category),
+        "            </ol>",
+        pager(),
+        about_section(payload, " " * 12),
+        "        </div>",
+        "    </div>",
+        "</main>",
+    ])
+    head = render_meta(
+        config,
+        title=(f"{name_en} · Favorites · simoncos", f"{category['name']} · 收藏 · simoncos"),
+        description=(
+            f"{name_en}: the {count_en} I rated five stars on Douban, newest mark first, "
+            "with my original notes in Chinese.",
+            f"{category['name']}：我在豆瓣上打过五星的 {count_zh}，按标记时间从新到旧，附豆瓣短评原文。",
+        ),
+        canonical=path,
+    )
+    return render_document(config, page, head=head, main=main)
 
 
 # ---------------------------------------------------------------- index page
-def export_date_zh(date: str) -> str:
-    year, month, day = date.split("-")
-    return f"{int(year)} 年 {int(month)} 月 {int(day)} 日"
-
-
-def index_block(category: dict[str, Any]) -> str:
+def glyph(category: dict[str, Any], on: bool) -> str:
     works = category["works"]
-    reviewed = [work for work in works if is_reviewed(work)]
-    unit = category["unit"]
-    recent = []
-    for work in reviewed[:RECENT_ON_INDEX]:
-        recent.append(
-            '                    <li>'
-            f'<time datetime="{work["date"]}">{work["date"]}</time>'
-            f'<div><a class="favorites-recent-title" href="{esc(work["link"])}">{esc(work["title"])}'
-            '<span class="visually-hidden">（豆瓣）</span></a>'
-            f'<p>{esc(main_mark(work)["review"])}</p></div></li>'
-        )
+    n_reviewed = sum(is_reviewed(work) for work in works)
+    href = f"favorites/{category['id']}.html"
+    name_en = ENGLISH[category["id"]][0]
+    count_en, count_zh = count_label(category, len(works))
     return "\n".join([
-        f'            <section class="favorites-category" aria-labelledby="favorites-{category["id"]}">',
-        '                <header>',
-        f'                    <h2 id="favorites-{category["id"]}"><a href="favorites/{category["id"]}.html">{category["name"]}</a></h2>',
-        f'                    <p>{len(works)} {unit} · 有短评 {len(reviewed)} {unit}</p>',
-        "                </header>",
-        '                <p class="section-kicker">最近的短评</p>',
-        '                <ol class="favorites-recent">',
-        *recent,
-        "                </ol>",
-        '                <p class="favorites-category-links">'
-        f'<a class="favorites-cta" href="favorites/{category["id"]}.html">全部 {len(works)} {unit}<span aria-hidden="true">→</span></a>'
-        f'<a href="favorites/{category["id"]}.html?filter=reviewed">只看有短评的 {len(reviewed)} {unit}</a></p>',
-        "            </section>",
+        f'        <div class="glyph{" is-peek" if on else ""}" data-peek="{category["id"]}">',
+        f'            <a class="glyph-cover" href="{href}" tabindex="-1" aria-hidden="true"></a>',
+        f'            <a class="glyph-label" href="{href}"'
+        f'{i18n_attrs(aria_label=(f"{name_en}, {count_en}", f"{category["name"]}，{count_zh}"))}>'
+        f'<span class="glyph-name"><span class="glyph-char" lang="zh-Hant">{GLYPHS[category["id"]]}</span>'
+        f'<span class="glyph-en" data-l="en">{esc(name_en)}</span></span>'
+        '<span class="glyph-stats num">'
+        f'<span class="glyph-count">{bi(count_en, count_zh)}</span>'
+        f'<span class="glyph-rev">{bi(f"{n_reviewed} with notes", f"有短评 {n_reviewed}")}</span>'
+        f'<span class="glyph-open">{bi("Open →", "进入 →")}</span></span></a>',
+        "        </div>",
     ])
 
 
-def index_page(config: dict[str, Any], payload: dict[str, Any], version: str) -> str:
+def reel(category: dict[str, Any], on: bool) -> str:
+    works = category["works"]
+    reviewed = [work for work in works if is_reviewed(work)]
+    href = f"favorites/{category['id']}.html"
+    count_en, count_zh = count_label(category, len(works))
+    reviewed_en, reviewed_zh = count_label(category, len(reviewed))
+    items = []
+    for work in reviewed[:RECENT_ON_INDEX]:
+        items.append(
+            f'                <li class="reel-item">{date_cell(work["date"])}<div class="reel-text">'
+            f'{title_link(work)}<p class="fav-review">{esc(main_mark(work)["review"])}</p></div></li>'
+        )
+    return "\n".join([
+        f'        <div class="reel{" is-on" if on else ""}" data-reel="{category["id"]}">',
+        '            <div class="reel-head">',
+        f'                <h2 class="reel-h">{bi("Latest notes · ", "最近的短评 · ")}'
+        f'{bi(ENGLISH[category["id"]][0], category["name"])}</h2>',
+        '                <div class="reel-ctas">'
+        f'<a class="pill pill-ink" href="{href}">{bi(f"All {count_en}", f"全部 {count_zh}")} <span aria-hidden="true">→</span></a>'
+        f'<a class="pill" href="{href}?filter=reviewed">'
+        f'{bi(f"Only the {len(reviewed)} with notes", f"只看有短评的 {reviewed_zh}")}</a></div>',
+        "            </div>",
+        '            <ol class="reel-list" lang="zh-Hans">',
+        *items,
+        "            </ol>",
+        "        </div>",
+    ])
+
+
+def index_page(config: dict[str, Any], payload: dict[str, Any]) -> str:
     path = "favorites.html"
+    page = page_config(config, path)
     categories = payload["categories"]
     total = sum(len(category["works"]) for category in categories)
     reviewed = sum(is_reviewed(work) for category in categories for work in category["works"])
-    title = "收藏 - simonc site"
-    description = "我在豆瓣上打过五星的书、影、音、游，按标记时间排列，附豆瓣短评原文。"
-    export = export_date_zh(payload["export_date"])
-    strip = [f"共 {total} 件", f"{reviewed} 件有短评", f"豆瓣数据截至 {export}"]
-    about = (
-        "日期是在豆瓣上标记的日期；同一部剧的几季合成一条，排在最近一季的日期上。"
-        f"星级和短评是 {export}导出时的版本。"
+    as_of_en, as_of_zh = export_label(payload["export_date"])
+    strip = (
+        (f"{total} works", f"共 {total} 件"),
+        (f"{reviewed} with notes", f"{reviewed} 件有短评"),
+        (f"Douban data as of {as_of_en}", f"豆瓣数据截至 {as_of_zh}"),
     )
-    return "\n".join([
-        head(config, path, title, description, noscript=False),
-        masthead("favorites-page favorites-index-page"),
-        '    <main id="main" class="container page-shell favorites-shell" lang="zh-Hans">',
-        '        <section class="favorites-top favorites-index-top" aria-labelledby="favorites-title">',
-        '            <h1 id="favorites-title">收藏</h1>',
-        # One span per sentence, so a narrow screen breaks between sentences, not inside a word.
-        '            <p class="favorites-intro"><span>我在豆瓣上打过五星的书、影、音、游。</span><span>短评是写在豆瓣上的原文，一字未改。</span></p>',
-        "        </section>",
-        '        <p class="favorites-strip">'
-        + '<span aria-hidden="true">/</span>'.join(f"<span>{esc(item)}</span>" for item in strip)
+    main = "\n".join([
+        '<main id="main" class="fav enter" tabindex="-1">',
+        '    <section class="fav-head">',
+        f'        <h1 class="fav-h1">{bi("Favorites", "收藏")}</h1>',
+        '        <p class="fav-intro">'
+        + bi("Every book, film, album and game I’ve rated five stars on Douban.", "我在豆瓣上打过五星的书、影、音、游。")
         + "</p>",
-        '        <div class="favorites-categories">',
-        *(index_block(category) for category in categories),
-        "        </div>",
-        '        <section class="favorites-about" aria-labelledby="favorites-about-title">',
-        '            <h2 id="favorites-about-title" class="section-kicker">关于这些记录</h2>',
-        f"            <p>{esc(about)}</p>",
-        "        </section>",
-        "    </main>",
-        footer(config, path, version),
+        "    </section>",
+        '    <p class="fav-strip num">'
+        + '<span aria-hidden="true">/</span>'.join(f"<span>{bi(en, zh)}</span>" for en, zh in strip)
+        + "</p>",
+        '    <div class="glyphs" data-glyphs>',
+        *(glyph(category, index == 0) for index, category in enumerate(categories)),
+        "    </div>",
+        '    <section class="reels" data-reels>',
+        *(reel(category, index == 0) for index, category in enumerate(categories)),
+        "    </section>",
+        about_section(payload),
+        "</main>",
     ])
+    head = render_meta(
+        config,
+        title=("Favorites · simoncos", "收藏 · simoncos"),
+        description=(
+            "Every book, film, album and game I rated five stars on Douban, by marking date, with the original notes.",
+            "我在豆瓣上打过五星的书、影、音、游，按标记时间排列，附豆瓣短评原文。",
+        ),
+        canonical=path,
+    )
+    return render_document(config, page, head=head, main=main)
 
 
 # ---------------------------------------------------------------- main
 def render_all() -> dict[Path, str]:
-    config = load_json(SHELL_CONFIG_PATH)
-    payload = load_json(DATA_PATH)
-    version = site_version_fallback()
-    pages = {ROOT / "favorites.html": index_page(config, payload, version)}
+    config = load_config()
+    payload = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+    pages = {ROOT / "favorites.html": index_page(config, payload)}
     for category in payload["categories"]:
-        pages[ROOT / f"favorites/{category['id']}.html"] = category_page(config, payload, category, version)
+        pages[ROOT / f"favorites/{category['id']}.html"] = category_page(config, payload, category)
     return pages
 
 

@@ -1,58 +1,49 @@
 ---
 name: site-surface-editing
-description: Edit the `simoncos.github.io` public site surfaces safely. Use when changing homepage live surface data, Gallery, Projects, About, navigation labels, i18n copy, CSS for root pages, `data/home_surface.json`, `data/content_manifest.json`, `llms.txt`, or `agent-index.json`. Also use when fixing drift between hand-authored HTML, TypeScript source, compiled JS, generated surface JSON, and static fallback HTML.
+description: Edit the `simoncos.github.io` public site pages safely. Use when changing the Index, Articles, Work, Projects, Favorites or About pages, navigation labels, bilingual copy, CSS, `data/site.json`, `data/site_shell.json`, `scripts/site_shell.py`, `llms.txt`, or `agent-index.json`. Also use when fixing drift between site data, generators, generated HTML, TypeScript source and compiled JS.
 ---
 
 # Site Surface Editing
 
-Use this skill for source-of-truth and verification discipline on the main personal site. Pair with `frontend-design` for visual design work and `site-copy-and-ia` for public copy/IA judgment.
+Use this skill for source-of-truth and verification discipline on the main personal site. Pair with `frontend-design` for visual design work and `site-copy-and-ia` for public copy/IA judgment. `docs/ARCHITECTURE.md` has the full page-to-generator table.
 
 ## Source Map
 
-- Root pages are hand-authored HTML: `index.html`, `about.html`, `gallery.html`, `projects.html`, `navigation.html`.
-- TypeScript source lives in `src/ts/*.ts`; compiled browser JS in `src/js/*.js` is tracked. Run `npm run build:ts` after TS edits.
-- Shared shell resources come from `data/site_shell.json` via `scripts/update_site_shell.py`.
-- Home live editorial state is `data/home_surface.json`; keep `index.html` fallback meaningful if JS fails.
-- Gallery/Projects generated JSON comes from `data/content_manifest.json` via `scripts/update_surface_data.py`.
-- Static fallback cards/lists come from `scripts/update_static_fallbacks.py`; do not hand-edit generated fallback blocks unless also changing the generator/data.
-- AI/agent-readable entrypoints are root `llms.txt` and `agent-index.json`; update them when navigation, public surfaces, or curated paths change.
+- Every section page is generated; do not hand-edit it.
+  - `index.html`, `gallery.html`, `projects.html`, `projects/sleep-toolkit*.html`, `about.html`, `404.html`: `scripts/build_pages.py` from `data/site.json` and `data/article_index.json`.
+  - `blogs.html` and `blogs/*.html`: `generate_blog_pages.py` from `blogs/*.md` and `templates/`.
+  - `favorites.html`, `favorites/*.html`: `scripts/update_favorites_pages.py` from `data/favorites.json`.
+- The shared head, header and footer come from `scripts/site_shell.py` (nav, toggles, footer, meta, script tags) and `data/site_shell.json` (page list, script profiles, cache keys, `site_updated`), applied by `scripts/update_site_shell.py`.
+- TypeScript source lives in `src/ts/*.ts`; compiled browser JS in `src/js/*.js` is tracked. Run `npm run build:ts` after TS edits. Each page loads `site.js` plus one page script from its profile.
+- `series.html` and `tags.html` are hand-authored redirects into the Articles page.
+- AI/agent-readable entrypoints are root `llms.txt` and `agent-index.json`; update them when navigation, public sections, or curated paths change.
 
 ## Workflow
 
 1. Run `git status --short --branch` and inspect only relevant dirty files. Do not revert unrelated work.
 2. Identify the owning source:
-   - navigation label: `navigation.html`, fallback nav in `src/ts/load-nav.ts`, and `src/ts/i18n.ts`
-   - bilingual text: `src/ts/i18n.ts` plus visible HTML fallback text
-   - Gallery/Projects membership: `data/content_manifest.json`, then generate surface data
-   - homepage editorial state: `data/home_surface.json`, `index.html`, and `src/ts/load-home-surface.ts` if schema changes
+   - navigation label: `NAV` in `scripts/site_shell.py`
+   - bilingual text on a section page: `data/site.json` or the generator that writes it (`bi()` pairs)
+   - Work types, featured work, projects, changelog, About: `data/site.json`
    - AI-readable map: `llms.txt` and `agent-index.json`
-3. Keep data-driven and fallback surfaces aligned. A page should remain understandable with JS disabled.
-4. Prefer small schema additions over ad hoc DOM-only hacks when homepage content needs controlled layout, for example `title_lines` for stable bilingual hero breaks.
-5. When adding a curated surface such as Personal Data Lab, decide whether it is a page section, a Gallery item, a Projects item, or a machine-readable entry. Do not duplicate the same object across sections unless the IA requires it.
-6. If a public label changes, search for it across HTML, TS, compiled JS after build, `llms.txt`, `agent-index.json`, and docs.
-7. If `src/css/styles.css` changes, bump `data/site_shell.json` `css_version`, then regenerate shared shells and generated blog pages. Confirm the served HTML references the new `styles.css?v=` key so local and deployed browsers do not keep stale CSS.
+3. Keep pages complete without JavaScript. CSS gates no-JS fallbacks with `:root.js` / `:root:not(.js)`; scripts only add interaction.
+4. Prefer small schema additions in `data/site.json` over DOM-only hacks when content needs controlled layout.
+5. When adding a curated item, decide whether it is a Work entry, a project, a related link, or a machine-readable entry. Do not duplicate the same object across sections unless the IA requires it.
+6. If a public label changes, search for it across `data/site.json`, generators, generated HTML, TS, `llms.txt`, `agent-index.json`, and docs.
+7. If `src/css/styles.css` or any page script changes, bump `css_version` / `js_version` in `data/site_shell.json`, then run `make generate`. Confirm the pages reference the new `?v=` key so local and deployed browsers do not keep stale files.
+8. When a work, project or article is added, keep `site_updated` in `data/site_shell.json` at or after its date; `scripts/check_site.py` fails otherwise.
 
 ## Checks
 
-Run the relevant subset, and run the full set before handing back broad surface edits:
+`make generate` rebuilds everything in order; `make check` verifies without rewriting; CI runs `make check-all`. Before handing back broad edits:
 
 ```bash
-npm run build:ts
-npm run check:ts
-jq empty agent-index.json data/home_surface.json data/site_shell.json data/content_manifest.json
-python3 scripts/update_site_shell.py
-python3 generate_blog_pages.py
-python3 scripts/check_site.py
-python3 scripts/update_site_shell.py --check
-python3 scripts/update_static_fallbacks.py --check
-python3 scripts/update_surface_data.py --check
-python3 scripts/check_blog_generation.py
-find src/js -name '*.js' -print0 | xargs -0 -n 1 node --check
-rg -n "styles.css\\?v=" --glob "*.html" .
+make generate
+make check-all
 git diff --check
 ```
 
-`make check` also runs `scripts/check_blog_generation.py`. If it fails, isolate whether generated blog drift predates the current surface change before treating it as a regression.
+If `scripts/check_blog_generation.py` fails, isolate whether generated blog drift predates the current change before treating it as a regression.
 
 ## Local Preview
 
