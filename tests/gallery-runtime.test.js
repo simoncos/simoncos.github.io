@@ -20,7 +20,7 @@ async function settle() {
     await new Promise((resolve) => setTimeout(resolve, 0));
 }
 
-async function runGallery(responses, { fallback = STATIC_FALLBACK } = {}) {
+async function runGallery(responses, { fallback = STATIC_FALLBACK, staticLanguage = '' } = {}) {
     let html = fallback;
     let language = 'en';
     let ready;
@@ -41,6 +41,9 @@ async function runGallery(responses, { fallback = STATIC_FALLBACK } = {}) {
             warn: (...args) => errors.push(args.map(String).join(' '))
         },
         document: {
+            documentElement: staticLanguage ? {
+                getAttribute(name) { return name === 'lang' ? staticLanguage : null; }
+            } : undefined,
             addEventListener(name, callback) {
                 if (name === 'DOMContentLoaded') ready = callback;
             },
@@ -92,6 +95,7 @@ async function runGallery(responses, { fallback = STATIC_FALLBACK } = {}) {
         get html() { return html; },
         writes,
         errors,
+        get fetchCount() { return fetchIndex; },
         async setLanguage(nextLanguage) {
             language = nextLanguage;
             pageUrl.searchParams.set('lang', nextLanguage);
@@ -177,17 +181,30 @@ test('Gallery runtime accepts safe HTTPS targets', async () => {
     assert.match(result.html, /href="https:\/\/example\.com\/gallery\/item\?source=qa#focus"/);
 });
 
-test('Gallery runtime restores the captured fallback when a language refetch fails', async () => {
+test('Gallery runtime reuses validated data across language changes without refetching', async () => {
     const result = await runGallery([
         { payload: GALLERY_PAYLOAD },
         { reject: 'language fetch failed' }
     ]);
     assert.notEqual(result.html, STATIC_FALLBACK);
 
-    const afterLanguageFailure = await result.setLanguage('zh');
+    const chinese = await result.setLanguage('zh');
 
-    assert.equal(afterLanguageFailure, STATIC_FALLBACK);
-    assert.ok(result.errors.some((message) => message.includes('preserving static fallback')));
+    assert.match(chinese, /[㐀-鿿]/);
+    assert.equal(result.fetchCount, 1);
+    assert.equal(result.errors.length, 0);
+});
+
+test('Gallery runtime leaves matching static markup untouched until another language is requested', async () => {
+    const result = await runGallery([{ payload: GALLERY_PAYLOAD }], { staticLanguage: 'en' });
+
+    assert.equal(result.html, STATIC_FALLBACK);
+    assert.equal(result.writes.length, 0);
+    assert.equal(result.fetchCount, 0);
+
+    const chinese = await result.setLanguage('zh');
+    assert.match(chinese, /[㐀-鿿]/);
+    assert.equal(result.fetchCount, 1);
 });
 
 test('Gallery runtime rerenders localized alt text and preserves local query/hash suffixes', async () => {

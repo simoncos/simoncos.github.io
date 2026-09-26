@@ -212,6 +212,9 @@
             if (cachedSurface) {
                 renderSurface(cachedSurface);
             }
+            else {
+                load();
+            }
         });
     });
 })();

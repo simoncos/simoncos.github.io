@@ -1,4 +1,5 @@
 "use strict";
+const projectsStaticLanguage = document.documentElement?.getAttribute('lang') || '';
 document.addEventListener('DOMContentLoaded', function () {
     const indexTarget = document.getElementById('projects-index');
     const detailTarget = document.getElementById('project-detail');
@@ -344,27 +345,32 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-    fetch(resolveVersionedPath('data/projects_data.json'))
-        .then((response) => {
-        if (!response.ok) {
-            throw new Error(`projects_data ${response.status}`);
-        }
-        return response.json();
-    })
-        .then((payload) => {
-        const validationError = validateProjectsPayload(payload);
-        if (validationError) {
-            throw new Error(`Invalid projects payload: ${validationError}`);
-        }
-        projectsPayload = payload;
-        renderProjects(payload);
-    })
-        .catch((error) => {
-        console.error('Failed to load projects data; preserving static fallback:', error);
-    });
-    window.addEventListener('site-language-change', function () {
+    function loadProjects() {
         if (projectsPayload) {
             renderProjects(projectsPayload);
+            return;
         }
-    });
+        fetch(resolveVersionedPath('data/projects_data.json'))
+            .then((response) => {
+            if (!response.ok) {
+                throw new Error(`projects_data ${response.status}`);
+            }
+            return response.json();
+        })
+            .then((payload) => {
+            const validationError = validateProjectsPayload(payload);
+            if (validationError) {
+                throw new Error(`Invalid projects payload: ${validationError}`);
+            }
+            projectsPayload = payload;
+            renderProjects(payload);
+        })
+            .catch((error) => {
+            console.error('Failed to load projects data; preserving static fallback:', error);
+        });
+    }
+    if (!projectsStaticLanguage || getCurrentLanguage() !== projectsStaticLanguage) {
+        loadProjects();
+    }
+    window.addEventListener('site-language-change', loadProjects);
 });

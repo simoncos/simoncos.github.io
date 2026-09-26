@@ -1,4 +1,5 @@
 "use strict";
+const galleryStaticLanguage = document.documentElement?.getAttribute('lang') || '';
 document.addEventListener('DOMContentLoaded', function () {
     const gallery = document.getElementById('gallery-grid');
     if (!gallery) {
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const staticFallback = gallery.innerHTML;
     const galleryCardClassPattern = /^gallery-card--[a-z0-9]+(?:-[a-z0-9]+)*$/;
     const gallerySectionIdPattern = /^gallery-[a-z0-9]+(?:-[a-z0-9]+)*$/;
+    let galleryPayload = null;
     function escapeHtml(text) {
         return String(text)
             .replace(/&/g, '&amp;')
@@ -38,6 +40,20 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         console.error(`Gallery data unavailable and no static fallback exists: ${reason}`);
+    }
+    function restoreMatchingStaticFallback() {
+        if (!staticFallback.trim()
+            || !galleryStaticLanguage
+            || getCurrentLanguage() !== galleryStaticLanguage) {
+            return false;
+        }
+        if (gallery.innerHTML !== staticFallback) {
+            gallery.innerHTML = staticFallback;
+        }
+        if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
+            i18n.applyLanguageStateToInternalLinks(gallery);
+        }
+        return true;
     }
     function getCurrentLanguage() {
         return typeof i18n.getCurrentLanguage === 'function'
@@ -217,6 +233,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }).join('\n');
     }
     function loadGallery() {
+        if (restoreMatchingStaticFallback())
+            return;
+        if (galleryPayload) {
+            gallery.innerHTML = galleryMarkup(galleryPayload);
+            if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
+                i18n.applyLanguageStateToInternalLinks(gallery);
+            }
+            return;
+        }
         fetch(resolveVersionedPath('data/gallery_data.json'))
             .then((response) => {
             if (!response.ok) {
@@ -229,8 +254,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (validationError) {
                 throw new Error(`Invalid Gallery payload: ${validationError}`);
             }
-            const markup = galleryMarkup(payload);
-            gallery.innerHTML = markup;
+            galleryPayload = payload;
+            gallery.innerHTML = galleryMarkup(payload);
             if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
                 i18n.applyLanguageStateToInternalLinks(gallery);
             }
@@ -239,6 +264,8 @@ document.addEventListener('DOMContentLoaded', function () {
             preserveStaticFallback(String(error));
         });
     }
-    loadGallery();
+    if (!restoreMatchingStaticFallback()) {
+        loadGallery();
+    }
     window.addEventListener('site-language-change', loadGallery);
 });

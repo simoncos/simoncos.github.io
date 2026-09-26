@@ -612,6 +612,66 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertRegex(i18n, r"home_dispatch_all\s*:\s*['\"]Browse all writing['\"]")
         self.assertRegex(i18n, r"home_dispatch_all\s*:\s*['\"]浏览全部文章['\"]")
 
+    def test_article_public_data_uses_one_lightweight_index(self):
+        retired_paths = (
+            "data/blog_data.json",
+            "data/article_groups.json",
+            "data/tags_data.json",
+            "data/series_data.json",
+            "src/ts/load-blog-list.ts",
+            "src/js/load-blog-list.js",
+        )
+        for rel_path in retired_paths:
+            with self.subTest(path=rel_path):
+                self.assertFalse((ROOT / rel_path).exists())
+
+        article_index = json.loads((ROOT / "data/article_index.json").read_text())
+        for group in article_index["groups"]:
+            for entry in group["languages"].values():
+                self.assertNotIn("html_content", entry)
+                self.assertNotIn("rendered_content", entry)
+
+        public_orientation = (ROOT / "llms.txt").read_text() + (ROOT / "agent-index.json").read_text()
+        self.assertIn("data/article_index.json", public_orientation)
+        self.assertNotIn("data/article_groups.json", public_orientation)
+
+    def test_check_target_verifies_generated_javascript_without_rewriting_it(self):
+        makefile = (ROOT / "Makefile").read_text()
+        check_recipe = makefile.split("check:", 1)[1].split("generate:", 1)[0]
+        package = json.loads((ROOT / "package.json").read_text())
+        workflow = (ROOT / ".github/workflows/site-check.yml").read_text()
+        checker = (ROOT / "scripts/check_typescript_build.py").read_text()
+
+        self.assertIn("npm run check:generated-js -- --scope $(TYPESCRIPT_SCOPE)", check_recipe)
+        self.assertNotIn("npm run build:ts", check_recipe)
+        self.assertIn("check-all:", makefile)
+        self.assertIn("$(MAKE) check TYPESCRIPT_SCOPE=all", makefile)
+        self.assertIn("run: make check-all", workflow)
+        self.assertIn('choices=("site", "all")', checker)
+        self.assertEqual(
+            package["scripts"]["check:generated-js"],
+            "python3 scripts/check_typescript_build.py",
+        )
+
+    def test_public_and_embedded_html_metadata_policy_is_enforced(self):
+        checker = (ROOT / "scripts/check_site.py").read_text()
+
+        self.assertIn('doc.meta(property="og:title")', checker)
+        self.assertIn('doc.meta(property="og:description")', checker)
+        self.assertIn('doc.meta(property="og:image")', checker)
+        self.assertIn("sitemap page must not declare noindex", checker)
+        self.assertIn("embedded support page must declare noindex", checker)
+
+    def test_pretext_runtime_has_one_vendored_source(self):
+        package = json.loads((ROOT / "package.json").read_text())
+        haba_runtime = (ROOT / "blogs/assets/haba-pretext.ts").read_text()
+        sleep_runtime = (ROOT / "projects/assets/sleep-essay-pretext-lab.ts").read_text()
+
+        self.assertNotIn("@chenglou/pretext", package.get("dependencies", {}))
+        self.assertIn("projects/assets/vendor/pretext/layout.js", haba_runtime)
+        self.assertIn("./vendor/pretext/layout.js", sleep_runtime)
+        self.assertTrue((ROOT / "projects/assets/vendor/pretext/LICENSE").is_file())
+
     def test_machine_readable_same_origin_links_and_fragments_resolve(self):
         llms = (ROOT / "llms.txt").read_text()
         agent_index = json.loads((ROOT / "agent-index.json").read_text())

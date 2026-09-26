@@ -16,15 +16,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 GENERATED_DATA = (
-    "data/blog_data.json",
-    "data/article_groups.json",
     "data/article_index.json",
     "data/backlinks_data.json",
-    "data/series_data.json",
-    "data/tags_data.json",
     "feed.zh.xml",
     "feed.en.xml",
     "blogs.html",
+)
+
+RETIRED_DATA = (
+    "data/blog_data.json",
+    "data/article_groups.json",
+    "data/series_data.json",
+    "data/tags_data.json",
 )
 
 
@@ -97,6 +100,12 @@ def compare_outputs(temp_root: Path) -> list[str]:
         generated_text = normalize_for_compare(rel_path, file_text(generated))
         if current_text != generated_text:
             errors.append(f"{rel_path}: generated output is out of date")
+
+    for rel_path in RETIRED_DATA:
+        if (ROOT / rel_path).exists():
+            errors.append(f"{rel_path}: retired generated file still exists")
+        if (temp_root / rel_path).exists():
+            errors.append(f"{rel_path}: generator recreated a retired data file")
 
     return errors
 

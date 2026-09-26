@@ -1,4 +1,5 @@
 "use strict";
+const blogArchiveStaticLanguage = document.documentElement?.getAttribute('lang') || '';
 document.addEventListener('DOMContentLoaded', function () {
     const archiveContainer = document.getElementById('blog-archive');
     if (!archiveContainer) {
@@ -7,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const i18n = window.SITE_I18N || {};
     const articleGroupsApi = window.SITE_ARTICLE_GROUPS || {};
     const latestCount = document.getElementById('essays-latest-count');
+    const staticFallback = archiveContainer.innerHTML;
     let articleGroupsData = null;
     function formatDate(dateValue) {
         return typeof i18n.formatDate === 'function'
@@ -63,6 +65,28 @@ document.addEventListener('DOMContentLoaded', function () {
             return '';
         }
     }
+    function canUseStaticFallback() {
+        return staticFallback.trim()
+            && blogArchiveStaticLanguage
+            && currentLanguage() === blogArchiveStaticLanguage
+            && !activeTopic();
+    }
+    function currentLanguage() {
+        return typeof i18n.getCurrentLanguage === 'function'
+            ? i18n.getCurrentLanguage()
+            : 'en';
+    }
+    function restoreStaticFallback() {
+        if (!canUseStaticFallback())
+            return false;
+        if (archiveContainer.innerHTML !== staticFallback) {
+            archiveContainer.innerHTML = staticFallback;
+        }
+        if (typeof i18n.applyLanguageStateToInternalLinks === 'function') {
+            i18n.applyLanguageStateToInternalLinks(archiveContainer);
+        }
+        return true;
+    }
     function getLanguageAvailability(group) {
         const labels = [];
         if (group.languages && group.languages.zh) {
@@ -82,9 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
             archiveContainer.innerHTML = `<p>${escapeHtml(i18n.t('no_blog_posts'))}</p>`;
             return;
         }
-        const currentLanguage = typeof i18n.getCurrentLanguage === 'function'
-            ? i18n.getCurrentLanguage()
-            : 'en';
+        const language = currentLanguage();
         const topic = activeTopic();
         const filteredGroups = topic
             ? groups.filter(group => Array.isArray(group.tags) && group.tags.includes(topic))
@@ -112,8 +134,8 @@ document.addEventListener('DOMContentLoaded', function () {
             html.push('<section class="archive-month">');
             html.push(`<div class="archive-month-header"><h3 class="archive-month-title">${escapeHtml(monthLabel)}</h3><p class="archive-month-note">${escapeHtml(i18n.formatArchiveMonthNote(monthGroups.length))}</p></div>`);
             monthGroups.forEach((group) => {
-                const primary = articleGroupsApi.getPreferredEntry(group, currentLanguage);
-                const secondary = articleGroupsApi.getSecondaryEntry(group, currentLanguage);
+                const primary = articleGroupsApi.getPreferredEntry(group, language);
+                const secondary = articleGroupsApi.getSecondaryEntry(group, language);
                 if (!primary || !primary.file) {
                     return;
                 }
@@ -150,18 +172,32 @@ document.addEventListener('DOMContentLoaded', function () {
             i18n.applyLanguageStateToInternalLinks(archiveContainer);
         }
     }
-    articleGroupsApi.fetchArticleGroups()
-        .then((data) => {
-        articleGroupsData = data;
-        renderArchive();
-    })
-        .catch((error) => {
-        console.error('Error loading article groups:', error);
-        archiveContainer.innerHTML = `<p>${escapeHtml(i18n.t('error_loading_blog_posts'))}</p>`;
-    });
-    window.addEventListener('site-language-change', renderArchive);
+    function showArchive() {
+        if (restoreStaticFallback())
+            return;
+        if (articleGroupsData)
+            renderArchive();
+    }
+    function loadArchive() {
+        if (articleGroupsData) {
+            showArchive();
+            return;
+        }
+        articleGroupsApi.fetchArticleGroups()
+            .then((data) => {
+            articleGroupsData = data;
+            showArchive();
+        })
+            .catch((error) => {
+            console.error('Error loading article groups; preserving static fallback:', error);
+        });
+    }
+    if (!restoreStaticFallback()) {
+        loadArchive();
+    }
+    window.addEventListener('site-language-change', loadArchive);
     window.addEventListener('hashchange', () => {
-        renderArchive();
+        loadArchive();
         if (activeTopic() && window.matchMedia('(max-width: 820px)').matches) {
             document.getElementById('latest-essays')?.scrollIntoView({
                 block: 'start',
