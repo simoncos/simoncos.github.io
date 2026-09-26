@@ -7798,13 +7798,22 @@ nav ul li a.active::after {
     }
 }
 
-/* Favorites (收藏): the index and the four category pages. Chinese only, so the
-   nav entry shows only when the page language is Chinese. Link rules carry
-   .favorites-shell to outrank the global dark-mode link colour. */
-html:not([lang|="zh"]) [data-nav-lang="zh"] {
-    display: none;
+/* Six English nav labels need 21-41px more than a 360-390px phone has at the
+   spacing above, which hid About behind a horizontal scroll. Keep the 44px
+   height and trade some of the width: 12px between labels instead of 21.6px,
+   and the tap areas still reach 4px past each label. */
+@media (pointer: coarse) and (max-width: 520px) {
+    nav ul {
+        gap: 0.25rem;
+    }
+
+    nav ul li a {
+        padding-inline: 0.25rem;
+    }
 }
 
+/* Favorites (收藏): the index and the four category pages. Link rules carry
+   .favorites-shell to outrank the global dark-mode link colour. */
 body.favorites-page .favorites-shell {
     --favorite-text: var(--text-secondary);
     --favorite-quiet: var(--text-muted);

@@ -120,6 +120,13 @@
           "markdown": "black-myth-wukong-bosses.md",
           "excerpt": "难度上个人体感前五：杨戬、小黄龙、寅虎、大圣残躯、夜叉王。\n先说 君麻吕 夜叉王：这里面唯一跟很多人（帖子也好、虎扑评分也好）不一样的，我也不知道为啥，就是觉得挺难的，攻击范围、攻击欲望、数值都蛮猛的。难道是因为我用了禁字诀？禁字诀这玩意儿...",
           "available": true
+        },
+        "en": {
+          "title": "Thoughts on a Few Bosses in Black Myth: Wukong",
+          "file": "black-myth-wukong-bosses.en.html",
+          "markdown": "black-myth-wukong-bosses.en.md",
+          "excerpt": "By my own feel, the top five for difficulty: Erlang, Yellow Loong, Yin Tiger, the Great Sage's Broken Shell and the Yaksha King.\nLet me start with Kimimaro the Yaksha King. He is the only one on this list where I part ways with a lot of people (forum posts and Hupu ratings alike). I don't know why; I just found him pretty hard. His attack range, his aggression and his numbers are all fierce. Could it be because I used Spell Binder? Spell Binder is honestly a bit addictive: once you've used it, you want to use it on...",
+          "available": true
         }
       }
     },
@@ -136,6 +143,13 @@
           "file": "on-the-value-of-war.html",
           "markdown": "on-the-value-of-war.md",
           "excerpt": "今天读完《西线无战事》，每次看战争题材的作品都很难释怀，战场上战场下，最美丽和最丑恶的东西总是同时绽放着，但一切终会消逝。\n战争的历史，可能比人类的历史还要长，君不见《2001太空漫游》里的远古猩猩，刚学会拿骨头当工具使，就开始用来互相...",
+          "available": true
+        },
+        "en": {
+          "title": "On the Value of War",
+          "file": "on-the-value-of-war.en.html",
+          "markdown": "on-the-value-of-war.en.md",
+          "excerpt": "I finished All Quiet on the Western Front today. War stories always stay with me. On the battlefield and off it, the most beautiful things and the ugliest things always bloom at the same time, but in the end all of it passes.\nThe history of war may be longer than the history of humanity. Look at the ancient apes in 2001: A Space Odyssey: no sooner had they learned to use a bone as a tool than they started killing each other with it. A tool, after all, if it is not used to create something, will surely be...",
           "available": true
         }
       }
@@ -154,6 +168,13 @@
           "markdown": "the-tatami-galaxy.md",
           "excerpt": "刚开始这部番的名字对我来说是不知所云的，以为大概是一个有各种神仙的学校之类的泡面番，看到豆瓣评分很高才收藏，过了不知道几年才捡起来看。\n四叠半的故事其实很简单，一个废柴大学生在无数平行时空中的无数个失败人生，最后其...",
           "available": true
+        },
+        "en": {
+          "title": "A Universe in a Few Square Feet: On The Tatami Galaxy",
+          "file": "the-tatami-galaxy.en.html",
+          "markdown": "the-tatami-galaxy.en.md",
+          "excerpt": "At first the Chinese title of this series, which reads roughly as \"a grand system of four-and-a-half-mat myths\", meant nothing to me. I took it for some throwaway short anime about a school full of assorted gods, the kind you finish while your instant noodles cook. I only saved it because of its high Douban score, and it was who knows how many years before I finally picked it up.\nThe story of The Tatami Galaxy is actually simple. A good-for-nothing college student lives countless failed lives in countless parallel worlds, until one of him gains the power to cross...",
+          "available": true
         }
       }
     },
@@ -170,6 +191,13 @@
           "file": "exformation-and-information.html",
           "markdown": "exformation-and-information.md",
           "excerpt": "《设计中的设计|全本》是我刚读完的一本书，作者原研哉带来的不是简简单单打包的一本作品集，而是在每一个项目上以一个作者而非设计者的方式强调了他的所思所想所感。或者，也可如他自己所说，用语言来阐述设计，其实是一种新的设计——不...",
+          "available": true
+        },
+        "en": {
+          "title": "Exformation and Information: Reading Kenya Hara's Designing Design",
+          "file": "exformation-and-information.en.html",
+          "markdown": "exformation-and-information.en.md",
+          "excerpt": "Designing Design (the complete edition) is a book I have just finished. What its author, Kenya Hara, offers is not a neatly packaged portfolio. Project by project, he dwells on what he thought, considered and felt, as an author rather than as a designer. Or, as he puts it himself, putting design into words is a new kind of design: no longer Design of Design, but Designing Design. Either way, this is not a book only about design.\nThe passage that resonated with me most goes like this: \"We have also begun to understand that when we make things, we...",
           "available": true
         }
       }
