@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <li><a href="#" data-page="blogs.html" data-i18n="nav_blogs">Essays</a></li>
                             <li><a href="#" data-page="gallery.html" data-i18n="nav_gallery">Gallery</a></li>
                             <li><a href="#" data-page="projects.html" data-i18n="nav_projects">Projects</a></li>
-                            <li data-nav-lang="zh"><a href="#" data-page="favorites.html" data-i18n="nav_favorites">Favorites</a></li>
+                            <li><a href="#" data-page="favorites.html" data-i18n="nav_favorites">Favorites</a></li>
                             <li><a href="#" data-page="about.html" data-i18n="nav_about">About</a></li>
                         </ul>
                         <div class="site-nav-controls">

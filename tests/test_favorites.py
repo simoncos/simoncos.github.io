@@ -127,13 +127,14 @@ class FavoritesPageTests(unittest.TestCase):
                 self.assertIn('<html lang="zh-Hans">', html)
                 self.assertNotIn("hreflang", html)
 
-    def test_nav_entry_is_chinese_only(self):
+    def test_nav_entry_shows_in_both_languages(self):
+        # The pages are Chinese only, but the English nav still lists the column:
+        # the site defaults to English, and hiding it there left no way in.
         for path in ("navigation.html", "src/ts/load-nav.ts"):
             text = (ROOT / path).read_text(encoding="utf-8")
             with self.subTest(path=path):
-                self.assertIn('<li data-nav-lang="zh"><a href="#" data-page="favorites.html"', text)
-        css = (ROOT / "src/css/styles.css").read_text(encoding="utf-8")
-        self.assertIn('html:not([lang|="zh"]) [data-nav-lang="zh"]', css)
+                self.assertIn('<li><a href="#" data-page="favorites.html"', text)
+                self.assertNotIn("data-nav-lang", text)
 
     def test_essay_links_point_at_published_articles_with_original_dates(self):
         links = {work["link"]: work for c in load_payload()["categories"] for work in c["works"]}
