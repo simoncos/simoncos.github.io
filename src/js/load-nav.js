@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     const isBlogPage = window.location.pathname.includes('/blogs/');
     const isProjectPage = window.location.pathname.includes('/projects/');
+    const isFavoritesPage = window.location.pathname.includes('/favorites/');
     const navigationPlaceholder = document.getElementById('navigation-placeholder');
     function applyActiveNavState() {
         const currentPath = window.location.pathname;
@@ -35,7 +36,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             link.classList.remove('active');
             link.removeAttribute('aria-current');
-            if ((isBlogPage && page === 'blogs.html') || (isProjectPage && page === 'projects.html') || page === currentPage) {
+            if ((isBlogPage && page === 'blogs.html')
+                || (isProjectPage && page === 'projects.html')
+                || (isFavoritesPage && page === 'favorites.html')
+                || page === currentPage) {
                 link.classList.add('active');
                 link.setAttribute('aria-current', 'page');
                 activeLink = link;
@@ -61,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <li><a href="#" data-page="blogs.html" data-i18n="nav_blogs">Essays</a></li>
                             <li><a href="#" data-page="gallery.html" data-i18n="nav_gallery">Gallery</a></li>
                             <li><a href="#" data-page="projects.html" data-i18n="nav_projects">Projects</a></li>
+                            <li data-nav-lang="zh"><a href="#" data-page="favorites.html" data-i18n="nav_favorites">Favorites</a></li>
                             <li><a href="#" data-page="about.html" data-i18n="nav_about">About</a></li>
                         </ul>
                         <div class="site-nav-controls">

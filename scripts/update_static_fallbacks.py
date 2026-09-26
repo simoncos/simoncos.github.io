@@ -108,7 +108,13 @@ def blog_posts(article_index: dict) -> list[dict]:
                 "type": "blog",
                 "date": group.get("date", ""),
                 "primary_title": primary.get("title", ""),
-                "secondary_title": secondary.get("title", "") if secondary else "",
+                # A single-language post falls back to itself as the secondary
+                # entry; load-recent-posts.ts drops a repeated title the same way.
+                "secondary_title": (
+                    secondary.get("title", "")
+                    if secondary and secondary.get("title") != primary.get("title")
+                    else ""
+                ),
                 "href": f"blogs/{primary.get('file', '')}",
                 "lang_avail": language_availability(group.get("languages") or {}),
                 "tags": group.get("tags") or [],

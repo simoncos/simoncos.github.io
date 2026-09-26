@@ -21,6 +21,7 @@
             nav_gallery: 'Gallery',
             nav_blogs: 'Essays',
             nav_projects: 'Projects',
+            nav_favorites: 'Favorites',
             nav_about: 'About',
             theme: 'Theme',
             switch_to_dark_mode: 'Switch to dark mode',
@@ -203,6 +204,7 @@
             nav_gallery: '作品',
             nav_blogs: '文章',
             nav_projects: '项目',
+            nav_favorites: '收藏',
             nav_about: '关于',
             theme: '外观',
             switch_to_dark_mode: '切换为深色模式',
@@ -409,6 +411,10 @@
 
     function getContentLanguageFromPath(pathname = window.location.pathname) {
         const normalizedPath = String(pathname || '');
+        // Favorites is Chinese only for now.
+        if (/\/favorites(?:\.html$|\/)/i.test(normalizedPath)) {
+            return 'zh';
+        }
         if (!/\/(?:blogs|projects)\/[^/]+\.html$/i.test(normalizedPath)) {
             return null;
         }

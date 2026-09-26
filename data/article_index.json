@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-14",
+  "last_updated": "2026-09-26",
   "groups": [
     {
       "id": "my-personal-knowledge-management-system-2026-03",
@@ -102,6 +102,74 @@
           "file": "my-haba-snow-mountain-journey.en.html",
           "markdown": "my-haba-snow-mountain-journey.en.md",
           "excerpt": "TLDR; This article is about 7500 words written entirely by a human. If it feels too long, you can jump straight to the AI Bonus section at the end.\nI’m in Kunming now. I’ve just finished washing every piece of gear I brought back from the summit. Before the memory gets “washed out” too much as well, I want to pour it all out while it’s still fresh.\nTimeline\n• 09.20 Confirmed the plan with a friend and bought flights\n• 09.29 22:00 Flew direct and arrived in Lijiang\n• 09.30 06:00 Drove to Haba Village, then rode mules to...",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "black-myth-wukong-bosses",
+      "date": "2024-09-09",
+      "tags": [
+        "game"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "说说对《黑神话悟空》几个Boss的感想",
+          "file": "black-myth-wukong-bosses.html",
+          "markdown": "black-myth-wukong-bosses.md",
+          "excerpt": "难度上个人体感前五：杨戬、小黄龙、寅虎、大圣残躯、夜叉王。\n先说 君麻吕 夜叉王：这里面唯一跟很多人（帖子也好、虎扑评分也好）不一样的，我也不知道为啥，就是觉得挺难的，攻击范围、攻击欲望、数值都蛮猛的。难道是因为我用了禁字诀？禁字诀这玩意儿...",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "on-the-value-of-war",
+      "date": "2021-10-10",
+      "tags": [
+        "book"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "关于战争的价值",
+          "file": "on-the-value-of-war.html",
+          "markdown": "on-the-value-of-war.md",
+          "excerpt": "今天读完《西线无战事》，每次看战争题材的作品都很难释怀，战场上战场下，最美丽和最丑恶的东西总是同时绽放着，但一切终会消逝。\n战争的历史，可能比人类的历史还要长，君不见《2001太空漫游》里的远古猩猩，刚学会拿骨头当工具使，就开始用来互相...",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "the-tatami-galaxy",
+      "date": "2018-01-16",
+      "tags": [
+        "movie"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "方寸间的宇宙——关于《四叠半神话大系》",
+          "file": "the-tatami-galaxy.html",
+          "markdown": "the-tatami-galaxy.md",
+          "excerpt": "刚开始这部番的名字对我来说是不知所云的，以为大概是一个有各种神仙的学校之类的泡面番，看到豆瓣评分很高才收藏，过了不知道几年才捡起来看。\n四叠半的故事其实很简单，一个废柴大学生在无数平行时空中的无数个失败人生，最后其...",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "exformation-and-information",
+      "date": "2014-03-27",
+      "tags": [
+        "book"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "Exformation和Information——读《设计中的设计|全本》",
+          "file": "exformation-and-information.html",
+          "markdown": "exformation-and-information.md",
+          "excerpt": "《设计中的设计|全本》是我刚读完的一本书，作者原研哉带来的不是简简单单打包的一本作品集，而是在每一个项目上以一个作者而非设计者的方式强调了他的所思所想所感。或者，也可如他自己所说，用语言来阐述设计，其实是一种新的设计——不...",
           "available": true
         }
       }

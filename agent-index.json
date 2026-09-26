@@ -44,6 +44,13 @@
       "label": "Gallery",
       "url": "https://simoncos.github.io/gallery.html",
       "purpose": "Talks, demos, visual essays, research artifacts, and curated work paths."
+    },
+    {
+      "id": "favorites",
+      "label": "Favorites (收藏)",
+      "url": "https://simoncos.github.io/favorites.html",
+      "language": "zh",
+      "purpose": "Every book, film, album and game rated five stars on Douban, newest first, with the short reviews as written there. Chinese only."
     }
   ],
   "current_surfaces": [
@@ -107,6 +114,12 @@
       "format": "json",
       "url": "https://simoncos.github.io/data/article_index.json",
       "description": "Lightweight bilingual article index used by the Essays archive, reading paths, topics, homepage, and language switching."
+    },
+    {
+      "id": "favorites",
+      "format": "json",
+      "url": "https://simoncos.github.io/data/favorites.json",
+      "description": "Five-star Douban marks behind the Favorites column, grouped into works, with the short reviews verbatim."
     },
     {
       "id": "sitemap",
