@@ -4,6 +4,33 @@
 
 /* ---- Tokens ------------------------------------------------------------ */
 
+/* Arial, or a metric twin, scaled to Geist's width and line metrics, so text
+   does not rewrap when the web font arrives (the About page shifted by 0.21
+   CLS without it). Widths were measured in the browser against this site's
+   English prose: Geist 400 runs 2.5% narrower than its letter-frequency
+   estimate, while 500 matches it, hence two faces. The overrides are Geist's
+   ascender (1005) and descender (295) per 1000 units, divided by the
+   size-adjust. */
+@font-face {
+    font-family: 'Geist Fallback';
+    src: local('Arial'), local('ArialMT'), local('Arimo'), local('Liberation Sans');
+    font-weight: 100 450;
+    size-adjust: 102.84%;
+    ascent-override: 97.73%;
+    descent-override: 28.69%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: 'Geist Fallback';
+    src: local('Arial'), local('ArialMT'), local('Arimo'), local('Liberation Sans');
+    font-weight: 451 600;
+    size-adjust: 105.27%;
+    ascent-override: 95.47%;
+    descent-override: 28.02%;
+    line-gap-override: 0%;
+}
+
 :root {
     --bg: #ffffff;
     --bg-a: rgba(255, 255, 255, 0.9);
@@ -24,7 +51,7 @@
     --live: #2fb35f;
     color-scheme: light;
 
-    --font: 'Geist', 'Noto Sans SC', system-ui, sans-serif;
+    --font: 'Geist', 'Geist Fallback', 'Noto Sans SC', system-ui, sans-serif;
     --mono: ui-monospace, 'SF Mono', Consolas, monospace;
     --pad: clamp(20px, 4vw, 56px);
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -260,7 +287,7 @@ button {
 }
 
 .seg-n {
-    opacity: 0.55;
+    opacity: 0.72;
     font-variant-numeric: tabular-nums;
 }
 
@@ -375,7 +402,7 @@ button {
     font-weight: 500;
     padding: 10px 14px;
     border-radius: 999px;
-    opacity: 0.5;
+    opacity: 0.62;
     transition: opacity 0.2s, background 0.2s;
     white-space: nowrap;
 }
@@ -465,7 +492,14 @@ button {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    overscroll-behavior: contain;
     animation: om-fade 0.25s ease both;
+}
+
+/* The sheet covers the page; a swipe on it must not scroll what is under it. */
+:root.menu-open,
+:root.menu-open body {
+    overflow: hidden;
 }
 
 .sheet-link {
@@ -534,6 +568,35 @@ button {
 @media (min-width: 860px) {
     .sheet {
         display: none !important;
+    }
+}
+
+/* Without scripts the theme and Menu buttons cannot work, so on phones the
+   section links come back as a second header row. */
+:root:not(.js) .theme-btn,
+:root:not(.js) .menu-btn {
+    display: none;
+}
+
+@media (max-width: 859.98px) {
+    :root:not(.js) .hdr {
+        flex-wrap: wrap;
+        row-gap: 4px;
+    }
+
+    :root:not(.js) .hdr-right {
+        display: contents;
+    }
+
+    /* The tabs' own padding would indent the first label; pull the row out
+       by that much so it lines up with the brand. */
+    :root:not(.js) .hdr-nav {
+        display: flex;
+        order: 3;
+        flex: 0 0 auto;
+        width: calc(100% + 28px);
+        margin: 0 -14px;
+        overflow-x: auto;
     }
 }
 
@@ -1427,6 +1490,20 @@ button {
     margin-bottom: clamp(24px, 4vh, 40px);
 }
 
+/* On a phone the four type tabs share the row; "Visual essays" was cut off
+   at the rounded edge with nothing to say the row scrolls. */
+@media (max-width: 859.98px) {
+    .topic-bar .seg {
+        width: 100%;
+    }
+
+    .topic-bar .seg-btn {
+        flex: 1 1 auto;
+        justify-content: center;
+        padding: 0 6px;
+    }
+}
+
 .topic-head {
     display: flex;
     flex-wrap: wrap;
@@ -1434,6 +1511,10 @@ button {
     justify-content: space-between;
     gap: 16px 40px;
     margin-bottom: clamp(28px, 5vh, 56px);
+}
+
+.topic-head [tabindex="-1"]:focus {
+    outline: none;
 }
 
 .topic-head h1,
@@ -2173,11 +2254,12 @@ button {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    opacity: 0.6;
 }
 
-.log li:first-child {
-    opacity: 1;
+/* Past versions step back by colour, not opacity, so their dates keep the
+   muted colour's contrast. */
+.log li:not(:first-child) .log-t {
+    color: var(--muted);
 }
 
 .log-when {
@@ -2225,6 +2307,14 @@ button {
 
 .board.is-present .intro-title {
     font-size: clamp(56px, 9vw, 140px);
+}
+
+/* On a phone 72vh plus the header and board bar ran past the fold. */
+@media (max-width: 859.98px) {
+    .board.is-present .block {
+        min-height: min(60vh, 680px);
+        min-height: min(60svh, 680px);
+    }
 }
 
 @media (max-width: 859.98px) {
@@ -2342,6 +2432,13 @@ button {
 .search:focus-within {
     outline: 2px solid var(--ink);
     outline-offset: 2px;
+}
+
+/* iOS Safari zooms into any field set below 16px when it gets focus. */
+@media (max-width: 859.98px) {
+    .search input {
+        font-size: 16px;
+    }
 }
 
 :root:not(.js) .ahead-tools,
@@ -2677,6 +2774,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: clamp(20px, 3vw, 32px);
+    scroll-margin-top: 96px;
 }
 
 :root:not(.js) .series-view {
@@ -3355,6 +3453,10 @@ button {
     border-top: 1px solid var(--line);
 }
 
+.post-content sup[id^="fnref"] {
+    scroll-margin-top: 96px;
+}
+
 .post-content .footnote li {
     margin-bottom: 0.5em;
     padding: 4px 8px;
@@ -3897,12 +3999,16 @@ button {
     gap: 12px;
     color: var(--ink);
     padding: 4px 0;
-    opacity: 0.35;
+}
+
+/* Other categories step back on the glyph only (large text, 3:1 or more);
+   their counts keep the muted colour so they stay readable. */
+.rail-item:not([aria-current="page"]) .rail-char {
+    opacity: 0.5;
     transition: opacity 0.3s;
 }
 
-.rail-item:hover,
-.rail-item[aria-current="page"] {
+.rail-item:hover .rail-char {
     opacity: 1;
 }
 
@@ -4245,6 +4351,13 @@ button {
 
     .rail-item:not([aria-current="page"]) .rail-count {
         display: none;
+    }
+
+    /* The other categories are glyph-only here; pad them to a 44px target
+       without moving them. */
+    .rail-item:not([aria-current="page"]) {
+        padding: 8px 7px;
+        margin: 0 -7px;
     }
 
     /* The English filter labels overflow at 375px with the default padding;

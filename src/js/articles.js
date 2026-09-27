@@ -14,6 +14,7 @@
     const rows = Array.from(main.querySelectorAll('.arow'));
     const months = Array.from(main.querySelectorAll('[data-month]'));
     const empty = main.querySelector('[data-empty]');
+    const status = main.querySelector('[data-status]');
     const cards = Array.from(main.querySelectorAll('.scard'));
     let view = 'list';
     let tag = 'all';
@@ -24,7 +25,7 @@
     function visibleRows() {
         return rows.filter((row) => !row.hidden);
     }
-    function filter() {
+    function filter(announce = false) {
         const q = (search ? search.value : '').trim().toLowerCase();
         rows.forEach((row) => {
             const tags = (row.dataset.tags || '').split(/\s+/);
@@ -38,9 +39,16 @@
             if (count)
                 count.innerHTML = bi(`${n} ${n === 1 ? 'article' : 'articles'}`, `${n} 篇`);
         });
+        const shown = visibleRows().length;
         if (empty)
-            empty.hidden = visibleRows().length > 0;
+            empty.hidden = shown > 0;
         syncCount();
+        // Tell screen readers what a search or a topic left on the list.
+        if (announce && status) {
+            status.innerHTML = shown
+                ? bi(`${shown} ${shown === 1 ? 'article' : 'articles'}`, `${shown} 篇文章`)
+                : bi('Nothing matches that yet.', '暂时没有匹配的文章。');
+        }
     }
     function syncCount() {
         if (!shownEl)
@@ -50,13 +58,13 @@
     function setTag(next, record) {
         tag = chips.some((chip) => chip.dataset.tag === next) ? next : 'all';
         chips.forEach((chip) => chip.setAttribute('aria-pressed', chip.dataset.tag === tag ? 'true' : 'false'));
-        filter();
+        filter(record);
         if (record)
             setHash(tag === 'all' ? '' : `topic-${tag}`);
     }
     chips.forEach((chip) => chip.addEventListener('click', () => setTag(chip.dataset.tag || 'all', true)));
     if (search)
-        search.addEventListener('input', filter);
+        search.addEventListener('input', () => filter(true));
     function setOpen(row) {
         rows.forEach((other) => {
             const open = other === row && !other.classList.contains('is-open');

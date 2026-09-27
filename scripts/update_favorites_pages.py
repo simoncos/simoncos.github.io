@@ -236,11 +236,14 @@ def rail(categories: list[dict[str, Any]], active: str) -> str:
         current = ' aria-current="page"' if category["id"] == active else ""
         n = len(category["works"])
         count = bi(f"{ENGLISH[category['id']][0]} · {n}", f"{n} {category['unit']}")
+        # The hidden name carries the count too: the visible count is
+        # display:none on phones, and reading both said "Books Books · 80".
+        name = bi(f"{ENGLISH[category['id']][0]} · {n}", f"{category['name']}，{n} {category['unit']}")
         links.append(
             f'            <a class="rail-item" href="{category["id"]}.html"{current}>'
             f'<span class="rail-char" lang="zh-Hant" aria-hidden="true">{GLYPHS[category["id"]]}</span>'
-            f'<span class="visually-hidden">{bi(ENGLISH[category["id"]][0], category["name"])}</span>'
-            f'<span class="rail-count num">{count}</span></a>'
+            f'<span class="visually-hidden">{name}</span>'
+            f'<span class="rail-count num" aria-hidden="true">{count}</span></a>'
         )
     return "\n".join([
         f'        <nav class="fav-rail"{i18n_attrs(aria_label=("Favorites categories", "收藏分类"))}>',

@@ -13,7 +13,7 @@ description: 2026 年 3 月的分层个人知识系统：Telegram 负责即时�
 [^4]: memory pipeline：这里主要指 daily memory 的记录、整理、提炼与保留边界。
 [^5]: SOP：Standard Operating Procedure，标准作业流程。
 
-![Personal Knowledge Management System 202603](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png)
+![Personal Knowledge Management System 202603](assets/images/my-personal-knowledge-management-system-2026-03/b0b1b4b23ca8bc7d5afc150d07c3582d.jpg)
 ## 一、从"记笔记"到"分层协作"
 
 我开始把 Obsidian 作为主要的 KM[^1] 工具，到现在差不多四、五年了。2026 年 3 月回顾完整的系统迭代记录（见文末附录），这套东西已经长成了一个分层的人机系统：Telegram 负责即时输入，Obsidian 负责整理与沉淀，个人站点负责发布与呈现，Git 负责版本边界，而我的 OpenClaw agent--RedPiggy，开始把这些部分粘合起来。
@@ -42,7 +42,7 @@ Telegram → Obsidian Journal 的打通，起因是我用Git替换了iCloud，�
 
 还有一个意想之外的好处：Telegram 消息需要经过 Piggy，所以它在执行这条流程的同时，也会顺手回应我的想法。这样一来，很多念头在刚出现时，就已经得到第一个读者的反馈。
 
-![Telegram 对话截图：把系统架构图发进捕捉频道，下方是回复](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/781b033aa99041b1fe3829dfaeb88c2d.png)
+![Telegram 对话截图：把系统架构图发进捕捉频道，下方是回复](assets/images/my-personal-knowledge-management-system-2026-03/781b033aa99041b1fe3829dfaeb88c2d.jpg)
 
 这不是我尝试的第一个方案。本来是想通过苹果全家桶里的 Notes 来和 Piggy 对接的，但是有几个大问题导致我不得不想其他方法：
 
