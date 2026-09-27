@@ -28,6 +28,10 @@ IGNORED_LOCAL_SCHEMES = {
     "mailto",
     "tel",
 }
+# Article images are served from the repository. scripts/localize_images.py
+# brings R2-hosted ones in, sized to stay well under this.
+MAX_ARTICLE_IMAGE_BYTES = 1_000_000
+R2_URL = re.compile(r"https://[A-Za-z0-9.-]+\.r2\.dev/[^\s)\"'<>]+")
 
 
 class HtmlDoc(HTMLParser):
@@ -438,6 +442,12 @@ def check_blog_image_attributes(errors: list[str]) -> None:
             local_path = resolve_local_html_image(html_file, source)
             if not local_path:
                 continue
+            size = local_path.stat().st_size
+            if size > MAX_ARTICLE_IMAGE_BYTES:
+                errors.append(
+                    f"{label} is {size / 1e6:.1f} MB; article images must stay under 1 MB "
+                    f"(see scripts/localize_images.py for the encoding)"
+                )
             dimensions = read_image_dimensions(local_path)
             if not dimensions:
                 continue
@@ -447,6 +457,16 @@ def check_blog_image_attributes(errors: list[str]) -> None:
                 errors.append(
                     f"{label} should declare width=\"{expected_width}\" and height=\"{expected_height}\""
                 )
+
+
+def r2_image_notes() -> list[str]:
+    """Articles that still load images from R2. A note, not a failure."""
+    notes = []
+    for md_file in sorted((ROOT / "blogs").glob("*.md")):
+        count = len(set(R2_URL.findall(md_file.read_text(encoding="utf-8"))))
+        if count:
+            notes.append(f"{md_file.relative_to(ROOT)}: {count} image(s) on R2")
+    return notes
 
 
 def check_json_assets(errors: list[str]) -> None:
@@ -585,6 +605,12 @@ def main() -> int:
     check_preview_domains(errors)
     check_inline_event_handlers(errors)
     check_blog_image_attributes(errors)
+
+    notes = r2_image_notes()
+    if notes:
+        print("Articles still loading images from R2 (run: python3 scripts/localize_images.py <slug>):")
+        for note in notes:
+            print(f"- {note}")
 
     if errors:
         print("Site checks failed:")

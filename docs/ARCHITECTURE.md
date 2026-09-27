@@ -31,6 +31,12 @@ Hand-authored pages outside this table: `series.html` and `tags.html` (redirects
 - `data/backlinks_data.json` — generated relationship graph. Article pages render their "linked from" list from it at build time.
 - `data/favorites.json` — every five-star book, film, album and game from a one-off Douban export. `scripts/extract_favorites.py` writes it from the local Obsidian vault and is run by hand, never in `make check`.
 
+### Article images
+
+- Article images live in the repository, at `blogs/assets/images/<slug>/`. Obsidian uploads them to R2; `scripts/localize_images.py <slug>` downloads an article's R2 images, writes web copies (sRGB, at most 1520 × 2026 px, progressive JPEG) and rewrites both language files to use them. Then run `make generate`.
+- `scripts/check_site.py` fails when an image an article shows is over 1 MB, and lists articles that still load images from R2 without failing.
+- Images left on another host need their size recorded in `data/image_dimensions.json` (`scripts/update_image_dimensions.py`, part of `make generate`), or they shift the layout as they load.
+
 ### Languages
 
 - Section pages (Index, Articles, Work, Favorites, About) carry both languages as `<span data-l="en">…</span><span data-l="zh" lang="zh-Hans">…</span>` pairs. `?lang=zh` or the toggle picks one; the choice is remembered.

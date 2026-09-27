@@ -62,7 +62,7 @@ Obsidian 不是用来什么都往里丢的。相比发布导向的个人站点[^
 
 有了 Piggy 之后，Obsidian 的这种定位得到了加强。为此我多划出一块目录，作为我和 Piggy 的协作空间。
 
-![Obsidian 侧边栏中的 RedPiggy 文件夹结构：Projects 下分为 Backlog、Dev、Research、Systems、Writing](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg)
+![Obsidian 侧边栏中的 RedPiggy 文件夹结构：Projects 下分为 Backlog、Dev、Research、Systems、Writing](assets/images/my-personal-knowledge-management-system-2026-03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg)
 
 通过对 Piggy 完全开放 Obsidian 的权限，我获得的收益主要有三类。
 
@@ -80,7 +80,7 @@ Obsidian 不是用来什么都往里丢的。相比发布导向的个人站点[^
 
 个人站点 Site（simoncos.github.io）是整个系统的发布层。第一版正式上线是在今年 1 月；有了 Piggy 和其他 agent 的帮助之后，最近一个月它的视觉、交互和信息架构经历了一轮全面更新。
 
-![个人网站文章页截图，左侧是文章目录](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg)
+![个人网站文章页截图，左侧是文章目录](assets/images/my-personal-knowledge-management-system-2026-03/d2783b62499c43b6f474df1058c28cdd.jpg)
 
 目前的网站：
 

@@ -7,7 +7,7 @@ description: Reading Kenya Hara's Designing Design: information overload is an i
 
 # Exformation and Information: Reading Kenya Hara's Designing Design
 
-![Cover of Designing Design (complete edition): DESIGNING DESIGN, 原研哉 and KENYA HARA printed on white](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/34a4ea355d5effc7ac410dbd1f5c4410.jpg)
+![Cover of Designing Design (complete edition): DESIGNING DESIGN, 原研哉 and KENYA HARA printed on white](assets/images/exformation-and-information/34a4ea355d5effc7ac410dbd1f5c4410.jpg)
 
 *Designing Design* (the complete edition) is a book I have just finished. What its author, Kenya Hara, offers is not a neatly packaged portfolio. Project by project, he dwells on what he thought, considered and felt, as an author rather than as a designer. Or, as he puts it himself, putting design into words is a new kind of design: no longer Design of Design, but Designing Design. Either way, this is not a book only about design.
 
