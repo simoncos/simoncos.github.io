@@ -7,7 +7,7 @@ description: Viewing notes on The Tatami Galaxy: one motif played over and over,
 
 # A Universe in a Few Square Feet: On The Tatami Galaxy
 
-![Illustrated poster for The Tatami Galaxy: the main characters, a moth, a teddy bear and the old fortune-teller crowd onto a wooden house above ukiyo-e-style waves](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/3e770ecde2287b0d0ac85abcf31826e6.png)
+![Illustrated poster for The Tatami Galaxy: the main characters, a moth, a teddy bear and the old fortune-teller crowd onto a wooden house above ukiyo-e-style waves](assets/images/the-tatami-galaxy/3e770ecde2287b0d0ac85abcf31826e6.jpg)
 
 At first the Chinese title of this series, which reads roughly as "a grand system of four-and-a-half-mat myths", meant nothing to me. I took it for some throwaway short anime about a school full of assorted gods, the kind you finish while your instant noodles cook. I only saved it because of its high Douban score, and it was who knows how many years before I finally picked it up.
 

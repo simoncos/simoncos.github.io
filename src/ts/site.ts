@@ -141,6 +141,9 @@
         menuSheet.hidden = !open;
         menuButton.setAttribute('aria-expanded', open ? 'true' : 'false');
         root.classList.toggle('menu-open', open);
+        // The sheet covers the page, so Tab must not wander onto controls
+        // hidden behind it.
+        document.querySelectorAll('main, footer').forEach((el) => el.toggleAttribute('inert', open));
     }
 
     if (menuButton && menuSheet) {

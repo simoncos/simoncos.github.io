@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -201,10 +202,10 @@ def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str
         if title_en != title_zh:
             alt = (
                 '<span class="row-alt"><span data-l="en" lang="zh-Hans">'
-                f'{esc(title_zh)}</span><span data-l="zh">{esc(title_en)}</span></span>'
+                f'{esc(title_zh)}</span><span data-l="zh" lang="en">{esc(title_en)}</span></span>'
             )
         float_attr = f' data-float="{esc(row["img"])}"' if row["img"] else ""
-        bilingual = '<span class="row-bi">中文 / EN</span>' if row["bilingual"] else ""
+        bilingual = '<span class="row-bi"><span lang="zh-Hans">中文</span> / EN</span>' if row["bilingual"] else ""
         row_html.append(
             f'            <a class="row" data-topic="{row["topic"]}"{href_attrs(row["href"])}{float_attr}>'
             f'<span class="row-main"><span class="row-t">{bi(title_en, title_zh)}</span>{alt}</span>'
@@ -623,6 +624,14 @@ def render_board(config: dict[str, Any], site: dict[str, Any], lang: str) -> str
 # ---- About ------------------------------------------------------------------
 
 
+def native_name(html: str, name: dict[str, str] | None) -> str:
+    """Tag a name written in another script (趙澈 is traditional Chinese)."""
+    if not name:
+        return html
+    text = esc(name["text"])
+    return html.replace(text, f'<span lang="{esc(name["lang"])}">{text}</span>')
+
+
 def render_about(config: dict[str, Any], site: dict[str, Any]) -> str:
     page = page_config(config, "about.html")
     about = site["about"]
@@ -643,7 +652,13 @@ def render_about(config: dict[str, Any], site: dict[str, Any]) -> str:
     for para in about["paragraphs"]:
         en = paragraph(para["en"], "en")
         zh = paragraph(para["zh"], "zh")
-        body = en if en == zh else f'<span data-l="en">{en}</span><span data-l="zh" lang="zh-Hans">{zh}</span>'
+        if en != zh:
+            body = f'<span data-l="en">{en}</span><span data-l="zh" lang="zh-Hans">{zh}</span>'
+        elif re.search(r"[\u3400-\u9fff]", en):
+            body = en
+        else:
+            # One English line for both languages ("Connecting the dots.").
+            body = f'<span lang="en">{en}</span>'
         paragraphs.append(f'        <p class="about-p">{body}</p>')
 
     contacts = "".join(
@@ -655,7 +670,7 @@ def render_about(config: dict[str, Any], site: dict[str, Any]) -> str:
         '<main id="main" class="about enter" tabindex="-1">',
         '    <section class="about-prose">',
         f'        <h1 class="visually-hidden">{bi("About", "关于")}</h1>',
-        f'        <p class="about-who">{bi_value(about["who"])}</p>',
+        f'        <p class="about-who">{native_name(bi_value(about["who"]), about.get("native_name"))}</p>',
         *paragraphs,
         "    </section>",
         '    <section class="contacts">',

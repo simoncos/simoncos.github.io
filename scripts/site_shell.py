@@ -223,7 +223,7 @@ def render_header_block(config: dict[str, Any], page: dict[str, Any]) -> str:
         )
         sheet.append(
             f'        <a class="sheet-link" href="{target}"{current}><span>{bi(en, zh)}</span>'
-            f'<span class="sheet-n">{number:02d}</span></a>'
+            f'<span class="sheet-n" aria-hidden="true">{number:02d}</span></a>'
         )
 
     home = prefixed(asset_prefix, "index.html")

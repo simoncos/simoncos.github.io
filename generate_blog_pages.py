@@ -332,7 +332,7 @@ def build_post_meta(metadata, language, created, updated, reading_minutes, paire
         hreflang = 'zh-Hans' if language == 'en' else 'en'
         rows.append(
             f'                    <a class="meta-alt" href="{esc(paired_entry["file"])}" hreflang="{hreflang}" '
-            f'data-lang-nav="{"zh" if language == "en" else "en"}">{text["other"]} ↗</a>'
+            f'lang="{hreflang}" data-lang-nav="{"zh" if language == "en" else "en"}">{text["other"]} ↗</a>'
         )
 
     return '\n'.join(rows)
@@ -1601,7 +1601,7 @@ def render_article_row(group, article_groups, series_meta, is_open):
     if title_en != title_zh:
         alt = (
             '<span class="arow-alt"><span data-l="en" lang="zh-Hans">'
-            f'{esc(title_zh)}</span><span data-l="zh">{esc(title_en)}</span></span>'
+            f'{esc(title_zh)}</span><span data-l="zh" lang="en">{esc(title_en)}</span></span>'
         )
 
     series_html = ''
@@ -1626,7 +1626,7 @@ def render_article_row(group, article_groups, series_meta, is_open):
         )
 
     search = ' '.join([title_en, title_zh, desc_en, desc_zh]).lower()
-    bilingual = '<span class="arow-bi">中文 / EN</span>' if en and zh else ''
+    bilingual = '<span class="arow-bi"><span lang="zh-Hans">中文</span> / EN</span>' if en and zh else ''
     tag_pills = ''.join(
         f'<span class="tag-label">{bi(*TAG_LABELS.get(tag, (tag, tag)))}</span>' for tag in tags
     )
@@ -1789,6 +1789,7 @@ def render_articles_main(article_groups, series_meta):
         *month_blocks,
         f'                <p class="aempty" data-empty hidden>{bi("Nothing matches that yet.", "暂时没有匹配的文章。")}</p>',
         '            </div>',
+        '            <p class="visually-hidden" role="status" data-status></p>',
         '        </div>',
         '        <div class="series-view" data-view-panel="series" id="reading-paths">',
         *series_cards,

@@ -70,8 +70,11 @@
             const el = id ? document.getElementById(id) : null;
             if (!el) return;
             event.preventDefault();
-            jump(el, id);
+            // Close the box first: closing it after the jump pulls the
+            // article up by the box's height and leaves the heading
+            // above the screen.
             if (tocBox) tocBox.open = false;
+            jump(el, id);
         });
     });
 

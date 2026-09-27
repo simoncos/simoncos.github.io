@@ -38,7 +38,17 @@
             card.style.setProperty('--o', a > 3.2 ? '0' : (1 - a * 0.22).toFixed(3));
             card.style.zIndex = String(100 - Math.round(a * 10));
             card.classList.toggle('is-on', on);
+            // Only the front card is a tab stop, and the only one assistive
+            // technology sees: the ring repeats the same types three times.
+            card.tabIndex = on ? 0 : -1;
+            if (on) card.removeAttribute('aria-hidden');
+            else card.setAttribute('aria-hidden', 'true');
         });
+        // Keyboard focus rides along when the wheel turns under it.
+        const focused = document.activeElement;
+        if (focused instanceof HTMLButtonElement && cards.includes(focused) && !focused.classList.contains('is-on')) {
+            cards.find((card) => card.classList.contains('is-on'))?.focus({ preventScroll: true });
+        }
         titles.forEach((title, i) => {
             title.classList.toggle('is-on', i === active);
             if (i === active) title.removeAttribute('aria-hidden');
@@ -198,6 +208,18 @@
         topics.forEach((section, i) => section.classList.toggle('is-current', i === index));
     }
 
+    // After a switch, put focus where the reader now is: the type's heading,
+    // or the front card back on the wheel.
+    function focusView() {
+        const current = topics.find((section) => section.classList.contains('is-current'));
+        const target = current
+            ? current.querySelector<HTMLElement>('.topic-head h1, .topic-head h2')
+            : cards.find((card) => card.classList.contains('is-on'));
+        if (!target) return;
+        if (current) target.tabIndex = -1;
+        target.focus({ preventScroll: true });
+    }
+
     function swap(id: string) {
         // A fragment link fires both hashchange and popstate; act once.
         const target = topicIndex(id) < 0 ? '' : id;
@@ -206,6 +228,7 @@
         const change = () => {
             show(id);
             window.scrollTo(0, 0);
+            focusView();
         };
         if (shell && shell.fade) shell.fade(change);
         else change();

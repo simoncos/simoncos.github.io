@@ -18,7 +18,7 @@
           "markdown": "my-personal-knowledge-management-system-2026-03.md",
           "excerpt": "一、从\"记笔记\"到\"分层协作\"\n我开始把 Obsidian 作为主要的 KM 工具，到现在差不多四、五年了。2026 年 3 月回顾完整的系统迭代记录（见文末附录），这套东西已经长成了一个分层的人机系统：Telegram 负责即时输入，Obsidian 负责整理与沉淀，个人站点负责发布与呈现，Git 负责版本边界，而我的 OpenClaw agent--RedPiggy，...",
           "description": "2026 年 3 月的分层个人知识系统：Telegram 负责即时捕捉，Obsidian 负责整理与提炼，Git 提供版本边界，个人网站负责发布，RedPiggy 把这些部分连起来。",
-          "image": "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png",
+          "image": "blogs/assets/images/my-personal-knowledge-management-system-2026-03/b0b1b4b23ca8bc7d5afc150d07c3582d.jpg",
           "available": true
         },
         "en": {
@@ -27,7 +27,7 @@
           "markdown": "my-personal-knowledge-management-system-2026-03.en.md",
           "excerpt": "I. From \"Taking Notes\" to Layered Collaboration\nI started using Obsidian as my main KM tool about four or five years ago. Looking back in March 2026 through the full record of this system's iteration (see the appendix), it has grown into a layered human-and-machine system: Telegram handles immediate input, Obsidian handles organization and distillation, the personal site handles publication and presentation, Git provides version boundaries, and my OpenClaw agent-RedPiggy-binds these parts together.\nThe current structure looks roughly like this:\n• Telegram: the entry point for collaborating with RedPiggy; quick capture for a sentence, a thought, or a photo\n•...",
           "description": "A layered personal knowledge system as of March 2026: Telegram for capture, Obsidian for distillation, Git for version boundaries, a static site for publishing, and RedPiggy binding them together.",
-          "image": "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png",
+          "image": "blogs/assets/images/my-personal-knowledge-management-system-2026-03/b0b1b4b23ca8bc7d5afc150d07c3582d.jpg",
           "available": true
         }
       }
@@ -108,7 +108,7 @@
           "markdown": "my-haba-snow-mountain-journey.md",
           "excerpt": "TLDR; 本文正文字数约11,600字，完全出自人类，如果觉得太长，可以直接前往文末的AI Bonus部分）\n此刻已在昆明，刚刚把登顶回来的全部装备清洗完毕。趁记忆还没被洗掉太多，我想赶紧把它们都倒出来。\n时间表\n• 09.20 和朋友确定行程并买机票\n• 09.29 22:00直飞抵达丽江\n• 09.30 6:00上车前往哈巴...",
           "description": "哈巴雪山（5396 米）两天一夜：行前准备、骑骡子上大本营、风雪中的夜间冲顶，以及身体与风险的真实感受。",
-          "image": "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/8636a1a47ea2beb545dcbac8495c1dc2.jpg",
+          "image": "blogs/assets/images/my-haba-snow-mountain-journey/8636a1a47ea2beb545dcbac8495c1dc2.jpg",
           "available": true
         },
         "en": {
@@ -117,7 +117,7 @@
           "markdown": "my-haba-snow-mountain-journey.en.md",
           "excerpt": "TLDR; This article is about 7500 words written entirely by a human. If it feels too long, you can jump straight to the AI Bonus section at the end.\nI’m in Kunming now. I’ve just finished washing every piece of gear I brought back from the summit. Before the memory gets “washed out” too much as well, I want to pour it all out while it’s still fresh.\nTimeline\n• 09.20 Confirmed the plan with a friend and bought flights\n• 09.29 22:00 Flew direct and arrived in Lijiang\n• 09.30 06:00 Drove to Haba Village, then rode mules to...",
           "description": "Two days on Haba Snow Mountain (5,396 m): the prep, the mule trail to base camp, the night summit push in driving snow, and what the body and the risk actually felt like.",
-          "image": "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/8636a1a47ea2beb545dcbac8495c1dc2.jpg",
+          "image": "blogs/assets/images/my-haba-snow-mountain-journey/8636a1a47ea2beb545dcbac8495c1dc2.jpg",
           "available": true
         }
       }
@@ -192,7 +192,7 @@
           "markdown": "the-tatami-galaxy.md",
           "excerpt": "刚开始这部番的名字对我来说是不知所云的，以为大概是一个有各种神仙的学校之类的泡面番，看到豆瓣评分很高才收藏，过了不知道几年才捡起来看。\n四叠半的故事其实很简单，一个废柴大学生在无数平行时空中的无数个失败人生，最后其...",
           "description": "《四叠半神话大系》的观后提纲：同一母题的反复演绎，第十、十一话的升维与降维，反复重现的意象，以及英文名 The Tatami Galaxy 里有限与无限的关系。",
-          "image": "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/3e770ecde2287b0d0ac85abcf31826e6.png",
+          "image": "blogs/assets/images/the-tatami-galaxy/3e770ecde2287b0d0ac85abcf31826e6.jpg",
           "available": true
         },
         "en": {
@@ -201,7 +201,7 @@
           "markdown": "the-tatami-galaxy.en.md",
           "excerpt": "At first the Chinese title of this series, which reads roughly as \"a grand system of four-and-a-half-mat myths\", meant nothing to me. I took it for some throwaway short anime about a school full of assorted gods, the kind you finish while your instant noodles cook. I only saved it because of its high Douban score, and it was who knows how many years before I finally picked it up.\nThe story of The Tatami Galaxy is actually simple. A good-for-nothing college student lives countless failed lives in countless parallel worlds, until one of him gains the power to cross...",
           "description": "Viewing notes on The Tatami Galaxy: one motif played over and over, episodes 10 and 11 stepping up and back down a dimension, the images that keep returning, and what the English title says about the finite and the infinite.",
-          "image": "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/3e770ecde2287b0d0ac85abcf31826e6.png",
+          "image": "blogs/assets/images/the-tatami-galaxy/3e770ecde2287b0d0ac85abcf31826e6.jpg",
           "available": true
         }
       }

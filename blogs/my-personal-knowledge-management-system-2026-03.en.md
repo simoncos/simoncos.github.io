@@ -13,7 +13,7 @@ description: A layered personal knowledge system as of March 2026: Telegram for 
 [^4]: *Memory pipeline* here mainly refers to the recording, consolidation, distillation, and preservation boundaries of daily memory.
 [^5]: SOP stands for Standard Operating Procedure.
 
-![Personal Knowledge Management System 202603](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/b0b1b4b23ca8bc7d5afc150d07c3582d.png)
+![Personal Knowledge Management System 202603](assets/images/my-personal-knowledge-management-system-2026-03/b0b1b4b23ca8bc7d5afc150d07c3582d.jpg)
 
 ## I. From "Taking Notes" to Layered Collaboration
 
@@ -43,7 +43,7 @@ Image support is worth mentioning separately. Before Piggy came into being, I ha
 
 There was also an unexpected benefit. Since Telegram messages have to pass through Piggy, it does not just execute the workflow-it also responds to the thought itself. That means many ideas now receive their first reader's feedback almost at the moment they appear.
 
-![Telegram chat screenshot: the system architecture diagram sent into the capture channel, with the reply below](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/781b033aa99041b1fe3829dfaeb88c2d.png)
+![Telegram chat screenshot: the system architecture diagram sent into the capture channel, with the reply below](assets/images/my-personal-knowledge-management-system-2026-03/781b033aa99041b1fe3829dfaeb88c2d.jpg)
 
 This was not the first solution I tried. Originally I wanted to connect with Piggy through Apple Notes, but several problems made that path untenable:
 

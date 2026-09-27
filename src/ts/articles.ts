@@ -13,6 +13,7 @@
     const rows = Array.from(main.querySelectorAll<HTMLElement>('.arow'));
     const months = Array.from(main.querySelectorAll<HTMLElement>('[data-month]'));
     const empty = main.querySelector<HTMLElement>('[data-empty]');
+    const status = main.querySelector<HTMLElement>('[data-status]');
     const cards = Array.from(main.querySelectorAll<HTMLElement>('.scard'));
 
     let view: 'list' | 'series' = 'list';
@@ -28,7 +29,7 @@
         return rows.filter((row) => !row.hidden);
     }
 
-    function filter() {
+    function filter(announce = false) {
         const q = (search ? search.value : '').trim().toLowerCase();
         rows.forEach((row) => {
             const tags = (row.dataset.tags || '').split(/\s+/);
@@ -41,8 +42,15 @@
             const count = month.querySelector<HTMLElement>('[data-month-count]');
             if (count) count.innerHTML = bi(`${n} ${n === 1 ? 'article' : 'articles'}`, `${n} 篇`);
         });
-        if (empty) empty.hidden = visibleRows().length > 0;
+        const shown = visibleRows().length;
+        if (empty) empty.hidden = shown > 0;
         syncCount();
+        // Tell screen readers what a search or a topic left on the list.
+        if (announce && status) {
+            status.innerHTML = shown
+                ? bi(`${shown} ${shown === 1 ? 'article' : 'articles'}`, `${shown} 篇文章`)
+                : bi('Nothing matches that yet.', '暂时没有匹配的文章。');
+        }
     }
 
     function syncCount() {
@@ -53,12 +61,12 @@
     function setTag(next: string, record: boolean) {
         tag = chips.some((chip) => chip.dataset.tag === next) ? next : 'all';
         chips.forEach((chip) => chip.setAttribute('aria-pressed', chip.dataset.tag === tag ? 'true' : 'false'));
-        filter();
+        filter(record);
         if (record) setHash(tag === 'all' ? '' : `topic-${tag}`);
     }
 
     chips.forEach((chip) => chip.addEventListener('click', () => setTag(chip.dataset.tag || 'all', true)));
-    if (search) search.addEventListener('input', filter);
+    if (search) search.addEventListener('input', () => filter(true));
 
     function setOpen(row: HTMLElement | null) {
         rows.forEach((other) => {

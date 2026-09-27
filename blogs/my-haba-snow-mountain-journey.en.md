@@ -10,7 +10,7 @@ description: Two days on Haba Snow Mountain (5,396 m): the prep, the mule trail 
 ---
 # My Haba Snow Mountain Journey
 
-![Climbers ascending a snow slope beside a crevasse on Haba Snow Mountain](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/8636a1a47ea2beb545dcbac8495c1dc2.jpg)
+![Climbers ascending a snow slope beside a crevasse on Haba Snow Mountain](assets/images/my-haba-snow-mountain-journey/8636a1a47ea2beb545dcbac8495c1dc2.jpg)
 
 *TLDR; This article is about 7500 words written entirely by a human. If it feels too long, you can jump straight to the AI Bonus section at the end.*
 
@@ -51,7 +51,7 @@ It was my first time doing stair training, and the worst part was switching betw
 
 From a project management perspective, the three prep streams were interdependent and cross-cutting—it was a non-trivial project. Thankfully the “team” was simple: just me and one friend. With WeChat communication plus a kanban board in Obsidian (mainly to track gear), I managed to keep the complexity under control.
 
-![Screenshot of the trip-planning notes: itinerary, clothing, outdoor gear, fitness, supplies, and a route map](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/e8d915d311e1c02a271d668779f5b619.jpeg)
+![Screenshot of the trip-planning notes: itinerary, clothing, outdoor gear, fitness, supplies, and a route map](assets/images/my-haba-snow-mountain-journey/e8d915d311e1c02a271d668779f5b619.jpg)
 
 ### Day 0 Hong Kong → Lijiang (0–2400m)
 
@@ -61,43 +61,43 @@ I arrived at Lijiang airport after 10 p.m. By 23:15, after getting to the hotel,
 
 We set off at 6 a.m. I ate the breakfast my friend had ordered in advance on the car. I’d hoped to nap, but I stayed awake because I wanted to watch the scenery. It was overcast the whole way. We drove past Tiger Leaping Gorge; even through clouds and mist it looked beautiful. We didn’t stop, but it still felt like a quick preview—one day I’ll come back properly.
 
-![Looking back at Tiger Leaping Gorge](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/b1c14c29f1f03c298a00fa7c6bdebb82.jpeg)
+![Looking back at Tiger Leaping Gorge](assets/images/my-haba-snow-mountain-journey/b1c14c29f1f03c298a00fa7c6bdebb82.jpg)
 
 We reached the village around 8:30. It was drizzling, and I wasn’t feeling great—slightly dizzy. I thought: ok, here we go again. Another round in the fight against altitude sickness.
 
 At the club, I drank a cup of fresh yak butter tea made by an older uncle, warmed up by the fire for a bit, and felt better. I repacked again: filled my thermos with a full cup of butter tea; put on my three-layer system and rain poncho; carried most of the rest on my back; and put a small portion into a woven sack (in hindsight, why not put most of it there? Maybe because a sack hanging on the side of a mule could make it unbalanced). Then I got on the mule, and the Haba Snow Mountain trip officially began.
 
-![Butter tea](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/2926e0b71cbe7c58912d8dbfba77c323.jpeg)
+![Butter tea](assets/images/my-haba-snow-mountain-journey/2926e0b71cbe7c58912d8dbfba77c323.jpg)
 
 The mule trail is different from the hiking route, but the scenery is still great. A cold but not heavy rain kept falling. We moved through thin fog in the forest, bumping upward through mud. Most of the time there were no people besides us; occasionally we saw cattle and sheep. Only at a mid-way rest stop did we briefly cross paths with hikers. You can imagine how hard hiking must be in rain, fog, and mud like this. This segment gained about 1,200 meters in elevation.
 
-![Two goats on a misty hillside dotted with tree stumps](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/2fce4b18b4c88bac853659b35a1fedcb.jpeg)
+![Two goats on a misty hillside dotted with tree stumps](assets/images/my-haba-snow-mountain-journey/2fce4b18b4c88bac853659b35a1fedcb.jpg)
 
-![Tall conifers rising out of thick mountain fog](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/ab651f40e466df5ff31e865dea6af584.jpeg)
+![Tall conifers rising out of thick mountain fog](assets/images/my-haba-snow-mountain-journey/ab651f40e466df5ff31e865dea6af584.jpg)
 
-![The group resting on a foggy meadow, some sheltering under umbrellas](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/a39df4d7790620c1cdece83f0fcc6307.jpeg)
+![The group resting on a foggy meadow, some sheltering under umbrellas](assets/images/my-haba-snow-mountain-journey/a39df4d7790620c1cdece83f0fcc6307.jpg)
 
-![Two pack mules with tarp-covered loads grazing on a meadow in heavy fog](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/5a608b6b1ff96d5eddf7730dcbad1959.jpeg)
+![Two pack mules with tarp-covered loads grazing on a meadow in heavy fog](assets/images/my-haba-snow-mountain-journey/5a608b6b1ff96d5eddf7730dcbad1959.jpg)
 
-![Riders in rain ponchos on mules climbing a muddy forest trail in mist](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/74b9a0abe85684f88f9e17636e89461e.jpeg)
+![Riders in rain ponchos on mules climbing a muddy forest trail in mist](assets/images/my-haba-snow-mountain-journey/74b9a0abe85684f88f9e17636e89461e.jpg)
 
 After being jolted around until my senses went numb, I felt a burst of joy when the sharp outline of Base Camp finally appeared out of the fog. I hurried off the mule and walked in, only to discover Base Camp was larger than I’d imagined—quite lively, and it even had a small shop.
 
-![Base camp in fog: corrugated metal huts, a signpost, and a toilet block](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/9be7058e873bc20f268619d376c2ebc7.jpeg)
+![Base camp in fog: corrugated metal huts, a signpost, and a toilet block](assets/images/my-haba-snow-mountain-journey/9be7058e873bc20f268619d376c2ebc7.jpg)
 
-![Three people in down jackets beside a sign pointing to the foot-soak area](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/cbaffb24aef5f962da8316abcbfaf9db.jpeg)
+![Three people in down jackets beside a sign pointing to the foot-soak area](assets/images/my-haba-snow-mountain-journey/cbaffb24aef5f962da8316abcbfaf9db.jpg)
 
-![Base camp canteen: metal buildings and a sign pointing to the dining area](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/37a48b767927d97743a1aff1af2ca306.jpeg)
+![Base camp canteen: metal buildings and a sign pointing to the dining area](assets/images/my-haba-snow-mountain-journey/37a48b767927d97743a1aff1af2ca306.jpg)
 
 I spent the entire afternoon and first half of the night at Base Camp. A few observations:
 
 1. Base Camp’s lodging was actually pretty good. The room I stayed in was cramped—outside of four bunk-bed frames, there were only three to four square meters of free space. Eight men in one room; it felt like going back to a student dorm. There wasn’t trash left behind, the bedding was wrapped in disposable plastic film, and the smell wasn’t strong—basic hygiene was there. There were power strips, but you need your own extension cord. The camp claimed to have Wi-Fi; some people said it worked. But neither my iPhone nor my OPPO could connect. There was no mobile signal on the mountain, and my friend was in the women’s dorm, so I was basically cut off from the outside world.
-  ![Dormitory interior: metal bunk beds with white quilts in a plywood room](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/56e34dfaa0550ecfc3a4580d0cf80569.jpeg)
+  ![Dormitory interior: metal bunk beds with white quilts in a plywood room](assets/images/my-haba-snow-mountain-journey/56e34dfaa0550ecfc3a4580d0cf80569.jpg)
 
 2. If I had to give a bad review, besides the network it would be the ground. The “ground” was basically not ground: imagine a wide field of gelatinous mud, more than ten centimeters deep, with a fishy stench, scattered with stones that might be natural or might be human-placed—that was it. Walking around camp, you had to make sure every step landed precisely on a stone; otherwise you’d gain +1 “stepping-in-poop” sensation. In half a day I must have hit +7 or +8. My shoes became increasingly unrecognizable. It might be much better on a dry day, but by the time we arrived it had already been raining for days.
 
 3. Food, drink, and bathroom. The food was honestly good enough to deserve praise. Base Camp has multiple separate dining halls; which one you go to depends on your club’s arrangement. The one I went to was decent: both dinner and breakfast were buffet-style—meat, vegetables, rice, soup—quite rich; enough oil and salt; flavor was fine. The toilets were basically classic pit toilets. Even for what’s said to be the cleanest toilet in camp, don’t bring any unrealistic expectations.
-  ![A compartment tray of canteen food with a bowl of rice and a bowl of soup](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/58228d92ccd170492e269ed23bb8659d.jpeg)
+  ![A compartment tray of canteen food with a bowl of rice and a bowl of soup](assets/images/my-haba-snow-mountain-journey/58228d92ccd170492e269ed23bb8659d.jpg)
 
 4. Health check and briefing. Everyone had to do a simple blood pressure and blood oxygen check after arriving in the afternoon. Blood pressure was measured through an outer jacket; blood oxygen was with a finger clip. When I took mine I glimpsed a number “74 (?)”—I suspect what I saw was heart rate. It was a bit perfunctory, but at least they went down a name list one by one. After everyone arrived and checks were done, the briefing started. This part had real content. The guides covered safety and how to use the gear distributed afterwards: helmet, ice axe, harness + safety rope, and crampons. They especially emphasized: don’t let your helmet and ice axe leave your body; on dangerous sections of Despair Slope you must use the safety system together with the newly refurbished fixed rope; and don’t take any meds casually (including glucose), because the assistants (and you yourself) won’t be able to assess your condition accurately—and in worse cases, medication can exacerbate altitude symptoms.
 
@@ -149,7 +149,7 @@ The rain stayed as light drizzle, and I wore my rain poncho, so it wasn’t a ha
 
 Darkness, tangled headlamps, fine rain, cold wind, sweat, the sound of heavy breathing—keep going up. At some point I realized my head didn’t hurt as much as before—keep going up. Without noticing, the front got darker, and the lights behind became more numerous—keep going up.
 
-![The night summit push: climbers in headlamps and rain gear, a line of lights ahead](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/1804715afcbd9ae9b6a5b4d66500ff16.jpeg)
+![The night summit push: climbers in headlamps and rain gear, a line of lights ahead](assets/images/my-haba-snow-mountain-journey/1804715afcbd9ae9b6a5b4d66500ff16.jpg)
 
 As people say, Haba’s summit push is really just nonstop uphill—almost no flat ground (4 km with 1,300 m gain). Beyond physical endurance, the challenge was cold rain and stronger wind the higher we went. When we reached the wind-shelter hut around 4,500 m, I started to shiver; the threat of hypothermia was very real. Even with a poncho and hardshell, my fleece was already half wet, though I couldn’t tell whether it was mostly outside-in or inside-out. The hut was packed with people changing clothes. At my assistant’s suggestion, I took off my shell and fleece, pulled my down puffer from the pack, put it on as an inner layer to trap heat, wore the fleece outside the down, and then put the shell back on. It’s kind of the reverse of the usual order, but it worked great—I stopped feeling cold quickly. Without it, I probably would have retreated right there. Later I learned that many people did, in fact, turn back around that area.
 
@@ -172,7 +172,7 @@ Maybe because it was interesting, this segment felt like it passed quickly. Jump
   <div class="haba-flow-stage" data-haba-flow-stage>
     <canvas class="haba-flow-canvas" data-haba-flow-canvas hidden aria-hidden="true"></canvas>
     <figure class="haba-flow-photo" data-haba-obstacle>
-      <img src="https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/93d98c360cf1aae1b93a79dd43d1efb4.jpeg" alt="Despair Slope on Haba Snow Mountain in driving snow">
+      <img src="assets/images/my-haba-snow-mountain-journey/93d98c360cf1aae1b93a79dd43d1efb4.jpg" alt="Despair Slope on Haba Snow Mountain in driving snow">
       <figcaption>Above the snow line, visibility shrank to a few dozen meters.</figcaption>
     </figure>
     <aside class="haba-flow-evidence" data-haba-obstacle aria-label="Despair Slope, by the numbers">
@@ -199,11 +199,11 @@ Another thing I’m grateful for: my assistant had a very “introvert” vibe. 
 
 Finally I heard people ahead saying they could see the sign, that someone was taking photos. I looked up. All I could see was a small, blurry shadow in the upper-left of my vision. They said there were only a few steps left. But I still couldn’t move. And yet, step by step, I dragged myself up.
 
-![The summit marker in blowing snow, reading Haba Snow Mountain, 5396 m](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/4274e16cc6981c973f6d3d0a6609dd86.jpeg)
+![The summit marker in blowing snow, reading Haba Snow Mountain, 5396 m](assets/images/my-haba-snow-mountain-journey/4274e16cc6981c973f6d3d0a6609dd86.jpg)
 
 On the summit it was still a blur, and the wind and snow were even stronger. Taking photos was unbelievably fast. A few minutes of panting in a short queue; then I put down the ice axe, took off the helmet, put on the commemorative badge, handed my phone to the assistant, click-click, two shots done, phone back into the pocket. I didn’t even have the energy to point the camera anywhere else beyond the summit marker (and in the fog there wasn’t much to shoot anyway). The timestamp on the photo was 09:31. From 3 a.m. to 9:30 a.m.—a clean 6.5 hours.
 
-![The author with a summit medal, standing beside the 5396 m marker in crampons](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/3cd9bc3cc2e2887a1446b4a1d9fa983d.jpeg)
+![The author with a summit medal, standing beside the 5396 m marker in crampons](assets/images/my-haba-snow-mountain-journey/3cd9bc3cc2e2887a1446b4a1d9fa983d.jpg)
 
 Summiting is only half the job. The problem in front of you is “getting back.” The freezing wind and snow, the severely depleted stamina, and my knee injury that could flare up at any time—all these threats killed any desire to linger and savor.
 
@@ -211,7 +211,7 @@ The eternal truth is: going up is easy; going down is hard. I descended Despair 
 
 On the most dangerous section, he held my safety rope and I grabbed it too, and we stumbled down like that—half human, half dog. Gradually I got a bit of downhill technique: don’t stare at your feet in fear of missing a step. Look farther away, and let your body sense and control the movement (maybe that also shifts your center of gravity slightly back).
 
-![Gloved hands resting on an ice axe planted in the snow, fixed rope running past](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/31e196c4a5f4951ea1acbe441ed21f14.jpeg)
+![Gloved hands resting on an ice axe planted in the snow, fixed rope running past](assets/images/my-haba-snow-mountain-journey/31e196c4a5f4951ea1acbe441ed21f14.jpg)
 
 Even after a long time, looking far ahead I still couldn’t see the end of the slope. In the final section, perhaps because a small patch of sunlight filtered down, and because I was exhausted, I felt extremely sleepy—my assistant started yawning too. We could only hurry down; otherwise it would get more dangerous.
 
@@ -223,13 +223,13 @@ Once we were on a section without snow, I handed my ice axe to the assistant to 
 
 On the way I met another assistant. Seeing me walking with such glee, he half-intentionally led me onto harder terrain to “challenge” me, which escalated into a big slope where he wanted me to run down… and of course, my knee finally started hurting. But for it to only start hurting here meant it had performed at 300% that day. My stomach started to reflux in waves and I felt an impending bout of diarrhea; I forced it down with water. Base Camp was already visible to the naked eye, yet it still took forever to reach.
 
-![Meltwater streaming down grey rock slabs on a misty mountainside](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/66d7820d9784fb2b20fedbf5cb89db4d.jpeg)
+![Meltwater streaming down grey rock slabs on a misty mountainside](assets/images/my-haba-snow-mountain-journey/66d7820d9784fb2b20fedbf5cb89db4d.jpg)
 
-![Looking down from a rock ledge at the village and valley below the clouds](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/71c6bf1121418a29625b6681cda8bc4a.jpeg)
+![Looking down from a rock ledge at the village and valley below the clouds](assets/images/my-haba-snow-mountain-journey/71c6bf1121418a29625b6681cda8bc4a.jpg)
 
 In the later segment, my assistant surged ahead and gradually pulled tens of meters away. But eventually he slowed down and was willing to chat a bit. It turned out he wasn’t local to Haba; he was from elsewhere in Yunnan. He used to hike a lot, and later turned it into work to make money. He explained that he’d been trying to motivate me with “provocation” earlier—he didn’t truly think I was that bad—and that he thought I had a lot of grit. He also said the weather was bad that day, but we still made it up.
 
-![A porter carrying a white load sack across grey rock slabs below a peak](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/d88e3140e238cb447cc9999ff35ed48b.jpeg)
+![A porter carrying a white load sack across grey rock slabs below a peak](assets/images/my-haba-snow-mountain-journey/d88e3140e238cb447cc9999ff35ed48b.jpg)
 
 We kept walking and walking, and finally reached Base Camp. It was 14:30. Another clean number. The Haba hike totaled 11.5 hours.
 
@@ -259,7 +259,7 @@ After we finally got back to Haba Village, my first priority was dealing with my
 
 I obviously couldn’t wear my boots anymore. I borrowed a pair of slippers, then bought a new pair at the club to change into (they’re now my swimming slippers—an unexpectedly practical mountaineering souvenir). A club guy gave me a big woven sack, and I stuffed my mud-caked shoes and socks and my rain poncho into it. I had no dry socks left, so I boarded the car back to Lijiang barefoot in slippers.
 
-![Mud-caked mountaineering boots set down on a plastic sheet](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/2b8ec11dfc596f9afb08b4640d244cef.jpeg)
+![Mud-caked mountaineering boots set down on a plastic sheet](assets/images/my-haba-snow-mountain-journey/2b8ec11dfc596f9afb08b4640d244cef.jpg)
 
 On the drive, a sudden strong wave hit me. I tore open a vomit bag and emptied my stomach, which made an aunt in front tell the driver to slow down—she said I made her dizzy. I explained that it was probably altitude sickness. But after that vomit, I felt strangely refreshed. So the earlier stomach discomfort really was an altitude symptom after all.
 
