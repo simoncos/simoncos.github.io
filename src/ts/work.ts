@@ -104,19 +104,31 @@
 
     // ---- Drag -----------------------------------------------------------
 
+    // The cards follow the finger along the arc, so one card is about 290px
+    // of travel on a phone and rounding alone asked for half of that. On
+    // release, a short swipe or a quick flick still turns one card. A gesture
+    // the browser takes over for scrolling (pointercancel) never does.
+    const COMMIT_PX = 32;
+    const FLICK_PX = 12;
+    const FLICK_SPEED = 0.3; // px per ms, over the last 100ms
+
     let dragStart: number | null = null;
     let moved = false;
+    let samples: { t: number; x: number }[] = [];
 
     wheel.addEventListener('pointerdown', (event) => {
         if (event.button !== 0) return;
         if ((event.target as Element).closest('.round-btn')) return;
         dragStart = event.clientX;
         moved = false;
+        samples = [{ t: event.timeStamp, x: event.clientX }];
     });
 
     window.addEventListener('pointermove', (event) => {
         if (dragStart === null) return;
         const dx = event.clientX - dragStart;
+        samples.push({ t: event.timeStamp, x: event.clientX });
+        while (samples.length > 2 && event.timeStamp - samples[0].t > 100) samples.shift();
         if (Math.abs(dx) > 4) {
             moved = true;
             wheel.classList.add('is-dragging');
@@ -126,11 +138,20 @@
         render();
     });
 
-    function endDrag() {
+    function endDrag(event: PointerEvent) {
         if (dragStart === null) return;
+        const dx = event.clientX - dragStart;
         dragStart = null;
         wheel.classList.remove('is-dragging');
-        rot = Math.round(rot + drag);
+        let target = Math.round(rot + drag);
+        if (event.type === 'pointerup' && moved && target === rot) {
+            const first = samples[0];
+            const span = event.timeStamp - first.t;
+            const speed = span > 0 ? (event.clientX - first.x) / span : 0;
+            const flick = Math.abs(dx) >= FLICK_PX && Math.abs(speed) >= FLICK_SPEED && speed * dx > 0;
+            if (Math.abs(dx) >= COMMIT_PX || flick) target = rot + (dx < 0 ? 1 : -1);
+        }
+        rot = target;
         drag = 0;
         render();
         window.setTimeout(() => {
