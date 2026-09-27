@@ -161,10 +161,13 @@ button {
     display: none !important;
 }
 
-/* Both languages ship in the markup; show the one in use. */
+/* Both languages ship in the markup; show the one in use. Without scripts
+   data-lang is never set, so a Chinese-only page falls back to its own
+   language instead of English. */
 :root[data-lang="en"] [data-l="zh"],
 :root[data-lang="zh"] [data-l="en"],
-:root:not([data-lang]) [data-l="zh"] {
+:root:not([data-lang]):not([data-page-lang="zh"]) [data-l="zh"],
+:root:not([data-lang])[data-page-lang="zh"] [data-l="en"] {
     display: none !important;
 }
 
@@ -571,10 +574,13 @@ button {
     }
 }
 
-/* Without scripts the theme and Menu buttons cannot work, so on phones the
-   section links come back as a second header row. */
+/* Without scripts the theme and Menu buttons cannot work, nor can the
+   ?lang=zh switch on section pages (an article's switch is a real link to its
+   translation and stays). On phones the section links come back as a second
+   header row. */
 :root:not(.js) .theme-btn,
-:root:not(.js) .menu-btn {
+:root:not(.js) .menu-btn,
+:root:not(.js) .lang-btn[href^="?"] {
     display: none;
 }
 

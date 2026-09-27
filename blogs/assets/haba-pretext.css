@@ -322,6 +322,14 @@
         min-height: 14rem;
         max-height: 24rem;
     }
+
+    /* The desktop labels are 0.68-0.73rem, under 12px on a phone. */
+    .post-content .haba-flow-kicker,
+    .post-content .haba-flow-label,
+    .post-content .haba-flow-photo figcaption,
+    .haba-flow-annotation cite {
+        font-size: 0.75rem;
+    }
 }
 
 @media print {
