@@ -119,13 +119,18 @@
   ],
   "featured": [
     {
-      "work": "toolkit"
-    },
-    {
       "work": "sleep"
     },
     {
       "work": "talk"
+    },
+    {
+      "article": "emerging-from-abyss",
+      "img": "gallery/assets/gallery-card-abyss-bird.webp",
+      "desc": {
+        "en": "An OpenClaw agent's first six days, in its own voice: birth, switching models, and the files that hold an identity together.",
+        "zh": "一个 OpenClaw agent 用自己的声音讲述最初六天：诞生、切换模型，以及用文件维系身份。"
+      }
     },
     {
       "article": "my-haba-snow-mountain-journey",
@@ -136,7 +141,12 @@
       }
     },
     {
-      "work": "hermes"
+      "article": "exformation-and-information",
+      "img": "gallery/assets/gallery-card-designing-design.webp",
+      "desc": {
+        "en": "Reading Kenya Hara: exformation makes the known unknown again, and stepping away from the screen is the other half.",
+        "zh": "读原研哉：Exformation 把已知的事物重新变得未知，离开屏幕、用身体感受世界是另一半。"
+      }
     }
   ],
   "work_topics": [
