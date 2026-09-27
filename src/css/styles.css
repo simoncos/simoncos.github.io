@@ -917,6 +917,13 @@ button {
     .panel:not(.is-on) .panel-row {
         display: block;
     }
+
+    /* A 64px strip is all middle of the picture, where the default shade is
+       thinnest, and pale pictures (snow, a white book cover) sat under white
+       type. Shade the whole strip, heaviest behind the start of the title. */
+    .panel:not(.is-on) .panel-shade {
+        background: linear-gradient(to right, rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.45));
+    }
 }
 
 .newest {
@@ -1143,6 +1150,7 @@ button {
     letter-spacing: -0.065em;
     margin: 0;
     max-width: 12ch;
+    text-wrap: pretty;
 }
 
 .nf-lede {
@@ -1396,6 +1404,14 @@ button {
 .topic {
     padding: clamp(24px, 4vh, 40px) var(--pad) clamp(80px, 12vh, 140px);
     animation: om-in 0.6s var(--ease) both;
+    scroll-margin-top: 96px;
+}
+
+/* With scripts one type view is the whole page, so a link such as
+   gallery.html#talks should land at the top, not with the back link under
+   the fixed header. A margin taller than the header clamps the jump to 0. */
+:root.js .topic {
+    scroll-margin-top: 100vh;
 }
 
 :root:not(.js) .topic + .topic {
@@ -1987,7 +2003,7 @@ button {
     display: block;
     font-size: 14px;
     opacity: 0.7;
-    margin-top: 6px;
+    margin: 6px 0 0;
 }
 
 .stages {
@@ -1996,6 +2012,12 @@ button {
     align-items: center;
     gap: 10px;
     margin-top: 22px;
+}
+
+.stage-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .stage-btn {
@@ -2215,8 +2237,29 @@ button {
         grid-row: span 1;
     }
 
+    /* The desktop heights keep grid rows level; stacked, they only leave
+       empty space above or below a card's text. */
+    .block:not(.is-image) {
+        min-height: 0;
+    }
+
     .block.is-image {
         min-height: 260px;
+    }
+
+    /* Tighter steps keep the pipeline to two lines on a phone
+       (CSV, Analyze, JSON / HTML, PDF), each line ending on an arrow. */
+    .stages,
+    .stage-step {
+        gap: 6px;
+    }
+
+    .stage-btn {
+        padding: 0 14px;
+    }
+
+    .stage-arrow {
+        width: 16px;
     }
 }
 
@@ -2849,6 +2892,53 @@ button {
 }
 
 @media (max-width: 859.98px) {
+    /* The desktop row wraps into three lines here, the toggle alone on the
+       last one. Instead: one header line (date, language, toggle), then the
+       title block at full width. The excerpt drops the date-column spacer,
+       which would otherwise wrap onto an empty line of its own. */
+    .arow-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 8px 12px;
+    }
+
+    .arow-date {
+        grid-column: 1;
+        grid-row: 1;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .arow-bi {
+        align-self: center;
+    }
+
+    .arow-main {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .arow-toggle {
+        grid-column: 2;
+        grid-row: 1;
+        margin: -10px -11px -10px 0;
+    }
+
+    .arow-spacer {
+        display: none;
+    }
+
+    .arow-ex-in {
+        padding-top: 14px;
+    }
+
+    .arow-ex-body {
+        flex-basis: 100%;
+    }
+
     .route {
         grid-template-columns: minmax(0, 1fr);
         gap: 22px 0;
@@ -3492,6 +3582,28 @@ button {
         font-size: 17.6px;
     }
 
+    /* At 2rem a section heading was nearly the size of the title and wrapped
+       after ten characters. */
+    .post-content h2 {
+        font-size: 1.6rem;
+    }
+
+    .post-content h3 {
+        font-size: 1.3rem;
+    }
+
+    /* English stays ragged-right; hyphenation evens the edge of a narrow
+       column. Chinese is justified at every width (see Chinese text). */
+    .post-content :is(p, li):lang(en) {
+        -webkit-hyphens: auto;
+        hyphens: auto;
+    }
+
+    /* Stacked, the older-post card no longer sits on the right. */
+    .post-nav-older {
+        text-align: left;
+    }
+
     .embedded-page {
         min-height: 480px;
         height: 65vh;
@@ -4090,6 +4202,12 @@ button {
         font-size: 56px;
     }
 
+    /* The cover tile is an empty placeholder until covers exist; two per
+       row on a phone it was most of each card. */
+    .glyph-cover {
+        display: none;
+    }
+
     .reel-item,
     .fav-row {
         grid-template-columns: minmax(0, 1fr);
@@ -4167,4 +4285,36 @@ button {
     .fav-pos {
         display: inline;
     }
+}
+
+/* ---- Chinese text ------------------------------------------------------- */
+
+/* Chinese running text is set justified, as in print: its lines otherwise
+   end wherever a Latin word, a code span or a closing mark falls, and the
+   right edge looks broken on a phone. English stays ragged-right. */
+:is(
+    .post-content :is(p, li, dd),
+    .arow-ex-body p,
+    .fav-review,
+    .about-p
+):lang(zh) {
+    text-align: justify;
+}
+
+/* Balanced wrapping evens out line lengths by breaking early, and in
+   Chinese it breaks inside words (黑神话悟 / 空). Fill the line instead;
+   pretty still keeps a lone character off the last line. */
+:is(
+    .panel-title,
+    .row-t,
+    .wheel-name,
+    .work-title,
+    .arow-title,
+    .scard h2,
+    .rtitle,
+    .spart-title,
+    .article-title,
+    .post-content :is(h2, h3, h4, h5, h6)
+):lang(zh) {
+    text-wrap: pretty;
 }

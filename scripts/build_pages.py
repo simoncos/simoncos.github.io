@@ -504,9 +504,13 @@ def render_board(config: dict[str, Any], site: dict[str, Any], lang: str) -> str
     descs = []
     for i, stage in enumerate(project["stages"]):
         on = " is-on" if i == 0 else ""
-        stages.append(f'<button class="stage-btn{on}" type="button" data-stage="{i}" aria-pressed="{"true" if i == 0 else "false"}">{t(stage["label"])}</button>')
-        if i < len(project["stages"]) - 1:
-            stages.append('<span class="stage-arrow" aria-hidden="true"></span>')
+        # A step keeps its button and the arrow after it together, so a
+        # wrapped pipeline ends a line on an arrow instead of starting one.
+        arrow = '<span class="stage-arrow" aria-hidden="true"></span>' if i < len(project["stages"]) - 1 else ""
+        stages.append(
+            f'<span class="stage-step"><button class="stage-btn{on}" type="button" data-stage="{i}" '
+            f'aria-pressed="{"true" if i == 0 else "false"}">{t(stage["label"])}</button>{arrow}</span>'
+        )
         descs.append(f'<p class="stage-desc{on}" data-stage-desc="{i}">{t(stage["desc"])}</p>')
 
     privacy = "".join(
