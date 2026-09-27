@@ -6,7 +6,7 @@ description: 读原研哉《设计中的设计｜全本》：信息过剩只是�
 
 # Exformation和Information——读《设计中的设计|全本》
 
-![《设计中的设计｜全本》的封面：白底上印着 DESIGNING DESIGN、原研哉和 KENYA HARA](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/34a4ea355d5effc7ac410dbd1f5c4410.jpg)
+![《设计中的设计｜全本》的封面：白底上印着 DESIGNING DESIGN、原研哉和 KENYA HARA](assets/images/exformation-and-information/34a4ea355d5effc7ac410dbd1f5c4410.jpg)
 
 《设计中的设计|全本》是我刚读完的一本书，作者原研哉带来的不是简简单单打包的一本作品集，而是在每一个项目上以一个作者而非设计者的方式强调了他的所思所想所感。或者，也可如他自己所说，用语言来阐述设计，其实是一种新的设计——不再是Design of Design，而是Designing Design。无论如何，这不是一本只谈设计的书。
 

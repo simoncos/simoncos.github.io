@@ -1,20 +1,3 @@
 {
-  "images": {
-    "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/34a4ea355d5effc7ac410dbd1f5c4410.jpg": {
-      "height": 603,
-      "width": 394
-    },
-    "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg": {
-      "height": 534,
-      "width": 524
-    },
-    "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/6fa962ae4c7f1c6ab8ed3d5ad49d6ce8.jpg": {
-      "height": 1279,
-      "width": 1706
-    },
-    "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg": {
-      "height": 998,
-      "width": 1280
-    }
-  }
+  "images": {}
 }

@@ -2,7 +2,7 @@
 tags: out
 date: 2026-01-20
 updated: 2026-07-24
-styles: assets/haba-pretext.css?v=20260927b
+styles: assets/haba-pretext.css?v=20260927c
 module_scripts: assets/haba-pretext.js?v=20260724a
 written: 2025-10-02
 translation: GPT-5.2
@@ -16,14 +16,14 @@ description: Two days on Haba Snow Mountain (5,396 m): the prep, the mule trail 
 
 I’m in Kunming now. I’ve just finished washing every piece of gear I brought back from the summit. Before the memory gets “washed out” too much as well, I want to pour it all out while it’s still fresh.
 
-### Timeline
+## Timeline
 
 - 09.20 Confirmed the plan with a friend and bought flights
 - 09.29 22:00 Flew direct and arrived in Lijiang
 - 09.30 06:00 Drove to Haba Village, then rode mules to Base Camp
 - 10.01 03:00 Set off, 09:30 reached the summit, 14:30 back to Base Camp; rode mules back to Haba Village; took car back to Lijiang
 
-### Pre-trip prep
+## Pre-trip prep
 
 My prep had three main parts: itinerary, gear, and fitness. All three are worth talking about.
 
@@ -53,11 +53,11 @@ From a project management perspective, the three prep streams were interdependen
 
 ![Screenshot of the trip-planning notes: itinerary, clothing, outdoor gear, fitness, supplies, and a route map](assets/images/my-haba-snow-mountain-journey/e8d915d311e1c02a271d668779f5b619.jpg)
 
-### Day 0 Hong Kong → Lijiang (0–2400m)
+## Day 0 Hong Kong → Lijiang (0–2400m)
 
 I arrived at Lijiang airport after 10 p.m. By 23:15, after getting to the hotel, I spent the rest of the night hunting down packages, opening them, and sorting gear (reallocating and compressing what I’d take to Haba Village; leaving excess items stored at the hotel). I didn’t get into bed until after 1 a.m. Since I had to wake up early to head to Haba Village the next day, I only slept 4.5 hours.
 
-### Day 1 Lijiang → Haba Village → Base Camp (2400–4100m)
+## Day 1 Lijiang → Haba Village → Base Camp (2400–4100m)
 
 We set off at 6 a.m. I ate the breakfast my friend had ordered in advance on the car. I’d hoped to nap, but I stayed awake because I wanted to watch the scenery. It was overcast the whole way. We drove past Tiger Leaping Gorge; even through clouds and mist it looked beautiful. We didn’t stop, but it still felt like a quick preview—one day I’ll come back properly.
 
@@ -131,7 +131,7 @@ Back to that afternoon at Base Camp: after dinner and collecting gear, it was al
 
 Maybe there’s no such thing as an easy high-altitude night. My memory goes like this: I lay down at 7:30 and closed my eyes. I drifted into a half-sleep quickly. I woke up thinking I’d slept a long time—then checked my watch: only 9:30. After that I couldn’t fall asleep again. The faint headache I’d had became obvious, and my watch’s oxygen saturation and heart rate numbers looked ugly. For warmth the dorm door was closed. A group of men + a small room means oxygen only decreases. For the next few hours, I fell into the classic loop of a headache-induced insomnia: keep trying to fall asleep, keep checking the time/heart rate/SpO₂, keep observing how others were doing—some people were actually snoring. Others were tossing and turning too. Some opened the door to “get oxygen,” then shut it again because of the cold wind, cycling up and down like taking turns on a stage. Bit by bit, those hours were ground down.
 
-### Day 2 Haba Snow Mountain (4100–5396–4100m)
+## Day 2 Haba Snow Mountain (4100–5396–4100m)
 
 Around 1 a.m., a sudden noise rose from outside. Listening closely, it sounded like heavy rain. I thought: well, the difficulty slider just got pushed higher again. Thankfully it eased up around 2. Almost everyone woke up earlier than scheduled, because sleep was so bad. When the room was finally noisy and someone turned on the light, I felt a kind of relief—at least I didn’t have to keep trying and failing. Someone said: “Seeing everyone doing this badly makes me feel reassured.” A guy from the Northeast who had hiked up from the village decided to give up on the summit right away.
 
@@ -166,7 +166,7 @@ Maybe because it was interesting, this segment felt like it passed quickly. Jump
 <section class="haba-flow-scene" id="desperate-slope-reading" aria-labelledby="desperate-slope-title">
   <header class="haba-flow-header">
     <p class="haba-flow-kicker">Despair Slope</p>
-    <h4 id="desperate-slope-title">Between 4,900 and 5,300 m</h4>
+    <h3 id="desperate-slope-title">Between 4,900 and 5,300 m</h3>
     <p>Four hundred meters of gain, compounded by altitude, gradient, and snow—this was no ordinary 400 meters.</p>
   </header>
   <div class="haba-flow-stage" data-haba-flow-stage>
@@ -233,7 +233,7 @@ In the later segment, my assistant surged ahead and gradually pulled tens of met
 
 We kept walking and walking, and finally reached Base Camp. It was 14:30. Another clean number. The Haba hike totaled 11.5 hours.
 
-### The way back (4100–2400–1900–0)
+## The way back (4100–2400–1900–0)
 
 Base Camp was quiet by then. Most people had already left. Based on the assistants’ estimate that day and what I later gathered from Xiaohongshu, the summit success rate was around 15%–20%—roughly 45–60 people out of 300. Those who had retreated early to Base Camp had already continued down.
 
@@ -267,7 +267,7 @@ In the following days in Kunming, besides being sore all over, the unprotected p
 
 By rights the trip consumed a lot. Yet when I finally got back to Hong Kong and weighed myself, I was somehow 0.5 kg heavier than before. My explanation: Yunnan food is too good.
 
-### Aftertaste
+## Aftertaste
 
 There’s an animated film called *The Summit of the Gods* (神之山岭). I’d saved it for years without watching. Three days before departure, I finally watched it, and it was deliciously on-theme.
 

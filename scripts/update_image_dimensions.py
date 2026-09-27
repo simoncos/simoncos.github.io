@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Record intrinsic sizes for externally hosted article images.
 
-Article photos live on R2, so the generator cannot stat them the way it stats
-local assets. Without width/height a lazy-loaded image reserves no space and
-shifts the layout as it arrives. This script measures each remote image once
+Article images normally live in the repository (scripts/localize_images.py
+moves them in from R2). One left on another host cannot be stat'ed the way a
+local asset is, and without width/height a lazy-loaded image reserves no space
+and shifts the layout as it arrives. This script measures each remote image once
 and checks the result in, which keeps `generate_blog_pages.py` offline and
 deterministic: generation only ever reads the cache.
 

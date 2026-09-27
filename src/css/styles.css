@@ -1444,9 +1444,20 @@ button {
     pointer-events: none;
 }
 
+/* On a phone the wheel fills the visible screen under the header, and the
+   card sits just above the arrows at whatever size the height allows. A
+   fixed 600px wheel with a 190px card left 130-190px empty under the title
+   and pushed the arrows below the fold on shorter screens. */
 @media (max-width: 859.98px) {
     .work-wheel {
-        height: max(600px, calc(100vh - 76px));
+        --wheel-h: max(440px, calc(100vh - 76px));
+        height: var(--wheel-h);
+    }
+
+    @supports (height: 100svh) {
+        .work-wheel {
+            --wheel-h: max(440px, calc(100svh - 76px));
+        }
     }
 
     .wheel-titles {
@@ -1457,10 +1468,14 @@ button {
         display: none;
     }
 
+    /* Height left for the card: the wheel less ~170px of title and ~84px of
+       arrows. The card is 4:3 plus a 27px label, so its width is that
+       height, less the label, times 3/4. */
     .wheel-card {
         --r: 560px;
-        top: calc(66% + var(--r));
-        width: 190px;
+        --cw: clamp(150px, calc((var(--wheel-h) - 281px) * 0.75), 250px);
+        top: calc(100% - 84px - (var(--cw) * 4 / 3 + 27px) / 2 + var(--r));
+        width: var(--cw);
     }
 
     .wheel-bottom {

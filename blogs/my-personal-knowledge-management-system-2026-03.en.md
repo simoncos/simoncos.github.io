@@ -63,7 +63,7 @@ Through Domain notes, Tasks, Bookmarks, Workspaces, and Bases, Obsidian has beco
 
 Once Piggy entered the picture, that role became much stronger. I carved out a dedicated area as a shared workspace for Piggy and me:
 
-![Obsidian sidebar showing the RedPiggy folder tree: Projects with Backlog, Dev, Research, Systems, and Writing](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg)
+![Obsidian sidebar showing the RedPiggy folder tree: Projects with Backlog, Dev, Research, Systems, and Writing](assets/images/my-personal-knowledge-management-system-2026-03/5dfdf920c9bf99d07f1b88c1ba1fc6b5.jpg)
 
 By opening Obsidian completely to Piggy, I gained three major kinds of benefit.
 
@@ -81,7 +81,7 @@ So Piggy is, for me, more like a collaborator than a machine for writing notes o
 
 The personal site (`simoncos.github.io`) is the publishing layer of the whole system. Its first formal public version went online in January this year. With Piggy and other agents involved, the site's visual language, interaction, and information architecture have gone through a comprehensive update.
 
-![Screenshot of an article page on the personal site, with its table of contents](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/03/d2783b62499c43b6f474df1058c28cdd.jpg)
+![Screenshot of an article page on the personal site, with its table of contents](assets/images/my-personal-knowledge-management-system-2026-03/d2783b62499c43b6f474df1058c28cdd.jpg)
 
 The current site:
 
