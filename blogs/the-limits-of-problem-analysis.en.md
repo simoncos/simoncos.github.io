@@ -1,10 +1,9 @@
 ---
 tags: thinking,hack
-date: 2026-09-28
+date: 2014-05-22
 updated: 2026-09-28
 translation: Claude Opus 5.5
 description: Starting from the way one game bot works: black boxes, levels of analysis and where a problem should end. The first rule of analysis is to come back with a finite result.
-written: Date unknown
 ---
 
 # The Limits of Problem Analysis
@@ -30,7 +29,3 @@ Sometimes, too, having weighed cost against return, we decide that studying a pr
 To analyse a problem system well, you certainly need the focus and persistence to get to the bottom of it. But we have to keep reminding ourselves that in the rough real world, the problem we are solving must have a boundary, one that keeps us from losing the way back while we dig our tunnel. **The first rule of analysis is to come back with a finite result.** This is a limit we cannot get around.
 
 PS. Here is the [PDF on types of analysis](https://d396qusza40orc.cloudfront.net/datascitoolbox/lecture_slides/03_01_typesOfQuestions.pdf) from The Data Scientist's Toolbox. It has a few illustrative examples too, if you are curious.
-
----
-
-An older post, added to this site on 2026-09-28. The original date of writing is unknown, and the text keeps its original wording.

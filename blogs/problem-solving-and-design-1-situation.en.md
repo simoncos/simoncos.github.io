@@ -1,10 +1,9 @@
 ---
 tags: thinking,design
-date: 2026-09-28
+date: 2016-10-24
 updated: 2026-09-28
 translation: Claude Opus 5.5
 description: Why does the same problem get harder or easier depending on how it is put? From problem situations, information and search paths to interaction design.
-written: Date unknown
 series: 问题解决与设计
 series_part: 1
 ---
@@ -50,7 +49,3 @@ So how is the problem situation connected to design? Note that by design I mean 
 I didn't expect the very first concept to spin out this much so casually. Looks like this will become a little series: spread out as far as it goes, then pull it all together (what I'm really thinking: since I'll pull it together anyway, why bother polishing now, hmm). I wanted to drag in some machine learning too, but I've run out of steam for that, so later. It has been ages since I dashed off a post like this (it took just over an hour). I have always had lots of small ideas that felt too shallow, and I was too lazy to spend a lot of time grinding away at any one of them. Now I seem to have found a good (or at least productive) way to produce. So, look out for the next one, "Mental Set and Functional Fixedness" (hopefully with fewer parentheses).
 
 ![Different representations of the same classification problem (problem situations). Figure from Deep Learning](assets/images/problem-solving-and-design-1-situation/ec9b85e46277f33f5c414c0bee77d852.jpg)
-
----
-
-An older post, added to this site on 2026-09-28. The original date of writing is unknown, and the text keeps its original wording.

@@ -1,10 +1,9 @@
 ---
 tags: thinking,design
-date: 2026-09-28
+date: 2017-05-04
 updated: 2026-09-28
 translation: Claude Opus 5.5
 description: Starting from a route across Hong Kong, from Central to Mong Kok: open problems, incomplete information, hidden premises and falsifiability.
-written: Date unknown
 series: 问题解决与设计
 series_part: 3
 ---
@@ -52,7 +51,3 @@ You can see from this that posing a problem and solving it are not always a one-
 ---
 
 Somewhere along the way this part seems to have lost its direct link to design, hahaha (hmm, maybe I could stretch it to the shared understanding users and designers have of design elements?).
-
----
-
-An older post, added to this site on 2026-09-28. The original date of writing is unknown, and the text keeps its original wording.

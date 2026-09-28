@@ -547,6 +547,28 @@ def check_article_translations(errors: list[str]) -> None:
             )
 
 
+def check_article_dates(errors: list[str]) -> None:
+    """`date` is the day a piece was first published, not the day it reached this
+    site (owner policy, 2026-09-28). Without it the generator falls back to the
+    file's mtime. `written` is an earlier composition date, never a placeholder."""
+    for path in sorted((ROOT / "blogs").glob("*.md")):
+        text = path.read_text(encoding="utf-8")
+        head = text.split("\n---", 1)[0] if text.startswith("---\n") else ""
+        meta = dict(re.findall(r"^(date|written):[ \t]*(.*?)[ \t]*$", head, re.M))
+        rel = path.relative_to(ROOT)
+        date = meta.get("date", "")
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
+            errors.append(f"{rel}: date must be the first-publication day as YYYY-MM-DD, got {date!r}")
+            continue
+        written = meta.get("written")
+        if written is None:
+            continue
+        if not re.fullmatch(r"\d{4}(-\d{2}(-\d{2})?)?", written):
+            errors.append(f"{rel}: written must be YYYY, YYYY-MM or YYYY-MM-DD, got {written!r}; omit it when unknown")
+        elif written > date[:len(written)]:
+            errors.append(f"{rel}: written {written} is later than date {date}")
+
+
 def check_site_updated(errors: list[str]) -> None:
     """The footer's "Updated" date must not predate the newest dated content."""
     shell = json.loads((ROOT / "data/site_shell.json").read_text(encoding="utf-8"))
@@ -622,6 +644,7 @@ def main() -> int:
     check_site_data(errors)
     check_json_assets(errors)
     check_article_translations(errors)
+    check_article_dates(errors)
     check_site_updated(errors)
     check_css_cache_keys(errors)
     check_js_cache_keys(errors)

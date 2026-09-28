@@ -43,6 +43,7 @@ Hand-authored pages outside this table: `series.html` and `tags.html` (redirects
 - Attributes that change with language are declared with `data-i18n="<attr>"` and a `data-zh-<attr>` value.
 - Articles and project boards are one language per file (`*.en.html` / `*.html`) and link their translation.
 - Article publishing policy (owner decision, 2026-09-28): every article must have both Chinese and English versions before going live. Use `blogs/<slug>.md` and `blogs/<slug>.en.md`, with matching dates, tags and series metadata. A Chinese-only local preview is not ready for publication. `scripts/check_site.py` rejects incomplete language pairs; do not push them to the Pages branch. Translation quality still needs review beyond this structural check.
+- An older piece republished here keeps its historical first-publication `date`, not the day it was added. The rules are under [Dates](ARTICLE_PUBLICATION.md#dates).
 - Favorites: page chrome is bilingual, titles and reviews stay in Chinese.
 
 ### Client scripts

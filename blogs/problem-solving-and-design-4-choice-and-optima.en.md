@@ -1,10 +1,9 @@
 ---
 tags: thinking,design
-date: 2026-09-28
+date: 2017-05-10
 updated: 2026-09-28
 translation: Claude Opus 5.5
 description: Why do we still agonize when feasible solutions are already in front of us? Value functions and systems of preferences, and what they say about choice, optimal solutions and model complexity.
-written: Date unknown
 series: 问题解决与设计
 series_part: 4
 ---
@@ -117,7 +116,3 @@ Of course, every problem has a level of model complexity that suits it. Too high
 ---
 
 By now this series has been wrenched all the way from a psychology textbook to the basic concepts of decision-making and learning. So bringing in game design counts as design too, I tell myself :)
-
----
-
-An older post, added to this site on 2026-09-28. The original date of writing is unknown, and the text keeps its original wording.

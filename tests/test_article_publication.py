@@ -51,5 +51,42 @@ class ArticlePublicationTests(unittest.TestCase):
         self.assertIn('missing zh translation', errors[0])
 
 
+class ArticleDateTests(unittest.TestCase):
+    """Republished older pieces keep their first-publication date."""
+
+    def check_frontmatter(self, frontmatter):
+        spec = importlib.util.spec_from_file_location('date_check_site', ROOT / 'scripts/check_site.py')
+        checker = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(checker)
+        with tempfile.TemporaryDirectory() as directory:
+            checker.ROOT = Path(directory)
+            (checker.ROOT / 'blogs').mkdir()
+            (checker.ROOT / 'blogs/essay.md').write_text(f'---\n{frontmatter}\n---\n\n# Essay\n', encoding='utf-8')
+            errors = []
+            checker.check_article_dates(errors)
+            return errors
+
+    def test_historical_date_with_earlier_composition_passes(self):
+        self.assertEqual(self.check_frontmatter('date: 2014-01-04\nwritten: 2012-12'), [])
+        self.assertEqual(self.check_frontmatter('date: 2016-10-24'), [])
+
+    def test_missing_date_is_rejected(self):
+        errors = self.check_frontmatter('tags: life')
+        self.assertEqual(len(errors), 1)
+        self.assertIn('first-publication day', errors[0])
+
+    def test_placeholder_written_is_rejected(self):
+        for placeholder in ('原日期未详', 'Date unknown'):
+            with self.subTest(placeholder=placeholder):
+                errors = self.check_frontmatter(f'date: 2026-09-28\nwritten: {placeholder}')
+                self.assertEqual(len(errors), 1)
+                self.assertIn('omit it when unknown', errors[0])
+
+    def test_written_after_date_is_rejected(self):
+        errors = self.check_frontmatter('date: 2014-01-04\nwritten: 2014-02')
+        self.assertEqual(len(errors), 1)
+        self.assertIn('later than date', errors[0])
+
+
 if __name__ == '__main__':
     unittest.main()

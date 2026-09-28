@@ -1,136 +1,6 @@
 {
   "last_updated": "2026-09-28",
   "files": {
-    "my-hands.en.html": [],
-    "my-hands.html": [],
-    "problem-solving-and-design-1-situation.en.html": [
-      {
-        "group_id": "problem-solving-and-design-2-feasible-solutions",
-        "date": "2026-09-28",
-        "languages": {
-          "zh": {
-            "title": "问题解决与设计（二）：可行解",
-            "file": "problem-solving-and-design-2-feasible-solutions.html"
-          },
-          "en": {
-            "title": "Problem Solving and Design (2): Feasible Solutions",
-            "file": "problem-solving-and-design-2-feasible-solutions.en.html"
-          }
-        }
-      },
-      {
-        "group_id": "problem-solving-and-design-3-open-problems",
-        "date": "2026-09-28",
-        "languages": {
-          "zh": {
-            "title": "问题解决与设计（三）：开放问题",
-            "file": "problem-solving-and-design-3-open-problems.html"
-          },
-          "en": {
-            "title": "Problem Solving and Design (3): Open Problems",
-            "file": "problem-solving-and-design-3-open-problems.en.html"
-          }
-        }
-      }
-    ],
-    "problem-solving-and-design-1-situation.html": [
-      {
-        "group_id": "problem-solving-and-design-2-feasible-solutions",
-        "date": "2026-09-28",
-        "languages": {
-          "zh": {
-            "title": "问题解决与设计（二）：可行解",
-            "file": "problem-solving-and-design-2-feasible-solutions.html"
-          },
-          "en": {
-            "title": "Problem Solving and Design (2): Feasible Solutions",
-            "file": "problem-solving-and-design-2-feasible-solutions.en.html"
-          }
-        }
-      },
-      {
-        "group_id": "problem-solving-and-design-3-open-problems",
-        "date": "2026-09-28",
-        "languages": {
-          "zh": {
-            "title": "问题解决与设计（三）：开放问题",
-            "file": "problem-solving-and-design-3-open-problems.html"
-          },
-          "en": {
-            "title": "Problem Solving and Design (3): Open Problems",
-            "file": "problem-solving-and-design-3-open-problems.en.html"
-          }
-        }
-      }
-    ],
-    "problem-solving-and-design-2-feasible-solutions.en.html": [
-      {
-        "group_id": "problem-solving-and-design-3-open-problems",
-        "date": "2026-09-28",
-        "languages": {
-          "zh": {
-            "title": "问题解决与设计（三）：开放问题",
-            "file": "problem-solving-and-design-3-open-problems.html"
-          },
-          "en": {
-            "title": "Problem Solving and Design (3): Open Problems",
-            "file": "problem-solving-and-design-3-open-problems.en.html"
-          }
-        }
-      }
-    ],
-    "problem-solving-and-design-2-feasible-solutions.html": [
-      {
-        "group_id": "problem-solving-and-design-3-open-problems",
-        "date": "2026-09-28",
-        "languages": {
-          "zh": {
-            "title": "问题解决与设计（三）：开放问题",
-            "file": "problem-solving-and-design-3-open-problems.html"
-          },
-          "en": {
-            "title": "Problem Solving and Design (3): Open Problems",
-            "file": "problem-solving-and-design-3-open-problems.en.html"
-          }
-        }
-      }
-    ],
-    "problem-solving-and-design-3-open-problems.en.html": [
-      {
-        "group_id": "problem-solving-and-design-4-choice-and-optima",
-        "date": "2026-09-28",
-        "languages": {
-          "zh": {
-            "title": "问题解决与设计（四）：纠结与最优解",
-            "file": "problem-solving-and-design-4-choice-and-optima.html"
-          },
-          "en": {
-            "title": "Problem Solving and Design (4): Indecision and the Optimal Solution",
-            "file": "problem-solving-and-design-4-choice-and-optima.en.html"
-          }
-        }
-      }
-    ],
-    "problem-solving-and-design-3-open-problems.html": [
-      {
-        "group_id": "problem-solving-and-design-4-choice-and-optima",
-        "date": "2026-09-28",
-        "languages": {
-          "zh": {
-            "title": "问题解决与设计（四）：纠结与最优解",
-            "file": "problem-solving-and-design-4-choice-and-optima.html"
-          },
-          "en": {
-            "title": "Problem Solving and Design (4): Indecision and the Optimal Solution",
-            "file": "problem-solving-and-design-4-choice-and-optima.en.html"
-          }
-        }
-      }
-    ],
-    "problem-solving-and-design-4-choice-and-optima.en.html": [],
-    "problem-solving-and-design-4-choice-and-optima.html": [],
-    "the-limits-of-problem-analysis.en.html": [],
-    "the-limits-of-problem-analysis.html": [],
     "my-personal-knowledge-management-system-2026-03.en.html": [],
     "my-personal-knowledge-management-system-2026-03.html": [],
     "a-bird-across-models.en.html": [],
@@ -241,7 +111,137 @@
     "ten-years-like-rain.html": [],
     "the-tatami-galaxy.en.html": [],
     "the-tatami-galaxy.html": [],
+    "problem-solving-and-design-4-choice-and-optima.en.html": [],
+    "problem-solving-and-design-4-choice-and-optima.html": [],
+    "problem-solving-and-design-3-open-problems.en.html": [
+      {
+        "group_id": "problem-solving-and-design-4-choice-and-optima",
+        "date": "2017-05-10",
+        "languages": {
+          "zh": {
+            "title": "问题解决与设计（四）：纠结与最优解",
+            "file": "problem-solving-and-design-4-choice-and-optima.html"
+          },
+          "en": {
+            "title": "Problem Solving and Design (4): Indecision and the Optimal Solution",
+            "file": "problem-solving-and-design-4-choice-and-optima.en.html"
+          }
+        }
+      }
+    ],
+    "problem-solving-and-design-3-open-problems.html": [
+      {
+        "group_id": "problem-solving-and-design-4-choice-and-optima",
+        "date": "2017-05-10",
+        "languages": {
+          "zh": {
+            "title": "问题解决与设计（四）：纠结与最优解",
+            "file": "problem-solving-and-design-4-choice-and-optima.html"
+          },
+          "en": {
+            "title": "Problem Solving and Design (4): Indecision and the Optimal Solution",
+            "file": "problem-solving-and-design-4-choice-and-optima.en.html"
+          }
+        }
+      }
+    ],
+    "problem-solving-and-design-2-feasible-solutions.en.html": [
+      {
+        "group_id": "problem-solving-and-design-3-open-problems",
+        "date": "2017-05-04",
+        "languages": {
+          "zh": {
+            "title": "问题解决与设计（三）：开放问题",
+            "file": "problem-solving-and-design-3-open-problems.html"
+          },
+          "en": {
+            "title": "Problem Solving and Design (3): Open Problems",
+            "file": "problem-solving-and-design-3-open-problems.en.html"
+          }
+        }
+      }
+    ],
+    "problem-solving-and-design-2-feasible-solutions.html": [
+      {
+        "group_id": "problem-solving-and-design-3-open-problems",
+        "date": "2017-05-04",
+        "languages": {
+          "zh": {
+            "title": "问题解决与设计（三）：开放问题",
+            "file": "problem-solving-and-design-3-open-problems.html"
+          },
+          "en": {
+            "title": "Problem Solving and Design (3): Open Problems",
+            "file": "problem-solving-and-design-3-open-problems.en.html"
+          }
+        }
+      }
+    ],
+    "problem-solving-and-design-1-situation.en.html": [
+      {
+        "group_id": "problem-solving-and-design-3-open-problems",
+        "date": "2017-05-04",
+        "languages": {
+          "zh": {
+            "title": "问题解决与设计（三）：开放问题",
+            "file": "problem-solving-and-design-3-open-problems.html"
+          },
+          "en": {
+            "title": "Problem Solving and Design (3): Open Problems",
+            "file": "problem-solving-and-design-3-open-problems.en.html"
+          }
+        }
+      },
+      {
+        "group_id": "problem-solving-and-design-2-feasible-solutions",
+        "date": "2016-11-11",
+        "languages": {
+          "zh": {
+            "title": "问题解决与设计（二）：可行解",
+            "file": "problem-solving-and-design-2-feasible-solutions.html"
+          },
+          "en": {
+            "title": "Problem Solving and Design (2): Feasible Solutions",
+            "file": "problem-solving-and-design-2-feasible-solutions.en.html"
+          }
+        }
+      }
+    ],
+    "problem-solving-and-design-1-situation.html": [
+      {
+        "group_id": "problem-solving-and-design-3-open-problems",
+        "date": "2017-05-04",
+        "languages": {
+          "zh": {
+            "title": "问题解决与设计（三）：开放问题",
+            "file": "problem-solving-and-design-3-open-problems.html"
+          },
+          "en": {
+            "title": "Problem Solving and Design (3): Open Problems",
+            "file": "problem-solving-and-design-3-open-problems.en.html"
+          }
+        }
+      },
+      {
+        "group_id": "problem-solving-and-design-2-feasible-solutions",
+        "date": "2016-11-11",
+        "languages": {
+          "zh": {
+            "title": "问题解决与设计（二）：可行解",
+            "file": "problem-solving-and-design-2-feasible-solutions.html"
+          },
+          "en": {
+            "title": "Problem Solving and Design (2): Feasible Solutions",
+            "file": "problem-solving-and-design-2-feasible-solutions.en.html"
+          }
+        }
+      }
+    ],
+    "the-limits-of-problem-analysis.en.html": [],
+    "the-limits-of-problem-analysis.html": [],
     "exformation-and-information.en.html": [],
-    "exformation-and-information.html": []
+    "exformation-and-information.html": [],
+    "my-hands.en.html": [],
+    "my-hands.html": []
   }
 }

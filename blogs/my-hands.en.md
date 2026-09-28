@@ -1,6 +1,6 @@
 ---
 tags: life
-date: 2026-09-28
+date: 2014-01-04
 updated: 2026-09-28
 translation: Claude Opus 5.5
 description: A short poem written in December 2012. Hai Zi's "Your Hands" is appended on the Chinese page.
@@ -46,7 +46,3 @@ and letting them light me
 ## Appendix: Hai Zi, "Your Hands"
 
 Hai Zi's poem is on the [Chinese version of this page](my-hands.html), in the original. It is not translated here.
-
----
-
-Written in December 2012; added to this site on 2026-09-28.
