@@ -57,6 +57,11 @@
 
     function jump(el: HTMLElement, hash: string) {
         el.scrollIntoView({ behavior, block: 'start' });
+        // Move focus with the view, so the next Tab continues from the
+        // target rather than the link, and a closed contents box does not
+        // drop focus to the page.
+        if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+        el.focus({ preventScroll: true });
         try {
             history.pushState(null, '', `#${hash}`);
         } catch (_error) {
