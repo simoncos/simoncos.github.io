@@ -114,7 +114,16 @@ class SurfaceContractTests(unittest.TestCase):
                 self.assertEqual(page_lang, "en" if path.name.endswith(".en.html") else "zh")
                 toggle = re.search(r'<a class="lang-btn" href="([^"]+)"', html).group(1)
                 if toggle != "#":
-                    self.assertTrue((path.parent / toggle).is_file(), toggle)
+                    target = urlsplit(toggle)
+                    self.assertTrue((path.parent / target.path).is_file(), toggle)
+                    peer = path.with_name(path.name.replace('.en.html', '.html') if page_lang == 'en'
+                                          else path.stem + '.en.html')
+                    if peer.exists():
+                        self.assertEqual(toggle, peer.name)
+                    else:
+                        # Untranslated articles return to the requested language's archive.
+                        other_lang = 'zh' if page_lang == 'en' else 'en'
+                        self.assertEqual(toggle, f'../blogs.html?lang={other_lang}')
 
     def test_home_stage_follows_site_data(self):
         site = json.loads((ROOT / "data/site.json").read_text())

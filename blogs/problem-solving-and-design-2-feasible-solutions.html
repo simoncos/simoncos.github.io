@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-page-lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问题解决与设计（二）：可行解 · 文章 · simoncos</title>
+    <meta name="description" content="从削苹果这个问题出发，讨论资源、方法、定势、功能固着与可供性，以及如何发现被忽略的可行解。">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="问题解决与设计（二）：可行解">
+    <meta property="og:description" content="从削苹果这个问题出发，讨论资源、方法、定势、功能固着与可供性，以及如何发现被忽略的可行解。">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="simoncos — tools and research, articles and field notes">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="问题解决与设计（二）：可行解">
+    <meta name="twitter:description" content="从削苹果这个问题出发，讨论资源、方法、定势、功能固着与可供性，以及如何发现被忽略的可行解。">
+    <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20260927c"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20260927k">
+    <script src="../src/js/site.js?v=20260927c" defer></script>
+    <script src="../src/js/article.js?v=20260927c" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="problem-solving-and-design-2-feasible-solutions">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="problem-solving-and-design-2-feasible-solutions.en.html" hreflang="en" data-lang-nav="en"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← 文章</a>
+                <h1 class="article-title">问题解决与设计（二）：可行解</h1>
+            </div>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">创建</span><span class="num">2026-09-28</span></span>
+                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-09-28</span></span>
+                    <span class="meta-item"><span class="k">阅读</span>5 分钟</span>
+                    <span class="meta-item"><span class="k">写于</span><span class="num">原日期未详</span></span>
+                    <a class="meta-alt" href="problem-solving-and-design-2-feasible-solutions.en.html" hreflang="en" lang="en" data-lang-nav="en">English ↗</a>
+                </div>
+                <div class="post-content">
+
+<p>关键词：可行解 | 可能性空间 | 偏见 | 定势 | 功能固着 | 可供性</p>
+<p><a href="problem-solving-and-design-1-situation.html">第一篇</a>中讨论的问题情境，在我的理解中实际上是一种对问题本身明确的表示（Representation）。一旦问题的表示确定下来，便可以开始寻找问题的可行解。我将借助一个简单的问题来开始本篇的思考：</p>
+<blockquote>
+<p>问题1：在手头有一把水果刀的情况下（条件），去掉一个苹果的皮（目标）。</p>
+</blockquote>
+<p>可行解落到这个现实问题里到底指的是什么呢？我觉得可以将其简单分为两个必要的部分，一个是<strong>资源（Resource）</strong>，一个是<strong>方法（Method or Approach）</strong>。</p>
+<p>那么用水果刀给苹果削皮就是一个可行解，其中水果刀是资源，用水果刀给苹果削皮的手法是方法。</p>
+<p>接下来我们把问题变一变，把你手上的水果刀抽走，换成一把剪刀。</p>
+<blockquote>
+<p>问题2：在手头有一把剪刀的情况下，去掉一个苹果的皮。</p>
+</blockquote>
+<p>请问问题2有可行解吗？这时你会说我侮辱你的智商，虽说在现实里这样做一定很智障，但用剪刀剪掉苹果的皮，或者“当作”水果刀来削皮，多费些劲还是能行的不是？</p>
+<p>但是相信你应该不会在水果刀和剪刀都存在的情况下选择剪刀的，对不：</p>
+<blockquote>
+<p>问题3：在手头同时有一把水果刀和一把剪刀的情况下，去掉一个苹果的皮。</p>
+</blockquote>
+<p>注意问题3中目的只是去掉一个苹果的皮。我们对可行解的选择实际上是在解决一个更强的问题：</p>
+<blockquote>
+<p>问题4：在手头同时有一把水果刀和一把剪刀的情况下，去掉一个苹果的皮，以最优的解决方式。</p>
+</blockquote>
+<p>这其实不是一个完整的问题，因为我们没有给出“最优”的标准。而在我们选择水果刀而不是剪刀时，隐含的标准是什么呢？可以是“费更少的劲削皮的可行解是更优的解”，也可以是“更像正常人的可行解是更优的解”，但无论是什么，<strong>只要提到选择，那就一定有相应的标准</strong>。有一个明确的标准后，问题就可表示成一个最优化（optimization）问题。</p>
+<p>在上一篇中我提到过这样一个观点：解决（明确定义的）问题，等于从解决方案的可能性空间中对可行解进行搜索。搜索其实只是解决问题的过程，目的其实是选择。这里进一步思考，所有的问题都涉及到选择吗，都是可以明确判断是否可解决的吗？这其实就涉及到问题是什么的，呃，问题。在此不去纠结了（以后再找时间纠结）。</p>
+<p>好了，一路漂游到这里，我终于想起继续讨论之前的七个概念了。来看下一个题（飞吻还没关掉页面的童鞋）：</p>
+<blockquote>
+<p>问题5：在手头同时有一把水果刀和一把剪刀的情况下，去掉一个梨子的皮。</p>
+</blockquote>
+<p>嗯，我在逗你，当然用水果刀啦。下一个：</p>
+<blockquote>
+<p>问题6：在手头同时有一把水果刀和一把剪刀的情况下，打开一瓶红酒。</p>
+</blockquote>
+<p>嗯，我又在逗你，这TM也能打开？</p>
+<p>如果我们假设这TM真打不开，但有一个已经吃掉4个苹果一个梨子的Li Lei继续想着用水果刀打开。那么他就是陷入了<strong>定势</strong>。啊啊我写得好累啊。这个定势呢，其实说的就是这么一回事，当你需要连续解决多个问题的时候（特别是当问题情境相似时），会有可能将之前的可行解缓存起来，在下个问题时优先尝试。<a href="https://web.archive.org/web/20160521150427/http://www.pep.com.cn/xgjy/xlyj/xlshuku/shuku13/shuku17/201008/t20100827_815322.htm">《影响问题解决的因素》</a>中举的水杯量水实验其实是一种稍好的情况，充其量只是忽略了最优解，仍然找到了可行解。但如果之前的可行解太过成功，比如解决了前面所有的问题，那么在下一个它行不通的问题里，你可能会花相当长的时间摆脱这个定势（手拿锤子看什么都是钉子，典型的overfit啊）。</p>
+<p>摆脱定势的方法可能是，清除脑中的缓存，<strong>清除先验的偏见（bias），从头寻找和评估所有的解</strong>，不论是吃个苹果梨子，还是预测美国总统大选，都需要解放思想，实事求是，重新做人（论今天双十一但是我没剁手的原因）。</p>
+<p>接着我们再来吃一个苹果，回到问题2。有位Han Meimei小姐为了帮我引出<strong>“功能固着”</strong>，坚持说她觉得没有可行解，剪刀都是用来剪窗花蜡烛什么的，怎么可能去苹果皮呢？这涉及到我们对资源这个概念更深入的分析。资源是工具、是方法所需依托的实体，是实实在在的物体。当我们认识一个物体的时候，我们更关心的常常是物体的用处和功能。</p>
+<p>但是这种认识的过程并不是一次结束的，回想我们第一次接触某一件物体时，我们一般只认识到它对我们而言最主要的功能，并常常会将功能和物体绑定在一起。比如铅笔，我们第一次认识它时知道它的作用是写字，那么之后说起铅笔我们会想到写字，反之亦然，要认识到铅笔可以用来转磁带（暴露年龄），可能是很久以后的事。这种功能固着在物体上的认知，阻碍我们提取剪刀与水果刀的共同点，阻碍我们对资源进行分解（乃至重组），阻碍我们发现可削除苹果皮的、锋利的剪刀刀刃。</p>
+<p>没错，<strong>物体、资源可以分解成更原子的模块</strong>，它们也有各自的更基础的功能。是这些模块的组合使物体这个系统有了我们认知到的功能，功能不是物体本身。在心理学和设计领域，有一个更fancy的词来将物体和功能区分开：<strong>可供性（<a href="https://en.wikipedia.org/wiki/Affordance">Affordance</a>）</strong>。可供性的原意是：一个物体可供你进行的所有可能动作（all actions that are physically possible on an object），假设我们忽略可能动作与功能之间的差距，那么这个“所有”实际上暗示了两点：1. 一个物体可能含有多种功能；2. 我们对一个物体的认识可能是不完整的，只知道其部分而非全部功能。</p>
+<p>将物体和功能绑定的功能固着机制，并非一无是处，它帮助我们快速认识事物及其最有用的功能，并且在之后的各种问题情境下更快速地回忆起来（跟定势类似，像是一种更长期的缓存），但是缺点在于“固化”。对可供性的关注促使我们思考惯例以外的可能性，思考一个问题的透明程度，促使我们将问题的解视为可分解重组的系统，思考原研哉所谓的Exformation，从而找到问题解决中被忽略的可行解，或者设计上新的可能性：</p>
+<p><img alt="分解和重组：無印良品的壁挂式CD机" decoding="async" height="496" src="assets/images/problem-solving-and-design-2-feasible-solutions/dbd633006b71940d338b9209cf5d134b.jpg" width="496"/></p>
+<p>可供性之后在设计领域中有了另一个意思：（人）能够很直接、不进行太多思考就能从一个物体上看出的那部分功能（only those action possibilities which one is aware of）。关注这个含义是为了帮助设计师理解物体的功能有显隐之分，需要在设计新事物的时候有意识地调整那条界限，凸显最需要凸显的功能，隐藏不需要的可能，这实际上是<strong>对“功能固着”的正向利用</strong>。</p>
+<hr/>
+<p>本篇暂时写到这里啦，涉及到了定势和功能固着两个概念，数数原文中七个概念还剩下四个，争取第三篇一次搞定~</p>
+<hr/>
+<p>旧文收录于 2026-09-28，原写作日期未详。正文保留当时的表述。</p>
+                </div>
+                <div class="series-box"><span class="k">系列 · 问题解决与设计</span><a href="problem-solving-and-design-1-situation.html"><span class="series-part">第 1 篇</span><span>问题解决与设计（一）：问题情境</span></a><a href="problem-solving-and-design-2-feasible-solutions.html" aria-current="page"><span class="series-part">第 2 篇</span><span>问题解决与设计（二）：可行解</span></a><a href="problem-solving-and-design-3-open-problems.html"><span class="series-part">第 3 篇</span><span>问题解决与设计（三）：开放问题</span></a><a href="problem-solving-and-design-4-choice-and-optima.html"><span class="series-part">第 4 篇</span><span>问题解决与设计（四）：纠结与最优解</span></a></div>
+                <div class="article-tags"><span class="k">标签</span><a class="tag" href="../blogs.html#topic-thinking">思考</a><a class="tag" href="../blogs.html#topic-design">设计</a></div>
+                <section class="xref-grid"><div class="xrefs"><span class="k">本文提到</span><a class="xref" href="problem-solving-and-design-1-situation.html"><span>问题解决与设计（一）：问题情境</span><span class="num">2026-09-28</span></a></div><div class="xrefs"><span class="k">提到本文</span><a class="xref" href="problem-solving-and-design-3-open-problems.html"><span>问题解决与设计（三）：开放问题</span><span class="num">2026-09-28</span></a></div></section>
+                <nav class="post-nav" aria-label="继续阅读"><a class="post-nav-card post-nav-newer" rel="prev" href="problem-solving-and-design-1-situation.html"><span class="k">更新的一篇</span><span class="post-nav-title">问题解决与设计（一）：问题情境</span></a><a class="post-nav-card post-nav-older" rel="next" href="problem-solving-and-design-3-open-problems.html"><span class="k">更早的一篇</span><span class="post-nav-title">问题解决与设计（三）：开放问题</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 28, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-28</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="回到顶部" title="回到顶部">↑</button>
+</body>
+</html>

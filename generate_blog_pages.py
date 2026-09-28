@@ -230,6 +230,8 @@ ARTICLE_TEXT = {
 
 # Tag slugs stay as written in the frontmatter; these are their display names.
 TAG_LABELS = {
+    'life': ('Life', '生活'),
+    'thinking': ('Thinking', '思考'),
     'ai': ('AI', 'AI'),
     'km': ('Knowledge', '知识管理'),
     'hack': ('Hack', 'Hack'),
@@ -1639,7 +1641,7 @@ def render_article_row(group, article_groups, series_meta, is_open):
         '                        <span class="arow-main">',
         f'                            <button class="arow-title" type="button" aria-expanded="{expanded}" aria-controls="ex-{esc(group_id)}">'
         f'{bi(title_en, title_zh)}</button>',
-        f'                            {alt}{series_html}',
+        f'                            {alt}{series_html}' if alt or series_html else '',
         '                        </span>',
         f'                        <button class="arow-toggle" type="button" aria-expanded="{expanded}" aria-controls="ex-{esc(group_id)}"'
         f'{i18n_attrs(aria_label=("Toggle excerpt", "展开摘要"))}>+</button>',
