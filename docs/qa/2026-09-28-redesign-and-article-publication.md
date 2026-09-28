@@ -29,17 +29,19 @@
 
 ## 九篇旧文收录
 
-| 文章 | 站内路径 | 原写作日期 |
+| 文章 | 站内路径 | `date` 及出处 |
 |---|---|---|
-| 十年如雨 | `blogs/ten-years-like-rain.html` | 原稿明确为 2018-05-12；另保留标注 2020-05-10 的补图。 |
-| 谢谢你曾来避雨 | `blogs/thanks-for-sheltering-from-the-rain.html` | 原稿明确为 2020-09-29。 |
-| 问题解析的极限 | `blogs/the-limits-of-problem-analysis.html` | 未详；明确标注本站收录日期 2026-09-28。 |
-| 问题解决与设计（一）：问题情境 | `blogs/problem-solving-and-design-1-situation.html` | 未详；同上。 |
-| 问题解决与设计（二）：可行解 | `blogs/problem-solving-and-design-2-feasible-solutions.html` | 未详；同上。 |
-| 问题解决与设计（三）：开放问题 | `blogs/problem-solving-and-design-3-open-problems.html` | 未详；同上。 |
-| 问题解决与设计（四）：纠结与最优解 | `blogs/problem-solving-and-design-4-choice-and-optima.html` | 未详；同上。 |
+| 十年如雨 | `blogs/ten-years-like-rain.html` | 2018-05-12，原稿日期行；另保留标注 2020-05-10 的补图。 |
+| 谢谢你曾来避雨 | `blogs/thanks-for-sheltering-from-the-rain.html` | 2020-09-29，原稿日期行，与简书发布日一致。 |
+| 小白头翁的100天 | `blogs/a-bulbuls-first-100-days.html` | 2020-08-31，原稿日期行（简书发布于前一晚 22:19）。 |
+| 我的手 | `blogs/my-hands.html` | 2014-01-04，简书首发；`written: 2012-12` 取自诗末落款。 |
+| 问题解析的极限 | `blogs/the-limits-of-problem-analysis.html` | 2014-05-22，简书首发。 |
+| 问题解决与设计（一）：问题情境 | `blogs/problem-solving-and-design-1-situation.html` | 2016-10-24，简书首发。 |
+| 问题解决与设计（二）：可行解 | `blogs/problem-solving-and-design-2-feasible-solutions.html` | 2016-11-11，简书首发，与文中“今天双十一”一致。 |
+| 问题解决与设计（三）：开放问题 | `blogs/problem-solving-and-design-3-open-problems.html` | 2017-05-04，简书首发。 |
+| 问题解决与设计（四）：纠结与最优解 | `blogs/problem-solving-and-design-4-choice-and-optima.html` | 2017-05-10，简书首发。 |
 
-另外新增《小白头翁的100天》（`blogs/a-bulbuls-first-100-days.html`，原日期 2020-08-31）和《我的手》（`blogs/my-hands.html`，写于 2012-12，收录日期 2026-09-28）。
+简书日期取自作者主页 `https://www.jianshu.com/u/fryvGp` 列出的发布时间（东八区）。按用户 2026-09-28 定下的规则，旧文 `date` 用历史日期，不用收录日期，详见 [发布流程 · Dates](../ARTICLE_PUBLICATION.md#dates)。
 
 只收录作者明确确认的前四篇；其余草稿、提纲和整合 Proposal 未收录。Obsidian 原稿不修改。正文保留历史表述；删除重复的旧日期行、过时的“目前仅为草稿”系列页尾，改用站内系列导航；修复 PDF 链接排版；25 张静态图片按网站现有流程转换为本地网页图片（总计约 4.3 MB，单张最多 400,076 字节），补充原本缺失的 alt。《小白头翁的100天》的 7 张 GIF 保留 R2 动画链接，已缓存尺寸；仍有外部资源依赖。两篇小白头翁文章互相链接。
 

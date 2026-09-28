@@ -1,10 +1,9 @@
 ---
 tags: thinking,design
-date: 2026-09-28
+date: 2016-11-11
 updated: 2026-09-28
 translation: Claude Opus 5.5
 description: Starting from peeling an apple: resources and methods, mental set, functional fixedness and affordance, and how to find the feasible solutions we overlook.
-written: Date unknown
 series: 问题解决与设计
 series_part: 2
 ---
@@ -68,7 +67,3 @@ Later, in design, affordance took on another meaning: the functions of an object
 ---
 
 That's where this part stops for now. It covered two concepts, mental set and functional fixedness. Counting the seven in the original article, four are left, and I'll try to get them all done in part three~
-
----
-
-An older post, added to this site on 2026-09-28. The original date of writing is unknown, and the text keeps its original wording.

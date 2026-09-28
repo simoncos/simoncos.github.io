@@ -2,191 +2,6 @@
   "last_updated": "2026-09-28",
   "groups": [
     {
-      "id": "my-hands",
-      "date": "2026-09-28",
-      "tags": [
-        "life"
-      ],
-      "series": null,
-      "languages": {
-        "zh": {
-          "title": "我的手",
-          "file": "my-hands.html",
-          "markdown": "my-hands.md",
-          "excerpt": "你沉重吗\n想要拥着你\n用我的手\n用刀子般的冬风割去你的不安\n留宿你的好梦\n累了吗\n想让你尽情哭泣、安睡\n在我的手之间\n当夜晚打湿了旧梦的裙角\n当一碗粥蒸润了晨光\n我希望我的手\n不只是南方的灯辉\n也能是近处的炉火\n照亮你的手\n也让它...",
-          "description": "写于 2012 年 12 月的一首短诗，附海子的《你的手》。",
-          "image": "",
-          "available": true
-        },
-        "en": {
-          "title": "My Hands",
-          "file": "my-hands.en.html",
-          "markdown": "my-hands.en.md",
-          "excerpt": "Do you feel heavy\nI want to hold you\nwith my hands\ncut away your unease with a winter wind like a blade\nand let your good dreams stay the night\nAre you tired\nI want you to cry all you need, and sleep in peace\nbetween my hands\nWhen the night has soaked the hem of an old dream\nwhen a bowl of congee steams the morning light soft\nI hope my hands\nare not only the glow of lamps in the south\nbut can also be a fire close at hand\nlighting your hands\nand letting them light...",
-          "description": "A short poem written in December 2012. Hai Zi's \"Your Hands\" is appended on the Chinese page.",
-          "image": "",
-          "available": true
-        }
-      }
-    },
-    {
-      "id": "problem-solving-and-design-1-situation",
-      "date": "2026-09-28",
-      "tags": [
-        "thinking",
-        "design"
-      ],
-      "series": {
-        "name": "问题解决与设计",
-        "part": "1"
-      },
-      "languages": {
-        "zh": {
-          "title": "问题解决与设计（一）：问题情境",
-          "file": "problem-solving-and-design-1-situation.html",
-          "markdown": "problem-solving-and-design-1-situation.md",
-          "excerpt": "关键词：方法论 | 问题情境 | 交互设计 | 搜索问题\n难以预料最近几个月以来泛读过的最有启发性的竟是这样一篇文章：摘自人教版《普通心理学》的 《影响问题解决的因素》 。\n文中提到的七种因素，每一种都可以单独拿出来玩味很久（虽然个人感觉有几种...",
-          "description": "同一个问题为什么会因表述方式不同而变难或变易？从问题情境、信息与搜索路径，谈到交互设计。",
-          "image": "blogs/assets/images/problem-solving-and-design-1-situation/3ac53d9fead8d368e660caa585da814a.jpg",
-          "available": true
-        },
-        "en": {
-          "title": "Problem Solving and Design (1): The Problem Situation",
-          "file": "problem-solving-and-design-1-situation.en.html",
-          "markdown": "problem-solving-and-design-1-situation.en.md",
-          "excerpt": "Keywords: methodology | problem situation | interaction design | search problems\nOf everything I have skimmed in the last few months, I would never have guessed that the most illuminating would be this: \"Factors That Affect Problem Solving\" (in Chinese), an excerpt from the People's Education Press textbook General Psychology.\nEach of the seven factors it names could be turned over on its own for a long time (though to me a few of them overlap as concepts): the problem situation, transfer, prototype heuristics, mental set, functional fixedness, motivation and emotional state, and individual characteristics.\nI found it valuable because...",
-          "description": "Why does the same problem get harder or easier depending on how it is put? From problem situations, information and search paths to interaction design.",
-          "image": "blogs/assets/images/problem-solving-and-design-1-situation/3ac53d9fead8d368e660caa585da814a.jpg",
-          "available": true
-        }
-      }
-    },
-    {
-      "id": "problem-solving-and-design-2-feasible-solutions",
-      "date": "2026-09-28",
-      "tags": [
-        "thinking",
-        "design"
-      ],
-      "series": {
-        "name": "问题解决与设计",
-        "part": "2"
-      },
-      "languages": {
-        "zh": {
-          "title": "问题解决与设计（二）：可行解",
-          "file": "problem-solving-and-design-2-feasible-solutions.html",
-          "markdown": "problem-solving-and-design-2-feasible-solutions.md",
-          "excerpt": "关键词：可行解 | 可能性空间 | 偏见 | 定势 | 功能固着 | 可供性\n第一篇 中讨论的问题情境，在我的理解中实际上是一种对问题本身明确的表示（Representation）。一旦问题的表示确定下来，便可以开始寻找问题的可行解。我将借助一个简单的问题来开始本篇的思考：\n问题1：...",
-          "description": "从削苹果这个问题出发，讨论资源、方法、定势、功能固着与可供性，以及如何发现被忽略的可行解。",
-          "image": "blogs/assets/images/problem-solving-and-design-2-feasible-solutions/dbd633006b71940d338b9209cf5d134b.jpg",
-          "available": true
-        },
-        "en": {
-          "title": "Problem Solving and Design (2): Feasible Solutions",
-          "file": "problem-solving-and-design-2-feasible-solutions.en.html",
-          "markdown": "problem-solving-and-design-2-feasible-solutions.en.md",
-          "excerpt": "Keywords: feasible solutions | possibility space | bias | mental set | functional fixedness | affordance\nThe problem situation discussed in the first part is, as I understand it, really an explicit representation of the problem itself. Once the representation of a problem is settled, you can start looking for its feasible solutions. I'll use a simple problem to start this part:\nProblem 1: With a fruit knife at hand (condition), remove the peel from an apple (goal).\nWhat exactly does a feasible solution mean in a real problem like this? I think it splits simply into two necessary parts:...",
-          "description": "Starting from peeling an apple: resources and methods, mental set, functional fixedness and affordance, and how to find the feasible solutions we overlook.",
-          "image": "blogs/assets/images/problem-solving-and-design-2-feasible-solutions/dbd633006b71940d338b9209cf5d134b.jpg",
-          "available": true
-        }
-      }
-    },
-    {
-      "id": "problem-solving-and-design-3-open-problems",
-      "date": "2026-09-28",
-      "tags": [
-        "thinking",
-        "design"
-      ],
-      "series": {
-        "name": "问题解决与设计",
-        "part": "3"
-      },
-      "languages": {
-        "zh": {
-          "title": "问题解决与设计（三）：开放问题",
-          "file": "problem-solving-and-design-3-open-problems.html",
-          "markdown": "problem-solving-and-design-3-open-problems.md",
-          "excerpt": "关键词：开放问题 | 信息不完全 | 隐含前提条件 | 可证伪性\n有了 问题情境 ，也对 可行解 这个东西有了更多了解，接下来要思考的就是如何大浪淘沙，在可能性空间中找到可行解。之所以说是大浪淘沙，是因为可能性空间可能会很大，视问题情境的约束...",
-          "description": "从香港中环到旺角的路线问题出发，讨论开放问题、信息不完全、隐含前提与可证伪性。",
-          "image": "blogs/assets/images/problem-solving-and-design-3-open-problems/22938bf33f05d2bd85f5debab9c9eabe.jpg",
-          "available": true
-        },
-        "en": {
-          "title": "Problem Solving and Design (3): Open Problems",
-          "file": "problem-solving-and-design-3-open-problems.en.html",
-          "markdown": "problem-solving-and-design-3-open-problems.en.md",
-          "excerpt": "Keywords: open problems | incomplete information | hidden premises | falsifiability\nWith the problem situation in place and a better grasp of what feasible solutions are, the next thing to think about is how to pan for gold: how to find feasible solutions in the possibility space. I say panning for gold because the possibility space can be huge, depending on how tightly the problem situation constrains it. Take this problem:\nA1. Travelling only by MTR, find the shortest route from Central to Mong Kok in Hong Kong.\nWith the MTR route map, it isn't hard to find a feasible...",
-          "description": "Starting from a route across Hong Kong, from Central to Mong Kok: open problems, incomplete information, hidden premises and falsifiability.",
-          "image": "blogs/assets/images/problem-solving-and-design-3-open-problems/22938bf33f05d2bd85f5debab9c9eabe.jpg",
-          "available": true
-        }
-      }
-    },
-    {
-      "id": "problem-solving-and-design-4-choice-and-optima",
-      "date": "2026-09-28",
-      "tags": [
-        "thinking",
-        "design"
-      ],
-      "series": {
-        "name": "问题解决与设计",
-        "part": "4"
-      },
-      "languages": {
-        "zh": {
-          "title": "问题解决与设计（四）：纠结与最优解",
-          "file": "problem-solving-and-design-4-choice-and-optima.html",
-          "markdown": "problem-solving-and-design-4-choice-and-optima.md",
-          "excerpt": "关键词：价值/损失函数 | 决策 | 偏好系统 | 最优解\n纠结、选择与价值函数\n纠结是什么？让我们回归字面：一个纠缠打结的复杂线团，拆也不是、剪也不是，胡乱尝试之下甚至缠得更紧。\n很不幸的是，我们面对问题时几乎总是会进入这样一种状态。原因有两个，...",
-          "description": "为什么已有可行解仍然让人纠结？从价值函数与偏好系统，思考选择、最优解与模型复杂度。",
-          "image": "blogs/assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg",
-          "available": true
-        },
-        "en": {
-          "title": "Problem Solving and Design (4): Indecision and the Optimal Solution",
-          "file": "problem-solving-and-design-4-choice-and-optima.en.html",
-          "markdown": "problem-solving-and-design-4-choice-and-optima.en.md",
-          "excerpt": "Keywords: value/loss functions | decision-making | systems of preferences | optimal solutions\nIndecision, choice and value functions\nWhat is indecision? Take the Chinese word for it, 纠结, literally: a tangled, knotted ball of thread that you can neither pick apart nor cut, and random tugging only pulls it tighter.\nUnfortunately, facing a problem almost always ties us in knots like this. There are two reasons. The problem itself may be complex, so a feasible solution is hard to find. But perhaps more often, plenty of feasible solutions are already in front of us and we have to choose the optimal...",
-          "description": "Why do we still agonize when feasible solutions are already in front of us? Value functions and systems of preferences, and what they say about choice, optimal solutions and model complexity.",
-          "image": "blogs/assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg",
-          "available": true
-        }
-      }
-    },
-    {
-      "id": "the-limits-of-problem-analysis",
-      "date": "2026-09-28",
-      "tags": [
-        "thinking",
-        "hack"
-      ],
-      "series": null,
-      "languages": {
-        "zh": {
-          "title": "问题解析的极限",
-          "file": "the-limits-of-problem-analysis.html",
-          "markdown": "the-limits-of-problem-analysis.md",
-          "excerpt": "一段时间前从朋友那听来的关于一个RPG游戏外挂的制作方法，因为很有意思，所以总念念不忘，想着哪天必须记下来。\n这个外挂是这样的：侦测游戏画面上显示着角色HP量/MP量的某一点的颜色值，若颜色值从一个方向改变（可以脑补比如从红/蓝到灰），说...",
-          "description": "从一个游戏外挂的思路出发，讨论黑箱、分析层次与问题的边界：解析的第一原则，是要带有限的结果回来。",
-          "image": "",
-          "available": true
-        },
-        "en": {
-          "title": "The Limits of Problem Analysis",
-          "file": "the-limits-of-problem-analysis.en.html",
-          "markdown": "the-limits-of-problem-analysis.en.md",
-          "excerpt": "A while ago a friend told me how someone had built a bot for an RPG. It was so interesting that it stuck with me, and I kept telling myself I had to write it down one day.\nThe bot works like this. It watches the colour of one particular point on the bar that shows the character's HP or MP on screen. If the colour changes in one direction (picture it going from red or blue to grey), health has dropped below some threshold, and the bot automatically enters the command to heal. If the colour changes the other...",
-          "description": "Starting from the way one game bot works: black boxes, levels of analysis and where a problem should end. The first rule of analysis is to come back with a finite result.",
-          "image": "",
-          "available": true
-        }
-      }
-    },
-    {
       "id": "my-personal-knowledge-management-system-2026-03",
       "date": "2026-03-14",
       "tags": [
@@ -476,6 +291,163 @@
       }
     },
     {
+      "id": "problem-solving-and-design-4-choice-and-optima",
+      "date": "2017-05-10",
+      "tags": [
+        "thinking",
+        "design"
+      ],
+      "series": {
+        "name": "问题解决与设计",
+        "part": "4"
+      },
+      "languages": {
+        "zh": {
+          "title": "问题解决与设计（四）：纠结与最优解",
+          "file": "problem-solving-and-design-4-choice-and-optima.html",
+          "markdown": "problem-solving-and-design-4-choice-and-optima.md",
+          "excerpt": "关键词：价值/损失函数 | 决策 | 偏好系统 | 最优解\n纠结、选择与价值函数\n纠结是什么？让我们回归字面：一个纠缠打结的复杂线团，拆也不是、剪也不是，胡乱尝试之下甚至缠得更紧。\n很不幸的是，我们面对问题时几乎总是会进入这样一种状态。原因有两个，...",
+          "description": "为什么已有可行解仍然让人纠结？从价值函数与偏好系统，思考选择、最优解与模型复杂度。",
+          "image": "blogs/assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Problem Solving and Design (4): Indecision and the Optimal Solution",
+          "file": "problem-solving-and-design-4-choice-and-optima.en.html",
+          "markdown": "problem-solving-and-design-4-choice-and-optima.en.md",
+          "excerpt": "Keywords: value/loss functions | decision-making | systems of preferences | optimal solutions\nIndecision, choice and value functions\nWhat is indecision? Take the Chinese word for it, 纠结, literally: a tangled, knotted ball of thread that you can neither pick apart nor cut, and random tugging only pulls it tighter.\nUnfortunately, facing a problem almost always ties us in knots like this. There are two reasons. The problem itself may be complex, so a feasible solution is hard to find. But perhaps more often, plenty of feasible solutions are already in front of us and we have to choose the optimal...",
+          "description": "Why do we still agonize when feasible solutions are already in front of us? Value functions and systems of preferences, and what they say about choice, optimal solutions and model complexity.",
+          "image": "blogs/assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "problem-solving-and-design-3-open-problems",
+      "date": "2017-05-04",
+      "tags": [
+        "thinking",
+        "design"
+      ],
+      "series": {
+        "name": "问题解决与设计",
+        "part": "3"
+      },
+      "languages": {
+        "zh": {
+          "title": "问题解决与设计（三）：开放问题",
+          "file": "problem-solving-and-design-3-open-problems.html",
+          "markdown": "problem-solving-and-design-3-open-problems.md",
+          "excerpt": "关键词：开放问题 | 信息不完全 | 隐含前提条件 | 可证伪性\n有了 问题情境 ，也对 可行解 这个东西有了更多了解，接下来要思考的就是如何大浪淘沙，在可能性空间中找到可行解。之所以说是大浪淘沙，是因为可能性空间可能会很大，视问题情境的约束...",
+          "description": "从香港中环到旺角的路线问题出发，讨论开放问题、信息不完全、隐含前提与可证伪性。",
+          "image": "blogs/assets/images/problem-solving-and-design-3-open-problems/22938bf33f05d2bd85f5debab9c9eabe.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Problem Solving and Design (3): Open Problems",
+          "file": "problem-solving-and-design-3-open-problems.en.html",
+          "markdown": "problem-solving-and-design-3-open-problems.en.md",
+          "excerpt": "Keywords: open problems | incomplete information | hidden premises | falsifiability\nWith the problem situation in place and a better grasp of what feasible solutions are, the next thing to think about is how to pan for gold: how to find feasible solutions in the possibility space. I say panning for gold because the possibility space can be huge, depending on how tightly the problem situation constrains it. Take this problem:\nA1. Travelling only by MTR, find the shortest route from Central to Mong Kok in Hong Kong.\nWith the MTR route map, it isn't hard to find a feasible...",
+          "description": "Starting from a route across Hong Kong, from Central to Mong Kok: open problems, incomplete information, hidden premises and falsifiability.",
+          "image": "blogs/assets/images/problem-solving-and-design-3-open-problems/22938bf33f05d2bd85f5debab9c9eabe.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "problem-solving-and-design-2-feasible-solutions",
+      "date": "2016-11-11",
+      "tags": [
+        "thinking",
+        "design"
+      ],
+      "series": {
+        "name": "问题解决与设计",
+        "part": "2"
+      },
+      "languages": {
+        "zh": {
+          "title": "问题解决与设计（二）：可行解",
+          "file": "problem-solving-and-design-2-feasible-solutions.html",
+          "markdown": "problem-solving-and-design-2-feasible-solutions.md",
+          "excerpt": "关键词：可行解 | 可能性空间 | 偏见 | 定势 | 功能固着 | 可供性\n第一篇 中讨论的问题情境，在我的理解中实际上是一种对问题本身明确的表示（Representation）。一旦问题的表示确定下来，便可以开始寻找问题的可行解。我将借助一个简单的问题来开始本篇的思考：\n问题1：...",
+          "description": "从削苹果这个问题出发，讨论资源、方法、定势、功能固着与可供性，以及如何发现被忽略的可行解。",
+          "image": "blogs/assets/images/problem-solving-and-design-2-feasible-solutions/dbd633006b71940d338b9209cf5d134b.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Problem Solving and Design (2): Feasible Solutions",
+          "file": "problem-solving-and-design-2-feasible-solutions.en.html",
+          "markdown": "problem-solving-and-design-2-feasible-solutions.en.md",
+          "excerpt": "Keywords: feasible solutions | possibility space | bias | mental set | functional fixedness | affordance\nThe problem situation discussed in the first part is, as I understand it, really an explicit representation of the problem itself. Once the representation of a problem is settled, you can start looking for its feasible solutions. I'll use a simple problem to start this part:\nProblem 1: With a fruit knife at hand (condition), remove the peel from an apple (goal).\nWhat exactly does a feasible solution mean in a real problem like this? I think it splits simply into two necessary parts:...",
+          "description": "Starting from peeling an apple: resources and methods, mental set, functional fixedness and affordance, and how to find the feasible solutions we overlook.",
+          "image": "blogs/assets/images/problem-solving-and-design-2-feasible-solutions/dbd633006b71940d338b9209cf5d134b.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "problem-solving-and-design-1-situation",
+      "date": "2016-10-24",
+      "tags": [
+        "thinking",
+        "design"
+      ],
+      "series": {
+        "name": "问题解决与设计",
+        "part": "1"
+      },
+      "languages": {
+        "zh": {
+          "title": "问题解决与设计（一）：问题情境",
+          "file": "problem-solving-and-design-1-situation.html",
+          "markdown": "problem-solving-and-design-1-situation.md",
+          "excerpt": "关键词：方法论 | 问题情境 | 交互设计 | 搜索问题\n难以预料最近几个月以来泛读过的最有启发性的竟是这样一篇文章：摘自人教版《普通心理学》的 《影响问题解决的因素》 。\n文中提到的七种因素，每一种都可以单独拿出来玩味很久（虽然个人感觉有几种...",
+          "description": "同一个问题为什么会因表述方式不同而变难或变易？从问题情境、信息与搜索路径，谈到交互设计。",
+          "image": "blogs/assets/images/problem-solving-and-design-1-situation/3ac53d9fead8d368e660caa585da814a.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Problem Solving and Design (1): The Problem Situation",
+          "file": "problem-solving-and-design-1-situation.en.html",
+          "markdown": "problem-solving-and-design-1-situation.en.md",
+          "excerpt": "Keywords: methodology | problem situation | interaction design | search problems\nOf everything I have skimmed in the last few months, I would never have guessed that the most illuminating would be this: \"Factors That Affect Problem Solving\" (in Chinese), an excerpt from the People's Education Press textbook General Psychology.\nEach of the seven factors it names could be turned over on its own for a long time (though to me a few of them overlap as concepts): the problem situation, transfer, prototype heuristics, mental set, functional fixedness, motivation and emotional state, and individual characteristics.\nI found it valuable because...",
+          "description": "Why does the same problem get harder or easier depending on how it is put? From problem situations, information and search paths to interaction design.",
+          "image": "blogs/assets/images/problem-solving-and-design-1-situation/3ac53d9fead8d368e660caa585da814a.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "the-limits-of-problem-analysis",
+      "date": "2014-05-22",
+      "tags": [
+        "thinking",
+        "hack"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "问题解析的极限",
+          "file": "the-limits-of-problem-analysis.html",
+          "markdown": "the-limits-of-problem-analysis.md",
+          "excerpt": "一段时间前从朋友那听来的关于一个RPG游戏外挂的制作方法，因为很有意思，所以总念念不忘，想着哪天必须记下来。\n这个外挂是这样的：侦测游戏画面上显示着角色HP量/MP量的某一点的颜色值，若颜色值从一个方向改变（可以脑补比如从红/蓝到灰），说...",
+          "description": "从一个游戏外挂的思路出发，讨论黑箱、分析层次与问题的边界：解析的第一原则，是要带有限的结果回来。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "The Limits of Problem Analysis",
+          "file": "the-limits-of-problem-analysis.en.html",
+          "markdown": "the-limits-of-problem-analysis.en.md",
+          "excerpt": "A while ago a friend told me how someone had built a bot for an RPG. It was so interesting that it stuck with me, and I kept telling myself I had to write it down one day.\nThe bot works like this. It watches the colour of one particular point on the bar that shows the character's HP or MP on screen. If the colour changes in one direction (picture it going from red or blue to grey), health has dropped below some threshold, and the bot automatically enters the command to heal. If the colour changes the other...",
+          "description": "Starting from the way one game bot works: black boxes, levels of analysis and where a problem should end. The first rule of analysis is to come back with a finite result.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
       "id": "exformation-and-information",
       "date": "2014-03-27",
       "tags": [
@@ -499,6 +471,34 @@
           "excerpt": "Designing Design (the complete edition) is a book I have just finished. What its author, Kenya Hara, offers is not a neatly packaged portfolio. Project by project, he dwells on what he thought, considered and felt, as an author rather than as a designer. Or, as he puts it himself, putting design into words is a new kind of design: no longer Design of Design, but Designing Design. Either way, this is not a book only about design.\nThe passage that resonated with me most goes like this: \"We have also begun to understand that when we make things, we...",
           "description": "Reading Kenya Hara's Designing Design: information overload is an illusion, exformation makes the known unknown again, and stepping away from the screen to feel the world with the body is the other half, beyond reason and order.",
           "image": "blogs/assets/images/exformation-and-information/34a4ea355d5effc7ac410dbd1f5c4410.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "my-hands",
+      "date": "2014-01-04",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "我的手",
+          "file": "my-hands.html",
+          "markdown": "my-hands.md",
+          "excerpt": "你沉重吗\n想要拥着你\n用我的手\n用刀子般的冬风割去你的不安\n留宿你的好梦\n累了吗\n想让你尽情哭泣、安睡\n在我的手之间\n当夜晚打湿了旧梦的裙角\n当一碗粥蒸润了晨光\n我希望我的手\n不只是南方的灯辉\n也能是近处的炉火\n照亮你的手\n也让它...",
+          "description": "写于 2012 年 12 月的一首短诗，附海子的《你的手》。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "My Hands",
+          "file": "my-hands.en.html",
+          "markdown": "my-hands.en.md",
+          "excerpt": "Do you feel heavy\nI want to hold you\nwith my hands\ncut away your unease with a winter wind like a blade\nand let your good dreams stay the night\nAre you tired\nI want you to cry all you need, and sleep in peace\nbetween my hands\nWhen the night has soaked the hem of an old dream\nwhen a bowl of congee steams the morning light soft\nI hope my hands\nare not only the glow of lamps in the south\nbut can also be a fire close at hand\nlighting your hands\nand letting them light...",
+          "description": "A short poem written in December 2012. Hai Zi's \"Your Hands\" is appended on the Chinese page.",
+          "image": "",
           "available": true
         }
       }
