@@ -33,8 +33,8 @@ Hand-authored pages outside this table: `series.html` and `tags.html` (redirects
 
 ### Article images
 
-- Article images live in the repository, at `blogs/assets/images/<slug>/`. Obsidian uploads them to R2; `scripts/localize_images.py <slug>` downloads an article's R2 images, writes web copies (sRGB, at most 1520 × 2026 px, progressive JPEG) and rewrites both language files to use them. Then run `make generate`.
-- `scripts/check_site.py` fails when an image an article shows is over 1 MB, and lists articles that still load images from R2 without failing.
+- Article images live in the repository, at `blogs/assets/images/<slug>/`. Obsidian uploads them to R2; `scripts/localize_images.py <slug>` downloads an article's R2 images, writes web copies (sRGB, at most 1520 × 2026 px, progressive JPEG) and rewrites both language files to use them. An animated GIF becomes a silent looping MP4 with a JPEG poster of the same name; the generator renders `![alt](<name>.mp4)` as `video.post-loop`, which `article.ts` plays like a GIF (paused with controls under reduced motion). Then run `make generate`.
+- `scripts/check_site.py` fails when an image or clip an article shows is over 1 MB, or a clip lacks its poster, size or text alternative, and lists articles that still load images from R2 without failing.
 - Images left on another host need their size recorded in `data/image_dimensions.json` (`scripts/update_image_dimensions.py`, part of `make generate`), or they shift the layout as they load.
 
 ### Languages

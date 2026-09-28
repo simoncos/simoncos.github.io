@@ -459,6 +459,33 @@ def check_blog_image_attributes(errors: list[str]) -> None:
                 )
 
 
+def check_blog_loop_videos(errors: list[str]) -> None:
+    """Looping clips (converted GIFs) follow the image rules: a local file
+    under 1 MB, a declared size, a text alternative, and a poster to show
+    before playing or when motion is reduced."""
+    for html_file in sorted((ROOT / "blogs").glob("*.html")):
+        doc = parse_html(html_file)
+        rel = html_file.relative_to(ROOT)
+        for tag, attrs in doc.tags:
+            if tag != "video":
+                continue
+            source = attrs.get("src", "")
+            label = f"{rel}: video {source!r}"
+            if not attrs.get("aria-label", "").strip():
+                errors.append(f"{label} missing aria-label (set the alt text in the source markdown)")
+            if not attrs.get("width") or not attrs.get("height"):
+                errors.append(f"{label} missing width/height (its .jpg poster gives them)")
+            if not resolve_local_html_image(html_file, attrs.get("poster", "")):
+                errors.append(f"{label} has no local poster; expected the .jpg of the same name")
+            local_path = resolve_local_html_image(html_file, source)
+            if not local_path:
+                errors.append(f"{label} is not a file in the repository")
+                continue
+            size = local_path.stat().st_size
+            if size > MAX_ARTICLE_IMAGE_BYTES:
+                errors.append(f"{label} is {size / 1e6:.1f} MB; article clips must stay under 1 MB")
+
+
 def r2_image_notes() -> list[str]:
     """Articles that still load images from R2. A note, not a failure."""
     notes = []
@@ -651,6 +678,7 @@ def main() -> int:
     check_preview_domains(errors)
     check_inline_event_handlers(errors)
     check_blog_image_attributes(errors)
+    check_blog_loop_videos(errors)
 
     notes = r2_image_notes()
     if notes:

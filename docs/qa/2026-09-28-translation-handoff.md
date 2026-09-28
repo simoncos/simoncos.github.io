@@ -39,7 +39,7 @@
 ## 图片与验证
 
 - 25 张静态图已按既有图片流程存放在 `blogs/assets/images/<slug>/`，每张小于 1 MB；中英文共享。
-- 百日记录的 7 张 GIF 保留原 R2 动画链接，尺寸已加入缓存。没有把动画压成静止图片；仍有外部资源依赖。发布前已确认 7 张 GIF 全部加载并解码成功，均为动图；合计约 51 MB，是否转成视频待作者决定。
+- 百日记录的 7 张 GIF 已转为站内循环 MP4，详见 [QA 报告](2026-09-28-redesign-and-article-publication.md#九篇旧文收录)。
 - 双语检查在译文补齐后全部通过。9 条英文 sitemap URL 已加入，`make check-all` 与 `git diff --check` 通过，双语跳转与手机阅读已复核。
 - `data/site.json` 系列英文简介、`llms.txt` 和 `agent-index.json` 中的 “In Chinese” 已改为双语说明。
 - 改版 MoA 发现的 6 项问题及其状态见 [QA 报告](2026-09-28-redesign-and-article-publication.md)。

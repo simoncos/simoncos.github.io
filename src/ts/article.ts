@@ -110,6 +110,39 @@
     if (window.location.hash) highlight(decodeURIComponent(window.location.hash.slice(1)));
     window.addEventListener('hashchange', () => highlight(decodeURIComponent(window.location.hash.slice(1))));
 
+    // ---- Looping clips ----------------------------------------------------
+
+    // Clips stand in for animated GIFs: silent, looping, no controls. A
+    // reader who prefers reduced motion keeps the controls and the poster.
+    // Click, Enter or Space pauses and resumes.
+    document.querySelectorAll<HTMLVideoElement>('video.post-loop').forEach((video) => {
+        if (reduced) return;
+        video.muted = true;
+        video.controls = false;
+        video.tabIndex = 0;
+        const toggle = () => {
+            if (video.paused) void video.play().catch(() => undefined);
+            else video.pause();
+        };
+        video.addEventListener('click', toggle);
+        video.addEventListener('keydown', (event) => {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            toggle();
+        });
+        const start = () => {
+            video.play().catch((error: DOMException) => {
+                // A refused autoplay (iOS Low Power Mode) brings the controls
+                // back so the clip can still be started. Other failures, such
+                // as Chrome pausing video in a background tab, are not refusals.
+                if (error && error.name === 'NotAllowedError') video.controls = true;
+            });
+        };
+        // A page opened in a background tab starts its clips when it is shown.
+        if (document.hidden) document.addEventListener('visibilitychange', start, { once: true });
+        else start();
+    });
+
     if (toTop) {
         toTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior });

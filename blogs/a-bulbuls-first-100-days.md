@@ -30,7 +30,7 @@ description: 从捡到一只幼鸟开始，记录小白头翁在家里的前一�
 
 ![小白头翁成长记录，Day 1 - May 23，第 4 张](assets/images/a-bulbuls-first-100-days/d99bd1d1907c4be6c442683be01458e2.jpg)
 
-![小白头翁成长记录，Day 1 - May 23，第 5 张](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/c90209eaa644d73267c9b9b4cf362f9c.gif)
+![小白头翁成长记录，Day 1 - May 23，第 5 张](assets/images/a-bulbuls-first-100-days/c90209eaa644d73267c9b9b4cf362f9c.mp4)
 
 ### Day 2 - May 24
 
@@ -61,7 +61,7 @@ description: 从捡到一只幼鸟开始，记录小白头翁在家里的前一�
 ![小白头翁成长记录，Day 9 - May 31，第 1 张](assets/images/a-bulbuls-first-100-days/bf1bfe646215be3d84ec4c5e91cf3b86.jpg)
 
 
-![小白头翁成长记录，Day 9 - May 31，第 2 张](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/f63dce05d3c86a3fa2b9f4e179a0ed12.gif)
+![小白头翁成长记录，Day 9 - May 31，第 2 张](assets/images/a-bulbuls-first-100-days/f63dce05d3c86a3fa2b9f4e179a0ed12.mp4)
 
 ### Day 10 - June 1
 
@@ -89,7 +89,7 @@ description: 从捡到一只幼鸟开始，记录小白头翁在家里的前一�
 
 从之前的贴地飞，变得非常会飞了，飞行范围已经跨房间了。我拍的慢动作视频里，他在阳光下转头、起飞、挥动翅膀，令人垂涎的鸟类天赋。
 
-![小白头翁成长记录，Day 50 - July 12，第 1 张](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/80f432ac21765f62e3aa5fe34f226917.gif)
+![小白头翁成长记录，Day 50 - July 12，第 1 张](assets/images/a-bulbuls-first-100-days/80f432ac21765f62e3aa5fe34f226917.mp4)
 
 ### Day 51 - July 13
 
@@ -101,7 +101,7 @@ description: 从捡到一只幼鸟开始，记录小白头翁在家里的前一�
 
 这时已经给他换上了崭新的大笼子，配食槽、水槽和一个鸟窝（它很快就学会晚上钻进去睡觉了）。这天把它放阳台上，又有两只同类过来嘎嘎嘎，相隔只有笼子的那几根铁丝而已。
 
-![小白头翁成长记录，Day 71 - August 1，第 1 张](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/0c9bb8249035ca0671b8a90e07defc68.gif)
+![小白头翁成长记录，Day 71 - August 1，第 1 张](assets/images/a-bulbuls-first-100-days/0c9bb8249035ca0671b8a90e07defc68.mp4)
 
 ### Day 72 - August 2
 
@@ -125,7 +125,7 @@ description: 从捡到一只幼鸟开始，记录小白头翁在家里的前一�
 
 又是明媚的一天，趁他不注意偷拍洗澡。
 
-![小白头翁成长记录，Day 79 - August 9，第 1 张](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/11a1eea6538195a33c0d6d4afaa115b2.gif)
+![小白头翁成长记录，Day 79 - August 9，第 1 张](assets/images/a-bulbuls-first-100-days/11a1eea6538195a33c0d6d4afaa115b2.mp4)
 
 ### Day 84 - August 14
 
@@ -137,7 +137,7 @@ description: 从捡到一只幼鸟开始，记录小白头翁在家里的前一�
 
 每到晴天的早上，他都喜欢躲到飘窗东侧晒几分钟太阳，羽毛展开、眼神迷离、小嘴微张...不知道的人说不定还以为是在孵蛋...其实他是在太阳能发电吧XD
 
-![小白头翁成长记录，Day 95 - August 25，第 1 张](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/439bf5c23ad5e58db5fe8de81a13b3a6.gif)
+![小白头翁成长记录，Day 95 - August 25，第 1 张](assets/images/a-bulbuls-first-100-days/439bf5c23ad5e58db5fe8de81a13b3a6.mp4)
 
 ### Day 99 - August 29
 
@@ -149,7 +149,7 @@ description: 从捡到一只幼鸟开始，记录小白头翁在家里的前一�
 
 前一日发现小区的树上掉了很多黑色小果子，有股清香味，这才注意到这就是网上说的女贞果，白头翁喜欢的果实之一，之前的大鸟黑屎估计也是它了。捡回来两颗放进食槽。隔了一会发现已经没了，这东西可真是杂食，前面都忘记提，每天我们全家开饭的时候他都会轮流飞到几个人肩膀上讨/抢各种各样的吃的，另外日常喜欢品尝的还包括我的袜子...真的是只馋鬼。今天又去捡了几颗，您慢用，另外，100天快乐。
 
-![小白头翁成长记录，Day 100 - August 30，第 1 张](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/b54caf37e69c485257df7bf8ff8f252a.gif)
+![小白头翁成长记录，Day 100 - August 30，第 1 张](assets/images/a-bulbuls-first-100-days/b54caf37e69c485257df7bf8ff8f252a.mp4)
 
 ---
 

@@ -704,9 +704,43 @@ def resolve_local_article_image(src):
     return candidate if candidate.exists() else None
 
 
+def render_loop_videos(soup):
+    """Turn `![alt](clip.mp4)` into a silent looping clip.
+
+    Clips stand in for animated GIFs (scripts/localize_images.py converts
+    them). The .jpg of the same name is the poster and gives the clip its
+    size. Controls stay in the HTML for readers without scripts; article.js
+    hides them and plays the clip unless the reader prefers reduced motion.
+    """
+    for image in soup.find_all('img'):
+        source = image.get('src') or ''
+        parsed = urlparse(source)
+        if not parsed.path.lower().endswith('.mp4'):
+            continue
+        alt = (image.get('alt') or '').strip()
+        video = soup.new_tag('video')
+        video['class'] = 'post-loop'
+        video['src'] = source
+        poster = parsed._replace(path=parsed.path[:-len('.mp4')] + '.jpg').geturl()
+        poster_path = resolve_local_article_image(poster)
+        if poster_path:
+            video['poster'] = poster
+            dimensions = read_image_dimensions(poster_path)
+            if dimensions:
+                video['width'], video['height'] = (str(value) for value in dimensions)
+        for flag in ('controls', 'loop', 'muted', 'playsinline'):
+            video[flag] = ''
+        video['preload'] = 'metadata'
+        if alt:
+            video['aria-label'] = alt
+            video.string = alt
+        image.replace_with(video)
+
+
 def optimize_article_images(html_content):
     """Add browser image scheduling hints to generated article HTML."""
     soup = BeautifulSoup(html_content, 'html.parser')
+    render_loop_videos(soup)
     dimension_cache = {}
     remote_dimensions = load_remote_image_dimensions()
 
@@ -784,7 +818,7 @@ def make_links_absolute(html_content, article_url):
     site_base = absolute_site_url().rstrip('/')
     soup = BeautifulSoup(html_content, 'html.parser')
     for tag in soup.find_all(True):
-        for attr in ('href', 'src'):
+        for attr in ('href', 'src', 'poster'):
             val = tag.get(attr)
             if not val:
                 continue

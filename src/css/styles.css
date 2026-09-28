@@ -3405,11 +3405,17 @@ button {
     margin: 2em 0;
 }
 
-.post-content img {
+.post-content img,
+.post-content video.post-loop {
     display: block;
     height: auto;
     border-radius: 12px;
     margin: 1.4em auto;
+}
+
+.post-content video.post-loop {
+    max-width: 100%;
+    background: var(--fill);
 }
 
 .post-content figure {

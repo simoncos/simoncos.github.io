@@ -12,9 +12,13 @@ one, writes a web copy and points the article at it:
   400 KB; PNG sources (screenshots, posters with type) are quality 90 with
   4:4:4 chroma so text stays sharp;
 - a JPEG under 400 KB that needs none of that is only stripped of metadata,
-  losslessly, with jpegtran.
+  losslessly, with jpegtran;
+- an animated GIF becomes a silent looping H.264 MP4 (CRF 23, about a
+  twentieth of the GIF), with its first frame as a JPEG poster of the same
+  name. The article keeps `![alt](<name>.mp4)`; generate_blog_pages.py renders
+  it as a video that plays like the GIF did.
 
-Copies land in blogs/assets/images/<slug>/<R2 file name>.jpg, and every
+Copies land in blogs/assets/images/<slug>/<R2 file name>.jpg (or .mp4), and every
 Markdown file of the article (both languages) is rewritten to use them. Run
 `make generate` afterwards. scripts/check_site.py fails on an article image
 over 1 MB and lists the articles that still load images from R2.
@@ -23,7 +27,7 @@ Usage:
     python3 scripts/localize_images.py <slug> [<slug> ...]
     python3 scripts/localize_images.py blogs/<slug>.md --dry-run
 
-Needs Pillow; jpegtran is optional.
+Needs Pillow; jpegtran is optional; ffmpeg is needed for animated GIFs.
 """
 
 from __future__ import annotations
@@ -34,6 +38,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse
@@ -98,13 +103,43 @@ def download(url: str) -> bytes:
         return response.read()
 
 
+def is_animated(data: bytes) -> bool:
+    from PIL import Image
+
+    return bool(getattr(Image.open(io.BytesIO(data)), "is_animated", False))
+
+
+def encode_animation(data: bytes) -> tuple[bytes, bytes, str]:
+    """Return (MP4, JPEG poster, what was done) for an animated image.
+
+    H.264 needs even dimensions, so an odd row or column is cropped rather
+    than the frame resampled. The poster is the first frame at the same size.
+    """
+    if not shutil.which("ffmpeg"):
+        raise ValueError("animated image and no ffmpeg; install it so the animation survives")
+    even = "crop=trunc(iw/2)*2:trunc(ih/2)*2:0:0"
+    with tempfile.TemporaryDirectory() as directory:
+        source, clip, poster = (Path(directory) / name for name in ("in", "out.mp4", "poster.jpg"))
+        source.write_bytes(data)
+        subprocess.run(
+            ["ffmpeg", "-v", "error", "-y", "-i", str(source), "-vf", even, "-an",
+             "-c:v", "libx264", "-preset", "slow", "-crf", "23", "-pix_fmt", "yuv420p",
+             "-movflags", "+faststart", str(clip)],
+            check=True, capture_output=True,
+        )
+        subprocess.run(
+            ["ffmpeg", "-v", "error", "-y", "-i", str(source), "-vf", even,
+             "-frames:v", "1", "-q:v", "3", str(poster)],
+            check=True, capture_output=True,
+        )
+        return clip.read_bytes(), poster.read_bytes(), "looping MP4 (H.264 CRF 23) + JPEG poster"
+
+
 def encode(data: bytes, suffix: str) -> tuple[bytes, str, str]:
-    """Return (bytes, file extension, what was done) for one source image."""
+    """Return (bytes, file extension, what was done) for one still image."""
     from PIL import Image, ImageCms, ImageOps
 
     image = Image.open(io.BytesIO(data))
-    if getattr(image, "is_animated", False):
-        raise ValueError("animated image; copy it by hand so the animation survives")
     image.load()
     icc = image.info.get("icc_profile")
     orientation = image.getexif().get(0x0112, 1)
@@ -180,7 +215,7 @@ def localize(slug: str, dry_run: bool) -> bool:
     ok = True
     for url in urls:
         suffix = Path(urlparse(url).path).suffix.lower()
-        existing = [target_dir / local_name(url, ext) for ext in (".jpg", ".png")]
+        existing = [target_dir / local_name(url, ext) for ext in (".mp4", ".jpg", ".png")]
         done = next((path for path in existing if path.exists()), None)
         if done:
             replacements[url] = done.relative_to(BLOGS_DIR).as_posix()
@@ -191,7 +226,12 @@ def localize(slug: str, dry_run: bool) -> bool:
             continue
         try:
             original = download(url)
-            data, extension, how = encode(original, suffix)
+            if is_animated(original):
+                data, poster, how = encode_animation(original)
+                extension = ".mp4"
+            else:
+                data, extension, how = encode(original, suffix)
+                poster = None
         except Exception as error:  # noqa: BLE001 - report and keep going
             print(f"  ! {url}: {error}")
             ok = False
@@ -199,6 +239,8 @@ def localize(slug: str, dry_run: bool) -> bool:
         target = target_dir / local_name(url, extension)
         target_dir.mkdir(parents=True, exist_ok=True)
         target.write_bytes(data)
+        if poster is not None:
+            target.with_suffix(".jpg").write_bytes(poster)
         replacements[url] = target.relative_to(BLOGS_DIR).as_posix()
         warning = "  ! over 1 MB, make check will fail" if len(data) > MAX_BYTES else ""
         print(f"  {target.name}: {human(len(original))} -> {human(len(data))}, {how}{warning}")
