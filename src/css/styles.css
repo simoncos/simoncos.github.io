@@ -1760,7 +1760,7 @@ button {
 }
 
 .page-h1 {
-    font-size: clamp(52px, 10vw, 150px);
+    font-size: clamp(44px, 7vw, 104px);
     font-weight: 500;
     line-height: 0.92;
     letter-spacing: -0.06em;
@@ -2393,7 +2393,7 @@ button {
 }
 
 .ahead-n {
-    font-size: 0.2em;
+    font-size: max(12px, 0.2em);
     letter-spacing: 0;
     vertical-align: top;
     margin-left: 8px;
@@ -2618,10 +2618,10 @@ button {
     border: 0;
     padding: 0;
     cursor: pointer;
-    font-size: clamp(24px, 3.2vw, 46px);
+    font-size: clamp(20px, 2.2vw, 30px);
     font-weight: 500;
-    line-height: 1.06;
-    letter-spacing: -0.04em;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
     text-wrap: balance;
 }
 
@@ -3753,7 +3753,7 @@ button {
 }
 
 .fav-h1 {
-    font-size: clamp(52px, 10vw, 150px);
+    font-size: clamp(44px, 7vw, 104px);
     font-weight: 500;
     line-height: 0.92;
     letter-spacing: -0.04em;

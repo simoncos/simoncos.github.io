@@ -1,7 +1,7 @@
 ---
 tags: thinking,design
 date: 2017-05-10
-updated: 2026-09-28
+updated: 2026-09-29
 translation: Claude Opus 5.5
 description: Why do we still agonize when feasible solutions are already in front of us? Value functions and systems of preferences, and what they say about choice, optimal solutions and model complexity.
 series: 问题解决与设计
@@ -30,7 +30,7 @@ Let's add some seasoning, and here comes a wave of questions:
 
 1. The five are strangers to you, and the one is a relative of yours
 2. 1,000,000 strangers, and one relative of yours
-3. Five on one side and one on the other, all strangers, but you know that if you press the button you will in effect be actively killing five innocent people and will never have a clear conscience again; whereas if you do nothing, at least you haven't actively chosen to kill anyone, and though it will be hard, it seems bearable
+3. Five on one side and one on the other, all strangers, but you know that if you press the button you will in effect be actively killing one innocent person and will never have a clear conscience again; whereas if you do nothing, at least you haven't actively chosen to kill anyone, and though it will be hard, it seems bearable
 4. (and the more you think, the scarier it gets...)
 
 In knots now?
@@ -53,7 +53,7 @@ where:
 
 There you go. All you need is to give this value function the parameters you like, a1, a2 and a3, and you have built your own model. With it, every problem above has an optimal solution you can easily compute.
 
-For example, if your parameters are 1, 100 and -2, then for problem 1, the value of saving the five passers-by is 1\*5 + 100\*0 + (-2\*1) = 3, and the value of saving your one relative is 1\*1 + 100\*1 + (-2\*5) = 91. 91 > 3, so without a doubt you save your relative.
+For example, if your parameters are 1, 100 and -2, then for problem 1, the value of saving the five passers-by is 1\*5 + 100\*0 + (-2\*1) = 3, and the value of saving your one relative is 1\*1 + 100\*1 + (-2\*0) = 101. 101 > 3, so without a doubt you save your relative.
 
 You can also set up a more complex value function, with **more independent variables**, say, or **non-linearity**:
 
@@ -63,7 +63,7 @@ Model 2. The number of people you save has diminishing marginal returns. Saving 
 
 Model 3. The more of your relatives you save, the more pain you feel for having actively killed others:
 
-> f(x1, x2, x3) = a1x1 + a2x2 + a3x1x3
+> f(x1, x2, x3) = a1x1 + a2x2 + a3x2x3
 
 Maybe this example is too gory, and absolute rationality is hard for us. But what I want to say should be clear: for many problems that tie us in knots, the root of the knot is irrationality, and the way out is to build a formal, quantified model and use a value function to evaluate the choices.
 

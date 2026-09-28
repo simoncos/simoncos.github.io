@@ -1,7 +1,7 @@
 ---
 tags: thinking,design
 date: 2016-10-24
-updated: 2026-09-28
+updated: 2026-09-29
 translation: Claude Opus 5.5
 description: Why does the same problem get harder or easier depending on how it is put? From problem situations, information and search paths to interaction design.
 series: 问题解决与设计
