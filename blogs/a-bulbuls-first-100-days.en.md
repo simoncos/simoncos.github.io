@@ -31,7 +31,7 @@ It didn't care much for the cardboard box, though. Whenever I put it inside, it 
 
 ![The young bulbul, Day 1 - May 23, picture 4](assets/images/a-bulbuls-first-100-days/d99bd1d1907c4be6c442683be01458e2.jpg)
 
-![The young bulbul, Day 1 - May 23, picture 5](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/c90209eaa644d73267c9b9b4cf362f9c.gif)
+![The young bulbul, Day 1 - May 23, picture 5](assets/images/a-bulbuls-first-100-days/c90209eaa644d73267c9b9b4cf362f9c.mp4)
 
 ### Day 2 - May 24
 
@@ -62,7 +62,7 @@ The tail feathers were another centimetre or two longer. It became hooked on squ
 ![The young bulbul, Day 9 - May 31, picture 1](assets/images/a-bulbuls-first-100-days/bf1bfe646215be3d84ec4c5e91cf3b86.jpg)
 
 
-![The young bulbul, Day 9 - May 31, picture 2](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/f63dce05d3c86a3fa2b9f4e179a0ed12.gif)
+![The young bulbul, Day 9 - May 31, picture 2](assets/images/a-bulbuls-first-100-days/f63dce05d3c86a3fa2b9f4e179a0ed12.mp4)
 
 ### Day 10 - June 1
 
@@ -90,7 +90,7 @@ A bright, sunny day. He had a happy little bath in a fruit bowl bigger than the 
 
 From skimming along the floor, he had become a very good flier, and his range now crossed rooms. In the slow-motion video I shot, he turns his head in the sunlight, takes off and beats his wings: an enviable bird talent.
 
-![The young bulbul, Day 50 - July 12, picture 1](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/80f432ac21765f62e3aa5fe34f226917.gif)
+![The young bulbul, Day 50 - July 12, picture 1](assets/images/a-bulbuls-first-100-days/80f432ac21765f62e3aa5fe34f226917.mp4)
 
 ### Day 51 - July 13
 
@@ -102,7 +102,7 @@ Relatives (maybe) came looking for him and squawked away for ages on the clothes
 
 By now he had a brand-new big cage, with a food trough, a water trough and a nest box (he soon learned to crawl into it to sleep at night). That day I put him out on the balcony, and two more of his kind came over to squawk, separated from him by nothing but the wires of the cage.
 
-![The young bulbul, Day 71 - August 1, picture 1](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/0c9bb8249035ca0671b8a90e07defc68.gif)
+![The young bulbul, Day 71 - August 1, picture 1](assets/images/a-bulbuls-first-100-days/0c9bb8249035ca0671b8a90e07defc68.mp4)
 
 ### Day 72 - August 2
 
@@ -126,7 +126,7 @@ The little one's colouring and plumage had actually been changing all along. The
 
 Another bright day. I secretly filmed his bath while he wasn't looking.
 
-![The young bulbul, Day 79 - August 9, picture 1](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/11a1eea6538195a33c0d6d4afaa115b2.gif)
+![The young bulbul, Day 79 - August 9, picture 1](assets/images/a-bulbuls-first-100-days/11a1eea6538195a33c0d6d4afaa115b2.mp4)
 
 ### Day 84 - August 14
 
@@ -138,7 +138,7 @@ Speaking of coaxing, a couple of days ago I found him standing on my chair, prac
 
 Every sunny morning he likes to tuck himself into the east side of the bay window to sunbathe for a few minutes, feathers spread, eyes glazed, beak slightly open... Anyone who didn't know might think he was sitting on eggs... He's actually charging his solar panels XD
 
-![The young bulbul, Day 95 - August 25, picture 1](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/439bf5c23ad5e58db5fe8de81a13b3a6.gif)
+![The young bulbul, Day 95 - August 25, picture 1](assets/images/a-bulbuls-first-100-days/439bf5c23ad5e58db5fe8de81a13b3a6.mp4)
 
 ### Day 99 - August 29
 
@@ -150,7 +150,7 @@ He's so obsessed with my phone that it's very hard to catch a full-body shot of 
 
 The day before, I noticed lots of little black berries had fallen from the trees in our compound, with a faint fresh smell. Only then did I realize these were the privet berries I'd read about online, one of the fruits bulbuls like, and probably also what the big birds' black droppings came from. I brought two back and put them in his food trough. A little later they were gone. He really eats everything. I forgot to mention earlier: every day, when our family sits down to eat, he flies from shoulder to shoulder, begging for or grabbing all sorts of food, and his everyday tastings also include my socks... A real little glutton. Today I went and picked up a few more. Enjoy, sir, and happy 100 days.
 
-![The young bulbul, Day 100 - August 30, picture 1](https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/b54caf37e69c485257df7bf8ff8f252a.gif)
+![The young bulbul, Day 100 - August 30, picture 1](assets/images/a-bulbuls-first-100-days/b54caf37e69c485257df7bf8ff8f252a.mp4)
 
 ---
 

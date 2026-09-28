@@ -1,5 +1,6 @@
 import importlib.util
 import io
+import shutil
 import sys
 import tempfile
 import unittest
@@ -78,6 +79,20 @@ class LocalizeImagesTests(unittest.TestCase):
         self.assertEqual(extension, ".png")
         self.assertIn("transparency", how)
 
+    @unittest.skipUnless(Image and shutil.which("ffmpeg"), "needs Pillow and ffmpeg")
+    def test_an_animated_gif_becomes_a_clip_with_a_poster(self):
+        frames = [Image.new("RGB", (31, 21), (i * 60, 0, 0)) for i in range(4)]
+        source = io.BytesIO()
+        frames[0].save(source, "GIF", save_all=True, append_images=frames[1:], duration=100, loop=0)
+
+        self.assertTrue(localize_images.is_animated(source.getvalue()))
+        clip, poster, how = localize_images.encode_animation(source.getvalue())
+
+        self.assertEqual(clip[4:8], b"ftyp")
+        # H.264 needs even sides: the odd row and column are cropped.
+        self.assertEqual(Image.open(io.BytesIO(poster)).size, (30, 20))
+        self.assertIn("MP4", how)
+
 
 class ArticleImageCheckTests(unittest.TestCase):
     def test_an_article_image_over_one_megabyte_fails_the_check(self):
@@ -101,6 +116,27 @@ class ArticleImageCheckTests(unittest.TestCase):
         self.assertEqual(len(errors), 1)
         self.assertIn("big.jpg", errors[0])
         self.assertIn("1.1 MB", errors[0])
+
+    def test_a_clip_needs_a_poster_a_label_and_a_local_file(self):
+        check_site = load_check_site()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir).resolve()
+            (temp_root / "blogs/assets/images/post").mkdir(parents=True)
+            (temp_root / "blogs/assets/images/post/ok.mp4").write_bytes(b"\0" * 1_000)
+            (temp_root / "blogs/assets/images/post/ok.jpg").write_bytes(b"\0" * 100)
+            (temp_root / "blogs/assets/images/post/bare.mp4").write_bytes(b"\0" * 1_000)
+            (temp_root / "blogs/post.html").write_text(
+                "<!doctype html>"
+                '<video class="post-loop" src="assets/images/post/ok.mp4" poster="assets/images/post/ok.jpg"'
+                ' width="30" height="20" aria-label="a bird"></video>'
+                '<video class="post-loop" src="assets/images/post/bare.mp4"></video>'
+            )
+            check_site.ROOT = temp_root
+            errors = []
+            check_site.check_blog_loop_videos(errors)
+
+        self.assertEqual(len(errors), 3)
+        self.assertTrue(all("bare.mp4" in error for error in errors))
 
 
 if __name__ == "__main__":
