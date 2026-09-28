@@ -83,6 +83,9 @@
     root.classList.add('js');
     const title = document.querySelector('title');
     if (lang === 'zh' && title && title.getAttribute('data-zh')) {
+        // Setting document.title rewrites <title>, so keep the English one
+        // for site.js to switch back to.
+        if (!title.hasAttribute('data-en')) title.setAttribute('data-en', title.textContent || '');
         document.title = title.getAttribute('data-zh') || document.title;
     }
 

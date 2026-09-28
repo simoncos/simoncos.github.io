@@ -311,6 +311,9 @@
 
     document.addEventListener('keydown', (event) => {
         if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) return;
+        // Keys belong to the mobile menu while it covers the page, whichever
+        // listener runs first.
+        if (document.documentElement.classList.contains('menu-open')) return;
         const target = event.target as HTMLElement;
         if (target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
         if (work.classList.contains('is-topic')) {

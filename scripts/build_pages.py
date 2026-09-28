@@ -50,8 +50,11 @@ def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def href_attrs(value: Any, prefix: str = "") -> str:
-    """href for English, with the Chinese target swapped in by site.js."""
+def href_attrs(value: Any, prefix: str = "", **extra: tuple[str, str]) -> str:
+    """href for English, with the Chinese target swapped in by site.js.
+
+    `extra` takes other per-language attributes of the same element, since an
+    element can carry only one data-i18n list."""
     en, zh = lang_pair(value)
 
     def resolve(target: str) -> str:
@@ -59,7 +62,7 @@ def href_attrs(value: Any, prefix: str = "") -> str:
             return target
         return f"{prefix}{target}"
 
-    return i18n_attrs(href=(resolve(en), resolve(zh)))
+    return i18n_attrs(href=(resolve(en), resolve(zh)), **extra)
 
 
 def pick(value: Any, lang: str) -> str:
@@ -165,6 +168,10 @@ def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str
     stage = []
     for i, panel in enumerate(panels):
         title_en, title_zh = lang_pair(panel["title"])
+        kind_en, kind_zh = lang_pair(panel["kind"])
+        # A folded panel shows its title only in aria-hidden copies, so the
+        # link names the work itself.
+        label = (f"{title_en}, {kind_en}, {panel['date']}", f"{title_zh}，{kind_zh}，{panel['date']}")
         on = " is-on" if i == 0 else ""
         bars.append(
             f'                <button class="sel-bar{on}" type="button" data-i="{i}"'
@@ -172,7 +179,7 @@ def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str
             '<span class="sel-track"><span class="sel-fill"></span></span></button>'
         )
         stage.append("\n".join([
-            f'            <a class="panel{on}" data-i="{i}"{href_attrs(panel["href"])}>',
+            f'            <a class="panel{on}" data-i="{i}"{href_attrs(panel["href"], aria_label=label)}>',
             f'                <img class="panel-img" src="{esc(panel["img"])}" alt="" decoding="async">',
             '                <span class="panel-shade"></span>',
             f'                <span class="panel-top"><span>{i + 1:02d}</span>'
@@ -676,7 +683,8 @@ def render_about(config: dict[str, Any], site: dict[str, Any]) -> str:
         '    <section class="contacts">',
         f'        <button class="copy-btn" type="button" data-copy="{esc(about["email"])}">'
         f'<span>{esc(about["email"])}</span><span class="copy-state">'
-        f'<span class="copy-idle">{bi("Copy", "复制")}</span><span class="copy-done">{bi("Copied", "已复制")}</span></span></button>',
+        f'<span class="copy-idle">{bi("Copy", "复制")}</span><span class="copy-done">{bi("Copied", "已复制")}</span>'
+        f'<span class="copy-fail">{bi("Copy failed", "复制失败")}</span></span></button>',
         f"        {contacts}",
         "    </section>",
         "</main>",

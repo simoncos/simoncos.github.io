@@ -42,6 +42,6 @@
 - 百日记录的 7 张 GIF 保留原 R2 动画链接，尺寸已加入缓存。没有把动画压成静止图片；仍有外部资源依赖。发布前已确认 7 张 GIF 全部加载并解码成功，均为动图；合计约 51 MB，是否转成视频待作者决定。
 - 双语检查在译文补齐后全部通过。9 条英文 sitemap URL 已加入，`make check-all` 与 `git diff --check` 通过，双语跳转与手机阅读已复核。
 - `data/site.json` 系列英文简介、`llms.txt` 和 `agent-index.json` 中的 “In Chinese” 已改为双语说明。
-- 改版 MoA 发现的 6 项问题见 [QA 报告](2026-09-28-redesign-and-article-publication.md)，尚未实施修复。
+- 改版 MoA 发现的 6 项问题及其状态见 [QA 报告](2026-09-28-redesign-and-article-publication.md)。
 
 整理中文稿的 Codex 任务已停止生成以避免与并行翻译相互覆盖；其 `127.0.0.1:5199` 临时预览已关闭并释放。未跟踪的 `个人网站视觉重设计.zip` 是原有文件，本轮未修改。

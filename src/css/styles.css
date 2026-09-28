@@ -1165,11 +1165,14 @@ button {
 }
 
 .copy-btn .copy-done,
-.copy-btn.is-copied .copy-idle {
+.copy-btn .copy-fail,
+.copy-btn.is-copied .copy-idle,
+.copy-btn.is-failed .copy-idle {
     display: none;
 }
 
-.copy-btn.is-copied .copy-done {
+.copy-btn.is-copied .copy-done,
+.copy-btn.is-failed .copy-fail {
     display: inline;
 }
 

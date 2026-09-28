@@ -1,17 +1,17 @@
 # 网站改版 QA 与旧文收录记录 · 2026-09-28
 
-本轮由三位独立审查员分别检查浏览器交互、构建与链接、内容结构与可访问性。改版基线为 `60660bc0cebb84125b40a9455a9c2277e6094b30`。审查员只读检查；下方问题尚未修复。文章收录是同一轮中独立实施的变更，不作为改版缺陷的依据。
+本轮由三位独立审查员分别检查浏览器交互、构建与链接、内容结构与可访问性。改版基线为 `60660bc0cebb84125b40a9455a9c2277e6094b30`。审查员只读检查。前五项已于同日修复并在本地浏览器复核；第六项（发布不依赖检查）需要改仓库的 Pages 设置，待用户决定。文章收录是同一轮中独立实施的变更，不作为改版缺陷的依据。
 
 ## 改版发现
 
-| 优先级 | 问题与复现 | 证据 | 修改入口 |
-|---|---|---|---|
-| P2 | 手机打开 `gallery.html#projects`，打开菜单后按 Esc；菜单关闭的同时退出 Projects 分类，hash 消失，焦点转到作品转盘。 | 线上浏览器 390×844 复现；菜单与 Work 两个文档级处理器均响应同一事件。 | `src/ts/site.ts:151`、`src/ts/work.ts:312` |
-| P2 | 首页折叠作品链接的可访问名称只有序号、类型和日期，缺少作品名称。标题副本 `aria-hidden`，正文标题随折叠隐藏。 | 线上桌面与手机 AX 树复现；如“01 视觉随笔 · 2026-04-23”。 | `scripts/build_pages.py:185`、`src/css/styles.css:881` |
-| P2 | 键盘激活文章目录后仅滚动，焦点仍在目录；下一次 Tab 进入下个目录项。手机收起目录后焦点落回 BODY。 | 线上最新中文文章桌面与手机复现；脚注同用此跳转函数，但脚注未单独做浏览器复现。 | `src/ts/article.ts:58` |
-| P3 | 从 `about.html?lang=zh` 切到 EN，正文与根语言变为英文，标签页标题仍为“关于 · simoncos”。 | 线上浏览器及最小 DOM 模拟复现；Articles 同样受影响。 | `src/ts/theme-init.ts:84`、`src/ts/site.ts:39` |
-| P2 | About 邮箱复制失败仍显示“已复制”。写剪贴板拒绝或异常后仍设置成功状态。 | 源码及拒绝 Promise 的最小 DOM 模拟；未操作真实剪贴板。 | `src/ts/site.ts:375` |
-| P2 | 站点检查与 Pages 发布独立运行，检查失败不能阻止直接推送先上线。 | 精确基线的 Pages 于 2026-09-27 15:45:10 UTC 完成，Site checks 在 15:45:20 UTC 才完成；分支 API 显示 master 未保护。两个工作流本次均成功，未发现由此导致的线上损坏。 | `.github/workflows/site-check.yml:3`；部署应依赖检查成功，或建立强制 PR/check 发布规则。 |
+| 优先级 | 问题与复现 | 证据 | 修改入口 | 状态 |
+|---|---|---|---|---|
+| P2 | 手机打开 `gallery.html#projects`，打开菜单后按 Esc；菜单关闭的同时退出 Projects 分类，hash 消失，焦点转到作品转盘。 | 线上浏览器 390×844 复现；菜单与 Work 两个文档级处理器均响应同一事件。 | `src/ts/site.ts:151`、`src/ts/work.ts:312` | 已修复：菜单处理 Esc 时 `preventDefault()`，Work 在菜单打开时不处理按键。复核：390×844 下按 Esc 只关菜单，`#projects` 保留，焦点回到菜单按钮；再按一次 Esc 才退出分类。 |
+| P2 | 首页折叠作品链接的可访问名称只有序号、类型和日期，缺少作品名称。标题副本 `aria-hidden`，正文标题随折叠隐藏。 | 线上桌面与手机 AX 树复现；如“01 视觉随笔 · 2026-04-23”。 | `scripts/build_pages.py:185`、`src/css/styles.css:881` | 已修复：五个作品链接都有中英文 `aria-label`（作品名、类型、日期），如“十年睡眠档案：数据分析，视觉随笔，2026-04-23”。 |
+| P2 | 键盘激活文章目录后仅滚动，焦点仍在目录；下一次 Tab 进入下个目录项。手机收起目录后焦点落回 BODY。 | 线上最新中文文章桌面与手机复现；脚注同用此跳转函数，但脚注未单独做浏览器复现。 | `src/ts/article.ts:58` | 已修复：跳转后焦点移到目标（目录标题或脚注）。复核：1280 宽回车跳到标题，下一次 Tab 进入该节正文第一个链接；390 宽收起目录后焦点在标题上，不落回 BODY。 |
+| P3 | 从 `about.html?lang=zh` 切到 EN，正文与根语言变为英文，标签页标题仍为“关于 · simoncos”。 | 线上浏览器及最小 DOM 模拟复现；Articles 同样受影响。 | `src/ts/theme-init.ts:84`、`src/ts/site.ts:39` | 已修复：`theme-init` 改写标题前把英文标题存入 `data-en`。复核：`about.html?lang=zh` 切到 EN 后标题为“About · simoncos”，再切回为“关于 · simoncos”。 |
+| P2 | About 邮箱复制失败仍显示“已复制”。写剪贴板拒绝或异常后仍设置成功状态。 | 源码及拒绝 Promise 的最小 DOM 模拟；未操作真实剪贴板。 | `src/ts/site.ts:375` | 已修复：只在写入成功时显示“已复制”；剪贴板接口被拒时改用 `execCommand` 复制，仍失败则显示“复制失败”。复核：在 DOM 中模拟三种情况，显示均正确；未操作真实剪贴板。 |
+| P2 | 站点检查与 Pages 发布独立运行，检查失败不能阻止直接推送先上线。 | 精确基线的 Pages 于 2026-09-27 15:45:10 UTC 完成，Site checks 在 15:45:20 UTC 才完成；分支 API 显示 master 未保护。两个工作流本次均成功，未发现由此导致的线上损坏。 | `.github/workflows/site-check.yml:3`；部署应依赖检查成功，或建立强制 PR/check 发布规则。 | 待定：需要把 Pages 来源改为 GitHub Actions，由检查通过后的部署任务发布。 |
 
 工作流证据：[Pages](https://github.com/simoncos/simoncos.github.io/actions/runs/36330680029)、[Site checks](https://github.com/simoncos/simoncos.github.io/actions/runs/36330681941)。文件行号针对改版基线。
 
