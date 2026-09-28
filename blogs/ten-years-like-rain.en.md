@@ -1,7 +1,7 @@
 ---
 tags: life
 date: 2018-05-12
-updated: 2026-09-28
+updated: 2026-09-29
 translation: Claude Opus 5.5
 description: Ten years after the Wenchuan earthquake, an ordinary person who lived through it looks back: history keeps the outline and the verdict, and personal memory keeps the details that still hold warmth.
 ---
@@ -18,7 +18,7 @@ Today it is exactly ten years since the Wenchuan earthquake. What have those wor
 
 > As of 12:00 on 18 September 2008, the Wenchuan earthquake had killed 69,227 people, injured 374,643 and left 17,923 missing. It was the most destructive earthquake since the founding of the People's Republic of China, and the deadliest since the Tangshan earthquake. Direct economic losses in the disaster areas of Sichuan, Gansu, Shaanxi and other provinces totalled 845.1 billion yuan, and health care, housing, school buildings, communications, transport, public order, the landscape, water works, the environment and ethnic minority cultures in the disaster areas were severely damaged. The disaster stirred a strong public response, and donations poured in from across China and around the world, totalling more than 50 billion yuan. The Chinese military mobilized its largest force in peacetime for the relief effort, and large numbers of Chinese volunteers, along with professional humanitarian rescue teams from all over China and from other countries, joined in. After the earthquake, the government of the People's Republic of China announced it would invest one trillion yuan and rebuild the disaster areas over three years on the principle of "one province helps one county", aiming largely to finish by 2010. In early 2012, Jiang Jufeng, then governor of Sichuan, announced that reconstruction was complete.
 
-These are the first two paragraphs of the Chinese Wikipedia article on the Wenchuan earthquake. For Chinese people, 2008 is probably a year still fresh in memory: the snowstorms in March, the earthquake in May, the Olympics in August, great highs and great lows. To people untouched by the disasters and not directly part of the Olympic celebrations, what do these events look like? Normally, much like the text above, or even more symbolic. Is there anything wrong with that? Of course not.
+These are the first two paragraphs of the Chinese Wikipedia article on the Wenchuan earthquake. For Chinese people, 2008 is probably a year still fresh in memory: the snowstorms at the start of the year, the earthquake in May, the Olympics in August, great highs and great lows. To people untouched by the disasters and not directly part of the Olympic celebrations, what do these events look like? Normally, much like the text above, or even more symbolic. Is there anything wrong with that? Of course not.
 
 I can still recall scraps of how history books and documentaries described the Tangshan earthquake: people sound asleep in the middle of the night, the ground suddenly splitting open, derailed trains, casualty figures repeated again and again, and the huge rescue operation. For me it was only a disaster from decades ago and a thousand miles away. It appeared as a question on an exam paper or a topic at the dinner table, and then I put it out of my mind. Time forms an absolutely solid barrier that fixes history in a display case, where people can look at it without it shaking the reality they live in now. When everyone who lived through a piece of history has left this world, all the actual memories are gone too, and only the narratives remain. Do these narratives ask anything of me? Nothing at all.
 

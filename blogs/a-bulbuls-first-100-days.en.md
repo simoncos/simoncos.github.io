@@ -1,7 +1,7 @@
 ---
 tags: life
 date: 2020-08-31
-updated: 2026-09-28
+updated: 2026-09-29
 translation: Claude Opus 5.5
 description: From picking up a fledgling onwards, the little bulbul's first hundred days at home: eating, learning to fly, bathing, singing, and the closeness that slowly grew between a person and a bird.
 ---

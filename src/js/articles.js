@@ -78,14 +78,13 @@
         row.querySelectorAll('.arow-title, .arow-toggle').forEach((button) => {
             button.addEventListener('click', () => setOpen(row));
         });
-        // Hovering a row dims the others, except the other parts of its series.
+        // Hovering a row dims all the others. Series parts used to stay lit
+        // together, which read as two rows hovered at once; the series pill
+        // already shows the relation.
         row.addEventListener('mouseenter', () => {
             if (!window.matchMedia('(hover: hover)').matches)
                 return;
-            const series = row.dataset.series;
-            rows.forEach((other) => {
-                other.classList.toggle('is-dim', other !== row && !(series && other.dataset.series === series));
-            });
+            rows.forEach((other) => other.classList.toggle('is-dim', other !== row));
         });
         row.addEventListener('mouseleave', () => rows.forEach((other) => other.classList.remove('is-dim')));
     });

@@ -32,10 +32,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
-    <script src="../src/js/theme-init.js?v=20260928a"></script>
-    <link rel="stylesheet" href="../src/css/styles.css?v=20260928a">
-    <script src="../src/js/site.js?v=20260928a" defer></script>
-    <script src="../src/js/article.js?v=20260928a" defer></script>
+    <script src="../src/js/theme-init.js?v=20260928b"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20260928b">
+    <script src="../src/js/site.js?v=20260928b" defer></script>
+    <script src="../src/js/article.js?v=20260928b" defer></script>
     <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
     <!-- site-shell:resources:end -->
 </head>
@@ -79,7 +79,7 @@
             <div class="article-main">
                 <div class="article-meta">
                     <span class="meta-item"><span class="k">创建</span><span class="num">2017-05-10</span></span>
-                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-09-28</span></span>
+                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-09-29</span></span>
                     <span class="meta-item"><span class="k">阅读</span>6 分钟</span>
                     <a class="meta-alt" href="problem-solving-and-design-4-choice-and-optima.en.html" hreflang="en" lang="en" data-lang-nav="en">English ↗</a>
                 </div>
@@ -100,7 +100,7 @@
 <ol>
 <li>那5个人都是你不认识的人，那1个人则是你的亲人</li>
 <li>1000000个你不认识的人，1个你的亲人</li>
-<li>一边5人一边1人，你都不认识，但是你知道如果按了按钮，你相当于主动杀掉5个无辜的人，会一辈子良心不安，反之如果什么都不做，至少你没有主动选择杀死谁，虽然也很难受但似乎可以承受</li>
+<li>一边5人一边1人，你都不认识，但是你知道如果按了按钮，你相当于主动杀掉1个无辜的人，会一辈子良心不安，反之如果什么都不做，至少你没有主动选择杀死谁，虽然也很难受但似乎可以承受</li>
 <li>（还可以继续细思恐极下去...）</li>
 </ol>
 <p>纠结了吗？</p>
@@ -116,7 +116,7 @@
 <code>x2</code>:  轨道上存活你的亲人数
 <code>x3</code>: 轨道上你主动杀死的人数</p>
 <p>那么好啦，你只需要提供心仪的参数值a1，a2，a3给这个价值函数，就建立起了你自己的模型，使用这个模型，以上所有的问题都能轻松算得最优解。</p>
-<p>举例而言，假如你的参数是1, 100, -2，那么就问题1而言，选择救那5个路人的价值是1*5 + 100*0 + (-2*1) = 3，选择救1个亲人的价值是1*1 + 100*1 + (-2*5) = 91，91&gt;3，毫无疑问选择救你的那个亲人。</p>
+<p>举例而言，假如你的参数是1, 100, -2，那么就问题1而言，选择救那5个路人的价值是1*5 + 100*0 + (-2*1) = 3，选择救1个亲人的价值是1*1 + 100*1 + (-2*0) = 101，101&gt;3，毫无疑问选择救你的那个亲人。</p>
 <p>你还可以设置更复杂的价值函数，比如<strong>更多自变量</strong>，比如<strong>非线性</strong>：</p>
 <p>模型2. 你救的人数存在边际效益递减，救2人和救1人差别或许很大，但救10000人和救9000人的差别或许就没那么强的实感了，随便来个log来示意一下：</p>
 <blockquote>
@@ -124,7 +124,7 @@
 </blockquote>
 <p>模型3. 你救的亲人越多，你越会因为主动杀死别人的行为产生痛苦： </p>
 <blockquote>
-<p>f(x1, x2, x3) = a1x1 + a2x2 + a3x1x3</p>
+<p>f(x1, x2, x3) = a1x1 + a2x2 + a3x2x3</p>
 </blockquote>
 <p>或许这个例子太过血淋淋了，我们很难做到绝对理性。但我想要讲的应该很清楚了，许多纠结的问题，纠结的根源是非理性，解决办法则是，建立形式化、量化的模型，使用价值函数去评估各种选择。</p>
 <h3 id="heading-2">偏好系统</h3>
@@ -169,7 +169,7 @@
     </main>
     <!-- site-shell:footer:start -->
     <footer class="ftr">
-        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 28, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-28</span></span></span>
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 29, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-29</span></span></span>
         <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
     </footer>
     <!-- site-shell:footer:end -->
