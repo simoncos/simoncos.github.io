@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simoncos.github.io/</loc>
-    <lastmod>2026-07-24</lastmod>
+    <lastmod>2026-09-28</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/gallery.html</loc>
@@ -30,7 +30,7 @@
   </url>
   <url>
     <loc>https://simoncos.github.io/blogs.html</loc>
-    <lastmod>2026-07-24</lastmod>
+    <lastmod>2026-09-28</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/projects.html</loc>
@@ -127,5 +127,77 @@
   <url>
     <loc>https://simoncos.github.io/gallery/research/hermes-agent-hv-analysis.html</loc>
     <lastmod>2026-08-11</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/ten-years-like-rain.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/ten-years-like-rain.en.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/thanks-for-sheltering-from-the-rain.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/thanks-for-sheltering-from-the-rain.en.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/the-limits-of-problem-analysis.en.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.en.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.en.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/problem-solving-and-design-3-open-problems.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/problem-solving-and-design-3-open-problems.en.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.en.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/a-bulbuls-first-100-days.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/a-bulbuls-first-100-days.en.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/my-hands.html</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/my-hands.en.html</loc>
+    <lastmod>2026-09-28</lastmod>
   </url>
 </urlset>

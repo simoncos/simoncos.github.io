@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" data-page-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Solving and Design (4): Indecision and the Optimal Solution · Articles · simoncos</title>
+    <meta name="description" content="Why do we still agonize when feasible solutions are already in front of us? Value functions and systems of preferences, and what they say about choice, optimal solutions and model...">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.en.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Problem Solving and Design (4): Indecision and the Optimal Solution">
+    <meta property="og:description" content="Why do we still agonize when feasible solutions are already in front of us? Value functions and systems of preferences, and what they say about choice, optimal solutions and model...">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.en.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://simoncos.github.io/blogs/assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg">
+    <meta property="og:image:width" content="695">
+    <meta property="og:image:height" content="521">
+    <meta property="og:image:alt" content="The extended rock-paper-scissors from The Big Bang Theory (note the arrows)">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Problem Solving and Design (4): Indecision and the Optimal Solution">
+    <meta name="twitter:description" content="Why do we still agonize when feasible solutions are already in front of us? Value functions and systems of preferences, and what they say about choice, optimal solutions and model...">
+    <meta name="twitter:image" content="https://simoncos.github.io/blogs/assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20260927c"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20260927k">
+    <script src="../src/js/site.js?v=20260927c" defer></script>
+    <script src="../src/js/article.js?v=20260927c" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="problem-solving-and-design-4-choice-and-optima">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="problem-solving-and-design-4-choice-and-optima.html" hreflang="zh-Hans" data-lang-nav="zh"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← Articles</a>
+                <h1 class="article-title">Problem Solving and Design (4): Indecision and the Optimal Solution</h1>
+            </div>
+            <aside class="toc" aria-label="Contents"><span class="k toc-k">Contents</span><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>Indecision, choice and value functions</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>Systems of preferences</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>Fighting indecision with complexity</span></a></aside>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">Created</span><span class="num">2026-09-28</span></span>
+                    <span class="meta-item"><span class="k">Updated</span><span class="num">2026-09-28</span></span>
+                    <span class="meta-item"><span class="k">Reading</span>7 min</span>
+                    <span class="meta-item"><span class="k">Written</span><span class="num">Date unknown</span></span>
+                    <span class="meta-item"><span class="k">Translation</span>Claude Opus 5.5</span>
+                    <a class="meta-alt" href="problem-solving-and-design-4-choice-and-optima.html" hreflang="zh-Hans" lang="zh-Hans" data-lang-nav="zh">中文 ↗</a>
+                </div>
+                <details class="toc-box"><summary><span>Contents</span><span class="toc-sign" aria-hidden="true"></span></summary><div class="toc-box-links"><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>Indecision, choice and value functions</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>Systems of preferences</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>Fighting indecision with complexity</span></a></div></details>
+                <div class="post-content">
+
+<p><img alt="The extended rock-paper-scissors from The Big Bang Theory (note the arrows)" decoding="async" height="521" src="assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg" width="695"/></p>
+<p>Keywords: value/loss functions | decision-making | systems of preferences | optimal solutions</p>
+<h3 id="heading-1">Indecision, choice and value functions</h3>
+<p>What is indecision? Take the Chinese word for it, 纠结, literally: a tangled, knotted ball of thread that you can neither pick apart nor cut, and random tugging only pulls it tighter.</p>
+<p>Unfortunately, facing a problem almost always ties us in knots like this. There are two reasons. The problem itself may be complex, so a feasible solution is hard to find. But perhaps more often, plenty of feasible solutions are already in front of us and we have to choose the optimal one. <strong>What ties us in knots is really how to choose.</strong></p>
+<p>Let's start with a classic knot: the <a href="https://en.wikipedia.org/wiki/Trolley_problem">trolley problem</a>.</p>
+<blockquote>
+<p>Suppose you see a trolley whose brakes have failed, about to hit five people on the track ahead. On the side track there is only one person. If you do nothing, the five will be killed. There is a button beside you: press it and the trolley switches to the side track, killing only one. What do you do?</p>
+</blockquote>
+<p>In knots yet? Let's first look at the most obvious key condition in this problem: five people on one side, one on the other. Going by the numbers alone, you save the five, of course. No problem there, right?</p>
+<p>Let's add some seasoning, and here comes a wave of questions:</p>
+<ol>
+<li>The five are strangers to you, and the one is a relative of yours</li>
+<li>1,000,000 strangers, and one relative of yours</li>
+<li>Five on one side and one on the other, all strangers, but you know that if you press the button you will in effect be actively killing five innocent people and will never have a clear conscience again; whereas if you do nothing, at least you haven't actively chosen to kill anyone, and though it will be hard, it seems bearable</li>
+<li>(and the more you think, the scarier it gets...)</li>
+</ol>
+<p>In knots now?</p>
+<p>Why the knots? Because <strong>we are clearly not as rational as we usually think we are</strong>.</p>
+<p>Save more people (utilitarianism)? Save your relative (morality, emotion)? Avoid harm caused by your own active choice (self-protection)? ...</p>
+<p>Yet before <strong>absolute rationality</strong>, this problem is not the least bit hard. Let's try.</p>
+<p>Suppose your <strong>value function</strong> for this problem is a simple linear function of several variables:</p>
+<blockquote>
+<p>f(x1, x2, x3) = a1x1 + a2x2 +a3x3</p>
+</blockquote>
+<p>where:</p>
+<p><code>x1</code>: the number of people left alive on all the tracks
+<code>x2</code>:  the number of your relatives left alive on the tracks
+<code>x3</code>: the number of people on the tracks you actively killed</p>
+<p>There you go. All you need is to give this value function the parameters you like, a1, a2 and a3, and you have built your own model. With it, every problem above has an optimal solution you can easily compute.</p>
+<p>For example, if your parameters are 1, 100 and -2, then for problem 1, the value of saving the five passers-by is 1*5 + 100*0 + (-2*1) = 3, and the value of saving your one relative is 1*1 + 100*1 + (-2*5) = 91. 91 &gt; 3, so without a doubt you save your relative.</p>
+<p>You can also set up a more complex value function, with <strong>more independent variables</strong>, say, or <strong>non-linearity</strong>:</p>
+<p>Model 2. The number of people you save has diminishing marginal returns. Saving two people rather than one may make a big difference, but saving 10,000 rather than 9,000 may not feel all that different. A log will do to illustrate:</p>
+<blockquote>
+<p>f(x1, x2, x3) = a1logx1 + a2x2 + a3x3</p>
+</blockquote>
+<p>Model 3. The more of your relatives you save, the more pain you feel for having actively killed others:</p>
+<blockquote>
+<p>f(x1, x2, x3) = a1x1 + a2x2 + a3x1x3</p>
+</blockquote>
+<p>Maybe this example is too gory, and absolute rationality is hard for us. But what I want to say should be clear: for many problems that tie us in knots, the root of the knot is irrationality, and the way out is to build a formal, quantified model and use a value function to evaluate the choices.</p>
+<h3 id="heading-2">Systems of preferences</h3>
+<p>Now let's relax a little.</p>
+<p>We have a <strong>model of decision</strong>, with choices in it and a value function. We know that a larger value of the function is of course better, and the largest naturally corresponds to the optimal solution. Sometimes it is the other way round, and then the function can be called a <strong>loss / cost function</strong>. This larger-and-smaller, this comparability, reflects which of the feasible solutions are better or worse relative to each other, that is, <strong><a href="https://en.wikipedia.org/wiki/Preference_(economics)">preference</a></strong>. Why do we need a value function? Fundamentally, what we need is for the choices to be <strong>comparable</strong>.</p>
+<p>But comparability is actually a very interesting trap. Here is an example:</p>
+<p>I'm sure everyone has played rock-paper-scissors. Scissors &gt; paper, paper &gt; rock, rock &gt; scissors: simple, clear preferences, right? Not quite. The setup has a fatal flaw.</p>
+<p>Suppose this <strong>system of preferences</strong> (or preference structure) is <strong>transitive</strong>, that is:</p>
+<blockquote>
+<p>(rock &gt; scissors) AND (scissors &gt; paper) -&gt; rock &gt; paper</p>
+</blockquote>
+<p>Now we have these two preferences: paper &gt; rock and rock &gt; paper. Both holding at once breaks <strong>consistency</strong>:</p>
+<blockquote>
+<p>paper &gt; rock -&gt; NOT (rock &gt; paper)</p>
+</blockquote>
+<p>This means that in this system transitivity and consistency cannot coexist, and it follows that in the cycle of rock-paper-scissors there is never an optimal solution. We actually realized this long ago: when three or more people play, we give up transitivity. If rock, paper and scissors all show up at once, we go straight to the next round, until a round with only two of them decides the winner (which seems to turn it into a binary classification problem again, interesting).</p>
+<p>There are many cyclic systems of preferences like this, such as the overcoming cycle of the five elements. Game design uses them a lot too, like the sword, axe and lance of Fire Emblem, or the way the sects counter each other in Fantasy Westward Journey. They cause no trouble because the whole point of the design is to eliminate the optimal solution and so balance the choices in the game. Besides, most games never have three sides fighting at once (even if many multiplayer games look very real-time), so transitivity never comes into it.</p>
+<p><img alt="The attribute triangle in Fire Emblem" decoding="async" height="555" loading="lazy" src="assets/images/problem-solving-and-design-4-choice-and-optima/7149cd22c040cb6cd688aa6ab2f933fd.jpg" width="700"/></p>
+<p>So cycles really are a very interesting structure. They suddenly remind me of things like PageRank (and the <a href="https://github.com/simoncos/lola">League of Legends champion strength ranking I worked on...</a>). I'm drifting; better hit the brakes.</p>
+<p>Besides consistency and transitivity, a system of preferences also needs <strong>completeness</strong>. That is, any two choices in the system can be compared:</p>
+<blockquote>
+<p>rock, paper -&gt; (rock &gt;= paper) OR (rock &lt;= paper)</p>
+</blockquote>
+<p>Without this basic completeness, the relative order of some choices cannot be determined, and an optimal solution cannot exist at all. Systems of preferences can have further properties too, such as <strong>continuity</strong> and <strong>convexity</strong>, which support all kinds of stricter decision models.</p>
+<h3 id="heading-3">Fighting indecision with complexity</h3>
+<p>Knots like rock-paper-scissors are frightening. What's frightening is that you think you are already very rational and have clear preferences among the choices, but those preferences cannot be transitive and consistent at the same time. Limited rationality can, taken as a whole, turn out to be irrational. Where does this irrationality come from in real life?</p>
+<p><a href="https://zhuanlan.zhihu.com/p/19740120">A post on Zhihu</a> (in Chinese) discusses the harm of the <strong>single-factor model</strong> as a way of thinking. Facing the big and small problems of life, people often grab one factor while wrongly ignoring many other important ones, overthrowing one blind faith only to set up another. <strong>It looks crude, quick and effortless, but in fact it takes twice the effort for half the result.</strong></p>
+<p>We often take turns applying different "single-factor models" to whatever problem is in front of us, and as soon as we try to weigh several factors together, our heads can't cope; we patch one wall and knock down another. Rock beats scissors because a rock can break scissors, and scissors beat paper because scissors can cut paper. But can paper destroy a rock? No. Paper beats rock by wrapping... it... up... Clearly two single factors taking turns: a double standard.</p>
+<p>We haven't used formalization, or a <strong>sufficiently complex</strong> model, to record and examine the whole thinking process and all the factors. So on important questions, especially the ones that set the direction of a life, every so often we unconsciously go round the same strange loop again, even get stuck in an infinite loop within one round, randomly goto-ing to some step. <strong>We keep building new systems of preferences, but never one that is complete, transitive and consistent at once, and so we never find the optimal solution</strong>.</p>
+<p>Our brains like simplicity. If one method, one factor, could explain everything and settle every question (42?), why go to the trouble of weighing every last detail with painstaking care? Simplifying isn't a bad thing. Keeping the big and dropping the small, from <a href="problem-solving-and-design-3-open-problems.en.html">the previous part</a>, is a very useful strategy (especially for open problems). But as this part has tried to say, <strong>oversimplifying is wrong. It is running away from reason, and only ties the knots tighter.</strong></p>
+<p>Of course, every problem has a level of model complexity that suits it. Too high and too low are both bad, and just right is best. I'll keep thinking about that in the next posts.</p>
+<hr/>
+<p>By now this series has been wrenched all the way from a psychology textbook to the basic concepts of decision-making and learning. So bringing in game design counts as design too, I tell myself :)</p>
+<hr/>
+<p>An older post, added to this site on 2026-09-28. The original date of writing is unknown, and the text keeps its original wording.</p>
+                </div>
+                <div class="series-box"><span class="k">Series · Problem Solving and Design</span><a href="problem-solving-and-design-1-situation.en.html"><span class="series-part">Part 1</span><span>Problem Solving and Design (1): The Problem Situation</span></a><a href="problem-solving-and-design-2-feasible-solutions.en.html"><span class="series-part">Part 2</span><span>Problem Solving and Design (2): Feasible Solutions</span></a><a href="problem-solving-and-design-3-open-problems.en.html"><span class="series-part">Part 3</span><span>Problem Solving and Design (3): Open Problems</span></a><a href="problem-solving-and-design-4-choice-and-optima.en.html" aria-current="page"><span class="series-part">Part 4</span><span>Problem Solving and Design (4): Indecision and the Optimal Solution</span></a></div>
+                <div class="article-tags"><span class="k">Tags</span><a class="tag" href="../blogs.html#topic-thinking">Thinking</a><a class="tag" href="../blogs.html#topic-design">Design</a></div>
+                <section class="xref-grid"><div class="xrefs"><span class="k">This article links to</span><a class="xref" href="problem-solving-and-design-3-open-problems.en.html"><span>Problem Solving and Design (3): Open Problems</span><span class="num">2026-09-28</span></a></div><div class="xrefs is-empty"><span class="k">Linked from</span><span class="xrefs-empty">No other article links here yet.</span></div></section>
+                <nav class="post-nav" aria-label="More reading"><a class="post-nav-card post-nav-newer" rel="prev" href="problem-solving-and-design-3-open-problems.en.html"><span class="k">Newer</span><span class="post-nav-title">Problem Solving and Design (3): Open Problems</span></a><a class="post-nav-card post-nav-older" rel="next" href="the-limits-of-problem-analysis.en.html"><span class="k">Older</span><span class="post-nav-title">The Limits of Problem Analysis</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 28, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-28</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="Back to top" title="Back to top">↑</button>
+</body>
+</html>

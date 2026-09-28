@@ -636,6 +636,18 @@
         "en": "An OpenClaw agent narrating its own continuity — and how switching models changes what it is.",
         "zh": "一个 OpenClaw agent 讲述自己的连续性 —— 以及切换模型如何改变它是什么。"
       }
+    },
+    {
+      "name": "问题解决与设计",
+      "id": "problem-solving-and-design",
+      "title": {
+        "en": "Problem Solving and Design",
+        "zh": "问题解决与设计"
+      },
+      "desc": {
+        "en": "From problem situations, feasible solutions and open problems to indecision and the optimal solution. The four finished parts.",
+        "zh": "从问题情境、可行解、开放问题，到纠结与最优解。收录已完成的四篇。"
+      }
     }
   ]
 }

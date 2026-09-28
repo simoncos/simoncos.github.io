@@ -1,3 +1,32 @@
 {
-  "images": {}
+  "images": {
+    "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/0c9bb8249035ca0671b8a90e07defc68.gif": {
+      "height": 450,
+      "width": 255
+    },
+    "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/11a1eea6538195a33c0d6d4afaa115b2.gif": {
+      "height": 253,
+      "width": 450
+    },
+    "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/439bf5c23ad5e58db5fe8de81a13b3a6.gif": {
+      "height": 253,
+      "width": 450
+    },
+    "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/80f432ac21765f62e3aa5fe34f226917.gif": {
+      "height": 253,
+      "width": 450
+    },
+    "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/b54caf37e69c485257df7bf8ff8f252a.gif": {
+      "height": 245,
+      "width": 450
+    },
+    "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/c90209eaa644d73267c9b9b4cf362f9c.gif": {
+      "height": 253,
+      "width": 450
+    },
+    "https://pub-c760cce3caa54c1f8c36befd88c8b043.r2.dev/obsidian/2026/02/f63dce05d3c86a3fa2b9f4e179a0ed12.gif": {
+      "height": 450,
+      "width": 253
+    }
+  }
 }

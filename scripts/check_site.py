@@ -525,6 +525,28 @@ def check_json_assets(errors: list[str]) -> None:
                     )
 
 
+def check_article_translations(errors: list[str]) -> None:
+    """Publishing requires Chinese and English source/page pairs (owner policy)."""
+    index_path = ROOT / "data/article_index.json"
+    if not index_path.exists():
+        return  # check_json_assets reports a missing index.
+    payload = json.loads(index_path.read_text(encoding="utf-8"))
+    for group in payload.get("groups", []):
+        languages = group.get("languages") or {}
+        missing = [
+            language for language in ("zh", "en")
+            if not languages.get(language)
+            or languages[language].get("available") is False
+            or not languages[language].get("markdown")
+            or not languages[language].get("file")
+        ]
+        if missing:
+            errors.append(
+                f"article group {group.get('id', '<unknown>')}: publication requires both zh and en; "
+                f"missing {', '.join(missing)} translation(s)"
+            )
+
+
 def check_site_updated(errors: list[str]) -> None:
     """The footer's "Updated" date must not predate the newest dated content."""
     shell = json.loads((ROOT / "data/site_shell.json").read_text(encoding="utf-8"))
@@ -599,6 +621,7 @@ def main() -> int:
     check_embedded_pages_are_noindex(errors)
     check_site_data(errors)
     check_json_assets(errors)
+    check_article_translations(errors)
     check_site_updated(errors)
     check_css_cache_keys(errors)
     check_js_cache_keys(errors)

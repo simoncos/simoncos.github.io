@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-page-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Limits of Problem Analysis · Articles · simoncos</title>
+    <meta name="description" content="Starting from the way one game bot works: black boxes, levels of analysis and where a problem should end. The first rule of analysis is to come back with a finite result.">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.en.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="The Limits of Problem Analysis">
+    <meta property="og:description" content="Starting from the way one game bot works: black boxes, levels of analysis and where a problem should end. The first rule of analysis is to come back with a finite result.">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.en.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="simoncos — tools and research, articles and field notes">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Limits of Problem Analysis">
+    <meta name="twitter:description" content="Starting from the way one game bot works: black boxes, levels of analysis and where a problem should end. The first rule of analysis is to come back with a finite result.">
+    <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20260927c"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20260927k">
+    <script src="../src/js/site.js?v=20260927c" defer></script>
+    <script src="../src/js/article.js?v=20260927c" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="the-limits-of-problem-analysis">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="the-limits-of-problem-analysis.html" hreflang="zh-Hans" data-lang-nav="zh"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← Articles</a>
+                <h1 class="article-title">The Limits of Problem Analysis</h1>
+            </div>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">Created</span><span class="num">2026-09-28</span></span>
+                    <span class="meta-item"><span class="k">Updated</span><span class="num">2026-09-28</span></span>
+                    <span class="meta-item"><span class="k">Reading</span>4 min</span>
+                    <span class="meta-item"><span class="k">Written</span><span class="num">Date unknown</span></span>
+                    <span class="meta-item"><span class="k">Translation</span>Claude Opus 5.5</span>
+                    <a class="meta-alt" href="the-limits-of-problem-analysis.html" hreflang="zh-Hans" lang="zh-Hans" data-lang-nav="zh">中文 ↗</a>
+                </div>
+                <div class="post-content">
+
+<p>A while ago a friend told me how someone had built a bot for an RPG. It was so interesting that it stuck with me, and I kept telling myself I had to write it down one day.</p>
+<p>The bot works like this. It watches the colour of one particular point on the bar that shows the character's HP or MP on screen. If the colour changes in one direction (picture it going from red or blue to grey), health has dropped below some threshold, and the bot automatically enters the command to heal. If the colour changes the other way, it does nothing.</p>
+<p>I had never thought about how game bots are made, so this was the first time I heard that one could be built this way. I found it fascinating, because it is a situation where you know nothing about a system's internal logic and work only on its final output to decide what to input next.</p>
+<p>Thinking about it now, a bot simply takes over part of the work of a person's eyes, brain and hands. Watching the health bar and deciding whether to heal is far too simple a job for a person. Much better to hand it to a computer, which is dumb but also unlikely to make dumb mistakes.</p>
+<p>Automation isn't really my point, though. What interests me is this way of taking a system apart. The logic inside a game is, in a sense, a black box. But whatever is in there, to get through the game at all it has to leave input and output interfaces for the <strong>human</strong>, so that person and machine together make up a complete game system. The bot exploits exactly this. Its ambition is not to crack all of the system's internal logic and put it to use. It simply takes hold of part of the system's output (the colour of one point in the game image) and sets up a simple, explicit rule for what to input. That frees the person from this small, simple loop to put their abilities into something more complex and more interesting. It is a textbook case of modular thinking.</p>
+<p>Then I remembered something from a MOOC I took on Coursera a while back, <em>The Data Scientist's Toolbox</em>. In data science, the analysis and research we do on data can be divided into types by its goal (or, put another way, by the final result it aims for), and the difficulty varies accordingly. The easiest is descriptive analysis, whose goal is only to describe the data you see. The hardest is mechanistic analysis, whose goal is to fully understand the system that produced the data: exactly which variables changed in each individual, and exactly what other changes those caused. The other types of analysis sit between these two poles.</p>
+<p>Let me offer a simple, if perhaps not very apt, example. Say I see a pear (my brain receives some data about it). Descriptive analysis only asks me to record its shape, colour, size and so on accurately. Mechanistic analysis asks me to work out why this pear has this shape, colour and size, and how shape, colour and size relate to each other (if the pear were bigger, would its shape and colour change?). And if all that holds for this pear, would our conclusions (the model we built) still be right for another one?</p>
+<p>Ideally we would want results at the level of mechanistic analysis: to pick out, clearly and precisely, the flap of one butterfly's wings inside a hurricane. In practice, though, <strong>the information we can get hold of is always far too little</strong>. With the pear, what the eyes alone can take in is very little data. And what about now, in an age that produces enormous amounts of data? There is more data, certainly, but extracting information from it has become harder too. At times like this we have to rein in our greed and advance one step at a time.</p>
+<p>Sometimes, too, having weighed cost against return, we decide that studying a problem to a certain depth and breadth already meets our needs, as with that bot. Then we should, of course, have the sense to spend the remaining resources where they count.</p>
+<p>To analyse a problem system well, you certainly need the focus and persistence to get to the bottom of it. But we have to keep reminding ourselves that in the rough real world, the problem we are solving must have a boundary, one that keeps us from losing the way back while we dig our tunnel. <strong>The first rule of analysis is to come back with a finite result.</strong> This is a limit we cannot get around.</p>
+<p>PS. Here is the <a href="https://d396qusza40orc.cloudfront.net/datascitoolbox/lecture_slides/03_01_typesOfQuestions.pdf">PDF on types of analysis</a> from The Data Scientist's Toolbox. It has a few illustrative examples too, if you are curious.</p>
+<hr/>
+<p>An older post, added to this site on 2026-09-28. The original date of writing is unknown, and the text keeps its original wording.</p>
+                </div>
+                <div class="article-tags"><span class="k">Tags</span><a class="tag" href="../blogs.html#topic-thinking">Thinking</a><a class="tag" href="../blogs.html#topic-hack">Hack</a></div>
+                <section class="xref-grid"><div class="xrefs is-empty"><span class="k">Linked from</span><span class="xrefs-empty">No other article links here yet.</span></div></section>
+                <nav class="post-nav" aria-label="More reading"><a class="post-nav-card post-nav-newer" rel="prev" href="problem-solving-and-design-4-choice-and-optima.en.html"><span class="k">Newer</span><span class="post-nav-title">Problem Solving and Design (4): Indecision and the Optimal Solution</span></a><a class="post-nav-card post-nav-older" rel="next" href="my-personal-knowledge-management-system-2026-03.en.html"><span class="k">Older</span><span class="post-nav-title">My Personal Knowledge Management System, 2026-03</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 28, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-28</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="Back to top" title="Back to top">↑</button>
+</body>
+</html>

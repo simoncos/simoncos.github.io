@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-page-lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问题解析的极限 · 文章 · simoncos</title>
+    <meta name="description" content="从一个游戏外挂的思路出发，讨论黑箱、分析层次与问题的边界：解析的第一原则，是要带有限的结果回来。">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="问题解析的极限">
+    <meta property="og:description" content="从一个游戏外挂的思路出发，讨论黑箱、分析层次与问题的边界：解析的第一原则，是要带有限的结果回来。">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="simoncos — tools and research, articles and field notes">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="问题解析的极限">
+    <meta name="twitter:description" content="从一个游戏外挂的思路出发，讨论黑箱、分析层次与问题的边界：解析的第一原则，是要带有限的结果回来。">
+    <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20260927c"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20260927k">
+    <script src="../src/js/site.js?v=20260927c" defer></script>
+    <script src="../src/js/article.js?v=20260927c" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="the-limits-of-problem-analysis">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="the-limits-of-problem-analysis.en.html" hreflang="en" data-lang-nav="en"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← 文章</a>
+                <h1 class="article-title">问题解析的极限</h1>
+            </div>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">创建</span><span class="num">2026-09-28</span></span>
+                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-09-28</span></span>
+                    <span class="meta-item"><span class="k">阅读</span>3 分钟</span>
+                    <span class="meta-item"><span class="k">写于</span><span class="num">原日期未详</span></span>
+                    <a class="meta-alt" href="the-limits-of-problem-analysis.en.html" hreflang="en" lang="en" data-lang-nav="en">English ↗</a>
+                </div>
+                <div class="post-content">
+
+<p>一段时间前从朋友那听来的关于一个RPG游戏外挂的制作方法，因为很有意思，所以总念念不忘，想着哪天必须记下来。</p>
+<p>这个外挂是这样的：侦测游戏画面上显示着角色HP量/MP量的某一点的颜色值，若颜色值从一个方向改变（可以脑补比如从红/蓝到灰），说明血量低于一个界限了，这时外挂就会自动输入加血指令；如果反向变化，则不作任何动作。</p>
+<p>以前从来没考虑过游戏外挂的做法，所以这是第一次听说外挂可以照这个思路来做。我觉得非常有趣，因为这是一个不知系统内部逻辑，单单对其最终输出进行处理，从而得到下一步输入选择的依据的情境。</p>
+<p>其实现在想来，外挂就是部分地代替了人眼和人脑和人手。监测血量并决定是否加血的逻辑，对人来说实在太简单了，交给低级但也不容易出低级错误的计算机多好。</p>
+<p>不过其实我的重点不是自动化的问题，而是这种拆解系统的方式。游戏系统内部的逻辑某种程度上说也算是个黑匣子，但不管怎样，为了完成整个游戏的过程，它就必须要为<strong>人</strong>留下输入和输出的接口，这样人机才能共同构成一个完整的游戏系统。这个外挂的思路利用了这一点，它的野心并没大到将系统内部的逻辑全部破解再加以利用，而只是简单地把握系统的部分输出（游戏图像上的点的颜色值），并设定简单明确的逻辑去进行输入，从而让人可以从这小块简单的流程中解放出来，将能力发挥到更复杂更有意思的东西上面。这简直就是模块化思想的范本。</p>
+<p>接着我想起了前段时间在Coursera上的一门MOOC——<em>The Data Scientist’s Toolbox</em> 中了解到的，在数据科学中，我们对于数据所进行的分析和研究，可以按分析目的（或者说是最终结果）的不同划分为不同的类型，相应的难度也会不一样。其中最简单的是Descriptive Analysis（直译「描述分析」），目标只是去描述你所见到的数据；最难的则是 Mechanistic Analysis（直译「机制分析」），目标是充分理解产生这些数据的系统，其中每一个个体究竟发生了哪些变量的变化，而这些变化又究竟造成了哪些其他变化。在这两极之间则是其他几种分析类型的位置。</p>
+<p>容我想个比较简单但或许不大恰当的例子，比如我看见一只梨子（大脑接收到了一些关于它的数据），Descriptive Analysis只需要我确切记下它的形状、颜色、大小等，Mechanistic Analysis则要求我弄清楚这只梨子为什么具有这样的形状、颜色、大小，以及形状、颜色、大小之间具有怎样的关系（比如梨子的大小变了，形状和颜色会变吗），此外对于这个梨子是如此，那么换一只梨子以后，我们之前的结论（我们所建立的模型）还会是正确的吗？</p>
+<p>理想状态下我们当前希望能够得到Mechanistic Analysis级别的结果，希望能从一次飓风中清晰地、精确地捕捉到一只蝴蝶的飞舞，但是现实情况往往是，<strong>我们所能掌握的信息永远是极为不足的</strong>。比如刚才的梨子问题，光凭眼睛看能得到的数据实在是太少了；即使我们到了现在这个数据产量超大的时代又怎样呢，数据倒是多起来了，从中提取到信息的难度也变大了。这种时候，我们一定需要控制起自己的贪欲，步步为营。</p>
+<p>此外，有时当我们衡量过投入产出以后，会觉得一个问题研究到某个深度和广度就已经能满足我们的需要了，就像那个游戏外挂一样。这时，我们当然更应该明智地把剩下的资源用在其他刀口上。</p>
+<p>想要较好地解析一个问题系统，当然需要「打破沙锅问到底」的集中力与恒心，但我们需要一直提醒自己：在粗糙的现实之中，我们所要解决的问题必须得有一个边界，这个边界让我们不致于在深挖隧道的过程中失去了回来的路径。<strong>解析的第一原则，便是要带有限的结果回来。</strong>这是我们不得不面对的一个极限。</p>
+<p>PS. 这里是 The Data Scientist’s Toolbox 里关于<a href="https://d396qusza40orc.cloudfront.net/datascitoolbox/lecture_slides/03_01_typesOfQuestions.pdf">分析类型的 PDF</a>，里面也有一些用以说明的例子，有兴趣的话可以瞧瞧。</p>
+<hr/>
+<p>旧文收录于 2026-09-28，原写作日期未详。正文保留当时的表述。</p>
+                </div>
+                <div class="article-tags"><span class="k">标签</span><a class="tag" href="../blogs.html#topic-thinking">思考</a><a class="tag" href="../blogs.html#topic-hack">Hack</a></div>
+                <section class="xref-grid"><div class="xrefs is-empty"><span class="k">提到本文</span><span class="xrefs-empty">暂时还没有其他文章引用这篇。</span></div></section>
+                <nav class="post-nav" aria-label="继续阅读"><a class="post-nav-card post-nav-newer" rel="prev" href="problem-solving-and-design-4-choice-and-optima.html"><span class="k">更新的一篇</span><span class="post-nav-title">问题解决与设计（四）：纠结与最优解</span></a><a class="post-nav-card post-nav-older" rel="next" href="my-personal-knowledge-management-system-2026-03.html"><span class="k">更早的一篇</span><span class="post-nav-title">我的个人知识管理系统 2026-03</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 28, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-28</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="回到顶部" title="回到顶部">↑</button>
+</body>
+</html>
