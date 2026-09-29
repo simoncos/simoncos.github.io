@@ -11,7 +11,7 @@ Every published page is complete HTML that reads fine without JavaScript. Page s
 
 ## Where each page comes from
 
-GitHub Pages serves `master` as-is, so generated HTML and compiled JavaScript are tracked.
+GitHub Pages serves the `master` tree as-is, with no build step, so generated HTML and compiled JavaScript are tracked. Since 2026-09-29 the `deploy` job in `.github/workflows/site-check.yml` publishes it, only after `make check-all` passes; dot-directories such as `.agents` and `.claude` are left out of the site.
 
 | Pages | Generator | Source |
 | --- | --- | --- |

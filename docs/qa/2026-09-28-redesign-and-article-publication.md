@@ -1,6 +1,6 @@
 # 网站改版 QA 与旧文收录记录 · 2026-09-28
 
-本轮由三位独立审查员分别检查浏览器交互、构建与链接、内容结构与可访问性。改版基线为 `60660bc0cebb84125b40a9455a9c2277e6094b30`。审查员只读检查。前五项已于同日修复并在本地浏览器复核；第六项（发布不依赖检查）需要改仓库的 Pages 设置，待用户决定。文章收录是同一轮中独立实施的变更，不作为改版缺陷的依据。
+本轮由三位独立审查员分别检查浏览器交互、构建与链接、内容结构与可访问性。改版基线为 `60660bc0cebb84125b40a9455a9c2277e6094b30`。审查员只读检查。前五项已于同日修复并在本地浏览器复核；第六项（发布不依赖检查）经用户批准，于 2026-09-29 改为检查通过后由工作流部署。文章收录是同一轮中独立实施的变更，不作为改版缺陷的依据。
 
 ## 改版发现
 
@@ -11,7 +11,7 @@
 | P2 | 键盘激活文章目录后仅滚动，焦点仍在目录；下一次 Tab 进入下个目录项。手机收起目录后焦点落回 BODY。 | 线上最新中文文章桌面与手机复现；脚注同用此跳转函数，但脚注未单独做浏览器复现。 | `src/ts/article.ts:58` | 已修复：跳转后焦点移到目标（目录标题或脚注）。复核：1280 宽回车跳到标题，下一次 Tab 进入该节正文第一个链接；390 宽收起目录后焦点在标题上，不落回 BODY。 |
 | P3 | 从 `about.html?lang=zh` 切到 EN，正文与根语言变为英文，标签页标题仍为“关于 · simoncos”。 | 线上浏览器及最小 DOM 模拟复现；Articles 同样受影响。 | `src/ts/theme-init.ts:84`、`src/ts/site.ts:39` | 已修复：`theme-init` 改写标题前把英文标题存入 `data-en`。复核：`about.html?lang=zh` 切到 EN 后标题为“About · simoncos”，再切回为“关于 · simoncos”。 |
 | P2 | About 邮箱复制失败仍显示“已复制”。写剪贴板拒绝或异常后仍设置成功状态。 | 源码及拒绝 Promise 的最小 DOM 模拟；未操作真实剪贴板。 | `src/ts/site.ts:375` | 已修复：只在写入成功时显示“已复制”；剪贴板接口被拒时改用 `execCommand` 复制，仍失败则显示“复制失败”。复核：在 DOM 中模拟三种情况，显示均正确；未操作真实剪贴板。 |
-| P2 | 站点检查与 Pages 发布独立运行，检查失败不能阻止直接推送先上线。 | 精确基线的 Pages 于 2026-09-27 15:45:10 UTC 完成，Site checks 在 15:45:20 UTC 才完成；分支 API 显示 master 未保护。两个工作流本次均成功，未发现由此导致的线上损坏。 | `.github/workflows/site-check.yml:3`；部署应依赖检查成功，或建立强制 PR/check 发布规则。 | 待定：需要把 Pages 来源改为 GitHub Actions，由检查通过后的部署任务发布。 |
+| P2 | 站点检查与 Pages 发布独立运行，检查失败不能阻止直接推送先上线。 | 精确基线的 Pages 于 2026-09-27 15:45:10 UTC 完成，Site checks 在 15:45:20 UTC 才完成；分支 API 显示 master 未保护。两个工作流本次均成功，未发现由此导致的线上损坏。 | `.github/workflows/site-check.yml:3`；部署应依赖检查成功，或建立强制 PR/check 发布规则。 | 已修复（2026-09-29）：Pages 来源改为 GitHub Actions，`site-check.yml` 的 `deploy` 任务在 `make check-all` 通过后才发布；`.agents`、`.claude` 等点目录不再出现在网站上。 |
 
 工作流证据：[Pages](https://github.com/simoncos/simoncos.github.io/actions/runs/36330680029)、[Site checks](https://github.com/simoncos/simoncos.github.io/actions/runs/36330681941)。文件行号针对改版基线。
 

@@ -22,4 +22,4 @@ Owner policy, confirmed 2026-09-28: **an older piece republished on this site ke
 
 `scripts/check_site.py` rejects a missing or malformed `date`, and a `written` value that is a placeholder or later than `date`. It cannot tell whether a well-formed date is the historical one, so check the source.
 
-GitHub Pages currently deploys independently from the check workflow. A failed check does **not** itself prevent a direct push from being published. Treat the local check as a required release condition until deployment is made dependent on check success. See the [2026-09-28 QA report](qa/2026-09-28-redesign-and-article-publication.md).
+Pages publishes through `.github/workflows/site-check.yml` (since 2026-09-29): on a push to `master`, the `deploy` job runs only after `make check-all` passes, so a failed check leaves the last good version live. Run the checks locally anyway, since a failed push holds back everything behind it. See the [2026-09-28 QA report](qa/2026-09-28-redesign-and-article-publication.md).
