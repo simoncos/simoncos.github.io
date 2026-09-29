@@ -29,3 +29,39 @@ jobs:
 
       - name: Run static site checks
         run: make check-all
+
+  # The repository's Pages source is "GitHub Actions" (since 2026-09-29), so
+  # this job is the only way master reaches the site, and it runs only after
+  # the checks pass. A failed check leaves the last good version live.
+  deploy:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      # The repository root is the site, as it was with branch publishing.
+      # Dot-directories (.agents, .claude) are agent configuration and are
+      # left out, which the action does by default.
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
