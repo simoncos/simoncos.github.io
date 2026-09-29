@@ -345,15 +345,15 @@ def assign_heading_ids(rendered_html):
 
     Ids follow the numbering the client-side contents list used to assign
     (heading-N over h2/h3/h4 in document order, counting from 1), so links
-    into sections from before the redesign keep working.
+    into sections from before the redesign keep working. The contents list
+    takes the same three levels, as it did then.
     """
     soup = BeautifulSoup(rendered_html, 'html.parser')
     entries = []
     for index, heading in enumerate(soup.find_all(['h2', 'h3', 'h4']), start=1):
         if not heading.get('id'):
             heading['id'] = f'heading-{index}'
-        if heading.name in ('h2', 'h3'):
-            entries.append((heading.name, heading['id'], heading.get_text(' ', strip=True)))
+        entries.append((heading.name, heading['id'], heading.get_text(' ', strip=True)))
     return str(soup), entries
 
 
@@ -1269,7 +1269,7 @@ def build_post_foot(post, article_group, article_groups, file_index, group_map, 
             )
         title = info['title'].get(language) or series['name']
         parts.append(
-            f'<div class="series-box"><span class="k">{text["series"]} · {esc(title)}</span>{"".join(rows)}</div>'
+            f'<div class="series-box"><h2 class="k">{text["series"]} · {esc(title)}</h2>{"".join(rows)}</div>'
         )
 
     if post['tags']:
@@ -1277,7 +1277,7 @@ def build_post_foot(post, article_group, article_groups, file_index, group_map, 
             f'<a class="tag" href="../blogs.html#topic-{quote(tag)}">{esc(tag_label(tag, language))}</a>'
             for tag in post['tags']
         )
-        parts.append(f'<div class="article-tags"><span class="k">{text["tags"]}</span>{tags}</div>')
+        parts.append(f'<div class="article-tags"><h2 class="k">{text["tags"]}</h2>{tags}</div>')
 
     def link_row(group):
         entry = entry_for(group, language)
@@ -1294,18 +1294,18 @@ def build_post_foot(post, article_group, article_groups, file_index, group_map, 
     boxes = []
     if outgoing:
         boxes.append(
-            f'<div class="xrefs"><span class="k">{text["links_out"]}</span>'
+            f'<div class="xrefs"><h2 class="k">{text["links_out"]}</h2>'
             + ''.join(link_row(group) for group in outgoing) + '</div>'
         )
     incoming = [group_map[item['group_id']] for item in backlinks if item.get('group_id') in group_map]
     if incoming:
         boxes.append(
-            f'<div class="xrefs"><span class="k">{text["links_in"]}</span>'
+            f'<div class="xrefs"><h2 class="k">{text["links_in"]}</h2>'
             + ''.join(link_row(group) for group in incoming) + '</div>'
         )
     else:
         boxes.append(
-            f'<div class="xrefs is-empty"><span class="k">{text["links_in"]}</span>'
+            f'<div class="xrefs is-empty"><h2 class="k">{text["links_in"]}</h2>'
             f'<span class="xrefs-empty">{text["links_in_empty"]}</span></div>'
         )
     parts.append(f'<section class="xref-grid">{"".join(boxes)}</section>')
