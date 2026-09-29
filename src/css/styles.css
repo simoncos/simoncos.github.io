@@ -3092,6 +3092,12 @@ button {
     color: var(--muted);
 }
 
+/* Section labels that are headings for assistive technology (the series,
+   tags and links under an article) look the same as the others. */
+h2.k {
+    margin: 0;
+}
+
 .read-progress {
     position: fixed;
     left: 0;
@@ -3186,6 +3192,11 @@ button {
 
 .toc-link.toc-h3 {
     padding-left: 16px;
+    font-size: 13px;
+}
+
+.toc-link.toc-h4 {
+    padding-left: 32px;
     font-size: 13px;
 }
 
@@ -3292,6 +3303,15 @@ button {
 .toc-box .toc-link {
     font-size: 15px;
     padding: 8px 0;
+}
+
+/* The shorthand above would otherwise flatten the levels. */
+.toc-box .toc-link.toc-h3 {
+    padding-left: 16px;
+}
+
+.toc-box .toc-link.toc-h4 {
+    padding-left: 32px;
 }
 
 .toc-box .toc-dot {
@@ -3460,10 +3480,28 @@ button {
 }
 
 .post-content a.footnote-ref {
+    position: relative;
     font-size: 0.72em;
     color: var(--a);
     padding: 0 2px;
+    border-radius: 4px;
     text-decoration: none;
+    transition: background 0.6s, box-shadow 0.6s;
+}
+
+/* The number is a few pixels wide; this gives a finger something to hit
+   without changing how it looks. The back link gets the same. */
+.post-content a.footnote-ref::after,
+.post-content a.footnote-backref::after {
+    content: '';
+    position: absolute;
+    inset: -12px -10px;
+}
+
+/* Coming back from a note, the number it belongs to lights up briefly. */
+.post-content sup.is-hl a.footnote-ref {
+    background: var(--hl);
+    box-shadow: 0 0 0 3px var(--hl);
 }
 
 .post-content .footnote {
@@ -3504,14 +3542,23 @@ button {
 }
 
 .post-content a.footnote-backref {
+    position: relative;
     text-decoration: none;
     color: var(--muted);
 }
 
+/* The generator draws the arrow as lines; without these it fills in as a
+   black blob, invisible in dark mode. */
 .footnote-backref-icon {
     width: 0.9em;
     height: 0.9em;
     vertical-align: -0.1em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.15;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    overflow: visible;
 }
 
 .embedded-page {
@@ -3687,6 +3734,14 @@ button {
     transition-delay: 0s;
 }
 
+/* On narrow screens the button steps aside with the contents box while the
+   reader scrolls on (article.ts). */
+.to-top.is-on.is-away {
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: 0s, 0.3s;
+}
+
 @media (max-width: 859.98px) {
     .article-grid {
         grid-template-columns: minmax(0, 1fr);
@@ -3708,6 +3763,74 @@ button {
 
     .toc-box {
         display: block;
+    }
+
+    /* Past the title the contents box sticks under the header, so the
+       contents stay one tap away mid-article. article.ts hides it while the
+       reader scrolls down and brings it back when they scroll up. Without
+       JavaScript the header wraps to two rows, so the box stays in place. */
+    :root.js .toc-box {
+        position: sticky;
+        top: calc(var(--hdr-h, 76px) + 8px);
+        z-index: 30;
+        transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, visibility 0s linear 0s;
+    }
+
+    /* The middle shadow and the band below fill the gap under the header
+       and the rounded corners, where text scrolling past would otherwise
+       show as cut-off half lines. */
+    :root.js .toc-box.is-stuck {
+        box-shadow: 0 0 0 1px var(--line), 0 -6px 0 var(--bg), 0 10px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    :root.js .toc-box.is-stuck::before {
+        content: '';
+        position: absolute;
+        top: -9px;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background: var(--bg);
+    }
+
+    :root.js .toc-box.is-away {
+        opacity: 0;
+        transform: translateY(-8px);
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, visibility 0s linear 0.2s;
+    }
+
+    /* A long list scrolls inside the box rather than past the screen. */
+    :root.js .toc-box-links {
+        max-height: calc(100dvh - var(--hdr-h, 76px) - 76px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    /* Opened in place, the list pushes the article down as it always has.
+       Opened under the header, it drops over the text instead, so the page
+       under the reader does not move. article.ts keeps .is-stuck as it was
+       when the box opened. */
+    :root.js .toc-box.is-stuck[open] {
+        border-radius: 14px 14px 0 0;
+    }
+
+    :root.js .toc-box.is-stuck .toc-box-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--fill);
+        border-radius: 0 0 14px 14px;
+        box-shadow: 0 1px 0 1px var(--line), 0 18px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Headings and notes land clear of the header and the contents box. */
+    :root.js .post-content :is(h2, h3, h4, h5, h6),
+    :root.js .post-content sup[id^="fnref"],
+    :root.js .post-content .footnote li {
+        scroll-margin-top: calc(var(--hdr-h, 76px) + 64px);
     }
 
     .post-content {
