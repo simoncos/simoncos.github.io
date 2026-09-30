@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-page-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simpson's Paradox and the Flaws of Intuition · Articles · simoncos</title>
+    <meta name="description" content="An extreme admissions example of Simpson&#x27;s paradox, and why it defies intuition: we assume that if every part is bigger, the whole is bigger, without seeing the additivity that ass...">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.en.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Simpson&#x27;s Paradox and the Flaws of Intuition">
+    <meta property="og:description" content="An extreme admissions example of Simpson&#x27;s paradox, and why it defies intuition: we assume that if every part is bigger, the whole is bigger, without seeing the additivity that ass...">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.en.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="simoncos — tools and research, articles and field notes">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Simpson&#x27;s Paradox and the Flaws of Intuition">
+    <meta name="twitter:description" content="An extreme admissions example of Simpson&#x27;s paradox, and why it defies intuition: we assume that if every part is bigger, the whole is bigger, without seeing the additivity that ass...">
+    <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20260929b"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20260929b">
+    <script src="../src/js/site.js?v=20260929b" defer></script>
+    <script src="../src/js/article.js?v=20260929b" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="simpsons-paradox-and-the-flaws-of-intuition">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="simpsons-paradox-and-the-flaws-of-intuition.html" hreflang="zh-Hans" data-lang-nav="zh"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← Articles</a>
+                <h1 class="article-title">Simpson's Paradox and the Flaws of Intuition</h1>
+            </div>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">Created</span><span class="num">2018-03-27</span></span>
+                    <span class="meta-item"><span class="k">Updated</span><span class="num">2026-09-30</span></span>
+                    <span class="meta-item"><span class="k">Reading</span>3 min</span>
+                    <span class="meta-item"><span class="k">Translation</span>Claude Opus 5.5</span>
+                    <a class="meta-alt" href="simpsons-paradox-and-the-flaws-of-intuition.html" hreflang="zh-Hans" lang="zh-Hans" data-lang-nav="zh">中文 ↗</a>
+                </div>
+                <div class="post-content">
+
+<p><img alt="Homer Simpson from The Simpsons, face screwed up, with a speech bubble reading &quot;D'oh!&quot;" decoding="async" height="380" src="assets/images/simpsons-paradox-and-the-flaws-of-intuition/41dff4010e43979b84a833fb80be4a58.jpg" width="532"/></p>
+<p>Keywords: Simpson's paradox | intuition | statistics | additivity</p>
+<p><a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox">Simpson's paradox</a> really is a classic. In the words of the <a href="https://zh.wikipedia.org/zh-hk/辛普森悖论">Chinese Wikipedia</a> (in Chinese):</p>
+<blockquote>
+<p>The side that comes out ahead in every group comparison sometimes turns out to be the side that loses in the overall assessment.</p>
+</blockquote>
+<p>A post on Jianshu uses the example of comparing treatments for kidney stones, with good visualizations, and it is worth a look: <a href="https://www.jianshu.com/p/5582464ef4d9">"Simpson's Paradox"</a> (in Chinese). A rather more extreme example makes it easier to explain what exactly this paradox is:</p>
+<p>Suppose a university is admitting students. Its School A admits women at a rate of 100% <strong>&gt;</strong> men at 90%; School B admits women at 10% <strong>&gt;</strong> men at 0%.<br/>
+There are 100 women and 100 men applying.<br/>
+10 women apply to School A and 90 to School B, so A admits 10 women and B admits 9, 19 women admitted in all;<br/>
+90 men apply to School A and 10 to School B, so A admits 81 men and B admits 0, 81 men admitted in all.<br/>
+Overall, the admission rate for women, 19/100 = 19%, <strong>&lt;</strong> the rate for men, 81/100 = 81%.</p>
+<p>Here comes the question: at both School A and School B, women are admitted at a higher rate than men. <strong>Intuitively, the overall admission rate for women should also be higher, but in fact it is the other way round.</strong></p>
+<p>What is going on?</p>
+<p>First, let me try an explanation that makes sense. From the students' point of view, applying to a school is like betting on football. Applying to School A is like betting on who wins, low risk; applying to School B is like guessing the exact score, high risk. Women have a better chance of winning their bets (both schools admit them at higher rates), whether because women are better than men overall (they know more about football) or because the university favours women (whichever team the girls bet on, we do our best to let it win). But most women chose to guess the score and most men chose to bet on who wins, and the gap in difficulty between guessing the score and betting on who wins is huge, bigger than the difference between men and women. So <strong>the stronger but more adventurous women were nearly all wiped out, while more of the weaker but more cautious men survived</strong>.</p>
+<p>Thinking further: <strong>why does this phenomenon defy intuition?</strong></p>
+<p>Because our intuition contains this logic: if each part of one thing is bigger than the corresponding part of another thing, then the first thing is bigger than the second. It can be formalized as follows:</p>
+<pre><code>Suppose:
+A=A1+A2+...+An
+B=B1+B2+...+Bn, then:
+if Ai&gt;Bi for every i=1,2...,n, then A&gt;B
+</code></pre>
+<p>This logic clearly doesn't hold up in the example. <strong>The root cause lies in the "+" and "=" in the supposition, which carry a hidden premise of additivity.</strong> What exactly are A1, A2, A3? Can they be added, and does their sum equal A? If A, B, Ai and Bi are all real numbers, additivity comes from the definition, and the logic above is naturally fine. But in the example of the schools' admissions, have we defined, or can we derive, the additivity of admission rates? No.</p>
+<p><strong>Before formalizing, it seems very hard for us to see the hidden premise of additivity.</strong></p>
+<p>When playing games with numbers, the worst thing you can do is take things for granted. Intuition is to some extent the same as trying your luck: how well it works depends on how well the nature of the problem fits the assumptions of the intuition. Don't say numbers lie. Lying is a deliberate act with a purpose; numbers can only be miscalculated, they cannot lie.</p>
+<p>Wikipedia also explains the phenomenon geometrically, representing admission rates as slopes. The slopes of the green and red lines are the overall admission rates of women and of men respectively, and you can see <strong>the additivity of vectors, not of slopes</strong>:</p>
+<blockquote>
+<p>Each of the women's two vectors, taken alone, has a larger slope than the men's, meaning both their rates are higher. But in the end the men's overall vector has a larger slope than the women's.</p>
+</blockquote>
+<p><img alt="Wikipedia's geometric explanation: applicants and admissions for men and women in each school drawn as vectors, with the admission rate as the slope; the red line is men overall, the green line women overall" decoding="async" height="270" loading="lazy" src="assets/images/simpsons-paradox-and-the-flaws-of-intuition/659c8fbfabc9d2893acd816d814aaaeb.jpg" width="440"/></p>
+<p>June 2019: behind the phenomenon of Simpson's paradox there are two sets of factors. In the example above, one set is the university's admission rates for men and women; the other is the men's and women's choices of where to apply. <strong>Understood from the point of view of cognition</strong>, intuition inclines us to think that only the first set of factors has a qualitative effect on the outcome of the system (whose final admission rate is higher), and to ignore the second. In particular, the first set of factors and the outcome under examination are both "admission rates for men and women", which seem very close in meaning, so we "naturally" take them to be the deciding factor.</p>
+                </div>
+                <div class="article-tags"><h2 class="k">Tags</h2><a class="tag" href="../blogs.html#topic-thinking">Thinking</a></div>
+                <section class="xref-grid"><div class="xrefs is-empty"><h2 class="k">Linked from</h2><span class="xrefs-empty">No other article links here yet.</span></div></section>
+                <nav class="post-nav" aria-label="More reading"><a class="post-nav-card post-nav-newer" rel="prev" href="ten-years-like-rain.en.html"><span class="k">Newer</span><span class="post-nav-title">Ten Years Like Rain</span></a><a class="post-nav-card post-nav-older" rel="next" href="the-tatami-galaxy.en.html"><span class="k">Older</span><span class="post-nav-title">A Universe in a Few Square Feet: On The Tatami Galaxy</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 30, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-30</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="Back to top" title="Back to top">↑</button>
+</body>
+</html>

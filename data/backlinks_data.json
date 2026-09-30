@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-28",
+  "last_updated": "2026-09-30",
   "files": {
     "my-personal-knowledge-management-system-2026-03.en.html": [],
     "my-personal-knowledge-management-system-2026-03.html": [],
@@ -41,6 +41,12 @@
     "my-haba-snow-mountain-journey.html": [],
     "black-myth-wukong-bosses.en.html": [],
     "black-myth-wukong-bosses.html": [],
+    "my-2023-in-pictures.en.html": [],
+    "my-2023-in-pictures.html": [],
+    "my-2022-in-pictures.en.html": [],
+    "my-2022-in-pictures.html": [],
+    "dont-express-yourself-pointlessly.en.html": [],
+    "dont-express-yourself-pointlessly.html": [],
     "on-the-value-of-war.en.html": [],
     "on-the-value-of-war.html": [],
     "thanks-for-sheltering-from-the-rain.en.html": [
@@ -107,8 +113,12 @@
         }
       }
     ],
+    "setting-aside-this-hour.en.html": [],
+    "setting-aside-this-hour.html": [],
     "ten-years-like-rain.en.html": [],
     "ten-years-like-rain.html": [],
+    "simpsons-paradox-and-the-flaws-of-intuition.en.html": [],
+    "simpsons-paradox-and-the-flaws-of-intuition.html": [],
     "the-tatami-galaxy.en.html": [],
     "the-tatami-galaxy.html": [],
     "problem-solving-and-design-4-choice-and-optima.en.html": [],
@@ -237,6 +247,72 @@
         }
       }
     ],
+    "zhihu-social-network-analysis-2-follow-network.en.html": [
+      {
+        "group_id": "zhihu-social-network-analysis-1-basic-statistics",
+        "date": "2016-02-28",
+        "languages": {
+          "zh": {
+            "title": "知乎社交网络分析（上）：基本统计",
+            "file": "zhihu-social-network-analysis-1-basic-statistics.html"
+          },
+          "en": {
+            "title": "Zhihu Social Network Analysis (1): Basic Statistics",
+            "file": "zhihu-social-network-analysis-1-basic-statistics.en.html"
+          }
+        }
+      }
+    ],
+    "zhihu-social-network-analysis-2-follow-network.html": [
+      {
+        "group_id": "zhihu-social-network-analysis-1-basic-statistics",
+        "date": "2016-02-28",
+        "languages": {
+          "zh": {
+            "title": "知乎社交网络分析（上）：基本统计",
+            "file": "zhihu-social-network-analysis-1-basic-statistics.html"
+          },
+          "en": {
+            "title": "Zhihu Social Network Analysis (1): Basic Statistics",
+            "file": "zhihu-social-network-analysis-1-basic-statistics.en.html"
+          }
+        }
+      }
+    ],
+    "zhihu-social-network-analysis-1-basic-statistics.en.html": [
+      {
+        "group_id": "zhihu-social-network-analysis-2-follow-network",
+        "date": "2016-03-18",
+        "languages": {
+          "zh": {
+            "title": "知乎社交网络分析（下）：关注网络",
+            "file": "zhihu-social-network-analysis-2-follow-network.html"
+          },
+          "en": {
+            "title": "Zhihu Social Network Analysis (2): The Follow Network",
+            "file": "zhihu-social-network-analysis-2-follow-network.en.html"
+          }
+        }
+      }
+    ],
+    "zhihu-social-network-analysis-1-basic-statistics.html": [
+      {
+        "group_id": "zhihu-social-network-analysis-2-follow-network",
+        "date": "2016-03-18",
+        "languages": {
+          "zh": {
+            "title": "知乎社交网络分析（下）：关注网络",
+            "file": "zhihu-social-network-analysis-2-follow-network.html"
+          },
+          "en": {
+            "title": "Zhihu Social Network Analysis (2): The Follow Network",
+            "file": "zhihu-social-network-analysis-2-follow-network.en.html"
+          }
+        }
+      }
+    ],
+    "ten-trillion-2015s.en.html": [],
+    "ten-trillion-2015s.html": [],
     "the-limits-of-problem-analysis.en.html": [],
     "the-limits-of-problem-analysis.html": [],
     "exformation-and-information.en.html": [],

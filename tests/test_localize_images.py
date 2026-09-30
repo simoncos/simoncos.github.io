@@ -93,6 +93,23 @@ class LocalizeImagesTests(unittest.TestCase):
         self.assertEqual(Image.open(io.BytesIO(poster)).size, (30, 20))
         self.assertIn("MP4", how)
 
+    @unittest.skipUnless(Image, "Pillow is not installed")
+    def test_a_multi_picture_jpeg_is_a_still_photo(self):
+        # iPhone photos are MPO files: the photo plus an HDR gain map. Pillow
+        # calls them animated; turning one into a two-frame clip made a
+        # flickering 1.6 MB video out of a still.
+        photo = Image.new("RGB", (64, 48), (200, 120, 40))
+        gain_map = Image.new("RGB", (32, 24), (90, 90, 90))
+        source = io.BytesIO()
+        photo.save(source, "MPO", save_all=True, append_images=[gain_map])
+        self.assertEqual(Image.open(io.BytesIO(source.getvalue())).format, "MPO")
+
+        self.assertFalse(localize_images.is_animated(source.getvalue()))
+        data, extension, _how = localize_images.encode(source.getvalue(), ".jpeg")
+        result = Image.open(io.BytesIO(data))
+
+        self.assertEqual((extension, result.format, result.size), (".jpg", "JPEG", (64, 48)))
+
 
 class ArticleImageCheckTests(unittest.TestCase):
     def test_an_article_image_over_one_megabyte_fails_the_check(self):

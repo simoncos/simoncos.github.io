@@ -1186,6 +1186,7 @@ def collect_markdown_file(md_file, blog_posts):
                     'markdown.extensions.fenced_code',
                     'markdown.extensions.attr_list',
                     'markdown.extensions.footnotes',
+                    'markdown.extensions.tables',
                     AnnotateExtension()
                 ]
             )
@@ -1482,6 +1483,7 @@ def build_post_excerpt(markdown_body, word_limit=100, cjk_char_limit=100):
             extensions=[
                 'markdown.extensions.fenced_code',
                 'markdown.extensions.attr_list',
+                'markdown.extensions.tables',
                 AnnotateExtension(),
             ],
         )

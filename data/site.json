@@ -648,6 +648,18 @@
         "en": "From problem situations, feasible solutions and open problems to indecision and the optimal solution. The four finished parts.",
         "zh": "从问题情境、可行解、开放问题，到纠结与最优解。收录已完成的四篇。"
       }
+    },
+    {
+      "name": "知乎社交网络分析",
+      "id": "zhihu-social-network-analysis",
+      "title": {
+        "en": "Zhihu Social Network Analysis",
+        "zh": "知乎社交网络分析"
+      },
+      "desc": {
+        "en": "A 2015 course project on 26,000 Zhihu users: basic statistics first, then the network of who follows whom among the big-name accounts.",
+        "zh": "2015 年的课程项目，分析 2.6 万名知乎用户：先看基本统计，再看大V之间的关注网络。"
+      }
     }
   ]
 }
