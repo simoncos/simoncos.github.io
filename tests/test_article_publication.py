@@ -83,5 +83,19 @@ class ArticleDateTests(unittest.TestCase):
                 self.assertIn('written is retired', errors[0])
 
 
+class ArticleExcerptTests(unittest.TestCase):
+    """The list excerpt reads each piece of text once."""
+
+    def test_loose_list_item_is_not_repeated(self):
+        spec = importlib.util.spec_from_file_location('excerpt_generator', ROOT / 'generate_blog_pages.py')
+        generator = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(generator)
+        # Blank lines between items make Markdown wrap each item's text in <p>.
+        excerpt = generator.build_post_excerpt('# Title\n\nOpening.\n\n- First point;\n\n- Second point.\n')
+        self.assertEqual(excerpt.count('First point'), 1)
+        self.assertEqual(excerpt.count('Second point'), 1)
+        self.assertIn('• First point', excerpt)
+
+
 if __name__ == '__main__':
     unittest.main()

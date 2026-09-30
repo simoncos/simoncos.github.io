@@ -1,6 +1,6 @@
 ---
 tags: life
-date: 2014-01-04
+date: 2012-12-01
 updated: 2026-09-28
 translation: Claude Opus 5.5
 description: A short poem written in December 2012. Hai Zi's "Your Hands" is appended on the Chinese page.

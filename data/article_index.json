@@ -208,6 +208,34 @@
       }
     },
     {
+      "id": "it-is-time",
+      "date": "2022-05-16",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "是时候",
+          "file": "it-is-time.html",
+          "markdown": "it-is-time.md",
+          "excerpt": "当再度感受到胸中那种令人发痒的温热悸动时，我才发现这种感觉已经久违了。或许一直以来我只是需要一个契机，需要一个人在我背后推上一把，于是我就可以下定决心迈出新的一步，虽然直到现在，我都还不确定这一步将踏向哪里。\n清楚记...",
+          "description": "七年前放弃三个方向的硕士 offer，选了计算机；七年后又到了做选择的时候。回看遗憾与成长，胸中又有一团火在安静燃烧：是时候继续向前走了。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "It Is Time",
+          "file": "it-is-time.en.html",
+          "markdown": "it-is-time.en.md",
+          "excerpt": "Only when I felt that itchy, warm stirring in my chest again did I realise how long it had been since I last felt it. Perhaps all along I just needed an opening, someone to give me a push from behind, and then I could make up my mind to take a new step, although even now I'm still not sure where this step will land.\nI clearly remember one evening seven years ago, when I made up my mind to turn down master's offers in three fields, Marketing, Knowledge Management and New Media & Communication, and chose Computer Science,...",
+          "description": "Seven years ago I turned down master's offers in three fields and chose computer science; seven years on, it is time to choose again. Looking back at the regrets and the growth, I find a fire burning quietly in my chest once more: it is time to keep moving forward.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
       "id": "dont-express-yourself-pointlessly",
       "date": "2022-02-27",
       "tags": [
@@ -236,6 +264,35 @@
       }
     },
     {
+      "id": "my-2021-in-pictures",
+      "date": "2022-01-01",
+      "tags": [
+        "life",
+        "out"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "我的影像回忆2021",
+          "file": "my-2021-in-pictures.html",
+          "markdown": "my-2021-in-pictures.md",
+          "excerpt": "平凡日子\n冬意的余韵未了，春日的阳光已露头角。疫情改变了我们的生命轨迹，但其中不一定都是坏事。疫情，加上其他一些巧合，最终使我得以在家乡远程工作了一年半之久，这中间的每一天、每个小时都那么平凡，却又那么值得珍惜。如果没有疫...",
+          "description": "2021 年的照片与回忆：在家乡远程工作的平凡日子，好友的婚礼，第一次雪山之行，又一只小鸟的相遇与分离，回到香港，第一次露营与三十岁生日。",
+          "image": "blogs/assets/images/my-2021-in-pictures/aeaeffd57c1244480a3b02b19abc1a9a.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "My 2021 in Pictures",
+          "file": "my-2021-in-pictures.en.html",
+          "markdown": "my-2021-in-pictures.en.md",
+          "excerpt": "Ordinary Days\nThe last notes of winter had not yet faded, and the spring sunshine was already showing through. The pandemic changed the course of our lives, but not all of it for the worse. The pandemic, together with a few other coincidences, ended up letting me work remotely from my hometown for a full year and a half. Every day and every hour of it was so ordinary, and yet so worth cherishing. Without the pandemic, these ordinary days, and many of the moments I mention below, might never have happened at all.\nAt the Ceremony\nIn an age...",
+          "description": "Photos and memories of 2021: ordinary days working remotely from my hometown, a good friend's wedding, my first snow mountain, meeting and losing another little bird, the way back to Hong Kong, my first camping trip, and turning thirty.",
+          "image": "blogs/assets/images/my-2021-in-pictures/aeaeffd57c1244480a3b02b19abc1a9a.jpg",
+          "available": true
+        }
+      }
+    },
+    {
       "id": "on-the-value-of-war",
       "date": "2021-10-10",
       "tags": [
@@ -258,6 +315,34 @@
           "markdown": "on-the-value-of-war.en.md",
           "excerpt": "I finished All Quiet on the Western Front today. War stories always stay with me. On the battlefield and off it, the most beautiful things and the ugliest things always bloom at the same time, but in the end all of it passes.\nThe history of war may be longer than the history of humanity. Look at the ancient apes in 2001: A Space Odyssey: no sooner had they learned to use a bone as a tool than they started killing each other with it. A tool, after all, if it is not used to create something, will surely be...",
           "description": "Thoughts after finishing All Quiet on the Western Front: if survival is not the only value, is it still fair to take someone else's survival for one's other needs? Why is giving up one's life for a cause called righteous? It ends with questions I haven't finished thinking through.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "on-expression",
+      "date": "2021-09-22",
+      "tags": [
+        "thinking"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "关于表达",
+          "file": "on-expression.html",
+          "markdown": "on-expression.md",
+          "excerpt": "我想，人其实是很容易失去自己的表达欲的。你可以随意举出很多原因，但最终都可以诉诸经济学：投资回报率太低=>费力不讨好。\n• 投资方面：表达意味着时间和精力的投入，意味着从一片混乱中组织出一点秩序，而不表达显然是阻力更小的、自然而...",
+          "description": "人很容易失去表达欲：投入太多，回报太少。私有频道里说话轻松，公开频道却要面对无数陌生人；人群的划分终究是人为的，而我还是想为自己的人生之书多插上几页。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "On Expression",
+          "file": "on-expression.en.html",
+          "markdown": "on-expression.en.md",
+          "excerpt": "I think people lose the urge to express themselves very easily. You can list any number of reasons, but in the end they all come down to economics: the return on investment is too low => more trouble than it's worth.\n• Investment: expressing yourself means putting in time and energy, organising a little order out of chaos, while not expressing yourself is plainly the direction of least resistance, the natural one, the one in which entropy increases;\n• Return: ask yourself honestly, can you express anything of value? The world is noisy enough already. There is no shortage of...",
+          "description": "It is easy to lose the urge to express yourself: too much effort, too little return. Private channels are easy; the public one means facing countless strangers. Every way of dividing people is man-made in the end, and still I want to add a few more pages to the book of my life.",
           "image": "",
           "available": true
         }
@@ -343,6 +428,90 @@
           "markdown": "setting-aside-this-hour.en.md",
           "excerpt": "Lately I have spent twenty-odd hours making deliveries in Death Stranding, marvelling every so often at the game's extraordinary worldbuilding. One of its core ideas is timefall: in this rain almost everything, living animals and lifeless metal alike, is rapidly eaten away, and the rain and the beautiful rainbows are also the sign that something more dangerous is on its way.\nRain really is a very good metaphor for time. It gives abstract time a flowing, cold texture. Rain brings the endless turning of life, and it also makes glory fleeting, like tears in rain. That classic line from Blade...",
           "description": "Starting from timefall in Death Stranding and tears in rain in Blade Runner: memory is what gives time its meaning, and the more predictable our days become, the more coarsely we sample them.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "seen-and-heard-in-lhasa",
+      "date": "2019-09-29",
+      "tags": [
+        "out"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "拉萨见闻之一二",
+          "file": "seen-and-heard-in-lhasa.html",
+          "markdown": "seen-and-heard-in-lhasa.md",
+          "excerpt": "1.白塔的作用是连接被公路切断的布达拉宫龙脉\n2.白墙是用涂料一层层泼出来的，里面含有牛奶白糖，经年累月一层又一层，一些部分甚至形成了类似钟乳石的结构\n3.经幡的蓝白红绿黄象征着天云火水地\n4.拉萨随处可见的转经筒与转着经筒的人",
+          "description": "拉萨的九个片段：白塔与白墙，经幡与转经筒，大昭寺外的朝圣者，不高过布宫的市区建筑，普及的移动支付，以及被称为“小四川”的拉萨。",
+          "image": "blogs/assets/images/seen-and-heard-in-lhasa/79c685717a085ee412463f496cf43547.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "A Thing or Two Seen and Heard in Lhasa",
+          "file": "seen-and-heard-in-lhasa.en.html",
+          "markdown": "seen-and-heard-in-lhasa.en.md",
+          "excerpt": "1. The white stupa is there to join up the Potala Palace's dragon vein, which the road cut through\n2. The white walls are made by splashing on coat after coat of whitewash, which contains milk and white sugar; built up layer on layer over the years, some parts have even formed something like stalactites\n3. The blue, white, red, green and yellow of the prayer flags stand for sky, cloud, fire, water and earth\n4. Prayer wheels, seen everywhere in Lhasa, and the people turning them\n5. Tibetan rugs and ornaments are all very beautiful, the fruit of a...",
+          "description": "Nine scenes from Lhasa: a white stupa and white walls, prayer flags and prayer wheels, pilgrims outside the Jokhang, buildings kept lower than the Potala, mobile payment everywhere, and a city also known as Little Sichuan.",
+          "image": "blogs/assets/images/seen-and-heard-in-lhasa/79c685717a085ee412463f496cf43547.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "media-and-content-business-1-communication-models",
+      "date": "2019-05-18",
+      "tags": [
+        "thinking"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "媒体与内容商业（一）：传播模型",
+          "file": "media-and-content-business-1-communication-models.html",
+          "markdown": "media-and-content-business-1-communication-models.md",
+          "excerpt": "2026 年注：这个系列后来只发表了这一篇，其余几篇停留在草稿阶段。\n前言\n《媒体与内容商业》系列文章起步于我几年前的一篇草稿 《流媒体的极限》 ，文章想要尝试对流媒体，如音频、视频进行一个比较系统性的思考。随着长时间零星的素材与想法积累，思...",
+          "description": "《媒体与内容商业》系列的第一篇：为什么要写这个系列，以及借 Shannon-Weaver 模型和 Jakobson 的语言功能模型，说说什么是内容、什么是通道。",
+          "image": "blogs/assets/images/media-and-content-business-1-communication-models/568f58cd126b3f1692b0795bb42e3df8.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Media and Content Business (1): Communication Models",
+          "file": "media-and-content-business-1-communication-models.en.html",
+          "markdown": "media-and-content-business-1-communication-models.en.md",
+          "excerpt": "Note, 2026: this is the only part of the series that was ever published; the others remained drafts.\nPreface\nThe Media and Content Business series grew out of a draft I wrote a few years ago, \"The Limits of Streaming Media\" (in Chinese), which tried to think fairly systematically about streaming media such as audio and video. As scattered material and ideas piled up over a long time, the scope of my thinking gradually extended to more everyday forms of media, such as print text and images and interactive media (software, games), to comparisons between media, and to how media...",
+          "description": "The first part of the Media and Content Business series: why I am writing it, and, by way of the Shannon–Weaver model and Jakobson's functions of language, what content is and what a channel is.",
+          "image": "blogs/assets/images/media-and-content-business-1-communication-models/568f58cd126b3f1692b0795bb42e3df8.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "hong-kong-drifters-and-mainland-income-tax",
+      "date": "2018-11-01",
+      "tags": [
+        "thinking"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "对港漂与内地新个税法的一些研究",
+          "file": "hong-kong-drifters-and-mainland-income-tax.html",
+          "markdown": "hong-kong-drifters-and-mainland-income-tax.md",
+          "excerpt": "如果觉得看完本文依然有疑问，或者相关内容涉及切身利益，建议咨询法律专业人士或政府税务机关。在此也请读到本文的专业人士在条件允许的情况下给予审阅和指正，以避免本文引起误导的可能。\n2026 年注：本文写于 2018 年底，当时个人所得税法实...",
+          "description": "2019 年新个税法生效前夕，一个内地户籍、只在香港工作的港漂，还要不要交内地个税？逐条读个税法、实施条例草案和内地与香港的税收安排，梳理居民身份与加比规则，得出有限的结论。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Some Research on Hong Kong Drifters and the Mainland's New Individual Income Tax Law",
+          "file": "hong-kong-drifters-and-mainland-income-tax.en.html",
+          "markdown": "hong-kong-drifters-and-mainland-income-tax.en.md",
+          "excerpt": "If you still have questions after reading this, or if the subject touches your own interests, I suggest consulting a legal professional or the tax authorities. I also ask any professionals who read this to review and correct it where they can, so that it does not mislead anyone.\nNote, 2026: this piece was written in late 2018, before the implementing regulations of the Individual Income Tax Law were final. The final regulations and later tax announcements changed several of the provisions quoted here, so the analysis may no longer apply.\nThe Question\nChina's new Individual Income Tax Law (its...",
+          "description": "On the eve of the new Individual Income Tax Law taking effect in 2019, does a Hong Kong drifter with mainland household registration, working only in Hong Kong, still owe mainland income tax? Reading the law, the draft implementing regulations and the Mainland–Hong Kong tax arrangement clause by clause, sorting out residence status and the tie-breaker rules, to reach a limited conclusion.",
           "image": "",
           "available": true
         }
@@ -497,6 +666,34 @@
       }
     },
     {
+      "id": "tracing-back",
+      "date": "2017-02-27",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "回溯",
+          "file": "tracing-back.html",
+          "markdown": "tracing-back.md",
+          "excerpt": "“念念不忘，必有回响。”\n如果不是因为回响的存在，无法知道既定的过去仍埋藏着许多宝藏。人生是单向的箭头，当你站在现在这个点上回望，来路似乎显得很清楚，然而鬼知道你走过了多少个分叉口。可惜我们无法像攻略游戏一样不断S/L，那些死去的...",
+          "description": "念念不忘，必有回响？人生是单向的箭头，记忆里却埋满了会被未来引爆的炸弹，而人还有一项更厉害的技能：主动回溯。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Tracing Back",
+          "file": "tracing-back.en.html",
+          "markdown": "tracing-back.en.md",
+          "excerpt": "\"What you keep in your heart will surely echo back.\"\nWere it not for the echoes, there would be no knowing that the settled past still holds so much buried treasure. Life is a one-way arrow. Standing at this point in the present and looking back, the road you came by seems clear, but God knows how many forks you passed. Pity we can't keep saving and loading the way we do when playing through every route of a game; the dead branches are dead, dead before they even grew.\nBut at least we can keep things in mind. The...",
+          "description": "What you keep in mind will echo back? Life is a one-way arrow, yet memory is packed with bombs that the future sets off, and people have a stronger skill still: tracing back on purpose.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
       "id": "problem-solving-and-design-2-feasible-solutions",
       "date": "2016-11-11",
       "tags": [
@@ -556,6 +753,62 @@
           "excerpt": "Keywords: methodology | problem situation | interaction design | search problems\nOf everything I have skimmed in the last few months, I would never have guessed that the most illuminating would be this: \"Factors That Affect Problem Solving\" (in Chinese), an excerpt from the People's Education Press textbook General Psychology.\nEach of the seven factors it names could be turned over on its own for a long time (though to me a few of them overlap as concepts): the problem situation, transfer, prototype heuristics, mental set, functional fixedness, motivation and emotional state, and individual characteristics.\nI found it valuable because...",
           "description": "Why does the same problem get harder or easier depending on how it is put? From problem situations, information and search paths to interaction design.",
           "image": "blogs/assets/images/problem-solving-and-design-1-situation/3ac53d9fead8d368e660caa585da814a.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "autumn-like-early-summer",
+      "date": "2016-10-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "秋若初夏",
+          "file": "autumn-like-early-summer.html",
+          "markdown": "autumn-like-early-summer.md",
+          "excerpt": "香港的第二个秋天到来了。然而清晨太阳光穿透两层窗帘的热力，以及大巴窗外一路的碧绿，天空，夜晚海边的风带来的两种气味，湾仔与铜锣湾的人潮，一波又一波来袭却又仅是掠过的台风，总是给人一种身在初夏的幻觉。不过真正的秋天盖亦...",
+          "description": "香港的第二个秋天，却总像身在初夏。人喜欢给四季的轮换赋予开始和结束，唯独忘了当下；当下虚幻，提起时却有一种无由来的喜悦。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Autumn Like Early Summer",
+          "file": "autumn-like-early-summer.en.html",
+          "markdown": "autumn-like-early-summer.en.md",
+          "excerpt": "My second autumn in Hong Kong has arrived. Yet the heat of the morning sun coming through two layers of curtains, the green all the way along outside the bus window, the sky, the two smells the wind carries by the sea at night, the crowds of Wan Chai and Causeway Bay, and the typhoons that come wave after wave only to brush past, all give the illusion of being in early summer. Still, the real autumn cannot be far off. Last year I wrote a short passage, meant to grow into a piece but set aside:\nAutumn on the...",
+          "description": "My second autumn in Hong Kong still feels like early summer. We like to give the turning seasons beginnings and endings, and forget only the present; the present is illusory, yet bringing it up stirs a joy that comes from nowhere.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "exponential-vs-power-law-distributions",
+      "date": "2016-05-19",
+      "tags": [
+        "hack"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "指数分布与幂律分布的图像对比",
+          "file": "exponential-vs-power-law-distributions.html",
+          "markdown": "exponential-vs-power-law-distributions.md",
+          "excerpt": "指数分布（exponential distribution）和幂律分布（power-law distribution）有时看起来很是相似，但实际上极为不同。我用python做了两种分布的函数plotting，方便直观理解。可以看到，两种函数转化为双对数形式（这里我用的math.log()是自然对数ln）后图像差异非常明显。\n注释里我给出了几个图分别对应的解析式，另外注意...",
+          "description": "用 Python 画出指数函数与幂律函数的图像：两者有时看起来很相似，转成双对数形式后，指数函数仍是一条曲线，幂律函数成了一条直线。",
+          "image": "blogs/assets/images/exponential-vs-power-law-distributions/4b2b9498456127b8af94f355cad1efaf.png",
+          "available": true
+        },
+        "en": {
+          "title": "Comparing the Plots of Exponential and Power-Law Distributions",
+          "file": "exponential-vs-power-law-distributions.en.html",
+          "markdown": "exponential-vs-power-law-distributions.en.md",
+          "excerpt": "Exponential distributions and power-law distributions sometimes look quite alike, but they are in fact very different. I plotted the functions of the two distributions in Python to make this easy to see intuitively. As you can see, once the two functions are turned into log-log form (the math.log() I use here is the natural logarithm, ln), their plots are strikingly different.\nIn the comments I give the analytic expression behind each plot. Note also that because I approximate with a discrete set of points here, which amounts to sampling the distribution's curve, I can get a numerical mean for the...",
+          "description": "Exponential and power-law functions plotted in Python: they can look alike, but in log-log form the exponential is still a curve while the power law becomes a straight line.",
+          "image": "blogs/assets/images/exponential-vs-power-law-distributions/4b2b9498456127b8af94f355cad1efaf.png",
           "available": true
         }
       }
@@ -651,6 +904,90 @@
       }
     },
     {
+      "id": "old-memories-young",
+      "date": "2015-06-07",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：年少无知",
+          "file": "old-memories-young.html",
+          "markdown": "old-memories-young.md",
+          "excerpt": "好久不见。\n距离我上次写一段自由而无用的文字，已有9个月。三个季度里，你我一定已有一些改变。因为什么而变？或许可以说是工作，或许可以说是学习，或许可以说是与他人的相处，但或许最根本的，永远是因为从来不会静止的时空。\n年少多好，因为...",
+          "description": "2015 年 6 月，隔了九个月再次写下“自由而无用”的文字：年岁增长后的两个自己，《童年的消逝》里的文字与儿童，以及我为什么需要文字。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: Young and Naive",
+          "file": "old-memories-young.en.html",
+          "markdown": "old-memories-young.en.md",
+          "excerpt": "Long time no see.\nIt has been nine months since I last wrote something free and useless. In three seasons, you and I must both have changed somewhat. Changed because of what? You could say work, perhaps, or study, or getting along with other people, but perhaps the most fundamental reason is always the space and time that never stand still.\nHow good it is to be young, because then you don't have to see how big the world is, and in that small, idyllic patch of time and space you can keep a few things safe. Beliefs, friends, the...",
+          "description": "June 2015, writing something \"free and useless\" again after nine months: the two selves that come with growing older, writing and childhood in The Disappearance of Childhood, and why I need words.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "golden-ratio-and-design",
+      "date": "2014-11-01",
+      "tags": [
+        "design"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "黄金比例与设计",
+          "file": "golden-ratio-and-design.html",
+          "markdown": "golden-ratio-and-design.md",
+          "excerpt": "斐波那契数列与黄金比例\n但凡喜欢美术、设计或是数学的人，一定都对“斐波那契”这四个字有一定的了解。\n斐波那契是生活在12至13世纪的意大利数学家，他在自己的著作中提到了一个著名的数列，这个数列是这样的：\n0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987,...\n这个数列的特点是：数列中的每...",
+          "description": "斐波那契数列里的黄金比例，黄金矩形与黄金曲线，以及黄金比例这类辅助线在 logo 等设计中究竟起什么作用。",
+          "image": "blogs/assets/images/golden-ratio-and-design/4e0cd78f574a95381b70d63e5480f72b.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "The Golden Ratio and Design",
+          "file": "golden-ratio-and-design.en.html",
+          "markdown": "golden-ratio-and-design.en.md",
+          "excerpt": "The Fibonacci Sequence and the Golden Ratio\nAnyone who likes art, design or mathematics must know something about the name \"Fibonacci\".\nFibonacci was an Italian mathematician who lived in the 12th and 13th centuries. In his writings he mentioned a famous sequence, which goes like this:\n0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987,...\nWhat marks this sequence out is that every number in it equals the sum of the two before it. Of course, that is surely not why the Fibonacci sequence is so well known. It is well known...",
+          "description": "The golden ratio hidden in the Fibonacci sequence, the golden rectangle and the golden spiral, and what guide lines like the golden ratio actually do in designing logos and more.",
+          "image": "blogs/assets/images/golden-ratio-and-design/4e0cd78f574a95381b70d63e5480f72b.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-sixteen-months",
+      "date": "2014-08-31",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：我的十六个月",
+          "file": "old-memories-sixteen-months.html",
+          "markdown": "old-memories-sixteen-months.md",
+          "excerpt": "倏忽又三十六个月。\n2017.08.31\n今天，从时间意义上正式开始了在南京的第五年，还会有第六年么，不知道。未来的路仍然分叉得那么明显，不管是哪一条，都需要打起精神做好所有能够做的\n一个月前的今天，已领悟运营必备绝技：精神分裂\n两个月前的今天，秦...",
+          "description": "2014 年 8 月 31 日，在南京的第五年开始：从一个月前倒数到十六个月前，实习、雅思、放弃 offer、毕业设计与新的工作。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: My Sixteen Months",
+          "file": "old-memories-sixteen-months.en.html",
+          "markdown": "old-memories-sixteen-months.en.md",
+          "excerpt": "In a flash, another thirty-six months.\n2017.08.31\nToday, in terms of time, my fifth year in Nanjing officially begins. Will there be a sixth? I don't know. The road ahead still forks so plainly, and whichever branch it is, I need to pull myself together and do everything I can\nOne month ago today: had mastered the essential skill of an operations job, split personality\nTwo months ago today: days and nights by the Qinhuai River; my present life began\nThree months ago today: just back from my graduation trip, the scenery of western Zhejiang already left behind, because the...",
+          "description": "31 August 2014, the start of my fifth year in Nanjing, counting back month by month over sixteen months of internships, IELTS, a turned-down offer, a graduation project and a new job.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
       "id": "the-limits-of-problem-analysis",
       "date": "2014-05-22",
       "tags": [
@@ -708,8 +1045,149 @@
       }
     },
     {
-      "id": "my-hands",
+      "id": "data-information-knowledge-wisdom",
       "date": "2014-01-04",
+      "tags": [
+        "thinking",
+        "km"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "数据、信息、知识、智慧",
+          "file": "data-information-knowledge-wisdom.html",
+          "markdown": "data-information-knowledge-wisdom.md",
+          "excerpt": "DIKW体系\n上图为DIKW体系，一个分为数据、信息、知识、智慧四层的金字塔结构。整个过程也可以大致概括为 自底向上，再自顶向下。\n数据是信息的实际载体，信息通过对数据的处理得到。数据无对错，但得到的信息可能会是错的（无法反映真实的情况）。特别是在...",
+          "description": "DIKW 金字塔的数据、信息、知识、智慧四层，自底向上、再自顶向下；知识可以从外界获得，智慧只能由自我产生。",
+          "image": "blogs/assets/images/data-information-knowledge-wisdom/49151acd148b7f9575893df977dfcfdf.png",
+          "available": true
+        },
+        "en": {
+          "title": "Data, Information, Knowledge, Wisdom",
+          "file": "data-information-knowledge-wisdom.en.html",
+          "markdown": "data-information-knowledge-wisdom.en.md",
+          "excerpt": "The DIKW hierarchy\nThe figure above shows the DIKW hierarchy, a pyramid of four layers: data, information, knowledge and wisdom. The whole process can be roughly summed up as bottom-up, then top-down.\nData is what actually carries information; information is obtained by processing data. Data is neither right nor wrong, but the information obtained from it may be wrong (failing to reflect the real situation). Data from noisy environments in particular is more likely to lead to wrong information. Sources of information vary widely in quality, and the truly valuable information is often swept along in a mass of redundant,...",
+          "description": "The four layers of the DIKW pyramid, data, information, knowledge and wisdom, working bottom-up and then top-down; knowledge can be taken in from outside, but wisdom can only come from within.",
+          "image": "blogs/assets/images/data-information-knowledge-wisdom/49151acd148b7f9575893df977dfcfdf.png",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "use-cases-and-user-stories",
+      "date": "2014-01-04",
+      "tags": [
+        "design"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "挖掘用户需求：用例与用户故事",
+          "file": "use-cases-and-user-stories.html",
+          "markdown": "use-cases-and-user-stories.md",
+          "excerpt": "注:这是以前在1号店运营实习时做的一次内部邮件分享。后面本来还编了两个具体使用用户故事来挖掘真实需求的小例子，因为主要是针对那个平台的内容，所以这里暂时删掉了，之后考虑再做两个比较通用的例子。\n在软件开发领域，常常采用...",
+          "description": "用例和用户故事这两种描述需求的方法，各适合什么样的产品，以及怎样讲好一个用户故事。原是在 1 号店做运营实习时的一次内部邮件分享。",
+          "image": "blogs/assets/images/use-cases-and-user-stories/fa4d26f04ef52ecb61a4b707d7828637.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Digging into User Needs: Use Cases and User Stories",
+          "file": "use-cases-and-user-stories.en.html",
+          "markdown": "use-cases-and-user-stories.en.md",
+          "excerpt": "Note: This was an internal email I shared when I was an operations intern at Yihaodian (1号店). It originally went on with two small made-up examples of using user stories to dig out real needs, but since they were mainly about that platform, I have taken them out here for now. I may do two more general examples later.\nIn software development, use cases (see Figure 1) or user stories are often used to describe how users interact with a software product in a given scenario, and the flow they may go through while using it, and from there to...",
+          "description": "Which kinds of product suit use cases and which suit user stories, two ways of describing requirements, and how to tell a good user story. First shared as an internal email during an operations internship at Yihaodian.",
+          "image": "blogs/assets/images/use-cases-and-user-stories/fa4d26f04ef52ecb61a4b707d7828637.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-moving-away",
+      "date": "2014-01-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：远离",
+          "file": "old-memories-moving-away.html",
+          "markdown": "old-memories-moving-away.md",
+          "excerpt": "昨天，当我坐在砚湖边，感受一点春天的迹象时，我并没有意识到这是多久以来再次做类似的事了。而不远处，有一个十字路口，我们安静又略带焦灼地彼此等候。\n去上回撰文随意描画心中所想，已经四月有余，一整个冬天。我经常在想，时间怎么过去...",
+          "description": "2014 年 1 月，隔了一整个冬天再写：不停地远离认识的人、做过的事、住过的地方，越来越充实也越来越空虚，但仍选择继续远离。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: Moving Away",
+          "file": "old-memories-moving-away.en.html",
+          "markdown": "old-memories-moving-away.en.md",
+          "excerpt": "Yesterday, sitting by Yan Lake and feeling a few signs of spring, I didn't realize how long it had been since I last did something like this. And not far off there was a crossroads, where we waited for each other, quiet and a little anxious.\nIt has been more than four months, a whole winter, since I last wrote down whatever was on my mind. I often wonder how time goes by so fast; there isn't much of a day when I'm clear-headed, clearly knowing what I'm doing and what I want to do. This morning seems no different...",
+          "description": "January 2014, writing again after a whole winter: moving away, again and again, from people I know, things I've done and places I've lived, fuller and emptier at once, and choosing to keep going.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-idle-words",
+      "date": "2013-05-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：闲言几句",
+          "file": "old-memories-idle-words.html",
+          "markdown": "old-memories-idle-words.md",
+          "excerpt": "片段人生。\n2017.05\n1.不要为别人而活。\n——这是一句回味无穷的话。每当有了一些新的经历之后，都会有更多的理解。\n这次的是，人往往参照别人的生活来决定自己的生活，这样节省了犹豫徘徊的成本，能够轻松得到适合大部分人的解决方案。但是对于一些奇葩...",
+          "description": "2013 年 5 月的四段闲话：不要为别人而活，底线难守，从吃货到睡货，以及在上海买不到回程车票的那个夜晚。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: A Few Idle Words",
+          "file": "old-memories-idle-words.en.html",
+          "markdown": "old-memories-idle-words.en.md",
+          "excerpt": "Life in fragments.\n2017.05\n1. Don't live for other people.\n— A saying you can chew on endlessly. Every time I have some new experience, I understand it a little more.\nThis time, it's that people often decide their own lives by reference to other people's. That saves the cost of dithering and gives you, easily, a solution that suits most people. But for oddballs like me who overthink everything, it may not work so well. Everyone has times of confusion and idleness, and then it's worth watching the paths others took to success or the hardships they went through....",
+          "description": "Four idle notes from May 2013: don't live for others, the line that's hard to hold, from foodie to sleepie, and a night in Shanghai with no ticket home.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-may-rain",
+      "date": "2013-05-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：五月雨",
+          "file": "old-memories-may-rain.html",
+          "markdown": "old-memories-may-rain.md",
+          "excerpt": "真诚而笔直，大概是拥抱所需的最佳姿势。\n2017.05\n今年五月的雨，是一种粘粘的、腻腻的东西。让人无可奈何，却又不忍心责骂。刚抬头便又被按下去的气温带来南京少有的长长的春天。可万物蠢蠢欲动，早做好迎接盛夏的准备，于是这种馈赠变得有些碍手...",
+          "description": "2013 年 5 月，南京黏腻的五月雨与暧昧的一年：学着主动去影响世界，雨天独自从学校走到将军山，你不去拥抱世界，世界如何拥抱你。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: May Rain",
+          "file": "old-memories-may-rain.en.html",
+          "markdown": "old-memories-may-rain.en.md",
+          "excerpt": "Sincere and upright: probably the best posture for an embrace.\n2017.05\nThis year's May rain is a sticky, cloying thing. There is nothing you can do about it, and yet you can't bring yourself to scold it. The temperature, pushed back down every time it lifts its head, has given Nanjing a long spring, which is rare here. But everything is itching to move, long since ready for high summer, so the gift gets a little in the way. It's like a yawn stopped halfway: there you are, belly out and arms stretched, unable to go forward or back, looking...",
+          "description": "May 2013, Nanjing's sticky May rain and an ambiguous year: learning to act on the world instead of only being changed by it, a rainy afternoon's walk alone from school to Jiangjun Mountain, and the thought that the world embraces those who embrace it.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "my-hands",
+      "date": "2012-12-01",
       "tags": [
         "life"
       ],
@@ -730,6 +1208,372 @@
           "markdown": "my-hands.en.md",
           "excerpt": "Do you feel heavy\nI want to hold you\nwith my hands\ncut away your unease with a winter wind like a blade\nand let your good dreams stay the night\nAre you tired\nI want you to cry all you need, and sleep in peace\nbetween my hands\nWhen the night has soaked the hem of an old dream\nwhen a bowl of congee steams the morning light soft\nI hope my hands\nare not only the glow of lamps in the south\nbut can also be a fire close at hand\nlighting your hands\nand letting them light...",
           "description": "A short poem written in December 2012. Hai Zi's \"Your Hands\" is appended on the Chinese page.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-autumn",
+      "date": "2012-09-29",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：又一天凉好个秋",
+          "file": "old-memories-autumn.html",
+          "markdown": "old-memories-autumn.md",
+          "excerpt": "旧忆有尽。\n2017.09\n今年的秋天来得好早，早到我们这些高年级的学长学姐们不断调侃“今年还怎么军训啊”，早到我还憋着一大口抵抗夏天的劲却发现已经完全没有必要，晚上穿短袖走在校园里凉飕飕的。明天就是中秋，月亮已经变得特别明亮，连傍晚的...",
+          "description": "2012 年中秋前夕，在南京的第三个秋天：什么样的生活才算完满？从“却道天凉好个秋”想到，没有生活的重量，就无法在乱风中保持自己的方向。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: Another Cool Day, a Fine Autumn",
+          "file": "old-memories-autumn.en.html",
+          "markdown": "old-memories-autumn.en.md",
+          "excerpt": "Old memories come to an end.\n2017.09\nAutumn came so early this year, so early that we seniors keep joking, \"How are the freshmen even going to do military training this year?\", so early that I was still holding my breath to fight off the summer and found there was no need at all. Walking around campus at night in short sleeves, it's chilly. Tomorrow is the Mid-Autumn Festival. The moon has grown especially bright; even the orange street lamps at dusk can't hold down the pale yellow pouring from it.\nMy third autumn in Nanjing no longer feels squeezed...",
+          "description": "The eve of the 2012 Mid-Autumn Festival, my third autumn in Nanjing: what makes a life full? From a line of Xin Qiji's, the thought that without the weight of living you cannot hold your course in the wind.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-july",
+      "date": "2012-07-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：宁静而珍贵的七月",
+          "file": "old-memories-july.html",
+          "markdown": "old-memories-july.md",
+          "excerpt": "夏天好像常常是我的转折点。\n2017.07\n似乎每一段生活，都有它的味道。\n但是很久都没有过像最近这般的生活了，或许甚至可以说，从没有过。\n其实也并不如何丰富多彩，晚上12点睡，早上8点起，仍然还是徘徊于几点一线。南京的天气闷热逼人，提着不轻的电脑包...",
+          "description": "2012 年 7 月在南京写的两篇：一个从选修课上的想法长成的项目，让这个夏天宁静而无纠缠；离校前夜的大风、月牙与《夏目友人帐》，以及缺憾的美。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: A Serene and Precious July",
+          "file": "old-memories-july.en.html",
+          "markdown": "old-memories-july.en.md",
+          "excerpt": "Summer, it seems, is often my turning point.\n2017.07\nEvery stretch of life seems to have its own flavour.\nBut it has been a long time since I lived a life like the one I'm living now; perhaps I could even say I never have.\nIt isn't actually all that rich or colourful. I go to bed at midnight and get up at eight, still shuttling between the same few points. Nanjing's weather is oppressively hot and muggy; walking along with a laptop bag that's no light load, I can feel beads of sweat rolling down one by one. The...",
+          "description": "Two pieces written in Nanjing in July 2012. A project grown from an idea in an elective class makes the summer serene and untangled; then, on the night before leaving school, strong wind, a crescent moon, Natsume's Book of Friends and the beauty of imperfection.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-four-years",
+      "date": "2012-05-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：四年了",
+          "file": "old-memories-four-years.html",
+          "markdown": "old-memories-four-years.md",
+          "excerpt": "Everything will flow, like tears in rain.\n2017.05\n转眼间已经四年了，很快就会十年，二十年，三十年。直到活着的人都只是从历史记载中得知曾经有过那么一件事。\n平常的生活几乎一瞬就被打破，所有的一切面目全非，就像来到一个完全陌生的世界。天花板落下粉尘，桌椅在地上跳来跳去，走道拱...",
+          "description": "汶川地震四年后，写给那些匆匆逝去的生命：那个下午和那一夜，在没经历过的人眼中只是一个符号；作为生还者，在戛然而止之前，奏出自己的生命。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: Four Years On",
+          "file": "old-memories-four-years.en.html",
+          "markdown": "old-memories-four-years.en.md",
+          "excerpt": "Everything will flow, like tears in rain.\n2017.05\nIn the blink of an eye it has been four years. Soon it will be ten, twenty, thirty, until the living know only from the historical record that such a thing once happened.\nOrdinary life was shattered almost in an instant; everything became unrecognizable, as if we had arrived in a completely strange world. Dust fell from the ceiling, desks and chairs hopped about the floor, the corridor heaved up and down just like a fairground ride, people surged through the stairwells, and someone had hold of my hand. Then came a...",
+          "description": "Four years after the Wenchuan earthquake, for the lives that ended so suddenly. That afternoon and that night are only a symbol to those who weren't there; as a survivor, I want to play out my own life before the music stops.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-on-repeat",
+      "date": "2012-04-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：“没有意外，一直重来”",
+          "file": "old-memories-on-repeat.html",
+          "markdown": "old-memories-on-repeat.md",
+          "excerpt": "所谓成熟，或许来源于自己与自己的不断对抗。\n2017.04\n几个晚上了，打开，关掉，打不出一个字。我不知道是怎么了，明明已经被乱七八糟的情绪憋到快要喘不过气，却还是写不下去。或许我越发明白，写下的东西没有人愿意看，每个人都是做不完的事，烦不完...",
+          "description": "2012 年 4 月，自我认同最动荡的一段日子：写不下去，对身边的人和自己都感到失望。把心底的负面情绪都倒出来之后，决定接受这样的自己，重来就重来。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: On Repeat",
+          "file": "old-memories-on-repeat.en.html",
+          "markdown": "old-memories-on-repeat.en.md",
+          "excerpt": "What we call maturity may come from a constant struggle of the self against itself.\n2017.04\nSeveral nights now: open it, close it, not a single word typed. I don't know what's wrong with me. I'm so choked with tangled feelings I can hardly breathe, and still I can't write. Maybe I understand more and more that nobody wants to read what I write. Everyone has endless things to do and endless worries of their own. So what if I write it down? No one will care.\nI seem to have been rather pessimistic lately; this is a time when...",
+          "description": "April 2012, when my sense of self was at its shakiest: unable to write, disappointed in the people around me and in myself. Having poured the bad feelings out, I decided to accept this self; if it meant starting over, then start over.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "only-forward-reading-1988",
+      "date": "2012-02-22",
+      "tags": [
+        "book"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "唯有前行——读《1988：我想和这个世界谈谈》",
+          "file": "only-forward-reading-1988.html",
+          "markdown": "only-forward-reading-1988.md",
+          "excerpt": "读韩寒这本《1988——我想和这个世界谈谈》的过程中，我曾经两次在读得聚精会神之时放下了该书。不是因为内容无聊、情节无味，而是情感上难以下咽。\n我无法轻松地形容出这本薄薄仅十余万字的小说带给我的感觉。硬要说的话，就好像在昏暗的光线里...",
+          "description": "读韩寒《1988：我想和这个世界谈谈》：像对着一面略微变形的镜子，看几个人物各自的轨迹，和这个故事最深的主题——唯有前行，才能与这个世界谈出一个结果。",
+          "image": "blogs/assets/images/only-forward-reading-1988/2153cd83632f493ac3a1c9745f510dff.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Only Forward — Reading 1988: I Want to Talk with the World",
+          "file": "only-forward-reading-1988.en.html",
+          "markdown": "only-forward-reading-1988.en.md",
+          "excerpt": "Twice while reading Han Han's 1988: I Want to Talk with the World, just when I was most absorbed, I put the book down. Not because the content was dull or the plot flat, but because emotionally it was hard to swallow.\nI can't easily describe the feeling this slim novel of barely more than a hundred thousand characters gave me. If I had to, it is like standing before a slightly warped mirror in dim light: the figure and face in front of me are me and not me; we share a similar helplessness, yet the helplessness seems to...",
+          "description": "Reading Han Han's 1988: I Want to Talk with the World, like facing a slightly warped mirror: the paths its characters take, and the story's deepest theme, that only by going forward can we talk things through with this world.",
+          "image": "blogs/assets/images/only-forward-reading-1988/2153cd83632f493ac3a1c9745f510dff.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-walking",
+      "date": "2012-02-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：走路",
+          "file": "old-memories-walking.html",
+          "markdown": "old-memories-walking.md",
+          "excerpt": "发霉了，就出去走走。\n2017.06\n我想，人总该有点确实的信念，否则无可救药。\n信念可以很大，也可以小到塞牙都嫌细。信念，比如遵守承诺。咱先不谈遵守和别人的承诺，自己和自己的承诺，自己曾咬牙下过的决心，自己曾热衷的美梦，如果一件都无法做到、一点都...",
+          "description": "2012 年 2 月，进大学快两年，总觉得被生活耍了：一个人从学校出发，在江宁走了三个小时，你拥抱世界，世界才会拥抱你。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: Walking",
+          "file": "old-memories-walking.en.html",
+          "markdown": "old-memories-walking.en.md",
+          "excerpt": "When you're going mouldy, go out for a walk.\n2017.06\nI think people should have some real beliefs; otherwise they're beyond saving.\nA belief can be huge, or so small it's too thin to get stuck in your teeth. A belief, like keeping promises. Let's leave aside keeping promises to others for now. The promises you make to yourself, the resolutions you once made through gritted teeth, the dreams you once burned for: if you can't manage a single one, can't make even a little of it come true, then that's no damn life at all.\nThough in many things...",
+          "description": "February 2012, nearly two years into university and feeling tricked by life. Three hours walking alone through Jiangning from school, and the thought that only if you embrace the world will it embrace you.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-numbers",
+      "date": "2011-12-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：号码",
+          "file": "old-memories-numbers.html",
+          "markdown": "old-memories-numbers.md",
+          "excerpt": "向海而行。\n2017.06\n“我在人海之中，找一朵浪花。”\n12月，也要到最后一周。吃饭、复习、通宵做比赛、看各种片子。情绪却没有突破口。\n其实读别人的文字、看别人的故事不但不能抒发自己的郁结，反而把更多复杂的感情加诸自己。\n路灯似乎没怎么开，夜色有点暗、风有点...",
+          "description": "2011 年 12 月，冬夜独自走在路上，MP3 随机放到一首旧歌《号码》：身份证号、学号、ID，人在人海里只是一个号码，却仍相信走到尽头留下的不只是一个号码。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: Numbers",
+          "file": "old-memories-numbers.en.html",
+          "markdown": "old-memories-numbers.en.md",
+          "excerpt": "Walking towards the sea.\n2017.06\nThe Chinese opens with a line from Bibi Zhou's song \"Numbers\" (号码), about looking for one person in a crowd. It is on the Chinese version of this page and is not translated here.\nDecember, and nearly its last week. Eating, revising, staying up all night on a competition, watching all sorts of films. But my feelings have no way out.\nIn fact, reading other people's writing and watching other people's stories doesn't release what's knotted up inside me; it only piles more tangled feelings on top.\nThe street lamps don't seem to be on...",
+          "description": "December 2011, walking alone on a winter night when an old song called \"Numbers\" comes up on shuffle. ID numbers, student numbers, user IDs: a person is just a number in the crowd, and yet I believe I will leave more than a number behind.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-nightscape",
+      "date": "2011-11-01",
+      "tags": [
+        "life",
+        "thinking"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：夜色",
+          "file": "old-memories-nightscape.html",
+          "markdown": "old-memories-nightscape.md",
+          "excerpt": "坐在回江宁校区的大校车上，运气好，坐在和司机并排的单独座位，面前是相当于全景的超大玻璃车窗。\n窗上有点点尘垢，但清晰得已经足够司机平稳地开车，也足够我窥看初冬夜色里的南京。\n不是这一次偶然的机会，我恐怕不知要到什么时候才...",
+          "description": "2011 年初冬，坐在回江宁校区的校车前排看南京的夜色：从“意义”是什么，想到真实、混沌与有序，以及生命这种最神奇的自组织。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: Nightscape",
+          "file": "old-memories-nightscape.en.html",
+          "markdown": "old-memories-nightscape.en.md",
+          "excerpt": "On the big school bus back to the Jiangning campus, I was lucky: I got the single seat beside the driver, with a huge glass windscreen in front of me, practically a panorama.\nThere were specks of grime on the glass, but it was clear enough for the driver to drive steadily, and clear enough for me to peer out at Nanjing in the early-winter night.\nIf not for this chance, I don't know when I would ever have spent several dozen minutes on something so meaningless. Speaking of meaning, what is \"meaning\", anyway? If I hadn't caught the last...",
+          "description": "Early winter 2011, watching Nanjing at night from the front of the school bus back to the Jiangning campus. From what \"meaning\" means to the real, chaos and order, and life as the most marvellous self-organization of all.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-serenity",
+      "date": "2011-09-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：宁静",
+          "file": "old-memories-serenity.html",
+          "markdown": "old-memories-serenity.md",
+          "excerpt": "动静皆宜，最可贵是平衡。\n2017.06\n一年以来，无论是忙碌还是无所事事，总觉得最缺的还是宁静，什么是宁静，不同的人有不同的界定。那么，宁静之于我，是什么色彩，什么气味，什么形状？\n我问自己，宁静是不是就意味着安静，清闲的时光？不是的。因为我说过了，无...",
+          "description": "2011 年 9 月，宁静不等于安静，它更像一炷香升起的烟里的气味，风一吹就乱；写内我与外我的拉扯，以及怎样给自己留出一点接近宁静的余地。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: Serenity",
+          "file": "old-memories-serenity.en.html",
+          "markdown": "old-memories-serenity.en.md",
+          "excerpt": "At ease in motion and in stillness; balance is what matters most.\n2017.06\nFor a year now, whether busy or idle, I have always felt that what I lack most is serenity. What is serenity? Different people define it differently. So what colour, what smell, what shape is serenity to me?\nI ask myself: does serenity just mean quiet, leisurely time? No. As I said, even when I have nothing to do, I still lack serenity. When I'm alone and everything around is quiet and silent, often there's still no serenity. Reading a book I like on my own, sitting...",
+          "description": "September 2011. Serenity is not the same as quiet; it is more like the scent in a wisp of incense smoke, scattered by any wind. On the tug of war between the inner and the outer self, and leaving yourself a little room to come close to serenity.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-letting-go",
+      "date": "2011-03-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：爱与放弃",
+          "file": "old-memories-letting-go.html",
+          "markdown": "old-memories-letting-go.md",
+          "excerpt": "事物有其重量。\n2017.06\n南京的风又开始放肆奔跑起来。\n玉兰甫开，便满地白帆，但抬头看却依旧锦簇。好像是花开得过盛过于饱和，承载不了而坠下枝头。阳光灿烂，昼夜温差大了起来，但是都在略偏冷的舒适范围内。这大抵就算南京的春天了吧。该得好好珍...",
+          "description": "2011 年 3 月南京的春天：舍不得写字的旧笔记本，差点毁于一杯被压破的酸奶，于是想到，很多时候放弃也许才是更完美的结局。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: Love and Letting Go",
+          "file": "old-memories-letting-go.en.html",
+          "markdown": "old-memories-letting-go.en.md",
+          "excerpt": "Things have their weight.\n2017.06\nNanjing's wind has started running wild again.\nThe magnolias have barely opened and already the ground is covered in white sails, yet look up and they're still in full bloom. It's as if the flowers bloomed too lavishly, too saturated, and couldn't hold on, and so dropped from the branches. The sun is brilliant, and the gap between day and night temperatures has grown, but it all stays within a comfortable range, slightly on the cool side. This is probably what counts as spring in Nanjing. I ought to treasure it.\nMy mood has had...",
+          "description": "Spring 2011 in Nanjing. An old notebook I couldn't bear to write in is nearly ruined by a squashed cup of yogurt, and I wonder whether letting go is often the more perfect ending.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-paper-and-pen",
+      "date": "2011-03-01",
+      "tags": [
+        "life",
+        "thinking"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：纸笔",
+          "file": "old-memories-paper-and-pen.html",
+          "markdown": "old-memories-paper-and-pen.md",
+          "excerpt": "从何时开始，不再依赖纸和笔。其实这个问题不用深究，一下就能找到答案。文字，喜爱了八年，一度达到不得不随身携带个小本子和一支笔的程度。刚爱上文字那个时候，郭敬明还是个多愁善感的大男孩，韩寒在世人眼中还多半是个叛逆的臭小子。...",
+          "description": "2011 年 3 月，写字的人手指上的茧、白纸的质感、古人行文的讲究：纸和笔正被键盘取代，这种美也许正在消逝。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: Paper and Pen",
+          "file": "old-memories-paper-and-pen.en.html",
+          "markdown": "old-memories-paper-and-pen.en.md",
+          "excerpt": "When did I stop relying on paper and pen? There's no need to dig deep into that; the answer comes at once. The written word: I've loved it for eight years, at one point so much that I had to carry a little notebook and a pen with me everywhere. When I first fell in love with the written word, Guo Jingming was still a sentimental big boy, and in most people's eyes Han Han was still mostly a rebellious brat. Guo Jingming wrote back then that he liked holding a pen and writing on sheet after sheet of smooth,...",
+          "description": "March 2011, on the calluses of people who write by hand, the feel of white paper and the customs of writing in the old days, and a beauty that may be fading as the keyboard replaces paper and pen.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-city",
+      "date": "2010-09-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：我所爱的城市",
+          "file": "old-memories-city.html",
+          "markdown": "old-memories-city.md",
+          "excerpt": "一座城市，一组回忆，一人一路一座座，身处这个时代的幸运。\n2017.06\n夜雨滴答、滴答，打在黑暗里。我的家乡，在最后一个安稳的夜晚里，送我这份大礼。我不知道此刻自己是怎样的心情，紧张or兴奋，总之挣扎良久，无法入眠。我总是说自己适应力强，然而面对变化，...",
+          "description": "2010 年 9 月，离开家乡绵阳去南京上大学的前一夜：在夜雨里写对绵阳、对南山的爱，以及“我走了，我来了”。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: The City I Love",
+          "file": "old-memories-city.en.html",
+          "markdown": "old-memories-city.en.md",
+          "excerpt": "One city, one set of memories; one person, one road, city after city: the luck of living in this age.\n2017.06\nThe night rain drips, drips, striking the dark. My hometown, on my last settled night, gives me this great gift. I don't know what I'm feeling right now, nervous or excited; anyway, I've tossed and turned for ages and can't sleep. I always say I adapt well, yet faced with change I can never stay calm; usually I'm tossing and turning days in advance, and when I do sleep it's a pile-up of tangled dreams. My thoughts are always...",
+          "description": "The night before leaving my hometown, Mianyang, for university in Nanjing, September 2010. In the night rain, on loving Mianyang and Nanshan, and \"I'm leaving. I'm coming.\"",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "old-memories-stars",
+      "date": "2008-10-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "旧忆：星（怀念住校时的长跑或是其他）",
+          "file": "old-memories-stars.html",
+          "markdown": "old-memories-stars.md",
+          "excerpt": "25年半，既然改变在所难免，那就享受它、驾驭它。\n2017.06\n当城市中的星空，逐渐黯淡，儿时的梦，又在何处寻？ ——题记\n既然只有二十分钟了，就写一写吧。\n最近几天天空一直比较晴朗。虽然气温在不断下降，那代表着冬天的败絮般的云袄却又消散了——本以为是要提前...",
+          "description": "2008 年 10 月，高中住校时的睡前长跑：跑着跑着抬头，看见久违的星，想起小时候对星空的挚爱。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Old Memories: Stars (Missing the Long Runs of Boarding-School Days, or Something Else)",
+          "file": "old-memories-stars.en.html",
+          "markdown": "old-memories-stars.en.md",
+          "excerpt": "Twenty-five and a half years. Since change is unavoidable, enjoy it, and ride it.\n2017.06\nWhen the starry sky over the city slowly dims, where can the dreams of childhood be found? — Epigraph\nSince there are only twenty minutes left, I might as well write a little.\nThe sky has been fairly clear these last few days. Although the temperature keeps dropping, the padded coat of cloud, like tattered cotton wadding, that stands for winter has broken up again (I'd thought winter was coming early). The hem of this autumn swept past in a flash; the weather really is...",
+          "description": "October 2008, a bedtime run at boarding school: glancing up mid-run at stars I hadn't seen for a long time, and remembering a childhood love of the night sky.",
           "image": "",
           "available": true
         }
