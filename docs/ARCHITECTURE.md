@@ -78,6 +78,7 @@ Other TypeScript bundles: `gallery/talks/pkm-2026-06-07/deck.ts` / `deck.mts`, `
 - Never hand-edit generated output; change the source or the generator and regenerate.
 - After a CSS or JS change, bump `css_version` / `js_version` in `data/site_shell.json` and regenerate, so browsers do not keep stale files.
 - `site_updated` must not be older than the newest work, project or article; `scripts/check_site.py` enforces it.
+- Project skills exist twice, file for file: `.claude/skills/` for Claude Code and `.agents/skills/` for Codex, which alone also has `agents/openai.yaml`. After editing one copy, run `python3 scripts/sync_skills.py` (add `--from agents` when the Codex copy was edited). `make check` fails while the two differ.
 
 Run `make check` before publishing structural changes.
 
