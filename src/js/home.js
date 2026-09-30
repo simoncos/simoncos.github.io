@@ -70,20 +70,22 @@
         setActive(active);
     }
     // ---- Newest: topic filter ---------------------------------------------
+    const rowsBox = document.querySelector('[data-rows]');
     const rows = Array.from(document.querySelectorAll('[data-rows] .row'));
+    // Only the newest few of the chosen topic show; Articles and Work list the rest.
+    const shown = Number(rowsBox?.dataset.shown) || rows.length;
     const chips = Array.from(document.querySelectorAll('.newest [data-topic]'))
         .filter((el) => el.tagName === 'BUTTON');
     chips.forEach((chip) => {
         chip.addEventListener('click', () => {
             const topic = chip.dataset.topic || 'all';
             chips.forEach((other) => other.setAttribute('aria-pressed', other === chip ? 'true' : 'false'));
+            let n = 0;
             rows.forEach((row) => {
-                const out = topic !== 'all' && row.dataset.topic !== topic;
-                row.classList.toggle('is-out', out);
-                if (out)
-                    row.setAttribute('tabindex', '-1');
-                else
-                    row.removeAttribute('tabindex');
+                const on = (topic === 'all' || row.dataset.topic === topic) && n < shown;
+                if (on)
+                    n++;
+                row.hidden = !on;
             });
         });
     });
