@@ -2918,6 +2918,22 @@ a.dmi-cell.is-off > span {
     opacity: 0.35;
 }
 
+/* The whole row opens its excerpt (articles.ts), except the open excerpt
+   itself. The opening excerpt is the tap feedback; a grey flash over the
+   whole row would add nothing. */
+:root.js .arow {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root.js .arow :is(a, button) {
+    -webkit-tap-highlight-color: initial;
+}
+
+:root.js .arow-ex {
+    cursor: auto;
+}
+
 .arow-top {
     display: flex;
     flex-wrap: wrap;

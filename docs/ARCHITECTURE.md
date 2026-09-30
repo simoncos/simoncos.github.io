@@ -52,7 +52,7 @@ TypeScript in `src/ts/*.ts` compiles to tracked `src/js/*.js` (`npm run build:ts
 
 - `site.ts` — language and theme, mobile menu, page transitions (a curtain between sections, a fade within one), external-link marking, cursor image previews, copy buttons.
 - `home.ts` — the Selected work stage and the topic filter over Newest.
-- `articles.ts` — search, tag filter and excerpts on the list; the month index (each month heading sticks under the header and opens a popover of every month, which follows the filter; `#2012-09` lands on a month); the series view. `#reading-paths` / `#topics` from old links still land correctly.
+- `articles.ts` — search, tag filter and excerpts on the list (a click anywhere on a row opens its excerpt); the month index (each month heading sticks under the header and opens a popover of every month, which follows the filter; `#2012-09` lands on a month); the series view. `#reading-paths` / `#topics` from old links still land correctly.
 - `article.ts` — reading progress, the contents list, footnote highlighting, back to top.
 - `work.ts` — the wheel of work types; `#projects`, `#talks` and so on open a type directly.
 - `board.ts` — Board / Present modes on the Sleep Toolkit boards.

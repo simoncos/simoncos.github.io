@@ -85,8 +85,19 @@
     }
 
     rows.forEach((row) => {
-        row.querySelectorAll('.arow-title, .arow-toggle').forEach((button) => {
-            button.addEventListener('click', () => setOpen(row));
+        // A click anywhere on the row opens or closes its excerpt, not only
+        // on the title or the toggle, which stay the controls for keyboards
+        // and screen readers. Links and other buttons keep their own action;
+        // an open excerpt is left alone, so reading in it or selecting text
+        // does not fold it away.
+        row.addEventListener('click', (event) => {
+            const target = event.target as Element;
+            if (!target.closest('.arow-title, .arow-toggle')) {
+                if (target.closest('a, button, input, label, .arow-ex')) return;
+                const selection = window.getSelection();
+                if (selection && !selection.isCollapsed && selection.containsNode(row, true)) return;
+            }
+            setOpen(row);
         });
         // Hovering a row dims all the others. Series parts used to stay lit
         // together, which read as two rows hovered at once; the series pill
