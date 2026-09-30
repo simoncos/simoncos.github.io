@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: February 2012, nearly two years into university and feeling tricked by life. Three hours walking alone through Jiangning from school, and the thought that only if you embrace the world will it embrace you.
 ---
 
-# Old Memories: Walking
+# Walking
 
 When you're going mouldy, go out for a walk.
 

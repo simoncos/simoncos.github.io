@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: The night before leaving my hometown, Mianyang, for university in Nanjing, September 2010. In the night rain, on loving Mianyang and Nanshan, and "I'm leaving. I'm coming."
 ---
 
-# Old Memories: The City I Love
+# The City I Love
 
 One city, one set of memories; one person, one road, city after city: the luck of living in this age.
 

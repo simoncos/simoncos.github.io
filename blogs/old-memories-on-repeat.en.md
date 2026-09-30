@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: April 2012, when my sense of self was at its shakiest: unable to write, disappointed in the people around me and in myself. Having poured the bad feelings out, I decided to accept this self; if it meant starting over, then start over.
 ---
 
-# Old Memories: On Repeat
+# On Repeat
 
 What we call maturity may come from a constant struggle of the self against itself.
 

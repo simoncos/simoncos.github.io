@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: October 2008, a bedtime run at boarding school: glancing up mid-run at stars I hadn't seen for a long time, and remembering a childhood love of the night sky.
 ---
 
-# Old Memories: Stars (Missing the Long Runs of Boarding-School Days, or Something Else)
+# Stars (Missing the Long Runs of Boarding-School Days, or Something Else)
 
 Twenty-five and a half years. Since change is unavoidable, enjoy it, and ride it.
 

@@ -21,23 +21,23 @@
 
 | 文章 | 站内路径 | `date` | 正文落款（引言 / 旧文） | 简书首发 |
 |---|---|---|---|---|
-| 旧忆：星（怀念住校时的长跑或是其他） | `blogs/old-memories-stars.html` | 2008-10-01，取当月 1 日 | 2017.06 / 2008.10 | 2017-02-26 11:28 |
-| 旧忆：我所爱的城市 | `blogs/old-memories-city.html` | 2010-09-01，取当月 1 日 | 2017.06 / 2010.09 | 2017-02-26 13:12 |
-| 旧忆：纸笔 | `blogs/old-memories-paper-and-pen.html` | 2011-03-01，取当月 1 日 | 无引言 / 2011.03 | 2014-01-04 15:37 |
-| 旧忆：爱与放弃 | `blogs/old-memories-letting-go.html` | 2011-03-01，取当月 1 日（文中线索表明不早于 3 月 11 日） | 2017.06 / 2011.03 | 2017-02-26 18:14 |
-| 旧忆：宁静 | `blogs/old-memories-serenity.html` | 2011-09-01，取当月 1 日 | 2017.06 / 2011.09 | 2017-02-26 22:46 |
-| 旧忆：夜色 | `blogs/old-memories-nightscape.html` | 2011-11-01，取当月 1 日 | 无引言 / 2011.11 | 2014-01-04 15:26 |
-| 旧忆：号码 | `blogs/old-memories-numbers.html` | 2011-12-01，取当月 1 日 | 2017.06 / 2011.12 | 2017-02-27 19:43 |
-| 旧忆：走路 | `blogs/old-memories-walking.html` | 2012-02-01，取当月 1 日 | 2017.06 / 2012.02 | 2017-02-28 20:12 |
-| 旧忆：“没有意外，一直重来” | `blogs/old-memories-on-repeat.html` | 2012-04-01，取当月 1 日 | 2017.04 / 2012.04 | 2017-04-03 20:03 |
-| 旧忆：四年了 | `blogs/old-memories-four-years.html` | 2012-05-01，取当月 1 日 | 2017.05 / 2012.05 | 2017-05-12 11:05 |
-| 旧忆：宁静而珍贵的七月 | `blogs/old-memories-july.html` | 2012-07-01，取当月 1 日 | 2017.07 / 两篇各署 2012.07 | 2017-05-29 12:45 |
-| 旧忆：又一天凉好个秋 | `blogs/old-memories-autumn.html` | 2012-09-29，文中「明天就是中秋」 | 2017.09 / 2012.09 | 2017-09-17 11:30 |
-| 旧忆：五月雨 | `blogs/old-memories-may-rain.html` | 2013-05-01，取当月 1 日 | 2017.05 / 2013.05 | 2017-05-03 21:50 |
-| 旧忆：闲言几句 | `blogs/old-memories-idle-words.html` | 2013-05-01，取当月 1 日 | 2017.05 / 2013.05 | 2017-05-29 12:14 |
-| 旧忆：远离 | `blogs/old-memories-moving-away.html` | 2014-01-01，取当月 1 日 | 无引言 / 2014.01 | 2014-03-06 09:58 |
-| 旧忆：我的十六个月 | `blogs/old-memories-sixteen-months.html` | 2014-08-31 | 2017.08.31 / 2014.08.31 | 2017-09-03 00:31 |
-| 旧忆：年少无知 | `blogs/old-memories-young.html` | 2015-06-07，简书首发，与落款同月 | 无引言 / 2015.06 | 2015-06-07 17:26 |
+| 星（怀念住校时的长跑或是其他） | `blogs/old-memories-stars.html` | 2008-10-01，取当月 1 日 | 2017.06 / 2008.10 | 2017-02-26 11:28 |
+| 我所爱的城市 | `blogs/old-memories-city.html` | 2010-09-01，取当月 1 日 | 2017.06 / 2010.09 | 2017-02-26 13:12 |
+| 纸笔 | `blogs/old-memories-paper-and-pen.html` | 2011-03-01，取当月 1 日 | 无引言 / 2011.03 | 2014-01-04 15:37 |
+| 爱与放弃 | `blogs/old-memories-letting-go.html` | 2011-03-01，取当月 1 日（文中线索表明不早于 3 月 11 日） | 2017.06 / 2011.03 | 2017-02-26 18:14 |
+| 宁静 | `blogs/old-memories-serenity.html` | 2011-09-01，取当月 1 日 | 2017.06 / 2011.09 | 2017-02-26 22:46 |
+| 夜色 | `blogs/old-memories-nightscape.html` | 2011-11-01，取当月 1 日 | 无引言 / 2011.11 | 2014-01-04 15:26 |
+| 号码 | `blogs/old-memories-numbers.html` | 2011-12-01，取当月 1 日 | 2017.06 / 2011.12 | 2017-02-27 19:43 |
+| 走路 | `blogs/old-memories-walking.html` | 2012-02-01，取当月 1 日 | 2017.06 / 2012.02 | 2017-02-28 20:12 |
+| “没有意外，一直重来” | `blogs/old-memories-on-repeat.html` | 2012-04-01，取当月 1 日 | 2017.04 / 2012.04 | 2017-04-03 20:03 |
+| 四年了 | `blogs/old-memories-four-years.html` | 2012-05-01，取当月 1 日 | 2017.05 / 2012.05 | 2017-05-12 11:05 |
+| 宁静而珍贵的七月 | `blogs/old-memories-july.html` | 2012-07-01，取当月 1 日 | 2017.07 / 两篇各署 2012.07 | 2017-05-29 12:45 |
+| 又一天凉好个秋 | `blogs/old-memories-autumn.html` | 2012-09-29，文中「明天就是中秋」 | 2017.09 / 2012.09 | 2017-09-17 11:30 |
+| 五月雨 | `blogs/old-memories-may-rain.html` | 2013-05-01，取当月 1 日 | 2017.05 / 2013.05 | 2017-05-03 21:50 |
+| 闲言几句 | `blogs/old-memories-idle-words.html` | 2013-05-01，取当月 1 日 | 2017.05 / 2013.05 | 2017-05-29 12:14 |
+| 远离 | `blogs/old-memories-moving-away.html` | 2014-01-01，取当月 1 日 | 无引言 / 2014.01 | 2014-03-06 09:58 |
+| 我的十六个月 | `blogs/old-memories-sixteen-months.html` | 2014-08-31 | 2017.08.31 / 2014.08.31 | 2017-09-03 00:31 |
+| 年少无知 | `blogs/old-memories-young.html` | 2015-06-07，简书首发，与落款同月 | 无引言 / 2015.06 | 2015-06-07 17:26 |
 
 英文版路径把 `.html` 换成 `.en.html`。落款有日的只有《我的十六个月》；《又一天凉好个秋》的日子由文中推出，《年少无知》用同月的首发日，其余 14 篇取当月 1 日。
 
@@ -73,7 +73,7 @@
   - 14 篇原文没有 H1，补上；《夜色》《纸笔》《远离》的 setext 标题改为 `#`。
   - 删去行尾空格和只含空格的行（《五月雨》《宁静》《星》《远离》《闲言几句》）。
   - Markdown 会把本该分行的几处连成一行，补上 `<br>`：《五月雨》引的三行歌词、《星》的题记与「——题记」、《爱与放弃》文末「是夜，」与「初成于……」。
-  - 标题「旧忆：“没有意外，一直重来”」取简书标题；原稿文件名末尾的「-」是文件名清洗留下的，不属于标题。
+  - 标题取简书标题，去掉「旧忆：」前缀（见[用户决定](#用户决定)第 8 条）。《“没有意外，一直重来”》原稿文件名末尾的「-」是文件名清洗留下的，不属于标题。
 - 各篇之间没有互相链接，原文也没有任何外链，所以没有要改成站内链接的地方，也没有失效链接。
 
 ## 照原文保留的问题
@@ -132,7 +132,7 @@
   - 《夏目友人帐》：「人有人的时间，妖怪有妖怪的时间，兽有兽的时间」，以及第四季最后一句「难以忘怀的，宝贵的每一天」，都是作者的转述，未与片中原台词核对。
   - 郭敬明「喜欢拿着一支笔……」是间接引述，照译。
 - **英文里补的说明**（中文没有，为英文读者补）：「Nanshan, my high school」；*Eufloria* 的中文名「真菌世界」；雅思的「鸭子」俗称和绝味；「dream-eating baku」（貘）；QQ 的「灰色」译作 greyed-out names；「军训」补 freshmen's；歌手名 Crowd Lu、Faye Wong、Bibi Zhou、Hacken Lee、the Eagles、KOKIA，以及诗人 Xin Qiji。《纸笔》「好（强调是四声）书之手」是原文自带的注，英文照译为 fourth tone。
-- **标题**：On Repeat / May Rain / Another Cool Day, a Fine Autumn / Numbers / Four Years On / Nightscape / Serenity / A Serene and Precious July / Young and Naive / The City I Love / My Sixteen Months / Stars (Missing the Long Runs of Boarding-School Days, or Something Else) / Love and Letting Go / Paper and Pen / Walking / Moving Away / A Few Idle Words，统一冠以 “Old Memories:”。
+- **标题**：On Repeat / May Rain / Another Cool Day, a Fine Autumn / Numbers / Four Years On / Nightscape / Serenity / A Serene and Precious July / Young and Naive / The City I Love / My Sixteen Months / Stars (Missing the Long Runs of Boarding-School Days, or Something Else) / Love and Letting Go / Paper and Pen / Walking / Moving Away / A Few Idle Words。和中文一样不加前缀。
 - **统一的译法**：宁静 serenity、安静 quiet；孤独 solitude、寂寞 loneliness；文字 the written word / words；远离 moving away；自由而无用 free and useless；拥抱世界 embrace the world；意义 meaning；真实 the real；内我／外我 inner self / outer self；南京 Nanjing，江宁 Jiangning，将军山 Jiangjun Mountain，砚湖 Yan Lake，秦淮河 Qinhuai River；《空之境界》*Kara no Kyoukai* (*The Garden of Sinners*)。
 - **其他处理**：
   - 指「这个我」的「他」译作 it；泛指的「他」译作 they。
@@ -143,7 +143,7 @@
 
 ## 系列
 
-用户 2026-09-30 决定**不建系列**：17 篇只靠「旧忆：」标题前缀和 `life` 标签归在一起。没有改 `data/site.json`，也没有加新标签。标签：15 篇 `life`，《夜色》《纸笔》为 `life,thinking`。
+用户 2026-09-30 决定**不建系列**，标题也不带「旧忆」前缀：17 篇只靠 `old-memories-` 路径和 `life` 标签归在一起。没有改 `data/site.json`，也没有加新标签。标签：15 篇 `life`，《夜色》《纸笔》为 `life,thinking`。
 
 ## 页面变化
 
@@ -169,3 +169,4 @@
 5. **系列**：不建（用户选择）。
 6. **《“没有意外，一直重来”》的英文标题**：因不能翻译歌词，用 *On Repeat*（按建议采用，未单独问用户）。
 7. **《我所爱的城市》英文加的「my high school」**：保留，否则英文读者会把南山当成一座山（按建议采用）。
+8. **标题前缀**：中英文标题都去掉「旧忆：」／“Old Memories:”（用户要求，上线后改）。站内路径不变。《十年如雨》文末附的《四年了》原本链到简书，改为链到站内这一篇，链接文字随之改为新标题。

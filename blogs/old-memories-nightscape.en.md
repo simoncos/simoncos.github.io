@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: Early winter 2011, watching Nanjing at night from the front of the school bus back to the Jiangning campus. From what "meaning" means to the real, chaos and order, and life as the most marvellous self-organization of all.
 ---
 
-# Old Memories: Nightscape
+# Nightscape
 
 On the big school bus back to the Jiangning campus, I was lucky: I got the single seat beside the driver, with a huge glass windscreen in front of me, practically a panorama.
 

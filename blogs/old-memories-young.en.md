@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: June 2015, writing something "free and useless" again after nine months: the two selves that come with growing older, writing and childhood in The Disappearance of Childhood, and why I need words.
 ---
 
-# Old Memories: Young and Naive
+# Young and Naive
 
 Long time no see.
 

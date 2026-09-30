@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Wed, 30 Sep 2026 10:52:20 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>我的个人知识管理系统 2026-03</title><link>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</link><guid>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</guid><pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的个人知识管理系统 2026-03</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Wed, 30 Sep 2026 13:39:03 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>我的个人知识管理系统 2026-03</title><link>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</link><guid>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</guid><pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的个人知识管理系统 2026-03</h1>
 <p><img alt="Personal Knowledge Management System 202603" decoding="async" height="717" src="https://simoncos.github.io/blogs/assets/images/my-personal-knowledge-management-system-2026-03/b0b1b4b23ca8bc7d5afc150d07c3582d.jpg" width="1199"/></p>
 <h2>一、从"记笔记"到"分层协作"</h2>
 <p>我开始把 Obsidian 作为主要的 KM<sup id="fnref:1"><a aria-label="脚注" class="footnote-ref" href="https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html#fn:1">1</a></sup> 工具，到现在差不多四、五年了。2026 年 3 月回顾完整的系统迭代记录（见文末附录），这套东西已经长成了一个分层的人机系统：Telegram 负责即时输入，Obsidian 负责整理与沉淀，个人站点负责发布与呈现，Git 负责版本边界，而我的 OpenClaw agent--RedPiggy，开始把这些部分粘合起来。</p>
@@ -1354,7 +1354,7 @@
 <p>时间就像是不会停的雨，在雨中看不见眼泪。但这场雨抹杀不了眼泪的真实，即使没有人叙述，即使没有人记得。</p>
 <p>至少我们可以记得这种真实。</p>
 <p><img alt="夜色中被灯光照亮的雨滴" decoding="async" height="377" src="https://simoncos.github.io/blogs/assets/images/ten-years-like-rain/fc6fc9e0995578be7065b65cb0e6a6dc.jpg" width="600"/></p>
-<p><a href="https://www.jianshu.com/p/aedf75a08e06">附《旧忆：四年了》</a></p>
+<p><a href="https://simoncos.github.io/blogs/old-memories-four-years.html">附《四年了》</a></p>
 <p>摄于2020.05.10：</p>
 <p><img alt="山坡下的地震遗址，断裂的台阶前摆着白花，中央立着国旗" decoding="async" height="1140" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/ten-years-like-rain/d758854f23e33f849fa06c986ca39f0b.jpg" width="1520"/></p>]]></description></item><item><title>辛普森悖论与直觉的缺陷</title><link>https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.html</link><guid>https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.html</guid><pubDate>Tue, 27 Mar 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>辛普森悖论与直觉的缺陷</h1>
 <p><img alt="《辛普森一家》里的荷马·辛普森皱着脸，对话框里写着 D'oh!" decoding="async" height="380" src="https://simoncos.github.io/blogs/assets/images/simpsons-paradox-and-the-flaws-of-intuition/41dff4010e43979b84a833fb80be4a58.jpg" width="532"/></p>
@@ -2052,7 +2052,7 @@ plt.show()
 <p>非常棒，完全没有问题。</p>
 <p>果然还是扯出了一大堆废话，还是做回文青总结一下我的这一年然后继续啃我的菲律賓金菠蘿果盤（價值十五文九毛，HKD），毕竟今天已经12月29号了嘛：</p>
 <p>二〇一五，没什么特别的事发生。在这一年的十万亿种可能性里，我幸不辱命活出了其中一种。然而在十万亿个人眼里所见的那个我，便是在那十万亿个世界中各自唯一的我，我只能有幸见过我的世界里的那一个我并与之告别。既然连我自己都无法同所有的我告别，我们也就不用为什么事情感到惋惜，正如我不会因为无法见全那水杯中的十万亿种风景而感到惋惜一样。毕竟，每一种风景里都包含了一整个世界，见过一种，便知十万亿种。我只要有幸见过我的世界中的那一个你，便能知十万亿个你。</p>
-<p>2015.12.29</p>]]></description></item><item><title>旧忆：年少无知</title><link>https://simoncos.github.io/blogs/old-memories-young.html</link><guid>https://simoncos.github.io/blogs/old-memories-young.html</guid><pubDate>Sun, 07 Jun 2015 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：年少无知</h1>
+<p>2015.12.29</p>]]></description></item><item><title>年少无知</title><link>https://simoncos.github.io/blogs/old-memories-young.html</link><guid>https://simoncos.github.io/blogs/old-memories-young.html</guid><pubDate>Sun, 07 Jun 2015 00:00:00 +0800</pubDate><description><![CDATA[<h1>年少无知</h1>
 <p>好久不见。</p>
 <p>距离我上次写一段自由而无用的文字，已有9个月。三个季度里，你我一定已有一些改变。因为什么而变？或许可以说是工作，或许可以说是学习，或许可以说是与他人的相处，但或许最根本的，永远是因为从来不会静止的时空。</p>
 <p>年少多好，因为那个时候世界的大你不用看到，那一小块田园般的时间和空间里你可以安稳地保存一些东西。信念、朋友，还有想要吃的家乡风味，都近得如与你一体。只可惜生命虽然谈不上只算一声发泄、妥协和抱歉，但是它不会简单到可以永远保持你周围的那份安稳。正如今日的你我，已经难以找到过去的那种困于一隅却足以作乐的感觉。年岁增长，我们感到世界动荡飘摇以及自我的渺小，我们总是那么轻易地被某种力量推往一个方向，远离和邂逅成为一种习惯。世界仿佛没有边界，即使有那么一堵墙，向上向下向左向右毫无止处，你也知道凭自己的力量是无法走到那里去证明其存在的。渐渐的你遇到越来越多的人，看见越来越远处的地平线，而你自己的记忆、情绪、思索那么狭隘有限，与之相除得到的值让你有时感觉它们像是完全不存在。你我变成海中的一粒水滴，个性消失，方向趋同，一切已经有了理所应当的安排，在那之中生老病死、喜怒哀乐、得意失意。</p>
@@ -2115,7 +2115,7 @@ plt.show()
 <li>艺术没目的，设计有特殊的明确目的</li>
 <li>艺术追随风格，设计追随功能</li>
 </ul>
-<p>我们或许还可以用比拟的方式来总结：艺术就是舞蹈，而设计则是戴着镣铐起舞（dance with shackles on）。黄金比例大概便算是这样一种镣铐，限制设计的舞步，却又使它闪闪发亮。</p>]]></description></item><item><title>旧忆：我的十六个月</title><link>https://simoncos.github.io/blogs/old-memories-sixteen-months.html</link><guid>https://simoncos.github.io/blogs/old-memories-sixteen-months.html</guid><pubDate>Sun, 31 Aug 2014 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：我的十六个月</h1>
+<p>我们或许还可以用比拟的方式来总结：艺术就是舞蹈，而设计则是戴着镣铐起舞（dance with shackles on）。黄金比例大概便算是这样一种镣铐，限制设计的舞步，却又使它闪闪发亮。</p>]]></description></item><item><title>我的十六个月</title><link>https://simoncos.github.io/blogs/old-memories-sixteen-months.html</link><guid>https://simoncos.github.io/blogs/old-memories-sixteen-months.html</guid><pubDate>Sun, 31 Aug 2014 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的十六个月</h1>
 <p>倏忽又三十六个月。</p>
 <p>2017.08.31</p>
 <hr/>
@@ -2192,7 +2192,7 @@ plt.show()
 <p>2.故事发生在怎样一个场景，场景有哪些特点和限制；</p>
 <p>3.使用拿手的叙述方式：可以什么都不借助，就用语言文字，也可以画一个像电影脚本的故事图（如果你绘画能力够强），甚至结合一些更为系统的流程图（如图2）。</p>
 <p><img alt="用户故事图的一个例子：左边是买家 TOM 的流程，从 List 页面、产品 Detail 页面到发起订单、订单详情；右边是卖家“黎叔”在交易管理页面处理订单、创建银行账号的流程；两个角色各配一张头像和年龄、所在地" decoding="async" height="431" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/use-cases-and-user-stories/5dd272663d262a4c8e3cbdcde98fa520.jpg" width="640"/></p>
-<p><strong>图2：用户故事图的一个例子（图片来源：heidixie《交互设计那些事儿》）</strong></p>]]></description></item><item><title>旧忆：远离</title><link>https://simoncos.github.io/blogs/old-memories-moving-away.html</link><guid>https://simoncos.github.io/blogs/old-memories-moving-away.html</guid><pubDate>Wed, 01 Jan 2014 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：远离</h1>
+<p><strong>图2：用户故事图的一个例子（图片来源：heidixie《交互设计那些事儿》）</strong></p>]]></description></item><item><title>远离</title><link>https://simoncos.github.io/blogs/old-memories-moving-away.html</link><guid>https://simoncos.github.io/blogs/old-memories-moving-away.html</guid><pubDate>Wed, 01 Jan 2014 00:00:00 +0800</pubDate><description><![CDATA[<h1>远离</h1>
 <p>昨天，当我坐在砚湖边，感受一点春天的迹象时，我并没有意识到这是多久以来再次做类似的事了。而不远处，有一个十字路口，我们安静又略带焦灼地彼此等候。</p>
 <p>去上回撰文随意描画心中所想，已经四月有余，一整个冬天。我经常在想，时间怎么过去得那样快，一天里没有多少时间是清醒的，清醒地知道自己在做什么、要做什么。今天的早上与昨天的早上仿佛没有实质区别，天空照常被点亮，楼下的马路照常被呼啸声铺满，饥饿照常按顺序次第发生。可是标示「2014年X月X日」的日历，将永远不会再从脑中撕上一遍。被夺走的日期，永远不再属于我。细想，原来所谓的照常，只是说明生活没有太大的波动罢了，但常常给我们一种自欺的幻觉。只有生命垂危的人，才能深刻地懂得这个道理：「在你们眼中，今晚过了就会是明天，明晚过了就会是后天，太阳每天都会重新升起。而我只有现在。」生命就像一笔几如偷得的巨额遗产，有了最哄骗人的华丽数字，鼓励我们尽情挥霍。我们认为金钱是可以再生的，因为它所代表的价值是可以被创造出来的。然而每个人所能直接创造的价值实际上是有限的，因为个体拥有的时间，是不可再生的，是有限的。我的时间用完了，我的一切都不可再生。所以只好让每一分钟变得更有价值一点，用力向前。</p>
 <p>我不停地远离。远离认识的人，远离做过的事，远离曾栖身的地方。认识更多值得认识的人，做更多没做过的事，去更多地方。一度误以为自己已成熟到对一切变化淡然处之，现在却发现这种淡然的代价是逐渐丧失对一切鲜活的情感。几年里我越发地迷恋抽象的、形式的、逻辑的问题，将真实世界的血肉和色彩剥离，探究隐藏在背后的「理」；做一个冰冷的观察者，观察发生的一切，也观察自己；离开一个个群体，走入一个个群体，再离开。</p>
@@ -2202,7 +2202,7 @@ plt.show()
 <p>选择现在，就将远离过去；选择未来，就将远离现在。而一模一样的过去不会在现在重现，一模一样的现在也不会在未来重现。</p>
 <p>或许没有哪一条路、哪一种选择能带给人绝对的快乐。有不同的快乐，就有不同的痛苦。颠簸也好、平坦也好、简单也好、曲折也好，只能走一条路，因为这是我已知的宇宙给我的游戏规则。</p>
 <p>所以，我将继续远离。</p>
-<p>2014.01</p>]]></description></item><item><title>旧忆：闲言几句</title><link>https://simoncos.github.io/blogs/old-memories-idle-words.html</link><guid>https://simoncos.github.io/blogs/old-memories-idle-words.html</guid><pubDate>Wed, 01 May 2013 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：闲言几句</h1>
+<p>2014.01</p>]]></description></item><item><title>闲言几句</title><link>https://simoncos.github.io/blogs/old-memories-idle-words.html</link><guid>https://simoncos.github.io/blogs/old-memories-idle-words.html</guid><pubDate>Wed, 01 May 2013 00:00:00 +0800</pubDate><description><![CDATA[<h1>闲言几句</h1>
 <p>片段人生。</p>
 <p>2017.05</p>
 <hr/>
@@ -2218,7 +2218,7 @@ plt.show()
 <p>在上海的短短几十小时，经历了好多种难得的心理状态。然后发现自己是多么重要。火车站大厅中，买不到回去的票，旅馆订不到，店铺开始打烊，光线暗下来；地铁之中倒很明亮，不远的外面却是巨大的夜晚，几乎所有人都有归去的方向，手机停了机。在这两个时刻，自己不知道要去向何方，整个世界渐渐朦胧起来变得与我无关，渐渐我只剩自己和自己的背包。夜晚的灯光变成一种假象，迎面走来的人变成另一种生物。</p>
 <p>但世界还是这个世界。</p>
 <p>就这么多。</p>
-<p>2013.05</p>]]></description></item><item><title>旧忆：五月雨</title><link>https://simoncos.github.io/blogs/old-memories-may-rain.html</link><guid>https://simoncos.github.io/blogs/old-memories-may-rain.html</guid><pubDate>Wed, 01 May 2013 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：五月雨</h1>
+<p>2013.05</p>]]></description></item><item><title>五月雨</title><link>https://simoncos.github.io/blogs/old-memories-may-rain.html</link><guid>https://simoncos.github.io/blogs/old-memories-may-rain.html</guid><pubDate>Wed, 01 May 2013 00:00:00 +0800</pubDate><description><![CDATA[<h1>五月雨</h1>
 <p>真诚而笔直，大概是拥抱所需的最佳姿势。</p>
 <p>2017.05</p>
 <hr/>
@@ -2276,7 +2276,7 @@ plt.show()
 <p>想起隔山隔水的</p>
 <p>北方</p>
 <p>有两盏灯</p>
-<p>只能远远的抚摸</p>]]></description></item><item><title>旧忆：又一天凉好个秋</title><link>https://simoncos.github.io/blogs/old-memories-autumn.html</link><guid>https://simoncos.github.io/blogs/old-memories-autumn.html</guid><pubDate>Sat, 29 Sep 2012 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：又一天凉好个秋</h1>
+<p>只能远远的抚摸</p>]]></description></item><item><title>又一天凉好个秋</title><link>https://simoncos.github.io/blogs/old-memories-autumn.html</link><guid>https://simoncos.github.io/blogs/old-memories-autumn.html</guid><pubDate>Sat, 29 Sep 2012 00:00:00 +0800</pubDate><description><![CDATA[<h1>又一天凉好个秋</h1>
 <p>旧忆有尽。</p>
 <p>2017.09</p>
 <hr/>
@@ -2290,7 +2290,7 @@ plt.show()
 <p>“欲说还休，却道天凉好个秋。”愁字秋心拆两半。消磨得古往今来人憔悴的“愁”原来竟是秋的心么？人总羡慕别人的生活多么风轻云淡，潇洒坦然。可若没有生活的重量，何以在乱风中保持自己的方向。少年不知愁，所以少年不懂生活；少年不懂生活，所以少年不知愁。你要如何看待它？也许你该微笑着直视它，也许你该大度拥抱它，也许你该轻轻对它说：来吧，我等着你出现，等你为我光滑却空洞的身躯刻上独一无二的痕迹，等你将枫叶与梧桐叶的金黄、露水与新月的纯白浸染我自由而无用的灵魂，等你赐予我谛听草木枯荣、四季变换表象下的生命喃喃低语的能力，等你教我学会分辨重要与不重要而不是一味逃亡。</p>
 <p>“天凉好个秋”或许并不一定是强颜欢笑的吐露，而是尝尽万般滋味之后，更觉每时每刻的余味点点。就像秋天的凋零沉淀了春的绚烂，褪去了夏的繁盛，却留下了清俊悠长的美妙。</p>
 <p>一叶落，知天下秋。知秋心，然后才能知人生。又一天凉好个秋。</p>
-<p>2012.09</p>]]></description></item><item><title>旧忆：宁静而珍贵的七月</title><link>https://simoncos.github.io/blogs/old-memories-july.html</link><guid>https://simoncos.github.io/blogs/old-memories-july.html</guid><pubDate>Sun, 01 Jul 2012 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：宁静而珍贵的七月</h1>
+<p>2012.09</p>]]></description></item><item><title>宁静而珍贵的七月</title><link>https://simoncos.github.io/blogs/old-memories-july.html</link><guid>https://simoncos.github.io/blogs/old-memories-july.html</guid><pubDate>Sun, 01 Jul 2012 00:00:00 +0800</pubDate><description><![CDATA[<h1>宁静而珍贵的七月</h1>
 <p>夏天好像常常是我的转折点。</p>
 <p>2017.07</p>
 <hr/>
@@ -2313,7 +2313,7 @@ plt.show()
 <p>前几天看到一张十几年前的照片，变得奇异的色调中仿佛能看清时间在上面流动的痕迹。人类是从什么时候开始懂得缺憾的美的呢，真是一个有意思的话题。对于个体来说，当懂得缺憾的美时，他实际上就已经触到了生命的天花板，再一经触动，便能理解到万事万物的局限。</p>
 <p>《夏目友人帐》是个好故事，故事里其实一直渗透着这种面对“局限”的观点。其实到目前为止我看过的比较好的与鬼怪打交道的作品，《通灵王》与《阴阳师》中都渗透着这种观点。毕竟生与死是所有生命都无法挣脱的局限，而人与鬼怪则也有各自的局限。或许我想得不够正确，这是不是佛教中所谓的“业”？</p>
 <p>引用《夏目》第四季最后一句总结性的语言（最后一个画面也是一张照片）来结束这临行之夜的闲谈吧，“难以忘怀的，宝贵的每一天”。</p>
-<p>2012.07 《难以忘怀的，宝贵的每一天》</p>]]></description></item><item><title>旧忆：四年了</title><link>https://simoncos.github.io/blogs/old-memories-four-years.html</link><guid>https://simoncos.github.io/blogs/old-memories-four-years.html</guid><pubDate>Tue, 01 May 2012 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：四年了</h1>
+<p>2012.07 《难以忘怀的，宝贵的每一天》</p>]]></description></item><item><title>四年了</title><link>https://simoncos.github.io/blogs/old-memories-four-years.html</link><guid>https://simoncos.github.io/blogs/old-memories-four-years.html</guid><pubDate>Tue, 01 May 2012 00:00:00 +0800</pubDate><description><![CDATA[<h1>四年了</h1>
 <p>Everything will flow, like tears in rain.</p>
 <p>2017.05</p>
 <hr/>
@@ -2327,7 +2327,7 @@ plt.show()
 <p>然后一切尘埃落定了吗？过了一年、两年、三年、四年、十年、二十年，被日复一日忙碌的生活推挤着，填满着，逐渐忘记自己的节奏，逐渐忘记自己的声音，人生被榨干成了快餐，简单而重复。挥霍成了人人争夺的最大理想，别人的生活成了自己选中的样板。自己的旋律在哪里，这仅有一次的生命你要去哪里？春天的清晨里花朵上沾满露水，要去哪里？夏日的白天里阳光明媚天空蔚蓝，要去哪里？秋日的夜晚里清风明月、叶子枯黄，要去哪里？冬季的浓云厚棉絮一般、寒气直达脚背，要去哪里？</p>
 <p>我想我应该永远作为一个生还者，战战兢兢地活下去。在戛然而止之前，奏出自己的生命。</p>
 <p>一篇乱糟糟的东西，悼念那些匆匆逝去的生命，在结束之前，我一定会善待自己。</p>
-<p>2012.05</p>]]></description></item><item><title>旧忆：“没有意外，一直重来”</title><link>https://simoncos.github.io/blogs/old-memories-on-repeat.html</link><guid>https://simoncos.github.io/blogs/old-memories-on-repeat.html</guid><pubDate>Sun, 01 Apr 2012 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：“没有意外，一直重来”</h1>
+<p>2012.05</p>]]></description></item><item><title>“没有意外，一直重来”</title><link>https://simoncos.github.io/blogs/old-memories-on-repeat.html</link><guid>https://simoncos.github.io/blogs/old-memories-on-repeat.html</guid><pubDate>Sun, 01 Apr 2012 00:00:00 +0800</pubDate><description><![CDATA[<h1>“没有意外，一直重来”</h1>
 <p>所谓成熟，或许来源于自己与自己的不断对抗。</p>
 <p>2017.04</p>
 <hr/>
@@ -2355,7 +2355,7 @@ plt.show()
 <p>目睹他们在生活的巨浪之中挣扎、沉沦，耗尽生命的力量，压过他们留下的车辙，带着他们的馈赠，前半程的记忆仍在翻涌，“我”和1988却已开始继续前进的旅程。前路依然茫茫未知，命运令人沉重而感伤，但无论是“我”还是我，都唯有前行，才能与这个世界真正谈出一个结果。</p>
 <p>唯有前行。</p>
 <p>2012.02</p>
-<p>豆瓣：<a href="https://book.douban.com/subject/5275059/">1988——我想和这个世界谈谈</a></p>]]></description></item><item><title>旧忆：走路</title><link>https://simoncos.github.io/blogs/old-memories-walking.html</link><guid>https://simoncos.github.io/blogs/old-memories-walking.html</guid><pubDate>Wed, 01 Feb 2012 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：走路</h1>
+<p>豆瓣：<a href="https://book.douban.com/subject/5275059/">1988——我想和这个世界谈谈</a></p>]]></description></item><item><title>走路</title><link>https://simoncos.github.io/blogs/old-memories-walking.html</link><guid>https://simoncos.github.io/blogs/old-memories-walking.html</guid><pubDate>Wed, 01 Feb 2012 00:00:00 +0800</pubDate><description><![CDATA[<h1>走路</h1>
 <p>发霉了，就出去走走。</p>
 <p>2017.06</p>
 <hr/>
@@ -2372,7 +2372,7 @@ plt.show()
 <p>出发前，我一直犹豫要不要叫上一个人同行，但一想本无同路人，何苦何必。当我真正开始走路，我发现带着自己一个人上路是很正确的。江宁算是南京的开发区，虽然有很多高档住宅，但干道以外的路人少车少。所以我一个人完完全全地放开了自己，忘形地唱着走着摇晃着。无车无人的路，因为一个人也显得格外宽敞，我甚至时而在路中央自顾自地走。</p>
 <p>任树影与阳光交错着映过眼皮，任凉风吹乱头发、吹翻外套，任音乐随机播放我手舞足蹈地唱。单调吗？一点也不。我在路边的干草地上喝醉般划着圈好把粘上的泥蹭掉，我见到分叉便选一个喜欢的走，走到无路可走返回重走，我甚至与自己会心笑起来。原来我还有我，这个对世界对人生仍然抱着一份天真和好奇的灵魂。路就像一卷空白的录像带，我用了3个小时在上面记录一份毫无躁扰拘束的时光。</p>
 <p>当思维被放开，当身体被放开，当灵魂被放开，沿路的风景也成为记忆中抹不掉的刻痕。在行走中，我渐渐觉得这里不再像从前那样陌生，这里不是一个客栈，这里也属于我，也是我的一个归宿。这一次，我没有充当一个孤独的旁观者，而是恬静地融入这个世界，听她的鸟语，听她的心跳。我也渐渐觉得如果不主动向前走出那一步，我永远无法知道路的前方是什么。世界如此地大，你没走过，它就是一片荒芜。而你在路上走着，就可以试着相信前方不断会有惊喜等待着你。你拥抱世界，世界才会拥抱你。</p>
-<p>2012.02</p>]]></description></item><item><title>旧忆：号码</title><link>https://simoncos.github.io/blogs/old-memories-numbers.html</link><guid>https://simoncos.github.io/blogs/old-memories-numbers.html</guid><pubDate>Thu, 01 Dec 2011 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：号码</h1>
+<p>2012.02</p>]]></description></item><item><title>号码</title><link>https://simoncos.github.io/blogs/old-memories-numbers.html</link><guid>https://simoncos.github.io/blogs/old-memories-numbers.html</guid><pubDate>Thu, 01 Dec 2011 00:00:00 +0800</pubDate><description><![CDATA[<h1>号码</h1>
 <p>向海而行。</p>
 <p>2017.06</p>
 <hr/>
@@ -2393,7 +2393,7 @@ plt.show()
 <p>深味这喧嚣中的孤寂，才更加懂得寻人的不易。《向左走向右走》里不过一场急雨就差点模糊了美好的未来，不过一个小小的习惯就差点使一墙之隔的两个人永远无法遇见。“每个人都是号码，擦肩而过却记不下。”在这滔滔洪流巨响之中竟能感觉到两三人的呼吸，体会到彼此的心跳。那么不管此时是否天南地北，无论关系在之后漫长的时间里变质或升华，我都已经心无所憾。</p>
 <p>世界用最残忍的方法，给予我试炼，教会我珍惜。</p>
 <p>抛下时间的所有作弄与诽谤，我相信我不断向前走，到尽头留下的不只是一个号码。</p>
-<p>2011.12</p>]]></description></item><item><title>旧忆：夜色</title><link>https://simoncos.github.io/blogs/old-memories-nightscape.html</link><guid>https://simoncos.github.io/blogs/old-memories-nightscape.html</guid><pubDate>Tue, 01 Nov 2011 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：夜色</h1>
+<p>2011.12</p>]]></description></item><item><title>夜色</title><link>https://simoncos.github.io/blogs/old-memories-nightscape.html</link><guid>https://simoncos.github.io/blogs/old-memories-nightscape.html</guid><pubDate>Tue, 01 Nov 2011 00:00:00 +0800</pubDate><description><![CDATA[<h1>夜色</h1>
 <p>坐在回江宁校区的大校车上，运气好，坐在和司机并排的单独座位，面前是相当于全景的超大玻璃车窗。</p>
 <p>窗上有点点尘垢，但清晰得已经足够司机平稳地开车，也足够我窥看初冬夜色里的南京。</p>
 <p>不是这一次偶然的机会，我恐怕不知要到什么时候才能用几十分钟做这样的一件无意义的事情。说起意义，“意义”到底是什么呢？如果我没有赶上这辆车的最后一个座位，如果夜色没有降临，我不知何时能用几十分钟看一路渐淡的霓虹色流和人流在其中的剪影，我不知何时能用几十分钟看无数个橘色路灯的光圈在高架桥和交通牌的掩映中明灭闪烁，我不知何时能用几十分钟看两排路灯顺着道路盘曲蜿蜒开去。我也不知何时才能生出这样的感慨：即使再实在的东西，你总能在一些地方发现它具有一种抽象的美；即使再固定不变的东西，你也总能发现它从某些角度看具有一种流动的美。</p>
@@ -2412,7 +2412,7 @@ plt.show()
 <p>我们一直在谈起“自组织”，物理中的自组织，化学中的自组织……到头来我们发现生命才是最神奇的自组织，因为它不仅仅是物质层面的。由混沌的真实衍生出有限的稳态，然后有限的稳态体最终居然又能察觉自身，察觉无限深远的存在，并且造出桥梁，造出光辉，一步步接近着混沌黑暗里的极限，居然企图用有限的构建还原出自然的分形。不知其不可为而为之，到明知其不可为而为之。这是否是“意义”的一种最终极的解释？</p>
 <p>不该发生的，发生了，称之“奇迹”。</p>
 <p>沿途的橘色路灯在黑暗的时空里不断流动，不断变幻，仿佛有限之物幻化成无限的“真实”情形。现实在安稳与紊乱的夹缝之中闪烁出光芒，这夜色美得让卑微的我无法呼吸。</p>
-<p>2011.11</p>]]></description></item><item><title>旧忆：宁静</title><link>https://simoncos.github.io/blogs/old-memories-serenity.html</link><guid>https://simoncos.github.io/blogs/old-memories-serenity.html</guid><pubDate>Thu, 01 Sep 2011 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：宁静</h1>
+<p>2011.11</p>]]></description></item><item><title>宁静</title><link>https://simoncos.github.io/blogs/old-memories-serenity.html</link><guid>https://simoncos.github.io/blogs/old-memories-serenity.html</guid><pubDate>Thu, 01 Sep 2011 00:00:00 +0800</pubDate><description><![CDATA[<h1>宁静</h1>
 <p>动静皆宜，最可贵是平衡。</p>
 <p>2017.06</p>
 <hr/>
@@ -2426,7 +2426,7 @@ plt.show()
 <p>于是而感，我永远无法达到宁静，因为内我永远战胜不了外我，就像精神追求永远敌不过物质欲求，就像烟和气味一旦升起来就会马上被周围的时空冲淡，这是身为人的基本物质结构决定的。但内我是一种绝不认输的东西，倔强而不可理喻，结果是在一些事情上偶尔做出反常的决定，让身边的人吓一大跳。反的这个“常”，实际上就是外在世界，一个由物质基础和每个人的外我所组成的世界。这也是为很多学派赞同人生性孤独的原因吧，内我是如此傲娇的东西。作茧自缚，不得安宁。明明渴望，却害怕受伤。</p>
 <p>而我们能做的，只能是尽可能留给自己一些余地，能够一个人看一本喜欢的书，坐着堵塞四感把听觉交给音乐，或是几个人沿着无人的夜晚街道走着，偶尔说笑，或是坐在咖啡店相对沉默不语，以期得到那么一点对宁静的逼近。</p>
 <p>我也不知在写些什么，因何而写，权当作对抗如今生活的意淫吧。</p>
-<p>2011.09</p>]]></description></item><item><title>旧忆：爱与放弃</title><link>https://simoncos.github.io/blogs/old-memories-letting-go.html</link><guid>https://simoncos.github.io/blogs/old-memories-letting-go.html</guid><pubDate>Tue, 01 Mar 2011 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：爱与放弃</h1>
+<p>2011.09</p>]]></description></item><item><title>爱与放弃</title><link>https://simoncos.github.io/blogs/old-memories-letting-go.html</link><guid>https://simoncos.github.io/blogs/old-memories-letting-go.html</guid><pubDate>Tue, 01 Mar 2011 00:00:00 +0800</pubDate><description><![CDATA[<h1>爱与放弃</h1>
 <p>事物有其重量。</p>
 <p>2017.06</p>
 <hr/>
@@ -2441,7 +2441,7 @@ plt.show()
 <p>于是想把此事记下来，算作人生之中一个小小的感悟。可能由于最近的9.0级地震（灾难是人类的灾难，不是哪一个国家的），想标题时联系起了曾经想写一篇与08年有关的文字——那时想好的标题便是《爱与放弃》——只是最终没有付诸纸上一事。也算是凑巧想来，细细斟酌倒是跟今日所感颇为契合，便索性拿来用了，也算是终于完满了旧物新用之义吧。然而原来为何要取这样一个文题，概由光阴流逝变迁，已尽然遗忘，来日若是忆起，倒也无妨补上一笔。</p>
 <p>是夜，<br/>
 初成于星屑のヴォカリーズ旋律之中</p>
-<p>2011.03</p>]]></description></item><item><title>旧忆：纸笔</title><link>https://simoncos.github.io/blogs/old-memories-paper-and-pen.html</link><guid>https://simoncos.github.io/blogs/old-memories-paper-and-pen.html</guid><pubDate>Tue, 01 Mar 2011 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：纸笔</h1>
+<p>2011.03</p>]]></description></item><item><title>纸笔</title><link>https://simoncos.github.io/blogs/old-memories-paper-and-pen.html</link><guid>https://simoncos.github.io/blogs/old-memories-paper-and-pen.html</guid><pubDate>Tue, 01 Mar 2011 00:00:00 +0800</pubDate><description><![CDATA[<h1>纸笔</h1>
 <p>从何时开始，不再依赖纸和笔。其实这个问题不用深究，一下就能找到答案。文字，喜爱了八年，一度达到不得不随身携带个小本子和一支笔的程度。刚爱上文字那个时候，郭敬明还是个多愁善感的大男孩，韩寒在世人眼中还多半是个叛逆的臭小子。那时的郭敬明曾写道，喜欢拿着一支笔，在一张张平整洁白的纸上写字。</p>
 <p>我也很喜欢这种感觉，白纸光洁无垢，在上面写东西就像在照镜子，任何造作、不真的地方写下来都会让人产生强烈的划掉的欲望，而白纸又象征着无限可能，好像可以无限延伸，思维能走多远，笔就能走多远。纸是薄薄的，但好的纸触摸起来总有一种独特的质感，那感觉传达给你的信息不是没有厚度，反而是厚度难测。闭上眼，想象这张纸来源的某棵树，从嫩芽到参天，经历多少风雨阴晴，想象那些纤维最初来自于哪一股轻盈的空气，怎样一点一点无声无息地生长，越来越长，越来越长，结成一张张自然随机却暗含规则的网.....还可以再往前倒溯，到这棵树之前，到无限的久远。这是怎样一种宏伟，怎样一种穷极想象的美？</p>
 <p>我自娱自乐写字的时候，常常是先拿出一两张纸写，不一定全白或者质量多么好，但一定要平整。初写时笔迹潦草到基本只有自己能看，写完之后，一般就随手一放，隔段时间再拿出来常常已是皱巴巴，只有偶尔特别看重的才会好好收藏。虽然皱，但底线是不能有残缺，因为下一步就要认真地将文字誊写在新的白纸上，边誊边改。改好后又放起来，隔段时间兴致来了可能拿出来再改。于是这么多年下来，纵使我这人很没收拾，书桌一个专用的抽屉里也堆满了乱七八糟各式各样的底子。</p>
@@ -2455,7 +2455,7 @@ plt.show()
 <p>或许答案是否定的吧，因为真到这个地步，纸和笔，便已经连占据记忆一隅的资格都失去了。</p>
 <p>是夜，</p>
 <p>无纸无笔。</p>
-<p>2011.03</p>]]></description></item><item><title>旧忆：我所爱的城市</title><link>https://simoncos.github.io/blogs/old-memories-city.html</link><guid>https://simoncos.github.io/blogs/old-memories-city.html</guid><pubDate>Wed, 01 Sep 2010 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：我所爱的城市</h1>
+<p>2011.03</p>]]></description></item><item><title>我所爱的城市</title><link>https://simoncos.github.io/blogs/old-memories-city.html</link><guid>https://simoncos.github.io/blogs/old-memories-city.html</guid><pubDate>Wed, 01 Sep 2010 00:00:00 +0800</pubDate><description><![CDATA[<h1>我所爱的城市</h1>
 <p>一座城市，一组回忆，一人一路一座座，身处这个时代的幸运。</p>
 <p>2017.06</p>
 <hr/>
@@ -2467,7 +2467,7 @@ plt.show()
 <p>然而，再是清楚明白，我，仍不过是个孩子，远离所爱的家乡，总是不胜唏嘘。家乡今年的秋天，早早地到了，每年的落叶归根之日，却是天涯海角之时，造化弄人，也难怪古人偏偏想到叶落人离的共通之处。</p>
 <p>离开我所爱的城市，夜已深，雨已停，人也困，天亮再天黑之时，也是时候打点行囊，启程离开了。</p>
 <p>南京，一个陌生的城市，一些陌生的人，在不远处，等着我。我走了，我来了。</p>
-<p>2010.09</p>]]></description></item><item><title>旧忆：星（怀念住校时的长跑或是其他）</title><link>https://simoncos.github.io/blogs/old-memories-stars.html</link><guid>https://simoncos.github.io/blogs/old-memories-stars.html</guid><pubDate>Wed, 01 Oct 2008 00:00:00 +0800</pubDate><description><![CDATA[<h1>旧忆：星（怀念住校时的长跑或是其他）</h1>
+<p>2010.09</p>]]></description></item><item><title>星（怀念住校时的长跑或是其他）</title><link>https://simoncos.github.io/blogs/old-memories-stars.html</link><guid>https://simoncos.github.io/blogs/old-memories-stars.html</guid><pubDate>Wed, 01 Oct 2008 00:00:00 +0800</pubDate><description><![CDATA[<h1>星（怀念住校时的长跑或是其他）</h1>
 <p>25年半，既然改变在所难免，那就享受它、驾驭它。</p>
 <p>2017.06</p>
 <hr/>

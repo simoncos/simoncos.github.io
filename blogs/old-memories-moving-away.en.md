@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: January 2014, writing again after a whole winter: moving away, again and again, from people I know, things I've done and places I've lived, fuller and emptier at once, and choosing to keep going.
 ---
 
-# Old Memories: Moving Away
+# Moving Away
 
 Yesterday, sitting by Yan Lake and feeling a few signs of spring, I didn't realize how long it had been since I last did something like this. And not far off there was a crossroads, where we waited for each other, quiet and a little anxious.
 
