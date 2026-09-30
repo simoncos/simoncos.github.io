@@ -3,7 +3,7 @@ tags: out
 date: 2026-01-20
 updated: 2026-07-24
 styles: assets/haba-pretext.css?v=20260927c
-module_scripts: assets/haba-pretext.js?v=20260724a
+module_scripts: assets/haba-pretext.js?v=20260930a
 translation: GPT-5.2
 description: Two days on Haba Snow Mountain (5,396 m): the prep, the mule trail to base camp, the night summit push in driving snow, and what the body and the risk actually felt like.
 ---
