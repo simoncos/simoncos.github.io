@@ -3,7 +3,7 @@ tags: out
 date: 2026-01-20
 updated: 2026-07-24
 styles: assets/haba-pretext.css?v=20260927c
-module_scripts: assets/haba-pretext.js?v=20260724a
+module_scripts: assets/haba-pretext.js?v=20260930a
 description: 哈巴雪山（5396 米）两天一夜：行前准备、骑骡子上大本营、风雪中的夜间冲顶，以及身体与风险的真实感受。
 ---
 

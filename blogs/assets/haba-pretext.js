@@ -187,14 +187,13 @@ function boot() {
     }
     const resizeObserver = new ResizeObserver(updateMode);
     resizeObserver.observe(stage);
+    // The text is painted in the theme's ink, so a theme switch (the toggle,
+    // or the system when it is followed) repaints it. The site marks the
+    // theme as <html data-theme>, as board.ts also watches.
     const themeObserver = new MutationObserver(scheduleRender);
     themeObserver.observe(document.documentElement, {
         attributes: true,
-        attributeFilter: ['class', 'data-effective-theme'],
-    });
-    themeObserver.observe(document.body, {
-        attributes: true,
-        attributeFilter: ['class'],
+        attributeFilter: ['data-theme'],
     });
     for (const image of stage.querySelectorAll('img')) {
         if (!image.complete)
