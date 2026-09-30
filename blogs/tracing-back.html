@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-page-lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回溯 · 文章 · simoncos</title>
+    <meta name="description" content="念念不忘，必有回响？人生是单向的箭头，记忆里却埋满了会被未来引爆的炸弹，而人还有一项更厉害的技能：主动回溯。">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/tracing-back.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/tracing-back.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/tracing-back.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/tracing-back.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="回溯">
+    <meta property="og:description" content="念念不忘，必有回响？人生是单向的箭头，记忆里却埋满了会被未来引爆的炸弹，而人还有一项更厉害的技能：主动回溯。">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/tracing-back.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="simoncos — tools and research, articles and field notes">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="回溯">
+    <meta name="twitter:description" content="念念不忘，必有回响？人生是单向的箭头，记忆里却埋满了会被未来引爆的炸弹，而人还有一项更厉害的技能：主动回溯。">
+    <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20260930a"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20260930a">
+    <script src="../src/js/site.js?v=20260930a" defer></script>
+    <script src="../src/js/article.js?v=20260930a" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="tracing-back">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="tracing-back.en.html" hreflang="en" data-lang-nav="en"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← 文章</a>
+                <h1 class="article-title">回溯</h1>
+            </div>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">创建</span><span class="num">2017-02-27</span></span>
+                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-09-30</span></span>
+                    <span class="meta-item"><span class="k">阅读</span>3 分钟</span>
+                    <a class="meta-alt" href="tracing-back.en.html" hreflang="en" lang="en" data-lang-nav="en">English ↗</a>
+                </div>
+                <div class="post-content">
+
+<p>“念念不忘，必有回响。”</p>
+<p>如果不是因为回响的存在，无法知道既定的过去仍埋藏着许多宝藏。人生是单向的箭头，当你站在现在这个点上回望，来路似乎显得很清楚，然而鬼知道你走过了多少个分叉口。可惜我们无法像攻略游戏一样不断S/L，那些死去的树枝便是死去了，还没生出就死去了。</p>
+<p>但至少还能念念不忘。脑中的思绪，旧忆与新思，就像火山灰一样，在热气流中不断回旋，在一片混乱中能浮出水面的东西，确实也是可贵了。这些心心念念的东西又是些什么呢？也许是一本一直想看又不得看的书，也许是一个一直想见又不得见的人，大都是些一路上未了的愿望，默默揣过多年余热却还尚在。这些东西当然不一直能停留在大脑当下的处理队列的，只是留下了一些强力的线索，意象、情绪、迷因，平时毫无觉察，直到被一些事物触发而再次被捞起。</p>
+<p>这星星点点，大多想起了又再次消散。人生已过四分之一百，怎么还能相信“必有回响”这样的谎话呢？幸存者偏差像幽灵一样，喂你我甜腻的假鸡汤，甘之甘之，然后留下苦味。谁也不是傻，只是前路永远大雾弥漫，背后永远有太多弄不明白的枝蔓，当下只有这个渺小的自己，人无非是怕黑而宁愿相信月亮会发光罢了。</p>
+<p>只是，就有那么一些，一百个里面有一个，穿过说不清道不明的过去，于现在回响起来，清脆悦耳。</p>
+<p>记忆就像是对时间的反抗，你不是单向吗，过去的就过去了？但记忆里埋满了炸弹，与无数概念粘在一起，而这些概念很多会于未来现实里不断出现，总有一些能给你点个炮仗。于是有了哇的一声，拿错稿子了不好意思，是啪的一声，回响如同一支穿云箭在心中、在身上，全身心地炸开。</p>
+<p>不过这种炸弹还是比较弱的，地雷嘛，太被动的连女朋友都炸不到的（本来想打“找”，打错发现更好，瞬间联想到炸鱼、王炸、你妈炸了什么的）。人其实还拥有一项更厉害的技能：主动回溯。</p>
+<p>于是你会在未来里想起过去，想起过去里回想起的过去，想起过去里盘算的未来，想起过去里盘算着未来可能想起的过去，点点点，子子孙孙无穷矣。</p>
+<p>在这些回溯里，人或许真的可以看清一些事情，那时的自己怎么那么傻，那时那句话原来可能是另外的意思，那时原来文艺起来不是人，那时爬过的那棵树原来真的贼高，那时那只他妈的田园狗其实根本就是只橘猫，那时那些明媚的四十五度忧伤其实只是因为正脸太寒碜（凝住眼泪才敢细看），之类，甚至还可有机会主动引爆一些尚未引爆的、痛并快乐起来；</p>
+<p>在这些回溯里，一些纸片被折好放入抽屉等待可能的再会，一些纸片燃烧起来然后终于可以放下，还有一些纸片没有一次出现、永远遗落在纸海茫茫之中，就像你从未洗出来过的扑克牌组合，你知道它的存在，但你的时间不允许你无止无尽、不厌其烦地翻看，这是可以全白金的我们也必须接受的无力感；</p>
+<p>在这些回溯里，过去得以重建、旋转、跳跃成另外一个人的人生，一个熟悉又陌生的人的故事，可以津津有味读到睡着。</p>
+<p>“溯”这个字总是画面感很强，逆流而上。既然不顺着水止于至善，那么总有一些还无法放开的坚持。</p>
+<p>不知不觉写到这里，同以前一样，我还是不知道写这些到底是干什么，但希望这个点也能在将来的某个点发出光，照亮所有的胖子。</p>
+<p>或许只是为了提醒自己，在这些回溯里，勿忘你，曾慷慨分享性爱玩具。</p>
+<p><em>特此感谢林宥嘉的专辑<a href="http://www.xiami.com/album/9czMQge5d53">《今日营业中》</a>为本文提供背景音乐和部分尿点。</em></p>
+<p>2017.02</p>
+                </div>
+                <div class="article-tags"><h2 class="k">标签</h2><a class="tag" href="../blogs.html#topic-life">生活</a></div>
+                <section class="xref-grid"><div class="xrefs is-empty"><h2 class="k">提到本文</h2><span class="xrefs-empty">暂时还没有其他文章引用这篇。</span></div></section>
+                <nav class="post-nav" aria-label="继续阅读"><a class="post-nav-card post-nav-newer" rel="prev" href="problem-solving-and-design-3-open-problems.html"><span class="k">更新的一篇</span><span class="post-nav-title">问题解决与设计（三）：开放问题</span></a><a class="post-nav-card post-nav-older" rel="next" href="problem-solving-and-design-2-feasible-solutions.html"><span class="k">更早的一篇</span><span class="post-nav-title">问题解决与设计（二）：可行解</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 30, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-30</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="回到顶部" title="回到顶部">↑</button>
+</body>
+</html>

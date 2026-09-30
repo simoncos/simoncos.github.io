@@ -1,0 +1,35 @@
+---
+tags: life
+date: 2012-04-01
+updated: 2026-09-30
+translation: Claude Opus 5.5
+description: April 2012, when my sense of self was at its shakiest: unable to write, disappointed in the people around me and in myself. Having poured the bad feelings out, I decided to accept this self; if it meant starting over, then start over.
+---
+
+# Old Memories: On Repeat
+
+What we call maturity may come from a constant struggle of the self against itself.
+
+2017.04
+
+---
+
+Several nights now: open it, close it, not a single word typed. I don't know what's wrong with me. I'm so choked with tangled feelings I can hardly breathe, and still I can't write. Maybe I understand more and more that nobody wants to read what I write. Everyone has endless things to do and endless worries of their own. So what if I write it down? No one will care.
+
+I seem to have been rather pessimistic lately; this is a time when my sense of self is badly shaken. A sense of self is like the moment an early ape-man first realized that the reflection in the water was itself. It is like switching off the light and sinking into total darkness, blocking your ears until not a sound gets through, and still knowing, easily, that in a place where nothing should exist there is something blundering around inside, and you know that it is you, the self you have to accept, a mind like no other. I have always felt this strongly, but it has been taking bigger and bigger blows. I have gradually found that my words keep going against my heart, and even my heart seems to be led, controlled by something, and it's so hard to break free. Sometimes I think I've broken free, only to find it was just another puppet string, harder to see.
+
+I no longer know where I'm heading, or which direction I should choose. Time has turned blurry and long. Often a day goes by and I don't know what I did with it. I find things to do and discover I have no wish at all to do them; when I finish one, I feel no sense of achievement, only emptiness. Last night, or the night before, I walked alone around the pitch-dark campus humming, and after a brief lift I found it was no longer enough to satisfy me. I can't get into any book; I wonder whether I'm sick at heart. I've started to hate being judged, hate being praised, hate the words and behaviour, murky and rank as insect fluids, that hold up so many relationships between people. I find the people around me disappointing and dull, and myself disappointing and dull; people are so ugly. I keep imagining all kinds of things that never happened. It hurts, and yet I can't stop, it just goes on by itself. I am becoming vulgar; my solitude is turning into loneliness.
+
+Crowd Lu's song "寂寞考" ("Loneliness Exam") has been playing in my head all day, and now I'm sitting at the computer with it on repeat. The song is about a life of endless do-overs where nothing unexpected ever happens, and here I am in the best time of my life, not using it to live. It is a cry for someone to understand you and rescue you. What the fuck kind of life is this? What's the point? This me: I want to feed it into a shredder, grind it all up, crumple it into a ball and start again.
+
+The more I write, the more this reads like a suicide note, as if I had lost all hope in the world and in myself. But I know, and have always firmly believed, that someone who ends their own life early and lightly is the greatest fool of all: they throw away every possibility. In my best years, at twenty, I have met no one, but that doesn't mean I never will. This is my negativity, the garbage at the bottom of my heart. If I purge all the toxins here and let out all the gloom that could never be acted on, perhaps for a while I won't feel so lost, and I'll be much better. Bad things are also proof of being alive, and besides, we don't live in order to prove anything.
+
+I think I will still accept this rank part of me, but I will do my best to dissolve it with positive energy, or at least keep the harm it does me as small as possible. One day I will break these bonds and the things forced on me. I will adjust myself (not by making myself unable to believe, but by choosing a way of living I have not yet found) and then find the real me, whole.
+
+There is still tomorrow.
+
+There will be surprises.
+
+If it means starting over, then start over.
+
+2012.04

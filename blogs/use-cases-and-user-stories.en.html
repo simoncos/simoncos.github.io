@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-page-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digging into User Needs: Use Cases and User Stories · Articles · simoncos</title>
+    <meta name="description" content="Which kinds of product suit use cases and which suit user stories, two ways of describing requirements, and how to tell a good user story. First shared as an internal email during...">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/use-cases-and-user-stories.en.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/use-cases-and-user-stories.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/use-cases-and-user-stories.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/use-cases-and-user-stories.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Digging into User Needs: Use Cases and User Stories">
+    <meta property="og:description" content="Which kinds of product suit use cases and which suit user stories, two ways of describing requirements, and how to tell a good user story. First shared as an internal email during...">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/use-cases-and-user-stories.en.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://simoncos.github.io/blogs/assets/images/use-cases-and-user-stories/5dd272663d262a4c8e3cbdcde98fa520.jpg">
+    <meta property="og:image:width" content="640">
+    <meta property="og:image:height" content="431">
+    <meta property="og:image:alt" content="An example of a user story map: on the left, the flow of a buyer, TOM, from the list page and the product detail page to placing and viewing an order; on the right, the flow of a seller, &quot;Uncle Li&quot;, handling the order on the transaction management pages and setting up a bank account; each role has a headshot, an age and a location">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Digging into User Needs: Use Cases and User Stories">
+    <meta name="twitter:description" content="Which kinds of product suit use cases and which suit user stories, two ways of describing requirements, and how to tell a good user story. First shared as an internal email during...">
+    <meta name="twitter:image" content="https://simoncos.github.io/blogs/assets/images/use-cases-and-user-stories/5dd272663d262a4c8e3cbdcde98fa520.jpg">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20260930a"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20260930a">
+    <script src="../src/js/site.js?v=20260930a" defer></script>
+    <script src="../src/js/article.js?v=20260930a" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="use-cases-and-user-stories">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="use-cases-and-user-stories.html" hreflang="zh-Hans" data-lang-nav="zh"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← Articles</a>
+                <h1 class="article-title">Digging into User Needs: Use Cases and User Stories</h1>
+            </div>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">Created</span><span class="num">2014-01-04</span></span>
+                    <span class="meta-item"><span class="k">Updated</span><span class="num">2026-09-30</span></span>
+                    <span class="meta-item"><span class="k">Reading</span>3 min</span>
+                    <span class="meta-item"><span class="k">Translation</span>Claude Opus 5.5</span>
+                    <a class="meta-alt" href="use-cases-and-user-stories.html" hreflang="zh-Hans" lang="zh-Hans" data-lang-nav="zh">中文 ↗</a>
+                </div>
+                <div class="post-content">
+
+<p><em>Note: This was an internal email I shared when I was an operations intern at Yihaodian (1号店). It originally went on with two small made-up examples of using user stories to dig out real needs, but since they were mainly about that platform, I have taken them out here for now. I may do two more general examples later.</em></p>
+<p>In software development, <strong>use cases</strong> (see Figure 1) or <strong>user stories</strong> are often used to describe how users interact with a software product in a given scenario, and the flow they may go through while using it, and from there to derive the product's functional requirements. The former looks more at the different scenarios from a high level, while the latter centres on building a virtual user with concrete characteristics who stands for a group, and on the story of what happens as they use the product (or it may simply be a real user's real experience).</p>
+<p><img alt='A simple use case diagram of a restaurant: inside a box labelled "Restaurant (simplified)" are four use cases, Eat Food, Pay for Food, Drink Wine and Cook Food; the Food Critic actor on the left is linked to the first three, and the Chef actor on the right to Cook Food' decoding="async" height="304" src="assets/images/use-cases-and-user-stories/fa4d26f04ef52ecb61a4b707d7828637.jpg" width="513"/></p>
+<p><strong>Figure 1: A simple use case diagram of a restaurant (image source: the "Use case" article on Wikipedia)</strong></p>
+<p>Original by Kishorekumar 62, redrawn by Marcel Douwe Dekker, via <a href="https://commons.wikimedia.org/wiki/File:Use_case_restaurant_model.svg">Wikimedia Commons</a>, CC BY-SA 3.0.</p>
+<p>In my view, the use case method is better suited to products with many scenarios, many user roles and a broad range of functions. Our back-office system, for example, involves staff in different departments who handle different parts of the business, and one person often needs many functions and connects with other staff through them. To describe clearly how each role interacts with the system, a <strong>use case diagram</strong> is very practical.</p>
+<p><strong>User stories</strong>, on the other hand, suit systems where users have a fairly single purpose and the flow branches fairly little. Take the front end of our group-buying site: the user's ultimate goal is to buy something, and there are only three core steps: browse the page -&gt; put the item in the cart -&gt; pay. But does that mean such a system needs no further analysis? Of course not. Whether an e-commerce platform runs healthily and keeps improving, and whether it can support a good user experience, depends not on how rich its features are but on whether the features it offers do a good job of converting users at the few key steps. Data such as UV and conversion rate help us quantify how the system is performing, but they cannot give us the reasons, let alone the ways to improve.</p>
+<p>What is the most fundamental reason a system performs well or badly? Whether users' needs are met. And users' needs come from their personal attributes: gender, age, personality, hobbies, experience and so on. These attributes drive what users need and how they behave. From this we can see how important CRM is. But while we don't yet have such rich user data and user analysis, how are we to get to know them? <strong>User stories</strong> are a very good way.</p>
+<p>In fact, everyone already knows how to use <strong>user stories</strong>. We often say things like "If it were me, I'd find this promotion really dull" or "If my dear mother had to use it, she'd never find her way around." To tell a good story, we may need to do a few things:</p>
+<p>1. Work out who our protagonist is, what attributes they have, and what tendencies of behaviour those attributes give them;</p>
+<p>2. What kind of scene the story takes place in, and what its features and constraints are;</p>
+<p>3. Use the way of telling you are best at: you can rely on nothing but words, or draw a storyboard like a film script (if you're good enough at drawing), or even combine it with some more systematic flowcharts (as in Figure 2).</p>
+<p><img alt='An example of a user story map: on the left, the flow of a buyer, TOM, from the list page and the product detail page to placing and viewing an order; on the right, the flow of a seller, "Uncle Li", handling the order on the transaction management pages and setting up a bank account; each role has a headshot, an age and a location' decoding="async" height="431" loading="lazy" src="assets/images/use-cases-and-user-stories/5dd272663d262a4c8e3cbdcde98fa520.jpg" width="640"/></p>
+<p><strong>Figure 2: An example of a user story map (image source: heidixie, <em>交互设计那些事儿</em>, "All About Interaction Design", in Chinese)</strong></p>
+                </div>
+                <div class="article-tags"><h2 class="k">Tags</h2><a class="tag" href="../blogs.html#topic-design">Design</a></div>
+                <section class="xref-grid"><div class="xrefs is-empty"><h2 class="k">Linked from</h2><span class="xrefs-empty">No other article links here yet.</span></div></section>
+                <nav class="post-nav" aria-label="More reading"><a class="post-nav-card post-nav-newer" rel="prev" href="data-information-knowledge-wisdom.en.html"><span class="k">Newer</span><span class="post-nav-title">Data, Information, Knowledge, Wisdom</span></a><a class="post-nav-card post-nav-older" rel="next" href="old-memories-moving-away.en.html"><span class="k">Older</span><span class="post-nav-title">Old Memories: Moving Away</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 30, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-30</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="Back to top" title="Back to top">↑</button>
+</body>
+</html>

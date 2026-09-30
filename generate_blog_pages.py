@@ -1494,6 +1494,9 @@ def build_post_excerpt(markdown_body, word_limit=100, cjk_char_limit=100):
 
         segments = []
         for element in soup.find_all(['p', 'li', 'h2', 'h3', 'h4', 'h5', 'h6']):
+            # A loose list wraps each item in <p>; the <li> already carries its text.
+            if element.name == 'p' and element.find_parent('li'):
+                continue
             segment = ' '.join(element.stripped_strings)
             if not segment:
                 continue
