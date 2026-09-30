@@ -141,6 +141,30 @@ class SurfaceContractTests(unittest.TestCase):
                 self.assertIn('name="robots" content="noindex"', html)
                 self.assertNotIn("simonc site", html)
 
+    def test_every_articles_month_is_in_the_month_index(self):
+        """Each month heading opens the index, and the index links each
+        month by its id with that month's article count."""
+        html = (ROOT / "blogs.html").read_text()
+        page = tags(html)
+        months = [attrs["data-month"] for tag, attrs in page if tag == "section" and "amonth" in attrs.get("class", "")]
+        self.assertTrue(months)
+        ids = {attrs.get("id") for tag, attrs in page}
+        index = [attrs for tag, attrs in page if attrs.get("id") == "date-index"]
+        self.assertEqual(len(index), 1)
+        self.assertIn("popover", index[0])
+        openers = [attrs for tag, attrs in page if tag == "button" and attrs.get("popovertarget") == "date-index"
+                   and attrs.get("popovertargetaction") != "hide"]
+        self.assertEqual(len(openers), len([m for m in months if m]))
+        cells = dict(re.findall(r'<a class="dmi-cell" href="#(\d{4}-\d{2})".*?data-n>(\d+)</span>', html))
+        for month in months:
+            if not month:
+                continue
+            with self.subTest(month=month):
+                self.assertIn(month, ids)
+                section = html.split(f'id="{month}"', 1)[1].split("</section>", 1)[0]
+                self.assertEqual(int(cells[month]), section.count('<article class="arow'))
+        self.assertEqual(set(cells), {m for m in months if m})
+
     def test_retired_runtime_and_data_stay_retired(self):
         retired_paths = (
             "navigation.html",

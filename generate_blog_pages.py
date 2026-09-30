@@ -1618,6 +1618,56 @@ def count_label(n):
     return (f"{n} article" if n == 1 else f"{n} articles"), f"{n} 篇"
 
 
+def render_date_index(month_counts):
+    """The month index that every month heading opens: one row per year,
+    newest first, twelve cells per row. A month with articles links to its
+    section and shows the count; the others are dots. On a phone the dots
+    drop out and the months wrap as chips. It is a popover, so it opens and
+    its links work without JavaScript; articles.js only positions it, marks
+    the month in view and follows the tag filter."""
+    years = defaultdict(dict)
+    for key, n in month_counts.items():
+        if key:
+            years[key[:4]][int(key[5:7])] = n
+    heads = ''.join(
+        f'<span>{bi(MONTH_NAMES[m - 1][:3], str(m))}</span>' for m in range(1, 13)
+    )
+    rows = [
+        '                <div class="dmi-row dmi-months" aria-hidden="true">'
+        f'<span></span><div class="dmi-cells">{heads}</div></div>'
+    ]
+    for year in sorted(years, reverse=True):
+        cells = []
+        for m in range(1, 13):
+            n = years[year].get(m)
+            if not n:
+                cells.append('<span class="dmi-cell is-empty" aria-hidden="true"></span>')
+                continue
+            key = f'{year}-{m:02d}'
+            label = i18n_attrs(aria_label=(f'{MONTH_NAMES[m - 1]} {year}', f'{year} 年 {m} 月'))
+            cells.append(
+                f'<a class="dmi-cell" href="#{key}" data-jump="{key}"{label}>'
+                f'<span class="dmi-m">{bi(MONTH_NAMES[m - 1][:3], f"{m} 月")}</span>'
+                f'<span class="dmi-n num" data-n>{n}</span></a>'
+            )
+        latest = f'{year}-{max(years[year]):02d}'
+        rows.append(
+            f'                <div class="dmi-row" data-year="{year}">'
+            f'<a class="dmi-year num" href="#{latest}" data-jump="{latest}">{year}</a>'
+            f'<div class="dmi-cells">{"".join(cells)}</div></div>'
+        )
+    close = i18n_attrs(aria_label=('Close', '关闭'))
+    return '\n'.join([
+        '            <div class="dmi" id="date-index" popover role="dialog" aria-labelledby="date-index-title" data-date-index>',
+        '                <div class="dmi-head">'
+        f'<h2 class="dmi-title" id="date-index-title">{bi("Jump to a month", "跳到某年某月")}</h2>'
+        f'<button class="dmi-close" type="button" popovertarget="date-index" popovertargetaction="hide"{close}>'
+        '<span aria-hidden="true">×</span></button></div>',
+        *rows,
+        '            </div>',
+    ])
+
+
 def render_article_row(group, article_groups, series_meta, is_open):
     """One row of the Articles list: date, title, other-language title,
     series pill, and the folding excerpt."""
@@ -1786,9 +1836,17 @@ def render_articles_main(article_groups, series_meta):
             first = False
         label_en, label_zh = month_label(key) if key else ('Undated', '未注明日期')
         n_en, n_zh = count_label(len(months[key]))
+        # A dated month's heading opens the month index (the popover below);
+        # its id is the month, so blogs.html#2012-09 lands on it.
+        heading = (
+            '<button class="amonth-jump" type="button" popovertarget="date-index">'
+            f'{bi(label_en, label_zh)}<span class="amonth-chev" aria-hidden="true"></span></button>'
+            if key else bi(label_en, label_zh)
+        )
+        id_attr = f' id="{esc(key)}"' if key else ''
         month_blocks.append('\n'.join([
-            f'            <section class="amonth" data-month="{esc(key)}">',
-            f'                <div class="amonth-head"><h2>{bi(label_en, label_zh)}</h2>'
+            f'            <section class="amonth"{id_attr} data-month="{esc(key)}">',
+            f'                <div class="amonth-head"><h2>{heading}</h2>'
             f'<span class="amonth-n" data-month-count>{bi(n_en, n_zh)}</span></div>',
             *rows,
             '            </section>',
@@ -1826,6 +1884,7 @@ def render_articles_main(article_groups, series_meta):
         *month_blocks,
         f'                <p class="aempty" data-empty hidden>{bi("Nothing matches that yet.", "暂时没有匹配的文章。")}</p>',
         '            </div>',
+        render_date_index({key: len(value) for key, value in months.items()}),
         '            <p class="visually-hidden" role="status" data-status></p>',
         '        </div>',
         '        <div class="series-view" data-view-panel="series" id="reading-paths">',

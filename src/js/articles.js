@@ -1,8 +1,9 @@
 "use strict";
 // Articles: the list (search, tag filter, month groups, excerpts that open in
-// place) and the series view (a route of parts per series). Old links keep
-// working: #reading-paths and #series-<id> open the series view, #topics and
-// #topic-<tag> the list.
+// place), the month index its headings open, and the series view (a route of
+// parts per series). Old links keep working: #reading-paths and #series-<id>
+// open the series view, #topics and #topic-<tag> the list; #2012-09 lands on
+// a month.
 (function () {
     const main = document.querySelector('[data-articles]');
     if (!main)
@@ -16,6 +17,10 @@
     const empty = main.querySelector('[data-empty]');
     const status = main.querySelector('[data-status]');
     const cards = Array.from(main.querySelectorAll('.scard'));
+    const index = main.querySelector('[data-date-index]');
+    const cells = index ? Array.from(index.querySelectorAll('a.dmi-cell')) : [];
+    const years = index ? Array.from(index.querySelectorAll('[data-year]')) : [];
+    const hdr = document.querySelector('.hdr');
     let view = 'list';
     let tag = 'all';
     function bi(en, zh) {
@@ -43,6 +48,7 @@
         if (empty)
             empty.hidden = shown > 0;
         syncCount();
+        syncIndex();
         // Tell screen readers what a search or a topic left on the list.
         if (announce && status) {
             status.innerHTML = shown
@@ -88,6 +94,110 @@
         });
         row.addEventListener('mouseleave', () => rows.forEach((other) => other.classList.remove('is-dim')));
     });
+    // ---- Month index --------------------------------------------------------
+    // Every month heading sticks under the header and opens the index, a
+    // popover with a cell per month. The popover and its links work without
+    // this script; here it opens next to the heading, marks that month,
+    // follows the filter, and jumps without touching the address.
+    // Where headings stick and jumps land. The header is taller when its
+    // labels wrap.
+    function measure() {
+        const h = hdr ? Math.round(hdr.getBoundingClientRect().height) : 76;
+        document.documentElement.style.setProperty('--hdr-h', `${h}px`);
+        return h;
+    }
+    // A month the filter emptied becomes a dot, a year with nothing left
+    // drops out, and a year jumps to its newest month still listed.
+    function syncIndex() {
+        cells.forEach((cell) => {
+            const month = document.getElementById(cell.dataset.jump || '');
+            const n = month && !month.hidden ? month.querySelectorAll('.arow:not([hidden])').length : 0;
+            cell.classList.toggle('is-off', n === 0);
+            cell.tabIndex = n ? 0 : -1;
+            if (n)
+                cell.removeAttribute('aria-hidden');
+            else
+                cell.setAttribute('aria-hidden', 'true');
+            const count = cell.querySelector('[data-n]');
+            if (count && n)
+                count.textContent = String(n);
+        });
+        years.forEach((row) => {
+            const on = Array.from(row.querySelectorAll('a.dmi-cell:not(.is-off)'));
+            row.hidden = on.length === 0;
+            const year = row.querySelector('.dmi-year');
+            const newest = on[on.length - 1];
+            if (year && newest) {
+                year.dataset.jump = newest.dataset.jump;
+                year.setAttribute('href', `#${newest.dataset.jump}`);
+            }
+        });
+    }
+    function jump(key) {
+        const month = document.getElementById(key);
+        if (!month || month.hidden)
+            return;
+        month.scrollIntoView({ block: 'start' });
+        month.classList.remove('is-arrived');
+        void month.offsetWidth;
+        month.classList.add('is-arrived');
+        window.setTimeout(() => month.classList.remove('is-arrived'), 1700);
+        const heading = month.querySelector('.amonth-jump');
+        if (heading)
+            heading.focus({ preventScroll: true });
+    }
+    if (index) {
+        let invoker = null;
+        main.querySelectorAll('.amonth-jump').forEach((button) => {
+            button.addEventListener('click', () => {
+                invoker = button;
+            });
+        });
+        index.addEventListener('beforetoggle', (event) => {
+            if (event.newState !== 'open')
+                return;
+            // Just under the heading that opened it, which is usually the
+            // one stuck under the header; at the top when that leaves too
+            // little room.
+            const top0 = measure() + 8;
+            let top = top0 + 44;
+            if (invoker) {
+                const r = invoker.getBoundingClientRect();
+                if (r.bottom > 0 && r.bottom + 260 < window.innerHeight)
+                    top = Math.max(top0, r.bottom + 6);
+            }
+            index.style.top = `${Math.round(top)}px`;
+            index.style.maxHeight = `${Math.round(window.innerHeight - top - 16)}px`;
+            const month = invoker ? invoker.closest('.amonth') : null;
+            cells.forEach((cell) => {
+                if (month && cell.dataset.jump === month.id)
+                    cell.setAttribute('aria-current', 'true');
+                else
+                    cell.removeAttribute('aria-current');
+            });
+        });
+        index.addEventListener('toggle', (event) => {
+            if (event.newState !== 'open') {
+                invoker = null;
+                return;
+            }
+            const current = cells.find((cell) => cell.getAttribute('aria-current') === 'true');
+            if (!current)
+                return;
+            index.scrollTop = Math.max(0, current.offsetTop - index.clientHeight / 2);
+            current.focus({ preventScroll: true });
+        });
+        index.addEventListener('click', (event) => {
+            const link = event.target.closest('a[data-jump]');
+            if (!link)
+                return;
+            event.preventDefault();
+            index.hidePopover();
+            jump(link.dataset.jump || '');
+        });
+    }
+    measure();
+    window.addEventListener('resize', measure);
     // ---- Series -----------------------------------------------------------
     function focusCard(card) {
         cards.forEach((other) => other.classList.toggle('is-focus', other === card));
@@ -173,6 +283,12 @@
         else if (hash.startsWith('topic-')) {
             setView('list', false);
             setTag(hash.slice('topic-'.length), false);
+        }
+        else if (/^\d{4}-\d{2}$/.test(hash)) {
+            // blogs.html#2012-09: the browser already scrolled, but before
+            // the header height was known.
+            setView('list', false);
+            jump(hash);
         }
         else {
             setView('list', false);

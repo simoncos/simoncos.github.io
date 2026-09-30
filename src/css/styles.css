@@ -2565,12 +2565,34 @@ button {
     flex-direction: column;
 }
 
+/* The gap above a month is margin, outside the section, so a jump that
+   scrolls the section to the header puts its heading exactly where the
+   heading sticks. */
+.amonth {
+    margin-top: clamp(16px, 2.4vw, 28px);
+    scroll-margin-top: var(--hdr-h, 76px);
+}
+
 .amonth-head {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: clamp(22px, 3vw, 34px) 0 4px;
+    padding: 2px 0;
+}
+
+/* The month in view stays under the site header, on the same frosted band,
+   and opens the month index. Without JavaScript the header can wrap to two
+   rows, so the heading stays in place. */
+:root.js .amonth-head {
+    position: sticky;
+    top: var(--hdr-h, 76px);
+    z-index: 20;
+    margin: 0 calc(-1 * var(--pad));
+    padding: 2px var(--pad);
+    background: var(--bg-a);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
 }
 
 .amonth-head h2 {
@@ -2580,9 +2602,307 @@ button {
     margin: 0;
 }
 
+.amonth-jump {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 40px;
+    margin-left: -12px;
+    padding: 0 14px 0 12px;
+    font: inherit;
+    letter-spacing: inherit;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.amonth-chev {
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    opacity: 0.55;
+}
+
+@media (hover: hover) {
+    .amonth-jump:hover {
+        background: var(--fill);
+    }
+}
+
+/* Where a jump lands: the heading lights up once. */
+.amonth.is-arrived .amonth-jump {
+    animation: amonth-arrive 1.6s ease-out;
+}
+
+@keyframes amonth-arrive {
+    0%, 35% { background: var(--hl); }
+    100% { background: transparent; }
+}
+
+/* A browser without popovers cannot open the index; the heading is text. */
+@supports not selector(:popover-open) {
+    .amonth-jump {
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .amonth-chev {
+        display: none;
+    }
+}
+
 .amonth-n {
     font-size: 13px;
     color: var(--muted);
+}
+
+/* ---- Month index -------------------------------------------------------- */
+
+.dmi {
+    position: fixed;
+    inset: auto;
+    top: calc(var(--hdr-h, 76px) + 50px);
+    left: var(--pad);
+    width: min(600px, calc(100vw - 32px));
+    max-height: calc(100dvh - var(--hdr-h, 76px) - 66px);
+    margin: 0;
+    padding: 0 20px 20px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    color: var(--ink);
+    background: var(--bg);
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 0 0 0 1px var(--line), 0 18px 48px rgba(0, 0, 0, 0.14);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.18s ease, transform 0.18s var(--ease), overlay 0.18s allow-discrete, display 0.18s allow-discrete;
+}
+
+.dmi:popover-open {
+    opacity: 1;
+    transform: none;
+}
+
+@starting-style {
+    .dmi:popover-open {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+}
+
+.dmi::backdrop {
+    background: transparent;
+}
+
+/* The title and the close button stay put while a long list scrolls. */
+.dmi-head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0 6px;
+    background: var(--bg);
+}
+
+.dmi-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin: 0;
+}
+
+.dmi-close {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    margin-right: -8px;
+    font: inherit;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dmi-close:hover {
+    background: var(--fill);
+}
+
+.dmi-row {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+}
+
+.dmi-row + .dmi-row {
+    margin-top: 4px;
+}
+
+.dmi-row[hidden] {
+    display: none;
+}
+
+.dmi-cells {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 4px;
+}
+
+.dmi-months span {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+}
+
+.dmi-year {
+    font-size: 14px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    padding: 6px 0;
+}
+
+.dmi-year:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.dmi-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 32px;
+    font-size: 13px;
+    border-radius: 8px;
+}
+
+a.dmi-cell {
+    color: var(--ink);
+    background: var(--fill);
+    transition: background 0.2s, color 0.2s;
+}
+
+a.dmi-cell:hover {
+    background: var(--fill-2);
+}
+
+a.dmi-cell[aria-current="true"] {
+    color: var(--on-ink);
+    background: var(--ink);
+}
+
+.dmi-cell.is-empty,
+a.dmi-cell.is-off {
+    background: none;
+    pointer-events: none;
+}
+
+.dmi-cell.is-empty::before,
+a.dmi-cell.is-off::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--line-2);
+}
+
+a.dmi-cell.is-off > span {
+    display: none;
+}
+
+/* The column heads name the months; a cell shows only its count. */
+.dmi-m {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* On a phone twelve columns would be 24px targets: the empty months drop
+   out and the rest wrap as chips under their year. */
+@media (max-width: 599.98px) {
+    .dmi {
+        left: 16px;
+        width: calc(100vw - 32px);
+        padding: 0 16px 18px;
+    }
+
+    /* Nearly the whole screen: dim the page so the panel reads as on top. */
+    .dmi::backdrop {
+        background: rgba(0, 0, 0, 0.18);
+    }
+
+    .dmi-months {
+        display: none;
+    }
+
+    .dmi-row {
+        grid-template-columns: 44px minmax(0, 1fr);
+        align-items: start;
+        padding-bottom: 8px;
+    }
+
+    .dmi-row + .dmi-row {
+        margin-top: 0;
+        padding-top: 8px;
+        border-top: 1px solid var(--line);
+    }
+
+    .dmi-year {
+        padding: 11px 0;
+    }
+
+    .dmi-cells {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .dmi-cell.is-empty,
+    a.dmi-cell.is-off {
+        display: none;
+    }
+
+    a.dmi-cell {
+        height: 40px;
+        padding: 0 14px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .dmi-m {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        clip-path: none;
+    }
+
+    a.dmi-cell .dmi-n {
+        font-weight: 400;
+        color: var(--muted);
+    }
+
+    a.dmi-cell[aria-current="true"] .dmi-n {
+        color: inherit;
+        opacity: 0.7;
+    }
 }
 
 .arow {
@@ -2590,7 +2910,8 @@ button {
     flex-direction: column;
     padding: clamp(18px, 2.6vw, 30px) 0;
     transition: opacity 0.35s ease;
-    scroll-margin-top: 96px;
+    /* Clear of the header and the month heading stuck under it. */
+    scroll-margin-top: calc(var(--hdr-h, 76px) + 60px);
 }
 
 .arow.is-dim {
