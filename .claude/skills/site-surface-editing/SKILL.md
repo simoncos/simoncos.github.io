@@ -17,6 +17,7 @@ Use this skill for source-of-truth and verification discipline on the main perso
 - TypeScript source lives in `src/ts/*.ts`; compiled browser JS in `src/js/*.js` is tracked. Run `npm run build:ts` after TS edits. Each page loads `site.js` plus one page script from its profile.
 - `series.html` and `tags.html` are hand-authored redirects into the Articles page.
 - AI/agent-readable entrypoints are root `llms.txt` and `agent-index.json`; update them when navigation, public sections, or curated paths change.
+- Project skills are kept in `.claude/skills/` and `.agents/skills/` (Codex). Edit one, then run `python3 scripts/sync_skills.py`; see the drift guards in `docs/ARCHITECTURE.md`.
 
 ## Workflow
 

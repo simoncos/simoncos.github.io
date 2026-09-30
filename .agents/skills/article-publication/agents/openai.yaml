@@ -1,0 +1,4 @@
+interface:
+  display_name: "Article Publication"
+  short_description: "Publish or revise bilingual articles on the simoncos site"
+  default_prompt: "Use $article-publication to add or revise an article, date or translate an older essay, integrate an essay batch, or deploy article changes."

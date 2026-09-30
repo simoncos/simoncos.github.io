@@ -5,7 +5,7 @@ description: Edit the `simoncos.github.io` public site pages safely. Use when ch
 
 # Site Surface Editing
 
-Use this skill for source-of-truth and verification discipline on the main personal site. Pair with `frontend-design` for visual design work and `site-copy-and-ia` for public copy/IA judgment. `docs/ARCHITECTURE.md` has the full page-to-generator table.
+Use this skill for source-of-truth and verification discipline on the main personal site. Pair with `frontend-design` for visual design work and `site-copy-and-ia` for public copy/IA judgment. Adding or changing an article follows `article-publication`. `docs/ARCHITECTURE.md` has the full page-to-generator table.
 
 ## Source Map
 
@@ -17,6 +17,7 @@ Use this skill for source-of-truth and verification discipline on the main perso
 - TypeScript source lives in `src/ts/*.ts`; compiled browser JS in `src/js/*.js` is tracked. Run `npm run build:ts` after TS edits. Each page loads `site.js` plus one page script from its profile.
 - `series.html` and `tags.html` are hand-authored redirects into the Articles page.
 - AI/agent-readable entrypoints are root `llms.txt` and `agent-index.json`; update them when navigation, public sections, or curated paths change.
+- Project skills are kept in `.claude/skills/` and `.agents/skills/` (Codex). Edit one, then run `python3 scripts/sync_skills.py`; see the drift guards in `docs/ARCHITECTURE.md`.
 
 ## Workflow
 
@@ -44,6 +45,14 @@ git diff --check
 ```
 
 If `scripts/check_blog_generation.py` fails, isolate whether generated blog drift predates the current change before treating it as a regression.
+
+`make generate` rewrites both feeds with a fresh `lastBuildDate`. Restore them only when the diff shows nothing else; when another agent has uncommitted work in the checkout, regenerate rather than `git checkout` generated files.
+
+## Deploy
+
+- A push to `master` publishes: `.github/workflows/site-check.yml` runs `make check-all`, then deploys the repo root, and a failed check leaves the last good version live.
+- Push only with the owner's approval for that change. Work on a branch; once it fast-forwards (`git merge-base --is-ancestor origin/master <branch>`), run `git push origin <branch>:master`.
+- Watch the run in the background with `gh run list --workflow site-check.yml --limit 1` and `gh run watch <id> --exit-status`. Then check the live pages with a cache-busting query, since Pages caches for up to 600 s. `.claude/skills/article-publication/scripts/check_pages.cjs` does both for any page list.
 
 ## Local Preview
 
