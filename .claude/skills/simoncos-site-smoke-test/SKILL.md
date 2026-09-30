@@ -28,6 +28,8 @@ Run relevant checks and report PASS/FAIL with evidence:
 - Both RSS feeds return HTTP 200.
 - Key assets referenced by changed pages return HTTP 200.
 
+Pages caches for up to 600 s, so add a cache-busting query when checking right after a deploy. For article pages, `.claude/skills/article-publication/scripts/check_pages.cjs https://simoncos.github.io/ <paths>` gives one PASS/FAIL line per page and width (status, images, alt text, overflow, script errors).
+
 Pages are generated static HTML, so check the rendered page itself; `/data/site.json` and `/data/article_index.json` should return HTTP 200 when they changed.
 
 Confirm the semantic split when relevant: Work holds projects, talks, research and visual essays; Projects is for maintained tools and deployed systems.
