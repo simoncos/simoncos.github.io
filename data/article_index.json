@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-28",
+  "last_updated": "2026-09-30",
   "groups": [
     {
       "id": "my-personal-knowledge-management-system-2026-03",
@@ -151,6 +151,91 @@
       }
     },
     {
+      "id": "my-2023-in-pictures",
+      "date": "2024-02-01",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "我的影像回忆2023",
+          "file": "my-2023-in-pictures.html",
+          "markdown": "my-2023-in-pictures.md",
+          "excerpt": "2023于我是显得漫长沉闷的一年，究其最大原因可形容为“与时俱退”，赶上了香港第五波新冠大流行，并喜提长达近一年的long covid。疲倦健忘、睡眠紊乱、心率波动、炎症乱飞...加之21年用力过猛造成的膝伤，望山们而兴叹。于是整一年的主题几乎就是“蹲着”。这也直接...",
+          "description": "长新冠里“蹲着”的一年，日常中拍下的维港、吐露港与马鞍山、黄昏与芒草，关于落日、循环与连接。",
+          "image": "blogs/assets/images/my-2023-in-pictures/46047d95aa5c2154a33b8e8950a49e08.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "My 2023 in Pictures",
+          "file": "my-2023-in-pictures.en.html",
+          "markdown": "my-2023-in-pictures.en.md",
+          "excerpt": "For me, 2023 felt like a long, dull year. The main reason could be summed up as \"regressing with the times\": I got caught in Hong Kong's fifth wave of COVID-19 and was rewarded with nearly a year of long COVID. Fatigue and forgetfulness, disordered sleep, an erratic heart rate, inflammation flaring up all over... Add the knee injury from overdoing it in '21, and all I could do was gaze at the mountains and sigh. So the theme of the whole year was, pretty much, \"hunkering down\". That is reflected directly in this year's photo memories: there doesn't seem...",
+          "description": "A year of \"hunkering down\" with long COVID; everyday photos of Victoria Harbour, Tolo Harbour and Ma On Shan, of dusk and silvergrass; on sunsets, cycles and connection.",
+          "image": "blogs/assets/images/my-2023-in-pictures/46047d95aa5c2154a33b8e8950a49e08.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "my-2022-in-pictures",
+      "date": "2023-01-15",
+      "tags": [
+        "life",
+        "out"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "我的影像回忆2022",
+          "file": "my-2022-in-pictures.html",
+          "markdown": "my-2022-in-pictures.md",
+          "excerpt": "前言：这篇东西写到最后，已经超出我预想的范围了。2022是特殊的一年，谨以此文做些片面的记录，证明我来过、事情发生过。\n山野之间\n承接2021后半的节奏，2022的起始记忆锚点是1月里两次非常美好的香港山野体验：凤凰山的罗汉塔+南北天门，以及青山腹地的...",
+          "description": "2022 年的照片与回忆：一月的香港山野，二月停滞的日子，离开工作近六年的公司，两段新工作，行动带回信息，以及年末的新冠与失去。",
+          "image": "blogs/assets/images/my-2022-in-pictures/b689fb21f61bffa00d3d9d5854fcf108.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "My 2022 in Pictures",
+          "file": "my-2022-in-pictures.en.html",
+          "markdown": "my-2022-in-pictures.en.md",
+          "excerpt": "Foreword: by the time I finished, this piece had gone beyond what I expected. 2022 was a special year, and I offer this as a partial record, to prove that I was here and that these things happened.\nAmong the Hills\nCarrying on the rhythm of the second half of 2021, the first anchors of memory in 2022 are two wonderful days in Hong Kong's hills in January: the Lo Hon Tower and the South and North Heaven Gates on Lantau Peak, and the Tai Shek Tsui and Ling Hui valleys in the hinterland of Castle Peak. The scenery was...",
+          "description": "Photos and memories of 2022: Hong Kong's hills in January, the stalled days of February, leaving a company after nearly six years, two new jobs, action bringing back information, and COVID and loss at the end of the year.",
+          "image": "blogs/assets/images/my-2022-in-pictures/b689fb21f61bffa00d3d9d5854fcf108.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "dont-express-yourself-pointlessly",
+      "date": "2022-02-27",
+      "tags": [
+        "thinking"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "请不要做无谓的表达",
+          "file": "dont-express-yourself-pointlessly.html",
+          "markdown": "dont-express-yourself-pointlessly.md",
+          "excerpt": "归功于全世界范围科技、经济的发展，这也许是有史以来表达欲最强的时代，同时也是一个任何事都能与任何人息息相关的“小”时代。不论你愿意与否，除非你是一个极端的、知行合一的陶渊明、阿米什般的人，否则迟早会被拖入某些事件的舆论场...",
+          "description": "这可能是有史以来表达欲最强的时代。抽象与类比让复杂的疫情、战争变得好谈，也可能遮蔽具体的人与事；如果表达只带来更多撕裂，它是为了什么？",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Please Don't Express Yourself Pointlessly",
+          "file": "dont-express-yourself-pointlessly.en.html",
+          "markdown": "dont-express-yourself-pointlessly.en.md",
+          "excerpt": "Thanks to the development of technology and the economy all over the world, this may be the age with the strongest urge to express in all of history, and also a \"small\" age in which anything can bear closely on anyone. Whether you like it or not, unless you are an extreme case who lives by what they believe, a Tao Yuanming or one of the Amish, sooner or later you will be dragged into the whirlpool of public opinion around some event.\nIf you happen to take an interest in some event and dig deeper, it gets even worse....",
+          "description": "This may be the age with the strongest urge to express ever. Abstraction and analogy make complex epidemics and wars easy to talk about, and can also hide the concrete people and events; if expression only brings more division, what is it for?",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
       "id": "on-the-value-of-war",
       "date": "2021-10-10",
       "tags": [
@@ -235,6 +320,35 @@
       }
     },
     {
+      "id": "setting-aside-this-hour",
+      "date": "2020-08-23",
+      "tags": [
+        "life",
+        "thinking"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "空出这一小时",
+          "file": "setting-aside-this-hour.html",
+          "markdown": "setting-aside-this-hour.md",
+          "excerpt": "最近在《死亡搁浅》中送了二十来小时快递，不时惊叹于游戏中各种神奇的世界观设定，其中有一个核心设定叫做时间雨（Timefall），在这种雨中几乎所有东西，有生命的动物和无生命的金属，都会被快速腐蚀，雨和美丽的彩虹还是一些更危险的东西来临前...",
+          "description": "从《死亡搁浅》的时间雨和《银翼杀手》的雨中泪说起：记忆让时间有了意义，而越来越可预测的日子，让我们对时间的采样越来越粗。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Setting Aside This Hour",
+          "file": "setting-aside-this-hour.en.html",
+          "markdown": "setting-aside-this-hour.en.md",
+          "excerpt": "Lately I have spent twenty-odd hours making deliveries in Death Stranding, marvelling every so often at the game's extraordinary worldbuilding. One of its core ideas is timefall: in this rain almost everything, living animals and lifeless metal alike, is rapidly eaten away, and the rain and the beautiful rainbows are also the sign that something more dangerous is on its way.\nRain really is a very good metaphor for time. It gives abstract time a flowing, cold texture. Rain brings the endless turning of life, and it also makes glory fleeting, like tears in rain. That classic line from Blade...",
+          "description": "Starting from timefall in Death Stranding and tears in rain in Blade Runner: memory is what gives time its meaning, and the more predictable our days become, the more coarsely we sample them.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
       "id": "ten-years-like-rain",
       "date": "2018-05-12",
       "tags": [
@@ -258,6 +372,34 @@
           "excerpt": "Not long ago a good friend invited me to Shenzhen for a YiXi talk event. One of the speakers, Wang Shu, gave a talk called \"About to Climb the Taihang\", on what he had seen and thought over dozens of journeys along the ancient roads of the Eight Passes of the Taihang. At first, all he thought about was the magnificent landscape along those mountain roads and the great history that had played out on them: changes of regime, emperors on tour. Gradually he began to notice the stories of ordinary people on the old roads: refugees fleeing war, common...",
           "description": "Ten years after the Wenchuan earthquake, an ordinary person who lived through it looks back: history keeps the outline and the verdict, and personal memory keeps the details that still hold warmth.",
           "image": "blogs/assets/images/ten-years-like-rain/fc6fc9e0995578be7065b65cb0e6a6dc.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "simpsons-paradox-and-the-flaws-of-intuition",
+      "date": "2018-03-27",
+      "tags": [
+        "thinking"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "辛普森悖论与直觉的缺陷",
+          "file": "simpsons-paradox-and-the-flaws-of-intuition.html",
+          "markdown": "simpsons-paradox-and-the-flaws-of-intuition.md",
+          "excerpt": "关键词：辛普森悖论 | 直觉 | 统计 | 可加性\n辛普森悖论真是个很经典的东西，引用 维基百科 ：\n在分组比较中都占优势的一方，在总评中有时反而是失势的一方。\n简书上有一篇文章提到一个结石治疗方案对比的例子，可视化得挺好，值得一看： 辛普森悖论 。...",
+          "description": "用一个极端的招生例子说明辛普森悖论，再追问它为什么违背直觉：我们默认了“各部分都更大，整体就更大”，却没看见其中隐含的可加性前提。",
+          "image": "blogs/assets/images/simpsons-paradox-and-the-flaws-of-intuition/41dff4010e43979b84a833fb80be4a58.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Simpson's Paradox and the Flaws of Intuition",
+          "file": "simpsons-paradox-and-the-flaws-of-intuition.en.html",
+          "markdown": "simpsons-paradox-and-the-flaws-of-intuition.en.md",
+          "excerpt": "Keywords: Simpson's paradox | intuition | statistics | additivity\nSimpson's paradox really is a classic. In the words of the Chinese Wikipedia (in Chinese):\nThe side that comes out ahead in every group comparison sometimes turns out to be the side that loses in the overall assessment.\nA post on Jianshu uses the example of comparing treatments for kidney stones, with good visualizations, and it is worth a look: \"Simpson's Paradox\" (in Chinese). A rather more extreme example makes it easier to explain what exactly this paradox is:\nSuppose a university is admitting students. Its School A admits women at...",
+          "description": "An extreme admissions example of Simpson's paradox, and why it defies intuition: we assume that if every part is bigger, the whole is bigger, without seeing the additivity that assumption quietly depends on.",
+          "image": "blogs/assets/images/simpsons-paradox-and-the-flaws-of-intuition/41dff4010e43979b84a833fb80be4a58.jpg",
           "available": true
         }
       }
@@ -414,6 +556,96 @@
           "excerpt": "Keywords: methodology | problem situation | interaction design | search problems\nOf everything I have skimmed in the last few months, I would never have guessed that the most illuminating would be this: \"Factors That Affect Problem Solving\" (in Chinese), an excerpt from the People's Education Press textbook General Psychology.\nEach of the seven factors it names could be turned over on its own for a long time (though to me a few of them overlap as concepts): the problem situation, transfer, prototype heuristics, mental set, functional fixedness, motivation and emotional state, and individual characteristics.\nI found it valuable because...",
           "description": "Why does the same problem get harder or easier depending on how it is put? From problem situations, information and search paths to interaction design.",
           "image": "blogs/assets/images/problem-solving-and-design-1-situation/3ac53d9fead8d368e660caa585da814a.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "zhihu-social-network-analysis-2-follow-network",
+      "date": "2016-03-18",
+      "tags": [
+        "hack"
+      ],
+      "series": {
+        "name": "知乎社交网络分析",
+        "part": "2"
+      },
+      "languages": {
+        "zh": {
+          "title": "知乎社交网络分析（下）：关注网络",
+          "file": "zhihu-social-network-analysis-2-follow-network.html",
+          "markdown": "zhihu-social-network-analysis-2-follow-network.md",
+          "excerpt": "关键词：社交网络分析（SNA） | 复杂网络 | 图论 | 网络中心度 | 热门话题发现\n本文是《知乎社交网络分析》的下篇，主要内容是对于知乎用户关注网络进行的分析。项目介绍（以及数据、代码和报告）及基本的统计分析内容请见 知乎社交网络分析（上）：基本统计 。\n导言：...",
+          "description": "为什么说关注关系最接近知乎上的社交网络？从密度、强连通分量与最短路径看大V如何抱团，再用 PageRank、HITS 和介性中心度给大V排位，最后看他们都在回答什么话题。",
+          "image": "blogs/assets/images/zhihu-social-network-analysis-2-follow-network/4a34f5c65f7bddca379b8f8719e1f25f.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Zhihu Social Network Analysis (2): The Follow Network",
+          "file": "zhihu-social-network-analysis-2-follow-network.en.html",
+          "markdown": "zhihu-social-network-analysis-2-follow-network.en.md",
+          "excerpt": "Keywords: social network analysis (SNA) | complex networks | graph theory | network centrality | trending topic discovery\nThis is the second part of Zhihu Social Network Analysis. It is mainly an analysis of the network of Zhihu users following one another. For an introduction to the project (and the data, code and report) and the basic statistics, see Zhihu Social Network Analysis (1): Basic Statistics.\nIntroduction: What Is a Social Network?\nAfter the basic statistics in the first part, we have some idea of the overall picture of Zhihu users' upvotes, answers, thanks and follows. Now let's first consider...",
+          "description": "Why is following the relation closest to a social network on Zhihu? Density, strongly connected components and shortest paths show how the big Vs cluster; PageRank, HITS and betweenness centrality rank them; and their answers show which topics they cover.",
+          "image": "blogs/assets/images/zhihu-social-network-analysis-2-follow-network/4a34f5c65f7bddca379b8f8719e1f25f.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "zhihu-social-network-analysis-1-basic-statistics",
+      "date": "2016-02-28",
+      "tags": [
+        "hack"
+      ],
+      "series": {
+        "name": "知乎社交网络分析",
+        "part": "1"
+      },
+      "languages": {
+        "zh": {
+          "title": "知乎社交网络分析（上）：基本统计",
+          "file": "zhihu-social-network-analysis-1-basic-statistics.html",
+          "markdown": "zhihu-social-network-analysis-1-basic-statistics.md",
+          "excerpt": "关键词：社交网络分析（SNA） | 统计 | 幂律分布\n简介\n为保证可读性，本文将分为上下两篇，上篇只涉及数据介绍及基本的统计描述性分析，下篇是 基于用户关注网络关系进行的分析 。\n本文源自我在2015年 Social Computing 课程中参与的一个小组项目，主要语言为Python，这里是项目包...",
+          "description": "一个 2015 年课程项目，从一个种子账号爬取 2.6 万名知乎用户：关注、粉丝、回答、赞同和感谢的均值与中位数相差悬殊，分布呈长尾，赞同数与粉丝数明显正相关。",
+          "image": "blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/3e2bcc95699de0337ab26473b8b8e362.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Zhihu Social Network Analysis (1): Basic Statistics",
+          "file": "zhihu-social-network-analysis-1-basic-statistics.en.html",
+          "markdown": "zhihu-social-network-analysis-1-basic-statistics.en.md",
+          "excerpt": "Keywords: social network analysis (SNA) | statistics | power-law distribution\nIntroduction\nTo keep it readable, this piece is split into two parts. The first covers only the data and basic descriptive statistics; the second is an analysis based on the network of who follows whom.\nIt comes from a group project I took part in for a Social Computing course in 2015. The main language was Python, and here is the project on GitHub, dataset included (please cite this address). The project covered the whole process of crawling, storing and analysing data from the Zhihu social network. In this piece...",
+          "description": "A 2015 course project crawled 26,000 Zhihu users outward from one seed account. The means and medians of followees, followers, answers, upvotes and thanks are far apart, the distributions have long tails, and upvotes rise clearly with followers.",
+          "image": "blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/3e2bcc95699de0337ab26473b8b8e362.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "ten-trillion-2015s",
+      "date": "2015-12-29",
+      "tags": [
+        "life"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "十万亿个二〇一五",
+          "file": "ten-trillion-2015s.html",
+          "markdown": "ten-trillion-2015s.md",
+          "excerpt": "午觉有两种，一种是普普通通的午觉。\n还有一种是将你切换到另外的世界再切换回来的午觉。而一场这样的午觉，最终促使我在一百八十天之后重新动笔（误）。\n（此处发呆五分钟，不知道接下来写什么）\n好不容易起了头，还是让我瞎扯扯吧。\n假想有一扇...",
+          "description": "一场把人切换到另一个世界再切换回来的午觉之后，从窗外的干道、苹果山和天空，想到一杯水里的整个世界，以及十万亿个可能的二〇一五。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Ten Trillion 2015s",
+          "file": "ten-trillion-2015s.en.html",
+          "markdown": "ten-trillion-2015s.en.md",
+          "excerpt": "There are two kinds of afternoon nap. One is the perfectly ordinary nap.\nThe other is the nap that switches you into another world and then switches you back. And it was a nap like that which finally got me writing again after a hundred and eighty days (not really).\n(Five minutes of staring into space here, with no idea what to write next.)\nNow that I have finally got started, let me just ramble.\nImagine a glass window as high up as the ninth floor, and below it a main road that is main and not quite main: by...",
+          "description": "After a nap that switches you into another world and back, the main road, Apple Mountain and the sky outside a window lead to a whole world in a glass of water, and to ten trillion possible 2015s.",
+          "image": "",
           "available": true
         }
       }

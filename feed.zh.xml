@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Tue, 29 Sep 2026 02:08:16 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>我的个人知识管理系统 2026-03</title><link>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</link><guid>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</guid><pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的个人知识管理系统 2026-03</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Wed, 30 Sep 2026 08:19:48 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>我的个人知识管理系统 2026-03</title><link>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</link><guid>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</guid><pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的个人知识管理系统 2026-03</h1>
 <p><img alt="Personal Knowledge Management System 202603" decoding="async" height="717" src="https://simoncos.github.io/blogs/assets/images/my-personal-knowledge-management-system-2026-03/b0b1b4b23ca8bc7d5afc150d07c3582d.jpg" width="1199"/></p>
 <h2>一、从"记笔记"到"分层协作"</h2>
 <p>我开始把 Obsidian 作为主要的 KM<sup id="fnref:1"><a aria-label="脚注" class="footnote-ref" href="https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html#fn:1">1</a></sup> 工具，到现在差不多四、五年了。2026 年 3 月回顾完整的系统迭代记录（见文末附录），这套东西已经长成了一个分层的人机系统：Telegram 负责即时输入，Obsidian 负责整理与沉淀，个人站点负责发布与呈现，Git 负责版本边界，而我的 OpenClaw agent--RedPiggy，开始把这些部分粘合起来。</p>
@@ -822,7 +822,141 @@
 <p>个人排名前五后还有几个觉得厉害的：黄风大圣、黄眉、百眼魔君三个关底boss，一个投技可以拯救国足，一个机制怪，另一个也是机制怪（控制型，黏黏腻腻的，跟打他师妹及其相好有类似的感觉）；青背龙也蛮数值怪的，只是和小黄龙比差一些；妙音disco，有点弹幕游戏的感觉，忘了哪招最恶心，只记得打着有点无聊；不能，什么，他只是头目？不能吧？</p>
 <p>然后是反过来，大家说很难的两个boss，虎先锋我差点初见杀，两次过；毒敌大王，大概四次过。王灵官，好像被我初见杀了（还我四妹！）...只能归因为这确实是个ARPG而非ACT game了，体感差异或许源于养成阶段。对了，啥是丹药？</p>
 <p>最后以小见个大，侃了好一会儿，才只提到了81个头目+妖王中的十来个，足以见该作内容之丰富。纵览游戏的各个方面，有两分生涩，五分平齐主流和中规中矩，三分惊喜，但能见到背后一百分的诚意与激情。这就是中国的第一个3A了，当得上，绝对当得上。</p>
-<p>豆瓣：<a href="https://www.douban.com/game/35184766/">黑神话：悟空</a></p>]]></description></item><item><title>关于战争的价值</title><link>https://simoncos.github.io/blogs/on-the-value-of-war.html</link><guid>https://simoncos.github.io/blogs/on-the-value-of-war.html</guid><pubDate>Sun, 10 Oct 2021 00:00:00 +0800</pubDate><description><![CDATA[<h1>关于战争的价值</h1>
+<p>豆瓣：<a href="https://www.douban.com/game/35184766/">黑神话：悟空</a></p>]]></description></item><item><title>我的影像回忆2023</title><link>https://simoncos.github.io/blogs/my-2023-in-pictures.html</link><guid>https://simoncos.github.io/blogs/my-2023-in-pictures.html</guid><pubDate>Thu, 01 Feb 2024 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的影像回忆2023</h1>
+<p>2023于我是显得漫长沉闷的一年，究其最大原因可形容为“与时俱退”，赶上了香港第五波新冠大流行，并喜提长达近一年的long covid。疲倦健忘、睡眠紊乱、心率波动、炎症乱飞...加之21年用力过猛造成的膝伤，望山们而兴叹。于是整一年的主题几乎就是“蹲着”。这也直接反映在今年的影像回忆之中——好像没太多可回忆的。</p>
+<p>不过细细拈来，日常之中被我拍到的美好瞬间，也堪一瓢之饮。而且正如你即将看到的，虽是日常，也是变幻无常。</p>
+<h3>维港</h3>
+<p>摄于每周三去游泳的路上，从会展站一出来，不急着左拐，向右几步，就会来到这个机位。有朋友嫌弃那根有些碍眼的灯柱，我想想现在用AI的方法可能是可以消除的，但只消心眼无遮挡，这点遮挡就算不得什么。</p>
+<p><img alt="从会展站外望向维港：黄昏的云层下是对岸的环球贸易广场和九龙高楼，前景有一根灯柱和几辆巴士" decoding="async" height="855" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/46047d95aa5c2154a33b8e8950a49e08.jpg" width="1520"/>
+<img alt="同一机位的阴天傍晚，乌云压在维港对岸亮起灯的高楼上方" decoding="async" height="768" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/498fdaff154af3722ad7070794719934.jpg" width="1365"/>
+<img alt="同一机位的黄昏，天边一抹金黄，对岸的高楼成了剪影" decoding="async" height="855" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/130b581f608756d59f073afd8761bd1c.jpg" width="1520"/>
+<img alt="同一机位，淡蓝的天空里，一朵被夕阳染成粉色的云停在对岸楼群上方" decoding="async" height="855" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/e13a417dbd86867e3e29ce21f8a48c58.jpg" width="1520"/></p>
+<h3>马鞍山</h3>
+<p>22年底换工作来到科学园，忍受了一年的长时间通勤，24年初终于住了过来。吐露港的海水及远处的马鞍山和八仙岭，均是足以慰藉人心的美景。中午或者晚上闲下来，举目远望，心自宁静。</p>
+<p><img alt="晴天里，吐露港对岸的马鞍山和山脚下的一排高楼，白云堆在山后" decoding="async" height="768" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/db57961f358cf6984654142cacef1884.jpg" width="1024"/></p>
+<p><img alt="云雾缠绕着马鞍山的山顶，山脚是楼群和平静的水面" decoding="async" height="768" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/f16b92949d1b63b8b5166367d44b9a82.jpg" width="1024"/></p>
+<p><img alt="一大团云压在马鞍山顶上，阳光照亮了山坡的绿色" decoding="async" height="768" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/d96c181a94e82f994fade79ce9ec63d3.jpg" width="1024"/>
+<img alt="晨雾中的马鞍山与楼群，海面上三艘小船驶过" decoding="async" height="768" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/5a1ecf562e88e5d29a412b340e316f7a.jpg" width="1024"/>
+<img alt="蓝调时分，一轮满月正好停在马鞍山的山顶，山脚的楼群亮起灯火" decoding="async" height="1140" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/e766cceecaf71f2767bedba6a206affe.jpg" width="1520"/></p>
+<h3>黄昏</h3>
+<p>黄昏是一天之中我最喜欢的时段。一日循环与一年循环有着惊人的对应，原因是什么呢？太阳与旋转。黄昏对应的当是秋天，是阴与阳的交界，晨昏线圆圈的一半。太阳向着地平线落去，越来越快，阳光从白色向黄色、红色端偏移，亮度越来越低，但如果天气允许，在一段时间内太阳会比白天时更加显眼，显眼到我们舍得用“辉煌”二字去形容，夕阳无限好，但只在一瞬间。</p>
+<p><img alt="从高处俯瞰，夕阳把环球贸易广场照成金色，前方是西九龙海滨和避风塘" decoding="async" height="768" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/014a698cde15f7770303ab6be1d5ce3c.jpg" width="1024"/></p>
+<p><img alt="夕阳下，岸边吊船的吊臂与桅杆成了剪影" decoding="async" height="1140" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/1b8addb91bf55f697db93b71f2bdd66c.jpg" width="1520"/></p>
+<p><img alt="火车站台的顶棚与轨道向远处延伸，夕阳落在正在施工的楼群之间" decoding="async" height="1140" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/d0652598dadc16372ee02098d60f8dbd.jpg" width="1520"/></p>
+<p><img alt="山林里，夕阳从光秃秃的树枝之间落向山谷" decoding="async" height="1024" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/f84811eaf1e09964a5fe02f1dbfb045e.jpg" width="768"/>
+<img alt="山顶的芒草和灌木在逆光中发亮，橙色的夕阳挂在层叠的山影之上" decoding="async" height="768" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/7400e4fd56a03ef71bd0a15e4ef0a673.jpg" width="1024"/></p>
+<p>接下来，日交给了夜，丰盛交给了静谧，生交给了死。《三体》里叶文洁叹道“这是人类的落日”，而莫得感情的物理学家会嘲笑“一半人类的sunset也是另一半人类的sunrise”。于是这之后的一次落日，我索性改写成“这是东八区人类的落日”。想象那长达两万公里的半圆从地球上扫过，扫过每一个抬头看落日的人的脸，线的一边是光亮的蔚蓝、翠绿、冰白与土黄，一边是或有繁星点缀的黑暗，而脚对脚的另一端，演出正截然相反地进行，由死向生，由睡眠至清醒，灯火次第消隐，重新染上色彩。</p>
+<p>错过一次落日？根本无所谓。只要太阳还没有熄灭，低熵还能维持，这已持续数十亿年的循环就不会休止，你可以重复看到吐。但君亦须知：“好风景多的是，夕阳平常事；然而每天眼见的，永远不相似。” 而太阳，终究是会熄灭的，在那之后，以及更之后的之后，直至时空的尽头，死还会向生运转吗？</p>
+<p>这永恒与瞬间、日常与非常的矛盾，正是一场浪漫。</p>
+<p><img alt="从山上俯瞰黄昏的九龙，城市笼罩在薄雾里，灯火初上，近处有一座输电塔" decoding="async" height="1140" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/d2c4697517d5212833b8863959cc6389.jpg" width="1520"/>
+<img alt="橙色的天幕下，雾中的城市和一个亮着灯的球场，左下角是一座输电塔" decoding="async" height="2026" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/f96ee1c42fd0fd508585e5f00805fed3.jpg" width="1520"/>
+<img alt="入夜后从山上俯瞰的城市灯火，近处是一个灯光明亮的足球场" decoding="async" height="1024" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/5d225ed385e234c6623814eefc5bb5c1.jpg" width="768"/></p>
+<h3>生命</h3>
+<p>太大尺度的浪漫，难免叫人晕眩。一个低熵体与另一个低熵体之间，一个pattern与另一个pattern之间在有限时空中的连接，渺小、平凡。但或许这是生命能赋予人最大的意义，即使连接最终都将断开，意义都将失落。就像这一根根闪着光的芒草，与蜿蜒的山脊线相比，它们是那样脆弱。</p>
+<p><img alt="阳光下长满芒草的山坡，坡顶有一座石屋，远处的山脊线蜿蜒起伏" decoding="async" height="1024" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/1062680149d1ebb16e778ce45f58e458.jpg" width="768"/></p>
+<p><img alt="夜里海面上空绽放的烟花，下方停满了观看的船只" decoding="async" height="2026" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/c80b6bb9ff4652514d9912e0e8c4e66a.jpg" width="1140"/></p>
+<p>用最后一张照片纪念这样一个我已经失去的小小连接，以及更早失去的无数连接。我希望自己能够用《异乡异客》里火星人的方式，去珍惜每个连接。珍惜，亦即像水般溶为一体。也许我快要做到了。</p>
+<p><img alt="一只毛茸茸的雏鸟窝在手心里" decoding="async" height="1092" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2023-in-pictures/4c5f8bc53c9001ee25ebbe343e292024.jpg" width="1092"/></p>]]></description></item><item><title>我的影像回忆2022</title><link>https://simoncos.github.io/blogs/my-2022-in-pictures.html</link><guid>https://simoncos.github.io/blogs/my-2022-in-pictures.html</guid><pubDate>Sun, 15 Jan 2023 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的影像回忆2022</h1>
+<p>前言：这篇东西写到最后，已经超出我预想的范围了。2022是特殊的一年，谨以此文做些片面的记录，证明我来过、事情发生过。</p>
+<h3>山野之间</h3>
+<p><img alt="一位戴帽子的行山者扶着铁链走过岩壁下窄窄的石台，远处是连绵的山谷" decoding="async" height="2026" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/b689fb21f61bffa00d3d9d5854fcf108.jpg" width="1520"/></p>
+<p><img alt="一位行山者站在巨石边缘，眺望海湾对岸深圳的高楼与深圳湾大桥" decoding="async" height="1013" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/619e0b69acbf1eef2cdbf8dc3d1ed947.jpg" width="1520"/></p>
+<p>承接2021后半的节奏，2022的起始记忆锚点是1月里两次非常美好的香港山野体验：凤凰山的罗汉塔+南北天门，以及青山腹地的大石坠谷+灵虚谷。二者在景色方面颇有不同，凤凰有云雾日照，青山有峡谷奇形、海湾对望。共同点则是老生常谈：香港的另一面。山海与城市像是两个次元，对立、矛盾却也能自洽，正如人心，直到今日我仍然为此感到惊叹。</p>
+<p>站在青山眺望，对岸的深圳是这么远又那么近。</p>
+<h3>停滞的日子</h3>
+<p><img alt="拉下的绿色卷闸门上贴着一张告示：同心抗疫，暂停营业" decoding="async" height="1140" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/afbe295c898b38ab4875c5b475a4cf97.jpg" width="1520"/></p>
+<p>二月对全香港的人来说，都是困难的一个月。疫情爆发不断新高，抗疫政策不断收紧，街道上萧条的景象远甚于过年。公司实行了远程办公，加上前几个月里高强度的户外活动引致膝盖旧伤复发，于工作于生活都没有了频繁外出的理由。并没有真正的强制力，但我几乎整个月都把自己关在房里，只有在下楼买外卖的时候才放个风，时间就像是停滞了。这是时代的沙，没有人可以幸免，但我们至少可以去记录。</p>
+<p>唯一鲜亮一些的记忆是一次午间散步，那是一个极其明媚的星期五，我带着刚买不久的新手机在金钟一带试拍，第一次体会到了长焦的魅力。</p>
+<p><img alt="长焦镜头下的深蓝天空：国际金融中心二期的塔顶、一盏双头路灯和一栋大楼的立面" decoding="async" height="1140" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/cf97b0538debce2cb0afab0d428676a3.jpg" width="1520"/></p>
+<p><img alt="一座循道卫理教堂的绿顶钟楼和红色外墙，前面驶过一辆电车，电线上停着一排鸽子" decoding="async" height="2026" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/1b1c632dd311757f5b47569cffea6c7f.jpg" width="1520"/></p>
+<h3>插柳</h3>
+<p>三四月里情势好转，膝盖恢复缓慢，所以參加了一些平时已不太感兴趣的户外活动，却也有很多收获。</p>
+<p>比如回南天里太平山的雾色：</p>
+<p><img alt="浓雾中的树枝与叶片被身后的路灯照亮，光束穿过雾气" decoding="async" height="650" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/35d4c03e34cf13149d05620bc131bad8.jpg" width="1170"/></p>
+<p>又比如一次预想中简单的行山，最后（又一次）变成了爆林挑战（God bless my knees）。犹记得艰难的下坡中途到了一片相对平坦的石涧，整个人平躺望着树木镶嵌的天空。身处幽暗之中错觉天色已晚，可其实外面的阳光依旧灿烂。</p>
+<p>很享受那一刻的宁静。</p>
+<p>但对我来讲那天更大的收获其实是友谊的树苗，之后很多美好的记忆皆可追溯至此，也在其中获得了一些成长。如今一晃已是新的一年，致朋友们，尽在不言中。</p>
+<p><img alt="仰望林冠：高大的树干向上伸展，枝叶间透出天空" decoding="async" height="1024" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/cd37f64e92ee4f65ded9feeb3194e602.jpg" width="768"/></p>
+<h3>Let it happen</h3>
+<p>五月的末尾，我在没有下家的情况下，留下几盒没太发挥过作用的名片，离开了供职接近6年的公司。职业身份的变动，这大概是世俗意义上，我这一年里发生的最重要的事情。</p>
+<p>脱去了外界给你的身份标签，你又是谁呢？众人皆知标准答案是：你还是你。但正如我一次写下的：“不愿被外界所定义的人，面临同样甚或更为艰巨的任务：定义自己。”一个人的身份、一个人的意义，不是天降下来的，而是要费力去寻找、去赢得的。甚至有人觉得，一个人的一生的意义，都在于寻找自己。</p>
+<p>套上世俗的价值尺（世俗的并非就是更差的，中国的传统文人价值观是扭曲的），这件事其实发生得还太晚了一些，疫情在其中可说是功不可没，但也因此让我在2020-2021走入人生中的奇妙支线。如果寻找自己是一生的事情，那就无所谓早或晚，并且也不是有其普适、固定的模式的事情。所以，让它自然而然开始吧，让水流动起来，让我们荡起双桨。</p>
+<p>六年里，自然有许多成长，也有许多革命友谊。致曾经一同奋战的伙伴们，尽在不言中。</p>
+<p><img alt="三盒叠放的名片，印着同一家公司不同时期的三个职位" decoding="async" height="2026" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/d8995a88b31003b1f03f6428bb85dc78.jpg" width="1520"/></p>
+<h3>明明暗暗</h3>
+<p>说到这里，让我索性打破时间顺序，并跳出影像回忆的限制，继续回忆。在之后的半年里，我经历了间隔1-工作A-间隔2-工作B的起伏。</p>
+<p>工作A给了我很大的挑战，包括间隔1里其实都没太闲着，而是成为A的预备期。工作的内容、节奏、模式，都与我过去的经验有很大差别，最终没能继续下去。但我很开心能有这段经历，它就像是一个紧凑的副本，逼迫我以一个极限的状态去尝试一些事情。自己是什么，不是什么，以及可以是什么；想要的是什么，不想要的是什么。对于这些问题，我快速得到了一部分答案，自信反而增长了（我觉得真正的自信来源于自我认识）。这正是我在之前漫长的6年里有所缺乏的东西。</p>
+<p>如果用一张照片来代表这段时光，我想大概是这一张：</p>
+<p><img alt="水泥排水沟的裂缝里长出一株小树苗，一束窄窄的光正好照在它身上，旁边是一个生锈的井盖" decoding="async" height="1024" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/e623f46cbb4e2487cb838bd32da7006c.jpg" width="768"/></p>
+<p>那几个月的我把自我压缩到一条缝隙之中，单单向一个方向伸展。只要那束狭窄的光还没消失，就暂时按下放弃的念头。最后那束光，是在我到达放弃的极限之前消失的。从这个角度来讲，我胜了。从其他角度上来讲，我也并没有失去什么。也是至此悟得，与一份工作的关系，恰如与人之间的关系，很多时候其实就只是不适合，不work，但这不代表你是劣人一等的。再退一步说，一个人终究会在某些方面劣人一等，但真的有全方位劣人一等这种事情吗，这是个很强的命题，我自己没有确切的答案。</p>
+<p>至少当下来看，过程中我的收获颇丰，没白消耗那几个月。</p>
+<p>工作A的那段时间里，生活方面也不是全然无味的。岭南炎热的夏季里没办法行山，也没有余力玩更多花样（尝试过一次皮划艇，还有一次船趴，期待下一个夏季），但也有周中让人身心舒畅的游泳及某日游完偶遇的晚霞，有一周一度的开心农场，有见缝插针地录一些歌，还有今年最满意的一张黑白摄影作品（完成于间隔1）。人生的乐趣来源于消耗，也来源于建造。</p>
+<p><img alt="傍晚的街口，紫色与橙红色的晚霞铺满天空，下方是树影、红灯和路灯" decoding="async" height="2026" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/6584223467c768060caf0a11fb4506e1.jpg" width="1520"/></p>
+<p><img alt="海边山坡上的农场里，几个人正合力把钢架和竹竿搭成的结构立起来" decoding="async" height="768" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/bb8c59d05bbe91bcf2acb8763d129a9e.jpg" width="1024"/></p>
+<p><img alt="黑白照片：从下方仰拍楼梯的底面，一级级台阶排成横纹，下方是铁丝网围起的楼梯间" decoding="async" height="2026" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/8ca946b9b7d4cbe80dde4eec7566b32b.jpg" width="1520"/></p>
+<p>到了间隔2，我才真正有松口气的感觉。继续农场生涯，也终于又有机会带大部队走一次大东二东，欣赏到完美的芒草日落。</p>
+<p><img alt="山顶的芒草在夕阳下发亮，太阳落向远处层叠的山峦" decoding="async" height="2026" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/f7a549a17c1880a228a23a4ead4a4739.jpg" width="1520"/></p>
+<p>在间隔2里，我逐渐想明白了一件事，那就是不要等，去尝试。不要猜测自己适不适合、喜不喜欢，只有试过才会有答案；不要觉得自己没准备好，一个机会既然对你是开放的，你能拿到入场券，而且你有足够的动因，那就去试试看。现实世界里，信息永远是不完全的，也是不停变化的。达成任何目标都没有标准路线，没有1-2-3的关卡限制，没有最优解。锁住你的目标，去干，那么你的行动自然会带回更多的信息，这样你才可以针对性地优化、迭代你的策略，然后再干下去，直到该退出时退出（1. 目标变了 或 2. 经评估ROI不足）。</p>
+<p>其实这个道理我早已经在各种地方见过，比如一篇我很喜欢的博文<a href="https://commoncog.com/blog/action-produces-information/">Action Produces Information</a>，或者控制理论里基本的行动-反馈-行动闭环。直到这时，我才终于在人生大方向上，趋向这个道理的知行合一。</p>
+<p>落到具体层面，那就是我抛弃了继续延长间隔的想法，快速进入了工作B。这一行动除了基于上述的思考，还基于另外一个很重要的结论，那就是停产、间隔的方式没办法支持我进行很有效的产出，无论是主要的职业方向，还是次要的兴趣爱好。纵观过去十几年，一个主要的工作、目标，才可以提供我一个好的运作状态，即使是兴趣爱好上的产出，也多是在我工作繁忙的时段（当然不是接近极限的情况）完成的。比如我很多业余的文章，都是在我工作上开发任务比较多的时候完成的。我的大脑需要进入这种热的状态，只要不同事情所消耗的脑力资源重叠不大就行。此外，这个时代能给人短平快刺激、反馈快感的东西实在是越来越多了，比如游戏和短视频，一旦脑子空下来，这些东西就会以最快速度、最强粘性占据人的注意力，所以人一定要主动用自己的高级脑来和低级脑抢夺认知资源。另一个选择当然是躺平，来啊快活啊，但我认识到自己毕竟不是一个这样就可以满足的人。</p>
+<p>总之，到目前为止，我觉得自己基于这些想法的决定是正确的。其一我确实在工作B中得到了有助于将来职业规划的信息；其二我在业余也确实有了（经调整的，马上会说到）更多产出，现在这篇文字正是鲜明的例子，此外还有几次需要费脑子组织的活动聚会。</p>
+<h3>那些阴影</h3>
+<p>“体验”是一个相对中性的词，后面可以跟好的、也可以跟不好的，而“享受”一般只跟好的。但正如光与影的矛盾统一，我们自然享受阳光，但也未必不能享受阴影。何况人生不如意十之八九，总是起起落落落落落落落落，我们大多数时间都要和不好的东西打交道，有时会格外的不好，正如这该死的covid-19。</p>
+<p><img alt="一张新冠抗原快速测试卡，C 线和 T 线都显示为红色，结果呈阳性" decoding="async" height="2026" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/my-2022-in-pictures/9432359dd80828833770fc1fd173c468.jpg" width="1520"/></p>
+<p>2022年的末尾，我不负众望地阳了，并且还喜获long covid，搞得两个礼拜几乎没法工作（callback前面所说“经调整”），直到此时此刻还没好利索。接着，我刚刚结束发烧才没几天，家里有长辈因covid离开了。</p>
+<p>我能说这样的事是可以去享受（英文是enjoy）的吗？不能，真的不能。</p>
+<p>或许换一个中文里似乎没有的词，appreciate。它有两个意思：</p>
+<ol>
+<li>recognize the full worth of. 认识到xx所有的价值</li>
+<li>understand (a situation) fully; grasp the full implications of. 完整、透彻地理解xx的意涵</li>
+</ol>
+<p>虽然直接用这个词仍然让我不安，但使用1和2这两个释义或许是合适的。是的，我们无法享受疫情及其带来的后果，但我<del>们</del>（这个话题上我没能力代表任何除我以外的人）或许可以去完整、透彻地认识它们的意义。</p>
+<p>疫情，冲垮了我们精心构建、全力运作的人类世界，造成或扩大了经济损失、社会动荡和撕裂；<br/>
+疫情，让有的人身心受损、事业崩塌、痛失所爱；<br/>
+疫情，让我们永久失去了三年的时光，并且我们不确定它是否还会让我们继续失去更多；</p>
+<p>我不想接下来马上反过来，逼迫自己及读到这里的人，用积极的态度去思考。像是，疫情中我们也有所得到，比如bla bla bla。我们甚至可以去解构疫情，编出一大堆段子惹人发笑。这些都是没毛病的，我只是想说，我们是有情感的生物，从设计上便是如此。如果我们真的感到痛苦，只要能留有一根理智的弦确保痛苦不会过于伤害我们，那就让它痛苦吧，否则我们就有丧失人性的危险。</p>
+<p>在痛苦之余，至少我们可以先试着去直面它、正视它。痛苦本身就是一种直面，除此之外，我们能做的便是去回忆、去叙述它。然后，接受它的存在，继续向前走。</p>
+<p>时间不能治愈心中的伤口，只会让它带来的痛苦减轻。伤口，其实是我们活着的证明，它证明一些事发生过，在其中我们失去了重要的东西。失去是令人难过的，但我们也因此确认什么是重要的。而自内心觉得什么重要，在我看来，那便是爱，即使它外显出来的表达可以千变万化。</p>
+<p>只要还存在于世，我们便可以继续去爱。</p>]]></description></item><item><title>请不要做无谓的表达</title><link>https://simoncos.github.io/blogs/dont-express-yourself-pointlessly.html</link><guid>https://simoncos.github.io/blogs/dont-express-yourself-pointlessly.html</guid><pubDate>Sun, 27 Feb 2022 00:00:00 +0800</pubDate><description><![CDATA[<h1>请不要做无谓的表达</h1>
+<p>归功于全世界范围科技、经济的发展，这也许是有史以来表达欲最强的时代，同时也是一个任何事都能与任何人息息相关的“小”时代。不论你愿意与否，除非你是一个极端的、知行合一的陶渊明、阿米什般的人，否则迟早会被拖入某些事件的舆论场漩涡。</p>
+<p>如果你恰巧对某些事件产生了兴趣，继续深入下去，那就更不得了，就像是在汪洋中潜水般，大海是既深且阔。更糟糕的是，你能看到的东西，99%都是二手的（2已经是最好的情况了），被不知多少人交替嚼过再喂进你的嘴里，这之中有多少偏差（bias）呢？运气好的话，你有机会寻到不同的信息来源对冲一下味道。但这只解决了一个问题，还有一个几乎无解的问题，那就是二手信息必然是压缩过、简化过的信息。</p>
+<p>大家喜欢把坏事的原因归于人的蠢或者坏，但我觉得至少还得再加一个“懒”。是的，我们是懒的，懒惰无罪，因为懒惰是经济的，懒惰带来的是最佳性价比、最大ROI。因为恰饭和安全才是一个有血有肉的直立动物最优先解决的问题，所以我们大多数人愿意接受，只费一点力气就能得到一个压缩过、简化过的信息的海洋。每天茶余饭后，我们只须在里面捞一捞，再嚼一嚼与小伙伴分享，就满足了我们一部分更高级的马斯洛需求（归属、尊重和自我实现），这还有什么不乐意的呢？</p>
+<p>只有当我们发现，不对啊，好像这个事情会影响我、或我关心的人们的生存了，只有这时，我们才会拿出极大力气，去钻那一层一层的信息背后的事实细节（人物时地事）。但有时，为时已晚。</p>
+<p>特别是疫情和战争这种大事，任何人或组织，没有拥有上帝视角，几乎是不可能钻到头、拿到所有细节的，因为它太复杂了，涉及太多实体、太多话题和角度、绵长的时间（历史）。谈细节等于在谈事实真相，一手信息收集太费力，二手信息可信度又低，更麻烦的是真实世界本身的复杂性，各种细节互相关联、纠缠甚至矛盾，你没办法轻松地把它们直接摊到一起，支撑出一个有明确方向的结论。这中间有非常大的思考空间，如果全部摊开来究根问底，好家伙，一个图书馆（光是新造学术概念的词典就能堆满一个书架）。</p>
+<p>因此我们在思考这些事情、表达自己的想法时，只好试着做一些简化。</p>
+<p>第一种简化的工具是“抽象”，抽象是形而上的。或者是把一整个复杂的系统考虑为单一个体并加以命名，比如国家；又或者像本文一样，讨论的都是概念化的内容，避开具体细节不谈。像“民主”、“自由”、“权利”、“道德”、“正义”，都是高度抽象的概念，看不见摸不着。哪怕是“民众”、“社会”这样似有实指的词汇，我们也很难搞清其范围。</p>
+<p>第二种简化的工具是“类比”，类比是形而下的。比如，我们把大型组织、国家用个人来类比，把它们在事件中的价值点、行为和动机用日常生活中人与人交往中的价值点、行为和动机来类比，利用每个人都有的日常生活经验，来更轻松理解整个复杂的局面。</p>
+<p>到这里先声明我自己的观点：工具是中性的，只具有功能或者说可供性（Affordance），工具能与事物交互，造成某种变化。工具的“中性”具体有两个层面，首先交互对象的选择，即它用在什么地方，是由使用者（通常指人）来决定的；其次，工具所造成的变化，其本身是中性的，好坏、价值，是由拥有具体价值观的具体的人判断得来。价值是主观的，如果说大部分人都认为某个事物是“好的”、“正义的”，那只能说因为他们达成了价值观的共识，而非找到了某种客观真理。</p>
+<p>抽象、类比这两种工具也是一样，它们用在什么地方，结果是好是坏，完全取决于我们。</p>
+<p>作为一个有具体价值观的具体的人，我个人觉得这两种工具是双刃剑。好的一面前面已经解释了，它们带来的简化迎合了我们的懒惰，有经济意义上的好处。接着是坏的一面：</p>
+<p>抽象的缺点在于：它去掉了细节，无论是事实的，还是概念的。</p>
+<p>缺少事实细节，任何论点都变得可疑。这个问题大家都知道，所以更高级也实在非常常见的玩法是cherry pick，也就是有选择地展示部分事实细节，能支撑某个论点的那部分。对其中一些证据的不可靠性，或者对任何反方向的证据视而不见。更糟的甚至还有捏造和再创作。这种屁股决定脑袋的情况大家见得太多了，背后除了“坏”（有意识的，为了牟取某种私利），也可能是“蠢”或“懒”（没意识的跟从、取乐，或者懒于厘清问题）。</p>
+<p>缺少概念细节，真正的交流沟通将变得困难。当我们都声称我们支持“自由”时，可能你说的是“不伤害到他人安全为前提可以做任何事的自由”，而我说的是“X你狗X的老子爱干嘛干嘛”。那我们还谈个XX呢？（原谅我最近玩《赛博朋克2077》受到了某种祖安影响）。这些概念有充分的讨论价值，但君不见，对于这些概念的研究，养活了至少半个社科学界，而我们在谈论它们的时候，又已经、或是愿意花工夫理解到什么程度呢？</p>
+<p>类比的缺点在于：它本身利用的是事物之间的相似性，但相似与相同是互斥的，你能想象出相似度100%是个啥情况吗？若我们类比得当，能省去很多繁琐的解释，甚至有新发现，比如说苹果是一种酸甜味的水果，可以用来做果酱涂面包，而樱桃与苹果相似，也是酸甜味的，所以我得出“樱桃可以用来做果酱涂面包”。</p>
+<p>但当你把国家关系类比为人之间的关系，这个领域切换的步子就有点大，我们需要好好审视。如果你说的是，两国交战，第三国不应马上介入支持某方，首先需要理清事实原委，因为这可以类比“两个人打架，第三个人不应立即帮某边一起打，而是先弄清原因”。我觉得这算是ok的，只要有前提：这个第三方是中立的。</p>
+<p>如果你说的是，A国、B国、C国，A和B有仇，A和C也有仇，所以B、C之间虽然也有点不对付但要先合作起来对付A，而C有个儿子D是个“大孝子”已经和C断绝关系了，但现在想要进一步投奔A和A的一群小弟{a1, a2...}。C因为怕A利用D来搞自己，忍无可忍跑去武力教训D，A和{a1, a2...}也不直接帮忙但暗中实力给D套debuff，而B发言暂时谁也不站，尊重所有人维护自身安全的权利，但C也有其苦衷，被某些人逼得太过分。实际上，A这样做是为了同时压住C和它自己的小弟{a1, a2...}........</p>
+<p>对于这个类比，我首先想问的一句是：这是个黑社会剧本吗？</p>
+<p>其次要问的是，你怎么解释某E地区和B之间的问题呢，E不也像是B的“大孝子”吗，那B到底要不要打E一顿呢？不同人的想法是：</p>
+<ol>
+<li>对自己的孩子就是要狠狠打，别人的无所谓（这样貌似结论是，B就是个双标？）</li>
+<li>E根本就不算B的孩子，或者D根本就不算C的孩子（问题：怎样算是孩子，怎样不算是孩子？）</li>
+<li>B表面上是这样想的，但目前的情况还没到摊牌的时候，要等A再弱一点，B再强一点，再下手</li>
+</ol>
+<p>我再问，那A这样做是如何压住C和{a1, a2...}的呢？有人的解释可能是：</p>
+<ol>
+<li>对C，我和{a1, a2...}有借口经济上进一步惩罚它啦，根据道上的规矩，我冻结它在我钱庄上存的钱</li>
+<li>对{a1, a2...}，这样一打它们就被C这个狠人吓到，更要和我搞好关系了，一天天还想着自己憋劲摆脱我，还要跟D做买卖，企图抢我生意</li>
+</ol>
+<p>讨论无限延伸，都是基于国家和人这个类比的，这样讲故事娱乐吸睛效果MAX，讲的人和听的人都很爽，但当我们挑任意一条继续深想，都会发现有很多额外的东西要考虑，须不断重新解释、修正这个类比。但实际上这个类比忽略了太多根本的东西，我们迟早会在某一步修正上碰到没法圆的情况。</p>
+<p>比如，B和E可以类比为父子关系，那请问B的政权和E的政权，这个“政权”，或其背后的“执政党”，是人身上的什么器官呢？另外，明明B父E子，为什么反而是后者更早建立呢，甚至前者的执政党成员里，很多都曾经是后者前执政党的成员。又另外，孩子的妈是谁？是无性繁殖？又或是像神话一样，自己的一块肉分出去就变成孩子？再另外，你怎么解释ABCDE中每个具体的人呢？人身上的一个细胞？而这些细胞居然还对ABCDE干的事情持有相同或不同的看法，它们都有独立意识？政党和人这些重要的实体，在类比中全被简化没了，而且根本打不了补丁，而这些实体其实才是真正做出所有行为、承担所有结果的对象。</p>
+<p>如果我们想要用类比来帮助做一些初步的理解，那是好的，但如果想拿类比物作为模型，以解决实际的问题，那除了低效外，可能错到姥姥家了还不自知。</p>
+<p>此外，类比还会带来一个致命的问题，那就是它会强迫我们选一个阈值，来区分“相似的”和“不相似”的。一旦这种逻辑用在人身上，具体的人就会被拆分成不同的群体，而群体之间会自动因为那些“不相似”的部分互相排斥，即使它们有更多的相似之处（至少我们都是人类，对吗）。</p>
+<p>这再配合起抽象就更糟了，群体对个人进行了抽象，导致以偏概全和刻板印象，更易形成对立化、仇敌化。此外，群体的抽象还使得人被异物化、陌生化了，我们失去了共情的能力，不再尝试理解和沟通，忽视不同角度的解释，选择站队和双重标准，使对立逐渐极化，造成的后果是难以估量的（他们就该被消灭，他们怎么可能是跟我们一样，有血肉、有家人、有悲欢、有梦想的人类呢）。</p>
+<p>到这里，本文似乎有了一个结论，抽象也好、类比也好，在我们认识和解决疫情、战争这种非常复杂问题的过程中，它们有一定益处，但若我们太过依赖，可能会出大错。有些复杂性是无法被简化的，是必须要我们集中精神去啃下来的。它们就是那些具体的事、具体的人，那些具体的困难和痛苦，它们才是第一性的。如果无法做到对具体的关注、查验、分析，我们就会被抽象蒙蔽，被类比误导，最终得到的是一个闹哄哄的，所有人都在表达自我、党同伐异、为抽象牺牲具体的世界。漂亮话下面，依然有人在流血。</p>
+<p>须知，在我们都知道的那栋建筑上，写着“世界人民大团结”，一个多么美好的愿景，我相信没有人是真心反对它的，但因为主观（文化、价值观）和客观因素（利益、历史旧账）的差异，这是极难做到的了。而“世界人民”这个抽象，背后难道不是我、你这样具体的人吗？</p>
+<p>如果我们作为具体的人，都一味求简化，在思考问题、表达意见时，无法落到具体的人和事身上，无法以同一标准努力去理解、沟通，去求同存异，去具体化这个抽象的愿景，那我们就更不要指望世界可以朝好的方向发展，甚至可以看到，这些无谓的表达反带来了更大的撕裂和冲突。果真如此，那我们充斥整个时代的表达，是为了什么呢？</p>
+<p>如果我们对世界的前进没有期待，那表达是一种浪费，不符合“懒”的精髓，若只是为了在社交中攫取归属感与尊重，那是否能找点更无害的方式？如果我们真的有所期待，那我们不能懒，做有实际意义的事，如果有必要表达，要尽力使其有益而无害。无论是站队、宣扬、说明还是调侃，如果我们明知表达可能带来的不良后果，一定要挥霍自由表达的权利，或者故意要做反方向的努力，那我们只须记得，事情的发生，还可以归因于人的蠢，或者坏，而在这个一切息息相关的世界里，你我不见得能每次置身事外。</p>
+<p>千头万绪，落笔而出只是些不成熟的东西，见笑。</p>]]></description></item><item><title>关于战争的价值</title><link>https://simoncos.github.io/blogs/on-the-value-of-war.html</link><guid>https://simoncos.github.io/blogs/on-the-value-of-war.html</guid><pubDate>Sun, 10 Oct 2021 00:00:00 +0800</pubDate><description><![CDATA[<h1>关于战争的价值</h1>
 <p>今天读完《西线无战事》，每次看战争题材的作品都很难释怀，战场上战场下，最美丽和最丑恶的东西总是同时绽放着，但一切终会消逝。</p>
 <p>战争的历史，可能比人类的历史还要长，君不见《2001太空漫游》里的远古猩猩，刚学会拿骨头当工具使，就开始用来互相厮杀了。毕竟工具，若非用于创造什么，则必然用于破坏。“高情商”的人会说破坏是手段，最终目的还是创造，这句话百分之百是对的。因为事物的创造不是凭空的，能量物质守恒，要建立什么必须打破什么，这两件事根本就是硬币的两面，只是事物由一个模式（pattern）转换至另一个模式罢了，是正常不过的万物流转，大可不必惊奇。</p>
 <p>只是这显然是一个不以人为本的、不带感情的旁观者思路。万物只要入人心，没有一件不经过价值判断。常说的人之三观，宇宙观、人生观、价值观，一为如何理解世界，二为如何理解自我，前两者都像是退后了一步来看待外物自身，而第三者才赋予人性及动机。什么是好，什么是坏，在某一种情况（宇宙）下，我作为我（人生）如何做抉择（价值）？</p>
@@ -931,7 +1065,16 @@
 <p>前一日发现小区的树上掉了很多黑色小果子，有股清香味，这才注意到这就是网上说的女贞果，白头翁喜欢的果实之一，之前的大鸟黑屎估计也是它了。捡回来两颗放进食槽。隔了一会发现已经没了，这东西可真是杂食，前面都忘记提，每天我们全家开饭的时候他都会轮流飞到几个人肩膀上讨/抢各种各样的吃的，另外日常喜欢品尝的还包括我的袜子...真的是只馋鬼。今天又去捡了几颗，您慢用，另外，100天快乐。</p>
 <p><video aria-label="小白头翁成长记录，Day 100 - August 30，第 1 张" class="post-loop" controls="" height="244" loop="" muted="" playsinline="" poster="https://simoncos.github.io/blogs/assets/images/a-bulbuls-first-100-days/b54caf37e69c485257df7bf8ff8f252a.jpg" preload="metadata" src="https://simoncos.github.io/blogs/assets/images/a-bulbuls-first-100-days/b54caf37e69c485257df7bf8ff8f252a.mp4" width="450">小白头翁成长记录，Day 100 - August 30，第 1 张</video></p>
 <hr/>
-<p>后记：<a href="https://simoncos.github.io/blogs/thanks-for-sheltering-from-the-rain.html">谢谢你曾来避雨</a>。</p>]]></description></item><item><title>十年如雨</title><link>https://simoncos.github.io/blogs/ten-years-like-rain.html</link><guid>https://simoncos.github.io/blogs/ten-years-like-rain.html</guid><pubDate>Sat, 12 May 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>十年如雨</h1>
+<p>后记：<a href="https://simoncos.github.io/blogs/thanks-for-sheltering-from-the-rain.html">谢谢你曾来避雨</a>。</p>]]></description></item><item><title>空出这一小时</title><link>https://simoncos.github.io/blogs/setting-aside-this-hour.html</link><guid>https://simoncos.github.io/blogs/setting-aside-this-hour.html</guid><pubDate>Sun, 23 Aug 2020 00:00:00 +0800</pubDate><description><![CDATA[<h1>空出这一小时</h1>
+<p>最近在《死亡搁浅》中送了二十来小时快递，不时惊叹于游戏中各种神奇的世界观设定，其中有一个核心设定叫做时间雨（Timefall），在这种雨中几乎所有东西，有生命的动物和无生命的金属，都会被快速腐蚀，雨和美丽的彩虹还是一些更危险的东西来临前的信号。</p>
+<p>雨真是时间的一个非常好的比喻，给了抽象的时间一种流动、冰凉的质感。雨带来了生生流转，也让辉煌稍纵即逝，like tears in rain.《银翼杀手》里这句经典台词又在我心中把雨和泪从此绑定在了一起，加上一些不想忘记的东西。而正是记忆才让时间有了关乎我们自身的意义。</p>
+<p>《大脑的故事》里介绍了这么一个有趣的事情：</p>
+<blockquote>
+<p>在受到威胁的情况下，大脑里一个名叫“杏仁核”的区域的运转切入了高速挡，征调了大脑其余部位的资源，全部用于应对眼前的局面。杏仁核发挥作用时，保留下来的记忆远比正常情况下更详细丰富，它激活了一套次级记忆系统。毕竟，这就是记忆的目的：追踪重要事件，如果再碰到类似情况，大脑会有更多信息可用来求生。换句话说，如果事情可怕得威胁到了性命，那就该好好地做笔记。</p>
+</blockquote>
+<p>我读到时留下了一句想法：“提高采样率的感觉，因为同一时间段采样帧数增多，事后再回顾就感觉时间变长了”。大脑其实是节能环保的模范，对于它判断没什么价值的东西，它是不会消耗自己的资源去处理的。所以童年和青春时期的记忆显得那么丰富和栩栩如生，因为里面有太多新奇、困惑、热情和不满足，我们恨不得一帧一帧全部记录下来。到后来人生走向了稳定、不变，“第一次”越来越少，求之不得的东西越来越少（不得太久的成了习得性无助），时间就开始变得越来越快，或者说我们的采样越来越粗。每个夜晚躺在床上的时候，我们都越来越能预测出第二天甚至一周、一个月内将要发生的事，在那里会有多少东西能危及（或者说颠覆）到我们的生命吗？或许风险正是问题的核心，价值常在人迹罕至处。</p>
+<p>全球性爆发的新冠疫情放慢了几乎所有人的一段时间，使许多人的“明天”重新变得不可预测，金融精英们管这个叫市场情绪，而他们的工作是比一般人做出更好的、不情绪化的预测并从中套利。而疫情终究会过去，市场终究会企稳，韭菜终究春风吹又生。最终这段时间带来的所谓群体记忆还是带有虚幻的性质，在每个人的心中其实都是不同的模样，这也许是任何大事件里的必然，只是这回更无奈的是，人们甚至无法面对面坐下来跟你聊上几句，就已淡出了你的人生。</p>
+<p>空出这一小时写出来的玩意，好像除了一个点用作了开头，后面都不在一开始想写的范围了，但在接近两年后能再次开始动“笔”，为未来留下这一帧，已是又一个好的开始。希望下周可以再见。</p>]]></description></item><item><title>十年如雨</title><link>https://simoncos.github.io/blogs/ten-years-like-rain.html</link><guid>https://simoncos.github.io/blogs/ten-years-like-rain.html</guid><pubDate>Sat, 12 May 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>十年如雨</h1>
 <p>不久前好友相邀去深圳听了场《一席》。有一位演讲人王抒，演讲的题目叫《将登太行》，讲述他数十次往返古道“太行八陉”间的所见所思。最开始他想到的，全是这山路间的壮阔山水以及其上发生的大历史：政权变更、君王巡幸。渐渐地他开始注意古道上那些普通人的故事，逃难的流民、被屠戮坑杀的民众、被流放数十年得以重返的文人。然后他意识到，历史往往热衷于宏大话语，不会关注芸芸众生的记忆，而我们则常常容易被宏大叙事所裹挟，无视历史背后那些真实存在的人，忘记他们的汗水与血泪。</p>
 <p>这个演讲留给了我深刻的印象。用以填写历史书册的空间是稀缺而昂贵的，所以历史偏爱那些可以化为浓墨重彩的材料，以为观者传达更普适而有力的观点、价值和立场。普通人的故事最多只能作为注脚。只有普适而有力的故事，才可以持久地生存下去，最终变成符号化、概念化的存在。</p>
 <p>汶川大地震，到今天整十个年头了。这五个字在历史中凝结成了怎样的存在呢？</p>
@@ -971,7 +1114,38 @@
 <p><img alt="夜色中被灯光照亮的雨滴" decoding="async" height="377" src="https://simoncos.github.io/blogs/assets/images/ten-years-like-rain/fc6fc9e0995578be7065b65cb0e6a6dc.jpg" width="600"/></p>
 <p><a href="https://www.jianshu.com/p/aedf75a08e06">附《旧忆：四年了》</a></p>
 <p>摄于2020.05.10：</p>
-<p><img alt="山坡下的地震遗址，断裂的台阶前摆着白花，中央立着国旗" decoding="async" height="1140" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/ten-years-like-rain/d758854f23e33f849fa06c986ca39f0b.jpg" width="1520"/></p>]]></description></item><item><title>方寸间的宇宙——关于《四叠半神话大系》</title><link>https://simoncos.github.io/blogs/the-tatami-galaxy.html</link><guid>https://simoncos.github.io/blogs/the-tatami-galaxy.html</guid><pubDate>Tue, 16 Jan 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>方寸间的宇宙——关于《四叠半神话大系》</h1>
+<p><img alt="山坡下的地震遗址，断裂的台阶前摆着白花，中央立着国旗" decoding="async" height="1140" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/ten-years-like-rain/d758854f23e33f849fa06c986ca39f0b.jpg" width="1520"/></p>]]></description></item><item><title>辛普森悖论与直觉的缺陷</title><link>https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.html</link><guid>https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.html</guid><pubDate>Tue, 27 Mar 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>辛普森悖论与直觉的缺陷</h1>
+<p><img alt="《辛普森一家》里的荷马·辛普森皱着脸，对话框里写着 D'oh!" decoding="async" height="380" src="https://simoncos.github.io/blogs/assets/images/simpsons-paradox-and-the-flaws-of-intuition/41dff4010e43979b84a833fb80be4a58.jpg" width="532"/></p>
+<p>关键词：辛普森悖论 | 直觉 | 统计 | 可加性</p>
+<p>辛普森悖论真是个很经典的东西，引用<a href="https://zh.wikipedia.org/zh-hk/辛普森悖论">维基百科</a>：</p>
+<blockquote>
+<p>在分组比较中都占优势的一方，在总评中有时反而是失势的一方。</p>
+</blockquote>
+<p>简书上有一篇文章提到一个结石治疗方案对比的例子，可视化得挺好，值得一看：<a href="https://www.jianshu.com/p/5582464ef4d9">辛普森悖论</a>。举个极端一点的例子，更容易说清楚这个悖论到底是什么情况：</p>
+<p>假设一个学校正在招生，其A学院对女生的录取率100% <strong>&gt;</strong> 男生录取率90%；B学院女生录取率10% <strong>&gt;</strong> 男生录取率0%。<br/>
+现有男女生各100人。<br/>
+女生报名A学院10人，报名B学院90人，所以A录取10个女生，B录取9个女生，共录取19个女生；<br/>
+男生报名A学院90人，报名B学院10人，所以A录取81个男生，B录取0个男生，共录取81个男生。<br/>
+整体来看，女生录取率19/100=19% <strong>&lt;</strong> 男生录取率81/100=81%。</p>
+<p>问题来了：无论A还是B学院，对女生的录取率都比男生高，<strong>直觉上整体的女生录取率也应该更高，但实际相反。</strong></p>
+<p>这是怎么回事？</p>
+<p>先尝试给出一个说得通的解释：站在学生的角度看，报名不同学院像是赌球。报名A学院类似于赌输赢，风险小；报名B学院类似猜比分，风险大。虽然因为女生整体水平比男生厉害（更懂球）或者学校偏好女生（妹子猜谁赢我们尽可能就让谁赢），女生赌赢的机会更大（两个学院录取率都更高），但是女生大部分选择猜比分，男生大部分选择猜输赢，而猜比分和猜输赢的难度相差很大，大过男女差异，因此<strong>有优势更冒险的女生都死得差不多，较弱但更保守的男生活下来更多</strong>。</p>
+<p>进一步思考，<strong>这种现象为什么违背直觉呢？</strong></p>
+<p>因为我们的直觉里有这样一个逻辑：如果一个东西的各部分都分别大于另一个东西的各部分，那么这个东西大于另一个东西。可以形式化如下：</p>
+<pre><code>假设：
+A=A1+A2+...+An
+B=B1+B2+...+Bn，那么：
+如果对i=1,2...,n都有Ai&gt;Bi，则A&gt;B
+</code></pre>
+<p>这个逻辑在例子里显然hold不住了。<strong>根本原因在于假设里的“+”和“=”，其中隐含了可加性的前提。</strong>A1、A2、A3到底是什么，可不可加呢，加起来是不是等于A呢？如果A、B、Ai、Bi都是实数，那么可加性来自于定义，上面的逻辑自然没问题。然而对于学院录取的例子，我们有没有定义，或者能不能推导出录取率的可加性呢？不能。</p>
+<p><strong>在形式化之前，我们似乎很难看到可加性这个隐含前提。</strong></p>
+<p>要和数字玩游戏，最忌讳的便是想当然，直觉在某种程度上等同于碰运气，效果取决于问题的性质与直觉假设的吻合程度。不要讲数字会说谎，说谎是一种带有目的的主动行为，数字只会被算错，但不会说谎。</p>
+<p>维基上还从几何角度解释了这个现象，将录取率表示为斜率，绿线和红线的斜率分别是整体的女生录取率和男生录取率，可以看到<strong>向量而非斜率的可加性</strong>：</p>
+<blockquote>
+<p>女生单独两个向量斜率都比男生大，说明它们的比率都比较高。但最后男生总体向量斜率却大于女生</p>
+</blockquote>
+<p><img alt="维基百科的几何解释：以向量表示男女生在各学院的报名与录取人数，斜率即录取率；红线是男生总体，绿线是女生总体" decoding="async" height="270" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/simpsons-paradox-and-the-flaws-of-intuition/659c8fbfabc9d2893acd816d814aaaeb.jpg" width="440"/></p>
+<p>201906：辛普森悖论现象的背后有两组要素，以前例而言：一组要素是学校对男女学生的录取率，另一组则是男女学生报考的选择。  <strong>从认知的角度上理解</strong>，直觉让我们倾向于认为只有前一组要素对系统结果有质（最终录取率谁大谁小）的影响，而忽略了后一组要素。特别前一组要素与要考察的结果都是“对男女学生的录取率”，语义上似乎很接近，所以被我们“自然地”认为是决定性因素。</p>]]></description></item><item><title>方寸间的宇宙——关于《四叠半神话大系》</title><link>https://simoncos.github.io/blogs/the-tatami-galaxy.html</link><guid>https://simoncos.github.io/blogs/the-tatami-galaxy.html</guid><pubDate>Tue, 16 Jan 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>方寸间的宇宙——关于《四叠半神话大系》</h1>
 <p><img alt="《四叠半神话大系》的插画海报：主角们和蛾子、熊玩偶、算命婆婆挤在一座木屋上，脚下是浮世绘式的海浪" decoding="async" height="905" src="https://simoncos.github.io/blogs/assets/images/the-tatami-galaxy/3e770ecde2287b0d0ac85abcf31826e6.jpg" width="640"/></p>
 <p>刚开始这部番的名字对我来说是不知所云的，以为大概是一个有各种神仙的学校之类的泡面番，看到豆瓣评分很高才收藏，过了不知道几年才捡起来看。</p>
 <p>四叠半的故事其实很简单，一个废柴大学生在无数平行时空中的无数个失败人生，最后其中某一个获得了穿越所有时空的能力，并最终突破自己，获得成长，成为人生赢家。这样讲起来感觉此番已经老掉牙了，已经没必要找美女医生进行口腔护理（逃），结果它出乎意料地成为很久以来我看过最有趣的一部。</p>
@@ -1167,7 +1341,398 @@
 <p>那么问题情境与设计存在什么关联呢？请注意我这里所指的设计，是去掉了一般性理解中有关艺术、美学的那部分概念，而朝可用性（Usability）逼近的“设计”（如果用目前互联网产品设计的分类方法来讲，更偏向交互而非视觉）。对于这一部分设计来说，其目的就是问题的解决。拿软件交互设计而言，其实死磕的就是如何通过各种可交互元素传达出合适的信息，从而为每一功能形成一条最佳路径。当然这个最佳可能是极致的可用，更可能是一些更为复杂的价值函数，比如同时还要考虑软件商的盈利，这使得现实中的交互设计工作非常具有挑战性。</p>
 <hr/>
 <p>没想到第一个概念就随随便便扯出了这么多，看起来要写个小连载，发散到极致再整合了（内心其实是这样：既然反正要整合，就懒得精加工了嗯），本来还想往machine learning上扯点但暂时有点扯不动了，之后再说吧。话说好久没这样飙过文了（居然只用了一小时多点），一直以来有很多点滴的想法但觉得太浅，又懒得花很多时间死磕某一个，这下倒是发现了一个好的（至少有产出的）产出方式。那么，请期待下一篇《定势和功能固着》（希望不要再产出这么多括号）。</p>
-<p><img alt="同一分类问题的不同表示（问题情境），图出自《Deep Learning》" decoding="async" height="266" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/problem-solving-and-design-1-situation/ec9b85e46277f33f5c414c0bee77d852.jpg" width="443"/></p>]]></description></item><item><title>问题解析的极限</title><link>https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html</link><guid>https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html</guid><pubDate>Thu, 22 May 2014 00:00:00 +0800</pubDate><description><![CDATA[<h1>问题解析的极限</h1>
+<p><img alt="同一分类问题的不同表示（问题情境），图出自《Deep Learning》" decoding="async" height="266" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/problem-solving-and-design-1-situation/ec9b85e46277f33f5c414c0bee77d852.jpg" width="443"/></p>]]></description></item><item><title>知乎社交网络分析（下）：关注网络</title><link>https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html</link><guid>https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html</guid><pubDate>Fri, 18 Mar 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>知乎社交网络分析（下）：关注网络</h1>
+<p>关键词：社交网络分析（SNA） | 复杂网络 | 图论 | 网络中心度 | 热门话题发现</p>
+<p>本文是《知乎社交网络分析》的下篇，主要内容是对于知乎用户关注网络进行的分析。项目介绍（以及数据、代码和报告）及基本的统计分析内容请见<a href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.html">知乎社交网络分析（上）：基本统计</a>。</p>
+<h3>导言：社交网络是什么？</h3>
+<p>在上篇所述的基本的统计分析之后，我们已经对知乎用户的赞答谢关四个方面的总体情况有了一些了解。现在，让我们先来考虑这样一个问题：我们平常所说的社交网络或者说社会网络，到底是什么意思？也许你会讲，这还不简单，只要一个事情有多人参与，自然就会具有社交的性质，从而产生社交网络。那么让我们思考思考，维基百科算不算具有社交性质？</p>
+<p>维基百科确实有很多人参与编辑词条啊，但是这些人之间有没有更直接的互动呢？假设编辑者们通过QQ、微博之类进行互动，那产生出的社交性质算不算是维基百科本身所具有的社交属性呢？即使维基百科提供评论区之类的功能，可以使编辑者之间直接互动，这些互动仍然是基于某个词条的，只要这个词条没什么大问题了，互动基本上也就随着编辑的停止而停止了。我认为这种临时建立起来的关系，并无法得到一个较为稳定的社交网络。</p>
+<p>让我们再来思考一个例子。我们知道，一门科学源自跨越时代的许多人的共同贡献，那么这许多人，能够构成社交网络吗？当然不能。所谓牛顿和爱因斯坦的对话只是一种修辞，一篇已经发出的论文，如何能引用一篇未来的论文？但是当我们考虑到同一时代的同一学科，情况就有所不同，学者之间确实存在着各种交流合作的可能，因此我们可以认为学术领域的共同作者关系（Co-authorship）形成的网络其实是带有社交性质的。</p>
+<p>从以上粗略的思考中我们或许可以总结<strong>形成社交网络的几个条件：多主体的直接互动、互动的长期性、互动的近同时性</strong>。</p>
+<p>现在让我们重新回到知乎上面来。赞同、感谢、回答、关注，哪一种用户行为最满足以上三个条件？回答是基于问题的，知乎的产品设计并不突出是谁提出了某个问题，并且一个问题可以被不同的人进行编辑（类似维基百科的权限设计），也就是说回答者一般不大在意是谁提出了问题，所以回答连互动都称不上；赞同、感谢以及我们之前没有提到的评论，相对来说互动得稍微直接一点，但是鼠标一点了事，不具有长期性；只有关注关系，同时满足了三个条件。这里可能会有一个疑问，关注也只是鼠标那么一点，这能算长期的吗？不要忘记知乎的时间线（Timeline）机制，这使得关注者有更大的概率看到被关注者的活动并与之进行互动，并且只要关注不取消，这种对时间线的影响就是长期的。</p>
+<p>到此，我们可以认为，如果想要对知乎从社交网络的角度上进行分析，可以重点考虑知乎用户之间的关注关系。接下来开始介绍我们对此进行的具体分析。</p>
+<h3>分析对象和分析方法</h3>
+<p>首先来了解一些网络的基本知识：</p>
+<p><strong>一个网络可以被表示为一种图（graph），其中包含点（vertex / node）与边（edge / link）两种基本要素。</strong>边可以具有方向性，也就是说对于一个点来说，可以有外连边（out-link）和内连边（in-link）两种边。如果边是具有方向性的，那么这种图称为有向图（directed graph），反之称为无向图（undirected graph）。图反映了点与点之间的某种相关关系，这种关系由边表现。</p>
+<p>回到知乎上，我们知道关注和被关注实际上是一件事情的两个角度。A关注了B，等价于B被A关注。在我们所爬取的数据中（见下面的数据全貌图），我们知道这2.6万用户中的每个人都关注了哪些人。也就是说，我们知道了2.6万用户点的所有外连边。从另一个角度想，我们其实也知道在这2.6万用户之间谁关注了谁（蓝圈以内的部分），<strong>加上</strong>他们关注了其他什么人（蓝圈以外的部分）。因此我们只能分析这2.6万用户（红色实心圆），因为我们并不知道其他的人（红色空心圆）的所有连接，这是由我们的广度优先爬取机制所导致的，不爬完知乎整站，不会有真正完整的数据（那些没人关注的账号应该可以忽略）。</p>
+<p><img alt="数据全貌示意图：蓝圈内是爬取到的 2.6 万名用户（实心圆），蓝圈外是他们关注的其他用户（空心圆）" decoding="async" height="1593" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-2-follow-network/4a34f5c65f7bddca379b8f8719e1f25f.jpg" width="1520"/></p>
+<p>此外，即使剔除了蓝圈以外的部分，涉及的连边数仍然具有很大的量级，计算量会是一个问题，所以在这个项目中，我们仅仅选取了这2.6万用户的两个有趣的子集进行分析：获得赞同数大于1万的用户（共1895人）、获得赞同数大于5万的用户（共375人）。方便起见，我们将他们分别命名为<strong>Net10k</strong>和<strong>Net50k</strong>，其实可以说就是<strong>两个不同级别的知乎大V群体</strong>了。</p>
+<p>接下来讲讲分析方法。一个网络图，别看里面只有点和边两种东西，其实可以包含复杂到极点的各种现象与性质。网络分析，或者进一步说复杂网络领域之中，存在大量人们为了描述网络的现象而定义的概念、以及为了量化网络的特征而设计的指标。后文将要涉及的分析建立在其中最基本的一些概念和指标上，如果对它们逐个详细介绍，那么本文篇幅会大大加长，而且会多出不少数学公式，这不符合我对本文的写作预期。因此我打算尽量从直觉（intuition）上来解释它们分别表达了什么的含义，即使给出定义也不求严格（数学公式才可带来最清晰严格的定义），重点仍在对分析的思考。此外，由于我们所讨论的知乎关注网络是有向图，<strong>后面所有的指标和算法都只讨论有向图的</strong>。当然，如果读者已有一定的基础，可以直接跳过相关的段落。</p>
+<h3>抱团的大V们：网络总体特征</h3>
+<p>一直以来知乎就给人一种印象，那就是大V们喜欢抱团。你关注我、我关注他、他又关注你，形成了紧密的圈子。那么我们怎样来量化这种特征？</p>
+<p>假设有A、B、C三个用户组成的关注网络，其中唯一的边是A-&gt;B，那么你觉得这个网络是否紧密？我们可以这样想，三个人之间最多可以有6条边，那么我们可以用1除以6来表示这个网络的紧密程度。如果6条边都存在，那么紧密程度是1，都不存在则为0。这就是所谓图的<strong>密度（density）</strong>。Net10k和Net50k的密度分别是0.064和0.195，到这我们可以猜测，获得赞同更多的大V之间，关注关系也更为紧密。</p>
+<p>接下来我们从另一个角度考虑这个猜测，先补充几个定义：</p>
+<ul>
+<li>
+<p>点的<strong>度（degree）</strong>：与一个点通过边相连的其他点的数量和，被称为这个点的度。有向图中一个点存在出度和入度两个度，一个只看它能到达哪个点，一个只看哪些点能到达它。对于知乎的关注关系而言，我们很容易就能看到出度就是你关注的人数，入度就是关注你的人数；</p>
+</li>
+<li>
+<p>点与点之间的<strong>路径（path）</strong>：假如从点A出发，经过一条或更多条边，到达了点B，那么我们称这些边按顺序相连形成了一条A与B之间的路径。两点间的路径数量一定是大于等于0的。假设每条边的长度相等，那么包含边数最少的路径，便是所谓最短路径（shortest path），最短路径的长度一般被认为是两点之间的距离（distance）；</p>
+</li>
+<li>
+<p>图的<strong>平均最短路径长度（average shortest path length）</strong>：对于一个网络而言，将所有点两两之间的最短路径长度进行算术平均，得到的就是所谓平均最短路径，可以用来衡量网络中点之间的平均距离。传说中的六度分隔（Six Degrees of Separation），其实指的就是一个网络的平均最短路径长度为6（这里大家可以想想边、度和路径三者间的联系）；</p>
+</li>
+<li>
+<p>点的<strong>偏心率（eccentricity）</strong>：对于图中的任意一点P，算出它与其他各个点的最短路径长度（距离），其中最大的距离称作点P的偏心率。</p>
+</li>
+<li>
+<p>图的<strong>半径（radius）</strong>与<strong>直径（diameter）</strong>：图的半径、直径分别是图中最小的、最大的点偏心率。注意图的直径不必然是半径的两倍。</p>
+</li>
+<li>
+<p>图的<strong>强连通子图（strongly connected subgraph）</strong>：设想一个网络图G的一个子图G'（意味着G'中的点和边都只能从G中挑），其中每一个点都能通过某条路径到达另一个点，则我们说G'具备强连通性，而且是G的一个强连通子图。这里注意，单独一个点我们也认为是强连通子图，虽然单个点并没有值得研究的；</p>
+</li>
+<li>
+<p>图的<strong>强连通分量（strongly connected component）</strong>：G的一个极大的强连通子图G''（意味着再往G''加任何G中剩下的点，都会破坏其强连通性）被称为G的一个强连通分量。这里需要注意，极大并不代表很大；</p>
+</li>
+</ul>
+<p>字好多看烦了吧，终于可以上图啦，下面分别是Net10k和Net50k的强连通分量示意图：</p>
+<p><img alt="Net10k 的强连通分量：43 号节点代表那个巨大的分量，其余 42 个单点分量各有一条线与它相连" decoding="async" height="595" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-2-follow-network/0d7248a6b262eb8b610fab4e582a8446.jpg" width="800"/></p>
+<p><img alt="Net50k 的强连通分量：7 号节点代表那个巨大的分量，其余 7 个单点分量各有一条线与它相连" decoding="async" height="595" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-2-follow-network/74d99398168a270d1cc4210202622082.jpg" width="800"/></p>
+<p>其中每一个红色圆圈都代表一个强连通分量，每条线（其实是很抽象的箭头orz）代表一条路径。光看这个我们还不清楚情况，我们来看二者对应的一些指标数据：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Net10k</th>
+<th>Net50k</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>点数量</td>
+<td>1895</td>
+<td>375</td>
+</tr>
+<tr>
+<td>边数量</td>
+<td>231416</td>
+<td>27324</td>
+</tr>
+<tr>
+<td>强连通分量数量</td>
+<td>43</td>
+<td>8</td>
+</tr>
+<tr>
+<td>强连通分量点分布</td>
+<td>1853,1,...,1（42个1）</td>
+<td>368,1,...,1（7个1）</td>
+</tr>
+</tbody>
+</table>
+<p>总结一下我们知道了什么：</p>
+<ol>
+<li>基本上Net10k和Net50k这两个图就是强连通的，别说抱团了，这已经根本就是<strong>挤成一坨</strong>（好吧，一个圈子）。</li>
+<li>除了一个巨大的圈子，群体里就剩几个特立独行的高冷大V（都是只包含一个点的强连通分量），他们受到了其他大V的关注，但却没有任何回粉。在网络中，这种点也被称为<strong>悬挂点（dangling nodes）</strong>；</li>
+</ol>
+<p>现在我们重点分析两个最大的强连通分量，连通倒是连通，但是如果A要经过100个人才能到B，那估计光凭关注关系，他们是没有缘分了。将Net10k和Net50k的最大强连通分量分别命名为<strong>Net10k-C</strong>和<strong>Net50k-C</strong>，以下是两者对应的指标数据：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Net10k-C</th>
+<th>Net50k-C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>点数量</td>
+<td>1853</td>
+<td>368</td>
+</tr>
+<tr>
+<td>平均最短路径长度</td>
+<td>2.11</td>
+<td>1.85</td>
+</tr>
+<tr>
+<td>半径</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>直径</td>
+<td>5</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p>如果你就是Net50k-C中的一个大V，还不认识其中的另一个大V？没关系，你关注的关注的关注...总会有他，所以你们总有机会看到彼此。强连通保证了总会有一条路径，平均最短路径向你保证平均来讲这条路径很短，只有2左右。直径和半径则告诉你<strong>在最坏情况下</strong>（你们碰巧是整个圈子里相距最远的两位），这条面基道路的长度在2到5（4）之间。What a small world，喜鹊们（雾）如是说。</p>
+<p>再来对比Net10k-C和Net50k-C的平均最短路径长度和直径，后者都比前者要小，从另一个角度说明后者的关注圈子更紧密。而且注意一点，这些大V是来自各个不同的专业领域，但都紧抱在一起，这是很有趣的现象，有进一步分析的价值。</p>
+<h3>给大V排个位：网络连接分析</h3>
+<p>上节侧重于对知乎大V关注网络的整体进行分析，这固然很有趣；但或许更有趣的是这个整体之中的每个个体，同样是赞同数很高的大V，他们彼此之间是否能一较高下呢？他们在关注这种社交行为上是否具有差异，如何衡量这种差异？这是本节涉及的问题。</p>
+<p>让我们先来设想一个简单的关注网络，其中只有A、B、C三个人。A关注了B，B关注了A，A、B同时关注了C，而C谁也不关注，如下图所示：</p>
+<p><img alt="A、B、C 三人的关注关系：A 与 B 互相关注，A 和 B 都关注了 C" decoding="async" height="781" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-2-follow-network/02637d508cb2b7251f02052ea7e6cb3c.jpg" width="869"/></p>
+<p>那么你觉得光凭关注关系来看，A，B，C谁更“牛”？从直觉上来说当然是C，因为C在三人之中得到了最多的关注。但是否只要粉丝更多就能说明更“牛”呢？下面我们在这个网络的基础上，来考虑几种很有趣的情况：</p>
+<ol>
+<li>多了10个自己粉丝数为0的用户，同时关注A</li>
+<li>多了10个用户，他们彼此全部互相关注，除此之外都没有其他粉丝</li>
+<li>多了10个自己粉丝数为1的用户，同时关注A，并且每个人还分别关注了10000个其他用户</li>
+</ol>
+<p>那我们能说1里的A，或者2里的10个用户比C更牛吗？前两种情况明显不合道理，可以说是较为典型的作弊行为。作弊利用了<strong>单纯粉丝数排序的漏洞：没有考虑到每个关注连接的质量差异</strong>。第三种情况算是一种正常现象，但是你会觉得，这些用户一个是只有1个粉丝，几乎等于0，另一个是他们关注了那么多用户，那么他们关注A，真是因为A很重要吗？</p>
+<p>既然发现了漏洞，那么假如不考虑赞同数等其他因素，我们是否有可能通过关注网络本身来予以解决呢？从直觉上来说，我们可以想到的是，用粉丝自己的粉丝的质量来衡量这个粉丝的质量，但粉丝的粉丝的质量又需要粉丝的粉丝的粉丝的质量来衡量...那么到底最后是个什么情况？到这里我们看到了<strong>日常语言结构所能承载的思维深度之浅薄</strong>，当一个问题到达这个复杂度，语言已然苍白无力，不得不将它托付给数学。</p>
+<p><strong>PageRank算法</strong>（其与Google的关系我就不赘述了）就是一个数学上非常优美的答案，不仅考虑到前述的连接质量问题，还解决了所有特殊情况——无论关注网络是什么样子的，都保证能得到一个满意的用户重要程度排序。</p>
+<p>下面是我们对Net10k和Net50k分别计算PageRank值，注意这里只考虑大V们内部的连接，此外圈子里所有大V的PageRank值相加等于1。最后得到排名前五的知乎大V用户如下：</p>
+<table>
+<thead>
+<tr>
+<th>Net10k top 5</th>
+<th>Pagerank值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>黄继新</td>
+<td>0.00736</td>
+</tr>
+<tr>
+<td>马伯庸</td>
+<td>0.00560</td>
+</tr>
+<tr>
+<td>张佳玮</td>
+<td>0.00551</td>
+</tr>
+<tr>
+<td>葛巾</td>
+<td>0.00510</td>
+</tr>
+<tr>
+<td>周源</td>
+<td>0.00503</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Net50k top 5</th>
+<th>Pagerank值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>黄继新</td>
+<td>0.0112</td>
+</tr>
+<tr>
+<td>马伯庸</td>
+<td>0.0103</td>
+</tr>
+<tr>
+<td>张佳玮</td>
+<td>0.0102</td>
+</tr>
+<tr>
+<td>梁边妖</td>
+<td>0.0095</td>
+</tr>
+<tr>
+<td>cOMMANDO</td>
+<td>0.0090</td>
+</tr>
+</tbody>
+</table>
+<p>这些便是站在知乎大V巅峰的大V们了，是否觉得有一定道理呢？注意比较Net10k和Net50k前五用户的PageRank值，前者比后者小，这主要是因为总和为1的PageRank资源被更多的大V们分掉了。</p>
+<p>下面让我们再考虑一点，所谓的“重要”，其实要看我们的目的是什么。假如我们是要看更多的好答案或者想要找人出书约稿，那么直接找到好答案的答主就好，而这些答主往往吸引了最多的关注，所以我们仅仅需要知道谁受到的关注最强（比如下图中的C）。</p>
+<p>但是光是通过关注，我们会漏掉那些暂时没有得到太强关注的<strong>好答主</strong>（可能是刚刚加入知乎的大V潜力股），然而我们又不可能自己去一个一个挖掘这些好答主，如何是好？简单，假如你能找到几个类似<strong>牵线人</strong>的用户（比如下图中的D）你相信只要是他们关注的用户，质量都不会差，都合你口味，事情就简单了。你只需要不时看看他们都关注了谁，就能发现更大的世界。这其实也算是一种用户推荐系统的可行思路，这里就不展开了。</p>
+<p><img alt="在上图的基础上多了 D，D 只关注了 C" decoding="async" height="785" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-2-follow-network/a12fc0d19fef8e0781d23433a3c23e6a.jpg" width="825"/></p>
+<p><strong>HITS算法</strong>便能做到只使用关注网络，通过<strong>权威度（Authority）</strong>和<strong>枢纽度（Hub）</strong>为我们分别挑出好的答主，和好的牵线人。</p>
+<p>上面的基于直觉的分析是否说得通呢？让我们看看Net10k和Net50k的权威度和枢纽度前五名：</p>
+<table>
+<thead>
+<tr>
+<th>Net10k Auth top 5</th>
+<th>Auth值</th>
+<th>Net10k Hub top 5</th>
+<th>Hub值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>张佳玮</td>
+<td>0.0345</td>
+<td>周诺</td>
+<td>0.00344</td>
+</tr>
+<tr>
+<td>梁边妖</td>
+<td>0.0339</td>
+<td>杨大懒人</td>
+<td>0.00338</td>
+</tr>
+<tr>
+<td>葛巾</td>
+<td>0.0324</td>
+<td>君陌Faust</td>
+<td>0.00336</td>
+</tr>
+<tr>
+<td>马伯庸</td>
+<td>0.0319</td>
+<td>ZENHO</td>
+<td>0.00325</td>
+</tr>
+<tr>
+<td>黄继新</td>
+<td>0.0315</td>
+<td>干脆面</td>
+<td>0.00290</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Net50k Auth top 5</th>
+<th>Auth值</th>
+<th>Net50k Hub top 5</th>
+<th>Hub值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>梁边妖</td>
+<td>0.00749</td>
+<td>杨大懒人</td>
+<td>0.00976</td>
+</tr>
+<tr>
+<td>张佳玮</td>
+<td>0.00721</td>
+<td>君陌Faust</td>
+<td>0.00972</td>
+</tr>
+<tr>
+<td>马伯庸</td>
+<td>0.00683</td>
+<td>ZENHO</td>
+<td>0.00953</td>
+</tr>
+<tr>
+<td>采铜</td>
+<td>0.00677</td>
+<td>Edison Chen</td>
+<td>0.00885</td>
+</tr>
+<tr>
+<td>谢熊猫君</td>
+<td>0.00670</td>
+<td>徐湘楠</td>
+<td>0.00798</td>
+</tr>
+</tbody>
+</table>
+<p>Auth（好答主）方面，我相信大家应该能认同这样的结果名单。值得一提的是在两个大V群体之中，张佳玮（顺便提一下，张佳玮张公子就是上篇中那个在各条曲线中高高在上的闪亮极点）和梁边妖调换了位置，很有趣。另外在Net50k中，采铜老师一跃进入前五，马亲王（祥瑞御免）上升一名，黄继新则掉了出去。这些现象或许反映了<strong>不同大V群体的一种喜好倾向的差异</strong>。</p>
+<p>Hub（牵线人）方面，说实话我个人只认识徐湘楠一个人，其中还有一位目前处于账号停用状态，这里便不做过多分析。只有一点比较有趣，作为大V，粉丝数很大很正常，然而这些用户关注的人数也算是很多的，好几个甚至达到了几千，不可不谓之具有某种交际花属性。另外提一下，Net10k Hub的第五名，叫干脆面的用户，我已经无法知道是谁了，原来的用户ID是wang-wang-wang-08-18，现在改掉了，总觉得跟徐湘楠（ID：miaomiaomiao）之间存在着某种联系...</p>
+<p>综合来看，HITS和PageRank有不少相同的用户入榜，这是为什么呢？我给一个直觉上我认为对的解释，其实PageRank的值是Hub值和Authority值的一种叠加（其实感觉更像是乘的关系）后的结果，这样Hub或Auth中的一种很强，另一种也不弱时，PageRank便相应比较高，这样两种算法得到部分相同的结果便很正常了。黄继新是一个典型的例子，他的Auth值和Hub值在Net10k和Net50k中虽然都不是最高，但都排到前20名，而他的PageRank则是第一。<strong>既有内容，又能充当渠道。</strong></p>
+<h3>不均衡中的均衡：Closeness和Betweenness中心度</h3>
+<p>到此先让我们总结一下，如果要衡量一个用户在关注网络中的“重要程度”，我们可以利用这几种指标：</p>
+<ul>
+<li>该用户的粉丝数，即入度（In-degree）</li>
+<li>该用户的PageRank值</li>
+<li>该用户的HITS值</li>
+</ul>
+<p>它们在网络分析中也可被归为同一类指标：<strong>点的中心度（Centrality）</strong>。但我们发现，其实三种指标所表达的“重要”，其含义是不完全一样的，同一个网络，同一个节点，可能不同的中心度排名会有不小的差距。接下来请允许我介绍本项目中涉及到的最后两种点的中心度：</p>
+<ul>
+<li>
+<p>点的<strong>近性中心度（Closeness Centrality）</strong>：一个点的近性中心度较高，说明该点到网络中其他各点的距离总体来说较近，反之则较远。假如一个物流仓库网络需要选某个仓库作为<strong>核心中转站</strong>，需要它到其他仓库的距离总体来说最近，那么一种方法就是找到近性中心度最高的那个仓库。</p>
+</li>
+<li>
+<p>点的<strong>介性中心度（Betweenness Centrality）</strong>：一个点的介性中心度较高，说明其他点之间的最短路径很多甚至全部都<strong>必须</strong>经过它中转。假如这个点消失了，那么其他点之间的交流会变得困难，甚至可能断开（因为原来的最短路径断开了）。因此假如要<strong>hack一个网络</strong>的话，对哪个结点下手你懂的。从另一个角度想，这些点简直就像是<strong>等在丝绸之路上必经关口的强盗</strong>。不留下买路钱？让你无路可走，生意就别做了。</p>
+</li>
+</ul>
+<p>这两种中心度我目前并未找到很公认的中文翻译，姑且自己翻译了。另外同PageRank和HITS一样，由于指标的计算稍显复杂，这里就不详细叙述了。但是我们都使用的是网络分析库Networkx中的算法实现，对详细算法有兴趣的读者可自行查阅其文档。</p>
+<p>本项目中我们分别计算了Net10k和Net50k的近性中心度和介性中心度，并画出了分布图。由于我们当时考虑欠周，算出的近性中心度是基于外连接而不是内连接的，我认为意义不大（你总是可以让自己关注更多人，从而得到更大的近性中心度），所以本文决定略过。下面主要说一下介性中心度，其于Net10k和Net50k的分布图分别如下：</p>
+<p><img alt="Net10k 的介性中心度分布：横轴是 1895 位大V，纵轴是介性中心度，最高约 0.066，绝大多数接近 0" decoding="async" height="595" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-2-follow-network/7a0addd718be6bdf1de437753d9f7d2b.jpg" width="800"/></p>
+<p><img alt="Net50k 的介性中心度分布：横轴是 375 位大V，最高约 0.04，大多数接近 0" decoding="async" height="595" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-2-follow-network/06cb6cf1d5dcd3bb03b9041b62c40201.jpg" width="800"/></p>
+<p>我们又得到了两条长长的尾巴。图中横坐标表示每一个特定的大V，纵坐标是大V相应的介性中心度。长长的尾巴表明大部分大V的介性中心度接近0，即使长尾以外有少数几个人远超其他人，但介性中心度的值依然很小。这说明什么？说明这些大V即使退出知乎，也几乎不会影响其他大V之间建立关注关系。没了你，我还有许多其他最短路径到达另外一个大V。这进一步说明什么？说明<strong>大V的关注网络是如此健壮</strong>，健壮到即使失去许多结点，对整个圈子的连通几乎毫无影响。</p>
+<p>再横向比较一下Net50k和Net10k，可以看到这种<strong>随着圈子增大，幂律变得更强</strong>，除了少数点，大部分的人介性中心度都更趋近于0，人数的增加进一步稀释了大多数人的“独特性”，直觉上我相信继续扩大这个圈子，到Net5k、Net1k甚至知乎全体用户，这种健壮性只会越来越强，虽然<strong>人与人相比存在指数级的差异</strong>，但<strong>对整个网络本身而言，每个人几乎同等重要，也同等不重要</strong>。这或许可以称之为知乎关注网络所具有的一种不均衡中的均衡吧。</p>
+<h3>大V都在关注什么：热门话题分析</h3>
+<p>最后，我们尝试了一种获得知乎上热门话题的办法（本项目中唯一涉及内容的分析），先取得Net10k和Net50k的<strong>支配集</strong>（<strong>Dominating set</strong>，这里由于我认为实际上不用这个子集结果也不会有显著区别，所以就不解释这个概念了），然后统计集合中所有用户的回答所对应的问题标签，最后对各个话题标签按出现次数排序。以下分别是二者的前20名：</p>
+<p><strong>Net10k的热门话题Top 20：</strong><br/>
+调查类问题 3792, 生活 3096, 历史 1713, 恋爱 1464, 心理学 1432<br/>
+电影 1419, 人际交往 1404, 社会 1332, 互联网 1214, 情感 1197<br/>
+政治 1028, 两性关系 994, 教育 897, 中国 823, 人生 815<br/>
+游戏 805, 文学 772, 知乎 772, 法律 750, 音乐 738<br/>
+爱情 699, 文化 659, 创业 628, 大学 621, 程序员 619<br/>
+心理 617, 你如何评价 X 609, 女性 604, 编程 585, X 是种怎样的体验 582</p>
+<p><strong>Net50k的热门话题Top 20：</strong><br/>
+生活 1435, 调查类问题 1365, 政治 1285, 历史 1204, 电影 1084<br/>
+健康 996, 社会 984, 医学 941, 恋爱 717, 中国 695<br/>
+两性关系 688, 英语 678, 人际交往 640, 心理学 634, 互联网 595<br/>
+法律 587, 微软（Microsoft） 555, 美国 552, 健身 538, 编程 511</p>
+<p>我个人认为<strong>大V们回答的问题所对应的话题，能够从一定程度上反映了知乎这个平台总体的话题领域热门程度</strong>。另外，我觉得排在最前的一些热门话题也在一定程度上解释了为什么不同领域的大V会抱团，因为不论处于什么专业领域，<strong>人们对于生活、历史、电影等人文和泛娱乐话题总是会感兴趣的</strong>，一旦都感兴趣，又都有不错的见解和分享，自然更容易惺惺相惜。</p>
+<p>到此，本文终于可以画上句号了，欢迎交流讨论。在此还要感谢和我一起参与本项目的其他三个小伙伴，四个人一起才得以在短短时间内做到这种程度（项目report里有我们的详细分工）。</p>]]></description></item><item><title>知乎社交网络分析（上）：基本统计</title><link>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.html</link><guid>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.html</guid><pubDate>Sun, 28 Feb 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>知乎社交网络分析（上）：基本统计</h1>
+<p>关键词：社交网络分析（SNA） | 统计 | 幂律分布</p>
+<h3>简介</h3>
+<p>为保证可读性，本文将分为上下两篇，上篇只涉及数据介绍及基本的统计描述性分析，下篇是<a href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html">基于用户关注网络关系进行的分析</a>。</p>
+<p>本文源自我在2015年<a href="https://www.cse.cuhk.edu.hk/irwin.king/teaching/cmsc5733/2015">Social Computing</a>课程中参与的一个小组项目，主要语言为Python，这里是项目包括数据集的<a href="https://github.com/simoncos/zhihu-analysis-python">Github传送门</a>（引用请使用该地址）。项目内容包括了知乎社交网络数据的爬取、存取、分析全过程。在本文中我打算略去数据爬取和数据库I/O的部分，重点在分享一些有趣的结果。分析过程若有不周之处，还望指正，也期待可以和有兴趣的小伙伴讨论及合作，继续一些更深入的分析。</p>
+<h3>数据</h3>
+<p>（自带吐槽模式开启）</p>
+<p>虽说不讲数据爬取，但要说清楚我们所使用的数据到底是啥，还是得简单提一下的。2015年10月，我们使用了<a href="https://www.zhihu.com/people/zhao-che">本人的知乎账号</a>作为种子，先获得了所有我关注的用户的数据，再获得了这些用户所关注的用户的数据，所以算上种子的话一共是<strong>3层的广度遍历</strong>（注意其实这个数据可能是存在严重bias的，毕竟seed是一个逗逼，逗逼关注的人呢...咦怎么感觉脖子一凉）。这里的用户数据包括：用户的回答数，用户获得的赞同数、感谢数，用户关注的人和关注用户的人，用户回答过的问题以及每个问题的话题标签。这里给出数据的简要统计信息：</p>
+<ul>
+<li>数据库文件: 688 MB（<strong>SQLite</strong>）</li>
+<li>数据包含：2.6万名用户, 461万条关注连接, 72万个问题</li>
+<li>数据的压缩包可以在这里<a href="http://pan.baidu.com/s/1bos5RqR">下载</a>。</li>
+</ul>
+<p>这里是一张数据全貌的示意图：
+<img alt="分析所使用数据全貌：蓝圈内是爬取到的 2.6 万名用户（实心圆），蓝圈外是他们关注的其他用户（空心圆），共 461 万条外连边" decoding="async" height="1299" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/3e2bcc95699de0337ab26473b8b8e362.jpg" width="1240"/></p>
+<p>下面将着重介绍我们所做的分析。</p>
+<h3>玩的不是同一个知乎：均值、中位数与标准差</h3>
+<p>要告诉别人我们在知乎上混得怎样，最基础的几个指标是什么呢？一定是关注、回答、赞同、感谢。所以我们首先对用户的<strong>关注数（followee）</strong>、<strong>关注者数（follower，粉丝数）</strong>、<strong>回答数（answer）</strong>、<strong>收到赞同数（agree）</strong>和<strong>收到感谢数（thanks）</strong>的平均数、中位数以及标准差进行了计算，结果如下表：</p>
+<p><img alt="知乎用户的基本指标统计表：关注数、粉丝数、回答数、赞同数、感谢数的平均数、中位数、标准差，以及作者本人的数值" decoding="async" height="326" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/1d5b5e473ced0f6ca6d3171f59fafd27.jpg" width="814"/></p>
+<p>这里其实就有许多有趣的结论了。</p>
+<p>首先我们看平均值，哇，平均每个人有三千多粉丝，三千多赞同，再看看可怜的我，306个粉和837个赞，而且他们回答的问题也并不多啊，却有那么多赞和粉丝，还让不让人玩知乎了？再看看中位数，顿时心里好受一些了，原来我混得挺不错嘛，五个指标都是我比较大，真开心（你是不是傻）。</p>
+<p>究竟是什么原因造成平均值和中位数差异这么大呢，也许我们能从标准差看出来一些端倪——太大了，粉丝数和赞同数的标准差甚至超过了两万。</p>
+<p>这意味着什么呢？我们知道，<strong>标准差其实衡量了数据个体之间的离散程度，也可以解释为大部分的数值和其平均值之间的差异</strong>。因此这么大的标准差可以说明知乎用户之间的差距可能略大于整个银河系（雾），同时也说明绝大部分用户的数值和平均值有很大的差距，要么大得离谱（比如<a href="https://www.zhihu.com/people/zhang-jia-wei">张佳玮</a>），要么小得可怜（比如我）。</p>
+<p>有人可能会不服气，说标准差严重依赖于数据本身的scale，不能充分说明问题。那么这里使用标准离差率（标准差除以平均值）来算算赞同数，21951.4/3858.4 = 568.9%。</p>
+<p>以上现象还可以导出一个猜测，那就是知乎用户的这五个指标的值分布，都<strong>不大可能是正态分布及其近似</strong>。让我们回想正态分布的样子：</p>
+<p><img alt="正态分布的钟形曲线，按标准差分段标出各区间所占的比例" decoding="async" height="263" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/f2f7273f4605a5246bf28aa3fa94c0e2.png" width="525"/></p>
+<p>图片来源：<a href="https://zh.wikipedia.org/zh-cn/正态分布">维基百科“正态分布”</a>，M. W. Toews 绘，CC BY 2.5。</p>
+<p>如果是正态分布，中位数（最中间的值）、众数（最多的值）以及平均值三者至少应该是非常接近的，然而我们这里却是地月距离（怎么一下缩水那么多）。</p>
+<h3>当雪球滚到最后：长尾和幂律分布</h3>
+<p>为了进一步验证上面的猜测，我们绘制了五个指标的分布图（Distribution Graph）。</p>
+<p><img alt="关注数分布：双对数坐标散点图，横轴为关注数，纵轴为用户数，点从左上向右下弯曲下降" decoding="async" height="595" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/0e9fb639f073982a4ec83bf87624b5c8.jpg" width="800"/></p>
+<p><img alt="粉丝数分布：双对数坐标散点图，用户数在十个粉丝左右达到最高，再向右下方下降" decoding="async" height="595" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/050ad934cdeeb42a6e4254c2a5bfc0e7.jpg" width="800"/></p>
+<p><img alt="回答数分布：双对数坐标散点图，点从左上向右下弯曲下降" decoding="async" height="595" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/0da612aae06c05311108e3538672d62a.jpg" width="800"/></p>
+<p><img alt="赞同数分布：双对数坐标散点图，点沿一条近乎笔直的斜线下降" decoding="async" height="595" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/00f1ff1973384535f7e563c7f4f6c40b.jpg" width="800"/></p>
+<p><img alt="感谢数分布：双对数坐标散点图，点沿一条近乎笔直的斜线下降，底部是几排只有一两个用户的点" decoding="async" height="595" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/4d11a4526f33ef3f3dcae9e3d1e5139d.jpg" width="800"/></p>
+<p>这里说明一下这五张分布图的含义，横轴表示指标的具体数值，纵轴表示有多少用户具有该指标值。需要注意的是横轴值和纵轴值都取了以10为底的log，这是研究中一种常见的处理办法，能够使图所表达的信息更清晰。以感谢数分布图为例，那个最左上方的点表示在这两万多知乎用户里面，有大于10的三次方也就是1000的人没有获得一个感谢（摸摸大）；而最下面那一排点则是说，感谢数是x1，x2，...， xn (反正都不小)的用户，都只有一个人——注意仅这一排点并不能形成什么有效的结论，因为可能感谢数100的只有一个人，101的就有好多人了，这一定程度上大概是因为<strong>数据量小，采样不足</strong>。但是如果把下面几排点放到一起考虑，也许会更有启发一些。</p>
+<p>顺便提一句，其实关注数和粉丝数的分布图分别还有另外一个名字，它们其实是知乎用户关注网络的<strong>出度（out-degree）分布图</strong>和<strong>入度（in-degree）分布图</strong>，这点在下篇中还会有所提到。</p>
+<p>如果是对这种分布图比较熟悉的童鞋，应该一眼就能看出，这绝壁不是正态分布，而极有可能是<strong>幂律（power law）分布</strong>（不过因为懒我们并没有做拟合去验证），这种分布在许多有人参与其中的网络中都会出现。此外，仔细<strong>比较这五条曲线的整体形状</strong>，有没有觉得有两条与另外三条略有不同？一条是关注数，一条是答案数，这两条曲线向外的弯曲程度似乎更明显，也就是说随着横轴值的增大，纵轴值减小的趋势相对较慢，而恰好五个指标里只有这两个是某个用户自己可以控制的，而其他三个指标则是由其他用户形成的群体所控制，这是很奇妙的一点，我觉得其实还有深挖的可能性。</p>
+<p>现在让我们以感谢数为例，再画另外一种分布图。横轴表示每个用户的index也就是0，1， 2， 3...，顺序由感谢数大小决定，纵轴则是该用户收到感谢数的具体数值：</p>
+<p><img alt="每个知乎用户收到的感谢数，按从多到少排列：最高一点约 27.5 万，随后迅速跌落成一条贴近零的长尾" decoding="async" height="606" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/0bc4d4cb3d4013f9cda6691784cd9580.jpg" width="1240"/></p>
+<p>看到那个突破天际的点了吗，二十七八万的感谢（其实这个点在前面那张感谢数分布图中也出现了，你还认得仅在几个自然段以外的它吗）！再看看下面那条长长的尾巴，人艰莫拆。再来看一个更夸张的，赞同数：</p>
+<p><img alt="每个知乎用户收到的赞同数，按从多到少排列：最高一点约 150 万，随后迅速跌落成一条贴近零的长尾" decoding="async" height="606" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/910762706825dd5018cd51952adbac91.jpg" width="1240"/></p>
+<p>其他三个指标的图的形状也基本如此。</p>
+<p>有其他知友使用远大于我们的数据量做了<a href="http://zhuanlan.zhihu.com/sulian/19781120">类似的分析</a>，结论是一致的。总结一下就是：大多数人小得可怜，却有极少数人大得可怕，一点也不正（可）态（爱）。前几年不是有本书很火吗，叫做《长尾理论》？所谓<strong>长尾</strong>，指的就是这样一种现象（附送我对该现象的一些解释：<a href="http://www.jianshu.com/p/bf751d19e34e">什么是「长尾效应」</a>）</p>
+<p>到这里不由得让人提到另外一个东西：<a href="https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%A4%AA%E6%95%88%E5%BA%94">马太效应</a>。所谓穷的人越来越穷，富的人越来越富，感觉上其实就是长尾效应的动态解释（最近打算看看有没有相关的文献）。富的人掌握大量资源，因此更可能攫取更多资源，而穷的人则相反；大V因为有名而得到更多关注，同时因此变得更加有名；玩游戏carry从而得到更多钱，有了钱买装备又更可能carry。这是典型的正（滚）反（雪）馈（球）。最后造成的结果，就是长尾现象。</p>
+<h3>论如何滚成人生赢家：赞同与关注</h3>
+<p>这一节可以算是对上一节结论的一个支撑。下面这张图同时包含了用户的赞同数和粉丝数两个指标：<br/>
+（<strong>!密集恐惧症高能预警!</strong>）</p>
+<p><img alt="赞同数与粉丝数的双对数坐标散点图：密密麻麻的点从左下向右上延伸，呈明显的正相关" decoding="async" height="595" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/ce3319601396f53bbb3216f8bc00d601.jpg" width="800"/></p>
+<p>我想不需要我们再做个回归什么的了，一看就是赤裸裸的正相关啊。这也为我等如何冷启动逆袭成为知乎大V提供了理论支持——要么你就有本事回答出几个赞数突破天际的答案，要么你一开始就很有名，没写啥答案也能吸粉...（说的都是屁话...）</p>
+<p>好了本篇到此结束，对网络关系更感兴趣的童鞋，不要错过<a href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html">下篇</a>，下篇信息量更大哦~</p>]]></description></item><item><title>十万亿个二〇一五</title><link>https://simoncos.github.io/blogs/ten-trillion-2015s.html</link><guid>https://simoncos.github.io/blogs/ten-trillion-2015s.html</guid><pubDate>Tue, 29 Dec 2015 00:00:00 +0800</pubDate><description><![CDATA[<h1>十万亿个二〇一五</h1>
+<p>午觉有两种，一种是普普通通的午觉。</p>
+<p>还有一种是将你切换到另外的世界再切换回来的午觉。而一场这样的午觉，最终促使我在一百八十天之后重新动笔（误）。</p>
+<p>（此处发呆五分钟，不知道接下来写什么）</p>
+<p>好不容易起了头，还是让我瞎扯扯吧。</p>
+<p>假想有一扇九层楼那么高的玻璃窗，窗子底下便是一条说干不干的干道——对于某些城市而言它一点不干，对于另外的城市而言它足够干，为了方便我们就叫它干道好了。</p>
+<p>在十字路口上有红绿灯——这设定真不是废话，因为我见过有的十字路口上没有。打开窗子的话，能够听到红绿灯发出的滴滴滴的状态指示音，大概是为了盲人方便而设，不如称之盲音？这声音根据状态有时滴滴，有时快滴，虽然对于常人没有什么，但假如你碰巧患有神经衰弱，放心，God will bless you。</p>
+<p>至于干道上来来往往的车辆——对，百分之九十九以上带有十字路口和红绿灯的道路应该都是车行道——我想不出什么有趣的设定。只有一个可能还有一些意思，清晨或是夜幕降临以后可能会有车子带着惊天彻地的，录下来当闹铃可能不错的撸鼻涕声刷过（God bless you again）。</p>
+<p>窗子纵向足够宽，这样人只是坐着便能向下望到干道的十字路口。向前看的方向上便有十字路口的一条胳臂。胳臂的一旁有一个小小的别墅群，另一旁则是一个学校。顺着这条胳膊能够望到绵延的小山，再往远处还能望见一座更大点的山，形状很美，接近一百二十度的等腰钝角三角形，顶部被啃了很小的一块，有时能够让人想起富士山。于是我们就叫它苹果山好了。在众山更上方还有什么呢，当然，一定还得有天空。</p>
+<p>你看这天色变幻，色彩，云雾，光线，气味，永远无穷无止，永远转瞬即逝。大概是因为其背后相关的因素你永远数不清楚，气温、湿度、空气成分、太阳位置、路上每辆车使用的油甚至还有你眼睛里面晶状体的成色（会是A货吗）等等，哪些才是决定性的因素呢？更别提动态的演变机制了，如果确定了因素等于准备好了食材，那么弄清机制你才能随心所欲做好每一道菜。所以下次天气预报不准的时候，别再叨叨了，你知道这样复杂的预测任务能达到现在这样的精度和准确度有多难吗？所以清明上香时别忘了心里顺便惦记一下贝叶斯、马尔科夫等老人家，世界是多么不确定啊，May God of Probability stand by your side，愿你能烧出一次不黑暗的糖醋排骨。</p>
+<p>现在设想窗子里面——没错这玻璃窗子是一个小小房间的唯一的窗户——有一书桌，书桌上放了一只玻璃杯，玻璃杯里盛着半杯自来水。那么问题来了，假设我们拉开窗帘，推开窗子。这玻璃杯中装有什么？玻璃，水，空气，干路，滴滴声，苹果山，天空，还是恰好的黄昏时玫瑰色的夕照？</p>
+<p>这是一个中二的问题，知道越多的人或许越难以给出只须他自己信服的答案。不过基于即兴气氛如此明显的本文来讲，我给出一个答案吧。</p>
+<p>这杯中，装有的是整个世界。现在你伸出手来，触摸它，也就触摸到整个世界。问题又来了，如果我们不拉开窗帘，不推开窗子，答案是不是会有不同。答案是，不会有不同。</p>
+<p>然而，你所触摸到的，只是无限可能性中的一种可能，并且只是这种可能中的一点，并且你无法准确描述这一点是哪一点。假如你说你不要那么精确，所有前文描述的一切缩为一个点就可以了，可无限的n分之一，还是无限啊。</p>
+<p>无限来无限去的听着好烦，我们想一个更简单霸气的词来代替它吧，十万亿怎么样？简单，霸气。于是上面那段话变成了：</p>
+<p><em>然而，你所触摸到的，只是十万亿可能性中的一种可能，并且只是这种可能中的一点，并且你无法准确描述这一点是哪一点。假如你说你不要那么精确，所有前文描述的一切缩为一个点就可以了，可十万亿的n分之一，还是十万亿啊。</em></p>
+<p>非常棒，完全没有问题。</p>
+<p>果然还是扯出了一大堆废话，还是做回文青总结一下我的这一年然后继续啃我的菲律賓金菠蘿果盤（價值十五文九毛，HKD），毕竟今天已经12月29号了嘛：</p>
+<p>二〇一五，没什么特别的事发生。在这一年的十万亿种可能性里，我幸不辱命活出了其中一种。然而在十万亿个人眼里所见的那个我，便是在那十万亿个世界中各自唯一的我，我只能有幸见过我的世界里的那一个我并与之告别。既然连我自己都无法同所有的我告别，我们也就不用为什么事情感到惋惜，正如我不会因为无法见全那水杯中的十万亿种风景而感到惋惜一样。毕竟，每一种风景里都包含了一整个世界，见过一种，便知十万亿种。我只要有幸见过我的世界中的那一个你，便能知十万亿个你。</p>
+<p>2015.12.29</p>]]></description></item><item><title>问题解析的极限</title><link>https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html</link><guid>https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html</guid><pubDate>Thu, 22 May 2014 00:00:00 +0800</pubDate><description><![CDATA[<h1>问题解析的极限</h1>
 <p>一段时间前从朋友那听来的关于一个RPG游戏外挂的制作方法，因为很有意思，所以总念念不忘，想着哪天必须记下来。</p>
 <p>这个外挂是这样的：侦测游戏画面上显示着角色HP量/MP量的某一点的颜色值，若颜色值从一个方向改变（可以脑补比如从红/蓝到灰），说明血量低于一个界限了，这时外挂就会自动输入加血指令；如果反向变化，则不作任何动作。</p>
 <p>以前从来没考虑过游戏外挂的做法，所以这是第一次听说外挂可以照这个思路来做。我觉得非常有趣，因为这是一个不知系统内部逻辑，单单对其最终输出进行处理，从而得到下一步输入选择的依据的情境。</p>

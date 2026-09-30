@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" data-page-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zhihu Social Network Analysis (1): Basic Statistics · Articles · simoncos</title>
+    <meta name="description" content="A 2015 course project crawled 26,000 Zhihu users outward from one seed account. The means and medians of followees, followers, answers, upvotes and thanks are far apart, the distri...">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.en.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Zhihu Social Network Analysis (1): Basic Statistics">
+    <meta property="og:description" content="A 2015 course project crawled 26,000 Zhihu users outward from one seed account. The means and medians of followees, followers, answers, upvotes and thanks are far apart, the distri...">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.en.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/3e2bcc95699de0337ab26473b8b8e362.jpg">
+    <meta property="og:image:width" content="1240">
+    <meta property="og:image:height" content="1299">
+    <meta property="og:image:alt" content="Overview of the data used: inside the blue circle are the 26,000 crawled users (filled dots), outside it the other users they follow (hollow dots), 4.61 million out-links in all">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Zhihu Social Network Analysis (1): Basic Statistics">
+    <meta name="twitter:description" content="A 2015 course project crawled 26,000 Zhihu users outward from one seed account. The means and medians of followees, followers, answers, upvotes and thanks are far apart, the distri...">
+    <meta name="twitter:image" content="https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/3e2bcc95699de0337ab26473b8b8e362.jpg">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20260929b"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20260929b">
+    <script src="../src/js/site.js?v=20260929b" defer></script>
+    <script src="../src/js/article.js?v=20260929b" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="zhihu-social-network-analysis-1-basic-statistics">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="zhihu-social-network-analysis-1-basic-statistics.html" hreflang="zh-Hans" data-lang-nav="zh"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← Articles</a>
+                <h1 class="article-title">Zhihu Social Network Analysis (1): Basic Statistics</h1>
+            </div>
+            <aside class="toc" aria-label="Contents"><span class="k toc-k">Contents</span><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>Introduction</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>The Data</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>Not Playing the Same Zhihu: Mean, Median and Standard Deviation</span></a><a class="toc-link toc-h3" href="#heading-4"><span class="toc-dot" aria-hidden="true"></span><span>When the Snowball Stops Rolling: Long Tails and Power Laws</span></a><a class="toc-link toc-h3" href="#heading-5"><span class="toc-dot" aria-hidden="true"></span><span>How to Snowball into a Winner at Life: Upvotes and Followers</span></a></aside>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">Created</span><span class="num">2016-02-28</span></span>
+                    <span class="meta-item"><span class="k">Updated</span><span class="num">2026-09-30</span></span>
+                    <span class="meta-item"><span class="k">Reading</span>7 min</span>
+                    <span class="meta-item"><span class="k">Translation</span>Claude Opus 5.5</span>
+                    <a class="meta-alt" href="zhihu-social-network-analysis-1-basic-statistics.html" hreflang="zh-Hans" lang="zh-Hans" data-lang-nav="zh">中文 ↗</a>
+                </div>
+                <details class="toc-box"><summary><span>Contents</span><span class="toc-sign" aria-hidden="true"></span></summary><div class="toc-box-links"><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>Introduction</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>The Data</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>Not Playing the Same Zhihu: Mean, Median and Standard Deviation</span></a><a class="toc-link toc-h3" href="#heading-4"><span class="toc-dot" aria-hidden="true"></span><span>When the Snowball Stops Rolling: Long Tails and Power Laws</span></a><a class="toc-link toc-h3" href="#heading-5"><span class="toc-dot" aria-hidden="true"></span><span>How to Snowball into a Winner at Life: Upvotes and Followers</span></a></div></details>
+                <div class="post-content">
+
+<p>Keywords: social network analysis (SNA) | statistics | power-law distribution</p>
+<h3 id="heading-1">Introduction</h3>
+<p>To keep it readable, this piece is split into two parts. The first covers only the data and basic descriptive statistics; the second is <a href="zhihu-social-network-analysis-2-follow-network.en.html">an analysis based on the network of who follows whom</a>.</p>
+<p>It comes from a group project I took part in for a <a href="https://www.cse.cuhk.edu.hk/irwin.king/teaching/cmsc5733/2015">Social Computing</a> course in 2015. The main language was Python, and here is <a href="https://github.com/simoncos/zhihu-analysis-python">the project on GitHub</a>, dataset included (please cite this address). The project covered the whole process of crawling, storing and analysing data from the Zhihu social network. In this piece I will skip the crawling and database I/O and concentrate on sharing some interesting results. If there are gaps in the analysis, corrections are welcome, and I would be glad to discuss and work with anyone interested on some deeper analysis.</p>
+<h3 id="heading-2">The Data</h3>
+<p>(Snark mode on.)</p>
+<p>I said I wouldn't talk about the crawling, but to make clear what data we actually used, I still have to mention it briefly. In October 2015 we used <a href="https://www.zhihu.com/people/zhao-che">my own Zhihu account</a> (in Chinese) as the seed: first we got the data of all the users I follow, then the data of the users they follow, so counting the seed, it was a <strong>breadth-first traversal three layers deep</strong> (note that this data may well be seriously biased; after all, the seed is a goofball, and the people a goofball follows... hang on, why do I feel a chill on the back of my neck?). The user data includes each user's number of answers, the upvotes and thanks they received, the people they follow and the people who follow them, the questions they answered, and the topic tags of each question. A brief summary of the data:</p>
+<ul>
+<li>Database file: 688 MB (<strong>SQLite</strong>)</li>
+<li>Contents: 26,000 users, 4.61 million follow links, 720,000 questions</li>
+<li>A compressed archive of the data can be <a href="http://pan.baidu.com/s/1bos5RqR">downloaded here</a> (Baidu Netdisk, in Chinese).</li>
+</ul>
+<p>Here is a diagram of the data as a whole:
+<img alt="Overview of the data used: inside the blue circle are the 26,000 crawled users (filled dots), outside it the other users they follow (hollow dots), 4.61 million out-links in all" decoding="async" height="1299" src="assets/images/zhihu-social-network-analysis-1-basic-statistics/3e2bcc95699de0337ab26473b8b8e362.jpg" width="1240"/></p>
+<p>Next I will focus on the analysis we did.</p>
+<h3 id="heading-3">Not Playing the Same Zhihu: Mean, Median and Standard Deviation</h3>
+<p>To tell others how we are doing on Zhihu, what are the most basic measures? Following, answers, upvotes and thanks, surely. So we started by calculating the mean, median and standard deviation of each user's <strong>number of people followed (followees)</strong>, <strong>number of followers</strong>, <strong>number of answers</strong>, <strong>upvotes received (agree)</strong> and <strong>thanks received</strong>. The results are in the table below:</p>
+<p><img alt="Table of basic statistics for Zhihu users: mean, median and standard deviation of followees, followers, answers, upvotes and thanks, with the author's own figures" decoding="async" height="326" loading="lazy" src="assets/images/zhihu-social-network-analysis-1-basic-statistics/1d5b5e473ced0f6ca6d3171f59fafd27.jpg" width="814"/></p>
+<p>There are already plenty of interesting conclusions here.</p>
+<p>Look at the means first. Wow, on average everyone has over three thousand followers and over three thousand upvotes. Then look at poor me, with 306 followers and 837 upvotes. And they haven't even answered many questions, yet they have all those upvotes and followers. How is anyone supposed to play Zhihu? Then look at the medians, and I feel much better at once: turns out I'm doing pretty well. I beat the median on all five measures, how nice (are you daft?).</p>
+<p>What makes the mean and the median so far apart? Perhaps the standard deviation gives us a clue: it is huge. The standard deviations of followers and upvotes are even above twenty thousand.</p>
+<p>What does that mean? As we know, <strong>the standard deviation measures how spread out the individual values are, and can also be read as how far most values are from the mean</strong>. So a standard deviation this large suggests that the gap between Zhihu users may be slightly larger than the whole Milky Way (kidding), and also that the vast majority of users' values are a long way from the mean: either absurdly large (like <a href="https://www.zhihu.com/people/zhang-jia-wei">Zhang Jiawei</a> (in Chinese)) or pitifully small (like me).</p>
+<p>Some may object that the standard deviation depends heavily on the scale of the data and doesn't really prove the point. So let's use the coefficient of variation (standard deviation divided by the mean) for upvotes: 21951.4/3858.4 = 568.9%.</p>
+<p>These observations also suggest a guess: the distributions of these five measures among Zhihu users are all <strong>unlikely to be normal distributions or anything close to one</strong>. Recall what the normal distribution looks like:</p>
+<p><img alt="The bell curve of the normal distribution, with the share of values in each band of standard deviations marked" decoding="async" height="263" loading="lazy" src="assets/images/zhihu-social-network-analysis-1-basic-statistics/f2f7273f4605a5246bf28aa3fa94c0e2.png" width="525"/></p>
+<p>Image: M. W. Toews, via <a href="https://commons.wikimedia.org/wiki/File:Standard_deviation_diagram.svg">Wikimedia Commons</a>, CC BY 2.5.</p>
+<p>In a normal distribution, the median (the middle value), the mode (the most common value) and the mean should at least be very close, but here they are as far apart as the Earth and the Moon (how did it shrink so much all of a sudden?).</p>
+<h3 id="heading-4">When the Snowball Stops Rolling: Long Tails and Power Laws</h3>
+<p>To test this guess further, we plotted the distribution of each of the five measures.</p>
+<p><img alt="Distribution of followee counts: a log-log scatter plot with followee count across and number of users up, the points curving down from top left to bottom right" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-1-basic-statistics/0e9fb639f073982a4ec83bf87624b5c8.jpg" width="800"/></p>
+<p><img alt="Distribution of follower counts: a log-log scatter plot; the number of users peaks at around ten followers and then falls away to the bottom right" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-1-basic-statistics/050ad934cdeeb42a6e4254c2a5bfc0e7.jpg" width="800"/></p>
+<p><img alt="Distribution of answer counts: a log-log scatter plot, the points curving down from top left to bottom right" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-1-basic-statistics/0da612aae06c05311108e3538672d62a.jpg" width="800"/></p>
+<p><img alt="Distribution of upvote counts: a log-log scatter plot, the points falling along a nearly straight line" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-1-basic-statistics/00f1ff1973384535f7e563c7f4f6c40b.jpg" width="800"/></p>
+<p><img alt="Distribution of thanks counts: a log-log scatter plot, the points falling along a nearly straight line, with rows of points for values held by only one or two users at the bottom" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-1-basic-statistics/4d11a4526f33ef3f3dcae9e3d1e5139d.jpg" width="800"/></p>
+<p>A word on what these five charts mean. The horizontal axis is the value of the measure, and the vertical axis is how many users have that value. Note that both axes are the base-10 log of the value, a common practice in research that makes the information in the chart clearer. Take the thanks chart as an example: the point at the very top left says that among these twenty-odd thousand Zhihu users, more than 10 to the power of 3, that is 1,000, people have not received a single thanks (there, there). The bottom row of points says that for users with x1, x2, ..., xn thanks (none of them small numbers), there is only one user each. Note that this row alone doesn't support any real conclusion, because there may be only one person with 100 thanks and quite a few with 101; to some extent this is probably because <strong>the dataset is small and undersampled</strong>. But taking the bottom few rows together may be more revealing.</p>
+<p>By the way, the followee and follower charts have another name: they are the <strong>out-degree distribution</strong> and <strong>in-degree distribution</strong> of the Zhihu follow network, which will come up again in the second part.</p>
+<p>Anyone familiar with this kind of chart will see at a glance that this is absolutely not a normal distribution, and very likely a <strong>power-law distribution</strong> (though out of laziness we did not fit one to check). This kind of distribution turns up in many networks that involve people. Also, look carefully and <strong>compare the overall shapes of the five curves</strong>. Do two of them look a little different from the other three? One is followees and the other is answers. These two curves seem to bow outward more, which means that as the horizontal value increases, the vertical value falls relatively slowly. And it just so happens that of the five measures, only these two are under the user's own control, while the other three are controlled by the crowd of other users. That is rather wonderful, and I think it could be dug into further.</p>
+<p>Now let's take thanks as the example and draw a different kind of distribution chart. The horizontal axis is each user's index, 0, 1, 2, 3..., ordered by number of thanks, and the vertical axis is the number of thanks that user received:</p>
+<p><img alt="Thanks received by each Zhihu user, sorted from most to least: the top point is at about 275,000, and the values drop quickly into a long tail near zero" decoding="async" height="606" loading="lazy" src="assets/images/zhihu-social-network-analysis-1-basic-statistics/0bc4d4cb3d4013f9cda6691784cd9580.jpg" width="1240"/></p>
+<p>See that point shooting through the sky? Two hundred and seventy or eighty thousand thanks (this point actually appeared in the thanks distribution chart earlier too; do you recognize it, just a few paragraphs away?). Then look at the long, long tail below. Life is hard enough; let's not rub it in. Now for something even more extreme, upvotes:</p>
+<p><img alt="Upvotes received by each Zhihu user, sorted from most to least: the top point is at about 1.5 million, and the values drop quickly into a long tail near zero" decoding="async" height="606" loading="lazy" src="assets/images/zhihu-social-network-analysis-1-basic-statistics/910762706825dd5018cd51952adbac91.jpg" width="1240"/></p>
+<p>The charts for the other three measures have much the same shape.</p>
+<p>Another Zhihu user did <a href="http://zhuanlan.zhihu.com/sulian/19781120">a similar analysis</a> (in Chinese) with far more data than ours, and reached the same conclusion. To sum up: most people are pitifully small, while a very few are frighteningly big, not the least bit normal (or nice). Wasn't there a book that was all the rage a few years ago, <em>The Long Tail</em>? The <strong>long tail</strong> refers to exactly this phenomenon (with a free bonus, some of my own explanation of it: <a href="http://www.jianshu.com/p/bf751d19e34e">"What Is the 'Long Tail Effect'"</a> (in Chinese)).</p>
+<p>This inevitably brings to mind something else: the <a href="https://en.wikipedia.org/wiki/Matthew_effect">Matthew effect</a>. The poor get poorer and the rich get richer. It feels like a dynamic explanation of the long-tail effect (I plan to look for literature on this soon). The rich control a great deal of resources and so are more likely to seize still more, while the poor are the opposite. Big-name accounts get more attention because they are famous, and so become more famous still. In a game, you carry your team and so earn more gold; with gold you buy gear and are more likely to carry again. This is classic posi(snow)tive feed(ball)back. The end result is the long-tail phenomenon.</p>
+<h3 id="heading-5">How to Snowball into a Winner at Life: Upvotes and Followers</h3>
+<p>This section can be seen as support for the conclusion of the last one. The chart below shows two measures for each user at once, upvotes and followers:<br/>
+(<strong>!Trypophobia alert!</strong>)</p>
+<p><img alt="Upvotes against followers on a log-log scatter plot: a dense cloud of points running from bottom left to top right, a clear positive correlation" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-1-basic-statistics/ce3319601396f53bbb3216f8bc00d601.jpg" width="800"/></p>
+<p>I don't think we need to run a regression or anything; it is a naked positive correlation at a glance. It also gives theoretical support to those of us wondering how to cold-start our way to becoming a Zhihu "big V" (a big-name account): either you are able to write a few answers whose upvotes shoot through the sky, or you are famous from the start and pull in followers without writing much... (all of which is utter nonsense...)</p>
+<p>That's it for this part. If you are more interested in the network relations, don't miss <a href="zhihu-social-network-analysis-2-follow-network.en.html">the second part</a>, which has even more in it~</p>
+                </div>
+                <div class="series-box"><h2 class="k">Series · Zhihu Social Network Analysis</h2><a href="zhihu-social-network-analysis-1-basic-statistics.en.html" aria-current="page"><span class="series-part">Part 1</span><span>Zhihu Social Network Analysis (1): Basic Statistics</span></a><a href="zhihu-social-network-analysis-2-follow-network.en.html"><span class="series-part">Part 2</span><span>Zhihu Social Network Analysis (2): The Follow Network</span></a></div>
+                <div class="article-tags"><h2 class="k">Tags</h2><a class="tag" href="../blogs.html#topic-hack">Hack</a></div>
+                <section class="xref-grid"><div class="xrefs"><h2 class="k">This article links to</h2><a class="xref" href="zhihu-social-network-analysis-2-follow-network.en.html"><span>Zhihu Social Network Analysis (2): The Follow Network</span><span class="num">2016-03-18</span></a></div><div class="xrefs"><h2 class="k">Linked from</h2><a class="xref" href="zhihu-social-network-analysis-2-follow-network.en.html"><span>Zhihu Social Network Analysis (2): The Follow Network</span><span class="num">2016-03-18</span></a></div></section>
+                <nav class="post-nav" aria-label="More reading"><a class="post-nav-card post-nav-newer" rel="prev" href="zhihu-social-network-analysis-2-follow-network.en.html"><span class="k">Newer</span><span class="post-nav-title">Zhihu Social Network Analysis (2): The Follow Network</span></a><a class="post-nav-card post-nav-older" rel="next" href="ten-trillion-2015s.en.html"><span class="k">Older</span><span class="post-nav-title">Ten Trillion 2015s</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 30, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-30</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="Back to top" title="Back to top">↑</button>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-page-lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>辛普森悖论与直觉的缺陷 · 文章 · simoncos</title>
+    <meta name="description" content="用一个极端的招生例子说明辛普森悖论，再追问它为什么违背直觉：我们默认了“各部分都更大，整体就更大”，却没看见其中隐含的可加性前提。">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="辛普森悖论与直觉的缺陷">
+    <meta property="og:description" content="用一个极端的招生例子说明辛普森悖论，再追问它为什么违背直觉：我们默认了“各部分都更大，整体就更大”，却没看见其中隐含的可加性前提。">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="simoncos — tools and research, articles and field notes">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="辛普森悖论与直觉的缺陷">
+    <meta name="twitter:description" content="用一个极端的招生例子说明辛普森悖论，再追问它为什么违背直觉：我们默认了“各部分都更大，整体就更大”，却没看见其中隐含的可加性前提。">
+    <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20260929b"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20260929b">
+    <script src="../src/js/site.js?v=20260929b" defer></script>
+    <script src="../src/js/article.js?v=20260929b" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="simpsons-paradox-and-the-flaws-of-intuition">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="simpsons-paradox-and-the-flaws-of-intuition.en.html" hreflang="en" data-lang-nav="en"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← 文章</a>
+                <h1 class="article-title">辛普森悖论与直觉的缺陷</h1>
+            </div>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">创建</span><span class="num">2018-03-27</span></span>
+                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-09-30</span></span>
+                    <span class="meta-item"><span class="k">阅读</span>3 分钟</span>
+                    <a class="meta-alt" href="simpsons-paradox-and-the-flaws-of-intuition.en.html" hreflang="en" lang="en" data-lang-nav="en">English ↗</a>
+                </div>
+                <div class="post-content">
+
+<p><img alt="《辛普森一家》里的荷马·辛普森皱着脸，对话框里写着 D'oh!" decoding="async" height="380" src="assets/images/simpsons-paradox-and-the-flaws-of-intuition/41dff4010e43979b84a833fb80be4a58.jpg" width="532"/></p>
+<p>关键词：辛普森悖论 | 直觉 | 统计 | 可加性</p>
+<p>辛普森悖论真是个很经典的东西，引用<a href="https://zh.wikipedia.org/zh-hk/辛普森悖论">维基百科</a>：</p>
+<blockquote>
+<p>在分组比较中都占优势的一方，在总评中有时反而是失势的一方。</p>
+</blockquote>
+<p>简书上有一篇文章提到一个结石治疗方案对比的例子，可视化得挺好，值得一看：<a href="https://www.jianshu.com/p/5582464ef4d9">辛普森悖论</a>。举个极端一点的例子，更容易说清楚这个悖论到底是什么情况：</p>
+<p>假设一个学校正在招生，其A学院对女生的录取率100% <strong>&gt;</strong> 男生录取率90%；B学院女生录取率10% <strong>&gt;</strong> 男生录取率0%。<br/>
+现有男女生各100人。<br/>
+女生报名A学院10人，报名B学院90人，所以A录取10个女生，B录取9个女生，共录取19个女生；<br/>
+男生报名A学院90人，报名B学院10人，所以A录取81个男生，B录取0个男生，共录取81个男生。<br/>
+整体来看，女生录取率19/100=19% <strong>&lt;</strong> 男生录取率81/100=81%。</p>
+<p>问题来了：无论A还是B学院，对女生的录取率都比男生高，<strong>直觉上整体的女生录取率也应该更高，但实际相反。</strong></p>
+<p>这是怎么回事？</p>
+<p>先尝试给出一个说得通的解释：站在学生的角度看，报名不同学院像是赌球。报名A学院类似于赌输赢，风险小；报名B学院类似猜比分，风险大。虽然因为女生整体水平比男生厉害（更懂球）或者学校偏好女生（妹子猜谁赢我们尽可能就让谁赢），女生赌赢的机会更大（两个学院录取率都更高），但是女生大部分选择猜比分，男生大部分选择猜输赢，而猜比分和猜输赢的难度相差很大，大过男女差异，因此<strong>有优势更冒险的女生都死得差不多，较弱但更保守的男生活下来更多</strong>。</p>
+<p>进一步思考，<strong>这种现象为什么违背直觉呢？</strong></p>
+<p>因为我们的直觉里有这样一个逻辑：如果一个东西的各部分都分别大于另一个东西的各部分，那么这个东西大于另一个东西。可以形式化如下：</p>
+<pre><code>假设：
+A=A1+A2+...+An
+B=B1+B2+...+Bn，那么：
+如果对i=1,2...,n都有Ai&gt;Bi，则A&gt;B
+</code></pre>
+<p>这个逻辑在例子里显然hold不住了。<strong>根本原因在于假设里的“+”和“=”，其中隐含了可加性的前提。</strong>A1、A2、A3到底是什么，可不可加呢，加起来是不是等于A呢？如果A、B、Ai、Bi都是实数，那么可加性来自于定义，上面的逻辑自然没问题。然而对于学院录取的例子，我们有没有定义，或者能不能推导出录取率的可加性呢？不能。</p>
+<p><strong>在形式化之前，我们似乎很难看到可加性这个隐含前提。</strong></p>
+<p>要和数字玩游戏，最忌讳的便是想当然，直觉在某种程度上等同于碰运气，效果取决于问题的性质与直觉假设的吻合程度。不要讲数字会说谎，说谎是一种带有目的的主动行为，数字只会被算错，但不会说谎。</p>
+<p>维基上还从几何角度解释了这个现象，将录取率表示为斜率，绿线和红线的斜率分别是整体的女生录取率和男生录取率，可以看到<strong>向量而非斜率的可加性</strong>：</p>
+<blockquote>
+<p>女生单独两个向量斜率都比男生大，说明它们的比率都比较高。但最后男生总体向量斜率却大于女生</p>
+</blockquote>
+<p><img alt="维基百科的几何解释：以向量表示男女生在各学院的报名与录取人数，斜率即录取率；红线是男生总体，绿线是女生总体" decoding="async" height="270" loading="lazy" src="assets/images/simpsons-paradox-and-the-flaws-of-intuition/659c8fbfabc9d2893acd816d814aaaeb.jpg" width="440"/></p>
+<p>201906：辛普森悖论现象的背后有两组要素，以前例而言：一组要素是学校对男女学生的录取率，另一组则是男女学生报考的选择。  <strong>从认知的角度上理解</strong>，直觉让我们倾向于认为只有前一组要素对系统结果有质（最终录取率谁大谁小）的影响，而忽略了后一组要素。特别前一组要素与要考察的结果都是“对男女学生的录取率”，语义上似乎很接近，所以被我们“自然地”认为是决定性因素。</p>
+                </div>
+                <div class="article-tags"><h2 class="k">标签</h2><a class="tag" href="../blogs.html#topic-thinking">思考</a></div>
+                <section class="xref-grid"><div class="xrefs is-empty"><h2 class="k">提到本文</h2><span class="xrefs-empty">暂时还没有其他文章引用这篇。</span></div></section>
+                <nav class="post-nav" aria-label="继续阅读"><a class="post-nav-card post-nav-newer" rel="prev" href="ten-years-like-rain.html"><span class="k">更新的一篇</span><span class="post-nav-title">十年如雨</span></a><a class="post-nav-card post-nav-older" rel="next" href="the-tatami-galaxy.html"><span class="k">更早的一篇</span><span class="post-nav-title">方寸间的宇宙——关于《四叠半神话大系》</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Sep 30, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-09-30</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="回到顶部" title="回到顶部">↑</button>
+</body>
+</html>

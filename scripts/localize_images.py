@@ -106,7 +106,13 @@ def download(url: str) -> bytes:
 def is_animated(data: bytes) -> bool:
     from PIL import Image
 
-    return bool(getattr(Image.open(io.BytesIO(data)), "is_animated", False))
+    image = Image.open(io.BytesIO(data))
+    # An MPO is a still JPEG carrying extra pictures (iPhone photos keep an
+    # HDR gain map or depth map there). Pillow reports it as animated, but
+    # only the first picture is the photo.
+    if image.format == "MPO":
+        return False
+    return bool(getattr(image, "is_animated", False))
 
 
 def encode_animation(data: bytes) -> tuple[bytes, bytes, str]:

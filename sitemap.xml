@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simoncos.github.io/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-09-30</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/gallery.html</loc>
@@ -30,7 +30,7 @@
   </url>
   <url>
     <loc>https://simoncos.github.io/blogs.html</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-09-30</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/projects.html</loc>
@@ -199,5 +199,69 @@
   <url>
     <loc>https://simoncos.github.io/blogs/my-hands.en.html</loc>
     <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/dont-express-yourself-pointlessly.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/dont-express-yourself-pointlessly.en.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/ten-trillion-2015s.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/ten-trillion-2015s.en.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/my-2022-in-pictures.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/my-2022-in-pictures.en.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/my-2023-in-pictures.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/my-2023-in-pictures.en.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/setting-aside-this-hour.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/setting-aside-this-hour.en.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.en.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.en.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/blogs/simpsons-paradox-and-the-flaws-of-intuition.en.html</loc>
+    <lastmod>2026-09-30</lastmod>
   </url>
 </urlset>
