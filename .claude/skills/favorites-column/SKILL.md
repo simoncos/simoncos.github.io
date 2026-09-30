@@ -62,11 +62,8 @@ The column lists every work Che rated five stars on Douban in four categories (�
 - An item links to an essay only after the essay is published on the site as an article. The proposal's data findings table lists the qualifying essays and their original dates.
 - To link one, map the work's Douban link to the article's path in `ESSAYS` in `scripts/update_favorites_pages.py` and regenerate. The link text is the article's H1, read from its Markdown, so the title lives in one place. Title marks inside it are nested as 〈〉 within the link's 《》.
 - The link shows only on rows with a short review. A work without one renders as a compact row, which has no room for it.
-- Essays are Chinese first, with an English translation beside each (`<slug>.en.md`, `translation:` names the model; Che asked for them 2026-09-26). Tags follow the work's type: `book`, `movie`, `music`, `game` (Che's choice). The work's Douban link goes on the last line (`豆瓣：[作品](链接)`), so the Articles list excerpt starts with the essay itself.
-- Each new article also needs a `sitemap.xml` entry; `make check` fails without one.
-- Set frontmatter `date` to the original Douban publication date. Without `date`, `generate_blog_pages.py` falls back to the file's mtime, and an old essay looks as if it was published today.
-- Do not take dates from the vault files. They have no frontmatter, and their creation and commit times date from the 2026 migration.
-- RSS readers may still show a newly uploaded old essay as new. Che accepts that.
+- Publish the essay like any article, in both languages, with the `article-publication` skill; its date is the Douban publication date unless the text carries a dateline.
+- Tags follow the work's type: `book`, `movie`, `music`, `game` (Che's choice). The work's Douban link goes on the last line (`豆瓣：[作品](链接)`), so the Articles list excerpt starts with the essay itself.
 
 ## Reading douban.com
 
