@@ -38,6 +38,11 @@ SITE_DATA_PATH = ROOT / "data/site.json"
 ARTICLE_INDEX_PATH = ROOT / "data/article_index.json"
 
 ARTICLE_KIND = {"en": "Article", "zh": "文章"}
+# The home page's Newest list shows this many rows for the chosen topic; the
+# rest stay in the page for the filter and are one click away in Articles
+# and Work. Older essays republished with their historical dates made the
+# full list run to 59 rows.
+NEWEST_SHOWN = 10
 TOPICS = (
     ("all", "All", "全部"),
     ("build", "Building", "造东西"),
@@ -203,7 +208,7 @@ def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str
     ]
 
     row_html = []
-    for row in rows:
+    for i, row in enumerate(rows):
         title_en, title_zh = lang_pair(row["title"])
         alt = ""
         if title_en != title_zh:
@@ -213,13 +218,15 @@ def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str
             )
         float_attr = f' data-float="{esc(row["img"])}"' if row["img"] else ""
         bilingual = '<span class="row-bi"><span lang="zh-Hans">中文</span> / EN</span>' if row["bilingual"] else ""
+        hidden = " hidden" if i >= NEWEST_SHOWN else ""
         row_html.append(
-            f'            <a class="row" data-topic="{row["topic"]}"{href_attrs(row["href"])}{float_attr}>'
+            f'            <a class="row" data-topic="{row["topic"]}"{href_attrs(row["href"])}{float_attr}{hidden}>'
             f'<span class="row-main"><span class="row-t">{bi(title_en, title_zh)}</span>{alt}</span>'
             f'<span class="row-meta">{bilingual}<span>{bi_value(row["kind"])}</span>'
             f'<span class="num">{esc(row["date"])}</span></span></a>'
         )
 
+    n_articles = len(articles)
     updated_en, updated_zh = updated_label(config["site_updated"])
     main = "\n".join([
         '<main id="main" class="home enter" tabindex="-1">',
@@ -245,9 +252,12 @@ def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str
         *chips,
         "            </div>",
         "        </div>",
-        '        <div class="rows" data-rows>',
+        f'        <div class="rows" data-rows data-shown="{NEWEST_SHOWN}">',
         *row_html,
         "        </div>",
+        '        <div class="newest-more">'
+        f'<a class="pill" href="blogs.html">{bi(f"All {n_articles} articles", f"全部 {n_articles} 篇文章")} <span aria-hidden="true">→</span></a>'
+        f'<a class="pill" href="gallery.html">{bi("All work", "全部作品")} <span aria-hidden="true">→</span></a></div>',
         "    </section>",
         "</main>",
     ])

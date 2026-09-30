@@ -1028,6 +1028,13 @@ button {
     font-variant-numeric: tabular-nums;
 }
 
+.newest-more {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 28px;
+}
+
 .rows {
     display: flex;
     flex-direction: column;
@@ -1041,10 +1048,6 @@ button {
     gap: 6px 28px;
     padding: 14px 0;
     transition: opacity 0.35s ease, transform 0.5s var(--ease);
-}
-
-.row.is-out {
-    opacity: 0.12;
 }
 
 .row-main {
@@ -1082,11 +1085,11 @@ button {
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .rows:has(.row:not(.is-out):hover) .row:not(:hover):not(.is-out) {
+    .rows:has(.row:hover) .row:not(:hover) {
         opacity: 0.25;
     }
 
-    .row:not(.is-out):hover {
+    .row:hover {
         transform: translate3d(14px, 0, 0);
     }
 }

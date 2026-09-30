@@ -353,7 +353,6 @@
         if (!canFloat(event)) return;
         const host = (event.target as Element | null)?.closest?.('[data-float]');
         if (!host || host === floatHost) return;
-        if (host.closest('.is-out')) return;
         floatHost = host;
         const el = floatEl();
         const src = host.getAttribute('data-float') || '';
