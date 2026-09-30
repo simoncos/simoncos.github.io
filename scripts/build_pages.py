@@ -693,8 +693,8 @@ def render_about(config: dict[str, Any], site: dict[str, Any]) -> str:
         config,
         title=("About · simoncos", "关于 · simoncos"),
         description=(
-            "About simoncos, a full-stack builder working across AI and data in Hong Kong.",
-            "关于 simoncos：在香港从事 AI 与数据工作的全栈构建者。",
+            "About simoncos: a full-stack builder in Hong Kong, working on AI and data.",
+            "关于 simoncos：在香港做 AI 和数据方向的全栈开发。",
         ),
         canonical="about.html",
     )

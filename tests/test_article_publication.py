@@ -52,7 +52,7 @@ class ArticlePublicationTests(unittest.TestCase):
 
 
 class ArticleDateTests(unittest.TestCase):
-    """Republished older pieces keep their first-publication date."""
+    """An article has one date, when it was written; older pieces keep theirs."""
 
     def check_frontmatter(self, frontmatter):
         spec = importlib.util.spec_from_file_location('date_check_site', ROOT / 'scripts/check_site.py')
@@ -66,26 +66,21 @@ class ArticleDateTests(unittest.TestCase):
             checker.check_article_dates(errors)
             return errors
 
-    def test_historical_date_with_earlier_composition_passes(self):
-        self.assertEqual(self.check_frontmatter('date: 2014-01-04\nwritten: 2012-12'), [])
+    def test_historical_date_passes(self):
         self.assertEqual(self.check_frontmatter('date: 2016-10-24'), [])
 
     def test_missing_date_is_rejected(self):
         errors = self.check_frontmatter('tags: life')
         self.assertEqual(len(errors), 1)
-        self.assertIn('first-publication day', errors[0])
+        self.assertIn('the day the piece was written', errors[0])
 
-    def test_placeholder_written_is_rejected(self):
-        for placeholder in ('原日期未详', 'Date unknown'):
-            with self.subTest(placeholder=placeholder):
-                errors = self.check_frontmatter(f'date: 2026-09-28\nwritten: {placeholder}')
+    def test_written_is_retired(self):
+        # Owner's call, 2026-09-30: one date, when the piece was written.
+        for value in ('2012-12', '原日期未详'):
+            with self.subTest(value=value):
+                errors = self.check_frontmatter(f'date: 2014-01-04\nwritten: {value}')
                 self.assertEqual(len(errors), 1)
-                self.assertIn('omit it when unknown', errors[0])
-
-    def test_written_after_date_is_rejected(self):
-        errors = self.check_frontmatter('date: 2014-01-04\nwritten: 2014-02')
-        self.assertEqual(len(errors), 1)
-        self.assertIn('later than date', errors[0])
+                self.assertIn('written is retired', errors[0])
 
 
 if __name__ == '__main__':
