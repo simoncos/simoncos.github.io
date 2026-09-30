@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: Four idle notes from May 2013: don't live for others, the line that's hard to hold, from foodie to sleepie, and a night in Shanghai with no ticket home.
 ---
 
-# Old Memories: A Few Idle Words
+# A Few Idle Words
 
 Life in fragments.
 

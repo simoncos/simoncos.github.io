@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: The eve of the 2012 Mid-Autumn Festival, my third autumn in Nanjing: what makes a life full? From a line of Xin Qiji's, the thought that without the weight of living you cannot hold your course in the wind.
 ---
 
-# Old Memories: Another Cool Day, a Fine Autumn
+# Another Cool Day, a Fine Autumn
 
 Old memories come to an end.
 

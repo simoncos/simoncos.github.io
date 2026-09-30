@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: December 2011, walking alone on a winter night when an old song called "Numbers" comes up on shuffle. ID numbers, student numbers, user IDs: a person is just a number in the crowd, and yet I believe I will leave more than a number behind.
 ---
 
-# Old Memories: Numbers
+# Numbers
 
 Walking towards the sea.
 

@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: Four years after the Wenchuan earthquake, for the lives that ended so suddenly. That afternoon and that night are only a symbol to those who weren't there; as a survivor, I want to play out my own life before the music stops.
 ---
 
-# Old Memories: Four Years On
+# Four Years On
 
 Everything will flow, like tears in rain.
 

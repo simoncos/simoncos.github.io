@@ -78,7 +78,7 @@ At least we can remember that they were real.
 
 ![Raindrops lit by lamplight at night](assets/images/ten-years-like-rain/fc6fc9e0995578be7065b65cb0e6a6dc.jpg)
 
-[Appendix: "Old Memories: Four Years On"](https://www.jianshu.com/p/aedf75a08e06) (in Chinese)
+[Appendix: "Four Years On"](old-memories-four-years.en.html)
 
 Taken on 10 May 2020:
 

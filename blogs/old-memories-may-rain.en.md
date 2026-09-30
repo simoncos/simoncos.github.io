@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: May 2013, Nanjing's sticky May rain and an ambiguous year: learning to act on the world instead of only being changed by it, a rainy afternoon's walk alone from school to Jiangjun Mountain, and the thought that the world embraces those who embrace it.
 ---
 
-# Old Memories: May Rain
+# May Rain
 
 Sincere and upright: probably the best posture for an embrace.
 

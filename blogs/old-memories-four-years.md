@@ -5,7 +5,7 @@ updated: 2026-09-30
 description: 汶川地震四年后，写给那些匆匆逝去的生命：那个下午和那一夜，在没经历过的人眼中只是一个符号；作为生还者，在戛然而止之前，奏出自己的生命。
 ---
 
-# 旧忆：四年了
+# 四年了
 
 Everything will flow, like tears in rain.
 

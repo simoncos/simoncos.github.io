@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: September 2011. Serenity is not the same as quiet; it is more like the scent in a wisp of incense smoke, scattered by any wind. On the tug of war between the inner and the outer self, and leaving yourself a little room to come close to serenity.
 ---
 
-# Old Memories: Serenity
+# Serenity
 
 At ease in motion and in stillness; balance is what matters most.
 

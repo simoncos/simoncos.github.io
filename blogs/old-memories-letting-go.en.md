@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: Spring 2011 in Nanjing. An old notebook I couldn't bear to write in is nearly ruined by a squashed cup of yogurt, and I wonder whether letting go is often the more perfect ending.
 ---
 
-# Old Memories: Love and Letting Go
+# Love and Letting Go
 
 Things have their weight.
 

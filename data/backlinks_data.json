@@ -357,8 +357,38 @@
     "old-memories-autumn.html": [],
     "old-memories-july.en.html": [],
     "old-memories-july.html": [],
-    "old-memories-four-years.en.html": [],
-    "old-memories-four-years.html": [],
+    "old-memories-four-years.en.html": [
+      {
+        "group_id": "ten-years-like-rain",
+        "date": "2018-05-12",
+        "languages": {
+          "zh": {
+            "title": "十年如雨",
+            "file": "ten-years-like-rain.html"
+          },
+          "en": {
+            "title": "Ten Years Like Rain",
+            "file": "ten-years-like-rain.en.html"
+          }
+        }
+      }
+    ],
+    "old-memories-four-years.html": [
+      {
+        "group_id": "ten-years-like-rain",
+        "date": "2018-05-12",
+        "languages": {
+          "zh": {
+            "title": "十年如雨",
+            "file": "ten-years-like-rain.html"
+          },
+          "en": {
+            "title": "Ten Years Like Rain",
+            "file": "ten-years-like-rain.en.html"
+          }
+        }
+      }
+    ],
     "old-memories-on-repeat.en.html": [],
     "old-memories-on-repeat.html": [],
     "only-forward-reading-1988.en.html": [],

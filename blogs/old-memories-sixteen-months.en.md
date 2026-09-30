@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: 31 August 2014, the start of my fifth year in Nanjing, counting back month by month over sixteen months of internships, IELTS, a turned-down offer, a graduation project and a new job.
 ---
 
-# Old Memories: My Sixteen Months
+# My Sixteen Months
 
 In a flash, another thirty-six months.
 

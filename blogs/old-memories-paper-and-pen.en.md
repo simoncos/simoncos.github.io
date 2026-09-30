@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: March 2011, on the calluses of people who write by hand, the feel of white paper and the customs of writing in the old days, and a beauty that may be fading as the keyboard replaces paper and pen.
 ---
 
-# Old Memories: Paper and Pen
+# Paper and Pen
 
 When did I stop relying on paper and pen? There's no need to dig deep into that; the answer comes at once. The written word: I've loved it for eight years, at one point so much that I had to carry a little notebook and a pen with me everywhere. When I first fell in love with the written word, Guo Jingming was still a sentimental big boy, and in most people's eyes Han Han was still mostly a rebellious brat. Guo Jingming wrote back then that he liked holding a pen and writing on sheet after sheet of smooth, clean white paper.
 

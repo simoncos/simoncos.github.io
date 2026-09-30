@@ -6,7 +6,7 @@ translation: Claude Opus 5.5
 description: Two pieces written in Nanjing in July 2012. A project grown from an idea in an elective class makes the summer serene and untangled; then, on the night before leaving school, strong wind, a crescent moon, Natsume's Book of Friends and the beauty of imperfection.
 ---
 
-# Old Memories: A Serene and Precious July
+# A Serene and Precious July
 
 Summer, it seems, is often my turning point.
 

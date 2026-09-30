@@ -77,7 +77,7 @@ description: 汶川地震十年后，回望一个普通亲历者的记忆：历�
 
 ![夜色中被灯光照亮的雨滴](assets/images/ten-years-like-rain/fc6fc9e0995578be7065b65cb0e6a6dc.jpg)
 
-[附《旧忆：四年了》](https://www.jianshu.com/p/aedf75a08e06)
+[附《四年了》](old-memories-four-years.html)
 
 摄于2020.05.10：
 
