@@ -212,7 +212,7 @@ def build_article_sequence(article_groups):
 ARTICLE_TEXT = {
     'en': {
         'section': 'Articles', 'toc': 'Contents', 'created': 'Created', 'updated': 'Updated',
-        'reading': 'Reading', 'minutes': '{n} min', 'written': 'Written', 'translation': 'Translation',
+        'reading': 'Reading', 'minutes': '{n} min', 'translation': 'Translation',
         'series': 'Series', 'part': 'Part {n}', 'tags': 'Tags', 'links_out': 'This article links to',
         'links_in': 'Linked from', 'links_in_empty': 'No other article links here yet.',
         'newer': 'Newer', 'older': 'Older', 'more': 'More reading', 'top': 'Back to top',
@@ -220,7 +220,7 @@ ARTICLE_TEXT = {
     },
     'zh': {
         'section': '文章', 'toc': '目录', 'created': '创建', 'updated': '更新',
-        'reading': '阅读', 'minutes': '{n} 分钟', 'written': '写于', 'translation': '翻译',
+        'reading': '阅读', 'minutes': '{n} 分钟', 'translation': '翻译',
         'series': '系列', 'part': '第 {n} 篇', 'tags': '标签', 'links_out': '本文提到',
         'links_in': '提到本文', 'links_in_empty': '暂时还没有其他文章引用这篇。',
         'newer': '更新的一篇', 'older': '更早的一篇', 'more': '继续阅读', 'top': '回到顶部',
@@ -307,13 +307,13 @@ def meta_item(label, value):
 
 
 def build_post_meta(metadata, language, created, updated, reading_minutes, paired_entry):
-    """Created / Updated / Reading, then optional provenance, then the link
-    to the translation.
+    """Created / Updated / Reading, then the translator, then the link to the
+    translation.
 
-    `written` (when the piece was actually composed, which can predate
-    publication) and `translation` used to sit as bare paragraphs at the top of
-    the body, where they read as stray text and got scraped into the meta
-    description. They are metadata, so they render as metadata.
+    `translation` used to sit as a bare paragraph at the top of the body, where
+    it read as stray text and got scraped into the meta description. It is
+    metadata, so it renders as metadata. There is no separate "written" row:
+    `date` is when the piece was written (owner's call, 2026-09-30).
     """
     text = ARTICLE_TEXT[language]
     rows = [
@@ -321,10 +321,6 @@ def build_post_meta(metadata, language, created, updated, reading_minutes, paire
         meta_item(text['updated'], f'<span class="num">{esc(updated)}</span>'),
         meta_item(text['reading'], esc(text['minutes'].format(n=reading_minutes))),
     ]
-
-    written = (metadata.get('written') or '').strip()
-    if written:
-        rows.append(meta_item(text['written'], f'<span class="num">{esc(written)}</span>'))
 
     translation = (metadata.get('translation') or '').strip()
     if translation:

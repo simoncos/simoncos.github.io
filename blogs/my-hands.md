@@ -3,7 +3,6 @@ tags: life
 date: 2014-01-04
 updated: 2026-09-28
 description: 写于 2012 年 12 月的一首短诗，附海子的《你的手》。
-written: 2012-12
 ---
 
 # 我的手
