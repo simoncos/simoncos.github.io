@@ -1,7 +1,7 @@
 ---
 tags: thinking,design
 date: 2017-05-04
-updated: 2026-09-28
+updated: 2026-09-29
 description: 从香港中环到旺角的路线问题出发，讨论开放问题、信息不完全、隐含前提与可证伪性。
 series: 问题解决与设计
 series_part: 3

@@ -46,7 +46,7 @@ People risked going back into the classrooms to grab some desks and chairs, then
 
 Communications cut.
 
-People passed the little garden and saw only an empty pond, and the water that had leapt out of it.
+People passed the little garden and saw only a bare surface of water, and water that had leapt out of the pond.
 
 Communications cut.
 

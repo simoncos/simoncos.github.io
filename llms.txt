@@ -25,7 +25,7 @@ The motto for this site is "Connecting the dots." The site is static, bilingual,
 - [Hermes Agent HV Analysis](https://simoncos.github.io/gallery/research/hermes-agent-hv-analysis.html): Research artifact showing an evidence-first analysis format.
 - [My Personal Knowledge Management System, 2026-03](https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html): Essay on personal systems and the publishing layer.
 - [My Haba Snow Mountain Journey](https://simoncos.github.io/blogs/my-haba-snow-mountain-journey.en.html): Field note about outdoor experience, risk, and body feedback.
-- [Problem Solving and Design](https://simoncos.github.io/blogs.html#series-problem-solving-and-design): Four completed essays in Chinese and English, from problem situations and feasible solutions to open problems, indecision and the optimal solution.
+- [Problem Solving and Design](https://simoncos.github.io/blogs.html#series-problem-solving-and-design): Four completed essays in Chinese and English, from problem situations and feasible solutions to open-ended problems, indecision and the optimal solution.
 
 ## Data and feeds
 

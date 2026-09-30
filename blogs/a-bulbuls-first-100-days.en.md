@@ -10,7 +10,7 @@ description: From picking up a fledgling onwards, the little bulbul's first hund
 
 ![Day 1](assets/images/a-bulbuls-first-100-days/878a36904b94aed69b19c0ce13ca3839.jpg)
 
-Since I brought a round little thing home one Saturday at noon, before I knew it today has become the bulbul's hundredth day with us. I wrote this as I went back through the photos and videos, so it's messy and rough. When I have time I plan to upload some of the videos to Bilibili~
+Today marks the little bulbul's hundredth day with us. The days have slipped by since I brought that round little thing home one Saturday at noon. I wrote this as I went back through the photos and videos, so it's messy and rough. When I have time I plan to upload some of the videos to Bilibili~
 
 ### Day 1 - May 23
 
@@ -41,11 +41,11 @@ Early in the morning, half awake, I heard the little thing's piercing calls. I c
 
 ### Day 3 - May 25
 
-I had moved it to the kitchen the night before, but a little after seven on Monday morning its noise still got me up to feed it. I had the baffling feeling of having become a stay-at-home dad (an intern one?). I tried peeling it a loquat, and it ate with real relish, calling as it ate. Sometimes it stared at the food (and at the straw on the counter), beak wide open and wings trembling, but wouldn't go for it, as if it believed loquat flesh and crawling worms would fly into its mouth by themselves.
+I had moved it to the kitchen the night before, but a little after seven on Monday morning its noise still got me up to feed it. I had the baffling feeling of having become a dad (in training?). I tried peeling it a loquat, and it ate with real relish, calling as it ate. Sometimes it stared at the food (and at the straw on the counter), beak wide open and wings trembling, but wouldn't go for it, as if it believed loquat flesh and crawling worms would fly into its mouth by themselves.
 
 ### Day 4 - May 26
 
-The little thing got even clingier. When I was at the computer, it squatted on my mouse arm and dozed... Its tail feathers had grown a little, into a tiny tuft.
+The little thing got even clingier. When I was working at my computer, it squatted on my mouse arm and dozed... Its tail feathers had grown a little, into a tiny tuft.
 
 ![The young bulbul, Day 4 - May 26, picture 1](assets/images/a-bulbuls-first-100-days/7a879ad0acb0c87ddd7dfb88cc8ec529.jpg)
 
