@@ -312,7 +312,7 @@
           "title": "A Bulbul's First 100 Days",
           "file": "a-bulbuls-first-100-days.en.html",
           "markdown": "a-bulbuls-first-100-days.en.md",
-          "excerpt": "Since I brought a round little thing home one Saturday at noon, before I knew it today has become the bulbul's hundredth day with us. I wrote this as I went back through the photos and videos, so it's messy and rough. When I have time I plan to upload some of the videos to Bilibili~\nDay 1 - May 23\nWhen I found it, it was huddled in a corner of the outside window frame of our compound's gatehouse, dazed and silent. At midday there were no people around, no trees and no birds, so as a stopgap I...",
+          "excerpt": "Today marks the little bulbul's hundredth day with us. The days have slipped by since I brought that round little thing home one Saturday at noon. I wrote this as I went back through the photos and videos, so it's messy and rough. When I have time I plan to upload some of the videos to Bilibili~\nDay 1 - May 23\nWhen I found it, it was huddled in a corner of the outside window frame of our compound's gatehouse, dazed and silent. At midday there were no people around, no trees and no birds, so as a stopgap...",
           "description": "From picking up a fledgling onwards, the little bulbul's first hundred days at home: eating, learning to fly, bathing, singing, and the closeness that slowly grew between a person and a bird.",
           "image": "blogs/assets/images/a-bulbuls-first-100-days/878a36904b94aed69b19c0ce13ca3839.jpg",
           "available": true
@@ -486,11 +486,11 @@
           "available": true
         },
         "en": {
-          "title": "Problem Solving and Design (3): Open Problems",
+          "title": "Problem Solving and Design (3): Open-Ended Problems",
           "file": "problem-solving-and-design-3-open-problems.en.html",
           "markdown": "problem-solving-and-design-3-open-problems.en.md",
-          "excerpt": "Keywords: open problems | incomplete information | hidden premises | falsifiability\nWith the problem situation in place and a better grasp of what feasible solutions are, the next thing to think about is how to pan for gold: how to find feasible solutions in the possibility space. I say panning for gold because the possibility space can be huge, depending on how tightly the problem situation constrains it. Take this problem:\nA1. Travelling only by MTR, find the shortest route from Central to Mong Kok in Hong Kong.\nWith the MTR route map, it isn't hard to find a feasible...",
-          "description": "Starting from a route across Hong Kong, from Central to Mong Kok: open problems, incomplete information, hidden premises and falsifiability.",
+          "excerpt": "Keywords: open-ended problems | incomplete information | hidden premises | falsifiability\nWith the problem situation in place and a better grasp of what feasible solutions are, the next thing to think about is how to pan for gold: how to find feasible solutions in the possibility space. I say panning for gold because the possibility space can be huge, depending on how tightly the problem situation constrains it. Take this problem:\nA1. Travelling only by MTR, find the shortest route from Central to Mong Kok in Hong Kong.\nWith the MTR route map, it isn't hard to find a feasible...",
+          "description": "Starting from a route across Hong Kong, from Central to Mong Kok: open-ended problems, incomplete information, hidden premises and falsifiability.",
           "image": "blogs/assets/images/problem-solving-and-design-3-open-problems/22938bf33f05d2bd85f5debab9c9eabe.jpg",
           "available": true
         }

@@ -71,7 +71,7 @@ Maybe this example is too gory, and absolute rationality is hard for us. But wha
 
 Now let's relax a little.
 
-We have a **model of decision**, with choices in it and a value function. We know that a larger value of the function is of course better, and the largest naturally corresponds to the optimal solution. Sometimes it is the other way round, and then the function can be called a **loss / cost function**. This larger-and-smaller, this comparability, reflects which of the feasible solutions are better or worse relative to each other, that is, **[preference](https://en.wikipedia.org/wiki/Preference_(economics))**. Why do we need a value function? Fundamentally, what we need is for the choices to be **comparable**.
+We have a **decision model**, with choices in it and a value function. We know that a larger value of the function is of course better, and the largest naturally corresponds to the optimal solution. Sometimes it is the other way round, and then the function can be called a **loss / cost function**. This larger-and-smaller, this comparability, reflects which of the feasible solutions are better or worse relative to each other, that is, **[preference](https://en.wikipedia.org/wiki/Preference_(economics))**. Why do we need a value function? Fundamentally, what we need is for the choices to be **comparable**.
 
 But comparability is actually a very interesting trap. Here is an example:
 
@@ -109,7 +109,7 @@ We often take turns applying different "single-factor models" to whatever proble
 
 We haven't used formalization, or a **sufficiently complex** model, to record and examine the whole thinking process and all the factors. So on important questions, especially the ones that set the direction of a life, every so often we unconsciously go round the same strange loop again, even get stuck in an infinite loop within one round, randomly goto-ing to some step. **We keep building new systems of preferences, but never one that is complete, transitive and consistent at once, and so we never find the optimal solution**.
 
-Our brains like simplicity. If one method, one factor, could explain everything and settle every question (42?), why go to the trouble of weighing every last detail with painstaking care? Simplifying isn't a bad thing. Keeping the big and dropping the small, from [the previous part](problem-solving-and-design-3-open-problems.en.html), is a very useful strategy (especially for open problems). But as this part has tried to say, **oversimplifying is wrong. It is running away from reason, and only ties the knots tighter.**
+Our brains like simplicity. If one method, one factor, could explain everything and settle every question (42?), why go to the trouble of weighing every last detail with painstaking care? Simplifying isn't a bad thing. Focusing on what matters and setting aside minor details, from [the previous part](problem-solving-and-design-3-open-problems.en.html), is a very useful strategy (especially for open-ended problems). But as this part has tried to say, **oversimplifying is wrong. It is running away from reason, and only ties the knots tighter.**
 
 Of course, every problem has a level of model complexity that suits it. Too high and too low are both bad, and just right is best. I'll keep thinking about that in the next posts.
 
