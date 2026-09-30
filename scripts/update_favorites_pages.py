@@ -51,6 +51,15 @@ ESSAYS: dict[str, str] = {
 
 # The category glyphs are traditional characters, as in the design.
 GLYPHS = {"books": "書", "film": "影", "music": "音", "games": "遊"}
+# What the search box finds, by category: the title, the credits on the meta
+# line and the notes (games carry only a year there). English placeholders
+# drop "Search" to fit the box at 1000px; the label keeps it.
+SEARCH_HINT = {
+    "books": (("Title, author or note", "搜索书名、作者、短评"), ("Search by title, author or note", "按书名、作者或短评搜索")),
+    "film": (("Title, director or note", "搜索片名、导演、短评"), ("Search by title, director or note", "按片名、导演或短评搜索")),
+    "music": (("Album, artist or note", "搜索专辑、音乐人、短评"), ("Search by album, artist or note", "按专辑、音乐人或短评搜索")),
+    "games": (("Title or note", "搜索游戏名、短评"), ("Search by title or note", "按游戏名或短评搜索")),
+}
 # English name, singular unit, plural unit.
 ENGLISH = {
     "books": ("Books", "book", "books"),
@@ -265,12 +274,17 @@ def filter_bar(category: dict[str, Any]) -> str:
             f'{bi(en, zh)} <span class="seg-n">{counts[key]}</span></button>'
         )
     first = min(PER_PAGE, len(works))
+    placeholder, label = SEARCH_HINT[category["id"]]
     return "\n".join([
         '            <div class="fav-tools">',
         f'                <div class="seg fav-filter" role="group" data-fav-filters{i18n_attrs(aria_label=("Filter", "筛选"))}>'
         + "".join(buttons) + "</div>",
+        '                <label class="search fav-search"><span class="search-icon" aria-hidden="true">⌕</span>'
+        '<input type="search" data-fav-search autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="search"'
+        f'{i18n_attrs(placeholder=placeholder, aria_label=label)}></label>',
         f'                <span class="fav-range num" data-fav-range>1–{first} / {len(works)}</span>',
         "            </div>",
+        '            <p class="visually-hidden" role="status" data-fav-status></p>',
     ])
 
 
@@ -305,6 +319,7 @@ def category_page(config: dict[str, Any], payload: dict[str, Any], category: dic
         '            <ol class="fav-list" data-fav-list tabindex="-1" lang="zh-Hans">',
         rows(category),
         "            </ol>",
+        f'            <p class="fav-empty" data-fav-empty hidden>{bi("Nothing matches.", "没有匹配的作品。")}</p>',
         pager(),
         about_section(payload, " " * 12),
         "        </div>",

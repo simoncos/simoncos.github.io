@@ -132,6 +132,22 @@ class FavoritesPageTests(unittest.TestCase):
                 self.assertIn('<span data-l="zh" lang="zh-Hans">', html)
                 self.assertRegex(html, r'<ol class="(?:fav-list|reel-list)"[^>]*lang="zh-Hans"')
 
+    def test_category_pages_have_a_bilingual_search_box(self):
+        # The box works on the rows already in the page; without JavaScript
+        # the whole tool row is hidden, so it never shows dead.
+        for category in load_payload()["categories"]:
+            html = (ROOT / f"favorites/{category['id']}.html").read_text(encoding="utf-8")
+            with self.subTest(category=category["id"]):
+                box = re.search(r'<input type="search" data-fav-search[^>]*>', html)
+                self.assertIsNotNone(box)
+                for attr in ("placeholder", "data-zh-placeholder", "aria-label", "data-zh-aria-label"):
+                    self.assertRegex(box.group(0), rf' {attr}="[^"]+"')
+                tools = html.index('<div class="fav-tools">')
+                self.assertLess(tools, box.start())
+                self.assertIn('role="status" data-fav-status', html)
+                self.assertIn("data-fav-empty hidden", html)
+        self.assertNotIn("data-fav-search", (ROOT / "favorites.html").read_text(encoding="utf-8"))
+
     def test_nav_lists_the_column_in_both_languages(self):
         site_shell = (ROOT / "scripts/site_shell.py").read_text(encoding="utf-8")
         self.assertIn('("favorites", "favorites.html", "Favorites", "收藏")', site_shell)
