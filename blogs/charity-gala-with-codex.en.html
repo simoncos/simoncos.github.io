@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-page-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lending a Hand at a Charity Gala, with Codex · Articles · simoncos</title>
+    <meta name="description" content="Working with Codex on a charity gala&#x27;s website, auction testing and data preparation. Some time saved, a few small mishaps, and thoughts on sharing context between people and agent...">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/charity-gala-with-codex.en.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/charity-gala-with-codex.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/charity-gala-with-codex.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/charity-gala-with-codex.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Lending a Hand at a Charity Gala, with Codex">
+    <meta property="og:description" content="Working with Codex on a charity gala&#x27;s website, auction testing and data preparation. Some time saved, a few small mishaps, and thoughts on sharing context between people and agent...">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/charity-gala-with-codex.en.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://simoncos.github.io/blogs/assets/images/charity-gala-with-codex/cover.jpg">
+    <meta property="og:image:width" content="1600">
+    <meta property="og:image:height" content="853">
+    <meta property="og:image:alt" content="A blog cover adapted from the event website&#x27;s artwork: many hands support children walking toward a bright doorway. The Chinese title reads “Lending a Hand at a Charity Gala, with Codex.”">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lending a Hand at a Charity Gala, with Codex">
+    <meta name="twitter:description" content="Working with Codex on a charity gala&#x27;s website, auction testing and data preparation. Some time saved, a few small mishaps, and thoughts on sharing context between people and agent...">
+    <meta name="twitter:image" content="https://simoncos.github.io/blogs/assets/images/charity-gala-with-codex/cover.jpg">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20261001a"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20261001b">
+    <script src="../src/js/site.js?v=20261001a" defer></script>
+    <script src="../src/js/article.js?v=20261001a" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="charity-gala-with-codex">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="charity-gala-with-codex.html" hreflang="zh-Hans" data-lang-nav="zh"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← Articles</a>
+                <h1 class="article-title">Lending a Hand at a Charity Gala, with Codex</h1>
+            </div>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">Created</span><span class="num">2026-10-01</span></span>
+                    <span class="meta-item"><span class="k">Updated</span><span class="num">2026-10-01</span></span>
+                    <span class="meta-item"><span class="k">Reading</span>7 min</span>
+                    <span class="meta-item"><span class="k">Translation</span>Codex (GPT-6)</span>
+                    <a class="meta-alt" href="charity-gala-with-codex.html" hreflang="zh-Hans" lang="zh-Hans" data-lang-nav="zh">中文 ↗</a>
+                </div>
+                <div class="post-content">
+
+<p><img alt="A blog cover adapted from the event website's artwork: many hands support children walking toward a bright doorway. The Chinese title reads “Lending a Hand at a Charity Gala, with Codex.”" decoding="async" height="853" src="assets/images/charity-gala-with-codex/cover.jpg" width="1600"/></p>
+<p>I helped with Spring Blooms' annual charity gala again this year, and was glad to contribute in my own small way. This time I had a few AI helpers. Compared with last year, I spent less time and managed to do quite a bit more: building and deploying the event website, coordinating requirements and testing the auction system, maintaining auction item information, creating an online donation pledge form, writing promotional copy, and handling the various loose ends after the event.</p>
+<p>Some of these were things I could have done before, just with more time. Others were things I only had room to take on because AI was helping. There were plenty of ways it made life easier, along with a few unexpected little episodes worth writing down.</p>
+<p>First, the event website. The organizing team supplied the design, and I had Codex turn the Illustrator and PDF files into a webpage, adapt it for phones, and deploy a preview. We revised it from feedback and gradually added the event brochure, auction link and QR codes. A separate development team built the auction platform; Codex and I helped with requirements, data preparation and testing.</p>
+<p>The webpage came together quickly, but getting the details right still took a few rounds. “Link to PDF,” an instruction in the design explaining how something should work, once ended up on the page as actual text. Photo crops, logo sizes and font sizes all needed individual adjustments. There was no mobile design, and shrinking the entire multi-column sponsor list to fit a phone made the names too small to read. So we rearranged the names and logos, then dealt with little things like a lone name on the last row that wasn't centered.</p>
+<p>None of this was especially difficult, but there were lots of small pieces. Now I could point out what looked wrong, have Codex change and deploy it, then open it again to check. Most of the effort saved was in implementation, leaving me more attention for how the result actually looked.</p>
+<p>Next came the auction item information. Excel files, PDFs, image folders, plus more details arriving in chats: as an event takes shape, file versions tend to multiply.</p>
+<p>Once, the images and item numbers simply wouldn't line up. After some digging, we realized that the organizing team and we were looking at different spreadsheets. We settled on one location for the master file, archived the old versions, and based subsequent updates on that same sheet. That cut down a lot of back-and-forth checking. Codex handled batch field checks, incorrect image references, and comparisons between the PDF and Excel versions. Handing over that work certainly saved some eyestrain.</p>
+<p>It could be a little too helpful, though. A “5000” appeared in the donor column of the original sheet. Codex decided it was probably the minimum bid increment and moved it there. A plausible guess, but nobody had confirmed it. After reviewing it, we left the relevant fields blank, put the guess in a note, and asked the organizing team to confirm.</p>
+<p>I gradually leaned toward having it go through the material first, flag anything uncertain, and collect those questions for confirmation. It could help spot problems. Where we didn't yet know the answer, it was fine to leave it unknown for a while.</p>
+<p>Images brought their own small troubles. Some files had a JPG extension but were actually PSDs. Some originals exceeded the upload limit. Tall paintings had their tops and bottoms cropped by the system. One attempt to process an image with generative AI even changed the lettering on the packaging. That obviously wouldn't do.</p>
+<p>In the end, the most useful fixes were often simple: check the format, compress a copy, resize without changing the proportions, add white margins, and keep the original. Sometimes all it took to show a whole painting was a square white background.</p>
+<p>Testing the auction system was another area where AI helped a lot. Codex could operate the admin interface through a browser, import items, then check the categories, images, details and bidding entry points on the public-facing side.</p>
+<p>During testing, we found cases where the same item showed different amounts in the listing, detail page and default bid. Sometimes the amount was right when the page first opened, then jumped back to an old value a moment later. If we had stopped at the admin interface's “Import successful,” these would have been easy to miss.</p>
+<p>Once it found a problem, Codex could assemble the item involved, the steps to reproduce it and screenshots. I passed those to the developers. After a fix, we went through the same steps again. That spared me a lot of repetitive clicking and made the issues easier to explain.</p>
+<p>The reports themselves went through some trimming, too. One five-page report became a single page covering only the key issues that needed development work. If an image could be displayed properly by adding a white background, we could just take care of the image ourselves. With the event approaching, everyone had plenty on their plate. Clear, short feedback made it easier for the next person to pick things up.</p>
+<p>Of course, the AI tools could also get stuck. Browser control repeatedly failed to connect at one point; investigation eventually showed that it was getting stuck while loading the tool's own configuration. A shared Excel file could be locked when someone else had it open, so we had to wait, get the latest version, and merge our changes. Some uploaded images also needed extra handling by the development team before they would display correctly.</p>
+<p>In practice, people and agents often took turns: filling in information, checking details, and working through whatever new problem had appeared.</p>
+<p>There was also a mistake worth remembering during the follow-up auction after the gala. We had initially considered reducing all remaining items' prices by 20%. I later changed the plan, but Codex still followed the old decision and discounted six items. When I noticed and pointed it out, it checked that no new bids had come in, then restored the prices.</p>
+<p>That gave me a more concrete understanding of long conversations. Having the history available doesn't mean an agent can reliably tell which decisions are still in force. For changes to prices, timing, or whether an item is listed, restating the current plan before execution is still useful. Otherwise, the human has turned the page while the agent is diligently following instructions from a few pages back.</p>
+<p>Later, we moved the paper pledge form into Google Forms, wrote copy for the follow-up auction, saved the results and prepared the handover. None of these tasks looked particularly big on its own, but together they took time. With AI helping, I really could spend less time on spreadsheets, webpages and repeated checks, and pick up a little more work than I otherwise might have managed.</p>
+<p>Looking back, though, my strongest impression has two sides.</p>
+<p>On one side, AI removed a great deal of friction from moving between systems and working with data, and lightened the testing and development load. Many things that used to feel laborious even to contemplate could now be started first and improved along the way.</p>
+<p>On the other, the hardest part of the whole process was still that <strong>the context wasn't connected</strong>.</p>
+<p>Event conversations happened on WeChat, scattered across different people and groups. Codex worked in several separate conversations. The auction platform's admin and public interfaces each showed another part of the current state.</p>
+<p>So I had to bring new decisions from WeChat to Codex, organize the problems it found for the developers, bring their replies back for retesting, and finally relay the results to the organizing team.</p>
+<p>A change might have been confirmed in a group chat while the document still said “awaiting confirmation.” The admin system might be updated while the spreadsheet wasn't. A plan might have been dropped while its old version remained in a long conversation. Before AI could help, I often had to piece that background together again.</p>
+<p>When several parties are preparing an event together, it's natural for information to keep arriving as things develop. Being part of it gave me a more concrete sense of this: speeding up individual steps doesn't necessarily speed up the whole process by the same proportion. AI had taken on quite a bit of the execution, but connecting context across tools and conversations still needed a person.</p>
+<p>The organizing and development teams kept supplying information, checking details and handling last-minute changes throughout. Their efforts were what allowed things to move forward. Working together like this also gave me a few thoughts about what might be possible in the future.</p>
+<p>Suppose we started from first principles, temporarily set aside the boundaries of our existing tools and platforms, and let ourselves imagine freely. Could we do the same things more easily next time?</p>
+<p>Perhaps people and agents could work together more naturally, with requirements, relevant knowledge, issue lists and current decisions continuously shared and updated in a common workspace. When a change was confirmed, the people and agents who needed it could know. When a problem was solved, the result could go back into the original record. When a new decision replaced an old plan, it wouldn't depend on someone remembering to mention it again.</p>
+<p>Perhaps that would mean less time passing information around and checking it, leaving more attention for communication, judgment and the event itself.</p>
+<p>I don't yet know exactly what that would look like. This experience simply made it feel like a direction worth exploring. Being able to contribute a little more to the event with AI's help is already something I'm happy about. If, in time, it also makes working together a little easier for everyone, so much the better.</p>
+<p>Onward, without end!</p>
+                </div>
+                <div class="article-tags"><h2 class="k">Tags</h2><a class="tag" href="../blogs.html#topic-ai">AI</a><a class="tag" href="../blogs.html#topic-hack">Hack</a><a class="tag" href="../blogs.html#topic-life">Life</a></div>
+                <section class="xref-grid"><div class="xrefs is-empty"><h2 class="k">Linked from</h2><span class="xrefs-empty">No other article links here yet.</span></div></section>
+                <nav class="post-nav" aria-label="More reading"><a class="post-nav-card post-nav-older" rel="next" href="my-personal-knowledge-management-system-2026-03.en.html"><span class="k">Older</span><span class="post-nav-title">My Personal Knowledge Management System, 2026-03</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Oct 1, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-10-01</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="Back to top" title="Back to top">↑</button>
+</body>
+</html>
