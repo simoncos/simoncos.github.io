@@ -123,10 +123,44 @@
     ],
     "setting-aside-this-hour.en.html": [],
     "setting-aside-this-hour.html": [],
+    "reading-2019.en.html": [],
+    "reading-2019.html": [],
     "seen-and-heard-in-lhasa.en.html": [],
     "seen-and-heard-in-lhasa.html": [],
     "media-and-content-business-1-communication-models.en.html": [],
     "media-and-content-business-1-communication-models.html": [],
+    "reading-2018.en.html": [
+      {
+        "group_id": "reading-2019",
+        "date": "2020-01-01",
+        "languages": {
+          "zh": {
+            "title": "2019年我的读书小结",
+            "file": "reading-2019.html"
+          },
+          "en": {
+            "title": "My Reading Roundup for 2019",
+            "file": "reading-2019.en.html"
+          }
+        }
+      }
+    ],
+    "reading-2018.html": [
+      {
+        "group_id": "reading-2019",
+        "date": "2020-01-01",
+        "languages": {
+          "zh": {
+            "title": "2019年我的读书小结",
+            "file": "reading-2019.html"
+          },
+          "en": {
+            "title": "My Reading Roundup for 2019",
+            "file": "reading-2019.en.html"
+          }
+        }
+      }
+    ],
     "hong-kong-drifters-and-mainland-income-tax.en.html": [],
     "hong-kong-drifters-and-mainland-income-tax.html": [],
     "what-went-unwritten.en.html": [],
@@ -137,6 +171,8 @@
     "simpsons-paradox-and-the-flaws-of-intuition.html": [],
     "the-tatami-galaxy.en.html": [],
     "the-tatami-galaxy.html": [],
+    "reading-2017-first-half.en.html": [],
+    "reading-2017-first-half.html": [],
     "problem-solving-and-design-4-choice-and-optima.en.html": [],
     "problem-solving-and-design-4-choice-and-optima.html": [],
     "problem-solving-and-design-3-open-problems.en.html": [
@@ -173,6 +209,66 @@
     ],
     "tracing-back.en.html": [],
     "tracing-back.html": [],
+    "reading-2016.en.html": [
+      {
+        "group_id": "reading-2018",
+        "date": "2019-01-04",
+        "languages": {
+          "zh": {
+            "title": "2018年我读过的好书",
+            "file": "reading-2018.html"
+          },
+          "en": {
+            "title": "Good Books I Read in 2018",
+            "file": "reading-2018.en.html"
+          }
+        }
+      },
+      {
+        "group_id": "reading-2017-first-half",
+        "date": "2017-06-21",
+        "languages": {
+          "zh": {
+            "title": "2017上半年我读过的书",
+            "file": "reading-2017-first-half.html"
+          },
+          "en": {
+            "title": "Books I Read in the First Half of 2017",
+            "file": "reading-2017-first-half.en.html"
+          }
+        }
+      }
+    ],
+    "reading-2016.html": [
+      {
+        "group_id": "reading-2018",
+        "date": "2019-01-04",
+        "languages": {
+          "zh": {
+            "title": "2018年我读过的好书",
+            "file": "reading-2018.html"
+          },
+          "en": {
+            "title": "Good Books I Read in 2018",
+            "file": "reading-2018.en.html"
+          }
+        }
+      },
+      {
+        "group_id": "reading-2017-first-half",
+        "date": "2017-06-21",
+        "languages": {
+          "zh": {
+            "title": "2017上半年我读过的书",
+            "file": "reading-2017-first-half.html"
+          },
+          "en": {
+            "title": "Books I Read in the First Half of 2017",
+            "file": "reading-2017-first-half.en.html"
+          }
+        }
+      }
+    ],
     "problem-solving-and-design-2-feasible-solutions.en.html": [
       {
         "group_id": "problem-solving-and-design-3-open-problems",
@@ -207,6 +303,20 @@
     ],
     "problem-solving-and-design-1-situation.en.html": [
       {
+        "group_id": "reading-2017-first-half",
+        "date": "2017-06-21",
+        "languages": {
+          "zh": {
+            "title": "2017上半年我读过的书",
+            "file": "reading-2017-first-half.html"
+          },
+          "en": {
+            "title": "Books I Read in the First Half of 2017",
+            "file": "reading-2017-first-half.en.html"
+          }
+        }
+      },
+      {
         "group_id": "problem-solving-and-design-3-open-problems",
         "date": "2017-05-04",
         "languages": {
@@ -236,6 +346,20 @@
       }
     ],
     "problem-solving-and-design-1-situation.html": [
+      {
+        "group_id": "reading-2017-first-half",
+        "date": "2017-06-21",
+        "languages": {
+          "zh": {
+            "title": "2017上半年我读过的书",
+            "file": "reading-2017-first-half.html"
+          },
+          "en": {
+            "title": "Books I Read in the First Half of 2017",
+            "file": "reading-2017-first-half.en.html"
+          }
+        }
+      },
       {
         "group_id": "problem-solving-and-design-3-open-problems",
         "date": "2017-05-04",
@@ -301,6 +425,8 @@
         }
       }
     ],
+    "reading-2015-second-half.en.html": [],
+    "reading-2015-second-half.html": [],
     "zhihu-social-network-analysis-1-basic-statistics.en.html": [
       {
         "group_id": "zhihu-social-network-analysis-2-follow-network",
@@ -335,6 +461,8 @@
     ],
     "ten-trillion-2015s.en.html": [],
     "ten-trillion-2015s.html": [],
+    "reading-2015-first-half.en.html": [],
+    "reading-2015-first-half.html": [],
     "old-memories-young.en.html": [],
     "old-memories-young.html": [],
     "golden-ratio-and-design.en.html": [],

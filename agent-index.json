@@ -112,6 +112,13 @@
       "label": "Zhihu 2015: People, Connections and Influence",
       "url": "https://simoncos.github.io/gallery/research/zhihu-2015.html",
       "description": "Bilingual interactive presentation of a 2015 study: profile statistics, follow-network comparisons, published influence rankings and topics. Historical sample, not current platform data."
+    },
+    {
+      "id": "reading-roundups",
+      "type": "article_series",
+      "label": "Reading Roundups (读书小结)",
+      "url": "https://simoncos.github.io/blogs.html#series-reading-roundups",
+      "description": "Six reading roundups from 2015 to 2019, in Chinese and English, with the original book reviews and historical publication dates."
     }
   ],
   "public_data_files": [

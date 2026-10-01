@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (English)</title><link>https://simoncos.github.io/</link><description>English posts feed</description><language>en</language><generator>generate_blog_pages.py</generator><lastBuildDate>Thu, 01 Oct 2026 13:34:55 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.en.xml" rel="self" type="application/rss+xml" /><item><title>Lending a Hand at a Charity Gala, with Codex</title><link>https://simoncos.github.io/blogs/charity-gala-with-codex.en.html</link><guid>https://simoncos.github.io/blogs/charity-gala-with-codex.en.html</guid><pubDate>Thu, 01 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>Lending a Hand at a Charity Gala, with Codex</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (English)</title><link>https://simoncos.github.io/</link><description>English posts feed</description><language>en</language><generator>generate_blog_pages.py</generator><lastBuildDate>Thu, 01 Oct 2026 23:24:56 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.en.xml" rel="self" type="application/rss+xml" /><item><title>Lending a Hand at a Charity Gala, with Codex</title><link>https://simoncos.github.io/blogs/charity-gala-with-codex.en.html</link><guid>https://simoncos.github.io/blogs/charity-gala-with-codex.en.html</guid><pubDate>Thu, 01 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>Lending a Hand at a Charity Gala, with Codex</h1>
 <p><img alt="A blog cover adapted from the event website's artwork: many hands support children walking toward a bright doorway. The Chinese title reads “Lending a Hand at a Charity Gala, with Codex.”" decoding="async" height="853" src="https://simoncos.github.io/blogs/assets/images/charity-gala-with-codex/cover.jpg" width="1600"/></p>
 <p>This year I helped with the annual charity gala of Springblooms, a charitable organization, and was glad to contribute in my own small way. This time I had a few AI helpers. Compared with last year, I spent less time and managed to do quite a bit more: building and deploying the event website, coordinating requirements and testing the auction system, maintaining auction item information, creating an online donation pledge form, writing promotional copy, and handling the various loose ends after the event.</p>
 <p>Some of these were things I could have done before, just with more time. Others were things I only had room to take on because AI was helping. There were plenty of ways it made life easier, along with a few unexpected little episodes worth writing down.</p>
@@ -1157,7 +1157,152 @@ the pandemic made us lose three years for good, and we are not sure whether it w
 <p>(Translated here from the book's Chinese edition, so the wording is not David Eagleman's own.)</p>
 <p>When I read it, I jotted down a thought: "Like raising the sampling rate: more frames are sampled in the same stretch of time, so looking back afterwards, the time feels longer." The brain is in fact a model of energy saving. It will not spend its own resources processing anything it judges to be of little value. That is why the memories of childhood and youth seem so rich and vivid: they are full of novelty, confusion, passion and discontent, and we would have loved to record every last frame. Later, as life settles into stability and sameness, there are fewer and fewer "first times", fewer and fewer things we long for and cannot have (those we went without for too long became learned helplessness), and time starts to go faster and faster; or rather, our sampling grows coarser and coarser. Every night as we lie in bed, we are better and better able to predict what will happen the next day, or even over the next week or month. How much in all that could endanger (or overturn) our lives? Perhaps risk is the heart of the matter. Value is often found where few people go.</p>
 <p>The COVID-19 pandemic that broke out around the world slowed down a stretch of time for almost everyone and made many people's "tomorrow" unpredictable again. The financial elite call this market sentiment, and their job is to make better, less emotional predictions than everyone else and profit from the gap. But the pandemic will pass in the end, the market will steady in the end, and the small investors who get harvested like leeks will, in the end, grow back when the spring wind blows. What this period leaves us as so-called collective memory is still something illusory; in each person's heart it actually looks different. Perhaps that is inevitable in any great event. Only this time it is more helpless still: people fade out of your life before they can even sit down face to face with you for a few words.</p>
-<p>In what I have written in this hour I set aside, apart from the one point I used as the opening, everything after it seems to lie outside what I first meant to write. But to take up the "pen" again after nearly two years, and leave this one frame for the future, is already another good beginning. I hope to see you again next week.</p>]]></description></item><item><title>A Thing or Two Seen and Heard in Lhasa</title><link>https://simoncos.github.io/blogs/seen-and-heard-in-lhasa.en.html</link><guid>https://simoncos.github.io/blogs/seen-and-heard-in-lhasa.en.html</guid><pubDate>Sun, 29 Sep 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>A Thing or Two Seen and Heard in Lhasa</h1>
+<p>In what I have written in this hour I set aside, apart from the one point I used as the opening, everything after it seems to lie outside what I first meant to write. But to take up the "pen" again after nearly two years, and leave this one frame for the future, is already another good beginning. I hope to see you again next week.</p>]]></description></item><item><title>My Reading Roundup for 2019</title><link>https://simoncos.github.io/blogs/reading-2019.en.html</link><guid>https://simoncos.github.io/blogs/reading-2019.en.html</guid><pubDate>Wed, 01 Jan 2020 00:00:00 +0800</pubDate><description><![CDATA[<h1>My Reading Roundup for 2019</h1>
+<h4>Five stars: highly recommended (in order of recommendation)</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/30171327/">The Astonishing Hypothesis</a> by Francis Crick &amp;</li>
+<li><a href="https://book.douban.com/subject/33383607/">The Brain: The Story of You</a> by David Eagleman</li>
+</ul>
+<p>Category: <strong>Broad reading | Neuroscience | Popular science</strong></p>
+<p><img alt="The Brain: The Story of You: Chinese edition cover" decoding="async" height="800" src="https://simoncos.github.io/blogs/assets/images/reading-2019/a3d87e3b4447bfec94c01d8015378d64.jpg" width="800"/></p>
+<p>Review:
+I put these books together because their content follows a common line, discussing consciousness mainly through vision; even the authors have a teacher–student relationship. <em>The Astonishing Hypothesis</em>, first published in 1994, is by Crick—yes, the DNA one. The title is a little opaque, the terminology plentiful and the information density high. The book's most important keywords: consciousness, vision, neurons, memory, attention, and monkeys. Just kidding about the last one. The models mentioned in the neural network chapter are ancestral: one, ADALINE, dates to 1960. Astonishing. <em>The Brain</em>, first published in 2015, feels a little like the 2010s inheriting from the 1990s, the student from the teacher. Every chapter poses an interesting big question, covering both classics and the frontier, with superb examples, accomplished prose and references at the end. As popular science, this is also a case of the student surpassing the teacher.</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/30171327/">notes on The Astonishing Hypothesis</a> &amp; <a href="https://book.douban.com/people/simoncos/annotation/33383607/">notes on The Brain</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/27041532/">Ubik</a> by Philip K. Dick &amp;</li>
+<li><a href="https://book.douban.com/subject/27041504/">The Minority Report (story collection)</a> by Philip K. Dick</li>
+</ul>
+<p>Category: <strong>Fiction | Stories | Science fiction</strong></p>
+<p><img alt="Ubik: Chinese edition cover" decoding="async" height="1532" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2019/cc9452230f1219b20da68a51894f9fd1.jpg" width="1080"/></p>
+<p>Review:
+Many people, myself included, may not know enough about Philip K. Dick, or PKD. But among <em>Blade Runner</em>, <em>Minority Report</em> and <em>The Man in the High Castle</em>, at least one name is likely familiar. At year's end I read five PKD books in succession. Meanwhile, <em>The Man in the High Castle</em> arrived on television, the game <em>Cyberpunk 2077</em> was about to be released, and there were rumors of a sequel to <em>The Matrix</em>. Add major changes in the real world, and PKD and cyberpunk were everywhere, like the hallucinations in his books. <em>Ubik</em> is a slow burner. After finishing it, all I could do was swear: having endured a dull first half, the second half pulled half of me out of myself. The <em>Minority Report</em> collection is brilliant story after story too. Perhaps because of experiences from drug trips, PKD's fiction favors “self-consciousness,” where oneself is not oneself, and “reality and illusion,” where the world is not the world. His humor and story patterns have something in common with detective novelist Raymond Chandler. If Asimov is the god of science fiction—please don't beat me up, other fans—PKD may be its ghost.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30316475/">The Long Goodbye</a> by Raymond Chandler</li>
+</ul>
+<p>Category: <strong>Fiction | Novel | Detective fiction</strong></p>
+<p><img alt="The Long Goodbye: Chinese edition cover" decoding="async" height="1547" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2019/9db9207011cfdb1bd52046215d032fe6.jpg" width="1080"/></p>
+<p>Review:
+I hadn't touched detective or mystery fiction in years, and was happy to find this novel so much to my taste. Chandler's prose deserves godlike status: humorous, melancholy—isn't that an interesting pair of words?—crisp and seasoned. The Chinese translation deserves considerable credit too. I had never taken notes on so many passages of a novel. A short Douban review put it well: the detective novel is only this story's shell. Perhaps good genre fiction is never satisfied with being only genre fiction. “To say goodbye is to die a little.” The atmosphere of farewell permeates the book. This complex feeling may be the most beautiful and lasting thing we take from it.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/2065597/">Vagabond</a> by Takehiko Inoue</li>
+</ul>
+<p>Category: <strong>Fiction | Manga</strong></p>
+<p><img alt="Vagabond: Chinese edition cover" decoding="async" height="475" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2019/4c2a11926cdd23be21e613c7abbb6843.jpg" width="314"/></p>
+<p>Review:
+Unquestionably a masterpiece. The art makes me drool. Whether combat, inner thoughts or comedy, its expressive force is tremendous. Many characters are immensely lovable, and the story and ideas it wants to express are interesting. P.S. Are we sure Beiluo's character design in <em>GuJian 3</em> wasn't influenced by Miyamoto Musashi? And… Kojiro!!! This manga is in the “maybe within my lifetime” category. I don't want it sitting in my “currently reading” list forever, so I marked it read.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30324808/">Changing Planes</a> by Ursula K. Le Guin</li>
+</ul>
+<p>Category: <strong>Fiction | Stories | Science fiction</strong></p>
+<p><img alt="Changing Planes: Chinese edition cover" decoding="async" height="827" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2019/c6d6bbe5a4f9fabc25828206dec35cc1.jpg" width="563"/></p>
+<p>Review:
+Recalls Borges, <em>Stories of Your Life and Others</em>, <em>Gulliver's Travels</em> (books), <em>Kino's Journey</em> (anime), and <em>Planescape: Torment</em> (a game). A collection of literary imaginary worlds, almost every one leaving an impression. Some would be fascinating expanded into larger fictional worlds. Ursula's broad knowledge shows through her imagination. The title <em>Changing Planes</em> is a pun, and isn't <em>Planescape</em> the English title of that game? Interesting.</p>
+<h4>Four stars: recommended (most recent reading first)</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/27041533/">Do Androids Dream of Electric Sheep?</a> <strong>Fiction | Novel | Science fiction</strong></li>
+</ul>
+<p>Review: The novel wants to express far more complex things than the film. The passages that resonated most with me run from the protagonist entering the theater to establishing the identity of the other bounty hunter, and the peaches and tears in the apartment.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/27039411/">The Man in the High Castle</a> <strong>Fiction | Novel | Science fiction</strong></li>
+</ul>
+<p>Review: Different from what I imagined. As science fiction, it has no “fantastical” element; it is very close to, or simply is, literary fiction. It gave me a little of the feeling of reading <em>Cloud Atlas</em>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/27194517/">The Big Sleep</a> <strong>Fiction | Novel | Detective fiction</strong></li>
+</ul>
+<p>Review: As Murakami says, this is messier than <em>The Long Goodbye</em>. But I really do like Chandler's prose. Very seasoned.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/27039412/">Flow My Tears, the Policeman Said</a> <strong>Fiction | Novel | Science fiction</strong></li>
+</ul>
+<p>Review: Quite peculiar. Surely you'd need to have taken drugs to write those descriptions of taking drugs? Very literary too; calling it genre fiction may not cover it. This is certainly not a novel satisfied with merely telling a story. And the style really does recall Chandler. Also: I followed the translator on Douban. They must have understood the book inside out for the translation to feel this comfortable.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30391099/">Reading in the Brain</a> <strong>Broad reading | Neuroscience | Popular science</strong></li>
+</ul>
+<p>Review: Given the depth of its subject and the detail of its discussion, this really cannot be called an easy popular science read. Extensive findings from neuroscience and psychology, with excellent illustrations, plus the author's synthesis and conjectures, give it something of an academic discussion. Although most of its content concerns reading, the ultimate purpose is to explore the adaptability/plasticity of the human nervous system. Reading is a very clever starting point: this behavior appeared extremely late and is difficult to explain through evolution. It also represents a major difference between humans and other animals, allowing many cross-species comparisons. Reading involves basic visual and auditory processing—the latter mainly in learning—as well as deeper semantic processing. A substantial rabbit hole. Anyone interested in language, vision or neuroscience should read it. Beneath the complexity, even without getting lost in every detail, there is much to gain. The book was written in 2009. How many important findings must there have been in ten years?</p>
+<p>Appendix: <a href="https://book.douban.com/annotation/91195405/">notes on the whole book</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/26280924/">看海的人 (Those Who Watch the Sea, story collection)</a> <strong>Fiction | Stories | Science fiction</strong></li>
+</ul>
+<p>Review: Every story is interesting: strange geometries and forces, uneven spacetime, quantum transport, causal ouroboroses, virtualization and cache leaks, assimilation, degeneration and brainwashing… My favorites are “缓存” (“Cache”) and “看海的人” (“Those Who Watch the Sea”).</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30290031/">The Selfish Gene, 40th-anniversary edition</a> <strong>Broad reading | Biology | Popular science</strong></li>
+</ul>
+<p>Review: Popular science written at the frontier inevitably has problems, as the repairs and revisions across editions over the years show. That doesn't obscure the book's brilliance. One obvious flaw is that some arguments are too long, particularly the responses to commentary in the penultimate chapter. The meme is what people in my circles most often mention, but the book's discussion of it is actually quite preliminary. The perspective of evolution at the gene level gave me more understanding of natural evolution. It took three weeks to read, with many highlights and thoughts along the way. Rewarding overall.</p>
+<p>Appendix: <a href="https://book.douban.com/annotation/91195438/">notes</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30353486/">Make It Stick</a> <strong>Broad reading | Psychology | Popular science</strong></li>
+</ul>
+<p>Review: Loosely structured but still valuable. Besides some old friends, there were examples I encountered here for the first time. It complements <em>Learning How to Learn</em> and <em>Peak</em>.</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/30353486/">notes</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/4820726/">On Liberty</a> <strong>Broad reading | Politics and law</strong></li>
+</ul>
+<p>Review: Reading worthwhile books doesn't solve every problem, but at least leaves you with slightly more sophisticated questions. The book's ideas have limitations too. Its principles are oversimplified, for example, as shown by the laborious discussion of practical problems in the last chapter. But its essential insights remain essential. Unfortunately, it is hard to force someone who doesn't want to read into doing so. Even willing readers easily become one-sided through fixed positions. The book says truth comes through the clash of different views, whereas echo chambers are full of echoes. Published in 1859, a full 160 years ago: the world advances painfully slowly in human affairs. The translation barely passes. Reading it at this particular moment, bringing my own observations and thoughts, was still rewarding. I'll put up my notes later.</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/4820726/">notes</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/6709809/">暗时间 (Dark Time, essays)</a> <strong>Broad reading | Psychology | Problem solving</strong></li>
+</ul>
+<p>Review: Too scattered, although its interests are fascinating and you can see the author has read a lot of cognitive psychology. The Y combinator section thoroughly tangled me up, bringing back the terror of <em>GEB</em>. Fitting for an essay that even models its name after <em>GEB</em>… I'll finish it when I have time. The sorting essay really hit the spot: a sorting problem is actually a search problem. The final essay on Bayes happened to provide material for my article draft too. One star added!</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/6709809/">notes</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/27030507/">Hooked</a> <strong>Broad reading | Psychology | Design</strong></li>
+</ul>
+<p>Review: The Chinese title, “Addicted,” is less good than the original <em>Hooked</em>. Overall, the book is better than expected. Its four steps for forming user habits—internal/external triggers, action, rewards, especially variable ones, and investment—clearly correspond with the four elements of habit in <em>Learning How to Learn</em>. It also mentions several cognitive biases. Many examples suit my taste, including LoL and Stack Overflow, and it briefly touches on gamification. Chapter six's discussion along two dimensions, whether you'd use it yourself and whether it offers users great value, is interesting.</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/27030507/">notes</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/26895988/">学习之道 (Learning How to Learn)</a> <strong>Broad reading | Psychology</strong></li>
+</ul>
+<p>Review: I finished the online course two weeks ago and have now gone through the book. In between, I started using methods it mentions, including the Pomodoro timer, daily lists and recall. Immensely useful. I need to revisit and try them more in my future learning.</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/26895988/">notes</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/25796122/">The Aleph (story collection)</a> <strong>Fiction | Stories</strong></li>
+</ul>
+<p>Review: Several stories here are rich with flavor. The cascading images in “The Aleph” moved me to tears. Reading it puts my brain completely into diffuse mode: wonderfully relaxing, and somehow a good match with Shafiq's soul album <em>The Loop</em>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/25829287/">Mathematics: A Very Short Introduction</a> <strong>Broad reading | Mathematics</strong></li>
+</ul>
+<p>Review: The chapter titles are some of the most important fundamental concepts in mathematics.</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/25829287/">notes</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/4202004/">The Clash of Civilizations and the Remaking of World Order</a> <strong>Broad reading | Politics | Foreign affairs</strong></li>
+</ul>
+<p>Review: I read the beginning at university and finally read it all this time. It corrected quite a few of my earlier naive ideas about politics and foreign affairs, and changed some of my ideas about religion. I wouldn't say every view in it is correct, but its wealth of factual detail and the unfolding of its arguments allow a slightly deeper understanding of some things. In tone, I think the author is already quite neutral, without an obvious inclination toward any particular civilization or value system. Comparing this book from twenty years ago with major events since—such as the Arab Spring, the US presidential election and the Belt and Road Initiative—and smaller things, including views encountered online and in everyday life, then thinking carefully about them, feels fascinating.</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/4202004/">notes</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/6518605/">Remembrance of Earth's Past: The Three-Body Trilogy</a> <strong>Fiction | Novels | Science fiction</strong></li>
+</ul>
+<p>Review: Finished my third reading, my second of the third book. The last time was six or seven years ago. Its merits outweigh its flaws. This time the first two books felt better than the third. The quality varies between passages, and the prose often doesn't seem to flow.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/25796061/">杜撰集 (Artifices, story collection)</a> <strong>Fiction | Stories</strong></li>
+</ul>
+<p>Review: Writing texts that resemble fiction using methods that don't resemble fiction.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/25796120/">The Garden of Forking Paths (story collection)</a> <strong>Fiction | Stories</strong></li>
+</ul>
+<p>Review: On rereading, I liked this less than <em>A Universal History of Infamy</em>, perhaps because it is too metaphysical and too full of metaphor. Its pioneering nature is undeniable, but the skimpy narration gives an impression of not thinking matters through, of laziness. Perhaps this is precisely the impression the author wants to give, being a poet at heart.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/25796066/">A Universal History of Infamy (story collection)</a> <strong>Fiction | Stories</strong></li>
+</ul>
+<p>Review: I once couldn't appreciate the outlines and spare descriptions in these histories of infamy; now I can. I quite like Wang Yongnian's translation. Many sentences have a distinctive flavor, most appearing at the stories' ends. For example, “The terrible carriage that had pursued him for years struck him.” [Another passage describes a body found on a busy New York street at dawn, five bullet wounds, and an ordinary cat that survived, prowling beside him in bewilderment.] The stories are concise, forceful and vivid. “The Man on Pink Corner” conceals the first-person narrator's role as the culprit. Two of the five stories in the “Et cetera” section come from <em>The Thousand and One Nights</em>. That last work is a masterpiece; I really want a complete set.</p>
+<h4>Roundup</h4>
+<p>Overall, an improvement on last year. Total reading time increased. Although I finished no nonfiction books of intensive study, I did far more broad reading, well beyond <a href="https://simoncos.github.io/blogs/reading-2018.en.html">the goal at the year's beginning</a>, and produced many thoughts to explore further. I found plenty of good fiction too. For books, I especially recommend WeChat Reading: a comprehensive library, an unlimited card for reading everything free, note exports and social connections. It recently added an app supporting several e-readers. Overall, it beats Kindle, Duokan and Douban hands down.</p>
+<ul>
+<li>2019 roundup:</li>
+<li>Overall: approximately 149.5 hours, averaging 12.5 hours a month; 42 books, counting one manga series as one book.</li>
+<li>Categories: nonfiction broad reading 21; nonfiction intensive study 0; fiction 21.</li>
+<li>Ratings: five stars/highly recommended 7; four stars/recommended 19; three stars/all right 15; two stars/poor 1.</li>
+<li>Goals reached:<ul>
+<li>Total time: 149.5/200.</li>
+<li>Nonfiction intensive study: 0/5.</li>
+<li>Nonfiction broad reading: 21/10.</li>
+</ul>
+</li>
+<li>2020 goals:</li>
+<li>Total time: 200 hours.</li>
+<li>Nonfiction intensive study: 5.</li>
+<li>Nonfiction broad reading: 10.</li>
+<li>Book reviews: 2.</li>
+</ul>
+<p><em>Compiled from <a href="https://book.douban.com/people/simoncos/collect">the books and short reviews I recorded on Douban</a>. Book links and cover images are from Douban; all Douban links on this page are in Chinese. English renderings accompanying untranslated Chinese titles are descriptive. Quoted English sentences here are translated from the Chinese quotations.</em></p>]]></description></item><item><title>A Thing or Two Seen and Heard in Lhasa</title><link>https://simoncos.github.io/blogs/seen-and-heard-in-lhasa.en.html</link><guid>https://simoncos.github.io/blogs/seen-and-heard-in-lhasa.en.html</guid><pubDate>Sun, 29 Sep 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>A Thing or Two Seen and Heard in Lhasa</h1>
 <p>1. The white stupa is there to join up the Potala Palace's dragon vein, which the road cut through</p>
 <p><img alt="A white stupa by the road under evening clouds; a line hung with small bells runs up from its golden spire, another small white stupa stands on the hill to the left, and a few scooters ride along the road" decoding="async" height="930" src="https://simoncos.github.io/blogs/assets/images/seen-and-heard-in-lhasa/79c685717a085ee412463f496cf43547.jpg" width="1240"/></p>
 <p>2. The white walls are made by splashing on coat after coat of whitewash, which contains milk and white sugar; built up layer on layer over the years, some parts have even formed something like stalactites</p>
@@ -1195,7 +1340,75 @@ the pandemic made us lose three years for good, and we are not sure whether it w
 (3): The Online Music Business<br/>
 (4): The Nature of Media and Cognitive Science<br/>
 (5): From Composite Media to Atomised Control<br/>
-(6): Digitisation and the Evolution of Media</p>]]></description></item><item><title>Some Research on Hong Kong Drifters and the Mainland's New Individual Income Tax Law</title><link>https://simoncos.github.io/blogs/hong-kong-drifters-and-mainland-income-tax.en.html</link><guid>https://simoncos.github.io/blogs/hong-kong-drifters-and-mainland-income-tax.en.html</guid><pubDate>Thu, 01 Nov 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>Some Research on Hong Kong Drifters and the Mainland's New Individual Income Tax Law</h1>
+(6): Digitisation and the Evolution of Media</p>]]></description></item><item><title>Good Books I Read in 2018</title><link>https://simoncos.github.io/blogs/reading-2018.en.html</link><guid>https://simoncos.github.io/blogs/reading-2018.en.html</guid><pubDate>Fri, 04 Jan 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>Good Books I Read in 2018</h1>
+<h4>Five stars: highly recommended (in order of recommendation)</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/30164677/" title="Why We Get Sick">Why We Get Sick</a> by Randolph M. Nesse and George C. Williams</li>
+</ul>
+<p>Category: <strong>Broad reading | Life sciences | Popular science</strong></p>
+<p><img alt="Why We Get Sick: Chinese edition cover" decoding="async" height="763" src="https://simoncos.github.io/blogs/assets/images/reading-2018/a467af1e6e29a184b0e7111264e59279.jpg" width="540"/></p>
+<p>Review: Excellent popular science, looking at medicine and biology from an evolutionary/Darwinian perspective and proposing meaningful conjectures and questions. The evolutionary bugs in the human eye, respiratory tract and esophagus are classics; not long ago I saw someone on Zhihu use them to argue against intelligent design. More than twenty years have passed since the first English edition in 1994, and I am quite interested in what related developments evolutionary biology has seen since. It is even more engaging alongside knowledge of genetic programming and genetic engineering—two entirely different fields despite both being “genetic”—or when you happen to be ill yourself. Just kidding.</p>
+<p>Appendix: <a href="https://book.douban.com/annotation/66339095/">excerpts from the whole book</a>.</p>
+<h4>Four stars: good (most recent reading first)</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/2209702/" title="Programming Collective Intelligence">Programming Collective Intelligence: Building Smart Web 2.0 Applications</a> <strong>Intensive study | Computing | Data mining</strong></li>
+</ul>
+<p>Review: Covers some common data mining algorithms. The title seems somewhat misleading next to the content, unless every dataset counts as “collective.” It skims over the various algorithms. This time I used it as an index from which to search and consolidate some basic knowledge. Some application scenarios and details are well explained, but without the corresponding technical terms or references, beginners struggle to go deeper. I didn't really get into the code and experiments, except for the implementation in the genetic programming chapter. I gained a lot from the random optimization chapter: cost functions, representations of constrained problems, and similar solutions yielding similar results.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/27135380/" title="Kokoro">Kokoro</a> <strong>Fiction | Novel | Japan</strong></li>
+</ul>
+<p>Review: One review put it well: indecision and ambiguity come from distrust of oneself and others, eventually leading people to hand their fate over to the external world.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/26658379/" title="The Inevitable">The Inevitable</a> <strong>Broad reading | Technology</strong></li>
+</ul>
+<p>Review: Very good ideas, some exactly the same as points in the articles I am writing… One star off for American-style verbosity, but it did provide some material for my writing.</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/26658379/">excerpts</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/26836970/" title="Dune">Dune</a> <strong>Fiction | Novel | Science fiction</strong></li>
+</ul>
+<p>Review: Interesting worldbuilding, with a strong legendary quality.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/25762598/" title="尽头">尽头 (The End)</a> <strong>Broad reading | Literature | Second reading</strong></li>
+</ul>
+<p>Review: Second reading. Tang Nuo now does seem a little verbose and showy with his erudition. But what he wants to express is complex; perhaps redundancy and a network of connections are the only way to approach precision? One star off, but still worth reading.</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/25762598/">excerpts</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/2887103/" title="Improv Wisdom">Improv Wisdom: Don't Prepare, Just Show Up</a> <strong>Broad reading | Methodology</strong></li>
+</ul>
+<p>Review: Aligns with some of my thoughts and practices. Improvisation is relaxed concentration. In the author's account, it includes both flow itself and ways to increase the chance of entering flow. Even blind optimism is better than never starting. Putting doing before thinking is something I hope to manage. The view that humor has little value in itself is also worth thinking about.</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/2887103/">excerpts</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/1559310/" title="The Deer and the Cauldron">The Deer and the Cauldron (five volumes)</a> <strong>Fiction | Novel | Wuxia</strong></li>
+</ul>
+<p>Review: Jin Yong's plotting is certainly solid, although sometimes rather rambling. The seven wives feel assigned by decree; in the last dozen or so chapters they become complete extras. Like the Sun Moon Holy Cult, the Mystic Dragon Cult has traces of its real-world model that perceptive readers should recognize. The male chauvinism remains severe. The best emotional writing may actually be between Wei Xiaobao and Kangxi.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/26634683/" title="Think Python">Think Python: How to Think Like a Computer Scientist</a> <strong>Intensive study | Computing | Python</strong></li>
+</ul>
+<p>Review: After three years writing Python, this is still the first book about it I have finished, and I learned from it. At my current level of understanding, the book reads smoothly and gets to the essentials. Everything it introduces is explained thoroughly, with clear definitions, continuity between concepts, and the author's practical experience and deep understanding. Each chapter ends with exercises and debugging advice. Even someone who has never encountered a programming language could start writing code with this book.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/24862722/" title="Linked">Linked (tenth-anniversary edition)</a> <strong>Broad reading | Popular science | Complex systems</strong></li>
+</ul>
+<p>Review: A very good introduction to early complex network research and its applications. Without background knowledge, you can enjoy the spectacle; with it, the book serves as a simple survey. One gain is seeing some of the early history of complex networks, particularly the move from static random graphs to growth mechanisms—nodes appearing and disappearing—plus preferential linking. It also helped me appreciate the widespread presence of complex networks and the discovery of power laws in all kinds of networks. Any complex system may well have a network behind it. The spread and treatment of AIDS and systems of gene–protein interactions are quite interesting. The Achilles' heel section is also fascinating: scale-free networks governed by power laws withstand random attacks or failures well, but targeted attacks on hubs overwhelm them. Which end of the dice lands on an unimportant or important node becomes critical. But what if a hub's interior is itself a fairly decentralized subnetwork, as behind Google.com? Although some passages become cluttered with too many citations, overall this is a very good book for popular science or an introduction to research.</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/24862722/">excerpts</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/1002299/" title="笑傲江湖">笑傲江湖 (The Smiling, Proud Wanderer, four volumes)</a> <strong>Fiction | Novel | Wuxia</strong></li>
+</ul>
+<p>Review: A little scattered, with too much unnecessary peripheral material and abrupt turns in much of the main plot. The good parts include learning swordsmanship, Plum Manor, and portions of the relationships with the three women. Yang Lianting has a big beard, haha.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/25976544/" title="Story">Story: Substance, Structure, Style, and the Principles of Screenwriting</a> <strong>Broad reading | Creativity | Screenwriting</strong></li>
+</ul>
+<p>Review: A good book. For an outsider like me, it offered a reasonably systematic understanding of film scripts and stories, helping me appreciate others' work and examine my own ideas.</p>
+<p>Appendix: <a href="https://book.douban.com/people/simoncos/annotation/25976544/">excerpts</a>.</p>
+<h4>Roundup</h4>
+<ul>
+<li>Some simple figures:</li>
+<li>Overall: approximately 107.5 hours, averaging 9.0 hours a month; 18 books.</li>
+<li>Categories: fiction 6; broad reading 10; intensive study 2.</li>
+<li>Ratings: five stars/highly recommended 1; four stars/recommended 11; three stars/all right 6.</li>
+<li>Progress: the earlier plan to <a href="https://simoncos.github.io/blogs/reading-2016.en.html">finish 2.5 books a month</a> would mean 30 in a year. Sigh. Eighteen just scraped a passing grade. One unfinished book of intensive study that I should continue is <a href="https://book.douban.com/subject/26883982/">Deep Learning</a>; so far I have finished only the first part.</li>
+<li>New goals for 2019: reach 200 hours of reading, complete at least five books of intensive study, keep broad reading at ten or more, and try to produce more writing.</li>
+</ul>
+<p><em>Compiled from <a href="https://book.douban.com/people/simoncos/collect">the books and short reviews I recorded on Douban</a>. Book links and cover images are from Douban; all Douban links on this page are in Chinese. English renderings accompanying untranslated Chinese titles are descriptive.</em></p>]]></description></item><item><title>Some Research on Hong Kong Drifters and the Mainland's New Individual Income Tax Law</title><link>https://simoncos.github.io/blogs/hong-kong-drifters-and-mainland-income-tax.en.html</link><guid>https://simoncos.github.io/blogs/hong-kong-drifters-and-mainland-income-tax.en.html</guid><pubDate>Thu, 01 Nov 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>Some Research on Hong Kong Drifters and the Mainland's New Individual Income Tax Law</h1>
 <p><em>If you still have questions after reading this, or if the subject touches your own interests, I suggest consulting a legal professional or the tax authorities. I also ask any professionals who read this to review and correct it where they can, so that it does not mislead anyone.</em></p>
 <p><em>Note, 2026: this piece was written in late 2018, before the implementing regulations of the Individual Income Tax Law were final. The final regulations and later tax announcements changed several of the provisions quoted here, so the analysis may no longer apply.</em></p>
 <h3>The Question</h3>
@@ -1472,7 +1685,81 @@ if Ai&gt;Bi for every i=1,2...,n, then A&gt;B
 <p>Robert McKee, <em>Story</em>: "All fine stories take place in a finite, knowable world. The world of a story must be small enough that a single artist's mind can hold the fictional universe it creates, and know everything in it the way God knows the world he made."</p>
 </li>
 </ul>
-<p>Douban: <a href="https://movie.douban.com/subject/4195678/">The Tatami Galaxy</a></p>]]></description></item><item><title>Problem Solving and Design (4): Indecision and the Optimal Solution</title><link>https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.en.html</link><guid>https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.en.html</guid><pubDate>Wed, 10 May 2017 00:00:00 +0800</pubDate><description><![CDATA[<h1>Problem Solving and Design (4): Indecision and the Optimal Solution</h1>
+<p>Douban: <a href="https://movie.douban.com/subject/4195678/">The Tatami Galaxy</a></p>]]></description></item><item><title>Books I Read in the First Half of 2017</title><link>https://simoncos.github.io/blogs/reading-2017-first-half.en.html</link><guid>https://simoncos.github.io/blogs/reading-2017-first-half.en.html</guid><pubDate>Wed, 21 Jun 2017 00:00:00 +0800</pubDate><description><![CDATA[<h1>Books I Read in the First Half of 2017</h1>
+<h4>Five stars: highly recommended (in order of recommendation)</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/1322336/">控制论与科学方法论 (Cybernetics and Scientific Methodology)</a> by Jin Guantao and Hua Guofan</li>
+</ul>
+<p>Category: <strong>Broad reading | Cybernetics | Philosophy of science</strong></p>
+<p><img alt="控制论与科学方法论: Chinese edition cover" decoding="async" height="600" src="https://simoncos.github.io/blogs/assets/images/reading-2017-first-half/8aedc1421d3359447eeb42a27684eb32.jpg" width="600"/></p>
+<p>Short review:
+First reading: a good book worth reading several times. Without advanced mathematics, it connects cybernetics, systems theory, information theory, and the general patterns of scientific discovery through plain examples. I finally have some understanding of why those first three are collectively called the “old three theories.”</p>
+<p>This was my second reading, years later. I gained considerably more, but also found the book less good than I once thought. Discussing concepts while bypassing rigorous definitions is difficult after all. The final section on black-box epistemology is good and happens to relate to the articles I have been writing recently, the <a href="https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.en.html">Problem Solving and Design series</a>. It helped a little.</p>
+<p>Appendix: <a href="https://book.douban.com/review/8407350/">excerpts: feedback, conjugacy, catastrophe and stability, black-box epistemology</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/1013416/">Thunderstorm</a> by Cao Yu</li>
+</ul>
+<p>Category: <strong>Fiction | Drama</strong></p>
+<p><img alt="Thunderstorm: Chinese edition cover" decoding="async" height="148" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2017-first-half/fa11525668d69f10d8a25a0c3841e1e5.jpg" width="100"/></p>
+<p>Short review:
+Read in one sitting. I wonder whether this represents the ultimate in dramatic conflict. At several points a slightly happy ending was possible, but all sorts of details became the last straw, and everything collapsed at the end. As drama, that is artistic and beautiful. Back in the real world, though, it is better to let go of fixations where possible, avoid getting trapped in a rigid mindset, and be able to both take things up and put them down.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/4067778/">文字的故事 (The Story of Writing)</a> by Tang Nuo</li>
+</ul>
+<p>Category: <strong>Broad reading | Culture</strong></p>
+<p><img alt="文字的故事: Chinese edition cover" decoding="async" height="142" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2017-first-half/397841ae4b0042ee67fa5ae9e7524f44.jpg" width="104"/></p>
+<p>Short review:
+Knowledge, flavor, thought. Work has recently brought me into closer contact with Chinese characters from mathematical perspectives. Individual characters become almost entirely abstract symbols; even their meanings are obtained indirectly from context and the like. Yet every character has a story, connected to a knowledge base developed over thousands of years. Starting from oracle-bone inscriptions and other early characters, Tang Nuo reveals a small part of the winding evolution of this symbolic system and its semantic repository, then raises farther-reaching questions and reflections. A “professional reader” indeed.</p>
+<p>More remarkable still is his ability to balance feeling and reason, phenomena and logic: rich, concrete description on one side, concise thought on the other. The birth and death of characters, their origins and destinations, their many forms, and the eternity of writing as a whole compared with individual human lives: fascinating and captivating. Reading it restored much of my love for writing, especially Chinese characters.</p>
+<p>Appendix: <a href="https://book.douban.com/review/8331157/">excerpts: conceptual abstraction, phonosemantic characters, shared memory and encoding/decoding, semi-supervised evolution</a>.</p>
+<h4>Four stars: good (in reading order)</h4>
+<ul>
+<li>
+<p><a href="https://book.douban.com/subject/25941891/">Endymion</a> <strong>Fiction | Novel | Science fiction</strong></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/25941893/">The Rise of Endymion</a> <strong>Fiction | Novel | Science fiction</strong></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/26546914/">科学的极致：漫谈人工智能 (The Extremes of Science: Essays on Artificial Intelligence)</a> <strong>Broad reading | Popular science | Computing | Mathematics</strong></p>
+</li>
+</ul>
+<p>Short review:
+  Quite a good book. Although the title says artificial intelligence, it also discusses complex systems and topics leaning toward physics, beyond what is ordinarily called AI. These are fascinating subjects, many worth further study, and the references are fairly comprehensive. The quality varies between essays, though. Some read more like quickly written blog posts, wandering wherever a thought takes them. Many formulas are presented without enough explanation. As popular science, it fails to make difficult ideas accessible; the neural network section is rather muddled. The whole book also lacks cohesion, though it passes muster as an essay collection.</p>
+<p>Appendix: <a href="https://book.douban.com/review/8339197/">excerpts: three schools, Turing machines, general intelligence, self-reference, flow networks, collectives</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/3155622/">庆余年 (Joy of Life series)</a> <strong>Fiction | Novel | Time travel</strong></li>
+</ul>
+<h4>Three stars (in reading order)</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/25952961/">博尔赫斯谈话录 (Conversations with Borges)</a> <strong>Broad reading | Interviews | Literature</strong></li>
+<li><a href="https://book.douban.com/subject/1905742/">The Golden Bough (two volumes)</a> <strong>Broad reading | Culture | Religion</strong></li>
+<li><a href="https://book.douban.com/subject/1203426/">人间词话 (Remarks on Ci Poetry)</a> <strong>Broad reading | Literature</strong></li>
+</ul>
+<h4>Roundup</h4>
+<ul>
+<li>Some simple figures:</li>
+<li>Reading time: approximately 86.1 hours, averaging 14.4 a month.</li>
+<li>Completed versus planned: fiction 4/6; broad reading 6/6; intensive study 0/3; total 10/15.</li>
+<li>Five stars: fiction 1/4; broad reading 2/6.</li>
+<li>Four stars: fiction 3/4; broad reading 1/6.</li>
+<li>
+<p>Three stars: broad reading 3/6.</p>
+</li>
+<li>
+<p>Progress: quite far short of the earlier plan to <a href="https://simoncos.github.io/blogs/reading-2016.en.html">finish 2.5 books a month</a>. If I counted the volumes of <em>Joy of Life</em> separately, the fiction/leisure part would be way over the target (hides face). Broad reading was just right; intensive study was a complete collapse, Orz. Overall, still an improvement on 2016. I need to make more effort, squeeze down gaming time further, and stop taking it quite so easy, haha.</p>
+</li>
+<li>
+<p>New goals for the second half: fiction 2; broad reading 4; intensive study 2.</p>
+</li>
+<li>
+<p>New plan: for five-star books in broad reading or intensive study, try more ways of consolidating what I gain, such as longer reviews and relationship diagrams of knowledge or concepts, to get more out of them.</p>
+</li>
+<li>
+<p>Additional content: three-star books join the roundup from this edition. Feels like a good way to draw fire; come argue! Actually, three stars from me on Douban is still all right. Below that, I don't even bother recording the book.</p>
+</li>
+</ul>
+<p><em>Compiled from the books <a href="https://www.douban.com/people/simoncos/">I</a> recorded on Douban and the short reviews I left after reading them. Book links and cover images are from Douban; all Douban links on this page are in Chinese. English renderings accompanying untranslated Chinese titles are descriptive.</em></p>]]></description></item><item><title>Problem Solving and Design (4): Indecision and the Optimal Solution</title><link>https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.en.html</link><guid>https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.en.html</guid><pubDate>Wed, 10 May 2017 00:00:00 +0800</pubDate><description><![CDATA[<h1>Problem Solving and Design (4): Indecision and the Optimal Solution</h1>
 <p><img alt="The extended rock-paper-scissors from The Big Bang Theory (note the arrows)" decoding="async" height="521" src="https://simoncos.github.io/blogs/assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg" width="695"/></p>
 <p>Keywords: value/loss functions | decision-making | systems of preferences | optimal solutions</p>
 <h3>Indecision, choice and value functions</h3>
@@ -1585,7 +1872,52 @@ if Ai&gt;Bi for every i=1,2...,n, then A&gt;B
 <p>Before I knew it I had written this far, and as before, I still don't know what I'm writing all this for, but I hope this point, too, will give off light at some point in the future and light up all the fat people, as the joke about getting thin as a lightning bolt has it.</p>
 <p>Or perhaps it is only to remind myself, in these tracings back, of a line from Yoga Lin's song 勿忘你 ("Forget Me Not"), which I have bent by one character so that the toy in it becomes a sex toy.</p>
 <p><em>Special thanks to Yoga Lin's album <a href="http://www.xiami.com/album/9czMQge5d53"><em>今日营业中</em></a> (in Chinese; English title </em>Sell Like Hot Cakes<em>) for the background music and some of the bathroom breaks.</em></p>
-<p>2017.02</p>]]></description></item><item><title>Problem Solving and Design (2): Feasible Solutions</title><link>https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.en.html</link><guid>https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.en.html</guid><pubDate>Fri, 11 Nov 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>Problem Solving and Design (2): Feasible Solutions</h1>
+<p>2017.02</p>]]></description></item><item><title>Good Books I Read in 2016</title><link>https://simoncos.github.io/blogs/reading-2016.en.html</link><guid>https://simoncos.github.io/blogs/reading-2016.en.html</guid><pubDate>Sun, 01 Jan 2017 00:00:00 +0800</pubDate><description><![CDATA[<h1>Good Books I Read in 2016</h1>
+<h4>Five stars: highly recommended (in order of recommendation)</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/5375620/">Out of Control: The New Biology of Machines, Social Systems, and the Economic World</a> by Kevin Kelly</li>
+</ul>
+<p>Category: <strong>Technology | Across disciplines</strong></p>
+<p><img alt="Out of Control: Chinese edition cover" decoding="async" height="435" src="https://simoncos.github.io/blogs/assets/images/reading-2016/5358c00218da1001f674444ebbdb729c.jpg" width="306"/></p>
+<p>Short review:
+A book discussing fascinating concepts including collectives, control, complex systems, evolution, adaptation, and the convergence of biology and machines. It has a typically Western approach, with plentiful, lively examples and an emphasis on connecting phenomena across broad fields. The writing flows well and the examples fit. Some of its references also show that the author has an academic grounding. Extremely thought-provoking.</p>
+<p>Appendix: <a href="https://book.douban.com/review/7945102/">excerpts from the whole book</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/26761696/">精进：如何成为一个很厉害的人 (Making Progress: How to Become a Highly Capable Person)</a></li>
+</ul>
+<p>Category: <strong>Psychology | Methodology</strong></p>
+<p><img alt="精进: Chinese edition cover" decoding="async" height="147" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2016/b7998a4efe08bd1995a05252f2d441e0.jpg" width="100"/></p>
+<p>Short review:
+This book is quite controversial on Douban. Some think it just repackages what everyone already knows; I disagree. Its title sounds like motivational chicken soup, and the author's marketing on Weibo and Zhihu honestly gets irritating. But overt advertising like this is actually among the more conscientious kinds.</p>
+<p>Considering only the book, I think it is a good discussion of thinking and methodology. The prose is not entirely smooth, but the content is illuminating. Memorable ideas include the half-life of returns, choosing interruption points in tasks, divergent and convergent thinking, the Johari window, and overestimating one's grasp of knowledge during concentrated study… Still, practice is what actually creates value. This book did influence my later decisions and ways of doing things, particularly making me more deliberate about where to pause a task. Five stars isn't excessive for a book that changes life in practice.</p>
+<p>Appendix: <a href="https://book.douban.com/review/8088495/">excerpts from the whole book</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/2052049/">Hyperion</a> by Dan Simmons</li>
+</ul>
+<p>Category: <strong>Novel | Science fiction</strong></p>
+<p><img alt="Hyperion: Chinese edition cover" decoding="async" height="149" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2016/be90d6f8ca1a059e70f60bd2c28926c8.jpg" width="99"/></p>
+<p>Short review:
+The structure of six people telling their stories reminded me of <em>Cloud Atlas</em>. This is a richly imagined world with brilliant premises. I happened to be playing <em>The Elder Scrolls</em> while reading it and felt a kinship in their grandeur. The stories are understated and moving, told in a steady, matter-of-fact voice: science fiction combining the soft and the hard. The Shrike, the Time Tombs, the labyrinth worlds: what an enormous mystery. Of the six stories, the one about aging backward left the strongest impression, followed by the priest's and the colonel's.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/25941905/">The Fall of Hyperion</a></li>
+</ul>
+<p>Category: <strong>Novel | Science fiction</strong></p>
+<p><img alt="The Fall of Hyperion: Chinese edition cover" decoding="async" height="146" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2016/a460bd1905359e0f4dc9474e3008f33c.jpg" width="101"/></p>
+<p>Short review:
+The second book of the Hyperion quartet. It becomes terrific once the climax gets underway… Full of details and descriptions of the world, combining space opera, cyberpunk and time travel. You can see the nourishment many science fiction works have drawn from it, and it also recalls the roughly contemporary <em>A Fire Upon the Deep</em> series. Many mysteries are revealed and new ones appear. The labyrinths, which interest me most, still haven't been explained. And what about faster-than-light travel and the voice behind it? Looking back after reading the third book, I find many mysteries in this second one still unresolved. Gladstone, such a contrast with Cheng Xin in <em>The Three-Body Problem</em>, haha, and Kassad are wonderfully drawn. The parts beyond the plot deserve rereading.</p>
+<h4>Four stars: good (in reading order)</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/4894876/">The Little Prince</a> <strong>Fairy tale</strong></li>
+<li><a href="https://book.douban.com/subject/5939312/">超·杀人事件 (Super Murder Cases)</a> <strong>Fiction | Mystery | Deconstruction</strong></li>
+<li><a href="https://book.douban.com/subject/3242963/">Baccano! 01</a> <strong>Fiction</strong></li>
+<li><a href="https://book.douban.com/subject/26381084/">隱形邏輯：香港式建築極限 (Invisible Logic: The Limits of Hong Kong Architecture)</a> <strong>Architecture | Design</strong> (unfinished)</li>
+<li><a href="https://book.douban.com/subject/1060852/">呼兰河传 (Tales of Hulan River)</a> <strong>Fiction | Literary</strong></li>
+<li><a href="https://book.douban.com/subject/26586492/">The Martian</a> <strong>Fiction | Science fiction</strong></li>
+<li><a href="https://book.douban.com/subject/25779326/">可能与不可能的边界：P/NP问题趣史 (The Boundary Between the Possible and Impossible: A History of the P/NP Problem)</a> <strong>Popular science | Mathematics</strong></li>
+</ul>
+<h4>Roundup</h4>
+<p>I finished far fewer books in 2016 than in 2015. A small goal for 2017: every month, finish one leisure read, mainly fiction, and one broad read that expands my horizons and stimulates thinking, such as <em>Out of Control</em> or <em>精进</em>. Every two months, finish one book of intensive study, such as mathematics or coding. This will probably still be a little difficult, particularly the intensive study. But without a goal, attention never gets allocated to it, and progress becomes difficult.</p>
+<p><em>Compiled from the books I recorded on Douban and the short reviews I left after reading them. Book links and cover images are from Douban; all Douban links on this page are in Chinese. English renderings accompanying untranslated Chinese titles are descriptive.</em></p>]]></description></item><item><title>Problem Solving and Design (2): Feasible Solutions</title><link>https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.en.html</link><guid>https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.en.html</guid><pubDate>Fri, 11 Nov 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>Problem Solving and Design (2): Feasible Solutions</h1>
 <p>Keywords: feasible solutions | possibility space | bias | mental set | functional fixedness | affordance</p>
 <p>The problem situation discussed in <a href="https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.en.html">the first part</a> is, as I understand it, really an explicit representation of the problem itself. Once the representation of a problem is settled, you can start looking for its feasible solutions. I'll use a simple problem to start this part:</p>
 <blockquote>
@@ -2036,7 +2368,51 @@ Health 996, Society 984, Medicine 941, Romance 717, China 695<br/>
 Relations Between the Sexes 688, English 678, Interpersonal Relationships 640, Psychology 634, Internet 595<br/>
 Law 587, Microsoft 555, United States 552, Fitness 538, Programming 511</p>
 <p>Personally, I think <strong>the topics of the questions the big Vs answer can reflect, to some extent, how popular each topic area is on Zhihu as a whole</strong>. I also think the topics at the very top go some way to explaining why big Vs from different fields stick together: whatever their professional field, <strong>people are always interested in the humanities and in broad entertainment topics such as life, history and film</strong>. Once they share those interests, and all have good insights to share, they naturally find it easier to appreciate one another.</p>
-<p>With that, this piece can at last come to a full stop. Comments and discussion are welcome. I also want to thank the three other people who worked on this project with me; it took the four of us together to get this far in so short a time (the project report has the details of who did what).</p>]]></description></item><item><title>Zhihu Social Network Analysis (1): Basic Statistics</title><link>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.en.html</link><guid>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.en.html</guid><pubDate>Sun, 28 Feb 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>Zhihu Social Network Analysis (1): Basic Statistics</h1>
+<p>With that, this piece can at last come to a full stop. Comments and discussion are welcome. I also want to thank the three other people who worked on this project with me; it took the four of us together to get this far in so short a time (the project report has the details of who did what).</p>]]></description></item><item><title>Good Books I Read in the Second Half of 2015</title><link>https://simoncos.github.io/blogs/reading-2015-second-half.en.html</link><guid>https://simoncos.github.io/blogs/reading-2015-second-half.en.html</guid><pubDate>Fri, 04 Mar 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>Good Books I Read in the Second Half of 2015</h1>
+<h4>Five stars: highly recommended (in order of recommendation)</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/11501823/">The Thousand Autumns of Jacob de Zoet</a> by David Mitchell</li>
+</ul>
+<p>Category: <strong>Novel</strong></p>
+<p><img alt="The Thousand Autumns of Jacob de Zoet: Chinese edition cover" decoding="async" height="499" src="https://simoncos.github.io/blogs/assets/images/reading-2015-second-half/ecad5e82a2fe3cc15e55da59eb3a0012.jpg" width="337"/></p>
+<p>Review:
+The most brilliant parts: the revelation of the thirteen tenets of the Mount Shiranui shrine, Uzaemon's death, the British ship's unloosed cannon fire, and the magistrate and abbot's game of Go alongside a butterfly's life and death. Jacob, Orito, Uzaemon, the abbot, the magistrate and the British captain all leave deep impressions. Dr. Marinus is practically a symbolic figure, quite distinctive.</p>
+<p>Ten years, twenty, thirty, and at the very end: the person that copper-haired, green-eyed Jacob still could not forget was Orito Aibagawa, on the far side of the world. Black hair, black eyes, independent and quiet, still beautiful with the burn scar on her left cheek, and never his.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/3601195/">Rainbows End</a> by Vernor Vinge</li>
+</ul>
+<p>Category: <strong>Novel | Science fiction</strong></p>
+<p><img alt="Rainbows End: Chinese edition cover" decoding="async" height="148" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-second-half/1acbd380549de93abdbe508bba173ba9.jpg" width="99"/></p>
+<p>Review:
+The best science fiction depiction of virtual reality I have read. Memorable ideas include the strange route through which mind control works; search and analysis as basic vocational school subjects; connecting knowledge across fields becoming more important than deep exploration; clusters of analysts; and the almost omnipotent Rabbit's fundamental, fatal weakness, which even it did not initially understand: all its eggs in one basket.</p>
+<p>Its brilliance lies in the various premises. The plot seems unfinished.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/1041482/">1587, A Year of No Significance</a> by Ray Huang</li>
+</ul>
+<p>Category: <strong>Social sciences</strong></p>
+<p><img alt="1587, A Year of No Significance: Chinese edition cover" decoding="async" height="148" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-second-half/840fcb5988607aaad240863581900cbf.jpg" width="99"/></p>
+<p>Review:
+The book's overarching perspective: many local problems ultimately came from the Ming dynasty's rule by civil officials and its ethical structure being too backward to meet changing economic and foreign affairs needs. This top-down perspective is not beyond dispute, of course. The top constrains the bottom, but the bottom may also drive the top. Conditions across the long span from the Wanli reign to the late Qing and early Republic could hardly have remained as unchanged as the author suggests. One point always holds, though: a collective runs into serious trouble when no institutional system properly maintains and coordinates the relationship between its upper and lower structures in both directions.</p>
+<p>And the Ming state's grain and supply transport problems are a potent reminder of the importance of decoupling. Transport between peers without distribution hubs: just thinking about it is a nightmare…</p>
+<p>Appendix: <a href="https://book.douban.com/review/7569857/">excerpts from the whole book</a>.</p>
+<ul>
+<li><a href="https://book.douban.com/subject/3816883/">The Left Hand of Darkness</a> by Ursula K. Le Guin</li>
+</ul>
+<p>Category: <strong>Novel | Science fiction</strong></p>
+<p><img alt="The Left Hand of Darkness: Chinese edition cover" decoding="async" height="149" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-second-half/b1ce5ba24e573123418e6a7598f079c6.jpg" width="99"/></p>
+<p>Review:
+A very slow-burning book. The story only starts moving toward its climax almost halfway through, when Estraven goes to rescue Ai. Their escape is the best part. Its worldbuilding is excellent, from the planetary environment and human physiology to technology, culture, politics and philosophy. The contrast between the two countries' institutions and populations is interesting. A novel focused on feeling and worldview: the relationship the two protagonists finally develop is hard to define, but it lingers.</p>
+<h4>Four stars: worthwhile (in reading order)</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/1031146/">Taipei People</a> <strong>Short stories</strong></li>
+<li><a href="https://book.douban.com/subject/26552069/">黑暗之城：九龍城寨的日與夜 (City of Darkness: Days and Nights in Kowloon Walled City)</a> <strong>Social sciences | Architecture</strong></li>
+<li><a href="https://book.douban.com/subject/24661349/">The Secret Language of Color</a> <strong>Nature | Design</strong></li>
+<li><a href="https://book.douban.com/subject/1046265/">Norwegian Wood</a> <strong>Novel</strong></li>
+<li><a href="https://book.douban.com/subject/26281221/">Mastering Machine Learning with scikit-learn</a> <strong>Computing | Python</strong></li>
+<li><a href="https://book.douban.com/subject/1986050/">哲学 科学 常识 (Philosophy, Science, Common Sense)</a> (appendix: <a href="http://book.douban.com/review/7690584/">excerpts</a>) <strong>Philosophy</strong></li>
+<li><a href="https://book.douban.com/subject/10786473/">The Willpower Instinct</a> (appendix: <a href="http://book.douban.com/review/7716025/">excerpts</a>) <strong>Psychology</strong></li>
+</ul>
+<p><em>Compiled from the books I recorded on Douban and the short reviews I left after reading them. Book links and cover images are from Douban; all Douban links on this page are in Chinese. English renderings accompanying untranslated Chinese titles are descriptive.</em></p>]]></description></item><item><title>Zhihu Social Network Analysis (1): Basic Statistics</title><link>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.en.html</link><guid>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.en.html</guid><pubDate>Sun, 28 Feb 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>Zhihu Social Network Analysis (1): Basic Statistics</h1>
 <blockquote>
 <p>Explore <a href="https://simoncos.github.io/gallery/research/zhihu-2015.html?lang=en">Zhihu 2015: People, Connections and Influence</a>, the interactive research page bringing both essays together.</p>
 </blockquote>
@@ -2108,7 +2484,88 @@ Law 587, Microsoft 555, United States 552, Fitness 538, Programming 511</p>
 <p>Excellent. No problem at all.</p>
 <p>Sure enough, I have rambled out a great heap of nonsense. Let me go back to being an arty youth, sum up my year, and then get back to my Philippine golden pineapple fruit platter (price fifteen dollars ninety, HKD). It is the 29th of December, after all:</p>
 <p>2015: nothing special happened. Of the ten trillion possibilities of this year, I managed not to fail my charge and lived out one of them. Yet the me that ten trillion people saw is, in each of those ten trillion worlds, the only me there, and I have only had the fortune to see the one me in my own world and say goodbye to it. Since I cannot even say goodbye to every me myself, we need not feel regret about anything, just as I feel no regret at being unable to see all ten trillion views in that glass of water. After all, each view holds a whole world; see one, and you know ten trillion. If only I have had the fortune to see the one you in my world, I know ten trillion of you.</p>
-<p>2015.12.29</p>]]></description></item><item><title>Young and Naive</title><link>https://simoncos.github.io/blogs/old-memories-young.en.html</link><guid>https://simoncos.github.io/blogs/old-memories-young.en.html</guid><pubDate>Sun, 07 Jun 2015 00:00:00 +0800</pubDate><description><![CDATA[<h1>Young and Naive</h1>
+<p>2015.12.29</p>]]></description></item><item><title>Good Books I Read in the First Half of 2015</title><link>https://simoncos.github.io/blogs/reading-2015-first-half.en.html</link><guid>https://simoncos.github.io/blogs/reading-2015-first-half.en.html</guid><pubDate>Fri, 19 Jun 2015 00:00:00 +0800</pubDate><description><![CDATA[<h1>Good Books I Read in the First Half of 2015</h1>
+<h4>Five stars: highly recommended (in order of recommendation)</h4>
+<ul>
+<li><a href="http://book.douban.com/subject/1365318/">The Design of Everyday Things</a> by Donald A. Norman</li>
+</ul>
+<p>Category: <strong>Design</strong></p>
+<p><img alt="The Design of Everyday Things: cover of the edition I read" decoding="async" height="475" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/363962ddb54e709576a8174ed53de477.jpg" width="310"/></p>
+<p>Review:
+This is a book about design that takes a broad, commanding view while explaining things with meticulous care. Concise principles, detailed arguments, practical examples, and supplementary notes and references form its basic approach.</p>
+<p>A good book in every respect, including the lack of footnotes that the author complains about: in the Kindle edition I read, the endnotes were properly linked to their markers. I learned a great deal. What stayed with me most was the use of information entropy to measure the complexity created by the number of product features and their corresponding controls.</p>
+<p>Applying design principles in reverse is another interesting angle: for security, permissions, or the pleasure of a game.</p>
+<p>Toward the end, the book discusses the linearity of text and the role of hyperlinks, which happens to be something I have been thinking about. I couldn't help marveling at how much the author had already considered so long ago. I read the 2002 edition, so those passages must have been written by then at the latest.</p>
+<p>Appendix: <a href="http://book.douban.com/review/7484409/">excerpts from the whole book</a>.</p>
+<ul>
+<li><a href="http://book.douban.com/subject/25762598/">尽头 (The End)</a> by Tang Nuo</li>
+</ul>
+<p>Category: <strong>Essays</strong></p>
+<p><img alt="尽头: Chinese edition cover" decoding="async" height="149" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/5f9173dcda9462fa315b513fd6550955.jpg" width="99"/></p>
+<p>Review:
+Reading on and off from summer 2014 to February 2015, I finally reached the end. Yet I feel its echoes will linger strongly. This is a tree of a book, one that draws thought into profound depths. Another gain: many more writers and works I now want to know, including Yukio Mishima, Walter Benjamin, Flaubert and Kundera. Borges, one of the author's favorites, is of course one of mine too.</p>
+<ul>
+<li><a href="http://book.douban.com/subject/1005325/">The Disappearance of Childhood</a> by Neil Postman</li>
+</ul>
+<p>Category: <strong>Media</strong></p>
+<p><img alt="The Disappearance of Childhood: Chinese edition cover" decoding="async" height="146" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/8e86db83015ca33d3685317ade0c017e.jpg" width="101"/></p>
+<p>Review:
+Postman being Postman, although the book is about the emergence of the concept of childhood and its tendency to disappear, most of its argumentative energy goes into the nature and influence of print and television. For me, its strongest part is the first half's analysis of how the invention and spread of writing and printing changed the transmission of knowledge in human society. Many of its observations about the fundamental influence of written and printed media on the expression of content agree with my own thinking.</p>
+<p>The second half mainly analyzes television's disruption of the system of written communication, leading adults and children to converge, and supports this with extensive social data. This involves a lot of American political and social knowledge, though, and I found it somewhat obscure and dry.</p>
+<p>On China: Postman argues that because Chinese lacks a simple alphabetic writing system, printing initially had much less effect on society. The invention did not arrive at a favorable moment.</p>
+<p>Appendix: <a href="https://book.douban.com/review/7510159/">notes on the whole book</a>.</p>
+<ul>
+<li><a href="http://book.douban.com/subject/25915629/">破茧成蝶：用户体验设计师的成长之路 (From Cocoon to Butterfly: A UX Designer's Path to Growth)</a> by Liu Jin and Li Yue</li>
+</ul>
+<p>Category: <strong>Design</strong></p>
+<p><img alt="破茧成蝶: Chinese edition cover" decoding="async" height="146" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/0949ca035e61967064f579e54cd12750.jpg" width="101"/></p>
+<p>Review:
+The first five chapters offered me little that was new. They are not very different from the systems analysis and design I studied as an undergraduate: probably an application of classical methodology to internet product design. Much of the work attributed here to designers or product managers was work I did in operations: data analysis, feature requests and little Photoshop advertisements at Yihaodian; then market analysis, user analysis and analysis of paths through features at a startup. At a small company, of course, you can do whatever needs doing as long as you don't waste time. My title was operations, but in practice I touched everything except development.</p>
+<p>Chapter six is useful on practically every page. It connects requirements analysis to overall interaction design and explains several important design principles, inevitably recalling <em>The Design of Everyday Things</em> and Don Norman. Chapter seven covers the contents and finer techniques of interaction design deliverables: prototype wireframes, interaction specifications and so on. Chapter eight is mainly about teamwork, design reviews, and following through so that the final product matches the interaction design. Chapter nine briefly discusses testing and evaluation. Chapters ten through twelve are more about awareness and attitudes, with very good examples.</p>
+<p>Detailed and well organized throughout, it lives up to its reputation as a good introduction to interaction design for internet software.</p>
+<ul>
+<li><a href="http://book.douban.com/subject/24866005/">number9dream</a> by David Mitchell</li>
+</ul>
+<p>Category: <strong>Fiction</strong></p>
+<p><img alt="number9dream: Chinese edition cover" decoding="async" height="147" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/796791227bb0220dddd1bc75a885b7dd.jpg" width="100"/></p>
+<p>Review:
+A story with a beginning but no end, interspersed with more stories that have beginnings but no ends, neither beginnings nor ends, or grand beginnings and feeble endings. Less exquisite than <em>Ghostwritten</em> or <em>Cloud Atlas</em>, but its chaos leaves a very particular melancholy.</p>
+<ul>
+<li><a href="http://book.douban.com/subject/6709783/">浪潮之巅 (On Top of Tides)</a> by Wu Jun</li>
+</ul>
+<p>Category: <strong>Technology</strong></p>
+<p><img alt="浪潮之巅: Chinese edition cover" decoding="async" height="142" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/a86d476d6dfd0b846c162c21ba468e42.jpg" width="104"/></p>
+<p>Review:
+I started this three or four years ago and finally read it from beginning to end this time. Some reviewers say that many of its views are too subjective and even many of its facts are the author's conjectures. Still, I can't think of another book currently offering such a comprehensive, rational and engaging account of the IT industry's development over several decades. Some of its analyses of key factors resonated strongly with me.</p>
+<ul>
+<li><a href="http://book.douban.com/subject/2136484/">If on a Winter's Night a Traveler</a> by Italo Calvino</li>
+</ul>
+<p>Category: <strong>Fiction</strong></p>
+<p><img alt="If on a Winter's Night a Traveler: Chinese edition cover" decoding="async" height="146" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/a372483e3550425b36138390b76d311d.jpg" width="101"/></p>
+<p>Review:
+Highly experimental: a novel with only beginnings and no endings. The way it finally connects all the chapters is quite brilliant.</p>
+<ul>
+<li><a href="http://book.douban.com/subject/1089517/">绝代双骄 (The Peerless Twins, three volumes)</a> by Gu Long</li>
+</ul>
+<p>Category: <strong>Fiction</strong></p>
+<p><img alt="绝代双骄: Chinese edition cover" decoding="async" height="146" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/2e02e1340a589c86d090e003afa4380a.jpg" width="101"/></p>
+<p>Review:
+The first original Gu Long novel I finished. The plot is wonderfully entertaining and the interlocking stories are extremely intricate. Yet each character's ending feels plain and natural, which shows his skill.</p>
+<h4>Four stars: worthwhile (in reading order)</h4>
+<ul>
+<li><a href="http://book.douban.com/subject/26261240/">古董局中局3：掠宝清单 (Antique Mystery 3: The Looting List)</a></li>
+<li><a href="http://book.douban.com/subject/2137767/">Farewell My Concubine</a></li>
+<li><a href="http://book.douban.com/subject/20442382/">一路去死 (On the Road to Death)</a></li>
+<li><a href="http://book.douban.com/subject/1485495/">楼下的房客 (The Tenants Downstairs)</a></li>
+<li><a href="http://book.douban.com/subject/4937547/">我的征途是星辰大海 (My Journey Is the Stars and the Sea)</a></li>
+<li><a href="http://book.douban.com/subject/10608453/">Blindsight</a></li>
+<li><a href="http://book.douban.com/subject/7061613/">Steal Like an Artist: 10 Things Nobody Told You About Being Creative</a></li>
+<li><a href="http://book.douban.com/subject/1064014/">中国吃 (Eating in China)</a></li>
+<li><a href="http://book.douban.com/subject/3684656/">Ringworld</a></li>
+<li><a href="http://book.douban.com/subject/3316174/">狂骨之梦 (A Dream of Crazy Bones)</a></li>
+<li><a href="http://book.douban.com/subject/2256351/">The Crowd: A Study of the Popular Mind</a></li>
+</ul>
+<p><em>Compiled from the books I recorded on Douban and the short reviews I left after reading them. Book links and cover images are from Douban; all Douban links on this page are in Chinese. English renderings accompanying untranslated Chinese titles are descriptive.</em></p>]]></description></item><item><title>Young and Naive</title><link>https://simoncos.github.io/blogs/old-memories-young.en.html</link><guid>https://simoncos.github.io/blogs/old-memories-young.en.html</guid><pubDate>Sun, 07 Jun 2015 00:00:00 +0800</pubDate><description><![CDATA[<h1>Young and Naive</h1>
 <p>Long time no see.</p>
 <p>It has been nine months since I last wrote something free and useless. In three seasons, you and I must both have changed somewhat. Changed because of what? You could say work, perhaps, or study, or getting along with other people, but perhaps the most fundamental reason is always the space and time that never stand still.</p>
 <p>How good it is to be young, because then you don't have to see how big the world is, and in that small, idyllic patch of time and space you can keep a few things safe. Beliefs, friends, the flavours of home you crave: all so close they feel like part of you. It's a pity that, though life can't be summed up as nothing but venting, compromise and apology, it isn't simple enough to keep that safety around you forever. Like you and me today: it's hard now to find that old feeling of being stuck in a corner and yet having all the fun you need. As we grow older, we feel the world shaking and swaying, and feel how small we are; we are always so easily pushed in one direction by some force, and moving away and chance meetings become a habit. The world seems to have no edges; even if there were a wall, stretching up and down and left and right without end, you'd know that on your own strength you could never walk there to prove it exists. Gradually you meet more and more people and see horizons further and further away, while your own memories, feelings and thoughts are so narrow and limited that dividing one by the other gives a value that sometimes makes them feel as if they don't exist at all. You and I become a drop of water in the sea, our individuality gone, our directions converging; everything has already been arranged as it should be, and within that we are born, grow old, fall ill and die, are glad and angry, sad and happy, proud and disappointed.</p>

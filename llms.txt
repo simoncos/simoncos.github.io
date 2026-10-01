@@ -30,6 +30,8 @@ The motto for this site is "Connecting the dots." The site is static, bilingual,
 - [My Haba Snow Mountain Journey](https://simoncos.github.io/blogs/my-haba-snow-mountain-journey.en.html): Field note about outdoor experience, risk, and body feedback.
 - [Problem Solving and Design](https://simoncos.github.io/blogs.html#series-problem-solving-and-design): Four completed essays in Chinese and English, from problem situations and feasible solutions to open-ended problems, indecision and the optimal solution.
 
+- [Reading Roundups (读书小结)](https://simoncos.github.io/blogs.html#series-reading-roundups): Six bilingual reading roundups from 2015 to 2019, preserving the original reviews and historical dates.
+
 ## Data and feeds
 
 - [Agent index JSON](https://simoncos.github.io/agent-index.json): Structured machine-readable map of site surfaces.

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Thu, 01 Oct 2026 13:34:55 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>和 Codex 一起，给慈善晚会搭把手</title><link>https://simoncos.github.io/blogs/charity-gala-with-codex.html</link><guid>https://simoncos.github.io/blogs/charity-gala-with-codex.html</guid><pubDate>Thu, 01 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>和 Codex 一起，给慈善晚会搭把手</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Thu, 01 Oct 2026 23:24:56 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>和 Codex 一起，给慈善晚会搭把手</title><link>https://simoncos.github.io/blogs/charity-gala-with-codex.html</link><guid>https://simoncos.github.io/blogs/charity-gala-with-codex.html</guid><pubDate>Thu, 01 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>和 Codex 一起，给慈善晚会搭把手</h1>
 <p><img alt="沿用活动页主视觉改制的文章封面：不同人的双手托举孩子向前，走向明亮的门；标题为“和 Codex 一起，给慈善晚会搭把手”" decoding="async" height="853" src="https://simoncos.github.io/blogs/assets/images/charity-gala-with-codex/cover.jpg" width="1600"/></p>
 <p>今年参与了晓日春晖（一个公益组织）的年度慈善晚会，很高兴能继续贡献一份自己的力量。跟去年相比，这回多了几个 AI 帮手，花的时间少了，能做的事情却多了不少：宣传页面开发部署、拍卖系统的需求对接和测试、拍品信息维护、在线认捐表制作、宣传文案，还有活动结束后的各种收尾。</p>
 <p>其中有些事情，以前也能做，就是比较费时间；有些则是因为有了 AI，才有余力多接一点。整个过程有不少省心的地方，也有一些预想之外的小插曲，值得记下来。</p>
@@ -1162,7 +1162,156 @@
 </blockquote>
 <p>我读到时留下了一句想法：“提高采样率的感觉，因为同一时间段采样帧数增多，事后再回顾就感觉时间变长了”。大脑其实是节能环保的模范，对于它判断没什么价值的东西，它是不会消耗自己的资源去处理的。所以童年和青春时期的记忆显得那么丰富和栩栩如生，因为里面有太多新奇、困惑、热情和不满足，我们恨不得一帧一帧全部记录下来。到后来人生走向了稳定、不变，“第一次”越来越少，求之不得的东西越来越少（不得太久的成了习得性无助），时间就开始变得越来越快，或者说我们的采样越来越粗。每个夜晚躺在床上的时候，我们都越来越能预测出第二天甚至一周、一个月内将要发生的事，在那里会有多少东西能危及（或者说颠覆）到我们的生命吗？或许风险正是问题的核心，价值常在人迹罕至处。</p>
 <p>全球性爆发的新冠疫情放慢了几乎所有人的一段时间，使许多人的“明天”重新变得不可预测，金融精英们管这个叫市场情绪，而他们的工作是比一般人做出更好的、不情绪化的预测并从中套利。而疫情终究会过去，市场终究会企稳，韭菜终究春风吹又生。最终这段时间带来的所谓群体记忆还是带有虚幻的性质，在每个人的心中其实都是不同的模样，这也许是任何大事件里的必然，只是这回更无奈的是，人们甚至无法面对面坐下来跟你聊上几句，就已淡出了你的人生。</p>
-<p>空出这一小时写出来的玩意，好像除了一个点用作了开头，后面都不在一开始想写的范围了，但在接近两年后能再次开始动“笔”，为未来留下这一帧，已是又一个好的开始。希望下周可以再见。</p>]]></description></item><item><title>拉萨见闻之一二</title><link>https://simoncos.github.io/blogs/seen-and-heard-in-lhasa.html</link><guid>https://simoncos.github.io/blogs/seen-and-heard-in-lhasa.html</guid><pubDate>Sun, 29 Sep 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>拉萨见闻之一二</h1>
+<p>空出这一小时写出来的玩意，好像除了一个点用作了开头，后面都不在一开始想写的范围了，但在接近两年后能再次开始动“笔”，为未来留下这一帧，已是又一个好的开始。希望下周可以再见。</p>]]></description></item><item><title>2019年我的读书小结</title><link>https://simoncos.github.io/blogs/reading-2019.html</link><guid>https://simoncos.github.io/blogs/reading-2019.html</guid><pubDate>Wed, 01 Jan 2020 00:00:00 +0800</pubDate><description><![CDATA[<h1>2019年我的读书小结</h1>
+<h4>五星力荐（按推荐顺序）</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/30171327/">惊人的假说</a> by [英] 弗朗西斯•克里克（Francis Crick） &amp;</li>
+<li><a href="https://book.douban.com/subject/33383607/">大脑的故事</a> by [美] 大卫·伊格曼（David Eagleman）</li>
+</ul>
+<p>分类：<strong>泛读 | 神经科学 | 科普</strong></p>
+<p><img alt="大脑的故事：所读版本的书封" decoding="async" height="800" src="https://simoncos.github.io/blogs/assets/images/reading-2019/a3d87e3b4447bfec94c01d8015378d64.jpg" width="800"/></p>
+<p>评：
+把这两本书并列放在一起，是因为内容一脉相承（主要从视觉角度来讨论意识问题），连作者都是师生关系。《惊人的假说》94年首版，出自克里克之手（没错，就是DNA那位），书名有点不知所云、术语多、信息密度大。全书最重要的几个关键词：意识、视觉、神经元、记忆、注意机制、猴子（雾）。神经网络那章提及的模型们可算得上是祖宗辈的了，有一个Adaline网络是60年的，真是令人感叹。《大脑的故事》2015年首版，有点像是10s对90s、学生对老师的一种传承。每章都是一个有趣的大问题，经典和前沿都有涉及到，举例精湛、行文老练，最后还有reference，从科普的角度上看也是一本青出于蓝的书。</p>
+<p>附：<a href="https://book.douban.com/people/simoncos/annotation/30171327/">惊人的假说-全书笔记</a> &amp; <a href="https://book.douban.com/people/simoncos/annotation/33383607/">大脑的故事-全书笔记</a></p>
+<ul>
+<li><a href="https://book.douban.com/subject/27041532/">尤比克</a> by [美] 菲利普·迪克（Philip K. Dick）&amp;</li>
+<li><a href="https://book.douban.com/subject/27041504/">少数派报告（小说集）</a> by [美] 菲利普·迪克（Philip K. Dick）</li>
+</ul>
+<p>分类：<strong>虚构 | 小说 | 科幻</strong></p>
+<p><img alt="尤比克：所读版本的书封" decoding="async" height="1532" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2019/cc9452230f1219b20da68a51894f9fd1.jpg" width="1080"/></p>
+<p>评：
+或许菲利普·迪克（PKD）这个名字许多人包括我认知都不太足够，但《银翼杀手》《少数派报告》《高堡奇人》这些名字之中，我们总有一个不会太陌生。今年年末我连续读了五本PKD，此外《高堡奇人》美剧上市、游戏《Cyberpunk 2077》即将上市、电影《黑客帝国》传出可能拍续集的消息，加上一些现实世界的大变化，PKD和赛博朋克就像他笔下的幻觉一样无孔不入。《尤比克》是一本慢热的书，我读完只能骂出脏话，经历了前半本的乏味，后半本把我整个人抽离出去了一半，而《少数派报告》小说集里也是篇篇精彩。可能因为一些嗑药trip带来的体验，PKD的小说非常青睐于“自我意识”（自己不是自己）以及“真实与虚幻”这两个主题（世界不是世界），幽默感、故事套路和写侦探小说的雷蒙德·钱德勒有那么点神似。如果说阿西莫夫是科幻之神（希望其他粉不要打我），PKD可能是鬼。</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30316475/">漫长的告别</a> by [美] 雷蒙德·钱德勒（Raymond Chandler）</li>
+</ul>
+<p>分类：<strong>虚构 | 小说 | 侦探</strong></p>
+<p><img alt="漫长的告别：所读版本的书封" decoding="async" height="1547" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2019/9db9207011cfdb1bd52046215d032fe6.jpg" width="1080"/></p>
+<p>评：
+侦探/推理这个类型我已经多年未涉及了，很高兴能够读到这本合口味的小说。钱德勒的文笔可以封为神级，幽默、忧郁（这两个词放一起是不是很有意思）、利落、老辣，本书的翻译也功不可没，我第一次在小说里笔记这么多段落。豆瓣上一个短评说得好，侦探小说只是这个故事的外壳，好的类型小说或许都不满足于只当一本类型小说。“说一声再见，就是死去一点点。”告别的气氛蔓延全书，这种复杂的情绪可能是我们从这本书中所能带走的最美、最持久的东西。</p>
+<ul>
+<li><a href="https://book.douban.com/subject/2065597/">浪客行</a> by [日] 井上雄彥</li>
+</ul>
+<p>分类：<strong>虚构 | 漫画</strong></p>
+<p><img alt="浪客行：所读版本的书封" decoding="async" height="475" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2019/4c2a11926cdd23be21e613c7abbb6843.jpg" width="314"/></p>
+<p>评：
+神作无疑，画工让人流口水，无论是打斗、心理活动还是搞笑，表现力都非常强。很多角色的人设很惹人喜爱，故事和想要表达的思想也蛮有意思。ps.《古剑奇谭三》北洛的人设真的没有参考宫本武藏吗？然后...小次郎！！！这套漫画属于有生之年系列，不想放“在读”列表一辈子了，所以归到了已读。</p>
+<ul>
+<li><a href="https://book.douban.com/subject/30324808/">变化的位面 Changing Planes</a> by [美] 厄休拉·勒古恩（Ursula K. Le Guin）</li>
+</ul>
+<p>分类：<strong>虚构 | 小说 | 科幻</strong></p>
+<p><img alt="变化的位面：所读版本的书封" decoding="async" height="827" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2019/c6d6bbe5a4f9fabc25828206dec35cc1.jpg" width="563"/></p>
+<p>评：
+令人想起博尔赫斯、《你一生的故事》《格列佛游记》（小说）、《奇诺之旅》（动画）、《异域镇魂曲》（游戏），有文学性的幻想世界集锦，几乎每一个世界都能给我留下印象，有些如果扩展成更大的架空世界应该会很有趣，脑洞中足见厄休拉的渊博知识。书名Changing Planes一语双关，而《异域镇魂曲》的英文原名不正是Planescape吗，有意思。</p>
+<h4>四星推荐（按最近阅读顺序）</h4>
+<ul>
+<li>
+<p><a href="https://book.douban.com/subject/27041533/">仿生人会梦见电子羊吗？</a> <strong>虚构 | 小说 | 科幻</strong>
+  评：小说想要表达的东西比电影要复杂许多。个人最有感觉的片段是男主进入戏院直到证明另一个赏金猎人的身份的部分，以及公寓里的桃子和眼泪。</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/27039411/">高堡奇人</a> <strong>虚构 | 小说 | 科幻</strong>
+  评：跟想象中不太一样的一本，作为科幻没有“幻”的东西，反而非常接近或者不如说根本就是严肃小说。读出了一点读云图时的感觉。</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/27194517/">长眠不醒</a> <strong>虚构 | 小说 | 侦探</strong>
+  评：如村上所说，这本比《漫长的告别》凌乱，但是我真的蛮喜欢钱德勒的文笔，很老辣。</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/27039412/">流吧！我的眼泪</a> <strong>虚构 | 小说 | 科幻</strong>
+  评：有点清奇啊，嗑过药才写得出来那些描述嗑药的段落吧，文学性也很强，如果归为类型小说可能有点概括不足了（这完全不是一部满足于讲故事的小说）。另外，风格真的令人想起钱德勒了。又：关注译者豆瓣了，真的是把这本书吃透了，译文才会让人觉得这么舒服吧。</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/30391099/">脑与阅读</a> <strong>泛读 | 神经科学 | 科普</strong>
+  评：主题的深入与讨论的细致程度使然，这实在不能说是一本好读的科普，大量的神经科学/心理学研究成果（配图好评）加上作者本身的消化提炼猜想，甚至很有一点学术讨论的味道了。本书的主要内容虽然都与阅读相关，但最终目的是要探讨人类神经系统的适应性/可塑性。选阅读这个切入点可以说非常聪明，因为这种人类行为出现得非常晚，用进化很难解释；这种行为也是人类与其他动物的很大一个不同之处，因此可以做许多横向对比。阅读这件事同时涉及到低级的视觉、听觉（主要跟学习有关）信息加工，此外还有更深层次的语义加工，可以说是一个相当大的坑。对语言、视觉、神经科学感兴趣的人，这本书都非常值得一读，繁复之下，即使不陷入每一个细节，也能有非常多的收获。本书成书于09年，十年里得有多少重要成果呢？
+  附：<a href="https://book.douban.com/annotation/91195405/">全书笔记</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/26280924/">看海的人（小说集）</a> <strong>虚构 | 小说 | 科幻</strong>
+  评：每篇都挺有意思的，神奇的几何与力、不均匀的时空、量子传送、因果衔尾蛇、虚拟化与缓存泄漏、同化与退化与洗脑...最喜欢 缓存 和 看海的人。</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/30290031/">自私的基因 40周年增订版</a> <strong>泛读 | 生物学 | 科普</strong>
+  评：站在前沿上的科普向书注定会有许多问题，从多年再版的修修补补可见一斑，但这不能掩盖本书的发光之处。写作上一个比较明显的缺点是部分论述过于冗长，特别是倒数第二章里对各种评论的回应。meme是我圈子里对这本书提到最多的部分，但在书中其实只有很初步的讨论。反而是从基因粒度去看演化的视角让人对自然演化有了更多理解。阅读本书前后经过了三个礼拜的时间，中间留下了不少划线和想法，总的来讲挺有收获。
+  附：<a href="https://book.douban.com/annotation/91195438/">全书笔记</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/30353486/">认知天性</a> <strong>泛读 | 心理学 | 科普</strong>
+  评：结构松散，内容还是有价值，除了一些老朋友外，一些例子我是在本书第一次见，与《学习之道》《刻意练习》互相映衬，互为补充。
+  附：<a href="https://book.douban.com/people/simoncos/annotation/30353486/">全书笔记</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/4820726/">论自由</a> <strong>泛读 | 政法</strong>
+  评：读（值得读的）书并不代表可以解决一切问题，但至少让你剩下需要考虑的问题稍微高级一点。本书思想也有其局限性（如原则过于简化，从最后一章陷入对各种实际问题进行的费力讨论中可见一斑），但精华仍然是精华。可惜的是，不愿意读书的人，你是很难强迫他读进去的。即使愿意，读书也非常容易因固有立场陷入片面。书里提到：不同观点交锋出真知。而同温层中尽是回声。这本书出版于1859年，整整160年，世界在人文面上步履维艰。翻译堪堪及格。在这个节骨眼上读此书，带着自己的所见所思来读，还是有一些收获的，晚点放笔记上来。
+  附：<a href="https://book.douban.com/people/simoncos/annotation/4820726/">全书笔记</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/6709809/">暗时间（文集）</a> <strong>泛读 | 心理学 | 问题解决</strong>
+  评：过于散乱，其实关注的东西都很有意思，也看得出来作者读了很多认知心理方面的书。我看到y combinator部分时被成功绕进去了，想起了被GEB支配的恐惧（不愧是连名字都照学GEB的文章）...之后有时间再补完。排序文章戳中g点，排序问题其实就是搜索问题，另外最后一篇贝叶斯则刚好给我文章草稿提供了素材，加一星！
+  附：<a href="https://book.douban.com/people/simoncos/annotation/6709809/">全书笔记</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/27030507/">上瘾</a> <strong>泛读 | 心理学 | 设计</strong>
+  评：上瘾这个译名不如原名hooked，全书总的来说比想象中好。培养用户习惯的四步：内外触发、行为、奖励（特别是多变的）、投入，跟learning how to learn里的习惯四要素有很明显的对应，书中还提到几种认识偏差。不少例子很对我口味，比如lol和stackoverflow，另外还带了一笔游戏化。第六章的自己会用/对用户有很大价值这两个维度的讨论很有趣。
+  附：<a href="https://book.douban.com/people/simoncos/annotation/27030507/">全书笔记</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/26895988/">学习之道 Learning how to learn</a> <strong>泛读 | 心理学</strong>
+  评：前两周刚上完公开课，现在再过完一遍书，中间已经开始用上了书里提到的一些方法如番茄时钟、每日清单、回想。受益匪浅。之后的学习过程中也要多回顾多尝试运用。
+  附：<a href="https://book.douban.com/people/simoncos/annotation/26895988/">全书笔记</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/25796122/">阿莱夫（小说集）</a> <strong>虚构 | 小说</strong>
+  评：这一本有好几篇都很有味道。被《阿莱夫》那段列锦秀哭了。读起来大脑完全进入diffuse mode，非常放松，莫名地很搭shafiq的soul album《the loop》。</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/25829287/">数学</a> <strong>泛读 | 数学</strong>
+  评：章节名都是数学里可能算是一等一重要的基本概念
+  附：<a href="https://book.douban.com/people/simoncos/annotation/25829287/">全书笔记</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/4202004/">文明的冲突与世界秩序的重建</a> <strong>泛读 | 政治｜外交</strong>
+  评：大学时看了个开头，这次终于一遍通读完了。感觉被本书纠正了不少以前对政治和外交的naive认知，对于宗教也有了一些不同的观念。虽不至于认为书中观点都是正确的，但其中大量的事实细节及观点表述过程，足够让人得以稍稍更深入地理解一些事情。行文态度上个人觉得作者已经算是非常中立了，并没有明显地倾向于某种文明和价值观。把二十年前的本书与这二十年里发生的一些大事（比如阿拉伯之春、美国总统竞选和一带一路）和小事（还有日常在网络上、生活中接触到的各种舆论观点）相对照，仔细琢磨下，感觉非常有意思。
+  附：<a href="https://book.douban.com/people/simoncos/annotation/4202004/">全书笔记</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/6518605/">三体全集 : 地球往事三部曲</a> <strong>虚构 | 小说 | 科幻</strong>
+  评：三刷完成（第三部是二刷），上次刷还是六七年前，瑕不掩瑜。这次感觉前两本比第三本好。不同段落水准有差异，很多地方文笔总感觉不顺畅。</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/25796061/">杜撰集（小说集）</a> <strong>虚构 | 小说</strong>
+  评：用不像小说的手法写像小说的文本</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/25796120/">小径分岔的花园（小说集）</a> <strong>虚构 | 小说</strong>
+  评：这次重读觉得反而不如恶棍列传喜欢，可能是太形而上、隐喻太多的关系。当然不可否认其先锋性，但叙述过于蜻蜓点水给人一种没有把事情想深入想明白、偷懒的印象，也或许正是作者想要给我们的印象，毕竟骨子里还是个诗人。</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/25796066/">恶棍列传（小说集）</a> <strong>虚构 | 小说</strong>
+  评：《恶棍列传》部分的梗概和白描以前不解其好，现在能够欣赏，蛮喜欢王永年的译文。有不少句子都很有味道，大部分出现在各个故事结尾。比如“多年来一直追踪他的可怕的马车撞上了他”，或是“xxx凌晨，纽约一条繁华街道上发现了xx的尸体。他身中五弹。一只幸免于难的、极普通的猫迷惑不解地在他身边逡巡。”几个故事都简洁有力，画面感很强。《玫瑰角的汉子》则是埋了第一人称为犯人的梗，《双梦记和其他》里五个故事中的两个来自一千零一夜（后者真神作，好想搞一套全集）。</p>
+</li>
+</ul>
+<h4>小结</h4>
+<p>总的来说今年比去年有进步，阅读总时长有提高，虽然非虚构精读没有一本完成，但泛读多了不少，远超<a href="https://simoncos.github.io/blogs/reading-2018.html">年初定下的目标</a>，并且都输出了许多想法可以留待更深入的探索，虚构方面也读到不少好书。书源方面，特别安利一下微信读书：书库全、有无限卡免费读所有的书、笔记导出功能、社交链，此外最近还出了支持多款电子书设备的app，总体完胜Kindle、多看、豆瓣。</p>
+<ul>
+<li>2019小结：</li>
+<li>总体：约149.5小时，月均12.5小时，共42本（漫画1套算1本）</li>
+<li>分类：非虚构泛读（21），非虚构精读（0），虚构（21）</li>
+<li>星级：五星力荐（7），四星推荐（19），三星还行（15），二星较差（1）</li>
+<li>目标达成：<ul>
+<li>总时间：149.5/200</li>
+<li>非虚构精读：0/5</li>
+<li>非虚构泛读：21/10</li>
+</ul>
+</li>
+<li>2020目标：<ul>
+<li>总时间：200</li>
+<li>非虚构精读：5</li>
+<li>非虚构泛读：10</li>
+<li>书评：2</li>
+</ul>
+</li>
+</ul>
+<p><em>注：本文整理自<a href="https://book.douban.com/people/simoncos/collect">我在豆瓣上记录的书及短评</a>，书籍信息链接及图片来源均为豆瓣。</em></p>]]></description></item><item><title>拉萨见闻之一二</title><link>https://simoncos.github.io/blogs/seen-and-heard-in-lhasa.html</link><guid>https://simoncos.github.io/blogs/seen-and-heard-in-lhasa.html</guid><pubDate>Sun, 29 Sep 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>拉萨见闻之一二</h1>
 <p>1.白塔的作用是连接被公路切断的布达拉宫龙脉</p>
 <p><img alt="黄昏的云层下，路边立着一座白塔，从金色塔尖拉出一串挂着小铃铛的绳索，左侧山上有另一座小白塔，路上有几辆电动车驶过" decoding="async" height="930" src="https://simoncos.github.io/blogs/assets/images/seen-and-heard-in-lhasa/79c685717a085ee412463f496cf43547.jpg" width="1240"/></p>
 <p>2.白墙是用涂料一层层泼出来的，里面含有牛奶白糖，经年累月一层又一层，一些部分甚至形成了类似钟乳石的结构</p>
@@ -1200,7 +1349,77 @@
 （三）：在线音乐商业<br/>
 （四）：媒体的性质与认知科学<br/>
 （五）：从复合媒体到原子化控制<br/>
-（六）：数字化与媒体的演化</p>]]></description></item><item><title>对港漂与内地新个税法的一些研究</title><link>https://simoncos.github.io/blogs/hong-kong-drifters-and-mainland-income-tax.html</link><guid>https://simoncos.github.io/blogs/hong-kong-drifters-and-mainland-income-tax.html</guid><pubDate>Thu, 01 Nov 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>对港漂与内地新个税法的一些研究</h1>
+（六）：数字化与媒体的演化</p>]]></description></item><item><title>2018年我读过的好书</title><link>https://simoncos.github.io/blogs/reading-2018.html</link><guid>https://simoncos.github.io/blogs/reading-2018.html</guid><pubDate>Fri, 04 Jan 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>2018年我读过的好书</h1>
+<h4>五星推荐（按推荐顺序）</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/30164677/" title="我们为什么会生病">我们为什么会生病</a> by 伦道夫·M·尼斯、乔治·C·威廉斯</li>
+</ul>
+<p>分类：<strong>泛读 | 生命科学 | 科普</strong></p>
+<p><img alt="我们为什么会生病：所读版本的书封" decoding="async" height="763" src="https://simoncos.github.io/blogs/assets/images/reading-2018/a467af1e6e29a184b0e7111264e59279.jpg" width="540"/></p>
+<p>评：非常好的科普，从演化/达尔文的视角看医学/生物学的方方面面，并提出很有意义的猜想和问题。关于人类眼球、呼吸道和食道等的进化bug都很经典，不久前还在知乎上看到人拿来反对设计论。距离英文初版94年超过二十年了，颇有兴趣继续了解一下演化生物学迄今为止有哪些相关发展。结合genetic programming、genetic engineering相关知识（虽然都叫genetic，完全两个领域），或者在读者生病时看更带感（雾</p>
+<p>附：<a href="https://book.douban.com/annotation/66339095/">全书摘抄</a></p>
+<h4>四星不错（按最近阅读顺序）</h4>
+<ul>
+<li>
+<p><a href="https://book.douban.com/subject/2209702/" title="Programming Collective Intelligence">Programming Collective Intelligence : Building Smart Web 2.0 Applications</a> <strong>精读 | 计算机 | 数据挖掘</strong>
+  评：涵盖了一些常见的数据挖掘算法，和内容对比书名似乎有点容易误导，除非说只要是数据集都算collective。各种算法蜻蜓点水，这次算是借本书为索引，再去搜索、巩固一些基本知识。一些应用试用场景及细节讲得不错，但是没有对应上专有术语也没有引用，导致入门者难以深入。代码和实验没怎么看得进去（genetic programming那章实现除外）。随机优化那一章收获蛮多的：cost function, representation of constrained problem, similar solutions yield similar results。</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/27135380/" title="心">心 : 夏目漱石作品系列</a> <strong>虚构 | 小说 | 日本</strong>
+  评：有一个书评写得好，犹豫不决和暧昧来源于对自己和他人的不信任，最后让人将自己的命运交予外部世界。</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/26658379/" title="必然">必然</a> <strong>泛读 | 科技</strong>
+  评：观点很好，有些点和我正在写的文章一模一样。。。美式啰嗦减一星，不过也算是帮忙提供了一点写作素材
+  附：<a href="https://book.douban.com/people/simoncos/annotation/26658379/">全书摘抄</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/26836970/" title="沙丘">沙丘</a> <strong>虚构 | 小说 | 科幻</strong>
+  评：设定有趣，传奇色彩挺浓的</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/25762598/" title="尽头">尽头</a> <strong>泛读 | 文学 | 二刷</strong>
+  评：二刷，现在来看唐诺确实有点啰嗦和掉书袋，但想要表达的东西毕竟复杂，只能靠冗余和网络来逼近准确？减一星，但仍是一本值得读的书。
+  附：<a href="https://book.douban.com/people/simoncos/annotation/25762598/">全书摘抄</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/2887103/" title="Improv Wisdom">Improv Wisdom : Don't Prepare, Just Show Up</a> <strong>泛读 | 方法论</strong>
+  评：跟我的一些想法和做法有相合之处。即兴是一种放松的专注，在作者的总结里不只是flow本身，也包括令人更有机会进入flow的方法。即使盲目乐观也比不开始更好，put doing before thinking，这是我期待自己可以做到的。幽默本身价值不大这个观点也值得思考。
+  附：<a href="https://book.douban.com/people/simoncos/annotation/2887103/">全书摘抄</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/1559310/" title="鹿鼎记">鹿鼎记 : （全五册）</a> <strong>虚构 | 小说 | 武侠</strong>
+  评：金庸的情节确实扎实，只不过有时比较拉杂。七个老婆有种钦定的感觉，到最后十几章完全变成龙套了。神龙教和日月神教一样，明眼人应瞧得出来原型的蛛丝马迹。直男癌仍然严重。这里面写的最好的情感部分，倒可能是韦小宝和康熙了。</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/26634683/" title="Think Python">Think Python : How to Think Like a Computer Scientist</a> <strong>精读 | 计算机 | Python</strong>
+  评：写了三年python代码了，这还是我看完的第一本关于Python的书，依然有所收获。以现在我对Python的了解程度看，本书内容流畅，都是要点精华，所有提到的都讲得十分透彻，概念定义清晰、前后连贯，并且都有作者的个人实践经验和深入理解，每章后面不光有练习还有debug经验分享。即使没接触过任何编程语言的人，也可以从这本书入门写代码。</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/24862722/" title="链接">链接 : 商业、科学与生活的新思维(十周年纪念版)</a> <strong>泛读 | 科普 | 复杂系统</strong>
+  评：非常好的早期复杂网络研究及应用领域介绍，没背景看个热闹，有背景感觉全书充当了一个简单综述的作用。一个收获是可以看到早期复杂网络的一些研究历程，特别是从静态的随机图如何到生长机制（结点的新生消亡）+链接偏好；另外也进一步认识到复杂网络的广泛存在，幂律在各种网络里的发现，任何复杂系统背后很可能都有网络的存在，关于艾滋病的传播与治疗和基因-蛋白质相互作用的系统都挺有趣；阿喀琉斯之踵的部分也很有意思，幂律下的无尺度网络可以抵御随机攻击/故障（容错性高），但却受不了人为对枢纽节点的针对性攻击，不重要与重要在骰子的哪一端变得critical（但如果枢纽节点的内部也是一个比较无中心化的子网络呢？比如Google.com的背后）。虽然行文有些部分因为过多引用导致凌乱，但总体是很好的科普/科研入门用书。
+  附：<a href="https://book.douban.com/people/simoncos/annotation/24862722/">全书摘抄</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/1002299/" title="笑傲江湖（全四册）">笑傲江湖（全四册）</a> <strong>虚构 | 小说 | 武侠</strong>
+  评：散了点，边角没必要的写得多了，很多主要剧情转得突兀。写得好的有学剑、梅庄和三女感情线的一部分。杨莲亭是个大胡子666</p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/25976544/" title="故事">故事 : 材质、结构、风格和银幕剧作的原理</a> <strong>泛读 | 创意 | 剧作</strong>
+  评：不错的书，对于我一门外汉来讲，算是对电影剧本及故事有了一些系统性的了解，有助于更好地欣赏别人的创作，以及审视自己的idea。
+  附：<a href="https://book.douban.com/people/simoncos/annotation/25976544/">全书摘抄</a></p>
+</li>
+</ul>
+<h4>小结</h4>
+<ul>
+<li>简单统计：</li>
+<li>总体：约107.5小时，月均9.0小时，共18本</li>
+<li>分类：虚构（6），泛读（10），精读（2）</li>
+<li>星级：五星力荐（1），四星推荐（11），三星还行（6）</li>
+<li>完成情况：参考之前计划的<a href="https://simoncos.github.io/blogs/reading-2016.html">每月完成2.5本书</a>则一年共30本，我了个sigh，18本压了及格线。还有一本未完成但应该会继续的精读：<a href="https://book.douban.com/subject/26883982/">Deep Learning</a>，目前只读完第一部分。</li>
+<li>2019年新目标：总阅读时间到200小时，精读5+，泛读保持10+，争取多输出。</li>
+</ul>
+<p><em>注：本文整理自<a href="https://book.douban.com/people/simoncos/collect">我在豆瓣上记录的书及短评</a>，书籍信息链接及图片来源均为豆瓣。</em></p>]]></description></item><item><title>对港漂与内地新个税法的一些研究</title><link>https://simoncos.github.io/blogs/hong-kong-drifters-and-mainland-income-tax.html</link><guid>https://simoncos.github.io/blogs/hong-kong-drifters-and-mainland-income-tax.html</guid><pubDate>Thu, 01 Nov 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>对港漂与内地新个税法的一些研究</h1>
 <p><em>如果觉得看完本文依然有疑问，或者相关内容涉及切身利益，建议咨询法律专业人士或政府税务机关。在此也请读到本文的专业人士在条件允许的情况下给予审阅和指正，以避免本文引起误导的可能。</em></p>
 <p><em>2026 年注：本文写于 2018 年底，当时个人所得税法实施条例尚未定稿。此后的实施条例和税务公告改动了文中引用的多处条文，文中的分析可能已不再适用。</em></p>
 <h3>想要解决的问题</h3>
@@ -1465,7 +1684,81 @@ B=B1+B2+...+Bn，那么：
 <p>《故事》：“一切优秀的故事都发生在一个有限的、可知的世界内。故事的世界必须小到能让单个艺术家的头脑容纳它所创造出来的虚构宇宙，并像上帝了解他所创造的世界一样对其一切了如指掌。”</p>
 </li>
 </ul>
-<p>豆瓣：<a href="https://movie.douban.com/subject/4195678/">四叠半神话大系</a></p>]]></description></item><item><title>问题解决与设计（四）：纠结与最优解</title><link>https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html</link><guid>https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html</guid><pubDate>Wed, 10 May 2017 00:00:00 +0800</pubDate><description><![CDATA[<h1>问题解决与设计（四）：纠结与最优解</h1>
+<p>豆瓣：<a href="https://movie.douban.com/subject/4195678/">四叠半神话大系</a></p>]]></description></item><item><title>2017上半年我读过的书</title><link>https://simoncos.github.io/blogs/reading-2017-first-half.html</link><guid>https://simoncos.github.io/blogs/reading-2017-first-half.html</guid><pubDate>Wed, 21 Jun 2017 00:00:00 +0800</pubDate><description><![CDATA[<h1>2017上半年我读过的书</h1>
+<h4>五星推荐（按推荐顺序）</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/1322336/">控制论与科学方法论</a> by 金观涛、华国凡</li>
+</ul>
+<p>分类：<strong>泛读 | 控制论 | 科学哲学</strong></p>
+<p><img alt="控制论与科学方法论：所读版本的书封" decoding="async" height="600" src="https://simoncos.github.io/blogs/assets/images/reading-2017-first-half/8aedc1421d3359447eeb42a27684eb32.jpg" width="600"/></p>
+<p>短评：
+一刷：一本值得看几遍的好书。在不涉及高等数学的情况下将控制论、系统论、信息论（终于有那么点明白为什么这三个被合称为“老三论”了），以及科学发现的一般规律用平实的例子串联了起来。</p>
+<p>这次是多年后二刷，收获多了不少，不过又觉得全书没以前感觉那么好了，绕过严格定义谈概念终究不容易。最后一部分黑箱认识论写得不错，且刚好和最近在写的文章有关（说的是<a href="https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.html">《问题的解决与设计》系列</a>），有一点帮助。</p>
+<p>附：<a href="https://book.douban.com/review/8407350/">全书摘抄：反馈、共轭、突变与稳定性、黑箱认识论</a></p>
+<ul>
+<li><a href="https://book.douban.com/subject/1013416/">雷雨</a> by 曹禺</li>
+</ul>
+<p>分类：<strong>虚构 | 戏剧</strong></p>
+<p><img alt="雷雨：所读版本的书封" decoding="async" height="148" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2017-first-half/fa11525668d69f10d8a25a0c3841e1e5.jpg" width="100"/></p>
+<p>短评：
+一口气读完，不知道雷雨算不算戏剧冲突的极致了。本来在几个点上是可以有个稍微happy的ending的，结果各种细节压垮了最后一根稻草，事情就在末尾完全崩塌。作为戏剧这样很有艺术性和美感，不过回到真实世界，还是尽量摒弃执念，尽量不要钻牛角尖困于某种定势的好，拿得起放得下。</p>
+<ul>
+<li><a href="https://book.douban.com/subject/4067778/">文字的故事</a> by 唐诺</li>
+</ul>
+<p>分类：<strong>泛读 | 文化</strong></p>
+<p><img alt="文字的故事：所读版本的书封" decoding="async" height="142" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2017-first-half/397841ae4b0042ee67fa5ae9e7524f44.jpg" width="104"/></p>
+<p>短评：
+有知识，有味道，有思索。最近因工作关系更多从数理角度与汉字打交道，单个文字几乎完全抽象成了符号，要说语义也只是从上下文之类的地方拐弯抹角地获取。但其实每一个文字都是有故事的，连接着成千上万年发展出来的knowledge base。唐诺这本书以甲骨文等早期汉字为源头，展现出了汉字这个符号系统与其语义库曲折进化历程的冰山一角，并进而发出一些更深远的疑问与感叹，不愧是「专业读者」。</p>
+<p>更不容易的是这哥们总是可以在感性与理性，现象和逻辑间找到一个平衡，一方面有丰富具体的描写，一方面也有简洁凝练的思考。文字的出生死亡，来头去向，形形色色，以及其作为整体相比之于人类个体的永恒，精彩迷人，读罢对文字特别是汉字又找回了许多爱意。</p>
+<p>附：<a href="https://book.douban.com/review/8331157/">全书摘抄：概念抽象、形声、共同记忆与编解码、半监督进化</a></p>
+<h4>四星不错（按阅读顺序）</h4>
+<ul>
+<li>
+<p><a href="https://book.douban.com/subject/25941891/">安迪密恩</a> <strong>虚构 | 小说 | 科幻</strong></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/25941893/">安迪密恩的觉醒</a> <strong>虚构 | 小说 | 科幻</strong></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/26546914/">科学的极致：漫谈人工智能</a> <strong>泛读 | 科普 | 计算 | 数学</strong>
+  短评：
+  很不错的书，书名虽然是人工智能，但其实除了一般所说的AI还有一些复杂系统和偏物理的东西，都是非常有趣的主题，很多值得继续深入了解和学习（参考文献列的还蛮全）。只是说每篇文章的质量参差不齐，有些更像是一篇没花太多时间的博文，想到哪写到哪，很多公式列出来但解释不够，从科普角度上来讲并不深入浅出，神经网络那块写的蛮乱的。另外全书的整体感挺差，当作文集倒也还说得过去。</p>
+</li>
+</ul>
+<p>附：<a href="https://book.douban.com/review/8339197/">全书摘抄：三学派、图灵机、通用智能、自指、流网络、群体</a></p>
+<ul>
+<li><a href="https://book.douban.com/subject/3155622/">庆余年系列</a> <strong>虚构 | 小说 | 穿越</strong></li>
+</ul>
+<h4>三星（按阅读顺序）</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/25952961/">博尔赫斯谈话录</a> <strong>泛读 | 访谈 | 文学</strong></li>
+<li><a href="https://book.douban.com/subject/1905742/">金枝（上下册）</a> <strong>泛读 | 文化 | 宗教</strong></li>
+<li><a href="https://book.douban.com/subject/1203426/">人间词话</a> <strong>泛读 | 文学</strong></li>
+</ul>
+<h4>小结</h4>
+<ul>
+<li>简单统计：</li>
+<li>阅读时间：约86.1小时，月均14.4</li>
+<li>完成：虚构（4/6），泛读（6/6），精读（0/3），总计（10/15）</li>
+<li>五星：虚构（1/4），泛读（2/6）</li>
+<li>四星：虚构（3/4），泛读（1/6）</li>
+<li>
+<p>三星：泛读（3/6）</p>
+</li>
+<li>
+<p>完成情况：距离之前计划的<a href="https://simoncos.github.io/blogs/reading-2016.html">每月完成2.5本书</a>差了不少，虚构（闲书）部分如果把《庆余年》系列几本分开算应该远远超过了（捂脸），泛读刚好，精读完全Orz。总体而言趋势比16年还是要好一些，得努把力啊，进一步压缩下玩游戏的时间啥的，然后就是不能太easy了233。</p>
+</li>
+<li>
+<p>下半年新目标：虚构（2），泛读（4），精读（2）</p>
+</li>
+<li>
+<p>新计划：以后对于五星的泛读/精读好书，尝试通过更多方式去沉淀所得，比如长篇评论、知识/概念的关系图等，以期得到更大的收获。</p>
+</li>
+<li>
+<p>内容增加：从这次开始总结里加入了三星，嗯，感觉是个吸引火力的部分呢，欢迎来战。其实我在豆瓣给的三星还好啦，低于三星我连记录都不会记录。</p>
+</li>
+</ul>
+<p><em>注：本文整理自<a href="https://www.douban.com/people/simoncos/">我</a>在豆瓣上记录的书及读完时留下的短评，书籍信息链接及图片来源均为豆瓣。</em></p>]]></description></item><item><title>问题解决与设计（四）：纠结与最优解</title><link>https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html</link><guid>https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html</guid><pubDate>Wed, 10 May 2017 00:00:00 +0800</pubDate><description><![CDATA[<h1>问题解决与设计（四）：纠结与最优解</h1>
 <p><img alt="TBBT里的扩展版剪刀石头布（注意里面的箭头）" decoding="async" height="521" src="https://simoncos.github.io/blogs/assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg" width="695"/></p>
 <p>关键词：价值/损失函数 | 决策 | 偏好系统 | 最优解</p>
 <h3>纠结、选择与价值函数</h3>
@@ -1579,7 +1872,52 @@ B=B1+B2+...+Bn，那么：
 <p>不知不觉写到这里，同以前一样，我还是不知道写这些到底是干什么，但希望这个点也能在将来的某个点发出光，照亮所有的胖子。</p>
 <p>或许只是为了提醒自己，在这些回溯里，勿忘你，曾慷慨分享性爱玩具。</p>
 <p><em>特此感谢林宥嘉的专辑<a href="http://www.xiami.com/album/9czMQge5d53">《今日营业中》</a>为本文提供背景音乐和部分尿点。</em></p>
-<p>2017.02</p>]]></description></item><item><title>问题解决与设计（二）：可行解</title><link>https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.html</link><guid>https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.html</guid><pubDate>Fri, 11 Nov 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>问题解决与设计（二）：可行解</h1>
+<p>2017.02</p>]]></description></item><item><title>2016年我读过的好书</title><link>https://simoncos.github.io/blogs/reading-2016.html</link><guid>https://simoncos.github.io/blogs/reading-2016.html</guid><pubDate>Sun, 01 Jan 2017 00:00:00 +0800</pubDate><description><![CDATA[<h1>2016年我读过的好书</h1>
+<h4>五星推荐（按推荐顺序）</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/5375620/">失控：机器、社会与经济的新生物学</a> by [美] 凯文·凯利</li>
+</ul>
+<p>分类：<strong>科技 | 泛领域</strong></p>
+<p><img alt="失控：机器、社会与经济的新生物学：所读版本的书封" decoding="async" height="435" src="https://simoncos.github.io/blogs/assets/images/reading-2016/5358c00218da1001f674444ebbdb729c.jpg" width="306"/></p>
+<p>短评：
+讨论群体、控制、复杂系统、进化、适应、生物与机器的趋同等等有趣概念的书，典型的欧美式写法，举了大量的实例、生动有趣，重在将广泛领域中的现象联系起来，写作上行文流畅、举例恰当，另外从这书的一些引用文献看出作者有一定的学术底子。启发性非常强。</p>
+<p>附：<a href="https://book.douban.com/review/7945102/">全书摘抄</a></p>
+<ul>
+<li><a href="https://book.douban.com/subject/26761696/">精进 : 如何成为一个很厉害的人</a></li>
+</ul>
+<p>分类：<strong>心理学 | 方法论</strong></p>
+<p><img alt="精进 : 如何成为一个很厉害的人：所读版本的书封" decoding="async" height="147" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2016/b7998a4efe08bd1995a05252f2d441e0.jpg" width="100"/></p>
+<p>短评：
+这本书在豆瓣上争议还蛮大的，有人觉得就是把每个人都熟知的东西变着花样讲了一遍（个人不同意），标题这么鸡汤，再加上作者在微博、知乎上对这本书的各种营销，说实话看着有些烦人，但其实这种硬广告是比较有良心的那一类广告了。</p>
+<p>只讨论书本身，我觉得这是一本谈论思维与方法论的好书，文笔虽然不太流畅，但内容很有启发性。印象比较深的有收益半衰期、任务中断点选择、思维的发散和收敛、乔哈利窗口、集中学习时对知识掌握程度的高估...不过还是那句话，实践才是真正带来价值之道，事实上这本书确实影响了我之后在一些事情上的决策过程和执行方法（特别是我变得更有意识地去决定任务中断点），这种真正为生活带来改变的书，打个五星也不算太过分。</p>
+<p>附：<a href="https://book.douban.com/review/8088495/">全书摘抄</a></p>
+<ul>
+<li><a href="https://book.douban.com/subject/2052049/">海伯利安</a> by [美] 丹·西蒙斯</li>
+</ul>
+<p>分类：<strong>长篇小说 | 科幻</strong></p>
+<p><img alt="海伯利安：所读版本的书封" decoding="async" height="149" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2016/be90d6f8ca1a059e70f60bd2c28926c8.jpg" width="99"/></p>
+<p>短评：
+六人分别讲故事的结构让我想起云图。书中是一个很丰富的世界，各种设定都很精彩，恰好读的时候同时在玩上古卷轴，感觉宏大自有其相似之处，故事含蓄且动人，都以一种理所当然的稳定语调被讲述出来，软硬兼施的科幻。伯劳和光阴塚还有迷宫世界，真是好大一个谜团，六人中印象最深的是年龄倒退那个故事，其次是神父和上校。</p>
+<ul>
+<li><a href="https://book.douban.com/subject/25941905/">海伯利安的陨落</a></li>
+</ul>
+<p>分类：<strong>长篇小说 | 科幻</strong></p>
+<p><img alt="海伯利安的陨落：所读版本的书封" decoding="async" height="146" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2016/a460bd1905359e0f4dc9474e3008f33c.jpg" width="101"/></p>
+<p>短评：
+海伯利安四部曲的第二部。故事的高潮开始以后变得很赞...本书大量的细节与世界描述，兼具太空歌剧、赛博朋克、时间旅行要素。能看到许多科幻从其中汲取的营养，也让人联想起年代大致相同的《深渊上的火》系列。揭开了许多谜团，又带来新的谜团，我最感兴趣的迷宫到现在还是没有解释，另外还有超光及其背后的声音？读完第三部以后再回顾这第二部发现还是有很多谜没有解开。悦石（和三体程心鲜明的对比哈哈哈）和卡萨德塑造得很赞。剧情以外的部分值得重读。</p>
+<h4>四星不错（按阅读顺序）</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/4894876/">小王子</a> <strong>童话</strong></li>
+<li><a href="https://book.douban.com/subject/5939312/">超·杀人事件</a> <strong>小说 | 推理 | 解构</strong></li>
+<li><a href="https://book.douban.com/subject/3242963/">BACCANO！01</a> <strong>小说</strong></li>
+<li><a href="https://book.douban.com/subject/26381084/">隱形邏輯 : 香港式建築極限</a> <strong>建筑 | 设计</strong> （未读完）</li>
+<li><a href="https://book.douban.com/subject/1060852/">呼兰河传</a> <strong>小说 | 严肃</strong></li>
+<li><a href="https://book.douban.com/subject/26586492/">火星救援</a> <strong>小说 | 科幻</strong></li>
+<li><a href="https://book.douban.com/subject/25779326/">可能与不可能的边界 : P/NP问题趣史</a> <strong>科普 | 数学</strong></li>
+</ul>
+<h4>小结</h4>
+<p>16年比之15年完成的书实在是少，17年先订个小目标：每月解决一部闲书（主要指小说）、一部泛读（广度拓展，活跃思维，比如《失控》、《精进》这样的）、每两个月解决一部精读（深入学习，如数学、coding之类）。估计实现起来还是略困难（特别是精读），但不设个目标的话，人的注意力就没机会分配到上面，也就很难有所进步。</p>
+<p><em>注：本文整理自我在豆瓣上记录的书及读完时留下的短评，书籍信息链接及图片来源均为豆瓣。</em></p>]]></description></item><item><title>问题解决与设计（二）：可行解</title><link>https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.html</link><guid>https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.html</guid><pubDate>Fri, 11 Nov 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>问题解决与设计（二）：可行解</h1>
 <p>关键词：可行解 | 可能性空间 | 偏见 | 定势 | 功能固着 | 可供性</p>
 <p><a href="https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.html">第一篇</a>中讨论的问题情境，在我的理解中实际上是一种对问题本身明确的表示（Representation）。一旦问题的表示确定下来，便可以开始寻找问题的可行解。我将借助一个简单的问题来开始本篇的思考：</p>
 <blockquote>
@@ -2030,7 +2368,51 @@ plt.show()
 两性关系 688, 英语 678, 人际交往 640, 心理学 634, 互联网 595<br/>
 法律 587, 微软（Microsoft） 555, 美国 552, 健身 538, 编程 511</p>
 <p>我个人认为<strong>大V们回答的问题所对应的话题，能够从一定程度上反映了知乎这个平台总体的话题领域热门程度</strong>。另外，我觉得排在最前的一些热门话题也在一定程度上解释了为什么不同领域的大V会抱团，因为不论处于什么专业领域，<strong>人们对于生活、历史、电影等人文和泛娱乐话题总是会感兴趣的</strong>，一旦都感兴趣，又都有不错的见解和分享，自然更容易惺惺相惜。</p>
-<p>到此，本文终于可以画上句号了，欢迎交流讨论。在此还要感谢和我一起参与本项目的其他三个小伙伴，四个人一起才得以在短短时间内做到这种程度（项目report里有我们的详细分工）。</p>]]></description></item><item><title>知乎社交网络分析（上）：基本统计</title><link>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.html</link><guid>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.html</guid><pubDate>Sun, 28 Feb 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>知乎社交网络分析（上）：基本统计</h1>
+<p>到此，本文终于可以画上句号了，欢迎交流讨论。在此还要感谢和我一起参与本项目的其他三个小伙伴，四个人一起才得以在短短时间内做到这种程度（项目report里有我们的详细分工）。</p>]]></description></item><item><title>2015下半年我读过的好书</title><link>https://simoncos.github.io/blogs/reading-2015-second-half.html</link><guid>https://simoncos.github.io/blogs/reading-2015-second-half.html</guid><pubDate>Fri, 04 Mar 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>2015下半年我读过的好书</h1>
+<h4>五星推荐（按推荐顺序）</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/11501823/">雅各布·德佐特的千秋</a> by [英]大卫·米切尔</li>
+</ul>
+<p>分类：<strong>长篇小说</strong></p>
+<p><img alt="雅各布·德佐特的千秋：所读版本的书封" decoding="async" height="499" src="https://simoncos.github.io/blogs/assets/images/reading-2015-second-half/ecad5e82a2fe3cc15e55da59eb3a0012.jpg" width="337"/></p>
+<p>评价：
+最精彩的部分：不知火神社十三信条的揭开，宇川的死，未能落下的英船炮火，奉行和住持的棋弈与蝴蝶的生死。雅各布、织斗、宇川、住持、奉行、英国船长都给人留下深刻印象（医生马里纳斯简直就是一个符号式的人物，很特别）</p>
+<p>十年、二十年、三十年、最后的最后，原来那个铜红色头发、碧色眼睛的雅各布一直最不能忘怀的，仍然是那个在天涯彼端的、黑发黑眸的、独立而安静的、左脸有着烫疤却依然美丽的、他从来没有得到的蓝场川。</p>
+<ul>
+<li><a href="https://book.douban.com/subject/3601195/">彩虹尽头</a> by [美] 弗诺·文奇</li>
+</ul>
+<p>分类：<strong>长篇小说 | 科幻</strong></p>
+<p><img alt="彩虹尽头：所读版本的书封" decoding="async" height="148" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-second-half/1acbd380549de93abdbe508bba173ba9.jpg" width="99"/></p>
+<p>评价：
+我读过的描述Virtual Reality（虚拟现实）最棒的科幻，印象深刻的有: 心智控制的诡异作用路径，职校的基础课有搜索和分析，连接不同领域的知识变成了比深度探索更重要的事，分析师集群，几乎无所不能的兔子却有一个一开始自己都不清楚的基本却又致命的弱点（鸡蛋放在一个篮子里）。</p>
+<p>精彩在于各种设定，剧情似有未完之意。</p>
+<ul>
+<li><a href="https://book.douban.com/subject/1041482/">万历十五年</a> by [美] 黄仁宇</li>
+</ul>
+<p>分类：<strong>社科</strong></p>
+<p><img alt="万历十五年：所读版本的书封" decoding="async" height="148" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-second-half/840fcb5988607aaad240863581900cbf.jpg" width="99"/></p>
+<p>评价：
+全书的大视角: 许多局部的问题根本都来源于明朝的文官统治与伦理道德的文明结构过于落后，无法满足经济与外事的形势发展需要。当然这种自上而下的视角不能说毫无可异议之处，上对下有制约，但下也可能推动上，从万历到清末民初这么长时间情况不可能如作者所言无大的改变。不过有一点总是正确的: 上层与下层结构之间如果不能由一种体制进行妥当的双向维系与协调，一个集体就会出现很大的问题。</p>
+<p>然后就是，明朝官方的粮食物资输送问题充分提醒我们解耦的重要性，没有集散中心的平级互运，想想真是噩梦...</p>
+<p>附：<a href="https://book.douban.com/review/7569857/">全书摘抄</a></p>
+<ul>
+<li><a href="https://book.douban.com/subject/3816883/">黑暗的左手</a> by [美]厄休拉•勒古恩</li>
+</ul>
+<p>分类：<strong>长篇小说 | 科幻</strong></p>
+<p><img alt="黑暗的左手：所读版本的书封" decoding="async" height="149" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-second-half/b1ce5ba24e573123418e6a7598f079c6.jpg" width="99"/></p>
+<p>评价：
+一本非常慢热的书，近半时候伊斯特拉凡去救艾故事才开始进入高潮部分，最精彩部分是两人的逃亡之旅。本书的设定很出色，从星球环境到人类的生理特点再到科技、文化、政治及哲学，两个国家的建制和民众对比很有趣。一本着重情感和世界观的小说，两位主人公最后发展出的关系很难定义，但是令人回味。</p>
+<h4>四星尚可（按阅读顺序）</h4>
+<ul>
+<li><a href="https://book.douban.com/subject/1031146/">台北人</a> <strong>短篇小说</strong></li>
+<li><a href="https://book.douban.com/subject/26552069/">黑暗之城：九龍城寨的日與夜</a> <strong>社科 | 建筑</strong></li>
+<li><a href="https://book.douban.com/subject/24661349/">The Secret Language of Color</a> <strong>自然 | 设计</strong></li>
+<li><a href="https://book.douban.com/subject/1046265/">挪威的森林</a> <strong>长篇小说</strong></li>
+<li><a href="https://book.douban.com/subject/26281221/">Mastering Machine Learning With scikit-learn</a> <strong>计算机 | python</strong></li>
+<li><a href="https://book.douban.com/subject/1986050/">哲学 科学 常识</a>（附：<a href="http://book.douban.com/review/7690584/">全书摘抄</a>） <strong>哲学</strong></li>
+<li><a href="https://book.douban.com/subject/10786473/">自控力 : 斯坦福大学最受欢迎心理学课程</a> （附：<a href="http://book.douban.com/review/7716025/">全书摘抄</a>）<strong>心理学</strong></li>
+</ul>
+<p><em>注：本文整理自我在豆瓣上记录的书及读完时留下的短评，书籍信息链接及图片来源均为豆瓣。</em></p>]]></description></item><item><title>知乎社交网络分析（上）：基本统计</title><link>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.html</link><guid>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.html</guid><pubDate>Sun, 28 Feb 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>知乎社交网络分析（上）：基本统计</h1>
 <blockquote>
 <p>交互研究页：<a href="https://simoncos.github.io/gallery/research/zhihu-2015.html?lang=zh">知乎 2015：人、关注与影响力</a>，把上下两篇的统计、网络、榜单与话题放在一起探索。</p>
 </blockquote>
@@ -2102,7 +2484,88 @@ plt.show()
 <p>非常棒，完全没有问题。</p>
 <p>果然还是扯出了一大堆废话，还是做回文青总结一下我的这一年然后继续啃我的菲律賓金菠蘿果盤（價值十五文九毛，HKD），毕竟今天已经12月29号了嘛：</p>
 <p>二〇一五，没什么特别的事发生。在这一年的十万亿种可能性里，我幸不辱命活出了其中一种。然而在十万亿个人眼里所见的那个我，便是在那十万亿个世界中各自唯一的我，我只能有幸见过我的世界里的那一个我并与之告别。既然连我自己都无法同所有的我告别，我们也就不用为什么事情感到惋惜，正如我不会因为无法见全那水杯中的十万亿种风景而感到惋惜一样。毕竟，每一种风景里都包含了一整个世界，见过一种，便知十万亿种。我只要有幸见过我的世界中的那一个你，便能知十万亿个你。</p>
-<p>2015.12.29</p>]]></description></item><item><title>年少无知</title><link>https://simoncos.github.io/blogs/old-memories-young.html</link><guid>https://simoncos.github.io/blogs/old-memories-young.html</guid><pubDate>Sun, 07 Jun 2015 00:00:00 +0800</pubDate><description><![CDATA[<h1>年少无知</h1>
+<p>2015.12.29</p>]]></description></item><item><title>2015上半年我读过的好书</title><link>https://simoncos.github.io/blogs/reading-2015-first-half.html</link><guid>https://simoncos.github.io/blogs/reading-2015-first-half.html</guid><pubDate>Fri, 19 Jun 2015 00:00:00 +0800</pubDate><description><![CDATA[<h1>2015上半年我读过的好书</h1>
+<h4>五星推荐（按推荐顺序）</h4>
+<ul>
+<li><a href="http://book.douban.com/subject/1365318/">The Design of Everyday Things</a> by Donald A. Norman（[美]唐·诺曼）</li>
+</ul>
+<p>分类：<strong>设计</strong></p>
+<p><img alt="The Design of Everyday Things：所读版本的书封" decoding="async" height="475" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/363962ddb54e709576a8174ed53de477.jpg" width="310"/></p>
+<p>评价：
+这是一本高屋建瓴、纵观全局但又细心讲解、细密入微的设计之书。凝练的原则+细致的论述+实际的例子+扩展的注解和引用，是这本书的基本写法。</p>
+<p>一本从各种角度来说都很好的好书（包括作者吐槽的没有footnotes，因为我看的kindle版有很好地把后面的注释对应到每个标记的位置）。 受益良多，印象最深刻的是利用信息熵的方法来衡量对应于产品的feature及其对应control数量所产生的复杂度。</p>
+<p>反过来利用设计原则也是个很有意思的角度（为安全、权限、或者游戏的乐趣而进行反向的运用）。</p>
+<p>接近末尾提到了文本的线性以及超链接的作用，恰好是我一直在思考的东西，不得不感慨，人家那么久之前（我看的是2002年版，说明最晚是这时候写进去的内容）就考虑到许多东西了。</p>
+<p>附：<a href="http://book.douban.com/review/7484409/">全书摘抄</a></p>
+<ul>
+<li><a href="http://book.douban.com/subject/25762598/">尽头</a> by 唐诺</li>
+</ul>
+<p>分类：<strong>随笔</strong></p>
+<p><img alt="尽头：所读版本的书封" decoding="async" height="149" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/5f9173dcda9462fa315b513fd6550955.jpg" width="99"/></p>
+<p>评价：
+从14年夏天断断续续到15年2月，终于读到了尽头。然而感觉接下来会有很强的余韵延续着。实是一本引人思索至深处的、大树一般的书。另外的收获就是，多了好多想了解的作家以及他们的作品（比如三岛由纪夫、本雅明、福楼拜、昆德拉，当然作者的最爱之一博尔赫斯也是我的最爱）。</p>
+<ul>
+<li><a href="http://book.douban.com/subject/1005325/">童年的消逝</a> by [美] 尼尔・波兹曼</li>
+</ul>
+<p>分类：<strong>传媒</strong></p>
+<p><img alt="童年的消逝：所读版本的书封" decoding="async" height="146" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/8e86db83015ca33d3685317ade0c017e.jpg" width="101"/></p>
+<p>评价：
+毕竟是波兹曼，虽然本书主旨是童年概念的产生和消逝倾向，但大部分的论述精力都放在了印刷品与电视这两种媒介的性质及影响上面。个人觉得当中最为出彩的是本书前半中对文字和印刷的发明和普及与人类社会知识传播形态变化的关系的分析，其中提到很多文字印刷媒介对内容表达的根本性影响与我个人的看法有许多一致之处。</p>
+<p>后半则主要分析电视对文字传播体系的破坏，导致成人与儿童趋同化，并引用了大量社会数据加以证明（不过这部分涉及到很多美国政治和社会的知识，个人觉得读起来稍显晦涩枯燥）。</p>
+<p>关于中国的问题：波兹曼认为中国没有简单的字母形式的文字，所以印刷给社会带来的影响一开始要小很多（发明的诞生没有赶上一个好时机）。</p>
+<p>附：<a href="https://book.douban.com/review/7510159/">全书笔记</a></p>
+<ul>
+<li><a href="http://book.douban.com/subject/25915629/">破茧成蝶：用户体验设计师的成长之路</a> by 刘津/李月</li>
+</ul>
+<p>分类：<strong>设计</strong></p>
+<p><img alt="破茧成蝶：用户体验设计师的成长之路：所读版本的书封" decoding="async" height="146" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/0949ca035e61967064f579e54cd12750.jpg" width="101"/></p>
+<p>评价：
+本书前5章对我来说没啥新东西，跟本科时系统分析及设计那一套区别不大，应该算是经典方法论在互联网产品设计上的应用吧。书中提到的好多设计师或产品经理的活，都属于我做运营时的活，比如在1号店时做数据分析、提功能需求、PS小广告图，还有后来在一个创业公司时做市场分析、用户分析、功能路径分析等（当然小公司就是你想做啥做啥只要别浪费时间，说是做运营其实当时除了开发都有涉及）。</p>
+<p>第6章简直页页干货，将需求分析与总体交互设计衔接了起来，并说明了几个重要的设计原则（不得不让人想起前面提到的那本 The Design of Everyday Things 和唐·诺曼）。第七章是讲交互设计产出物（原型的线框图、交互说明等）中包含哪些内容，有哪些细节上的技巧。第八章主要是讲团队合作，如何进行设计评审，如何跟进使最终的产品与交互设计一致。第九章简单讲讲测试与评估，十至十二章就是些意识、观念上的东西了，实例很不错。</p>
+<p>整本书内容细致有条理，确如评价而言是一本互联网软件交互设计的入门好书。</p>
+<ul>
+<li><a href="http://book.douban.com/subject/24866005/">九号梦</a> by [英]大卫·米切尔</li>
+</ul>
+<p>分类：<strong>小说</strong></p>
+<p><img alt="九号梦：所读版本的书封" decoding="async" height="147" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/796791227bb0220dddd1bc75a885b7dd.jpg" width="100"/></p>
+<p>评价：
+一个有头无尾的故事里夹杂着更多有头无尾以及无头无尾以及虎头蛇尾的故事。不如《幽灵代笔》和《云图》那么精美，但是混乱中也给人一种很特别的惆怅感。</p>
+<ul>
+<li><a href="http://book.douban.com/subject/6709783/">浪潮之巅</a> by 吴军</li>
+</ul>
+<p>分类：<strong>科技</strong></p>
+<p><img alt="浪潮之巅：所读版本的书封" decoding="async" height="142" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/a86d476d6dfd0b846c162c21ba468e42.jpg" width="104"/></p>
+<p>评价：
+三四年前就开始读，这次终于重头到尾读完。有评论说书中很多观点太过主观，连许多事实都来自于作者臆断，但我觉得至少目前找不出一本书能像这样较全面理性以及精彩地描写整个IT产业几十年里的发展历程。书中的一些关键因素分析很有共鸣。</p>
+<ul>
+<li><a href="http://book.douban.com/subject/2136484/">如果在冬夜，一个旅人 </a> by [意大利] 伊塔洛·卡尔维诺</li>
+</ul>
+<p>分类：<strong>小说</strong></p>
+<p><img alt="如果在冬夜，一个旅人：所读版本的书封" decoding="async" height="146" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/a372483e3550425b36138390b76d311d.jpg" width="101"/></p>
+<p>评价：
+实验性质很强，算是一本只有开头没有结尾的小说。最后将所有章节都串联了起来，蛮出彩。</p>
+<ul>
+<li><a href="http://book.douban.com/subject/1089517/">绝代双骄（全三册）</a> by 古龙</li>
+</ul>
+<p>分类：<strong>小说</strong></p>
+<p><img alt="绝代双骄（全三册）：所读版本的书封" decoding="async" height="146" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/reading-2015-first-half/2e02e1340a589c86d090e003afa4380a.jpg" width="101"/></p>
+<p>评价：
+我读完的第一部古龙原著。情节真真有趣，故事也一环套一环，非常精巧。然而各个人物的结局却能显得平实自然，足见功力。</p>
+<h4>四星尚可（按阅读顺序）</h4>
+<ul>
+<li><a href="http://book.douban.com/subject/26261240/">古董局中局3 : 掠宝清单</a></li>
+<li><a href="http://book.douban.com/subject/2137767/">霸王别姬</a></li>
+<li><a href="http://book.douban.com/subject/20442382/">一路去死</a></li>
+<li><a href="http://book.douban.com/subject/1485495/">楼下的房客</a></li>
+<li><a href="http://book.douban.com/subject/4937547/">我的征途是星辰大海</a></li>
+<li><a href="http://book.douban.com/subject/10608453/">盲视</a></li>
+<li><a href="http://book.douban.com/subject/7061613/">Steal Like an Artist : 10 Things Nobody Told You About Being Creative</a></li>
+<li><a href="http://book.douban.com/subject/1064014/">中国吃</a></li>
+<li><a href="http://book.douban.com/subject/3684656/">环形世界</a></li>
+<li><a href="http://book.douban.com/subject/3316174/">狂骨之梦</a></li>
+<li><a href="http://book.douban.com/subject/2256351/">乌合之众 : 大众心理研究</a></li>
+</ul>
+<p><em>注：本文整理自我在豆瓣上记录的书及读完时留下的短评，书籍信息链接及图片来源均为豆瓣。</em></p>]]></description></item><item><title>年少无知</title><link>https://simoncos.github.io/blogs/old-memories-young.html</link><guid>https://simoncos.github.io/blogs/old-memories-young.html</guid><pubDate>Sun, 07 Jun 2015 00:00:00 +0800</pubDate><description><![CDATA[<h1>年少无知</h1>
 <p>好久不见。</p>
 <p>距离我上次写一段自由而无用的文字，已有9个月。三个季度里，你我一定已有一些改变。因为什么而变？或许可以说是工作，或许可以说是学习，或许可以说是与他人的相处，但或许最根本的，永远是因为从来不会静止的时空。</p>
 <p>年少多好，因为那个时候世界的大你不用看到，那一小块田园般的时间和空间里你可以安稳地保存一些东西。信念、朋友，还有想要吃的家乡风味，都近得如与你一体。只可惜生命虽然谈不上只算一声发泄、妥协和抱歉，但是它不会简单到可以永远保持你周围的那份安稳。正如今日的你我，已经难以找到过去的那种困于一隅却足以作乐的感觉。年岁增长，我们感到世界动荡飘摇以及自我的渺小，我们总是那么轻易地被某种力量推往一个方向，远离和邂逅成为一种习惯。世界仿佛没有边界，即使有那么一堵墙，向上向下向左向右毫无止处，你也知道凭自己的力量是无法走到那里去证明其存在的。渐渐的你遇到越来越多的人，看见越来越远处的地平线，而你自己的记忆、情绪、思索那么狭隘有限，与之相除得到的值让你有时感觉它们像是完全不存在。你我变成海中的一粒水滴，个性消失，方向趋同，一切已经有了理所应当的安排，在那之中生老病死、喜怒哀乐、得意失意。</p>

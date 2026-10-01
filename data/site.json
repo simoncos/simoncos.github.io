@@ -710,6 +710,18 @@
         "en": "A 2015 course project on 26,000 Zhihu users: basic statistics first, then the network of who follows whom among the big-name accounts.",
         "zh": "2015 年的课程项目，分析 2.6 万名知乎用户：先看基本统计，再看大V之间的关注网络。"
       }
+    },
+    {
+      "name": "reading-roundups",
+      "id": "reading-roundups",
+      "title": {
+        "en": "Reading Roundups",
+        "zh": "读书小结"
+      },
+      "desc": {
+        "en": "Six reading roundups from 2015 to 2019: books, short reviews, changing interests and plans for the following year.",
+        "zh": "2015—2019 年的六篇读书小结：书、短评、兴趣的变化，以及下一年的阅读计划。"
+      }
     }
   ],
   "songs": [
