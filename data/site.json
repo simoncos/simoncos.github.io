@@ -30,10 +30,10 @@
     {
       "id": "sleep",
       "kind": {
-        "en": "Visual essay",
-        "zh": "视觉随笔"
+        "en": "Research",
+        "zh": "研究"
       },
-      "work_topic": "visual",
+      "work_topic": "research",
       "home_topic": "body",
       "date": "2026-04-23",
       "title": {
@@ -45,12 +45,12 @@
         "zh": "十年睡眠记录"
       },
       "home_desc": {
-        "en": "A visual essay built from 3,656 nights, tracing sleep, body, and life across a decade.",
+        "en": "A study of 3,656 nights, tracing sleep, body, and life across a decade.",
         "zh": "基于 3,656 个夜晚的记录，回看十年的睡眠、身体与生活变化。"
       },
       "desc": {
-        "en": "3,656 nights of sleep records turned into a story about rhythm, body, and life changes across a decade.",
-        "zh": "把 3,656 个夜晚的睡眠记录，整理成一篇关于节律、身体和生活变化的视觉随笔。"
+        "en": "A study of 3,656 nights: sleep rhythms, the body, and changes across a decade.",
+        "zh": "从 3,656 个夜晚的记录，研究十年的睡眠节律、身体与生活变化。"
       },
       "img": "gallery/assets/gallery-card-sleep-scatter.webp",
       "href": {
@@ -134,14 +134,14 @@
         "zh": "知乎 2015：人、关注与影响力"
       },
       "home_desc": {
-        "en": "Four questions about a 2015 Zhihu sample: user differences, following networks, influence and topics.",
-        "zh": "从用户差异、关注网络、影响力和话题，探索 2015 年知乎的一份样本。"
+        "en": "Real follow networks from a 2015 archive, with interactive neighbourhoods and influence comparisons.",
+        "zh": "从 2015 年归档重建关注网络，探索节点邻居与影响力。"
       },
       "desc": {
-        "en": "Explore the statistics, compare two following networks, and see how influence rankings change with the measure.",
-        "zh": "探索用户统计，对照两个关注网络，看看衡量方式如何改变影响力榜单。"
+        "en": "Step inside the real 2015 follow networks: explore neighbours, mutual follows, structural groups and influence.",
+        "zh": "走进 2015 年的真实关注网络，查看节点邻居、互相关注、结构分组与影响力。"
       },
-      "img": "gallery/research/assets/zhihu-2015-card.svg",
+      "img": "gallery/research/assets/zhihu-network-card.svg",
       "href": "gallery/research/zhihu-2015.html"
     },
     {
@@ -270,8 +270,8 @@
         "zh": "研究"
       },
       "line": {
-        "en": "Studies of people, networks and systems.",
-        "zh": "关于人、网络与系统的研究。"
+        "en": "Studies of people, networks, bodies and systems.",
+        "zh": "关于人、网络、身体与系统的研究。"
       },
       "desc": {
         "en": "Research artifacts that put evidence, questions, and limits side by side.",
@@ -292,24 +292,7 @@
             "zh": "blogs/a-bird-across-models.html"
           },
           "arrow": "→"
-        }
-      ]
-    },
-    {
-      "id": "visual",
-      "title": {
-        "en": "Visual essays",
-        "zh": "视觉随笔"
-      },
-      "line": {
-        "en": "Personal data, told visually.",
-        "zh": "把个人数据讲成图。"
-      },
-      "desc": {
-        "en": "Long-running personal records turned into visual stories.",
-        "zh": "把长期的个人记录，整理成可以看的故事。"
-      },
-      "related": [
+        },
         {
           "label": {
             "en": "Sleep Toolkit",

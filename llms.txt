@@ -10,14 +10,14 @@ The motto for this site is "Connecting the dots." The site is static, bilingual,
 - [About](https://simoncos.github.io/about.html): Short profile, motto and contact links.
 - [Projects](https://simoncos.github.io/projects.html): Index of maintained tools and systems; open a project for its context, outputs, and related work.
 - [Articles](https://simoncos.github.io/blogs.html): Long-form writing archive, filterable by topic, with series.
-- [Work](https://simoncos.github.io/gallery.html): Projects, talks, research artifacts, visual essays and music.
+- [Work](https://simoncos.github.io/gallery.html): Projects, talks, research artifacts and music.
 - [Favorites (收藏)](https://simoncos.github.io/favorites.html): Every book, film, album and game rated five stars on Douban, newest first, with the short reviews as written there. Page chrome is bilingual; titles and reviews are in Chinese.
 
 ## Current project surfaces
 
 - [Sleep Toolkit project](https://simoncos.github.io/projects/sleep-toolkit.en.html): Project context, report preview, and routes to the tool and data essay.
 - [Sleep Toolkit web app](https://sleep-toolkit-production.up.railway.app): Public tool for SleepCycle CSV analysis.
-- [Ten Years of Sleep Records, Analyzed](https://simoncos.github.io/projects/sleep-2016-2026.en.html): Visual essay and project context for the Sleep Toolkit work.
+- [Ten Years of Sleep Records, Analyzed](https://simoncos.github.io/projects/sleep-2016-2026.en.html): Research based on 3,656 nights of personal sleep records, with visual analysis and project context.
 
 ## Key artifacts
 
