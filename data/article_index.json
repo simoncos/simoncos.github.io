@@ -15,7 +15,7 @@
           "title": "和 Codex 一起，给慈善晚会搭把手",
           "file": "charity-gala-with-codex.html",
           "markdown": "charity-gala-with-codex.md",
-          "excerpt": "今年又参与了晓日春晖的年度慈善晚会，很高兴能继续贡献一份自己的力量。跟去年相比，这回多了几个 AI 帮手，花的时间少了，能做的事情却多了不少：宣传页面开发部署、拍卖系统的需求对接和测试、拍品信息维护、在线认捐表制作、宣传文案，还有...",
+          "excerpt": "今年参与了晓日春晖的年度慈善晚会，很高兴能继续贡献一份自己的力量。跟去年相比，这回多了几个 AI 帮手，花的时间少了，能做的事情却多了不少：宣传页面开发部署、拍卖系统的需求对接和测试、拍品信息维护、在线认捐表制作、宣传文案，还有活...",
           "description": "和 Codex 一起支持慈善晚会的活动页面、拍卖测试和资料维护。记下一些省下的功夫、遇到的小麻烦，以及对共享上下文和协作方式的想象。",
           "image": "blogs/assets/images/charity-gala-with-codex/cover.jpg",
           "available": true
@@ -24,7 +24,7 @@
           "title": "Lending a Hand at a Charity Gala, with Codex",
           "file": "charity-gala-with-codex.en.html",
           "markdown": "charity-gala-with-codex.en.md",
-          "excerpt": "I helped with Springblooms' annual charity gala again this year, and was glad to contribute in my own small way. This time I had a few AI helpers. Compared with last year, I spent less time and managed to do quite a bit more: building and deploying the event website, coordinating requirements and testing the auction system, maintaining auction item information, creating an online donation pledge form, writing promotional copy, and handling the various loose ends after the event.\nSome of these were things I could have done before, just with more time. Others were things I only had room...",
+          "excerpt": "I helped with Springblooms' annual charity gala this year, and was glad to contribute in my own small way. This time I had a few AI helpers. Compared with last year, I spent less time and managed to do quite a bit more: building and deploying the event website, coordinating requirements and testing the auction system, maintaining auction item information, creating an online donation pledge form, writing promotional copy, and handling the various loose ends after the event.\nSome of these were things I could have done before, just with more time. Others were things I only had room to...",
           "description": "Working with Codex on a charity gala's website, auction testing and data preparation. Some time saved, a few small mishaps, and thoughts on sharing context between people and agents.",
           "image": "blogs/assets/images/charity-gala-with-codex/cover.jpg",
           "available": true
