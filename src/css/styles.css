@@ -1630,10 +1630,17 @@ button {
 
 .topic-open-title {
     display: none;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .topic-open-title.is-on {
-    display: inline;
+    display: block;
+}
+
+.topic-open > :not(.topic-open-title) {
+    flex-shrink: 0;
 }
 
 .works {
@@ -2609,10 +2616,9 @@ button {
 }
 
 .ahead-tools {
-    flex: 0 1 460px;
+    flex: 0 1 560px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     gap: 10px;
 }
@@ -2624,6 +2630,34 @@ button {
 .ahead-tools .seg-btn {
     min-height: 40px;
     padding: 0 16px;
+}
+
+@media (max-width: 1100px) {
+    .ahead {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .ahead-tools {
+        flex: none;
+        width: 100%;
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 600px) {
+    .ahead-tools {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ahead-tools .seg {
+        align-self: flex-start;
+    }
+
+    .ahead-tools .search {
+        flex: none;
+    }
 }
 
 .search {
@@ -4496,7 +4530,6 @@ h2.k {
     overflow: hidden;
     border-radius: 12px;
     background: var(--fill-2);
-    transition: transform 0.7s var(--ease);
 }
 
 .glyph-cover img {
@@ -4504,9 +4537,10 @@ h2.k {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.7s var(--ease);
 }
 
-.glyph.is-peek .glyph-cover {
+.glyph.is-peek .glyph-cover img {
     transform: scale(1.02);
 }
 
@@ -5066,10 +5100,9 @@ h2.k {
         position: relative;
         top: auto;
         display: grid;
-        grid-template-columns: repeat(4, auto) 1fr;
-        justify-content: start;
-        align-items: baseline;
-        gap: 14px 18px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        align-items: start;
+        gap: 14px 8px;
         padding-bottom: 12px;
     }
 
@@ -5079,23 +5112,29 @@ h2.k {
         margin-bottom: 0;
     }
 
+    .rail-item {
+        min-width: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 0;
+    }
+
     .rail-char {
-        font-size: 32px;
+        font-size: 40px;
+        line-height: 1.2;
     }
 
     .rail-item[aria-current="page"] .rail-char {
-        font-size: 52px;
+        font-size: 40px;
     }
 
     .rail-item:not([aria-current="page"]) .rail-count {
-        display: none;
+        visibility: hidden;
     }
 
-    /* The other categories are glyph-only here; pad them to a 44px target
-       without moving them. */
-    .rail-item:not([aria-current="page"]) {
-        padding: 8px 7px;
-        margin: 0 -7px;
+    .rail-count {
+        font-size: 11px;
     }
 
     /* The English filter labels overflow at 375px with the default padding;

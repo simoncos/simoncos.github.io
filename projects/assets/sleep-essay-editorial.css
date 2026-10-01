@@ -713,3 +713,11 @@ html {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Chart grids must fit the card's content box, including on narrow phones. */
+.chart-card, .chart-card > div, .chart-card > div > div { min-width: 0; }
+.chart-axis-caption { color: var(--text-muted); font-size: .75rem; text-align: center; line-height: 1.5; margin-top: .5rem; }
+@media (max-width: 600px) {
+  .container, .wide-container { padding-inline: 1.25rem; }
+  .chart-card { padding: 1rem .75rem; }
+}

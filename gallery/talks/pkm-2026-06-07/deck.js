@@ -195,6 +195,7 @@ const deck = document.getElementById('deck');
 const slides = deck.querySelectorAll('.slide');
 const nav = document.getElementById('nav');
 let idx = 0, total = slides.length, lock = false;
+const readerMode = matchMedia("(max-width: 900px)");
 deck.style.width = (total * 100) + 'vw';
 slides.forEach((s, i) => {
     const b = document.createElement('button');
@@ -205,11 +206,17 @@ slides.forEach((s, i) => {
     nav.appendChild(b);
 });
 function go(n) {
-    if (lock)
+    if (lock && !readerMode.matches)
         return;
     idx = Math.max(0, Math.min(total - 1, n));
     window.__currentSlideIndex = idx;
     deck.style.transform = `translateX(${-idx * 100}vw)`;
+    if (readerMode.matches) {
+        if (idx === 0)
+            window.scrollTo({ top: 0, behavior: "instant" });
+        else
+            slides[idx].scrollIntoView({ block: "start", behavior: "instant" });
+    }
     nav.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
     const el = slides[idx];
     const isDark = el.classList.contains('dark') || el.classList.contains('accent');
@@ -220,6 +227,10 @@ function go(n) {
     lock = true;
     setTimeout(() => lock = false, 700);
 }
+readerMode.addEventListener('change', () => {
+    lock = false;
+    go(idx);
+});
 /* =============== ESC 索引视图 =============== */
 let overviewOn = false;
 const ov = document.createElement('div');
@@ -262,6 +273,8 @@ function toggleOverview() {
     }
 }
 addEventListener('keydown', e => {
+    if (readerMode.matches)
+        return;
     if (e.key === 'Escape') {
         e.preventDefault();
         toggleOverview();
@@ -289,6 +302,8 @@ addEventListener('keydown', e => {
 });
 let wheelTO = null, wheelAcc = 0;
 addEventListener('wheel', e => {
+    if (readerMode.matches)
+        return;
     wheelAcc += e.deltaY + e.deltaX;
     if (Math.abs(wheelAcc) > 50) {
         if (wheelAcc > 0 && window.__pipeAdvance && window.__pipeAdvance()) {
@@ -305,6 +320,8 @@ addEventListener('wheel', e => {
 let tx = 0, ty = 0;
 addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
 addEventListener('touchend', e => {
+    if (readerMode.matches)
+        return;
     const dx = (e.changedTouches[0].clientX - tx);
     const dy = (e.changedTouches[0].clientY - ty);
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
@@ -632,6 +649,8 @@ go(Number.isFinite(initialSlide) ? initialSlide : 0);
             return;
         }
         // Lightbox closed: check if current slide has zoomable images
+        if (readerMode.matches)
+            return;
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
             if (justClosedByKey) {
                 justClosedByKey = false;
