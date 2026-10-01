@@ -35,7 +35,7 @@
       "id": "work",
       "label": "Work",
       "url": "https://simoncos.github.io/gallery.html",
-      "purpose": "Projects, talks, research artifacts, visual essays and music."
+      "purpose": "Projects, talks, research artifacts and music."
     },
     {
       "id": "projects",
@@ -72,11 +72,11 @@
       "description": "Public tool for SleepCycle CSV analysis."
     },
     {
-      "id": "sleep-visual-essay",
-      "type": "visual_essay",
+      "id": "sleep-research",
+      "type": "research_artifact",
       "label": "Ten Years of Sleep Records, Analyzed",
       "url": "https://simoncos.github.io/projects/sleep-2016-2026.en.html",
-      "description": "Visual essay and project context for the Sleep Toolkit work."
+      "description": "A study of 3,656 nights of personal sleep records, with visual analysis and project context."
     },
     {
       "id": "pkm-talk-2026-06-07",

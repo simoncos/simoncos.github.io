@@ -416,8 +416,8 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
         config,
         title=("Work · simoncos", "作品 · simoncos"),
         description=(
-            "Projects, talks, research, visual essays and music from simoncos.",
-            "simoncos 的项目、演讲、研究、视觉随笔与音乐。",
+            "Projects, talks, research and music from simoncos.",
+            "simoncos 的项目、演讲、研究与音乐。",
         ),
         canonical="gallery.html",
     )

@@ -1,6 +1,6 @@
 {
   "css_version": "20261001d",
-  "js_version": "20261001b",
+  "js_version": "20261001c",
   "site_updated": "2026-10-01",
   "theme_init": "theme-init.js",
   "icons": {
@@ -159,6 +159,10 @@
       },
       {
         "src": "zhihu-research.js",
+        "defer": true
+      },
+      {
+        "src": "zhihu-network.js",
         "defer": true
       }
     ]

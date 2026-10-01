@@ -190,6 +190,9 @@
     }
     let shown = null;
     function show(id) {
+        // Keep old links to the retired single-item category useful.
+        if (id === 'visual')
+            id = 'research';
         const index = topicIndex(id);
         shown = index < 0 ? '' : id;
         if (index < 0) {
@@ -221,6 +224,8 @@
         target.focus({ preventScroll: true });
     }
     function swap(id) {
+        if (id === 'visual')
+            id = 'research';
         // A fragment link fires both hashchange and popstate; act once.
         const target = topicIndex(id) < 0 ? '' : id;
         if (target === shown)
