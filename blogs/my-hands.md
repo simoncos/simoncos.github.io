@@ -1,5 +1,5 @@
 ---
-tags: life
+tags: poetry
 date: 2012-12-01
 updated: 2026-09-28
 description: 写于 2012 年 12 月的一首短诗，附海子的《你的手》。

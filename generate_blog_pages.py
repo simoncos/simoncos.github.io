@@ -232,6 +232,7 @@ ARTICLE_TEXT = {
 TAG_LABELS = {
     'life': ('Life', '生活'),
     'thinking': ('Thinking', '思考'),
+    'poetry': ('Poetry', '诗'),
     'ai': ('AI', 'AI'),
     'km': ('Knowledge', '知识管理'),
     'hack': ('Hack', 'Hack'),

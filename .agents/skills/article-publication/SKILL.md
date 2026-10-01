@@ -41,7 +41,7 @@ Every article goes live in Chinese and English, dated by when it was written. Ch
    ---
    ```
 
-   - `tags` come from the existing set: life, thinking, design, hack, out, book, ai, km, movie, game, plus `music` for a Favorites album essay. Any other new tag is the owner's call.
+   - `tags` come from the existing set: life, thinking, design, hack, out, book, ai, km, movie, game, plus `music` for a Favorites album essay and `poetry` for Che's own verse (owner's call, 2026-10-01: 我的手 and 掩上的门 are 诗, not 生活). Any other new tag is the owner's call.
    - The tags decide the Index topic, through `article_topic` in `scripts/build_pages.py`:
      - any `out` → 身体与现场;
      - otherwise any `km`, `hack` or `design` → 造东西;

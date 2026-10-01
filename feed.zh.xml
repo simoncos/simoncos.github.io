@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Wed, 30 Sep 2026 13:39:03 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>我的个人知识管理系统 2026-03</title><link>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</link><guid>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</guid><pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的个人知识管理系统 2026-03</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Thu, 01 Oct 2026 10:44:33 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>我的个人知识管理系统 2026-03</title><link>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</link><guid>https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html</guid><pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>我的个人知识管理系统 2026-03</h1>
 <p><img alt="Personal Knowledge Management System 202603" decoding="async" height="717" src="https://simoncos.github.io/blogs/assets/images/my-personal-knowledge-management-system-2026-03/b0b1b4b23ca8bc7d5afc150d07c3582d.jpg" width="1199"/></p>
 <h2>一、从"记笔记"到"分层协作"</h2>
 <p>我开始把 Obsidian 作为主要的 KM<sup id="fnref:1"><a aria-label="脚注" class="footnote-ref" href="https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.html#fn:1">1</a></sup> 工具，到现在差不多四、五年了。2026 年 3 月回顾完整的系统迭代记录（见文末附录），这套东西已经长成了一个分层的人机系统：Telegram 负责即时输入，Obsidian 负责整理与沉淀，个人站点负责发布与呈现，Git 负责版本边界，而我的 OpenClaw agent--RedPiggy，开始把这些部分粘合起来。</p>
@@ -1316,7 +1316,18 @@
 <li>多重标准的冲突和弥合，比如涉及多个主权国家的情况，法律之间及各条款之间优先级的情况，定义的模糊与再解释</li>
 <li>不同法系的差异：重判例的法系下除了法律文本本身还需要对判例数据的收集和理解</li>
 </ul>
-<p>最近几年已经见到有一些团队在尝试用自然语言理解、知识图谱去<strong>自动化</strong>地做法律的理解和推断，非常有意思，但道阻且长，仍需努力。</p>]]></description></item><item><title>十年如雨</title><link>https://simoncos.github.io/blogs/ten-years-like-rain.html</link><guid>https://simoncos.github.io/blogs/ten-years-like-rain.html</guid><pubDate>Sat, 12 May 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>十年如雨</h1>
+<p>最近几年已经见到有一些团队在尝试用自然语言理解、知识图谱去<strong>自动化</strong>地做法律的理解和推断，非常有意思，但道阻且长，仍需努力。</p>]]></description></item><item><title>那些没有记下的</title><link>https://simoncos.github.io/blogs/what-went-unwritten.html</link><guid>https://simoncos.github.io/blogs/what-went-unwritten.html</guid><pubDate>Fri, 07 Sep 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>那些没有记下的</h1>
+<p>最近这两年，总觉得自由思考的时间大大压缩了，为什么呢？是因为工作消耗了太多精力，因为沉迷于更纯粹的娱乐，因为自觉生产不出有价值的内容，还是单纯因为人进入了一种稳定的状态，变得懒惰了呢？回想起来，在此之前的数年里，我的生活几乎是由一直停不下来的折腾组成，现下虽然并非没有令人很是烦恼或痛苦的事情，但总归是平稳了许多。</p>
+<p>曾经脑子中活火山一样不断迸发的火花，现在变得偃旗息鼓了。其实也并非完全没有新的想法，只是从前那种将每一个想法在脑海中仔细展览琢磨、一有机会便书写下来的习惯有些消失了，太多回生出的想法因为各种原因没有记下。大脑像任性奔跑的马不断被马缰牵制，它可能会说我耗费这么多能量，一点意义都没有，那何必要继续这样做呢？慢慢就习惯了，脑海中的声音安静了，“就像水消失在水中”。</p>
+<p>这个世界给了我们太多的便利，但也带来了限制。当人对24小时的商店和餐馆，对四通八达的交通网络，对自来水、电力、网络与地下管道系统如呼吸般习以为常时，也同时被其束缚在了原地。我想起不久前一个朋友听说我打算一个人去旅游时发出的讶异，对他来讲独自旅行有太多的不便，即使这种不便只是在餐馆想要去洗手间时没有人帮忙看守行李。</p>
+<p>一种被豢养的感觉。</p>
+<p>当然我并不想也没可能站上某种高地去指责这样的世界，生长于斯，受惠无可计数。何况这种被生活支配的生活并非没有改善的空间。与其说没有选择，不如说是路径依赖，一旦走上了一条路，你便难以放弃它了，生命有限。</p>
+<p>对我而言，这些限制的表现，概括来讲就是地平线的缩窄。我所能望及的世界比更年轻时的我更小。吊诡的是，从知识与经验来讲，现在的我对世界的了解应该多多了才对。然而细想一下，这个所谓的世界到底是什么呢？是你可以不断探索不断发现新风景的宽广原野般的世界，还是了解越多便越深入其中抽身不得的地底宫殿般的世界呢？回想起游戏《辐射3》中的设定，核末日之后人们被封闭于一个麻雀般五脏俱全的避难所，繁衍的每一代人都在遵守一系列律法般规则的前提下无忧无虑地度过一生。外面的荒野世界中充满了核辐射、变异物种、刀口舔血的帮伙和信仰扭曲的教徒。避难所基本上自给自足，但为了保证内部人口的可持续性以及避免由外部入侵的危险，禁止外出。实际上对于在避难所内出生成长的人而言，大概也完全不会有出去的念头，甚至根本不会知道有外部世界的存在，就像是动画《天元突破》中主人公的故乡，以及另一篇我不记得名字的小说中的设定：一个球状空间，内部则拥有可供小型部族生存的生态环境（有限但充足的空气及有机物资源），外壳是坚硬矿物，再外面才是广阔无人知的宇宙。</p>
+<p>与这些虚构的封闭世界比，我们所处的现实世界似乎自由多了。在这个世界里，除了那些杀人放火违背公众利益或者道德观从而被法律禁止的事情，人似乎可以选择做任何事。但你我都知道这远非真实。真实是有多少种选择，就有多少种身不由己。“大概没有什么世界是比现实世界更令人失望的了。”</p>
+<p>再想想我们为什么想要有自己的选择。撇开物质上的存活，最终我们要的都是精神上的满足，是拥有自己的人生、获得高峰的体验、证明自己的存在价值，是获得自己独一无二的生命故事，这都要靠一个又一个的选择。而一个故事的形成几乎总是需要至少两个个体的。即使是如小说《火星救援》中的主人公那般于荒星之上、用尽十八般武艺绝地求生，也仍然需要一个休斯顿和背后的整个人类社会不断地寻找他、支持他，并最终派人将他带回地球。即使真的完完全全是一个人的故事，也只有当它经由叙述者的嘴或笔到达听者读者之时，借由互动与分享，才能完整地出生。我们最终还是需要依赖他人作为自己的一面镜子，由客体反射出主体的意义，否则一切困于自身，便只能“如水消失在水中”。</p>
+<p>假如一种选择需要我们突破一连串的身不由己，那这种选择所指向的道路一定是人迹所罕至的。虽然奇伟瑰怪，但要寻到可以分享和理解之人，便难上加难了。选择如此，想法也是如此，更不如说选择其实就是一种坚定的想法。分享或许可浮于表面，理解则更为难得，每个人心中的风景都是独一无二的，能交会的道路又有多少呢？于是在困于世界给我们的看得见摸得着的其他限制的同时，我们还被这样一些深层次的限制所困。</p>
+<p>人年龄渐长，能感受到的限制越来越多。或不如说因为我们得蒙他人的庇护，世界在更早时没有机会全面展示出它华丽袍子内的皱褶与虱子，像麦子一样日夜快速生长时的我们也还无法意识到自己的局限。当我们了解这个世界、了解自己越多，越有机会触到一些像天花板一样坚硬的边缘，选择的成本越来越高。当所有的经验值都进了技能树，爬过的那棵树也就变得矮小，星光也就变成了床头灯光，汪洋大海也就变成了25米长的游泳池。到了绝大多数事物都可以用金钱和时间去衡量时，冰块就再不会让我们觉得烫手，帽子里也就再变不出能让我们惊奇拍手的兔子。如果人生变得一眼知其尽头，要在这样一条百无聊赖的路上行走到最后，怎么可能不感到疲惫呢？</p>
+<p>假如一直生存在这样的境地之中，对于那些没有记下的东西，我们又能剩下多少力气去在意呢？</p>]]></description></item><item><title>十年如雨</title><link>https://simoncos.github.io/blogs/ten-years-like-rain.html</link><guid>https://simoncos.github.io/blogs/ten-years-like-rain.html</guid><pubDate>Sat, 12 May 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>十年如雨</h1>
 <p>不久前好友相邀去深圳听了场《一席》。有一位演讲人王抒，演讲的题目叫《将登太行》，讲述他数十次往返古道“太行八陉”间的所见所思。最开始他想到的，全是这山路间的壮阔山水以及其上发生的大历史：政权变更、君王巡幸。渐渐地他开始注意古道上那些普通人的故事，逃难的流民、被屠戮坑杀的民众、被流放数十年得以重返的文人。然后他意识到，历史往往热衷于宏大话语，不会关注芸芸众生的记忆，而我们则常常容易被宏大叙事所裹挟，无视历史背后那些真实存在的人，忘记他们的汗水与血泪。</p>
 <p>这个演讲留给了我深刻的印象。用以填写历史书册的空间是稀缺而昂贵的，所以历史偏爱那些可以化为浓墨重彩的材料，以为观者传达更普适而有力的观点、价值和立场。普通人的故事最多只能作为注脚。只有普适而有力的故事，才可以持久地生存下去，最终变成符号化、概念化的存在。</p>
 <p>汶川大地震，到今天整十个年头了。这五个字在历史中凝结成了怎样的存在呢？</p>
@@ -2290,6 +2301,22 @@ plt.show()
 <p>“欲说还休，却道天凉好个秋。”愁字秋心拆两半。消磨得古往今来人憔悴的“愁”原来竟是秋的心么？人总羡慕别人的生活多么风轻云淡，潇洒坦然。可若没有生活的重量，何以在乱风中保持自己的方向。少年不知愁，所以少年不懂生活；少年不懂生活，所以少年不知愁。你要如何看待它？也许你该微笑着直视它，也许你该大度拥抱它，也许你该轻轻对它说：来吧，我等着你出现，等你为我光滑却空洞的身躯刻上独一无二的痕迹，等你将枫叶与梧桐叶的金黄、露水与新月的纯白浸染我自由而无用的灵魂，等你赐予我谛听草木枯荣、四季变换表象下的生命喃喃低语的能力，等你教我学会分辨重要与不重要而不是一味逃亡。</p>
 <p>“天凉好个秋”或许并不一定是强颜欢笑的吐露，而是尝尽万般滋味之后，更觉每时每刻的余味点点。就像秋天的凋零沉淀了春的绚烂，褪去了夏的繁盛，却留下了清俊悠长的美妙。</p>
 <p>一叶落，知天下秋。知秋心，然后才能知人生。又一天凉好个秋。</p>
+<p>2012.09</p>]]></description></item><item><title>掩上的门</title><link>https://simoncos.github.io/blogs/the-door-pulled-shut.html</link><guid>https://simoncos.github.io/blogs/the-door-pulled-shut.html</guid><pubDate>Sat, 01 Sep 2012 00:00:00 +0800</pubDate><description><![CDATA[<h1>掩上的门</h1>
+<p>是在转角处吗</p>
+<p>那落日下的虫鸣</p>
+<p>滑行在昏暗的空气里</p>
+<p>今夜有几颗露滴</p>
+<p>你走过</p>
+<p>走过一片艳绿的荒芜</p>
+<p>交叉在这一点的时空</p>
+<p>缓慢地爬入眉梢，双鬓</p>
+<p>如游丝般的脆弱</p>
+<p>却拴住你的脖颈</p>
+<p><br/></p>
+<p>不要回头</p>
+<p>回头是子夜的歌</p>
+<p>而你需要安睡</p>
+<p><br/></p>
 <p>2012.09</p>]]></description></item><item><title>宁静而珍贵的七月</title><link>https://simoncos.github.io/blogs/old-memories-july.html</link><guid>https://simoncos.github.io/blogs/old-memories-july.html</guid><pubDate>Sun, 01 Jul 2012 00:00:00 +0800</pubDate><description><![CDATA[<h1>宁静而珍贵的七月</h1>
 <p>夏天好像常常是我的转折点。</p>
 <p>2017.07</p>
