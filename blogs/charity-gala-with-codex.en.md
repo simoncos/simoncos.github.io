@@ -72,6 +72,4 @@ Perhaps people and agents could work together more naturally, with requirements,
 
 Perhaps that would mean less time passing information around and checking it, leaving more attention for communication, judgment and the event itself.
 
-I don't yet know exactly what that would look like. This experience simply made it feel like a direction worth exploring. Being able to contribute a little more to the event with AI's help is already something I'm happy about. If, in time, it also makes working together a little easier for everyone, so much the better.
-
 Onward, without end!
