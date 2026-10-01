@@ -1870,31 +1870,46 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
     }
     function renderCounterfactualChart(ctx, chartId, rows, axisTitle, suffix, decimals) {
         const { Plotly, THEME, plotDefaults } = ctx;
-        if (!Plotly || !global.document.getElementById(chartId))
+        const target = global.document.getElementById(chartId);
+        if (!Plotly || !target || !rows.length)
             return;
         const sorted = rows.slice().sort((a, b) => a.delta - b.delta);
+        const labels = sorted.map(r => labelFor(SCENARIO_LABELS, r.scenario));
+        const low = Math.min(0, ...sorted.map(r => r.delta));
+        const high = Math.max(0, ...sorted.map(r => r.delta));
+        const padding = (high - low || 1) * 0.3;
+        // Give labels their own line above each bar, leaving the full card width
+        // for signed values instead of a fixed 170px label margin on phones.
+        target.style.height = `${sorted.length * 54 + 50}px`;
+        const caption = global.document.createElement('p');
+        caption.className = 'chart-axis-caption';
+        caption.textContent = axisTitle;
+        target.after(caption);
         Plotly.newPlot(chartId, [{
                 type: 'bar',
                 orientation: 'h',
-                y: sorted.map(r => labelFor(SCENARIO_LABELS, r.scenario)),
+                width: 0.32,
+                y: sorted.map((_, i) => i),
                 x: sorted.map(r => r.delta),
+                customdata: labels,
                 marker: {
                     color: sorted.map(r => r.delta >= 0 ? THEME.green : THEME.red),
                     opacity: 0.9,
                 },
                 text: sorted.map(r => formatSigned(r.delta, decimals, suffix)),
                 textposition: 'outside',
-                hovertemplate: '%{y}<br>%{x:.2f}' + suffix + '<extra></extra>',
+                cliponaxis: false,
+                hovertemplate: '%{customdata}<br>%{x:.2f}' + suffix + '<extra></extra>',
             }], {
             ...plotDefaults,
-            margin: { t: 20, r: 65, b: 40, l: 170 },
-            xaxis: { ...plotDefaults.xaxis, title: axisTitle, zeroline: true, zerolinecolor: THEME.border },
-            yaxis: { ...plotDefaults.yaxis, automargin: true },
+            margin: { t: 16, r: 12, b: 30, l: 12 },
+            xaxis: { ...plotDefaults.xaxis, title: '', range: [low - padding, high + padding], nticks: 5, zeroline: true, zerolinecolor: THEME.border },
+            yaxis: { ...plotDefaults.yaxis, range: [-0.5, sorted.length - 0.2], showticklabels: false, showgrid: false, zeroline: false },
+            annotations: labels.map((text, i) => ({
+                text, x: 0, xref: 'paper', xanchor: 'left', y: i + 0.26,
+                yanchor: 'bottom', showarrow: false, font: { size: 12, color: THEME.text },
+            })),
             showlegend: false,
-            shapes: [{
-                    type: 'line', x0: 0, x1: 0, y0: 0, y1: 1, yref: 'paper',
-                    line: { color: THEME.border, width: 1, dash: 'dot' },
-                }],
         }, { responsive: true, displayModeBar: false });
     }
     function renderConfounding(ctx) {

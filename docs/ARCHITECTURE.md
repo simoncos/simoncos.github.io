@@ -63,6 +63,8 @@ TypeScript in `src/ts/*.ts` compiles to tracked `src/js/*.js` (`npm run build:ts
 - `favorites.ts` — index peeks; paging, filters and folds on category pages (`?filter=`, `?page=`).
 - `theme-init.ts` — runs in the head before paint; sets the theme and adds the `js` class that CSS uses to gate no-JS fallbacks.
 
+The PKM talk keeps its canonical desktop `deck.css` from Obsidian. Site-only phone reading rules live in `gallery/talks/pkm-2026-06-07/reader.css`; the site HTML loads this layer and the TypeScript navigation leaves native scrolling enabled below 901px. Preserve this web adaptation when syncing a canonical deck.
+
 Other TypeScript bundles: `gallery/talks/pkm-2026-06-07/deck.ts` / `deck.mts`, `projects/assets/sleep-2016-2026*.ts`, and the Haba pretext runtime. `make check` compiles the shared site bundle into a temporary directory and compares it with the tracked output without rewriting the working tree; `make check-all` adds the frozen bundles, and CI runs it. The only unconverted `.js` file is `gallery/talks/pkm-2026-06-07/assets/motion.min.js`, a third-party minified vendor asset.
 
 ### AI / agent-readable

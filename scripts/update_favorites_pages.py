@@ -250,7 +250,7 @@ def rail(categories: list[dict[str, Any]], active: str) -> str:
         n = len(category["works"])
         count = bi(f"{ENGLISH[category['id']][0]} · {n}", f"{n} {category['unit']}")
         # The hidden name carries the count too: the visible count is
-        # display:none on phones, and reading both said "Books Books · 80".
+        # hidden for inactive categories on phones; reading both repeated it.
         name = bi(f"{ENGLISH[category['id']][0]} · {n}", f"{category['name']}，{n} {category['unit']}")
         links.append(
             f'            <a class="rail-item" href="{category["id"]}.html"{current}>'
