@@ -4289,9 +4289,17 @@ h2.k {
     display: block;
     width: 100%;
     aspect-ratio: 3 / 4;
+    overflow: hidden;
     border-radius: 12px;
     background: var(--fill-2);
     transition: transform 0.7s var(--ease);
+}
+
+.glyph-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .glyph.is-peek .glyph-cover {
@@ -4838,12 +4846,6 @@ h2.k {
 
     .glyph-char {
         font-size: 56px;
-    }
-
-    /* The cover tile is an empty placeholder until covers exist; two per
-       row on a phone it was most of each card. */
-    .glyph-cover {
-        display: none;
     }
 
     .reel-item,
