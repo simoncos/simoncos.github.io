@@ -51,6 +51,10 @@ ESSAYS: dict[str, str] = {
 
 # The category glyphs are traditional characters, as in the design.
 GLYPHS = {"books": "書", "film": "影", "music": "音", "games": "遊"}
+# One official image per category on the index cards, cropped to 3:4 at
+# COVER_SIZE: 我的团长我的团 (人民文学 2018, volume one), Better Call Saul's
+# final-season key art, 林忆莲《野花》 (1991) and Pentiment's Steam capsule.
+COVER_SIZE = (600, 800)
 # What the search box finds, by category: the title, the credits on the meta
 # line and the notes (games carry only a year there). English placeholders
 # drop "Search" to fit the box at 1000px; the label keeps it.
@@ -348,7 +352,9 @@ def glyph(category: dict[str, Any], on: bool) -> str:
     count_en, count_zh = count_label(category, len(works))
     return "\n".join([
         f'        <div class="glyph{" is-peek" if on else ""}" data-peek="{category["id"]}">',
-        f'            <a class="glyph-cover" href="{href}" tabindex="-1" aria-hidden="true"></a>',
+        f'            <a class="glyph-cover" href="{href}" tabindex="-1" aria-hidden="true">'
+        f'<img src="favorites/assets/covers/{category["id"]}.webp" width="{COVER_SIZE[0]}" '
+        f'height="{COVER_SIZE[1]}" alt="" decoding="async"></a>',
         f'            <a class="glyph-label" href="{href}"'
         f'{i18n_attrs(aria_label=(f"{name_en}, {count_en}", f"{category["name"]}，{count_zh}"))}>'
         f'<span class="glyph-name"><span class="glyph-char" lang="zh-Hant">{GLYPHS[category["id"]]}</span>'

@@ -19,7 +19,7 @@ The column lists every work Che rated five stars on Douban in four categories (�
 
 - Page chrome (labels, filters, pager, about notes) is bilingual since the v3 redesign (2026-09-27); titles, reviews and item metadata stay Chinese. This replaces the first release's Chinese-only pages; update the proposal's decision if it still says Chinese only.
 - No handwritten "why" line.
-- No covers: text-only layout.
+- Covers only on the four index cards, one official image per category (Che's choice, 2026-10-01): 我的团长我的团, Better Call Saul's final-season key art, 林忆莲《野花》 and Pentiment. Works in the lists stay text-only. The downloaded originals and `crop.py`, which writes `favorites/assets/covers/`, are in `~/Documents/simoncos-site-intro/covers-src/`, outside the repo.
 - The proposal's decisions list is the record; this list only summarizes it.
 
 ## Data Rules That Are Easy To Get Wrong
