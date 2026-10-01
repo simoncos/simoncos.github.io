@@ -1,5 +1,5 @@
 ---
-tags: life
+tags: poetry
 date: 2012-12-01
 updated: 2026-09-28
 translation: Claude Opus 5.5

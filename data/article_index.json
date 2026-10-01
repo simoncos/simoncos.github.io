@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-30",
+  "last_updated": "2026-10-01",
   "groups": [
     {
       "id": "my-personal-knowledge-management-system-2026-03",
@@ -512,6 +512,35 @@
           "markdown": "hong-kong-drifters-and-mainland-income-tax.en.md",
           "excerpt": "If you still have questions after reading this, or if the subject touches your own interests, I suggest consulting a legal professional or the tax authorities. I also ask any professionals who read this to review and correct it where they can, so that it does not mislead anyone.\nNote, 2026: this piece was written in late 2018, before the implementing regulations of the Individual Income Tax Law were final. The final regulations and later tax announcements changed several of the provisions quoted here, so the analysis may no longer apply.\nThe Question\nChina's new Individual Income Tax Law (its...",
           "description": "On the eve of the new Individual Income Tax Law taking effect in 2019, does a Hong Kong drifter with mainland household registration, working only in Hong Kong, still owe mainland income tax? Reading the law, the draft implementing regulations and the Mainland–Hong Kong tax arrangement clause by clause, sorting out residence status and the tie-breaker rules, to reach a limited conclusion.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "what-went-unwritten",
+      "date": "2018-09-07",
+      "tags": [
+        "life",
+        "thinking"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "那些没有记下的",
+          "file": "what-went-unwritten.html",
+          "markdown": "what-went-unwritten.md",
+          "excerpt": "最近这两年，总觉得自由思考的时间大大压缩了，为什么呢？是因为工作消耗了太多精力，因为沉迷于更纯粹的娱乐，因为自觉生产不出有价值的内容，还是单纯因为人进入了一种稳定的状态，变得懒惰了呢？回想起来，在此之前的数年里，我的生活...",
+          "description": "这两年自由思考的时间被压缩，许多想法没有记下。生活的便利把人束缚在原地，有多少种选择就有多少种身不由己，人需要他人作镜子，地平线也随年岁变窄。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "What Went Unwritten",
+          "file": "what-went-unwritten.en.html",
+          "markdown": "what-went-unwritten.en.md",
+          "excerpt": "For the past two years or so I have felt that my time for free thinking has been squeezed hard. Why? Is it because work uses up too much of my energy, because I have sunk into purer kinds of entertainment, because I feel I cannot produce anything of value, or simply because I have settled into a stable state and grown lazy? Looking back, in the years before this my life was made up almost entirely of restless upheaval that never stopped. Now, though there is no lack of things that trouble me or cause me real pain, life...",
+          "description": "Over these two years my time for free thinking has been squeezed, and many thoughts went unwritten. Conveniences tie us to the spot, every choice comes with ties that bind our hands, we need others as a mirror, and the horizon narrows with age.",
           "image": "",
           "available": true
         }
@@ -1189,7 +1218,7 @@
       "id": "my-hands",
       "date": "2012-12-01",
       "tags": [
-        "life"
+        "poetry"
       ],
       "series": null,
       "languages": {
@@ -1236,6 +1265,34 @@
           "markdown": "old-memories-autumn.en.md",
           "excerpt": "Old memories come to an end.\n2017.09\nAutumn came so early this year, so early that we seniors keep joking, \"How are the freshmen even going to do military training this year?\", so early that I was still holding my breath to fight off the summer and found there was no need at all. Walking around campus at night in short sleeves, it's chilly. Tomorrow is the Mid-Autumn Festival. The moon has grown especially bright; even the orange street lamps at dusk can't hold down the pale yellow pouring from it.\nMy third autumn in Nanjing no longer feels squeezed...",
           "description": "The eve of the 2012 Mid-Autumn Festival, my third autumn in Nanjing: what makes a life full? From a line of Xin Qiji's, the thought that without the weight of living you cannot hold your course in the wind.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "the-door-pulled-shut",
+      "date": "2012-09-01",
+      "tags": [
+        "poetry"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "掩上的门",
+          "file": "the-door-pulled-shut.html",
+          "markdown": "the-door-pulled-shut.md",
+          "excerpt": "是在转角处吗\n那落日下的虫鸣\n滑行在昏暗的空气里\n今夜有几颗露滴\n你走过\n走过一片艳绿的荒芜\n交叉在这一点的时空\n缓慢地爬入眉梢，双鬓\n如游丝般的脆弱\n却拴住你的脖颈\n不要回头\n回头是子夜的歌\n而你需要安睡\n2012.09",
+          "description": "写于 2012 年 9 月的一首短诗。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "The Door Pulled Shut",
+          "file": "the-door-pulled-shut.en.html",
+          "markdown": "the-door-pulled-shut.en.md",
+          "excerpt": "Is it there at the corner\nthat insect song under the setting sun\ngliding through the dim air\na few drops of dew tonight\nYou pass\npass through a wilderness of vivid green\ncrossing at this one point of time and space\ncreeping slowly into your brows, your temples\nfrail as gossamer\nand yet it tethers you by the neck\nDon't look back\nlooking back is a midnight song\nand you need to sleep in peace\n2012.09",
+          "description": "A short poem written in September 2012.",
           "image": "",
           "available": true
         }
