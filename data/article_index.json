@@ -464,6 +464,37 @@
       }
     },
     {
+      "id": "reading-2019",
+      "date": "2020-01-01",
+      "tags": [
+        "book"
+      ],
+      "series": {
+        "name": "reading-roundups",
+        "part": "6"
+      },
+      "languages": {
+        "zh": {
+          "title": "2019年我的读书小结",
+          "file": "reading-2019.html",
+          "markdown": "reading-2019.md",
+          "excerpt": "五星力荐（按推荐顺序）\n• 惊人的假说 by [英] 弗朗西斯•克里克（Francis Crick） &\n• 大脑的故事 by [美] 大卫·伊格曼（David Eagleman）\n分类： 泛读 | 神经科学 | 科普\n评：\n把这两本书并列放在一起，是因为内容一脉相承（主要从视觉角度来讨论意识问题），连作者都是师生关系。《惊人的假说》94年首版，出自克里克...",
+          "description": "意识、科幻、侦探与控制论彼此相连的一年：2019 年的书评与阅读小结。",
+          "image": "blogs/assets/images/reading-2019/a3d87e3b4447bfec94c01d8015378d64.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "My Reading Roundup for 2019",
+          "file": "reading-2019.en.html",
+          "markdown": "reading-2019.en.md",
+          "excerpt": "Five stars: highly recommended (in order of recommendation)\n• The Astonishing Hypothesis by Francis Crick &\n• The Brain: The Story of You by David Eagleman\nCategory: Broad reading | Neuroscience | Popular science\nReview:\nI put these books together because their content follows a common line, discussing consciousness mainly through vision; even the authors have a teacher–student relationship. The Astonishing Hypothesis, first published in 1994, is by Crick—yes, the DNA one. The title is a little opaque, the terminology plentiful and the information density high. The book's most important keywords: consciousness, vision, neurons, memory, attention, and monkeys. Just kidding...",
+          "description": "A year connecting consciousness, science fiction, detective stories and cybernetics: my 2019 reviews and reading roundup.",
+          "image": "blogs/assets/images/reading-2019/a3d87e3b4447bfec94c01d8015378d64.jpg",
+          "available": true
+        }
+      }
+    },
+    {
       "id": "seen-and-heard-in-lhasa",
       "date": "2019-09-29",
       "tags": [
@@ -515,6 +546,37 @@
           "excerpt": "Note, 2026: this is the only part of the series that was ever published; the others remained drafts.\nPreface\nThe Media and Content Business series grew out of a draft I wrote a few years ago, \"The Limits of Streaming Media\" (in Chinese), which tried to think fairly systematically about streaming media such as audio and video. As scattered material and ideas piled up over a long time, the scope of my thinking gradually extended to more everyday forms of media, such as print text and images and interactive media (software, games), to comparisons between media, and to how media...",
           "description": "The first part of the Media and Content Business series: why I am writing it, and, by way of the Shannon–Weaver model and Jakobson's functions of language, what content is and what a channel is.",
           "image": "blogs/assets/images/media-and-content-business-1-communication-models/568f58cd126b3f1692b0795bb42e3df8.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "reading-2018",
+      "date": "2019-01-04",
+      "tags": [
+        "book"
+      ],
+      "series": {
+        "name": "reading-roundups",
+        "part": "5"
+      },
+      "languages": {
+        "zh": {
+          "title": "2018年我读过的好书",
+          "file": "reading-2018.html",
+          "markdown": "reading-2018.md",
+          "excerpt": "五星推荐（按推荐顺序）\n• 我们为什么会生病 by 伦道夫·M·尼斯、乔治·C·威廉斯\n分类： 泛读 | 生命科学 | 科普\n评：非常好的科普，从演化/达尔文的视角看医学/生物学的方方面面，并提出很有意义的猜想和问题。关于人类眼球、呼吸道和食道等的进化bug都很经典，不久前...",
+          "description": "从演化医学、程序设计到武侠与复杂网络，回看 2018 年的 18 本书。",
+          "image": "blogs/assets/images/reading-2018/a467af1e6e29a184b0e7111264e59279.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Good Books I Read in 2018",
+          "file": "reading-2018.en.html",
+          "markdown": "reading-2018.en.md",
+          "excerpt": "Five stars: highly recommended (in order of recommendation)\n• Why We Get Sick by Randolph M. Nesse and George C. Williams\nCategory: Broad reading | Life sciences | Popular science\nReview: Excellent popular science, looking at medicine and biology from an evolutionary/Darwinian perspective and proposing meaningful conjectures and questions. The evolutionary bugs in the human eye, respiratory tract and esophagus are classics; not long ago I saw someone on Zhihu use them to argue against intelligent design. More than twenty years have passed since the first English edition in 1994, and I am quite interested in what related developments evolutionary...",
+          "description": "Eighteen books from 2018, from evolutionary medicine and programming to wuxia and complex networks.",
+          "image": "blogs/assets/images/reading-2018/a467af1e6e29a184b0e7111264e59279.jpg",
           "available": true
         }
       }
@@ -661,6 +723,37 @@
       }
     },
     {
+      "id": "reading-2017-first-half",
+      "date": "2017-06-21",
+      "tags": [
+        "book"
+      ],
+      "series": {
+        "name": "reading-roundups",
+        "part": "4"
+      },
+      "languages": {
+        "zh": {
+          "title": "2017上半年我读过的书",
+          "file": "reading-2017-first-half.html",
+          "markdown": "reading-2017-first-half.md",
+          "excerpt": "五星推荐（按推荐顺序）\n• 控制论与科学方法论 by 金观涛、华国凡\n分类： 泛读 | 控制论 | 科学哲学\n短评：\n一刷：一本值得看几遍的好书。在不涉及高等数学的情况下将控制论、系统论、信息论（终于有那么点明白为什么这三个被合称为“老三论”了），以及科学发现的...",
+          "description": "控制论、文字、戏剧与科幻：2017 上半年的书评、阅读统计与计划。",
+          "image": "blogs/assets/images/reading-2017-first-half/8aedc1421d3359447eeb42a27684eb32.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Books I Read in the First Half of 2017",
+          "file": "reading-2017-first-half.en.html",
+          "markdown": "reading-2017-first-half.en.md",
+          "excerpt": "Five stars: highly recommended (in order of recommendation)\n• 控制论与科学方法论 (Cybernetics and Scientific Methodology) by Jin Guantao and Hua Guofan\nCategory: Broad reading | Cybernetics | Philosophy of science\nShort review:\nFirst reading: a good book worth reading several times. Without advanced mathematics, it connects cybernetics, systems theory, information theory, and the general patterns of scientific discovery through plain examples. I finally have some understanding of why those first three are collectively called the “old three theories.”\nThis was my second reading, years later. I gained considerably more, but also found the book less good than I once thought. Discussing...",
+          "description": "Cybernetics, writing, drama and science fiction: reviews, reading figures and plans from the first half of 2017.",
+          "image": "blogs/assets/images/reading-2017-first-half/8aedc1421d3359447eeb42a27684eb32.jpg",
+          "available": true
+        }
+      }
+    },
+    {
       "id": "problem-solving-and-design-4-choice-and-optima",
       "date": "2017-05-10",
       "tags": [
@@ -748,6 +841,37 @@
           "excerpt": "\"What you keep in your heart will surely echo back.\"\nWere it not for the echoes, there would be no knowing that the settled past still holds so much buried treasure. Life is a one-way arrow. Standing at this point in the present and looking back, the road you came by seems clear, but God knows how many forks you passed. Pity we can't keep saving and loading the way we do when playing through every route of a game; the dead branches are dead, dead before they even grew.\nBut at least we can keep things in mind. The...",
           "description": "What you keep in mind will echo back? Life is a one-way arrow, yet memory is packed with bombs that the future sets off, and people have a stronger skill still: tracing back on purpose.",
           "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "reading-2016",
+      "date": "2017-01-01",
+      "tags": [
+        "book"
+      ],
+      "series": {
+        "name": "reading-roundups",
+        "part": "3"
+      },
+      "languages": {
+        "zh": {
+          "title": "2016年我读过的好书",
+          "file": "reading-2016.html",
+          "markdown": "reading-2016.md",
+          "excerpt": "五星推荐（按推荐顺序）\n• 失控：机器、社会与经济的新生物学 by [美] 凯文·凯利\n分类： 科技 | 泛领域\n短评：\n讨论群体、控制、复杂系统、进化、适应、生物与机器的趋同等等有趣概念的书，典型的欧美式写法，举了大量的实例、生动有趣，重在将广泛领域中的现象联系起...",
+          "description": "复杂系统、思维方法与海伯利安，以及下一年怎样为阅读留出时间。",
+          "image": "blogs/assets/images/reading-2016/5358c00218da1001f674444ebbdb729c.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Good Books I Read in 2016",
+          "file": "reading-2016.en.html",
+          "markdown": "reading-2016.en.md",
+          "excerpt": "Five stars: highly recommended (in order of recommendation)\n• Out of Control: The New Biology of Machines, Social Systems, and the Economic World by Kevin Kelly\nCategory: Technology | Across disciplines\nShort review:\nA book discussing fascinating concepts including collectives, control, complex systems, evolution, adaptation, and the convergence of biology and machines. It has a typically Western approach, with plentiful, lively examples and an emphasis on connecting phenomena across broad fields. The writing flows well and the examples fit. Some of its references also show that the author has an academic grounding. Extremely thought-provoking.\nAppendix: excerpts from the whole book.",
+          "description": "Complex systems, ways of thinking and Hyperion, and how to make room for reading in the next year.",
+          "image": "blogs/assets/images/reading-2016/5358c00218da1001f674444ebbdb729c.jpg",
           "available": true
         }
       }
@@ -904,6 +1028,37 @@
       }
     },
     {
+      "id": "reading-2015-second-half",
+      "date": "2016-03-04",
+      "tags": [
+        "book"
+      ],
+      "series": {
+        "name": "reading-roundups",
+        "part": "2"
+      },
+      "languages": {
+        "zh": {
+          "title": "2015下半年我读过的好书",
+          "file": "reading-2015-second-half.html",
+          "markdown": "reading-2015-second-half.md",
+          "excerpt": "五星推荐（按推荐顺序）\n• 雅各布·德佐特的千秋 by [英]大卫·米切尔\n分类： 长篇小说\n评价：\n最精彩的部分：不知火神社十三信条的揭开，宇川的死，未能落下的英船炮火，奉行和住持的棋弈与蝴蝶的生死。雅各布、织斗、宇川、住持、奉行、英国船长都给人留下深刻印...",
+          "description": "从大卫·米切尔、弗诺·文奇到黄仁宇与勒古恩，回看 2015 下半年的阅读。",
+          "image": "blogs/assets/images/reading-2015-second-half/ecad5e82a2fe3cc15e55da59eb3a0012.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Good Books I Read in the Second Half of 2015",
+          "file": "reading-2015-second-half.en.html",
+          "markdown": "reading-2015-second-half.en.md",
+          "excerpt": "Five stars: highly recommended (in order of recommendation)\n• The Thousand Autumns of Jacob de Zoet by David Mitchell\nCategory: Novel\nReview:\nThe most brilliant parts: the revelation of the thirteen tenets of the Mount Shiranui shrine, Uzaemon's death, the British ship's unloosed cannon fire, and the magistrate and abbot's game of Go alongside a butterfly's life and death. Jacob, Orito, Uzaemon, the abbot, the magistrate and the British captain all leave deep impressions. Dr. Marinus is practically a symbolic figure, quite distinctive.\nTen years, twenty, thirty, and at the very end: the person that copper-haired, green-eyed Jacob still could...",
+          "description": "Looking back at the second half of 2015, from David Mitchell and Vernor Vinge to Ray Huang and Ursula K. Le Guin.",
+          "image": "blogs/assets/images/reading-2015-second-half/ecad5e82a2fe3cc15e55da59eb3a0012.jpg",
+          "available": true
+        }
+      }
+    },
+    {
       "id": "zhihu-social-network-analysis-1-basic-statistics",
       "date": "2016-02-28",
       "tags": [
@@ -958,6 +1113,37 @@
           "excerpt": "There are two kinds of afternoon nap. One is the perfectly ordinary nap.\nThe other is the nap that switches you into another world and then switches you back. And it was a nap like that which finally got me writing again after a hundred and eighty days (not really).\n(Five minutes of staring into space here, with no idea what to write next.)\nNow that I have finally got started, let me just ramble.\nImagine a glass window as high up as the ninth floor, and below it a main road that is main and not quite main: by...",
           "description": "After a nap that switches you into another world and back, the main road, Apple Mountain and the sky outside a window lead to a whole world in a glass of water, and to ten trillion possible 2015s.",
           "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "reading-2015-first-half",
+      "date": "2015-06-19",
+      "tags": [
+        "book"
+      ],
+      "series": {
+        "name": "reading-roundups",
+        "part": "1"
+      },
+      "languages": {
+        "zh": {
+          "title": "2015上半年我读过的好书",
+          "file": "reading-2015-first-half.html",
+          "markdown": "reading-2015-first-half.md",
+          "excerpt": "五星推荐（按推荐顺序）\n• The Design of Everyday Things by Donald A. Norman（[美]唐·诺曼）\n分类： 设计\n评价：\n这是一本高屋建瓴、纵观全局但又细心讲解、细密入微的设计之书。凝练的原则+细致的论述+实际的例子+扩展的注解和引用，是这本书的基本写法。\n一本从各种角度来说都很好的好书（包括作者吐槽的...",
+          "description": "2015 上半年的阅读：设计、传媒、文学与科技，从诺曼、唐诺到卡尔维诺。",
+          "image": "blogs/assets/images/reading-2015-first-half/363962ddb54e709576a8174ed53de477.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "Good Books I Read in the First Half of 2015",
+          "file": "reading-2015-first-half.en.html",
+          "markdown": "reading-2015-first-half.en.md",
+          "excerpt": "Five stars: highly recommended (in order of recommendation)\n• The Design of Everyday Things by Donald A. Norman\nCategory: Design\nReview:\nThis is a book about design that takes a broad, commanding view while explaining things with meticulous care. Concise principles, detailed arguments, practical examples, and supplementary notes and references form its basic approach.\nA good book in every respect, including the lack of footnotes that the author complains about: in the Kindle edition I read, the endnotes were properly linked to their markers. I learned a great deal. What stayed with me most was the use of information entropy...",
+          "description": "Reading in the first half of 2015: design, media, literature and technology, from Norman and Tang Nuo to Calvino.",
+          "image": "blogs/assets/images/reading-2015-first-half/363962ddb54e709576a8174ed53de477.jpg",
           "available": true
         }
       }
