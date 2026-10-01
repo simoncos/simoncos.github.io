@@ -10,7 +10,7 @@ translation: Codex (GPT-6)
 
 ![A blog cover adapted from the event website's artwork: many hands support children walking toward a bright doorway. The Chinese title reads “Lending a Hand at a Charity Gala, with Codex.”](assets/images/charity-gala-with-codex/cover.jpg)
 
-I helped with Spring Blooms' annual charity gala again this year, and was glad to contribute in my own small way. This time I had a few AI helpers. Compared with last year, I spent less time and managed to do quite a bit more: building and deploying the event website, coordinating requirements and testing the auction system, maintaining auction item information, creating an online donation pledge form, writing promotional copy, and handling the various loose ends after the event.
+I helped with Springblooms' annual charity gala again this year, and was glad to contribute in my own small way. This time I had a few AI helpers. Compared with last year, I spent less time and managed to do quite a bit more: building and deploying the event website, coordinating requirements and testing the auction system, maintaining auction item information, creating an online donation pledge form, writing promotional copy, and handling the various loose ends after the event.
 
 Some of these were things I could have done before, just with more time. Others were things I only had room to take on because AI was helping. There were plenty of ways it made life easier, along with a few unexpected little episodes worth writing down.
 

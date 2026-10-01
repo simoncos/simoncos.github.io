@@ -34,7 +34,7 @@
 
 | 中文 | 英文 |
 | --- | --- |
-| 晓日春晖 | Spring Blooms |
+| 晓日春晖 | Springblooms |
 | 拍品 | auction item |
 | 最低加价 | minimum bid increment |
 | 补拍 | follow-up auction |
@@ -42,7 +42,7 @@
 | 打八折 | reducing prices by 20% |
 | context 没有打通 | the context wasn't connected |
 
-组织名称核对：[晓日春晖官网](https://www.springblooms.org/4)及活动参与机构使用的 [Spring Blooms 英文名称](https://ebmedical.com/en/about/newscenter/news/2026-07-14/105.html)。没有把这些参考链接或额外背景添加到作者正文。
+组织英文名称按用户于 2026-10-01 的直接纠正统一为 `Springblooms`（一个词），英文正文及生成的列表、索引和 RSS 同步更新。中文仍为“晓日春晖”。
 
 ## 链接与生成范围
 
