@@ -115,6 +115,30 @@
       },
       "img": "gallery/assets/gallery-card-hermes-report.webp",
       "href": "gallery/research/hermes-agent-hv-analysis.html"
+    },
+    {
+      "id": "qingtian",
+      "kind": {
+        "en": "Original song",
+        "zh": "原创歌曲"
+      },
+      "work_topic": "music",
+      "home_topic": "think",
+      "date": "2011",
+      "title": {
+        "en": "Sunny Day",
+        "zh": "晴天"
+      },
+      "home_desc": {
+        "en": "A song I wrote, composed and sang: the closing song of the 2014 graduation video at NUAA's College of Economics and Management.",
+        "zh": "自己作词、作曲、演唱的歌，南航经管院 2014 届毕业视频的片尾曲。"
+      },
+      "desc": {
+        "en": "Words, music and vocals by me: the recording and the lyrics, with an English translation.",
+        "zh": "自己作词、作曲、演唱：录音和歌词都在这里。"
+      },
+      "img": "gallery/assets/gallery-card-qingtian.webp",
+      "href": "gallery/music/qingtian.html"
     }
   ],
   "featured": [
@@ -274,6 +298,21 @@
           "arrow": "→"
         }
       ]
+    },
+    {
+      "id": "music",
+      "title": {
+        "en": "Music",
+        "zh": "音乐"
+      },
+      "line": {
+        "en": "Songs I wrote and sang.",
+        "zh": "自己作词作曲、自己唱的歌。"
+      },
+      "desc": {
+        "en": "Original songs, published with the recording and the lyrics.",
+        "zh": "原创歌曲，连同录音和歌词一起发布。"
+      }
     }
   ],
   "projects": [
@@ -660,6 +699,166 @@
         "en": "A 2015 course project on 26,000 Zhihu users: basic statistics first, then the network of who follows whom among the big-name accounts.",
         "zh": "2015 年的课程项目，分析 2.6 万名知乎用户：先看基本统计，再看大V之间的关注网络。"
       }
+    }
+  ],
+  "songs": [
+    {
+      "id": "qingtian",
+      "page": "gallery/music/qingtian.html",
+      "audio": "gallery/music/qingtian.mp3",
+      "peaks": "gallery/music/qingtian.peaks.json",
+      "credits": [
+        {
+          "role": {
+            "en": "Words, music and vocals",
+            "zh": "词、曲、演唱"
+          },
+          "name": {
+            "en": "Che Zhao",
+            "zh": "赵澈"
+          }
+        },
+        {
+          "role": {
+            "en": "Arrangement",
+            "zh": "编曲"
+          },
+          "name": "南航D.C."
+        }
+      ],
+      "note": {
+        "en": "The closing song of the graduation video for the class of 2014, College of Economics and Management, Nanjing University of Aeronautics and Astronautics.",
+        "zh": "2014 届南京航空航天大学经济与管理学院毕业视频片尾曲。"
+      },
+      "lyrics": [
+        [
+          {
+            "zh": "眼前 是张张色彩如前的相片",
+            "en": "Before my eyes, photo after photo, the colours as they were"
+          },
+          {
+            "zh": "昨天 是曾经逃避而今又浮现",
+            "en": "Yesterday: what I once ran from, surfacing again"
+          },
+          {
+            "zh": "回忆 是无数秒里凝固的笑脸",
+            "en": "Memory: smiles held still in countless seconds"
+          },
+          {
+            "zh": "你那双手 你那双眼",
+            "en": "Your hands, your eyes"
+          },
+          {
+            "zh": "却无法褪浅",
+            "en": "will not fade"
+          }
+        ],
+        [
+          {
+            "zh": "谎言 是这个季节绵延的火焰",
+            "en": "Lies: a fire that runs on through this season"
+          },
+          {
+            "zh": "随便 那些淡漠或是褒贬的视线",
+            "en": "Never mind the looks, cold, or quick to praise or blame"
+          },
+          {
+            "zh": "岁月 像沙般落入每一个黑夜",
+            "en": "The years, like sand, fall into every night"
+          },
+          {
+            "zh": "不愿看见 不愿听见",
+            "en": "Not wanting to see it, not wanting to hear it:"
+          },
+          {
+            "zh": "终点的预告片",
+            "en": "the trailer for the end"
+          }
+        ],
+        [
+          {
+            "zh": "曾经拥过 操场边清澈干净的夏天",
+            "en": "We once held a summer by the sports field, clear and clean"
+          },
+          {
+            "zh": "还有与那苦辣酸甜的遇见",
+            "en": "and every meeting, bitter, sharp, sour and sweet"
+          },
+          {
+            "zh": "曾经许诺 无论是灰色阴天还是雨天",
+            "en": "We once promised, grey skies or rain,"
+          },
+          {
+            "zh": "只要时间 还一滴一点",
+            "en": "as long as time still falls, drop by drop"
+          }
+        ],
+        [
+          {
+            "zh": "谎言 是这个季节绵延的火焰",
+            "en": "Lies: a fire that runs on through this season"
+          },
+          {
+            "zh": "随便 那些淡漠或是褒贬的视线",
+            "en": "Never mind the looks, cold, or quick to praise or blame"
+          },
+          {
+            "zh": "岁月 像沙般落入每一个黑夜",
+            "en": "The years, like sand, fall into every night"
+          },
+          {
+            "zh": "总要看见 总要听见",
+            "en": "Bound to see it, bound to hear it:"
+          },
+          {
+            "zh": "终点的预告片",
+            "en": "the trailer for the end"
+          }
+        ],
+        [
+          {
+            "zh": "曾经拥过 操场边清澈干净的夏天",
+            "en": "We once held a summer by the sports field, clear and clean"
+          },
+          {
+            "zh": "还有与那苦辣酸甜的遇见",
+            "en": "and every meeting, bitter, sharp, sour and sweet"
+          },
+          {
+            "zh": "曾经许诺 无论是灰色阴天还是雨天",
+            "en": "We once promised, grey skies or rain,"
+          },
+          {
+            "zh": "只要时间 还一滴一点",
+            "en": "as long as time still falls, drop by drop"
+          }
+        ],
+        [
+          {
+            "zh": "曾经拥过 操场边清澈干净的夏天",
+            "en": "We once held a summer by the sports field, clear and clean"
+          },
+          {
+            "zh": "还有与那苦辣酸甜的遇见",
+            "en": "and every meeting, bitter, sharp, sour and sweet"
+          },
+          {
+            "zh": "曾经许诺 无论是灰色阴天还是雨天",
+            "en": "We once promised, grey skies or rain,"
+          },
+          {
+            "zh": "只要时间 还一滴一点",
+            "en": "as long as time still falls, drop by drop"
+          }
+        ],
+        [
+          {
+            "zh": "只要想念 晴天也可永远",
+            "en": "As long as we miss it, a sunny day can last forever"
+          }
+        ]
+      ],
+      "og_image": "gallery/assets/og-qingtian.jpg"
     }
   ]
 }

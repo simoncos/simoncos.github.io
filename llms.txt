@@ -10,7 +10,7 @@ The motto for this site is "Connecting the dots." The site is static, bilingual,
 - [About](https://simoncos.github.io/about.html): Short profile, motto and contact links.
 - [Projects](https://simoncos.github.io/projects.html): Index of maintained tools and systems; open a project for its context, outputs, and related work.
 - [Articles](https://simoncos.github.io/blogs.html): Long-form writing archive, filterable by topic, with series.
-- [Work](https://simoncos.github.io/gallery.html): Projects, talks, research artifacts and visual essays.
+- [Work](https://simoncos.github.io/gallery.html): Projects, talks, research artifacts, visual essays and music.
 - [Favorites (收藏)](https://simoncos.github.io/favorites.html): Every book, film, album and game rated five stars on Douban, newest first, with the short reviews as written there. Page chrome is bilingual; titles and reviews are in Chinese.
 
 ## Current project surfaces
@@ -23,6 +23,7 @@ The motto for this site is "Connecting the dots." The site is static, bilingual,
 
 - [Personal Information Systems in the AI Era](https://simoncos.github.io/gallery/talks/pkm-2026-06-07/index.html): Talk on capture, memory, agents, projects, and boundaries.
 - [Hermes Agent HV Analysis](https://simoncos.github.io/gallery/research/hermes-agent-hv-analysis.html): Research artifact showing an evidence-first analysis format.
+- [Sunny Day (晴天)](https://simoncos.github.io/gallery/music/qingtian.html): Original song, words, music and vocals by Che Zhao, with the recording and the lyrics.
 - [My Personal Knowledge Management System, 2026-03](https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html): Essay on personal systems and the publishing layer.
 - [My Haba Snow Mountain Journey](https://simoncos.github.io/blogs/my-haba-snow-mountain-journey.en.html): Field note about outdoor experience, risk, and body feedback.
 - [Problem Solving and Design](https://simoncos.github.io/blogs.html#series-problem-solving-and-design): Four completed essays in Chinese and English, from problem situations and feasible solutions to open-ended problems, indecision and the optimal solution.

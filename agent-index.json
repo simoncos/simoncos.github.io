@@ -32,7 +32,7 @@
       "id": "work",
       "label": "Work",
       "url": "https://simoncos.github.io/gallery.html",
-      "purpose": "Projects, talks, research artifacts and visual essays."
+      "purpose": "Projects, talks, research artifacts, visual essays and music."
     },
     {
       "id": "projects",
@@ -88,6 +88,13 @@
       "label": "Hermes Agent HV Analysis",
       "url": "https://simoncos.github.io/gallery/research/hermes-agent-hv-analysis.html",
       "description": "Evidence-first research artifact."
+    },
+    {
+      "id": "qingtian",
+      "type": "song",
+      "label": "Sunny Day (晴天)",
+      "url": "https://simoncos.github.io/gallery/music/qingtian.html",
+      "description": "Original song, words, music and vocals by Che Zhao: the recording, with the Chinese lyrics and an English translation."
     },
     {
       "id": "problem-solving-and-design",
