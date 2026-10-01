@@ -10,7 +10,7 @@ translation: Codex (GPT-6)
 
 ![A blog cover adapted from the event website's artwork: many hands support children walking toward a bright doorway. The Chinese title reads “Lending a Hand at a Charity Gala, with Codex.”](assets/images/charity-gala-with-codex/cover.jpg)
 
-I helped with Springblooms' annual charity gala again this year, and was glad to contribute in my own small way. This time I had a few AI helpers. Compared with last year, I spent less time and managed to do quite a bit more: building and deploying the event website, coordinating requirements and testing the auction system, maintaining auction item information, creating an online donation pledge form, writing promotional copy, and handling the various loose ends after the event.
+This year I helped with the annual charity gala of Springblooms, a charitable organization, and was glad to contribute in my own small way. This time I had a few AI helpers. Compared with last year, I spent less time and managed to do quite a bit more: building and deploying the event website, coordinating requirements and testing the auction system, maintaining auction item information, creating an online donation pledge form, writing promotional copy, and handling the various loose ends after the event.
 
 Some of these were things I could have done before, just with more time. Others were things I only had room to take on because AI was helping. There were plenty of ways it made life easier, along with a few unexpected little episodes worth writing down.
 
@@ -50,7 +50,7 @@ That gave me a more concrete understanding of long conversations. Having the his
 
 Later, we moved the paper pledge form into Google Forms, wrote copy for the follow-up auction, saved the results and prepared the handover. None of these tasks looked particularly big on its own, but together they took time. With AI helping, I really could spend less time on spreadsheets, webpages and repeated checks, and pick up a little more work than I otherwise might have managed.
 
-Looking back, though, my strongest impression has two sides.
+Looking back, my strongest impression has two sides.
 
 On one side, AI removed a great deal of friction from moving between systems and working with data, and lightened the testing and development load. Many things that used to feel laborious even to contemplate could now be started first and improved along the way.
 
