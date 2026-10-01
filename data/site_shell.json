@@ -1,6 +1,6 @@
 {
-  "css_version": "20261001c",
-  "js_version": "20261001a",
+  "css_version": "20261001d",
+  "js_version": "20261001b",
   "site_updated": "2026-10-01",
   "theme_init": "theme-init.js",
   "icons": {
@@ -151,6 +151,16 @@
           "data-cf-beacon": "{\"token\":\"27d42618c53846ada3300ce4fefe0f94\"}"
         }
       }
+    ],
+    "research": [
+      {
+        "src": "site.js",
+        "defer": true
+      },
+      {
+        "src": "zhihu-research.js",
+        "defer": true
+      }
     ]
   },
   "pages": [
@@ -274,6 +284,13 @@
       "script_profile": "basic",
       "section": null,
       "head_rss": false
+    },
+    {
+      "path": "gallery/research/zhihu-2015.html",
+      "asset_prefix": "../../",
+      "script_profile": "research",
+      "section": "work",
+      "canonical": "gallery/research/zhihu-2015.html"
     }
   ],
   "site_url": "https://simoncos.github.io/"

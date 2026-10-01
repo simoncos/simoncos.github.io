@@ -1,7 +1,7 @@
 ---
 tags: hack
 date: 2016-03-18
-updated: 2026-09-30
+updated: 2026-10-01
 translation: Claude Opus 5.5
 description: Why is following the relation closest to a social network on Zhihu? Density, strongly connected components and shortest paths show how the big Vs cluster; PageRank, HITS and betweenness centrality rank them; and their answers show which topics they cover.
 series: 知乎社交网络分析
@@ -9,6 +9,8 @@ series_part: 2
 ---
 
 # Zhihu Social Network Analysis (2): The Follow Network
+
+> Explore [Zhihu 2015: People, Connections and Influence](../gallery/research/zhihu-2015.html?lang=en), the interactive research page bringing both essays together.
 
 Keywords: social network analysis (SNA) | complex networks | graph theory | network centrality | trending topic discovery
 

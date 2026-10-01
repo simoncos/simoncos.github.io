@@ -18,13 +18,14 @@ GitHub Pages serves the `master` tree as-is, with no build step, so generated HT
 | `blogs/*.html`, `blogs.html`, feeds, `data/article_index.json`, `data/backlinks_data.json` | `generate_blog_pages.py` | `blogs/*.md`, `templates/` |
 | `index.html`, `gallery.html`, `projects.html`, `projects/sleep-toolkit*.html`, `gallery/music/*.html`, `about.html`, `404.html` | `scripts/build_pages.py` | `data/site.json`, `data/article_index.json`, `gallery/music/*.peaks.json` |
 | `favorites.html`, `favorites/*.html` | `scripts/update_favorites_pages.py` | `data/favorites.json` |
+| `gallery/research/zhihu-2015.html` | `scripts/build_zhihu_research.py`, called by `build_pages.py` | `data/zhihu-2015.json` and bilingual editorial copy |
 | Shared head, header and footer blocks on every page above | `scripts/update_site_shell.py` | `scripts/site_shell.py`, `data/site_shell.json` |
 
 A new generated page must exist before `update_site_shell.py` will accept its entry in `data/site_shell.json`, so run `python3 scripts/build_pages.py` once before the first `make generate`.
 
 `make generate` first syncs the shell into `templates/` and refreshes `data/image_dimensions.json` (both are inputs to article generation), then runs the article, page and Favorites generators. It is idempotent apart from the feeds' `lastBuildDate`. `scripts/site_shell.py` is the single definition of the shell: navigation, language and theme toggles, footer, meta tags and script tags. `data/site_shell.json` lists the pages, their section and their script profile, plus the `css_version` / `js_version` cache keys and `site_updated`.
 
-Hand-authored pages outside this table: `series.html` and `tags.html` (redirects into the Articles page), the Sleep essay pages under `projects/`, the talk deck and research artifacts under `gallery/`.
+Hand-authored pages outside this table: `series.html` and `tags.html` (redirects into the Articles page), the Sleep essay pages under `projects/`, the talk deck and the Hermes research artifact under `gallery/`. The Zhihu research page is generated; see `docs/ZHIHU_RESEARCH.md`.
 
 ### Data
 

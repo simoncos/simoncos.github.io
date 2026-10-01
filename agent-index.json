@@ -5,11 +5,14 @@
     "owner": "simoncos / Che ZHAO",
     "motto": "Connecting the dots.",
     "summary": "A live public surface for software, AI collaboration, data projects, research artifacts, essays, talks, and field notes.",
-    "last_updated": "2026-09-28"
+    "last_updated": "2026-10-01"
   },
   "language_policy": {
     "default_language": "en",
-    "supported_languages": ["en", "zh"],
+    "supported_languages": [
+      "en",
+      "zh"
+    ],
     "english_page_pattern": "*.en.html",
     "chinese_page_pattern": "*.html",
     "agent_preference": "Prefer English pages when both versions exist, unless the user asks for Chinese.",
@@ -102,6 +105,13 @@
       "label": "问题解决与设计",
       "url": "https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.html",
       "description": "Four completed essays, in Chinese and English, on problem situations, feasible solutions, open-ended problems, and indecision and the optimal solution."
+    },
+    {
+      "id": "zhihu-2015",
+      "type": "research_artifact",
+      "label": "Zhihu 2015: People, Connections and Influence",
+      "url": "https://simoncos.github.io/gallery/research/zhihu-2015.html",
+      "description": "Bilingual interactive presentation of a 2015 study: profile statistics, follow-network comparisons, published influence rankings and topics. Historical sample, not current platform data."
     }
   ],
   "public_data_files": [

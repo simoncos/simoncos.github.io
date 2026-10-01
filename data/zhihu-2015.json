@@ -1,0 +1,712 @@
+{
+  "edition": "2016 published results with profile distributions recounted in 2026",
+  "snapshot": "2015-10",
+  "presentation_updated": "2026-10-01",
+  "sources": [
+    "blogs/zhihu-social-network-analysis-1-basic-statistics.md",
+    "blogs/zhihu-social-network-analysis-2-follow-network.md"
+  ],
+  "notes": [
+    "Network metrics, influence rankings and topics are historical published aggregates. Profile distribution bins were recounted from the verified archive; see recovered_distribution.",
+    "Thresholds use lifetime upvotes strictly greater than 10000 or 50000.",
+    "Path lengths concern the largest strongly connected component only.",
+    "Topic counts concern question tags of answers by a dominating set, not all users.",
+    "Net10k article heading says Top 20 but contains 30 entries; all 30 are preserved.",
+    "A name absent from a published Top 5 has unknown rank, not zero score."
+  ],
+  "metrics": [
+    {
+      "id": "agree",
+      "label": {
+        "en": "Upvotes",
+        "zh": "赞同"
+      },
+      "mean": 3858.4,
+      "median": 96,
+      "sd": 21951.4,
+      "image": "../../blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/00f1ff1973384535f7e563c7f4f6c40b.jpg"
+    },
+    {
+      "id": "follower",
+      "label": {
+        "en": "Followers",
+        "zh": "粉丝"
+      },
+      "mean": 3620.0,
+      "median": 112,
+      "sd": 22978.5,
+      "image": "../../blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/050ad934cdeeb42a6e4254c2a5bfc0e7.jpg"
+    },
+    {
+      "id": "followee",
+      "label": {
+        "en": "Following",
+        "zh": "关注"
+      },
+      "mean": 176.3,
+      "median": 67,
+      "sd": 565.9,
+      "image": "../../blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/0e9fb639f073982a4ec83bf87624b5c8.jpg"
+    },
+    {
+      "id": "answer",
+      "label": {
+        "en": "Answers",
+        "zh": "回答"
+      },
+      "mean": 68.9,
+      "median": 17,
+      "sd": 225.9,
+      "image": "../../blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/0da612aae06c05311108e3538672d62a.jpg"
+    },
+    {
+      "id": "thanks",
+      "label": {
+        "en": "Thanks",
+        "zh": "感谢"
+      },
+      "mean": 865.3,
+      "median": 28,
+      "sd": 4627.6,
+      "image": "../../blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/4d11a4526f33ef3f3dcae9e3d1e5139d.jpg"
+    }
+  ],
+  "cohorts": [
+    {
+      "id": "Net10k",
+      "threshold": 10000,
+      "nodes": 1895,
+      "edges": 231416,
+      "density": 0.064,
+      "components": 43,
+      "giant": 1853,
+      "distance": 2.11,
+      "diameter": 5
+    },
+    {
+      "id": "Net50k",
+      "threshold": 50000,
+      "nodes": 375,
+      "edges": 27324,
+      "density": 0.195,
+      "components": 8,
+      "giant": 368,
+      "distance": 1.85,
+      "diameter": 4
+    }
+  ],
+  "rankings": {
+    "Net10k": {
+      "pagerank": [
+        {
+          "name": "黄继新",
+          "score": "0.00736"
+        },
+        {
+          "name": "马伯庸",
+          "score": "0.00560"
+        },
+        {
+          "name": "张佳玮",
+          "score": "0.00551"
+        },
+        {
+          "name": "葛巾",
+          "score": "0.00510"
+        },
+        {
+          "name": "周源",
+          "score": "0.00503"
+        }
+      ],
+      "authority": [
+        {
+          "name": "张佳玮",
+          "score": "0.0345"
+        },
+        {
+          "name": "梁边妖",
+          "score": "0.0339"
+        },
+        {
+          "name": "葛巾",
+          "score": "0.0324"
+        },
+        {
+          "name": "马伯庸",
+          "score": "0.0319"
+        },
+        {
+          "name": "黄继新",
+          "score": "0.0315"
+        }
+      ],
+      "hub": [
+        {
+          "name": "周诺",
+          "score": "0.00344"
+        },
+        {
+          "name": "杨大懒人",
+          "score": "0.00338"
+        },
+        {
+          "name": "君陌Faust",
+          "score": "0.00336"
+        },
+        {
+          "name": "ZENHO",
+          "score": "0.00325"
+        },
+        {
+          "name": "干脆面",
+          "score": "0.00290"
+        }
+      ]
+    },
+    "Net50k": {
+      "pagerank": [
+        {
+          "name": "黄继新",
+          "score": "0.0112"
+        },
+        {
+          "name": "马伯庸",
+          "score": "0.0103"
+        },
+        {
+          "name": "张佳玮",
+          "score": "0.0102"
+        },
+        {
+          "name": "梁边妖",
+          "score": "0.0095"
+        },
+        {
+          "name": "cOMMANDO",
+          "score": "0.0090"
+        }
+      ],
+      "authority": [
+        {
+          "name": "梁边妖",
+          "score": "0.00749"
+        },
+        {
+          "name": "张佳玮",
+          "score": "0.00721"
+        },
+        {
+          "name": "马伯庸",
+          "score": "0.00683"
+        },
+        {
+          "name": "采铜",
+          "score": "0.00677"
+        },
+        {
+          "name": "谢熊猫君",
+          "score": "0.00670"
+        }
+      ],
+      "hub": [
+        {
+          "name": "杨大懒人",
+          "score": "0.00976"
+        },
+        {
+          "name": "君陌Faust",
+          "score": "0.00972"
+        },
+        {
+          "name": "ZENHO",
+          "score": "0.00953"
+        },
+        {
+          "name": "Edison Chen",
+          "score": "0.00885"
+        },
+        {
+          "name": "徐湘楠",
+          "score": "0.00798"
+        }
+      ]
+    }
+  },
+  "topics": {
+    "Net10k": [
+      {
+        "name": "调查类问题",
+        "en": "Survey questions",
+        "count": 3792
+      },
+      {
+        "name": "生活",
+        "en": "Life",
+        "count": 3096
+      },
+      {
+        "name": "历史",
+        "en": "History",
+        "count": 1713
+      },
+      {
+        "name": "恋爱",
+        "en": "Dating",
+        "count": 1464
+      },
+      {
+        "name": "心理学",
+        "en": "Psychology",
+        "count": 1432
+      },
+      {
+        "name": "电影",
+        "en": "Film",
+        "count": 1419
+      },
+      {
+        "name": "人际交往",
+        "en": "Social relationships",
+        "count": 1404
+      },
+      {
+        "name": "社会",
+        "en": "Society",
+        "count": 1332
+      },
+      {
+        "name": "互联网",
+        "en": "Internet",
+        "count": 1214
+      },
+      {
+        "name": "情感",
+        "en": "Emotions",
+        "count": 1197
+      },
+      {
+        "name": "政治",
+        "en": "Politics",
+        "count": 1028
+      },
+      {
+        "name": "两性关系",
+        "en": "Gender relations",
+        "count": 994
+      },
+      {
+        "name": "教育",
+        "en": "Education",
+        "count": 897
+      },
+      {
+        "name": "中国",
+        "en": "China",
+        "count": 823
+      },
+      {
+        "name": "人生",
+        "en": "Life choices",
+        "count": 815
+      },
+      {
+        "name": "游戏",
+        "en": "Games",
+        "count": 805
+      },
+      {
+        "name": "文学",
+        "en": "Literature",
+        "count": 772
+      },
+      {
+        "name": "知乎",
+        "en": "Zhihu",
+        "count": 772
+      },
+      {
+        "name": "法律",
+        "en": "Law",
+        "count": 750
+      },
+      {
+        "name": "音乐",
+        "en": "Music",
+        "count": 738
+      },
+      {
+        "name": "爱情",
+        "en": "Love",
+        "count": 699
+      },
+      {
+        "name": "文化",
+        "en": "Culture",
+        "count": 659
+      },
+      {
+        "name": "创业",
+        "en": "Entrepreneurship",
+        "count": 628
+      },
+      {
+        "name": "大学",
+        "en": "University",
+        "count": 621
+      },
+      {
+        "name": "程序员",
+        "en": "Programmers",
+        "count": 619
+      },
+      {
+        "name": "心理",
+        "en": "Mental life",
+        "count": 617
+      },
+      {
+        "name": "你如何评价 X",
+        "en": "How would you rate X?",
+        "count": 609
+      },
+      {
+        "name": "女性",
+        "en": "Women",
+        "count": 604
+      },
+      {
+        "name": "编程",
+        "en": "Programming",
+        "count": 585
+      },
+      {
+        "name": "X 是种怎样的体验",
+        "en": "What is X like?",
+        "count": 582
+      }
+    ],
+    "Net50k": [
+      {
+        "name": "生活",
+        "en": "Life",
+        "count": 1435
+      },
+      {
+        "name": "调查类问题",
+        "en": "Survey questions",
+        "count": 1365
+      },
+      {
+        "name": "政治",
+        "en": "Politics",
+        "count": 1285
+      },
+      {
+        "name": "历史",
+        "en": "History",
+        "count": 1204
+      },
+      {
+        "name": "电影",
+        "en": "Film",
+        "count": 1084
+      },
+      {
+        "name": "健康",
+        "en": "Health",
+        "count": 996
+      },
+      {
+        "name": "社会",
+        "en": "Society",
+        "count": 984
+      },
+      {
+        "name": "医学",
+        "en": "Medicine",
+        "count": 941
+      },
+      {
+        "name": "恋爱",
+        "en": "Dating",
+        "count": 717
+      },
+      {
+        "name": "中国",
+        "en": "China",
+        "count": 695
+      },
+      {
+        "name": "两性关系",
+        "en": "Gender relations",
+        "count": 688
+      },
+      {
+        "name": "英语",
+        "en": "English",
+        "count": 678
+      },
+      {
+        "name": "人际交往",
+        "en": "Social relationships",
+        "count": 640
+      },
+      {
+        "name": "心理学",
+        "en": "Psychology",
+        "count": 634
+      },
+      {
+        "name": "互联网",
+        "en": "Internet",
+        "count": 595
+      },
+      {
+        "name": "法律",
+        "en": "Law",
+        "count": 587
+      },
+      {
+        "name": "微软（Microsoft）",
+        "en": "Microsoft",
+        "count": 555
+      },
+      {
+        "name": "美国",
+        "en": "United States",
+        "count": 552
+      },
+      {
+        "name": "健身",
+        "en": "Fitness",
+        "count": 538
+      },
+      {
+        "name": "编程",
+        "en": "Programming",
+        "count": 511
+      }
+    ]
+  },
+  "recovered_distribution": {
+    "computed": "2026-10-01",
+    "snapshot": "2015-10",
+    "sample_size": 26161,
+    "database_sha256": "1ea3f6f2a3ecc8f220a36e9c9b8463501af5b62eb1cb7ec3674bf0e7105c903d",
+    "method": "Counts in disjoint magnitude bins, over all User records; no user-level records exported.",
+    "published_mean_median_check": "All five means (one decimal) and medians match the 2016 table.",
+    "bins": {
+      "agree": [
+        {
+          "min": 0,
+          "max_exclusive": 1,
+          "count": 4745
+        },
+        {
+          "min": 1,
+          "max_exclusive": 10,
+          "count": 3082
+        },
+        {
+          "min": 10,
+          "max_exclusive": 100,
+          "count": 5345
+        },
+        {
+          "min": 100,
+          "max_exclusive": 1000,
+          "count": 6296
+        },
+        {
+          "min": 1000,
+          "max_exclusive": 10000,
+          "count": 4797
+        },
+        {
+          "min": 10000,
+          "max_exclusive": 100000,
+          "count": 1735
+        },
+        {
+          "min": 100000,
+          "max_exclusive": 1000000,
+          "count": 160
+        },
+        {
+          "min": 1000000,
+          "max_exclusive": null,
+          "count": 1
+        }
+      ],
+      "follower": [
+        {
+          "min": 0,
+          "max_exclusive": 1,
+          "count": 0
+        },
+        {
+          "min": 1,
+          "max_exclusive": 10,
+          "count": 2020
+        },
+        {
+          "min": 10,
+          "max_exclusive": 100,
+          "count": 10535
+        },
+        {
+          "min": 100,
+          "max_exclusive": 1000,
+          "count": 8267
+        },
+        {
+          "min": 1000,
+          "max_exclusive": 10000,
+          "count": 3865
+        },
+        {
+          "min": 10000,
+          "max_exclusive": 100000,
+          "count": 1299
+        },
+        {
+          "min": 100000,
+          "max_exclusive": 1000000,
+          "count": 175
+        },
+        {
+          "min": 1000000,
+          "max_exclusive": null,
+          "count": 0
+        }
+      ],
+      "followee": [
+        {
+          "min": 0,
+          "max_exclusive": 1,
+          "count": 380
+        },
+        {
+          "min": 1,
+          "max_exclusive": 10,
+          "count": 3260
+        },
+        {
+          "min": 10,
+          "max_exclusive": 100,
+          "count": 12248
+        },
+        {
+          "min": 100,
+          "max_exclusive": 1000,
+          "count": 9673
+        },
+        {
+          "min": 1000,
+          "max_exclusive": 10000,
+          "count": 594
+        },
+        {
+          "min": 10000,
+          "max_exclusive": 100000,
+          "count": 6
+        },
+        {
+          "min": 100000,
+          "max_exclusive": 1000000,
+          "count": 0
+        },
+        {
+          "min": 1000000,
+          "max_exclusive": null,
+          "count": 0
+        }
+      ],
+      "answer": [
+        {
+          "min": 0,
+          "max_exclusive": 1,
+          "count": 3547
+        },
+        {
+          "min": 1,
+          "max_exclusive": 10,
+          "count": 6849
+        },
+        {
+          "min": 10,
+          "max_exclusive": 100,
+          "count": 11727
+        },
+        {
+          "min": 100,
+          "max_exclusive": 1000,
+          "count": 3833
+        },
+        {
+          "min": 1000,
+          "max_exclusive": 10000,
+          "count": 204
+        },
+        {
+          "min": 10000,
+          "max_exclusive": 100000,
+          "count": 1
+        },
+        {
+          "min": 100000,
+          "max_exclusive": 1000000,
+          "count": 0
+        },
+        {
+          "min": 1000000,
+          "max_exclusive": null,
+          "count": 0
+        }
+      ],
+      "thanks": [
+        {
+          "min": 0,
+          "max_exclusive": 1,
+          "count": 5200
+        },
+        {
+          "min": 1,
+          "max_exclusive": 10,
+          "count": 4843
+        },
+        {
+          "min": 10,
+          "max_exclusive": 100,
+          "count": 6843
+        },
+        {
+          "min": 100,
+          "max_exclusive": 1000,
+          "count": 6002
+        },
+        {
+          "min": 1000,
+          "max_exclusive": 10000,
+          "count": 2815
+        },
+        {
+          "min": 10000,
+          "max_exclusive": 100000,
+          "count": 450
+        },
+        {
+          "min": 100000,
+          "max_exclusive": 1000000,
+          "count": 8
+        },
+        {
+          "min": 1000000,
+          "max_exclusive": null,
+          "count": 0
+        }
+      ]
+    }
+  }
+}

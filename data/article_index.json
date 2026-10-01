@@ -887,7 +887,7 @@
           "title": "知乎社交网络分析（下）：关注网络",
           "file": "zhihu-social-network-analysis-2-follow-network.html",
           "markdown": "zhihu-social-network-analysis-2-follow-network.md",
-          "excerpt": "关键词：社交网络分析（SNA） | 复杂网络 | 图论 | 网络中心度 | 热门话题发现\n本文是《知乎社交网络分析》的下篇，主要内容是对于知乎用户关注网络进行的分析。项目介绍（以及数据、代码和报告）及基本的统计分析内容请见 知乎社交网络分析（上）：基本统计 。\n导言：...",
+          "excerpt": "交互研究页： 知乎 2015：人、关注与影响力 ，把上下两篇的统计、网络、榜单与话题放在一起探索。\n关键词：社交网络分析（SNA） | 复杂网络 | 图论 | 网络中心度 | 热门话题发现\n本文是《知乎社交网络分析》的下篇，主要内容是对于知乎用户关注网络进行的分析。项目介绍（以...",
           "description": "为什么说关注关系最接近知乎上的社交网络？从密度、强连通分量与最短路径看大V如何抱团，再用 PageRank、HITS 和介性中心度给大V排位，最后看他们都在回答什么话题。",
           "image": "blogs/assets/images/zhihu-social-network-analysis-2-follow-network/4a34f5c65f7bddca379b8f8719e1f25f.jpg",
           "available": true
@@ -896,7 +896,7 @@
           "title": "Zhihu Social Network Analysis (2): The Follow Network",
           "file": "zhihu-social-network-analysis-2-follow-network.en.html",
           "markdown": "zhihu-social-network-analysis-2-follow-network.en.md",
-          "excerpt": "Keywords: social network analysis (SNA) | complex networks | graph theory | network centrality | trending topic discovery\nThis is the second part of Zhihu Social Network Analysis. It is mainly an analysis of the network of Zhihu users following one another. For an introduction to the project (and the data, code and report) and the basic statistics, see Zhihu Social Network Analysis (1): Basic Statistics.\nIntroduction: What Is a Social Network?\nAfter the basic statistics in the first part, we have some idea of the overall picture of Zhihu users' upvotes, answers, thanks and follows. Now let's first consider...",
+          "excerpt": "Explore Zhihu 2015: People, Connections and Influence, the interactive research page bringing both essays together.\nKeywords: social network analysis (SNA) | complex networks | graph theory | network centrality | trending topic discovery\nThis is the second part of Zhihu Social Network Analysis. It is mainly an analysis of the network of Zhihu users following one another. For an introduction to the project (and the data, code and report) and the basic statistics, see Zhihu Social Network Analysis (1): Basic Statistics.\nIntroduction: What Is a Social Network?\nAfter the basic statistics in the first part, we have some idea of...",
           "description": "Why is following the relation closest to a social network on Zhihu? Density, strongly connected components and shortest paths show how the big Vs cluster; PageRank, HITS and betweenness centrality rank them; and their answers show which topics they cover.",
           "image": "blogs/assets/images/zhihu-social-network-analysis-2-follow-network/4a34f5c65f7bddca379b8f8719e1f25f.jpg",
           "available": true
@@ -918,7 +918,7 @@
           "title": "知乎社交网络分析（上）：基本统计",
           "file": "zhihu-social-network-analysis-1-basic-statistics.html",
           "markdown": "zhihu-social-network-analysis-1-basic-statistics.md",
-          "excerpt": "关键词：社交网络分析（SNA） | 统计 | 幂律分布\n简介\n为保证可读性，本文将分为上下两篇，上篇只涉及数据介绍及基本的统计描述性分析，下篇是 基于用户关注网络关系进行的分析 。\n本文源自我在2015年 Social Computing 课程中参与的一个小组项目，主要语言为Python，这里是项目包...",
+          "excerpt": "交互研究页： 知乎 2015：人、关注与影响力 ，把上下两篇的统计、网络、榜单与话题放在一起探索。\n关键词：社交网络分析（SNA） | 统计 | 幂律分布\n简介\n为保证可读性，本文将分为上下两篇，上篇只涉及数据介绍及基本的统计描述性分析，下篇是 基于用户关注网络关系...",
           "description": "一个 2015 年课程项目，从一个种子账号爬取 2.6 万名知乎用户：关注、粉丝、回答、赞同和感谢的均值与中位数相差悬殊，分布呈长尾，赞同数与粉丝数明显正相关。",
           "image": "blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/3e2bcc95699de0337ab26473b8b8e362.jpg",
           "available": true
@@ -927,7 +927,7 @@
           "title": "Zhihu Social Network Analysis (1): Basic Statistics",
           "file": "zhihu-social-network-analysis-1-basic-statistics.en.html",
           "markdown": "zhihu-social-network-analysis-1-basic-statistics.en.md",
-          "excerpt": "Keywords: social network analysis (SNA) | statistics | power-law distribution\nIntroduction\nTo keep it readable, this piece is split into two parts. The first covers only the data and basic descriptive statistics; the second is an analysis based on the network of who follows whom.\nIt comes from a group project I took part in for a Social Computing course in 2015. The main language was Python, and here is the project on GitHub, dataset included (please cite this address). The project covered the whole process of crawling, storing and analysing data from the Zhihu social network. In this piece...",
+          "excerpt": "Explore Zhihu 2015: People, Connections and Influence, the interactive research page bringing both essays together.\nKeywords: social network analysis (SNA) | statistics | power-law distribution\nIntroduction\nTo keep it readable, this piece is split into two parts. The first covers only the data and basic descriptive statistics; the second is an analysis based on the network of who follows whom.\nIt comes from a group project I took part in for a Social Computing course in 2015. The main language was Python, and here is the project on GitHub, dataset included (please cite this address). The project covered the whole...",
           "description": "A 2015 course project crawled 26,000 Zhihu users outward from one seed account. The means and medians of followees, followers, answers, upvotes and thanks are far apart, the distributions have long tails, and upvotes rise clearly with followers.",
           "image": "blogs/assets/images/zhihu-social-network-analysis-1-basic-statistics/3e2bcc95699de0337ab26473b8b8e362.jpg",
           "available": true

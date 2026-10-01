@@ -117,6 +117,34 @@
       "href": "gallery/research/hermes-agent-hv-analysis.html"
     },
     {
+      "id": "zhihu-2015",
+      "kind": {
+        "en": "Research",
+        "zh": "研究"
+      },
+      "work_kind": {
+        "en": "Interactive research",
+        "zh": "交互研究"
+      },
+      "work_topic": "research",
+      "home_topic": "think",
+      "date": "2015",
+      "title": {
+        "en": "Zhihu 2015: People, Connections and Influence",
+        "zh": "知乎 2015：人、关注与影响力"
+      },
+      "home_desc": {
+        "en": "Four questions about a 2015 Zhihu sample: user differences, following networks, influence and topics.",
+        "zh": "从用户差异、关注网络、影响力和话题，探索 2015 年知乎的一份样本。"
+      },
+      "desc": {
+        "en": "Explore the statistics, compare two following networks, and see how influence rankings change with the measure.",
+        "zh": "探索用户统计，对照两个关注网络，看看衡量方式如何改变影响力榜单。"
+      },
+      "img": "gallery/research/assets/zhihu-2015-card.svg",
+      "href": "gallery/research/zhihu-2015.html"
+    },
+    {
       "id": "qingtian",
       "kind": {
         "en": "Original song",
@@ -242,8 +270,8 @@
         "zh": "研究"
       },
       "line": {
-        "en": "Public analyses of systems and agents.",
-        "zh": "对系统和 Agent 的公开分析。"
+        "en": "Studies of people, networks and systems.",
+        "zh": "关于人、网络与系统的研究。"
       },
       "desc": {
         "en": "Research artifacts that put evidence, questions, and limits side by side.",

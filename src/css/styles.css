@@ -613,6 +613,7 @@ button {
     justify-content: space-between;
     padding: 28px var(--pad) 36px;
     font-size: 13px;
+    line-height: 1.6;
     color: var(--muted);
 }
 
@@ -625,6 +626,8 @@ button {
 
 .ftr-r {
     gap: 20px;
+    /* Mixed CJK/Latin runs have different font ascents: align text baselines. */
+    align-items: baseline;
 }
 
 .ftr a {
