@@ -19,6 +19,8 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from build_zhihu_research import render_research
+
 from site_shell import (  # noqa: E402
     ROOT,
     bi,
@@ -876,6 +878,7 @@ def build() -> dict[str, str]:
         "projects.html": render_projects(config, site),
         "about.html": render_about(config, site),
         "404.html": render_not_found(config),
+        "gallery/research/zhihu-2015.html": render_research(config),
     }
     for lang in ("en", "zh"):
         project = next(item for item in site["projects"] if item["id"] == "sleep-toolkit")

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Thu, 01 Oct 2026 12:04:35 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>和 Codex 一起，给慈善晚会搭把手</title><link>https://simoncos.github.io/blogs/charity-gala-with-codex.html</link><guid>https://simoncos.github.io/blogs/charity-gala-with-codex.html</guid><pubDate>Thu, 01 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>和 Codex 一起，给慈善晚会搭把手</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Thu, 01 Oct 2026 13:19:20 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>和 Codex 一起，给慈善晚会搭把手</title><link>https://simoncos.github.io/blogs/charity-gala-with-codex.html</link><guid>https://simoncos.github.io/blogs/charity-gala-with-codex.html</guid><pubDate>Thu, 01 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>和 Codex 一起，给慈善晚会搭把手</h1>
 <p><img alt="沿用活动页主视觉改制的文章封面：不同人的双手托举孩子向前，走向明亮的门；标题为“和 Codex 一起，给慈善晚会搭把手”" decoding="async" height="853" src="https://simoncos.github.io/blogs/assets/images/charity-gala-with-codex/cover.jpg" width="1600"/></p>
 <p>今年又参与了晓日春晖的年度慈善晚会，很高兴能继续贡献一份自己的力量。跟去年相比，这回多了几个 AI 帮手，花的时间少了，能做的事情却多了不少：宣传页面开发部署、拍卖系统的需求对接和测试、拍品信息维护、在线认捐表制作、宣传文案，还有活动结束后的各种收尾。</p>
 <p>其中有些事情，以前也能做，就是比较费时间；有些则是因为有了 AI，才有余力多接一点。整个过程有不少省心的地方，也有一些预想之外的小插曲，值得记下来。</p>
@@ -1706,6 +1706,9 @@ plt.plot(x_ln,y_ln)
 plt.show()
 </code></pre>
 <p><img alt="幂律函数的双对数形式（一条直线）, c=-2：一条从原点向右下方延伸的直线，末端约为 −9.2" decoding="async" height="256" loading="lazy" src="https://simoncos.github.io/blogs/assets/images/exponential-vs-power-law-distributions/2beb0a90d264febacafb9fbb76ce26b5.png" width="377"/></p>]]></description></item><item><title>知乎社交网络分析（下）：关注网络</title><link>https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html</link><guid>https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html</guid><pubDate>Fri, 18 Mar 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>知乎社交网络分析（下）：关注网络</h1>
+<blockquote>
+<p>交互研究页：<a href="https://simoncos.github.io/gallery/research/zhihu-2015.html?lang=zh">知乎 2015：人、关注与影响力</a>，把上下两篇的统计、网络、榜单与话题放在一起探索。</p>
+</blockquote>
 <p>关键词：社交网络分析（SNA） | 复杂网络 | 图论 | 网络中心度 | 热门话题发现</p>
 <p>本文是《知乎社交网络分析》的下篇，主要内容是对于知乎用户关注网络进行的分析。项目介绍（以及数据、代码和报告）及基本的统计分析内容请见<a href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.html">知乎社交网络分析（上）：基本统计</a>。</p>
 <h3>导言：社交网络是什么？</h3>
@@ -2028,6 +2031,9 @@ plt.show()
 法律 587, 微软（Microsoft） 555, 美国 552, 健身 538, 编程 511</p>
 <p>我个人认为<strong>大V们回答的问题所对应的话题，能够从一定程度上反映了知乎这个平台总体的话题领域热门程度</strong>。另外，我觉得排在最前的一些热门话题也在一定程度上解释了为什么不同领域的大V会抱团，因为不论处于什么专业领域，<strong>人们对于生活、历史、电影等人文和泛娱乐话题总是会感兴趣的</strong>，一旦都感兴趣，又都有不错的见解和分享，自然更容易惺惺相惜。</p>
 <p>到此，本文终于可以画上句号了，欢迎交流讨论。在此还要感谢和我一起参与本项目的其他三个小伙伴，四个人一起才得以在短短时间内做到这种程度（项目report里有我们的详细分工）。</p>]]></description></item><item><title>知乎社交网络分析（上）：基本统计</title><link>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.html</link><guid>https://simoncos.github.io/blogs/zhihu-social-network-analysis-1-basic-statistics.html</guid><pubDate>Sun, 28 Feb 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>知乎社交网络分析（上）：基本统计</h1>
+<blockquote>
+<p>交互研究页：<a href="https://simoncos.github.io/gallery/research/zhihu-2015.html?lang=zh">知乎 2015：人、关注与影响力</a>，把上下两篇的统计、网络、榜单与话题放在一起探索。</p>
+</blockquote>
 <p>关键词：社交网络分析（SNA） | 统计 | 幂律分布</p>
 <h3>简介</h3>
 <p>为保证可读性，本文将分为上下两篇，上篇只涉及数据介绍及基本的统计描述性分析，下篇是<a href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html">基于用户关注网络关系进行的分析</a>。</p>

@@ -1,7 +1,7 @@
 ---
 tags: hack
 date: 2016-02-28
-updated: 2026-09-30
+updated: 2026-10-01
 translation: Claude Opus 5.5
 description: A 2015 course project crawled 26,000 Zhihu users outward from one seed account. The means and medians of followees, followers, answers, upvotes and thanks are far apart, the distributions have long tails, and upvotes rise clearly with followers.
 series: 知乎社交网络分析
@@ -9,6 +9,8 @@ series_part: 1
 ---
 
 # Zhihu Social Network Analysis (1): Basic Statistics
+
+> Explore [Zhihu 2015: People, Connections and Influence](../gallery/research/zhihu-2015.html?lang=en), the interactive research page bringing both essays together.
 
 Keywords: social network analysis (SNA) | statistics | power-law distribution
 
