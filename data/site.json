@@ -21,7 +21,7 @@
         "en": "A maintained public tool: one SleepCycle CSV in; JSON, an interactive report, and a PDF out.",
         "zh": "持续维护的公开工具：进一份 SleepCycle CSV，出 JSON、交互式报告和 PDF。"
       },
-      "img": "gallery/assets/gallery-card-sleep-toolkit-v2.webp",
+      "img": "gallery/assets/gallery-card-sleep-toolkit-report.webp",
       "href": {
         "en": "projects/sleep-toolkit.en.html",
         "zh": "projects/sleep-toolkit.html"
@@ -52,7 +52,7 @@
         "en": "3,656 nights of sleep records turned into a story about rhythm, body, and life changes across a decade.",
         "zh": "把 3,656 个夜晚的睡眠记录，整理成一篇关于节律、身体和生活变化的视觉随笔。"
       },
-      "img": "gallery/assets/gallery-card-sleep-records-v2.webp",
+      "img": "gallery/assets/gallery-card-sleep-scatter.webp",
       "href": {
         "en": "projects/sleep-2016-2026.en.html",
         "zh": "projects/sleep-2016-2026.html"
@@ -80,7 +80,7 @@
         "en": "A 45-minute talk for finance and technology professionals: how capture, knowledge bases, agents, project incubation, and safety boundaries form one working system.",
         "zh": "面向金融与科技从业者的 45 分钟分享：捕捉、知识库、Agent、项目孵化和安全边界，如何连成一套在运转的系统。"
       },
-      "img": "gallery/assets/gallery-hero-network-v2.webp",
+      "img": "gallery/assets/gallery-card-talk-slides.webp",
       "href": "gallery/talks/pkm-2026-06-07/index.html"
     },
     {
@@ -113,7 +113,7 @@
         "en": "Evidence, questions, and limits in agent systems, placed side by side in a public analysis.",
         "zh": "把 Agent 系统的证据、问题和边界放在一起看的公开分析。"
       },
-      "img": "gallery/assets/gallery-card-hermes-v2.webp",
+      "img": "gallery/assets/gallery-card-hermes-report.webp",
       "href": "gallery/research/hermes-agent-hv-analysis.html"
     }
   ],
@@ -280,7 +280,7 @@
     {
       "id": "sleep-toolkit",
       "title": "Sleep Toolkit",
-      "cover": "gallery/assets/gallery-card-sleep-toolkit-v2.webp",
+      "cover": "gallery/assets/gallery-card-sleep-toolkit-report.webp",
       "status": {
         "en": "Maintained",
         "zh": "持续维护"
@@ -460,7 +460,7 @@
         "en": "Report preview · May 2025",
         "zh": "报告预览 · 2025 年 5 月"
       },
-      "essay_image": "gallery/assets/gallery-card-sleep-records-v2.webp",
+      "essay_image": "gallery/assets/gallery-card-sleep-scatter.webp",
       "essay_caption": {
         "en": "The data essay",
         "zh": "数据随笔"
@@ -576,18 +576,18 @@
     ],
     "links": {
       "toolkit": {
-        "img": "gallery/assets/gallery-card-sleep-toolkit-v2.webp",
+        "img": "gallery/assets/gallery-card-sleep-toolkit-report.webp",
         "href": {
           "en": "projects/sleep-toolkit.en.html",
           "zh": "projects/sleep-toolkit.html"
         }
       },
       "hermes": {
-        "img": "gallery/assets/gallery-card-hermes-v2.webp",
+        "img": "gallery/assets/gallery-card-hermes-report.webp",
         "href": "gallery/research/hermes-agent-hv-analysis.html"
       },
       "sleep": {
-        "img": "gallery/assets/gallery-card-sleep-records-v2.webp",
+        "img": "gallery/assets/gallery-card-sleep-scatter.webp",
         "href": {
           "en": "projects/sleep-2016-2026.en.html",
           "zh": "projects/sleep-2016-2026.html"
