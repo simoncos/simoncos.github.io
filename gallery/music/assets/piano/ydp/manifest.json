@@ -1,0 +1,76 @@
+{
+  "sourceFile": "YDP-GrandPiano-20160804.sf2",
+  "generatedAt": "2026-07-28T00:00:00.000Z",
+  "naming": "Files are named by the MIDI note they actually sound. The previous note-name filenames had drifted from their contents (G3.mp3 held F#3; D4.mp3 and E4.mp3 both held D#4), and '#' is a URL fragment delimiter, so note names are a poor fit for web asset filenames.",
+  "coverage": {
+    "lowestRootMidi": 48,
+    "highestRootMidi": 72,
+    "maxGapSemitones": 6,
+    "limitation": "Roots span C3-C5 only. Notes outside it are resampled from the nearest root, so timbre degrades with distance (A5 plays at 1.68x). Regenerating with roots every ~3 semitones across G2-C6 needs the source .sf2, which is not in this repository."
+  },
+  "samples": [
+    {
+      "rootMidi": 48,
+      "rootNote": "C3",
+      "file": "root-048.mp3",
+      "sampleRate": 44100,
+      "sourceSample": "piano048v125",
+      "sourceSampleType": "mono",
+      "durationSeconds": 19.299
+    },
+    {
+      "rootMidi": 54,
+      "rootNote": "F#3",
+      "file": "root-054.mp3",
+      "sampleRate": 44100,
+      "sourceSample": "piano054v125",
+      "sourceSampleType": "mono",
+      "durationSeconds": 19.133
+    },
+    {
+      "rootMidi": 60,
+      "rootNote": "C4",
+      "file": "root-060.mp3",
+      "sampleRate": 44100,
+      "sourceSample": "piano060v125",
+      "sourceSampleType": "mono",
+      "durationSeconds": 13.572
+    },
+    {
+      "rootMidi": 63,
+      "rootNote": "D#4",
+      "file": "root-063.mp3",
+      "sampleRate": 44100,
+      "sourceSample": "piano063v125",
+      "sourceSampleType": "mono",
+      "durationSeconds": 13.128
+    },
+    {
+      "rootMidi": 66,
+      "rootNote": "F#4",
+      "file": "root-066.mp3",
+      "sampleRate": 44100,
+      "sourceSample": "piano066v125",
+      "sourceSampleType": "mono",
+      "durationSeconds": 13.311
+    },
+    {
+      "rootMidi": 69,
+      "rootNote": "A4",
+      "file": "root-069.mp3",
+      "sampleRate": 44100,
+      "sourceSample": "piano069v125",
+      "sourceSampleType": "mono",
+      "durationSeconds": 9.95
+    },
+    {
+      "rootMidi": 72,
+      "rootNote": "C5",
+      "file": "root-072.mp3",
+      "sampleRate": 44100,
+      "sourceSample": "piano072v123",
+      "sourceSampleType": "mono",
+      "durationSeconds": 9.485
+    }
+  ]
+}

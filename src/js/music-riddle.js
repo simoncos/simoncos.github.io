@@ -40,73 +40,28 @@
     let notice = () => '';
     let feedbackKind = '';
     const soundKey = key + '-sound';
-    let soundEnabled = true, soundAvailable = true, audioContext = null;
-    const voices = new Set();
+    let soundEnabled = true, soundStatus = 'ready';
     try {
         soundEnabled = localStorage.getItem(soundKey) !== 'off';
     }
     catch { }
+    const piano = new EchoPiano.Player(status => { soundStatus = status; renderSound(); });
     function renderSound() {
         const button = root.querySelector('[data-sound]');
-        button.disabled = !soundAvailable;
-        button.setAttribute('aria-pressed', String(soundEnabled && soundAvailable));
-        root.querySelector('[data-sound-label]').textContent = !soundAvailable ? t('Sound unavailable', '音效不可用') : soundEnabled ? t('Sound on', '音效：开') : t('Sound off', '音效：关');
-        button.title = t('A soft note when a new song is found', '首次找到一首歌时，播放一个轻音符');
+        button.disabled = soundStatus === 'unavailable';
+        button.setAttribute('aria-pressed', String(soundEnabled && soundStatus !== 'unavailable' && soundStatus !== 'failed'));
+        button.setAttribute('aria-busy', String(soundStatus === 'loading'));
+        root.querySelector('[data-sound-label]').textContent = soundStatus === 'unavailable' ? t('Sound unavailable', '音效不可用') : !soundEnabled ? t('Sound off', '音效：关') : soundStatus === 'loading' ? t('Loading piano…', '加载钢琴…') : soundStatus === 'failed' ? t('Retry sound', '重试音效') : t('Sound on', '音效：开');
+        button.title = t('A piano note when you discover or select a song', '发现或点击已点亮的歌曲时，播放钢琴音符');
     }
-    // Synthesized pentatonic notes, unrelated to the recordings or melodies of the songs.
-    // The context is created only inside an explicit answer/reveal interaction, never on load.
-    async function playBloomNote(id) {
-        if (!soundEnabled || !soundAvailable)
+    function playNote(id) {
+        if (!soundEnabled)
             return;
-        try {
-            const Audio = window.AudioContext || window.webkitAudioContext;
-            if (!Audio)
-                throw new Error('Audio unavailable');
-            audioContext ?? (audioContext = new Audio());
-            if (audioContext.state === 'suspended')
-                await audioContext.resume();
-            if (!soundEnabled || audioContext.state !== 'running')
-                return;
-            // Bound overlapping notes during rapid answers.
-            if (voices.size >= 4)
-                return;
-            const index = data.nodes.findIndex(n => n.id === id);
-            const midi = [60, 62, 64, 67, 69, 72, 74, 76, 79, 81][index % 10];
-            const frequency = 440 * Math.pow(2, (midi - 69) / 12), now = audioContext.currentTime;
-            const envelope = audioContext.createGain();
-            envelope.gain.setValueAtTime(0, now);
-            envelope.gain.linearRampToValueAtTime(.13, now + .012);
-            envelope.gain.exponentialRampToValueAtTime(.0001, now + 1.1);
-            envelope.connect(audioContext.destination);
-            voices.add(envelope);
-            let active = 2;
-            for (const [multiple, volume] of [[1, 1], [2, .22]]) {
-                const oscillator = audioContext.createOscillator(), partial = audioContext.createGain();
-                oscillator.type = 'sine';
-                oscillator.frequency.value = frequency * multiple;
-                partial.gain.value = volume;
-                oscillator.connect(partial);
-                partial.connect(envelope);
-                oscillator.start(now);
-                oscillator.stop(now + 1.15);
-                oscillator.onended = () => { oscillator.disconnect(); partial.disconnect(); if (--active === 0) {
-                    envelope.disconnect();
-                    voices.delete(envelope);
-                } };
-            }
-        }
-        catch {
-            soundAvailable = false;
-            renderSound();
-        }
-    }
-    function hush() {
-        if (!audioContext)
-            return;
-        for (const voice of voices) {
-            voice.gain.cancelScheduledValues(audioContext.currentTime);
-            voice.gain.setTargetAtTime(0, audioContext.currentTime, .01);
-        }
+        // Keep every cue inside Vocal Coach's C3–C5 sample coverage.
+        const notes = [48, 50, 52, 55, 57, 60, 62, 64, 67, 69, 72];
+        const index = data.nodes.findIndex(n => n.id === id);
+        if (index >= 0)
+            void piano.play(notes[index % notes.length]);
     }
     function focusClue() {
         const heading = document.getElementById('echo-song');
@@ -164,6 +119,7 @@
     function visit(id, remember = true) {
         if (!trail.found.includes(id))
             return;
+        playNote(id);
         clearArrival();
         if (remember && trail.current !== id)
             trail.history.push(trail.current);
@@ -188,8 +144,6 @@
         const isNew = !trail.found.includes(id);
         if (isNew)
             trail.found.push(id);
-        if (isNew)
-            void playBloomNote(id);
         const unlocked = syncBonus();
         visit(id);
         const arrival = id === data.ending ? 'ending' : id === data.start && previous.id !== data.start ? 'loop' : null;
@@ -346,15 +300,17 @@
         visit(data.bonus); });
     document.querySelector('[data-return-branch]').addEventListener('click', () => { const id = trail.history.pop() || data.nodes.find(n => n.next.includes(trail.current))?.id || data.start; visit(id, false); });
     document.querySelector('[data-go-start]').addEventListener('click', () => visit(data.start));
-    document.querySelector('[data-reset]').addEventListener('click', () => { clearArrival(); hush(); trail = fresh(); notice = () => ''; feedbackKind = ''; hint.open = false; reveal.open = false; input.value = ''; document.querySelector('.echo-reset').open = false; save(); render(); });
+    document.querySelector('[data-reset]').addEventListener('click', () => { clearArrival(); piano.stop(); trail = fresh(); notice = () => ''; feedbackKind = ''; hint.open = false; reveal.open = false; input.value = ''; document.querySelector('.echo-reset').open = false; save(); render(); });
     hint.addEventListener('toggle', () => { if (hint.open)
         reveal.open = false; });
     reveal.addEventListener('toggle', () => { if (reveal.open)
         hint.open = false; render(); });
     root.querySelector('[data-sound]').addEventListener('click', () => {
-        soundEnabled = !soundEnabled;
-        if (!soundEnabled)
-            hush();
+        soundEnabled = soundStatus === 'failed' ? true : !soundEnabled;
+        if (soundEnabled)
+            playNote(trail.current);
+        else
+            piano.stop();
         try {
             localStorage.setItem(soundKey, soundEnabled ? 'on' : 'off');
         }
@@ -362,7 +318,7 @@
         renderSound();
     });
     document.addEventListener('visibilitychange', () => { if (document.hidden)
-        hush(); });
+        piano.stop(); });
     root.querySelector('[data-map-zoom]').addEventListener('click', () => {
         zoomed = !zoomed;
         render();
@@ -370,7 +326,7 @@
     });
     root.querySelectorAll('[data-node]').forEach(node => {
         node.addEventListener('click', () => { visit(node.dataset.node); focusClue(); });
-        node.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') {
+        node.addEventListener('keydown', event => { if (!event.repeat && (event.key === 'Enter' || event.key === ' ')) {
             event.preventDefault();
             visit(node.dataset.node);
             focusClue();
