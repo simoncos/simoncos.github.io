@@ -238,8 +238,10 @@ def render_header_block(config: dict[str, Any], page: dict[str, Any]) -> str:
         *tabs,
         "            </nav>",
         '            <div class="hdr-tools">',
-        '                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode">'
-        '<span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>',
+        *([] if page.get("theme") else [
+            '                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode">'
+            '<span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>'
+        ]),
         f"                {render_lang_toggle(page)}",
         '                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet">'
         f'<span class="menu-when-closed">{bi("Menu", "菜单")}</span>'

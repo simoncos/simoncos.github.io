@@ -31,6 +31,50 @@
     const form=document.getElementById('echo-form');
     const hint=document.getElementById('echo-hint') as HTMLDetailsElement;
     const reveal=document.getElementById('echo-reveal') as HTMLDetailsElement;
+    const compact=window.matchMedia('(max-width: 900px)');
+    const cluePanel=root.querySelector<HTMLElement>('.echo-clue-panel');
+    const mapPanel=root.querySelector<HTMLElement>('.echo-map-panel');
+    const clueDialog=document.getElementById('echo-clue-dialog') as HTMLDialogElement;
+    const currentButton=root.querySelector<HTMLButtonElement>('[data-open-clue]');
+    let clueOpener:Element|null=null;
+    let clueFromList=false;
+    function openClue(opener:Element|null=document.activeElement){
+        if(!compact.matches)return;
+        if(!clueDialog.open){
+            clueOpener=opener;
+            clueFromList=!!opener?.closest('#echo-song-list');
+            clueDialog.showModal();
+            document.documentElement.classList.add('echo-sheet-open');
+        }
+        clueDialog.scrollTop=0;
+        document.getElementById('echo-song').focus({preventScroll:true});
+    }
+    function closeClue(){if(clueDialog.open)clueDialog.close();}
+    clueDialog.addEventListener('close',()=>{
+        document.documentElement.classList.remove('echo-sheet-open');
+        const target=clueFromList?document.querySelector('#echo-song-list [aria-current=true]'):clueOpener?.isConnected?clueOpener:currentButton;
+        if(compact.matches&&(target instanceof HTMLElement||target instanceof SVGElement))target.focus({preventScroll:true});
+    });
+    root.querySelector('[data-close-clue]').addEventListener('click',closeClue);
+    currentButton.addEventListener('click',()=>openClue());
+    clueDialog.addEventListener('click',event=>{if(event.target===clueDialog){
+        const box=clueDialog.getBoundingClientRect();
+        if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)closeClue();
+    }});
+    function syncClueLayout(){
+        if(compact.matches)clueDialog.append(cluePanel);
+        else{closeClue();mapPanel.before(cluePanel);}
+    }
+    compact.addEventListener('change',()=>{syncClueLayout();centerCurrentFlower();});
+    // Keep the sheet and its close control above the on-screen keyboard.
+    function syncKeyboardViewport(){
+        const viewport=window.visualViewport;
+        clueDialog.style.setProperty('--echo-viewport-height',(viewport?.height||window.innerHeight)+'px');
+        clueDialog.style.setProperty('--echo-sheet-bottom',Math.max(0,window.innerHeight-(viewport?.height||window.innerHeight)-(viewport?.offsetTop||0))+'px');
+    }
+    window.visualViewport?.addEventListener('resize',syncKeyboardViewport);
+    window.visualViewport?.addEventListener('scroll',syncKeyboardViewport);
+    syncClueLayout();syncKeyboardViewport();
     let notice:()=>string=()=>'';
     let feedbackKind='';
     const soundKey=key+'-sound';
@@ -52,18 +96,19 @@
         const index=data.nodes.findIndex(n=>n.id===id);
         if(index>=0)void piano.play(notes[index%notes.length]);
     }
-    function focusClue(){
-        const heading=document.getElementById('echo-song');heading.focus({preventScroll:true});
-        if(window.matchMedia('(max-width: 900px)').matches&&heading.getBoundingClientRect().top<80){
-            heading.scrollIntoView({block:'start',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
-        }
+    function focusClue(opener?:Element){
+        if(compact.matches){openClue(opener);return;}
+        document.getElementById('echo-song').focus({preventScroll:true});
     }
     function centerCurrentFlower(){
         if(!zoomed)return;
         const stage=root.querySelector<HTMLElement>('.echo-map-stage');
         const current=root.querySelector<SVGElement>('.echo-node.is-current .echo-hit').getBoundingClientRect(),box=stage.getBoundingClientRect();
+        const visibleTop=Math.max(box.top,0);
+        const visibleBottom=compact.matches?Math.min(box.bottom,window.innerHeight,root.querySelector('.echo-current').getBoundingClientRect().top):box.bottom;
+        const centerY=visibleBottom-visibleTop>100?(visibleTop+visibleBottom)/2:box.top+stage.clientHeight/2;
         stage.scrollLeft+=current.left+current.width/2-box.left-stage.clientWidth/2;
-        stage.scrollTop+=current.top+current.height/2-box.top-stage.clientHeight/2;
+        stage.scrollTop+=current.top+current.height/2-centerY;
     }
     function syncBonus(){
         if(!data.bonus)return false;
@@ -90,12 +135,12 @@
         root.classList.add('is-'+kind+'-arrival');
         arrivalTimer=window.setTimeout(clearArrival,2800);
     }
-    function visit(id:string,remember=true){
+    function visit(id:string,remember=true,center=true){
         if(!trail.found.includes(id))return;
         playNote(id);
         clearArrival();
         if(remember&&trail.current!==id)trail.history.push(trail.current);
-        trail.history=trail.history.slice(-100);trail.current=id;input.value='';notice=()=>'';feedbackKind='';hint.open=false;reveal.open=false;save();render();centerCurrentFlower();
+        trail.history=trail.history.slice(-100);trail.current=id;input.value='';notice=()=>'';feedbackKind='';hint.open=false;reveal.open=false;save();render();if(center)centerCurrentFlower();
     }
     function solve(id:string){
         const previous=songs.get(trail.current);
@@ -126,6 +171,8 @@
         const quote=document.getElementById('echo-quote');
         quote.replaceChildren(...(song.quote?.match(/[^，]+，?/g)||[]).map(line=>{const span=document.createElement('span');span.textContent=line;return span;}));quote.hidden=!song.quote;
         document.getElementById('echo-clue').textContent=t(song.clue.en,song.clue.zh);
+        root.querySelector('[data-current-title]').textContent=song.title;
+        root.querySelector('[data-current-preview]').textContent=song.quote||t(song.clue.en,song.clue.zh);
         const remaining=song.next.filter(id=>!trail.edges.includes(song.id+':'+id)).length;
         const total=song.next.length, explored=total-remaining;
         let branch=epilogue?t('A HIDDEN ECHO · THANK YOU FOR LISTENING','隐藏回响 · 谢谢你听到这里'):deadEnd?t('DEAD END · EXPLORE ANOTHER BRANCH','死胡同 · 换一条路继续'):ending?t('ENDING FOUND','已抵达终点'):total?
@@ -147,7 +194,7 @@
             for(const answer of song.open_answers||[]){const button=document.createElement('button');button.type='button';button.textContent=answer.title+t(' · next clue pending',' · 后续待补');button.addEventListener('click',()=>acknowledgeOpen(answer));choices.append(button);}
         }
         const list=document.getElementById('echo-song-list');list.replaceChildren(...trail.found.map(id=>{
-            const button=document.createElement('button');button.type='button';button.textContent=songs.get(id).title;button.setAttribute('aria-current',String(id===song.id));button.className='bloom-'+(id===data.start?1:id===data.ending?2:data.nodes.findIndex(n=>n.id===id)%4);button.addEventListener('click',()=>{visit(id);focusClue();});return button;
+            const button=document.createElement('button');button.type='button';button.textContent=songs.get(id).title;button.setAttribute('aria-current',String(id===song.id));button.className='bloom-'+(id===data.start?1:id===data.ending?2:data.nodes.findIndex(n=>n.id===id)%4);button.addEventListener('click',()=>{visit(id);focusClue(list.querySelector('[aria-current=true]'));});return button;
         }));
         const foundCount=trail.found.filter(id=>id!==data.bonus).length;
         document.getElementById('echo-found-count').textContent=String(foundCount);
@@ -158,7 +205,7 @@
         root.classList.toggle('is-map-zoomed',zoomed);
         const zoomButton=root.querySelector<HTMLButtonElement>('[data-map-zoom]');
         zoomButton.textContent=zoomed?t('See full map','查看全图'):t('Enlarge map','放大地图');zoomButton.setAttribute('aria-pressed',String(zoomed));
-        root.querySelector('.echo-map-instruction').textContent=zoomed?t('Scroll to explore · select a discovered song to revisit','滑动查看 · 点击已点亮的节点返回'):t('Select a discovered song to revisit','点击已点亮的节点，回到那首歌');
+        root.querySelector('.echo-map-instruction').textContent=zoomed?t('Scroll to explore · tap a lit song to select and replay','滑动查看 · 点已点亮的歌曲，切换并回放'):t('Tap a lit song to select and replay','点已点亮的歌曲，切换并回放');
         document.getElementById('echo-save-status').textContent=storage?t('Saved in this browser','进度已保存在此浏览器'):t('Saving unavailable · progress lasts while this page is open','无法保存 · 进度仅在此页面打开时保留');
         root.querySelectorAll<SVGGElement>('[data-node]').forEach(node=>{
             const id=node.dataset.node,found=trail.found.includes(id),active=id===song.id;
@@ -202,7 +249,7 @@
         feedbackKind='error';render();input.select();
     });
     document.querySelector('[data-back]').addEventListener('click',()=>{const id=trail.history.pop();if(id)visit(id,false);});
-    document.querySelector('[data-open-bonus]').addEventListener('click',()=>{if(data.bonus)visit(data.bonus);});
+    document.querySelector('[data-open-bonus]').addEventListener('click',()=>{if(data.bonus){visit(data.bonus);focusClue();}});
     document.querySelector('[data-return-branch]').addEventListener('click',()=>{const id=trail.history.pop()||data.nodes.find(n=>n.next.includes(trail.current))?.id||data.start;visit(id,false);});
     document.querySelector('[data-go-start]').addEventListener('click',()=>visit(data.start));
     document.querySelector('[data-reset]').addEventListener('click',()=>{clearArrival();piano.stop();trail=fresh();notice=()=>'';feedbackKind='';hint.open=false;reveal.open=false;input.value='';document.querySelector<HTMLDetailsElement>('.echo-reset').open=false;save();render();});
@@ -218,9 +265,11 @@
     root.querySelector('[data-map-zoom]').addEventListener('click',()=>{
         zoomed=!zoomed;render();centerCurrentFlower();
     });
+    root.querySelector('[data-map-locate]').addEventListener('click',()=>{zoomed=true;render();centerCurrentFlower();});
     root.querySelectorAll<SVGGElement>('[data-node]').forEach(node=>{
-        node.addEventListener('click',()=>{visit(node.dataset.node);focusClue();});
-        node.addEventListener('keydown',event=>{if(!event.repeat&&(event.key==='Enter'||event.key===' ')){event.preventDefault();visit(node.dataset.node);focusClue();}});
+        // Selecting a map node never moves the page, the panned map or keyboard focus.
+        node.addEventListener('click',()=>visit(node.dataset.node,true,false));
+        node.addEventListener('keydown',event=>{if(!event.repeat&&(event.key==='Enter'||event.key===' ')){event.preventDefault();visit(node.dataset.node,true,false);}});
     });
     window.SITE_SHELL?.onLang?.(render);
     syncBonus();save();render();centerCurrentFlower();
