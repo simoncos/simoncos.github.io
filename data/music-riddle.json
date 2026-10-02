@@ -629,7 +629,8 @@
       },
       "next": [
         "bqvdVl73c0ab",
-        "9lmK42c6b"
+        "9lmK42c6b",
+        "mian-mian"
       ],
       "position": [
         430,
@@ -651,26 +652,17 @@
           }
         ]
       },
-      "open_answers": [
-        {
-          "title": "绵绵",
-          "aliases": [
-            "綿綿"
-          ],
-          "clue": null,
-          "next": null,
-          "review": {
-            "status": "confirmed",
-            "by": "simoncos",
-            "date": "2026-10-02",
-            "note": "作者确认好久不见可以接绵绵；后续先空着，原作当时应该没有放入这首。"
-          }
-        }
-      ],
       "route_audit": {
         "date": "2026-10-02",
-        "note": "保留豆列前驱直接支持的约定、不如不见；绵绵由作者确认接受答案，但按作者要求将其后续留空，不添加第 27 个完整谜面节点。",
-        "confirmed_additions": [],
+        "note": "作者于 2026-10-02 将绵绵从后续暂空答案升级为独立死胡同节点，并提供引用。",
+        "confirmed_additions": [
+          {
+            "target": "mian-mian",
+            "by": "simoncos",
+            "date": "2026-10-02",
+            "note": "作者明确要求新增绵绵为死胡同节点。"
+          }
+        ],
         "candidates": []
       }
     },
@@ -1278,6 +1270,43 @@
       "source": {
         "douban_item": "269531195",
         "xiami": "http://www.xiami.com/song/VbpP7694d",
+        "predecessors": []
+      }
+    },
+    {
+      "id": "mian-mian",
+      "title": "绵绵",
+      "aliases": [
+        "綿綿"
+      ],
+      "terminal": "dead-end",
+      "quote": "从来没细心数清楚，一个下雨天，一次愉快的睡眠，断多少发线",
+      "identity": {
+        "evidence_type": "author",
+        "evidence_urls": [],
+        "note": "2026-10-02 作者新增的死胡同，不属于原存档的 26 首。",
+        "candidates": [],
+        "review": {
+          "status": "confirmed",
+          "by": "simoncos",
+          "date": "2026-10-02",
+          "note": "作者指定歌名、死胡同类型与引用原文。"
+        }
+      },
+      "clue": {
+        "zh": "这条支线在这里停下。可以退回《好久不见》，继续寻找另一条路。",
+        "en": "This branch ends here. Return to 好久不见 and follow another path."
+      },
+      "hint": {
+        "zh": "这里没有下一首。",
+        "en": "There is no next song here."
+      },
+      "next": [],
+      "position": [
+        315,
+        505
+      ],
+      "source": {
         "predecessors": []
       }
     }

@@ -585,6 +585,15 @@
           ],
           "additionalProperties": false,
           "description": "路径复核记录。候选不进入答案判断，confirmed_additions 记录原始前驱之外由作者确认的接线。"
+        },
+        "terminal": {
+          "const": "dead-end",
+          "description": "独立可收集的死胡同节点；next 必须为空，不是全局终点。"
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1,
+          "description": "作者提供的原文引用，独立于谜面展示。"
         }
       },
       "required": [

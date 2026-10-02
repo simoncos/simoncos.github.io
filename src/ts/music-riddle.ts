@@ -1,6 +1,6 @@
 (function () {
     interface OpenAnswer { title:string; aliases:string[] }
-    interface Song { id:string; title:string; aliases:string[]; next:string[]; clue:{en:string;zh:string}; hint:{en:string;zh:string}; dead_ends?:string[]; open_answers?:OpenAnswer[] }
+    interface Song { id:string; title:string; aliases:string[]; next:string[]; clue:{en:string;zh:string}; hint:{en:string;zh:string}; dead_ends?:string[]; open_answers?:OpenAnswer[]; terminal?:"dead-end"; quote?:string }
     interface Riddle { id:string; start:string; ending:string; nodes:Song[] }
     interface Trail { current:string; found:string[]; edges:string[]; history:string[] }
     const root=document.querySelector<HTMLElement>('[data-echo-game]');
@@ -33,8 +33,16 @@
     const reveal=document.getElementById('echo-reveal') as HTMLDetailsElement;
     let notice:()=>string=()=>'';
     function save(){try{localStorage.setItem(key,JSON.stringify(trail));}catch{storage=false;}}
+    let arrivalTimer:number;
+    function clearArrival(){window.clearTimeout(arrivalTimer);root.classList.remove('is-loop-arrival','is-ending-arrival');}
+    function animateArrival(kind:'loop'|'ending'){
+        if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+        root.classList.add('is-'+kind+'-arrival');
+        arrivalTimer=window.setTimeout(clearArrival,2800);
+    }
     function visit(id:string,remember=true){
         if(!trail.found.includes(id))return;
+        clearArrival();
         if(remember&&trail.current!==id)trail.history.push(trail.current);
         trail.history=trail.history.slice(-100);trail.current=id;input.value='';notice=()=>'';hint.open=false;reveal.open=false;save();render();
     }
@@ -45,8 +53,9 @@
         if(!trail.edges.includes(edge))trail.edges.push(edge);
         if(!trail.found.includes(id))trail.found.push(id);
         visit(id);
-        notice=()=>t('Found: ','找到了：')+songs.get(id).title+(id===data.ending?t(' · The ending.',' · 终点。'):'');
-        render();document.getElementById('echo-song').focus({preventScroll:true});
+        const arrival=id===data.ending?'ending':id===data.start&&previous.id!==data.start?'loop':null;
+        notice=()=>arrival==='loop'?t('Back to the beginning. Your trail remains.','又回到最初。走过的路还在。'):t('Found: ','找到了：')+songs.get(id).title+(id===data.ending?t(' · The ending.',' · 终点。'):'');
+        render();if(arrival)animateArrival(arrival);document.getElementById('echo-song').focus({preventScroll:true});
     }
     function acknowledgeOpen(answer:OpenAnswer){
         notice=()=>t(`You found ${answer.title}. Its next clue is still blank; explore another branch for now.`,
@@ -54,18 +63,20 @@
         input.value='';render();
     }
     function render(){
-        const song=songs.get(trail.current),ending=song.id===data.ending;
+        const song=songs.get(trail.current),ending=song.id===data.ending,deadEnd=song.terminal==='dead-end';
         const heading=document.getElementById('echo-song');heading.textContent=song.title;heading.tabIndex=-1;
+        const quote=document.getElementById('echo-quote');
+        quote.replaceChildren(...(song.quote?.match(/[^，]+，?/g)||[]).map(line=>{const span=document.createElement('span');span.textContent=line;return span;}));quote.hidden=!song.quote;
         document.getElementById('echo-clue').textContent=t(song.clue.en,song.clue.zh);
         const remaining=song.next.filter(id=>!trail.edges.includes(song.id+':'+id)).length;
         const total=song.next.length, explored=total-remaining;
-        let branch=ending?t('ENDING FOUND','已抵达终点'):total?
+        let branch=deadEnd?t('DEAD END · EXPLORE ANOTHER BRANCH','死胡同 · 换一条路继续'):ending?t('ENDING FOUND','已抵达终点'):total?
             (remaining?t(`${total} outgoing ${total===1?'path':'paths'} · ${explored} explored`,`下一步 ${total} 条 · 已走通 ${explored} 条`):t(`${total} outgoing ${total===1?'path':'paths'} · all explored`,`下一步 ${total} 条 · 已全部走通`)):
             t('Guess this side branch, then return to another song.','猜猜这条支线，再回到其他歌继续。');
         if(song.open_answers?.length)branch+='\n'+t(`${song.open_answers.length} answer has no next clue yet`,`另有 ${song.open_answers.length} 个答案，后续暂空`);
         document.getElementById('echo-branch').textContent=branch;
-        form.hidden=ending;document.getElementById('echo-ending').hidden=!ending;
-        document.querySelector<HTMLElement>('.echo-help').hidden=ending;
+        form.hidden=ending||deadEnd;document.getElementById('echo-dead-end').hidden=!deadEnd;document.getElementById('echo-ending').hidden=!ending;
+        document.querySelector<HTMLElement>('.echo-help').hidden=ending||deadEnd;
         document.querySelector<HTMLButtonElement>('[data-back]').disabled=!trail.history.length;
         feedback.textContent=notice();
         document.getElementById('echo-hint-text').textContent=t(song.hint.en,song.hint.zh);
@@ -112,8 +123,9 @@
         render();input.select();
     });
     document.querySelector('[data-back]').addEventListener('click',()=>{const id=trail.history.pop();if(id)visit(id,false);});
+    document.querySelector('[data-return-branch]').addEventListener('click',()=>{const id=trail.history.pop()||data.nodes.find(n=>n.next.includes(trail.current))?.id||data.start;visit(id,false);});
     document.querySelector('[data-go-start]').addEventListener('click',()=>visit(data.start));
-    document.querySelector('[data-reset]').addEventListener('click',()=>{trail=fresh();notice=()=>'';hint.open=false;reveal.open=false;input.value='';document.querySelector<HTMLDetailsElement>('.echo-reset').open=false;save();render();});
+    document.querySelector('[data-reset]').addEventListener('click',()=>{clearArrival();trail=fresh();notice=()=>'';hint.open=false;reveal.open=false;input.value='';document.querySelector<HTMLDetailsElement>('.echo-reset').open=false;save();render();});
     reveal.addEventListener('toggle',render);
     root.querySelector('[data-map-zoom]').addEventListener('click',()=>{zoomed=!zoomed;render();});
     root.querySelectorAll<SVGGElement>('[data-node]').forEach(node=>{

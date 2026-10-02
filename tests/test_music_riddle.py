@@ -17,8 +17,8 @@ class MusicRiddleTests(unittest.TestCase):
         cls.nodes = {n['id']: n for n in cls.data['nodes']}
 
     def test_original_collection_size_and_unique_sources(self):
-        self.assertEqual(len(self.nodes), 26)
-        self.assertEqual(len({n['source']['douban_item'] for n in self.nodes.values()}), 26)
+        self.assertEqual(len(self.nodes), 27)
+        self.assertEqual(len({n['source']['douban_item'] for n in self.nodes.values() if n['source'].get('douban_item')}), 26)
         self.assertEqual(self.nodes[self.data['start']]['title'], '不来也不去')
 
     def test_every_song_is_reachable_from_the_start(self):
@@ -42,21 +42,34 @@ class MusicRiddleTests(unittest.TestCase):
         self.assertIn(('2113245', self.data['start']), actual)
         self.assertIn(('2113245', 'hmuda8eb'), actual)
 
-    def test_mian_mian_is_accepted_without_inventing_a_followup(self):
-        branch = self.nodes['kavMc624b']['open_answers'][0]
-        self.assertEqual(branch['title'], '绵绵')
-        self.assertIn('綿綿', branch['aliases'])
-        self.assertIsNone(branch['clue'])
-        self.assertIsNone(branch['next'])
-        self.assertEqual(branch['review']['status'], 'confirmed')
-        self.assertNotIn('绵绵', [n['title'] for n in self.nodes.values()])
+    def test_mian_mian_is_a_collectible_dead_end_with_the_author_quote(self):
+        song = self.nodes['mian-mian']
+        self.assertIn('mian-mian', self.nodes['kavMc624b']['next'])
+        self.assertNotIn('open_answers', self.nodes['kavMc624b'])
+        self.assertEqual(song['terminal'], 'dead-end')
+        self.assertFalse(song['next'])
+        self.assertNotEqual(song['id'], self.data['ending'])
+        self.assertIn('綿綿', song['aliases'])
+        self.assertEqual(song['quote'], '从来没细心数清楚，一个下雨天，一次愉快的睡眠，断多少发线')
+
+    def test_dead_end_cannot_continue_or_replace_the_ending(self):
+        for case in ('outgoing', 'ending'):
+            data = copy.deepcopy(self.data)
+            song = next(n for n in data['nodes'] if n['id'] == 'mian-mian')
+            if case == 'outgoing':
+                song['next'] = [data['start']]
+            else:
+                data['ending'] = song['id']
+            with self.assertRaises(ValueError):
+                validate(data)
 
     def test_open_answers_cannot_shadow_a_path_or_claim_unconfirmed_authorship(self):
         for case in ('ambiguous', 'unconfirmed', 'invented-clue', 'unrecorded-route'):
             with self.subTest(case=case):
                 data = copy.deepcopy(self.data)
                 nodes = {n['id']: n for n in data['nodes']}
-                branch = nodes['kavMc624b']['open_answers'][0]
+                branch = {'title':'待补歌曲','aliases':[],'clue':None,'next':None,'review':{'status':'confirmed','by':'simoncos','date':'2026-10-02','note':'test fixture'}}
+                nodes['kavMc624b']['open_answers'] = [branch]
                 if case == 'ambiguous':
                     branch['aliases'].append('约定')
                 elif case == 'unconfirmed':
@@ -74,7 +87,7 @@ class MusicRiddleTests(unittest.TestCase):
         self.assertNotIn('dead_ends', ending)
         for node in self.nodes.values():
             if node['id'] != ending['id'] and not node['next']:
-                self.assertTrue(node.get('dead_ends'), node['title'])
+                self.assertTrue(node.get('dead_ends') or node.get('terminal') == 'dead-end', node['title'])
 
     def test_every_clue_and_hint_is_bilingual(self):
         for node in self.nodes.values():

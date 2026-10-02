@@ -74,3 +74,18 @@
 @media(max-width:900px){.echo-main{padding:24px 24px 50px}.echo-intro{grid-template-columns:1fr 220px;gap:20px}.echo-intro-note{padding-left:20px}.echo-game{grid-template-columns:1fr}.echo-clue-panel{padding:26px;border-right:0;border-bottom:1px solid #3b4741}.echo-map-panel{padding:26px 18px}.echo-map-stage{min-height:230px}.echo-map-instruction{margin-left:0}}
 @media(max-width:650px){.echo-main{padding:24px 18px 42px}.echo-intro{grid-template-columns:1fr;gap:25px;padding:36px 0 30px}.echo-intro h1{font-size:58px}.echo-kicker{font-size:10px;margin-bottom:16px}.echo-intro-note{border-left:0;border-top:1px solid var(--line);padding:18px 0 0;display:grid;grid-template-columns:58px 1fr;column-gap:15px}.echo-count{font-size:45px;grid-row:span 2}.echo-intro-note p{font-size:12px;margin:0;line-height:1.7}.echo-intro-note p+p{margin-top:6px}.echo-game{grid-template-columns:1fr}.echo-clue-panel{padding:25px;border-right:0;border-bottom:1px solid #3b4741}.echo-clue-panel h2{font-size:29px;margin:21px 0 18px}.echo-clue{font-size:15px;line-height:1.9}.echo-input-row input{min-width:0}.echo-input-row button{white-space:nowrap;padding:11px 15px;font-size:14px}.echo-map-panel{padding:24px 20px 22px}.echo-map-stage{min-height:0;padding:24px 0 8px}.echo-map-key{gap:10px 15px}.echo-map-instruction{width:100%}.echo-about{grid-template-columns:1fr;gap:22px;padding-top:32px}.echo-about h2{font-size:24px;max-width:none}.echo-collection .echo-panel-top{flex-wrap:wrap;gap:8px}.echo-about p{font-size:13px}.echo-song-list{gap:8px}}
 @media(prefers-reduced-motion:reduce){.echo-edge{transition:none}}
+
+.echo-quote{margin:24px 0;color:var(--echo-paper,#e9e3d8);font-family:var(--font);font-size:clamp(20px,2.1vw,27px);line-height:1.9;letter-spacing:.04em;border-left:2px solid #d7b388;padding-left:20px}
+.echo-quote span{display:block}
+.echo-quote[hidden]{display:none}
+.is-loop-arrival .echo-node.is-current .echo-halo{animation:echo-return-ring 1.35s ease-out 2;transform-box:fill-box;transform-origin:center}
+.is-loop-arrival .echo-clue-panel{animation:echo-return-panel 1.4s ease-out}
+.is-ending-arrival .echo-node.is-current .echo-halo{animation:echo-ending-ring 2.6s ease-out;transform-box:fill-box;transform-origin:center}
+.is-ending-arrival .echo-edge.is-found{animation:echo-ending-path 2.6s ease-in-out}
+.is-ending-arrival #echo-ending{animation:echo-ending-message 1.8s ease-out}
+@keyframes echo-return-ring{0%{transform:scale(.65);opacity:1;stroke:#eec298}100%{transform:scale(2.3);opacity:0;stroke:#eec298}}
+@keyframes echo-return-panel{0%{box-shadow:inset 0 0 70px #eec29825}100%{box-shadow:inset 0 0 0 #eec29800}}
+@keyframes echo-ending-ring{0%{transform:scale(.6);opacity:.9}60%{transform:scale(2.8);opacity:.4}100%{transform:scale(1);opacity:1}}
+@keyframes echo-ending-path{0%,100%{opacity:.65}45%{opacity:1;stroke:#ffe3bc;stroke-width:2.5}}
+@keyframes echo-ending-message{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.is-loop-arrival .echo-halo,.is-loop-arrival .echo-clue-panel,.is-ending-arrival .echo-halo,.is-ending-arrival .echo-edge,.is-ending-arrival #echo-ending{animation:none}}
