@@ -1,4 +1,5 @@
 """Restore the music riddle as a generated, bilingual Work page."""
+import base64
 import json
 import math
 from music_riddle_data import load as load_music_riddle
@@ -59,11 +60,13 @@ def render_music_riddle(config):
     main = f'''<main id="main" class="echo-main" tabindex="-1">
     <div class="echo-top"><a href="../../gallery.html#games">← {b('Work · Games','作品 · 游戏')}</a><span>2017 / 2026</span></div>
     <header class="echo-intro">
-      <div><p class="echo-kicker">{b('A MUSIC RIDDLE · EXPANDED EDITION','音乐谜题 · 扩展版')}</p>
-      <h1>{b('Endless','漫无止尽')}<br>{b('Echoes','的回响')}</h1></div>
-      <div class="echo-intro-note"><span class="echo-count">{song_count}</span><p>{b('songs. More than one way through.','首歌，不止一条路。')}</p><p>{b('Read a clue, name the next song.','读一段线索，猜下一首歌。')}<br>{b('Follow what you remember.','沿着你记得的声音走。')}</p></div>
+      <div class="echo-intro-copy"><p class="echo-kicker">{b('A MUSIC RIDDLE · EXPANDED EDITION','音乐谜题 · 扩展版')}</p>
+      <h1>{b('Endless','漫无止尽')}<br>{b('Echoes','的回响')}</h1>
+      <div class="echo-intro-note"><span class="echo-count">{song_count}</span><p>{b('songs. More than one way through.','首歌，不止一条路。')}</p><p>{b('Read a clue, name the next song.','读一段线索，猜下一首歌。')}<br> {b('Follow what you remember.','沿着你记得的声音走。')}</p></div>
+      <a class="echo-begin" href="#echo-game">{b('Begin the trail','开始探索')} <span aria-hidden="true">↘</span></a></div>
+      <figure class="echo-hero-art"><img src="assets/endless-echoes-ribbon-v1.webp" width="1200" height="800" alt="" fetchpriority="high" decoding="async"></figure>
     </header>
-    <div class="echo-game" data-echo-game>
+    <div id="echo-game" class="echo-game" data-echo-game>
       <section class="echo-clue-panel" aria-labelledby="echo-song">
         <div class="echo-panel-top"><span>{b('NOW AT','此刻停在')}</span><button type="button" class="echo-js echo-text-button" data-back disabled>{b('← Back','← 退一步')}</button></div>
         <h2 id="echo-song" lang="zh-Hans">{esc(start['title'])}</h2>
@@ -91,7 +94,7 @@ def render_music_riddle(config):
     <section class="echo-about"><h2>{b('The echoes continue.','旧日的谜，新的回响。')}</h2><div><p>{b('This is the expanded edition of a music riddle first made in 2017. The original 26 songs have grown into 36, with new branches, dead ends and a hidden echo waiting beyond the complete collection.','这是 2017 年音乐谜题的扩展版。原来的 26 首歌，如今延展为 36 首：新增的分支、死胡同，以及集齐之后才会出现的隐藏回响，让旧日的线索有了新的去处。')}</p><p>{b('Read the clue and guess which song it leads to. Some paths meet again; others bring you back to the beginning. You can reach the ending before finding every song, then return to explore the paths you missed.','读一段谜面，猜它指向的下一首歌。有些路会重逢，有些会带你回到最初。不必集齐所有歌，也能到达终点；抵达之后，仍可以回头寻找未曾走过的分支。')}</p><p>{b('The original trail lived in Xiami playlist comments. After the platform closed, its surviving archive and Douban list helped bring it back. If you get stuck, ask for a hint or reveal the answers. Your progress is saved in this browser.','最初的谜面藏在虾米歌单的推荐语里。平台关闭后，留下的存档和豆列让这条路得以重建。卡住时，可以先看提示，也可以主动揭晓答案。进度会保存在这个浏览器里。')}</p><div class="echo-source-links"><a href="https://www.douban.com/doulist/45894638/">{b('Original clues on Douban (in Chinese)','豆列中的原始谜面')} ↗</a><a href="https://www.jianshu.com/p/bacb95af08b1">{b('The 2017 introduction (in Chinese)','2017 年的原始介绍')} ↗</a></div></div></section>
     </main>'''
     head = render_meta(config, title=('Endless Echoes · simoncos','漫无止尽的回响 · simoncos'), description=(f'A branching music riddle through {song_count} songs, first made in 2017.',f'一场穿过{song_count} 首歌的音乐谜题，沿线索点亮歌曲之间的回响。'), canonical=PAGE)
-    head += '\n<link rel="stylesheet" href="assets/endless-echoes.css?v=20261002g">'
+    head += '\n<link rel="stylesheet" href="assets/endless-echoes.css?v=20261002h">'
     # Runtime only needs clues and the graph, not historical source annotations.
     payload = {key:data[key] for key in ('id','start','ending','bonus') if key in data}
     payload['nodes'] = [{k:v for k,v in n.items() if k in ('id','title','aliases','clue','hint','next','dead_ends','position','terminal','quote')} for n in data['nodes']]
@@ -103,25 +106,22 @@ def render_music_riddle(config):
 
 
 def render_music_cover(portrait=False):
+    """Use the same artwork as the page; keep crisp, editable text in SVG."""
     data = load_music_riddle()
-    nodes = {n['id']:n for n in data['nodes'] if n['id'] != data.get('bonus')}
-    portrait_scale = min(.62, 576 / data['map']['width'])
-    landscape_scale = min(.83, 540 / data['map']['width'])
-    start_x, start_y = nodes[data['start']]['position']
-    paths=[]
-    for node in nodes.values():
-        x,y=node['position']
-        for target in node['next']:
-            xx,yy=nodes[target]['position']
-            paths.append(f'<path d="{edge_path((x,y),(xx,yy))}"/>')
-    dots=''.join(f'<circle cx="{n["position"][0]}" cy="{n["position"][1]}" r="7"/>' for n in nodes.values())
+    count = len(data['nodes']) - bool(data.get('bonus'))
+    artwork = base64.b64encode((ROOT / 'gallery/music/assets/endless-echoes-ribbon-v1.webp').read_bytes()).decode('ascii')
+    width, height = (600, 800) if portrait else (960, 600)
     if portrait:
-        return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-labelledby="title"><title id="title">漫无止尽的回响 · Endless Echoes · {len(nodes)} songs</title>
-<rect width="600" height="800" fill="#242321"/>
-<text x="50" y="62" fill="#b2baa9" font-family="sans-serif" font-size="14" letter-spacing="2">EASON CHAN · 2017</text>
-<text x="46" y="154" fill="#f0e8dc" font-family="sans-serif" font-size="68" font-weight="500">漫无止尽</text><text x="46" y="236" fill="#f0e8dc" font-family="sans-serif" font-size="68" font-weight="500">的回响</text>
-<g transform="translate(12 290) scale({portrait_scale:.4f})"><g fill="none" stroke="#ada394" stroke-width="2" opacity=".7">{''.join(paths)}</g><g fill="#d7b388" stroke="#242321" stroke-width="3">{dots}</g><circle cx="{start_x}" cy="{start_y}" r="23" fill="#eec298" opacity=".2"/></g>
-<text x="50" y="707" fill="#eec298" font-family="monospace" font-size="18" letter-spacing="2">{len(nodes)} SONGS</text><text x="50" y="747" fill="#b2baa9" font-family="monospace" font-size="14" letter-spacing="2">ENDLESS ECHOES</text></svg>\n'''
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title"><title id="title">漫无止尽的回响 · Endless Echoes · {len(nodes)} songs</title>
-<rect width="960" height="600" fill="#242321"/><g transform="translate(380 210) scale({landscape_scale:.4f})"><g fill="none" stroke="#ada394" stroke-width="1.5" opacity=".65">{''.join(paths)}</g><g fill="#d7b388" stroke="#242321" stroke-width="3">{dots}</g><circle cx="{start_x}" cy="{start_y}" r="20" fill="#eec298" opacity=".16"/></g>
-<text x="120" y="75" fill="#b2baa9" font-family="sans-serif" font-size="15" letter-spacing="3">EASON CHAN · 2017</text><text x="116" y="167" fill="#f0e8dc" font-family="sans-serif" font-size="66" font-weight="500">漫无止尽</text><text x="116" y="247" fill="#f0e8dc" font-family="sans-serif" font-size="66" font-weight="500">的回响</text></svg>\n'''
+        art = f'<image href="data:image/webp;base64,{artwork}" x="0" y="230" width="600" height="400"/>'
+        text = f'''<text x="46" y="58" font-size="13" letter-spacing="3">EXPANDED EDITION · 2026</text>
+<text x="42" y="139" font-size="64" font-weight="500">漫无止尽</text><text x="42" y="214" font-size="64" font-weight="500">的回响</text>
+<path d="M46 668H554" stroke="#c7beb0"/><text x="46" y="718" font-size="18" letter-spacing="3">ENDLESS ECHOES</text><text x="46" y="757" font-size="13" letter-spacing="2">{count} SONGS · MANY PATHS</text>'''
+    else:
+        art = f'<image href="data:image/webp;base64,{artwork}" x="370" y="93" width="576" height="384"/>'
+        text = f'''<text x="65" y="78" font-size="13" letter-spacing="3">EXPANDED EDITION · 2026</text>
+<text x="60" y="214" font-size="62" font-weight="500">漫无止尽</text><text x="60" y="290" font-size="62" font-weight="500">的回响</text>
+<path d="M65 473H895" stroke="#c7beb0"/><text x="65" y="523" font-size="16" letter-spacing="3">ENDLESS ECHOES</text><text x="895" y="523" font-size="13" text-anchor="end" letter-spacing="2">{count} SONGS · MANY PATHS</text>'''
+    x, y, w, h = (0, 230, 600, 400) if portrait else (370, 93, 576, 384)
+    mask = f'<defs><filter id="soft-edge"><feGaussianBlur stdDeviation="12"/></filter><mask id="art-edge" maskUnits="userSpaceOnUse" x="{x}" y="{y}" width="{w}" height="{h}"><rect x="{x+20}" y="{y+20}" width="{w-40}" height="{h-40}" fill="white" filter="url(#soft-edge)"/></mask></defs>'
+    art = f'<g mask="url(#art-edge)">{art}</g>'
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title"><title id="title">漫无止尽的回响 · Endless Echoes · {count} songs</title><rect width="{width}" height="{height}" fill="#f0eade"/>{mask}{art}<g fill="#2b2824" font-family="sans-serif">{text}</g></svg>\n'''
