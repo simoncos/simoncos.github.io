@@ -20,6 +20,7 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from build_zhihu_research import render_research
+from build_music_riddle import render_music_riddle, render_music_cover
 
 from site_shell import (  # noqa: E402
     ROOT,
@@ -879,6 +880,8 @@ def build() -> dict[str, str]:
         "about.html": render_about(config, site),
         "404.html": render_not_found(config),
         "gallery/research/zhihu-2015.html": render_research(config),
+        "gallery/music/endless-echoes.html": render_music_riddle(config),
+        "gallery/music/assets/endless-echoes-cover.svg": render_music_cover(),
     }
     for lang in ("en", "zh"):
         project = next(item for item in site["projects"] if item["id"] == "sleep-toolkit")

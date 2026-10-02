@@ -167,6 +167,31 @@
       },
       "img": "gallery/assets/gallery-card-qingtian.webp",
       "href": "gallery/music/qingtian.html"
+    },
+    {
+      "id": "endless-echoes",
+      "kind": {
+        "en": "Music riddle",
+        "zh": "音乐谜题"
+      },
+      "work_topic": "music",
+      "home_topic": "think",
+      "date": "2017-03-25",
+      "single": true,
+      "title": {
+        "en": "Endless Echoes",
+        "zh": "漫无止尽的回响"
+      },
+      "home_desc": {
+        "en": "A branching riddle through 26 Eason Chan songs. Follow clues and light up your own trail.",
+        "zh": "穿过陈奕迅 26 首歌的分岔谜题，沿着线索点亮自己的路径。"
+      },
+      "desc": {
+        "en": "Read a clue, name the next song, and find your way through 26 Eason Chan songs. A 2017 riddle restored from its Douban list.",
+        "zh": "读一段线索，猜下一首歌，在陈奕迅的 26 首歌之间寻找路径。根据豆列复原的 2017 年音乐谜题。"
+      },
+      "img": "gallery/music/assets/endless-echoes-cover.svg",
+      "href": "gallery/music/endless-echoes.html"
     }
   ],
   "featured": [
@@ -317,12 +342,12 @@
         "zh": "音乐"
       },
       "line": {
-        "en": "Songs I wrote and sang.",
-        "zh": "自己作词作曲、自己唱的歌。"
+        "en": "Songs and the paths between them.",
+        "zh": "歌，以及歌与歌之间的路。"
       },
       "desc": {
-        "en": "Original songs, published with the recording and the lyrics.",
-        "zh": "原创歌曲，连同录音和歌词一起发布。"
+        "en": "An original recording and a branching music riddle.",
+        "zh": "原创歌曲，也有沿着声音寻找线索的谜题。"
       }
     }
   ],
