@@ -220,7 +220,7 @@
         "zh": "浏览 Hacker News 月度项目，查看原文与讨论证据，对比候选项目趋势。"
       },
       "img": "projects/assets/hn-field-notes-cover.png",
-      "href": "projects/hn-field-notes/index.html"
+      "href": "https://hn-waywo-dashboard.vercel.app/"
     },
     {
       "id": "hn-llm-research",
@@ -629,7 +629,7 @@
       "years": "2026 —",
       "tags": "Tool · Hacker News · Web",
       "updated": "2026-10-02",
-      "href": "projects/hn-field-notes/index.html",
+      "href": "https://hn-waywo-dashboard.vercel.app/",
       "line": {
         "en": "Browse projects from monthly Hacker News threads, read source evidence, and compare candidate trends.",
         "zh": "浏览 Hacker News 月度项目，查看原文与讨论证据，对比候选项目趋势。"

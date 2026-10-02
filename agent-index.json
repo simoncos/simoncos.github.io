@@ -131,7 +131,7 @@
       "id": "hn-field-notes",
       "type": "web_app",
       "label": "HN Field Notes",
-      "url": "https://simoncos.github.io/projects/hn-field-notes/index.html",
+      "url": "https://hn-waywo-dashboard.vercel.app/",
       "description": "Read-only HN WAYWO project browser with source evidence and monthly candidate trends. Updated monthly by Hermes."
     }
   ],
