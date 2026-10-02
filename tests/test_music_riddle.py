@@ -33,11 +33,40 @@ class MusicRiddleTests(unittest.TestCase):
             pending.extend(self.nodes[song]['next'])
         self.assertEqual(reached, set(self.nodes))
 
-    def test_edges_preserve_doulist_predecessors(self):
+    def test_edges_preserve_sources_without_treating_backlinks_as_exhaustive(self):
         actual = {(n['id'], target) for n in self.nodes.values() for target in n['next']}
         expected = {(source['id'], n['id']) for n in self.nodes.values() for source in n['source']['predecessors']}
-        self.assertEqual(actual, expected)
-        self.assertEqual(len(actual), 31)
+        additions = {(n['id'], route['target']) for n in self.nodes.values()
+                     for route in n.get('route_audit', {}).get('confirmed_additions', [])}
+        self.assertEqual(actual, expected | additions)
+        self.assertIn(('2113245', self.data['start']), actual)
+        self.assertIn(('2113245', 'hmuda8eb'), actual)
+
+    def test_mian_mian_is_accepted_without_inventing_a_followup(self):
+        branch = self.nodes['kavMc624b']['open_answers'][0]
+        self.assertEqual(branch['title'], '绵绵')
+        self.assertIn('綿綿', branch['aliases'])
+        self.assertIsNone(branch['clue'])
+        self.assertIsNone(branch['next'])
+        self.assertEqual(branch['review']['status'], 'confirmed')
+        self.assertNotIn('绵绵', [n['title'] for n in self.nodes.values()])
+
+    def test_open_answers_cannot_shadow_a_path_or_claim_unconfirmed_authorship(self):
+        for case in ('ambiguous', 'unconfirmed', 'invented-clue', 'unrecorded-route'):
+            with self.subTest(case=case):
+                data = copy.deepcopy(self.data)
+                nodes = {n['id']: n for n in data['nodes']}
+                branch = nodes['kavMc624b']['open_answers'][0]
+                if case == 'ambiguous':
+                    branch['aliases'].append('约定')
+                elif case == 'unconfirmed':
+                    branch['review']['status'] = 'pending'
+                elif case == 'invented-clue':
+                    branch['clue'] = {'zh': '新写的谜面', 'en': 'Invented clue'}
+                else:
+                    nodes['2113245']['next'].remove(data['start'])
+                with self.assertRaises(ValueError):
+                    validate(data)
 
     def test_single_ending_and_explained_detours(self):
         ending = self.nodes[self.data['ending']]

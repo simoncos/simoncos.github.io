@@ -396,6 +396,195 @@
           "required": [],
           "additionalProperties": false,
           "description": "历史证据，前驱标题按来源原文保留；不用于生成当前路径。"
+        },
+        "open_answers": {
+          "type": "array",
+          "minItems": 1,
+          "description": "已确认可接，但后续暂空的答案；不充当完整节点或原版死胡同。",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "aliases": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "clue": {
+                "type": "null"
+              },
+              "next": {
+                "type": "null"
+              },
+              "review": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "const": "confirmed"
+                  },
+                  "by": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "date": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "format": "date",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status",
+                  "by",
+                  "date",
+                  "note"
+                ],
+                "additionalProperties": false,
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "status": {
+                          "enum": [
+                            "confirmed",
+                            "corrected"
+                          ]
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "by": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "date": {
+                          "type": "string",
+                          "minLength": 1,
+                          "format": "date",
+                          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                        }
+                      }
+                    },
+                    "else": {
+                      "properties": {
+                        "by": {
+                          "type": "null"
+                        },
+                        "date": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "required": [
+              "title",
+              "aliases",
+              "clue",
+              "next",
+              "review"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "route_audit": {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "string",
+              "minLength": 1,
+              "format": "date",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "note": {
+              "type": "string"
+            },
+            "confirmed_additions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "target": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+                    "description": "稳定节点 ID；改歌名时保持不变。"
+                  },
+                  "by": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "date": {
+                    "type": "string",
+                    "minLength": 1,
+                    "format": "date",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "target",
+                  "by",
+                  "date",
+                  "note"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "title",
+                  "reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "date",
+            "note",
+            "confirmed_additions",
+            "candidates"
+          ],
+          "additionalProperties": false,
+          "description": "路径复核记录。候选不进入答案判断，confirmed_additions 记录原始前驱之外由作者确认的接线。"
         }
       },
       "required": [

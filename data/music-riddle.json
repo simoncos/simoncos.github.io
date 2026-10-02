@@ -362,11 +362,12 @@
         "en": "Even if I could return to the beginning, go abroad again, ask you for a light on that boat in the heat, and see your eyes brighten with a smile, what could I really change?"
       },
       "hint": {
-        "zh": "回到过去之后，仍要选择今天。",
-        "en": "After returning to the past, today still calls for a choice."
+        "zh": "一条路向前出发，另一条路回到最初。",
+        "en": "One path sets out; another returns to the beginning."
       },
       "next": [
-        "hmuda8eb"
+        "hmuda8eb",
+        "VbpP7694d"
       ],
       "position": [
         260,
@@ -380,6 +381,28 @@
             "id": "1769399775",
             "title": "陀飞轮",
             "url": "http://www.xiami.com/song/xLqlvna2191"
+          }
+        ]
+      },
+      "route_audit": {
+        "date": "2026-10-02",
+        "note": "原豆列《今天等我来》的前驱栏明确列出《倒带人生》，保留该路。作者本日指出谜面也指向《不来也不去》，补上回到起点的有向边；前驱栏不是全量答案。",
+        "confirmed_additions": [
+          {
+            "target": "VbpP7694d",
+            "by": "simoncos",
+            "date": "2026-10-02",
+            "note": "作者指出倒带人生的谜题明显指向不来也不去。"
+          }
+        ],
+        "candidates": [
+          {
+            "title": "谢谢侬",
+            "reason": "原谜面直接提及歌名，但没有该条目的后续谜面或作者路径确认。"
+          },
+          {
+            "title": "热岛小夜曲",
+            "reason": "原谜面出现热岛意象；只有文字关联，尚不能确认原版接线。"
           }
         ]
       }
@@ -601,8 +624,8 @@
         "en": "In the end I cannot let go of those faint inner voices. I am not afraid that important things have changed, or that we might be better off not meeting. The past was beautiful: a rain-beaten windowsill, a scent in warm dim light, echoing like chords. I simply want to see you."
       },
       "hint": {
-        "zh": "记忆里的一次承诺，也可能变成另一种离别。",
-        "en": "A promise in memory, or another kind of parting."
+        "zh": "一次承诺、另一种离别，以及雨夜窗边的回忆。",
+        "en": "A promise, another kind of farewell, and memories by a rainy window."
       },
       "next": [
         "bqvdVl73c0ab",
@@ -627,6 +650,28 @@
             "url": "http://www.xiami.com/song/1769110881"
           }
         ]
+      },
+      "open_answers": [
+        {
+          "title": "绵绵",
+          "aliases": [
+            "綿綿"
+          ],
+          "clue": null,
+          "next": null,
+          "review": {
+            "status": "confirmed",
+            "by": "simoncos",
+            "date": "2026-10-02",
+            "note": "作者确认好久不见可以接绵绵；后续先空着，原作当时应该没有放入这首。"
+          }
+        }
+      ],
+      "route_audit": {
+        "date": "2026-10-02",
+        "note": "保留豆列前驱直接支持的约定、不如不见；绵绵由作者确认接受答案，但按作者要求将其后续留空，不添加第 27 个完整谜面节点。",
+        "confirmed_additions": [],
+        "candidates": []
       }
     },
     {
@@ -670,6 +715,17 @@
             "id": "8Gmn27f4280",
             "title": "任我行",
             "url": "http://www.xiami.com/song/8Gmn27f4280"
+          }
+        ]
+      },
+      "route_audit": {
+        "date": "2026-10-02",
+        "note": "好久不见的前驱栏明确列出孤独患者，现有边保留。原谜面包含多首歌的意象，不能据此认定其他歌都不是答案。",
+        "confirmed_additions": [],
+        "candidates": [
+          {
+            "title": "红玫瑰",
+            "reason": "原谜面关于得不到的骚动与得到后的空洞，与红玫瑰意象相符；未找到该歌的原谜面，待作者确认。"
           }
         ]
       }
