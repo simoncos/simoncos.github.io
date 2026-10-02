@@ -183,20 +183,20 @@
         "zh": "漫无止尽的回响"
       },
       "home_desc": {
-        "en": "A branching riddle through 27 Eason Chan songs. Follow clues and light up your own trail.",
-        "zh": "穿过陈奕迅 27 首歌的分岔谜题，沿着线索点亮自己的路径。"
+        "en": "A branching riddle through 36 songs. Follow clues and light up your own trail.",
+        "zh": "穿过36 首歌的分岔谜题，沿着线索点亮自己的路径。"
       },
       "desc": {
-        "en": "Read a clue, name the next song, and find your way through 27 Eason Chan songs. A 2017 riddle restored from its Douban list.",
-        "zh": "读一段线索，猜下一首歌，在陈奕迅的 27 首歌之间寻找路径。根据豆列复原的 2017 年音乐谜题。"
+        "en": "Read a clue, name the next song, and find your way through 36 songs. A 2017 riddle restored from its Douban list.",
+        "zh": "读一段线索，猜下一首歌，在36 首歌之间寻找路径。根据豆列复原的 2017 年音乐谜题。"
       },
-      "img": "gallery/music/assets/endless-echoes-cover.svg?v=20261002e",
+      "img": "gallery/music/assets/endless-echoes-cover.svg?v=20261002f",
       "href": "gallery/music/endless-echoes.html",
       "work_kind": {
         "en": "Interactive music riddle",
         "zh": "交互音乐谜题"
       },
-      "wheel_img": "gallery/music/assets/endless-echoes-poster.svg?v=20261002e"
+      "wheel_img": "gallery/music/assets/endless-echoes-poster.svg?v=20261002f"
     }
   ],
   "featured": [

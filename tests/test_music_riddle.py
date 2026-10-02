@@ -17,7 +17,7 @@ class MusicRiddleTests(unittest.TestCase):
         cls.nodes = {n['id']: n for n in cls.data['nodes']}
 
     def test_original_collection_size_and_unique_sources(self):
-        self.assertEqual(len(self.nodes), 27)
+        self.assertEqual(len(self.nodes), 37)
         self.assertEqual(len({n['source']['douban_item'] for n in self.nodes.values() if n['source'].get('douban_item')}), 26)
         self.assertEqual(self.nodes[self.data['start']]['title'], '不来也不去')
 
@@ -31,14 +31,16 @@ class MusicRiddleTests(unittest.TestCase):
             self.assertIn(song, self.nodes)
             reached.add(song)
             pending.extend(self.nodes[song]['next'])
-        self.assertEqual(reached, set(self.nodes))
+        self.assertEqual(reached, set(self.nodes) - {self.data['bonus']})
 
     def test_edges_preserve_sources_without_treating_backlinks_as_exhaustive(self):
         actual = {(n['id'], target) for n in self.nodes.values() for target in n['next']}
         expected = {(source['id'], n['id']) for n in self.nodes.values() for source in n['source']['predecessors']}
         additions = {(n['id'], route['target']) for n in self.nodes.values()
                      for route in n.get('route_audit', {}).get('confirmed_additions', [])}
-        self.assertEqual(actual, expected | additions)
+        retired = {(n['id'], route['target']) for n in self.nodes.values()
+                   for route in n.get('route_audit', {}).get('retired_routes', [])}
+        self.assertEqual(actual, (expected - retired) | additions)
         self.assertIn(('2113245', self.data['start']), actual)
         self.assertIn(('2113245', 'hmuda8eb'), actual)
 
@@ -87,7 +89,40 @@ class MusicRiddleTests(unittest.TestCase):
         self.assertNotIn('dead_ends', ending)
         for node in self.nodes.values():
             if node['id'] != ending['id'] and not node['next']:
-                self.assertTrue(node.get('dead_ends') or node.get('terminal') == 'dead-end', node['title'])
+                self.assertTrue(node.get('dead_ends') or node.get('terminal') in ('dead-end', 'epilogue'), node['title'])
+
+    def test_expansion_routes_and_hidden_epilogue(self):
+        expected = {
+            '9lmK42c6b': ['ten-years'], 'ten-years': ['next-year-today'],
+            '8Gmn27f4280': ['exaggerated'], 'exaggerated': ['mQ9j8d7b7b0'],
+            'red-rose': ['8GcTLDedcc6', 'kau7b16d6', 'black-zek-ming'],
+            'black-zek-ming': ['the-end'], 'the-end': ['rAx50113'],
+            'wedding-card-street': ['rAx50113'], 'today': ['mQKhoF955e4'],
+            'mQ9j8i76fc8': ['matchless'],
+        }
+        for source, targets in expected.items():
+            self.assertEqual(self.nodes[source]['next'], targets)
+        for source, target in [('hmuda8eb', 'today'), ('mQ9j8d7b7b0', 'red-rose'), ('fOld7b901', 'wedding-card-street')]:
+            self.assertIn(target, self.nodes[source]['next'])
+        self.assertEqual(self.data['bonus'], 'allegro')
+        self.assertEqual(self.nodes['allegro']['terminal'], 'epilogue')
+        self.assertFalse(self.nodes['allegro']['next'])
+        self.assertTrue(all('allegro' not in n['next'] for n in self.nodes.values()))
+        self.assertEqual(len(self.nodes) - 1, 36)
+
+    def test_bonus_cannot_be_guessed_or_replace_the_main_ending(self):
+        for case in ('path', 'ending', 'missing', 'ordinary-leaf'):
+            data = copy.deepcopy(self.data)
+            if case == 'path':
+                data['nodes'][0]['next'].append(data['bonus'])
+            elif case == 'ending':
+                data['bonus'] = data['ending']
+            elif case == 'missing':
+                data['bonus'] = 'unknown'
+            else:
+                next(n for n in data['nodes'] if n['id'] == data['bonus'])['terminal'] = 'dead-end'
+            with self.assertRaises(ValueError):
+                validate(data)
 
     def test_every_clue_and_hint_is_bilingual(self):
         for node in self.nodes.values():

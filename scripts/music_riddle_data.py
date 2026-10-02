@@ -76,8 +76,8 @@ def validate(data):
         if 'quote' in node:
             text(node['quote'], f'{node_id}.quote')
         if 'terminal' in node:
-            require(node['terminal'] == 'dead-end', f'{node_id}: unknown terminal kind')
-            require(not node['next'] and node_id != data.get('ending'), f'{node_id}: a dead-end cannot continue or be the ending')
+            require(node['terminal'] in ('dead-end', 'epilogue'), f'{node_id}: unknown terminal kind')
+            require(not node['next'] and node_id != data.get('ending'), f'{node_id}: a terminal branch cannot continue or be the ending')
         position = node.get('position')
         require(isinstance(position, list) and len(position) == 2, f'{node_id}.position: expected [x, y]')
         for coordinate, axis in zip(position, ('width', 'height')):
@@ -106,6 +106,13 @@ def validate(data):
 
     for field in ('start', 'ending'):
         require(data.get(field) in by_id, f'{field}: unknown node id')
+    if 'bonus' in data:
+        require(data['bonus'] in by_id and data['bonus'] not in (data['start'], data['ending']), 'bonus: unknown or primary node')
+        require(by_id[data['bonus']].get('terminal') == 'epilogue', 'bonus: expected epilogue terminal')
+    for node in nodes:
+        if node.get('terminal') == 'epilogue':
+            require(node['id'] == data.get('bonus'), 'epilogue must be the bonus node')
+        require(data.get('bonus') not in node['next'], 'bonus must be unlocked by collection, not a path')
     require(not by_id[data['ending']]['next'], 'The ending must not have outgoing paths')
     for node_id, node in by_id.items():
         answers = {}
@@ -146,12 +153,17 @@ def validate(data):
                 for field in ('by', 'note'):
                     text(addition.get(field), f'{node_id}.confirmed_additions.{field}')
                 iso_date(addition.get('date'), f'{node_id}.confirmed_additions.date')
+            for retired in audit.get('retired_routes', []):
+                require(retired.get('target') in by_id and retired['target'] not in node['next'], f'{node_id}: invalid retired route')
+                for field in ('by', 'note'):
+                    text(retired.get(field), f'{node_id}.retired_routes.{field}')
+                iso_date(retired.get('date'), f'{node_id}.retired_routes.date')
             require(isinstance(audit.get('candidates'), list), f'{node_id}: expected route candidates array')
             for candidate in audit['candidates']:
                 text(candidate.get('title'), f'{node_id}.route_candidate.title')
                 text(candidate.get('reason'), f'{node_id}.route_candidate.reason')
         if node_id != data['ending'] and not node['next']:
-            require(bool(node.get('dead_ends') or open_answers or node.get('terminal') == 'dead-end'), f'{node_id}: a non-ending leaf needs an explained answer')
+            require(bool(node.get('dead_ends') or open_answers or node.get('terminal') in ('dead-end', 'epilogue')), f'{node_id}: a non-ending leaf needs an explained answer')
         for predecessor in node.get('source', {}).get('predecessors', []):
             require(predecessor.get('id') in by_id, f'{node_id}: unknown historical predecessor')
             text(predecessor.get('title'), f'{node_id}.source.predecessors.title')
@@ -162,7 +174,8 @@ def validate(data):
         if node_id not in reached:
             reached.add(node_id)
             pending.extend(by_id[node_id]['next'])
-    require(reached == set(by_id), f'Unreachable nodes: {sorted(set(by_id) - reached)}')
+    expected = set(by_id) - {data.get('bonus')}
+    require(reached == expected, f'Unreachable nodes: {sorted(expected - reached)}')
     return data
 
 
