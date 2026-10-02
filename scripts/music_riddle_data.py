@@ -104,6 +104,17 @@ def validate(data):
         if identity['evidence_type'] == 'archive':
             require(bool(identity['evidence_urls']), f'{node_id}: archive evidence needs a URL')
 
+    routes = layout.get('routes', {})
+    require(isinstance(routes, dict), 'map.routes: expected an object')
+    actual_edges = {n['id'] + ':' + target for n in nodes for target in n['next']}
+    for edge, waypoints in routes.items():
+        require(edge in actual_edges, f'map.routes: unknown path {edge}')
+        require(isinstance(waypoints, list), f'{edge}: expected waypoint array')
+        for waypoint in waypoints:
+            require(isinstance(waypoint, list) and len(waypoint) == 2, f'{edge}: expected [x, y] waypoint')
+            for coordinate, axis in zip(waypoint, ('width', 'height')):
+                require(type(coordinate) in (int, float) and 0 <= coordinate <= layout[axis], f'{edge}: waypoint outside the map')
+
     for field in ('start', 'ending'):
         require(data.get(field) in by_id, f'{field}: unknown node id')
     if 'bonus' in data:

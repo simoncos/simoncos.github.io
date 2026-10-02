@@ -92,6 +92,21 @@
         "height": {
           "type": "number",
           "exclusiveMinimum": 0
+        },
+        "routes": {
+          "type": "object",
+          "description": "可选的平滑连线路径。键为 起点ID:终点ID，值为经过的坐标点；不改变歌曲的 next 关系。",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          }
         }
       },
       "required": [
