@@ -126,6 +126,13 @@
       "label": "Endless Echoes (漫无止尽的回响)",
       "url": "https://simoncos.github.io/gallery/music/endless-echoes.html",
       "description": "A game in Work → Games: a bilingual branching music riddle through 36 songs, restored from a 2017 Douban list. Imagery clues and an author-selected quotation guide the trail; progress stays in the browser."
+    },
+    {
+      "id": "hn-field-notes",
+      "type": "web_app",
+      "label": "HN Field Notes",
+      "url": "https://simoncos.github.io/projects/hn-field-notes/index.html",
+      "description": "Read-only HN WAYWO project browser with source evidence and monthly candidate trends. Updated monthly by Hermes."
     }
   ],
   "public_data_files": [
