@@ -1275,6 +1275,8 @@ button {
     position: relative;
     height: clamp(640px, calc(100vh - 76px), 940px);
     overflow: hidden;
+    /* Transformed cards must not make this a focus-scroll container. */
+    overflow: clip;
     touch-action: pan-y;
     cursor: grab;
     user-select: none;

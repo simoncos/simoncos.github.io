@@ -60,7 +60,7 @@ def render_music_riddle(config):
     <section class="echo-about"><h2>{b('A riddle that outlived its platform','一个比平台活得更久的谜')}</h2><div><p>{b('In March 2017, I hid clues in comments on Eason Chan’s songs on Xiami. One song led to another; some paths branched, some met again, and some led nowhere. There was one ending, and 26 songs to collect.','2017 年 3 月，我把谜面藏在虾米音乐的陈奕迅歌曲评论里。一首歌引向另一首，有的分岔，有的重逢，也有死胡同。终点只有一个，等待收集的歌有 26 首。')}</p><p>{b('Xiami has since closed. This edition rebuilds the trail from the surviving Douban list. Lyric quotations become descriptions of their imagery; song titles remain in their original Chinese or English. You can reach the ending without finding every song.','虾米后来关闭了。这个版本根据保留下来的豆列重建路径，将歌词引用改为意象提示，保留原始歌名。不必集齐所有歌，也能到达终点。')}</p><p>{b('All answers are Eason Chan songs. Knowing the songs helps; hints and optional reveals are here if you get stuck. Progress stays in this browser.','谜底都在陈奕迅的歌里。熟悉歌曲会更容易；卡住时可以看提示，或主动揭晓下一首。进度保存在这个浏览器里。')}</p><div class="echo-source-links"><a href="https://www.douban.com/doulist/45894638/">{b('Original clues on Douban (in Chinese)','豆列中的原始谜面')} ↗</a><a href="https://www.jianshu.com/p/bacb95af08b1">{b('The 2017 introduction (in Chinese)','2017 年的原始介绍')} ↗</a></div></div></section>
     </main>'''
     head = render_meta(config, title=('Endless Echoes · simoncos','漫无止尽的回响 · simoncos'), description=('A branching music riddle through 26 Eason Chan songs, first made in 2017.','一场穿过陈奕迅 26 首歌的音乐谜题，沿线索点亮歌曲之间的回响。'), canonical=PAGE)
-    head += '\n<link rel="stylesheet" href="assets/endless-echoes.css?v=20261001a">'
+    head += '\n<link rel="stylesheet" href="assets/endless-echoes.css?v=20261002b">'
     # Runtime only needs clues and the graph, not historical source annotations.
     payload = {key:data[key] for key in ('id','start','ending')}
     payload['nodes'] = [{k:v for k,v in n.items() if k in ('id','title','aliases','clue','hint','next','dead_ends','position')} for n in data['nodes']]
@@ -68,7 +68,7 @@ def render_music_riddle(config):
     return render_document(config,page_config(config,PAGE),head=head,main=main,body_attrs=' class="music-riddle"',tail=f'<script type="application/json" id="echo-data">{serialized}</script>')
 
 
-def render_music_cover():
+def render_music_cover(portrait=False):
     data = load_music_riddle()
     nodes = {n['id']:n for n in data['nodes']}
     paths=[]
@@ -79,6 +79,13 @@ def render_music_cover():
             bend=min(abs(xx-x)*.3+25,90)*(1 if yy>=y else -1)
             paths.append(f'<path d="M{x},{y} C{x+bend},{y-35} {xx-bend},{yy+35} {xx},{yy}"/>')
     dots=''.join(f'<circle cx="{n["position"][0]}" cy="{n["position"][1]}" r="7"/>' for n in nodes.values())
+    if portrait:
+        return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-labelledby="title"><title id="title">漫无止尽的回响 · Endless Echoes · {len(nodes)} Eason Chan songs</title>
+<rect width="600" height="800" fill="#172420"/>
+<text x="50" y="62" fill="#b2baa9" font-family="sans-serif" font-size="14" letter-spacing="2">EASON CHAN · 2017</text>
+<text x="46" y="154" fill="#f0e8dc" font-family="sans-serif" font-size="68" font-weight="500">漫无止尽</text><text x="46" y="236" fill="#f0e8dc" font-family="sans-serif" font-size="68" font-weight="500">的回响</text>
+<g transform="translate(12 290) scale(.62)"><g fill="none" stroke="#9aa68f" stroke-width="2" opacity=".7">{''.join(paths)}</g><g fill="#d7b388" stroke="#172420" stroke-width="3">{dots}</g><circle cx="85" cy="430" r="23" fill="#eec298" opacity=".2"/></g>
+<text x="50" y="707" fill="#eec298" font-family="monospace" font-size="18" letter-spacing="2">{len(nodes)} SONGS</text><text x="50" y="747" fill="#b2baa9" font-family="monospace" font-size="14" letter-spacing="2">ENDLESS ECHOES</text></svg>\n'''
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title"><title id="title">漫无止尽的回响 · Endless Echoes · 26 Eason Chan songs</title>
 <rect width="960" height="600" fill="#172420"/><g transform="translate(140 100) scale(.83)"><g fill="none" stroke="#83937b" stroke-width="1.5" opacity=".65">{''.join(paths)}</g><g fill="#d7b388" stroke="#172420" stroke-width="3">{dots}</g><circle cx="85" cy="430" r="20" fill="#eec298" opacity=".16"/></g>
-<text x="58" y="75" fill="#b2baa9" font-family="sans-serif" font-size="15" letter-spacing="3">EASON CHAN · 2017</text><text x="54" y="167" fill="#f0e8dc" font-family="sans-serif" font-size="66" font-weight="500">漫无止尽</text><text x="54" y="247" fill="#f0e8dc" font-family="sans-serif" font-size="66" font-weight="500">的回响</text><text x="58" y="542" fill="#eec298" font-family="monospace" font-size="16" letter-spacing="2">26 SONGS / ENDLESS ECHOES</text></svg>\n'''
+<text x="120" y="75" fill="#b2baa9" font-family="sans-serif" font-size="15" letter-spacing="3">EASON CHAN · 2017</text><text x="116" y="167" fill="#f0e8dc" font-family="sans-serif" font-size="66" font-weight="500">漫无止尽</text><text x="116" y="247" fill="#f0e8dc" font-family="sans-serif" font-size="66" font-weight="500">的回响</text></svg>\n'''

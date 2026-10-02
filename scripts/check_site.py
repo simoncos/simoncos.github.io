@@ -251,7 +251,7 @@ def check_embedded_pages_are_noindex(errors: list[str]) -> None:
 def check_site_data(errors: list[str]) -> None:
     """Every local image and link named in data/site.json exists."""
     site = json.loads((ROOT / "data/site.json").read_text(encoding="utf-8"))
-    keys = {"img", "href", "cover", "report_image", "essay_image", "essay_href"}
+    keys = {"img", "wheel_img", "href", "cover", "report_image", "essay_image", "essay_href"}
 
     def walk(value: object, trail: str) -> None:
         if isinstance(value, dict):

@@ -311,7 +311,7 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
         works = by_topic[topic["id"]][:3]
         k = max(1, len(works))
         faces = "".join(
-            f'<img src="{esc(work["img"])}" alt="" draggable="false" decoding="async" '
+            f'<img src="{esc(work.get("wheel_img", work["img"]) if k == 1 else work["img"])}" alt="" draggable="false" decoding="async" '
             f'style="top:{j * 100 / k:.4g}%;height:{100 / k:.4g}%">'
             for j, work in enumerate(works)
         )
@@ -882,6 +882,7 @@ def build() -> dict[str, str]:
         "gallery/research/zhihu-2015.html": render_research(config),
         "gallery/music/endless-echoes.html": render_music_riddle(config),
         "gallery/music/assets/endless-echoes-cover.svg": render_music_cover(),
+        "gallery/music/assets/endless-echoes-poster.svg": render_music_cover(portrait=True),
     }
     for lang in ("en", "zh"):
         project = next(item for item in site["projects"] if item["id"] == "sleep-toolkit")
