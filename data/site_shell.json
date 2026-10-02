@@ -1,6 +1,6 @@
 {
   "css_version": "20261002b",
-  "js_version": "20261002i",
+  "js_version": "20261002k",
   "site_updated": "2026-10-02",
   "theme_init": "theme-init.js",
   "icons": {
@@ -169,6 +169,10 @@
     "music-riddle": [
       {
         "src": "site.js",
+        "defer": true
+      },
+      {
+        "src": "echo-piano.js",
         "defer": true
       },
       {

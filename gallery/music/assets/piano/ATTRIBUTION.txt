@@ -1,0 +1,11 @@
+YDP Grand Piano — Endless Echoes / 漫无止尽的回响
+
+Original recordings: Zenph Studios Yamaha Disklavier Pro Piano Multisamples for OLPC, recorded by Dr. Mikhail Krishtal and his team at Zenph Studios.
+Soundfont and modifications: Roberto (roberto@zenvoid.org), FreePats project.
+Source: https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html
+License: Creative Commons Attribution 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+Local processing: notes were extracted from YDP-GrandPiano-20160804.sf2 and transcoded to MP3 for Vocal Coach. Endless Echoes reuses its seven root-MIDI files without modification. Playback transposes to nearby notes and applies a short gain envelope.
+
+The adjacent ydp/manifest.json retains Vocal Coach's sample metadata and naming history. Root MIDI notes: 48, 54, 60, 63, 66, 69, 72 (C3–C5).

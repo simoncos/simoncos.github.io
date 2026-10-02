@@ -2,6 +2,7 @@
 import json
 import copy
 import sys
+import subprocess
 import unittest
 from pathlib import Path
 
@@ -20,6 +21,10 @@ class MusicRiddleTests(unittest.TestCase):
         self.assertEqual(len(self.nodes), 37)
         self.assertEqual(len({n['source']['douban_item'] for n in self.nodes.values() if n['source'].get('douban_item')}), 26)
         self.assertEqual(self.nodes[self.data['start']]['title'], '不来也不去')
+
+    def test_sampled_piano_replay_and_async_cancellation(self):
+        subprocess.run(['node', 'tests/echo_piano_runtime.cjs'], cwd=ROOT, check=True,
+                       capture_output=True, text=True)
 
     def test_every_song_is_reachable_from_the_start(self):
         reached = set()
