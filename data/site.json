@@ -197,6 +197,30 @@
         "zh": "交互音乐谜题"
       },
       "wheel_img": "gallery/music/assets/endless-echoes-poster.svg?v=20261002j"
+    },
+    {
+      "id": "hn-field-notes",
+      "kind": {
+        "en": "Tool",
+        "zh": "工具"
+      },
+      "work_topic": "projects",
+      "home_topic": "build",
+      "date": "2026-10-02",
+      "title": {
+        "en": "HN Field Notes",
+        "zh": "HN Field Notes"
+      },
+      "home_desc": {
+        "en": "Browse projects from monthly Hacker News threads, read source evidence, and compare candidate trends.",
+        "zh": "浏览 Hacker News 月度项目，查看原文与讨论证据，对比候选项目趋势。"
+      },
+      "desc": {
+        "en": "Browse projects from monthly Hacker News threads, read source evidence, and compare candidate trends.",
+        "zh": "浏览 Hacker News 月度项目，查看原文与讨论证据，对比候选项目趋势。"
+      },
+      "img": "projects/assets/hn-field-notes-cover.png",
+      "href": "projects/hn-field-notes/index.html"
     }
   ],
   "featured": [
@@ -563,6 +587,23 @@
       "essay_href": {
         "en": "projects/sleep-2016-2026.en.html",
         "zh": "projects/sleep-2016-2026.html"
+      }
+    },
+    {
+      "id": "hn-field-notes",
+      "title": "HN Field Notes",
+      "cover": "projects/assets/hn-field-notes-cover.png",
+      "status": {
+        "en": "Updated monthly",
+        "zh": "每月更新"
+      },
+      "years": "2026 —",
+      "tags": "Tool · Hacker News · Web",
+      "updated": "2026-10-02",
+      "href": "projects/hn-field-notes/index.html",
+      "line": {
+        "en": "Browse projects from monthly Hacker News threads, read source evidence, and compare candidate trends.",
+        "zh": "浏览 Hacker News 月度项目，查看原文与讨论证据，对比候选项目趋势。"
       }
     }
   ],

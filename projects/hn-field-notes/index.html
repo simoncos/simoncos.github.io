@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en" data-read-only="true">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HN Field Notes</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23ff5a1f'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial,sans-serif' font-size='22' font-weight='700' fill='white'%3EHN%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="style.css?v=8f29d0db3ee2" />
+  <meta name="description" content="Explore projects from monthly Hacker News WAYWO threads. Search ideas, read source evidence, and compare candidate trends." />
+    <link rel="canonical" href="https://simoncos.github.io/projects/hn-field-notes/index.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="HN Field Notes · simoncos" />
+    <meta property="og:description" content="Explore HN projects, source evidence, and monthly candidate trends." />
+    <meta property="og:url" content="https://simoncos.github.io/projects/hn-field-notes/index.html" />
+    <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <style>[hidden]{display:none!important}.site-return{color:inherit;font-size:14px;white-space:nowrap;text-decoration:none;border-bottom:1px solid currentColor;padding:6px 0}</style>
+    </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="hn-mark" aria-hidden="true">HN</div>
+          <div>
+            <h1>HN Field Notes</h1>
+            <p>Ideas found in monthly HN threads</p>
+          </div>
+        </div>
+
+        <nav class="tabs" aria-label="Primary views" role="tablist">
+          <button class="tab is-active" data-view="scout" role="tab" aria-selected="true" aria-controls="view-scout" title="Browse extracted project ideas">Ideas</button>
+          <button class="tab" data-view="trends" role="tab" aria-selected="false" aria-controls="view-trends" title="Compare the published candidate mix across months">Trends</button>
+        </nav>
+
+        <div class="topbar-actions"><a class="site-return" href="../../projects.html">simoncos / Tools</a>
+          <button class="saved-button" id="savedButton" hidden type="button" aria-pressed="false">Saved this month <strong>0</strong></button>
+          <details class="utility-menu">
+            <summary>About the data</summary>
+            <div class="utility-popover">
+              <div class="utility-popover-header">
+                <strong>About the data</strong>
+                <button id="closeUtility" class="ghost-button" type="button" aria-label="Close About the data">Close</button>
+              </div>
+              <section>
+                <span class="section-kicker">About the data</span>
+                <strong id="topbarSourceLabel">HN WAYWO</strong>
+                <p>Projects are heuristically extracted from retained monthly Hacker News “What Are You Working On?” threads.</p>
+                <dl class="utility-facts">
+                  <div><dt>Snapshot</dt><dd id="topbarDataMeta">Loading data</dd></div>
+                  <div><dt>Coverage</dt><dd id="topbarModeLabel">Loading</dd></div>
+                </dl>
+                <small>Candidate shares describe this published sample—not HN-wide activity, product demand, or project success.</small>
+              </section>
+              <section class="backup-actions" hidden>
+                <span class="section-kicker">Browser workspace</span>
+                <p>Back up saved ideas and personal notes. Imports accept only the current backup format and stop before changing local data when validation fails.</p>
+                <small>Saved counts and filters use the selected month. Backups keep every month's saved ideas and notes, including items unavailable in this dataset.</small>
+                <small>Import needs browser storage for a rollback snapshot. In Session only mode, export still works but import stops before changing data.</small>
+                <div>
+                  <button id="exportWorkspace" class="ghost-button" type="button">Export backup</button>
+                  <button id="importWorkspace" class="ghost-button" type="button">Import backup</button>
+                </div>
+              </section>
+            </div>
+          </details>
+        </div>
+      </header>
+
+      <noscript><p>Enable JavaScript to search the archive and compare trends. You can also <a href="data/hn-waywo-archive.json">download the published project data</a>.</p></noscript><main class="workspace">
+        <aside class="left-rail" aria-label="Month archive">
+          <section class="rail-section">
+            <div class="rail-heading">
+              <h2>Month archive</h2>
+              <span>HN WAYWO</span>
+            </div>
+            <div id="monthList" class="month-list"></div>
+          </section>
+
+          <div class="rail-note">
+            <strong>Use this as a discovery list.</strong>
+            Replies show HN discussion, not validated demand. Open the original comment before acting on an idea.
+          </div>
+        </aside>
+
+        <section class="main-panel">
+          <section class="view is-active" id="view-scout" aria-labelledby="scoutTitle" role="tabpanel">
+            <div class="view-header ideas-header">
+              <div>
+                <span class="section-kicker">Published monthly set</span>
+                <h2 id="scoutTitle"><span id="activeMonthLabel">Latest month</span> ideas</h2>
+                <p id="monthSummary">Loading extracted HN candidates.</p>
+              </div>
+            </div>
+
+            <section id="activeFilterNote" class="active-filter-note" aria-live="polite" hidden></section>
+
+            <button id="mobileFilterToggle" class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="scoutToolbar">
+              Search, filter &amp; sort
+            </button>
+
+            <div class="toolbar" id="scoutToolbar">
+              <label class="filter-control search-wrap">
+                <span class="toolbar-label">Search</span>
+                <input id="searchInput" type="search" placeholder="Name, description, or tag" autocomplete="off" />
+              </label>
+              <label class="filter-control">
+                <span class="toolbar-label">Category</span>
+                <select id="categorySelect" aria-label="Filter by category">
+                  <option value="all">All categories</option>
+                </select>
+              </label>
+              <label class="filter-control">
+                <span class="toolbar-label">Type</span>
+                <select id="aiSelect" aria-label="Filter AI-adjacent or non-AI ideas">
+                  <option value="all">AI + non-AI</option>
+                  <option value="ai">AI-adjacent</option>
+                  <option value="non-ai">Non-AI</option>
+                </select>
+              </label>
+              <label class="filter-control">
+                <span class="toolbar-label">Effort</span>
+                <select id="effortSelect" aria-label="Filter by effort">
+                  <option value="all">All effort levels</option>
+                </select>
+              </label>
+              <label class="filter-control">
+                <span class="toolbar-label">Sort by</span>
+                <select id="sortSelect" aria-label="Sort ideas">
+                  <option value="newest">Newest comment</option>
+                  <option value="heat">Most HN replies</option>
+                  <option value="weekend">Easiest to try</option>
+                  <option value="evidence">Most linked HN evidence</option>
+                </select>
+              </label>
+              <button id="clearFilters" class="ghost-button" type="button">Reset</button>
+            </div>
+
+            <div class="results-summary">
+              <span id="resultCount" aria-live="polite">Showing 0 ideas</span>
+              <span class="sample-note">A retained sample, not a complete HN index.</span>
+            </div>
+
+            <div id="ideaCards" class="idea-cards" aria-live="polite"></div>
+
+            <div class="table-shell">
+              <table class="idea-table">
+                <thead>
+                  <tr>
+                    <th>Idea / project</th>
+                    <th>Category</th>
+                    <th>HN evidence</th>
+                    <th>Discussion</th>
+                    <th>Effort</th>
+                  </tr>
+                </thead>
+                <tbody id="ideaRows"></tbody>
+              </table>
+            </div>
+
+            <div class="table-footer">
+              <span>Open an idea for its source excerpt and linked HN replies.</span>
+              <button id="exportButton" class="ghost-button" type="button">Export current list CSV</button>
+            </div>
+          </section>
+
+          <section class="view" id="view-trends" aria-labelledby="trendsTitle" role="tabpanel">
+            <div class="subpage trends-page">
+              <div class="trends-heading">
+                <div>
+                  <span class="section-kicker">Across the published archive</span>
+                  <h2 id="trendsTitle">Candidate mix over time</h2>
+                  <p>Compare the composition of retained HN WAYWO candidate sets. Missing threads remain visible as gaps rather than zero.</p>
+                </div>
+                <label class="filter-control trend-metric-control">
+                  <span class="toolbar-label">Analyze</span>
+                  <select id="trendMetric" aria-label="Choose trend metric">
+                    <option value="category">Category mix</option>
+                    <option value="ai">AI / non-AI mix</option>
+                    <option value="effort">Effort mix</option>
+                    <option value="discussion">HN discussion</option>
+                  </select>
+                </label>
+              </div>
+
+              <div id="trendSummary" class="trend-summary" aria-live="polite"></div>
+              <div id="trendMatrix" class="trend-matrix"></div>
+              <p id="trendCaveat" class="trend-caveat"></p>
+            </div>
+          </section>
+        </section>
+
+        <aside class="workbench" aria-label="Idea details" role="complementary" aria-hidden="false">
+          <div id="workbenchContent"></div>
+        </aside>
+      </main>
+
+      <button id="workbenchBackdrop" class="workbench-backdrop" type="button" aria-label="Close idea details" hidden></button>
+
+      <footer class="statusbar">
+        <span id="dataStatus"><span class="status-dot"></span>Data: loading HN payload</span>
+        <span>Heuristic extraction · original source stays linked</span>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <input id="workspaceImportInput" type="file" accept="application/json,.json" hidden />
+    <script src="app.js?v=2cf4215ed68d"></script>
+  </body>
+</html>
