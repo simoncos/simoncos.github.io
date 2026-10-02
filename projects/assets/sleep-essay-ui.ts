@@ -21,6 +21,7 @@
         const ratio = Math.min(1, Math.max(0, window.scrollY / maxScroll));
         progress.style.transform = `scaleX(${ratio})`;
       }
+      document.getElementById('back-bar')?.classList.toggle('visible', window.scrollY > 400);
 
       if (!chapterTargets.length) return;
 

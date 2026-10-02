@@ -140,6 +140,6 @@ def render_research(config):
     </main>'''
     head=render_meta(config,title=('Zhihu 2015 · People, connections and influence · simoncos','知乎 2015 · 人、关注与影响力 · simoncos'),description=('Explore the user statistics, follow networks, influence rankings and topics of a 2015 Zhihu study.','从用户差异、关注网络、影响力和话题四个问题，探索 2015 年知乎社交网络研究。'),canonical=PAGE)
     # The shared stylesheet is emitted after head; these rules use page-specific classes.
-    head+='\n<link rel="stylesheet" href="assets/zhihu-2015.css?v=20261001b">'
+    head+='\n<link rel="stylesheet" href="assets/zhihu-2015.css?v=20261003">'
     payload=json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')
     return render_document(config,page_config(config,PAGE),head=head,main=main,body_attrs=' class="zhihu-research"',tail=f'<script type="application/json" id="zr-data">{payload}</script>')

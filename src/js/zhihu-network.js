@@ -357,5 +357,17 @@
     } });
     root.addEventListener('zrstate', () => void update());
     new ResizeObserver(() => draw()).observe(stage);
-    void update();
+    // The article and its real static overview are useful before this heavier
+    // interactive graph is near the reader. Explicit controls still update above.
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+            if (!entries.some(entry => entry.isIntersecting))
+                return;
+            observer.disconnect();
+            void update();
+        }, { rootMargin: '200px 0px' });
+        observer.observe(reader);
+    }
+    else
+        void update();
 })();

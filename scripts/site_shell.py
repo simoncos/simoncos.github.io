@@ -27,7 +27,7 @@ FOOTER_END = "site-shell:footer:end"
 
 FONTS_URL = (
     "https://fonts.googleapis.com/css2?family=Geist:wght@300..700"
-    "&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+    "&family=Noto+Sans+SC:wght@400..700&display=swap"
 )
 
 NAV = (
