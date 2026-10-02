@@ -417,8 +417,8 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
         config,
         title=("Work · simoncos", "作品 · simoncos"),
         description=(
-            "Projects, talks, research and music from simoncos.",
-            "simoncos 的项目、演讲、研究与音乐。",
+            "Tools, games, talks, research and music from simoncos.",
+            "simoncos 的工具、游戏、演讲、研究与音乐。",
         ),
         canonical="gallery.html",
     )
@@ -446,8 +446,8 @@ def render_projects(config: dict[str, Any], site: dict[str, Any]) -> str:
     main = "\n".join([
         '<main id="main" class="projects enter" tabindex="-1">',
         '    <section class="page-head">',
-        f'        <h1 class="page-h1">{bi("Projects", "项目")}</h1>',
-        f'        <p class="page-lead">{bi("Things that are maintained and running. Each opens as its own board. Finished pieces live in Work.", "在维护、在运行的东西。每个项目打开都是一块独立看板；定稿作品在「作品」里。")}</p>',
+        f'        <h1 class="page-h1">{bi("Tools", "工具")}</h1>',
+        f'        <p class="page-lead">{bi("Tools I build and keep running, for working with data and personal systems.", "围绕数据与个人系统，自己开发并持续维护的工具。")}</p>',
         "    </section>",
         '    <div class="plist">',
         *rows,
@@ -456,10 +456,10 @@ def render_projects(config: dict[str, Any], site: dict[str, Any]) -> str:
     ])
     head = render_meta(
         config,
-        title=("Projects · Work · simoncos", "项目 · 作品 · simoncos"),
+        title=("Tools · Work · simoncos", "工具 · 作品 · simoncos"),
         description=(
-            "Maintained public-facing projects from simoncos: tools, deployed systems, and data essays.",
-            "simoncos 持续维护的公开项目：工具、已部署的系统与数据长文。",
+            "Public tools from simoncos for working with data and personal systems.",
+            "simoncos 围绕数据与个人系统开发的公开工具。",
         ),
         canonical="projects.html",
     )

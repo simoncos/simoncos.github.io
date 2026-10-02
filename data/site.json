@@ -3,8 +3,8 @@
     {
       "id": "toolkit",
       "kind": {
-        "en": "Project",
-        "zh": "项目"
+        "en": "Tool",
+        "zh": "工具"
       },
       "work_topic": "projects",
       "home_topic": "build",
@@ -171,11 +171,11 @@
     {
       "id": "endless-echoes",
       "kind": {
-        "en": "Music riddle",
-        "zh": "音乐谜题"
+        "en": "Game",
+        "zh": "游戏"
       },
-      "work_topic": "music",
-      "home_topic": "think",
+      "work_topic": "games",
+      "home_topic": "build",
       "date": "2017-03-25",
       "single": true,
       "title": {
@@ -191,7 +191,11 @@
         "zh": "读一段线索，猜下一首歌，在陈奕迅的 26 首歌之间寻找路径。根据豆列复原的 2017 年音乐谜题。"
       },
       "img": "gallery/music/assets/endless-echoes-cover.svg",
-      "href": "gallery/music/endless-echoes.html"
+      "href": "gallery/music/endless-echoes.html",
+      "work_kind": {
+        "en": "Interactive music riddle",
+        "zh": "交互音乐谜题"
+      }
     }
   ],
   "featured": [
@@ -230,22 +234,22 @@
     {
       "id": "projects",
       "title": {
-        "en": "Projects",
-        "zh": "项目"
+        "en": "Tools",
+        "zh": "工具"
       },
       "line": {
-        "en": "Things I build and keep running.",
-        "zh": "在造、在维护的东西。"
+        "en": "Tools I build and keep running.",
+        "zh": "自己开发、持续维护的工具。"
       },
       "desc": {
-        "en": "Tools and systems that are maintained and running. Each opens as its own board or its own site.",
-        "zh": "持续维护、正在运行的工具和系统。每个项目打开是一块独立看板，或者一个独立的站点。"
+        "en": "Public tools for working with data and personal systems.",
+        "zh": "围绕数据与个人系统，自己开发并公开使用的工具。"
       },
       "related": [
         {
           "label": {
-            "en": "All projects",
-            "zh": "全部项目"
+            "en": "All tools",
+            "zh": "全部工具"
           },
           "kind": {
             "en": "List",
@@ -255,6 +259,21 @@
           "arrow": "→"
         }
       ]
+    },
+    {
+      "id": "games",
+      "title": {
+        "en": "Games",
+        "zh": "游戏"
+      },
+      "line": {
+        "en": "Worlds and puzzles to play through.",
+        "zh": "可以走进去玩的世界与谜题。"
+      },
+      "desc": {
+        "en": "Interactive games and puzzles: follow clues, make choices and explore.",
+        "zh": "沿着线索探索，在选择中前进的交互游戏与谜题。"
+      }
     },
     {
       "id": "talks",
@@ -324,8 +343,8 @@
             "zh": "Sleep Toolkit"
           },
           "kind": {
-            "en": "Project",
-            "zh": "项目"
+            "en": "Tool",
+            "zh": "工具"
           },
           "href": {
             "en": "projects/sleep-toolkit.en.html",
@@ -342,12 +361,12 @@
         "zh": "音乐"
       },
       "line": {
-        "en": "Songs and the paths between them.",
-        "zh": "歌，以及歌与歌之间的路。"
+        "en": "Songs I wrote and sang.",
+        "zh": "自己作词作曲、自己唱的歌。"
       },
       "desc": {
-        "en": "An original recording and a branching music riddle.",
-        "zh": "原创歌曲，也有沿着声音寻找线索的谜题。"
+        "en": "Original songs, published with the recording and the lyrics.",
+        "zh": "原创歌曲，连同录音和歌词一起发布。"
       }
     }
   ],
