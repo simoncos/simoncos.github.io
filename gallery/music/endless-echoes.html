@@ -20,7 +20,7 @@
     <meta name="twitter:title" content="Endless Echoes · simoncos">
     <meta name="twitter:description" content="A branching music riddle through 36 songs, first made in 2017.">
     <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
-<link rel="stylesheet" href="assets/endless-echoes.css?v=20261002f">
+<link rel="stylesheet" href="assets/endless-echoes.css?v=20261002g">
     <!-- site-shell:resources:start -->
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/icons/apple-touch-icon.png">
@@ -32,10 +32,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"></noscript>
-    <script src="../../src/js/theme-init.js?v=20261002f"></script>
+    <script src="../../src/js/theme-init.js?v=20261002g"></script>
     <link rel="stylesheet" href="../../src/css/styles.css?v=20261002b">
-    <script src="../../src/js/site.js?v=20261002f" defer></script>
-    <script src="../../src/js/music-riddle.js?v=20261002f" defer></script>
+    <script src="../../src/js/site.js?v=20261002g" defer></script>
+    <script src="../../src/js/music-riddle.js?v=20261002g" defer></script>
     <!-- site-shell:resources:end -->
 </head>
 <body class="music-riddle">
@@ -69,7 +69,7 @@
 <main id="main" class="echo-main" tabindex="-1">
     <div class="echo-top"><a href="../../gallery.html#games">← <span data-l="en">Work · Games</span><span data-l="zh" lang="zh-Hans">作品 · 游戏</span></a><span>2017 / 2026</span></div>
     <header class="echo-intro">
-      <div><p class="echo-kicker"><span data-l="en">A BRANCHING MUSIC RIDDLE</span><span data-l="zh" lang="zh-Hans">从陈奕迅出发 · 广域音乐谜题</span></p>
+      <div><p class="echo-kicker"><span data-l="en">A MUSIC RIDDLE · EXPANDED EDITION</span><span data-l="zh" lang="zh-Hans">音乐谜题 · 扩展版</span></p>
       <h1><span data-l="en">Endless</span><span data-l="zh" lang="zh-Hans">漫无止尽</span><br><span data-l="en">Echoes</span><span data-l="zh" lang="zh-Hans">的回响</span></h1></div>
       <div class="echo-intro-note"><span class="echo-count">36</span><p><span data-l="en">songs. More than one way through.</span><span data-l="zh" lang="zh-Hans">首歌，不止一条路。</span></p><p><span data-l="en">Read a clue, name the next song.</span><span data-l="zh" lang="zh-Hans">读一段线索，猜下一首歌。</span><br><span data-l="en">Follow what you remember.</span><span data-l="zh" lang="zh-Hans">沿着你记得的声音走。</span></p></div>
     </header>
@@ -87,7 +87,7 @@
         <p class="echo-feedback" id="echo-feedback" role="status" aria-live="polite"></p>
         <div class="echo-ending" id="echo-ending" hidden><p><span data-l="en">You have found the ending. Other paths are still waiting.</span><span data-l="zh" lang="zh-Hans">你找到了终点。还有一些路，等你回去走。</span></p><button class="echo-button" data-go-start type="button"><span data-l="en">Explore another branch</span><span data-l="zh" lang="zh-Hans">回到起点，走另一条路</span></button></div>
         <div class="echo-ending" id="echo-dead-end" hidden><button class="echo-button" data-return-branch type="button"><span data-l="en">Return to the previous song</span><span data-l="zh" lang="zh-Hans">退回上一首</span></button></div>
-        <div class="echo-help echo-js"><details id="echo-hint"><summary><span data-l="en">A little hint</span><span data-l="zh" lang="zh-Hans">一点提示</span></summary><p id="echo-hint-text"></p></details><details id="echo-reveal"><summary><span data-l="en">Reveal the next songs</span><span data-l="zh" lang="zh-Hans">揭晓下一首（会显示答案）</span></summary><div id="echo-reveal-choices"></div></details></div>
+        <div class="echo-help echo-js"><details id="echo-hint"><summary><span data-l="en">Get a hint</span><span data-l="zh" lang="zh-Hans">给我一点提示</span></summary><p id="echo-hint-text"></p></details><details id="echo-reveal"><summary><span data-l="en">Show answers</span><span data-l="zh" lang="zh-Hans">揭晓答案</span></summary><p><span data-l="en">Choose a song below to follow that path.</span><span data-l="zh" lang="zh-Hans">选择下方的歌，沿这条路继续。</span></p><div id="echo-reveal-choices"></div></details></div>
         <noscript><p class="echo-noscript"><span data-l="en">The interactive trail needs JavaScript. You can follow the original clues in the Douban list below; start with 不来也不去.</span><span data-l="zh" lang="zh-Hans">开启 JavaScript 可在这里猜歌和保存进度。也可以在下方豆列阅读原始线索，从《不来也不去》开始。</span></p></noscript>
       </section>
       <section class="echo-map-panel" aria-labelledby="echo-map-heading">
@@ -98,7 +98,7 @@
       </section>
     </div>
     <section class="echo-collection echo-js" aria-labelledby="echo-collection-heading"><div class="echo-panel-top"><h2 id="echo-collection-heading"><span data-l="en">THE SONGS YOU FOUND</span><span data-l="zh" lang="zh-Hans">已经找到的歌</span></h2><span id="echo-save-status"></span></div><div class="echo-song-list" id="echo-song-list"></div><details class="echo-reset"><summary><span data-l="en">Start a fresh trail</span><span data-l="zh" lang="zh-Hans">重新开始</span></summary><p><span data-l="en">This clears the saved trail in this browser.</span><span data-l="zh" lang="zh-Hans">这会清除这个浏览器里保存的进度。</span></p><button type="button" data-reset><span data-l="en">Clear my trail and restart</span><span data-l="zh" lang="zh-Hans">清除进度，从头开始</span></button></details></section>
-    <section class="echo-about"><h2><span data-l="en">A riddle that outlived its platform</span><span data-l="zh" lang="zh-Hans">一个比平台活得更久的谜</span></h2><div><p><span data-l="en">In March 2017, I hid clues in comments on Eason Chan’s songs on Xiami. One song led to another; some paths branched, some met again, and some led nowhere. There was one ending, and 26 songs to collect.</span><span data-l="zh" lang="zh-Hans">2017 年 3 月，我把谜面藏在虾米音乐的陈奕迅歌曲评论里。一首歌引向另一首，有的分岔，有的重逢，也有死胡同。终点只有一个，等待收集的歌有 26 首。</span></p><p><span data-l="en">Xiami has since closed. This edition rebuilds the trail from the surviving Douban list. Lyric quotations become descriptions of their imagery; song titles remain in their original Chinese or English. This expanded edition adds new paths, dead ends and a hidden echo for those who find every song. You can reach the ending without finding every song.</span><span data-l="zh" lang="zh-Hans">虾米后来关闭了。这个版本根据保留下来的豆列重建路径，将歌词引用改为意象提示，保留原始歌名。本次扩展加入新的分支与死胡同，集齐所有歌曲后，还会出现隐藏的回响。不必集齐所有歌，也能到达终点。</span></p><p><span data-l="en">The trail starts with Eason Chan and follows echoes into other songs. Knowing the music helps; hints and optional reveals are here if you get stuck. Progress stays in this browser.</span><span data-l="zh" lang="zh-Hans">从陈奕迅的歌出发，走进彼此呼应的作品。熟悉歌曲会更容易；卡住时可以看提示，或主动揭晓下一首。进度保存在这个浏览器里。</span></p><div class="echo-source-links"><a href="https://www.douban.com/doulist/45894638/"><span data-l="en">Original clues on Douban (in Chinese)</span><span data-l="zh" lang="zh-Hans">豆列中的原始谜面</span> ↗</a><a href="https://www.jianshu.com/p/bacb95af08b1"><span data-l="en">The 2017 introduction (in Chinese)</span><span data-l="zh" lang="zh-Hans">2017 年的原始介绍</span> ↗</a></div></div></section>
+    <section class="echo-about"><h2><span data-l="en">The echoes continue.</span><span data-l="zh" lang="zh-Hans">旧日的谜，新的回响。</span></h2><div><p><span data-l="en">This is the expanded edition of a music riddle first made in 2017. The original 26 songs have grown into 36, with new branches, dead ends and a hidden echo waiting beyond the complete collection.</span><span data-l="zh" lang="zh-Hans">这是 2017 年音乐谜题的扩展版。原来的 26 首歌，如今延展为 36 首：新增的分支、死胡同，以及集齐之后才会出现的隐藏回响，让旧日的线索有了新的去处。</span></p><p><span data-l="en">Read the clue and guess which song it leads to. Some paths meet again; others bring you back to the beginning. You can reach the ending before finding every song, then return to explore the paths you missed.</span><span data-l="zh" lang="zh-Hans">读一段谜面，猜它指向的下一首歌。有些路会重逢，有些会带你回到最初。不必集齐所有歌，也能到达终点；抵达之后，仍可以回头寻找未曾走过的分支。</span></p><p><span data-l="en">The original trail lived in Xiami playlist comments. After the platform closed, its surviving archive and Douban list helped bring it back. If you get stuck, ask for a hint or reveal the answers. Your progress is saved in this browser.</span><span data-l="zh" lang="zh-Hans">最初的谜面藏在虾米歌单的推荐语里。平台关闭后，留下的存档和豆列让这条路得以重建。卡住时，可以先看提示，也可以主动揭晓答案。进度会保存在这个浏览器里。</span></p><div class="echo-source-links"><a href="https://www.douban.com/doulist/45894638/"><span data-l="en">Original clues on Douban (in Chinese)</span><span data-l="zh" lang="zh-Hans">豆列中的原始谜面</span> ↗</a><a href="https://www.jianshu.com/p/bacb95af08b1"><span data-l="en">The 2017 introduction (in Chinese)</span><span data-l="zh" lang="zh-Hans">2017 年的原始介绍</span> ↗</a></div></div></section>
     </main>
     <!-- site-shell:footer:start -->
     <footer class="ftr">
