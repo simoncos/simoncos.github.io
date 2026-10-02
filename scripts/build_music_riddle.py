@@ -74,7 +74,7 @@ def render_music_riddle(config):
       <h1>{b('Endless','漫无止尽')}<br>{b('Echoes','的回响')}</h1>
       <div class="echo-intro-note"><span class="echo-count">{song_count}</span><p>{b('songs. More than one way through.','首歌，不止一条路。')}</p><p>{b('Read a clue, name the next song.','读一段线索，猜下一首歌。')}<br> {b('Follow what you remember.','沿着你记得的声音走。')}</p></div>
       <a class="echo-begin" href="#echo-game">{b('Begin the trail','开始探索')} <span aria-hidden="true">↘</span></a></div>
-      <figure class="echo-hero-art"><img src="assets/endless-echoes-garden-v3.webp" width="1200" height="800" alt="" fetchpriority="high" decoding="async"></figure>
+      <figure class="echo-hero-art"><img src="assets/endless-echoes-garden-v5.webp" width="1200" height="800" alt="" fetchpriority="high" decoding="async"></figure>
     </header>
     <div id="echo-game" class="echo-game" data-echo-game>
       <div class="echo-toolbar"><div><h2>{b('ENDLESS ECHOES','漫无止尽的回响')}</h2><p>{b('Read the clue. Find the next song.','读一段线索，猜下一首歌。')}</p></div><button type="button" class="echo-sound echo-js" data-sound aria-pressed="true"><span aria-hidden="true">♫</span><span data-sound-label>{b('Sound on','音效：开')}</span></button></div>
@@ -122,7 +122,7 @@ def render_music_cover(portrait=False):
     """Use the same artwork as the page; keep crisp, editable text in SVG."""
     data = load_music_riddle()
     count = len(data['nodes']) - bool(data.get('bonus'))
-    artwork = base64.b64encode((ROOT / 'gallery/music/assets/endless-echoes-garden-v3.webp').read_bytes()).decode('ascii')
+    artwork = base64.b64encode((ROOT / 'gallery/music/assets/endless-echoes-garden-v5.webp').read_bytes()).decode('ascii')
     width, height = (600, 800) if portrait else (960, 600)
     if portrait:
         art = f'<image href="data:image/webp;base64,{artwork}" x="0" y="230" width="600" height="400"/>'
