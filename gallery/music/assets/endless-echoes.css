@@ -15,7 +15,7 @@
 .echo-panel-top h2{font:inherit;margin:0}
 .echo-clue-panel h2{font-size:32px;line-height:1.35;font-weight:500;margin:27px 0 22px;letter-spacing:-.02em}
 .echo-clue{font-size:16px;line-height:1.95;margin:0 0 20px;white-space:pre-line}
-.echo-branch{font:12px/1.7 var(--mono);color:var(--echo-accent);margin:auto 0 18px;padding-top:10px}
+.echo-branch{white-space:pre-line;font:12px/1.7 var(--mono);color:var(--echo-accent);margin:auto 0 18px;padding-top:10px}
 .echo-answer label{font-size:12px;display:block;margin-bottom:10px;color:var(--echo-soft)}
 .echo-input-row{display:flex;flex-direction:column;gap:10px}
 .echo-input-row input{width:100%;height:46px;background:#222e2a;border:1px solid #667067;border-radius:3px;color:var(--echo-ink);font:inherit;padding:0 12px}
@@ -40,6 +40,8 @@
 .echo-edge{fill:none;stroke:#758271;stroke-width:1;opacity:.25;transition:opacity .25s}
 .echo-edge.is-found{stroke:#eec298;opacity:.65;stroke-width:1.5}
 .echo-edge.is-current{opacity:1;stroke-width:2}
+.echo-edge.is-next{stroke:#eec298;opacity:.85;stroke-width:2;stroke-dasharray:5 4}
+.echo-edge.is-incoming{opacity:.3}
 .echo-node{color:#97a392}
 .echo-node circle:not(.echo-halo){fill:#23372d;stroke:#74846d;stroke-width:1.5}
 .echo-node .echo-halo{fill:transparent;stroke:transparent}

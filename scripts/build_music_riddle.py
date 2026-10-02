@@ -10,12 +10,13 @@ def map_svg(data):
     nodes = {n['id']: n for n in data['nodes']}
     parts = [f'<svg class="echo-map" viewBox="0 0 {data["map"]["width"]} {data["map"]["height"]}" role="group" aria-labelledby="echo-map-title">',
              f'<title id="echo-map-title">{len(nodes)} songs connected by {sum(len(n["next"]) for n in nodes.values())} paths · {len(nodes)} 首歌，{sum(len(n["next"]) for n in nodes.values())} 条路径</title>']
+    parts.append('<defs><marker id="echo-arrow" viewBox="0 0 8 8" refX="19" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#97a392"/></marker><marker id="echo-arrow-active" viewBox="0 0 8 8" refX="19" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#eec298"/></marker></defs>')
     for node in nodes.values():
         x, y = node['position']
         for target in node['next']:
             xx, yy = nodes[target]['position']
             bend = min(abs(xx-x)*.3+25, 90) * (1 if yy >= y else -1)
-            parts.append(f'<path class="echo-edge" data-from="{node["id"]}" data-to="{target}" d="M{x},{y} C{x+bend},{y-35} {xx-bend},{yy+35} {xx},{yy}"/>')
+            parts.append(f'<path class="echo-edge" data-from="{node["id"]}" data-to="{target}" marker-end="url(#echo-arrow)" d="M{x},{y} C{x+bend},{y-35} {xx-bend},{yy+35} {xx},{yy}"/>')
     for i, node in enumerate(data['nodes'], 1):
         x, y = node['position']
         start = node['id'] == data['start']
@@ -53,17 +54,20 @@ def render_music_riddle(config):
       <section class="echo-map-panel" aria-labelledby="echo-map-heading">
         <div class="echo-panel-top"><h2 id="echo-map-heading">{b('YOUR ECHOES','你的回响')}</h2><button class="echo-text-button echo-js" type="button" data-map-zoom aria-pressed="false">{b('Enlarge map','放大地图')}</button><span class="echo-progress"><span id="echo-found-count">1</span> / {len(data["nodes"])}</span></div>
         <div class="echo-map-stage">{map_svg(data)}</div>
-        <div class="echo-map-key"><span><i class="echo-key-found"></i>{b('Found','已找到')}</span><span><i class="echo-key-unknown"></i>{b('Still unheard','尚未抵达')}</span><span class="echo-map-instruction">{b('Revisit a lit song','点亮的歌可以再次打开')}</span></div>
+        <div class="echo-map-key"><span><i class="echo-key-found"></i>{b('Found','已找到')}</span><span><i class="echo-key-unknown"></i>{b('Still unheard','尚未抵达')}</span><span>→ {b('Arrows lead to the next song','箭头指向下一首')}</span><span class="echo-map-instruction">{b('Revisit a lit song','点亮的歌可以再次打开')}</span></div>
       </section>
     </div>
     <section class="echo-collection echo-js" aria-labelledby="echo-collection-heading"><div class="echo-panel-top"><h2 id="echo-collection-heading">{b('THE SONGS YOU FOUND','已经找到的歌')}</h2><span id="echo-save-status"></span></div><div class="echo-song-list" id="echo-song-list"></div><details class="echo-reset"><summary>{b('Start a fresh trail','重新开始')}</summary><p>{b('This clears the saved trail in this browser.','这会清除这个浏览器里保存的进度。')}</p><button type="button" data-reset>{b('Clear my trail and restart','清除进度，从头开始')}</button></details></section>
     <section class="echo-about"><h2>{b('A riddle that outlived its platform','一个比平台活得更久的谜')}</h2><div><p>{b('In March 2017, I hid clues in comments on Eason Chan’s songs on Xiami. One song led to another; some paths branched, some met again, and some led nowhere. There was one ending, and 26 songs to collect.','2017 年 3 月，我把谜面藏在虾米音乐的陈奕迅歌曲评论里。一首歌引向另一首，有的分岔，有的重逢，也有死胡同。终点只有一个，等待收集的歌有 26 首。')}</p><p>{b('Xiami has since closed. This edition rebuilds the trail from the surviving Douban list. Lyric quotations become descriptions of their imagery; song titles remain in their original Chinese or English. You can reach the ending without finding every song.','虾米后来关闭了。这个版本根据保留下来的豆列重建路径，将歌词引用改为意象提示，保留原始歌名。不必集齐所有歌，也能到达终点。')}</p><p>{b('All answers are Eason Chan songs. Knowing the songs helps; hints and optional reveals are here if you get stuck. Progress stays in this browser.','谜底都在陈奕迅的歌里。熟悉歌曲会更容易；卡住时可以看提示，或主动揭晓下一首。进度保存在这个浏览器里。')}</p><div class="echo-source-links"><a href="https://www.douban.com/doulist/45894638/">{b('Original clues on Douban (in Chinese)','豆列中的原始谜面')} ↗</a><a href="https://www.jianshu.com/p/bacb95af08b1">{b('The 2017 introduction (in Chinese)','2017 年的原始介绍')} ↗</a></div></div></section>
     </main>'''
     head = render_meta(config, title=('Endless Echoes · simoncos','漫无止尽的回响 · simoncos'), description=('A branching music riddle through 26 Eason Chan songs, first made in 2017.','一场穿过陈奕迅 26 首歌的音乐谜题，沿线索点亮歌曲之间的回响。'), canonical=PAGE)
-    head += '\n<link rel="stylesheet" href="assets/endless-echoes.css?v=20261002b">'
+    head += '\n<link rel="stylesheet" href="assets/endless-echoes.css?v=20261002c">'
     # Runtime only needs clues and the graph, not historical source annotations.
     payload = {key:data[key] for key in ('id','start','ending')}
     payload['nodes'] = [{k:v for k,v in n.items() if k in ('id','title','aliases','clue','hint','next','dead_ends','position')} for n in data['nodes']]
+    for source, node in zip(data['nodes'], payload['nodes']):
+        if source.get('open_answers'):
+            node['open_answers'] = [{k:a[k] for k in ('title','aliases')} for a in source['open_answers']]
     serialized = json.dumps(payload,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')
     return render_document(config,page_config(config,PAGE),head=head,main=main,body_attrs=' class="music-riddle"',tail=f'<script type="application/json" id="echo-data">{serialized}</script>')
 

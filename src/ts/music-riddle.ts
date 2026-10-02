@@ -1,5 +1,6 @@
 (function () {
-    interface Song { id:string; title:string; aliases:string[]; next:string[]; clue:{en:string;zh:string}; hint:{en:string;zh:string}; dead_ends?:string[] }
+    interface OpenAnswer { title:string; aliases:string[] }
+    interface Song { id:string; title:string; aliases:string[]; next:string[]; clue:{en:string;zh:string}; hint:{en:string;zh:string}; dead_ends?:string[]; open_answers?:OpenAnswer[] }
     interface Riddle { id:string; start:string; ending:string; nodes:Song[] }
     interface Trail { current:string; found:string[]; edges:string[]; history:string[] }
     const root=document.querySelector<HTMLElement>('[data-echo-game]');
@@ -47,12 +48,22 @@
         notice=()=>t('Found: ','找到了：')+songs.get(id).title+(id===data.ending?t(' · The ending.',' · 终点。'):'');
         render();document.getElementById('echo-song').focus({preventScroll:true});
     }
+    function acknowledgeOpen(answer:OpenAnswer){
+        notice=()=>t(`You found ${answer.title}. Its next clue is still blank; explore another branch for now.`,
+            `接上了《${answer.title}》。后续谜面暂空，可以先探索其他分支。`);
+        input.value='';render();
+    }
     function render(){
         const song=songs.get(trail.current),ending=song.id===data.ending;
         const heading=document.getElementById('echo-song');heading.textContent=song.title;heading.tabIndex=-1;
         document.getElementById('echo-clue').textContent=t(song.clue.en,song.clue.zh);
         const remaining=song.next.filter(id=>!trail.edges.includes(song.id+':'+id)).length;
-        document.getElementById('echo-branch').textContent=ending?t('ENDING FOUND','已抵达终点'):song.next.length?t(`${remaining} of ${song.next.length} paths still to follow here`,`${song.next.length} 条路 · 还有 ${remaining} 条未走`):t('A detour. Guess the song, then return to another branch.','一条岔路。猜猜它指向的歌，再回头走其他分支。');
+        const total=song.next.length, explored=total-remaining;
+        let branch=ending?t('ENDING FOUND','已抵达终点'):total?
+            (remaining?t(`${total} outgoing ${total===1?'path':'paths'} · ${explored} explored`,`下一步 ${total} 条 · 已走通 ${explored} 条`):t(`${total} outgoing ${total===1?'path':'paths'} · all explored`,`下一步 ${total} 条 · 已全部走通`)):
+            t('Guess this side branch, then return to another song.','猜猜这条支线，再回到其他歌继续。');
+        if(song.open_answers?.length)branch+='\n'+t(`${song.open_answers.length} answer has no next clue yet`,`另有 ${song.open_answers.length} 个答案，后续暂空`);
+        document.getElementById('echo-branch').textContent=branch;
         form.hidden=ending;document.getElementById('echo-ending').hidden=!ending;
         document.querySelector<HTMLElement>('.echo-help').hidden=ending;
         document.querySelector<HTMLButtonElement>('[data-back]').disabled=!trail.history.length;
@@ -61,7 +72,8 @@
         const choices=document.getElementById('echo-reveal-choices');choices.replaceChildren();
         if(reveal.open) {
             if(song.next.length)for(const id of song.next){const button=document.createElement('button');button.type='button';button.textContent=songs.get(id).title+' →';button.addEventListener('click',()=>solve(id));choices.append(button);}
-            else {const p=document.createElement('p');p.textContent=t('This clue points to a dead end: ','这条线索指向一条死胡同：')+(song.dead_ends?.[0]||'');choices.append(p);}
+            else if(song.dead_ends?.length){const p=document.createElement('p');p.textContent=t('This side branch has no further clue here: ','这条支线在这里没有后续谜面：')+song.dead_ends[0];choices.append(p);}
+            for(const answer of song.open_answers||[]){const button=document.createElement('button');button.type='button';button.textContent=answer.title+t(' · next clue pending',' · 后续待补');button.addEventListener('click',()=>acknowledgeOpen(answer));choices.append(button);}
         }
         const list=document.getElementById('echo-song-list');list.replaceChildren(...trail.found.map(id=>{
             const button=document.createElement('button');button.type='button';button.textContent=songs.get(id).title;button.setAttribute('aria-current',String(id===song.id));button.addEventListener('click',()=>visit(id));return button;
@@ -80,7 +92,12 @@
         });
         root.querySelectorAll<SVGPathElement>('[data-from]').forEach(edge=>{
             const found=trail.edges.includes(edge.dataset.from+':'+edge.dataset.to);
-            edge.classList.toggle('is-found',found);edge.classList.toggle('is-current',found&&(edge.dataset.from===song.id||edge.dataset.to===song.id));
+            const outgoing=edge.dataset.from===song.id;
+            edge.classList.toggle('is-found',found);
+            edge.classList.toggle('is-current',found&&outgoing);
+            edge.classList.toggle('is-next',!found&&outgoing);
+            edge.classList.toggle('is-incoming',edge.dataset.to===song.id);
+            edge.setAttribute('marker-end',outgoing?'url(#echo-arrow-active)':'url(#echo-arrow)');
         });
     }
     document.getElementById('echo-form').addEventListener('submit',event=>{
@@ -88,7 +105,9 @@
         if(!guess)return;
         const answer=song.next.find(id=>[songs.get(id).title,...songs.get(id).aliases].some(answer=>norm(answer)===guess));
         if(answer){solve(answer);return;}
-        if(song.dead_ends?.some(n=>norm(n)===guess))notice=()=>t('You found an original dead end. There is no next clue here; revisit another song below.','你猜到了一条原版死胡同。这里没有下一条谜面，可以在下方回到其他歌。');
+        const openAnswer=song.open_answers?.find(answer=>[answer.title,...answer.aliases].some(value=>norm(value)===guess));
+        if(openAnswer){acknowledgeOpen(openAnswer);return;}
+        if(song.dead_ends?.some(n=>norm(n)===guess))notice=()=>t('You found a side branch with no next clue here; revisit another song below.','你接上了一条支线。这里没有下一条谜面，可以在下方回到其他歌。');
         else notice=()=>t('That song doesn’t follow this clue. Try another, or open a hint.','这首歌没有接上当前线索。可以再试一首，或打开提示。');
         render();input.select();
     });

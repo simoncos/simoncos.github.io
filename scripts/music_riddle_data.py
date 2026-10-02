@@ -112,8 +112,41 @@ def validate(data):
                 answers[normalized] = target
         for answer in node.get('dead_ends', []):
             require(normalize_answer(answer) not in answers, f'{node_id}: detour also matches a next song: {answer}')
+            answers[normalize_answer(answer)] = 'dead-end'
+        open_answers = node.get('open_answers', [])
+        require(isinstance(open_answers, list), f'{node_id}.open_answers: expected an array')
+        for index, answer in enumerate(open_answers):
+            text(answer.get('title'), f'{node_id}.open_answers.title')
+            strings(answer.get('aliases'), f'{node_id}.open_answers.aliases')
+            require('clue' in answer and answer['clue'] is None and 'next' in answer and answer['next'] is None,
+                    f'{node_id}: an open answer must keep its unknown clue and next empty')
+            review = answer.get('review', {})
+            require(review.get('status') == 'confirmed', f'{node_id}: an open answer needs author confirmation')
+            for field in ('by', 'note'):
+                text(review.get(field), f'{node_id}.open_answers.review.{field}')
+            iso_date(review.get('date'), f'{node_id}.open_answers.review.date')
+            for value in [answer['title'], *answer['aliases']]:
+                normalized = normalize_answer(value)
+                identity = f'open-{index}'
+                require(normalized not in answers or answers[normalized] == identity,
+                        f'{node_id}: ambiguous open answer {value}')
+                answers[normalized] = identity
+        if 'route_audit' in node:
+            audit = node['route_audit']
+            iso_date(audit.get('date'), f'{node_id}.route_audit.date')
+            text(audit.get('note'), f'{node_id}.route_audit.note')
+            require(isinstance(audit.get('confirmed_additions'), list), f'{node_id}: expected confirmed_additions array')
+            for addition in audit['confirmed_additions']:
+                require(addition.get('target') in node['next'], f'{node_id}: confirmed route is absent from next')
+                for field in ('by', 'note'):
+                    text(addition.get(field), f'{node_id}.confirmed_additions.{field}')
+                iso_date(addition.get('date'), f'{node_id}.confirmed_additions.date')
+            require(isinstance(audit.get('candidates'), list), f'{node_id}: expected route candidates array')
+            for candidate in audit['candidates']:
+                text(candidate.get('title'), f'{node_id}.route_candidate.title')
+                text(candidate.get('reason'), f'{node_id}.route_candidate.reason')
         if node_id != data['ending'] and not node['next']:
-            require(bool(node.get('dead_ends')), f'{node_id}: a non-ending leaf needs dead_ends answers')
+            require(bool(node.get('dead_ends') or open_answers), f'{node_id}: a non-ending leaf needs an explained answer')
         for predecessor in node.get('source', {}).get('predecessors', []):
             require(predecessor.get('id') in by_id, f'{node_id}: unknown historical predecessor')
             text(predecessor.get('title'), f'{node_id}.source.predecessors.title')
@@ -141,6 +174,8 @@ if __name__ == '__main__':
     except (ValueError, OSError, TypeError, KeyError, AttributeError) as exc:
         parser.exit(1, f'Invalid puzzle: {exc}\n')
     pending = [n for n in puzzle['nodes'] if n['identity']['review']['status'] == 'pending']
-    print(f"Valid: {puzzle['id']} · {len(puzzle['nodes'])} songs · {sum(len(n['next']) for n in puzzle['nodes'])} paths · {len(pending)} pending identities")
+    candidates = sum(len(n.get('route_audit', {}).get('candidates', [])) for n in puzzle['nodes'])
+    open_answers = sum(len(n.get('open_answers', [])) for n in puzzle['nodes'])
+    print(f"Valid: {puzzle['id']} · {len(puzzle['nodes'])} songs · {sum(len(n['next']) for n in puzzle['nodes'])} paths · {len(pending)} pending identities · {candidates} candidate routes · {open_answers} open answers")
     for node in pending:
         print(f"  {node['id']}: {node['title']}")
