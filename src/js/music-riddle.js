@@ -9,7 +9,7 @@
     const t = (en, zh) => window.SITE_SHELL?.lang === 'zh' ? zh : en;
     const norm = (value) => value.normalize('NFKC').toLowerCase().replace(/[\s《》「」『』·.,，。!?！？’'"-]/g, '');
     const fresh = () => ({ current: data.start, found: [data.start], edges: [], history: [] });
-    let trail = fresh(), storage = true, zoomed = false;
+    let trail = fresh(), storage = true, zoomed = window.matchMedia('(max-width: 650px)').matches;
     try {
         const saved = JSON.parse(localStorage.getItem(key) || 'null');
         if (saved && typeof saved === 'object' && Array.isArray(saved.found) && Array.isArray(saved.edges) && Array.isArray(saved.history)) {
@@ -32,11 +32,97 @@
         }
     }
     const input = document.querySelector('#echo-answer');
+    input.setAttribute('aria-describedby', 'echo-feedback');
     const feedback = document.getElementById('echo-feedback');
     const form = document.getElementById('echo-form');
     const hint = document.getElementById('echo-hint');
     const reveal = document.getElementById('echo-reveal');
     let notice = () => '';
+    let feedbackKind = '';
+    const soundKey = key + '-sound';
+    let soundEnabled = true, soundAvailable = true, audioContext = null;
+    const voices = new Set();
+    try {
+        soundEnabled = localStorage.getItem(soundKey) !== 'off';
+    }
+    catch { }
+    function renderSound() {
+        const button = root.querySelector('[data-sound]');
+        button.disabled = !soundAvailable;
+        button.setAttribute('aria-pressed', String(soundEnabled && soundAvailable));
+        root.querySelector('[data-sound-label]').textContent = !soundAvailable ? t('Sound unavailable', '音效不可用') : soundEnabled ? t('Sound on', '音效：开') : t('Sound off', '音效：关');
+        button.title = t('A soft note when a new song is found', '首次找到一首歌时，播放一个轻音符');
+    }
+    // Synthesized pentatonic notes, unrelated to the recordings or melodies of the songs.
+    // The context is created only inside an explicit answer/reveal interaction, never on load.
+    async function playBloomNote(id) {
+        if (!soundEnabled || !soundAvailable)
+            return;
+        try {
+            const Audio = window.AudioContext || window.webkitAudioContext;
+            if (!Audio)
+                throw new Error('Audio unavailable');
+            audioContext ?? (audioContext = new Audio());
+            if (audioContext.state === 'suspended')
+                await audioContext.resume();
+            if (!soundEnabled || audioContext.state !== 'running')
+                return;
+            // Bound overlapping notes during rapid answers.
+            if (voices.size >= 4)
+                return;
+            const index = data.nodes.findIndex(n => n.id === id);
+            const midi = [60, 62, 64, 67, 69, 72, 74, 76, 79, 81][index % 10];
+            const frequency = 440 * Math.pow(2, (midi - 69) / 12), now = audioContext.currentTime;
+            const envelope = audioContext.createGain();
+            envelope.gain.setValueAtTime(0, now);
+            envelope.gain.linearRampToValueAtTime(.13, now + .012);
+            envelope.gain.exponentialRampToValueAtTime(.0001, now + 1.1);
+            envelope.connect(audioContext.destination);
+            voices.add(envelope);
+            let active = 2;
+            for (const [multiple, volume] of [[1, 1], [2, .22]]) {
+                const oscillator = audioContext.createOscillator(), partial = audioContext.createGain();
+                oscillator.type = 'sine';
+                oscillator.frequency.value = frequency * multiple;
+                partial.gain.value = volume;
+                oscillator.connect(partial);
+                partial.connect(envelope);
+                oscillator.start(now);
+                oscillator.stop(now + 1.15);
+                oscillator.onended = () => { oscillator.disconnect(); partial.disconnect(); if (--active === 0) {
+                    envelope.disconnect();
+                    voices.delete(envelope);
+                } };
+            }
+        }
+        catch {
+            soundAvailable = false;
+            renderSound();
+        }
+    }
+    function hush() {
+        if (!audioContext)
+            return;
+        for (const voice of voices) {
+            voice.gain.cancelScheduledValues(audioContext.currentTime);
+            voice.gain.setTargetAtTime(0, audioContext.currentTime, .01);
+        }
+    }
+    function focusClue() {
+        const heading = document.getElementById('echo-song');
+        heading.focus({ preventScroll: true });
+        if (window.matchMedia('(max-width: 900px)').matches && heading.getBoundingClientRect().top < 80) {
+            heading.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+        }
+    }
+    function centerCurrentFlower() {
+        if (!zoomed)
+            return;
+        const stage = root.querySelector('.echo-map-stage');
+        const current = root.querySelector('.echo-node.is-current .echo-hit').getBoundingClientRect(), box = stage.getBoundingClientRect();
+        stage.scrollLeft += current.left + current.width / 2 - box.left - stage.clientWidth / 2;
+        stage.scrollTop += current.top + current.height / 2 - box.top - stage.clientHeight / 2;
+    }
     function syncBonus() {
         if (!data.bonus)
             return false;
@@ -54,10 +140,24 @@
         storage = false;
     } }
     let arrivalTimer;
-    function clearArrival() { window.clearTimeout(arrivalTimer); root.classList.remove('is-loop-arrival', 'is-ending-arrival', 'is-song-arrival'); }
-    function animateArrival(kind) {
+    function clearArrival() {
+        window.clearTimeout(arrivalTimer);
+        root.classList.remove('is-loop-arrival', 'is-ending-arrival', 'is-song-arrival');
+        root.querySelectorAll('.is-new').forEach(node => node.classList.remove('is-new'));
+        root.querySelector('[data-travel-glow]').removeAttribute('d');
+    }
+    function animateArrival(kind, previous, id, isNew, bonus) {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches)
             return;
+        const path = Array.from(root.querySelectorAll('[data-from]')).find(edge => edge.dataset.from === previous && edge.dataset.to === id);
+        if (path)
+            root.querySelector('[data-travel-glow]').setAttribute('d', path.getAttribute('d'));
+        root.querySelectorAll('[data-node]').forEach(node => {
+            if ((isNew && node.dataset.node === id) || (bonus && node.dataset.node === data.bonus))
+                node.classList.add('is-new');
+        });
+        // Restart the path sweep even when consecutive answers use the same arrival style.
+        void root.offsetWidth;
         root.classList.add('is-' + kind + '-arrival');
         arrivalTimer = window.setTimeout(clearArrival, 2800);
     }
@@ -71,10 +171,12 @@
         trail.current = id;
         input.value = '';
         notice = () => '';
+        feedbackKind = '';
         hint.open = false;
         reveal.open = false;
         save();
         render();
+        centerCurrentFlower();
     }
     function solve(id) {
         const previous = songs.get(trail.current);
@@ -83,19 +185,24 @@
         const edge = previous.id + ':' + id;
         if (!trail.edges.includes(edge))
             trail.edges.push(edge);
-        if (!trail.found.includes(id))
+        const isNew = !trail.found.includes(id);
+        if (isNew)
             trail.found.push(id);
+        if (isNew)
+            void playBloomNote(id);
         const unlocked = syncBonus();
         visit(id);
         const arrival = id === data.ending ? 'ending' : id === data.start && previous.id !== data.start ? 'loop' : null;
         notice = () => unlocked ? t('Every song is lit. A hidden echo has appeared beside the ending.', '所有歌曲都已点亮。终点旁出现了一段隐藏的回响。') : arrival === 'loop' ? t('Back to the beginning. Your trail remains.', '又回到最初。走过的路还在。') : t('Found: ', '找到了：') + songs.get(id).title + (id === data.ending ? t(' · The ending.', ' · 终点。') : '');
+        feedbackKind = 'success';
         render();
-        animateArrival(arrival || 'song');
-        document.getElementById('echo-song').focus({ preventScroll: true });
+        animateArrival(arrival || 'song', previous.id, id, isNew, unlocked);
+        focusClue();
     }
     function acknowledgeOpen(answer) {
         notice = () => t(`You found ${answer.title}. Its next clue is still blank; explore another branch for now.`, `接上了《${answer.title}》。后续谜面暂空，可以先探索其他分支。`);
         input.value = '';
+        feedbackKind = 'success';
         render();
     }
     function render() {
@@ -103,6 +210,12 @@
         const heading = document.getElementById('echo-song');
         heading.textContent = song.title;
         heading.tabIndex = -1;
+        const songIndex = data.nodes.findIndex(n => n.id === song.id);
+        const family = song.id === data.start ? 1 : ending ? 2 : songIndex % 4;
+        const emblem = root.querySelector('[data-clue-flower]');
+        emblem.className = 'echo-clue-flower bloom-' + family;
+        root.querySelector('[data-clue-art]').src = 'assets/echo-flower-' + ['poppy', 'blue', 'ivory', 'dahlia'][family] + '.webp';
+        root.querySelector('[data-song-number]').textContent = epilogue ? '✧' : String(songIndex + 1).padStart(2, '0');
         const quote = document.getElementById('echo-quote');
         quote.replaceChildren(...(song.quote?.match(/[^，]+，?/g) || []).map(line => { const span = document.createElement('span'); span.textContent = line; return span; }));
         quote.hidden = !song.quote;
@@ -121,6 +234,9 @@
         document.querySelector('.echo-help').hidden = ending || deadEnd || epilogue;
         document.querySelector('[data-back]').disabled = !trail.history.length;
         feedback.textContent = notice();
+        feedback.dataset.kind = feedbackKind;
+        input.setAttribute('aria-invalid', String(feedbackKind === 'error'));
+        renderSound();
         document.getElementById('echo-hint-text').textContent = t(song.hint.en, song.hint.zh);
         const choices = document.getElementById('echo-reveal-choices');
         choices.replaceChildren();
@@ -152,17 +268,21 @@
             button.type = 'button';
             button.textContent = songs.get(id).title;
             button.setAttribute('aria-current', String(id === song.id));
-            button.addEventListener('click', () => visit(id));
+            button.className = 'bloom-' + (id === data.start ? 1 : id === data.ending ? 2 : data.nodes.findIndex(n => n.id === id) % 4);
+            button.addEventListener('click', () => { visit(id); focusClue(); });
             return button;
         }));
-        document.getElementById('echo-found-count').textContent = String(trail.found.filter(id => id !== data.bonus).length);
+        const foundCount = trail.found.filter(id => id !== data.bonus).length;
+        document.getElementById('echo-found-count').textContent = String(foundCount);
+        document.getElementById('echo-progress-bar').value = foundCount;
         const bonusUnlocked = !!data.bonus && trail.found.includes(data.bonus);
         document.getElementById('echo-bonus').hidden = !bonusUnlocked;
         root.querySelector('[data-bonus-link]')?.classList.toggle('is-hidden', !bonusUnlocked);
         root.classList.toggle('is-map-zoomed', zoomed);
         const zoomButton = root.querySelector('[data-map-zoom]');
-        zoomButton.textContent = zoomed ? t('Fit map', '缩回全图') : t('Enlarge map', '放大地图');
+        zoomButton.textContent = zoomed ? t('See full map', '查看全图') : t('Enlarge map', '放大地图');
         zoomButton.setAttribute('aria-pressed', String(zoomed));
+        root.querySelector('.echo-map-instruction').textContent = zoomed ? t('Scroll to explore · select a discovered song to revisit', '滑动查看 · 点击已点亮的节点返回') : t('Select a discovered song to revisit', '点击已点亮的节点，回到那首歌');
         document.getElementById('echo-save-status').textContent = storage ? t('Saved in this browser', '进度已保存在此浏览器') : t('Saving unavailable · progress lasts while this page is open', '无法保存 · 进度仅在此页面打开时保留');
         root.querySelectorAll('[data-node]').forEach(node => {
             const id = node.dataset.node, found = trail.found.includes(id), active = id === song.id;
@@ -216,6 +336,7 @@
             notice = () => t('You found a side branch with no next clue here; revisit another song below.', '你接上了一条支线。这里没有下一条谜面，可以在下方回到其他歌。');
         else
             notice = () => t('That song doesn’t follow this clue. Try another, or open a hint.', '这首歌没有接上当前线索。可以再试一首，或打开提示。');
+        feedbackKind = 'error';
         render();
         input.select();
     });
@@ -225,21 +346,39 @@
         visit(data.bonus); });
     document.querySelector('[data-return-branch]').addEventListener('click', () => { const id = trail.history.pop() || data.nodes.find(n => n.next.includes(trail.current))?.id || data.start; visit(id, false); });
     document.querySelector('[data-go-start]').addEventListener('click', () => visit(data.start));
-    document.querySelector('[data-reset]').addEventListener('click', () => { clearArrival(); trail = fresh(); notice = () => ''; hint.open = false; reveal.open = false; input.value = ''; document.querySelector('.echo-reset').open = false; save(); render(); });
+    document.querySelector('[data-reset]').addEventListener('click', () => { clearArrival(); hush(); trail = fresh(); notice = () => ''; feedbackKind = ''; hint.open = false; reveal.open = false; input.value = ''; document.querySelector('.echo-reset').open = false; save(); render(); });
     hint.addEventListener('toggle', () => { if (hint.open)
         reveal.open = false; });
     reveal.addEventListener('toggle', () => { if (reveal.open)
         hint.open = false; render(); });
-    root.querySelector('[data-map-zoom]').addEventListener('click', () => { zoomed = !zoomed; render(); });
+    root.querySelector('[data-sound]').addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        if (!soundEnabled)
+            hush();
+        try {
+            localStorage.setItem(soundKey, soundEnabled ? 'on' : 'off');
+        }
+        catch { }
+        renderSound();
+    });
+    document.addEventListener('visibilitychange', () => { if (document.hidden)
+        hush(); });
+    root.querySelector('[data-map-zoom]').addEventListener('click', () => {
+        zoomed = !zoomed;
+        render();
+        centerCurrentFlower();
+    });
     root.querySelectorAll('[data-node]').forEach(node => {
-        node.addEventListener('click', () => visit(node.dataset.node));
+        node.addEventListener('click', () => { visit(node.dataset.node); focusClue(); });
         node.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault();
             visit(node.dataset.node);
+            focusClue();
         } });
     });
     window.SITE_SHELL?.onLang?.(render);
     syncBonus();
     save();
     render();
+    centerCurrentFlower();
 })();

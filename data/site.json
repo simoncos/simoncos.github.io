@@ -190,13 +190,13 @@
         "en": "Read a clue, name the next song, and find your way through 36 songs. A 2017 riddle restored from its Douban list.",
         "zh": "读一段线索，猜下一首歌，在36 首歌之间寻找路径。根据豆列复原的 2017 年音乐谜题。"
       },
-      "img": "gallery/music/assets/endless-echoes-cover.svg?v=20261002h",
+      "img": "gallery/music/assets/endless-echoes-cover.svg?v=20261002i",
       "href": "gallery/music/endless-echoes.html",
       "work_kind": {
         "en": "Interactive music riddle",
         "zh": "交互音乐谜题"
       },
-      "wheel_img": "gallery/music/assets/endless-echoes-poster.svg?v=20261002h"
+      "wheel_img": "gallery/music/assets/endless-echoes-poster.svg?v=20261002i"
     }
   ],
   "featured": [
