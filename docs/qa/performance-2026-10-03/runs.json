@@ -1,0 +1,1802 @@
+{
+  "conditions": {
+    "viewport": "390x844",
+    "cpu": 4,
+    "downloadBytesPerSecond": 204800,
+    "latencyMs": 150,
+    "cache": false,
+    "server": "local uncompressed"
+  },
+  "runs": [
+    {
+      "url": "http://localhost:5199/index.html?lang=zh&perf=before",
+      "width": 390,
+      "height": 844,
+      "at": 12445.5,
+      "ready": "complete",
+      "domNodes": 1381,
+      "charts": 0,
+      "nav": {
+        "ttfb": 18.100000008940697,
+        "dcl": 3733.2000000029802,
+        "load": 7614.29999999702,
+        "bytes": 76479
+      },
+      "fcp": 2408,
+      "lcp": 2508,
+      "cls": 0.13462109537077713,
+      "shifts": [
+        {
+          "at": 4798.4000000059605,
+          "value": 0.000008266747606574598
+        },
+        {
+          "at": 9376.5,
+          "value": 0.00034529585289339113
+        },
+        {
+          "at": 9433.10000000894,
+          "value": 0.020017639606639895
+        },
+        {
+          "at": 9476.90000000596,
+          "value": 0.03116576065429488
+        },
+        {
+          "at": 9524.20000000298,
+          "value": 0.02667536573656774
+        },
+        {
+          "at": 9580.40000000596,
+          "value": 0.018066855405200737
+        },
+        {
+          "at": 9628.79999999702,
+          "value": 0.013522323561110156
+        },
+        {
+          "at": 9684.20000000298,
+          "value": 0.009222241994149574
+        },
+        {
+          "at": 9739.40000000596,
+          "value": 0.007786198404951362
+        },
+        {
+          "at": 9796.40000000596,
+          "value": 0.0036120950160434223
+        },
+        {
+          "at": 9843.29999999702,
+          "value": 0.0025073043554961812
+        },
+        {
+          "at": 9890.90000000596,
+          "value": 0.0017000147834297728
+        }
+      ],
+      "longTasks": [
+        {
+          "at": 963.9000000059605,
+          "duration": 119
+        },
+        {
+          "at": 3361.9000000059605,
+          "duration": 375
+        },
+        {
+          "at": 7604.9000000059605,
+          "duration": 249
+        },
+        {
+          "at": 10457.60000000894,
+          "duration": 84
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003b",
+          "bytes": 6529,
+          "decoded": 6529,
+          "transfer": 6829,
+          "duration": 334.20000000298023,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1798.8999999910593,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003b",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 2959.4000000059605,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/home.js?v=20261003b",
+          "bytes": 4177,
+          "decoded": 4177,
+          "transfer": 4477,
+          "duration": 2761,
+          "kind": "script"
+        },
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 2954.7000000029802,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-sleep-scatter.webp",
+          "bytes": 105236,
+          "decoded": 105236,
+          "transfer": 105536,
+          "duration": 1932.2000000029802,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-talk-slides.webp",
+          "bytes": 136498,
+          "decoded": 136498,
+          "transfer": 136798,
+          "duration": 2524.2999999970198,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-abyss-bird.webp",
+          "bytes": 117920,
+          "decoded": 117920,
+          "transfer": 118220,
+          "duration": 3270.6000000089407,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-haba-field-v2.jpg",
+          "bytes": 20577,
+          "decoded": 20577,
+          "transfer": 20877,
+          "duration": 2399.7000000029802,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-designing-design.webp",
+          "bytes": 7998,
+          "decoded": 7998,
+          "transfer": 8298,
+          "duration": 2165.2999999970198,
+          "kind": "img"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400;500;700&display=swap",
+          "bytes": 93147,
+          "decoded": 340630,
+          "transfer": 93447,
+          "duration": 2374.2999999970198,
+          "kind": "link"
+        }
+      ],
+      "phase": "before"
+    },
+    {
+      "url": "http://localhost:5199/projects/sleep-2016-2026.html?lang=zh&perf=before",
+      "width": 390,
+      "height": 844,
+      "at": 19395.19999998808,
+      "ready": "loading",
+      "domNodes": 712,
+      "charts": 0,
+      "nav": {
+        "ttfb": 8.099999994039536,
+        "dcl": 0,
+        "load": 0,
+        "bytes": 82197
+      },
+      "fcp": 16624,
+      "lcp": 16624,
+      "cls": 0,
+      "shifts": [],
+      "longTasks": [
+        {
+          "at": 11942.5,
+          "duration": 4116
+        }
+      ],
+      "resources": [
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 28.100000008940697,
+          "kind": "script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;720&family=Noto+Sans+SC:wght@400;500;700&display=swap",
+          "bytes": 93364,
+          "decoded": 351319,
+          "transfer": 93664,
+          "duration": 1247.4000000059605,
+          "kind": "link"
+        },
+        {
+          "url": "https://cdn.plot.ly/plotly-2.27.0.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 11616.70000000298,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/sleep-essay-editorial.css?v=20261001",
+          "bytes": 14127,
+          "decoded": 14127,
+          "transfer": 14427,
+          "duration": 345.40000000596046,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/sleep-essay-ui.js?v=20260724",
+          "bytes": 3379,
+          "decoded": 3379,
+          "transfer": 3679,
+          "duration": 246,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/sleep-essay-pretext-lab.js?v=20260724-hero2",
+          "bytes": 12644,
+          "decoded": 12644,
+          "transfer": 12944,
+          "duration": 415.70000000298023,
+          "kind": "script"
+        }
+      ],
+      "phase": "before"
+    },
+    {
+      "url": "http://localhost:5199/projects/sleep-2016-2026.html?lang=zh&perf=after",
+      "width": 390,
+      "height": 844,
+      "at": 16682.29999999702,
+      "ready": "complete",
+      "domNodes": 749,
+      "charts": 0,
+      "nav": {
+        "ttfb": 24.799999997019768,
+        "dcl": 15737.40000000596,
+        "load": 16052.70000000298,
+        "bytes": 82190
+      },
+      "fcp": 3184,
+      "lcp": 3184,
+      "cls": 0.0014926332309701407,
+      "shifts": [
+        {
+          "at": 4067.2000000029802,
+          "value": 0.0014926332309701407
+        }
+      ],
+      "longTasks": [
+        {
+          "at": 15538.20000000298,
+          "duration": 201
+        },
+        {
+          "at": 16046.29999999702,
+          "duration": 549
+        },
+        {
+          "at": 16687,
+          "duration": 494
+        },
+        {
+          "at": 17182,
+          "duration": 447
+        }
+      ],
+      "resources": [
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 214.70000000298023,
+          "kind": "script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;720&family=Noto+Sans+SC:wght@400..700&display=swap",
+          "bytes": 31550,
+          "decoded": 125867,
+          "transfer": 31850,
+          "duration": 1175.3999999910593,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/sleep-essay-editorial.css?v=20261001",
+          "bytes": 14127,
+          "decoded": 14127,
+          "transfer": 14427,
+          "duration": 329.20000000298023,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/sleep-chart-loader.js?v=20261003",
+          "bytes": 4209,
+          "decoded": 4209,
+          "transfer": 4509,
+          "duration": 828.5,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/sleep-essay-ui.js?v=20261003",
+          "bytes": 3479,
+          "decoded": 3479,
+          "transfer": 3779,
+          "duration": 224.70000000298023,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/sleep-essay-pretext-lab.js?v=20260724-hero2",
+          "bytes": 12644,
+          "decoded": 12644,
+          "transfer": 12944,
+          "duration": 319.79999999701977,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/vendor/pretext/layout.js",
+          "bytes": 24116,
+          "decoded": 24116,
+          "transfer": 24416,
+          "duration": 3599.7999999970198,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/vendor/pretext/bidi.js",
+          "bytes": 5675,
+          "decoded": 5675,
+          "transfer": 5975,
+          "duration": 275.79999999701977,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/vendor/pretext/analysis.js",
+          "bytes": 42389,
+          "decoded": 42389,
+          "transfer": 42689,
+          "duration": 753,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/vendor/pretext/measurement.js",
+          "bytes": 8097,
+          "decoded": 8097,
+          "transfer": 8397,
+          "duration": 334.09999999403954,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/vendor/pretext/line-break.js",
+          "bytes": 39026,
+          "decoded": 39026,
+          "transfer": 39326,
+          "duration": 721.2999999970198,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/vendor/pretext/line-text.js",
+          "bytes": 2687,
+          "decoded": 2687,
+          "transfer": 2987,
+          "duration": 235.70000000298023,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/vendor/pretext/generated/bidi-data.js",
+          "bytes": 23376,
+          "decoded": 23376,
+          "transfer": 23676,
+          "duration": 467.90000000596046,
+          "kind": "script"
+        }
+      ],
+      "phase": "after"
+    },
+    {
+      "url": "http://localhost:5199/index.html?lang=zh&perf=after",
+      "width": 390,
+      "height": 844,
+      "at": 12393.199999988079,
+      "ready": "complete",
+      "domNodes": 1381,
+      "charts": 0,
+      "nav": {
+        "ttfb": 14,
+        "dcl": 3567.5999999940395,
+        "load": 7269.699999988079,
+        "bytes": 76476
+      },
+      "fcp": 3256,
+      "lcp": 3840,
+      "cls": 0.000008266747606574598,
+      "shifts": [
+        {
+          "at": 4752,
+          "value": 0.000008266747606574598
+        }
+      ],
+      "longTasks": [
+        {
+          "at": 651.5,
+          "duration": 58
+        },
+        {
+          "at": 714.5,
+          "duration": 70
+        },
+        {
+          "at": 3179.199999988079,
+          "duration": 200
+        },
+        {
+          "at": 3415.2999999970198,
+          "duration": 157
+        },
+        {
+          "at": 7268.79999999702,
+          "duration": 151
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003c",
+          "bytes": 6526,
+          "decoded": 6526,
+          "transfer": 6826,
+          "duration": 317.79999999701977,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 2352.0999999940395,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/home.js?v=20261003c",
+          "bytes": 5003,
+          "decoded": 5003,
+          "transfer": 5303,
+          "duration": 2283.5,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003c",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 2304.5,
+          "kind": "script"
+        },
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 2293.0999999940395,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-sleep-scatter.webp",
+          "bytes": 105236,
+          "decoded": 105236,
+          "transfer": 105536,
+          "duration": 2472.7999999970198,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-talk-slides.webp",
+          "bytes": 136498,
+          "decoded": 136498,
+          "transfer": 136798,
+          "duration": 3414.5999999940395,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-abyss-bird.webp",
+          "bytes": 117920,
+          "decoded": 117920,
+          "transfer": 118220,
+          "duration": 6231.20000000298,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-haba-field-v2.jpg",
+          "bytes": 20577,
+          "decoded": 20577,
+          "transfer": 20877,
+          "duration": 1959.7000000029802,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-designing-design.webp",
+          "bytes": 7998,
+          "decoded": 7998,
+          "transfer": 8298,
+          "duration": 1315.2000000029802,
+          "kind": "img"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400..700&display=swap",
+          "bytes": 31358,
+          "decoded": 115178,
+          "transfer": 31658,
+          "duration": 864.5,
+          "kind": "link"
+        }
+      ],
+      "phase": "after"
+    },
+    {
+      "url": "http://localhost:5199/blogs.html?lang=zh&perf=after",
+      "width": 390,
+      "height": 844,
+      "at": 14585.90000000596,
+      "ready": "complete",
+      "domNodes": 3861,
+      "charts": 0,
+      "nav": {
+        "ttfb": 9.5,
+        "dcl": 12745.800000011921,
+        "load": 12800.20000000298,
+        "bytes": 285201
+      },
+      "fcp": 2916,
+      "lcp": 4380,
+      "cls": 0,
+      "shifts": [],
+      "longTasks": [
+        {
+          "at": 570.2000000029802,
+          "duration": 53
+        },
+        {
+          "at": 3656.2000000029802,
+          "duration": 56
+        },
+        {
+          "at": 4607,
+          "duration": 71
+        },
+        {
+          "at": 9413.300000011921,
+          "duration": 127
+        },
+        {
+          "at": 12005.20000000298,
+          "duration": 51
+        },
+        {
+          "at": 12056.40000000596,
+          "duration": 226
+        },
+        {
+          "at": 12559,
+          "duration": 204
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003b",
+          "bytes": 6526,
+          "decoded": 6526,
+          "transfer": 6826,
+          "duration": 264.70000000298023,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1471.0999999940395,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/articles.js?v=20261003b",
+          "bytes": 13896,
+          "decoded": 13896,
+          "transfer": 14196,
+          "duration": 811.2999999970198,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003b",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 836,
+          "kind": "script"
+        },
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 819.1999999880791,
+          "kind": "script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400..700&display=swap",
+          "bytes": 31358,
+          "decoded": 115178,
+          "transfer": 31658,
+          "duration": 809.1000000089407,
+          "kind": "link"
+        }
+      ],
+      "phase": "after"
+    },
+    {
+      "url": "http://localhost:5199/gallery.html?lang=zh&perf=after",
+      "width": 390,
+      "height": 844,
+      "at": 12666.90000000596,
+      "ready": "complete",
+      "domNodes": 725,
+      "charts": 0,
+      "nav": {
+        "ttfb": 9.299999997019768,
+        "dcl": 2939.0999999940395,
+        "load": 7717.4000000059605,
+        "bytes": 40727
+      },
+      "fcp": 2808,
+      "lcp": 7644,
+      "cls": 0,
+      "shifts": [],
+      "longTasks": [
+        {
+          "at": 2761.2000000029802,
+          "duration": 180
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003c",
+          "bytes": 6526,
+          "decoded": 6526,
+          "transfer": 6826,
+          "duration": 309.70000000298023,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003c",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 2109.1000000089407,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 2133,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/work.js?v=20261003c",
+          "bytes": 14165,
+          "decoded": 14165,
+          "transfer": 14465,
+          "duration": 2058.5999999940395,
+          "kind": "script"
+        },
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 2260.2000000029802,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-sleep-toolkit-report.webp",
+          "bytes": 71304,
+          "decoded": 71304,
+          "transfer": 71604,
+          "duration": 1466.7999999970198,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/hn-field-notes-cover.png",
+          "bytes": 210223,
+          "decoded": 210223,
+          "transfer": 210523,
+          "duration": 7367.899999991059,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/endless-echoes-poster.svg?v=20261002j",
+          "bytes": 112614,
+          "decoded": 112614,
+          "transfer": 112914,
+          "duration": 6873.29999999702,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-talk-slides.webp",
+          "bytes": 136498,
+          "decoded": 136498,
+          "transfer": 136798,
+          "duration": 7311.29999999702,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/research/assets/hn-llm-research-cover.svg",
+          "bytes": 1458,
+          "decoded": 1458,
+          "transfer": 1758,
+          "duration": 1442.199999988079,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-hermes-report.webp",
+          "bytes": 80490,
+          "decoded": 80490,
+          "transfer": 80790,
+          "duration": 7015.79999999702,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-sleep-scatter.webp",
+          "bytes": 105236,
+          "decoded": 105236,
+          "transfer": 105536,
+          "duration": 7383.4000000059605,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-qingtian.webp",
+          "bytes": 17428,
+          "decoded": 17428,
+          "transfer": 17728,
+          "duration": 3350.7000000029802,
+          "kind": "img"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400..700&display=swap",
+          "bytes": 31358,
+          "decoded": 115178,
+          "transfer": 31658,
+          "duration": 856.2000000029802,
+          "kind": "link"
+        }
+      ],
+      "phase": "after"
+    },
+    {
+      "url": "http://localhost:5199/favorites/film.html?lang=zh&perf=after",
+      "width": 390,
+      "height": 844,
+      "at": 12522.79999999702,
+      "ready": "complete",
+      "domNodes": 1888,
+      "charts": 0,
+      "nav": {
+        "ttfb": 10.399999991059303,
+        "dcl": 2829.8999999910593,
+        "load": 9573.5,
+        "bytes": 120398
+      },
+      "fcp": 2228,
+      "lcp": 3496,
+      "cls": 0.00024945012984365196,
+      "shifts": [
+        {
+          "at": 7614.399999991059,
+          "value": 0.00024945012984365196
+        }
+      ],
+      "longTasks": [
+        {
+          "at": 587.7999999970198,
+          "duration": 59
+        },
+        {
+          "at": 2262.0999999940395,
+          "duration": 96
+        },
+        {
+          "at": 2685.7999999970198,
+          "duration": 150
+        },
+        {
+          "at": 9563.59999999404,
+          "duration": 722
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003c",
+          "bytes": 6526,
+          "decoded": 6526,
+          "transfer": 6826,
+          "duration": 268.40000000596046,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1348.8999999910593,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003c",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 829.4000000059605,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/favorites.js?v=20261003c",
+          "bytes": 15034,
+          "decoded": 15034,
+          "transfer": 15334,
+          "duration": 835.1000000089407,
+          "kind": "script"
+        },
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 838,
+          "kind": "script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400..700&display=swap",
+          "bytes": 31358,
+          "decoded": 115178,
+          "transfer": 31658,
+          "duration": 817.5999999940395,
+          "kind": "link"
+        }
+      ],
+      "phase": "after"
+    },
+    {
+      "url": "http://localhost:5199/gallery/research/zhihu-2015.html?lang=zh&perf=audit",
+      "width": 390,
+      "height": 844,
+      "at": 12836.39999999106,
+      "ready": "complete",
+      "domNodes": 1965,
+      "charts": 0,
+      "nav": {
+        "ttfb": 7.799999997019768,
+        "dcl": 3275.199999988079,
+        "load": 8450.199999988079,
+        "bytes": 97530
+      },
+      "fcp": 2760,
+      "lcp": 6944,
+      "cls": 0,
+      "shifts": [],
+      "longTasks": [
+        {
+          "at": 876.8999999910593,
+          "duration": 51
+        },
+        {
+          "at": 2870.0999999940395,
+          "duration": 419
+        },
+        {
+          "at": 3290.699999988079,
+          "duration": 107
+        },
+        {
+          "at": 8425.29999999702,
+          "duration": 201
+        },
+        {
+          "at": 9128.59999999404,
+          "duration": 273
+        },
+        {
+          "at": 9417.29999999702,
+          "duration": 71
+        },
+        {
+          "at": 10789.29999999702,
+          "duration": 149
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/gallery/research/assets/zhihu-2015.css?v=20261001b",
+          "bytes": 20039,
+          "decoded": 20039,
+          "transfer": 20339,
+          "duration": 500,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003c",
+          "bytes": 6526,
+          "decoded": 6526,
+          "transfer": 6826,
+          "duration": 308.40000000596046,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1793.2000000029802,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003c",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 1104.5,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/zhihu-research.js?v=20261003c",
+          "bytes": 6100,
+          "decoded": 6100,
+          "transfer": 6400,
+          "duration": 1397.8999999910593,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/zhihu-network.js?v=20261003c",
+          "bytes": 22588,
+          "decoded": 22588,
+          "transfer": 22888,
+          "duration": 1844,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/gallery/research/assets/zhihu-net50k.svg",
+          "bytes": 188147,
+          "decoded": 188147,
+          "transfer": 188447,
+          "duration": 6099,
+          "kind": "img"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400..700&display=swap",
+          "bytes": 31358,
+          "decoded": 115178,
+          "transfer": 31658,
+          "duration": 852.9000000059605,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/gallery/research/assets/zhihu-net10k.svg",
+          "bytes": 456148,
+          "decoded": 456148,
+          "transfer": 456448,
+          "duration": 7980.79999999702,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/research/assets/zhihu-net50k.json?v=20261001b",
+          "bytes": 202945,
+          "decoded": 202945,
+          "transfer": 203245,
+          "duration": 6220.29999999702,
+          "kind": "fetch"
+        }
+      ],
+      "phase": "audit"
+    },
+    {
+      "url": "http://localhost:5199/gallery/music/endless-echoes.html?lang=zh&perf=audit",
+      "width": 390,
+      "height": 844,
+      "at": 12502.20000000298,
+      "ready": "complete",
+      "domNodes": 800,
+      "charts": 0,
+      "nav": {
+        "ttfb": 7.700000002980232,
+        "dcl": 2608.7000000029802,
+        "load": 7838.0999999940395,
+        "bytes": 73915
+      },
+      "fcp": 2240,
+      "lcp": 2240,
+      "cls": 0.35928301706440463,
+      "shifts": [
+        {
+          "at": 2645,
+          "value": 0.35928301706440463
+        }
+      ],
+      "longTasks": [
+        {
+          "at": 2261.0999999940395,
+          "duration": 358
+        },
+        {
+          "at": 7785.5,
+          "duration": 57
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/gallery/music/assets/endless-echoes.css?v=20261003g",
+          "bytes": 21469,
+          "decoded": 21469,
+          "transfer": 21769,
+          "duration": 618.5,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003c",
+          "bytes": 6526,
+          "decoded": 6526,
+          "transfer": 6826,
+          "duration": 333.40000000596046,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1456.9000000059605,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003c",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 1668.5,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/echo-piano.js?v=20261003c",
+          "bytes": 4482,
+          "decoded": 4482,
+          "transfer": 4782,
+          "duration": 1506.4000000059605,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/music-riddle.js?v=20261003c",
+          "bytes": 23975,
+          "decoded": 23975,
+          "transfer": 24275,
+          "duration": 1896.3999999910593,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/endless-echoes-garden-v5.webp",
+          "bytes": 83658,
+          "decoded": 83658,
+          "transfer": 83958,
+          "duration": 1385.4000000059605,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/echo-flower-blue.webp",
+          "bytes": 12980,
+          "decoded": 12980,
+          "transfer": 13280,
+          "duration": 1823.2999999970198,
+          "kind": "img"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400..700&display=swap",
+          "bytes": 31358,
+          "decoded": 115178,
+          "transfer": 31658,
+          "duration": 672.7000000029802,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/echo-flower-poppy.webp",
+          "bytes": 11782,
+          "decoded": 11782,
+          "transfer": 12082,
+          "duration": 1073.5,
+          "kind": "image"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/echo-flower-ivory.webp",
+          "bytes": 11638,
+          "decoded": 11638,
+          "transfer": 11938,
+          "duration": 1131.0999999940395,
+          "kind": "image"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/echo-flower-dahlia.webp",
+          "bytes": 13526,
+          "decoded": 13526,
+          "transfer": 13826,
+          "duration": 6294.4000000059605,
+          "kind": "image"
+        }
+      ],
+      "phase": "audit"
+    },
+    {
+      "url": "http://localhost:5199/gallery/music/endless-echoes.html?lang=zh&perf=after",
+      "width": 390,
+      "height": 844,
+      "at": 12533.79999999702,
+      "ready": "complete",
+      "domNodes": 800,
+      "charts": 0,
+      "nav": {
+        "ttfb": 8.400000005960464,
+        "dcl": 3096.9000000059605,
+        "load": 7310.79999999702,
+        "bytes": 73915
+      },
+      "fcp": 2796,
+      "lcp": 2796,
+      "cls": 0.0000896118038991539,
+      "shifts": [
+        {
+          "at": 3129.4000000059605,
+          "value": 0.0000896118038991539
+        }
+      ],
+      "longTasks": [
+        {
+          "at": 2725.1000000089407,
+          "duration": 381
+        },
+        {
+          "at": 7308.5,
+          "duration": 390
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/gallery/music/assets/endless-echoes.css?v=20261003h",
+          "bytes": 21541,
+          "decoded": 21541,
+          "transfer": 21841,
+          "duration": 565.0999999940395,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003c",
+          "bytes": 6526,
+          "decoded": 6526,
+          "transfer": 6826,
+          "duration": 347.1000000089407,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1920.0999999940395,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003c",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 1281.7000000029802,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/echo-piano.js?v=20261003c",
+          "bytes": 4482,
+          "decoded": 4482,
+          "transfer": 4782,
+          "duration": 917,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/music-riddle.js?v=20261003c",
+          "bytes": 23975,
+          "decoded": 23975,
+          "transfer": 24275,
+          "duration": 1501.7000000029802,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/endless-echoes-garden-v5.webp",
+          "bytes": 83658,
+          "decoded": 83658,
+          "transfer": 83958,
+          "duration": 1847.199999988079,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/echo-flower-blue.webp",
+          "bytes": 12980,
+          "decoded": 12980,
+          "transfer": 13280,
+          "duration": 1160,
+          "kind": "img"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400..700&display=swap",
+          "bytes": 31358,
+          "decoded": 115178,
+          "transfer": 31658,
+          "duration": 1119.8999999910593,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/echo-flower-poppy.webp",
+          "bytes": 11782,
+          "decoded": 11782,
+          "transfer": 12082,
+          "duration": 764.3999999910593,
+          "kind": "image"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/echo-flower-ivory.webp",
+          "bytes": 11638,
+          "decoded": 11638,
+          "transfer": 11938,
+          "duration": 975.5,
+          "kind": "image"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/echo-flower-dahlia.webp",
+          "bytes": 13526,
+          "decoded": 13526,
+          "transfer": 13826,
+          "duration": 1108.4000000059605,
+          "kind": "image"
+        }
+      ],
+      "phase": "after"
+    },
+    {
+      "url": "http://localhost:5199/gallery/research/zhihu-2015.html?lang=zh&perf=after",
+      "width": 390,
+      "height": 844,
+      "at": 12817.20000000298,
+      "ready": "complete",
+      "domNodes": 1965,
+      "charts": 0,
+      "nav": {
+        "ttfb": 9.200000002980232,
+        "dcl": 3296.8999999910593,
+        "load": 7933.79999999702,
+        "bytes": 97529
+      },
+      "fcp": 2708,
+      "lcp": 6176,
+      "cls": 0,
+      "shifts": [],
+      "longTasks": [
+        {
+          "at": 804.2999999970198,
+          "duration": 50
+        },
+        {
+          "at": 857.8999999910593,
+          "duration": 59
+        },
+        {
+          "at": 923.3999999910593,
+          "duration": 54
+        },
+        {
+          "at": 2805.5,
+          "duration": 510
+        },
+        {
+          "at": 3317.2000000029802,
+          "duration": 112
+        },
+        {
+          "at": 7852.899999991059,
+          "duration": 680
+        },
+        {
+          "at": 8643.39999999106,
+          "duration": 208
+        },
+        {
+          "at": 8858.09999999404,
+          "duration": 58
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/gallery/research/assets/zhihu-2015.css?v=20261003",
+          "bytes": 20141,
+          "decoded": 20141,
+          "transfer": 20441,
+          "duration": 501.59999999403954,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003c",
+          "bytes": 6526,
+          "decoded": 6526,
+          "transfer": 6826,
+          "duration": 305.09999999403954,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1763.0999999940395,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003c",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 1096.800000011921,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/zhihu-research.js?v=20261003c",
+          "bytes": 6100,
+          "decoded": 6100,
+          "transfer": 6400,
+          "duration": 1397.6000000089407,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/zhihu-network.js?v=20261003c",
+          "bytes": 23099,
+          "decoded": 23099,
+          "transfer": 23399,
+          "duration": 1842.5,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/gallery/research/assets/zhihu-net50k.svg",
+          "bytes": 188147,
+          "decoded": 188147,
+          "transfer": 188447,
+          "duration": 5363.70000000298,
+          "kind": "img"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400..700&display=swap",
+          "bytes": 31358,
+          "decoded": 115178,
+          "transfer": 31658,
+          "duration": 863,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/gallery/research/assets/zhihu-net50k.json?v=20261001b",
+          "bytes": 202945,
+          "decoded": 202945,
+          "transfer": 203245,
+          "duration": 5000.800000011921,
+          "kind": "fetch"
+        }
+      ],
+      "phase": "after"
+    },
+    {
+      "url": "http://localhost:5199/gallery.html?lang=zh&perf=final",
+      "width": 390,
+      "height": 844,
+      "at": 12508.09999999404,
+      "ready": "complete",
+      "domNodes": 725,
+      "charts": 0,
+      "nav": {
+        "ttfb": 9.200000002980232,
+        "dcl": 1741.8999999910593,
+        "load": 4357.899999991059,
+        "bytes": 41087
+      },
+      "fcp": 1612,
+      "lcp": 7064,
+      "cls": 0,
+      "shifts": [],
+      "longTasks": [
+        {
+          "at": 513.5999999940395,
+          "duration": 68
+        },
+        {
+          "at": 1601.5999999940395,
+          "duration": 144
+        },
+        {
+          "at": 4350.399999991059,
+          "duration": 83
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003c",
+          "bytes": 6526,
+          "decoded": 6526,
+          "transfer": 6826,
+          "duration": 223.90000000596046,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 993.5,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/work.js?v=20261003c",
+          "bytes": 14165,
+          "decoded": 14165,
+          "transfer": 14465,
+          "duration": 685.3999999910593,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003c",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 694.0999999940395,
+          "kind": "script"
+        },
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 892.2000000029802,
+          "kind": "script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400..700&display=swap",
+          "bytes": 31358,
+          "decoded": 115178,
+          "transfer": 31658,
+          "duration": 638,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/hn-field-notes-cover.png",
+          "bytes": 210223,
+          "decoded": 210223,
+          "transfer": 210523,
+          "duration": 6427.20000000298,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-sleep-toolkit-report.webp",
+          "bytes": 71304,
+          "decoded": 71304,
+          "transfer": 71604,
+          "duration": 4793.199999988079,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/endless-echoes-poster.svg?v=20261002j",
+          "bytes": 112614,
+          "decoded": 112614,
+          "transfer": 112914,
+          "duration": 5825.5,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-talk-slides.webp",
+          "bytes": 136498,
+          "decoded": 136498,
+          "transfer": 136798,
+          "duration": 6080.5,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/research/assets/hn-llm-research-cover.svg",
+          "bytes": 1458,
+          "decoded": 1458,
+          "transfer": 1758,
+          "duration": 2885.2000000029802,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-hermes-report.webp",
+          "bytes": 80490,
+          "decoded": 80490,
+          "transfer": 80790,
+          "duration": 5193.5999999940395,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-sleep-scatter.webp",
+          "bytes": 105236,
+          "decoded": 105236,
+          "transfer": 105536,
+          "duration": 5855.9000000059605,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-qingtian.webp",
+          "bytes": 17428,
+          "decoded": 17428,
+          "transfer": 17728,
+          "duration": 5417.29999999702,
+          "kind": "img"
+        }
+      ],
+      "phase": "final"
+    },
+    {
+      "url": "http://localhost:5199/gallery/research/zhihu-2015.html?lang=zh&perf=final",
+      "width": 390,
+      "height": 844,
+      "at": 12806.79999999702,
+      "ready": "complete",
+      "domNodes": 1947,
+      "charts": 0,
+      "nav": {
+        "ttfb": 11.199999988079071,
+        "dcl": 3205.199999988079,
+        "load": 7628.0999999940395,
+        "bytes": 97529
+      },
+      "fcp": 2688,
+      "lcp": 5988,
+      "cls": 0,
+      "shifts": [],
+      "longTasks": [
+        {
+          "at": 946.3999999910593,
+          "duration": 57
+        },
+        {
+          "at": 2776.699999988079,
+          "duration": 440
+        },
+        {
+          "at": 3217.699999988079,
+          "duration": 101
+        },
+        {
+          "at": 7599.5999999940395,
+          "duration": 549
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/gallery/research/assets/zhihu-2015.css?v=20261003",
+          "bytes": 20141,
+          "decoded": 20141,
+          "transfer": 20441,
+          "duration": 507.40000000596046,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003c",
+          "bytes": 6526,
+          "decoded": 6526,
+          "transfer": 6826,
+          "duration": 309.79999999701977,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1779.4000000059605,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003c",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 1114.2000000029802,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/zhihu-research.js?v=20261003c",
+          "bytes": 6100,
+          "decoded": 6100,
+          "transfer": 6400,
+          "duration": 1410.5,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/zhihu-network.js?v=20261003c",
+          "bytes": 23099,
+          "decoded": 23099,
+          "transfer": 23399,
+          "duration": 1863,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/gallery/research/assets/zhihu-net50k.svg",
+          "bytes": 188147,
+          "decoded": 188147,
+          "transfer": 188447,
+          "duration": 5449.600000008941,
+          "kind": "img"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400..700&display=swap",
+          "bytes": 31358,
+          "decoded": 115178,
+          "transfer": 31658,
+          "duration": 878.7000000029802,
+          "kind": "link"
+        }
+      ],
+      "phase": "final"
+    },
+    {
+      "url": "http://localhost:5199/gallery.html?lang=zh&perf=priority",
+      "width": 390,
+      "height": 844,
+      "at": 12428.39999999106,
+      "ready": "complete",
+      "domNodes": 725,
+      "charts": 0,
+      "nav": {
+        "ttfb": 5.0999999940395355,
+        "dcl": 1393.5,
+        "load": 7803,
+        "bytes": 41569
+      },
+      "fcp": 1348,
+      "lcp": 5884,
+      "cls": 0,
+      "shifts": [],
+      "longTasks": [
+        {
+          "at": 1320.2000000029802,
+          "duration": 76
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003c",
+          "bytes": 6526,
+          "decoded": 6526,
+          "transfer": 6826,
+          "duration": 236.6000000089407,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 995.6000000089407,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003c",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 697.7000000029802,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/work.js?v=20261003c",
+          "bytes": 14165,
+          "decoded": 14165,
+          "transfer": 14465,
+          "duration": 665.6999999880791,
+          "kind": "script"
+        },
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 863.8000000119209,
+          "kind": "script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400..700&display=swap",
+          "bytes": 31358,
+          "decoded": 115178,
+          "transfer": 31658,
+          "duration": 646.2000000029802,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/hn-field-notes-cover.png",
+          "bytes": 210223,
+          "decoded": 210223,
+          "transfer": 210523,
+          "duration": 6420.70000000298,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-sleep-toolkit-report.webp",
+          "bytes": 71304,
+          "decoded": 71304,
+          "transfer": 71604,
+          "duration": 3504.2000000029802,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/music/assets/endless-echoes-poster.svg?v=20261002j",
+          "bytes": 112614,
+          "decoded": 112614,
+          "transfer": 112914,
+          "duration": 6324.5,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-talk-slides.webp",
+          "bytes": 136498,
+          "decoded": 136498,
+          "transfer": 136798,
+          "duration": 6499.600000008941,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/research/assets/hn-llm-research-cover.svg",
+          "bytes": 1458,
+          "decoded": 1458,
+          "transfer": 1758,
+          "duration": 3861.7999999970198,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-hermes-report.webp",
+          "bytes": 80490,
+          "decoded": 80490,
+          "transfer": 80790,
+          "duration": 5853.5999999940395,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-sleep-scatter.webp",
+          "bytes": 105236,
+          "decoded": 105236,
+          "transfer": 105536,
+          "duration": 6351.0999999940395,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-qingtian.webp",
+          "bytes": 17428,
+          "decoded": 17428,
+          "transfer": 17728,
+          "duration": 4533.5,
+          "kind": "img"
+        }
+      ],
+      "phase": "priority"
+    }
+  ]
+}

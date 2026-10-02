@@ -1,0 +1,663 @@
+{
+  "conditions": {
+    "viewport": "390x844",
+    "cpu": 4,
+    "downloadBytesPerSecond": 204800,
+    "latencyMs": 150,
+    "cache": false,
+    "server": "local uncompressed"
+  },
+  "exploratory": [
+    {
+      "url": "http://localhost:5199/index.html?lang=zh&perf=baseline",
+      "width": 390,
+      "height": 844,
+      "ready": "complete",
+      "domNodes": 1381,
+      "charts": 0,
+      "nav": {
+        "ttfb": 11.900000005960464,
+        "dcl": 3508.2999999970198,
+        "load": 7323.70000000298,
+        "bytes": 76479
+      },
+      "fcp": 2660,
+      "lcp": 3512,
+      "longTasks": [
+        50,
+        92,
+        293,
+        62,
+        85,
+        84,
+        53
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003b",
+          "bytes": 6529,
+          "decoded": 6529,
+          "transfer": 6829,
+          "duration": 319.59999999403954,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1973.7000000029802,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003b",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 2705.5,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/home.js?v=20261003b",
+          "bytes": 4177,
+          "decoded": 4177,
+          "transfer": 4477,
+          "duration": 2961.9000000059605,
+          "kind": "script"
+        },
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 2974.4000000059605,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-sleep-scatter.webp",
+          "bytes": 105236,
+          "decoded": 105236,
+          "transfer": 105536,
+          "duration": 2097.4000000059605,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-talk-slides.webp",
+          "bytes": 136498,
+          "decoded": 136498,
+          "transfer": 136798,
+          "duration": 2766.2999999970198,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-abyss-bird.webp",
+          "bytes": 117920,
+          "decoded": 117920,
+          "transfer": 118220,
+          "duration": 3486.3999999910593,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-haba-field-v2.jpg",
+          "bytes": 20577,
+          "decoded": 20577,
+          "transfer": 20877,
+          "duration": 2648.5,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-designing-design.webp",
+          "bytes": 7998,
+          "decoded": 7998,
+          "transfer": 8298,
+          "duration": 2152.2999999970198,
+          "kind": "img"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400;500;700&display=swap",
+          "bytes": 93147,
+          "decoded": 340630,
+          "transfer": 93447,
+          "duration": 2573.3999999910593,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/assets/icons/favicon-32.png",
+          "bytes": 2793,
+          "decoded": 2793,
+          "transfer": 3093,
+          "duration": 168.70000000298023,
+          "kind": "other"
+        }
+      ],
+      "unvalidated_layout_shift_sum": 0.9153481492853307
+    },
+    {
+      "url": "http://localhost:5199/blogs.html?lang=zh&perf=baseline",
+      "width": 390,
+      "height": 844,
+      "ready": "complete",
+      "domNodes": 3861,
+      "charts": 0,
+      "nav": {
+        "ttfb": 8.5,
+        "dcl": 6006.70000000298,
+        "load": 11414.79999999702,
+        "bytes": 285201
+      },
+      "fcp": 2848,
+      "lcp": 4080,
+      "longTasks": [
+        147,
+        446,
+        1120
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1667.4000000059605,
+          "kind": "link"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400;500;700&display=swap",
+          "bytes": 93147,
+          "decoded": 340630,
+          "transfer": 93447,
+          "duration": 1624.9000000059605,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003b",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 824,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/articles.js?v=20261003b",
+          "bytes": 13896,
+          "decoded": 13896,
+          "transfer": 14196,
+          "duration": 786.7999999970198,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003b",
+          "bytes": 6529,
+          "decoded": 6529,
+          "transfer": 6829,
+          "duration": 270.20000000298023,
+          "kind": "script"
+        },
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 975.7000000029802,
+          "kind": "script"
+        }
+      ],
+      "unvalidated_layout_shift_sum": 0
+    },
+    {
+      "url": "http://localhost:5199/favorites/film.html?lang=zh&perf=baseline",
+      "width": 390,
+      "height": 844,
+      "at": 7084.79999999702,
+      "ready": "interactive",
+      "domNodes": 1888,
+      "charts": 0,
+      "nav": {
+        "ttfb": 10.600000008940697,
+        "dcl": 3166.4000000059605,
+        "load": 0,
+        "bytes": 120401
+      },
+      "fcp": 2348,
+      "lcp": 3516,
+      "shifts": [],
+      "longTasks": [
+        {
+          "at": 2324.2000000029802,
+          "duration": 63
+        },
+        {
+          "at": 2831.5,
+          "duration": 343
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003b",
+          "bytes": 6529,
+          "decoded": 6529,
+          "transfer": 6829,
+          "duration": 271.20000000298023,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1485.5,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003b",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 819.6999999880791,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/favorites.js?v=20261003b",
+          "bytes": 15034,
+          "decoded": 15034,
+          "transfer": 15334,
+          "duration": 832.9000000059605,
+          "kind": "script"
+        },
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 1016.9000000059605,
+          "kind": "script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400;500;700&display=swap",
+          "bytes": 93147,
+          "decoded": 340630,
+          "transfer": 93447,
+          "duration": 1319.5,
+          "kind": "link"
+        }
+      ],
+      "unvalidated_layout_shift_sum": 0
+    },
+    {
+      "url": "http://localhost:5199/gallery.html?lang=zh&perf=baseline",
+      "width": 390,
+      "height": 844,
+      "at": 7182.5999999940395,
+      "ready": "interactive",
+      "domNodes": 725,
+      "charts": 0,
+      "nav": {
+        "ttfb": 7.5,
+        "dcl": 3350.699999988079,
+        "load": 0,
+        "bytes": 40730
+      },
+      "fcp": 2500,
+      "lcp": 4500,
+      "shifts": [],
+      "longTasks": [
+        {
+          "at": 3210.7999999970198,
+          "duration": 142
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003b",
+          "bytes": 6529,
+          "decoded": 6529,
+          "transfer": 6829,
+          "duration": 226.8999999910593,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1609.1000000089407,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003b",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 2339,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/work.js?v=20261003b",
+          "bytes": 14165,
+          "decoded": 14165,
+          "transfer": 14465,
+          "duration": 2392.7000000029802,
+          "kind": "script"
+        },
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 2351.199999988079,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-sleep-toolkit-report.webp",
+          "bytes": 71304,
+          "decoded": 71304,
+          "transfer": 71604,
+          "duration": 1493,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/research/assets/hn-llm-research-cover.svg",
+          "bytes": 1458,
+          "decoded": 1458,
+          "transfer": 1758,
+          "duration": 1611.3999999910593,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-qingtian.webp",
+          "bytes": 17428,
+          "decoded": 17428,
+          "transfer": 17728,
+          "duration": 3504.300000011921,
+          "kind": "img"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400;500;700&display=swap",
+          "bytes": 93147,
+          "decoded": 340630,
+          "transfer": 93447,
+          "duration": 2134.0999999940395,
+          "kind": "link"
+        }
+      ],
+      "unvalidated_layout_shift_sum": 0
+    }
+  ],
+  "runs": [
+    {
+      "url": "http://localhost:5199/index.html?lang=zh&perf=before",
+      "width": 390,
+      "height": 844,
+      "at": 12445.5,
+      "ready": "complete",
+      "domNodes": 1381,
+      "charts": 0,
+      "nav": {
+        "ttfb": 18.100000008940697,
+        "dcl": 3733.2000000029802,
+        "load": 7614.29999999702,
+        "bytes": 76479
+      },
+      "fcp": 2408,
+      "lcp": 2508,
+      "cls": 0.13462109537077713,
+      "shifts": [
+        {
+          "at": 4798.4000000059605,
+          "value": 8.266747606574598e-06
+        },
+        {
+          "at": 9376.5,
+          "value": 0.00034529585289339113
+        },
+        {
+          "at": 9433.10000000894,
+          "value": 0.020017639606639895
+        },
+        {
+          "at": 9476.90000000596,
+          "value": 0.03116576065429488
+        },
+        {
+          "at": 9524.20000000298,
+          "value": 0.02667536573656774
+        },
+        {
+          "at": 9580.40000000596,
+          "value": 0.018066855405200737
+        },
+        {
+          "at": 9628.79999999702,
+          "value": 0.013522323561110156
+        },
+        {
+          "at": 9684.20000000298,
+          "value": 0.009222241994149574
+        },
+        {
+          "at": 9739.40000000596,
+          "value": 0.007786198404951362
+        },
+        {
+          "at": 9796.40000000596,
+          "value": 0.0036120950160434223
+        },
+        {
+          "at": 9843.29999999702,
+          "value": 0.0025073043554961812
+        },
+        {
+          "at": 9890.90000000596,
+          "value": 0.0017000147834297728
+        }
+      ],
+      "longTasks": [
+        {
+          "at": 963.9000000059605,
+          "duration": 119
+        },
+        {
+          "at": 3361.9000000059605,
+          "duration": 375
+        },
+        {
+          "at": 7604.9000000059605,
+          "duration": 249
+        },
+        {
+          "at": 10457.60000000894,
+          "duration": 84
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://localhost:5199/src/js/theme-init.js?v=20261003b",
+          "bytes": 6529,
+          "decoded": 6529,
+          "transfer": 6829,
+          "duration": 334.20000000298023,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/css/styles.css?v=20261002b",
+          "bytes": 97837,
+          "decoded": 97837,
+          "transfer": 98137,
+          "duration": 1798.8999999910593,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/src/js/site.js?v=20261003b",
+          "bytes": 17202,
+          "decoded": 17202,
+          "transfer": 17502,
+          "duration": 2959.4000000059605,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/src/js/home.js?v=20261003b",
+          "bytes": 4177,
+          "decoded": 4177,
+          "transfer": 4477,
+          "duration": 2761,
+          "kind": "script"
+        },
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 2954.7000000029802,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-sleep-scatter.webp",
+          "bytes": 105236,
+          "decoded": 105236,
+          "transfer": 105536,
+          "duration": 1932.2000000029802,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-talk-slides.webp",
+          "bytes": 136498,
+          "decoded": 136498,
+          "transfer": 136798,
+          "duration": 2524.2999999970198,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-abyss-bird.webp",
+          "bytes": 117920,
+          "decoded": 117920,
+          "transfer": 118220,
+          "duration": 3270.6000000089407,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-haba-field-v2.jpg",
+          "bytes": 20577,
+          "decoded": 20577,
+          "transfer": 20877,
+          "duration": 2399.7000000029802,
+          "kind": "img"
+        },
+        {
+          "url": "http://localhost:5199/gallery/assets/gallery-card-designing-design.webp",
+          "bytes": 7998,
+          "decoded": 7998,
+          "transfer": 8298,
+          "duration": 2165.2999999970198,
+          "kind": "img"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400;500;700&display=swap",
+          "bytes": 93147,
+          "decoded": 340630,
+          "transfer": 93447,
+          "duration": 2374.2999999970198,
+          "kind": "link"
+        }
+      ],
+      "phase": "before"
+    },
+    {
+      "url": "http://localhost:5199/projects/sleep-2016-2026.html?lang=zh&perf=before",
+      "width": 390,
+      "height": 844,
+      "at": 19395.19999998808,
+      "ready": "loading",
+      "domNodes": 712,
+      "charts": 0,
+      "nav": {
+        "ttfb": 8.099999994039536,
+        "dcl": 0,
+        "load": 0,
+        "bytes": 82197
+      },
+      "fcp": 16624,
+      "lcp": 16624,
+      "cls": 0,
+      "shifts": [],
+      "longTasks": [
+        {
+          "at": 11942.5,
+          "duration": 4116
+        }
+      ],
+      "resources": [
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 28.100000008940697,
+          "kind": "script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;720&family=Noto+Sans+SC:wght@400;500;700&display=swap",
+          "bytes": 93364,
+          "decoded": 351319,
+          "transfer": 93664,
+          "duration": 1247.4000000059605,
+          "kind": "link"
+        },
+        {
+          "url": "https://cdn.plot.ly/plotly-2.27.0.min.js",
+          "bytes": 0,
+          "decoded": 0,
+          "transfer": 0,
+          "duration": 11616.70000000298,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/sleep-essay-editorial.css?v=20261001",
+          "bytes": 14127,
+          "decoded": 14127,
+          "transfer": 14427,
+          "duration": 345.40000000596046,
+          "kind": "link"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/sleep-essay-ui.js?v=20260724",
+          "bytes": 3379,
+          "decoded": 3379,
+          "transfer": 3679,
+          "duration": 246,
+          "kind": "script"
+        },
+        {
+          "url": "http://localhost:5199/projects/assets/sleep-essay-pretext-lab.js?v=20260724-hero2",
+          "bytes": 12644,
+          "decoded": 12644,
+          "transfer": 12944,
+          "duration": 415.70000000298023,
+          "kind": "script"
+        }
+      ],
+      "phase": "before"
+    }
+  ],
+  "sleepCompletion": {
+    "ready": "complete",
+    "charts": 36,
+    "resources": [
+      {
+        "url": "https://cdn.plot.ly/plotly-2.27.0.min.js",
+        "bytes": 0,
+        "duration": 11616.70000000298
+      },
+      {
+        "url": "http://localhost:5199/projects/assets/sleep-2016-2026.js?v=20261001",
+        "bytes": 2244799,
+        "duration": 24768.09999999404
+      }
+    ],
+    "nav": [
+      {
+        "dcl": 45653.5,
+        "load": 46731.79999999702
+      }
+    ]
+  }
+}

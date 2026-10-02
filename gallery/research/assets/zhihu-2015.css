@@ -199,6 +199,7 @@
 .zr-network-stage canvas { display: none; width: 100%; height: 620px; touch-action: pan-y pinch-zoom; outline-offset: -4px; }
 .zr-network-loaded canvas { display: block; }
 .zr-network-loaded [data-graph-fallback] { display: none; }
+:root.js .zr-main:not([data-graph-cohort="Net10k"]) [data-graph-fallback="Net10k"] { display: none; }
 .zr-network-reader:not(.zr-network-loaded) .zr-network-caption { display: none; }
 .zr-ready .zr-network-reader:not(.zr-network-loaded) .zr-network-tools,
 .zr-ready .zr-network-reader:not(.zr-network-loaded) .zr-view-controls,

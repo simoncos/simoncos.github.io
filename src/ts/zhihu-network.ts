@@ -200,5 +200,14 @@
     canvas.addEventListener('pointercancel',()=>drag=null);canvas.addEventListener('lostpointercapture',()=>drag=null);
     canvas.addEventListener('keydown',event=>{if(!network)return;if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();const step=event.key==='ArrowRight'?1:-1,current=selected();const next=current<0?(step>0?0:network.node_count-1):(current+step+network.node_count)%network.node_count;change({node:String(next+1)});}else if(event.key==='+'||event.key==='='){event.preventDefault();scale(1.4);}else if(event.key==='-'){event.preventDefault();scale(1/1.4);}else if(event.key==='Escape'){event.preventDefault();zoom=1;pan={x:0,y:0};change({node:''});}});
     root.addEventListener('zrstate',()=>void update());new ResizeObserver(()=>draw()).observe(stage);
-    void update();
+    // The article and its real static overview are useful before this heavier
+    // interactive graph is near the reader. Explicit controls still update above.
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+            if (!entries.some(entry => entry.isIntersecting)) return;
+            observer.disconnect();
+            void update();
+        }, { rootMargin: '200px 0px' });
+        observer.observe(reader);
+    } else void update();
 })();

@@ -8,7 +8,7 @@
     const LANG_KEY = 'siteLanguage';
     const NAV_KEY = 'site-nav';
     const LAST_KEY = 'site-last-section';
-    const FONTS = 'https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400;500;700&display=swap';
+    const FONTS = 'https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Noto+Sans+SC:wght@400..700&display=swap';
 
     const LABELS: Record<string, SiteLabel> = {
         home: { en: 'Index', zh: '首页' },

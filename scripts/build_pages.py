@@ -188,7 +188,8 @@ def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str
         )
         stage.append("\n".join([
             f'            <a class="panel{on}" data-i="{i}"{href_attrs(panel["href"], aria_label=label)}>',
-            f'                <img class="panel-img" src="{esc(panel["img"])}" alt="" decoding="async">',
+            f'                <img class="panel-img" src="{esc(panel["img"])}" alt="" decoding="async"'
+            f' fetchpriority="{"high" if i == 0 else "low"}">',
             '                <span class="panel-shade"></span>',
             f'                <span class="panel-top"><span>{i + 1:02d}</span>'
             f'<span class="panel-meta">{bi_value(panel["kind"])} · {esc(panel["date"])}</span></span>',
@@ -311,7 +312,8 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
         works = by_topic[topic["id"]][:3]
         k = max(1, len(works))
         faces = "".join(
-            f'<img src="{esc(work.get("wheel_img", work["img"]) if k == 1 else work["img"])}" alt="" draggable="false" decoding="async" '
+            f'<img src="{esc(work.get("wheel_img", work["img"]) if k == 1 else work["img"])}" alt="" draggable="false" decoding="async" loading="lazy" '
+            f'fetchpriority="{"high" if i == 0 else "low"}" '
             f'style="top:{j * 100 / k:.4g}%;height:{100 / k:.4g}%">'
             for j, work in enumerate(works)
         )

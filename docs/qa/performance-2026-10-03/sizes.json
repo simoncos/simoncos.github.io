@@ -1,0 +1,24 @@
+[
+  {
+    "path": "projects/assets/sleep-2016-2026.js",
+    "before": 2244799,
+    "after": 1471281,
+    "before_gzip": 196575,
+    "after_gzip": 147439
+  },
+  {
+    "path": "projects/assets/sleep-2016-2026.en.js",
+    "before": 2246473,
+    "after": 1472705,
+    "before_gzip": 196555,
+    "after_gzip": 147342
+  },
+  {
+    "path": "Google Fonts CSS, Chrome 154 response",
+    "before": 340630,
+    "after": 115178,
+    "before_gzip": 93712,
+    "after_gzip": 31292,
+    "identical_font_urls": true
+  }
+]

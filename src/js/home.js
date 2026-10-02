@@ -37,7 +37,7 @@
         // The bar's own animation is the clock: when it ends, move on. Pausing
         // the animation (hover, focus) therefore pauses the stage too.
         sel.addEventListener('animationend', (event) => {
-            if (event.animationName !== 'om-bar' || shell?.reduced)
+            if (event.animationName !== 'om-bar' || shell?.reduced || sel.classList.contains('is-paused'))
                 return;
             const bar = event.target.closest('.sel-bar');
             if (bar && bar.classList.contains('is-on'))
@@ -56,17 +56,30 @@
                     setActive(i);
             });
         });
-        const pause = () => sel.classList.add('is-paused');
-        const resume = () => sel.classList.remove('is-paused');
+        let hovered = false;
+        let focused = false;
+        let inView = true;
+        // Expanding mobile rows must only move in response to a tap. Desktop
+        // playback also rests when the stage or browser tab is out of view.
+        const syncPlayback = () => sel.classList.toggle('is-paused', !wide() || !!shell?.reduced || document.hidden || !inView || hovered || focused);
         if (stage) {
-            stage.addEventListener('mouseenter', pause);
-            stage.addEventListener('mouseleave', resume);
+            stage.addEventListener('mouseenter', () => { hovered = true; syncPlayback(); });
+            stage.addEventListener('mouseleave', () => { hovered = false; syncPlayback(); });
         }
-        sel.addEventListener('focusin', pause);
+        sel.addEventListener('focusin', () => { focused = true; syncPlayback(); });
         sel.addEventListener('focusout', (event) => {
-            if (!sel.contains(event.relatedTarget))
-                resume();
+            focused = sel.contains(event.relatedTarget);
+            syncPlayback();
         });
+        window.matchMedia(`(min-width: ${WIDE}px)`).addEventListener('change', syncPlayback);
+        document.addEventListener('visibilitychange', syncPlayback);
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(([entry]) => {
+                inView = entry.isIntersecting;
+                syncPlayback();
+            }).observe(sel);
+        }
+        syncPlayback();
         setActive(active);
     }
     // ---- Newest: topic filter ---------------------------------------------
