@@ -131,3 +131,21 @@
 .is-song-arrival .echo-node.is-current .echo-halo{animation:echo-return-ring 1s ease-out;transform-box:fill-box;transform-origin:center}
 @keyframes echo-page-arrival{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.is-song-arrival #echo-song,.is-song-arrival .echo-clue,.is-song-arrival .echo-quote,.is-song-arrival .echo-halo{animation:none}}
+
+/* Album artwork introduces the trail; the playable map remains a quiet surface. */
+.echo-intro{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center;gap:52px;padding:42px 0 44px}
+.echo-intro h1{font-size:clamp(58px,6.2vw,82px)}
+.echo-intro-note{border:0;padding:0;margin-top:28px;display:grid;grid-template-columns:52px 1fr;column-gap:16px}
+.echo-count{font-size:43px;grid-row:span 2;align-self:center}
+.echo-intro-note p{font-size:13px;margin:0;line-height:1.8}
+.echo-intro-note p+p{margin-top:3px}
+.echo-intro-note br{display:none}
+.echo-begin{display:inline-flex;align-items:center;gap:34px;min-height:44px;margin-top:18px;color:var(--ink);font-size:13px;text-decoration:none;border-bottom:1px solid var(--line)}
+.echo-begin span{font-size:22px;transition:transform .2s}
+.echo-begin:hover span{transform:translate(3px,3px)}
+.echo-hero-art{margin:0;background:#f0eade;overflow:hidden;border-radius:3px;box-shadow:0 1px 0 #00000008}
+.echo-hero-art img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain}
+#echo-game{scroll-margin-top:100px}
+@media(max-width:900px) and (min-width:651px){.echo-intro{gap:28px}.echo-intro h1{font-size:58px}.echo-intro-note{grid-template-columns:45px 1fr;column-gap:12px}.echo-count{font-size:37px}}
+@media(max-width:650px){.echo-intro{grid-template-columns:1fr;gap:0;padding:28px 0 30px}.echo-intro-copy{display:contents}.echo-intro h1{font-size:58px;grid-row:2}.echo-kicker{grid-row:1}.echo-hero-art{grid-row:3;margin-top:24px}.echo-intro-note{grid-row:4;margin-top:20px;padding:0;grid-template-columns:48px 1fr}.echo-begin{grid-row:5;justify-self:start;margin-top:12px}.echo-intro-note p{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.echo-begin span{transition:none}}
