@@ -39,8 +39,8 @@
     }
     function save(){try{localStorage.setItem(key,JSON.stringify(trail));}catch{storage=false;}}
     let arrivalTimer:number;
-    function clearArrival(){window.clearTimeout(arrivalTimer);root.classList.remove('is-loop-arrival','is-ending-arrival');}
-    function animateArrival(kind:'loop'|'ending'){
+    function clearArrival(){window.clearTimeout(arrivalTimer);root.classList.remove('is-loop-arrival','is-ending-arrival','is-song-arrival');}
+    function animateArrival(kind:'loop'|'ending'|'song'){
         if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
         root.classList.add('is-'+kind+'-arrival');
         arrivalTimer=window.setTimeout(clearArrival,2800);
@@ -61,7 +61,7 @@
         visit(id);
         const arrival=id===data.ending?'ending':id===data.start&&previous.id!==data.start?'loop':null;
         notice=()=>unlocked?t('Every song is lit. A hidden echo has appeared beside the ending.','所有歌曲都已点亮。终点旁出现了一段隐藏的回响。'):arrival==='loop'?t('Back to the beginning. Your trail remains.','又回到最初。走过的路还在。'):t('Found: ','找到了：')+songs.get(id).title+(id===data.ending?t(' · The ending.',' · 终点。'):'');
-        render();if(arrival)animateArrival(arrival);document.getElementById('echo-song').focus({preventScroll:true});
+        render();animateArrival(arrival||'song');document.getElementById('echo-song').focus({preventScroll:true});
     }
     function acknowledgeOpen(answer:OpenAnswer){
         notice=()=>t(`You found ${answer.title}. Its next clue is still blank; explore another branch for now.`,
@@ -140,7 +140,8 @@
     document.querySelector('[data-return-branch]').addEventListener('click',()=>{const id=trail.history.pop()||data.nodes.find(n=>n.next.includes(trail.current))?.id||data.start;visit(id,false);});
     document.querySelector('[data-go-start]').addEventListener('click',()=>visit(data.start));
     document.querySelector('[data-reset]').addEventListener('click',()=>{clearArrival();trail=fresh();notice=()=>'';hint.open=false;reveal.open=false;input.value='';document.querySelector<HTMLDetailsElement>('.echo-reset').open=false;save();render();});
-    reveal.addEventListener('toggle',render);
+    hint.addEventListener('toggle',()=>{if(hint.open)reveal.open=false;});
+    reveal.addEventListener('toggle',()=>{if(reveal.open)hint.open=false;render();});
     root.querySelector('[data-map-zoom]').addEventListener('click',()=>{zoomed=!zoomed;render();});
     root.querySelectorAll<SVGGElement>('[data-node]').forEach(node=>{
         node.addEventListener('click',()=>visit(node.dataset.node));
