@@ -106,6 +106,10 @@
         "$ref": "#/$defs/node"
       },
       "minItems": 1
+    },
+    "bonus": {
+      "type": "string",
+      "description": "集齐所有其他节点后自动解锁的隐藏回响 ID。"
     }
   },
   "required": [
@@ -575,6 +579,42 @@
                 ],
                 "additionalProperties": false
               }
+            },
+            "retired_routes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "target": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+                    "description": "稳定节点 ID；改歌名时保持不变。"
+                  },
+                  "by": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "date": {
+                    "type": "string",
+                    "minLength": 1,
+                    "format": "date",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "target",
+                  "by",
+                  "date",
+                  "note"
+                ],
+                "additionalProperties": false
+              },
+              "description": "作者明确替换的历史路径；保存旧证据，不再参与答案判断。"
             }
           },
           "required": [
@@ -587,8 +627,11 @@
           "description": "路径复核记录。候选不进入答案判断，confirmed_additions 记录原始前驱之外由作者确认的接线。"
         },
         "terminal": {
-          "const": "dead-end",
-          "description": "独立可收集的死胡同节点；next 必须为空，不是全局终点。"
+          "enum": [
+            "dead-end",
+            "epilogue"
+          ],
+          "description": "死胡同或隐藏尾声；均无出边。epilogue 必须对应顶层 bonus。"
         },
         "quote": {
           "type": "string",
