@@ -25,6 +25,7 @@ The motto for this site is "Connecting the dots." The site is static, bilingual,
 
 - [Personal Information Systems in the AI Era](https://simoncos.github.io/gallery/talks/pkm-2026-06-07/index.html): Talk on capture, memory, agents, projects, and boundaries.
 - [Hermes Agent HV Analysis](https://simoncos.github.io/gallery/research/hermes-agent-hv-analysis.html): Research artifact showing an evidence-first analysis format.
+- [Endless Echoes (漫无止尽的回响)](https://simoncos.github.io/gallery/music/endless-echoes.html): A branching music riddle through 26 Eason Chan songs, restored from the 2017 Douban list.
 - [Sunny Day (晴天)](https://simoncos.github.io/gallery/music/qingtian.html): Original song, words, music and vocals by Che Zhao, with the recording and the lyrics.
 - [My Personal Knowledge Management System, 2026-03](https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html): Essay on personal systems and the publishing layer.
 - [My Haba Snow Mountain Journey](https://simoncos.github.io/blogs/my-haba-snow-mountain-journey.en.html): Field note about outdoor experience, risk, and body feedback.

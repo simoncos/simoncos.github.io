@@ -119,6 +119,13 @@
       "label": "Reading Roundups (读书小结)",
       "url": "https://simoncos.github.io/blogs.html#series-reading-roundups",
       "description": "Six reading roundups from 2015 to 2019, in Chinese and English, with the original book reviews and historical publication dates."
+    },
+    {
+      "id": "endless-echoes",
+      "type": "music_riddle",
+      "label": "Endless Echoes (漫无止尽的回响)",
+      "url": "https://simoncos.github.io/gallery/music/endless-echoes.html",
+      "description": "Bilingual branching music riddle through 26 Eason Chan songs, restored from a 2017 Douban list. Lyric quotations are replaced by imagery clues; progress stays in the browser."
     }
   ],
   "public_data_files": [

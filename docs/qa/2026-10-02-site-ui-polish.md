@@ -38,4 +38,8 @@
 - `make generate`、`make check-all`（56 项测试）通过；`git diff --check` 无报错。
 - 本批没有添加镜像实现的测试；使用既有检查和真实浏览器验证布局与交互。
 - 读书文章上一发布的 Actions run `36887292574` 成功，12 篇正文加列表、两个 RSS、文章索引共 16 个线上文件 SHA-256 与提交相同。
-- 本 UI 候选通过检查后，按用户已经授权的网站发布范围推送；随后核对本次 GitHub Actions 的 check、deploy 和线上页面。部署证据在最终报告中给出。
+- UI 发布提交 `164eddf8cd6bc89b55ced84d1072a3c535aec396`；[GitHub Actions run 36944912007](https://github.com/simoncos/simoncos.github.io/actions/runs/36944912007) 的检查与部署全部成功。
+- 部署后，首页、栏目页、样式、公开数据、两个 RSS 及 12 篇读书正文共 26 个线上文件 SHA-256 与发布提交相同。
+- 线上重测中文手机首页：四个折叠条目高 80，序号与标题间距均 16.703125 像素；创造筛选确实显示睡眠研究。
+- 线上 Articles、Work、Favorites 标题实测：390 宽为 40 像素、距导航 20；1280 宽为 64 像素、距导航 32（Favorites 入场动画尾端测得 32.025，四舍五入为 32）。文章阅读页头部距导航 20。所有检查页面无横向溢出。
+- 部署后再次执行八篇文章中英文、手机与桌面、手机深色的 48 次加载检查，全部通过。线上截图 `ui-home-live.png`、`ui-article-live.png` 和标题测量 `ui-live-title-metrics.json` 保存在同一证据目录。

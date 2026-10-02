@@ -1,6 +1,6 @@
 {
   "css_version": "20261002a",
-  "js_version": "20261001c",
+  "js_version": "20261001d",
   "site_updated": "2026-10-02",
   "theme_init": "theme-init.js",
   "icons": {
@@ -165,6 +165,16 @@
         "src": "zhihu-network.js",
         "defer": true
       }
+    ],
+    "music-riddle": [
+      {
+        "src": "site.js",
+        "defer": true
+      },
+      {
+        "src": "music-riddle.js",
+        "defer": true
+      }
     ]
   },
   "pages": [
@@ -295,6 +305,13 @@
       "script_profile": "research",
       "section": "work",
       "canonical": "gallery/research/zhihu-2015.html"
+    },
+    {
+      "path": "gallery/music/endless-echoes.html",
+      "asset_prefix": "../../",
+      "script_profile": "music-riddle",
+      "section": "work",
+      "canonical": "gallery/music/endless-echoes.html"
     }
   ],
   "site_url": "https://simoncos.github.io/"
