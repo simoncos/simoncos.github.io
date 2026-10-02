@@ -6,18 +6,18 @@
 - [字段规范 / JSON Schema](../data/music-riddle.schema.json)：支持 JSON Schema 的编辑器可据此补全字段、提示结构错误。
 - [新谜题模板](templates/music-riddle.json)：最小的「起点 → 终点」示例，复制后填写即可建立另一份谜题数据。
 
-## 这次需要你确认的两项
+## 已确认的两项歌名
 
-在完整数据里搜索以下 `id`，修改对应节点即可：
+2026-10-02，作者在本任务中回复“确认是对的”，并授权修改后发布。对应节点为：
 
-| 稳定 ID | 当前候选歌名 | 位置 |
+| 稳定 ID | 已确认歌名 | 位置 |
 |---|---|---|
 | `rAx50113` | 贝多芬与我 | 《花花世界》引出的终点 |
 | `mQ9j8i76fc8` | Baby Song | 《单车》引出的分支，之后是《天下无双》的死胡同 |
 
-两项的 `identity.review.status` 均为 `pending`；目前的 `title` 是用于预览的候选，不表示你已经确认。
+两项的 `identity.review.status` 均已设为 `confirmed`，确认人为 `simoncos`，日期为 `2026-10-02`。保留原有 `provisional` 证据类型及候选理由，记录确认之前的推断过程；这不表示找到了新的独立歌曲页证据。
 
-你可以只改歌名，或直接告诉我修改意见，我来补齐记录。若自行确认：
+后续可以只改歌名，或直接告知修改意见，再补齐记录。若自行确认新的待定项：
 
 1. 接受候选：保留 `title`，把 `identity.review.status` 改为 `confirmed`。
 2. 修正候选：修改 `title` 和需要接受的 `aliases`，把状态改为 `corrected`；在 `review.note` 写明原候选及修正理由。
@@ -97,4 +97,4 @@ python3 scripts/music_riddle_data.py docs/templates/music-riddle.json
 
 校验器会报告重复 ID、失效路径、不可达歌曲、分支答案冲突、坐标越界、缺失双语字段、不完整确认记录等，并列出待确认项。结构通过与歌名确认是两件事；存在 `pending` 仍可制作预览。页面构建也会执行这些检查。
 
-本次只整理数据和本地预览，两个歌名的待确认状态保持不变。
+当前回响数据没有待确认歌名；以后新加的不确定项使用 `pending` 单独记录。

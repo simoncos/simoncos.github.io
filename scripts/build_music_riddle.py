@@ -29,7 +29,7 @@ def render_music_riddle(config):
     start = next(n for n in data['nodes'] if n['id'] == data['start'])
     b = bi
     main = f'''<main id="main" class="echo-main" tabindex="-1">
-    <div class="echo-top"><a href="../../gallery.html#music">← {b('Work · Music','作品 · 音乐')}</a><span>2017 / 2026</span></div>
+    <div class="echo-top"><a href="../../gallery.html#games">← {b('Work · Games','作品 · 游戏')}</a><span>2017 / 2026</span></div>
     <header class="echo-intro">
       <div><p class="echo-kicker">{b('EASON CHAN · A MUSIC RIDDLE','陈奕迅 · 广域音乐谜题')}</p>
       <h1>{b('Endless','漫无止尽')}<br>{b('Echoes','的回响')}</h1></div>

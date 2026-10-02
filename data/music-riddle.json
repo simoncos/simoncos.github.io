@@ -171,10 +171,10 @@
           }
         ],
         "review": {
-          "status": "pending",
-          "by": null,
-          "date": null,
-          "note": ""
+          "status": "confirmed",
+          "by": "simoncos",
+          "date": "2026-10-02",
+          "note": "作者在本任务中明确回复“确认是对的”，确认《贝多芬与我》和《Baby Song》两个候选歌名，并授权修改后发布。"
         }
       },
       "clue": {
@@ -444,10 +444,10 @@
           }
         ],
         "review": {
-          "status": "pending",
-          "by": null,
-          "date": null,
-          "note": ""
+          "status": "confirmed",
+          "by": "simoncos",
+          "date": "2026-10-02",
+          "note": "作者在本任务中明确回复“确认是对的”，确认《贝多芬与我》和《Baby Song》两个候选歌名，并授权修改后发布。"
         }
       },
       "clue": {

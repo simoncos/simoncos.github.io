@@ -35,11 +35,11 @@
       "id": "work",
       "label": "Work",
       "url": "https://simoncos.github.io/gallery.html",
-      "purpose": "Projects, talks, research artifacts and music."
+      "purpose": "Tools, games, talks, research artifacts and music."
     },
     {
       "id": "projects",
-      "label": "Projects",
+      "label": "Tools",
       "url": "https://simoncos.github.io/projects.html",
       "purpose": "Index of maintained tools and systems; each project opens into its context, outputs, and related work."
     },
@@ -122,10 +122,10 @@
     },
     {
       "id": "endless-echoes",
-      "type": "music_riddle",
+      "type": "game",
       "label": "Endless Echoes (漫无止尽的回响)",
       "url": "https://simoncos.github.io/gallery/music/endless-echoes.html",
-      "description": "Bilingual branching music riddle through 26 Eason Chan songs, restored from a 2017 Douban list. Lyric quotations are replaced by imagery clues; progress stays in the browser."
+      "description": "A game in Work → Games: a bilingual branching music riddle through 26 Eason Chan songs, restored from a 2017 Douban list. Lyric quotations are replaced by imagery clues; progress stays in the browser."
     }
   ],
   "public_data_files": [
