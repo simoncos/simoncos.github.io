@@ -221,6 +221,35 @@
       },
       "img": "projects/assets/hn-field-notes-cover.png",
       "href": "projects/hn-field-notes/index.html"
+    },
+    {
+      "id": "hn-llm-research",
+      "kind": {
+        "en": "Research",
+        "zh": "研究"
+      },
+      "work_kind": {
+        "en": "Ongoing research",
+        "zh": "持续研究"
+      },
+      "work_topic": "research",
+      "home_topic": "think",
+      "date": "2026-10-02",
+      "single": true,
+      "title": {
+        "en": "HN × LLM: Model Releases and Discussion",
+        "zh": "HN × LLM：模型发布与讨论"
+      },
+      "home_desc": {
+        "en": "Explore how Hacker News discusses model releases across 14 AI companies, with source threads and coverage limits.",
+        "zh": "追踪 Hacker News 对 14 家 AI 公司模型发布的讨论，查看原帖、讨论关联与覆盖范围。"
+      },
+      "desc": {
+        "en": "Explore how Hacker News discusses model releases across 14 AI companies, with source threads and coverage limits. An ongoing study.",
+        "zh": "追踪 Hacker News 对 14 家 AI 公司模型发布的讨论，查看原帖、讨论关联与覆盖范围。研究持续进行中。"
+      },
+      "img": "gallery/research/assets/hn-llm-research-cover.svg",
+      "href": "https://simoncos-hn-llm-research.vercel.app/"
     }
   ],
   "featured": [

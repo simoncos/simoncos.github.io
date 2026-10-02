@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" aria-labelledby="title desc">
+  <title id="title">HN × LLM Research</title>
+  <desc id="desc">A typographic cover with an unfilled comparison grid, representing research into model releases and discussion. No research values are plotted.</desc>
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect x="2" y="2" width="18" height="18" rx="2" fill="none" stroke="#c1c7c1"/>
+    </pattern>
+  </defs>
+  <rect width="960" height="640" fill="#eeeee7"/>
+  <path d="M64 90H896M64 550H896" stroke="#bdc3bc"/>
+  <text x="64" y="65" font-family="Arial, sans-serif" font-size="16" letter-spacing="3" fill="#4b6257">RESEARCH / MODEL RELEASES</text>
+  <rect x="552" y="168" width="336" height="336" fill="url(#grid)"/>
+  <rect x="552" y="168" width="336" height="336" fill="none" stroke="#829589"/>
+  <text x="60" y="271" font-family="Georgia, serif" font-size="132" fill="#263d32">HN</text>
+  <text x="68" y="360" font-family="Georgia, serif" font-size="64" fill="#849588">×</text>
+  <text x="58" y="488" font-family="Georgia, serif" font-size="132" fill="#263d32">LLM</text>
+  <text x="64" y="590" font-family="Arial, sans-serif" font-size="20" fill="#4b6257">Releases, discussion, evidence.</text>
+  <text x="896" y="590" text-anchor="end" font-family="Arial, sans-serif" font-size="16" fill="#4b6257">simoncos</text>
+</svg>
