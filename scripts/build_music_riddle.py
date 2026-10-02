@@ -1,5 +1,6 @@
 """Restore the music riddle as a generated, bilingual Work page."""
 import json
+from music_riddle_data import load as load_music_riddle
 from site_shell import ROOT, bi, esc, i18n_attrs, page_config, render_document, render_meta
 
 PAGE = 'gallery/music/endless-echoes.html'
@@ -7,8 +8,8 @@ PAGE = 'gallery/music/endless-echoes.html'
 
 def map_svg(data):
     nodes = {n['id']: n for n in data['nodes']}
-    parts = ['<svg class="echo-map" viewBox="0 0 960 570" role="group" aria-labelledby="echo-map-title">',
-             '<title id="echo-map-title">26 songs connected by 31 paths · 26 首歌，31 条路径</title>']
+    parts = [f'<svg class="echo-map" viewBox="0 0 {data["map"]["width"]} {data["map"]["height"]}" role="group" aria-labelledby="echo-map-title">',
+             f'<title id="echo-map-title">{len(nodes)} songs connected by {sum(len(n["next"]) for n in nodes.values())} paths · {len(nodes)} 首歌，{sum(len(n["next"]) for n in nodes.values())} 条路径</title>']
     for node in nodes.values():
         x, y = node['position']
         for target in node['next']:
@@ -24,7 +25,7 @@ def map_svg(data):
 
 
 def render_music_riddle(config):
-    data = json.loads((ROOT / 'data/music-riddle.json').read_text())
+    data = load_music_riddle()
     start = next(n for n in data['nodes'] if n['id'] == data['start'])
     b = bi
     main = f'''<main id="main" class="echo-main" tabindex="-1">
@@ -32,7 +33,7 @@ def render_music_riddle(config):
     <header class="echo-intro">
       <div><p class="echo-kicker">{b('EASON CHAN · A MUSIC RIDDLE','陈奕迅 · 广域音乐谜题')}</p>
       <h1>{b('Endless','漫无止尽')}<br>{b('Echoes','的回响')}</h1></div>
-      <div class="echo-intro-note"><span class="echo-count">26</span><p>{b('songs. More than one way through.','首歌，不止一条路。')}</p><p>{b('Read a clue, name the next song.','读一段线索，猜下一首歌。')}<br>{b('Follow what you remember.','沿着你记得的声音走。')}</p></div>
+      <div class="echo-intro-note"><span class="echo-count">{len(data["nodes"])}</span><p>{b('songs. More than one way through.','首歌，不止一条路。')}</p><p>{b('Read a clue, name the next song.','读一段线索，猜下一首歌。')}<br>{b('Follow what you remember.','沿着你记得的声音走。')}</p></div>
     </header>
     <div class="echo-game" data-echo-game>
       <section class="echo-clue-panel" aria-labelledby="echo-song">
@@ -50,7 +51,7 @@ def render_music_riddle(config):
         <noscript><p class="echo-noscript">{b('The interactive trail needs JavaScript. You can follow the original clues in the Douban list below; start with 不来也不去.','开启 JavaScript 可在这里猜歌和保存进度。也可以在下方豆列阅读原始线索，从《不来也不去》开始。')}</p></noscript>
       </section>
       <section class="echo-map-panel" aria-labelledby="echo-map-heading">
-        <div class="echo-panel-top"><h2 id="echo-map-heading">{b('YOUR ECHOES','你的回响')}</h2><button class="echo-text-button echo-js" type="button" data-map-zoom aria-pressed="false">{b('Enlarge map','放大地图')}</button><span class="echo-progress"><span id="echo-found-count">1</span> / 26</span></div>
+        <div class="echo-panel-top"><h2 id="echo-map-heading">{b('YOUR ECHOES','你的回响')}</h2><button class="echo-text-button echo-js" type="button" data-map-zoom aria-pressed="false">{b('Enlarge map','放大地图')}</button><span class="echo-progress"><span id="echo-found-count">1</span> / {len(data["nodes"])}</span></div>
         <div class="echo-map-stage">{map_svg(data)}</div>
         <div class="echo-map-key"><span><i class="echo-key-found"></i>{b('Found','已找到')}</span><span><i class="echo-key-unknown"></i>{b('Still unheard','尚未抵达')}</span><span class="echo-map-instruction">{b('Revisit a lit song','点亮的歌可以再次打开')}</span></div>
       </section>
@@ -61,14 +62,14 @@ def render_music_riddle(config):
     head = render_meta(config, title=('Endless Echoes · simoncos','漫无止尽的回响 · simoncos'), description=('A branching music riddle through 26 Eason Chan songs, first made in 2017.','一场穿过陈奕迅 26 首歌的音乐谜题，沿线索点亮歌曲之间的回响。'), canonical=PAGE)
     head += '\n<link rel="stylesheet" href="assets/endless-echoes.css?v=20261001a">'
     # Runtime only needs clues and the graph, not historical source annotations.
-    payload = {key:data[key] for key in ('start','ending')}
-    payload['nodes'] = [{k:v for k,v in n.items() if k not in ('source','identity_status')} for n in data['nodes']]
+    payload = {key:data[key] for key in ('id','start','ending')}
+    payload['nodes'] = [{k:v for k,v in n.items() if k in ('id','title','aliases','clue','hint','next','dead_ends','position')} for n in data['nodes']]
     serialized = json.dumps(payload,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')
     return render_document(config,page_config(config,PAGE),head=head,main=main,body_attrs=' class="music-riddle"',tail=f'<script type="application/json" id="echo-data">{serialized}</script>')
 
 
 def render_music_cover():
-    data = json.loads((ROOT / 'data/music-riddle.json').read_text())
+    data = load_music_riddle()
     nodes = {n['id']:n for n in data['nodes']}
     paths=[]
     for node in nodes.values():
