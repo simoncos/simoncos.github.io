@@ -1,4 +1,11 @@
 {
+  "$schema": "./music-riddle.schema.json",
+  "schema_version": 1,
+  "id": "endless-echoes",
+  "artist": {
+    "zh": "陈奕迅",
+    "en": "Eason Chan"
+  },
   "title": {
     "zh": "漫无止尽的回响",
     "en": "Endless Echoes"
@@ -8,14 +15,27 @@
   "source": "https://www.douban.com/doulist/45894638/",
   "start": "VbpP7694d",
   "ending": "rAx50113",
+  "map": {
+    "width": 960,
+    "height": 570
+  },
   "nodes": [
     {
       "id": "1769110881",
       "title": "多少",
-      "position": [
-        190,
-        490
-      ],
+      "aliases": [],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "熟悉又陌生的街，熟悉又陌生的脸，只是缺少了熟悉的你",
         "en": "Familiar yet unfamiliar streets. Familiar yet unfamiliar faces. Only the familiar you is missing."
@@ -24,28 +44,41 @@
         "zh": "重逢，或者只是想见一面。",
         "en": "A reunion, or simply the wish to meet."
       },
+      "next": [
+        "kavMc624b"
+      ],
+      "position": [
+        190,
+        490
+      ],
       "source": {
         "douban_item": "269592564",
         "xiami": "http://www.xiami.com/song/1769110881",
         "predecessors": [
-          [
-            "不来也不去",
-            "http://www.xiami.com/song/VbpP7694d"
-          ]
+          {
+            "id": "VbpP7694d",
+            "title": "不来也不去",
+            "url": "http://www.xiami.com/song/VbpP7694d"
+          }
         ]
-      },
-      "next": [
-        "kavMc624b"
-      ],
-      "identity_status": "cross-reference"
+      }
     },
     {
       "id": "r9g304ba",
       "title": "信心花舍",
-      "position": [
-        660,
-        510
-      ],
+      "aliases": [],
+      "identity": {
+        "evidence_type": "contextual-alias",
+        "evidence_urls": [],
+        "note": "短地址与其他版本地址不同，依据前驱、后继及谜意对应；属于上下文推断。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "长夜清早，梅兰菊竹，这小小花舍，不也是一个世界？",
         "en": "Through night and morning, plum, orchid, chrysanthemum and bamboo: is this little flower house not a world of its own?"
@@ -54,28 +87,41 @@
         "zh": "从花舍走向更大的世界。",
         "en": "From a flower house to a wider world."
       },
+      "next": [
+        "8GcTLDedcc6"
+      ],
+      "position": [
+        660,
+        510
+      ],
       "source": {
         "douban_item": "269585212",
         "xiami": "http://www.xiami.com/song/r9g304ba",
         "predecessors": [
-          [
-            "喜欢一个人",
-            "http://www.xiami.com/song/b1qjuSo404ab"
-          ]
+          {
+            "id": "b1qjuSo404ab",
+            "title": "喜欢一个人",
+            "url": "http://www.xiami.com/song/b1qjuSo404ab"
+          }
         ]
-      },
-      "next": [
-        "8GcTLDedcc6"
-      ],
-      "identity_status": "contextual-alias"
+      }
     },
     {
       "id": "kau7b16d6",
       "title": "富士山下",
-      "position": [
-        680,
-        235
-      ],
+      "aliases": [],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "如果爱上一座山，你只有自己走过去欣赏，然后头也不回地离开。人生不常如初见，不如在那一刹那品尽苦与甜，从此不再见。",
         "en": "If you fall in love with a mountain, you can only walk over, appreciate it, and leave without looking back. Life seldom stays like the first meeting. Taste its bitterness and sweetness in that moment, then never meet again."
@@ -84,32 +130,53 @@
         "zh": "山与离别。",
         "en": "A mountain and a farewell."
       },
+      "next": [
+        "9lmK42c6b"
+      ],
+      "position": [
+        680,
+        235
+      ],
       "source": {
         "douban_item": "269584812",
         "xiami": "http://www.xiami.com/song/kau7b16d6",
         "predecessors": [
-          [
-            "落花流水",
-            "http://www.xiami.com/song/kavDda4ae"
-          ],
-          [
-            "夕阳无限好",
-            "http://www.xiami.com/song/fOlr5231a"
-          ]
+          {
+            "id": "3075085",
+            "title": "落花流水",
+            "url": "http://www.xiami.com/song/kavDda4ae"
+          },
+          {
+            "id": "fOlr5231a",
+            "title": "夕阳无限好",
+            "url": "http://www.xiami.com/song/fOlr5231a"
+          }
         ]
-      },
-      "next": [
-        "9lmK42c6b"
-      ],
-      "identity_status": "cross-reference"
+      }
     },
     {
       "id": "rAx50113",
       "title": "贝多芬与我",
-      "position": [
-        875,
-        490
+      "aliases": [
+        "貝多芬與我"
       ],
+      "identity": {
+        "evidence_type": "provisional",
+        "evidence_urls": [],
+        "note": "原豆列的缺名终点，由《花花世界》引出；根据终点线索推断为《贝多芬与我》，尚无独立歌曲页证据。",
+        "candidates": [
+          {
+            "title": "贝多芬与我",
+            "reason": "原豆列的缺名终点，由《花花世界》引出；根据终点线索推断为《贝多芬与我》，尚无独立歌曲页证据。"
+          }
+        ],
+        "review": {
+          "status": "pending",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "从生命的开端，到理解世界，再到年轻、告别与平静。音乐替每一个阶段留下了声音，故事在这里回响。",
         "en": "From the beginning of life to understanding the world, youth, farewell and stillness: music leaves a sound for each stage. The story echoes here."
@@ -118,26 +185,41 @@
         "zh": "你找到了终点。",
         "en": "You have reached the ending."
       },
+      "next": [],
+      "position": [
+        875,
+        490
+      ],
       "source": {
         "douban_item": "269584120",
         "xiami": "http://www.xiami.com/song/rAx50113",
         "predecessors": [
-          [
-            "花花世界",
-            "http://www.xiami.com/song/8GcTLDedcc6"
-          ]
+          {
+            "id": "8GcTLDedcc6",
+            "title": "花花世界",
+            "url": "http://www.xiami.com/song/8GcTLDedcc6"
+          }
         ]
-      },
-      "next": [],
-      "identity_status": "provisional"
+      }
     },
     {
       "id": "b1qjuSo404ab",
       "title": "喜欢一个人",
-      "position": [
-        560,
-        515
+      "aliases": [
+        "喜歡一個人"
       ],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "如觉得喜欢一个人，昨天的我会被小心珍藏，明天的我有一部分来自于你，而今天的我，同每一天一样，阴晴圆缺，牡丹被单，都是风景。",
         "en": "When you like someone, yesterday’s self is carefully treasured and part of tomorrow’s self comes from them. Today, as on any other day, changing skies and a peony-patterned sheet are all scenery."
@@ -146,28 +228,43 @@
         "zh": "被安放、被照料的感情。",
         "en": "Affection given a place and tended with care."
       },
+      "next": [
+        "r9g304ba"
+      ],
+      "position": [
+        560,
+        515
+      ],
       "source": {
         "douban_item": "269583105",
         "xiami": "http://www.xiami.com/song/b1qjuSo404ab",
         "predecessors": [
-          [
-            "约定",
-            "http://www.xiami.com/song/bqvdVl73c0ab"
-          ]
+          {
+            "id": "bqvdVl73c0ab",
+            "title": "约定",
+            "url": "http://www.xiami.com/song/bqvdVl73c0ab"
+          }
         ]
-      },
-      "next": [
-        "r9g304ba"
-      ],
-      "identity_status": "cross-reference"
+      }
     },
     {
       "id": "hmuda8eb",
       "title": "今天等我来",
-      "position": [
-        350,
-        95
+      "aliases": [
+        "今天等我來"
       ],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "把旧日牵挂放在身后，给自己一个可以即兴的旅程。即使独行，也能跨过大海，写出自己的好故事。",
         "en": "Leave old attachments behind and give yourself a journey open to improvisation. Even alone, you can cross the sea and write your own good story."
@@ -176,28 +273,43 @@
         "zh": "独行也可以自在。",
         "en": "Going alone can also mean going freely."
       },
+      "next": [
+        "8Gmn27f4280"
+      ],
+      "position": [
+        350,
+        95
+      ],
       "source": {
         "douban_item": "269582782",
         "xiami": "http://www.xiami.com/song/hmuda8eb",
         "predecessors": [
-          [
-            "倒带人生",
-            "http://www.xiami.com/song/b4MFp97c40"
-          ]
+          {
+            "id": "2113245",
+            "title": "倒带人生",
+            "url": "http://www.xiami.com/song/b4MFp97c40"
+          }
         ]
-      },
-      "next": [
-        "8Gmn27f4280"
-      ],
-      "identity_status": "cross-reference"
+      }
     },
     {
       "id": "bqvdVl73c0ab",
       "title": "约定",
-      "position": [
-        490,
-        495
+      "aliases": [
+        "約定"
       ],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "就算会与你分离，我们至少还拥有剩下这段旋律。只有彼此懂得其中的起伏，也许有一天还能遇上。",
         "en": "Even if we part, a melody remains between us. Only we understand its rises and falls; perhaps one day we will meet again."
@@ -206,28 +318,45 @@
         "zh": "从共同的约定，走向对一个人的感情。",
         "en": "From a shared promise toward feelings for one person."
       },
+      "next": [
+        "b1qjuSo404ab"
+      ],
+      "position": [
+        490,
+        495
+      ],
       "source": {
         "douban_item": "269582401",
         "xiami": "http://www.xiami.com/song/bqvdVl73c0ab",
         "predecessors": [
-          [
-            "好久不见",
-            "http://www.xiami.com/song/kavMc624b"
-          ]
+          {
+            "id": "kavMc624b",
+            "title": "好久不见",
+            "url": "http://www.xiami.com/song/kavMc624b"
+          }
         ]
-      },
-      "next": [
-        "b1qjuSo404ab"
-      ],
-      "identity_status": "cross-reference"
+      }
     },
     {
       "id": "2113245",
       "title": "倒带人生",
-      "position": [
-        260,
-        75
+      "aliases": [
+        "倒帶人生"
       ],
+      "identity": {
+        "evidence_type": "archive",
+        "evidence_urls": [
+          "https://web.archive.org/web/20130920213923/http://www.xiami.com/song/2113245"
+        ],
+        "note": "已打开存档歌曲页核对标题。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "即使能回到最初，再次远走他乡，在热岛的船上问你借火，看到你笑开的眼眉，我真的可以改变什么吗？",
         "en": "Even if I could return to the beginning, go abroad again, ask you for a light on that boat in the heat, and see your eyes brighten with a smile, what could I really change?"
@@ -236,28 +365,43 @@
         "zh": "回到过去之后，仍要选择今天。",
         "en": "After returning to the past, today still calls for a choice."
       },
+      "next": [
+        "hmuda8eb"
+      ],
+      "position": [
+        260,
+        75
+      ],
       "source": {
         "douban_item": "269581999",
         "xiami": "http://www.xiami.com/song/2113245",
         "predecessors": [
-          [
-            "陀飞轮",
-            "http://www.xiami.com/song/xLqlvna2191"
-          ]
+          {
+            "id": "1769399775",
+            "title": "陀飞轮",
+            "url": "http://www.xiami.com/song/xLqlvna2191"
+          }
         ]
-      },
-      "next": [
-        "hmuda8eb"
-      ],
-      "identity_status": "archive"
+      }
     },
     {
       "id": "1769399775",
       "title": "陀飞轮",
-      "position": [
-        185,
-        165
+      "aliases": [
+        "陀飛輪"
       ],
+      "identity": {
+        "evidence_type": "contextual-alias",
+        "evidence_urls": [],
+        "note": "短地址与其他版本地址不同，依据前驱、后继及谜意对应；属于上下文推断。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "或许我们永远也追赶不赢时间，也无法退回过去再次选择。不懂教训的时候肆意消费，等透支到无法偿还为时已晚。",
         "en": "Perhaps we can never outrun time or return to the past to choose again. We spend recklessly before learning the lesson; once the debt is beyond repayment, it is too late."
@@ -266,28 +410,46 @@
         "zh": "想让人生倒着走。",
         "en": "Wishing life could run backward."
       },
+      "next": [
+        "2113245"
+      ],
+      "position": [
+        185,
+        165
+      ],
       "source": {
         "douban_item": "269581832",
         "xiami": "http://www.xiami.com/song/1769399775",
         "predecessors": [
-          [
-            "单车",
-            "http://www.xiami.com/song/e1p628e1"
-          ]
+          {
+            "id": "wLB3e449",
+            "title": "单车",
+            "url": "http://www.xiami.com/song/e1p628e1"
+          }
         ]
-      },
-      "next": [
-        "2113245"
-      ],
-      "identity_status": "contextual-alias"
+      }
     },
     {
       "id": "mQ9j8i76fc8",
       "title": "Baby Song",
-      "position": [
-        70,
-        90
-      ],
+      "aliases": [],
+      "identity": {
+        "evidence_type": "provisional",
+        "evidence_urls": [],
+        "note": "原豆列的缺名歌曲，由《单车》引出，线索再指向《天下无双》的死胡同；结合亲子意象推断为《Baby Song》，尚无独立歌曲页证据。",
+        "candidates": [
+          {
+            "title": "Baby Song",
+            "reason": "原豆列的缺名歌曲，由《单车》引出，线索再指向《天下无双》的死胡同；结合亲子意象推断为《Baby Song》，尚无独立歌曲页证据。"
+          }
+        ],
+        "review": {
+          "status": "pending",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "道一声晚安，感谢世界让我们成为彼此独一无二的陪伴。",
         "en": "Say goodnight, grateful that the world gave us each other as a unique companion."
@@ -296,30 +458,45 @@
         "zh": "这条岔路可以通向对彼此的赞美。",
         "en": "This detour points toward praise for an incomparable companion."
       },
+      "next": [],
+      "dead_ends": [
+        "天下无双",
+        "天下無雙"
+      ],
+      "position": [
+        70,
+        90
+      ],
       "source": {
         "douban_item": "269534209",
         "xiami": "http://www.xiami.com/song/mQ9j8i76fc8",
         "predecessors": [
-          [
-            "单车",
-            "http://www.xiami.com/song/e1p628e1"
-          ]
+          {
+            "id": "wLB3e449",
+            "title": "单车",
+            "url": "http://www.xiami.com/song/e1p628e1"
+          }
         ]
-      },
-      "next": [],
-      "identity_status": "provisional",
-      "dead_ends": [
-        "天下无双",
-        "天下無雙"
-      ]
+      }
     },
     {
       "id": "wLB3e449",
       "title": "单车",
-      "position": [
-        100,
-        190
+      "aliases": [
+        "單車"
       ],
+      "identity": {
+        "evidence_type": "contextual-alias",
+        "evidence_urls": [],
+        "note": "短地址与其他版本地址不同，依据前驱、后继及谜意对应；属于上下文推断。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "时间只负责流动，不负责成长，你送给我的歌，有一天我也会送给别人，我们数着剩下的心跳唱着歌，这交替没有尽头 。",
         "en": "Time flows, but does not take responsibility for growing us. One day I will give someone else the song you gave me. We sing while counting our remaining heartbeats; the passing on never ends."
@@ -328,29 +505,46 @@
         "zh": "一条关于时间，一条关于把歌传给下一代。",
         "en": "One direction concerns time; another passes a song to the next generation."
       },
-      "source": {
-        "douban_item": "269534146",
-        "xiami": "http://www.xiami.com/song/wLB3e449",
-        "predecessors": [
-          [
-            "你的背包",
-            "http://www.xiami.com/song/f8v1t424e6"
-          ]
-        ]
-      },
       "next": [
         "1769399775",
         "mQ9j8i76fc8"
       ],
-      "identity_status": "contextual-alias"
+      "position": [
+        100,
+        190
+      ],
+      "source": {
+        "douban_item": "269534146",
+        "xiami": "http://www.xiami.com/song/wLB3e449",
+        "predecessors": [
+          {
+            "id": "fOld7b901",
+            "title": "你的背包",
+            "url": "http://www.xiami.com/song/f8v1t424e6"
+          }
+        ]
+      }
     },
     {
       "id": "9lmK42c6b",
       "title": "不如不见",
-      "position": [
-        855,
-        185
+      "aliases": [
+        "不如不見"
       ],
+      "identity": {
+        "evidence_type": "archive",
+        "evidence_urls": [
+          "https://web.archive.org/web/20190710235257/http://xiami.com/song/9lmK42c6b"
+        ],
+        "note": "已打开存档歌曲页核对标题。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "十年以后，恋人变成朋友；眼泪似乎有理由落下，又似乎没有。",
         "en": "Ten years later, lovers become friends. There seems to be a reason for tears, and yet there seems to be none."
@@ -359,33 +553,49 @@
         "zh": "留意这里提到的时间跨度。",
         "en": "Notice the span of time mentioned here."
       },
+      "next": [],
+      "dead_ends": [
+        "十年"
+      ],
+      "position": [
+        855,
+        185
+      ],
       "source": {
         "douban_item": "269533885",
         "xiami": "http://www.xiami.com/song/9lmK42c6b",
         "predecessors": [
-          [
-            "好久不见",
-            "http://www.xiami.com/song/kavMc624b"
-          ],
-          [
-            "富士山下",
-            "http://www.xiami.com/song/kau7b16d6"
-          ]
+          {
+            "id": "kavMc624b",
+            "title": "好久不见",
+            "url": "http://www.xiami.com/song/kavMc624b"
+          },
+          {
+            "id": "kau7b16d6",
+            "title": "富士山下",
+            "url": "http://www.xiami.com/song/kau7b16d6"
+          }
         ]
-      },
-      "next": [],
-      "identity_status": "archive",
-      "dead_ends": [
-        "十年"
-      ]
+      }
     },
     {
       "id": "kavMc624b",
       "title": "好久不见",
-      "position": [
-        430,
-        430
+      "aliases": [
+        "好久不見"
       ],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "所以我终究还是放不下心中那些微弱的声音。不害怕重要的东西都已改变，也不害怕不如不见。那些过往真的很美丽：大雨侵袭的窗台，昏黄灯光中的香气，如同和弦不断回响。我只是单纯地想见你。",
         "en": "In the end I cannot let go of those faint inner voices. I am not afraid that important things have changed, or that we might be better off not meeting. The past was beautiful: a rain-beaten windowsill, a scent in warm dim light, echoing like chords. I simply want to see you."
@@ -394,33 +604,49 @@
         "zh": "记忆里的一次承诺，也可能变成另一种离别。",
         "en": "A promise in memory, or another kind of parting."
       },
-      "source": {
-        "douban_item": "269533823",
-        "xiami": "http://www.xiami.com/song/kavMc624b",
-        "predecessors": [
-          [
-            "孤独患者",
-            "http://www.xiami.com/song/mQ9j8d7b7b0"
-          ],
-          [
-            "多少",
-            "http://www.xiami.com/song/1769110881"
-          ]
-        ]
-      },
       "next": [
         "bqvdVl73c0ab",
         "9lmK42c6b"
       ],
-      "identity_status": "cross-reference"
+      "position": [
+        430,
+        430
+      ],
+      "source": {
+        "douban_item": "269533823",
+        "xiami": "http://www.xiami.com/song/kavMc624b",
+        "predecessors": [
+          {
+            "id": "mQ9j8d7b7b0",
+            "title": "孤独患者",
+            "url": "http://www.xiami.com/song/mQ9j8d7b7b0"
+          },
+          {
+            "id": "1769110881",
+            "title": "多少",
+            "url": "http://www.xiami.com/song/1769110881"
+          }
+        ]
+      }
     },
     {
       "id": "mQ9j8d7b7b0",
       "title": "孤独患者",
-      "position": [
-        485,
-        250
+      "aliases": [
+        "孤獨患者"
       ],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "喧闹里得不到的东西让内心骚动，真正得到后又觉得空荡荡。多年装腔作势、小心翼翼，于我究竟有多大意义？像卓别林的默片，幽默，却传不出心中的真实声音。",
         "en": "In the noise, wanting something unsettles me; getting it leaves me empty. What have years of posing and caution really meant? Like a Chaplin silent film: funny, but unable to carry my true inner voice."
@@ -429,28 +655,41 @@
         "zh": "从喧闹和孤独，回到一个想见的人。",
         "en": "From noise and loneliness back to someone you want to see."
       },
+      "next": [
+        "kavMc624b"
+      ],
+      "position": [
+        485,
+        250
+      ],
       "source": {
         "douban_item": "269533591",
         "xiami": "http://www.xiami.com/song/mQ9j8d7b7b0",
         "predecessors": [
-          [
-            "任我行",
-            "http://www.xiami.com/song/8Gmn27f4280"
-          ]
+          {
+            "id": "8Gmn27f4280",
+            "title": "任我行",
+            "url": "http://www.xiami.com/song/8Gmn27f4280"
+          }
         ]
-      },
-      "next": [
-        "kavMc624b"
-      ],
-      "identity_status": "cross-reference"
+      }
     },
     {
       "id": "8Gmn27f4280",
       "title": "任我行",
-      "position": [
-        445,
-        120
-      ],
+      "aliases": [],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "少时刻意的离群，如今显得幼稚。虽然我不认为两厅双套就是天空海阔，但何必演戏感动自己？人生真无必要那么戏剧化才算活过。",
         "en": "The deliberate distance I kept when young now seems immature. A spacious apartment is not my idea of an open sky, but why perform to move myself? A life need not be theatrical to count as lived."
@@ -459,32 +698,48 @@
         "zh": "一种在人群之中的孤独。",
         "en": "A kind of solitude in the crowd."
       },
+      "next": [
+        "mQ9j8d7b7b0"
+      ],
+      "position": [
+        445,
+        120
+      ],
       "source": {
         "douban_item": "269533436",
         "xiami": "http://www.xiami.com/song/8Gmn27f4280",
         "predecessors": [
-          [
-            "幸福摩天轮",
-            "http://www.xiami.com/song/e91122b1"
-          ],
-          [
-            "今天等我来",
-            "http://www.xiami.com/song/hmuda8eb"
-          ]
+          {
+            "id": "e91122b1",
+            "title": "幸福摩天轮",
+            "url": "http://www.xiami.com/song/e91122b1"
+          },
+          {
+            "id": "hmuda8eb",
+            "title": "今天等我来",
+            "url": "http://www.xiami.com/song/hmuda8eb"
+          }
         ]
-      },
-      "next": [
-        "mQ9j8d7b7b0"
-      ],
-      "identity_status": "cross-reference"
+      }
     },
     {
       "id": "e91122b1",
       "title": "幸福摩天轮",
-      "position": [
-        650,
-        105
+      "aliases": [
+        "幸福摩天輪"
       ],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "高低起落的旅程里，有你陪伴，坚硬的外壳也慢慢融化。这个顽童终于开始学会坦诚地与人相对。",
         "en": "With you beside me through the journey’s rises and falls, the hard shell slowly softens. This unruly child finally begins to face others honestly."
@@ -493,28 +748,45 @@
         "zh": "从一起升降，走向自在行走。",
         "en": "From rising and falling together to walking freely."
       },
+      "next": [
+        "8Gmn27f4280"
+      ],
+      "position": [
+        650,
+        105
+      ],
       "source": {
         "douban_item": "269533289",
         "xiami": "http://www.xiami.com/song/e91122b1",
         "predecessors": [
-          [
-            "沙龙",
-            "http://www.xiami.com/song/fEJ2g40bfb"
-          ]
+          {
+            "id": "3589522",
+            "title": "沙龙",
+            "url": "http://www.xiami.com/song/fEJ2g40bfb"
+          }
         ]
-      },
-      "next": [
-        "8Gmn27f4280"
-      ],
-      "identity_status": "cross-reference"
+      }
     },
     {
       "id": "3589522",
       "title": "沙龙",
-      "position": [
-        640,
-        50
+      "aliases": [
+        "沙龍"
       ],
+      "identity": {
+        "evidence_type": "archive",
+        "evidence_urls": [
+          "https://web.archive.org/web/20171110074202/http://www.xiami.com:80/song/3589522?"
+        ],
+        "note": "已打开存档歌曲页核对标题。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "谢谢你陪伴我画完这个圈。",
         "en": "Thank you for staying with me until I finished drawing this circle."
@@ -523,28 +795,43 @@
         "zh": "那个一起转过的圈，也许是游乐场里的。",
         "en": "The circle you travelled together may belong to a fairground."
       },
+      "next": [
+        "e91122b1"
+      ],
+      "position": [
+        640,
+        50
+      ],
       "source": {
         "douban_item": "269533134",
         "xiami": "http://www.xiami.com/song/3589522",
         "predecessors": [
-          [
-            "还有什么可以送给你 ",
-            "http://www.xiami.com/song/VbpI6a8d2"
-          ]
+          {
+            "id": "3589514",
+            "title": "还有什么可以送给你",
+            "url": "http://www.xiami.com/song/VbpI6a8d2"
+          }
         ]
-      },
-      "next": [
-        "e91122b1"
-      ],
-      "identity_status": "archive"
+      }
     },
     {
       "id": "3589514",
       "title": "还有什么可以送给你",
-      "position": [
-        785,
-        60
+      "aliases": [
+        "還有什麼可以送給你"
       ],
+      "identity": {
+        "evidence_type": "contextual-alias",
+        "evidence_urls": [],
+        "note": "短地址与其他版本地址不同，依据前驱、后继及谜意对应；属于上下文推断。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "声、光、味，速度、温度、浓度，这些重要的碎片组成了我。当我鼓起勇气把所有重要的东西都送给了你，你就变成了我最重要的东西。",
         "en": "Sound, light, taste, speed, warmth and intensity: these fragments make me. When I find the courage to give you everything that matters, you become what matters most."
@@ -553,28 +840,43 @@
         "zh": "把感官与回忆定格。",
         "en": "Holding senses and memories still."
       },
+      "next": [
+        "3589522"
+      ],
+      "position": [
+        785,
+        60
+      ],
       "source": {
         "douban_item": "269533002",
         "xiami": "http://www.xiami.com/song/3589514",
         "predecessors": [
-          [
-            "落花流水",
-            "http://www.xiami.com/song/kavDda4ae"
-          ]
+          {
+            "id": "3075085",
+            "title": "落花流水",
+            "url": "http://www.xiami.com/song/kavDda4ae"
+          }
         ]
-      },
-      "next": [
-        "3589522"
-      ],
-      "identity_status": "contextual-alias"
+      }
     },
     {
       "id": "fOlr5231a",
       "title": "夕阳无限好",
-      "position": [
-        715,
-        315
+      "aliases": [
+        "夕陽無限好"
       ],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "风花雪月不可等人，但如果是山那一般近似永恒的东西，又该如何？",
         "en": "Passing romance cannot wait. But what of something almost eternal, like a mountain?"
@@ -583,28 +885,43 @@
         "zh": "爱上一座山。",
         "en": "Falling in love with a mountain."
       },
+      "next": [
+        "kau7b16d6"
+      ],
+      "position": [
+        715,
+        315
+      ],
       "source": {
         "douban_item": "269532704",
         "xiami": "http://www.xiami.com/song/fOlr5231a",
         "predecessors": [
-          [
-            "七百年后",
-            "http://www.xiami.com/song/VbpM8f3ff"
-          ]
+          {
+            "id": "VbpM8f3ff",
+            "title": "七百年后",
+            "url": "http://www.xiami.com/song/VbpM8f3ff"
+          }
         ]
-      },
-      "next": [
-        "kau7b16d6"
-      ],
-      "identity_status": "cross-reference"
+      }
     },
     {
       "id": "3075085",
       "title": "落花流水",
-      "position": [
-        745,
-        375
-      ],
+      "aliases": [],
+      "identity": {
+        "evidence_type": "archive",
+        "evidence_urls": [
+          "https://web.archive.org/web/20171022222905/http://www.xiami.com:80/song/3075085?"
+        ],
+        "note": "已打开存档歌曲页核对标题。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "花与水相遇，短暂同行，各自带走旧日的记忆与一份赠礼。",
         "en": "A flower and flowing water meet, travel briefly together, and carry away old memories and a gift."
@@ -613,29 +930,42 @@
         "zh": "山是一条路，赠礼是另一条。",
         "en": "The mountain is one route; a gift is another."
       },
-      "source": {
-        "douban_item": "269532357",
-        "xiami": "http://www.xiami.com/song/3075085",
-        "predecessors": [
-          [
-            "七百年后",
-            "http://www.xiami.com/song/VbpM8f3ff"
-          ]
-        ]
-      },
       "next": [
         "kau7b16d6",
         "3589514"
       ],
-      "identity_status": "archive"
+      "position": [
+        745,
+        375
+      ],
+      "source": {
+        "douban_item": "269532357",
+        "xiami": "http://www.xiami.com/song/3075085",
+        "predecessors": [
+          {
+            "id": "VbpM8f3ff",
+            "title": "七百年后",
+            "url": "http://www.xiami.com/song/VbpM8f3ff"
+          }
+        ]
+      }
     },
     {
       "id": "8GcTLDedcc6",
       "title": "花花世界",
-      "position": [
-        780,
-        480
-      ],
+      "aliases": [],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "亲人、爱人、友人，陪你上路的人终有下车的时候。人生载满随机和未解的谜，存在正确的选择么？听听自己串成的韵律，再合上眼睛，告别这个世界。",
         "en": "Family, lovers, friends: those who join the journey eventually leave. Life is full of chance and unsolved riddles. Is there a right choice? Listen to the rhythm you have strung together, then close your eyes and bid this world farewell."
@@ -644,32 +974,48 @@
         "zh": "音乐伴着整个人生走到平静。",
         "en": "Music accompanies a whole life toward stillness."
       },
+      "next": [
+        "rAx50113"
+      ],
+      "position": [
+        780,
+        480
+      ],
       "source": {
         "douban_item": "269532178",
         "xiami": "http://www.xiami.com/song/8GcTLDedcc6",
         "predecessors": [
-          [
-            "七百年后",
-            "http://www.xiami.com/song/VbpM8f3ff"
-          ],
-          [
-            "信心花舍",
-            "http://www.xiami.com/song/kdTo97ad1"
-          ]
+          {
+            "id": "VbpM8f3ff",
+            "title": "七百年后",
+            "url": "http://www.xiami.com/song/VbpM8f3ff"
+          },
+          {
+            "id": "r9g304ba",
+            "title": "信心花舍",
+            "url": "http://www.xiami.com/song/kdTo97ad1"
+          }
         ]
-      },
-      "next": [
-        "rAx50113"
-      ],
-      "identity_status": "cross-reference"
+      }
     },
     {
       "id": "VbpM8f3ff",
       "title": "七百年后",
-      "position": [
-        600,
-        360
+      "aliases": [
+        "七百年後"
       ],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "如果在某个初夏你见到一朵花，一定记得珍惜她，与她好好告别，虽然一路上你还会见到不同的花，但你也许不会再见到她。谁只能陪你走过那一段短暂夕照下温柔的旅程，而谁会留下？",
         "en": "If you meet a flower in early summer, treasure her and say goodbye properly. You will meet other flowers along the way, but may never see her again. Who can accompany you only through a brief sunset journey, and who will stay?"
@@ -678,30 +1024,43 @@
         "zh": "夕照、花与流动，或整个世界。",
         "en": "Sunset, flowers and flowing water, or the whole world."
       },
-      "source": {
-        "douban_item": "269531795",
-        "xiami": "http://www.xiami.com/song/VbpM8f3ff",
-        "predecessors": [
-          [
-            "你的背包 ",
-            "http://www.xiami.com/song/f8v1t424e6"
-          ]
-        ]
-      },
       "next": [
         "fOlr5231a",
         "3075085",
         "8GcTLDedcc6"
       ],
-      "identity_status": "cross-reference"
+      "position": [
+        600,
+        360
+      ],
+      "source": {
+        "douban_item": "269531795",
+        "xiami": "http://www.xiami.com/song/VbpM8f3ff",
+        "predecessors": [
+          {
+            "id": "fOld7b901",
+            "title": "你的背包",
+            "url": "http://www.xiami.com/song/f8v1t424e6"
+          }
+        ]
+      }
     },
     {
       "id": "fOld7b901",
       "title": "你的背包",
-      "position": [
-        395,
-        340
-      ],
+      "aliases": [],
+      "identity": {
+        "evidence_type": "contextual-alias",
+        "evidence_urls": [],
+        "note": "短地址与其他版本地址不同，依据前驱、后继及谜意对应；属于上下文推断。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "人会恋物，或许是因为在那物品上连接着对某些事、某些人的记忆，背包、单车、钥匙、贺卡。如果我能再活一百倍这样长度的时间，那时世界肯定早已不是这个世界，或许只有到那时，我才可能抛下这些回忆中的遗憾，只保留其中的欢喜。",
         "en": "Perhaps we love objects because they connect to memories of people and events: a backpack, a bicycle, keys, a card. If life were a hundred times longer, perhaps we could finally keep the joy and let go of regret."
@@ -710,29 +1069,42 @@
         "zh": "物件里的亲情；或者漫长的未来。",
         "en": "Family affection in an object, or a very distant future."
       },
-      "source": {
-        "douban_item": "269531607",
-        "xiami": "http://www.xiami.com/song/fOld7b901",
-        "predecessors": [
-          [
-            "四季圈",
-            "http://www.xiami.com/song/mQKhoF955e4"
-          ]
-        ]
-      },
       "next": [
         "wLB3e449",
         "VbpM8f3ff"
       ],
-      "identity_status": "contextual-alias"
+      "position": [
+        395,
+        340
+      ],
+      "source": {
+        "douban_item": "269531607",
+        "xiami": "http://www.xiami.com/song/fOld7b901",
+        "predecessors": [
+          {
+            "id": "mQKhoF955e4",
+            "title": "四季圈",
+            "url": "http://www.xiami.com/song/mQKhoF955e4"
+          }
+        ]
+      }
     },
     {
       "id": "mQKhoF955e4",
       "title": "四季圈",
-      "position": [
-        310,
-        270
-      ],
+      "aliases": [],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "你的声音旧了，但已成为我身体的另一半。",
         "en": "Your voice has aged, but it has become the other half of my body."
@@ -741,32 +1113,50 @@
         "zh": "那件陪了你很多年的物品。",
         "en": "An object that has stayed with you for years."
       },
+      "next": [
+        "fOld7b901"
+      ],
+      "position": [
+        310,
+        270
+      ],
       "source": {
         "douban_item": "269531392",
         "xiami": "http://www.xiami.com/song/mQKhoF955e4",
         "predecessors": [
-          [
-            "葡萄成熟时",
-            "http://www.xiami.com/song/kauwa0f39"
-          ],
-          [
-            "不来也不去",
-            "http://www.xiami.com/song/VbpP7694d"
-          ]
+          {
+            "id": "b8OSHbf0e1",
+            "title": "葡萄成熟时",
+            "url": "http://www.xiami.com/song/kauwa0f39"
+          },
+          {
+            "id": "VbpP7694d",
+            "title": "不来也不去",
+            "url": "http://www.xiami.com/song/VbpP7694d"
+          }
         ]
-      },
-      "next": [
-        "fOld7b901"
-      ],
-      "identity_status": "cross-reference"
+      }
     },
     {
       "id": "b8OSHbf0e1",
       "title": "葡萄成熟时",
-      "position": [
-        185,
-        315
+      "aliases": [
+        "葡萄成熟時"
       ],
+      "identity": {
+        "evidence_type": "archive",
+        "evidence_urls": [
+          "https://web.archive.org/web/20170926234243/http://www.xiami.com:80/song/b8OSHbf0e1"
+        ],
+        "note": "已打开存档歌曲页核对标题。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "错过一个春天，还会有另一个春天；夏、秋、冬，也会再次回来。日子慢慢淌过，明天的你会对今天说些什么？",
         "en": "Miss one spring and another will come. Summer, autumn and winter return too. As days flow slowly past, what will tomorrow’s you say to today?"
@@ -775,28 +1165,43 @@
         "zh": "把四个季节连接起来。",
         "en": "Connect all four seasons."
       },
+      "next": [
+        "mQKhoF955e4"
+      ],
+      "position": [
+        185,
+        315
+      ],
       "source": {
         "douban_item": "269531299",
         "xiami": "http://www.xiami.com/song/b8OSHbf0e1",
         "predecessors": [
-          [
-            "不来也不去",
-            "http://www.xiami.com/song/VbpP7694d"
-          ]
+          {
+            "id": "VbpP7694d",
+            "title": "不来也不去",
+            "url": "http://www.xiami.com/song/VbpP7694d"
+          }
         ]
-      },
-      "next": [
-        "mQKhoF955e4"
-      ],
-      "identity_status": "archive"
+      }
     },
     {
       "id": "VbpP7694d",
       "title": "不来也不去",
-      "position": [
-        85,
-        430
+      "aliases": [
+        "不來也不去"
       ],
+      "identity": {
+        "evidence_type": "cross-reference",
+        "evidence_urls": [],
+        "note": "其他原始评论中的前驱歌名提供交叉证据。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
       "clue": {
         "zh": "我种下了这个谜静候你。它没有尽头、没有谜底，像四季，像来了又去，像歌曲在不同时间、以不同方式不断回响。",
         "en": "I planted this riddle and waited for you. It has no end, no final answer: like the seasons, like coming and going, like songs echoing through different times in different ways."
@@ -805,17 +1210,20 @@
         "zh": "等待成熟，四季轮转，或者追问有多少。",
         "en": "Waiting for ripeness, the turning seasons, or asking how much."
       },
-      "source": {
-        "douban_item": "269531195",
-        "xiami": "http://www.xiami.com/song/VbpP7694d",
-        "predecessors": []
-      },
       "next": [
         "1769110881",
         "mQKhoF955e4",
         "b8OSHbf0e1"
       ],
-      "identity_status": "cross-reference"
+      "position": [
+        85,
+        430
+      ],
+      "source": {
+        "douban_item": "269531195",
+        "xiami": "http://www.xiami.com/song/VbpP7694d",
+        "predecessors": []
+      }
     }
   ]
 }

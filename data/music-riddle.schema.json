@@ -1,0 +1,414 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Music Riddle v1",
+  "description": "单份 JSON 定义一个音乐谜题。结构由编辑器检查，ID、路径、可达性和答案冲突由 scripts/music_riddle_data.py 检查。",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+      "description": "稳定节点 ID；改歌名时保持不变。"
+    },
+    "artist": {
+      "type": "object",
+      "properties": {
+        "zh": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "zh",
+        "en"
+      ],
+      "additionalProperties": false
+    },
+    "title": {
+      "type": "object",
+      "properties": {
+        "zh": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "zh",
+        "en"
+      ],
+      "additionalProperties": false
+    },
+    "date": {
+      "type": "string",
+      "minLength": 1,
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "restored": {
+      "type": "string",
+      "minLength": 1,
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "format": "uri"
+    },
+    "start": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+      "description": "稳定节点 ID；改歌名时保持不变。"
+    },
+    "ending": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+      "description": "稳定节点 ID；改歌名时保持不变。"
+    },
+    "map": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ],
+      "additionalProperties": false
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/node"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "artist",
+    "title",
+    "date",
+    "start",
+    "ending",
+    "map",
+    "nodes"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "node": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+          "description": "稳定节点 ID；改歌名时保持不变。"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "identity": {
+          "type": "object",
+          "properties": {
+            "evidence_type": {
+              "enum": [
+                "author",
+                "cross-reference",
+                "archive",
+                "contextual-alias",
+                "provisional"
+              ]
+            },
+            "evidence_urls": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "format": "uri"
+              },
+              "uniqueItems": true
+            },
+            "note": {
+              "type": "string"
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "title",
+                  "reason"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "review": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "enum": [
+                    "not-requested",
+                    "pending",
+                    "confirmed",
+                    "corrected"
+                  ]
+                },
+                "by": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "date": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "minLength": 1,
+                      "format": "date",
+                      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status",
+                "by",
+                "date",
+                "note"
+              ],
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "confirmed",
+                          "corrected"
+                        ]
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "by": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "date": {
+                        "type": "string",
+                        "minLength": 1,
+                        "format": "date",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "by": {
+                        "type": "null"
+                      },
+                      "date": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "required": [
+            "evidence_type",
+            "evidence_urls",
+            "note",
+            "candidates",
+            "review"
+          ],
+          "additionalProperties": false,
+          "description": "查证依据和人工决定分开保留；人工确认不改变原始证据类型。"
+        },
+        "clue": {
+          "type": "object",
+          "properties": {
+            "zh": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "zh",
+            "en"
+          ],
+          "additionalProperties": false
+        },
+        "hint": {
+          "type": "object",
+          "properties": {
+            "zh": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "zh",
+            "en"
+          ],
+          "additionalProperties": false
+        },
+        "next": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+            "description": "稳定节点 ID；改歌名时保持不变。"
+          },
+          "uniqueItems": true,
+          "description": "谜底对应的下一首歌曲 ID；唯一可编辑的路径定义。"
+        },
+        "dead_ends": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "指向站外死胡同的可接受答案，可包含简繁体别名，不产生图中的新节点。"
+        },
+        "position": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "number",
+              "minimum": 0
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "douban_item": {
+              "type": "string",
+              "minLength": 1
+            },
+            "xiami": {
+              "type": "string",
+              "minLength": 1,
+              "format": "uri"
+            },
+            "predecessors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+                    "description": "稳定节点 ID；改歌名时保持不变。"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "url": {
+                    "type": "string",
+                    "minLength": 1,
+                    "format": "uri"
+                  }
+                },
+                "required": [
+                  "id",
+                  "title",
+                  "url"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [],
+          "additionalProperties": false,
+          "description": "历史证据，前驱标题按来源原文保留；不用于生成当前路径。"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "aliases",
+        "identity",
+        "clue",
+        "hint",
+        "next",
+        "position"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

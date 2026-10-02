@@ -1,0 +1,84 @@
+{
+  "$schema": "../../data/music-riddle.schema.json",
+  "schema_version": 1,
+  "id": "my-music-riddle",
+  "artist": {
+    "zh": "歌手名",
+    "en": "Artist name"
+  },
+  "title": {
+    "zh": "新音乐谜题",
+    "en": "A New Music Riddle"
+  },
+  "date": "2026-10-02",
+  "start": "song-001",
+  "ending": "song-002",
+  "map": {
+    "width": 960,
+    "height": 570
+  },
+  "nodes": [
+    {
+      "id": "song-001",
+      "title": "起点歌名",
+      "aliases": [],
+      "identity": {
+        "evidence_type": "author",
+        "evidence_urls": [],
+        "note": "新作，由作者直接指定歌曲。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
+      "clue": {
+        "zh": "在这里写指向下一首歌的线索。",
+        "en": "Write a clue pointing to the next song here."
+      },
+      "hint": {
+        "zh": "在这里写提示。",
+        "en": "Write a hint here."
+      },
+      "next": [
+        "song-002"
+      ],
+      "position": [
+        200,
+        285
+      ]
+    },
+    {
+      "id": "song-002",
+      "title": "终点歌名",
+      "aliases": [],
+      "identity": {
+        "evidence_type": "author",
+        "evidence_urls": [],
+        "note": "新作，由作者直接指定歌曲。",
+        "candidates": [],
+        "review": {
+          "status": "not-requested",
+          "by": null,
+          "date": null,
+          "note": ""
+        }
+      },
+      "clue": {
+        "zh": "你找到了终点。",
+        "en": "You have found the ending."
+      },
+      "hint": {
+        "zh": "旅程在此结束。",
+        "en": "The trail ends here."
+      },
+      "next": [],
+      "position": [
+        750,
+        285
+      ]
+    }
+  ]
+}

@@ -1,16 +1,14 @@
 (function () {
-    interface Song { id:string; title:string; next:string[]; clue:{en:string;zh:string}; hint:{en:string;zh:string}; dead_ends?:string[] }
-    interface Riddle { start:string; ending:string; nodes:Song[] }
+    interface Song { id:string; title:string; aliases:string[]; next:string[]; clue:{en:string;zh:string}; hint:{en:string;zh:string}; dead_ends?:string[] }
+    interface Riddle { id:string; start:string; ending:string; nodes:Song[] }
     interface Trail { current:string; found:string[]; edges:string[]; history:string[] }
     const root=document.querySelector<HTMLElement>('[data-echo-game]');
     const payload=document.getElementById('echo-data');
     if(!root||!payload)return;
     const data:Riddle=JSON.parse(payload.textContent), songs=new Map(data.nodes.map(n=>[n.id,n]));
-    const key='simoncos-endless-echoes-v1';
+    const key='simoncos-'+data.id+'-v1';
     const t=(en:string,zh:string)=>window.SITE_SHELL?.lang==='zh'?zh:en;
     const norm=(value:string)=>value.normalize('NFKC').toLowerCase().replace(/[\s《》「」『』·.,，。!?！？’'"-]/g,'');
-    const traditional:Record<string,string>={'多少':'多少','信心花舍':'信心花舍','富士山下':'富士山下','貝多芬與我':'贝多芬与我','喜歡一個人':'喜欢一个人','今天等我來':'今天等我来','約定':'约定','倒帶人生':'倒带人生','陀飛輪':'陀飞轮','單車':'单车','不如不見':'不如不见','好久不見':'好久不见','孤獨患者':'孤独患者','任我行':'任我行','幸福摩天輪':'幸福摩天轮','沙龍':'沙龙','還有什麼可以送給你':'还有什么可以送给你','夕陽無限好':'夕阳无限好','落花流水':'落花流水','花花世界':'花花世界','七百年後':'七百年后','你的背包':'你的背包','四季圈':'四季圈','葡萄成熟時':'葡萄成熟时','不來也不去':'不来也不去'};
-    const name=(value:string)=>traditional[value.trim().replace(/[《》「」『』]/g,'')]||value;
     const fresh=():Trail=>({current:data.start,found:[data.start],edges:[],history:[]});
     let trail=fresh(), storage=true, zoomed=false;
     try {
@@ -86,11 +84,11 @@
         });
     }
     document.getElementById('echo-form').addEventListener('submit',event=>{
-        event.preventDefault();const guess=norm(name(input.value)),song=songs.get(trail.current);
+        event.preventDefault();const guess=norm(input.value),song=songs.get(trail.current);
         if(!guess)return;
-        const answer=song.next.find(id=>norm(songs.get(id).title)===guess);
+        const answer=song.next.find(id=>[songs.get(id).title,...songs.get(id).aliases].some(answer=>norm(answer)===guess));
         if(answer){solve(answer);return;}
-        if(song.dead_ends?.some(n=>norm(name(n))===guess))notice=()=>t('You found an original dead end. There is no next clue here; revisit another song below.','你猜到了一条原版死胡同。这里没有下一条谜面，可以在下方回到其他歌。');
+        if(song.dead_ends?.some(n=>norm(n)===guess))notice=()=>t('You found an original dead end. There is no next clue here; revisit another song below.','你猜到了一条原版死胡同。这里没有下一条谜面，可以在下方回到其他歌。');
         else notice=()=>t('That song doesn’t follow this clue. Try another, or open a hint.','这首歌没有接上当前线索。可以再试一首，或打开提示。');
         render();input.select();
     });

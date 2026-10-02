@@ -1,0 +1,100 @@
+# 音乐谜题数据约定 · v1
+
+**回响的唯一歌曲数据源是 [`data/music-riddle.json`](../data/music-riddle.json)。我们以后交换、确认和修改这份 JSON，不另维护一份歌名表。** 页面生成器和答案判断直接读取这里的数据。
+
+- [完整数据](../data/music-riddle.json)：26 首歌、31 条路径、线索、别名及核验记录。
+- [字段规范 / JSON Schema](../data/music-riddle.schema.json)：支持 JSON Schema 的编辑器可据此补全字段、提示结构错误。
+- [新谜题模板](templates/music-riddle.json)：最小的「起点 → 终点」示例，复制后填写即可建立另一份谜题数据。
+
+## 这次需要你确认的两项
+
+在完整数据里搜索以下 `id`，修改对应节点即可：
+
+| 稳定 ID | 当前候选歌名 | 位置 |
+|---|---|---|
+| `rAx50113` | 贝多芬与我 | 《花花世界》引出的终点 |
+| `mQ9j8i76fc8` | Baby Song | 《单车》引出的分支，之后是《天下无双》的死胡同 |
+
+两项的 `identity.review.status` 均为 `pending`；目前的 `title` 是用于预览的候选，不表示你已经确认。
+
+你可以只改歌名，或直接告诉我修改意见，我来补齐记录。若自行确认：
+
+1. 接受候选：保留 `title`，把 `identity.review.status` 改为 `confirmed`。
+2. 修正候选：修改 `title` 和需要接受的 `aliases`，把状态改为 `corrected`；在 `review.note` 写明原候选及修正理由。
+3. 填写实际确认人 `review.by`、确认日期 `review.date`（`YYYY-MM-DD`）。仍不确定就保留 `pending`，也可以向 `identity.candidates` 添加其他候选与理由。
+
+**改歌名时不要改 `id`。** `next`、起点、终点和已保存的游玩进度都通过 ID 连接。旧虾米 ID 只是在这次复原中沿用的稳定标识；新谜题可以使用 `song-001` 这类易读 ID。
+
+## 顶层字段
+
+| 字段 | 含义 |
+|---|---|
+| `$schema` / `schema_version` | 字段规范的位置 / 数据格式版本，目前为 `1` |
+| `id` | 整个谜题的稳定 ID；新谜题必须另取名字，避免与旧谜题共用浏览器进度 |
+| `title` / `artist` | 谜题名 / 歌手，中英文各一份 |
+| `date` / `restored` | 原作日期 / 复原日期；新作可省略 `restored` |
+| `source` | 原始来源网址，新作可省略 |
+| `start` / `ending` | 起点 / 唯一终点的节点 ID |
+| `map` | 地图坐标系宽、高，`position` 使用该坐标系 |
+| `nodes` | 所有歌曲节点；数组顺序决定未发现节点的序号，不决定游玩路线 |
+
+## 每首歌的字段
+
+| 字段 | 含义 |
+|---|---|
+| `id` | 稳定标识，与歌名分开 |
+| `title` | 页面显示的歌名，也是一种可接受答案 |
+| `aliases` | 同一首歌的其他可接受写法，如繁体歌名；无别名时为 `[]` |
+| `clue.zh` / `clue.en` | 停在这首歌时看到的谜面，指向 `next` 中的下一首或几首歌 |
+| `hint.zh` / `hint.en` | 用户主动打开的辅助提示 |
+| `next` | 下一首歌曲的 ID 数组；有多个 ID 即分岔，`[]` 表示没有图内后继 |
+| `dead_ends` | 可选：指向原版死胡同的答案，可包含简繁体写法；这些答案不增加歌曲节点 |
+| `position` | 地图中的 `[x, y]` |
+| `identity` | 歌名查证依据、候选和人工确认记录 |
+| `source` | 可选：豆列 item、虾米原地址及历史前驱记录 |
+
+`next` 是当前路径的唯一可编辑定义。`source.predecessors` 是原始材料的证据，使用 `{id, title, url}` 对象保存；其中的历史歌名不随当前 `title` 自动改写。前驱关系可以由 `next` 反向推导，不需要再维护一份当前前驱表。
+
+答案判断会忽略大小写、空格、常用标点与书名号；简繁体、译名等词形差异应明确写进 `aliases`，不做猜测式转换。
+
+## 查证依据与人工确认
+
+两层分开保存：作者确认一个推断，并不等于找到了原歌曲页。确认后保留原来的 `evidence_type`、`candidates` 和来源证据。
+
+| `identity.evidence_type` | 含义 |
+|---|---|
+| `author` | 新谜题由作者直接指定 |
+| `cross-reference` | 原始评论中的其他歌名提供交叉证据 |
+| `archive` | 已实际打开存档歌曲页核对标题，链接见 `evidence_urls` |
+| `contextual-alias` | 根据前后歌曲及谜意对应不同地址，属于上下文推断 |
+| `provisional` | 暂定候选，缺少独立身份依据 |
+
+| `identity.review.status` | 含义 |
+|---|---|
+| `not-requested` | 尚未要求人工确认；不代表作者已认可，也不抹去已有查证依据 |
+| `pending` | 已提出具体待确认问题 |
+| `confirmed` | 确认了当前候选 |
+| `corrected` | 人工改正了候选，原因写在 `review.note` |
+
+`identity.note` 记录查证说明；`identity.candidates` 保存 `{title, reason}` 候选；`identity.review` 记录 `{status, by, date, note}` 人工决定。仅凭收到了文件或改了排版，不会自动变更确认状态。
+
+## 修改、扩展和新建
+
+- **修改歌名或答案**：改 `title` / `aliases`，保留 ID，补确认记录。
+- **修改谜面**：改对应 `clue` / `hint` 的中英文。歌词引用和页面改编仍按现有内容规范处理。
+- **增加歌曲**：增加唯一 ID 的完整节点，至少让一个已有节点的 `next` 指向它；更新地图位置和必要的线索。原版复原与主动扩展的区别应在来源说明中写清楚。
+- **新建谜题**：复制模板，替换顶层 `id`、歌手、标题、日期及歌曲节点。模板通过同一校验器；回响的专用页面介绍、封面设计、页面地址和 Work 入口仍需要另行配置，复制 JSON 不会自动发布新页面。
+- **同步**：直接交回修改后的 JSON，或告知「节点 ID + 字段 + 新值」。JSON 不支持注释，把说明写入相应的 `note` 字段。只维护 JSON 一种格式，避免与 YAML 双份漂移。
+
+## 校验
+
+在仓库目录运行：
+
+```sh
+python3 scripts/music_riddle_data.py
+python3 scripts/music_riddle_data.py docs/templates/music-riddle.json
+```
+
+校验器会报告重复 ID、失效路径、不可达歌曲、分支答案冲突、坐标越界、缺失双语字段、不完整确认记录等，并列出待确认项。结构通过与歌名确认是两件事；存在 `pending` 仍可制作预览。页面构建也会执行这些检查。
+
+本次只整理数据和本地预览，两个歌名的待确认状态保持不变。
