@@ -47,9 +47,9 @@ ARTICLE_KIND = {"en": "Article", "zh": "文章"}
 NEWEST_SHOWN = 10
 TOPICS = (
     ("all", "All", "全部"),
-    ("build", "Building", "造东西"),
+    ("build", "Creating", "创造"),
     ("think", "Thinking", "思考"),
-    ("body", "Body & field", "身体与现场"),
+    ("body", "Experiences", "体验"),
 )
 
 
@@ -234,7 +234,7 @@ def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str
         '<main id="main" class="home enter" tabindex="-1">',
         '    <section class="sel" data-sel aria-labelledby="sel-title">',
         '        <div class="sel-head">',
-        f'            <h1 class="sel-h1" id="sel-title">{bi("Selected work", "代表作品")}</h1>',
+        f'            <h1 class="sel-h1" id="sel-title">{bi("Selected work", "精选")}</h1>',
         '            <div class="sel-prog">',
         '                <div class="sel-bars">',
         *bars,
@@ -296,8 +296,8 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
         n_en, n_zh = count_label(len(by_topic[topic["id"]]))
         titles.append("\n".join([
             f'                <div class="wheel-title{" is-on" if i == 0 else ""}" data-i="{i}"{"" if i == 0 else " aria-hidden=\"true\""}>',
-            f'                    <span class="wheel-kicker">{bi("Type", "类别")} · {bi(n_en, n_zh)}</span>',
             f'                    <p class="wheel-name">{bi_value(topic["title"])}</p>',
+            f'                    <span class="wheel-kicker">{bi("Type", "类别")} · {bi(n_en, n_zh)}</span>',
             f'                    <span class="wheel-line">{bi_value(topic["line"])}</span>',
             "                </div>",
         ]))
