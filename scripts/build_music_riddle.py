@@ -1,22 +1,39 @@
 """Restore the music riddle as a generated, bilingual Work page."""
 import json
+import math
 from music_riddle_data import load as load_music_riddle
 from site_shell import ROOT, bi, esc, i18n_attrs, page_config, render_document, render_meta
 
 PAGE = 'gallery/music/endless-echoes.html'
 
 
+def edge_path(start, end, *, inset=False):
+    """A shallow arc with explicit clearance, without short-edge hairpin turns."""
+    x, y = start
+    xx, yy = end
+    dx, dy = xx - x, yy - y
+    distance = math.hypot(dx, dy)
+    bend = min(distance * .10, 24)
+    cx, cy = (x + xx) / 2 - dy / distance * bend, (y + yy) / 2 + dx / distance * bend
+    if inset:
+        # End the actual path before the node; the marker tip sits at this endpoint.
+        source_length = math.hypot(cx - x, cy - y)
+        target_length = math.hypot(cx - xx, cy - yy)
+        x, y = x + (cx - x) * 10 / source_length, y + (cy - y) * 10 / source_length
+        xx, yy = xx + (cx - xx) * 23 / target_length, yy + (cy - yy) * 23 / target_length
+    return f'M{x:.2f},{y:.2f} Q{cx:.2f},{cy:.2f} {xx:.2f},{yy:.2f}'
+
+
 def map_svg(data):
     nodes = {n['id']: n for n in data['nodes']}
     parts = [f'<svg class="echo-map" viewBox="0 0 {data["map"]["width"]} {data["map"]["height"]}" role="group" aria-labelledby="echo-map-title">',
              f'<title id="echo-map-title">{len(nodes)} songs connected by {sum(len(n["next"]) for n in nodes.values())} paths · {len(nodes)} 首歌，{sum(len(n["next"]) for n in nodes.values())} 条路径</title>']
-    parts.append('<defs><marker id="echo-arrow" viewBox="0 0 8 8" refX="19" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#97a392"/></marker><marker id="echo-arrow-active" viewBox="0 0 8 8" refX="19" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#eec298"/></marker></defs>')
+    parts.append('<defs><marker id="echo-arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10 L2 5 Z" fill="#97a392"/></marker><marker id="echo-arrow-active" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10 L2 5 Z" fill="#eec298"/></marker></defs>')
     for node in nodes.values():
         x, y = node['position']
         for target in node['next']:
             xx, yy = nodes[target]['position']
-            bend = min(abs(xx-x)*.3+25, 90) * (1 if yy >= y else -1)
-            parts.append(f'<path class="echo-edge" data-from="{node["id"]}" data-to="{target}" marker-end="url(#echo-arrow)" d="M{x},{y} C{x+bend},{y-35} {xx-bend},{yy+35} {xx},{yy}"/>')
+            parts.append(f'<path class="echo-edge" data-from="{node["id"]}" data-to="{target}" marker-end="url(#echo-arrow)" d="{edge_path((x,y),(xx,yy),inset=True)}"/>')
     for i, node in enumerate(data['nodes'], 1):
         x, y = node['position']
         start = node['id'] == data['start']
@@ -80,8 +97,7 @@ def render_music_cover(portrait=False):
         x,y=node['position']
         for target in node['next']:
             xx,yy=nodes[target]['position']
-            bend=min(abs(xx-x)*.3+25,90)*(1 if yy>=y else -1)
-            paths.append(f'<path d="M{x},{y} C{x+bend},{y-35} {xx-bend},{yy+35} {xx},{yy}"/>')
+            paths.append(f'<path d="{edge_path((x,y),(xx,yy))}"/>')
     dots=''.join(f'<circle cx="{n["position"][0]}" cy="{n["position"][1]}" r="7"/>' for n in nodes.values())
     if portrait:
         return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-labelledby="title"><title id="title">漫无止尽的回响 · Endless Echoes · {len(nodes)} Eason Chan songs</title>
