@@ -171,6 +171,7 @@
             if(found){node.setAttribute('role','button');node.setAttribute('tabindex','0');node.setAttribute('aria-label',t('Revisit ','重新打开')+songs.get(id).title);node.setAttribute('aria-pressed',String(active));}
             else{node.removeAttribute('role');node.removeAttribute('tabindex');node.removeAttribute('aria-label');node.removeAttribute('aria-pressed');}
         });
+        const relatedRoutes:SVGGElement[]=[];
         root.querySelectorAll<SVGPathElement>('[data-from]').forEach(edge=>{
             const found=trail.edges.includes(edge.dataset.from+':'+edge.dataset.to);
             const outgoing=edge.dataset.from===song.id;
@@ -179,7 +180,15 @@
             edge.classList.toggle('is-next',!found&&outgoing);
             edge.classList.toggle('is-incoming',edge.dataset.to===song.id);
             edge.setAttribute('marker-end',outgoing?'url(#echo-arrow-active)':'url(#echo-arrow)');
+            const route=edge.parentElement as unknown as SVGGElement;
+            const related=outgoing||edge.dataset.to===song.id;
+            route.classList.toggle('is-related',related);
+            if(related)relatedRoutes.push(route);
         });
+        const glow=root.querySelector('[data-travel-glow]');
+        // Related paths sit above crossings, while labels and nodes stay above every path.
+        relatedRoutes.sort((a,b)=>Number(a.querySelector<SVGPathElement>('[data-from]').dataset.from===song.id)-Number(b.querySelector<SVGPathElement>('[data-from]').dataset.from===song.id));
+        for(const route of relatedRoutes)glow.before(route);
     }
     document.getElementById('echo-form').addEventListener('submit',event=>{
         event.preventDefault();const guess=norm(input.value),song=songs.get(trail.current);
