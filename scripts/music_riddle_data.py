@@ -73,6 +73,11 @@ def validate(data):
         strings(node.get('dead_ends', []), f'{node_id}.dead_ends')
         for field in ('clue', 'hint'):
             bilingual(node.get(field), f'{node_id}.{field}')
+        if 'quote' in node:
+            text(node['quote'], f'{node_id}.quote')
+        if 'terminal' in node:
+            require(node['terminal'] == 'dead-end', f'{node_id}: unknown terminal kind')
+            require(not node['next'] and node_id != data.get('ending'), f'{node_id}: a dead-end cannot continue or be the ending')
         position = node.get('position')
         require(isinstance(position, list) and len(position) == 2, f'{node_id}.position: expected [x, y]')
         for coordinate, axis in zip(position, ('width', 'height')):
@@ -146,7 +151,7 @@ def validate(data):
                 text(candidate.get('title'), f'{node_id}.route_candidate.title')
                 text(candidate.get('reason'), f'{node_id}.route_candidate.reason')
         if node_id != data['ending'] and not node['next']:
-            require(bool(node.get('dead_ends') or open_answers), f'{node_id}: a non-ending leaf needs an explained answer')
+            require(bool(node.get('dead_ends') or open_answers or node.get('terminal') == 'dead-end'), f'{node_id}: a non-ending leaf needs an explained answer')
         for predecessor in node.get('source', {}).get('predecessors', []):
             require(predecessor.get('id') in by_id, f'{node_id}: unknown historical predecessor')
             text(predecessor.get('title'), f'{node_id}.source.predecessors.title')
