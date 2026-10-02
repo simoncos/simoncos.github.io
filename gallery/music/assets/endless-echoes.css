@@ -10,12 +10,10 @@
 .echo-intro-note{margin-top:22px;display:grid;grid-template-columns:45px 1fr;gap:3px 16px}
 .echo-count{font:36px/1 var(--mono);letter-spacing:-.07em;grid-row:span 2;align-self:center}
 .echo-intro-note p{font-size:12px;line-height:1.8;margin:0;color:var(--muted)}.echo-intro-note br{display:none}
-.echo-main .echo-begin{display:inline-flex;align-items:center;gap:30px;min-height:44px;margin-top:12px;color:var(--ink);font-size:13px;text-decoration:none;border-bottom:1px solid var(--line)}
-.echo-begin span{font-size:21px;transition:transform .2s}.echo-begin:hover span{transform:translate(3px,3px)}
 .echo-hero-art{margin:0 0 0 auto;max-width:490px;background:#141d27;border-radius:8px;overflow:hidden}
 .echo-hero-art img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain}
 #echo-game{scroll-margin-top:100px}
-.echo-game{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);background:var(--echo-surface);border:1px solid var(--echo-line);border-radius:18px;color:var(--echo-ink);overflow:hidden;box-shadow:0 18px 55px #1010180b}
+.echo-game{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);background:var(--echo-surface);border:1px solid var(--echo-line);border-radius:18px;color:var(--echo-ink);overflow:clip;box-shadow:0 18px 55px #1010180b}
 .echo-toolbar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 30px;border-bottom:1px solid var(--echo-line);background:linear-gradient(100deg,color-mix(in srgb,var(--bloom-coral) 7%,var(--echo-surface)),var(--echo-surface))}
 .echo-toolbar h2{font:500 14px var(--font);letter-spacing:.08em;margin:0 0 5px}.echo-toolbar p{font:12px/1.6 var(--font);color:var(--echo-soft);margin:0}
 .echo-sound{display:flex;align-items:center;gap:10px;min-height:44px;padding:9px 15px;border:1px solid var(--echo-line);border-radius:24px;background:var(--echo-input);font:12px var(--font);color:var(--echo-ink);cursor:pointer;white-space:nowrap}
@@ -50,7 +48,7 @@
 .echo-map-panel{position:relative;padding:27px 24px 24px;min-width:0;background:radial-gradient(ellipse at 25% 35%,color-mix(in srgb,var(--bloom-blue) 7%,transparent),transparent 55%),radial-gradient(ellipse at 80% 75%,color-mix(in srgb,var(--bloom-coral) 8%,transparent),transparent 58%),var(--echo-map-bg);display:flex;flex-direction:column}
 .echo-map-panel .echo-panel-top{gap:12px;flex-wrap:wrap}.echo-map-panel .echo-panel-top h2{margin-right:auto}
 .echo-progress{font-size:22px;letter-spacing:-.04em;color:var(--echo-ink);white-space:nowrap}.echo-progress>span+span{font-size:12px;letter-spacing:0;color:var(--echo-soft)}
-[data-map-zoom]{border:1px solid var(--echo-line);border-radius:20px;padding:8px 13px;font-size:11px;letter-spacing:0;min-height:44px}
+[data-map-zoom],[data-map-locate]{border:1px solid var(--echo-line);border-radius:20px;padding:8px 13px;font-size:11px;letter-spacing:0;min-height:44px}
 .echo-progress-line{appearance:none;border:0;background:var(--echo-line);color:var(--echo-accent);height:2px;width:100%;margin:16px 0 0;border-radius:3px;overflow:hidden}.echo-progress-line::-webkit-progress-bar{background:var(--echo-line)}.echo-progress-line::-webkit-progress-value{background:var(--echo-accent);transition:width .6s}.echo-progress-line::-moz-progress-bar{background:var(--echo-accent)}
 .echo-map-stage{margin:24px -8px 0;min-height:360px;display:flex;align-items:center}
 .echo-map{width:100%;height:auto;display:block;overflow:visible;isolation:isolate}
@@ -97,7 +95,49 @@
 @keyframes echo-return{from{transform:rotate(-120deg);opacity:.3}to{transform:rotate(0);opacity:1}}
 @media(max-width:1100px){.echo-main{padding:26px 28px 54px}.echo-game{grid-template-columns:320px minmax(0,1fr)}.echo-clue-panel{padding:22px}.echo-map-panel{padding:24px 18px}.echo-map-panel .echo-panel-top h2{width:100%}.echo-map-instruction{margin-left:0}}
 @media(max-width:900px){.echo-intro{gap:28px}.echo-intro h1{font-size:58px}.echo-game{grid-template-columns:1fr}.echo-clue-panel{border-right:0;border-bottom:1px solid var(--echo-line);padding:26px}.echo-map-panel .echo-panel-top h2{width:auto}.echo-map-stage{min-height:300px}.echo-clue-flower{margin-top:12px}.echo-clue-panel h2{margin-top:8px}}
-@media(max-width:650px){.echo-main{padding:22px 18px 42px}.echo-intro{grid-template-columns:1fr;gap:0;padding:28px 0}.echo-intro-copy{display:contents}.echo-intro h1{font-size:54px;grid-row:2}.echo-kicker{font-size:10px;grid-row:1;margin-bottom:16px}.echo-hero-art{grid-row:3;width:100%;max-width:354px;margin:22px auto 0}.echo-intro-note{grid-row:4;margin-top:20px;grid-template-columns:42px 1fr;column-gap:13px}.echo-main .echo-begin{grid-row:5;justify-self:start;margin-top:10px}.echo-toolbar{padding:16px 18px;gap:10px}.echo-toolbar h2{font-size:13px}.echo-toolbar p{font-size:10px}.echo-sound{padding:8px 11px;font-size:11px;gap:7px}.echo-game{border-radius:12px}.echo-clue-panel{padding:20px}.echo-clue-panel h2{font-size:28px}.echo-clue{font-size:15px}.echo-map-panel{padding:20px 15px}.echo-map-panel .echo-panel-top{gap:9px}.echo-map-panel .echo-panel-top h2{width:100%}.echo-progress{margin-left:auto}.echo-map-stage{min-height:0;margin:18px -2px 0}.echo-map-key{gap:10px 14px}.echo-map-instruction{width:100%}.is-map-zoomed .echo-map-stage{height:420px}.echo-about{grid-template-columns:1fr;gap:22px;padding-top:30px}.echo-about h2{font-size:24px;max-width:none}.echo-about p{font-size:13px}.echo-collection .echo-panel-top{flex-wrap:wrap;gap:8px}.echo-song-list{gap:8px}.echo-quote{font-size:21px}}
+@media(max-width:650px){.echo-main{padding:22px 18px 42px}.echo-intro{grid-template-columns:1fr;gap:0;padding:28px 0}.echo-intro-copy{display:contents}.echo-intro h1{font-size:54px;grid-row:2}.echo-kicker{font-size:10px;grid-row:1;margin-bottom:16px}.echo-hero-art{grid-row:3;width:100%;max-width:354px;margin:22px auto 0}.echo-intro-note{grid-row:4;margin-top:20px;grid-template-columns:42px 1fr;column-gap:13px}.echo-toolbar{padding:16px 18px;gap:10px}.echo-toolbar h2{font-size:13px}.echo-toolbar p{font-size:10px}.echo-sound{padding:8px 11px;font-size:11px;gap:7px}.echo-game{border-radius:12px}.echo-clue-panel{padding:20px}.echo-clue-panel h2{font-size:28px}.echo-clue{font-size:15px}.echo-map-panel{padding:20px 15px}.echo-map-panel .echo-panel-top{gap:9px}.echo-map-panel .echo-panel-top h2{width:100%}.echo-progress{margin-left:auto}.echo-map-stage{min-height:0;margin:18px -2px 0}.echo-map-key{gap:10px 14px}.echo-map-instruction{width:100%}.is-map-zoomed .echo-map-stage{height:420px}.echo-about{grid-template-columns:1fr;gap:22px;padding-top:30px}.echo-about h2{font-size:24px;max-width:none}.echo-about p{font-size:13px}.echo-collection .echo-panel-top{flex-wrap:wrap;gap:8px}.echo-song-list{gap:8px}.echo-quote{font-size:21px}}
 @media(prefers-reduced-motion:reduce){.echo-main *, .echo-main *::before,.echo-main *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 .echo-map-key .echo-key-outgoing,.echo-map-key .echo-key-incoming{width:18px;height:2px;border-radius:0;background:var(--echo-accent)}.echo-map-key .echo-key-incoming{background:var(--echo-blue)}
+
+/* The compact layout keeps selection beside the map; the same clue moves into a sheet. */
+.echo-current{display:none}
+.echo-clue-dialog{position:fixed;inset:auto 0 var(--echo-sheet-bottom,0);width:min(100%,600px);max-width:100%;max-height:min(86dvh,calc(var(--echo-viewport-height,100dvh) - 16px));margin:0 auto;padding:0;border:1px solid var(--echo-line);border-bottom:0;border-radius:20px 20px 0 0;background:var(--echo-surface);color:var(--echo-ink);overflow:auto;overscroll-behavior:contain;box-shadow:0 -20px 80px #0006;scroll-padding:76px 0 24px}
+.echo-clue-dialog::backdrop{background:#0c0e18a8;backdrop-filter:blur(3px)}
+.echo-clue-dialog[open]{animation:echo-sheet-arrive .22s ease-out}
+.echo-sheet-top{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 22px;border-bottom:1px solid var(--echo-line);background:var(--echo-surface);font:10px var(--mono);letter-spacing:.09em;color:var(--echo-soft)}
+.echo-sheet-top button{color:var(--echo-accent);padding-inline:10px}
+.echo-clue-dialog .echo-clue-panel{padding:8px 24px max(24px,env(safe-area-inset-bottom));border:0}
+.echo-clue-dialog .echo-clue-flower{position:absolute;top:55px;right:24px;margin:0;gap:6px}
+.echo-clue-dialog .echo-clue-flower img{width:36px;height:36px}
+.echo-clue-dialog .echo-clue-panel h2{font-size:26px;margin:6px 76px 18px 0}
+.echo-clue-dialog .echo-branch{margin-bottom:16px}
+.echo-clue-dialog .echo-help{margin-top:12px}
+:root.echo-sheet-open{overflow:hidden}
+@keyframes echo-sheet-arrive{from{opacity:.5;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){
+  :root.js .echo-current{display:flex;align-items:center;justify-content:space-between;gap:18px;position:sticky;bottom:0;z-index:3;grid-column:1/-1;padding:16px 22px max(16px,env(safe-area-inset-bottom));border-top:1px solid var(--echo-line);background:var(--echo-surface);box-shadow:0 -12px 28px #10101824;min-height:120px}
+  .echo-current-copy{min-width:0;flex:1}
+  .echo-current-label{display:block;font:10px var(--mono);color:var(--echo-soft);letter-spacing:.08em;margin-bottom:5px}
+  .echo-current strong{font-size:20px;font-weight:500;line-height:1.4;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .echo-current p{font:12px/1.7 var(--font);color:var(--echo-soft);margin:5px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .echo-current button{flex-shrink:0;font-size:12px;padding:11px 14px}
+  .echo-map-panel{padding:18px 22px 16px}
+  .echo-map-panel .echo-panel-top h2{width:auto}
+  .echo-map-key{padding-top:12px;gap:8px 14px}
+  .echo-map-stage{height:clamp(280px,42svh,440px);min-height:0;margin:18px 0 0}
+  .is-map-zoomed .echo-map-stage{height:clamp(280px,42svh,440px);margin:18px 0 0}
+  .is-map-zoomed .echo-map{min-width:1240px;width:1240px}
+}
+@media(max-width:650px){
+  .echo-intro{padding:24px 0;gap:0 16px;grid-template-columns:1fr 112px}
+  .echo-kicker{grid-column:1/-1;margin-bottom:14px}
+  .echo-intro h1{font-size:40px;grid-column:1;grid-row:2}
+  .echo-hero-art{grid-row:2;grid-column:2;width:112px;margin:0;border-radius:5px;align-self:center}
+  .echo-intro-note{grid-row:3;grid-column:1/-1;margin-top:18px}
+  .echo-map-panel{padding:14px 14px 16px}
+  .echo-map-panel .echo-panel-top h2{width:100%}
+  :root.js .echo-current{gap:12px;padding:14px 16px max(14px,env(safe-area-inset-bottom))}
+  .echo-current strong{font-size:18px}
+  .echo-current button{padding:10px 12px}
+}

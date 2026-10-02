@@ -1,6 +1,6 @@
 {
   "css_version": "20261002b",
-  "js_version": "20261003a",
+  "js_version": "20261003b",
   "site_updated": "2026-10-02",
   "theme_init": "theme-init.js",
   "icons": {
@@ -315,7 +315,8 @@
       "asset_prefix": "../../",
       "script_profile": "music-riddle",
       "section": "work",
-      "canonical": "gallery/music/endless-echoes.html"
+      "canonical": "gallery/music/endless-echoes.html",
+      "theme": "dark"
     }
   ],
   "site_url": "https://simoncos.github.io/"

@@ -62,6 +62,10 @@
         const legacy = read(localStorage, LEGACY_DARK_KEY);
         mode = legacy === 'true' ? 'dark' : legacy === 'false' ? 'light' : 'system';
     }
+    // Art-directed pages can fix their own palette without changing the saved site preference.
+    const pageTheme = root.getAttribute('data-page-theme');
+    if (pageTheme === 'dark' || pageTheme === 'light')
+        mode = pageTheme;
     const systemDark = typeof window.matchMedia === 'function'
         && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const dark = mode === 'dark' || (mode === 'system' && systemDark);
