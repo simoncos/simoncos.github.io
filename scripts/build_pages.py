@@ -315,7 +315,7 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
             f'style="top:{j * 100 / k:.4g}%;height:{100 / k:.4g}%">'
             for j, work in enumerate(works)
         )
-        n_en, n_zh = count_label(len(works))
+        n_en, n_zh = count_label(len(by_topic[topic["id"]]))
         title_en, title_zh = lang_pair(topic["title"])
         cards.append(
             f'            <button class="wheel-card" type="button" data-i="{i}" data-topic="{topic["id"]}" tabindex="-1"'
