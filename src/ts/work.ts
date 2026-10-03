@@ -259,57 +259,6 @@
         });
     });
 
-    // Within a type: hovering (or, on touch, a first tap) picks a work, and
-    // the picture and its Open link follow.
-    function copyHref(from: HTMLAnchorElement, to: HTMLAnchorElement) {
-        const zh = from.getAttribute('data-zh-href');
-        const en = from.getAttribute('data-en-href') || from.getAttribute('href') || '';
-        if (zh) {
-            to.setAttribute('data-en-href', en);
-            to.setAttribute('data-zh-href', zh);
-            to.setAttribute('data-i18n', 'href');
-            to.setAttribute('href', shell && shell.lang === 'zh' ? zh : en);
-        } else {
-            to.removeAttribute('data-en-href');
-            to.removeAttribute('data-zh-href');
-            to.removeAttribute('data-i18n');
-            to.setAttribute('href', from.getAttribute('href') || '');
-        }
-    }
-
-    topics.forEach((section) => {
-        const items = Array.from(section.querySelectorAll<HTMLAnchorElement>('.work-item'));
-        const open = section.querySelector<HTMLAnchorElement>('[data-topic-open]');
-
-        function pick(index: number) {
-            items.forEach((item, i) => item.classList.toggle('is-on', i === index));
-            section.querySelectorAll<HTMLElement>('.topic-visual [data-w]').forEach((el) => {
-                el.classList.toggle('is-on', el.dataset.w === String(index));
-            });
-            if (open && items[index]) copyHref(items[index], open);
-        }
-
-        items.forEach((item, i) => {
-            item.addEventListener('mouseenter', () => {
-                if (window.innerWidth >= WIDE && !item.classList.contains('is-on')) pick(i);
-            });
-            item.addEventListener('focus', () => {
-                if (!item.classList.contains('is-on')) pick(i);
-            });
-            item.addEventListener('click', (event) => {
-                if (window.innerWidth < WIDE && !item.classList.contains('is-on')) {
-                    event.preventDefault();
-                    pick(i);
-                }
-            });
-        });
-
-        (section as HTMLElement & { pickWork?: (d: number) => void }).pickWork = (d: number) => {
-            const current = items.findIndex((item) => item.classList.contains('is-on'));
-            pick(mod(current + d, items.length));
-        };
-    });
-
     // ---- Keys -------------------------------------------------------------
 
     document.addEventListener('keydown', (event) => {
@@ -320,12 +269,8 @@
         const target = event.target as HTMLElement;
         if (target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
         if (work.classList.contains('is-topic')) {
-            const current = topics.find((section) => section.classList.contains('is-current')) as
-                (HTMLElement & { pickWork?: (d: number) => void }) | undefined;
-            if (event.key === 'Escape') backToWheel();
-            else if (current && current.pickWork && (event.key === 'ArrowDown' || event.key === 'ArrowRight')) current.pickWork(1);
-            else if (current && current.pickWork && (event.key === 'ArrowUp' || event.key === 'ArrowLeft')) current.pickWork(-1);
-            else return;
+            if (event.key !== 'Escape') return;
+            backToWheel();
             event.preventDefault();
             return;
         }
