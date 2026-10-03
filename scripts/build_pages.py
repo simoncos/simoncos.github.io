@@ -131,10 +131,15 @@ def home_panels(site: dict[str, Any], articles: dict[str, dict[str, Any]]) -> li
     for entry in site["featured"]:
         if "work" in entry:
             work = works[entry["work"]]
+            # A featured title is set large, so the "(in Chinese)" mark goes
+            # on the small kind line above it instead.
+            kind_en, kind_zh = lang_pair(work["kind"])
+            if work.get("zh_only"):
+                kind_en = f"{kind_en} · In Chinese"
             panels.append({
-                "kind": work["kind"],
+                "kind": {"en": kind_en, "zh": kind_zh},
                 "date": work["date"],
-                "title": work_title(work),
+                "title": work["title"],
                 "desc": work["home_desc"],
                 "img": work["img"],
                 "href": work["href"],
