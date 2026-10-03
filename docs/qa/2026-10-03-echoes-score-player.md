@@ -4,7 +4,7 @@ The author asked for three things: play the path from the start to the current s
 
 **The author listened to it on 2026-10-04 and judged it good (「挺好的」); no changes were asked for.** That was general listening: which pieces were played, and on what speakers or headphones, was not recorded. Every other audio claim below is numeric (timing, level, voice counts) or visual.
 
-Baseline: the released redesign `e752a7b`. This work was not rebased on `origin/master` or on the phone and loading fixes (`docs/qa/2026-10-03-echoes-mobile-fixes.md`); see "Not done".
+Baseline: the released redesign `e752a7b`; on 2026-10-04 the branch was rebased onto `origin/master` (`5039424`). It does not include the phone and loading fixes (`docs/qa/2026-10-03-echoes-mobile-fixes.md`, on another branch); see "Not done".
 
 ## What changed
 
@@ -40,6 +40,7 @@ Chrome (system, Playwright), local server on the worktree, 1440 × 900 and iPhon
 - **Content fixes.** The added spellings are accepted from the song that leads to each (紅玫瑰 on 孤独患者, 浮誇 on 任我行, 囍帖街 on 你的背包); the original spelling and a wrong answer behave as before (5 of 5).
 - **Listening aid.** The two console snippets in `score-qa/listen.md` (one loads a finished game, the other leaves one answer to the finale) load the game as described and start the finale (6 of 6).
 - `make check-all` passes (85 tests). `tests/echo_score_runtime.cjs` (virtual clock: scheduling, dynamics, rolls, bus, heard-time hooks, look-ahead, cancellation, cold start, validation, routes, path phrasing, the finale against the data) runs from `tests/test_music_riddle.py`.
+- **After the rebase onto `5039424`** (2026-10-04): `make check-all` passes again (85 tests). This branch's Echoes sources and docs are byte-identical to the pre-rebase tip, and the regenerated Echoes page differs from it only in the cache tokens and the shared footer date that `5039424` changed. The wake-lock check passes 7 of 7 on the rebased build (`--quick`, so scenario 8 was not rerun).
 
 ## Not verified
 
@@ -49,7 +50,7 @@ Chrome (system, Playwright), local server on the worktree, 1440 × 900 and iPhon
 
 ## Not done
 
-- Not rebased onto `origin/master` or onto the phone and loading fixes. Expect conflicts in `endless-echoes.css`, `scripts/build_music_riddle.py`, `src/ts/music-riddle.ts` and its output, `data/site_shell.json` (this branch sets `js_version` 20261003i, those fixes 20261003t) and the regenerated pages; resolve the sources and regenerate.
+- Not combined with the phone and loading fixes, which live on another branch. Expect conflicts in `endless-echoes.css`, `scripts/build_music_riddle.py`, `src/ts/music-riddle.ts` and its output, `data/site_shell.json` (this branch sets `js_version` 20261003i, those fixes 20261003t) and the regenerated pages; resolve the sources and regenerate. The rebase onto `5039424` conflicted only in the generated pages and `data/site_shell.json` (adjacent cache-token lines) and was resolved by regenerating; whichever of the two branches lands second needs the same treatment against the first.
 - `EchoScore` (a second deferred script) is not guarded the way `EchoPiano` is in the phone and loading fixes: if `echo-score.js` failed to load, the riddle would stop at its first sound, as it did for `echo-piano.js`. Extend the guard when the two meet.
 
 ## Files
