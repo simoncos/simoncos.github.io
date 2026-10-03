@@ -137,7 +137,8 @@ OG_SAFE_IMAGE_SUFFIXES = ('.png', '.jpg', '.jpeg', '.gif')
 
 
 def build_og_image(rendered_html, title):
-    """Pick the share image for an article: its lead photo, else the site card.
+    """Pick the share image for an article: its lead photo, else a film's
+    poster, else the site card.
 
     A lead photo makes a far better preview than a generated card, but only if
     the crawler can actually decode it.
@@ -165,6 +166,21 @@ def build_og_image(rendered_html, title):
             'width': str(width),
             'height': str(height),
             'alt': (image.get('alt') or title).strip() or title,
+        }
+
+    # An article led by a film rather than a photo shares the film's poster.
+    for video in soup.find_all('video'):
+        poster = (video.get('poster') or '').strip()
+        width, height = video.get('width'), video.get('height')
+        if not poster or not urlparse(poster).path.lower().endswith(OG_SAFE_IMAGE_SUFFIXES):
+            continue
+        if not width or not height or int(width) < 315 or int(height) < 315:
+            continue
+        return {
+            'url': urljoin(absolute_site_url('blogs/'), poster),
+            'width': str(width),
+            'height': str(height),
+            'alt': (video.get('aria-label') or title).strip() or title,
         }
 
     return og_fallback_image()
