@@ -3219,6 +3219,14 @@ a.dmi-cell.is-off > span {
     scroll-margin-top: calc(var(--hdr-h, 76px) + 60px);
 }
 
+/* A desktop row is one title line beside the date and language, so the
+   phone's padding left too much air between titles (owner, 2026-10-03). */
+@media (min-width: 860px) {
+    .arow {
+        padding: 18px 0;
+    }
+}
+
 .arow.is-dim {
     opacity: 0.35;
 }
