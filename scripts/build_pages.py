@@ -692,6 +692,28 @@ def render_song(config: dict[str, Any], site: dict[str, Any], song: dict[str, An
             for line in stanza
         )
         stanzas.append(f'                <p class="stanza">{lines}</p>')
+    score = []
+    if song.get("score"):
+        files = []
+        for item in song["score"]["files"]:
+            size = (ROOT / item["path"]).stat().st_size
+            size_text = f"{size / 1e6:.1f} MB" if size >= 1e6 else f"{max(1, round(size / 1e3))} KB"
+            files.append(
+                f'                <li><a class="song-file" href="{esc(item["path"].rsplit("/", 1)[-1])}" download>'
+                f'<span class="song-file-format">{esc(item["format"])}</span>'
+                f'<span class="song-file-label">{bi_value(item["label"])}</span>'
+                f'<span class="song-file-desc">{bi_value(item["desc"])}</span>'
+                f'<span class="song-file-size num">{size_text}</span></a></li>'
+            )
+        score = [
+            '        <section class="block block-score" style="--span:12;--rows:1;--delay:0.18s" aria-labelledby="score-title">',
+            f'            <h2 class="block-k" id="score-title">{bi("Score", "乐谱")}</h2>',
+            f'            <p class="song-score-note">{bi_value(song["score"]["note"])}</p>',
+            '            <ul class="song-files">',
+            *files,
+            "            </ul>",
+            "        </section>",
+        ]
     wave = wave_path(peaks)
     svg = (
         f'<svg class="{{cls}}" viewBox="0 0 {len(peaks)} 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
@@ -746,6 +768,7 @@ def render_song(config: dict[str, Any], site: dict[str, Any], song: dict[str, An
         *stanzas,
         "            </div>",
         "        </section>",
+        *score,
         "    </div>",
         "</main>",
     ])
