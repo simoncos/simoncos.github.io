@@ -325,10 +325,10 @@ by side (Chrome, 1440, device pixel ratio 2-3), not by the numbers alone.
   moved, so they were left as they were.
 - Aura gradients read the page's `--bloom-*` tokens, so a palette change needs no
   second edit; the arrowheads keep literal colours, as in the baseline.
-- `docs/ENDLESS_ECHOES_DESIGN.md` is not in git yet (it is the author's uncommitted
-  file), so it was not part of this release. It still needs: the walked/ghost/next path
-  styles, buds instead of numerals, the chord keyboard, the focus rule, and the new
-  answer-moment table row.
+- `docs/ENDLESS_ECHOES_DESIGN.md` was an uncommitted file of the author's at the time,
+  so it was not part of this release. It has since been committed with this release's
+  changes added (the walked/ghost/next path styles, buds instead of numerals, the chord
+  keyboard, the focus rule, the answer moment) and the score batch's.
 
 ## Evidence
 
