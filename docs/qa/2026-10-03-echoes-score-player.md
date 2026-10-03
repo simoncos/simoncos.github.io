@@ -2,7 +2,7 @@
 
 The author asked for three things: play the path from the start to the current song as a phrase of chords (with the chord order adjusted so it sounds musical), play an arranged chord piece automatically when every song is lit, with the nodes brightening and dimming along with it, and richer chords than before. The same change carries the content fixes the author approved after a content review (below).
 
-**Nothing here has been listened to by a person.** Every audio claim below is numeric (timing, level, voice counts) or visual. Whether the arrangement sounds good is untested.
+**The author listened to it on 2026-10-04 and judged it good (「挺好的」); no changes were asked for.** That was general listening: which pieces were played, and on what speakers or headphones, was not recorded. Every other audio claim below is numeric (timing, level, voice counts) or visual.
 
 Baseline: the released redesign `e752a7b`. This work was not rebased on `origin/master` or on the phone and loading fixes (`docs/qa/2026-10-03-echoes-mobile-fixes.md`); see "Not done".
 
@@ -43,7 +43,6 @@ Chrome (system, Playwright), local server on the worktree, 1440 × 900 and iPhon
 
 ## Not verified
 
-- By ear: the chord table, the finale arrangement, the path phrasing, the compressor setting, the level of the finale against clicks as heard on a speaker.
 - A real phone and Safari/iOS. The auto-start relies on the audio context created by the last answer's own chord still running 2.9 s later; Chrome behaves, iOS is untested. The wake lock was tested against a stub of `navigator.wakeLock` (what the page asks of the API and whether it lets go), not against a device's real auto-lock.
 - Firefox.
 - Frame pacing: earlier measurements were not kept, so none are claimed. A slow phone's frame rate during the finale is unknown.
