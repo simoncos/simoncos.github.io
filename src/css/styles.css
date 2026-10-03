@@ -1410,6 +1410,8 @@ button {
     border-radius: 16px;
     overflow: hidden;
     background: var(--fill);
+    outline: 1px solid var(--line);
+    outline-offset: -1px;
     transition: box-shadow 0.6s;
 }
 
@@ -1605,12 +1607,16 @@ button {
     min-width: 0;
 }
 
+/* The hairline keeps a white cover (a table, a report page) from dissolving
+   into the page; outlines paint over the image. */
 .wcard-img {
     display: block;
     aspect-ratio: 4 / 3;
     border-radius: 16px;
     overflow: hidden;
     background: var(--fill);
+    outline: 1px solid var(--line);
+    outline-offset: -1px;
 }
 
 .wcard-img img {
@@ -1661,6 +1667,16 @@ button {
     .wcard {
         transition: opacity 0.35s ease;
     }
+}
+
+/* A lone work shows its whole picture: the covers are 3:2 or 16:10, and a
+   4:3 frame cut the title off the Echoes cover. */
+.wgrid[data-n="1"] .wcard-img {
+    aspect-ratio: auto;
+}
+
+.wgrid[data-n="1"] .wcard-img img {
+    height: auto;
 }
 
 @media (min-width: 860px) {
