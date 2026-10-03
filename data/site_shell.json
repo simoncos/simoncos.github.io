@@ -1,6 +1,6 @@
 {
   "css_version": "20261003d",
-  "js_version": "20261003h",
+  "js_version": "20261003i",
   "site_updated": "2026-10-03",
   "theme_init": "theme-init.js",
   "icons": {
@@ -173,6 +173,10 @@
       },
       {
         "src": "echo-piano.js",
+        "defer": true
+      },
+      {
+        "src": "echo-score.js",
         "defer": true
       },
       {

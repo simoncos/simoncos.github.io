@@ -1,6 +1,7 @@
 """Guard the recovered source graph and its usable routes, not the layout."""
 import json
 import copy
+import re
 import sys
 import subprocess
 import unittest
@@ -55,12 +56,75 @@ class MusicRiddleTests(unittest.TestCase):
                 self.assertEqual(href, f"assets/echo-flower-{art['flower']}.webp")
 
     def test_chord_data_rejects_unplayable_or_ambiguous_values(self):
-        for midi in ([48], [48, 55, 64, 67, 72], [47, 55, 64], [48, 55, 73], [48, 55, 55], [60, 55, 48], [48, 55, 60.5]):
+        # A chord is three to six distinct notes, low to high, inside the sampled range C3-C5 (MIDI 48-72).
+        for midi in ([48], [48, 55], [48, 50, 52, 54, 56, 58, 60], [47, 55, 64], [48, 55, 73], [48, 55, 55], [60, 55, 48], [48, 55, 60.5]):
             with self.subTest(midi=midi):
                 data = copy.deepcopy(self.data)
                 data['nodes'][0]['presentation']['chord']['midi'] = midi
                 with self.assertRaises(ValueError):
                     validate(data)
+
+    def test_extended_chords_are_valid_and_the_table_is_not_monotonous(self):
+        for midi in ([48, 55, 64], [48, 55, 64, 67, 72], [48, 55, 59, 62, 64, 71]):
+            with self.subTest(midi=midi):
+                data = copy.deepcopy(self.data)
+                data['nodes'][0]['presentation']['chord']['midi'] = midi
+                validate(data)
+        chords = [n['presentation']['chord'] for n in self.nodes.values()]
+        # The author asked for richer harmony than triads and sevenths: keep the table from collapsing back to them.
+        self.assertGreaterEqual(len({c['name'] for c in chords}), 20, 'distinct chord names')
+        self.assertGreaterEqual(sum(len(c['midi']) >= 5 for c in chords), 8, 'chords of five or six notes')
+        self.assertTrue(all(3 <= len(c['midi']) <= 6 for c in chords))
+
+    def test_finale_is_a_complete_arrangement_of_every_song(self):
+        finale = self.data['finale']
+        steps = finale['steps']
+        self.assertEqual({s['node'] for s in steps}, set(self.nodes), 'every song, the hidden coda included, is lit at least once')
+        self.assertEqual(steps[0]['node'], self.data['start'])
+        self.assertEqual(steps[-2]['node'], self.data['ending'])
+        self.assertEqual(steps[-1]['node'], self.data['bonus'])
+        seconds = sum(s['beats'] for s in steps) * finale['beat']
+        self.assertTrue(30 <= seconds <= 60, f'a piece to sit through once: {seconds:.1f} s')
+        # Where the arrangement follows a path of the graph the page lights that path; most of it should.
+        edges = {(n['id'], t) for n in self.nodes.values() for t in n['next']} | {(self.data['ending'], self.data['bonus'])}
+        followed = sum((a['node'], b['node']) in edges for a, b in zip(steps, steps[1:]))
+        self.assertGreaterEqual(followed, len(steps) * 0.6)
+
+    def test_finale_rejects_broken_arrangements(self):
+        def broken(mutate):
+            data = copy.deepcopy(self.data)
+            mutate(data['finale'])
+            with self.assertRaises(ValueError):
+                validate(data)
+        broken(lambda f: f['steps'][3].update(node='no-such-song'))
+        broken(lambda f: f.update(beat=0.1))
+        broken(lambda f: f.update(beat=2))
+        broken(lambda f: f['steps'][3].pop('level'))
+        broken(lambda f: f['steps'][3].update(level=1.5))
+        broken(lambda f: f['steps'][3].update(beats=0.1))
+        broken(lambda f: f['steps'][3].update(roll=0.9))
+        broken(lambda f: f['steps'][3].update(release=0.05))
+        broken(lambda f: f['steps'][3].update(volume=1))
+        broken(lambda f: f.update(extra=1))
+        broken(lambda f: f.update(steps=f['steps'][:1]))
+        broken(lambda f: f.update(beat=1.5, steps=[dict(s, beats=16) for s in f['steps'][:6]] + f['steps'][-2:]))  # longer than the cap
+        broken(lambda f: f['steps'].pop())  # no longer closes on the hidden coda
+        broken(lambda f: f['steps'].__setitem__(-2, dict(f['steps'][-2], node=self.data['start'])))  # the ending does not precede the coda
+
+    def test_score_player_and_finale_runtime(self):
+        subprocess.run(['node', 'tests/echo_score_runtime.cjs'], cwd=ROOT, check=True, capture_output=True, text=True)
+
+    def test_generated_page_wires_the_path_player_and_the_finale(self):
+        html = (ROOT / 'gallery/music/endless-echoes.html').read_text(encoding='utf-8')
+        for hook in ('data-path-play', 'data-path-beads', 'data-finale-bar', 'data-finale-play', 'id="echo-score-status"', 'data-finale-status'):
+            with self.subTest(hook=hook):
+                self.assertEqual(html.count(hook), 1)
+        scripts = re.findall(r'src="[^"]*src/js/([a-z-]+\.js)', html)
+        self.assertLess(scripts.index('echo-piano.js'), scripts.index('echo-score.js'))
+        self.assertLess(scripts.index('echo-score.js'), scripts.index('music-riddle.js'))
+        payload = json.loads(re.search(r'<script type="application/json" id="echo-data">(.*?)</script>', html, re.S).group(1))
+        self.assertEqual(payload['finale'], self.data['finale'])
+        self.assertTrue(all(len(n['presentation']['chord']['midi']) >= 3 for n in payload['nodes']))
 
     def test_quote_format_cannot_replace_a_separate_epigraph(self):
         for node_id in ('matchless', 'next-year-today', 'today'):
@@ -103,6 +167,15 @@ class MusicRiddleTests(unittest.TestCase):
         self.assertNotEqual(song['id'], self.data['ending'])
         self.assertIn('綿綿', song['aliases'])
         self.assertEqual(song['quote'], '从来没细心数清楚，一个下雨天，一次愉快的睡眠，断多少发线')
+
+    def test_the_spellings_a_player_would_type_are_accepted(self):
+        # The input says "简繁体均可"; these three were rejected until 2026-10-03 (浮夸 and 红玫瑰 had no traditional
+        # spelling, and 囍帖街 is the title's official form). Each alias must belong to the one node it names.
+        spellings = {'exaggerated': '浮誇', 'red-rose': '紅玫瑰', 'wedding-card-street': '囍帖街'}
+        for node_id, spelling in spellings.items():
+            self.assertIn(spelling, self.nodes[node_id]['aliases'], node_id)
+            owners = [n['id'] for n in self.nodes.values() if spelling in (n['title'], *n['aliases'])]
+            self.assertEqual(owners, [node_id], spelling)
 
     def test_dead_end_cannot_continue_or_replace_the_ending(self):
         for case in ('outgoing', 'ending'):

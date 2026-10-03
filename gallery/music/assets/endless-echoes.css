@@ -118,6 +118,41 @@
 @media(max-width:1100px){.echo-main{padding:26px 28px 54px}.echo-game{grid-template-columns:320px minmax(0,1fr)}.echo-clue-panel{padding:22px}.echo-map-panel{padding:24px 18px}.echo-map-panel .echo-panel-top h2{width:100%}.echo-map-instruction{margin-left:0}}
 @media(max-width:900px){.echo-intro{gap:28px}.echo-intro h1{font-size:58px}.echo-game{grid-template-columns:1fr}.echo-clue-panel{border-right:0;border-bottom:1px solid var(--echo-line);padding:26px}.echo-map-panel .echo-panel-top h2{width:auto}.echo-map-stage{min-height:300px}.echo-clue-flower{margin-top:12px}.echo-clue-panel h2{margin-top:8px}}
 @media(max-width:650px){.echo-main{padding:22px 18px 42px}.echo-intro{grid-template-columns:1fr;gap:0;padding:28px 0}.echo-intro-copy{display:contents}.echo-intro h1{font-size:54px;grid-row:2}.echo-kicker{font-size:10px;grid-row:1;margin-bottom:16px}.echo-hero-art{grid-row:3;width:100%;max-width:354px;margin:22px auto 0}.echo-intro-note{grid-row:4;margin-top:20px;grid-template-columns:42px 1fr;column-gap:13px}.echo-toolbar{padding:16px 18px;gap:10px}.echo-toolbar h2{font-size:13px}.echo-toolbar p{font-size:10px}.echo-sound{padding:8px 11px;font-size:11px;gap:7px}.echo-game{border-radius:12px}.echo-clue-panel{padding:20px}.echo-clue-panel h2{font-size:28px}.echo-clue{font-size:15px}.echo-map-panel{padding:20px 15px}.echo-map-panel .echo-panel-top{gap:9px}.echo-map-panel .echo-panel-top h2{width:100%}.echo-progress{margin-left:auto}.echo-map-stage{min-height:0;margin:18px -2px 0}.echo-map-key{gap:10px 14px}.echo-map-instruction{width:100%}.is-map-zoomed .echo-map-stage{height:420px}.echo-about{grid-template-columns:1fr;gap:22px;padding-top:30px}.echo-about h2{font-size:24px;max-width:none}.echo-about p{font-size:13px}.echo-collection .echo-panel-top{flex-wrap:wrap;gap:8px}.echo-song-list{gap:8px}.echo-quote{font-size:21px}}
+/* Scores. A walked path, played back as a phrase of chords, sits under the keyboard; the finale has its own bar above the map. */
+.echo-path{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:12px;padding-top:12px;border-top:1px solid var(--echo-line)}
+.echo-path-play,.echo-finale-play{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:6px 16px 6px 13px;border:1px solid color-mix(in srgb,var(--echo-accent) 50%,transparent);border-radius:24px;background:color-mix(in srgb,var(--echo-accent) 10%,transparent);color:var(--echo-accent);font:500 13px var(--font);white-space:nowrap;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.echo-path-play>span:first-child,.echo-finale-play>span:first-child{width:12px;font-size:11px;text-align:center}
+.echo-path-play:not(:disabled):hover,.echo-finale-play:not(:disabled):hover{background:color-mix(in srgb,var(--echo-accent) 20%,transparent)}
+.echo-path[data-state=playing] .echo-path-play,.echo-finale-bar.is-playing .echo-finale-play{background:var(--echo-accent);border-color:var(--echo-accent);color:var(--echo-button-ink)}
+.echo-path-play:disabled,.echo-finale-play:disabled{opacity:.5;cursor:default}
+.echo-path-caption{flex:1;min-width:0;margin:0;font:12px/1.5 var(--font);color:var(--echo-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.echo-path[data-state=playing] .echo-path-caption{font-size:14px;color:var(--echo-ink)}
+.echo-path-beads{flex:1 0 100%;display:flex;flex-wrap:wrap;gap:5px;margin:0;padding:0;list-style:none}
+.echo-path-beads li{width:22px;height:22px;background:center/contain no-repeat var(--flower-art);opacity:.7;transition:opacity .6s,transform .25s,filter .6s}
+.echo-path[data-state=playing] .echo-path-beads li{opacity:.28}.echo-path[data-state=playing] .echo-path-beads li.is-played{opacity:.85}
+.echo-path-beads li.is-lit{opacity:1!important;transform:scale(1.3);filter:drop-shadow(0 0 6px var(--bloom))}
+.echo-finale-bar{position:relative;display:flex;align-items:center;gap:12px;margin-top:14px;padding:4px 0 8px;border-bottom:1px solid var(--echo-line);font:13px/1.5 var(--font);color:var(--echo-soft);scroll-margin-top:calc(var(--hdr-h,76px) + 10px)}
+.echo-finale-mark{flex:none;font-size:18px;color:var(--echo-accent)}
+.echo-finale-caption{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.echo-finale-bar.is-playing .echo-finale-caption{font-size:16px;color:var(--echo-ink)}
+.echo-finale-run{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--echo-accent);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+.echo-finale-bar.is-running .echo-finale-run{animation:echo-finale-run var(--run,48s) linear var(--lead,.78s) both}
+@keyframes echo-finale-run{to{transform:scaleX(1)}}
+/* The song that is sounding lights up and then fades with its chord. Only that one song carries a glow filter. */
+.echo-node{transition:opacity .9s ease}.echo-route{transition:opacity 1.2s ease}
+.echo-node.is-sounding .echo-petals{transform:scale(1.2);filter:drop-shadow(0 0 7px var(--bloom)) drop-shadow(0 0 20px color-mix(in srgb,var(--bloom) 55%,transparent));transition-duration:.16s}
+.echo-node.is-sounding .echo-halo{fill:color-mix(in srgb,var(--bloom) 14%,transparent);stroke:color-mix(in srgb,var(--bloom) 75%,transparent);stroke-width:1.4}
+.echo-aura.is-sounding{opacity:1;transition-duration:.2s}
+.echo-travel-glow.is-traveling{animation:echo-light-path .9s ease-out}
+/* The finale: the map's lights go down; each song comes up with its chord and dims as the chord fades. */
+.is-finale .echo-node:not(.is-sounding){opacity:.3;transition-duration:1s}
+.is-finale .echo-node.is-sounding{opacity:1;transition-duration:.12s}
+.is-finale .echo-route{opacity:.35;transition-duration:.9s}
+.is-finale .echo-route.is-lit{opacity:1;transition-duration:.15s}
+.is-finale .echo-route.is-lit .echo-edge{stroke:var(--echo-accent);stroke-width:3.2;opacity:1;transition-duration:.15s}
+.is-finale .echo-aura.is-found:not(.is-sounding){opacity:.08;transition-duration:.9s}
+.is-finale .echo-spotlight{transition-duration:.45s}
+.is-finale-bloom .echo-map-panel{animation:echo-finale 2.6s ease-out}
 @media(prefers-reduced-motion:reduce){.echo-main *, .echo-main *::before,.echo-main *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 .echo-map-key .echo-key-outgoing,.echo-map-key .echo-key-incoming,.echo-map-key .echo-key-walked{width:18px;height:2px;border-radius:0;background:var(--echo-accent)}.echo-map-key .echo-key-outgoing{background:repeating-linear-gradient(90deg,var(--echo-accent) 0 5px,transparent 5px 8px)}.echo-map-key .echo-key-incoming{background:var(--echo-blue)}.echo-map-key .echo-key-walked{background:var(--echo-gold)}
@@ -171,6 +206,7 @@ button.echo-clue-flower:disabled{cursor:default}.echo-replay-cue{transition:colo
   :root.js .echo-clue-panel > .echo-answer{order:5}
   :root.js .echo-clue-panel > .echo-feedback{order:6}
   :root.js .echo-clue-panel > .echo-ending{order:7}
+  :root.js .echo-clue-panel > .echo-path{order:7}
   :root.js .echo-clue-panel > .echo-help{order:8}
   .echo-focus-edge{fill:none;stroke-width:1.5;opacity:.85;pointer-events:none}
   .echo-focus-edge-in{stroke:var(--echo-blue)}.echo-focus-edge-out{stroke:var(--echo-accent)}
