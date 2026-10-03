@@ -20,7 +20,8 @@ Use this skill to keep the personal site reader-facing, broad enough, and semant
 
 - Index: Selected work, the newest articles with a topic filter, and a short changelog. It should help readers choose a path, not explain implementation.
 - Articles: long-form writing, with a list view (search, topics) and a series view (structured reading arcs).
-- Work: one view per type — App, Games, Talks, Research, Music (`work_topics` in `data/site.json`). Each type's wheel card shows one picture: the work whose `id` the type's optional `wheel_work` names, else its newest work.
+- Work: one view per type — App, Games, Talks, Research, Music (`work_topics` in `data/site.json`). Each type's wheel card shows one picture: the work whose `id` the type's optional `wheel_work` names, else its newest finished work. (Not `cover`: `check_site.py` reads any `cover` key as a file path.)
+- A work with no `href` is in progress: its type page lists it under 在做 / In progress as a card that is not a link, `projects.html` lists it after the live apps, and the home page skips it. Its `date` is a bare year. Covers for these come from `~/Documents/simoncos-site-intro/covers-src/wip_covers.py` (real screenshots cropped to 4:3).
 - Projects: maintained tools and deployed systems; each opens as its own board or site. `projects.html` lists them all.
 - Favorites: every five-star Douban mark in four categories; see the `favorites-column` skill.
 - About: a short profile, the motto, and contacts.
