@@ -771,6 +771,73 @@ def optimize_article_images(html_content):
         if not image.has_attr('height'):
             image['height'] = str(height)
 
+        if local_path and not image.has_attr('srcset'):
+            add_phone_variant(image, source, local_path, width)
+
+    return str(soup)
+
+
+# The article column is 760 px wide and the page keeps 20 px of margin on each
+# side below that (measured: 320 px of image on a 360 px screen). Keep this
+# exact: a few px too wide and a 360 px phone at 3x asks for more than the
+# phone-size copy and loads the full one.
+ARTICLE_IMAGE_SIZES = '(max-width: 800px) calc(100vw - 40px), 760px'
+PHONE_VARIANT_SUFFIX = '.1080w.webp'  # written by scripts/image_variants.py
+PHONE_VARIANT_WIDTH = 1080
+
+
+def add_phone_variant(image, source, local_path, width):
+    """Offer the 1080 px copy beside an article image as a srcset candidate.
+
+    The original stays as `src` (share cards, feeds, browsers without srcset);
+    a phone at up to three device pixels per CSS pixel picks the smaller file.
+    """
+    variant = local_path.with_name(local_path.stem + PHONE_VARIANT_SUFFIX)
+    if width <= PHONE_VARIANT_WIDTH or not variant.exists():
+        return
+    parsed = urlparse(source)
+    variant_source = parsed._replace(
+        path=parsed.path[: len(parsed.path) - len(Path(parsed.path).name)] + variant.name
+    ).geturl()
+    image['srcset'] = f'{variant_source} {PHONE_VARIANT_WIDTH}w, {source} {width}w'
+    image['sizes'] = ARTICLE_IMAGE_SIZES
+
+
+def wrap_embedded_pages(html_content, is_english=False):
+    """Keep an embedded page from trapping a finger that scrolls the article.
+
+    `<iframe class="embedded-page">` is a tall scrolling page inside the
+    article. On a touch screen or a narrow window, a swipe that lands on it
+    scrolls the frame instead of the article. Each one is wrapped with a cover
+    link to the same page in a new tab: on coarse pointers and narrow screens
+    the CSS lays the cover over the frame, so a swipe scrolls the article and
+    a tap opens the page full screen; elsewhere the cover is hidden and the
+    frame works as before. The label is the iframe's `data-open-label`, or a
+    generic one.
+    """
+    if 'embedded-page' not in html_content:
+        return html_content
+    soup = BeautifulSoup(html_content, 'html.parser')
+    for frame in soup.select('iframe.embedded-page'):
+        if frame.parent and 'embed-frame' in (frame.parent.get('class') or []):
+            continue
+        source = frame.get('src') or ''
+        label = (frame.get('data-open-label') or '').strip() or (
+            'Open full screen' if is_english else '全屏打开'
+        )
+        if frame.has_attr('data-open-label'):
+            del frame['data-open-label']
+        wrapper = soup.new_tag('div')
+        wrapper['class'] = 'embed-frame'
+        frame.wrap(wrapper)
+        cover = soup.new_tag('a', href=source, target='_blank', rel='noopener')
+        cover['class'] = 'embed-cover'
+        cover['data-noext'] = ''
+        text = soup.new_tag('span')
+        text['class'] = 'embed-cover-label'
+        text.string = f'{label} ↗'
+        cover.append(text)
+        wrapper.append(cover)
     return str(soup)
 
 
@@ -811,10 +878,16 @@ def make_links_absolute(html_content, article_url):
     - Fragment-only links (#fn:1) → article_url + #fn:1
     - Root-relative links (/blogs/foo.html) → site_base + /blogs/foo.html
     - Already-absolute links and mailto: left unchanged.
+    - srcset/sizes are dropped, so readers load the full image from src.
     """
     site_base = absolute_site_url().rstrip('/')
     soup = BeautifulSoup(html_content, 'html.parser')
     for tag in soup.find_all(True):
+        # Feed readers get the full image from src; a relative srcset would
+        # point nowhere outside the site.
+        for attr in ('srcset', 'sizes'):
+            if tag.has_attr(attr):
+                del tag[attr]
         for attr in ('href', 'src', 'poster'):
             val = tag.get(attr)
             if not val:
@@ -1193,6 +1266,7 @@ def collect_markdown_file(md_file, blog_posts):
 
         html_content = localize_footnotes(html_content, is_english=md_file.endswith('.en.md'))
         html_content = optimize_article_images(html_content)
+        html_content = wrap_embedded_pages(html_content, is_english=md_file.endswith('.en.md'))
         title, rendered_post_content = extract_title_and_content(html_content)
         excerpt = build_post_excerpt(content)
         image = lead_image(rendered_post_content)

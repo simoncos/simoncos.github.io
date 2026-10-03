@@ -2465,7 +2465,9 @@ button {
     flex: 1;
     min-height: 160px;
     cursor: pointer;
-    touch-action: none;
+    /* Vertical swipes scroll the page; song.ts seeks on a tap or a sideways
+       drag only. */
+    touch-action: pan-y;
     border-radius: 6px;
 }
 
@@ -4240,6 +4242,56 @@ h2.k {
     border: 1px solid var(--line);
     border-radius: 20px;
     background: var(--bg);
+}
+
+/* generate_blog_pages.py wraps each embedded page with a cover link. Where a
+   finger would scroll the frame instead of the article, the cover lies over
+   the frame: a swipe scrolls the article, a tap opens the page in a new tab. */
+.embed-frame {
+    position: relative;
+    margin: 1.4em 0;
+}
+
+.embed-frame .embedded-page {
+    margin: 0;
+}
+
+.embed-cover {
+    display: none;
+}
+
+@media (pointer: coarse), (max-width: 760px) {
+    .embed-frame .embedded-page {
+        min-height: 0;
+        height: min(56vh, 420px);
+        pointer-events: none;
+    }
+
+    .embed-cover {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 0 16px 20px;
+        border-radius: 20px;
+        background: linear-gradient(to bottom, transparent 55%, color-mix(in srgb, var(--bg) 88%, transparent));
+        text-decoration: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .embed-cover-label {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 20px;
+        border-radius: 999px;
+        background: var(--ink);
+        color: var(--bg);
+        font-size: 15px;
+        font-weight: 600;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    }
 }
 
 .series-box {

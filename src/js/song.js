@@ -2,6 +2,8 @@
 // The player on a Music page. Without scripts the browser's own audio
 // controls show; with them, a play button and the recording's waveform,
 // which doubles as the seek bar (pointer, or arrow keys when focused).
+// On a touch screen a vertical swipe over it scrolls the page; a tap or a
+// sideways drag seeks.
 (function () {
     const player = document.querySelector('[data-song-player]');
     if (!player)
@@ -63,26 +65,70 @@
         const box = wave.getBoundingClientRect();
         seek(((clientX - box.left) / box.width) * total());
     }
+    // A mouse seeks on press and drags at once. A finger may only be passing
+    // over the waveform on its way down the page (the CSS lets the browser
+    // pan vertically), so touch and pen wait until the gesture says what it
+    // is: a tap seeks where it lifts, a sideways drag past DECIDE px scrubs,
+    // and anything vertical is left to the page and never seeks.
+    const DECIDE = 8;
     let dragging = null;
+    let pending = null;
+    function startDrag(event) {
+        dragging = event.pointerId;
+        pending = null;
+        try {
+            wave.setPointerCapture(event.pointerId);
+        }
+        catch {
+            // The pointer may already be gone; the drag still follows moves.
+        }
+        wave.classList.add('is-dragging');
+        seekAt(event.clientX);
+    }
     wave.addEventListener('pointerdown', (event) => {
         if (event.button !== 0)
             return;
-        dragging = event.pointerId;
-        wave.setPointerCapture(event.pointerId);
-        wave.classList.add('is-dragging');
-        seekAt(event.clientX);
+        if (event.pointerType === 'mouse') {
+            startDrag(event);
+        }
+        else {
+            pending = { id: event.pointerId, x: event.clientX, y: event.clientY };
+        }
     });
     wave.addEventListener('pointermove', (event) => {
-        if (dragging === event.pointerId)
+        if (dragging === event.pointerId) {
             seekAt(event.clientX);
+            return;
+        }
+        if (!pending || pending.id !== event.pointerId)
+            return;
+        const dx = Math.abs(event.clientX - pending.x);
+        const dy = Math.abs(event.clientY - pending.y);
+        if (dx < DECIDE && dy < DECIDE)
+            return;
+        if (dx > dy) {
+            startDrag(event);
+        }
+        else {
+            pending = null;
+        }
     });
-    const release = (event) => {
+    wave.addEventListener('pointerup', (event) => {
+        if (pending && pending.id === event.pointerId) {
+            pending = null;
+            seekAt(event.clientX);
+        }
+        release(event);
+    });
+    function release(event) {
+        if (pending && pending.id === event.pointerId)
+            pending = null;
         if (dragging !== event.pointerId)
             return;
         dragging = null;
         wave.classList.remove('is-dragging');
-    };
-    wave.addEventListener('pointerup', release);
+    }
+    // The browser cancels the pointer when it takes the gesture for a scroll.
     wave.addEventListener('pointercancel', release);
     wave.addEventListener('keydown', (event) => {
         const steps = { ArrowLeft: -5, ArrowDown: -5, ArrowRight: 5, ArrowUp: 5, PageDown: -15, PageUp: 15 };

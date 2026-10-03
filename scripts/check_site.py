@@ -439,6 +439,17 @@ def check_blog_image_attributes(errors: list[str]) -> None:
                     f"(run: python3 scripts/update_image_dimensions.py)"
                 )
 
+            # srcset candidates (scripts/image_variants.py) must be real files
+            # under the same size limit.
+            for candidate in filter(None, (part.strip() for part in attrs.get("srcset", "").split(","))):
+                candidate_url = candidate.split()[0]
+                candidate_path = resolve_local_html_image(html_file, candidate_url)
+                if not candidate_path:
+                    if not urlparse(candidate_url).scheme:
+                        errors.append(f"{label} srcset candidate {candidate_url!r} is not a file in the repository")
+                elif candidate_path.stat().st_size > MAX_ARTICLE_IMAGE_BYTES:
+                    errors.append(f"{label} srcset candidate {candidate_url!r} is over 1 MB")
+
             local_path = resolve_local_html_image(html_file, source)
             if not local_path:
                 continue

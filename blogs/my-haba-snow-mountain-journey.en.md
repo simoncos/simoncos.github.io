@@ -428,6 +428,6 @@ To make the practical information easier to absorb, I organized it into a “Hab
 
 You can save the code as an `.html` file and open it in a browser, or just view the rendered layout idea.
 
-<iframe class="embedded-page" src="assets/pages/my-haba-snow-mountain-journey-gemini-summary.en.html" title="Haba Snow Mountain Speed-Ascent Field Debrief Dashboard" loading="lazy"></iframe>
+<iframe class="embedded-page" src="assets/pages/my-haba-snow-mountain-journey-gemini-summary.en.html" title="Haba Snow Mountain Speed-Ascent Field Debrief Dashboard" data-open-label="Open the dashboard" loading="lazy"></iframe>
 
 [Open the dashboard in a new tab](assets/pages/my-haba-snow-mountain-journey-gemini-summary.en.html)

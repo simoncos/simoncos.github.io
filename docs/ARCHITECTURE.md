@@ -39,6 +39,8 @@ Hand-authored pages outside this table: `series.html` and `tags.html` (redirects
 ### Article images
 
 - Article images live in the repository, at `blogs/assets/images/<slug>/`. Obsidian uploads them to R2; `scripts/localize_images.py <slug>` downloads an article's R2 images, writes web copies (sRGB, at most 1520 × 2026 px, progressive JPEG) and rewrites both language files to use them. An animated GIF becomes a silent looping MP4 with a JPEG poster of the same name; the generator renders `![alt](<name>.mp4)` as `video.post-loop`, which `article.ts` plays like a GIF (paused with controls under reduced motion). Then run `make generate`.
+- Phones get a smaller file. `scripts/image_variants.py <slug>` writes a 1080 px WebP (`<name>.1080w.webp`) beside each image wider than that, and `localize_images.py` does it for every image it writes. The generator offers the variant through `srcset`/`sizes` and keeps the original as `src` (share cards, feeds). On the Haba article, a 360 or 390 px phone at three device pixels per CSS pixel now loads 1.88 MB of images instead of 5.05 MB (measured 2026-10-03). `sizes` assumes 20 px of margin each side; keep it exact, or a 360 px phone asks for more than 1080 px and loads the original.
+- An `<iframe class="embedded-page">` is wrapped with a cover link (`.embed-cover`, label from the iframe's `data-open-label`). On touch screens and narrow windows the cover lies over the frame, so a swipe scrolls the article and a tap opens the page in a new tab; elsewhere the frame works as before.
 - `scripts/check_site.py` fails when an image or clip an article shows is over 1 MB, or a clip lacks its poster, size or text alternative, and lists articles that still load images from R2 without failing.
 - Images left on another host need their size recorded in `data/image_dimensions.json` (`scripts/update_image_dimensions.py`, part of `make generate`), or they shift the layout as they load.
 
@@ -61,7 +63,7 @@ TypeScript in `src/ts/*.ts` compiles to tracked `src/js/*.js` (`npm run build:ts
 - `article.ts` — reading progress, the contents list, footnote highlighting, back to top.
 - `work.ts` — the wheel of work types; `#projects`, `#talks` and so on open a type directly.
 - `board.ts` — Board / Present modes on the Sleep Toolkit boards.
-- `song.ts` — the player on a Music page: play and pause, and the waveform as the seek bar (pointer or arrow keys). Without scripts the browser's own audio controls show.
+- `song.ts` — the player on a Music page: play and pause, and the waveform as the seek bar (mouse, arrow keys, or a tap or sideways drag on a touch screen; a vertical swipe over it scrolls the page). Without scripts the browser's own audio controls show.
 - `favorites.ts` — index peeks; paging, filters and folds on category pages (`?filter=`, `?page=`).
 - `theme-init.ts` — runs in the head before paint; sets the theme and adds the `js` class that CSS uses to gate no-JS fallbacks.
 
