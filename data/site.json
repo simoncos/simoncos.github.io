@@ -64,6 +64,7 @@
       "home_topic": "think",
       "date": "2026-06-07",
       "single": true,
+      "zh_only": true,
       "title": {
         "en": "Personal Information Systems in the AI Era",
         "zh": "AI 时代的个人信息系统"
@@ -89,6 +90,7 @@
       "home_topic": "think",
       "date": "2026-05-21",
       "single": true,
+      "zh_only": true,
       "title": {
         "en": "Hermes Agent HV Analysis",
         "zh": "Hermes Agent 横纵分析"
@@ -146,8 +148,8 @@
         "zh": "自己作词、作曲、演唱的歌，南航经管院 2014 届毕业视频的片尾曲。"
       },
       "desc": {
-        "en": "Words, music and vocals by me: the recording and the lyrics, with an English translation.",
-        "zh": "自己作词、作曲、演唱：录音和歌词都在这里。"
+        "en": "The recording and lyrics of a song I wrote, composed and sang, with an English translation.",
+        "zh": "自己作词、作曲、演唱的歌，录音和歌词都在这里。"
       },
       "img": "gallery/assets/gallery-card-qingtian.webp",
       "href": "gallery/music/qingtian.html"
@@ -542,7 +544,7 @@
         "en": "Maintained",
         "zh": "持续维护"
       },
-      "years": "2025 —",
+      "years": "2026 —",
       "tags": {
         "en": "Tool · Python · Web",
         "zh": "工具 · Python · Web"
@@ -717,8 +719,8 @@
       ],
       "report_image": "projects/assets/sleep-report-preview.svg",
       "report_caption": {
-        "en": "Report preview · May 2025",
-        "zh": "报告预览 · 2025 年 5 月"
+        "en": "Report preview · May 2026",
+        "zh": "报告预览 · 2026 年 5 月"
       },
       "essay_image": "gallery/assets/gallery-card-sleep-scatter.webp",
       "essay_caption": {
