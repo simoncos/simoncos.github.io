@@ -93,7 +93,7 @@ def validate(data):
             for field in ('name', 'reason'):
                 text(chord.get(field), f'{node_id}.chord.{field}')
             midi = chord.get('midi')
-            require(isinstance(midi, list) and 3 <= len(midi) <= 4, f'{node_id}.chord.midi: expected 3–4 simultaneous notes')
+            require(isinstance(midi, list) and 3 <= len(midi) <= 6, f'{node_id}.chord.midi: expected 3–6 simultaneous notes')
             require(all(type(n) is int and 48 <= n <= 72 for n in midi), f'{node_id}.chord.midi: use integers inside C3–C5')
             require(midi == sorted(set(midi)), f'{node_id}.chord.midi: notes must be unique and ascending')
         if 'terminal' in node:
@@ -208,7 +208,40 @@ def validate(data):
             pending.extend(by_id[node_id]['next'])
     expected = set(by_id) - {data.get('bonus')}
     require(reached == expected, f'Unreachable nodes: {sorted(expected - reached)}')
+    if 'finale' in data:
+        validate_finale(data['finale'], by_id, data, require)
     return data
+
+
+FINALE_STEP_KEYS = {'node', 'beats', 'level', 'roll', 'release'}
+MAX_FINALE_SECONDS = 120
+
+
+def validate_finale(finale, by_id, data, require):
+    """The arranged piece played when every song is lit: a sequence of node chords, each lit as it sounds."""
+    def number(value, low, high, label):
+        require(type(value) in (int, float) and low <= value <= high, f'{label}: expected a number from {low} to {high}')
+
+    require(isinstance(finale, dict), 'finale: expected an object')
+    require(set(finale) <= {'beat', 'steps'}, 'finale: unknown field')
+    number(finale.get('beat'), .25, 1.5, 'finale.beat')
+    steps = finale.get('steps')
+    require(isinstance(steps, list) and 2 <= len(steps) <= 128, 'finale.steps: expected 2–128 steps')
+    for index, step in enumerate(steps):
+        label = f'finale.steps[{index}]'
+        require(isinstance(step, dict) and set(step) <= FINALE_STEP_KEYS and {'node', 'beats', 'level'} <= set(step), f'{label}: expected node, beats and level (roll, release optional)')
+        require(step['node'] in by_id, f'{label}.node: unknown node {step["node"]}')
+        number(step['beats'], .25, 16, f'{label}.beats')
+        number(step['level'], .1, 1, f'{label}.level')
+        if 'roll' in step:
+            number(step['roll'], 0, .6, f'{label}.roll')
+        if 'release' in step:
+            number(step['release'], .2, 6, f'{label}.release')
+    require(sum(step['beats'] for step in steps) * finale['beat'] <= MAX_FINALE_SECONDS, f'finale: longer than {MAX_FINALE_SECONDS} seconds')
+    closing = data.get('bonus') or data['ending']
+    require(steps[-1]['node'] == closing, 'finale: the last step must be the hidden coda (or the ending when there is none)')
+    if data.get('bonus'):
+        require(steps[-2]['node'] == data['ending'], 'finale: the ending chord must come right before the hidden coda')
 
 
 def load(path=DATA_PATH):
@@ -226,6 +259,11 @@ if __name__ == '__main__':
     pending = [n for n in puzzle['nodes'] if n['identity']['review']['status'] == 'pending']
     candidates = sum(len(n.get('route_audit', {}).get('candidates', [])) for n in puzzle['nodes'])
     open_answers = sum(len(n.get('open_answers', [])) for n in puzzle['nodes'])
-    print(f"Valid: {puzzle['id']} · {len(puzzle['nodes'])} songs · {sum(len(n['next']) for n in puzzle['nodes'])} paths · {len(pending)} pending identities · {candidates} candidate routes · {open_answers} open answers")
+    finale = puzzle.get('finale')
+    finale_note = ''
+    if finale:
+        lit = {step['node'] for step in finale['steps']}
+        finale_note = f" · finale {len(finale['steps'])} steps, {len(lit)}/{len(puzzle['nodes'])} songs lit, {sum(s['beats'] for s in finale['steps']) * finale['beat']:.0f} s"
+    print(f"Valid: {puzzle['id']} · {len(puzzle['nodes'])} songs · {sum(len(n['next']) for n in puzzle['nodes'])} paths · {len(pending)} pending identities · {candidates} candidate routes · {open_answers} open answers{finale_note}")
     for node in pending:
         print(f"  {node['id']}: {node['title']}")

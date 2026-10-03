@@ -125,6 +125,67 @@
     "bonus": {
       "type": "string",
       "description": "集齐所有其他节点后自动解锁的隐藏回响 ID。"
+    },
+    "finale": {
+      "type": "object",
+      "description": "集齐所有歌曲时自动播放的编排曲：一串节点和弦，每个节点随自己的和弦亮起、暗下。最后一步必须是隐藏尾声（没有隐藏尾声时是终点）。",
+      "properties": {
+        "beat": {
+          "type": "number",
+          "minimum": 0.25,
+          "maximum": 1.5,
+          "description": "每拍的秒数。"
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 128,
+          "items": {
+            "type": "object",
+            "properties": {
+              "node": {
+                "type": "string",
+                "description": "节点 ID；同一节点可出现多次，所有节点至少出现一次才会都被点亮。"
+              },
+              "beats": {
+                "type": "number",
+                "minimum": 0.25,
+                "maximum": 16,
+                "description": "这一和弦占几拍；下一和弦在这之后进入。"
+              },
+              "level": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 1,
+                "description": "力度，0.1 极轻，1 最强。"
+              },
+              "roll": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 0.6,
+                "description": "可选：和弦由低到高依次发声的总秒数；省略为同时发声。"
+              },
+              "release": {
+                "type": "number",
+                "minimum": 0.2,
+                "maximum": 6,
+                "description": "可选：和弦结束后的淡出秒数。"
+              }
+            },
+            "required": [
+              "node",
+              "beats",
+              "level"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "beat",
+        "steps"
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
@@ -690,9 +751,9 @@
                     "maximum": 72
                   },
                   "minItems": 3,
-                  "maxItems": 4,
+                  "maxItems": 6,
                   "uniqueItems": true,
-                  "description": "实际同时发声的配器，MIDI 由低到高；C4 = 60。"
+                  "description": "实际同时发声的配器，3–6 个音，MIDI 由低到高；C4 = 60。"
                 },
                 "reason": {
                   "type": "string",

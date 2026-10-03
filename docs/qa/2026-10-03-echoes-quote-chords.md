@@ -9,7 +9,7 @@ Baseline: `5e9508e248300f7b72e44eeba97f038c2c8f220e`. Author requested large lyr
 - Existing four generated flower assets and seven Vocal Coach YDP root samples are reused. No new image or audio downloads were added to initial page load.
 - Start / rewind share Csus2. Ending resolves to C; G7 at the preceding “完” makes that path a cadence. Hidden epilogue responds higher in the register. These are newly designed UI chords, not transcriptions of song keys.
 - `clue_format: quote` for 天下无双, 明年今日 and 今日. 绵绵 retains its separate quote plus ordinary branch instruction. Other clues are prose / paraphrases, not promoted to quotations based only on length or poetic wording.
-- 今日 intentionally retains the owner's supplied “就像圈中圈” wording; the released lyric source says “像处圈中圈”. Formatting does not silently rewrite the author's clue.
+- 今日 kept the owner's supplied “就像圈中圈” wording in this change, because formatting must not silently rewrite the author's clue; the released lyric source says “像处圈中圈”. The data now carries the released wording (changed 2026-10-03 once the owner agreed that quotations with problems may be corrected).
 
 Reference checks for quotation treatment: [天下无双, JOOX](https://www.joox.com/hk/single/dtV7Vl5UvK9oDRC3YsT0Tw==), [明年今日, official music video](https://www.youtube.com/watch?v=8NJVNkzhJM4), [今日, JOOX](https://www.joox.com/my-zh_cn/single/cNy5ofQn85BMVRjUkSv56Q%3D%3D).
 
