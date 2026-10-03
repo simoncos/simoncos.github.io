@@ -3,8 +3,8 @@
     {
       "id": "toolkit",
       "kind": {
-        "en": "Tool",
-        "zh": "工具"
+        "en": "App",
+        "zh": "应用"
       },
       "work_topic": "projects",
       "home_topic": "build",
@@ -201,8 +201,8 @@
     {
       "id": "hn-field-notes",
       "kind": {
-        "en": "Tool",
-        "zh": "工具"
+        "en": "App",
+        "zh": "应用"
       },
       "work_topic": "projects",
       "home_topic": "build",
@@ -225,15 +225,15 @@
     {
       "id": "hn-llm-research",
       "kind": {
-        "en": "Research",
-        "zh": "研究"
+        "en": "App",
+        "zh": "应用"
       },
       "work_kind": {
-        "en": "Ongoing research",
-        "zh": "持续研究"
+        "en": "Research explorer",
+        "zh": "研究浏览器"
       },
-      "work_topic": "research",
-      "home_topic": "think",
+      "work_topic": "projects",
+      "home_topic": "build",
       "date": "2026-10-02",
       "single": true,
       "title": {
@@ -288,22 +288,22 @@
     {
       "id": "projects",
       "title": {
-        "en": "Tools",
-        "zh": "工具"
+        "en": "App",
+        "zh": "应用"
       },
       "line": {
-        "en": "Tools I build and keep running.",
-        "zh": "自己开发、持续维护的工具。"
+        "en": "Apps I build and keep running.",
+        "zh": "自己开发、持续维护的应用。"
       },
       "desc": {
-        "en": "Public tools for working with data and personal systems.",
-        "zh": "围绕数据与个人系统，自己开发并公开使用的工具。"
+        "en": "Apps for exploration, creativity, and everyday use.",
+        "zh": "用于探索、创作与日常生活的应用。"
       },
       "related": [
         {
           "label": {
-            "en": "All tools",
-            "zh": "全部工具"
+            "en": "All apps",
+            "zh": "全部应用"
           },
           "kind": {
             "en": "List",
@@ -397,8 +397,8 @@
             "zh": "Sleep Toolkit"
           },
           "kind": {
-            "en": "Tool",
-            "zh": "工具"
+            "en": "App",
+            "zh": "应用"
           },
           "href": {
             "en": "projects/sleep-toolkit.en.html",

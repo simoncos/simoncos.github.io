@@ -419,8 +419,8 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
         config,
         title=("Work · simoncos", "作品 · simoncos"),
         description=(
-            "Tools, games, talks, research and music from simoncos.",
-            "simoncos 的工具、游戏、演讲、研究与音乐。",
+            "Apps, games, talks, research and music from simoncos.",
+            "simoncos 的应用、游戏、演讲、研究与音乐。",
         ),
         canonical="gallery.html",
     )
@@ -432,24 +432,29 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
 
 def render_projects(config: dict[str, Any], site: dict[str, Any]) -> str:
     page = page_config(config, "projects.html")
+    topic = next(topic for topic in site["work_topics"] if topic["id"] == "projects")
+    apps = sorted((work for work in site["works"] if work["work_topic"] == topic["id"]),
+                  key=lambda work: work["date"], reverse=True)
     rows = []
-    for i, project in enumerate(site["projects"]):
+    for i, work in enumerate(apps):
+        project = next((project for project in site["projects"] if project["href"] == work["href"]), {})
+        facts = (f'<span class="prow-status"><span class="live-dot" aria-hidden="true"></span>{bi_value(project["status"])}</span>'
+                 f'<span>{esc(project["years"])}</span><span>{esc(project["tags"])}</span>') if project else (
+                     f'<span>{esc(work["date"])}</span><span>{bi_value(work["kind"])}</span>')
         rows.append(
-            f'        <a class="prow"{href_attrs(project["href"])}>'
+            f'        <a class="prow"{href_attrs(work["href"])}>'
             f'<span class="prow-n">{i + 1:02d}</span>'
             '<span class="prow-main">'
-            f'<span class="prow-title">{bi_value(project["title"])}</span>'
-            f'<span class="prow-line">{bi_value(project["line"])}</span>'
-            '<span class="prow-facts">'
-            f'<span class="prow-status"><span class="live-dot" aria-hidden="true"></span>{bi_value(project["status"])}</span>'
-            f'<span>{esc(project["years"])}</span><span>{esc(project["tags"])}</span></span></span>'
-            f'<span class="prow-cover"><img src="{esc(project["cover"])}" alt="" decoding="async" loading="lazy"></span></a>'
+            f'<span class="prow-title">{bi_value(work["title"])}</span>'
+            f'<span class="prow-line">{bi_value(project.get("line", work["desc"]))}</span>'
+            f'<span class="prow-facts">{facts}</span></span>'
+            f'<span class="prow-cover"><img src="{esc(work["img"])}" alt="" decoding="async" loading="lazy"></span></a>'
         )
     main = "\n".join([
         '<main id="main" class="projects enter" tabindex="-1">',
         '    <section class="page-head">',
-        f'        <h1 class="page-h1">{bi("Tools", "工具")}</h1>',
-        f'        <p class="page-lead">{bi("Tools I build and keep running, for working with data and personal systems.", "围绕数据与个人系统，自己开发并持续维护的工具。")}</p>',
+        f'        <h1 class="page-h1">{bi_value(topic["title"])}</h1>',
+        f'        <p class="page-lead">{bi_value(topic["desc"])}</p>',
         "    </section>",
         '    <div class="plist">',
         *rows,
@@ -458,11 +463,8 @@ def render_projects(config: dict[str, Any], site: dict[str, Any]) -> str:
     ])
     head = render_meta(
         config,
-        title=("Tools · Work · simoncos", "工具 · 作品 · simoncos"),
-        description=(
-            "Public tools from simoncos for working with data and personal systems.",
-            "simoncos 围绕数据与个人系统开发的公开工具。",
-        ),
+        title=tuple(f"{label} · {work_label} · simoncos" for label, work_label in zip(lang_pair(topic["title"]), ("Work", "作品"))),
+        description=lang_pair(topic["desc"]),
         canonical="projects.html",
     )
     return render_document(config, page, head=head, main=main)
