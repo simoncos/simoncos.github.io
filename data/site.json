@@ -235,7 +235,7 @@
       "href": "https://simoncos-hn-llm-research.vercel.app/"
     },
     {
-      "id": "stock-watchdog",
+      "id": "unannounced-1",
       "kind": {
         "en": "App",
         "zh": "应用"
@@ -243,14 +243,14 @@
       "work_topic": "projects",
       "date": "2026",
       "title": {
-        "en": "Stock Watchdog",
-        "zh": "Stock Watchdog"
+        "en": "Unannounced project",
+        "zh": "未公布项目"
       },
       "desc": {
-        "en": "Watches A-share closes, southbound flows into Hong Kong and US public filings (13F, insider trades). Refreshes daily; research only, no trading.",
-        "zh": "盯 A 股收盘、港股通南向资金和美股公开披露（13F、内部人交易），每天自动更新。只做研究，不下单。"
+        "en": "An agentic investment-research project.",
+        "zh": "一个 Agentic 投资研究类项目。"
       },
-      "img": "gallery/assets/wip/stock-watchdog.webp"
+      "img": "gallery/assets/wip/unannounced.webp"
     },
     {
       "id": "daily-oracle",
