@@ -11,7 +11,7 @@
     const t = (en, zh) => window.SITE_SHELL?.lang === 'zh' ? zh : en;
     const norm = (value) => value.normalize('NFKC').toLowerCase().replace(/[\s《》「」『』·.,，。!?！？’'"-]/g, '');
     const fresh = () => ({ current: data.start, found: [data.start], edges: [], history: [] });
-    let trail = fresh(), storage = true, zoomed = window.matchMedia('(max-width: 650px)').matches;
+    let trail = fresh(), storage = true, zoomed = false;
     try {
         const saved = JSON.parse(localStorage.getItem(key) || 'null');
         if (saved && typeof saved === 'object' && Array.isArray(saved.found) && Array.isArray(saved.edges) && Array.isArray(saved.history)) {
@@ -42,58 +42,46 @@
     const compact = window.matchMedia('(max-width: 900px)');
     const cluePanel = root.querySelector('.echo-clue-panel');
     const mapPanel = root.querySelector('.echo-map-panel');
-    const clueDialog = document.getElementById('echo-clue-dialog');
-    const currentButton = root.querySelector('[data-open-clue]');
-    let clueOpener = null;
-    let clueFromList = false;
-    function openClue(opener = document.activeElement) {
-        if (!compact.matches)
-            return;
-        if (!clueDialog.open) {
-            clueOpener = opener;
-            clueFromList = !!opener?.closest('#echo-song-list');
-            clueDialog.showModal();
-            document.documentElement.classList.add('echo-sheet-open');
-        }
-        clueDialog.scrollTop = 0;
-        document.getElementById('echo-song').focus({ preventScroll: true });
+    const mapDialog = document.getElementById('echo-map-dialog');
+    const mapButton = root.querySelector('[data-open-map]');
+    const neighborhood = root.querySelector('[data-neighborhood]');
+    let mapSelection = false;
+    let mapPagePosition = null;
+    function pagePosition() { return { x: window.scrollX, y: window.scrollY }; }
+    function restorePage(position) {
+        window.scrollTo({ left: position.x, top: position.y, behavior: 'instant' });
+        // Native dialog focus restoration and scroll anchoring can happen after layout.
+        window.requestAnimationFrame(() => window.scrollTo({ left: position.x, top: position.y, behavior: 'instant' }));
     }
-    function closeClue() { if (clueDialog.open)
-        clueDialog.close(); }
-    clueDialog.addEventListener('close', () => {
-        document.documentElement.classList.remove('echo-sheet-open');
-        const target = clueFromList ? document.querySelector('#echo-song-list [aria-current=true]') : clueOpener?.isConnected ? clueOpener : currentButton;
-        if (compact.matches && (target instanceof HTMLElement || target instanceof SVGElement))
-            target.focus({ preventScroll: true });
-    });
-    root.querySelector('[data-close-clue]').addEventListener('click', closeClue);
-    currentButton.addEventListener('click', () => openClue());
-    clueDialog.addEventListener('click', event => {
-        if (event.target === clueDialog) {
-            const box = clueDialog.getBoundingClientRect();
-            if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)
-                closeClue();
-        }
-    });
-    function syncClueLayout() {
+    function closeMap() { if (mapDialog.open)
+        mapDialog.close(); }
+    mapDialog.addEventListener('close', () => {
+        document.documentElement.classList.remove('echo-map-open');
         if (compact.matches)
-            clueDialog.append(cluePanel);
-        else {
-            closeClue();
-            mapPanel.before(cluePanel);
-        }
+            (mapSelection ? document.getElementById('echo-song') : mapButton).focus({ preventScroll: true });
+        if (compact.matches && mapPagePosition)
+            restorePage(mapPagePosition);
+        mapPagePosition = null;
+        mapSelection = false;
+    });
+    root.querySelector('[data-close-map]').addEventListener('click', closeMap);
+    mapButton.addEventListener('click', () => {
+        zoomed = false;
+        render();
+        mapSelection = false;
+        mapPagePosition = pagePosition();
+        mapDialog.showModal();
+        document.documentElement.classList.add('echo-map-open');
+    });
+    function syncMapLayout() {
+        closeMap();
+        if (compact.matches)
+            mapDialog.append(mapPanel);
+        else
+            cluePanel.after(mapPanel);
     }
-    compact.addEventListener('change', () => { syncClueLayout(); centerCurrentFlower(); });
-    // Keep the sheet and its close control above the on-screen keyboard.
-    function syncKeyboardViewport() {
-        const viewport = window.visualViewport;
-        clueDialog.style.setProperty('--echo-viewport-height', (viewport?.height || window.innerHeight) + 'px');
-        clueDialog.style.setProperty('--echo-sheet-bottom', Math.max(0, window.innerHeight - (viewport?.height || window.innerHeight) - (viewport?.offsetTop || 0)) + 'px');
-    }
-    window.visualViewport?.addEventListener('resize', syncKeyboardViewport);
-    window.visualViewport?.addEventListener('scroll', syncKeyboardViewport);
-    syncClueLayout();
-    syncKeyboardViewport();
+    compact.addEventListener('change', () => { syncMapLayout(); render(); centerCurrentFlower(); });
+    syncMapLayout();
     let notice = () => '';
     let feedbackKind = '';
     const soundKey = key + '-sound';
@@ -110,6 +98,8 @@
         button.setAttribute('aria-busy', String(soundStatus === 'loading'));
         root.querySelector('[data-sound-label]').textContent = soundStatus === 'unavailable' ? t('Sound unavailable', '音效不可用') : !soundEnabled ? t('Sound off', '音效：关') : soundStatus === 'loading' ? t('Loading piano…', '加载钢琴…') : soundStatus === 'failed' ? t('Retry sound', '重试音效') : t('Sound on', '音效：开');
         button.title = t('A piano chord when you discover or select a song', '发现或点击已点亮的歌曲时，播放钢琴和弦');
+        const replay = root.querySelector('[data-replay]');
+        replay.disabled = !soundEnabled || soundStatus === 'unavailable';
     }
     function playChord(id) {
         if (!soundEnabled)
@@ -118,20 +108,16 @@
         if (song)
             void piano.play(song.presentation.chord.midi);
     }
-    function focusClue(opener) {
-        if (compact.matches) {
-            openClue(opener);
-            return;
-        }
+    function focusClue() {
         document.getElementById('echo-song').focus({ preventScroll: true });
     }
     function centerCurrentFlower() {
-        if (!zoomed)
+        if (!zoomed || (compact.matches && !mapDialog.open))
             return;
         const stage = root.querySelector('.echo-map-stage');
         const current = root.querySelector('.echo-node.is-current .echo-hit').getBoundingClientRect(), box = stage.getBoundingClientRect();
         const visibleTop = Math.max(box.top, 0);
-        const visibleBottom = compact.matches ? Math.min(box.bottom, window.innerHeight, root.querySelector('.echo-current').getBoundingClientRect().top) : box.bottom;
+        const visibleBottom = Math.min(box.bottom, window.innerHeight);
         const centerY = visibleBottom - visibleTop > 100 ? (visibleTop + visibleBottom) / 2 : box.top + stage.clientHeight / 2;
         stage.scrollLeft += current.left + current.width / 2 - box.left - stage.clientWidth / 2;
         stage.scrollTop += current.top + current.height / 2 - centerY;
@@ -174,9 +160,10 @@
         root.classList.add('is-' + kind + '-arrival');
         arrivalTimer = window.setTimeout(clearArrival, 2800);
     }
-    function visit(id, remember = true, center = true) {
+    function visit(id, remember = true, center = true, preservePage = true) {
         if (!trail.found.includes(id))
             return;
+        const position = compact.matches && preservePage ? pagePosition() : null;
         playChord(id);
         clearArrival();
         if (remember && trail.current !== id)
@@ -192,6 +179,8 @@
         render();
         if (center)
             centerCurrentFlower();
+        if (position)
+            restorePage(position);
     }
     function solve(id) {
         const previous = songs.get(trail.current);
@@ -218,11 +207,88 @@
         feedbackKind = 'success';
         render();
     }
+    function renderNeighborhood(song) {
+        const ns = 'http://www.w3.org/2000/svg';
+        const element = (tag, attrs, text) => {
+            const node = document.createElementNS(ns, tag);
+            for (const [name, value] of Object.entries(attrs))
+                node.setAttribute(name, value);
+            if (text !== undefined)
+                node.textContent = text;
+            return node;
+        };
+        neighborhood.replaceChildren();
+        const defs = element('defs', {});
+        for (const side of ['in', 'out']) {
+            const marker = element('marker', { id: 'echo-local-arrow-' + side, viewBox: '0 0 10 10', refX: '9', refY: '5', markerWidth: '6', markerHeight: '6', orient: 'auto', markerUnits: 'userSpaceOnUse' });
+            marker.append(element('path', { d: 'M0 0 L10 5 L0 10 L2 5 Z', class: 'echo-focus-arrow-' + side }));
+            defs.append(marker);
+        }
+        neighborhood.append(defs);
+        const incoming = data.nodes.filter(n => trail.edges.includes(n.id + ':' + song.id)).map(n => n.id);
+        if (song.id === data.bonus)
+            incoming.push(data.ending);
+        const outgoing = [...song.next];
+        if (song.id === data.ending && data.bonus && trail.found.includes(data.bonus))
+            outgoing.push(data.bonus);
+        for (const [side, ids] of [['in', incoming], ['out', outgoing]]) {
+            const x = side === 'in' ? 42 : 318;
+            if (ids.length)
+                neighborhood.append(element('text', { x: String(x), y: '16', 'text-anchor': 'middle', class: 'echo-focus-caption' }, side === 'in' ? t('FROM', '来路') : t('ONWARD', '出路')));
+            ids.forEach((id, i) => {
+                const next = songs.get(id), found = trail.found.includes(id);
+                const y = 115 + (i - (ids.length - 1) / 2) * 64;
+                const path = side === 'in' ? `M72 ${y} C105 ${y} 107 115 124 115` : `M236 115 C253 115 254 ${y} 286 ${y}`;
+                neighborhood.append(element('path', { d: path, class: 'echo-focus-edge echo-focus-edge-' + side + (!found ? ' is-pending' : ''), 'marker-end': 'url(#echo-local-arrow-' + side + ')' }));
+                const group = element('g', { 'data-focus-node': id, 'data-focus-side': side, class: 'echo-focus-node bloom-' + flowerFamily(next) + (found ? ' is-found' : ''), transform: `translate(${x} ${y})` });
+                group.append(element('circle', { r: '32', class: 'echo-focus-hit' }));
+                if (found) {
+                    group.setAttribute('role', 'button');
+                    group.setAttribute('tabindex', '0');
+                    group.setAttribute('aria-label', (side === 'in' ? t('Back to ', '回到') : t('Continue to ', '继续到')) + next.title);
+                    group.append(element('image', { href: 'assets/echo-flower-' + next.presentation.flower + '.webp', x: '-20', y: '-20', width: '40', height: '40' }));
+                }
+                else {
+                    group.setAttribute('aria-label', t('Song still to discover', '尚未接上的歌曲'));
+                    group.append(element('circle', { r: '15', class: 'echo-focus-unknown' }), element('text', { 'text-anchor': 'middle', y: '5', class: 'echo-focus-question' }, '?'));
+                }
+                const foreign = element('foreignObject', { x: '-40', y: '22', width: '80', height: '37' });
+                const label = document.createElementNS('http://www.w3.org/1999/xhtml', 'span');
+                label.className = 'echo-focus-label';
+                label.textContent = found ? next.title : t('Not found', '未接上');
+                foreign.append(label);
+                group.append(foreign);
+                neighborhood.append(group);
+            });
+        }
+        if (!outgoing.length)
+            neighborhood.append(element('text', { x: '318', y: '120', 'text-anchor': 'middle', class: 'echo-focus-caption' }, song.id === data.ending ? t('ENDING', '终点') : t('END OF PATH', '支线尽头')));
+    }
+    function followNeighbor(target) {
+        const node = target.closest('[data-focus-node]');
+        if (!node || !trail.found.includes(node.dataset.focusNode))
+            return;
+        const id = node.dataset.focusNode;
+        if (node.dataset.focusSide === 'out' && songs.get(trail.current).next.includes(id))
+            solve(id);
+        else {
+            visit(id);
+            focusClue();
+        }
+    }
+    neighborhood.addEventListener('click', event => followNeighbor(event.target));
+    neighborhood.addEventListener('keydown', event => {
+        if (!event.repeat && (event.key === 'Enter' || event.key === ' ')) {
+            event.preventDefault();
+            followNeighbor(event.target);
+        }
+    });
     function render() {
         const song = songs.get(trail.current), ending = song.id === data.ending, deadEnd = song.terminal === 'dead-end', epilogue = song.id === data.bonus;
         const heading = document.getElementById('echo-song');
         heading.textContent = song.title;
         heading.tabIndex = -1;
+        root.querySelector('[data-now-label]').textContent = compact.matches ? song.title : t('NOW ECHOING', '正在回响');
         const songIndex = data.nodes.findIndex(n => n.id === song.id);
         const family = flowerFamily(song);
         const emblem = root.querySelector('[data-clue-flower]');
@@ -239,8 +305,7 @@
         const clue = document.getElementById('echo-clue');
         clue.textContent = t(song.clue.en, song.clue.zh);
         clue.hidden = quotedClue;
-        root.querySelector('[data-current-title]').textContent = song.title;
-        root.querySelector('[data-current-preview]').textContent = song.quote || t(song.clue.en, song.clue.zh);
+        renderNeighborhood(song);
         const remaining = song.next.filter(id => !trail.edges.includes(song.id + ':' + id)).length;
         const total = song.next.length, explored = total - remaining;
         let branch = epilogue ? t('A HIDDEN ECHO · THANK YOU FOR LISTENING', '隐藏回响 · 谢谢你听到这里') : deadEnd ? t('DEAD END · EXPLORE ANOTHER BRANCH', '死胡同 · 换一条路继续') : ending ? t('ENDING FOUND', '已抵达终点') : total ?
@@ -290,10 +355,12 @@
             button.textContent = songs.get(id).title;
             button.setAttribute('aria-current', String(id === song.id));
             button.className = 'bloom-' + flowerFamily(songs.get(id));
-            button.addEventListener('click', () => { visit(id); focusClue(list.querySelector('[aria-current=true]')); });
+            button.addEventListener('click', () => { visit(id, true, true, false); if (compact.matches)
+                cluePanel.scrollIntoView({ block: 'start', behavior: 'instant' }); focusClue(); });
             return button;
         }));
         const foundCount = trail.found.filter(id => id !== data.bonus).length;
+        root.querySelector('[data-focus-count]').textContent = t(`${foundCount} / ${data.nodes.length - (data.bonus ? 1 : 0)} songs found`, `${foundCount} / ${data.nodes.length - (data.bonus ? 1 : 0)} 首已点亮`);
         document.getElementById('echo-found-count').textContent = String(foundCount);
         document.getElementById('echo-progress-bar').value = foundCount;
         const bonusUnlocked = !!data.bonus && trail.found.includes(data.bonus);
@@ -303,7 +370,7 @@
         const zoomButton = root.querySelector('[data-map-zoom]');
         zoomButton.textContent = zoomed ? t('See full map', '查看全图') : t('Enlarge map', '放大地图');
         zoomButton.setAttribute('aria-pressed', String(zoomed));
-        root.querySelector('.echo-map-instruction').textContent = zoomed ? t('Scroll to explore · tap a lit song to select and replay', '滑动查看 · 点已点亮的歌曲，切换并回放') : t('Tap a lit song to select and replay', '点已点亮的歌曲，切换并回放');
+        root.querySelector('.echo-map-instruction').textContent = compact.matches ? (zoomed ? t('Scroll to explore · select a lit song to return to its clue', '滑动查看 · 选择已点亮的歌，回到它的线索') : t('Full network · enlarge to explore the details', '完整网络 · 放大查看细节')) : zoomed ? t('Scroll to explore · tap a lit song to select and replay', '滑动查看 · 点已点亮的歌曲，切换并回放') : t('Tap a lit song to select and replay', '点已点亮的歌曲，切换并回放');
         document.getElementById('echo-save-status').textContent = storage ? t('Saved in this browser', '进度已保存在此浏览器') : t('Saving unavailable · progress lasts while this page is open', '无法保存 · 进度仅在此页面打开时保留');
         root.querySelectorAll('[data-node]').forEach(node => {
             const id = node.dataset.node, found = trail.found.includes(id), active = id === song.id;
@@ -376,6 +443,10 @@
         visit(id, false); });
     document.querySelector('[data-open-bonus]').addEventListener('click', () => { if (data.bonus) {
         visit(data.bonus);
+        if (compact.matches && mapDialog.open) {
+            mapSelection = true;
+            closeMap();
+        }
         focusClue();
     } });
     document.querySelector('[data-return-branch]').addEventListener('click', () => { const id = trail.history.pop() || data.nodes.find(n => n.next.includes(trail.current))?.id || data.start; visit(id, false); });
@@ -397,6 +468,7 @@
         catch { }
         renderSound();
     });
+    root.querySelector('[data-replay]').addEventListener('click', () => playChord(trail.current));
     document.addEventListener('visibilitychange', () => { if (document.hidden)
         piano.stop(); });
     root.querySelector('[data-map-zoom]').addEventListener('click', () => {
@@ -407,10 +479,19 @@
     root.querySelector('[data-map-locate]').addEventListener('click', () => { zoomed = true; render(); centerCurrentFlower(); });
     root.querySelectorAll('[data-node]').forEach(node => {
         // Selecting a map node never moves the page, the panned map or keyboard focus.
-        node.addEventListener('click', () => visit(node.dataset.node, true, false));
+        const select = () => {
+            if (!trail.found.includes(node.dataset.node))
+                return;
+            visit(node.dataset.node, true, false);
+            if (compact.matches) {
+                mapSelection = true;
+                closeMap();
+            }
+        };
+        node.addEventListener('click', select);
         node.addEventListener('keydown', event => { if (!event.repeat && (event.key === 'Enter' || event.key === ' ')) {
             event.preventDefault();
-            visit(node.dataset.node, true, false);
+            select();
         } });
     });
     window.SITE_SHELL?.onLang?.(render);
