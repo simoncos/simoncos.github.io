@@ -36,6 +36,7 @@
     const input = document.querySelector('#echo-answer');
     input.setAttribute('aria-describedby', 'echo-feedback');
     const feedback = document.getElementById('echo-feedback');
+    const announcer = document.getElementById('echo-announce');
     const form = document.getElementById('echo-form');
     const hint = document.getElementById('echo-hint');
     const reveal = document.getElementById('echo-reveal');
@@ -46,6 +47,8 @@
     const mapButton = root.querySelector('[data-open-map]');
     const neighborhood = root.querySelector('[data-neighborhood]');
     let mapSelection = false;
+    let misses = 0, feedbackSong = '';
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
     let mapPagePosition = null;
     function pagePosition() { return { x: window.scrollX, y: window.scrollY }; }
     function restorePage(position) {
@@ -96,6 +99,7 @@
     function renderSound() {
         const button = root.querySelector('[data-sound]');
         button.disabled = soundStatus === 'unavailable';
+        button.dataset.state = soundStatus === 'unavailable' ? 'unavailable' : !soundEnabled ? 'off' : soundStatus === 'loading' ? 'loading' : soundStatus === 'failed' ? 'failed' : 'on';
         button.setAttribute('aria-pressed', String(soundEnabled && soundStatus !== 'unavailable' && soundStatus !== 'failed'));
         button.setAttribute('aria-busy', String(soundStatus === 'loading'));
         root.querySelector('[data-sound-label]').textContent = soundStatus === 'unavailable' ? t('Sound unavailable', '音效不可用') : !soundEnabled ? t('Sound off', '音效：关') : soundStatus === 'loading' ? t('Loading piano…', '加载钢琴…') : soundStatus === 'failed' ? t('Retry sound', '重试音效') : t('Sound on', '音效：开');
@@ -113,6 +117,58 @@
     function focusClue() {
         document.getElementById('echo-song').focus({ preventScroll: true });
     }
+    // On a phone the field sits below the clue, so after an answer the new clue is above the fold (seen on a real phone: the
+    // title in the sticky bar changed, the clue did not appear). Once the reward chip has been seen, glide up to it. A touch or
+    // wheel before that means the player is already steering, so leave the page alone; one during the glide stops it on the
+    // spot (on a real phone the running glide swallowed the swipe: 14 px of an intended 150).
+    function bringClueIntoView() {
+        let steered = false, gliding = false;
+        const release = () => { window.removeEventListener('touchstart', steer); window.removeEventListener('wheel', steer); };
+        function steer() {
+            steered = true;
+            if (gliding)
+                window.scrollTo({ left: window.scrollX, top: window.scrollY, behavior: 'instant' });
+            release();
+        }
+        window.addEventListener('touchstart', steer, { passive: true });
+        window.addEventListener('wheel', steer, { passive: true });
+        window.setTimeout(() => {
+            const heading = document.getElementById('echo-song'), top = heading.getBoundingClientRect().top;
+            if (steered || (top >= (parseFloat(getComputedStyle(heading).scrollMarginTop) || 0) - 4 && top < window.innerHeight * .5)) {
+                release();
+                return;
+            }
+            gliding = true;
+            heading.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+            window.setTimeout(release, 900);
+        }, 500);
+    }
+    // After a correct answer a desktop player is mid-typing: stay in the field (an IME cannot be handed over from a heading).
+    // A touch player should see the new clue, so the heading takes focus, the on-screen keyboard closes and the page glides up.
+    function focusAfterAnswer() {
+        if (finePointer.matches && !form.hidden) {
+            input.focus({ preventScroll: true });
+            return;
+        }
+        focusClue();
+        bringClueIntoView();
+    }
+    // One ring of light per chord: the node on the map and the flower beside the clue answer the sound together.
+    function ring(id) {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+            return;
+        const targets = [root.querySelector(`[data-node="${id}"]`), root.querySelector('[data-clue-flower]'), root.querySelector('[data-keys]')];
+        for (const target of targets) {
+            if (!target)
+                continue;
+            target.classList.remove('is-ringing');
+            void target.getBoundingClientRect();
+            target.classList.add('is-ringing');
+        }
+        window.clearTimeout(ringTimer);
+        ringTimer = window.setTimeout(() => root.querySelectorAll('.is-ringing').forEach(node => node.classList.remove('is-ringing')), 1900);
+    }
+    let ringTimer;
     function centerCurrentFlower() {
         if (!zoomed || (compact.matches && !mapDialog.open))
             return;
@@ -168,6 +224,7 @@
         const position = compact.matches && preservePage ? pagePosition() : null;
         playChord(id);
         clearArrival();
+        misses = 0;
         if (remember && trail.current !== id)
             trail.history.push(trail.current);
         trail.history = trail.history.slice(-100);
@@ -181,6 +238,7 @@
         render();
         if (center)
             centerCurrentFlower();
+        ring(id);
         if (position)
             restorePage(position);
     }
@@ -197,11 +255,18 @@
         const unlocked = syncBonus();
         visit(id);
         const arrival = id === data.ending ? 'ending' : id === data.start && previous.id !== data.start ? 'loop' : null;
-        notice = () => unlocked ? t('Every song is lit. A hidden echo has appeared beside the ending.', '所有歌曲都已点亮。终点旁出现了一段隐藏的回响。') : arrival === 'loop' ? t('Back to the beginning. Your trail remains.', '又回到最初。走过的路还在。') : t('Found: ', '找到了：') + songs.get(id).title + (id === data.ending ? t(' · The ending.', ' · 终点。') : '');
+        const lit = trail.found.filter(song => song !== data.bonus).length, total = data.nodes.length - (data.bonus ? 1 : 0);
+        notice = () => unlocked ? t('Every song is lit. A hidden echo has appeared beside the ending.', '所有歌曲都已点亮。终点旁出现了一段隐藏的回响。') : arrival === 'loop' ? t('Back to the beginning. Your trail remains.', '又回到最初。走过的路还在。') : t('Found: ', '找到了：') + songs.get(id).title + (id === data.ending ? t(' · The ending.', ' · 终点。') : isNew ? ` · ${lit} / ${total}` : '');
         feedbackKind = 'success';
+        feedbackSong = id;
         render();
         animateArrival(arrival || 'song', previous.id, id, isNew, unlocked);
-        focusClue();
+        focusAfterAnswer();
+        // Focus stays in the field on a desktop, so say the new clue aloud; a touch player's focus lands on the heading instead.
+        if (finePointer.matches && !form.hidden) {
+            announcer.textContent = '';
+            window.setTimeout(() => { announcer.textContent = t(songs.get(id).clue.en, songs.get(id).clue.zh); }, 60);
+        }
     }
     function acknowledgeOpen(answer) {
         notice = () => t(`You found ${answer.title}. Its next clue is still blank; explore another branch for now.`, `接上了《${answer.title}》。后续谜面暂空，可以先探索其他分支。`);
@@ -236,7 +301,7 @@
         for (const [side, ids] of [['in', incoming], ['out', outgoing]]) {
             const x = side === 'in' ? 42 : 318;
             if (ids.length)
-                neighborhood.append(element('text', { x: String(x), y: '16', 'text-anchor': 'middle', class: 'echo-focus-caption' }, side === 'in' ? t('FROM', '来路') : t('ONWARD', '出路')));
+                neighborhood.append(element('text', { x: String(x), y: String(Math.max(16, 115 - (ids.length - 1) * 32 - 50)), 'text-anchor': 'middle', class: 'echo-focus-caption' }, side === 'in' ? t('FROM', '来路') : t('ONWARD', '出路')));
             ids.forEach((id, i) => {
                 const next = songs.get(id), found = trail.found.includes(id);
                 const y = 115 + (i - (ids.length - 1) / 2) * 64;
@@ -252,9 +317,9 @@
                 }
                 else {
                     group.setAttribute('aria-label', t('Song still to discover', '尚未接上的歌曲'));
-                    group.append(element('circle', { r: '15', class: 'echo-focus-unknown' }), element('text', { 'text-anchor': 'middle', y: '5', class: 'echo-focus-question' }, '?'));
+                    group.append(element('circle', { r: '15', class: 'echo-focus-unknown' }), element('text', { 'text-anchor': 'middle', y: '6', class: 'echo-focus-question' }, '?'));
                 }
-                const foreign = element('foreignObject', { x: '-40', y: '22', width: '80', height: '37' });
+                const foreign = element('foreignObject', { x: '-42', y: '22', width: '84', height: '42' });
                 const label = document.createElementNS('http://www.w3.org/1999/xhtml', 'span');
                 label.className = 'echo-focus-label';
                 label.textContent = found ? next.title : t('Not found', '未接上');
@@ -265,6 +330,23 @@
         }
         if (!outgoing.length)
             neighborhood.append(element('text', { x: '318', y: '120', 'text-anchor': 'middle', class: 'echo-focus-caption' }, song.id === data.ending ? t('ENDING', '终点') : t('END OF PATH', '支线尽头')));
+    }
+    // The keyboard spans the chord range (C3-C5). The current chord is lit in the song's colour; keys that other found songs
+    // have used keep a faint warm trace, so the keyboard slowly fills with the harmony the player has gathered.
+    function renderKeys(song) {
+        const keys = root.querySelector('[data-keys]');
+        const chord = new Set(song.presentation.chord.midi), heard = new Map();
+        for (const id of trail.found)
+            if (id !== song.id)
+                for (const note of songs.get(id).presentation.chord.midi)
+                    heard.set(note, (heard.get(note) || 0) + 1);
+        keys.classList.remove(...flowers.map((_, i) => 'bloom-' + i));
+        keys.classList.add('bloom-' + flowerFamily(song));
+        keys.querySelectorAll('[data-midi]').forEach(key => {
+            const note = Number(key.dataset.midi);
+            key.classList.toggle('is-chord', chord.has(note));
+            key.style.setProperty('--heat', String(Math.min(1, (heard.get(note) || 0) / 6).toFixed(2)));
+        });
     }
     function followNeighbor(target) {
         const node = target.closest('[data-focus-node]');
@@ -291,12 +373,14 @@
         heading.textContent = song.title;
         heading.tabIndex = -1;
         root.querySelector('[data-now-label]').textContent = compact.matches ? song.title : t('NOW ECHOING', '正在回响');
-        const songIndex = data.nodes.findIndex(n => n.id === song.id);
         const family = flowerFamily(song);
         const emblem = root.querySelector('[data-clue-flower]');
-        emblem.className = 'echo-clue-flower bloom-' + family;
+        emblem.classList.remove(...flowers.map((_, i) => 'bloom-' + i));
+        emblem.classList.add('bloom-' + family);
+        // The song's own colour tints its page: the clue column, the answer chip and, below, the map's lantern.
+        cluePanel.classList.remove(...flowers.map((_, i) => 'bloom-' + i));
+        cluePanel.classList.add('bloom-' + family);
         root.querySelector('[data-clue-art]').src = 'assets/echo-flower-' + song.presentation.flower + '.webp';
-        root.querySelector('[data-song-number]').textContent = epilogue ? '✧' : String(songIndex + 1).padStart(2, '0');
         const quote = document.getElementById('echo-quote');
         const quotedClue = song.clue_format === 'quote';
         const quoteText = quotedClue ? t(song.clue.en, song.clue.zh) : song.quote;
@@ -308,6 +392,7 @@
         clue.textContent = t(song.clue.en, song.clue.zh);
         clue.hidden = quotedClue;
         renderNeighborhood(song);
+        renderKeys(song);
         const remaining = song.next.filter(id => !trail.edges.includes(song.id + ':' + id)).length;
         const total = song.next.length, explored = total - remaining;
         let branch = epilogue ? t('A HIDDEN ECHO · THANK YOU FOR LISTENING', '隐藏回响 · 谢谢你听到这里') : deadEnd ? t('DEAD END · EXPLORE ANOTHER BRANCH', '死胡同 · 换一条路继续') : ending ? t('ENDING FOUND', '已抵达终点') : total ?
@@ -316,6 +401,12 @@
         if (song.open_answers?.length)
             branch += '\n' + t(`${song.open_answers.length} answer has no next clue yet`, `另有 ${song.open_answers.length} 个答案，后续暂空`);
         document.getElementById('echo-branch').textContent = branch;
+        // One pip per outgoing path, lit once walked: the exits of this song at a glance.
+        document.getElementById('echo-pips').replaceChildren(...song.next.map(id => {
+            const pip = document.createElement('i');
+            pip.className = trail.edges.includes(song.id + ':' + id) ? 'is-walked' : '';
+            return pip;
+        }));
         form.hidden = ending || deadEnd || epilogue;
         document.getElementById('echo-dead-end').hidden = !(deadEnd || epilogue);
         document.getElementById('echo-ending').hidden = !ending;
@@ -323,6 +414,10 @@
         document.querySelector('[data-back]').disabled = !trail.history.length;
         feedback.textContent = notice();
         feedback.dataset.kind = feedbackKind;
+        feedback.classList.remove(...flowers.map((_, i) => 'bloom-' + i));
+        if (feedbackKind === 'success' && songs.has(feedbackSong))
+            feedback.classList.add('bloom-' + flowerFamily(songs.get(feedbackSong)));
+        document.querySelector('#echo-hint summary').classList.toggle('is-nudged', misses >= 2 && !hint.open);
         input.setAttribute('aria-invalid', String(feedbackKind === 'error'));
         renderSound();
         document.getElementById('echo-hint-text').textContent = t(song.hint.en, song.hint.zh);
@@ -397,26 +492,37 @@
                 node.removeAttribute('aria-pressed');
             }
         });
-        const relatedRoutes = [];
+        const relatedRoutes = [], walkedRoutes = [];
         root.querySelectorAll('[data-from]').forEach(edge => {
             const found = trail.edges.includes(edge.dataset.from + ':' + edge.dataset.to);
-            const outgoing = edge.dataset.from === song.id;
+            const outgoing = edge.dataset.from === song.id, incoming = edge.dataset.to === song.id;
             edge.classList.toggle('is-found', found);
             edge.classList.toggle('is-current', found && outgoing);
             edge.classList.toggle('is-next', !found && outgoing);
-            edge.classList.toggle('is-incoming', edge.dataset.to === song.id);
-            edge.setAttribute('marker-end', outgoing ? 'url(#echo-arrow-active)' : 'url(#echo-arrow)');
+            edge.classList.toggle('is-incoming', incoming);
+            edge.setAttribute('marker-end', 'url(#echo-arrow' + (outgoing ? '-active' : incoming ? '-incoming' : found ? '-walked' : '') + ')');
             const route = edge.parentElement;
-            const related = outgoing || edge.dataset.to === song.id;
+            route.querySelector('.echo-edge-glow').classList.toggle('is-found', found);
+            const related = outgoing || incoming;
             route.classList.toggle('is-related', related);
             if (related)
                 relatedRoutes.push(route);
+            else if (found)
+                walkedRoutes.push(route);
         });
-        const glow = root.querySelector('[data-travel-glow]');
-        // Related paths sit above crossings, while labels and nodes stay above every path.
+        // Light gathers where the player has been; the lantern follows the current song.
+        root.querySelectorAll('[data-aura]').forEach(aura => aura.classList.toggle('is-found', trail.found.includes(aura.dataset.aura) && (aura.dataset.aura !== data.bonus || bonusUnlocked)));
+        // Four steps, not a slope: a new song then re-fades every older aura only when a tier changes.
+        const lit = trail.found.length;
+        root.style.setProperty('--echo-aura-k', lit <= 22 ? '1' : lit <= 27 ? '.85' : lit <= 32 ? '.72' : '.6');
+        const spot = root.querySelector('[data-spotlight]'), at = songs.get(trail.current).position;
+        spot.style.transform = `translate(${at[0]}px,${at[1]}px)`;
+        // Ghost routes keep their document order; walked threads rise above them and the current song's paths above both.
+        // The aura layer sits over every route, so the haze softly lights the threads it covers.
         relatedRoutes.sort((a, b) => Number(a.querySelector('[data-from]').dataset.from === song.id) - Number(b.querySelector('[data-from]').dataset.from === song.id));
-        for (const route of relatedRoutes)
-            glow.before(route);
+        const layer = root.querySelector('[data-aura-layer]');
+        for (const route of [...walkedRoutes, ...relatedRoutes])
+            layer.before(route);
     }
     document.getElementById('echo-form').addEventListener('submit', event => {
         event.preventDefault();
@@ -435,11 +541,17 @@
         }
         if (song.dead_ends?.some(n => norm(n) === guess))
             notice = () => t('You found a side branch with no next clue here; revisit another song below.', '你接上了一条支线。这里没有下一条谜面，可以在下方回到其他歌。');
-        else
+        else {
+            misses++;
             notice = () => t('That song doesn’t follow this clue. Try another, or open a hint.', '这首歌没有接上当前线索。可以再试一首，或打开提示。');
+        }
         feedbackKind = 'error';
         render();
         input.select();
+        const row = input.parentElement;
+        row.classList.remove('is-shaking');
+        void row.offsetWidth;
+        row.classList.add('is-shaking');
     });
     document.querySelector('[data-back]').addEventListener('click', () => { const id = trail.history.pop(); if (id)
         visit(id, false); });
@@ -453,9 +565,11 @@
     } });
     document.querySelector('[data-return-branch]').addEventListener('click', () => { const id = trail.history.pop() || data.nodes.find(n => n.next.includes(trail.current))?.id || data.start; visit(id, false); });
     document.querySelector('[data-go-start]').addEventListener('click', () => visit(data.start));
-    document.querySelector('[data-reset]').addEventListener('click', () => { clearArrival(); piano.stop(); trail = fresh(); notice = () => ''; feedbackKind = ''; hint.open = false; reveal.open = false; input.value = ''; document.querySelector('.echo-reset').open = false; save(); render(); });
-    hint.addEventListener('toggle', () => { if (hint.open)
-        reveal.open = false; });
+    document.querySelector('[data-reset]').addEventListener('click', () => { clearArrival(); piano.stop(); trail = fresh(); misses = 0; notice = () => ''; feedbackKind = ''; hint.open = false; reveal.open = false; input.value = ''; document.querySelector('.echo-reset').open = false; save(); render(); });
+    hint.addEventListener('toggle', () => { if (hint.open) {
+        reveal.open = false;
+        hint.querySelector('summary').classList.remove('is-nudged');
+    } });
     reveal.addEventListener('toggle', () => { if (reveal.open)
         hint.open = false; render(); });
     root.querySelector('[data-sound]').addEventListener('click', () => {
@@ -472,7 +586,7 @@
         catch { }
         renderSound();
     });
-    root.querySelector('[data-replay]').addEventListener('click', () => playChord(trail.current));
+    root.querySelector('[data-replay]').addEventListener('click', () => { playChord(trail.current); ring(trail.current); });
     document.addEventListener('visibilitychange', () => { if (document.hidden)
         piano.stop();
     else
