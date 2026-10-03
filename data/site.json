@@ -231,6 +231,132 @@
       "img": "gallery/research/assets/hn-llm-research-cover.svg",
       "wheel_img": "gallery/research/assets/hn-llm-research-wheel.svg",
       "href": "https://simoncos-hn-llm-research.vercel.app/"
+    },
+    {
+      "id": "stock-watchdog",
+      "kind": {
+        "en": "App",
+        "zh": "应用"
+      },
+      "work_topic": "projects",
+      "date": "2026",
+      "title": {
+        "en": "Stock Watchdog",
+        "zh": "Stock Watchdog"
+      },
+      "desc": {
+        "en": "Watches A-share closes, southbound flows into Hong Kong and US public filings (13F, insider trades). Refreshes daily; research only, no trading.",
+        "zh": "盯 A 股收盘、港股通南向资金和美股公开披露（13F、内部人交易），每天自动更新。只做研究，不下单。"
+      },
+      "img": "gallery/assets/wip/stock-watchdog.webp"
+    },
+    {
+      "id": "daily-oracle",
+      "kind": {
+        "en": "App",
+        "zh": "应用"
+      },
+      "work_topic": "projects",
+      "date": "2026",
+      "title": {
+        "en": "Daily Oracle",
+        "zh": "Daily Oracle"
+      },
+      "desc": {
+        "en": "Draw a card each day, do the small real-world thing it asks, and log it. Over time a garden and a card collection fill up.",
+        "zh": "每天抽一张卡，去现实里做一件小事，回来记下。日子久了，花园和卡册会慢慢长满。"
+      },
+      "img": "gallery/assets/wip/daily-oracle.webp"
+    },
+    {
+      "id": "vocal-coach",
+      "kind": {
+        "en": "App",
+        "zh": "应用"
+      },
+      "work_topic": "projects",
+      "date": "2026",
+      "title": {
+        "en": "Vocal Coach",
+        "zh": "Vocal Coach"
+      },
+      "desc": {
+        "en": "A phone app for singing in tune: measure your range, sing to target notes, and see live whether you are sharp or flat.",
+        "zh": "练音准的手机应用：测音域，跟着目标音唱，实时看自己偏高还是偏低。"
+      },
+      "img": "gallery/assets/wip/vocal-coach.webp"
+    },
+    {
+      "id": "hiking-route-planner",
+      "kind": {
+        "en": "App",
+        "zh": "应用"
+      },
+      "work_topic": "projects",
+      "date": "2026",
+      "title": {
+        "en": "Hiking Planner",
+        "zh": "徒步规划器"
+      },
+      "desc": {
+        "en": "Import a route, read it segment by segment (distance, climb, resupply), plan the trip, and log it afterwards.",
+        "zh": "导入路线，按分段看距离、爬升和补给，排好行程，走完再记一笔。"
+      },
+      "img": "gallery/assets/wip/hiking.webp"
+    },
+    {
+      "id": "paper-research-platform",
+      "kind": {
+        "en": "App",
+        "zh": "应用"
+      },
+      "work_topic": "projects",
+      "date": "2026",
+      "title": {
+        "en": "Paper Research Platform",
+        "zh": "Paper Research Platform"
+      },
+      "desc": {
+        "en": "Ask the same questions of a stack of papers. A model answers each with quoted evidence; you check the answers and export a workbook.",
+        "zh": "给一批论文提同一组问题，模型逐篇作答并附原文证据，人工核对后导出成表。"
+      },
+      "img": "gallery/assets/wip/paper-research.webp"
+    },
+    {
+      "id": "wuxia",
+      "kind": {
+        "en": "Game",
+        "zh": "游戏"
+      },
+      "work_topic": "games",
+      "date": "2026",
+      "title": {
+        "en": "San Geng Zhang",
+        "zh": "三更账"
+      },
+      "desc": {
+        "en": "A wuxia RPG prototype: walk the inn and the roads around it, question people, pin clues to a board, and confront the suspect.",
+        "zh": "武侠 RPG 原型：在醉仙楼一带走动、问话、收集线索，把线索摆上线索板，当面对质。"
+      },
+      "img": "gallery/assets/wip/wuxia.webp"
+    },
+    {
+      "id": "murder-mystery-table",
+      "kind": {
+        "en": "Game",
+        "zh": "游戏"
+      },
+      "work_topic": "games",
+      "date": "2026",
+      "title": {
+        "en": "Murder Mystery Table",
+        "zh": "谜案圆桌"
+      },
+      "desc": {
+        "en": "A murder mystery for one player: pick a script and a seat, and an AI host and AI players take you through the search, the discussion, the vote and the reveal.",
+        "zh": "一个人也能玩的剧本杀：选好剧本和角色，AI 主持人和其他角色陪你搜证、讨论、投票、复盘。"
+      },
+      "img": "gallery/assets/wip/murder-mystery.webp"
     }
   ],
   "featured": [

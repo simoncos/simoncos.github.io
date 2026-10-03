@@ -142,7 +142,9 @@ def home_panels(site: dict[str, Any], articles: dict[str, dict[str, Any]]) -> li
 
 def home_rows(site: dict[str, Any], articles: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     rows = []
-    for work in site["works"]:
+    # A work without an href is in progress: shown on Work, but not offered
+    # on the home page as something to open.
+    for work in (work for work in site["works"] if work.get("href")):
         rows.append({
             "date": work["date"],
             "title": work["title"],
@@ -298,11 +300,12 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
         ]))
 
     # Each type shows one picture: the work named by the type's `wheel_work`, else
-    # its newest. Three laps of the types make a ring big enough to read as a
-    # wheel.
+    # its newest finished one. Three laps of the types make a ring big enough to
+    # read as a wheel.
     def cover_work(topic: dict[str, Any]) -> dict[str, Any]:
         works = by_topic[topic["id"]]
-        return next((work for work in works if work["id"] == topic.get("wheel_work")), works[0])
+        return next((work for work in works if work["id"] == topic.get("wheel_work")),
+                    next((work for work in works if work.get("href")), works[0]))
 
     cards = []
     ring = len(topics) * 3
@@ -328,16 +331,30 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
             f'{bi_value(other["title"])}</a>'
             for other in topics
         )
-        items = []
-        for work in works:
-            items.append(
-                f'                <a class="wcard"{href_attrs(work["href"])}>'
+        def card(work: dict[str, Any]) -> str:
+            # A work in progress has no page yet, so its card is not a link.
+            done = bool(work.get("href"))
+            tag, attrs = ("a", href_attrs(work["href"])) if done else ("div", "")
+            when = esc(work["date"][:4]) if done else f'{esc(work["date"][:4])} · {bi("In progress", "在做")}'
+            return (
+                f'                <{tag} class="wcard{"" if done else " is-wip"}"{attrs}>'
                 f'<span class="wcard-img"><img src="{esc(work["img"])}" alt="" decoding="async" loading="lazy"></span>'
                 '<span class="wcard-text">'
                 f'<span class="wcard-title">{bi_value(work.get("work_title") or work["title"])}</span>'
                 f'<span class="wcard-desc">{bi_value(work["desc"])}</span>'
-                f'<span class="wcard-year num">{esc(work["date"][:4])}</span></span></a>'
+                f'<span class="wcard-year num">{when}</span></span></{tag}>'
             )
+
+        done = [work for work in works if work.get("href")]
+        wip = [work for work in works if not work.get("href")]
+        grids = []
+        if done:
+            grids += [f'        <div class="wgrid" data-n="{min(len(done), 3)}">', *map(card, done), "        </div>"]
+        if wip:
+            grids += [
+                f'        <h3 class="wgroup-h">{bi("In progress", "在做")}</h3>',
+                f'        <div class="wgrid" data-n="{min(len(wip), 3)}">', *map(card, wip), "        </div>",
+            ]
         related = ""
         if topic.get("related"):
             links = "".join(
@@ -360,9 +377,7 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
             f'            <h2 id="topic-{topic["id"]}">{bi_value(topic["title"])}</h2>',
             f'            <p>{bi_value(topic["desc"])}</p>',
             "        </div>",
-            f'        <div class="wgrid" data-n="{min(len(works), 3)}">',
-            *items,
-            "        </div>",
+            *grids,
             *([related] if related else []),
             "    </section>",
         ]))
@@ -412,9 +427,19 @@ def render_projects(config: dict[str, Any], site: dict[str, Any]) -> str:
     page = page_config(config, "projects.html")
     topic = next(topic for topic in site["work_topics"] if topic["id"] == "projects")
     apps = sorted((work for work in site["works"] if work["work_topic"] == topic["id"]),
-                  key=lambda work: work["date"], reverse=True)
+                  key=lambda work: (bool(work.get("href")), work["date"]), reverse=True)
     rows = []
     for work in apps:
+        if not work.get("href"):
+            rows.append(
+                '        <div class="prow is-wip">'
+                '<span class="prow-main">'
+                f'<span class="prow-title">{bi_value(work["title"])}</span>'
+                f'<span class="prow-line">{bi_value(work["desc"])}</span>'
+                f'<span class="prow-facts"><span>{bi("In progress", "在做")}</span><span>{esc(work["date"][:4])}</span></span></span>'
+                f'<span class="prow-cover"><img src="{esc(work["img"])}" alt="" decoding="async" loading="lazy"></span></div>'
+            )
+            continue
         project = next((project for project in site["projects"] if project["href"] == work["href"]), {})
         facts = (f'<span class="prow-status"><span class="live-dot" aria-hidden="true"></span>{bi_value(project["status"])}</span>'
                  f'<span>{esc(project["years"])}</span><span>{bi_value(project["tags"])}</span>') if project else (
