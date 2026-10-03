@@ -43,12 +43,16 @@ The echoes themselves have become an echo.
 
 ## Projects still growing
 
-There are seven cards on the Work page that you can't click into yet. These are things I have been working on for the past few months that are not yet ready to show:
+There are eleven cards on the Work page that you can't click into yet. These are things I have been working on for the past few months that are not yet ready to show:
 
 - **Daily Oracle**: draw a card each day, go do a small thing in the real world, and come back to log it. Over time the card collection grows and the garden comes into full bloom.
 - **Vocal Coach**: a phone app for singing in tune: sing along to a target note and see live whether you are sharp or flat. The piano in Endless Echoes and in the intro video first came from the real samples I found while making this app.
 - **Paper Research Platform**: ask the same set of questions of a batch of papers; a model answers for each paper with evidence from the text, and after a human check the results export as a table.
 - **Hiking Planner**: import a route, read distance, climb and resupply segment by segment, and log the hike once it is done.
+- **WeChat Chat Exporter**: export your own WeChat chats, on your own computer, into searchable text where every message keeps its time and where it came from.
+- **Birdie**: a phone app for keeping pet birds, with a profile for each bird and one diary for weight, food and mood.
+- **Muscle & Joint Log**: for everyday neck, back and joint strain: check first for signs that mean see a doctor, log how it changes day by day, and bring a summary to the appointment.
+- **Photo Curator**: import a batch of photos, sort them into album ideas, and get help picking the frames and putting them in order.
 - **The Midnight Ledger**: a wuxia mystery RPG prototype: walk around a small town, question people, collect clues, and confront the suspect face to face.
 - **Murder Mystery Table**: a murder mystery you can play alone, with an AI host and AI characters who search for evidence, discuss and vote with you.
 - An unannounced project, in agentic investment research.
