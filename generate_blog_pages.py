@@ -266,6 +266,11 @@ MONTH_NAMES = (
 )
 
 
+def tag_slug(tag):
+    # Addresses use the English label (#topic-outdoors), not the frontmatter key (out).
+    return TAG_LABELS[tag][0].lower() if tag in TAG_LABELS else tag
+
+
 def tag_label(tag, language):
     en, zh = TAG_LABELS.get(tag, (tag, tag))
     return zh if language == 'zh' else en
@@ -1372,7 +1377,7 @@ def build_post_foot(post, article_group, article_groups, file_index, group_map, 
 
     if post['tags']:
         tags = ''.join(
-            f'<a class="tag" href="../blogs.html#topic-{quote(tag)}">{esc(tag_label(tag, language))}</a>'
+            f'<a class="tag" href="../blogs.html#topic-{quote(tag_slug(tag))}">{esc(tag_label(tag, language))}</a>'
             for tag in post['tags']
         )
         parts.append(f'<div class="article-tags"><h2 class="k">{text["tags"]}</h2>{tags}</div>')
@@ -1914,7 +1919,7 @@ def render_articles_main(article_groups, series_meta):
     ]
     for tag in tag_order:
         chips.append(
-            f'<button class="chip" type="button" data-tag="{esc(tag)}" aria-pressed="false">'
+            f'<button class="chip" type="button" data-tag="{esc(tag)}" data-slug="{esc(tag_slug(tag))}" aria-pressed="false">'
             f'{bi(*TAG_LABELS.get(tag, (tag, tag)))} <span class="seg-n">{counts[tag]}</span></button>'
         )
     chips.append(
@@ -1984,7 +1989,7 @@ def render_articles_main(article_groups, series_meta):
         render_date_index({key: len(value) for key, value in months.items()}),
         '            <p class="visually-hidden" role="status" data-status></p>',
         '        </div>',
-        '        <div class="series-view" data-view-panel="series" id="reading-paths">',
+        '        <div class="series-view" data-view-panel="series" id="series">',
         *series_cards,
         '        </div>',
         '    </main>',

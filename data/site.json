@@ -6,7 +6,7 @@
         "en": "App",
         "zh": "应用"
       },
-      "work_topic": "projects",
+      "work_topic": "apps",
       "home_topic": "build",
       "date": "2026-05-06",
       "title": {
@@ -190,7 +190,7 @@
         "en": "App",
         "zh": "应用"
       },
-      "work_topic": "projects",
+      "work_topic": "apps",
       "home_topic": "build",
       "date": "2026-10-02",
       "title": {
@@ -214,7 +214,7 @@
         "en": "App",
         "zh": "应用"
       },
-      "work_topic": "projects",
+      "work_topic": "apps",
       "home_topic": "build",
       "date": "2026-10-02",
       "single": true,
@@ -240,7 +240,7 @@
         "en": "App",
         "zh": "应用"
       },
-      "work_topic": "projects",
+      "work_topic": "apps",
       "date": "2026",
       "title": {
         "en": "Unannounced project",
@@ -258,7 +258,7 @@
         "en": "App",
         "zh": "应用"
       },
-      "work_topic": "projects",
+      "work_topic": "apps",
       "date": "2026",
       "title": {
         "en": "Daily Oracle",
@@ -276,7 +276,7 @@
         "en": "App",
         "zh": "应用"
       },
-      "work_topic": "projects",
+      "work_topic": "apps",
       "date": "2026",
       "title": {
         "en": "Vocal Coach",
@@ -294,7 +294,7 @@
         "en": "App",
         "zh": "应用"
       },
-      "work_topic": "projects",
+      "work_topic": "apps",
       "date": "2026",
       "title": {
         "en": "Hiking Planner",
@@ -312,7 +312,7 @@
         "en": "App",
         "zh": "应用"
       },
-      "work_topic": "projects",
+      "work_topic": "apps",
       "date": "2026",
       "title": {
         "en": "Paper Research Platform",
@@ -330,7 +330,7 @@
         "en": "App",
         "zh": "应用"
       },
-      "work_topic": "projects",
+      "work_topic": "apps",
       "date": "2026",
       "title": {
         "en": "WeChat Chat Exporter",
@@ -348,7 +348,7 @@
         "en": "App",
         "zh": "应用"
       },
-      "work_topic": "projects",
+      "work_topic": "apps",
       "date": "2026",
       "title": {
         "en": "Birdie",
@@ -366,7 +366,7 @@
         "en": "App",
         "zh": "应用"
       },
-      "work_topic": "projects",
+      "work_topic": "apps",
       "date": "2026",
       "title": {
         "en": "Muscle & Joint Log",
@@ -384,7 +384,7 @@
         "en": "App",
         "zh": "应用"
       },
-      "work_topic": "projects",
+      "work_topic": "apps",
       "date": "2026",
       "title": {
         "en": "Photo Curator",
@@ -467,7 +467,7 @@
   ],
   "work_topics": [
     {
-      "id": "projects",
+      "id": "apps",
       "wheel_work": "hn-llm-research",
       "title": {
         "en": "Apps",

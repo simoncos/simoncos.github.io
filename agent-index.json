@@ -35,11 +35,11 @@
       "id": "work",
       "label": "Work",
       "url": "https://simoncos.github.io/gallery.html",
-      "purpose": "One view per type: App, Games, Talks, Research and Music."
+      "purpose": "One view per type: Apps, Games, Talks, Research and Music."
     },
     {
       "id": "projects",
-      "label": "App (应用)",
+      "label": "Apps (应用)",
       "url": "https://simoncos.github.io/projects.html",
       "purpose": "Every app in one list, live apps first, then those in progress; each opens to its own page or site."
     },

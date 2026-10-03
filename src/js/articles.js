@@ -1,9 +1,9 @@
 "use strict";
 // Articles: the list (search, tag filter, month groups, excerpts that open in
 // place), the month index its headings open, and the series view (a route of
-// parts per series). Old links keep working: #reading-paths and #series-<id>
-// open the series view, #topics and #topic-<tag> the list; #2012-09 lands on
-// a month.
+// parts per series). #series and #series-<id> open the series view,
+// #topic-<slug> filters the list by a tag's English label (#topic-outdoors);
+// #2012-09 lands on a month.
 (function () {
     const main = document.querySelector('[data-articles]');
     if (!main)
@@ -61,14 +61,21 @@
             return;
         shownEl.textContent = String(view === 'list' ? visibleRows().length : cards.length);
     }
+    // A tag's address name (its English label), and back.
+    function slugOf(key) {
+        return chips.find((chip) => chip.dataset.tag === key)?.dataset.slug || key;
+    }
+    function tagFor(name) {
+        return chips.find((chip) => chip.dataset.slug === name)?.dataset.tag || 'all';
+    }
     function setTag(next, record) {
-        tag = chips.some((chip) => chip.dataset.tag === next) ? next : 'all';
+        tag = tagFor(next);
         chips.forEach((chip) => chip.setAttribute('aria-pressed', chip.dataset.tag === tag ? 'true' : 'false'));
         filter(record);
         if (record)
-            setHash(tag === 'all' ? '' : `topic-${tag}`);
+            setHash(tag === 'all' ? '' : `topic-${slugOf(tag)}`);
     }
-    chips.forEach((chip) => chip.addEventListener('click', () => setTag(chip.dataset.tag || 'all', true)));
+    chips.forEach((chip) => chip.addEventListener('click', () => setTag(chip.dataset.slug || 'all', true)));
     if (search)
         search.addEventListener('input', () => filter(true));
     function setOpen(row) {
@@ -264,7 +271,7 @@
         viewButtons.forEach((button) => button.setAttribute('aria-pressed', button.dataset.view === view ? 'true' : 'false'));
         syncCount();
         if (record)
-            setHash(view === 'series' ? 'reading-paths' : tag === 'all' ? '' : `topic-${tag}`);
+            setHash(view === 'series' ? 'series' : tag === 'all' ? '' : `topic-${slugOf(tag)}`);
     }
     viewButtons.forEach((button) => {
         button.addEventListener('click', () => setView(button.dataset.view === 'series' ? 'series' : 'list', true));
@@ -282,7 +289,7 @@
     });
     function fromHash() {
         const hash = decodeURIComponent(window.location.hash.slice(1));
-        if (hash === 'reading-paths') {
+        if (hash === 'series') {
             setView('series', false);
         }
         else if (hash.startsWith('series-')) {

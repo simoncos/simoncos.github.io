@@ -15,7 +15,7 @@
         articles: { en: 'Articles', zh: '文章' },
         reading: { en: 'Reading', zh: '阅读' },
         work: { en: 'Work', zh: '作品' },
-        projects: { en: 'Projects', zh: '项目' },
+        projects: { en: 'Apps', zh: '应用' },
         toolkit: { en: 'Sleep Toolkit', zh: 'Sleep Toolkit' },
         music: { en: 'Music', zh: '音乐' },
         favorites: { en: 'Favorites', zh: '收藏' },

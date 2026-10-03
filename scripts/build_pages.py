@@ -443,7 +443,7 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
 
 def render_projects(config: dict[str, Any], site: dict[str, Any]) -> str:
     page = page_config(config, "projects.html")
-    topic = next(topic for topic in site["work_topics"] if topic["id"] == "projects")
+    topic = next(topic for topic in site["work_topics"] if topic["id"] == "apps")
     apps = sorted((work for work in site["works"] if work["work_topic"] == topic["id"]),
                   key=lambda work: (bool(work.get("href")), work["date"]), reverse=True)
     rows = []
