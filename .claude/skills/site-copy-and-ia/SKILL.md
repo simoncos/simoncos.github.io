@@ -20,7 +20,7 @@ Use this skill to keep the personal site reader-facing, broad enough, and semant
 
 - Index: Selected work, the newest articles with a topic filter, and a short changelog. It should help readers choose a path, not explain implementation.
 - Articles: long-form writing, with a list view (search, topics) and a series view (structured reading arcs).
-- Work: one view per type — App, Games, Talks, Research, Music (`work_topics` in `data/site.json`). Each type's wheel card shows one picture: the work whose `id` the type's optional `cover` names, else its newest work.
+- Work: one view per type — App, Games, Talks, Research, Music (`work_topics` in `data/site.json`). Each type's wheel card shows one picture: the work whose `id` the type's optional `wheel_work` names, else its newest work.
 - Projects: maintained tools and deployed systems; each opens as its own board or site. `projects.html` lists them all.
 - Favorites: every five-star Douban mark in four categories; see the `favorites-column` skill.
 - About: a short profile, the motto, and contacts.

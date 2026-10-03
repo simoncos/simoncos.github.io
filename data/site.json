@@ -229,6 +229,7 @@
         "zh": "追踪 Hacker News 对 14 家 AI 公司模型发布的讨论，查看原帖、讨论关联与覆盖范围。研究持续进行中。"
       },
       "img": "gallery/research/assets/hn-llm-research-cover.svg",
+      "wheel_img": "gallery/research/assets/hn-llm-research-wheel.svg",
       "href": "https://simoncos-hn-llm-research.vercel.app/"
     }
   ],
@@ -267,6 +268,7 @@
   "work_topics": [
     {
       "id": "projects",
+      "wheel_work": "hn-llm-research",
       "title": {
         "en": "App",
         "zh": "应用"
@@ -343,6 +345,7 @@
     },
     {
       "id": "research",
+      "wheel_work": "sleep",
       "title": {
         "en": "Research",
         "zh": "研究"
