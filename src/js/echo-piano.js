@@ -7,8 +7,10 @@ var EchoPiano;
         constructor(onStatus) {
             this.onStatus = onStatus;
             this.context = null;
+            this.decoder = null;
+            this.preparation = null;
             this.buffers = new Map();
-            this.decoded = new Set();
+            this.decoded = new Map();
             this.voices = new Map();
             this.request = 0;
             this.status = 'ready';
@@ -24,11 +26,40 @@ var EchoPiano;
                     return response.arrayBuffer();
                 })
                     .then(bytes => context.decodeAudioData(bytes))
-                    .then(buffer => { this.decoded.add(root); return buffer; })
+                    .then(buffer => { this.decoded.set(root, buffer); return buffer; })
                     .catch(error => { this.buffers.delete(root); throw error; });
                 this.buffers.set(root, pending);
             }
             return pending;
+        }
+        prepare() {
+            if (this.decoded.size === EchoPiano.roots.length)
+                return Promise.resolve(true);
+            if (this.preparation)
+                return this.preparation;
+            const Offline = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+            // Decode ahead of the gesture without opening an output device or playing audio.
+            // Older browsers can still use the normal interaction-time loading path.
+            if (!Offline)
+                return Promise.resolve(false);
+            try {
+                this.decoder ?? (this.decoder = new Offline(1, 1, 44100));
+            }
+            catch {
+                return Promise.resolve(false);
+            }
+            const request = this.request;
+            this.report('loading');
+            this.preparation = Promise.allSettled(EchoPiano.roots.map(root => this.load(root, this.decoder)))
+                .then(results => {
+                const ready = results.every(result => result.status === 'fulfilled');
+                // Background completion must not override a newer click, mute or retry.
+                if (request === this.request)
+                    this.report(ready ? 'ready' : 'failed');
+                return ready;
+            })
+                .finally(() => { this.preparation = null; });
+            return this.preparation;
         }
         async play(midis) {
             const request = ++this.request;
@@ -41,11 +72,17 @@ var EchoPiano;
                     return;
                 }
                 // Both context creation and resume start within the user's gesture (including iOS).
-                const context = this.context ?? (this.context = new Audio());
-                const resume = context.state === 'running' ? Promise.resolve() : context.resume();
+                const context = this.context ?? (this.context = new Audio({ latencyHint: 'interactive' }));
+                const resume = context.state === 'running' ? null : context.resume();
                 // Retire the previous chord together; rapid navigation must not stack harmonies.
                 this.releaseVoices();
                 const samples = midis.map(midi => EchoPiano.roots.reduce((best, n) => Math.abs(n - midi) < Math.abs(best - midi) ? n : best, EchoPiano.roots[0]));
+                const cached = samples.map(root => this.decoded.get(root));
+                if (!resume && cached.every(Boolean)) {
+                    // Schedule before the caller redraws the graph; a warm click has no await.
+                    this.sound(midis, samples, cached, context);
+                    return;
+                }
                 if (samples.some(root => !this.decoded.has(root)))
                     this.report('loading');
                 const [, buffers] = await Promise.all([resume, Promise.all(samples.map(root => this.load(root, context)))]);
@@ -54,31 +91,34 @@ var EchoPiano;
                     return;
                 if (context.state !== 'running')
                     throw new Error('Piano output suspended');
-                const now = context.currentTime + .01;
-                const level = .22 / Math.sqrt(midis.length);
-                for (let i = 0; i < midis.length; i++) {
-                    const source = context.createBufferSource(), gain = context.createGain();
-                    source.buffer = buffers[i];
-                    source.playbackRate.setValueAtTime(Math.pow(2, (midis[i] - samples[i]) / 12), now);
-                    // One shared start time: a simultaneous chord, never an arpeggio.
-                    // Scale per-note gain so four notes do not become four times as loud.
-                    gain.gain.setValueAtTime(.0001, now);
-                    gain.gain.linearRampToValueAtTime(level, now + .008);
-                    gain.gain.setValueAtTime(level, now + 1.05);
-                    gain.gain.exponentialRampToValueAtTime(.0001, now + 1.4);
-                    source.connect(gain);
-                    gain.connect(context.destination);
-                    this.voices.set(source, gain);
-                    source.onended = () => { this.voices.delete(source); source.disconnect(); gain.disconnect(); };
-                    source.start(now);
-                    source.stop(now + 1.42);
-                }
-                this.report('ready');
+                this.sound(midis, samples, buffers, context);
             }
             catch {
                 if (request === this.request)
                     this.report('failed');
             }
+        }
+        sound(midis, samples, buffers, context) {
+            const now = context.currentTime + .01;
+            const level = .22 / Math.sqrt(midis.length);
+            for (let i = 0; i < midis.length; i++) {
+                const source = context.createBufferSource(), gain = context.createGain();
+                source.buffer = buffers[i];
+                source.playbackRate.setValueAtTime(Math.pow(2, (midis[i] - samples[i]) / 12), now);
+                // One shared start time: a simultaneous chord, never an arpeggio.
+                // Scale per-note gain so four notes do not become four times as loud.
+                gain.gain.setValueAtTime(.0001, now);
+                gain.gain.linearRampToValueAtTime(level, now + .008);
+                gain.gain.setValueAtTime(level, now + 1.05);
+                gain.gain.exponentialRampToValueAtTime(.0001, now + 1.4);
+                source.connect(gain);
+                gain.connect(context.destination);
+                this.voices.set(source, gain);
+                source.onended = () => { this.voices.delete(source); source.disconnect(); gain.disconnect(); };
+                source.start(now);
+                source.stop(now + 1.42);
+            }
+            this.report('ready');
         }
         release(source, gain, now) {
             gain.gain.cancelScheduledValues(now);
