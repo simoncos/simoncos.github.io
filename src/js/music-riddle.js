@@ -5,6 +5,8 @@
     if (!root || !payload)
         return;
     const data = JSON.parse(payload.textContent), songs = new Map(data.nodes.map(n => [n.id, n]));
+    const flowers = ['poppy', 'blue', 'ivory', 'dahlia'];
+    const flowerFamily = (song) => flowers.indexOf(song.presentation.flower);
     const key = 'simoncos-' + data.id + '-v1';
     const t = (en, zh) => window.SITE_SHELL?.lang === 'zh' ? zh : en;
     const norm = (value) => value.normalize('NFKC').toLowerCase().replace(/[\s《》「」『』·.,，。!?！？’'"-]/g, '');
@@ -107,16 +109,14 @@
         button.setAttribute('aria-pressed', String(soundEnabled && soundStatus !== 'unavailable' && soundStatus !== 'failed'));
         button.setAttribute('aria-busy', String(soundStatus === 'loading'));
         root.querySelector('[data-sound-label]').textContent = soundStatus === 'unavailable' ? t('Sound unavailable', '音效不可用') : !soundEnabled ? t('Sound off', '音效：关') : soundStatus === 'loading' ? t('Loading piano…', '加载钢琴…') : soundStatus === 'failed' ? t('Retry sound', '重试音效') : t('Sound on', '音效：开');
-        button.title = t('A piano note when you discover or select a song', '发现或点击已点亮的歌曲时，播放钢琴音符');
+        button.title = t('A piano chord when you discover or select a song', '发现或点击已点亮的歌曲时，播放钢琴和弦');
     }
-    function playNote(id) {
+    function playChord(id) {
         if (!soundEnabled)
             return;
-        // Keep every cue inside Vocal Coach's C3–C5 sample coverage.
-        const notes = [48, 50, 52, 55, 57, 60, 62, 64, 67, 69, 72];
-        const index = data.nodes.findIndex(n => n.id === id);
-        if (index >= 0)
-            void piano.play(notes[index % notes.length]);
+        const song = songs.get(id);
+        if (song)
+            void piano.play(song.presentation.chord.midi);
     }
     function focusClue(opener) {
         if (compact.matches) {
@@ -177,7 +177,7 @@
     function visit(id, remember = true, center = true) {
         if (!trail.found.includes(id))
             return;
-        playNote(id);
+        playChord(id);
         clearArrival();
         if (remember && trail.current !== id)
             trail.history.push(trail.current);
@@ -224,15 +224,21 @@
         heading.textContent = song.title;
         heading.tabIndex = -1;
         const songIndex = data.nodes.findIndex(n => n.id === song.id);
-        const family = song.id === data.start ? 1 : ending ? 2 : songIndex % 4;
+        const family = flowerFamily(song);
         const emblem = root.querySelector('[data-clue-flower]');
         emblem.className = 'echo-clue-flower bloom-' + family;
-        root.querySelector('[data-clue-art]').src = 'assets/echo-flower-' + ['poppy', 'blue', 'ivory', 'dahlia'][family] + '.webp';
+        root.querySelector('[data-clue-art]').src = 'assets/echo-flower-' + song.presentation.flower + '.webp';
         root.querySelector('[data-song-number]').textContent = epilogue ? '✧' : String(songIndex + 1).padStart(2, '0');
         const quote = document.getElementById('echo-quote');
-        quote.replaceChildren(...(song.quote?.match(/[^，]+，?/g) || []).map(line => { const span = document.createElement('span'); span.textContent = line; return span; }));
-        quote.hidden = !song.quote;
-        document.getElementById('echo-clue').textContent = t(song.clue.en, song.clue.zh);
+        const quotedClue = song.clue_format === 'quote';
+        const quoteText = quotedClue ? t(song.clue.en, song.clue.zh) : song.quote;
+        // Chinese lyric phrases get deliberate line breaks; translations wrap naturally.
+        quote.replaceChildren(...(quoteText?.match(/[^，]+，?/g) || []).map(line => { const span = document.createElement('span'); span.textContent = line; return span; }));
+        quote.hidden = !quoteText;
+        quote.lang = quotedClue ? t('en', 'zh-Hans') : 'zh-Hans';
+        const clue = document.getElementById('echo-clue');
+        clue.textContent = t(song.clue.en, song.clue.zh);
+        clue.hidden = quotedClue;
         root.querySelector('[data-current-title]').textContent = song.title;
         root.querySelector('[data-current-preview]').textContent = song.quote || t(song.clue.en, song.clue.zh);
         const remaining = song.next.filter(id => !trail.edges.includes(song.id + ':' + id)).length;
@@ -283,7 +289,7 @@
             button.type = 'button';
             button.textContent = songs.get(id).title;
             button.setAttribute('aria-current', String(id === song.id));
-            button.className = 'bloom-' + (id === data.start ? 1 : id === data.ending ? 2 : data.nodes.findIndex(n => n.id === id) % 4);
+            button.className = 'bloom-' + flowerFamily(songs.get(id));
             button.addEventListener('click', () => { visit(id); focusClue(list.querySelector('[aria-current=true]')); });
             return button;
         }));
@@ -382,7 +388,7 @@
     root.querySelector('[data-sound]').addEventListener('click', () => {
         soundEnabled = soundStatus === 'failed' ? true : !soundEnabled;
         if (soundEnabled)
-            playNote(trail.current);
+            playChord(trail.current);
         else
             piano.stop();
         try {

@@ -10,6 +10,12 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / 'data/music-riddle.json'
 EVIDENCE_TYPES = {'author', 'cross-reference', 'archive', 'contextual-alias', 'provisional'}
 REVIEW_STATUSES = {'not-requested', 'pending', 'confirmed', 'corrected'}
+FLOWERS = ('poppy', 'blue', 'ivory', 'dahlia')
+
+
+def presentation(node):
+    """Stable fallback for older v1 puzzles; never derive art or sound from order."""
+    return node.get('presentation', {'flower': 'blue', 'chord': {'midi': [48, 55, 62]}})
 
 
 def normalize_answer(value):
@@ -75,6 +81,21 @@ def validate(data):
             bilingual(node.get(field), f'{node_id}.{field}')
         if 'quote' in node:
             text(node['quote'], f'{node_id}.quote')
+        require(node.get('clue_format', 'prose') in ('prose', 'quote'), f'{node_id}: unknown clue_format')
+        require(not (node.get('clue_format') == 'quote' and node.get('quote')), f'{node_id}: use either a quoted clue or a separate quote')
+        if 'presentation' in node:
+            art = node['presentation']
+            require(isinstance(art, dict), f'{node_id}.presentation: expected an object')
+            require(art.get('flower') in FLOWERS, f'{node_id}: unknown flower')
+            text(art.get('flower_reason'), f'{node_id}.flower_reason')
+            chord = art.get('chord')
+            require(isinstance(chord, dict), f'{node_id}.chord: expected an object')
+            for field in ('name', 'reason'):
+                text(chord.get(field), f'{node_id}.chord.{field}')
+            midi = chord.get('midi')
+            require(isinstance(midi, list) and 3 <= len(midi) <= 4, f'{node_id}.chord.midi: expected 3–4 simultaneous notes')
+            require(all(type(n) is int and 48 <= n <= 72 for n in midi), f'{node_id}.chord.midi: use integers inside C3–C5')
+            require(midi == sorted(set(midi)), f'{node_id}.chord.midi: notes must be unique and ascending')
         if 'terminal' in node:
             require(node['terminal'] in ('dead-end', 'epilogue'), f'{node_id}: unknown terminal kind')
             require(not node['next'] and node_id != data.get('ending'), f'{node_id}: a terminal branch cannot continue or be the ending')

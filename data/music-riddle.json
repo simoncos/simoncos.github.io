@@ -429,6 +429,20 @@
             "url": "http://www.xiami.com/song/VbpP7694d"
           }
         ]
+      },
+      "presentation": {
+        "flower": "blue",
+        "flower_reason": "蓝色簇花像街上相似又陌生的面孔，留出缺席感。",
+        "chord": {
+          "name": "Am(add9)",
+          "midi": [
+            57,
+            60,
+            64,
+            71
+          ],
+          "reason": "小三度中的九音悬着，留住熟悉与疏离。"
+        }
       }
     },
     {
@@ -472,6 +486,20 @@
             "url": "http://www.xiami.com/song/b1qjuSo404ab"
           }
         ]
+      },
+      "presentation": {
+        "flower": "ivory",
+        "flower_reason": "乳白花瓣和暖黄花心，像被照料的小花舍。",
+        "chord": {
+          "name": "F6",
+          "midi": [
+            53,
+            60,
+            62,
+            69
+          ],
+          "reason": "大六和弦的柔和暖意，给这处庇护所安定感。"
+        }
       }
     },
     {
@@ -520,6 +548,20 @@
             "url": "http://www.xiami.com/song/fOlr5231a"
           }
         ]
+      },
+      "presentation": {
+        "flower": "blue",
+        "flower_reason": "冷蓝色簇花对应远山与克制的告别。",
+        "chord": {
+          "name": "Dm(add9)",
+          "midi": [
+            50,
+            57,
+            64,
+            65
+          ],
+          "reason": "低音与上方九音拉开距离，小三度留下一点酸楚。"
+        }
       }
     },
     {
@@ -568,6 +610,20 @@
             "url": "http://www.xiami.com/song/8GcTLDedcc6"
           }
         ]
+      },
+      "presentation": {
+        "flower": "ivory",
+        "flower_reason": "明亮而朴素的乳白花，作为旅程收束的光。",
+        "chord": {
+          "name": "C",
+          "midi": [
+            48,
+            55,
+            64,
+            72
+          ],
+          "reason": "以低音和高八度框住稳定的大三和弦，让起点的悬念在这里落地。"
+        }
       }
     },
     {
@@ -613,6 +669,20 @@
             "url": "http://www.xiami.com/song/bqvdVl73c0ab"
           }
         ]
+      },
+      "presentation": {
+        "flower": "ivory",
+        "flower_reason": "舒展的乳白花瓣，贴近一个人过日子的柔软与从容。",
+        "chord": {
+          "name": "C6",
+          "midi": [
+            48,
+            55,
+            64,
+            69
+          ],
+          "reason": "大六度带一点亲近的甜，保留日常感。"
+        }
       }
     },
     {
@@ -672,6 +742,20 @@
           }
         ],
         "candidates": []
+      },
+      "presentation": {
+        "flower": "dahlia",
+        "flower_reason": "向四周铺开的橙色花瓣，像朝外出发的旅程。",
+        "chord": {
+          "name": "G6",
+          "midi": [
+            55,
+            59,
+            64,
+            67
+          ],
+          "reason": "明亮的六音向上展开，给独行一点轻快。"
+        }
       }
     },
     {
@@ -717,6 +801,20 @@
             "url": "http://www.xiami.com/song/kavMc624b"
           }
         ]
+      },
+      "presentation": {
+        "flower": "ivory",
+        "flower_reason": "乳白花瓣保留共同记忆的温度。",
+        "chord": {
+          "name": "Fmaj7",
+          "midi": [
+            53,
+            57,
+            64,
+            72
+          ],
+          "reason": "温暖的大三和弦带大七度，承诺里仍有不舍。"
+        }
       }
     },
     {
@@ -787,6 +885,19 @@
             "reason": "原谜面出现热岛意象；只有文字关联，尚不能确认原版接线。"
           }
         ]
+      },
+      "presentation": {
+        "flower": "blue",
+        "flower_reason": "与起点使用同一蓝色花，暗示记忆回到原处。",
+        "chord": {
+          "name": "Csus2",
+          "midi": [
+            48,
+            55,
+            62
+          ],
+          "reason": "沿用起点同一配器，回环发生时能听出又回到最初。"
+        }
       }
     },
     {
@@ -832,6 +943,20 @@
             "url": "http://www.xiami.com/song/e1p628e1"
           }
         ]
+      },
+      "presentation": {
+        "flower": "dahlia",
+        "flower_reason": "层层排列的橙色花瓣，借花的几何层次呼应时间与机械。",
+        "chord": {
+          "name": "Em(add9)",
+          "midi": [
+            52,
+            59,
+            66,
+            67
+          ],
+          "reason": "九音与小三度的相邻色彩留下一点紧迫与反省。"
+        }
       }
     },
     {
@@ -895,6 +1020,20 @@
           }
         ],
         "candidates": []
+      },
+      "presentation": {
+        "flower": "ivory",
+        "flower_reason": "浅色花瓣像安静的床边灯，对应陪伴和晚安。",
+        "chord": {
+          "name": "F6/9(no5)",
+          "midi": [
+            53,
+            57,
+            62,
+            67
+          ],
+          "reason": "轻柔的六、九音展开成开放的摇篮和声。"
+        }
       }
     },
     {
@@ -941,6 +1080,20 @@
             "url": "http://www.xiami.com/song/f8v1t424e6"
           }
         ]
+      },
+      "presentation": {
+        "flower": "dahlia",
+        "flower_reason": "暖橙色对应亲情记忆，放射花形也轻轻呼应车轮。",
+        "chord": {
+          "name": "Cadd9",
+          "midi": [
+            48,
+            55,
+            62,
+            64
+          ],
+          "reason": "稳定低音托住明亮九音，像后来才懂得的亲近。"
+        }
       }
     },
     {
@@ -1006,6 +1159,20 @@
           }
         ],
         "candidates": []
+      },
+      "presentation": {
+        "flower": "blue",
+        "flower_reason": "冷蓝的花簇收住想见又不见的距离。",
+        "chord": {
+          "name": "Am7",
+          "midi": [
+            57,
+            60,
+            64,
+            67
+          ],
+          "reason": "克制的小七和弦，为回望保留温度。"
+        }
       }
     },
     {
@@ -1071,6 +1238,20 @@
           }
         ],
         "candidates": []
+      },
+      "presentation": {
+        "flower": "blue",
+        "flower_reason": "同样的蓝色把这首与前后的思念连接起来。",
+        "chord": {
+          "name": "Am(add9)",
+          "midi": [
+            57,
+            60,
+            64,
+            71
+          ],
+          "reason": "比小七更悬的九音，对应仍然想见的心情。"
+        }
       }
     },
     {
@@ -1130,6 +1311,20 @@
           }
         ],
         "candidates": []
+      },
+      "presentation": {
+        "flower": "blue",
+        "flower_reason": "聚在一起的蓝色小花，表现人群之中的孤独。",
+        "chord": {
+          "name": "Em7",
+          "midi": [
+            52,
+            59,
+            62,
+            67
+          ],
+          "reason": "较低的小七和弦收回声量，接住外放之后的空落。"
+        }
       }
     },
     {
@@ -1199,6 +1394,20 @@
             "note": "扩展版在两者之间插入浮夸；保留历史前驱证据。"
           }
         ]
+      },
+      "presentation": {
+        "flower": "dahlia",
+        "flower_reason": "向外伸展而密集的橙色花瓣，对应远行与人群。",
+        "chord": {
+          "name": "Dsus2",
+          "midi": [
+            50,
+            57,
+            62,
+            64
+          ],
+          "reason": "不定大小调的二度悬置，让脚步有继续向外的余地。"
+        }
       }
     },
     {
@@ -1244,6 +1453,20 @@
             "url": "http://www.xiami.com/song/fEJ2g40bfb"
           }
         ]
+      },
+      "presentation": {
+        "flower": "dahlia",
+        "flower_reason": "圆而温暖的橙色花，借放射结构呼应摩天轮。",
+        "chord": {
+          "name": "Fadd9",
+          "midi": [
+            53,
+            60,
+            67,
+            69
+          ],
+          "reason": "大三和弦里的九音让温暖带一点轻盈与上升感。"
+        }
       }
     },
     {
@@ -1291,6 +1514,20 @@
             "url": "http://www.xiami.com/song/VbpI6a8d2"
           }
         ]
+      },
+      "presentation": {
+        "flower": "ivory",
+        "flower_reason": "乳白花瓣像把一个片刻轻轻留在相纸上。",
+        "chord": {
+          "name": "Cmaj7",
+          "midi": [
+            48,
+            55,
+            59,
+            64
+          ],
+          "reason": "熟悉的大三和弦添一枚大七度，让凝固的瞬间有余味。"
+        }
       }
     },
     {
@@ -1336,6 +1573,20 @@
             "url": "http://www.xiami.com/song/kavDda4ae"
           }
         ]
+      },
+      "presentation": {
+        "flower": "poppy",
+        "flower_reason": "敞开的朱红花瓣，像把重要的东西全部交出去。",
+        "chord": {
+          "name": "Fmaj7",
+          "midi": [
+            53,
+            60,
+            64,
+            69
+          ],
+          "reason": "宽一些的大七和弦，兼有赠予的暖意和袒露的脆弱。"
+        }
       }
     },
     {
@@ -1381,6 +1632,20 @@
             "url": "http://www.xiami.com/song/VbpM8f3ff"
           }
         ]
+      },
+      "presentation": {
+        "flower": "dahlia",
+        "flower_reason": "橙色花瓣直接回应夕照，繁盛中带着将尽的时间感。",
+        "chord": {
+          "name": "Fmaj7/A",
+          "midi": [
+            57,
+            60,
+            64,
+            65
+          ],
+          "reason": "温暖的大七转位，上方半音让明亮里带一点将逝的酸楚。"
+        }
       }
     },
     {
@@ -1427,6 +1692,20 @@
             "url": "http://www.xiami.com/song/VbpM8f3ff"
           }
         ]
+      },
+      "presentation": {
+        "flower": "poppy",
+        "flower_reason": "薄而舒展的朱红花瓣，借轻盈感表现相遇与漂流。",
+        "chord": {
+          "name": "Dm7",
+          "midi": [
+            50,
+            57,
+            60,
+            65
+          ],
+          "reason": "开放的小七和弦保持流动，伤感不过分沉重。"
+        }
       }
     },
     {
@@ -1475,6 +1754,20 @@
             "url": "http://www.xiami.com/song/kdTo97ad1"
           }
         ]
+      },
+      "presentation": {
+        "flower": "dahlia",
+        "flower_reason": "繁密的橙色花瓣对应世界的丰盛与纷繁。",
+        "chord": {
+          "name": "C6/9(no5)",
+          "midi": [
+            48,
+            57,
+            62,
+            64
+          ],
+          "reason": "六、九音同时展开，留下丰盛而不封闭的色彩。"
+        }
       }
     },
     {
@@ -1522,6 +1815,20 @@
             "url": "http://www.xiami.com/song/f8v1t424e6"
           }
         ]
+      },
+      "presentation": {
+        "flower": "blue",
+        "flower_reason": "冷蓝色的花让短暂相遇显得遥远，回应跨越时间的记忆。",
+        "chord": {
+          "name": "Em7",
+          "midi": [
+            52,
+            55,
+            62,
+            71
+          ],
+          "reason": "拉开的小七配器把高音放远，留下时间的纵深。"
+        }
       }
     },
     {
@@ -1580,6 +1887,20 @@
           }
         ],
         "candidates": []
+      },
+      "presentation": {
+        "flower": "dahlia",
+        "flower_reason": "暖橙花心像旧物中留下的体温。",
+        "chord": {
+          "name": "Am7/E",
+          "midi": [
+            52,
+            57,
+            60,
+            67
+          ],
+          "reason": "小七转位减弱落点，像还舍不得放下的旧物。"
+        }
       }
     },
     {
@@ -1628,6 +1949,20 @@
             "url": "http://www.xiami.com/song/VbpP7694d"
           }
         ]
+      },
+      "presentation": {
+        "flower": "dahlia",
+        "flower_reason": "层层环绕的花瓣对应四季轮转。",
+        "chord": {
+          "name": "Gsus4",
+          "midi": [
+            55,
+            60,
+            62,
+            67
+          ],
+          "reason": "悬四和弦等待继续，像循环仍未停止。"
+        }
       }
     },
     {
@@ -1675,6 +2010,20 @@
             "url": "http://www.xiami.com/song/VbpP7694d"
           }
         ]
+      },
+      "presentation": {
+        "flower": "poppy",
+        "flower_reason": "饱满的暖红色对应等待之后的成熟。",
+        "chord": {
+          "name": "F6",
+          "midi": [
+            53,
+            57,
+            62,
+            72
+          ],
+          "reason": "暖和的大六和弦向高处舒展，给漫长等待一个开阔的回应。"
+        }
       }
     },
     {
@@ -1716,6 +2065,19 @@
         "douban_item": "269531195",
         "xiami": "http://www.xiami.com/song/VbpP7694d",
         "predecessors": []
+      },
+      "presentation": {
+        "flower": "blue",
+        "flower_reason": "蓝色花簇作为夜间入口，也与倒带的回环相认。",
+        "chord": {
+          "name": "Csus2",
+          "midi": [
+            48,
+            55,
+            62
+          ],
+          "reason": "省去三音的开放悬置，先提出一个问题，留给终点回答。"
+        }
       }
     },
     {
@@ -1753,6 +2115,20 @@
       ],
       "source": {
         "predecessors": []
+      },
+      "presentation": {
+        "flower": "blue",
+        "flower_reason": "冷蓝簇花对应雨天、发线与绵延的回忆。",
+        "chord": {
+          "name": "Dm9(no5)",
+          "midi": [
+            50,
+            60,
+            64,
+            65
+          ],
+          "reason": "小和弦里保留七音和九音，让雨后的回忆悬而未决。"
+        }
       }
     },
     {
@@ -1801,6 +2177,20 @@
           }
         ],
         "candidates": []
+      },
+      "presentation": {
+        "flower": "blue",
+        "flower_reason": "沿用蓝色记忆线，把十年的距离留在同一花色里。",
+        "chord": {
+          "name": "Am7",
+          "midi": [
+            57,
+            60,
+            64,
+            67
+          ],
+          "reason": "与不如不见保留同一小七和声，像记忆没有走远。"
+        }
       }
     },
     {
@@ -1835,7 +2225,22 @@
       "source": {
         "predecessors": []
       },
-      "terminal": "dead-end"
+      "terminal": "dead-end",
+      "presentation": {
+        "flower": "blue",
+        "flower_reason": "冷蓝色收束这条关于相遇与流逝的支线。",
+        "chord": {
+          "name": "Am(add9)",
+          "midi": [
+            57,
+            60,
+            64,
+            71
+          ],
+          "reason": "保留悬着的九音，让死胡同像余韵而非失败提示。"
+        }
+      },
+      "clue_format": "quote"
     },
     {
       "id": "today",
@@ -1883,7 +2288,22 @@
           }
         ],
         "candidates": []
-      }
+      },
+      "presentation": {
+        "flower": "ivory",
+        "flower_reason": "浅色花瓣与暖心，回应接纳眼前生活的光。",
+        "chord": {
+          "name": "Cadd9/E",
+          "midi": [
+            52,
+            55,
+            60,
+            62
+          ],
+          "reason": "明亮的转位添九音，温柔地从纠结里抬起头。"
+        }
+      },
+      "clue_format": "quote"
     },
     {
       "id": "exaggerated",
@@ -1931,6 +2351,20 @@
           }
         ],
         "candidates": []
+      },
+      "presentation": {
+        "flower": "poppy",
+        "flower_reason": "高饱和的朱红与深色花心，像舞台上的外放和内里的缺口。",
+        "chord": {
+          "name": "E7",
+          "midi": [
+            52,
+            59,
+            62,
+            68
+          ],
+          "reason": "属七和弦的三全音保留张力，表现用力寻求认可的急切。"
+        }
       }
     },
     {
@@ -1993,6 +2427,20 @@
           }
         ],
         "candidates": []
+      },
+      "presentation": {
+        "flower": "poppy",
+        "flower_reason": "朱红花瓣与深色花心表现热烈与缺憾的对照。",
+        "chord": {
+          "name": "Am(maj7)",
+          "midi": [
+            57,
+            60,
+            64,
+            68
+          ],
+          "reason": "小三和弦加大七度，让欲望与不满足同时存在。"
+        }
       }
     },
     {
@@ -2043,6 +2491,20 @@
           }
         ],
         "candidates": []
+      },
+      "presentation": {
+        "flower": "poppy",
+        "flower_reason": "黑色花心周围仍有鲜红花瓣，回应暗处的生命力。",
+        "chord": {
+          "name": "Cm(add9)",
+          "midi": [
+            48,
+            55,
+            62,
+            63
+          ],
+          "reason": "低处的小三和弦带九音，保留黑暗中向外的力量。"
+        }
       }
     },
     {
@@ -2091,6 +2553,20 @@
           }
         ],
         "candidates": []
+      },
+      "presentation": {
+        "flower": "dahlia",
+        "flower_reason": "明亮而饱满的橙色花，是走到终点前最后一次尽力歌唱。",
+        "chord": {
+          "name": "G7",
+          "midi": [
+            55,
+            59,
+            62,
+            65
+          ],
+          "reason": "属七和弦把张力交给下一站的 C 大三和弦，形成抵达感。"
+        }
       }
     },
     {
@@ -2127,7 +2603,22 @@
       "source": {
         "predecessors": []
       },
-      "terminal": "dead-end"
+      "terminal": "dead-end",
+      "presentation": {
+        "flower": "ivory",
+        "flower_reason": "干净的乳白与暖黄花心，表达独一无二的陪伴。",
+        "chord": {
+          "name": "Fmaj9(no5)",
+          "midi": [
+            53,
+            57,
+            64,
+            67
+          ],
+          "reason": "柔和的大七与九音，像愿意一直奔向的温暖。"
+        }
+      },
+      "clue_format": "quote"
     },
     {
       "id": "wedding-card-street",
@@ -2175,6 +2666,20 @@
           }
         ],
         "candidates": []
+      },
+      "presentation": {
+        "flower": "ivory",
+        "flower_reason": "乳白花瓣呼应婚礼，也保留告别旧日的轻。",
+        "chord": {
+          "name": "G7sus4",
+          "midi": [
+            55,
+            60,
+            62,
+            65
+          ],
+          "reason": "悬四中的属七等待终点，喜悦与失去都暂时悬在一起。"
+        }
       }
     },
     {
@@ -2209,7 +2714,21 @@
       "source": {
         "predecessors": []
       },
-      "terminal": "epilogue"
+      "terminal": "epilogue",
+      "presentation": {
+        "flower": "ivory",
+        "flower_reason": "与终点同一乳白花，像结束后仍亮着的一盏灯。",
+        "chord": {
+          "name": "C6/9(no5)",
+          "midi": [
+            60,
+            62,
+            64,
+            69
+          ],
+          "reason": "在更高音区重述 C 的六、九音色彩，把结束变成轻盈的回声。"
+        }
+      }
     }
   ],
   "bonus": "allegro"

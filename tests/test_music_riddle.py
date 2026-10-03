@@ -26,6 +26,51 @@ class MusicRiddleTests(unittest.TestCase):
         subprocess.run(['node', 'tests/echo_piano_runtime.cjs'], cwd=ROOT, check=True,
                        capture_output=True, text=True)
 
+    def test_curated_presentation_survives_reordering_and_matches_the_map(self):
+        from build_music_riddle import map_svg
+        from html.parser import HTMLParser
+        class MapImages(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.node = None
+                self.images = {}
+
+            def handle_starttag(self, tag, attrs):
+                attrs = dict(attrs)
+                if 'data-node' in attrs:
+                    self.node = attrs['data-node']
+                if tag == 'image' and self.node:
+                    self.images[self.node] = attrs['href']
+                    self.node = None
+
+        for ordered in (self.data, dict(self.data, nodes=list(reversed(self.data['nodes'])))):
+            parser = MapImages()
+            parser.feed(map_svg(ordered))
+            self.assertEqual(set(parser.images), set(self.nodes))
+            for node_id, href in parser.images.items():
+                node = self.nodes[node_id]
+                art = node['presentation']
+                self.assertTrue(art['flower_reason'].strip())
+                self.assertTrue(art['chord']['reason'].strip())
+                self.assertEqual(href, f"assets/echo-flower-{art['flower']}.webp")
+
+    def test_chord_data_rejects_unplayable_or_ambiguous_values(self):
+        for midi in ([48], [48, 55, 64, 67, 72], [47, 55, 64], [48, 55, 73], [48, 55, 55], [60, 55, 48], [48, 55, 60.5]):
+            with self.subTest(midi=midi):
+                data = copy.deepcopy(self.data)
+                data['nodes'][0]['presentation']['chord']['midi'] = midi
+                with self.assertRaises(ValueError):
+                    validate(data)
+
+    def test_quote_format_cannot_replace_a_separate_epigraph(self):
+        for node_id in ('matchless', 'next-year-today', 'today'):
+            self.assertEqual(self.nodes[node_id]['clue_format'], 'quote')
+        data = copy.deepcopy(self.data)
+        song = next(n for n in data['nodes'] if n['id'] == 'mian-mian')
+        song['clue_format'] = 'quote'
+        with self.assertRaises(ValueError):
+            validate(data)
+
     def test_every_song_is_reachable_from_the_start(self):
         reached = set()
         pending = [self.data['start']]

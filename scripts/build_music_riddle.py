@@ -1,7 +1,7 @@
 """Restore the music riddle as a generated, bilingual Work page."""
 import base64
 import json
-from music_riddle_data import load as load_music_riddle
+from music_riddle_data import FLOWERS, presentation, load as load_music_riddle
 from music_riddle_layout import curves, svg_path, route_geometry, labels
 from site_shell import ROOT, bi, esc, i18n_attrs, page_config, render_document, render_meta
 
@@ -13,7 +13,7 @@ def edge_path(start, end, *, inset=False):
 
 
 def flower_svg(family=0, special=False):
-    name = ('poppy', 'blue', 'ivory', 'dahlia')[family]
+    name = FLOWERS[family]
     size = 64 if special else 50
     return f'<g class="echo-petals"><image href="assets/echo-flower-{name}.webp" x="{-size/2:g}" y="{-size/2:g}" width="{size}" height="{size}"/></g>'
 
@@ -42,7 +42,7 @@ def map_svg(data):
         role_class = 'is-start' if start else 'is-ending' if ending else ''
         role_label = '起点' if start else '终点' if ending else ''
         role_text = f'<text class="echo-node-kind" y="48" text-anchor="middle">{role_label}</text>' if role_label else ''
-        family = 1 if start else 2 if ending else (i - 1) % 4
+        family = FLOWERS.index(presentation(node)['flower'])
         # Labels occupy open space; their hit areas remain usable beside the flower.
         dx, dy, anchor = label_offsets[node['id']]
         label_position = f'x="{dx}" y="{dy}" text-anchor="{anchor}"'
@@ -58,6 +58,7 @@ def render_music_riddle(config):
     data = load_music_riddle()
     song_count = len(data['nodes']) - bool(data.get('bonus'))
     start = next(n for n in data['nodes'] if n['id'] == data['start'])
+    start_flower = presentation(start)['flower']
     b = bi
     main = f'''<main id="main" class="echo-main" tabindex="-1">
     <div class="echo-top"><a href="../../gallery.html#games">← {b('Work · Games','作品 · 游戏')}</a><span>2017 / 2026</span></div>
@@ -72,7 +73,7 @@ def render_music_riddle(config):
       <div class="echo-toolbar"><div><h2>{b('ENDLESS ECHOES','漫无止尽的回响')}</h2><p>{b('Read the clue. Find the next song.','读一段线索，猜下一首歌。')}</p></div><button type="button" class="echo-sound echo-js" data-sound aria-pressed="true"><span aria-hidden="true">♫</span><span data-sound-label>{b('Sound on','音效：开')}</span></button></div>
       <section class="echo-clue-panel" aria-labelledby="echo-song">
         <div class="echo-panel-top"><span>{b('NOW ECHOING','正在回响')}</span><button type="button" class="echo-js echo-text-button" data-back disabled>{b('← Back','← 退一步')}</button></div>
-        <div class="echo-clue-flower bloom-1" data-clue-flower aria-hidden="true"><img data-clue-art src="assets/echo-flower-blue.webp" width="56" height="56" alt=""><span data-song-number></span></div>
+        <div class="echo-clue-flower bloom-{FLOWERS.index(start_flower)}" data-clue-flower aria-hidden="true"><img data-clue-art src="assets/echo-flower-{start_flower}.webp" width="56" height="56" alt=""><span data-song-number></span></div>
         <h2 id="echo-song" lang="zh-Hans">{esc(start['title'])}</h2>
         <blockquote class="echo-quote" id="echo-quote" lang="zh-Hans" hidden></blockquote>
         <p class="echo-clue" id="echo-clue">{b(start['clue']['en'],start['clue']['zh'])}</p>
@@ -109,8 +110,10 @@ def render_music_riddle(config):
     head += '\n<link rel="stylesheet" href="assets/endless-echoes.css?v=20261003h">'
     # Runtime only needs clues and the graph, not historical source annotations.
     payload = {key:data[key] for key in ('id','start','ending','bonus') if key in data}
-    payload['nodes'] = [{k:v for k,v in n.items() if k in ('id','title','aliases','clue','hint','next','dead_ends','position','terminal','quote')} for n in data['nodes']]
+    payload['nodes'] = [{k:v for k,v in n.items() if k in ('id','title','aliases','clue','hint','next','dead_ends','position','terminal','quote','clue_format')} for n in data['nodes']]
     for source, node in zip(data['nodes'], payload['nodes']):
+        art = presentation(source)
+        node['presentation'] = {'flower': art['flower'], 'chord': {'midi': art['chord']['midi']}}
         if source.get('open_answers'):
             node['open_answers'] = [{k:a[k] for k in ('title','aliases')} for a in source['open_answers']]
     serialized = json.dumps(payload,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')
