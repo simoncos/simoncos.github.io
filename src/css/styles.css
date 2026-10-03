@@ -208,11 +208,6 @@ button {
     to { left: 100%; }
 }
 
-@keyframes om-bar {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
-}
-
 @keyframes om-pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.35; }
@@ -796,16 +791,9 @@ button {
     transform: scaleX(0);
 }
 
-.sel-bar.is-done .sel-fill {
-    transform: scaleX(1);
-}
-
 .sel-bar.is-on .sel-fill {
-    animation: om-bar 6000ms linear both;
-}
-
-.sel.is-paused .sel-bar.is-on .sel-fill {
-    animation-play-state: paused;
+    transform: scaleX(1);
+    transition: transform 0.4s var(--ease);
 }
 
 .sel-count {
@@ -983,6 +971,9 @@ button {
     .panel,
     .panel.is-on {
         flex: 0 0 80px;
+        /* Done inside the half second after the tap that the layout-shift
+           metric credits to the tap. */
+        transition-duration: 0.45s;
     }
 
     .panel.is-on {

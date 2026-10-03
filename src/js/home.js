@@ -1,8 +1,8 @@
 "use strict";
-// Home: the Selected work stage, which advances on its own and pauses under
-// the pointer, and the topic filter over the Newest list.
+// Home: the Selected work stage, which changes only when the reader asks
+// (hover on a wide screen, a tap on a narrow one), and the topic filter over
+// the Newest list.
 (function () {
-    const shell = window.SITE_SHELL;
     const WIDE = 860;
     function wide() {
         return window.innerWidth >= WIDE;
@@ -21,28 +21,17 @@
         function setActive(next) {
             const total = panels.length;
             active = ((next % total) + total) % total;
-            // Dropping the running class and forcing a reflow restarts the bar,
-            // even when the stage comes back round to the same panel.
-            bars.forEach((bar) => bar.classList.remove('is-on'));
-            void sel.offsetWidth;
             panels.forEach((panel, i) => panel.classList.toggle('is-on', i === active));
             bars.forEach((bar, i) => {
                 bar.classList.toggle('is-on', i === active);
-                bar.classList.toggle('is-done', i < active);
                 bar.setAttribute('aria-current', i === active ? 'true' : 'false');
             });
             if (count)
                 count.textContent = `${pad(active + 1)} / ${pad(total)}`;
         }
-        // The bar's own animation is the clock: when it ends, move on. Pausing
-        // the animation (hover, focus) therefore pauses the stage too.
-        sel.addEventListener('animationend', (event) => {
-            if (event.animationName !== 'om-bar' || shell?.reduced || sel.classList.contains('is-paused'))
-                return;
-            const bar = event.target.closest('.sel-bar');
-            if (bar && bar.classList.contains('is-on'))
-                setActive(active + 1);
-        });
+        // No timer: a stage that moves by itself shifts the page under the
+        // reader. A wide screen follows the pointer; a narrow one, where the
+        // panels stack, opens a row on a tap (a second tap follows the link).
         bars.forEach((bar, i) => bar.addEventListener('click', () => setActive(i)));
         panels.forEach((panel, i) => {
             panel.addEventListener('click', (event) => {
@@ -56,30 +45,6 @@
                     setActive(i);
             });
         });
-        let hovered = false;
-        let focused = false;
-        let inView = true;
-        // Expanding mobile rows must only move in response to a tap. Desktop
-        // playback also rests when the stage or browser tab is out of view.
-        const syncPlayback = () => sel.classList.toggle('is-paused', !wide() || !!shell?.reduced || document.hidden || !inView || hovered || focused);
-        if (stage) {
-            stage.addEventListener('mouseenter', () => { hovered = true; syncPlayback(); });
-            stage.addEventListener('mouseleave', () => { hovered = false; syncPlayback(); });
-        }
-        sel.addEventListener('focusin', () => { focused = true; syncPlayback(); });
-        sel.addEventListener('focusout', (event) => {
-            focused = sel.contains(event.relatedTarget);
-            syncPlayback();
-        });
-        window.matchMedia(`(min-width: ${WIDE}px)`).addEventListener('change', syncPlayback);
-        document.addEventListener('visibilitychange', syncPlayback);
-        if ('IntersectionObserver' in window) {
-            new IntersectionObserver(([entry]) => {
-                inView = entry.isIntersecting;
-                syncPlayback();
-            }).observe(sel);
-        }
-        syncPlayback();
         setActive(active);
     }
     // ---- Newest: topic filter ---------------------------------------------
