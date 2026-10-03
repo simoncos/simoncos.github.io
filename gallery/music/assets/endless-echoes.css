@@ -1,4 +1,4 @@
-.echo-main{max-width:1440px;margin:0 auto;padding:30px 40px 70px;--echo-ink:#292b35;--echo-soft:#777782;--echo-line:#dbd7d4;--echo-accent:#a85042;--echo-surface:#fbf8f4;--echo-map-bg:#f2ede8;--echo-input:#fffdfb;--echo-button-ink:#fff9f2;--echo-hover:#8d3d31;--echo-node:#aaa4a8;--echo-blue:#527bb4;--bloom-coral:#c26654;--bloom-blue:#6584c6;--bloom-gold:#b78a3b;--bloom-orange:#bd7636;--echo-gold:#b88a3a;--echo-voice:'Iowan Old Style',Charter,Georgia,'Songti SC','Noto Serif SC','Source Han Serif SC','STSongti-SC-Regular',var(--font)}
+.echo-main{width:100%;max-width:1440px;margin:0 auto;padding:30px 40px 70px;--echo-ink:#292b35;--echo-soft:#777782;--echo-line:#dbd7d4;--echo-accent:#a85042;--echo-surface:#fbf8f4;--echo-map-bg:#f2ede8;--echo-input:#fffdfb;--echo-button-ink:#fff9f2;--echo-hover:#8d3d31;--echo-node:#aaa4a8;--echo-blue:#527bb4;--bloom-coral:#c26654;--bloom-blue:#6584c6;--bloom-gold:#b78a3b;--bloom-orange:#bd7636;--echo-gold:#b88a3a;--echo-voice:'Iowan Old Style',Charter,Georgia,'Songti SC','Noto Serif SC','Source Han Serif SC','STSongti-SC-Regular',var(--font)}
 :root[data-theme=dark] .echo-main{--echo-ink:#f0e8e3;--echo-soft:#b7afbc;--echo-line:#3d3a48;--echo-accent:#f1b291;--echo-surface:#21202a;--echo-map-bg:#161923;--echo-input:#2a2833;--echo-button-ink:#2b211d;--echo-hover:#ffd0b1;--echo-node:#777382;--echo-blue:#91b5ed;--bloom-coral:#f2a08b;--bloom-blue:#a3b7f1;--bloom-gold:#f0ca80;--bloom-orange:#eca45d;--echo-gold:#efd9a8}
 .bloom-0{--bloom:var(--bloom-coral);--flower-art:url(echo-flower-poppy.webp)}.bloom-1{--bloom:var(--bloom-blue);--flower-art:url(echo-flower-blue.webp)}.bloom-2{--bloom:var(--bloom-gold);--flower-art:url(echo-flower-ivory.webp)}.bloom-3{--bloom:var(--bloom-orange);--flower-art:url(echo-flower-dahlia.webp)}
 .echo-top,.echo-panel-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
@@ -10,7 +10,7 @@
 .echo-intro-note{margin-top:22px;display:grid;grid-template-columns:45px 1fr;gap:3px 16px}
 .echo-count{font:36px/1 var(--mono);letter-spacing:-.07em;grid-row:span 2;align-self:center}
 .echo-intro-note p{font-size:12px;line-height:1.8;margin:0;color:var(--muted)}.echo-intro-note br{display:none}
-.echo-hero-art{margin:0 0 0 auto;max-width:490px;background:#141d27;border-radius:8px;overflow:hidden}
+.echo-hero-art{width:100%;margin:0 0 0 auto;max-width:490px;background:#141d27;border-radius:8px;overflow:hidden}
 .echo-hero-art img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain}
 #echo-game{scroll-margin-top:100px}
 .echo-game{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);background:var(--echo-surface);border:1px solid var(--echo-line);border-radius:18px;color:var(--echo-ink);overflow:clip;box-shadow:0 18px 55px #1010180b}
@@ -163,7 +163,7 @@ button.echo-clue-flower:disabled{cursor:default}.echo-replay-cue{transition:colo
   :root.js button.echo-clue-flower{--flower-size:clamp(80px,25vw,100px);position:absolute;left:50%;top:47.13%;transform:translate(-50%,-50%);margin:0;display:flex;flex-direction:column;gap:8px}
   :root.js .echo-flower-stage::before{left:50%;top:47.13%;width:min(300px,86%);height:auto;aspect-ratio:1;margin:0;transform:translate(-50%,-50%)}
   :root.js .echo-clue-flower img{width:clamp(80px,25vw,100px);height:clamp(80px,25vw,100px);filter:drop-shadow(0 0 12px color-mix(in srgb,var(--bloom) 22%,transparent))}
-  :root.js .echo-clue-flower span{position:absolute;top:100%;font-size:10px;color:var(--echo-soft);letter-spacing:.14em}
+  :root.js .echo-clue-flower>.echo-replay-cue{position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px;color:var(--echo-soft);letter-spacing:.14em}
   :root.js .echo-focus-count{display:block;position:absolute;bottom:0;left:25%;width:50%;text-align:center;font:10px/1.5 var(--mono);color:var(--echo-soft);margin:0}
   :root.js .echo-clue-panel > .echo-keys{order:2;align-self:center;width:min(100%,360px);height:36px;margin:8px 0 14px;border-top:0}
   :root.js .echo-clue-panel > :is(.echo-clue,.echo-quote){order:3}
@@ -207,4 +207,21 @@ button.echo-clue-flower:disabled{cursor:default}.echo-replay-cue{transition:colo
   .echo-intro h1{font-size:40px;grid-column:1;grid-row:2}
   .echo-hero-art{grid-row:2;grid-column:2;width:112px;margin:0;border-radius:5px;align-self:center}
   .echo-intro-note{grid-row:3;grid-column:1/-1;margin-top:18px}
+}
+/* Touch: the page's own links keep their look; only the area that answers a thumb grows to 44 px. The row gap keeps stacked areas apart. */
+@media(pointer:coarse),(max-width:650px){
+  .echo-source-links{row-gap:26px}
+  .echo-source-links a{position:relative}
+  .echo-source-links a::after{content:'';position:absolute;inset:-13px 0}
+}
+/* A tip that a computer shows the clue and the map side by side. CSS decides where it applies: a touch device on the stacked layout (a phone,
+   a tablet held upright) or any window as narrow as a phone's. Where the two already sit side by side (a tablet held wide, a desktop) it stays
+   off, since the sentence would be wrong there. Script hides it for a player who closed it. */
+.echo-device-hint{display:none}
+@media(max-width:900px) and (pointer:coarse),(max-width:650px){
+  .echo-device-hint:not([hidden]){display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px;padding:8px 6px 8px 14px;border:1px solid var(--echo-line);border-radius:8px;font:12px/1.6 var(--font);color:var(--echo-soft)}
+  .echo-device-hint p{margin:0}
+  .echo-device-hint button{flex:none;position:relative;width:24px;height:24px;padding:0;border:0;background:none;color:inherit;font:18px/1 var(--font);cursor:pointer}
+  .echo-device-hint button::after{content:'';position:absolute;inset:-10px}
+  .echo-device-hint:not(.is-armed) button{visibility:hidden}
 }

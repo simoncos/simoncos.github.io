@@ -47,8 +47,10 @@ def map_svg(data):
     song_count = len(nodes) - bool(data.get('bonus'))
     geometry = route_geometry(data)
     label_offsets = labels(data, geometry)
-    parts = [f'<svg class="echo-map" viewBox="0 0 {data["map"]["width"]} {data["map"]["height"]}" style="--echo-map-width:{data["map"]["width"]}px" role="group" aria-labelledby="echo-map-title">',
-             f'<title id="echo-map-title">{song_count} songs connected by {sum(len(n["next"]) for n in nodes.values())} paths · {song_count} 首歌，{sum(len(n["next"]) for n in nodes.values())} 条路径</title>']
+    path_count = sum(len(n['next']) for n in nodes.values())
+    # The map's name follows the page language (site.js swaps the attribute); an SVG <title> would read both languages at once.
+    map_name = i18n_attrs(**{'aria-label': (f'{song_count} songs connected by {path_count} paths', f'{song_count} 首歌，{path_count} 条路径')})
+    parts = [f'<svg class="echo-map" viewBox="0 0 {data["map"]["width"]} {data["map"]["height"]}" style="--echo-map-width:{data["map"]["width"]}px" role="group"{map_name}>']
     defs = arrow_marker('', '#777782') + arrow_marker('-active', '#f1b291', 13) + arrow_marker('-walked', '#efd9a8', 13) + arrow_marker('-incoming', '#91b5ed', 13)
     defs += ''.join(glow_gradient('aura-' + name, color, .34) for name, color in AURA.items()) + glow_gradient('spot', '#ffe9c9', .22)
     parts.append(f'<defs>{defs}</defs>')
@@ -99,6 +101,7 @@ def render_music_riddle(config):
       </div>
       <figure class="echo-hero-art"><img src="assets/endless-echoes-garden-v5.webp" width="1200" height="800" alt="" fetchpriority="high" decoding="async"></figure>
     </header>
+    <div class="echo-device-hint echo-js" data-device-hint role="note"><p>{b('Best on a computer, where the clue and the map sit side by side.','在电脑上体验更佳：线索和地图可以并排看。')}</p><button type="button" data-hint-dismiss {i18n_attrs(**{'aria-label':('Dismiss this tip','关闭这条提示')})}><span aria-hidden="true">×</span></button></div>
     <div id="echo-game" class="echo-game" data-echo-game role="region" {i18n_attrs(**{'aria-label':('Endless Echoes','漫无止尽的回响')})}>
       <section class="echo-clue-panel" aria-labelledby="echo-song">
         <div class="echo-panel-top"><span data-now-label>{b('NOW ECHOING','正在回响')}</span><div class="echo-clue-actions"><button type="button" class="echo-js echo-text-button" data-back disabled>{b('← Back','← 退一步')}</button><button type="button" class="echo-js echo-text-button echo-open-map" data-open-map aria-haspopup="dialog" aria-controls="echo-map-dialog">{b('Full map ↗','完整地图 ↗')}</button><button type="button" class="echo-sound echo-js" data-sound aria-pressed="true"><span aria-hidden="true">♫</span><span class="echo-sound-label" data-sound-label>{b('Sound on','音效：开')}</span></button></div></div>
@@ -138,7 +141,7 @@ def render_music_riddle(config):
     <section class="echo-about"><h2>{b('The echoes continue.','旧日的谜，新的回响。')}</h2><div><p>{b('This is the expanded edition of a music riddle first made in 2017. The original 26 songs have grown into 36, with new branches, dead ends and a hidden echo waiting beyond the complete collection.','这是 2017 年音乐谜题的扩展版。原来的 26 首歌，如今延展为 36 首：新增的分支、死胡同，以及集齐之后才会出现的隐藏回响，让旧日的线索有了新的去处。')}</p><p>{b('Read the clue and guess which song it leads to. Some paths meet again; others bring you back to the beginning. You can reach the ending before finding every song, then return to explore the paths you missed.','读一段谜面，猜它指向的下一首歌。有些路会重逢，有些会带你回到最初。不必集齐所有歌，也能到达终点；抵达之后，仍可以回头寻找未曾走过的分支。')}</p><p>{b('The original trail lived in Xiami playlist comments. After the platform closed, its surviving archive and Douban list helped bring it back. If you get stuck, ask for a hint or reveal the answers. Your progress is saved in this browser.','最初的谜面藏在虾米歌单的推荐语里。平台关闭后，留下的存档和豆列让这条路得以重建。卡住时，可以先看提示，也可以主动揭晓答案。进度会保存在这个浏览器里。')}</p><div class="echo-source-links"><a href="https://www.douban.com/doulist/45894638/">{b('Original clues on Douban (in Chinese)','豆列中的原始谜面')} ↗</a><a href="https://www.jianshu.com/p/bacb95af08b1">{b('The 2017 introduction (in Chinese)','2017 年的原始介绍')} ↗</a><a href="assets/piano/ATTRIBUTION.txt">{b('Piano sample credits','钢琴采样与署名')} ↗</a></div></div></section>
     </main>'''
     head = render_meta(config, title=('Endless Echoes · simoncos','漫无止尽的回响 · simoncos'), description=(f'A branching music riddle through {song_count} songs, first made in 2017.',f'一场穿过{song_count} 首歌的音乐谜题，沿线索点亮歌曲之间的回响。'), canonical=PAGE)
-    head += '\n<link rel="stylesheet" href="assets/endless-echoes.css?v=20261003o">'
+    head += '\n<link rel="stylesheet" href="assets/endless-echoes.css?v=20261003q">'
     # Runtime only needs clues and the graph, not historical source annotations.
     payload = {key:data[key] for key in ('id','start','ending','bonus') if key in data}
     payload['nodes'] = [{k:v for k,v in n.items() if k in ('id','title','aliases','clue','hint','next','dead_ends','position','terminal','quote','clue_format')} for n in data['nodes']]

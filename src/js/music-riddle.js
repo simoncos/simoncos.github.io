@@ -8,6 +8,33 @@
     const flowers = ['poppy', 'blue', 'ivory', 'dahlia'];
     const flowerFamily = (song) => flowers.indexOf(song.presentation.flower);
     const key = 'simoncos-' + data.id + '-v1';
+    // The tip that a computer shows the clue and the map side by side. CSS decides where it shows (a phone or a narrow screen) and it is
+    // in the first paint, so for a first-time visitor nothing below it moves when script runs. Script hides it for a player who closed it
+    // before (the one case where the page shifts, once) and arms the close button, which stays invisible until then rather than being a
+    // dead control. Reading and writing storage may both fail.
+    const tip = document.querySelector('[data-device-hint]');
+    if (tip) {
+        const tipKey = key + '-computer-tip';
+        let closed = false;
+        try {
+            closed = localStorage.getItem(tipKey) === 'closed';
+        }
+        catch { }
+        if (closed)
+            tip.hidden = true;
+        else {
+            tip.classList.add('is-armed');
+            tip.querySelector('[data-hint-dismiss]').addEventListener('click', () => {
+                tip.hidden = true;
+                try {
+                    localStorage.setItem(tipKey, 'closed');
+                }
+                catch { }
+                // The button that held focus is gone: hand focus to the clue instead of dropping it to the page.
+                document.getElementById('echo-song')?.focus({ preventScroll: true });
+            });
+        }
+    }
     const t = (en, zh) => window.SITE_SHELL?.lang === 'zh' ? zh : en;
     const norm = (value) => value.normalize('NFKC').toLowerCase().replace(/[\s《》「」『』·.,，。!?！？’'"-]/g, '');
     const fresh = () => ({ current: data.start, found: [data.start], edges: [], history: [] });
@@ -93,8 +120,11 @@
         soundEnabled = localStorage.getItem(soundKey) !== 'off';
     }
     catch { }
-    const piano = new EchoPiano.Player(status => { soundStatus = status; renderSound(); });
-    function preparePiano() { if (soundEnabled && !document.hidden)
+    // echo-piano.js is a separate file. If it fails to load the riddle still runs, in silence, and the sound control says so.
+    const piano = typeof EchoPiano === 'undefined' ? null : new EchoPiano.Player(status => { soundStatus = status; renderSound(); });
+    if (!piano)
+        soundStatus = 'unavailable';
+    function preparePiano() { if (piano && soundEnabled && !document.hidden)
         void piano.prepare(); }
     function renderSound() {
         const button = root.querySelector('[data-sound]');
@@ -111,7 +141,7 @@
         if (!soundEnabled)
             return;
         const song = songs.get(id);
-        if (song)
+        if (song && piano)
             void piano.play(song.presentation.chord.midi);
     }
     function focusClue() {
@@ -565,7 +595,7 @@
     } });
     document.querySelector('[data-return-branch]').addEventListener('click', () => { const id = trail.history.pop() || data.nodes.find(n => n.next.includes(trail.current))?.id || data.start; visit(id, false); });
     document.querySelector('[data-go-start]').addEventListener('click', () => visit(data.start));
-    document.querySelector('[data-reset]').addEventListener('click', () => { clearArrival(); piano.stop(); trail = fresh(); misses = 0; notice = () => ''; feedbackKind = ''; hint.open = false; reveal.open = false; input.value = ''; document.querySelector('.echo-reset').open = false; save(); render(); });
+    document.querySelector('[data-reset]').addEventListener('click', () => { clearArrival(); piano?.stop(); trail = fresh(); misses = 0; notice = () => ''; feedbackKind = ''; hint.open = false; reveal.open = false; input.value = ''; document.querySelector('.echo-reset').open = false; save(); render(); });
     hint.addEventListener('toggle', () => { if (hint.open) {
         reveal.open = false;
         hint.querySelector('summary').classList.remove('is-nudged');
@@ -579,7 +609,7 @@
             preparePiano();
         }
         else
-            piano.stop();
+            piano?.stop();
         try {
             localStorage.setItem(soundKey, soundEnabled ? 'on' : 'off');
         }
@@ -588,7 +618,7 @@
     });
     root.querySelector('[data-replay]').addEventListener('click', () => { playChord(trail.current); ring(trail.current); });
     document.addEventListener('visibilitychange', () => { if (document.hidden)
-        piano.stop();
+        piano?.stop();
     else
         preparePiano(); });
     root.querySelector('[data-map-zoom]').addEventListener('click', () => {
