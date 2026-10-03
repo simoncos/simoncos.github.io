@@ -100,35 +100,69 @@
 
 .echo-map-key .echo-key-outgoing,.echo-map-key .echo-key-incoming{width:18px;height:2px;border-radius:0;background:var(--echo-accent)}.echo-map-key .echo-key-incoming{background:var(--echo-blue)}
 
-/* The compact layout keeps selection beside the map; the same clue moves into a sheet. */
-.echo-current{display:none}
-.echo-clue-dialog{position:fixed;inset:auto 0 var(--echo-sheet-bottom,0);width:min(100%,600px);max-width:100%;max-height:min(86dvh,calc(var(--echo-viewport-height,100dvh) - 16px));margin:0 auto;padding:0;border:1px solid var(--echo-line);border-bottom:0;border-radius:20px 20px 0 0;background:var(--echo-surface);color:var(--echo-ink);overflow:auto;overscroll-behavior:contain;box-shadow:0 -20px 80px #0006;scroll-padding:76px 0 24px}
-.echo-clue-dialog::backdrop{background:#0c0e18a8;backdrop-filter:blur(3px)}
-.echo-clue-dialog[open]{animation:echo-sheet-arrive .22s ease-out}
-.echo-sheet-top{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 22px;border-bottom:1px solid var(--echo-line);background:var(--echo-surface);font:10px var(--mono);letter-spacing:.09em;color:var(--echo-soft)}
-.echo-sheet-top button{color:var(--echo-accent);padding-inline:10px}
-.echo-clue-dialog .echo-clue-panel{padding:8px 24px max(24px,env(safe-area-inset-bottom));border:0}
-.echo-clue-dialog .echo-clue-flower{position:absolute;top:55px;right:24px;margin:0;gap:6px}
-.echo-clue-dialog .echo-clue-flower img{width:36px;height:36px}
-.echo-clue-dialog .echo-clue-panel h2{font-size:26px;margin:6px 76px 18px 0}
-.echo-clue-dialog .echo-branch{margin-bottom:16px}
-.echo-clue-dialog .echo-help{margin-top:12px}
-:root.echo-sheet-open{overflow:hidden}
-@keyframes echo-sheet-arrive{from{opacity:.5;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+/* On small screens, the current song is the work surface; the network is optional. */
+.echo-clue-actions{display:flex;align-items:center;gap:16px}
+.echo-open-map,.echo-neighborhood,.echo-focus-count{display:none}
+.echo-flower-stage{position:relative}
+button.echo-clue-flower{border:0;padding:0;background:none;cursor:pointer;letter-spacing:.18em;min-height:56px}
+button.echo-clue-flower:disabled{cursor:default}
+.echo-map-dialog{position:fixed;inset:12px;width:min(860px,calc(100% - 24px));height:calc(100dvh - 24px);max-width:none;max-height:none;margin:auto;padding:0;border:1px solid var(--echo-line);border-radius:16px;background:var(--echo-map-bg);color:var(--echo-ink);overflow:auto;overscroll-behavior:contain;box-shadow:0 20px 80px #0008}
+.echo-map-dialog::backdrop{background:#090b13c9;backdrop-filter:blur(4px)}
+.echo-overview-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 18px;border-bottom:1px solid var(--echo-line);background:var(--echo-surface);position:sticky;top:0;z-index:2}
+.echo-overview-top h2{font:11px var(--mono);letter-spacing:.06em;margin:0;color:var(--echo-soft)}
+.echo-overview-top button{padding-inline:8px;color:var(--echo-accent)}
+:root.echo-map-open{overflow:hidden}
+.echo-map-dialog .echo-map-panel{min-height:calc(100% - 61px);border:0}
+.echo-map-dialog .echo-map-stage{flex:1;min-height:260px;display:flex;align-items:center;margin:16px 0 0}
+.is-map-zoomed .echo-map-dialog .echo-map-stage{height:calc(100dvh - 270px);min-height:220px;display:block;flex:none}
+.echo-map-dialog .echo-map-key{padding-top:16px}
 @media(max-width:900px){
-  :root.js .echo-game > .echo-clue-panel{display:none}
-  :root.js .echo-current{display:flex;align-items:center;justify-content:space-between;gap:18px;position:sticky;bottom:0;z-index:3;grid-column:1/-1;padding:16px 22px max(16px,env(safe-area-inset-bottom));border-top:1px solid var(--echo-line);background:var(--echo-surface);box-shadow:0 -12px 28px #10101824;min-height:120px}
-  .echo-current-copy{min-width:0;flex:1}
-  .echo-current-label{display:block;font:10px var(--mono);color:var(--echo-soft);letter-spacing:.08em;margin-bottom:5px}
-  .echo-current strong{font-size:20px;font-weight:500;line-height:1.4;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .echo-current p{font:12px/1.7 var(--font);color:var(--echo-soft);margin:5px 0 0;min-height:3.4em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .echo-current button{flex-shrink:0;font-size:12px;padding:11px 14px}
-  .echo-map-panel{padding:18px 22px 16px}
+  .music-riddle{overflow-anchor:none}
+  :root.js .echo-game > .echo-map-panel{display:none}
+  :root.js .echo-open-map{display:inline-block;color:var(--echo-accent)}
+  :root.js .echo-clue-panel{border:0;padding:18px 22px 26px;scroll-margin-top:92px;overflow-anchor:none}
+  :root.js .echo-clue-panel > *{order:10}
+  :root.js .echo-clue-panel > .echo-panel-top{order:0}
+  :root.js .echo-clue-panel > .echo-panel-top{position:sticky;top:var(--hdr-h,76px);z-index:4;min-height:52px;background:var(--echo-surface);padding-block:4px;border-bottom:1px solid var(--echo-line)}
+  :root.js [data-now-label]{font:14px var(--font);color:var(--echo-ink);min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;letter-spacing:0}
+  .echo-clue-actions{flex-shrink:0}
+  :root.js .echo-clue-panel > h2{order:1;font-size:30px;text-align:center;margin:18px 0 0;line-height:1.3}
+  :root.js .echo-flower-stage{order:2;width:min(100%,420px);align-self:center;margin:2px 0 12px}
+  :root.js .echo-neighborhood{display:block;width:100%;height:auto;overflow:visible}
+  :root.js button.echo-clue-flower{position:absolute;left:50%;top:47.13%;transform:translate(-50%,-50%);margin:0;display:flex;flex-direction:column;gap:8px}
+  :root.js .echo-clue-flower img{width:clamp(80px,25vw,100px);height:clamp(80px,25vw,100px);filter:drop-shadow(0 0 12px color-mix(in srgb,var(--bloom) 22%,transparent))}
+  :root.js .echo-clue-flower span{position:absolute;top:100%;font-size:10px;color:var(--echo-soft);letter-spacing:.14em}
+  :root.js .echo-focus-count{display:block;position:absolute;bottom:0;left:25%;width:50%;text-align:center;font:10px/1.5 var(--mono);color:var(--echo-soft);margin:0}
+  :root.js .echo-clue-panel > :is(.echo-clue,.echo-quote){order:3}
+  :root.js .echo-clue-panel > .echo-branch{order:4}
+  :root.js .echo-clue-panel > .echo-answer{order:5}
+  :root.js .echo-clue-panel > .echo-feedback{order:6}
+  :root.js .echo-clue-panel > .echo-ending{order:7}
+  :root.js .echo-clue-panel > .echo-help{order:8}
+  .echo-focus-edge{fill:none;stroke-width:1.5;opacity:.85;pointer-events:none}
+  .echo-focus-edge-in{stroke:var(--echo-blue)}.echo-focus-edge-out{stroke:var(--echo-accent)}
+  .echo-focus-edge.is-pending{stroke-dasharray:4 5;opacity:.5}
+  .echo-focus-arrow-in{fill:var(--echo-blue)}.echo-focus-arrow-out{fill:var(--echo-accent)}
+  .echo-focus-caption{font:10px var(--mono);fill:var(--echo-soft);letter-spacing:.06em}
+  .echo-focus-hit{fill:transparent;stroke:none}
+  .echo-focus-node.is-found{cursor:pointer}
+  .echo-focus-node.is-found:hover image{filter:drop-shadow(0 0 6px var(--bloom))}
+  .echo-focus-node:focus-visible{outline:none}.echo-focus-node:focus-visible .echo-focus-hit{stroke:var(--echo-accent);stroke-width:2}
+  .echo-focus-unknown{fill:var(--echo-input);stroke:var(--echo-node);stroke-width:1;stroke-dasharray:2 3}
+  .echo-focus-question{font:14px var(--mono);fill:var(--echo-soft)}
+  .echo-focus-label{display:block;text-align:center;white-space:normal;overflow-wrap:anywhere;font:13px/1.4 var(--font);color:var(--echo-soft);pointer-events:none}
+  .echo-focus-node.is-found .echo-focus-label{color:var(--echo-ink)}
+  .echo-map-panel{padding:18px 18px 16px}
   .echo-map-panel .echo-panel-top h2{width:auto}
-  .echo-map-key{padding-top:12px;gap:8px 14px}
-  .echo-map-stage{height:clamp(280px,42svh,440px);min-height:0;margin:18px 0 0}
-  .is-map-zoomed .echo-map-stage{height:clamp(280px,42svh,440px);margin:18px 0 0}
   .is-map-zoomed .echo-map{min-width:1240px;width:1240px}
+}
+@media(max-width:650px){
+  :root.js .echo-clue-panel{padding:14px 16px 24px}
+  .echo-clue-actions{gap:12px}
+  .echo-map-dialog{inset:0;width:100%;height:100dvh;margin:0;border-radius:0;border:0;padding-bottom:env(safe-area-inset-bottom)}
+  .echo-overview-top{padding:8px 14px}
+  .echo-map-dialog .echo-panel-top h2{display:none}
+  .echo-focus-label{font-size:13px}
 }
 @media(max-width:650px){
   .echo-intro{padding:24px 0;gap:0 16px;grid-template-columns:1fr 112px}
@@ -136,9 +170,4 @@
   .echo-intro h1{font-size:40px;grid-column:1;grid-row:2}
   .echo-hero-art{grid-row:2;grid-column:2;width:112px;margin:0;border-radius:5px;align-self:center}
   .echo-intro-note{grid-row:3;grid-column:1/-1;margin-top:18px}
-  .echo-map-panel{padding:14px 14px 16px}
-  .echo-map-panel .echo-panel-top h2{width:100%}
-  :root.js .echo-current{gap:12px;padding:14px 16px max(14px,env(safe-area-inset-bottom))}
-  .echo-current strong{font-size:18px}
-  .echo-current button{padding:10px 12px}
 }

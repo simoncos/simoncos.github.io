@@ -72,8 +72,12 @@ def render_music_riddle(config):
     <div id="echo-game" class="echo-game" data-echo-game>
       <div class="echo-toolbar"><div><h2>{b('ENDLESS ECHOES','漫无止尽的回响')}</h2><p>{b('Read the clue. Find the next song.','读一段线索，猜下一首歌。')}</p></div><button type="button" class="echo-sound echo-js" data-sound aria-pressed="true"><span aria-hidden="true">♫</span><span data-sound-label>{b('Sound on','音效：开')}</span></button></div>
       <section class="echo-clue-panel" aria-labelledby="echo-song">
-        <div class="echo-panel-top"><span>{b('NOW ECHOING','正在回响')}</span><button type="button" class="echo-js echo-text-button" data-back disabled>{b('← Back','← 退一步')}</button></div>
-        <div class="echo-clue-flower bloom-{FLOWERS.index(start_flower)}" data-clue-flower aria-hidden="true"><img data-clue-art src="assets/echo-flower-{start_flower}.webp" width="56" height="56" alt=""><span data-song-number></span></div>
+        <div class="echo-panel-top"><span data-now-label>{b('NOW ECHOING','正在回响')}</span><div class="echo-clue-actions"><button type="button" class="echo-js echo-text-button" data-back disabled>{b('← Back','← 退一步')}</button><button type="button" class="echo-js echo-text-button echo-open-map" data-open-map aria-haspopup="dialog" aria-controls="echo-map-dialog">{b('Full map ↗','完整地图 ↗')}</button></div></div>
+        <div class="echo-flower-stage">
+          <svg class="echo-neighborhood echo-js" data-neighborhood viewBox="0 0 360 244" role="group" {i18n_attrs(**{'aria-label':('Paths around the current song','当前歌曲附近的路径')})}></svg>
+          <button type="button" disabled class="echo-clue-flower bloom-{FLOWERS.index(start_flower)}" data-clue-flower data-replay {i18n_attrs(**{'aria-label':('Replay the current piano chord','回放当前钢琴和弦')})}><img data-clue-art src="assets/echo-flower-{start_flower}.webp" width="56" height="56" alt=""><span data-song-number aria-hidden="true"></span></button>
+          <p class="echo-focus-count echo-js" data-focus-count></p>
+        </div>
         <h2 id="echo-song" lang="zh-Hans">{esc(start['title'])}</h2>
         <blockquote class="echo-quote" id="echo-quote" lang="zh-Hans" hidden></blockquote>
         <p class="echo-clue" id="echo-clue">{b(start['clue']['en'],start['clue']['zh'])}</p>
@@ -95,19 +99,15 @@ def render_music_riddle(config):
         <div class="echo-bonus echo-js" id="echo-bonus" hidden role="status"><p>{b("Every song is lit. A hidden echo awaits beside the ending.","所有歌曲都已点亮。终点旁，还有一段隐藏的回响。")}</p><button class="echo-button" type="button" data-open-bonus>{b("Listen to the hidden echo","听听隐藏的回响")}</button></div>
         <div class="echo-map-key"><span><i class="echo-key-found"></i>{b('Found','已点亮')}</span><span><i class="echo-key-unknown"></i>{b('Undiscovered','未发现')}</span><span><i class="echo-key-outgoing"></i>{b('Paths onward','当前出路')}</span><span><i class="echo-key-incoming"></i>{b('Paths here','来路')}</span><span>→ {b('Arrows lead to the next song','箭头指向下一首')}</span><span class="echo-map-instruction">{b('Select a discovered song to revisit','点击已点亮的节点，回到那首歌')}</span></div>
       </section>
-      <div class="echo-current echo-js">
-        <div class="echo-current-copy" role="status" aria-live="polite" aria-atomic="true"><span class="echo-current-label">{b('SELECTED SONG','当前歌曲')}</span><strong data-current-title lang="zh-Hans">{esc(start['title'])}</strong><p data-current-preview></p></div>
-        <button type="button" class="echo-button" data-open-clue aria-haspopup="dialog" aria-controls="echo-clue-dialog">{b('Read clue','查看线索')} <span aria-hidden="true">↗</span></button>
-      </div>
-      <dialog id="echo-clue-dialog" class="echo-clue-dialog" aria-labelledby="echo-song">
-        <div class="echo-sheet-top"><span>{b('CLUE & ANSWER','线索与答案')}</span><button type="button" class="echo-text-button" data-close-clue autofocus>{b('Back to map ↓','返回地图 ↓')}</button></div>
+      <dialog id="echo-map-dialog" class="echo-map-dialog" aria-labelledby="echo-overview-heading">
+        <div class="echo-overview-top"><h2 id="echo-overview-heading">{b('FULL NETWORK','完整回响地图')}</h2><button type="button" class="echo-text-button" data-close-map autofocus>{b('Back to clue ↓','回到线索 ↓')}</button></div>
       </dialog>
     </div>
     <section class="echo-collection echo-js" aria-labelledby="echo-collection-heading"><div class="echo-panel-top"><h2 id="echo-collection-heading">{b('THE SONGS YOU FOUND','已经找到的歌')}</h2><span id="echo-save-status"></span></div><div class="echo-song-list" id="echo-song-list"></div><details class="echo-reset"><summary>{b('Start a fresh trail','重新开始')}</summary><p>{b('This clears the saved trail in this browser.','这会清除这个浏览器里保存的进度。')}</p><button type="button" data-reset>{b('Clear my trail and restart','清除进度，从头开始')}</button></details></section>
     <section class="echo-about"><h2>{b('The echoes continue.','旧日的谜，新的回响。')}</h2><div><p>{b('This is the expanded edition of a music riddle first made in 2017. The original 26 songs have grown into 36, with new branches, dead ends and a hidden echo waiting beyond the complete collection.','这是 2017 年音乐谜题的扩展版。原来的 26 首歌，如今延展为 36 首：新增的分支、死胡同，以及集齐之后才会出现的隐藏回响，让旧日的线索有了新的去处。')}</p><p>{b('Read the clue and guess which song it leads to. Some paths meet again; others bring you back to the beginning. You can reach the ending before finding every song, then return to explore the paths you missed.','读一段谜面，猜它指向的下一首歌。有些路会重逢，有些会带你回到最初。不必集齐所有歌，也能到达终点；抵达之后，仍可以回头寻找未曾走过的分支。')}</p><p>{b('The original trail lived in Xiami playlist comments. After the platform closed, its surviving archive and Douban list helped bring it back. If you get stuck, ask for a hint or reveal the answers. Your progress is saved in this browser.','最初的谜面藏在虾米歌单的推荐语里。平台关闭后，留下的存档和豆列让这条路得以重建。卡住时，可以先看提示，也可以主动揭晓答案。进度会保存在这个浏览器里。')}</p><div class="echo-source-links"><a href="https://www.douban.com/doulist/45894638/">{b('Original clues on Douban (in Chinese)','豆列中的原始谜面')} ↗</a><a href="https://www.jianshu.com/p/bacb95af08b1">{b('The 2017 introduction (in Chinese)','2017 年的原始介绍')} ↗</a><a href="assets/piano/ATTRIBUTION.txt">{b('Piano sample credits','钢琴采样与署名')} ↗</a></div></div></section>
     </main>'''
     head = render_meta(config, title=('Endless Echoes · simoncos','漫无止尽的回响 · simoncos'), description=(f'A branching music riddle through {song_count} songs, first made in 2017.',f'一场穿过{song_count} 首歌的音乐谜题，沿线索点亮歌曲之间的回响。'), canonical=PAGE)
-    head += '\n<link rel="stylesheet" href="assets/endless-echoes.css?v=20261003h">'
+    head += '\n<link rel="stylesheet" href="assets/endless-echoes.css?v=20261003i">'
     # Runtime only needs clues and the graph, not historical source annotations.
     payload = {key:data[key] for key in ('id','start','ending','bonus') if key in data}
     payload['nodes'] = [{k:v for k,v in n.items() if k in ('id','title','aliases','clue','hint','next','dead_ends','position','terminal','quote','clue_format')} for n in data['nodes']]

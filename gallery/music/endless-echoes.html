@@ -20,7 +20,7 @@
     <meta name="twitter:title" content="Endless Echoes · simoncos">
     <meta name="twitter:description" content="A branching music riddle through 36 songs, first made in 2017.">
     <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
-<link rel="stylesheet" href="assets/endless-echoes.css?v=20261003h">
+<link rel="stylesheet" href="assets/endless-echoes.css?v=20261003i">
     <!-- site-shell:resources:start -->
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/icons/apple-touch-icon.png">
@@ -32,11 +32,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400..700&amp;display=swap"></noscript>
-    <script src="../../src/js/theme-init.js?v=20261003d"></script>
+    <script src="../../src/js/theme-init.js?v=20261003e"></script>
     <link rel="stylesheet" href="../../src/css/styles.css?v=20261002b">
-    <script src="../../src/js/site.js?v=20261003d" defer></script>
-    <script src="../../src/js/echo-piano.js?v=20261003d" defer></script>
-    <script src="../../src/js/music-riddle.js?v=20261003d" defer></script>
+    <script src="../../src/js/site.js?v=20261003e" defer></script>
+    <script src="../../src/js/echo-piano.js?v=20261003e" defer></script>
+    <script src="../../src/js/music-riddle.js?v=20261003e" defer></script>
     <!-- site-shell:resources:end -->
 </head>
 <body class="music-riddle">
@@ -78,8 +78,12 @@
     <div id="echo-game" class="echo-game" data-echo-game>
       <div class="echo-toolbar"><div><h2><span data-l="en">ENDLESS ECHOES</span><span data-l="zh" lang="zh-Hans">漫无止尽的回响</span></h2><p><span data-l="en">Read the clue. Find the next song.</span><span data-l="zh" lang="zh-Hans">读一段线索，猜下一首歌。</span></p></div><button type="button" class="echo-sound echo-js" data-sound aria-pressed="true"><span aria-hidden="true">♫</span><span data-sound-label><span data-l="en">Sound on</span><span data-l="zh" lang="zh-Hans">音效：开</span></span></button></div>
       <section class="echo-clue-panel" aria-labelledby="echo-song">
-        <div class="echo-panel-top"><span><span data-l="en">NOW ECHOING</span><span data-l="zh" lang="zh-Hans">正在回响</span></span><button type="button" class="echo-js echo-text-button" data-back disabled><span data-l="en">← Back</span><span data-l="zh" lang="zh-Hans">← 退一步</span></button></div>
-        <div class="echo-clue-flower bloom-1" data-clue-flower aria-hidden="true"><img data-clue-art src="assets/echo-flower-blue.webp" width="56" height="56" alt=""><span data-song-number></span></div>
+        <div class="echo-panel-top"><span data-now-label><span data-l="en">NOW ECHOING</span><span data-l="zh" lang="zh-Hans">正在回响</span></span><div class="echo-clue-actions"><button type="button" class="echo-js echo-text-button" data-back disabled><span data-l="en">← Back</span><span data-l="zh" lang="zh-Hans">← 退一步</span></button><button type="button" class="echo-js echo-text-button echo-open-map" data-open-map aria-haspopup="dialog" aria-controls="echo-map-dialog"><span data-l="en">Full map ↗</span><span data-l="zh" lang="zh-Hans">完整地图 ↗</span></button></div></div>
+        <div class="echo-flower-stage">
+          <svg class="echo-neighborhood echo-js" data-neighborhood viewBox="0 0 360 244" role="group"  aria-label="Paths around the current song" data-zh-aria-label="当前歌曲附近的路径" data-i18n="aria-label"></svg>
+          <button type="button" disabled class="echo-clue-flower bloom-1" data-clue-flower data-replay  aria-label="Replay the current piano chord" data-zh-aria-label="回放当前钢琴和弦" data-i18n="aria-label"><img data-clue-art src="assets/echo-flower-blue.webp" width="56" height="56" alt=""><span data-song-number aria-hidden="true"></span></button>
+          <p class="echo-focus-count echo-js" data-focus-count></p>
+        </div>
         <h2 id="echo-song" lang="zh-Hans">不来也不去</h2>
         <blockquote class="echo-quote" id="echo-quote" lang="zh-Hans" hidden></blockquote>
         <p class="echo-clue" id="echo-clue"><span data-l="en">I planted this riddle and waited for you. It has no end, no final answer: like the seasons, like coming and going, like songs echoing through different times in different ways.</span><span data-l="zh" lang="zh-Hans">我种下了这个谜静候你。它没有尽头、没有谜底，像四季，像来了又去，像歌曲在不同时间、以不同方式不断回响。</span></p>
@@ -101,12 +105,8 @@
         <div class="echo-bonus echo-js" id="echo-bonus" hidden role="status"><p><span data-l="en">Every song is lit. A hidden echo awaits beside the ending.</span><span data-l="zh" lang="zh-Hans">所有歌曲都已点亮。终点旁，还有一段隐藏的回响。</span></p><button class="echo-button" type="button" data-open-bonus><span data-l="en">Listen to the hidden echo</span><span data-l="zh" lang="zh-Hans">听听隐藏的回响</span></button></div>
         <div class="echo-map-key"><span><i class="echo-key-found"></i><span data-l="en">Found</span><span data-l="zh" lang="zh-Hans">已点亮</span></span><span><i class="echo-key-unknown"></i><span data-l="en">Undiscovered</span><span data-l="zh" lang="zh-Hans">未发现</span></span><span><i class="echo-key-outgoing"></i><span data-l="en">Paths onward</span><span data-l="zh" lang="zh-Hans">当前出路</span></span><span><i class="echo-key-incoming"></i><span data-l="en">Paths here</span><span data-l="zh" lang="zh-Hans">来路</span></span><span>→ <span data-l="en">Arrows lead to the next song</span><span data-l="zh" lang="zh-Hans">箭头指向下一首</span></span><span class="echo-map-instruction"><span data-l="en">Select a discovered song to revisit</span><span data-l="zh" lang="zh-Hans">点击已点亮的节点，回到那首歌</span></span></div>
       </section>
-      <div class="echo-current echo-js">
-        <div class="echo-current-copy" role="status" aria-live="polite" aria-atomic="true"><span class="echo-current-label"><span data-l="en">SELECTED SONG</span><span data-l="zh" lang="zh-Hans">当前歌曲</span></span><strong data-current-title lang="zh-Hans">不来也不去</strong><p data-current-preview></p></div>
-        <button type="button" class="echo-button" data-open-clue aria-haspopup="dialog" aria-controls="echo-clue-dialog"><span data-l="en">Read clue</span><span data-l="zh" lang="zh-Hans">查看线索</span> <span aria-hidden="true">↗</span></button>
-      </div>
-      <dialog id="echo-clue-dialog" class="echo-clue-dialog" aria-labelledby="echo-song">
-        <div class="echo-sheet-top"><span><span data-l="en">CLUE &amp; ANSWER</span><span data-l="zh" lang="zh-Hans">线索与答案</span></span><button type="button" class="echo-text-button" data-close-clue autofocus><span data-l="en">Back to map ↓</span><span data-l="zh" lang="zh-Hans">返回地图 ↓</span></button></div>
+      <dialog id="echo-map-dialog" class="echo-map-dialog" aria-labelledby="echo-overview-heading">
+        <div class="echo-overview-top"><h2 id="echo-overview-heading"><span data-l="en">FULL NETWORK</span><span data-l="zh" lang="zh-Hans">完整回响地图</span></h2><button type="button" class="echo-text-button" data-close-map autofocus><span data-l="en">Back to clue ↓</span><span data-l="zh" lang="zh-Hans">回到线索 ↓</span></button></div>
       </dialog>
     </div>
     <section class="echo-collection echo-js" aria-labelledby="echo-collection-heading"><div class="echo-panel-top"><h2 id="echo-collection-heading"><span data-l="en">THE SONGS YOU FOUND</span><span data-l="zh" lang="zh-Hans">已经找到的歌</span></h2><span id="echo-save-status"></span></div><div class="echo-song-list" id="echo-song-list"></div><details class="echo-reset"><summary><span data-l="en">Start a fresh trail</span><span data-l="zh" lang="zh-Hans">重新开始</span></summary><p><span data-l="en">This clears the saved trail in this browser.</span><span data-l="zh" lang="zh-Hans">这会清除这个浏览器里保存的进度。</span></p><button type="button" data-reset><span data-l="en">Clear my trail and restart</span><span data-l="zh" lang="zh-Hans">清除进度，从头开始</span></button></details></section>
