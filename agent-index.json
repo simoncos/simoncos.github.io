@@ -40,7 +40,7 @@
     {
       "id": "projects",
       "label": "Apps (应用)",
-      "url": "https://simoncos.github.io/projects.html",
+      "url": "https://simoncos.github.io/apps.html",
       "purpose": "Every app in one list, live apps first, then those in progress; each opens to its own page or site."
     },
     {
@@ -61,7 +61,7 @@
       "id": "sleep-toolkit-project",
       "type": "project",
       "label": "Sleep Toolkit",
-      "url": "https://simoncos.github.io/projects/sleep-toolkit.en.html",
+      "url": "https://simoncos.github.io/apps/sleep-toolkit.en.html",
       "description": "Project context, report preview, and routes to the web app and the ten-year sleep research."
     },
     {
@@ -75,7 +75,7 @@
       "id": "sleep-research",
       "type": "research_artifact",
       "label": "Ten Years of Sleep Records, Analyzed",
-      "url": "https://simoncos.github.io/projects/sleep-2016-2026.en.html",
+      "url": "https://simoncos.github.io/gallery/research/sleep-2016-2026.en.html",
       "description": "A study of 3,656 nights of personal sleep records, with visual analysis and project context."
     },
     {

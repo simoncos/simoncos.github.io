@@ -23,7 +23,7 @@ A few things I like about the new design:
 
 **[The Work wheel](../gallery.html?lang=en).** I sorted my work into five kinds: apps, games, talks, research and music. On the Work page you swipe sideways, one notch at a time, with a cover for each kind.
 
-**Interactive pages.** Much of my work is interactive web pages (interactive content is also a direction I want to take my own work in): [ten years of sleep records](../projects/sleep-2016-2026.en.html) (3,656 nights), a [social network study](../gallery/research/zhihu-2015.html?lang=en) built on 2015 Zhihu data, and [HN × LLM](https://simoncos-hn-llm-research.vercel.app/). You can click, filter and look around in all of them right on the page.
+**Interactive pages.** Much of my work is interactive web pages (interactive content is also a direction I want to take my own work in): [ten years of sleep records](../gallery/research/sleep-2016-2026.en.html) (3,656 nights), a [social network study](../gallery/research/zhihu-2015.html?lang=en) built on 2015 Zhihu data, and [HN × LLM](https://simoncos-hn-llm-research.vercel.app/). You can click, filter and look around in all of them right on the page.
 
 **[Favorites](../favorites.html?lang=en).** Everything I have rated five stars on Douban, books, films, music and games: 453 in all, 222 of them with a short review. They are an important part of me too, the things I grew up on.
 

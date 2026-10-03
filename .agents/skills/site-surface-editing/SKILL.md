@@ -10,7 +10,7 @@ Use this skill for source-of-truth and verification discipline on the main perso
 ## Source Map
 
 - Every section page is generated; do not hand-edit it.
-  - `index.html`, `gallery.html`, `projects.html`, `projects/sleep-toolkit*.html`, `about.html`, `404.html`: `scripts/build_pages.py` from `data/site.json` and `data/article_index.json`.
+  - `index.html`, `gallery.html`, `apps.html`, `apps/sleep-toolkit*.html`, `about.html`, `404.html`: `scripts/build_pages.py` from `data/site.json` and `data/article_index.json`.
   - `blogs.html` and `blogs/*.html`: `generate_blog_pages.py` from `blogs/*.md` and `templates/`.
   - `favorites.html`, `favorites/*.html`: `scripts/update_favorites_pages.py` from `data/favorites.json`.
 - The shared head, header and footer come from `scripts/site_shell.py` (nav, toggles, footer, meta, script tags) and `data/site_shell.json` (page list, script profiles, cache keys, `site_updated`), applied by `scripts/update_site_shell.py`.

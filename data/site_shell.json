@@ -1,6 +1,6 @@
 {
   "css_version": "20261003u",
-  "js_version": "20261004b",
+  "js_version": "20261004c",
   "site_updated": "2026-10-03",
   "theme_init": "theme-init.js",
   "icons": {
@@ -211,40 +211,40 @@
       "canonical": "gallery.html"
     },
     {
-      "path": "projects.html",
+      "path": "apps.html",
       "asset_prefix": "",
       "script_profile": "basic",
       "section": "work",
-      "canonical": "projects.html"
+      "canonical": "apps.html"
     },
     {
-      "path": "projects/sleep-toolkit.en.html",
+      "path": "apps/sleep-toolkit.en.html",
       "asset_prefix": "../",
       "script_profile": "board",
       "section": "work",
-      "canonical": "projects/sleep-toolkit.en.html",
+      "canonical": "apps/sleep-toolkit.en.html",
       "lang_pair": {
         "lang": "zh",
         "href": "sleep-toolkit.html"
       },
       "alternates": {
-        "en": "projects/sleep-toolkit.en.html",
-        "zh": "projects/sleep-toolkit.html"
+        "en": "apps/sleep-toolkit.en.html",
+        "zh": "apps/sleep-toolkit.html"
       }
     },
     {
-      "path": "projects/sleep-toolkit.html",
+      "path": "apps/sleep-toolkit.html",
       "asset_prefix": "../",
       "script_profile": "board",
       "section": "work",
-      "canonical": "projects/sleep-toolkit.html",
+      "canonical": "apps/sleep-toolkit.html",
       "lang_pair": {
         "lang": "en",
         "href": "sleep-toolkit.en.html"
       },
       "alternates": {
-        "en": "projects/sleep-toolkit.en.html",
-        "zh": "projects/sleep-toolkit.html"
+        "en": "apps/sleep-toolkit.en.html",
+        "zh": "apps/sleep-toolkit.html"
       }
     },
     {

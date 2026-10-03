@@ -8,7 +8,7 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 
 - [Index](https://simoncos.github.io/): Selected work, then the newest articles and works with a topic filter.
 - [About](https://simoncos.github.io/about.html): Short profile, motto and contact links.
-- [Apps (应用)](https://simoncos.github.io/projects.html): Every app in one list, live apps first, then those in progress; each opens to its own page or site.
+- [Apps (应用)](https://simoncos.github.io/apps.html): Every app in one list, live apps first, then those in progress; each opens to its own page or site.
 - [Articles](https://simoncos.github.io/blogs.html): Long-form writing archive, filterable by topic, with series.
 - [Work](https://simoncos.github.io/gallery.html): One view per type: App, Games, Talks, Research and Music.
 - [Favorites (收藏)](https://simoncos.github.io/favorites.html): Every book, film, album and game rated five stars on Douban, newest first, with the short reviews as written there. Page chrome is bilingual; titles and reviews are in Chinese.
@@ -17,9 +17,9 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 
 - [HN Field Notes](https://hn-waywo-dashboard.vercel.app/): Read-only project search, HN source evidence and monthly candidate trends. Updated monthly.
 - [HN × LLM: Model Releases and Discussion](https://simoncos-hn-llm-research.vercel.app/): How Hacker News discusses model releases across 14 AI companies, with source threads and coverage limits. An ongoing study.
-- [Sleep Toolkit project](https://simoncos.github.io/projects/sleep-toolkit.en.html): Project context, report preview, and routes to the tool and the ten-year sleep research.
+- [Sleep Toolkit project](https://simoncos.github.io/apps/sleep-toolkit.en.html): Project context, report preview, and routes to the tool and the ten-year sleep research.
 - [Sleep Toolkit web app](https://sleep-toolkit-production.up.railway.app): Public tool for SleepCycle CSV analysis.
-- [Ten Years of Sleep Records, Analyzed](https://simoncos.github.io/projects/sleep-2016-2026.en.html): Research based on 3,656 nights of personal sleep records, with visual analysis and project context.
+- [Ten Years of Sleep Records, Analyzed](https://simoncos.github.io/gallery/research/sleep-2016-2026.en.html): Research based on 3,656 nights of personal sleep records, with visual analysis and project context.
 
 ## Key artifacts
 

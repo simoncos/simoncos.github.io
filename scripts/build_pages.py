@@ -441,8 +441,8 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
 # ---- Projects ---------------------------------------------------------------
 
 
-def render_projects(config: dict[str, Any], site: dict[str, Any]) -> str:
-    page = page_config(config, "projects.html")
+def render_apps(config: dict[str, Any], site: dict[str, Any]) -> str:
+    page = page_config(config, "apps.html")
     topic = next(topic for topic in site["work_topics"] if topic["id"] == "apps")
     apps = sorted((work for work in site["works"] if work["work_topic"] == topic["id"]),
                   key=lambda work: (bool(work.get("href")), work["date"]), reverse=True)
@@ -485,7 +485,7 @@ def render_projects(config: dict[str, Any], site: dict[str, Any]) -> str:
         config,
         title=tuple(f"{label} · {work_label} · simoncos" for label, work_label in zip(lang_pair(topic["title"]), ("Work", "作品"))),
         description=lang_pair(topic["desc"]),
-        canonical="projects.html",
+        canonical="apps.html",
     )
     return render_document(config, page, head=head, main=main)
 
@@ -932,7 +932,7 @@ def build() -> dict[str, str]:
     outputs = {
         "index.html": render_home(config, site, articles),
         "gallery.html": render_work(config, site),
-        "projects.html": render_projects(config, site),
+        "apps.html": render_apps(config, site),
         "about.html": render_about(config, site),
         "404.html": render_not_found(config),
         "gallery/research/zhihu-2015.html": render_research(config),

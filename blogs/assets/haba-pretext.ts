@@ -4,7 +4,7 @@ import {
     prepareWithSegments,
     setLocale,
     type LayoutCursor,
-} from '../../projects/assets/vendor/pretext/layout.js'
+} from '../../gallery/research/assets/vendor/pretext/layout.js'
 
 type Interval = { start: number; end: number }
 type Obstacle = { left: number; right: number; top: number; bottom: number }

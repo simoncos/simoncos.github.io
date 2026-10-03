@@ -23,8 +23,8 @@
       },
       "img": "gallery/assets/gallery-card-sleep-toolkit-report.webp",
       "href": {
-        "en": "projects/sleep-toolkit.en.html",
-        "zh": "projects/sleep-toolkit.html"
+        "en": "apps/sleep-toolkit.en.html",
+        "zh": "apps/sleep-toolkit.html"
       }
     },
     {
@@ -50,8 +50,8 @@
       },
       "img": "gallery/assets/gallery-card-sleep-scatter.webp",
       "href": {
-        "en": "projects/sleep-2016-2026.en.html",
-        "zh": "projects/sleep-2016-2026.html"
+        "en": "gallery/research/sleep-2016-2026.en.html",
+        "zh": "gallery/research/sleep-2016-2026.html"
       }
     },
     {
@@ -205,7 +205,7 @@
         "en": "Projects from Hacker News's monthly \"What are you working on?\" threads: browse by category, see trends, with the original posts and replies.",
         "zh": "Hacker News 每月「你在做什么」帖里的项目：按类别浏览、看趋势，附原帖和讨论。"
       },
-      "img": "projects/assets/hn-field-notes-cover.png",
+      "img": "apps/assets/hn-field-notes-cover.png",
       "href": "https://hn-waywo-dashboard.vercel.app/"
     },
     {
@@ -491,7 +491,7 @@
             "en": "List",
             "zh": "列表"
           },
-          "href": "projects.html",
+          "href": "apps.html",
           "arrow": "→"
         }
       ]
@@ -584,8 +584,8 @@
             "zh": "应用"
           },
           "href": {
-            "en": "projects/sleep-toolkit.en.html",
-            "zh": "projects/sleep-toolkit.html"
+            "en": "apps/sleep-toolkit.en.html",
+            "zh": "apps/sleep-toolkit.html"
           },
           "arrow": "→"
         }
@@ -623,8 +623,8 @@
       },
       "updated": "2026-05-08",
       "href": {
-        "en": "projects/sleep-toolkit.en.html",
-        "zh": "projects/sleep-toolkit.html"
+        "en": "apps/sleep-toolkit.en.html",
+        "zh": "apps/sleep-toolkit.html"
       },
       "line": {
         "en": "Turns SleepCycle exports into readable reports: JSON, interactive HTML, and PDF.",
@@ -681,8 +681,8 @@
             "zh": "研究 —— 工具背后的故事"
           },
           "href": {
-            "en": "projects/sleep-2016-2026.en.html",
-            "zh": "projects/sleep-2016-2026.html"
+            "en": "gallery/research/sleep-2016-2026.en.html",
+            "zh": "gallery/research/sleep-2016-2026.html"
           },
           "arrow": "→"
         }
@@ -789,7 +789,7 @@
           }
         }
       ],
-      "report_image": "projects/assets/sleep-report-preview.svg",
+      "report_image": "apps/assets/sleep-report-preview.svg",
       "report_caption": {
         "en": "Report preview · May 2026",
         "zh": "报告预览 · 2026 年 5 月"
@@ -800,14 +800,14 @@
         "zh": "十年睡眠档案：数据分析"
       },
       "essay_href": {
-        "en": "projects/sleep-2016-2026.en.html",
-        "zh": "projects/sleep-2016-2026.html"
+        "en": "gallery/research/sleep-2016-2026.en.html",
+        "zh": "gallery/research/sleep-2016-2026.html"
       }
     },
     {
       "id": "hn-field-notes",
       "title": "HN Field Notes",
-      "cover": "projects/assets/hn-field-notes-cover.png",
+      "cover": "apps/assets/hn-field-notes-cover.png",
       "status": {
         "en": "Updated monthly",
         "zh": "每月更新"

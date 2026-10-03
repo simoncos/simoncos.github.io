@@ -15,7 +15,7 @@
         articles: { en: 'Articles', zh: '文章' },
         reading: { en: 'Reading', zh: '阅读' },
         work: { en: 'Work', zh: '作品' },
-        projects: { en: 'Apps', zh: '应用' },
+        apps: { en: 'Apps', zh: '应用' },
         toolkit: { en: 'Sleep Toolkit', zh: 'Sleep Toolkit' },
         music: { en: 'Music', zh: '音乐' },
         favorites: { en: 'Favorites', zh: '收藏' },
@@ -44,9 +44,9 @@
             return make('articles', 'reading');
         if (path === '/gallery.html')
             return make('work', 'work');
-        if (path === '/projects.html')
-            return make('work', 'projects');
-        if (/^\/projects\/sleep-toolkit(\.en)?\.html$/.test(path))
+        if (path === '/apps.html')
+            return make('work', 'apps');
+        if (/^\/apps\/sleep-toolkit(\.en)?\.html$/.test(path))
             return make('work', 'toolkit');
         if (/^\/gallery\/music\/[a-z0-9-]+\.html$/.test(path))
             return make('work', 'music');
