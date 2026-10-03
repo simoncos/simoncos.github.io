@@ -841,7 +841,7 @@ def render_about(config: dict[str, Any], site: dict[str, Any]) -> str:
         elif re.search(r"[\u3400-\u9fff]", en):
             body = en
         else:
-            # One English line for both languages ("Connecting the dots.").
+            # One English line for both languages ("connecting the dots.").
             body = f'<span lang="en">{en}</span>'
         paragraphs.append(f'        <p class="about-p">{body}</p>')
 

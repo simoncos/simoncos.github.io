@@ -10,7 +10,7 @@ Use this skill to keep the personal site reader-facing, broad enough, and semant
 ## Core Rules
 
 - Mark a link from the English interface to a Chinese-only page by appending " (in Chinese)" to its English label, as the Endless Echoes page does for its Douban sources; a work sets `zh_only` in `data/site.json` and `build_pages.py` adds the mark.
-- Keep the motto `Connecting the dots.` on About and in AI-readable orientation files. Do not remove it.
+- Keep the motto `connecting the dots.` on About and in AI-readable orientation files. Do not remove it.
 - The nav is Index, Articles, Work, Favorites, About (首页、文章、作品、收藏、关于), from the 2026-09 v3 redesign. The URLs stay `index.html`, `blogs.html`, `gallery.html`, `favorites.html`, `about.html`; do not rename files to match labels.
 - Keep the person broader than a KM or AI-agent identity. The site can include software, AI, data, research, systems, essays, health/body data, field notes, and tools.
 - Write public page copy for readers, not for designers or site maintainers.

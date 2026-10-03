@@ -2,7 +2,7 @@
 
 > Personal site of simoncos / Che ZHAO: software, AI collaboration, data projects, research, essays, talks, music and field notes.
 
-The motto for this site is "Connecting the dots." The site is static and bilingual. It has five sections: Index, Articles, Work, Favorites and About. Articles and project pages are one language per file: English pages generally end in `.en.html`; Chinese pages use the same slug without `.en.html`. Section pages carry both languages in the HTML and switch with `?lang=zh`.
+The motto for this site is "connecting the dots." The site is static and bilingual. It has five sections: Index, Articles, Work, Favorites and About. Articles and project pages are one language per file: English pages generally end in `.en.html`; Chinese pages use the same slug without `.en.html`. Section pages carry both languages in the HTML and switch with `?lang=zh`.
 
 ## Start here
 

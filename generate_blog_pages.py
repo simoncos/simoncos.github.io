@@ -813,7 +813,9 @@ def wrap_embedded_pages(html_content, is_english=False):
     the CSS lays the cover over the frame, so a swipe scrolls the article and
     a tap opens the page full screen; elsewhere the cover is hidden and the
     frame works as before. The label is the iframe's `data-open-label`, or a
-    generic one.
+    generic one. A paragraph right after the frame that is only a link to the
+    same page duplicates the cover there, so it is marked `embed-fallback` and
+    the CSS hides it wherever the cover shows.
     """
     if 'embedded-page' not in html_content:
         return html_content
@@ -838,6 +840,14 @@ def wrap_embedded_pages(html_content, is_english=False):
         text.string = f'{label} ↗'
         cover.append(text)
         wrapper.append(cover)
+        after = wrapper.find_next_sibling()
+        links = after.find_all('a') if after and after.name == 'p' else []
+        if (
+            len(links) == 1
+            and links[0].get('href') == source
+            and after.get_text(strip=True) == links[0].get_text(strip=True)
+        ):
+            after['class'] = 'embed-fallback'
     return str(soup)
 
 

@@ -4110,6 +4110,19 @@ h2.k {
     background: var(--fill);
 }
 
+/* A film with sound, written as raw <video class="post-film"> in the article:
+   portrait, so its height is capped to keep it on one screen. */
+.post-content video.post-film {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 78vh;
+    margin: 1.4em auto;
+    border-radius: 12px;
+    background: var(--fill);
+}
+
 .post-content figure {
     margin: 1.6em 0;
 }
@@ -4278,6 +4291,10 @@ h2.k {
         background: linear-gradient(to bottom, transparent 55%, color-mix(in srgb, var(--bg) 88%, transparent));
         text-decoration: none;
         -webkit-tap-highlight-color: transparent;
+    }
+
+    .embed-fallback {
+        display: none;
     }
 
     .embed-cover-label {
