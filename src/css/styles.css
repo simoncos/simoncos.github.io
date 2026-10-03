@@ -1655,12 +1655,28 @@ button {
     color: var(--muted);
 }
 
+.wgroup-h {
+    margin: clamp(56px, 8vh, 96px) 0 clamp(20px, 3vh, 32px);
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+/* A type whose works are all in progress opens straight on the group. */
+.topic-head + .wgroup-h {
+    margin-top: 0;
+}
+
+/* Works in progress have no page yet: their cards are not links, so only
+   linked cards answer the pointer. */
 @media (hover: hover) and (pointer: fine) {
-    .wcard:hover .wcard-img img {
+    a.wcard:hover .wcard-img img {
         transform: scale(1.04);
     }
 
-    .wgrid:has(.wcard:hover) .wcard:not(:hover) {
+    .wgrid:has(a.wcard:hover) a.wcard:not(:hover) {
         opacity: 0.45;
     }
 
