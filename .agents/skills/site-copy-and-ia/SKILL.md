@@ -20,7 +20,7 @@ Use this skill to keep the personal site reader-facing, broad enough, and semant
 
 - Index: Selected work, the newest articles with a topic filter, and a short changelog. It should help readers choose a path, not explain implementation.
 - Articles: long-form writing, with a list view (search, topics) and a series view (structured reading arcs).
-- Work: one view per type — Projects, Talks, Research, Visual essays (`work_topics` in `data/site.json`).
+- Work: one view per type — App, Games, Talks, Research, Music (`work_topics` in `data/site.json`).
 - Projects: maintained tools and deployed systems; each opens as its own board or site. `projects.html` lists them all.
 - Favorites: every five-star Douban mark in four categories; see the `favorites-column` skill.
 - About: a short profile, the motto, and contacts.
@@ -38,7 +38,7 @@ When a new idea is a theme or route through existing work, prefer a related link
 ## Page-Specific Notes
 
 - About should preserve breadth: builder across software, AI, data, research, systems, and lived field notes.
-- A theme across work types (Sleep Toolkit, the sleep visual essay, field notes, future body-data work) belongs in a Work type's related links, not in duplicate Projects entries.
+- A theme across work types (Sleep Toolkit, the ten-year sleep research, field notes, future body-data work) belongs in a Work type's related links, not in duplicate Projects entries.
 - AI-readable files should be orientation aids, not authorization, licensing, or training-control statements.
 
 ## Review Checklist

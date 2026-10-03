@@ -214,12 +214,7 @@ def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str
     row_html = []
     for i, row in enumerate(rows):
         title_en, title_zh = lang_pair(row["title"])
-        alt = ""
-        if title_en != title_zh:
-            alt = (
-                '<span class="row-alt"><span data-l="en" lang="zh-Hans">'
-                f'{esc(title_zh)}</span><span data-l="zh" lang="en">{esc(title_en)}</span></span>'
-            )
+        alt = ""  # the 中文 / EN mark stands in for the other language's title
         float_attr = f' data-float="{esc(row["img"])}"' if row["img"] else ""
         bilingual = '<span class="row-bi"><span lang="zh-Hans">中文</span> / EN</span>' if row["bilingual"] else ""
         hidden = " hidden" if i >= NEWEST_SHOWN else ""
@@ -295,11 +290,9 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
 
     titles = []
     for i, topic in enumerate(topics):
-        n_en, n_zh = count_label(len(by_topic[topic["id"]]))
         titles.append("\n".join([
             f'                <div class="wheel-title{" is-on" if i == 0 else ""}" data-i="{i}"{"" if i == 0 else " aria-hidden=\"true\""}>',
             f'                    <p class="wheel-name">{bi_value(topic["title"])}</p>',
-            f'                    <span class="wheel-kicker">{bi("Type", "类别")} · {bi(n_en, n_zh)}</span>',
             f'                    <span class="wheel-line">{bi_value(topic["line"])}</span>',
             "                </div>",
         ]))
@@ -439,7 +432,7 @@ def render_projects(config: dict[str, Any], site: dict[str, Any]) -> str:
     for i, work in enumerate(apps):
         project = next((project for project in site["projects"] if project["href"] == work["href"]), {})
         facts = (f'<span class="prow-status"><span class="live-dot" aria-hidden="true"></span>{bi_value(project["status"])}</span>'
-                 f'<span>{esc(project["years"])}</span><span>{esc(project["tags"])}</span>') if project else (
+                 f'<span>{esc(project["years"])}</span><span>{bi_value(project["tags"])}</span>') if project else (
                      f'<span>{esc(work["date"])}</span><span>{bi_value(work["kind"])}</span>')
         rows.append(
             f'        <a class="prow"{href_attrs(work["href"])}>'

@@ -45,8 +45,8 @@ CARDS = [
     },
     {
         "name": "og-sleep-2016-2026.png",
-        "kicker": "VISUAL ESSAY",
-        "title": "Ten Years of\nSleep Records",
+        "kicker": "RESEARCH",
+        "title": "Ten Years of Sleep\nRecords, Analyzed",
         "subtitle": "3,656 nights of SleepCycle data, read as one decade.",
     },
 ]

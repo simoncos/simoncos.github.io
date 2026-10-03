@@ -17,7 +17,7 @@ The motto for this site is "Connecting the dots." The site is static, bilingual,
 
 - [HN Field Notes](https://hn-waywo-dashboard.vercel.app/): Read-only project search, HN source evidence and monthly candidate trends. Updated monthly.
 
-- [Sleep Toolkit project](https://simoncos.github.io/projects/sleep-toolkit.en.html): Project context, report preview, and routes to the tool and data essay.
+- [Sleep Toolkit project](https://simoncos.github.io/projects/sleep-toolkit.en.html): Project context, report preview, and routes to the tool and the ten-year sleep research.
 - [Sleep Toolkit web app](https://sleep-toolkit-production.up.railway.app): Public tool for SleepCycle CSV analysis.
 - [Ten Years of Sleep Records, Analyzed](https://simoncos.github.io/projects/sleep-2016-2026.en.html): Research based on 3,656 nights of personal sleep records, with visual analysis and project context.
 
