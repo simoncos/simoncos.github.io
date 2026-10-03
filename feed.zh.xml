@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Sat, 03 Oct 2026 21:26:13 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>个人网站，Remake</title><link>https://simoncos.github.io/blogs/personal-site-remake.html</link><guid>https://simoncos.github.io/blogs/personal-site-remake.html</guid><pubDate>Sat, 03 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>个人网站，Remake</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Sat, 03 Oct 2026 23:54:15 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>个人网站，Remake</title><link>https://simoncos.github.io/blogs/personal-site-remake.html</link><guid>https://simoncos.github.io/blogs/personal-site-remake.html</guid><pubDate>Sat, 03 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>个人网站，Remake</h1>
 <p>九月到今天，我把网站从头到尾重做了一遍，顺手做了一支 40 秒的介绍视频。代码大部分是 Claude 和 Codex 写的，我负责提要求、挑毛病、拍板。这次 remake 不只是外在的翻新，也是对自己的一次梳理和 re-branding。这篇文章做点小小记录。</p>
 <video aria-label="网站介绍视频，40 秒：睡眠数据、演讲、作品轮盘、《晴天》、漫无止尽的回响、文章、哈巴雪山和收藏，最后所有的点连成网站的名字" class="post-film" controls="" height="1280" playsinline="" poster="https://simoncos.github.io/blogs/assets/images/personal-site-remake/intro.zh.jpg" preload="none" src="https://simoncos.github.io/blogs/assets/images/personal-site-remake/intro.zh.mp4" width="720"></video>
 <p><small>视频里的钢琴采样：<a href="https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html">YDP Grand Piano</a>，Zenph Studios 录制，FreePats 项目整理，<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。</small></p>
@@ -18,12 +18,16 @@
 <p>视觉改了很多轮。一开始是暗绿色，不喜欢；封面图一开始是磁带的意象，我第一眼看成了皮带；于是按我要求改成花、钢琴和埃舍尔式的空间。整个路线图是一朵玫瑰的形状，每首歌也是一朵花，借鉴了陈奕迅Fear and Dreams 演唱会的艺术概念。每首歌曲被猜中时会点亮花朵，同时响起一个和弦。这些和弦从起点的 Csus2 走到最后会落在 C 上。</p>
 <p>回响本身也变为了回响。</p>
 <h2>还在生长的项目</h2>
-<p>作品里一共有七张点不进去的卡片。这些是过去几个月一直在做、但还没到能拿出来的程度的东西：</p>
+<p>作品里一共有十一张点不进去的卡片。这些是过去几个月一直在做、但还没到能拿出来的程度的东西：</p>
 <ul>
 <li><strong>Daily Oracle</strong>：每天抽一张卡，去现实里做一件小事，回来记下。日子久了，卡册会慢慢扩展，花园会逐渐盛放。</li>
 <li><strong>Vocal Coach</strong>：练音准的手机应用，跟着目标音唱，实时看自己偏高还是偏低。《回响》和介绍视频里的钢琴声，最早来自我做这个app时找的真实采样。</li>
 <li><strong>Paper Research Platform</strong>：给一批论文提同一组问题，模型逐篇作答并附原文证据，人工核对后导出成表。</li>
 <li><strong>徒步规划器</strong>：导入路线，按分段看距离、爬升和补给，走完再记一笔。</li>
+<li><strong>微信聊天导出器</strong>：在自己的电脑上，把自己的微信聊天记录导出成可搜索的文本，每条消息都保留时间和出处。</li>
+<li><strong>Birdie</strong>：养鸟的手机应用，每只鸟一份档案，体重、饮食、状态记在同一本日记里。</li>
+<li><strong>肌骨不适记录</strong>：记日常的颈肩腰膝不适，先对照哪些情况该去就医，再一天天记下变化，看医生时带上一份整理好的摘要。</li>
+<li><strong>Photo Curator</strong>：导入一批照片，归成几组相册候选，再帮你挑片、排顺序。</li>
 <li><strong>三更账</strong>：一个武侠解谜 RPG 原型，在一个小镇里走动、问话、收集线索，当面对质。</li>
 <li><strong>谜案圆桌</strong>：一个人也能玩的剧本杀，AI 主持人和其他角色陪你搜证、讨论、投票。</li>
 <li>一个暂不公布的项目，是 Agentic 投资研究方向。</li>

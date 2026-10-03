@@ -325,6 +325,78 @@
       "img": "gallery/assets/wip/paper-research.webp"
     },
     {
+      "id": "wechat-exporter",
+      "kind": {
+        "en": "App",
+        "zh": "应用"
+      },
+      "work_topic": "projects",
+      "date": "2026",
+      "title": {
+        "en": "WeChat Chat Exporter",
+        "zh": "微信聊天导出器"
+      },
+      "desc": {
+        "en": "Export your own WeChat chats, on your own computer, into searchable text where every message keeps its time and where it came from.",
+        "zh": "在自己的电脑上，把自己的微信聊天记录导出成可搜索的文本，每条消息都保留时间和出处。"
+      },
+      "img": "gallery/assets/wip/wechat-exporter.webp"
+    },
+    {
+      "id": "birdie",
+      "kind": {
+        "en": "App",
+        "zh": "应用"
+      },
+      "work_topic": "projects",
+      "date": "2026",
+      "title": {
+        "en": "Birdie",
+        "zh": "Birdie"
+      },
+      "desc": {
+        "en": "A phone app for keeping pet birds: a profile for each bird, one diary for weight, food and mood, and care notes for common species.",
+        "zh": "养鸟的手机应用：每只鸟一份档案，体重、饮食、状态记在同一本日记里，还能查常见鸟种的照护要点。"
+      },
+      "img": "gallery/assets/wip/birdie.webp"
+    },
+    {
+      "id": "ortho-rehab",
+      "kind": {
+        "en": "App",
+        "zh": "应用"
+      },
+      "work_topic": "projects",
+      "date": "2026",
+      "title": {
+        "en": "Muscle & Joint Log",
+        "zh": "肌骨不适记录"
+      },
+      "desc": {
+        "en": "For everyday neck, back and joint strain: check first for signs that mean see a doctor, log how it changes day by day, and bring a summary to the appointment.",
+        "zh": "记日常的颈肩腰膝不适：先对照哪些情况该去就医，再一天天记下变化，看医生时带上一份整理好的摘要。"
+      },
+      "img": "gallery/assets/wip/ortho-rehab.webp"
+    },
+    {
+      "id": "photo-curation",
+      "kind": {
+        "en": "App",
+        "zh": "应用"
+      },
+      "work_topic": "projects",
+      "date": "2026",
+      "title": {
+        "en": "Photo Curator",
+        "zh": "Photo Curator"
+      },
+      "desc": {
+        "en": "Import a batch of photos; it reads their shooting details and colours, sorts them into album ideas, and helps you pick the frames and put them in order.",
+        "zh": "导入一批照片，读出拍摄信息和色调，归成几组相册候选，再帮你挑片、排顺序。"
+      },
+      "img": "gallery/assets/wip/photo-curation.webp"
+    },
+    {
       "id": "wuxia",
       "kind": {
         "en": "Game",
