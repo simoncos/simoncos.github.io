@@ -813,65 +813,84 @@
       {
         "en": [
           [
-            "My interests wander: ten years of "
+            "I’m into the "
           ],
           [
-            "sleep",
-            "sleep"
-          ],
-          [
-            " records, a climb up "
-          ],
-          [
-            "Haba Snow Mountain",
+            "outdoors",
             "haba"
           ],
           [
-            ", and, years ago, "
+            ", "
           ],
           [
-            "a song",
+            "music",
             "song"
           ],
           [
-            " I wrote."
+            ", "
+          ],
+          [
+            "reading",
+            "books"
+          ],
+          [
+            ", "
+          ],
+          [
+            "games",
+            "fav_games"
+          ],
+          [
+            " and more."
           ]
         ],
         "zh": [
           [
-            "兴趣比较杂：记录了十年的"
+            "兴趣有"
           ],
           [
-            "睡眠",
-            "sleep"
-          ],
-          [
-            "，爬过"
-          ],
-          [
-            "哈巴雪山",
+            "户外",
             "haba"
           ],
           [
-            "，十几年前还写过"
+            "、"
           ],
           [
-            "一首歌",
+            "音乐",
             "song"
           ],
           [
-            "。"
+            "、"
+          ],
+          [
+            "阅读",
+            "books"
+          ],
+          [
+            "、"
+          ],
+          [
+            "游戏",
+            "fav_games"
+          ],
+          [
+            "等。"
           ]
         ]
       }
     ],
     "links": {
-      "sleep": {
-        "img": "gallery/assets/gallery-card-sleep-scatter.webp",
-        "href": {
-          "en": "projects/sleep-2016-2026.en.html",
-          "zh": "projects/sleep-2016-2026.html"
-        }
+      "psd": {
+        "img": "blogs/assets/images/problem-solving-and-design-1-situation/3ac53d9fead8d368e660caa585da814a.jpg",
+        "href": "blogs.html#series-problem-solving-and-design"
+      },
+      "song": {
+        "img": "gallery/assets/gallery-card-qingtian.webp",
+        "href": "gallery/music/qingtian.html"
+      },
+      "books": {
+        "img": "favorites/assets/covers/books.webp",
+        "href": "favorites/books.html"
       },
       "haba": {
         "img": "gallery/assets/gallery-card-haba-field-v2.jpg",
@@ -880,13 +899,9 @@
           "zh": "blogs/my-haba-snow-mountain-journey.html"
         }
       },
-      "psd": {
-        "img": "blogs/assets/images/problem-solving-and-design-1-situation/3ac53d9fead8d368e660caa585da814a.jpg",
-        "href": "blogs.html#series-problem-solving-and-design"
-      },
-      "song": {
-        "img": "gallery/assets/gallery-card-qingtian.webp",
-        "href": "gallery/music/qingtian.html"
+      "fav_games": {
+        "img": "favorites/assets/covers/games.webp",
+        "href": "favorites/games.html"
       }
     },
     "email": "l.z.simon@hotmail.com",

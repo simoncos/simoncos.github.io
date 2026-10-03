@@ -1156,6 +1156,11 @@ button {
     transition: text-underline-offset 0.3s;
 }
 
+/* A linked Chinese word stays on one line (游戏, not 游 / 戏). */
+.about-p a:lang(zh) {
+    white-space: nowrap;
+}
+
 .about-p a:hover {
     text-underline-offset: 0.26em;
 }
@@ -5263,8 +5268,7 @@ h2.k {
 :is(
     .post-content :is(p, li, dd),
     .arow-ex-body p,
-    .fav-review,
-    .about-p
+    .fav-review
 ):lang(zh) {
     text-align: justify;
 }
