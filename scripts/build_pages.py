@@ -867,6 +867,13 @@ def render_about(config: dict[str, Any], site: dict[str, Any]) -> str:
         f'<span class="copy-fail">{bi("Copy failed", "复制失败")}</span></span></button>',
         f"        {contacts}",
         "    </section>",
+        *([
+            # Che's WeChat official account, the same code as on the talk's last slide.
+            '    <figure class="about-wechat">'
+            f'<img src="{esc(about["wechat_qr"])}" width="320" height="320" alt="" decoding="async" loading="lazy">'
+            f'<figcaption>{bi("WeChat official account (in Chinese)", "微信公众号")}'
+            f'<span class="about-wechat-hint">{bi("Scan in WeChat", "微信扫一扫，或长按识别")}</span></figcaption></figure>',
+        ] if about.get("wechat_qr") else []),
         "</main>",
     ])
     head = render_meta(
