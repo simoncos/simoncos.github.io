@@ -652,6 +652,68 @@
           "type": "string",
           "minLength": 1,
           "description": "作者提供的原文引用，独立于谜面展示。"
+        },
+        "clue_format": {
+          "enum": [
+            "prose",
+            "quote"
+          ],
+          "description": "整段谜面引用歌词时用 quote；原文仍只维护在 clue 中。省略等同 prose。"
+        },
+        "presentation": {
+          "type": "object",
+          "properties": {
+            "flower": {
+              "enum": [
+                "poppy",
+                "blue",
+                "ivory",
+                "dahlia"
+              ]
+            },
+            "flower_reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "chord": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "midi": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 48,
+                    "maximum": 72
+                  },
+                  "minItems": 3,
+                  "maxItems": 4,
+                  "uniqueItems": true,
+                  "description": "实际同时发声的配器，MIDI 由低到高；C4 = 60。"
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "name",
+                "midi",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "flower",
+            "flower_reason",
+            "chord"
+          ],
+          "additionalProperties": false,
+          "description": "按歌曲意象设计的视觉与和声，不表示原曲调性。省略时使用蓝花与 Csus2。"
         }
       },
       "required": [

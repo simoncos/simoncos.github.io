@@ -48,7 +48,20 @@
       "position": [
         200,
         285
-      ]
+      ],
+      "presentation": {
+        "flower": "blue",
+        "flower_reason": "示例：入口保留夜色，终点转为明亮。",
+        "chord": {
+          "name": "Csus2",
+          "midi": [
+            48,
+            55,
+            62
+          ],
+          "reason": "示例：从悬置走向稳定；请按新谜题的意象重新选择。"
+        }
+      }
     },
     {
       "id": "song-002",
@@ -78,7 +91,21 @@
       "position": [
         750,
         285
-      ]
+      ],
+      "presentation": {
+        "flower": "ivory",
+        "flower_reason": "示例：入口保留夜色，终点转为明亮。",
+        "chord": {
+          "name": "C",
+          "midi": [
+            48,
+            55,
+            64,
+            72
+          ],
+          "reason": "示例：从悬置走向稳定；请按新谜题的意象重新选择。"
+        }
+      }
     }
   ]
 }
