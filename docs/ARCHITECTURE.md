@@ -19,7 +19,7 @@ GitHub Pages serves the `master` tree as-is, with no build step, so generated HT
 | `index.html`, `gallery.html`, `projects.html`, `projects/sleep-toolkit*.html`, `gallery/music/*.html`, `about.html`, `404.html` | `scripts/build_pages.py` | `data/site.json`, `data/article_index.json`, `gallery/music/*.peaks.json` |
 | `favorites.html`, `favorites/*.html` | `scripts/update_favorites_pages.py` | `data/favorites.json` |
 | `gallery/research/zhihu-2015.html` | `scripts/build_zhihu_research.py`, called by `build_pages.py` | `data/zhihu-2015.json` and bilingual editorial copy |
-| `gallery/music/endless-echoes.html` and its graph cover | `scripts/build_music_riddle.py`, called by `build_pages.py` | `data/music-riddle.json`; field contract and editing workflow in `docs/MUSIC_RIDDLE_DATA.md` |
+| `gallery/music/endless-echoes.html` and its graph cover | `scripts/build_music_riddle.py`, called by `build_pages.py` | `data/music-riddle.json`; [field contract](MUSIC_RIDDLE_DATA.md) and [design guide](ENDLESS_ECHOES_DESIGN.md) |
 | Shared head, header and footer blocks on every page above | `scripts/update_site_shell.py` | `scripts/site_shell.py`, `data/site_shell.json` |
 
 A new generated page must exist before `update_site_shell.py` will accept its entry in `data/site_shell.json`, so run `python3 scripts/build_pages.py` once before the first `make generate`.

@@ -2,6 +2,8 @@
 
 **回响的唯一歌曲数据源是 [`data/music-riddle.json`](../data/music-riddle.json)。我们以后交换、确认和修改这份 JSON，不另维护一份歌名表。** 页面生成器和答案判断直接读取这里的数据。
 
+整体创作方向、视觉与声音取舍、移动交互及扩展验收见[《回响》设计思路与维护指引](ENDLESS_ECHOES_DESIGN.md)。本文件负责字段约定，两者各有分工。
+
 - [完整数据](../data/music-riddle.json)：原存档 26 首与作者扩展，共 36 个常规节点、47 条路径，另有 1 个全收集解锁的隐藏尾声；包含线索、别名及核验记录。
 - [字段规范 / JSON Schema](../data/music-riddle.schema.json)：支持 JSON Schema 的编辑器可据此补全字段、提示结构错误。
 - [新谜题模板](templates/music-riddle.json)：最小的「起点 → 终点」示例，复制后填写即可建立另一份谜题数据。
