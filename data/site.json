@@ -257,7 +257,7 @@
     },
     {
       "article": "exformation-and-information",
-      "img": "gallery/assets/gallery-card-designing-design.webp",
+      "img": "gallery/assets/gallery-card-designing-design-v2.webp",
       "desc": {
         "en": "Reading Kenya Hara: exformation makes the known unknown again, and stepping away from the screen is the other half.",
         "zh": "读原研哉：Exformation 把已知的事物重新变得未知，离开屏幕、用身体感受世界是另一半。"
@@ -272,12 +272,12 @@
         "zh": "应用"
       },
       "line": {
-        "en": "Tools I built and still maintain.",
-        "zh": "我做的、还在维护的工具。"
+        "en": "Apps I've made.",
+        "zh": "我做的应用。"
       },
       "desc": {
-        "en": "Tools I built and still maintain.",
-        "zh": "我做的、还在维护的工具。"
+        "en": "Apps I've made.",
+        "zh": "我做的应用。"
       },
       "related": [
         {
@@ -301,12 +301,12 @@
         "zh": "游戏"
       },
       "line": {
-        "en": "Puzzles you can play.",
-        "zh": "可以玩的谜题。"
+        "en": "Games I've made.",
+        "zh": "我做的游戏。"
       },
       "desc": {
-        "en": "Puzzles solved by reading clues and making choices.",
-        "zh": "读线索、做选择，一步步解开的谜题。"
+        "en": "Games I've made.",
+        "zh": "我做的游戏。"
       }
     },
     {
