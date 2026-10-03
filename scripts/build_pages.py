@@ -297,12 +297,12 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
             "                </div>",
         ]))
 
-    # Each type shows one picture: the work named by the type's `cover`, else
+    # Each type shows one picture: the work named by the type's `wheel_work`, else
     # its newest. Three laps of the types make a ring big enough to read as a
     # wheel.
     def cover_work(topic: dict[str, Any]) -> dict[str, Any]:
         works = by_topic[topic["id"]]
-        return next((work for work in works if work["id"] == topic.get("cover")), works[0])
+        return next((work for work in works if work["id"] == topic.get("wheel_work")), works[0])
 
     cards = []
     ring = len(topics) * 3
