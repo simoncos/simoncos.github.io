@@ -91,6 +91,8 @@
     }
     catch { }
     const piano = new EchoPiano.Player(status => { soundStatus = status; renderSound(); });
+    function preparePiano() { if (soundEnabled && !document.hidden)
+        void piano.prepare(); }
     function renderSound() {
         const button = root.querySelector('[data-sound]');
         button.disabled = soundStatus === 'unavailable';
@@ -458,8 +460,10 @@
         hint.open = false; render(); });
     root.querySelector('[data-sound]').addEventListener('click', () => {
         soundEnabled = soundStatus === 'failed' ? true : !soundEnabled;
-        if (soundEnabled)
+        if (soundEnabled) {
             playChord(trail.current);
+            preparePiano();
+        }
         else
             piano.stop();
         try {
@@ -470,7 +474,9 @@
     });
     root.querySelector('[data-replay]').addEventListener('click', () => playChord(trail.current));
     document.addEventListener('visibilitychange', () => { if (document.hidden)
-        piano.stop(); });
+        piano.stop();
+    else
+        preparePiano(); });
     root.querySelector('[data-map-zoom]').addEventListener('click', () => {
         zoomed = !zoomed;
         render();
@@ -499,4 +505,5 @@
     save();
     render();
     centerCurrentFlower();
+    preparePiano();
 })();

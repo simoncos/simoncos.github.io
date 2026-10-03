@@ -74,6 +74,7 @@
     let soundEnabled=true,soundStatus:EchoPiano.Status='ready';
     try{soundEnabled=localStorage.getItem(soundKey)!=='off';}catch{}
     const piano=new EchoPiano.Player(status=>{soundStatus=status;renderSound();});
+    function preparePiano(){if(soundEnabled&&!document.hidden)void piano.prepare();}
     function renderSound(){
         const button=root.querySelector<HTMLButtonElement>('[data-sound]');
         button.disabled=soundStatus==='unavailable';
@@ -313,12 +314,12 @@
     reveal.addEventListener('toggle',()=>{if(reveal.open)hint.open=false;render();});
     root.querySelector('[data-sound]').addEventListener('click',()=>{
         soundEnabled=soundStatus==='failed'?true:!soundEnabled;
-        if(soundEnabled)playChord(trail.current);else piano.stop();
+        if(soundEnabled){playChord(trail.current);preparePiano();}else piano.stop();
         try{localStorage.setItem(soundKey,soundEnabled?'on':'off');}catch{}
         renderSound();
     });
     root.querySelector('[data-replay]').addEventListener('click',()=>playChord(trail.current));
-    document.addEventListener('visibilitychange',()=>{if(document.hidden)piano.stop();});
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)piano.stop();else preparePiano();});
     root.querySelector('[data-map-zoom]').addEventListener('click',()=>{
         zoomed=!zoomed;render();centerCurrentFlower();
     });
@@ -335,4 +336,5 @@
     });
     window.SITE_SHELL?.onLang?.(render);
     syncBonus();save();render();centerCurrentFlower();
+    preparePiano();
 })();
