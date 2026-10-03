@@ -782,22 +782,16 @@
       "text": "趙澈",
       "lang": "zh-Hant"
     },
+    "motto": "Connecting the dots.",
     "paragraphs": [
       {
         "en": [
           [
-            "Full-stack builder working on AI and data. I make "
+            "Full-stack developer in AI and data. I care about AI, "
           ],
           [
-            "small tools",
-            "toolkit"
-          ],
-          [
-            " for myself, and write notes on "
-          ],
-          [
-            "AI agents",
-            "hermes"
+            "problem solving and design",
+            "psd"
           ],
           [
             "."
@@ -805,58 +799,11 @@
         ],
         "zh": [
           [
-            "做 AI 和数据方向的全栈开发。平时会给自己做些"
+            "做 AI 和数据方向的全栈开发，关注 AI、"
           ],
           [
-            "小工具",
-            "toolkit"
-          ],
-          [
-            "，也写一些对 "
-          ],
-          [
-            "Agent",
-            "hermes"
-          ],
-          [
-            " 的观察。"
-          ]
-        ]
-      },
-      {
-        "en": [
-          [
-            "I’ve tracked my own "
-          ],
-          [
-            "sleep",
-            "sleep"
-          ],
-          [
-            " since 2016, and I’ve climbed "
-          ],
-          [
-            "Haba Snow Mountain",
-            "haba"
-          ],
-          [
-            "."
-          ]
-        ],
-        "zh": [
-          [
-            "从 2016 年开始记录自己的"
-          ],
-          [
-            "睡眠",
-            "sleep"
-          ],
-          [
-            "，也爬过"
-          ],
-          [
-            "哈巴雪山",
-            "haba"
+            "问题解决和设计",
+            "psd"
           ],
           [
             "。"
@@ -866,28 +813,59 @@
       {
         "en": [
           [
-            "Connecting the dots."
+            "My interests wander: ten years of "
+          ],
+          [
+            "sleep",
+            "sleep"
+          ],
+          [
+            " records, a climb up "
+          ],
+          [
+            "Haba Snow Mountain",
+            "haba"
+          ],
+          [
+            ", and, years ago, "
+          ],
+          [
+            "a song",
+            "song"
+          ],
+          [
+            " I wrote."
           ]
         ],
         "zh": [
           [
-            "Connecting the dots."
+            "兴趣比较杂：记录了十年的"
+          ],
+          [
+            "睡眠",
+            "sleep"
+          ],
+          [
+            "，爬过"
+          ],
+          [
+            "哈巴雪山",
+            "haba"
+          ],
+          [
+            "，十几年前还写过"
+          ],
+          [
+            "一首歌",
+            "song"
+          ],
+          [
+            "。"
           ]
         ]
       }
     ],
     "links": {
-      "toolkit": {
-        "img": "gallery/assets/gallery-card-sleep-toolkit-report.webp",
-        "href": {
-          "en": "projects/sleep-toolkit.en.html",
-          "zh": "projects/sleep-toolkit.html"
-        }
-      },
-      "hermes": {
-        "img": "gallery/assets/gallery-card-hermes-report.webp",
-        "href": "gallery/research/hermes-agent-hv-analysis.html"
-      },
       "sleep": {
         "img": "gallery/assets/gallery-card-sleep-scatter.webp",
         "href": {
@@ -901,6 +879,14 @@
           "en": "blogs/my-haba-snow-mountain-journey.en.html",
           "zh": "blogs/my-haba-snow-mountain-journey.html"
         }
+      },
+      "psd": {
+        "img": "blogs/assets/images/problem-solving-and-design-1-situation/3ac53d9fead8d368e660caa585da814a.jpg",
+        "href": "blogs.html#series-problem-solving-and-design"
+      },
+      "song": {
+        "img": "gallery/assets/gallery-card-qingtian.webp",
+        "href": "gallery/music/qingtian.html"
       }
     },
     "email": "l.z.simon@hotmail.com",

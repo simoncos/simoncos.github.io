@@ -854,6 +854,8 @@ def render_about(config: dict[str, Any], site: dict[str, Any]) -> str:
         '<main id="main" class="about enter" tabindex="-1">',
         '    <section class="about-prose">',
         f'        <h1 class="visually-hidden">{bi("About", "关于")}</h1>',
+        # The motto leads the page, set largest: Che's own line, in English in both languages.
+        f'        <p class="about-motto" lang="en">{esc(about["motto"])}</p>',
         f'        <p class="about-who">{native_name(bi_value(about["who"]), about.get("native_name"))}</p>',
         *paragraphs,
         "    </section>",

@@ -1124,6 +1124,15 @@ button {
     gap: 28px;
 }
 
+.about-motto {
+    font-size: clamp(44px, 7.4vw, 112px);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    margin: 0 0 clamp(4px, 2vh, 24px);
+    text-wrap: balance;
+}
+
 .about-who {
     font-size: 14px;
     color: var(--muted);
