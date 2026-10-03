@@ -1,6 +1,6 @@
 // Work: a wheel of work types that turns by scroll, drag, arrow keys or the
 // buttons, and one view per type. The type views are real sections with ids,
-// so #projects, #talks and so on open them directly and survive a reload.
+// so #apps, #talks and so on open them directly and survive a reload.
 (function () {
     const shell = window.SITE_SHELL;
     const work = document.querySelector<HTMLElement>('[data-work]');

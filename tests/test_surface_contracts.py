@@ -132,7 +132,7 @@ class SurfaceContractTests(unittest.TestCase):
         self.assertEqual(len(re.findall(r'class="sel-bar(?: is-on)?"', html)), len(site["featured"]))
 
     def test_legacy_series_and_tags_redirect_into_articles(self):
-        for page, fragment in (("series.html", "reading-paths"), ("tags.html", "topics")):
+        for page, fragment in (("series.html", "series"), ("tags.html", "topics")):
             with self.subTest(page=page):
                 html = (ROOT / page).read_text()
                 self.assertEqual(sum(1 for tag, _ in tags(html) if tag == "main"), 1)
