@@ -16,7 +16,10 @@ one, writes a web copy and points the article at it:
 - an animated GIF becomes a silent looping H.264 MP4 (CRF 23, about a
   twentieth of the GIF), with its first frame as a JPEG poster of the same
   name. The article keeps `![alt](<name>.mp4)`; generate_blog_pages.py renders
-  it as a video that plays like the GIF did.
+  it as a video that plays like the GIF did;
+- a still wider than 1080 px also gets a 1080 px WebP beside it
+  (scripts/image_variants.py), which the generated page offers to phones
+  through srcset.
 
 Copies land in blogs/assets/images/<slug>/<R2 file name>.jpg (or .mp4), and every
 Markdown file of the article (both languages) is rewritten to use them. Run
@@ -42,6 +45,9 @@ import tempfile
 import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from image_variants import write_variant  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 BLOGS_DIR = ROOT / "blogs"
@@ -247,6 +253,9 @@ def localize(slug: str, dry_run: bool) -> bool:
         target.write_bytes(data)
         if poster is not None:
             target.with_suffix(".jpg").write_bytes(poster)
+        else:
+            # The phone-size copy that generate_blog_pages.py offers in srcset.
+            write_variant(target, force=True)
         replacements[url] = target.relative_to(BLOGS_DIR).as_posix()
         warning = "  ! over 1 MB, make check will fail" if len(data) > MAX_BYTES else ""
         print(f"  {target.name}: {human(len(original))} -> {human(len(data))}, {how}{warning}")
