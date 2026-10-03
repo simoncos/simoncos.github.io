@@ -173,8 +173,8 @@
         "zh": "读线索，猜下一首歌，在 36 首歌之间走出自己的路线。"
       },
       "desc": {
-        "en": "Read a clue, guess the next song, and find your own route through 36 songs. A 2017 riddle from a Douban list, rebuilt to play.",
-        "zh": "读线索，猜下一首歌，在 36 首歌之间走出自己的路线。2017 年的豆列谜题，重新做成了可以玩的版本。"
+        "en": "Read a clue, guess the next song, and find your own route through 36 songs. A 2017 riddle from Xiami playlist notes, backed up on Douban, rebuilt to play.",
+        "zh": "读线索，猜下一首歌，在 36 首歌之间走出自己的路线。2017 年藏在虾米歌单推荐语里的谜题，靠豆列备份，重新做成了可以玩的版本。"
       },
       "img": "gallery/music/assets/endless-echoes-cover.svg?v=20261002j",
       "href": "gallery/music/endless-echoes.html",
@@ -398,7 +398,7 @@
       "id": "projects",
       "wheel_work": "hn-llm-research",
       "title": {
-        "en": "App",
+        "en": "Apps",
         "zh": "应用"
       },
       "line": {
@@ -762,8 +762,8 @@
       },
       "years": "2026 —",
       "tags": {
-        "en": "Research · Hacker News · Web",
-        "zh": "研究 · Hacker News · Web"
+        "en": "Explorer · Hacker News · Web",
+        "zh": "交互探索 · Hacker News · Web"
       },
       "updated": "2026-10-02",
       "href": "https://simoncos-hn-llm-research.vercel.app/",

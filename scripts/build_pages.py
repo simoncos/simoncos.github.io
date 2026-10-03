@@ -352,7 +352,8 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
             # A work in progress has no page yet, so its card is not a link.
             done = bool(work.get("href"))
             tag, attrs = ("a", href_attrs(work["href"])) if done else ("div", "")
-            when = esc(work["date"][:4]) if done else f'{esc(work["date"][:4])} · {bi("In progress", "在做")}'
+            # Works in progress sit under their own 在做 heading, so the card shows only the year.
+            when = esc(work["date"][:4])
             return (
                 f'                <{tag} class="wcard{"" if done else " is-wip"}"{attrs}>'
                 f'<span class="wcard-img"><img src="{esc(work["img"])}" alt="" decoding="async" loading="lazy"></span>'
