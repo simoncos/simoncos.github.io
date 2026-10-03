@@ -1167,6 +1167,36 @@ button {
     gap: 10px;
 }
 
+.about-wechat {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 28px 0 0;
+}
+
+.about-wechat img {
+    width: 112px;
+    height: 112px;
+    padding: 6px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid var(--line);
+}
+
+.about-wechat figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.about-wechat-hint {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+}
+
 .copy-btn {
     display: flex;
     align-items: center;
