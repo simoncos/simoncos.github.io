@@ -1,6 +1,6 @@
 "use strict";
 // @ts-nocheck
-// Extracted from inline scripts in projects/sleep-2016-2026.html. Keep execution order intact.
+// Extracted from inline scripts in gallery/research/sleep-2016-2026.en.html. Keep execution order intact.
 (function (global) {
     const root = global.SleepEssayCharts = global.SleepEssayCharts || {};
     function normalizeBedtime(v) {
@@ -92,7 +92,7 @@
                 line: { color: 'transparent' },
                 type: 'scatter',
                 mode: 'none',
-                name: '惩罚幅度',
+                name: 'Penalty magnitude',
                 showlegend: true,
                 hoverinfo: 'skip',
             },
@@ -100,32 +100,32 @@
             {
                 x: validMonthsFmt, y: scSmooth,
                 type: 'scatter', mode: 'lines',
-                name: 'SleepCycle 原始分',
+                name: 'SleepCycle Raw score',
                 line: { color: THEME.accent, width: 2.5, shape: 'spline' },
-                hovertemplate: '%{x}<br>原始分: %{y:.1f}%<extra></extra>',
+                hovertemplate: '%{x}<br>Raw score: %{y:.1f}%<extra></extra>',
             },
             // Mood-adjusted
             {
                 x: validMonthsFmt, y: smooth(moodVals),
                 type: 'scatter', mode: 'lines',
-                name: 'mood 修正分',
+                name: 'Mood-adjusted score',
                 line: { color: THEME.muted, width: 1.5, shape: 'spline', dash: 'dash' },
-                hovertemplate: '%{x}<br>mood 修正分: %{y:.1f}<extra></extra>',
+                hovertemplate: '%{x}<br>Mood-adjusted score: %{y:.1f}<extra></extra>',
             },
             // Fully adjusted
             {
                 x: validMonthsFmt, y: adjSmooth,
                 type: 'scatter', mode: 'lines',
-                name: '完整修正分',
+                name: 'Fully-adjusted score',
                 line: { color: THEME.text, width: 2.5, shape: 'spline' },
-                hovertemplate: '%{x}<br>完整修正分: %{y:.1f}<extra></extra>',
+                hovertemplate: '%{x}<br>Fully-adjusted score: %{y:.1f}<extra></extra>',
                 connectgaps: false,
             },
             // Asleep hours — right axis
             {
                 x: validMonthsFmt, y: smooth(asleepVals),
                 type: 'scatter', mode: 'lines',
-                name: 'sleep_h（有效睡眠）',
+                name: 'sleep_h (effective sleep)',
                 line: { color: THEME.accent2, width: 1.8, shape: 'spline', dash: 'dot' },
                 yaxis: 'y2',
                 hovertemplate: '%{x}<br>sleep_h: %{y:.2f}h<extra></extra>',
@@ -133,14 +133,14 @@
             },
         ], {
             ...plotDefaults,
-            yaxis: { ...plotDefaults.yaxis, title: '分数（0–100）', range: [20, 105] },
+            yaxis: { ...plotDefaults.yaxis, title: 'Score (0–100)', range: [20, 105] },
             yaxis2: {
                 title: 'sleep_h (h)',
                 overlaying: 'y', side: 'right',
                 range: [4.5, 9.5],
                 gridcolor: 'transparent',
                 tickfont: { color: THEME.accent2 },
-                titlefont: { color: THEME.accent4 },
+                titlefont: { color: THEME.green },
             },
             xaxis: { ...plotDefaults.xaxis, title: '', type: 'date' },
             showlegend: true,
@@ -151,15 +151,15 @@
             margin: { t: 40, r: 60, b: 40, l: 60 },
             annotations: [
                 { x: '2020-03-01', y: 1.02, yref: 'paper', xanchor: 'left', showarrow: false,
-                    text: '乙流', font: { color: THEME.accent3, size: 9 } },
+                    text: 'Influenza B', font: { color: THEME.accent3, size: 9 } },
                 { x: '2022-12-01', y: 1.02, yref: 'paper', xanchor: 'left', showarrow: false,
-                    text: 'COVID 首次', font: { color: THEME.red, size: 9 } },
+                    text: 'COVID (1st)', font: { color: THEME.red, size: 9 } },
                 { x: '2023-01-01', y: 0.92, yref: 'paper', xanchor: 'left', showarrow: false,
-                    text: '裂口扩大', font: { color: THEME.accent3, size: 9 } },
+                    text: 'Gap widening', font: { color: THEME.accent3, size: 9 } },
                 { x: '2024-08-01', y: 1.02, yref: 'paper', xanchor: 'right', showarrow: false,
-                    text: 'COVID二次', font: { color: THEME.red, size: 9 } },
+                    text: 'COVID (2nd)', font: { color: THEME.red, size: 9 } },
                 { x: '2024-09-01', y: 0.92, yref: 'paper', xanchor: 'right', showarrow: false,
-                    text: '甲流', font: { color: THEME.accent3, size: 9 } },
+                    text: 'Influenza A', font: { color: THEME.accent3, size: 9 } },
             ],
             shapes: [
                 { type: 'line', xref: 'x', x0: '2020-03-01', x1: '2020-03-01', y0: 0, y1: 1, yref: 'paper',
@@ -178,19 +178,32 @@
 (function (global) {
     const root = global.SleepEssayCharts = global.SleepEssayCharts || {};
     const DEFAULT_FLY_CO = [
-        { tag: '洗澡', delta: 25.8 },
-        { tag: '午睡', delta: 12.2 },
-        { tag: '假日夜晚', delta: 8.9 },
-        { tag: '锻炼', delta: 5.4 },
-        { tag: '休假', delta: 4.5 },
-        { tag: '疲劳', delta: 4.2 },
+        { tag: 'shower', delta: 25.8 },
+        { tag: 'noon nap', delta: 12.2 },
+        { tag: 'holiday night', delta: 8.9 },
+        { tag: 'Worked out', delta: 5.4 },
+        { tag: 'Vacation', delta: 4.5 },
+        { tag: 'tired', delta: 4.2 },
     ];
+    // Remap Chinese tag names from JSON data to English
+    // Align with original SleepCycle tag names
+    const TAG_LABEL_MAP = {
+        '洗澡': 'shower', '午睡': 'noon nap', '假日夜晚': 'holiday night',
+        '锻炼': 'Worked out', '休假': 'Vacation', '疲劳': 'tired',
+        '生病': 'sick', '夜间游戏': 'night gaming', '神秘事件': 'Mysterious Events',
+        '旅行': 'travel', '饮酒': 'Alcohol', '冥想': 'meditation',
+        '按摩': 'massage', '耳塞': 'Earplugs', '过了午夜': 'after midnight',
+        '压力大': 'Stressful day', '吃得晚': 'Ate late', '睡前思考': 'thinking',
+        '睡前负面情绪': 'pre-sleep sad', '肠道未排空': 'gut uneasy',
+        '茶/咖啡': 'tea/coffee', 'HP feeling': 'HP feeling',
+    };
+    function remapTag(tag) { return TAG_LABEL_MAP[tag] || tag; }
     const DEFAULT_NG_SEGMENTS = [
-        { label: '非夜游\n≤1am', quality: 85.1, bad: 29.9, n: 2212 },
-        { label: '非夜游\n>1am', quality: 74.7, bad: 53.8, n: 303 },
-        { label: '夜游\n≤1am', quality: 85.4, bad: 37.1, n: 722 },
-        { label: '夜游\n>1am', quality: 76.6, bad: 71.9, n: 417 },
-        { label: '夜游\n>1am\n<7h', quality: 67.4, bad: 87.8, n: 196 },
+        { label: 'No night gaming\n≤1am', quality: 85.1, bad: 29.9, n: 2212 },
+        { label: 'No night gaming\n>1am', quality: 74.7, bad: 53.8, n: 303 },
+        { label: 'Night gaming\n≤1am', quality: 85.4, bad: 37.1, n: 722 },
+        { label: 'Night gaming\n>1am', quality: 76.6, bad: 71.9, n: 417 },
+        { label: 'Night gaming\n>1am\n<7h', quality: 67.4, bad: 87.8, n: 196 },
     ];
     function renderEventsSection(ctx) {
         const { Plotly, THEME, plotDefaults, eventData, extraData, breakData } = ctx;
@@ -199,7 +212,7 @@
             return;
         const eventPanels = eventData || {};
         const EVENTS = eventPanels.events || {};
-        const FLY_CO = eventPanels.fly_co || DEFAULT_FLY_CO;
+        const FLY_CO = (eventPanels.fly_co || DEFAULT_FLY_CO).map(d => ({ ...d, tag: remapTag(d.tag) }));
         const NG_SEGMENTS = eventPanels.night_gaming_segments || DEFAULT_NG_SEGMENTS;
         const baselines = {};
         if (extraData && extraData.yearly) {
@@ -230,65 +243,64 @@
                 if (comboCard)
                     comboCard.style.display = '';
                 if (title1)
-                    title1.textContent = '年度出现频率（%）';
+                    title1.textContent = 'Annual frequency (%)';
                 if (title2)
-                    title2.textContent = '有/无该物质的质量对比';
-                // Chart 1: yearly frequency dual line
+                    title2.textContent = 'Quality comparison: alcohol vs caffeine vs baseline';
                 const years = Object.keys(wine.yearly_pct || {}).sort();
                 const yearNums = years.map(Number);
                 Plotly.newPlot('chart-event-freq', [
-                    { x: yearNums, y: years.map(y => (wine.yearly_pct || {})[y] || 0), type: 'scatter', mode: 'lines+markers', name: '酒精', line: { color: THEME.red, width: 2.5 }, marker: { size: 6 } },
-                    { x: yearNums, y: years.map(y => (caff.yearly_pct || {})[y] || 0), type: 'scatter', mode: 'lines+markers', name: '咖啡因（茶/咖啡）', line: { color: THEME.gold, width: 2.5 }, marker: { size: 6 } }
+                    { x: yearNums, y: years.map(y => (wine.yearly_pct || {})[y] || 0), type: 'scatter', mode: 'lines+markers', name: 'Alcohol', line: { color: THEME.red, width: 2.5 }, marker: { size: 6 } },
+                    { x: yearNums, y: years.map(y => (caff.yearly_pct || {})[y] || 0), type: 'scatter', mode: 'lines+markers', name: 'Caffeine (tea/coffee)', line: { color: THEME.gold, width: 2.5 }, marker: { size: 6 } }
                 ], {
                     ...plotDefaults,
-                    yaxis: { ...plotDefaults.yaxis, title: '出现率 %', ticksuffix: '%' },
+                    yaxis: { ...plotDefaults.yaxis, title: 'Frequency %', ticksuffix: '%' },
                     xaxis: { ...plotDefaults.xaxis, title: '', type: 'linear', tickmode: 'array', tickvals: yearNums, ticktext: years, range: [yearNums[0] - 0.5, yearNums[yearNums.length - 1] + 0.5] },
                     legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
                     margin: { t: 10, r: 70, b: 45, l: 55 },
                     annotations: years.includes('2026') ? [{
                             x: 2026, y: 0, xref: 'x', yref: 'paper',
-                            text: '* 数据截至 3 月，且集中在春节假期，不代表全年趋势', showarrow: false,
+                            text: '* data through Mar; spike likely driven by Lunar New Year holiday cluster', showarrow: false,
                             font: { color: THEME.muted, size: 10 }, xanchor: 'center', yanchor: 'bottom'
                         }] : []
                 }, { responsive: true, displayModeBar: false });
-                // Chart 2: quality gap bar (wine vs caffeine vs baseline)
+                // Chart 2: quality gap (alcohol vs caffeine vs neither)
                 const items = [
-                    { label: '酒精', q: wine.quality_with, n: wine.n, color: THEME.red },
-                    { label: '咖啡因（茶/咖啡）', q: (stim.caffeine || {}).quality_with, n: (stim.caffeine || {}).n, color: THEME.gold },
-                    { label: '两者皆无', q: wine.quality_without, n: null, color: THEME.muted },
+                    { label: 'Alcohol', q: wine.quality_with, n: wine.n, color: THEME.red },
+                    { label: 'Caffeine (tea/coffee)', q: (stim.caffeine || {}).quality_with, n: (stim.caffeine || {}).n, color: THEME.gold },
+                    { label: 'Neither', q: wine.quality_without, n: null, color: THEME.muted },
                 ];
                 Plotly.newPlot('chart-event-box', [
                     { type: 'bar', x: items.map(d => d.label), y: items.map(d => d.q),
                         marker: { color: items.map(d => d.color), opacity: 0.85 },
                         text: items.map(d => d.n ? `${d.q}%<br>(n=${d.n})` : `${d.q}%`), textposition: 'outside',
-                        hovertemplate: '%{x}<br>质量: %{y:.1f}%<extra></extra>' },
+                        hovertemplate: '%{x}<br>Quality: %{y:.1f}%<extra></extra>' },
                     { type: 'scatter', mode: 'lines', x: items.map(d => d.label), y: items.map(() => 83.3),
                         line: { color: THEME.muted, width: 1.5, dash: 'dot' }, hoverinfo: 'none', showlegend: false }
                 ], {
                     ...plotDefaults,
-                    yaxis: { ...plotDefaults.yaxis, title: '平均睡眠质量 %', range: [60, 100], ticksuffix: '%' },
+                    yaxis: { ...plotDefaults.yaxis, title: 'Avg Sleep Quality %', range: [60, 100], ticksuffix: '%' },
                     xaxis: { ...plotDefaults.xaxis, title: '', type: 'category' },
                     margin: { t: 10, r: 60, b: 60, l: 55 }, showlegend: false
                 }, { responsive: true, displayModeBar: false });
-                // Chart 3: combo effect (wine × late night)
+                // Chart 3: alcohol × late night combo
                 const combo = wine.combo || {};
                 const groups = [
-                    { label: '酒精 + 熬夜', q: (combo.wine_and_late || {}).quality, n: (combo.wine_and_late || {}).n, color: '#b91c1c' },
-                    { label: '仅酒精（不熬夜）', q: (combo.wine_only || {}).quality, n: (combo.wine_only || {}).n, color: THEME.red },
-                    { label: '两者皆无', q: (combo.neither || {}).quality, n: (combo.neither || {}).n, color: THEME.muted },
+                    { label: 'Alcohol + late night', q: (combo.wine_and_late || {}).quality, n: (combo.wine_and_late || {}).n, color: '#b91c1c' },
+                    { label: 'Alcohol only (early)', q: (combo.wine_only || {}).quality, n: (combo.wine_only || {}).n, color: THEME.red },
+                    { label: 'Neither', q: (combo.neither || {}).quality, n: (combo.neither || {}).n, color: THEME.muted },
                 ];
                 Plotly.newPlot('chart-event-combo', [
                     { type: 'bar', x: groups.map(d => d.label), y: groups.map(d => d.q),
                         marker: { color: groups.map(d => d.color), opacity: 0.85 },
                         text: groups.map(d => `${d.q}%<br>(n=${d.n})`), textposition: 'outside',
-                        hovertemplate: '%{x}<br>质量: %{y:.1f}%<extra></extra>' },
+                        hovertemplate: '%{x}<br>Quality: %{y:.1f}%<extra></extra>' },
                     { type: 'scatter', mode: 'lines', x: groups.map(d => d.label), y: groups.map(() => 83.3),
                         line: { color: THEME.muted, width: 1.5, dash: 'dot' }, hoverinfo: 'none', showlegend: false }
                 ], {
                     ...plotDefaults,
-                    yaxis: { ...plotDefaults.yaxis, title: '平均睡眠质量 %', range: [60, 100], ticksuffix: '%' },
+                    yaxis: { ...plotDefaults.yaxis, title: 'Avg Sleep Quality %', range: [60, 100], ticksuffix: '%' },
                     xaxis: { ...plotDefaults.xaxis, title: '', type: 'category' },
-                    annotations: [{ x: '两者皆无', y: 83.3, xref: 'x', yref: 'y', showarrow: false, text: '基线 83.3%', font: { color: THEME.muted, size: 10 }, xanchor: 'left', yanchor: 'bottom' }],
+                    annotations: [{ x: 'Neither', y: 83.3, xref: 'x', yref: 'y', showarrow: false, text: 'baseline 83.3%', font: { color: THEME.muted, size: 10 }, xanchor: 'left', yanchor: 'bottom' }],
                     margin: { t: 10, r: 60, b: 60, l: 55 }, showlegend: false
                 }, { responsive: true, displayModeBar: false });
                 return;
@@ -301,7 +313,7 @@
                 chart2Card.style.display = '';
             if (key === 'hp_feeling') {
                 if (title1)
-                    title1.textContent = '每年 HP feeling 出现次数';
+                    title1.textContent = 'Annual HP feeling count';
                 if (chart2Card)
                     chart2Card.style.display = 'none';
                 const hpCountsMap = eventPanels.hp_counts || {};
@@ -313,33 +325,33 @@
                         x: yearNums, y: hpCounts, type: 'bar',
                         marker: { color: hpCounts.map(n => n > 50 ? THEME.red : n > 20 ? THEME.muted : THEME.border), opacity: 0.9 },
                         text: hpCounts.map(n => n > 0 ? String(n) : ''), textposition: 'outside',
-                        hovertemplate: '%{x}年<br>HP feeling: %{y} 次<extra></extra>'
+                        hovertemplate: '%{x}<br>HP feeling: %{y} times<extra></extra>'
                     }], {
                     ...plotDefaults,
-                    yaxis: { ...plotDefaults.yaxis, title: '出现次数' },
-                    xaxis: { ...plotDefaults.xaxis, title: '年份', type: 'linear', tickmode: 'array', tickvals: yearNums, ticktext: years, range: [2015.5, 2026.5] },
+                    yaxis: { ...plotDefaults.yaxis, title: 'Count' },
+                    xaxis: { ...plotDefaults.xaxis, title: 'Year', type: 'linear', tickmode: 'array', tickvals: yearNums, ticktext: hpYears, range: [2015.5, 2026.5] },
                     margin: { t: 10, r: 60, b: 45, l: 55 }, showlegend: false,
                 }, { responsive: true, displayModeBar: false });
                 return;
             }
             if (title1)
-                title1.textContent = '年度出现频率（%）';
+                title1.textContent = 'Annual frequency (%)';
             if (title2) {
                 if (key === 'fly')
-                    title2.textContent = '与神秘事件一起出现的状态信号';
+                    title2.textContent = 'Co-occurring signals with Mysterious Events';
                 else if (key === 'night_gaming')
-                    title2.textContent = '夜游 × 晚睡 × 短卧床的叠加代价';
+                    title2.textContent = 'Night gaming × late sleep × short bed time — cumulative cost';
                 else
-                    title2.textContent = '有/无该事件夜晚的质量对比';
+                    title2.textContent = 'Sleep quality: with vs without event';
             }
             Plotly.newPlot('chart-event-freq', [
-                { x: years, y: years.map(y => ev.yearly_pct[y]), type: 'bar', name: '年度出现率 %', marker: { color: THEME.border, opacity: 0.7 }, yaxis: 'y' },
-                { x: years, y: years.map(y => ev.yearly_qual[y]), type: 'scatter', mode: 'lines+markers', name: '该事件夜晚质量', line: { color: THEME.accent, width: 2.5 }, marker: { size: 6 }, yaxis: 'y2' },
-                { x: years, y: years.map(y => baselines[y] || 83.3), type: 'scatter', mode: 'lines', name: '年度基线', line: { color: THEME.muted, width: 1.5, dash: 'dot' }, yaxis: 'y2' }
+                { x: years, y: years.map(y => ev.yearly_pct[y]), type: 'bar', name: 'Annual frequency %', marker: { color: THEME.border, opacity: 0.7 }, yaxis: 'y' },
+                { x: years, y: years.map(y => ev.yearly_qual[y]), type: 'scatter', mode: 'lines+markers', name: 'Quality on event nights', line: { color: THEME.accent, width: 2.5 }, marker: { size: 6 }, yaxis: 'y2' },
+                { x: years, y: years.map(y => baselines[y] || 83.3), type: 'scatter', mode: 'lines', name: 'Annual Baseline', line: { color: THEME.muted, width: 1.5, dash: 'dot' }, yaxis: 'y2' }
             ], {
                 ...plotDefaults,
-                yaxis: { ...plotDefaults.yaxis, title: '出现率 %', range: [0, 55], ticksuffix: '%' },
-                yaxis2: { title: '睡眠质量 %', overlaying: 'y', side: 'right', range: [40, 105], ticksuffix: '%', gridcolor: 'transparent' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Frequency %', range: [0, 55], ticksuffix: '%' },
+                yaxis2: { title: 'Sleep Quality %', overlaying: 'y', side: 'right', range: [40, 105], ticksuffix: '%', gridcolor: 'transparent' },
                 xaxis: { ...plotDefaults.xaxis, title: '', type: 'category' }, hovermode: 'x unified',
                 legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
                 margin: { t: 10, r: 70, b: 45, l: 55 }
@@ -348,34 +360,34 @@
                 Plotly.newPlot('chart-event-box', [{
                         type: 'bar', orientation: 'h', y: FLY_CO.map(d => d.tag), x: FLY_CO.map(d => d.delta),
                         marker: { color: THEME.muted, opacity: 0.85 }, text: FLY_CO.map(d => `+${d.delta.toFixed(1)}pp`), textposition: 'outside',
-                        hovertemplate: '%{y}<br>与神秘事件共现抬升: %{x:.1f}pp<extra></extra>'
+                        hovertemplate: '%{y}<br>Co-occurrence lift with Mysterious Events: %{x:.1f}pp<extra></extra>'
                     }], {
                     ...plotDefaults,
-                    xaxis: { ...plotDefaults.xaxis, title: '在有神秘事件夜晚中更常出现（百分点）', ticksuffix: 'pp', zeroline: true, zerolinecolor: THEME.muted },
+                    xaxis: { ...plotDefaults.xaxis, title: 'More common on Mysterious Event nights (percentage points)', ticksuffix: 'pp', zeroline: true, zerolinecolor: THEME.muted },
                     yaxis: { ...plotDefaults.yaxis, automargin: true }, margin: { t: 10, r: 70, b: 45, l: 120 }, showlegend: false,
                 }, { responsive: true, displayModeBar: false });
             }
             else if (key === 'night_gaming') {
                 Plotly.newPlot('chart-event-box', [
-                    { type: 'bar', x: NG_SEGMENTS.map(d => d.label), y: NG_SEGMENTS.map(d => d.quality), marker: { color: [THEME.muted, THEME.accent3, THEME.muted, THEME.red, '#b91c1c'], opacity: 0.85 }, text: NG_SEGMENTS.map(d => `${d.quality}%<br>(n=${d.n})`), textposition: 'outside', hovertemplate: '%{x}<br>质量: %{y:.1f}%<extra></extra>' },
-                    { type: 'scatter', mode: 'lines+markers', x: NG_SEGMENTS.map(d => d.label), y: NG_SEGMENTS.map(d => d.bad), line: { color: THEME.red, width: 2 }, marker: { size: 6 }, yaxis: 'y2', name: 'Bad 比例', hovertemplate: '%{x}<br>Bad: %{y:.1f}%<extra></extra>' }
+                    { type: 'bar', x: NG_SEGMENTS.map(d => d.label), y: NG_SEGMENTS.map(d => d.quality), marker: { color: [THEME.muted, THEME.accent3, THEME.muted, THEME.red, '#b91c1c'], opacity: 0.85 }, text: NG_SEGMENTS.map(d => `${d.quality}%<br>(n=${d.n})`), textposition: 'outside', hovertemplate: '%{x}<br>Quality: %{y:.1f}%<extra></extra>' },
+                    { type: 'scatter', mode: 'lines+markers', x: NG_SEGMENTS.map(d => d.label), y: NG_SEGMENTS.map(d => d.bad), line: { color: THEME.red, width: 2 }, marker: { size: 6 }, yaxis: 'y2', name: 'Bad %', hovertemplate: '%{x}<br>Bad: %{y:.1f}%<extra></extra>' }
                 ], {
                     ...plotDefaults,
                     xaxis: { ...plotDefaults.xaxis, title: '', type: 'category' },
-                    yaxis: { ...plotDefaults.yaxis, title: '平均睡眠质量 %', range: [60, 100], ticksuffix: '%' },
-                    yaxis2: { title: 'Bad 比例 %', overlaying: 'y', side: 'right', range: [20, 95], ticksuffix: '%', gridcolor: 'transparent' },
+                    yaxis: { ...plotDefaults.yaxis, title: 'Avg Sleep Quality %', range: [60, 100], ticksuffix: '%' },
+                    yaxis2: { title: 'Bad %', overlaying: 'y', side: 'right', range: [20, 95], ticksuffix: '%', gridcolor: 'transparent' },
                     margin: { t: 10, r: 60, b: 70, l: 55 }, showlegend: false,
                 }, { responsive: true, displayModeBar: false });
             }
             else {
                 Plotly.newPlot('chart-event-box', [
-                    { type: 'bar', x: ['有该事件', '无该事件'], y: [ev.mean_with, ev.mean_without], marker: { color: [ev.delta >= 0 ? THEME.green : THEME.red, THEME.muted], opacity: 0.85 }, text: [`${ev.mean_with}%<br>(n=${ev.n})`, `${ev.mean_without}%`], textposition: 'outside', width: 0.4 },
-                    { type: 'scatter', mode: 'lines', x: ['有该事件', '无该事件'], y: [83.3, 83.3], line: { color: THEME.muted, width: 1.5, dash: 'dot' }, hoverinfo: 'none', showlegend: false }
+                    { type: 'bar', x: ['With event', 'Without event'], y: [ev.mean_with, ev.mean_without], marker: { color: [ev.delta >= 0 ? THEME.green : THEME.red, THEME.muted], opacity: 0.85 }, text: [`${ev.mean_with}%<br>(n=${ev.n})`, `${ev.mean_without}%`], textposition: 'outside', width: 0.4 },
+                    { type: 'scatter', mode: 'lines', x: ['With event', 'Without event'], y: [83.3, 83.3], line: { color: THEME.muted, width: 1.5, dash: 'dot' }, hoverinfo: 'none', showlegend: false }
                 ], {
                     ...plotDefaults,
-                    yaxis: { ...plotDefaults.yaxis, title: '平均睡眠质量 %', range: [40, 100], ticksuffix: '%' },
+                    yaxis: { ...plotDefaults.yaxis, title: 'Avg Sleep Quality %', range: [40, 100], ticksuffix: '%' },
                     xaxis: { ...plotDefaults.xaxis, title: '', type: 'category' },
-                    annotations: [{ x: '无该事件', y: 83.3, xref: 'x', yref: 'y', showarrow: false, text: '基线 83.3%', font: { color: THEME.muted, size: 10 }, xanchor: 'left', yanchor: 'bottom' }],
+                    annotations: [{ x: 'Without event', y: 83.3, xref: 'x', yref: 'y', showarrow: false, text: 'baseline 83.3%', font: { color: THEME.muted, size: 10 }, xanchor: 'left', yanchor: 'bottom' }],
                     margin: { t: 10, r: 60, b: 45, l: 55 }, showlegend: false
                 }, { responsive: true, displayModeBar: false });
             }
@@ -402,7 +414,7 @@
                     x: yearlyKeys,
                     y: yearlyKeys.map(y => yearly[y].break_pct),
                     type: 'bar',
-                    name: 'break 占比',
+                    name: 'Break night %',
                     marker: { color: THEME.border, opacity: 0.75 },
                     yaxis: 'y'
                 },
@@ -411,7 +423,7 @@
                     y: yearlyKeys.map(y => yearly[y].quality_delta),
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: '相对非 break 质量差值',
+                    name: 'Quality delta vs non-break',
                     line: { color: THEME.red, width: 2.5 },
                     marker: { size: 6 },
                     yaxis: 'y2'
@@ -419,8 +431,8 @@
             ], {
                 ...plotDefaults,
                 xaxis: { ...plotDefaults.xaxis, title: '', type: 'category' },
-                yaxis: { ...plotDefaults.yaxis, title: 'break 占比 %', ticksuffix: '%', range: [0, 13] },
-                yaxis2: { title: '质量差值', overlaying: 'y', side: 'right', range: [-15, 2], gridcolor: 'transparent' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Break night %', ticksuffix: '%', range: [0, 13] },
+                yaxis2: { title: 'Quality Delta', overlaying: 'y', side: 'right', range: [-15, 2], gridcolor: 'transparent' },
                 hovermode: 'x unified',
                 legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
                 margin: { t: 10, r: 70, b: 45, l: 55 }
@@ -428,11 +440,11 @@
         }
         if (breakContinuityEl && breakData.continuity && breakData.headline) {
             const metrics = [
-                { label: '睡眠质量差值', value: breakData.headline.quality.delta, color: THEME.red },
-                { label: 'Bad 比例差值', value: breakData.headline.bad_pct.delta, color: THEME.red },
-                { label: '醒着时间差值（小时）', value: breakData.continuity.awake_h.delta, color: THEME.gold },
-                { label: '效率差值（百分点）', value: breakData.continuity.efficiency_pct.delta, color: THEME.red },
-                { label: '动作频率差值', value: breakData.body && breakData.body.movements_per_hour ? breakData.body.movements_per_hour.delta : null, color: THEME.muted },
+                { label: 'Sleep quality delta', value: breakData.headline.quality.delta, color: THEME.red },
+                { label: 'Bad mood % delta', value: breakData.headline.bad_pct.delta, color: THEME.red },
+                { label: 'Awake time delta (hours)', value: breakData.continuity.awake_h.delta, color: THEME.gold },
+                { label: 'Efficiency delta (pp)', value: breakData.continuity.efficiency_pct.delta, color: THEME.red },
+                { label: 'Movement freq delta', value: breakData.body && breakData.body.movements_per_hour ? breakData.body.movements_per_hour.delta : null, color: THEME.muted },
             ].filter(d => d.value !== null && d.value !== undefined);
             Plotly.newPlot('chart-break-continuity', [{
                     type: 'bar',
@@ -445,7 +457,7 @@
                     hovertemplate: '%{y}<br>%{x}<extra></extra>'
                 }], {
                 ...plotDefaults,
-                xaxis: { ...plotDefaults.xaxis, title: 'break 相对非 break 的差值', zeroline: true, zerolinecolor: THEME.muted },
+                xaxis: { ...plotDefaults.xaxis, title: 'Break vs non-break delta', zeroline: true, zerolinecolor: THEME.muted },
                 yaxis: { ...plotDefaults.yaxis, automargin: true },
                 margin: { t: 10, r: 60, b: 45, l: 150 },
                 showlegend: false,
@@ -453,15 +465,15 @@
         }
         if (breakTrekEl) {
             const trekRows = [
-                { label: '2020-11-30\n雨崩归来夜', quality: 100.0, awake_h: 0.1665, efficiency: 98.0 },
-                { label: '2025-10-03\n哈巴归来夜', quality: 45.0, awake_h: 3.3202, efficiency: 59.3 },
+                { label: '2020-11-30\nPost-Yubeng trek night', quality: 100.0, awake_h: 0.1665, efficiency: 98.0 },
+                { label: '2025-10-03\nPost-Haba trek night', quality: 45.0, awake_h: 3.3202, efficiency: 59.3 },
             ];
             Plotly.newPlot('chart-break-trek', [
                 {
                     x: trekRows.map(d => d.label),
                     y: trekRows.map(d => d.quality),
                     type: 'bar',
-                    name: '睡眠质量',
+                    name: 'Sleep Quality',
                     marker: { color: [THEME.green, THEME.red], opacity: 0.85 },
                     text: trekRows.map(d => `${d.quality}%`),
                     textposition: 'outside',
@@ -472,7 +484,7 @@
                     y: trekRows.map(d => d.awake_h),
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: '醒着时间（小时）',
+                    name: 'Awake time (hours)',
                     line: { color: THEME.gold, width: 2.5 },
                     marker: { size: 8 },
                     yaxis: 'y2'
@@ -482,7 +494,7 @@
                     y: trekRows.map(d => d.efficiency),
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: '效率 %',
+                    name: 'Efficiency %',
                     line: { color: THEME.muted, width: 2.5, dash: 'dot' },
                     marker: { size: 8 },
                     yaxis: 'y3'
@@ -490,9 +502,9 @@
             ], {
                 ...plotDefaults,
                 xaxis: { ...plotDefaults.xaxis, title: '', type: 'category' },
-                yaxis: { ...plotDefaults.yaxis, title: '睡眠质量 %', range: [0, 105], ticksuffix: '%' },
-                yaxis2: { title: '醒着时间（小时）', overlaying: 'y', side: 'right', range: [0, 3.8], gridcolor: 'transparent' },
-                yaxis3: { title: '效率 %', anchor: 'free', overlaying: 'y', side: 'right', position: 0.94, range: [50, 100], ticksuffix: '%', gridcolor: 'transparent' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Sleep Quality %', range: [0, 105], ticksuffix: '%' },
+                yaxis2: { title: 'Awake time (hours)', overlaying: 'y', side: 'right', range: [0, 3.8], gridcolor: 'transparent' },
+                yaxis3: { title: 'Efficiency %', anchor: 'free', overlaying: 'y', side: 'right', position: 0.94, range: [50, 100], ticksuffix: '%', gridcolor: 'transparent' },
                 legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
                 margin: { t: 10, r: 115, b: 60, l: 55 }
             }, { responsive: true, displayModeBar: false });
@@ -516,48 +528,48 @@
             Plotly.newPlot('chart-duration', [
                 {
                     x: years, y: asleep,
-                    type: 'bar', name: '实际睡眠 (sleep_h)',
+                    type: 'bar', name: 'Actual sleep (sleep_h)',
                     marker: { color: THEME.border, opacity: 0.75 },
                     hovertemplate: '%{x}<br>sleep_h: %{y:.2f}h<extra></extra>',
                 },
                 {
                     x: years, y: late,
-                    type: 'scatter', mode: 'lines+markers', name: '过凌晨1点 %',
+                    type: 'scatter', mode: 'lines+markers', name: 'After 1AM %',
                     line: { color: THEME.red, width: 2, dash: 'dot' },
                     marker: { size: 6, color: THEME.red },
                     yaxis: 'y2',
-                    hovertemplate: '%{x}<br>过凌晨1点: %{y:.1f}%<extra></extra>',
+                    hovertemplate: '%{x}<br>After 1AM: %{y:.1f}%<extra></extra>',
                 },
                 {
                     x: years, y: short_,
-                    type: 'scatter', mode: 'lines+markers', name: '短睡（<6h）%',
+                    type: 'scatter', mode: 'lines+markers', name: 'Short sleep (<6h) %',
                     line: { color: THEME.accent3, width: 2, dash: 'dash' },
                     marker: { size: 5, color: THEME.accent3 },
                     yaxis: 'y2',
-                    hovertemplate: '%{x}<br>短睡: %{y:.1f}%<extra></extra>',
+                    hovertemplate: '%{x}<br>Short sleep: %{y:.1f}%<extra></extra>',
                 },
                 {
                     x: years, y: regularity,
-                    type: 'scatter', mode: 'lines+markers', name: '作息规律性 %',
+                    type: 'scatter', mode: 'lines+markers', name: 'Schedule Regularity %',
                     line: { color: THEME.muted, width: 2, dash: 'dot' },
                     marker: { size: 6, color: THEME.muted },
                     yaxis: 'y3',
-                    hovertemplate: '%{x}<br>作息规律性: %{y:.1f}%<extra></extra>',
+                    hovertemplate: '%{x}<br>Schedule Regularity: %{y:.1f}%<extra></extra>',
                 },
             ], {
                 ...plotDefaults,
-                yaxis: { ...plotDefaults.yaxis, title: 'sleep_h（小时）', range: [5.5, 9] },
-                yaxis2: { title: '占比 (%)', overlaying: 'y', side: 'right', range: [0, 55], gridcolor: 'transparent', ticksuffix: '%' },
+                yaxis: { ...plotDefaults.yaxis, title: 'sleep_h (hours)', range: [5.5, 9] },
+                yaxis2: { title: '% (%)', overlaying: 'y', side: 'right', range: [0, 55], gridcolor: 'transparent', ticksuffix: '%' },
                 yaxis3: { title: '', overlaying: 'y', side: 'right', position: 0.98, range: [70, 100], gridcolor: 'transparent', tickfont: { color: THEME.muted }, showticklabels: false },
-                xaxis: { ...plotDefaults.xaxis, title: '年份', type: 'linear', dtick: 1, range: [2015.5, 2026.5] },
+                xaxis: { ...plotDefaults.xaxis, title: 'Year', type: 'linear', dtick: 1, range: [2015.5, 2026.5] },
                 showlegend: true,
                 legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
                 hovermode: 'x unified',
                 annotations: [
-                    { x: 2020, y: 7.8, text: '封控高峰<br>7.8h / 37%超8h', showarrow: true, arrowhead: 2,
+                    { x: 2020, y: 7.8, text: 'Lockdown peak\n7.8h / 37% over 8h', showarrow: true, arrowhead: 2,
                         arrowcolor: THEME.green, font: { color: THEME.green, size: 10 }, ax: -70, ay: -30,
                         bgcolor: 'rgba(13,17,23,0.85)', bordercolor: THEME.green, borderwidth: 1, borderpad: 4 },
-                    { x: 2024, y: 6.55, text: '29%夜晚<br>不足6小时', showarrow: true, arrowhead: 2,
+                    { x: 2024, y: 6.55, text: '29% of nights\nunder 6 hours', showarrow: true, arrowhead: 2,
                         arrowcolor: THEME.red, font: { color: THEME.red, size: 10 }, ax: 55, ay: -25,
                         bgcolor: 'rgba(13,17,23,0.85)', bordercolor: THEME.red, borderwidth: 1, borderpad: 4 },
                 ],
@@ -584,25 +596,25 @@
                 y: years,
                 type: 'scatter',
                 mode: 'lines+markers',
-                name: '当年入睡中位数',
+                name: 'Annual bedtime median',
                 line: { color: '#f8d25c', width: 2, dash: 'dot' },
                 marker: { color: '#f8d25c', size: 6, symbol: 'diamond' },
-                hovertemplate: '%{y}年 中位数: %{x}<extra></extra>',
+                hovertemplate: '%{y} median: %{x}<extra></extra>',
             } : null;
             const traces = [
                 {
                     z, x: hourLabels, y: years, type: 'heatmap',
                     colorscale: [[0, THEME.bg], [0.15, '#1c2128'], [0.4, '#2d333b'], [0.7, '#545d68'], [1.0, '#adbac7']],
                     showscale: true,
-                    colorbar: { title: '次数', thickness: 12, tickfont: { size: 10 } },
-                    hovertemplate: '%{y}年 %{x}<br>%{z} 次<extra></extra>',
+                    colorbar: { title: 'Count', thickness: 12, tickfont: { size: 10 } },
+                    hovertemplate: '%{y} %{x}<br>%{z} nights<extra></extra>',
                 },
                 ...(medianTrace ? [medianTrace] : []),
             ];
             Plotly.newPlot('chart-bedtime-heat', traces, {
                 ...plotDefaults,
-                xaxis: { ...plotDefaults.xaxis, title: '入睡时间', tickangle: -30, type: 'category' },
-                yaxis: { ...plotDefaults.yaxis, title: '年份', type: 'category', autorange: 'reversed' },
+                xaxis: { ...plotDefaults.xaxis, title: 'Bedtime', tickangle: -30, type: 'category' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Year', type: 'category', autorange: 'reversed' },
                 legend: { x: 0.01, y: -0.18, orientation: 'h', bgcolor: 'rgba(22,27,34,0.8)', bordercolor: THEME.border, borderwidth: 1 },
                 margin: { t: 20, r: 80, b: 70, l: 60 },
             }, { responsive: true, displayModeBar: false });
@@ -629,12 +641,12 @@
                     ],
                     zmin: 55, zmax: 95,
                     showscale: true,
-                    colorbar: { title: '质量%', thickness: 12, tickfont: { size: 10 } },
-                    hovertemplate: '%{y}年 %{x}<br>平均质量: %{z:.1f}%<extra></extra>',
+                    colorbar: { title: 'Quality%', thickness: 12, tickfont: { size: 10 } },
+                    hovertemplate: '%{y} %{x}<br>Avg quality: %{z:.1f}%<extra></extra>',
                 }], {
                 ...plotDefaults,
-                xaxis: { ...plotDefaults.xaxis, title: '入睡时间', tickangle: -30, type: 'category' },
-                yaxis: { ...plotDefaults.yaxis, title: '年份', type: 'category', autorange: 'reversed' },
+                xaxis: { ...plotDefaults.xaxis, title: 'Bedtime', tickangle: -30, type: 'category' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Year', type: 'category', autorange: 'reversed' },
                 margin: { t: 20, r: 80, b: 70, l: 60 },
             }, { responsive: true, displayModeBar: false });
         }
@@ -642,13 +654,13 @@
             const S = eventsData.short_sleep;
             try {
                 Plotly.newPlot('chart-short-bins', [
-                    { x: S.bins.map(d => d.label), y: S.bins.map(d => d.pct), type: 'bar', name: '夜晚占比', marker: { color: THEME.border, opacity: 0.75 }, yaxis: 'y' },
-                    { x: S.bins.map(d => d.label), y: S.bins.map(d => d.mean_quality), type: 'scatter', mode: 'lines+markers+text', name: '平均睡眠质量', text: S.bins.map(d => d.mean_quality + '%'), textposition: 'top center', line: { color: THEME.accent, width: 2.5 }, marker: { size: 7 }, yaxis: 'y2' }
+                    { x: S.bins.map(d => d.label), y: S.bins.map(d => d.pct), type: 'bar', name: '% of Nights', marker: { color: THEME.border, opacity: 0.75 }, yaxis: 'y' },
+                    { x: S.bins.map(d => d.label), y: S.bins.map(d => d.mean_quality), type: 'scatter', mode: 'lines+markers+text', name: 'Avg Sleep Quality', text: S.bins.map(d => d.mean_quality + '%'), textposition: 'top center', line: { color: THEME.accent, width: 2.5 }, marker: { size: 7 }, yaxis: 'y2' }
                 ], {
                     ...plotDefaults,
-                    xaxis: { ...plotDefaults.xaxis, title: '卧床总时长（小时）', type: 'category' },
-                    yaxis: { ...plotDefaults.yaxis, title: '夜晚占比', ticksuffix: '%', range: [0, 50] },
-                    yaxis2: { title: '平均睡眠质量', ticksuffix: '%', overlaying: 'y', side: 'right', range: [50, 95], gridcolor: 'transparent' },
+                    xaxis: { ...plotDefaults.xaxis, title: 'Total Time in Bed (hours)', type: 'category' },
+                    yaxis: { ...plotDefaults.yaxis, title: '% of Nights', ticksuffix: '%', range: [0, 50] },
+                    yaxis2: { title: 'Avg Sleep Quality', ticksuffix: '%', overlaying: 'y', side: 'right', range: [50, 95], gridcolor: 'transparent' },
                     hovermode: 'x unified',
                     legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
                     margin: { t: 10, r: 60, b: 45, l: 55 }
@@ -656,14 +668,14 @@
                 const years = Object.keys(S.yearly_under7_pct).sort();
                 const yearNums = years.map(y => Number(y));
                 Plotly.newPlot('chart-short-yearly', [
-                    { x: yearNums, y: years.map(y => S.yearly_under7_pct[y]), type: 'bar', name: '<7h 占比', marker: { color: THEME.border, opacity: 0.72 }, yaxis: 'y' },
-                    { x: yearNums, y: years.map(y => S.yearly_under7_quality[y]), type: 'scatter', mode: 'lines+markers', name: '短夜晚质量', line: { color: THEME.accent, width: 2.5 }, marker: { size: 6 }, yaxis: 'y2' },
-                    { x: yearNums, y: years.map(y => S.yearly_baseline_quality[y]), type: 'scatter', mode: 'lines', name: '年度基线', line: { color: THEME.muted, width: 1.5, dash: 'dot' }, yaxis: 'y2' }
+                    { x: yearNums, y: years.map(y => S.yearly_under7_pct[y]), type: 'bar', name: '<7h %', marker: { color: THEME.border, opacity: 0.72 }, yaxis: 'y' },
+                    { x: yearNums, y: years.map(y => S.yearly_under7_quality[y]), type: 'scatter', mode: 'lines+markers', name: 'Short night quality', line: { color: THEME.accent, width: 2.5 }, marker: { size: 6 }, yaxis: 'y2' },
+                    { x: yearNums, y: years.map(y => S.yearly_baseline_quality[y]), type: 'scatter', mode: 'lines', name: 'Annual Baseline', line: { color: THEME.muted, width: 1.5, dash: 'dot' }, yaxis: 'y2' }
                 ], {
                     ...plotDefaults,
                     xaxis: { ...plotDefaults.xaxis, title: '', type: 'linear', tickmode: 'array', tickvals: yearNums, ticktext: years, range: [2015.5, 2026.5] },
-                    yaxis: { ...plotDefaults.yaxis, title: '<7h 占比', ticksuffix: '%', range: [0, 30] },
-                    yaxis2: { title: '睡眠质量', ticksuffix: '%', overlaying: 'y', side: 'right', range: [55, 100], gridcolor: 'transparent' },
+                    yaxis: { ...plotDefaults.yaxis, title: '<7h %', ticksuffix: '%', range: [0, 30] },
+                    yaxis2: { title: 'Sleep Quality', ticksuffix: '%', overlaying: 'y', side: 'right', range: [55, 100], gridcolor: 'transparent' },
                     ...(global.SleepEssayCharts && global.SleepEssayCharts.common
                         ? global.SleepEssayCharts.common.xUnifiedLayout({
                             legend: global.SleepEssayCharts.common.softLegend(THEME),
@@ -674,7 +686,7 @@
                         }),
                     margin: { t: 10, r: 60, b: 45, l: 55 },
                     shapes: [{ type: 'line', x0: 2024, x1: 2024, y0: 0, y1: 1, xref: 'x', yref: 'paper', line: { color: THEME.border, width: 1, dash: 'dash' } }],
-                    annotations: [{ x: 2024, y: 1.02, xref: 'x', yref: 'paper', showarrow: false, text: '2024 后短夜晚增多', font: { size: 10, color: THEME.muted } }]
+                    annotations: [{ x: 2024, y: 1.02, xref: 'x', yref: 'paper', showarrow: false, text: 'Short nights increasing after 2024', font: { size: 10, color: THEME.muted } }]
                 }, { responsive: true, displayModeBar: false });
             }
             catch (e) {
@@ -695,7 +707,7 @@
         const years = Object.keys(baseData.mood_by_year).sort();
         const moodTypes = ['Good', 'OK', 'Bad', 'Not set'];
         const moodColors = [THEME.green, '#c8b89a', THEME.red, THEME.muted];
-        const moodLabels = { Good: '好', OK: '还行', Bad: '差', 'Not set': '未记录' };
+        const moodLabels = { Good: 'Good', OK: 'OK', Bad: 'Bad', 'Not set': 'Not set' };
         const traces = moodTypes.map((mood, i) => ({
             x: years,
             y: years.map(yr => {
@@ -705,7 +717,7 @@
             name: moodLabels[mood],
             type: 'bar',
             marker: { color: moodColors[i], opacity: 0.85 },
-            hovertemplate: `%{x}年 - ${moodLabels[mood]}<br>%{y}%<extra></extra>`,
+            hovertemplate: `%{x} - ${moodLabels[mood]}<br>%{y}%<extra></extra>`,
             text: years.map(yr => {
                 const total = Object.values(baseData.mood_by_year[yr]).reduce((a, b) => a + b, 0);
                 const pct = Math.round((baseData.mood_by_year[yr][mood] || 0) / total * 100);
@@ -720,27 +732,27 @@
                 const total = Object.values(baseData.mood_by_year[yr]).reduce((a, b) => a + b, 0);
                 return Math.round((baseData.mood_by_year[yr]['Bad'] || 0) / total * 100);
             }),
-            name: 'Bad 占比趋势',
+            name: 'Bad mood trend',
             type: 'scatter', mode: 'lines+markers',
             line: { color: '#ffffff', width: 2.5, shape: 'spline', dash: 'dot' },
             marker: { size: 7, color: '#ffffff', symbol: 'circle' },
-            hovertemplate: '%{x}年 Bad: %{y}%<extra></extra>',
+            hovertemplate: '%{x} Bad: %{y}%<extra></extra>',
             showlegend: true,
         };
         Plotly.newPlot('chart-mood', [...traces, badLine], {
             ...plotDefaults,
             barmode: 'stack',
-            yaxis: { ...plotDefaults.yaxis, title: '占比 %', ticksuffix: '%' },
-            xaxis: { ...plotDefaults.xaxis, title: '年份' },
+            yaxis: { ...plotDefaults.yaxis, title: '% of Nights', ticksuffix: '%' },
+            xaxis: { ...plotDefaults.xaxis, title: 'Year' },
             showlegend: true,
             legend: (global.SleepEssayCharts && global.SleepEssayCharts.common)
                 ? global.SleepEssayCharts.common.softLegend(THEME, { y: 1.05, orientation: 'h', bgcolor: 'rgba(22,27,34,0.8)' })
                 : { x: 0.01, y: 1.05, orientation: 'h', bgcolor: 'rgba(22,27,34,0.8)', bordercolor: THEME.border, borderwidth: 1 },
             annotations: [
-                { x: '2021', y: 55, text: '2021跳变<br>Bad 48%', showarrow: true, arrowhead: 2,
+                { x: '2021', y: 55, text: '2021 jump\nBad 48%', showarrow: true, arrowhead: 2,
                     arrowcolor: '#ffffff', font: { color: '#ffffff', size: 10 }, ax: -55, ay: -25,
                     bgcolor: 'rgba(13,17,23,0.85)', bordercolor: '#ffffff', borderwidth: 1, borderpad: 4 },
-                { x: '2026', y: 60, text: '2026 Bad 54%<br>十年最高', showarrow: true, arrowhead: 2,
+                { x: '2026', y: 60, text: '2026 Bad 54%\ndecade high', showarrow: true, arrowhead: 2,
                     arrowcolor: '#ffffff', font: { color: '#ffffff', size: 10 }, ax: -65, ay: -15,
                     bgcolor: 'rgba(13,17,23,0.85)', bordercolor: '#ffffff', borderwidth: 1, borderpad: 4 },
             ],
@@ -750,6 +762,17 @@
 })(window);
 (function (global) {
     const root = global.SleepEssayCharts = global.SleepEssayCharts || {};
+    // Label remap: translate Chinese labels from JSON data
+    const TEMP_LABEL_MAP = {
+        '10–18°C (偏冷)': '10–18°C (Cool)',
+        '18–24°C (适宜)': '18–24°C (Comfortable)',
+        '>24°C (偏热)': '>24°C (Warm)'
+    };
+    const RAIN_LABEL_MAP = {
+        '晴/多云 (Clear/Cloudy)': 'Clear/Cloudy',
+        '雨天 (Rain/Wet)': 'Rainy/Wet'
+    };
+    function remapLabel(map, label) { return map[label] || label; }
     function renderEnvSection(ctx) {
         const { Plotly, THEME, plotDefaults, weatherData, envData } = ctx;
         if (!Plotly)
@@ -758,19 +781,19 @@
         if (weatherData && global.document.getElementById('chart-weather-temp')) {
             const td = weatherData.temp_impact;
             Plotly.newPlot('chart-weather-temp', [
-                { x: td.map(d => d.label), y: td.map(d => d.snore), type: 'bar', name: '打呼噜（分钟）', marker: { color: '#ffea00', opacity: 0.85 }, text: td.map(d => d.snore + ' min'), textposition: 'outside', yaxis: 'y' },
-                { x: td.map(d => d.label), y: td.map(d => d.bd), type: 'scatter', mode: 'lines+markers', name: '呼吸中断（次/小时）', line: { color: THEME.accent3, width: 2.5 }, marker: { size: 8 }, yaxis: 'y2' }
+                { x: td.map(d => remapLabel(TEMP_LABEL_MAP, d.label)), y: td.map(d => d.snore), type: 'bar', name: 'Snoring (min)', marker: { color: '#ffea00', opacity: 0.85 }, text: td.map(d => d.snore + ' min'), textposition: 'outside', yaxis: 'y' },
+                { x: td.map(d => remapLabel(TEMP_LABEL_MAP, d.label)), y: td.map(d => d.bd), type: 'scatter', mode: 'lines+markers', name: 'Breathing Interruption (times/hr)', line: { color: THEME.accent3, width: 2.5 }, marker: { size: 8 }, yaxis: 'y2' }
             ], {
-                ...plotDefaults, xaxis: { ...plotDefaults.xaxis, title: '' }, yaxis: { ...plotDefaults.yaxis, title: '打呼噜（分钟）', range: [0, 45] }, yaxis2: { title: '呼吸中断', overlaying: 'y', side: 'right', range: [0, 9], gridcolor: 'transparent' }, margin: { t: 20, r: 60, b: 40, l: 60 }, legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
+                ...plotDefaults, xaxis: { ...plotDefaults.xaxis, title: '' }, yaxis: { ...plotDefaults.yaxis, title: 'Snoring (min)', range: [0, 45] }, yaxis2: { title: 'Breathing Interruption', overlaying: 'y', side: 'right', range: [0, 9], gridcolor: 'transparent' }, margin: { t: 20, r: 60, b: 40, l: 60 }, legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
             }, { responsive: true, displayModeBar: false });
         }
         if (weatherData && global.document.getElementById('chart-weather-rain')) {
             const rd = weatherData.rain_impact;
             Plotly.newPlot('chart-weather-rain', [
-                { x: rd.map(d => d.label), y: rd.map(d => d.snore), type: 'bar', name: '打呼噜（分钟）', marker: { color: '#ffea00', opacity: 0.85 }, text: rd.map(d => d.snore + ' min'), textposition: 'outside', yaxis: 'y' },
-                { x: rd.map(d => d.label), y: rd.map(d => d.bad_pct), type: 'scatter', mode: 'lines+markers', name: 'Bad 情绪比例 %', line: { color: THEME.red, width: 2.5 }, marker: { size: 8 }, yaxis: 'y2' }
+                { x: rd.map(d => remapLabel(RAIN_LABEL_MAP, d.label)), y: rd.map(d => d.snore), type: 'bar', name: 'Snoring (min)', marker: { color: '#ffea00', opacity: 0.85 }, text: rd.map(d => d.snore + ' min'), textposition: 'outside', yaxis: 'y' },
+                { x: rd.map(d => remapLabel(RAIN_LABEL_MAP, d.label)), y: rd.map(d => d.bad_pct), type: 'scatter', mode: 'lines+markers', name: 'Bad mood %', line: { color: THEME.red, width: 2.5 }, marker: { size: 8 }, yaxis: 'y2' }
             ], {
-                ...plotDefaults, xaxis: { ...plotDefaults.xaxis, title: '' }, yaxis: { ...plotDefaults.yaxis, title: '打呼噜（分钟）', range: [0, 40] }, yaxis2: { title: 'Bad 比例 %', overlaying: 'y', side: 'right', range: [0, 60], ticksuffix: '%', gridcolor: 'transparent' }, margin: { t: 20, r: 60, b: 40, l: 60 }, legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
+                ...plotDefaults, xaxis: { ...plotDefaults.xaxis, title: '' }, yaxis: { ...plotDefaults.yaxis, title: 'Snoring (min)', range: [0, 40] }, yaxis2: { title: 'Bad %', overlaying: 'y', side: 'right', range: [0, 60], ticksuffix: '%', gridcolor: 'transparent' }, margin: { t: 20, r: 60, b: 40, l: 60 }, legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
             }, { responsive: true, displayModeBar: false });
         }
         // --- Location/Phase Chart ---
@@ -783,7 +806,7 @@
                     y: ld.map(d => d.noise_tag_pct),
                     customdata: dateRanges,
                     type: 'bar',
-                    name: '主观标为 Noisy %',
+                    name: 'Subjectively noisy %',
                     marker: { color: THEME.border, opacity: 0.75 },
                     yaxis: 'y',
                     hovertemplate: '<b>%{x}</b><br>%{customdata}<br>Noisy: %{y:.1f}%<extra></extra>'
@@ -794,11 +817,11 @@
                     customdata: dateRanges,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: '戴耳塞抗噪 %',
+                    name: 'Earplug use (noise) %',
                     line: { color: THEME.muted, width: 2.5, dash: 'dot' },
                     marker: { size: 7 },
                     yaxis: 'y',
-                    hovertemplate: '<b>%{x}</b><br>%{customdata}<br>耳塞: %{y:.1f}%<extra></extra>'
+                    hovertemplate: '<b>%{x}</b><br>%{customdata}<br>Earplugs: %{y:.1f}%<extra></extra>'
                 },
                 {
                     x: ld.map(d => d.phase),
@@ -806,11 +829,11 @@
                     customdata: dateRanges,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: '平均睡眠质量 %',
+                    name: 'Avg Sleep Quality %',
                     line: { color: THEME.accent, width: 2.5 },
                     marker: { size: 7 },
                     yaxis: 'y2',
-                    hovertemplate: '<b>%{x}</b><br>%{customdata}<br>质量: %{y:.1f}%<extra></extra>'
+                    hovertemplate: '<b>%{x}</b><br>%{customdata}<br>Quality: %{y:.1f}%<extra></extra>'
                 },
                 {
                     x: ld.map(d => d.phase),
@@ -818,7 +841,7 @@
                     customdata: dateRanges,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: 'sleep_h（有效睡眠）',
+                    name: 'sleep_h (effective sleep)',
                     line: { color: THEME.accent2, width: 2.5, dash: 'dot' },
                     marker: { size: 7 },
                     yaxis: 'y3',
@@ -828,17 +851,17 @@
                 ...plotDefaults,
                 barmode: 'group',
                 xaxis: { ...plotDefaults.xaxis, title: '', tickangle: -25 },
-                yaxis: { ...plotDefaults.yaxis, title: '频率 %', range: [0, 65], ticksuffix: '%' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Frequency %', range: [0, 65], ticksuffix: '%' },
                 yaxis2: { title: '', overlaying: 'y', side: 'right', range: [70, 95], gridcolor: 'transparent', tickfont: { color: THEME.accent }, showticklabels: false },
                 yaxis3: { title: '', overlaying: 'y', side: 'right', position: 0.98, range: [5, 9], gridcolor: 'transparent', tickfont: { color: THEME.accent2 }, showticklabels: false },
-                margin: { t: 40, r: 50, b: 80, l: 60 },
-                legend: { x: 0.01, y: 1.15, orientation: 'h', bgcolor: 'rgba(22,27,34,0.8)', bordercolor: THEME.border, borderwidth: 1 },
+                margin: { t: 80, r: 50, b: 80, l: 60 },
+                legend: { x: 0.01, y: 1.22, orientation: 'h', bgcolor: 'rgba(22,27,34,0.8)', bordercolor: THEME.border, borderwidth: 1 },
                 annotations: [
                     {
                         x: 'HK · Wan Chai',
                         y: 57.6,
                         yref: 'y',
-                        text: '开始高频使用耳塞抗噪',
+                        text: 'Started high-frequency earplug use (noise)',
                         showarrow: true,
                         arrowhead: 2,
                         ax: -20,
@@ -861,7 +884,7 @@
                     x: nd.map(d => d.label),
                     y: nd.map(d => d.plug_pct),
                     type: 'bar',
-                    name: '耳塞使用率 %',
+                    name: 'Earplug Usage %',
                     marker: { color: THEME.muted, opacity: 0.8 },
                     text: nd.map(d => d.plug_pct + '%'),
                     textposition: 'auto',
@@ -870,7 +893,7 @@
             ], {
                 ...plotDefaults,
                 xaxis: { ...plotDefaults.xaxis, title: '' },
-                yaxis: { ...plotDefaults.yaxis, title: '耳塞使用频率 %', range: [0, 80], ticksuffix: '%' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Earplug Usage %', range: [0, 80], ticksuffix: '%' },
                 margin: { t: 20, r: 60, b: 40, l: 60 },
                 legend: { x: 0.01, y: 1.15, orientation: 'h', bgcolor: 'rgba(22,27,34,0.8)', bordercolor: THEME.border, borderwidth: 1 },
             }, { responsive: true, displayModeBar: false });
@@ -890,7 +913,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
         const traceQuality = {
             x: buckets.map(b => b.label),
             y: buckets.map(b => b.quality),
-            name: '睡眠质量 %',
+            name: 'Sleep Quality %',
             type: 'bar',
             marker: {
                 // First bucket (sedentary/targeted) is positive — accent blue; others neutral
@@ -900,19 +923,19 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
             yaxis: 'y',
             text: buckets.map(b => b.quality.toFixed(1) + '%'),
             textposition: 'outside',
-            hovertemplate: '%{x}<br>睡眠质量: %{y:.1f}%<extra></extra>',
+            hovertemplate: '%{x}<br>Sleep Quality: %{y:.1f}%<extra></extra>',
         };
         const traceBD = {
             x: buckets.map(b => b.label),
             y: buckets.map(b => b.bd),
-            name: '呼吸中断（次/小时）',
+            name: 'Breathing Interruption (times/hr)',
             type: 'scatter',
             mode: 'lines+markers',
             // BD is a physiological signal — accent3 (orange) per body palette
             line: { color: THEME.accent3, width: 3 },
             marker: { size: 8, color: THEME.accent3 },
             yaxis: 'y2',
-            hovertemplate: '呼吸中断: %{y:.1f} 次/小时<extra></extra>',
+            hovertemplate: 'Breathing Interruption: %{y:.1f} times/hr<extra></extra>',
         };
         Plotly.newPlot(container, [traceQuality, traceBD], {
             ...plotDefaults,
@@ -920,12 +943,12 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
             xaxis: { ...plotDefaults.xaxis, title: '' },
             yaxis: {
                 ...plotDefaults.yaxis,
-                title: '睡眠质量 %',
+                title: 'Sleep Quality %',
                 range: [75, 92],
                 ticksuffix: '%',
             },
             yaxis2: {
-                title: '呼吸中断（次/小时）',
+                title: 'Breathing Interruption (times/hr)',
                 overlaying: 'y',
                 side: 'right',
                 range: [0, 10],
@@ -943,10 +966,10 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
     if (!containerType)
         return;
     const categories = [
-        '靶向心肺\n(游泳/健身环)',
-        '高强度徒步\n(>10k+锻炼)',
-        '旅行奔波\n(>10k+旅行)',
-        '其他多步数\n(>10k无标签)',
+        'Targeted cardio\n(Swimming/Ring Fit)',
+        'High-intensity hiking\n(>10k+exercise)',
+        'Travel fatigue\n(>10k+travel)',
+        'Other high-step\n(>10k no tag)',
     ];
     // Strict location-isolated baseline-adjusted deltas
     const qData = [2.7, -2.9, -11.2, 0.3];
@@ -954,7 +977,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
     const traceTypeQuality = {
         x: categories,
         y: qData,
-        name: '睡眠质量差值 %',
+        name: 'Sleep quality delta %',
         type: 'bar',
         marker: {
             // positive = accent, negative = red, near-zero = border
@@ -964,25 +987,25 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
         text: qData.map(v => (v > 0 ? '+' : '') + v.toFixed(1) + '%'),
         textposition: 'outside',
         yaxis: 'y',
-        hovertemplate: '%{x}<br>质量差值: %{y:.1f}%<extra></extra>',
+        hovertemplate: '%{x}<br>Quality delta: %{y:.1f}%<extra></extra>',
     };
     const traceTypeBD = {
         x: categories,
         y: bdData,
-        name: '呼吸中断差值（次/小时）',
+        name: 'Breathing Interruption delta (times/hr)',
         type: 'scatter',
         mode: 'lines+markers',
         line: { color: THEME.accent3, width: 3 },
         marker: { size: 8, color: THEME.accent3 },
         yaxis: 'y2',
-        hovertemplate: 'BD 差值: %{y:.1f} 次/小时<extra></extra>',
+        hovertemplate: 'BD delta: %{y:.1f} times/hr<extra></extra>',
     };
     Plotly.newPlot(containerType, [traceTypeQuality, traceTypeBD], {
         ...plotDefaults,
         xaxis: { ...plotDefaults.xaxis, title: '' },
         yaxis: {
             ...plotDefaults.yaxis,
-            title: '相对本地基线的质量差值 %',
+            title: 'Quality delta vs local baseline %',
             range: [-15, 6],
             ticksuffix: '%',
             zeroline: true,
@@ -990,7 +1013,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
             zerolinewidth: 2,
         },
         yaxis2: {
-            title: '呼吸中断差值（次/小时）',
+            title: 'Breathing Interruption delta (times/hr)',
             overlaying: 'y',
             side: 'right',
             range: [-5, 4],
@@ -1017,7 +1040,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
             const traceShift = {
                 x: stats.map(d => d.label),
                 y: stats.map(d => d.bedtime_shift_mins),
-                name: '入睡时间偏移 (分钟)',
+                name: 'Bedtime Drift (min)',
                 type: 'bar',
                 marker: {
                     color: THEME.muted,
@@ -1026,26 +1049,26 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 yaxis: 'y',
                 text: stats.map(d => (d.bedtime_shift_mins > 0 ? '+' : '') + Math.round(d.bedtime_shift_mins) + 'm'),
                 textposition: 'auto',
-                hovertemplate: '<b>%{x}</b><br>入睡时间偏移: %{y:.0f} 分钟<extra></extra>',
+                hovertemplate: '<b>%{x}</b><br>Bedtime Drift: %{y:.0f} min<extra></extra>',
             };
             const traceLatency = {
                 x: stats.map(d => d.label),
                 y: stats.map(d => d.latency_mins),
-                name: '入睡潜伏期 (分钟)',
+                name: 'Sleep Onset Latency (min)',
                 type: 'scatter',
                 mode: 'lines+markers',
                 line: { color: THEME.accent2, width: 2, dash: 'dot' },
                 marker: { size: 7, color: THEME.accent2 },
                 yaxis: 'y2',
-                hovertemplate: '<b>%{x}</b><br>入睡潜伏期: %{y:.1f} 分钟<extra></extra>',
+                hovertemplate: '<b>%{x}</b><br>Sleep Onset Latency: %{y:.1f} min<extra></extra>',
             };
             const layoutRebound = {
                 ...plotDefaults,
                 barmode: 'group',
-                xaxis: { ...plotDefaults.xaxis, title: '前一夜睡眠时长' },
-                yaxis: { ...plotDefaults.yaxis, title: '入睡时间偏移 (分钟)' },
+                xaxis: { ...plotDefaults.xaxis, title: 'Previous night sleep duration' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Bedtime Drift (min)' },
                 yaxis2: {
-                    title: '入睡潜伏期 (分钟)',
+                    title: 'Sleep Onset Latency (min)',
                     overlaying: 'y',
                     side: 'right',
                     gridcolor: 'transparent',
@@ -1065,19 +1088,19 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
             const traceQual = {
                 x: stats.map(d => d.label),
                 y: stats.map(d => d.next_quality),
-                name: '第三日睡眠质量',
+                name: '3rd Day Sleep Quality',
                 type: 'bar',
                 marker: {
                     color: stats.map((_, i) => i < 2 ? THEME.red : (i === 2 ? THEME.border : THEME.green))
                 },
                 text: stats.map(d => d.next_quality.toFixed(1) + '%'),
                 textposition: 'auto',
-                hovertemplate: '<b>%{x}</b><br>第三日质量: %{y:.1f}%<extra></extra>',
+                hovertemplate: '<b>%{x}</b><br>3rd Day Quality: %{y:.1f}%<extra></extra>',
             };
             const layoutStreaks = {
                 ...plotDefaults,
-                xaxis: { ...plotDefaults.xaxis, title: '连续两日睡眠状态' },
-                yaxis: { ...plotDefaults.yaxis, title: '第三日睡眠质量 %', range: [65, 95] },
+                xaxis: { ...plotDefaults.xaxis, title: 'Two consecutive nights state' },
+                yaxis: { ...plotDefaults.yaxis, title: '3rd Day Sleep Quality %', range: [65, 95] },
                 showlegend: false,
                 margin: { t: 20, r: 20, b: 60, l: 60 }
             };
@@ -1119,7 +1142,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
         if (!Plotly)
             return;
         const monthly = monthlyFromTimeline(summaryData && summaryData.timeline);
-        // 06 / 主呼吸图：quality as background bars; respiratory signals as lines.
+        // 06 / Main respiratory chart: quality as background bars; respiratory signals as lines.
         if (global.document.getElementById('chart-snore')) {
             const months = Object.keys(monthly).filter(m => m >= '2019-01').sort();
             const qualMonths = months.filter(m => monthly[m].quality !== null);
@@ -1137,49 +1160,49 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                     x: qualMonths,
                     y: qualVals,
                     type: 'bar',
-                    name: '睡眠质量 %',
+                    name: 'Sleep Quality %',
                     marker: { color: QUALITY_BAR },
                     yaxis: 'y',
-                    hovertemplate: '%{x}<br>睡眠质量: %{y:.1f}%<extra></extra>'
+                    hovertemplate: '%{x}<br>Sleep Quality: %{y:.1f}%<extra></extra>'
                 },
                 {
                     x: snoreMonths,
                     y: snoreVals,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: '打呼噜（分钟）',
+                    name: 'Snoring (min)',
                     line: { color: '#ffea00', width: 2.6, shape: 'spline' },
                     marker: { size: 5, color: '#ffea00' },
                     yaxis: 'y2',
-                    hovertemplate: '%{x}<br>打呼噜: %{y:.1f} 分钟<extra></extra>'
+                    hovertemplate: '%{x}<br>Snoring: %{y:.1f} min<extra></extra>'
                 },
                 {
                     x: bdMonths,
                     y: bdVals,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: '呼吸中断（次/小时）',
+                    name: 'Breathing Interruption (times/hr)',
                     line: { color: THEME.accent3, width: 2.5, shape: 'spline' },
                     marker: { size: 5, color: THEME.accent3 },
                     yaxis: 'y3',
-                    hovertemplate: '%{x}<br>呼吸中断: %{y:.2f} 次/小时<extra></extra>'
+                    hovertemplate: '%{x}<br>Breathing Interruption: %{y:.2f} times/hr<extra></extra>'
                 },
                 {
                     x: coughMonths,
                     y: coughVals,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: '咳嗽（次/小时）',
+                    name: 'Cough (times/hr)',
                     line: { color: COUGH_COLOR, width: 3.0, shape: 'spline' },
                     marker: { size: 6, color: COUGH_COLOR },
                     yaxis: 'y4',
-                    hovertemplate: '%{x}<br>咳嗽: %{y:.2f} 次/小时<extra></extra>'
+                    hovertemplate: '%{x}<br>Cough: %{y:.2f} times/hr<extra></extra>'
                 },
             ], {
                 ...plotDefaults,
                 barmode: 'overlay',
                 xaxis: { ...plotDefaults.xaxis, title: '', type: 'category', tickangle: -45, nticks: 22 },
-                yaxis: { ...plotDefaults.yaxis, title: '睡眠质量 %', range: [55, 95], ticksuffix: '%' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Sleep Quality %', range: [55, 95], ticksuffix: '%' },
                 yaxis2: { title: '', overlaying: 'y', side: 'right', range: [0, 130], gridcolor: 'transparent', tickfont: { color: THEME.gold }, showticklabels: false },
                 yaxis3: { title: '', overlaying: 'y', side: 'right', position: 0.90, range: [0, 16], gridcolor: 'transparent', tickfont: { color: THEME.accent3 }, showticklabels: false },
                 yaxis4: { title: '', overlaying: 'y', side: 'right', position: 0.97, range: [0, coughRangeMax], tickmode: 'array', tickvals: [0, 0.5, 1.0, 1.5].filter(v => v <= coughRangeMax), gridcolor: 'transparent', tickfont: { color: COUGH_COLOR }, showticklabels: false },
@@ -1189,7 +1212,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 annotations: [
                     {
                         x: '2020-02', y: 18.7, yref: 'y2', xref: 'x',
-                        text: '乙流<br>（2020-01）',
+                        text: 'Influenza B<br>(2020-01)',
                         showarrow: true, arrowhead: 2, arrowcolor: THEME.red,
                         ax: 65, ay: -15,
                         font: { color: THEME.red, size: 10 },
@@ -1198,7 +1221,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                     },
                     {
                         x: '2023-01', y: 41.5, yref: 'y2', xref: 'x',
-                        text: 'COVID 首次<br>（2022-12）',
+                        text: 'COVID (1st)<br>(2022-12)',
                         showarrow: true, arrowhead: 2, arrowcolor: THEME.red,
                         ax: -55, ay: 22,
                         font: { color: THEME.red, size: 10 },
@@ -1207,7 +1230,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                     },
                     {
                         x: '2024-08', y: 60.4, yref: 'y2', xref: 'x',
-                        text: 'COVID 二次<br>（2024-08）',
+                        text: 'COVID (2nd)<br>(2024-08)',
                         showarrow: true, arrowhead: 2, arrowcolor: THEME.red,
                         ax: -95, ay: -35,
                         font: { color: THEME.red, size: 10 },
@@ -1216,7 +1239,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                     },
                     {
                         x: '2024-09', y: 39.0, yref: 'y2', xref: 'x',
-                        text: '甲流<br>（2024-09）',
+                        text: 'Influenza A<br>(2024-09)',
                         showarrow: true, arrowhead: 2, arrowcolor: THEME.red,
                         ax: 55, ay: -35,
                         font: { color: THEME.red, size: 10 },
@@ -1226,7 +1249,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 ],
             }, { responsive: true, displayModeBar: false });
         }
-        // 07b · 系统之间的接力：三系统年度趋势图（肠胃 / 呼吸 / 循环）
+        // 07b · System relay: three-system annual trend chart (gut / respiratory / circulatory)
         if (global.document.getElementById('chart-hp-snore') && hpData) {
             const years = Object.keys(hpData).sort();
             const hp = years.map(y => hpData[y].hp_pct);
@@ -1237,17 +1260,17 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 return block ? block.hr_mean : null;
             });
             Plotly.newPlot('chart-hp-snore', [
-                { x: years, y: qualVals, type: 'bar', name: 'SleepCycle 睡眠分', marker: { color: QUALITY_BAR }, yaxis: 'y2', hovertemplate: '%{x}<br>睡眠分: %{y:.1f}%<extra></extra>' },
-                { x: years, y: hp, type: 'scatter', mode: 'lines+markers', name: 'HP feeling 出现率 %', line: { color: HP_COLOR, width: 2.6, shape: 'spline' }, marker: { size: 6, color: HP_COLOR }, yaxis: 'y', hovertemplate: '%{x}<br>HP: %{y:.1f}%<extra></extra>' },
-                { x: years, y: snore, type: 'scatter', mode: 'lines+markers', name: '打呼噜出现率 %', line: { color: '#ffea00', width: 2.6, shape: 'spline' }, marker: { size: 6, color: '#ffea00' }, yaxis: 'y', hovertemplate: '%{x}<br>打呼噜: %{y:.1f}%<extra></extra>' },
-                { x: years, y: hrVals, type: 'scatter', mode: 'lines+markers', name: '晨起心率', line: { color: THEME.muted, width: 2.6, shape: 'spline' }, marker: { size: 6, color: THEME.muted }, yaxis: 'y3', hovertemplate: '%{x}<br>晨起心率: %{y:.1f}<extra></extra>' },
+                { x: years, y: qualVals, type: 'bar', name: 'SleepCycle score', marker: { color: QUALITY_BAR }, yaxis: 'y2', hovertemplate: '%{x}<br>Sleep score: %{y:.1f}%<extra></extra>' },
+                { x: years, y: hp, type: 'scatter', mode: 'lines+markers', name: 'HP feeling frequency %', line: { color: HP_COLOR, width: 2.6, shape: 'spline' }, marker: { size: 6, color: HP_COLOR }, yaxis: 'y', hovertemplate: '%{x}<br>HP: %{y:.1f}%<extra></extra>' },
+                { x: years, y: snore, type: 'scatter', mode: 'lines+markers', name: 'Snoring frequency %', line: { color: '#ffea00', width: 2.6, shape: 'spline' }, marker: { size: 6, color: '#ffea00' }, yaxis: 'y', hovertemplate: '%{x}<br>Snoring: %{y:.1f}%<extra></extra>' },
+                { x: years, y: hrVals, type: 'scatter', mode: 'lines+markers', name: 'Morning heart rate', line: { color: THEME.muted, width: 2.6, shape: 'spline' }, marker: { size: 6, color: THEME.muted }, yaxis: 'y3', hovertemplate: '%{x}<br>Morning heart rate: %{y:.1f}<extra></extra>' },
             ], {
                 ...plotDefaults,
                 barmode: 'overlay',
-                yaxis: { ...plotDefaults.yaxis, title: '系统信号占比 %', range: [0, 115], ticksuffix: '%' },
+                yaxis: { ...plotDefaults.yaxis, title: 'System signal %', range: [0, 115], ticksuffix: '%' },
                 yaxis2: { title: '', overlaying: 'y', side: 'right', range: [55, 105], ticksuffix: '%', gridcolor: 'transparent', tickfont: { color: THEME.accent }, showticklabels: false },
                 yaxis3: { title: '', overlaying: 'y', side: 'right', position: 0.94, range: [60, 75], gridcolor: 'transparent', tickfont: { color: THEME.muted }, showticklabels: false },
-                xaxis: { ...plotDefaults.xaxis, title: '年份' },
+                xaxis: { ...plotDefaults.xaxis, title: 'Year' },
                 showlegend: true,
                 legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
                 margin: { t: 20, r: 60, b: 60, l: 60 },
@@ -1255,7 +1278,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 annotations: [
                     {
                         x: '2019', y: 2.2, yref: 'y', xref: 'x',
-                        text: 'HP 治愈<br>（2018 末）',
+                        text: 'HP Cured<br>(end of 2018)',
                         showarrow: true, arrowhead: 2, arrowcolor: HP_COLOR,
                         ax: -60, ay: -35,
                         font: { color: HP_COLOR, size: 10 },
@@ -1264,7 +1287,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                     },
                     {
                         x: '2020', y: 62.7, yref: 'y', xref: 'x',
-                        text: '乙流<br>（2020-01）',
+                        text: 'Influenza B<br>(2020-01)',
                         showarrow: true, arrowhead: 2, arrowcolor: THEME.red,
                         ax: 55, ay: -35,
                         font: { color: THEME.red, size: 10 },
@@ -1274,25 +1297,25 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 ],
             }, { responsive: true, displayModeBar: false });
         }
-        // 07c · 诊断、治疗与恢复：quality as bar, recent signals as lines.
+        // 07c · Diagnosis, treatment & recovery: quality as bar, recent signals as lines.
         if (global.document.getElementById('chart-recovery') && recoveryData) {
             const months = Object.keys(recoveryData).sort();
             Plotly.newPlot('chart-recovery', [
-                { x: months, y: months.map(m => recoveryData[m].q), type: 'bar', name: '睡眠质量', marker: { color: QUALITY_BAR }, yaxis: 'y' },
-                { x: months, y: months.map(m => recoveryData[m].bd), type: 'scatter', mode: 'lines+markers', name: '呼吸中断', line: { color: THEME.accent3, width: 2.3, shape: 'spline' }, marker: { size: 5, color: THEME.accent3 }, yaxis: 'y2' },
-                { x: months, y: months.map(m => recoveryData[m].snore), type: 'scatter', mode: 'lines+markers', name: '打呼噜（分钟）', line: { color: '#ffea00', width: 2.4, shape: 'spline' }, marker: { size: 5, color: '#ffea00' }, yaxis: 'y3' },
+                { x: months, y: months.map(m => recoveryData[m].q), type: 'bar', name: 'Sleep Quality', marker: { color: QUALITY_BAR }, yaxis: 'y' },
+                { x: months, y: months.map(m => recoveryData[m].bd), type: 'scatter', mode: 'lines+markers', name: 'Breathing Interruption', line: { color: THEME.accent3, width: 2.3, shape: 'spline' }, marker: { size: 5, color: THEME.accent3 }, yaxis: 'y2' },
+                { x: months, y: months.map(m => recoveryData[m].snore), type: 'scatter', mode: 'lines+markers', name: 'Snoring (min)', line: { color: '#ffea00', width: 2.4, shape: 'spline' }, marker: { size: 5, color: '#ffea00' }, yaxis: 'y3' },
             ], {
                 ...plotDefaults,
                 barmode: 'overlay',
                 xaxis: { ...plotDefaults.xaxis, title: '', type: 'date' },
-                yaxis: { ...plotDefaults.yaxis, title: '睡眠质量 %', range: [65, 90], ticksuffix: '%' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Sleep Quality %', range: [65, 90], ticksuffix: '%' },
                 yaxis2: { title: '', overlaying: 'y', side: 'right', range: [0, 16], gridcolor: 'transparent', tickfont: { color: THEME.accent3 }, showticklabels: false },
                 yaxis3: { title: '', overlaying: 'y', side: 'right', position: 0.94, range: [0, 130], gridcolor: 'transparent', tickfont: { color: '#ffea00' }, showticklabels: false },
                 margin: { t: 20, r: 60, b: 70, l: 60 },
                 annotations: [
                     {
                         x: '2024-08-15', y: 60.4, yref: 'y3', xref: 'x',
-                        text: 'COVID 二次<br>（2024-08）',
+                        text: 'COVID (2nd)<br>(2024-08)',
                         showarrow: true, arrowhead: 2, arrowcolor: THEME.red,
                         ax: -65, ay: -35,
                         font: { color: THEME.red, size: 10 },
@@ -1301,7 +1324,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                     },
                     {
                         x: '2024-09-15', y: 39.0, yref: 'y3', xref: 'x',
-                        text: '甲流<br>（2024-09）',
+                        text: 'Influenza A<br>(2024-09)',
                         showarrow: true, arrowhead: 2, arrowcolor: THEME.red,
                         ax: 60, ay: -30,
                         font: { color: THEME.red, size: 10 },
@@ -1310,7 +1333,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                     },
                     {
                         x: '2025-04-15', y: 12.84, yref: 'y2', xref: 'x',
-                        text: '开始自行治疗鼻炎<br>（2025-04-15）',
+                        text: 'Started self-treating rhinitis<br>(2025-04-15)',
                         showarrow: true, arrowhead: 2, arrowcolor: '#4ade80',
                         ax: 0, ay: -50,
                         font: { color: '#4ade80', size: 10 },
@@ -1319,7 +1342,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                     },
                     {
                         x: '2025-07-25', y: 7.05, yref: 'y2', xref: 'x',
-                        text: '确诊鼻窦炎<br>（2025-07-25）',
+                        text: 'Diagnosed sinusitis<br>(2025-07-25)',
                         showarrow: true, arrowhead: 2, arrowcolor: '#4ade80',
                         ax: 65, ay: -35,
                         font: { color: '#4ade80', size: 10 },
@@ -1354,11 +1377,11 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 return slice.reduce((a, b) => a + b, 0) / slice.length;
             });
             Plotly.newPlot('chart-monthly', [
-                { x: months, y: vals, type: 'scatter', mode: 'lines', line: { color: THEME.border, width: 1 }, name: '月度均值', hovertemplate: '%{x}<br>%{y:.1f}%<extra></extra>' },
-                { x: months, y: smoothed, type: 'scatter', mode: 'lines', line: { color: THEME.accent, width: 2.5, shape: 'spline' }, name: '3个月平滑', hovertemplate: '%{x}<br>%{y:.1f}%（平滑）<extra></extra>' },
+                { x: months, y: vals, type: 'scatter', mode: 'lines', line: { color: THEME.border, width: 1 }, name: 'Monthly Average', hovertemplate: '%{x}<br>%{y:.1f}%<extra></extra>' },
+                { x: months, y: smoothed, type: 'scatter', mode: 'lines', line: { color: THEME.accent, width: 2.5, shape: 'spline' }, name: '3-month smoothed', hovertemplate: '%{x}<br>%{y:.1f}% (smoothed)<extra></extra>' },
             ], {
                 ...plotDefaults,
-                yaxis: { ...plotDefaults.yaxis, range: [50, 105], ticksuffix: '%', title: '睡眠质量' },
+                yaxis: { ...plotDefaults.yaxis, range: [50, 105], ticksuffix: '%', title: 'Sleep Quality' },
                 xaxis: { ...plotDefaults.xaxis, title: '' },
                 showlegend: true,
                 legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.8)', bordercolor: THEME.border, borderwidth: 1 },
@@ -1390,18 +1413,18 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 text: pts.map(d => `${d.date}<br>${d.quality}%<br>${d.duration}h`),
                 hovertemplate: '%{text}<extra>' + name + '</extra>',
             });
-            const allTrace = makeTrace(baseData.scatter, '全部年份', THEME.accent);
+            const allTrace = makeTrace(baseData.scatter, 'All Years', THEME.accent);
             const yearTraces = Object.fromEntries(years.map(yr => [String(yr), makeTrace(baseData.scatter.filter(d => d.year === yr), String(yr), colorMap[yr] || THEME.border)]));
             const selector = global.document.getElementById('scatter-selector');
             if (selector) {
                 selector.innerHTML = '';
-                const options = ['全部年份', ...years.map(String)];
+                const options = ['All Years', ...years.map(String)];
                 const render = (key) => {
-                    const trace = key === '全部年份' ? allTrace : yearTraces[key];
+                    const trace = key === 'All Years' ? allTrace : yearTraces[key];
                     Plotly.newPlot('chart-scatter', [trace], {
                         ...plotDefaults,
-                        xaxis: { ...plotDefaults.xaxis, title: '入睡时间', tickmode: 'array', tickvals: [20, 21, 22, 23, 24, 25, 26, 27, 28, 29], ticktext: ['20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00'], range: [19.5, 29.5], autorange: false, fixedrange: true },
-                        yaxis: { ...plotDefaults.yaxis, title: '实际睡眠时长（小时）', range: [3.5, 10.5] },
+                        xaxis: { ...plotDefaults.xaxis, title: 'Bedtime', tickmode: 'array', tickvals: [20, 21, 22, 23, 24, 25, 26, 27, 28, 29], ticktext: ['20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00'], range: [19.5, 29.5], autorange: false, fixedrange: true },
+                        yaxis: { ...plotDefaults.yaxis, title: 'Actual Sleep Duration (hours)', range: [3.5, 10.5] },
                         margin: { t: 20, r: 40, b: 60, l: 60 },
                     }, { responsive: true, displayModeBar: false });
                     [...selector.querySelectorAll('.scatter-chip')].forEach(btn => btn.classList.toggle('active', btn.dataset.scatterKey === key));
@@ -1415,13 +1438,13 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                     btn.addEventListener('click', () => render(key));
                     selector.appendChild(btn);
                 });
-                render('全部年份');
+                render('All Years');
             }
             else {
                 Plotly.newPlot('chart-scatter', [allTrace], {
                     ...plotDefaults,
-                    xaxis: { ...plotDefaults.xaxis, title: '入睡时间', tickmode: 'array', tickvals: [20, 21, 22, 23, 24, 25, 26, 27, 28, 29], ticktext: ['20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00'], range: [19.5, 29.5], autorange: false, fixedrange: true },
-                    yaxis: { ...plotDefaults.yaxis, title: '实际睡眠时长（小时）', range: [3.5, 10.5] },
+                    xaxis: { ...plotDefaults.xaxis, title: 'Bedtime', tickmode: 'array', tickvals: [20, 21, 22, 23, 24, 25, 26, 27, 28, 29], ticktext: ['20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00'], range: [19.5, 29.5], autorange: false, fixedrange: true },
+                    yaxis: { ...plotDefaults.yaxis, title: 'Actual Sleep Duration (hours)', range: [3.5, 10.5] },
                     margin: { t: 20, r: 40, b: 60, l: 60 },
                 }, { responsive: true, displayModeBar: false });
             }
@@ -1443,14 +1466,15 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
         const nWith = tags.map(t => baseData.tag_impact[t].n_with);
         const withMean = tags.map(t => baseData.tag_impact[t].with_mean);
         const withoutMean = tags.map(t => baseData.tag_impact[t].without_mean);
+        // Use original tag names (align with SleepCycle)
         const tagLabels = {
-            'tea/coffee': '茶/咖啡', 'break': '休假', 'thinking': '睡前思考',
-            'after 0000': '过了午夜', 'plug': '耳塞', 'noon nap': '午睡',
-            'HP feeling': '肠胃不适(HP)', 'sick': '生病', 'Stressful day': '压力大',
-            'Ate late': '吃得晚', 'night gaming': '夜间游戏', 'Worked out': '锻炼',
-            'music': '听音乐', 'tired': '疲劳', 'meditation': '冥想', 'massage': '按摩',
-            'fly': '神秘事件', 'wine': '饮酒', 'travel': '旅行',
-            'shower': '睡前洗澡', 'holiday night': '无闹钟之夜', 'sad': '睡前负面情绪', 'holy': '肠道未排空',
+            'tea/coffee': 'tea/coffee', 'break': 'break', 'thinking': 'thinking',
+            'after 0000': 'after midnight', 'plug': 'Earplugs', 'noon nap': 'noon nap',
+            'HP feeling': 'HP feeling', 'sick': 'sick', 'Stressful day': 'Stressful day',
+            'Ate late': 'Ate late', 'night gaming': 'night gaming', 'Worked out': 'Worked out',
+            'music': 'music', 'tired': 'tired', 'meditation': 'meditation', 'massage': 'massage',
+            'fly': 'Mysterious Events', 'wine': 'Alcohol', 'travel': 'travel',
+            'shower': 'shower', 'holiday night': 'holiday night', 'sad': 'pre-sleep sad', 'holy': 'gut uneasy',
         };
         const colors = diffs.map(d => {
             // Diverging color scale based on magnitude
@@ -1472,13 +1496,13 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 orientation: 'h',
                 marker: { color: colors },
                 customdata: tags.map((t, i) => [withMean[i], withoutMean[i], nWith[i]]),
-                hovertemplate: '%{y}<br>差值: %{x:.1f}%<br>有该 tag: %{customdata[0]:.1f}%<br>无该 tag: %{customdata[1]:.1f}%<br>样本数: %{customdata[2]}<extra></extra>',
+                hovertemplate: '%{y}<br>delta: %{x:.1f}%<br>With tag: %{customdata[0]:.1f}%<br>Without tag: %{customdata[1]:.1f}%<br>n: %{customdata[2]}<extra></extra>',
                 text: diffs.map(d => `${d > 0 ? '+' : ''}${d.toFixed(1)}%`),
                 textposition: 'outside',
                 textfont: { size: 11 },
             }], {
             ...plotDefaults,
-            xaxis: { ...plotDefaults.xaxis, title: '相对整体基线的质量差值', ticksuffix: '%', zeroline: true, zerolinecolor: THEME.muted, zerolinewidth: 2 },
+            xaxis: { ...plotDefaults.xaxis, title: 'Quality delta vs overall baseline', ticksuffix: '%', zeroline: true, zerolinecolor: THEME.muted, zerolinewidth: 2 },
             yaxis: { ...plotDefaults.yaxis, automargin: true },
             margin: { t: 20, r: 80, b: 55, l: 120 },
             showlegend: false,
@@ -1506,14 +1530,14 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                     type: 'bar',
                     marker: { color: colors, opacity: 0.85 },
                     customdata: hours.map((h, i) => [bc[h].q, ns[i]]),
-                    hovertemplate: '%{x}<br>相对基线: %{y:+.1f}%<br>平均质量: %{customdata[0]:.1f}%<br>夜晚数: %{customdata[1]}<extra></extra>',
+                    hovertemplate: '%{x}<br>vs baseline: %{y:+.1f}%<br>Avg quality: %{customdata[0]:.1f}%<br>Nights: %{customdata[1]}<extra></extra>',
                     text: diffs.map(d => `${d > 0 ? '+' : ''}${d.toFixed(1)}%`),
                     textposition: 'auto',
                     textfont: { size: 11, color: '#ffffff' },
                 }], {
                 ...plotDefaults,
-                yaxis: { ...plotDefaults.yaxis, title: '相对基线的质量差值 (%)', zeroline: true, zerolinecolor: THEME.border, zerolinewidth: 1, range: [-30, 12] },
-                xaxis: { ...plotDefaults.xaxis, title: '入睡时间段' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Quality delta vs baseline (%)', zeroline: true, zerolinecolor: THEME.border, zerolinewidth: 1, range: [-30, 12] },
+                xaxis: { ...plotDefaults.xaxis, title: 'Bedtime window' },
                 shapes: [{
                         type: 'line', x0: -0.5, x1: labels.length - 0.5, y0: 0, y1: 0,
                         line: { color: THEME.border, width: 1, dash: 'dot' },
@@ -1545,15 +1569,15 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 },
                 {
                     x: bucketLabels, y: bad,
-                    type: 'bar', name: 'Bad 晨起情绪',
+                    type: 'bar', name: 'Bad morning mood',
                     marker: { color: THEME.red, opacity: 0.85 },
                     hovertemplate: '%{x}<br>Bad: %{y:.1f}%<extra></extra>',
                 },
             ], {
                 ...plotDefaults,
                 barmode: 'stack',
-                yaxis: { ...plotDefaults.yaxis, title: '早晨情绪占比 (%)', ticksuffix: '%', range: [0, 105] },
-                xaxis: { ...plotDefaults.xaxis, title: '睡眠质量区间' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Morning mood % (%)', ticksuffix: '%', range: [0, 105] },
+                xaxis: { ...plotDefaults.xaxis, title: 'Sleep quality range' },
                 showlegend: true,
                 legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
                 margin: { t: 20, r: 20, b: 70, l: 60 },
@@ -1575,39 +1599,39 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
             Plotly.newPlot('chart-regularity-monthly', [
                 {
                     x: months, y: regVals,
-                    type: 'scatter', mode: 'lines', name: '规律性（原始）',
+                    type: 'scatter', mode: 'lines', name: 'Regularity (raw)',
                     line: { color: THEME.border, width: 1 },
-                    hovertemplate: '%{x}<br>规律性（原始）: %{y:.1f}%<extra></extra>',
+                    hovertemplate: '%{x}<br>Regularity (raw): %{y:.1f}%<extra></extra>',
                     opacity: 0.4,
                     showlegend: false,
                 },
                 {
                     x: months, y: regSmooth,
-                    type: 'scatter', mode: 'lines', name: '作息规律性（3月均）',
+                    type: 'scatter', mode: 'lines', name: 'Schedule Regularity (3mo avg)',
                     line: { color: THEME.muted, width: 2.5 },
-                    hovertemplate: '%{x}<br>规律性（均）: %{y:.1f}%<extra></extra>',
+                    hovertemplate: '%{x}<br>Regularity (avg): %{y:.1f}%<extra></extra>',
                 },
                 {
                     x: months, y: qSmooth,
-                    type: 'scatter', mode: 'lines', name: 'SleepCycle 质量分（3月均）',
+                    type: 'scatter', mode: 'lines', name: 'SleepCycle quality score (3mo avg)',
                     line: { color: THEME.accent, width: 2.5 },
-                    hovertemplate: '%{x}<br>质量（均）: %{y:.1f}%<extra></extra>',
+                    hovertemplate: '%{x}<br>Quality (avg): %{y:.1f}%<extra></extra>',
                     yaxis: 'y2',
                 },
             ], {
                 ...plotDefaults,
-                yaxis: { ...plotDefaults.yaxis, title: '作息规律性 (%)', range: [55, 100], ticksuffix: '%' },
-                yaxis2: { title: '睡眠质量 (%)', overlaying: 'y', side: 'right', range: [55, 100], gridcolor: 'transparent', ticksuffix: '%' },
-                xaxis: { ...plotDefaults.xaxis, title: '月份', type: 'date' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Schedule Regularity (%)', range: [55, 100], ticksuffix: '%' },
+                yaxis2: { title: 'Sleep Quality (%)', overlaying: 'y', side: 'right', range: [55, 100], gridcolor: 'transparent', ticksuffix: '%' },
+                xaxis: { ...plotDefaults.xaxis, title: 'Month', type: 'date' },
                 showlegend: true,
                 legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
                 hovermode: 'x unified',
                 margin: { t: 20, r: 80, b: 60, l: 60 },
                 annotations: [
-                    { x: '2020-04', y: 93.2, yref: 'y', text: '封控期峰值 93%', showarrow: true,
+                    { x: '2020-04', y: 93.2, yref: 'y', text: 'Lockdown peak 93%', showarrow: true,
                         arrowhead: 2, arrowcolor: THEME.muted, font: { color: THEME.muted, size: 10 },
                         ax: 50, ay: -30, bgcolor: 'rgba(13,17,23,0.85)', bordercolor: THEME.muted, borderwidth: 1, borderpad: 4 },
-                    { x: '2022-11', y: 80.8, yref: 'y', text: 'COVID 首次后<br>规律性开始持续下滑', showarrow: true,
+                    { x: '2022-11', y: 80.8, yref: 'y', text: 'After COVID (1st)\nSchedule regularity began declining', showarrow: true,
                         arrowhead: 2, arrowcolor: THEME.red, font: { color: THEME.red, size: 10 },
                         ax: -65, ay: -35, bgcolor: 'rgba(13,17,23,0.85)', bordercolor: THEME.red, borderwidth: 1, borderpad: 4 },
                 ],
@@ -1622,20 +1646,20 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
         if (!travelData)
             return;
         const baseline = travelData.overview.baseline_quality_mean;
-        // ── Chart 1: 旅行夜晚的高频伤害因素 ──────────────────────────────
+        // ── Chart 1: High-Frequency Damage Factors on Travel Nights ──────────────────────────────
         const containerDamage = document.getElementById('chart-travel-damage');
         if (containerDamage && travelData.damage_factors) {
-            const factors = [...travelData.damage_factors].reverse(); // 从小到大，让最大在顶部
+            const factors = [...travelData.damage_factors].reverse();
             const traceTravel = {
                 x: factors.map(d => d.travel_pct),
                 y: factors.map(d => d.tag),
-                name: '出行夜晚',
+                name: 'Travel nights',
                 type: 'bar',
                 orientation: 'h',
                 marker: { color: THEME.bad || '#e05252', opacity: 0.85 },
                 text: factors.map(d => d.travel_pct != null ? d.travel_pct.toFixed(1) + '%' : ''),
                 textposition: 'outside',
-                hovertemplate: '<b>%{y}</b><br>出行夜晚出现率: %{x:.1f}%<extra></extra>',
+                hovertemplate: '<b>%{y}</b><br>Travel night rate: %{x:.1f}%<extra></extra>',
             };
             const traceBaseline = {
                 x: factors.map(d => d.baseline_pct),
@@ -1646,19 +1670,19 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 marker: { color: THEME.muted || '#666', opacity: 0.6 },
                 text: factors.map(d => d.baseline_pct != null ? d.baseline_pct.toFixed(1) + '%' : ''),
                 textposition: 'outside',
-                hovertemplate: '<b>%{y}</b><br>Baseline 出现率: %{x:.1f}%<extra></extra>',
+                hovertemplate: '<b>%{y}</b><br>Baseline rate: %{x:.1f}%<extra></extra>',
             };
             const layoutDamage = {
                 ...plotDefaults,
                 barmode: 'group',
-                xaxis: { ...plotDefaults.xaxis, title: '出现率 (%)', ticksuffix: '%' },
+                xaxis: { ...plotDefaults.xaxis, title: 'Occurrence Rate (%)', ticksuffix: '%' },
                 yaxis: { ...plotDefaults.yaxis, title: '' },
                 legend: { x: 0.6, y: 0.05, bgcolor: 'rgba(22,27,34,0.85)' },
                 margin: { t: 20, r: 80, b: 60, l: 120 },
             };
             Plotly.newPlot(containerDamage, [traceTravel, traceBaseline], layoutDamage, { responsive: true, displayModeBar: false });
         }
-        // ── Chart 2: 旅行后的恢复曲线 ──────────────────────────────
+        // ── Chart 2: Post-Travel Recovery Curve ──────────────────────────────
         const containerRecovery = document.getElementById('chart-travel-recovery');
         if (containerRecovery && travelData.recovery_by_length) {
             const shortData = travelData.recovery_by_length.short.filter(d => d.offset !== 99);
@@ -1667,22 +1691,22 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
             const traceShort = {
                 x: labels,
                 y: shortData.map(d => d.quality),
-                name: '短途（1-2 晚）',
+                name: 'Short trip (1–2 nights)',
                 type: 'scatter',
                 mode: 'lines+markers',
                 line: { color: THEME.accent || '#4a9eff', width: 2.5 },
                 marker: { size: 7, color: THEME.accent || '#4a9eff' },
-                hovertemplate: '<b>%{x}</b><br>质量: %{y:.1f}%<extra></extra>',
+                hovertemplate: '<b>%{x}</b><br>Quality: %{y:.1f}%<extra></extra>',
             };
             const traceLong = {
                 x: labels,
                 y: longData.map(d => d.quality),
-                name: '长途（3+ 晚）',
+                name: 'Long trip (3+ nights)',
                 type: 'scatter',
                 mode: 'lines+markers',
                 line: { color: THEME.accent2 || '#f5a623', width: 2.5 },
                 marker: { size: 7, color: THEME.accent2 || '#f5a623' },
-                hovertemplate: '<b>%{x}</b><br>质量: %{y:.1f}%<extra></extra>',
+                hovertemplate: '<b>%{x}</b><br>Quality: %{y:.1f}%<extra></extra>',
             };
             const traceBaselineRecovery = {
                 x: labels,
@@ -1693,7 +1717,6 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 line: { color: THEME.muted || '#666', width: 1.5, dash: 'dash' },
                 hovertemplate: 'Baseline: %{y:.1f}%<extra></extra>',
             };
-            // Find and annotate the peak
             const allVals = [...shortData.map(d => d.quality), ...longData.map(d => d.quality)].filter(v => v != null);
             const peakVal = Math.max(...allVals);
             const peakIdx = shortData.findIndex(d => d.quality === peakVal) !== -1
@@ -1703,13 +1726,13 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
             const layoutRecovery = {
                 ...plotDefaults,
                 xaxis: { ...plotDefaults.xaxis, title: '' },
-                yaxis: { ...plotDefaults.yaxis, title: '睡眠质量 %', range: [60, 95] },
+                yaxis: { ...plotDefaults.yaxis, title: 'Sleep Quality %', range: [60, 95] },
                 legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(22,27,34,0.85)' },
                 margin: { t: 30, r: 20, b: 60, l: 60 },
                 annotations: [{
                         x: peakLabel,
                         y: peakVal,
-                        text: '回家反弹峰值',
+                        text: 'Homecoming rebound',
                         showarrow: true,
                         arrowhead: 2,
                         arrowcolor: THEME.green || '#4caf50',
@@ -1720,7 +1743,7 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
             };
             Plotly.newPlot(containerRecovery, [traceShort, traceLong, traceBaselineRecovery], layoutRecovery, { responsive: true, displayModeBar: false });
         }
-        // ── Chart 3: 旅行长度与睡眠质量 ──────────────────────────────
+        // ── Chart 3: Trip Length Effect on Sleep Quality ──────────────────────────────
         const containerLength = document.getElementById('chart-travel-length');
         if (containerLength && travelData.length_effect) {
             const le = travelData.length_effect.filter(d => d.n > 0);
@@ -1741,12 +1764,12 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 text: le.map(d => d.quality != null ? d.quality.toFixed(1) + '%' : ''),
                 textposition: 'outside',
                 customdata: le.map(d => d.n),
-                hovertemplate: '<b>%{x}</b><br>质量: %{y:.1f}%<br>样本数: %{customdata}<extra></extra>',
+                hovertemplate: '<b>%{x}</b><br>Quality: %{y:.1f}%<br>n: %{customdata}<extra></extra>',
             };
             const layoutLength = {
                 ...plotDefaults,
-                xaxis: { ...plotDefaults.xaxis, title: '旅行长度' },
-                yaxis: { ...plotDefaults.yaxis, title: '睡眠质量 %', range: [60, 92] },
+                xaxis: { ...plotDefaults.xaxis, title: 'Trip Length' },
+                yaxis: { ...plotDefaults.yaxis, title: 'Sleep Quality %', range: [60, 92] },
                 showlegend: false,
                 margin: { t: 30, r: 20, b: 60, l: 60 },
                 shapes: [{
@@ -1774,35 +1797,35 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
 (function (global) {
     const root = global.SleepEssayCharts = global.SleepEssayCharts || {};
     const FEATURE_LABELS = {
-        bedtime_offset: '晚睡时点',
-        break: '夜间中断',
-        bedtime_offset_x_tired: '晚睡 × tired',
-        tea_coffee: '茶 / 咖啡',
-        holiday_night: '无闹钟之夜',
-        steps: '步数',
-        quality_roll7_std: '近期波动',
-        tag_count: '标签数量',
-        after_0000: '过午夜',
-        quality_roll7: '近 7 天质量',
-        bedtime_bin: '入睡时段',
-        in_bed_lag1: '昨晚卧床时长',
+        bedtime_offset: 'Late bedtime',
+        break: 'Night interruption',
+        bedtime_offset_x_tired: 'Late bedtime × tired',
+        tea_coffee: 'Tea / coffee',
+        holiday_night: 'No alarm next day',
+        steps: 'Steps',
+        quality_roll7_std: 'Recent volatility',
+        tag_count: 'Tag count',
+        after_0000: 'After midnight',
+        quality_roll7: 'Recent 7-day quality',
+        bedtime_bin: 'Bedtime bucket',
+        in_bed_lag1: 'Yesterday in-bed time',
     };
     const SCENARIO_LABELS = {
-        'bedtime 2h earlier': '提前 2 小时入睡',
-        'bedtime 1h earlier': '提前 1 小时入睡',
-        'holiday_night on vs off': '无闹钟 vs 有闹钟',
-        'massage on vs off': '按摩',
-        'shower on vs off': '洗澡',
-        'tea_coffee on vs off': '茶 / 咖啡',
-        'after_0000 on vs off': '过午夜',
-        'break on vs off': '夜间中断',
-        'bedtime 1h later': '推迟 1 小时入睡',
+        'bedtime 2h earlier': 'Bedtime 2h earlier',
+        'bedtime 1h earlier': 'Bedtime 1h earlier',
+        'holiday_night on vs off': 'No alarm vs alarm',
+        'massage on vs off': 'Massage',
+        'shower on vs off': 'Shower',
+        'tea_coffee on vs off': 'Tea / coffee',
+        'after_0000 on vs off': 'After midnight',
+        'break on vs off': 'Night interruption',
+        'bedtime 1h later': 'Bedtime 1h later',
     };
     const TAG_LABELS = {
-        after_0000: '过午夜',
-        tired: 'tired',
-        tea_coffee: '茶 / 咖啡',
-        night_gaming: '夜间游戏',
+        after_0000: 'After midnight',
+        tired: 'Tired',
+        tea_coffee: 'Tea / coffee',
+        night_gaming: 'Night gaming',
     };
     function labelFor(map, key) {
         return map[key] || key;
@@ -1840,28 +1863,28 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 orientation: 'h',
                 y: rows.map(r => r.label),
                 x: rows.map(r => r.quality),
-                name: '睡眠质量',
+                name: 'Sleep quality',
                 marker: { color: THEME.accent, opacity: 0.9 },
                 text: rows.map(r => r.quality > 0 ? `${r.quality.toFixed(0)}` : ''),
                 textposition: 'outside',
-                hovertemplate: '%{y}<br>睡眠质量: %{x:.0f}<extra></extra>',
+                hovertemplate: '%{y}<br>Sleep quality: %{x:.0f}<extra></extra>',
             },
             {
                 type: 'bar',
                 orientation: 'h',
                 y: rows.map(r => r.label),
                 x: rows.map(r => r.mood),
-                name: '起床情绪',
+                name: 'Wake-up mood',
                 marker: { color: THEME.accent2, opacity: 0.9 },
                 text: rows.map(r => r.mood > 0 ? `${r.mood.toFixed(0)}` : ''),
                 textposition: 'outside',
-                hovertemplate: '%{y}<br>起床情绪: %{x:.0f}<extra></extra>',
+                hovertemplate: '%{y}<br>Wake-up mood: %{x:.0f}<extra></extra>',
             },
         ], {
             ...plotDefaults,
             barmode: 'group',
             margin: { t: 30, r: 40, b: 50, l: 170 },
-            xaxis: { ...plotDefaults.xaxis, title: '相对权重（第一名 = 100）', range: [0, 112] },
+            xaxis: { ...plotDefaults.xaxis, title: 'Relative weight (top factor = 100)', range: [0, 112] },
             yaxis: { ...plotDefaults.yaxis, automargin: true },
             legend: (global.SleepEssayCharts && global.SleepEssayCharts.common)
                 ? global.SleepEssayCharts.common.softLegend(THEME, { y: 1.08, orientation: 'h' })
@@ -1924,24 +1947,24 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
                 type: 'bar',
                 x: rows.map(r => labelFor(TAG_LABELS, r.tag)),
                 y: rows.map(r => r.naive_delta),
-                name: '单变量直觉',
+                name: 'Naive association',
                 marker: { color: THEME.accent3, opacity: 0.9 },
-                hovertemplate: '%{x}<br>直觉关联: %{y:.1f}pp<extra></extra>',
+                hovertemplate: '%{x}<br>Naive: %{y:.1f}pp<extra></extra>',
             },
             {
                 type: 'bar',
                 x: rows.map(r => labelFor(TAG_LABELS, r.tag)),
                 y: rows.map(r => r.model_delta),
-                name: '控制变量后（SHAP）',
+                name: 'After control (SHAP)',
                 marker: { color: THEME.accent, opacity: 0.9 },
-                hovertemplate: '%{x}<br>控制后: %{y:.2f}pp<extra></extra>',
+                hovertemplate: '%{x}<br>Controlled: %{y:.2f}pp<extra></extra>',
             },
         ], {
             ...plotDefaults,
             barmode: 'group',
             margin: { t: 30, r: 20, b: 60, l: 60 },
             xaxis: { ...plotDefaults.xaxis, title: '' },
-            yaxis: { ...plotDefaults.yaxis, title: '对 OK mood 概率的影响（pp）', zeroline: true, zerolinecolor: THEME.border },
+            yaxis: { ...plotDefaults.yaxis, title: 'Impact on OK-mood probability (pp)', zeroline: true, zerolinecolor: THEME.border },
             legend: (global.SleepEssayCharts && global.SleepEssayCharts.common)
                 ? global.SleepEssayCharts.common.softLegend(THEME, { y: 1.08, orientation: 'h' })
                 : { x: 0.01, y: 1.08, orientation: 'h', bgcolor: 'rgba(22,27,34,0.85)', bordercolor: THEME.border, borderwidth: 1 },
@@ -1968,8 +1991,8 @@ window.SleepEssayCharts.renderExertionCharts = function (env) {
         if (!mlData)
             return;
         renderTopFeatures(ctx);
-        renderCounterfactualChart(ctx, 'chart-ml-quality-cf', mlData.counterfactuals.quality || [], '对睡眠质量的预测变化（分）', '', 2);
-        renderCounterfactualChart(ctx, 'chart-ml-mood-cf', mlData.counterfactuals.mood || [], '对 OK mood 概率的预测变化（pp）', 'pp', 1);
+        renderCounterfactualChart(ctx, 'chart-ml-quality-cf', mlData.counterfactuals.quality || [], 'Predicted change in sleep quality (points)', '', 2);
+        renderCounterfactualChart(ctx, 'chart-ml-mood-cf', mlData.counterfactuals.mood || [], 'Predicted change in OK-mood probability (pp)', 'pp', 1);
         fillGapStats(mlData);
     }
     root.renderMlSection = renderMlSection;

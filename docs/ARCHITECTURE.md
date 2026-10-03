@@ -16,7 +16,7 @@ GitHub Pages serves the `master` tree as-is, with no build step, so generated HT
 | Pages | Generator | Source |
 | --- | --- | --- |
 | `blogs/*.html`, `blogs.html`, feeds, `data/article_index.json`, `data/backlinks_data.json` | `generate_blog_pages.py` | `blogs/*.md`, `templates/` |
-| `index.html`, `gallery.html`, `projects.html`, `projects/sleep-toolkit*.html`, `gallery/music/*.html`, `about.html`, `404.html` | `scripts/build_pages.py` | `data/site.json`, `data/article_index.json`, `gallery/music/*.peaks.json` |
+| `index.html`, `gallery.html`, `apps.html`, `apps/sleep-toolkit*.html`, `gallery/music/*.html`, `about.html`, `404.html` | `scripts/build_pages.py` | `data/site.json`, `data/article_index.json`, `gallery/music/*.peaks.json` |
 | `favorites.html`, `favorites/*.html` | `scripts/update_favorites_pages.py` | `data/favorites.json` |
 | `gallery/research/zhihu-2015.html` | `scripts/build_zhihu_research.py`, called by `build_pages.py` | `data/zhihu-2015.json` and bilingual editorial copy |
 | `gallery/music/endless-echoes.html` and its graph cover | `scripts/build_music_riddle.py`, called by `build_pages.py` | `data/music-riddle.json`; field contract and editing workflow in `docs/MUSIC_RIDDLE_DATA.md` |
@@ -26,7 +26,7 @@ A new generated page must exist before `update_site_shell.py` will accept its en
 
 `make generate` first syncs the shell into `templates/` and refreshes `data/image_dimensions.json` (both are inputs to article generation), then runs the article, page and Favorites generators. It is idempotent apart from the feeds' `lastBuildDate`. `scripts/site_shell.py` is the single definition of the shell: navigation, language and theme toggles, footer, meta tags and script tags. `data/site_shell.json` lists the pages, their section and their script profile, plus the `css_version` / `js_version` cache keys and `site_updated`.
 
-Hand-authored pages outside this table: `series.html` and `tags.html` (redirects into the Articles page), the Sleep essay pages under `projects/`, the talk deck and the Hermes research artifact under `gallery/`. The Zhihu research page is generated; see `docs/ZHIHU_RESEARCH.md`.
+Hand-authored pages outside this table: `series.html` and `tags.html` (redirects into the Articles page), the Sleep essay pages under `gallery/research/`, the talk deck and the Hermes research artifact under `gallery/`. The Zhihu research page is generated; see `docs/ZHIHU_RESEARCH.md`.
 
 ### Data
 
@@ -69,7 +69,7 @@ TypeScript in `src/ts/*.ts` compiles to tracked `src/js/*.js` (`npm run build:ts
 
 The PKM talk keeps its canonical desktop `deck.css` from Obsidian. Site-only phone reading rules live in `gallery/talks/pkm-2026-06-07/reader.css`; the site HTML loads this layer and the TypeScript navigation leaves native scrolling enabled below 901px. Preserve this web adaptation when syncing a canonical deck.
 
-Other TypeScript bundles: `gallery/talks/pkm-2026-06-07/deck.ts` / `deck.mts`, `projects/assets/sleep-2016-2026*.ts`, and the Haba pretext runtime. `make check` compiles the shared site bundle into a temporary directory and compares it with the tracked output without rewriting the working tree; `make check-all` adds the frozen bundles, and CI runs it. The only unconverted `.js` file is `gallery/talks/pkm-2026-06-07/assets/motion.min.js`, a third-party minified vendor asset.
+Other TypeScript bundles: `gallery/talks/pkm-2026-06-07/deck.ts` / `deck.mts`, `gallery/research/assets/sleep-2016-2026*.ts`, and the Haba pretext runtime. `make check` compiles the shared site bundle into a temporary directory and compares it with the tracked output without rewriting the working tree; `make check-all` adds the frozen bundles, and CI runs it. The only unconverted `.js` file is `gallery/talks/pkm-2026-06-07/assets/motion.min.js`, a third-party minified vendor asset.
 
 ### AI / agent-readable
 

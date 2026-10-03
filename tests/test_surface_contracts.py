@@ -246,12 +246,12 @@ class SurfaceContractTests(unittest.TestCase):
     def test_pretext_runtime_has_one_vendored_source(self):
         package = json.loads((ROOT / "package.json").read_text())
         haba_runtime = (ROOT / "blogs/assets/haba-pretext.ts").read_text()
-        sleep_runtime = (ROOT / "projects/assets/sleep-essay-pretext-lab.ts").read_text()
+        sleep_runtime = (ROOT / "gallery/research/assets/sleep-essay-pretext-lab.ts").read_text()
 
         self.assertNotIn("@chenglou/pretext", package.get("dependencies", {}))
-        self.assertIn("projects/assets/vendor/pretext/layout.js", haba_runtime)
+        self.assertIn("gallery/research/assets/vendor/pretext/layout.js", haba_runtime)
         self.assertIn("./vendor/pretext/layout.js", sleep_runtime)
-        self.assertTrue((ROOT / "projects/assets/vendor/pretext/LICENSE").is_file())
+        self.assertTrue((ROOT / "gallery/research/assets/vendor/pretext/LICENSE").is_file())
 
     def test_machine_readable_same_origin_links_and_fragments_resolve(self):
         llms = (ROOT / "llms.txt").read_text()

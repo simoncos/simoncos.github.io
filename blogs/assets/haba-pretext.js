@@ -1,4 +1,4 @@
-import { layoutNextLineRange, materializeLineRange, prepareWithSegments, setLocale, } from '../../projects/assets/vendor/pretext/layout.js';
+import { layoutNextLineRange, materializeLineRange, prepareWithSegments, setLocale, } from '../../gallery/research/assets/vendor/pretext/layout.js';
 const MOBILE_BREAKPOINT = 680;
 const MIN_INTERVAL = 148;
 const OBSTACLE_GAP = 17;

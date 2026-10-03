@@ -27,7 +27,7 @@ function fixture({ observer = true } = {}) {
         constructor(callback) { intersect = callback; }
         observe() {} unobserve() {}
     };
-    vm.runInNewContext(fs.readFileSync('projects/assets/sleep-chart-loader.js', 'utf8'), {
+    vm.runInNewContext(fs.readFileSync('gallery/research/assets/sleep-chart-loader.js', 'utf8'), {
         window, document, IntersectionObserver: window.IntersectionObserver, console: { error() {} },
     });
     return {

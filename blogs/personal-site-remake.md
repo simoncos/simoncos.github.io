@@ -22,7 +22,7 @@ description: 这两周把个人网站从头重做了一遍：作品轮盘、收�
 
 **[作品轮盘](../gallery.html?lang=zh)。** 我把我的作品分成应用、游戏、演讲、研究、音乐五类，在作品页上横着滑，一次转一格，每一类一张封面。
 
-**可互动的页面。** 我的作品里很多都是可互动的网页（这也是我自己未来的一个创作方向：可互动的内容）：[十年睡眠档案](../projects/sleep-2016-2026.html)（3,656 个夜晚）、用 2015 年知乎数据做的[社交网络研究](../gallery/research/zhihu-2015.html?lang=zh)、[HN × LLM](https://simoncos-hn-llm-research.vercel.app/)，都可以直接在页面里点、筛、看。
+**可互动的页面。** 我的作品里很多都是可互动的网页（这也是我自己未来的一个创作方向：可互动的内容）：[十年睡眠档案](../gallery/research/sleep-2016-2026.html)（3,656 个夜晚）、用 2015 年知乎数据做的[社交网络研究](../gallery/research/zhihu-2015.html?lang=zh)、[HN × LLM](https://simoncos-hn-llm-research.vercel.app/)，都可以直接在页面里点、筛、看。
 
 **[收藏](../favorites.html?lang=zh)。** 豆瓣上我打过五星的书、影、音、游，一共 453 部，其中 222 部有短评。它们也是我的重要组成部分，是我的成长养分。
 

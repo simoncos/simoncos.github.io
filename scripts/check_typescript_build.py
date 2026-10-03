@@ -25,13 +25,13 @@ BUILD_TARGETS = (
         ),
     ),
     (
-        "projects/assets/tsconfig.json",
-        "projects/assets",
+        "gallery/research/assets/tsconfig.json",
+        "gallery/research/assets",
         (
-            "projects/assets/sleep-2016-2026.js",
-            "projects/assets/sleep-2016-2026.en.js",
-            "projects/assets/sleep-essay-pretext-lab.js",
-            "projects/assets/sleep-essay-ui.js",
+            "gallery/research/assets/sleep-2016-2026.js",
+            "gallery/research/assets/sleep-2016-2026.en.js",
+            "gallery/research/assets/sleep-essay-pretext-lab.js",
+            "gallery/research/assets/sleep-essay-ui.js",
         ),
     ),
     (
