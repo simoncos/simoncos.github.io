@@ -5277,3 +5277,48 @@ h2.k {
 ):lang(zh) {
     text-wrap: pretty;
 }
+
+/* ---- Touch hit areas ---------------------------------------------------- */
+
+/* On a touch screen every small control answers to a hit area of at least
+   44 × 44 px without changing how it looks: a transparent pseudo-element,
+   centred on the control, grows past its edges until it is 44 px each way.
+   `min()` leaves a side that is already 44 px or more at its own size. */
+@media (pointer: coarse) {
+    .seg-btn,
+    .pill,
+    .chip,
+    .rss-pill,
+    .amonth-jump,
+    .sel-bar,
+    .arow-title,
+    .meta-alt,
+    .ftr-r a {
+        position: relative;
+    }
+
+    .seg-btn::after,
+    .pill::after,
+    .chip::after,
+    .rss-pill::after,
+    .amonth-jump::after,
+    .sel-bar::after,
+    .arow-title::after,
+    .meta-alt::after,
+    .ftr-r a::after {
+        content: "";
+        position: absolute;
+        top: min(0px, calc((100% - 44px) / 2));
+        bottom: min(0px, calc((100% - 44px) / 2));
+        left: min(0px, calc((100% - 44px) / 2));
+        right: min(0px, calc((100% - 44px) / 2));
+    }
+
+    /* The tag row scrolls sideways, so it clips anything past its edges:
+       give the chips' hit areas room inside it. */
+    .tagbar {
+        padding-block: 2px;
+        margin-top: -2px;
+        margin-bottom: calc(clamp(8px, 2vh, 16px) - 2px);
+    }
+}

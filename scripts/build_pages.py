@@ -49,7 +49,9 @@ NEWEST_SHOWN = 10
 TOPICS = (
     ("all", "All", "全部"),
     ("build", "Creating", "创造"),
-    ("think", "Thinking", "思考"),
+    # The catch-all bucket. Labelled 其他 / Other so it does not collide with
+    # the Articles page's narrower 思考 / Thinking tag; the key stays "think".
+    ("think", "Other", "其他"),
     ("body", "Experiences", "体验"),
 )
 
@@ -76,6 +78,16 @@ def href_attrs(value: Any, prefix: str = "", **extra: tuple[str, str]) -> str:
 def pick(value: Any, lang: str) -> str:
     en, zh = lang_pair(value)
     return zh if lang == "zh" else en
+
+
+def work_title(work: dict[str, Any], key: str = "title") -> dict[str, str]:
+    """A work's title for a link. A work whose page exists only in Chinese
+    (`zh_only`) gets the "(in Chinese)" mark on its English title, as the
+    Endless Echoes page marks its Chinese-only sources."""
+    en, zh = lang_pair(work.get(key) or work["title"])
+    if work.get("zh_only"):
+        en = f"{en} (in Chinese)"
+    return {"en": en, "zh": zh}
 
 
 def article_topic(tags: list[str]) -> str:
@@ -122,7 +134,7 @@ def home_panels(site: dict[str, Any], articles: dict[str, dict[str, Any]]) -> li
             panels.append({
                 "kind": work["kind"],
                 "date": work["date"],
-                "title": work["title"],
+                "title": work_title(work),
                 "desc": work["home_desc"],
                 "img": work["img"],
                 "href": work["href"],
@@ -147,7 +159,7 @@ def home_rows(site: dict[str, Any], articles: dict[str, dict[str, Any]]) -> list
     for work in (work for work in site["works"] if work.get("href")):
         rows.append({
             "date": work["date"],
-            "title": work["title"],
+            "title": work_title(work),
             "kind": work["kind"],
             "href": work["href"],
             "topic": work["home_topic"],
@@ -340,7 +352,7 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
                 f'                <{tag} class="wcard{"" if done else " is-wip"}"{attrs}>'
                 f'<span class="wcard-img"><img src="{esc(work["img"])}" alt="" decoding="async" loading="lazy"></span>'
                 '<span class="wcard-text">'
-                f'<span class="wcard-title">{bi_value(work.get("work_title") or work["title"])}</span>'
+                f'<span class="wcard-title">{bi_value(work_title(work, "work_title"))}</span>'
                 f'<span class="wcard-desc">{bi_value(work["desc"])}</span>'
                 f'<span class="wcard-year num">{when}</span></span></{tag}>'
             )

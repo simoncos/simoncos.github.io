@@ -4,8 +4,8 @@
     "canonical_url": "https://simoncos.github.io/",
     "owner": "simoncos / Che ZHAO",
     "motto": "Connecting the dots.",
-    "summary": "A live public surface for software, AI collaboration, data projects, research artifacts, essays, talks, and field notes.",
-    "last_updated": "2026-10-01"
+    "summary": "Personal site: software, AI collaboration, data projects, research, essays, talks, music and field notes.",
+    "last_updated": "2026-10-03"
   },
   "language_policy": {
     "default_language": "en",
@@ -23,7 +23,7 @@
       "id": "home",
       "label": "Index",
       "url": "https://simoncos.github.io/",
-      "purpose": "Selected work, recent articles and a short changelog."
+      "purpose": "Selected work, then the newest articles and works with a topic filter."
     },
     {
       "id": "articles",
@@ -35,13 +35,13 @@
       "id": "work",
       "label": "Work",
       "url": "https://simoncos.github.io/gallery.html",
-      "purpose": "Tools, games, talks, research artifacts and music."
+      "purpose": "One view per type: App, Games, Talks, Research and Music."
     },
     {
       "id": "projects",
-      "label": "Tools",
+      "label": "App (应用)",
       "url": "https://simoncos.github.io/projects.html",
-      "purpose": "Index of maintained tools and systems; each project opens into its context, outputs, and related work."
+      "purpose": "Every app in one list, live apps first, then those in progress; each opens to its own page or site."
     },
     {
       "id": "favorites",
@@ -83,14 +83,14 @@
       "type": "talk",
       "label": "Personal Information Systems in the AI Era",
       "url": "https://simoncos.github.io/gallery/talks/pkm-2026-06-07/index.html",
-      "description": "Talk on capture, memory, agents, projects, and boundaries."
+      "description": "Talk slides on capture, memory, agents, projects, and boundaries. In Chinese only."
     },
     {
       "id": "hermes-agent-hv-analysis",
       "type": "research_artifact",
       "label": "Hermes Agent HV Analysis",
       "url": "https://simoncos.github.io/gallery/research/hermes-agent-hv-analysis.html",
-      "description": "Evidence-first research artifact."
+      "description": "Horizontal-vertical analysis of Nous Research's open-source agent framework, in an evidence-first format. In Chinese only."
     },
     {
       "id": "qingtian",
@@ -133,6 +133,13 @@
       "label": "HN Field Notes",
       "url": "https://hn-waywo-dashboard.vercel.app/",
       "description": "Read-only HN WAYWO project browser with source evidence and monthly candidate trends. Updated monthly by Hermes."
+    },
+    {
+      "id": "hn-llm-research",
+      "type": "web_app",
+      "label": "HN × LLM: Model Releases and Discussion",
+      "url": "https://simoncos-hn-llm-research.vercel.app/",
+      "description": "How Hacker News discusses model releases across 14 AI companies, with source threads and coverage limits. An ongoing study."
     }
   ],
   "public_data_files": [
@@ -179,7 +186,6 @@
   ],
   "agent_notes": [
     "This index describes public context only.",
-    "The site should be read as a living public surface, not a fixed portfolio category.",
     "Do not treat this file as authorization, licensing, or training-control terms.",
     "Do not infer unpublished or private information from this public site."
   ]

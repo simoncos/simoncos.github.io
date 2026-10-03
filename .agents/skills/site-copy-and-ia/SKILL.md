@@ -9,6 +9,7 @@ Use this skill to keep the personal site reader-facing, broad enough, and semant
 
 ## Core Rules
 
+- Mark a link from the English interface to a Chinese-only page by appending " (in Chinese)" to its English label, as the Endless Echoes page does for its Douban sources; a work sets `zh_only` in `data/site.json` and `build_pages.py` adds the mark.
 - Keep the motto `Connecting the dots.` on About and in AI-readable orientation files. Do not remove it.
 - The nav is Index, Articles, Work, Favorites, About (首页、文章、作品、收藏、关于), from the 2026-09 v3 redesign. The URLs stay `index.html`, `blogs.html`, `gallery.html`, `favorites.html`, `about.html`; do not rename files to match labels.
 - Keep the person broader than a KM or AI-agent identity. The site can include software, AI, data, research, systems, essays, health/body data, field notes, and tools.
@@ -18,11 +19,11 @@ Use this skill to keep the personal site reader-facing, broad enough, and semant
 
 ## IA Semantics
 
-- Index: Selected work, the newest articles with a topic filter, and a short changelog. It should help readers choose a path, not explain implementation.
+- Index: Selected work, then the newest articles and finished works with a topic filter (创造 / 其他 / 体验 on the home page; its 其他 / Other is a catch-all and must not reuse an Articles topic name such as 思考). It should help readers choose a path, not explain implementation.
 - Articles: long-form writing, with a list view (search, topics) and a series view (structured reading arcs).
 - Work: one view per type — App, Games, Talks, Research, Music (`work_topics` in `data/site.json`). Each type's wheel card shows one picture: the work whose `id` the type's optional `wheel_work` names, else its newest finished work. (Not `cover`: `check_site.py` reads any `cover` key as a file path.)
 - A work with no `href` is in progress: its type page lists it under 在做 / In progress as a card that is not a link, `projects.html` lists it after the live apps, and the home page skips it. Its `date` is a bare year. Covers for these come from `~/Documents/simoncos-site-intro/covers-src/wip_covers.py` (real screenshots cropped to 4:3).
-- Projects: maintained tools and deployed systems; each opens as its own board or site. `projects.html` lists them all.
+- App (应用, `projects.html`): every work of type App in one list, live apps first and in-progress ones after; each opens as its own board or site. AI-readable files call it App, not Tools.
 - Favorites: every five-star Douban mark in four categories; see the `favorites-column` skill.
 - About: a short profile, the motto, and contacts.
 
