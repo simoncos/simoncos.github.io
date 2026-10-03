@@ -32,7 +32,7 @@ Pages caches for up to 600 s, so add a cache-busting query when checking right a
 
 Pages are generated static HTML, so check the rendered page itself; `/data/site.json` and `/data/article_index.json` should return HTTP 200 when they changed.
 
-Confirm the semantic split when relevant: Work holds projects, talks, research and visual essays; Projects is for maintained tools and deployed systems.
+Confirm the semantic split when relevant: Work holds apps, games, talks, research and music; the App list (`projects.html`) is for maintained tools and deployed systems.
 
 For copy or IA changes, check at least one Chinese mobile viewport. Large Chinese headings and navigation labels can pass source checks while wrapping poorly.
 

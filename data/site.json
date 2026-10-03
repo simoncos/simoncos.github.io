@@ -18,8 +18,8 @@
         "zh": "从原始记录到可读报告：进一份 CSV，出 JSON、HTML 和 PDF。"
       },
       "desc": {
-        "en": "A maintained public tool: one SleepCycle CSV in; JSON, an interactive report, and a PDF out.",
-        "zh": "持续维护的公开工具：进一份 SleepCycle CSV，出 JSON、交互式报告和 PDF。"
+        "en": "One SleepCycle CSV in; JSON, an interactive report, and a PDF out.",
+        "zh": "进一份 SleepCycle CSV，出 JSON、交互式报告和 PDF。"
       },
       "img": "gallery/assets/gallery-card-sleep-toolkit-report.webp",
       "href": {
@@ -39,10 +39,6 @@
       "title": {
         "en": "Ten Years of Sleep Records, Analyzed",
         "zh": "十年睡眠档案：数据分析"
-      },
-      "work_title": {
-        "en": "Ten Years of Sleep Records",
-        "zh": "十年睡眠记录"
       },
       "home_desc": {
         "en": "A study of 3,656 nights, tracing sleep, body, and life across a decade.",
@@ -74,11 +70,11 @@
       },
       "home_desc": {
         "en": "A 45-minute talk on how capture, knowledge bases, agents, and safety boundaries connect into one working system.",
-        "zh": "45 分钟的分享：捕捉、知识库、Agent 和安全边界，如何连成一套真正在运转的系统。"
+        "zh": "45 分钟的分享：捕捉、知识库、Agent 和安全边界，怎样连成一套运转的系统。"
       },
       "desc": {
         "en": "A 45-minute talk for finance and technology professionals: how capture, knowledge bases, agents, project incubation, and safety boundaries form one working system.",
-        "zh": "面向金融与科技从业者的 45 分钟分享：捕捉、知识库、Agent、项目孵化和安全边界，如何连成一套在运转的系统。"
+        "zh": "面向金融与科技从业者的 45 分钟分享：捕捉、知识库、Agent、项目孵化和安全边界，怎样连成一套运转的系统。"
       },
       "img": "gallery/assets/gallery-card-talk-slides.webp",
       "href": "gallery/talks/pkm-2026-06-07/index.html"
@@ -89,10 +85,6 @@
         "en": "Research",
         "zh": "研究"
       },
-      "work_kind": {
-        "en": "Research",
-        "zh": "研究产物"
-      },
       "work_topic": "research",
       "home_topic": "think",
       "date": "2026-05-21",
@@ -101,17 +93,13 @@
         "en": "Hermes Agent HV Analysis",
         "zh": "Hermes Agent 横纵分析"
       },
-      "work_title": {
-        "en": "Hermes Agent / HV Analysis",
-        "zh": "Hermes Agent / HV 分析"
-      },
       "home_desc": {
-        "en": "Evidence, questions, and limits in agent systems, placed side by side in a public analysis.",
-        "zh": "把 Agent 系统的问题、证据和局限放在一起看的公开分析。"
+        "en": "A horizontal-vertical analysis of Hermes Agent, Nous Research's open-source agent framework: where it came from, and how it compares with its peers.",
+        "zh": "Nous Research 的开源 Agent 框架 Hermes 的横纵分析：纵向看它从哪来，横向和同类框架比。"
       },
       "desc": {
-        "en": "Evidence, questions, and limits in agent systems, placed side by side in a public analysis.",
-        "zh": "把 Agent 系统的证据、问题和边界放在一起看的公开分析。"
+        "en": "A horizontal-vertical analysis of Hermes Agent, Nous Research's open-source agent framework: where it came from, and how it compares with its peers.",
+        "zh": "Nous Research 的开源 Agent 框架 Hermes 的横纵分析：纵向看它从哪来，横向和同类框架比。"
       },
       "img": "gallery/assets/gallery-card-hermes-report.webp",
       "href": "gallery/research/hermes-agent-hv-analysis.html"
@@ -122,10 +110,6 @@
         "en": "Research",
         "zh": "研究"
       },
-      "work_kind": {
-        "en": "Interactive research",
-        "zh": "交互研究"
-      },
       "work_topic": "research",
       "home_topic": "think",
       "date": "2015",
@@ -134,12 +118,12 @@
         "zh": "知乎 2015：人、关注与影响力"
       },
       "home_desc": {
-        "en": "Real follow networks from a 2015 archive, with interactive neighbourhoods and influence comparisons.",
-        "zh": "从 2015 年归档重建关注网络，探索节点邻居与影响力。"
+        "en": "Zhihu's 2015 follow network, interactive: who follows whom, mutual follows, and influence.",
+        "zh": "2015 年知乎关注网络的交互版：谁关注谁、互关和影响力。"
       },
       "desc": {
-        "en": "Step inside the real 2015 follow networks: explore neighbours, mutual follows, structural groups and influence.",
-        "zh": "走进 2015 年的真实关注网络，查看节点邻居、互相关注、结构分组与影响力。"
+        "en": "Zhihu's 2015 follow network, interactive: who follows whom, mutual follows, structural groups, and influence.",
+        "zh": "2015 年知乎关注网络的交互版：谁关注谁、互关、结构分组和影响力。"
       },
       "img": "gallery/research/assets/zhihu-network-card.svg",
       "href": "gallery/research/zhihu-2015.html"
@@ -183,12 +167,12 @@
         "zh": "漫无止尽的回响"
       },
       "home_desc": {
-        "en": "A branching riddle through 36 songs. Follow clues and light up your own trail.",
-        "zh": "穿过36 首歌的分岔谜题，沿着线索点亮自己的路径。"
+        "en": "Read a clue, guess the next song, and find your own route through 36 songs.",
+        "zh": "读线索，猜下一首歌，在 36 首歌之间走出自己的路线。"
       },
       "desc": {
-        "en": "Read a clue, name the next song, and find your way through 36 songs. A 2017 riddle restored from its Douban list.",
-        "zh": "读一段线索，猜下一首歌，在36 首歌之间寻找路径。根据豆列复原的 2017 年音乐谜题。"
+        "en": "Read a clue, guess the next song, and find your own route through 36 songs. A 2017 riddle from a Douban list, rebuilt to play.",
+        "zh": "读线索，猜下一首歌，在 36 首歌之间走出自己的路线。2017 年的豆列谜题，重新做成了可以玩的版本。"
       },
       "img": "gallery/music/assets/endless-echoes-cover.svg?v=20261002j",
       "href": "gallery/music/endless-echoes.html",
@@ -212,12 +196,12 @@
         "zh": "HN Field Notes"
       },
       "home_desc": {
-        "en": "Browse projects from monthly Hacker News threads, read source evidence, and compare candidate trends.",
-        "zh": "浏览 Hacker News 月度项目，查看原文与讨论证据，对比候选项目趋势。"
+        "en": "Projects from Hacker News's monthly \"What are you working on?\" threads: browse by category, see trends, with the original posts and replies.",
+        "zh": "Hacker News 每月「你在做什么」帖里的项目：按类别浏览、看趋势，附原帖和讨论。"
       },
       "desc": {
-        "en": "Browse projects from monthly Hacker News threads, read source evidence, and compare candidate trends.",
-        "zh": "浏览 Hacker News 月度项目，查看原文与讨论证据，对比候选项目趋势。"
+        "en": "Projects from Hacker News's monthly \"What are you working on?\" threads: browse by category, see trends, with the original posts and replies.",
+        "zh": "Hacker News 每月「你在做什么」帖里的项目：按类别浏览、看趋势，附原帖和讨论。"
       },
       "img": "projects/assets/hn-field-notes-cover.png",
       "href": "https://hn-waywo-dashboard.vercel.app/"
@@ -227,10 +211,6 @@
       "kind": {
         "en": "App",
         "zh": "应用"
-      },
-      "work_kind": {
-        "en": "Research explorer",
-        "zh": "研究浏览器"
       },
       "work_topic": "projects",
       "home_topic": "build",
@@ -271,8 +251,8 @@
       "article": "my-haba-snow-mountain-journey",
       "img": "gallery/assets/gallery-card-haba-field-v2.jpg",
       "desc": {
-        "en": "Altitude, risk, training, and body feedback from outside the screen — 5,396 m.",
-        "zh": "海拔、风险、训练，以及屏幕之外的身体反馈 —— 5,396 米。"
+        "en": "Climbing Haba Snow Mountain, 5,396 m: training, risk, and what the body reports back.",
+        "zh": "爬 5,396 米的哈巴雪山：训练、风险和身体的反馈。"
       }
     },
     {
@@ -292,12 +272,12 @@
         "zh": "应用"
       },
       "line": {
-        "en": "Apps I build and keep running.",
-        "zh": "自己开发、持续维护的应用。"
+        "en": "Tools I built and still maintain.",
+        "zh": "我做的、还在维护的工具。"
       },
       "desc": {
-        "en": "Apps for exploration, creativity, and everyday use.",
-        "zh": "用于探索、创作与日常生活的应用。"
+        "en": "Tools I built and still maintain.",
+        "zh": "我做的、还在维护的工具。"
       },
       "related": [
         {
@@ -321,12 +301,12 @@
         "zh": "游戏"
       },
       "line": {
-        "en": "Worlds and puzzles to play through.",
-        "zh": "可以走进去玩的世界与谜题。"
+        "en": "Puzzles you can play.",
+        "zh": "可以玩的谜题。"
       },
       "desc": {
-        "en": "Interactive games and puzzles: follow clues, make choices and explore.",
-        "zh": "沿着线索探索，在选择中前进的交互游戏与谜题。"
+        "en": "Puzzles solved by reading clues and making choices.",
+        "zh": "读线索、做选择，一步步解开的谜题。"
       }
     },
     {
@@ -372,8 +352,8 @@
         "zh": "关于人、网络、身体与系统的研究。"
       },
       "desc": {
-        "en": "Research artifacts that put evidence, questions, and limits side by side.",
-        "zh": "把证据、问题和局限放在一起看的研究产物。"
+        "en": "Questions I was curious about, worked through with data and sources.",
+        "zh": "用数据和资料，回答一些我好奇的问题。"
       },
       "related": [
         {
@@ -434,7 +414,10 @@
         "zh": "持续维护"
       },
       "years": "2025 —",
-      "tags": "Tool · Python · Web",
+      "tags": {
+        "en": "Tool · Python · Web",
+        "zh": "工具 · Python · Web"
+      },
       "updated": "2026-05-08",
       "href": {
         "en": "projects/sleep-toolkit.en.html",
@@ -449,8 +432,8 @@
         "zh": "从原始记录到可读报告。"
       },
       "summary": {
-        "en": "A maintained public tool. Upload one CSV and get structured JSON, an interactive report, and a PDF. The CLI can run entirely locally.",
-        "zh": "一个持续维护、对外可用的工具。上传一份 CSV，得到结构化 JSON、交互式报告和 PDF；CLI 也可以完全在本地运行。"
+        "en": "Upload one CSV and get structured JSON, an interactive report, and a PDF. The CLI can run entirely locally.",
+        "zh": "上传一份 CSV，得到结构化 JSON、交互式报告和 PDF；CLI 也可以完全在本地运行。"
       },
       "metrics": [
         {
@@ -487,12 +470,12 @@
         },
         {
           "label": {
-            "en": "Ten years of sleep records",
-            "zh": "十年睡眠记录"
+            "en": "Ten Years of Sleep Records, Analyzed",
+            "zh": "十年睡眠档案：数据分析"
           },
           "kind": {
-            "en": "Data essay — the story behind the tool",
-            "zh": "数据随笔 —— 工具背后的故事"
+            "en": "Research — the story behind the tool",
+            "zh": "研究 —— 工具背后的故事"
           },
           "href": {
             "en": "projects/sleep-2016-2026.en.html",
@@ -521,8 +504,8 @@
         {
           "d": "2026-04-23",
           "t": {
-            "en": "Powers the ten-year data essay",
-            "zh": "支撑十年睡眠数据随笔"
+            "en": "Used in Ten Years of Sleep Records, Analyzed",
+            "zh": "用于《十年睡眠档案：数据分析》"
           }
         },
         {
@@ -610,8 +593,8 @@
       },
       "essay_image": "gallery/assets/gallery-card-sleep-scatter.webp",
       "essay_caption": {
-        "en": "The data essay",
-        "zh": "数据随笔"
+        "en": "Ten Years of Sleep Records, Analyzed",
+        "zh": "十年睡眠档案：数据分析"
       },
       "essay_href": {
         "en": "projects/sleep-2016-2026.en.html",
@@ -627,12 +610,35 @@
         "zh": "每月更新"
       },
       "years": "2026 —",
-      "tags": "Tool · Hacker News · Web",
+      "tags": {
+        "en": "Tool · Hacker News · Web",
+        "zh": "工具 · Hacker News · Web"
+      },
       "updated": "2026-10-02",
       "href": "https://hn-waywo-dashboard.vercel.app/",
       "line": {
-        "en": "Browse projects from monthly Hacker News threads, read source evidence, and compare candidate trends.",
-        "zh": "浏览 Hacker News 月度项目，查看原文与讨论证据，对比候选项目趋势。"
+        "en": "Projects from Hacker News's monthly \"What are you working on?\" threads: browse by category, see trends, with the original posts and replies.",
+        "zh": "Hacker News 每月「你在做什么」帖里的项目：按类别浏览、看趋势，附原帖和讨论。"
+      }
+    },
+    {
+      "id": "hn-llm-research",
+      "title": "HN × LLM",
+      "cover": "gallery/research/assets/hn-llm-research-cover.svg",
+      "status": {
+        "en": "Ongoing",
+        "zh": "持续进行"
+      },
+      "years": "2026 —",
+      "tags": {
+        "en": "Research · Hacker News · Web",
+        "zh": "研究 · Hacker News · Web"
+      },
+      "updated": "2026-10-02",
+      "href": "https://simoncos-hn-llm-research.vercel.app/",
+      "line": {
+        "en": "Explore how Hacker News discusses model releases across 14 AI companies, with source threads and coverage limits. An ongoing study.",
+        "zh": "追踪 Hacker News 对 14 家 AI 公司模型发布的讨论，查看原帖、讨论关联与覆盖范围。研究持续进行中。"
       }
     }
   ],
@@ -798,8 +804,8 @@
         "zh": "RedPiggy，一个正在浮现的 AI 存在"
       },
       "desc": {
-        "en": "An OpenClaw agent narrating its own continuity — and how switching models changes what it is.",
-        "zh": "一个 OpenClaw agent 讲述自己的连续性 —— 以及切换模型如何改变它是什么。"
+        "en": "An OpenClaw agent on itself: after switching models, is it still the same agent?",
+        "zh": "一个 OpenClaw agent 讲自己：换了模型，它还是它吗？"
       }
     },
     {
@@ -810,8 +816,8 @@
         "zh": "问题解决与设计"
       },
       "desc": {
-        "en": "From problem situations, feasible solutions and open-ended problems to indecision and the optimal solution. The four finished parts.",
-        "zh": "从问题情境、可行解、开放问题，到纠结与最优解。收录已完成的四篇。"
+        "en": "From problem situations, feasible solutions and open-ended problems to indecision and the optimal solution.",
+        "zh": "从问题情境、可行解、开放问题，到纠结与最优解。"
       }
     },
     {

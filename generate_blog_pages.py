@@ -1685,12 +1685,9 @@ def render_article_row(group, article_groups, series_meta, is_open):
     tags = group.get('tags') or []
     day_en, day_zh = day_label(group.get('date', ''))
 
+    # The other language's title is not repeated under each row; the
+    # 中文 / EN mark says both exist.
     alt = ''
-    if title_en != title_zh:
-        alt = (
-            '<span class="arow-alt"><span data-l="en" lang="zh-Hans">'
-            f'{esc(title_zh)}</span><span data-l="zh" lang="en">{esc(title_en)}</span></span>'
-        )
 
     series_html = ''
     series_attr = ''
@@ -1751,8 +1748,8 @@ def render_series_card(info, parts, index):
     """A series as a route: numbered parts on a line, the chosen one below."""
     dates = sorted(group.get('date', '')[:7] for group in parts if group.get('date'))
     span = dates[0] if dates and dates[0] == dates[-1] else (f"{dates[0]} — {dates[-1]}" if dates else '')
-    meta_en = f"{len(parts)} published" + (f" · {span}" if span else '')
-    meta_zh = f"已发布 {len(parts)} 篇" + (f" · {span}" if span else '')
+    # The part count is in the progress label, so the kicker is only the span.
+    meta_en = meta_zh = span
 
     nodes = []
     details = []
@@ -1773,12 +1770,11 @@ def render_series_card(info, parts, index):
             f'<span class="rtext"><span class="rdate num">{esc(group.get("date", ""))}</span>'
             f'<span class="rtitle">{bi(title_en, title_zh)}</span></span></button>'
         )
-        cta = bi("Start here", "从这里开始") if i == 0 else bi("Read", "阅读")
+        cta = bi("Read", "阅读")
         href = i18n_attrs(href=(f"blogs/{(en or zh).get('file', '')}", f"blogs/{(zh or en).get('file', '')}"))
         details.append(
             f'<div class="spart{state}" data-part-detail="{i}">'
             '<div class="spart-text">'
-            f'<span class="k-soft">{bi(f"Part {part}", f"第 {part} 篇")}</span>'
             f'<span class="spart-title">{bi(title_en, title_zh)}</span>'
             f'<p>{bi(desc_en, desc_zh)}</p></div>'
             f'<a class="pill pill-ink read-pill"{href}>{cta}<span aria-hidden="true">→</span></a></div>'
@@ -1790,7 +1786,7 @@ def render_series_card(info, parts, index):
         f'style="--n:{len(parts)};--delay:{index * 0.08:.2f}s">',
         '                <div class="scard-head">',
         '                    <div class="scard-text">',
-        f'                        <span class="k-soft">{bi(meta_en, meta_zh)}</span>',
+        (f'                        <span class="k-soft num">{esc(meta_en)}</span>' if meta_en else ''),
         f'                        <h2>{bi(info["title"].get("en", ""), info["title"].get("zh"))}</h2>',
         (f'                        <p>{bi(info["desc"].get("en", ""), info["desc"].get("zh"))}</p>' if info['desc'] else ''),
         '                    </div>',
