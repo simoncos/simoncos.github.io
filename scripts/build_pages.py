@@ -297,25 +297,25 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
             "                </div>",
         ]))
 
-    # Three laps of the topics make a ring big enough to read as a wheel.
+    # Each type shows one picture: the work named by the type's `cover`, else
+    # its newest. Three laps of the types make a ring big enough to read as a
+    # wheel.
+    def cover_work(topic: dict[str, Any]) -> dict[str, Any]:
+        works = by_topic[topic["id"]]
+        return next((work for work in works if work["id"] == topic.get("cover")), works[0])
+
     cards = []
     ring = len(topics) * 3
     for i in range(ring):
         topic = topics[i % len(topics)]
-        works = by_topic[topic["id"]][:3]
-        k = max(1, len(works))
-        faces = "".join(
-            f'<img src="{esc(work.get("wheel_img", work["img"]) if k == 1 else work["img"])}" alt="" draggable="false" decoding="async" loading="lazy" '
-            f'fetchpriority="{"high" if i == 0 else "low"}" '
-            f'style="top:{j * 100 / k:.4g}%;height:{100 / k:.4g}%">'
-            for j, work in enumerate(works)
-        )
+        work = cover_work(topic)
         n_en, n_zh = count_label(len(by_topic[topic["id"]]))
         title_en, title_zh = lang_pair(topic["title"])
         cards.append(
             f'            <button class="wheel-card" type="button" data-i="{i}" data-topic="{topic["id"]}" tabindex="-1"'
             f'{i18n_attrs(aria_label=(title_en, title_zh))}>'
-            f'<span class="wheel-face">{faces}</span>'
+            f'<span class="wheel-face"><img src="{esc(work.get("wheel_img", work["img"]))}" alt="" draggable="false" '
+            f'decoding="async" loading="lazy" fetchpriority="{"high" if i == 0 else "low"}"></span>'
             f'<span class="wheel-label"><span>{bi(n_en, n_zh)}</span>'
             f'<span class="wheel-enter">{bi("Enter", "进入")}</span></span></button>'
         )
@@ -328,23 +328,15 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
             f'{bi_value(other["title"])}</a>'
             for other in topics
         )
-        visuals = "".join(
-            f'<img class="{"is-on" if j == 0 else ""}" data-w="{j}" src="{esc(work["img"])}" alt="" decoding="async" loading="lazy">'
-            for j, work in enumerate(works)
-        )
-        open_titles = "".join(
-            f'<span class="topic-open-title{" is-on" if j == 0 else ""}" data-w="{j}">'
-            f'{bi_value(work.get("work_title") or work["title"])}</span>'
-            for j, work in enumerate(works)
-        )
         items = []
-        for j, work in enumerate(works):
+        for work in works:
             items.append(
-                f'                    <a class="work-item{" is-on" if j == 0 else ""}" data-w="{j}"{href_attrs(work["href"])}>'
-                f'<span class="work-meta"><span>{j + 1:02d} · {bi_value(work.get("work_kind") or work["kind"])}</span>'
-                f'<span>{esc(work["date"])}</span></span>'
-                f'<span class="work-title">{bi_value(work.get("work_title") or work["title"])}</span>'
-                f'<span class="work-desc"><span><span>{bi_value(work["desc"])}</span></span></span></a>'
+                f'                <a class="wcard"{href_attrs(work["href"])}>'
+                f'<span class="wcard-img"><img src="{esc(work["img"])}" alt="" decoding="async" loading="lazy"></span>'
+                '<span class="wcard-text">'
+                f'<span class="wcard-title">{bi_value(work.get("work_title") or work["title"])}</span>'
+                f'<span class="wcard-desc">{bi_value(work["desc"])}</span>'
+                f'<span class="wcard-year num">{esc(work["date"][:4])}</span></span></a>'
             )
         related = ""
         if topic.get("related"):
@@ -354,11 +346,10 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
                 for item in topic["related"]
             )
             related = (
-                '                    <div class="related">'
+                '        <div class="related">'
                 f'<span class="related-label">{bi("Related elsewhere on the site", "站内相关")}</span>'
                 f"{links}</div>"
             )
-        first = works[0]
         sections.append("\n".join([
             f'    <section class="topic" id="{topic["id"]}" data-topic="{topic["id"]}" aria-labelledby="topic-{topic["id"]}">',
             '        <div class="topic-bar">',
@@ -369,16 +360,10 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
             f'            <h2 id="topic-{topic["id"]}">{bi_value(topic["title"])}</h2>',
             f'            <p>{bi_value(topic["desc"])}</p>',
             "        </div>",
-            '        <div class="topic-split">',
-            '            <div class="topic-visual">',
-            f'                <a data-topic-open{href_attrs(first["href"])}>{visuals}'
-            f'<span class="topic-open">{bi("Open", "打开")} {open_titles} <span aria-hidden="true">↗</span></span></a>',
-            "            </div>",
-            '            <div class="works">',
+            f'        <div class="wgrid" data-n="{min(len(works), 3)}">',
             *items,
-            *([related] if related else []),
-            "            </div>",
             "        </div>",
+            *([related] if related else []),
             "    </section>",
         ]))
 
@@ -429,14 +414,13 @@ def render_projects(config: dict[str, Any], site: dict[str, Any]) -> str:
     apps = sorted((work for work in site["works"] if work["work_topic"] == topic["id"]),
                   key=lambda work: work["date"], reverse=True)
     rows = []
-    for i, work in enumerate(apps):
+    for work in apps:
         project = next((project for project in site["projects"] if project["href"] == work["href"]), {})
         facts = (f'<span class="prow-status"><span class="live-dot" aria-hidden="true"></span>{bi_value(project["status"])}</span>'
                  f'<span>{esc(project["years"])}</span><span>{bi_value(project["tags"])}</span>') if project else (
                      f'<span>{esc(work["date"])}</span><span>{bi_value(work["kind"])}</span>')
         rows.append(
             f'        <a class="prow"{href_attrs(work["href"])}>'
-            f'<span class="prow-n">{i + 1:02d}</span>'
             '<span class="prow-main">'
             f'<span class="prow-title">{bi_value(work["title"])}</span>'
             f'<span class="prow-line">{bi_value(project.get("line", work["desc"]))}</span>'
