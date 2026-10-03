@@ -1,6 +1,34 @@
 {
-  "last_updated": "2026-10-01",
+  "last_updated": "2026-10-03",
   "groups": [
+    {
+      "id": "personal-site-remake",
+      "date": "2026-10-03",
+      "tags": [
+        "design"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "个人网站，Remake",
+          "file": "personal-site-remake.html",
+          "markdown": "personal-site-remake.md",
+          "excerpt": "九月到今天，我把网站从头到尾重做了一遍，顺手做了一支 40 秒的介绍视频。代码大部分是 Claude 和 Codex 写的，我负责提要求、挑毛病、拍板。这次 remake 不只是外在的翻新，也是对自己的一次梳理和 re-branding。这篇文章做点小小记录。\n视频里的钢琴采样： YDP Grand Piano ，Zenph Studios 录制，FreePats 项目整理， CC BY 3.0 。\n网站\n新版是...",
+          "description": "这两周把个人网站从头重做了一遍：作品轮盘、收藏、复原 2017 年的音乐谜题，还做了一支 40 秒的介绍视频，顺带把《晴天》的谱扒了出来。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Personal Site, Remake",
+          "file": "personal-site-remake.en.html",
+          "markdown": "personal-site-remake.en.md",
+          "excerpt": "Between September and today I rebuilt this site from top to bottom, and made a 40-second intro video along the way. Claude and Codex wrote most of the code; I set the requirements, picked at flaws and made the calls. This remake is not just a fresh coat of paint. It is also a way of sorting myself out, and a re-branding. This post is a small record of it.\nPiano samples in the video: YDP Grand Piano, recorded by Zenph Studios, prepared by the FreePats project, CC BY 3.0.\nThe site\nThe new version started from a design package....",
+          "description": "Over the past two weeks I rebuilt this site from scratch: a Work wheel, Favorites, a 2017 music riddle brought back, and a 40-second intro video, which led me to transcribe the score of Sunny Day along the way.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
     {
       "id": "charity-gala-with-codex",
       "date": "2026-10-01",

@@ -1,6 +1,8 @@
 {
-  "last_updated": "2026-10-01",
+  "last_updated": "2026-10-03",
   "files": {
+    "personal-site-remake.en.html": [],
+    "personal-site-remake.html": [],
     "charity-gala-with-codex.en.html": [],
     "charity-gala-with-codex.html": [],
     "my-personal-knowledge-management-system-2026-03.en.html": [],
@@ -39,8 +41,38 @@
         }
       }
     ],
-    "my-haba-snow-mountain-journey.en.html": [],
-    "my-haba-snow-mountain-journey.html": [],
+    "my-haba-snow-mountain-journey.en.html": [
+      {
+        "group_id": "personal-site-remake",
+        "date": "2026-10-03",
+        "languages": {
+          "zh": {
+            "title": "个人网站，Remake",
+            "file": "personal-site-remake.html"
+          },
+          "en": {
+            "title": "Personal Site, Remake",
+            "file": "personal-site-remake.en.html"
+          }
+        }
+      }
+    ],
+    "my-haba-snow-mountain-journey.html": [
+      {
+        "group_id": "personal-site-remake",
+        "date": "2026-10-03",
+        "languages": {
+          "zh": {
+            "title": "个人网站，Remake",
+            "file": "personal-site-remake.html"
+          },
+          "en": {
+            "title": "Personal Site, Remake",
+            "file": "personal-site-remake.en.html"
+          }
+        }
+      }
+    ],
     "black-myth-wukong-bosses.en.html": [],
     "black-myth-wukong-bosses.html": [],
     "my-2023-in-pictures.en.html": [],

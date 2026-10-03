@@ -31,6 +31,8 @@ IGNORED_LOCAL_SCHEMES = {
 # Article images are served from the repository. scripts/localize_images.py
 # brings R2-hosted ones in, sized to stay well under this.
 MAX_ARTICLE_IMAGE_BYTES = 1_000_000
+# A film with sound (<video class="post-film">) loads nothing until it is played.
+MAX_ARTICLE_FILM_BYTES = 5_000_000
 R2_URL = re.compile(r"https://[A-Za-z0-9.-]+\.r2\.dev/[^\s)\"'<>]+")
 
 
@@ -473,7 +475,9 @@ def check_blog_image_attributes(errors: list[str]) -> None:
 def check_blog_loop_videos(errors: list[str]) -> None:
     """Looping clips (converted GIFs) follow the image rules: a local file
     under 1 MB, a declared size, a text alternative, and a poster to show
-    before playing or when motion is reduced."""
+    before playing or when motion is reduced. A film with sound
+    (class post-film) has the same needs, may be up to 5 MB, and must not
+    preload."""
     for html_file in sorted((ROOT / "blogs").glob("*.html")):
         doc = parse_html(html_file)
         rel = html_file.relative_to(ROOT)
@@ -493,7 +497,12 @@ def check_blog_loop_videos(errors: list[str]) -> None:
                 errors.append(f"{label} is not a file in the repository")
                 continue
             size = local_path.stat().st_size
-            if size > MAX_ARTICLE_IMAGE_BYTES:
+            if "post-film" in attrs.get("class", "").split():
+                if attrs.get("preload") != "none":
+                    errors.append(f"{label} is a film; it must have preload=\"none\"")
+                if size > MAX_ARTICLE_FILM_BYTES:
+                    errors.append(f"{label} is {size / 1e6:.1f} MB; article films must stay under 5 MB")
+            elif size > MAX_ARTICLE_IMAGE_BYTES:
                 errors.append(f"{label} is {size / 1e6:.1f} MB; article clips must stay under 1 MB")
 
 
