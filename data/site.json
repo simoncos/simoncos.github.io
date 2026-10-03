@@ -1131,7 +1131,51 @@
           }
         ]
       ],
-      "og_image": "gallery/assets/og-qingtian.jpg"
+      "og_image": "gallery/assets/og-qingtian.jpg",
+      "score": {
+        "note": {
+          "en": "Worked out note by note from this recording in October 2026: the melody with its lyrics, the chords, and the harmony part. Still being checked by ear. The numbered notation is in 1 = F, written an octave above the sung pitch, as is usual for a male voice.",
+          "zh": "2026 年 10 月从这版录音里逐音扒出：旋律与歌词、和弦，以及和声声部，仍在逐句听校。简谱为 1 = F，按男声惯例比实际演唱高一个八度记写。"
+        },
+        "files": [
+          {
+            "path": "gallery/music/qingtian-jianpu.pdf",
+            "format": "PDF",
+            "label": {
+              "en": "Numbered notation (jianpu)",
+              "zh": "简谱"
+            },
+            "desc": {
+              "en": "Chords above, lyrics below. For printing and singing from.",
+              "zh": "上方和弦，下方歌词。可打印，照着唱。"
+            }
+          },
+          {
+            "path": "gallery/music/qingtian.musicxml",
+            "format": "MusicXML",
+            "label": {
+              "en": "Staff notation",
+              "zh": "五线谱文件"
+            },
+            "desc": {
+              "en": "Opens in MuseScore and other notation software, for editing or arranging.",
+              "zh": "用 MuseScore 等打谱软件打开，可修改、改编。"
+            }
+          },
+          {
+            "path": "gallery/music/qingtian.mid",
+            "format": "MIDI",
+            "label": {
+              "en": "Note sequence",
+              "zh": "音符序列"
+            },
+            "desc": {
+              "en": "Three tracks: melody with lyrics, harmony, chords. Slides are not included.",
+              "zh": "主旋律（含歌词）、和声、和弦三轨；滑音未收入。"
+            }
+          }
+        ]
+      }
     }
   ]
 }

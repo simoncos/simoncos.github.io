@@ -2574,9 +2574,76 @@ button {
     gap: 12px;
 }
 
+/* The score: one card per file, the format large, what it is for below. */
+.song-score-note {
+    max-width: 62ch;
+    margin: 12px 0 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.song-files {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.song-file {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 100%;
+    padding: 20px;
+    border-radius: 16px;
+    background: var(--bg);
+    color: var(--ink);
+    transition: background 0.2s;
+}
+
+.song-file:hover {
+    background: var(--fill-2);
+}
+
+.song-file:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
+.song-file-format {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+.song-file-label {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.song-file-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+.song-file-size {
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
 @media (max-width: 859.98px) {
     .song-wave {
         min-height: 120px;
+    }
+
+    .song-files {
+        grid-template-columns: 1fr;
     }
 
     .lyrics {
