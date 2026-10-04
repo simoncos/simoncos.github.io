@@ -497,53 +497,6 @@
       ]
     },
     {
-      "id": "games",
-      "title": {
-        "en": "Games",
-        "zh": "游戏"
-      },
-      "line": {
-        "en": "Games I've made.",
-        "zh": "我做的游戏。"
-      },
-      "desc": {
-        "en": "Games I've made.",
-        "zh": "我做的游戏。"
-      }
-    },
-    {
-      "id": "talks",
-      "title": {
-        "en": "Talks",
-        "zh": "演讲"
-      },
-      "line": {
-        "en": "Talks, with their slides.",
-        "zh": "演讲，连同幻灯片。"
-      },
-      "desc": {
-        "en": "Talks given in person, published with their HTML slides.",
-        "zh": "线下做过的分享，连同 HTML 幻灯片一起发布。"
-      },
-      "related": [
-        {
-          "label": {
-            "en": "My PKM System, 2026-03",
-            "zh": "我的个人知识管理系统 2026-03"
-          },
-          "kind": {
-            "en": "Article",
-            "zh": "文章"
-          },
-          "href": {
-            "en": "blogs/my-personal-knowledge-management-system-2026-03.en.html",
-            "zh": "blogs/my-personal-knowledge-management-system-2026-03.html"
-          },
-          "arrow": "→"
-        }
-      ]
-    },
-    {
       "id": "research",
       "wheel_work": "sleep",
       "title": {
@@ -590,6 +543,53 @@
           "arrow": "→"
         }
       ]
+    },
+    {
+      "id": "talks",
+      "title": {
+        "en": "Talks",
+        "zh": "演讲"
+      },
+      "line": {
+        "en": "Talks, with their slides.",
+        "zh": "演讲，连同幻灯片。"
+      },
+      "desc": {
+        "en": "Talks given in person, published with their HTML slides.",
+        "zh": "线下做过的分享，连同 HTML 幻灯片一起发布。"
+      },
+      "related": [
+        {
+          "label": {
+            "en": "My PKM System, 2026-03",
+            "zh": "我的个人知识管理系统 2026-03"
+          },
+          "kind": {
+            "en": "Article",
+            "zh": "文章"
+          },
+          "href": {
+            "en": "blogs/my-personal-knowledge-management-system-2026-03.en.html",
+            "zh": "blogs/my-personal-knowledge-management-system-2026-03.html"
+          },
+          "arrow": "→"
+        }
+      ]
+    },
+    {
+      "id": "games",
+      "title": {
+        "en": "Games",
+        "zh": "游戏"
+      },
+      "line": {
+        "en": "Games I've made.",
+        "zh": "我做的游戏。"
+      },
+      "desc": {
+        "en": "Games I've made.",
+        "zh": "我做的游戏。"
+      }
     },
     {
       "id": "music",
