@@ -10,7 +10,7 @@ description: 最近把个人网站从头重做了一遍：不只是外在的翻�
 
 <video class="post-film" src="assets/images/personal-site-remake/intro.zh.mp4" poster="assets/images/personal-site-remake/intro.zh.jpg" width="720" height="1280" controls playsinline preload="none" aria-label="网站介绍视频，40 秒：睡眠数据、演讲、作品轮盘、《晴天》、漫无止尽的回响、文章、哈巴雪山和收藏，最后所有的点连成网站的名字"></video>
 
-<small>视频里的钢琴采样：[YDP Grand Piano](https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html)，Zenph Studios 录制，FreePats 项目整理，[CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)。</small>
+<p class="post-film-credit"><small><span>视频里的钢琴采样：<a href="https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html">YDP Grand Piano</a>，</span><span><span>Zenph Studios 录制，</span><span>FreePats 项目整理，<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。</span></span></small></p>
 
 ## 网站
 
