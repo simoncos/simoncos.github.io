@@ -39,7 +39,7 @@ There are eleven cards among the works on this site that you can't click into ye
 - **Vocal Coach**: a phone app for singing in tune: sing along to a target note and see live whether you are sharp or flat. The piano in Endless Echoes and in the intro video first came from the real samples I found while making this app.
 - **Paper Research Platform**: ask the same set of questions of a batch of papers; a model answers for each paper with evidence from the text, and after a human check the results export as a table.
 - **Hiking Planner**: import a route, read distance, climb and resupply segment by segment, and log the hike once it is done.
-- **WeChat Chat Exporter**: export your own WeChat chats, on your own computer, into searchable text where every message keeps its time and where it came from.
+- **WeChat Chat Exporter**: export your own WeChat chats on your own computer, together with their voice messages, images and files; the text is searchable, and every message keeps its time and where it came from.
 - **Birdie**: a phone app for keeping pet birds, with a profile for each bird and one diary for weight, food and mood.
 - **Muscle & Joint Log**: for everyday neck, back and joint strain: check first for signs that mean see a doctor, log how it changes day by day, and bring a summary to the appointment.
 - **Photo Curator**: import a batch of photos, sort them into album ideas, and get help picking the frames and putting them in order.

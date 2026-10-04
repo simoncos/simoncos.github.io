@@ -337,8 +337,8 @@
         "zh": "微信聊天导出器"
       },
       "desc": {
-        "en": "Export your own WeChat chats, on your own computer, into searchable text where every message keeps its time and where it came from.",
-        "zh": "在自己的电脑上，把自己的微信聊天记录导出成可搜索的文本，每条消息都保留时间和出处。"
+        "en": "Export your own WeChat chats on your own computer, together with their voice messages, images and files; the text is searchable, and every message keeps its time and where it came from.",
+        "zh": "在自己的电脑上，把自己的微信聊天记录连同语音、图片和文件一起导出；文字可以搜索，每条消息都保留时间和出处。"
       },
       "img": "gallery/assets/wip/wechat-exporter.webp"
     },
