@@ -1,5 +1,5 @@
 ---
-tags: design
+tags: design,music
 date: 2026-10-04
 description: 最近把个人网站从头重做了一遍：不只是外在的翻新，也是对自己的一次梳理。
 ---

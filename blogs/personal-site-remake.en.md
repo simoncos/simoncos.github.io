@@ -1,5 +1,5 @@
 ---
-tags: design
+tags: design,music
 date: 2026-10-04
 translation: Claude Opus 5.5
 description: I recently rebuilt this site from scratch: not just a fresh coat of paint, but also a way of sorting myself out.
