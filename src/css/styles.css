@@ -4175,6 +4175,30 @@ h2.k {
     background: var(--fill);
 }
 
+/* The credit under a film: centred beneath it, on two lines when one is not
+   enough. Raw <p class="post-film-credit"> in the article. */
+.post-content p.post-film-credit {
+    max-width: 30em;
+    margin: -0.4em auto 1.6em;
+    text-align: center;
+}
+
+/* Clauses that each stay whole, so the credit breaks between them and never
+   strands one character or a link's arrow on a line of its own. The second
+   half nests two clauses: whole on a wide screen, split on a phone. */
+.post-content p.post-film-credit small span {
+    display: inline-block;
+}
+
+.post-content p.post-film-credit a {
+    white-space: nowrap;
+}
+
+/* Beats the justified Chinese running text below. */
+.post-content p.post-film-credit:lang(zh) {
+    text-align: center;
+}
+
 /* A few screenshots in one place, switched by tabs instead of stacked down
    the page. Raw HTML in the article: radio inputs, then a stage of
    same-sized images, then a caption of labels; the nth input shows the nth

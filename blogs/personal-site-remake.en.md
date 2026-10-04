@@ -11,7 +11,7 @@ Between September and today I rebuilt this site from top to bottom, and made a 4
 
 <video class="post-film" src="assets/images/personal-site-remake/intro.en.mp4" poster="assets/images/personal-site-remake/intro.en.jpg" width="720" height="1280" controls playsinline preload="none" aria-label="The 40-second intro video: sleep data, the talk, the Work wheel, Sunny Day, Endless Echoes, articles, Haba Snow Mountain and Favorites, until every dot connects into the site’s name"></video>
 
-<small>Piano samples in the video: [YDP Grand Piano](https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html), recorded by Zenph Studios, prepared by the FreePats project, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).</small>
+<p class="post-film-credit"><small><span>Piano samples in the video: <a href="https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html">YDP Grand Piano</a>,</span> <span><span>recorded by Zenph Studios,</span> <span>prepared by the FreePats project, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</span></span></small></p>
 
 ## The site
 
