@@ -7,7 +7,7 @@ description: I recently rebuilt this site from scratch: not just a fresh coat of
 
 # Personal Site, Remake
 
-Between September and today I rebuilt this site from top to bottom, and made a 40-second intro video along the way. Claude and Codex wrote most of the code; I set the requirements, picked at flaws and made the calls. This remake is not just a fresh coat of paint. It is also a way of sorting myself out.
+Between September and today I rebuilt this site from top to bottom, and made a 40-second intro video along the way. This remake is not just a fresh coat of paint. It is also a way of sorting myself out.
 
 <video class="post-film" src="assets/images/personal-site-remake/intro.en.mp4" poster="assets/images/personal-site-remake/intro.en.jpg" width="720" height="1280" controls playsinline preload="none" aria-label="The 40-second intro video: sleep data, the talk, the Work wheel, Sunny Day, Endless Echoes, articles, Haba Snow Mountain and Favorites, until every dot connects into the site’s name"></video>
 
@@ -91,4 +91,4 @@ Sunny Day is my first and, so far, only complete original work, with lyrics, mel
 
 When Claude made the first version of the video, without any obvious hint from me, it seized on dots, an image that runs through so much here. Each night of sleep data at the start of the video is a dot; every work, every article, every favorite is a dot; and each song in Endless Echoes is a dot as well.
 
-It is these dots, together with the people, events, memories and hopes behind them, that make up who I was, am and will be. Yes, this site is about my past, present and future.
+It is these dots, together with the people, events, memories and hopes behind them, that make up who I was, am and will be. Yes, this site is precisely about my past, present and future.

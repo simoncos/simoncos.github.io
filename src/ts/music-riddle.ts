@@ -1,8 +1,10 @@
 (function () {
     interface OpenAnswer { title:string; aliases:string[] }
     interface Song { id:string; title:string; aliases:string[]; next:string[]; position:[number,number]; clue:{en:string;zh:string}; hint:{en:string;zh:string}; dead_ends?:string[]; open_answers?:OpenAnswer[]; terminal?:"dead-end"|"epilogue"; quote?:string; clue_format?:'prose'|'quote'; presentation:{flower:string;chord:{midi:number[]}} }
-    interface Riddle { id:string; start:string; ending:string; bonus?:string; nodes:Song[] }
+    interface Riddle { id:string; start:string; ending:string; bonus?:string; finale?:EchoScore.Finale; nodes:Song[] }
     interface Trail { current:string; found:string[]; edges:string[]; history:string[] }
+    /** A score in progress: a walked path or the finale. `lit` is the song whose chord is sounding. */
+    interface Playing { kind:'path'|'finale'; ids:string[]; started:boolean; lit:string; lead:number; seconds:number }
     const root=document.querySelector<HTMLElement>('[data-echo-game]');
     const payload=document.getElementById('echo-data');
     if(!root||!payload)return;
@@ -60,7 +62,17 @@
     const mapDialog=document.getElementById('echo-map-dialog') as HTMLDialogElement;
     const mapButton=root.querySelector<HTMLButtonElement>('[data-open-map]');
     const neighborhood=root.querySelector<SVGElement>('[data-neighborhood]');
+    const pathButton=root.querySelector<HTMLButtonElement>('[data-path-play]');
+    const pathBeads=root.querySelector<HTMLElement>('[data-path-beads]');
+    const pathCaption=root.querySelector<HTMLElement>('[data-path-caption]');
+    const finaleButton=root.querySelector<HTMLButtonElement>('[data-finale-play]');
+    const finaleBar=root.querySelector<HTMLElement>('[data-finale-bar]');
+    const finaleCaption=root.querySelector<HTMLElement>('[data-finale-caption]');
+    const scoreStatus=document.getElementById('echo-score-status');
     let mapSelection=false;
+    let playing:Playing|null=null;
+    let screenLock:WakeLockSentinel|null=null;
+    let finaleTimer:number;
     let misses=0, feedbackSong='';
     const finePointer=window.matchMedia('(hover: hover) and (pointer: fine)');
     let mapPagePosition:{x:number;y:number}|null=null;
@@ -73,17 +85,20 @@
     function closeMap(){if(mapDialog.open)mapDialog.close();}
     mapDialog.addEventListener('close',()=>{
         document.documentElement.classList.remove('echo-map-open');
+        // The finale is a show for the map; leaving the map ends it.
+        if(playing?.kind==='finale')silence();
         if(compact.matches)(mapSelection?document.getElementById('echo-song'):mapButton).focus({preventScroll:true});
         if(compact.matches&&mapPagePosition)restorePage(mapPagePosition);
         mapPagePosition=null;
         mapSelection=false;
     });
     root.querySelector('[data-close-map]').addEventListener('click',closeMap);
-    mapButton.addEventListener('click',()=>{
+    function openMap(){
         zoomed=false;render();mapSelection=false;
         mapPagePosition=pagePosition();
         mapDialog.showModal();document.documentElement.classList.add('echo-map-open');
-    });
+    }
+    mapButton.addEventListener('click',openMap);
     function syncMapLayout(){
         closeMap();
         if(compact.matches)mapDialog.append(mapPanel);
@@ -110,11 +125,15 @@
         button.title=t('A piano chord when you discover or select a song','发现或点击已点亮的歌曲时，播放钢琴和弦');
         const replay=root.querySelector<HTMLButtonElement>('[data-replay]');
         replay.disabled=!soundEnabled||soundStatus==='unavailable';
+        renderScore();
     }
     function playChord(id:string){
         if(!soundEnabled)return;
         const song=songs.get(id);
-        if(song&&piano)void piano.play(song.presentation.chord.midi);
+        if(!song||!piano)return;
+        void piano.play(song.presentation.chord.midi);
+        // A running score ends through its onEnd hook; one still loading has none yet.
+        if(playing)finishScore(playing,false);
     }
     function focusClue(){
         document.getElementById('echo-song').focus({preventScroll:true});
@@ -147,9 +166,9 @@
         focusClue();bringClueIntoView();
     }
     // One ring of light per chord: the node on the map and the flower beside the clue answer the sound together.
-    function ring(id:string){
+    function ring(id:string,flower=true){
         if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-        const targets=[root.querySelector<Element>(`[data-node="${id}"]`),root.querySelector<Element>('[data-clue-flower]'),root.querySelector<Element>('[data-keys]')];
+        const targets=[root.querySelector<Element>(`[data-node="${id}"]`),flower?root.querySelector<Element>('[data-clue-flower]'):null,root.querySelector<Element>('[data-keys]')];
         for(const target of targets){
             if(!target)continue;
             target.classList.remove('is-ringing');void (target as HTMLElement|SVGElement).getBoundingClientRect();target.classList.add('is-ringing');
@@ -178,7 +197,7 @@
     function clearArrival(){
         window.clearTimeout(arrivalTimer);root.classList.remove('is-loop-arrival','is-ending-arrival','is-song-arrival');
         root.querySelectorAll('.is-new').forEach(node=>node.classList.remove('is-new'));
-        root.querySelector('[data-travel-glow]').removeAttribute('d');
+        if(!playing)root.querySelector('[data-travel-glow]').removeAttribute('d');
     }
     function animateArrival(kind:'loop'|'ending'|'song',previous:string,id:string,isNew:boolean,bonus:boolean){
         if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
@@ -195,6 +214,7 @@
     function visit(id:string,remember=true,center=true,preservePage=true){
         if(!trail.found.includes(id))return;
         const position=compact.matches&&preservePage?pagePosition():null;
+        window.clearTimeout(finaleTimer);
         playChord(id);
         clearArrival();
         misses=0;
@@ -214,8 +234,11 @@
         visit(id);
         const arrival=id===data.ending?'ending':id===data.start&&previous.id!==data.start?'loop':null;
         const lit=trail.found.filter(song=>song!==data.bonus).length,total=data.nodes.length-(data.bonus?1:0);
-        notice=()=>unlocked?t('Every song is lit. A hidden echo has appeared beside the ending.','所有歌曲都已点亮。终点旁出现了一段隐藏的回响。'):arrival==='loop'?t('Back to the beginning. Your trail remains.','又回到最初。走过的路还在。'):t('Found: ','找到了：')+songs.get(id).title+(id===data.ending?t(' · The ending.',' · 终点。'):isNew?` · ${lit} / ${total}`:'');
+        const finaleSoon=unlocked&&soundEnabled&&!!data.finale;
+        notice=()=>unlocked?(finaleSoon?t('Every song is lit. A hidden echo has appeared beside the ending, and the finale is about to begin.','所有歌曲都已点亮。终点旁出现了一段隐藏的回响，终章即将奏响。'):t('Every song is lit. A hidden echo has appeared beside the ending.','所有歌曲都已点亮。终点旁出现了一段隐藏的回响。')):arrival==='loop'?t('Back to the beginning. Your trail remains.','又回到最初。走过的路还在。'):t('Found: ','找到了：')+songs.get(id).title+(id===data.ending?t(' · The ending.',' · 终点。'):isNew?` · ${lit} / ${total}`:'');
         feedbackKind='success';feedbackSong=id;render();animateArrival(arrival||'song',previous.id,id,isNew,unlocked);
+        // The last song's own chord rings out and the arrival settles (2.8 s); then the arranged piece begins, once, as the collection completes.
+        if(finaleSoon)finaleTimer=window.setTimeout(()=>startFinale(),2900);
         focusAfterAnswer();
         // Focus stays in the field on a desktop, so say the new clue aloud; a touch player's focus lands on the heading instead.
         if(finePointer.matches&&!form.hidden){announcer.textContent='';window.setTimeout(()=>{announcer.textContent=t(songs.get(id).clue.en,songs.get(id).clue.zh);},60);}
@@ -283,6 +306,170 @@
             key.style.setProperty('--heat',String(Math.min(1,(heard.get(note)||0)/6).toFixed(2)));
         });
     }
+    // Scores: the path the player has walked, and the finale. The audio is scheduled ahead by EchoPiano; the code below only dresses it.
+    // Whatever is sounding lights up on the map, the keyboard and the path row, and everything returns to the current song when a
+    // score ends or is cut short. Every way of stopping goes through silence(), so lighting is never left behind.
+    const midiOf=(id:string)=>songs.get(id).presentation.chord.midi;
+    const songCount=data.nodes.length-(data.bonus?1:0);
+    const finaleStatus=finaleBar.querySelector<HTMLElement>('[data-finale-status]');
+    const reducedMotion=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let beadsFor='';
+    // echo-score.js is a separate file too. Without it there is no path row and no finale; the riddle itself still runs.
+    const scoring=typeof EchoScore!=='undefined';
+    function walkedRoute(){if(!scoring)return [];return EchoScore.route(trail.edges,data.start,trail.current,data.ending,data.bonus);}
+    function finaleReady(){return scoring&&!!data.finale&&!!data.bonus&&trail.found.includes(data.bonus);}
+    // A fresh write each time, so a repeated message is announced again.
+    function say(region:HTMLElement,text:string){region.textContent='';window.setTimeout(()=>{region.textContent=text;},60);}
+    function placeSpotlight(id:string){
+        const spot=root.querySelector<SVGElement>('[data-spotlight]'),at=songs.get(id).position;
+        spot.style.transform=`translate(${at[0]}px,${at[1]}px)`;
+    }
+    // The path the player solved between two songs answers the chord that arrives along it. A short phrase sends a pulse of light along
+    // the path; the finale (a jump has no path, and is skipped) lights the thread itself and lets it fade, because forty-odd pulses with
+    // glow filters over a 46-second piece cost frames on a slow phone.
+    function travel(from:string,to:string,pulse:boolean){
+        const glow=root.querySelector<SVGPathElement>('[data-travel-glow]');
+        glow.classList.remove('is-traveling');
+        root.querySelectorAll('.echo-route.is-lit').forEach(route=>route.classList.remove('is-lit'));
+        if(!from)return;
+        const edge=Array.from(root.querySelectorAll<SVGPathElement>('[data-from]')).find(path=>path.dataset.from===from&&path.dataset.to===to);
+        if(!edge)return;
+        if(!pulse){edge.parentElement.classList.add('is-lit');return;}
+        if(reducedMotion())return;
+        glow.setAttribute('d',edge.getAttribute('d'));
+        void glow.getBoundingClientRect();
+        glow.classList.add('is-traveling');
+    }
+    // The finale is a show for the map: a phone opens the full-network dialog for it, a desktop brings the map into view.
+    function showMap(){
+        if(compact.matches){if(!mapDialog.open)openMap();return;}
+        if(zoomed){zoomed=false;render();}
+        const bar=finaleBar.getBoundingClientRect(),stage=root.querySelector<HTMLElement>('.echo-map-stage').getBoundingClientRect();
+        const header=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h'))||76;
+        if(bar.top<header||stage.bottom>window.innerHeight)finaleBar.scrollIntoView({block:'start',behavior:reducedMotion()?'auto':'smooth'});
+    }
+    function light(run:Playing,index:number){
+        const id=run.ids[index];
+        run.lit=id;
+        root.querySelectorAll('.is-sounding').forEach(element=>element.classList.remove('is-sounding'));
+        root.querySelector(`[data-node="${id}"]`)?.classList.add('is-sounding');
+        root.querySelector(`[data-aura="${id}"]`)?.classList.add('is-sounding');
+        placeSpotlight(id);renderKeys(songs.get(id));ring(id,false);travel(index?run.ids[index-1]:'',id,run.kind==='path');
+        const title=songs.get(id).title;
+        if(run.kind==='path'){
+            pathBeads.querySelectorAll('li').forEach((bead,i)=>{bead.classList.toggle('is-lit',i===index);bead.classList.toggle('is-played',i<index);});
+            pathCaption.textContent=title;
+        }else{
+            finaleCaption.textContent=title;
+            // The hidden echo closes the piece: it blooms as its soft chord sounds.
+            if(index===run.ids.length-1){root.querySelector(`[data-node="${id}"]`)?.classList.add('is-new');root.classList.add('is-finale-bloom');}
+        }
+    }
+    // Audio is scheduled; the first chord follows after the lead.
+    function enter(run:Playing){
+        run.started=true;
+        if(run.kind==='finale'){
+            showMap();
+            root.classList.add('is-finale');
+            finaleBar.style.setProperty('--run',run.seconds.toFixed(1)+'s');
+            finaleBar.style.setProperty('--lead',(run.lead+.08).toFixed(2)+'s');
+            say(finaleStatus,t('The finale begins. Press Escape to stop.','终章开始。按 Esc 可停止。'));
+        }else say(scoreStatus,t(`Playing the path: ${run.ids.length} songs.`,`播放这条路径：${run.ids.length} 首歌。`));
+        renderScore();
+    }
+    function finishScore(run:Playing,finished:boolean){
+        if(playing!==run)return;
+        playing=null;
+        if(run.kind==='finale')releaseScreen();
+        root.classList.remove('is-finale','is-finale-bloom');
+        root.querySelectorAll('.is-sounding').forEach(element=>element.classList.remove('is-sounding'));
+        root.querySelector('.echo-node.is-new')?.classList.remove('is-new');
+        const glow=root.querySelector('[data-travel-glow]');glow.classList.remove('is-traveling');glow.removeAttribute('d');
+        root.querySelectorAll('.echo-route.is-lit').forEach(route=>route.classList.remove('is-lit'));
+        pathBeads.querySelectorAll('li').forEach(bead=>bead.classList.remove('is-lit','is-played'));
+        // The map's lantern and the keyboard go back to the song the player is in.
+        placeSpotlight(trail.current);renderKeys(songs.get(trail.current));
+        renderScore();
+        if(finished)say(run.kind==='finale'?finaleStatus:scoreStatus,run.kind==='finale'?t('The finale has ended.','终章播放完毕。'):t('Path finished.','路径播放完毕。'));
+    }
+    function silence(){
+        const run=playing;
+        piano?.stop();
+        if(run)finishScore(run,false);
+    }
+    /**
+     * The finale outlasts a phone's auto-lock, which would cut the sound mid-phrase, so the screen is kept awake while it plays.
+     * Quietly does nothing where the browser lacks the API or refuses the request.
+     */
+    function holdScreen(run:Playing){
+        if(!navigator.wakeLock)return;
+        navigator.wakeLock.request('screen').then(lock=>{
+            // The finale may have ended, or been replaced, while the request was pending.
+            if(playing!==run||screenLock){void lock.release().catch(()=>{});return;}
+            screenLock=lock;
+            lock.addEventListener('release',()=>{if(screenLock===lock)screenLock=null;});
+        }).catch(()=>{});
+    }
+    function releaseScreen(){
+        const lock=screenLock;
+        screenLock=null;
+        if(lock)void lock.release().catch(()=>{});
+    }
+    function begin(kind:'path'|'finale',ids:string[],steps:EchoPiano.Step[],lead:number){
+        window.clearTimeout(finaleTimer);
+        if(!piano||!scoring)return;
+        if(playing)finishScore(playing,false);
+        const run:Playing={kind,ids,started:false,lit:'',lead,seconds:EchoScore.length(steps)};
+        playing=run;
+        if(kind==='finale')holdScreen(run);
+        renderScore();
+        void piano.playScore(steps,{
+            onStart:()=>{if(playing===run)enter(run);},
+            onStep:index=>{if(playing===run)light(run,index);},
+            onEnd:finished=>finishScore(run,finished)
+        },{lead}).then(()=>finishScore(run,false));
+    }
+    function startFinale(lead=.7){
+        window.clearTimeout(finaleTimer);
+        if(!finaleReady()||!soundEnabled||soundStatus==='unavailable'||document.hidden)return;
+        begin('finale',data.finale.steps.map(step=>step.node),EchoScore.finaleSteps(data.finale,midiOf),lead);
+    }
+    function renderScore(){
+        const canPlay=soundEnabled&&soundStatus!=='unavailable';
+        const path=playing?.kind==='path'?playing:null,finale=playing?.kind==='finale'?playing:null;
+        const route=path?path.ids:walkedRoute(),row=pathBeads.parentElement;
+        row.hidden=route.length<2;
+        if(route.length>1){
+            const key=route.join('>');
+            if(key!==beadsFor){
+                beadsFor=key;
+                pathBeads.replaceChildren(...route.map(id=>{const bead=document.createElement('li');bead.className='bloom-'+flowerFamily(songs.get(id));return bead;}));
+            }
+            const seconds=Math.max(1,Math.round(EchoScore.length(EchoScore.pathSteps(route,midiOf))));
+            row.dataset.state=path?'playing':'idle';
+            pathButton.disabled=!path&&!canPlay;
+            root.querySelector('[data-path-icon]').textContent=path?'■':'▶';
+            root.querySelector('[data-path-label]').textContent=path?t('Stop','停止'):t('Play this path','回响这条路');
+            pathCaption.textContent=path?(path.started?songs.get(path.lit||route[0]).title:t('Loading piano…','加载钢琴…')):!canPlay?t('Turn sound on to play','打开音效后可播放'):t(`${route.length} songs · about ${seconds} s`,`${route.length} 首 · 约 ${seconds} 秒`);
+        }
+        finaleBar.hidden=!finaleReady();
+        if(finaleReady()){
+            finaleBar.classList.toggle('is-playing',!!finale);finaleBar.classList.toggle('is-running',!!finale?.started);
+            finaleButton.disabled=!finale&&!canPlay;
+            finaleBar.querySelector('[data-finale-icon]').textContent=finale?'■':'▶';
+            finaleBar.querySelector('[data-finale-label]').textContent=finale?t('Stop','停止'):t('Play the finale','播放终章');
+            finaleCaption.textContent=finale?(finale.started?songs.get(finale.lit||finale.ids[0]).title:t('Loading piano…','加载钢琴…')):!canPlay?t('Turn sound on to play the finale','打开音效后可播放终章'):t(`Finale · all ${songCount} songs as one piece`,`终章 · ${songCount} 首歌，编成一段和弦曲`);
+        }
+    }
+    pathButton.addEventListener('click',()=>{
+        if(playing?.kind==='path'){silence();return;}
+        const ids=walkedRoute();
+        if(ids.length>1&&soundEnabled)begin('path',ids,EchoScore.pathSteps(ids,midiOf),0);
+    });
+    finaleButton.addEventListener('click',()=>{
+        if(playing?.kind==='finale'){silence();return;}
+        startFinale();
+    });
     function followNeighbor(target:Element){
         const node=target.closest<SVGGElement>('[data-focus-node]');
         if(!node||!trail.found.includes(node.dataset.focusNode))return;
@@ -312,7 +499,7 @@
         const clue=document.getElementById('echo-clue');
         clue.textContent=t(song.clue.en,song.clue.zh);clue.hidden=quotedClue;
         renderNeighborhood(song);
-        renderKeys(song);
+        renderKeys(playing?.lit?songs.get(playing.lit):song);
         const remaining=song.next.filter(id=>!trail.edges.includes(song.id+':'+id)).length;
         const total=song.next.length, explored=total-remaining;
         let branch=epilogue?t('A HIDDEN ECHO · THANK YOU FOR LISTENING','隐藏回响 · 谢谢你听到这里'):deadEnd?t('DEAD END · EXPLORE ANOTHER BRANCH','死胡同 · 换一条路继续'):ending?t('ENDING FOUND','已抵达终点'):total?
@@ -386,8 +573,7 @@
         // Four steps, not a slope: a new song then re-fades every older aura only when a tier changes.
         const lit=trail.found.length;
         root.style.setProperty('--echo-aura-k',lit<=22?'1':lit<=27?'.85':lit<=32?'.72':'.6');
-        const spot=root.querySelector<SVGElement>('[data-spotlight]'),at=songs.get(trail.current).position;
-        spot.style.transform=`translate(${at[0]}px,${at[1]}px)`;
+        placeSpotlight(playing?.lit||trail.current);
         // Ghost routes keep their document order; walked threads rise above them and the current song's paths above both.
         // The aura layer sits over every route, so the haze softly lights the threads it covers.
         relatedRoutes.sort((a,b)=>Number(a.querySelector<SVGPathElement>('[data-from]').dataset.from===song.id)-Number(b.querySelector<SVGPathElement>('[data-from]').dataset.from===song.id));
@@ -410,17 +596,18 @@
     document.querySelector('[data-open-bonus]').addEventListener('click',()=>{if(data.bonus){visit(data.bonus);if(compact.matches&&mapDialog.open){mapSelection=true;closeMap();}focusClue();}});
     document.querySelector('[data-return-branch]').addEventListener('click',()=>{const id=trail.history.pop()||data.nodes.find(n=>n.next.includes(trail.current))?.id||data.start;visit(id,false);});
     document.querySelector('[data-go-start]').addEventListener('click',()=>visit(data.start));
-    document.querySelector('[data-reset]').addEventListener('click',()=>{clearArrival();piano?.stop();trail=fresh();misses=0;notice=()=>'';feedbackKind='';hint.open=false;reveal.open=false;input.value='';document.querySelector<HTMLDetailsElement>('.echo-reset').open=false;save();render();});
+    document.querySelector('[data-reset]').addEventListener('click',()=>{window.clearTimeout(finaleTimer);silence();clearArrival();trail=fresh();misses=0;notice=()=>'';feedbackKind='';hint.open=false;reveal.open=false;input.value='';document.querySelector<HTMLDetailsElement>('.echo-reset').open=false;save();render();});
     hint.addEventListener('toggle',()=>{if(hint.open){reveal.open=false;hint.querySelector('summary').classList.remove('is-nudged');}});
     reveal.addEventListener('toggle',()=>{if(reveal.open)hint.open=false;render();});
     root.querySelector('[data-sound]').addEventListener('click',()=>{
         soundEnabled=soundStatus==='failed'?true:!soundEnabled;
-        if(soundEnabled){playChord(trail.current);preparePiano();}else piano?.stop();
+        if(soundEnabled){playChord(trail.current);preparePiano();}else silence();
         try{localStorage.setItem(soundKey,soundEnabled?'on':'off');}catch{}
         renderSound();
     });
     root.querySelector('[data-replay]').addEventListener('click',()=>{playChord(trail.current);ring(trail.current);});
-    document.addEventListener('visibilitychange',()=>{if(document.hidden)piano?.stop();else preparePiano();});
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)silence();else preparePiano();});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&playing)silence();});
     root.querySelector('[data-map-zoom]').addEventListener('click',()=>{
         zoomed=!zoomed;render();centerCurrentFlower();
     });
