@@ -85,7 +85,7 @@ It took three drafts: the first, by my ear, was about 95 percent right, and the 
 
 Sunny Day is also a slow song with a slightly melancholy feel (Claude's analysis says F major, 66 BPM). That didn't quite suit the video, so in the end Claude took the key, chords and chorus melody of Sunny Day and rearranged them into a light, brisk piece.
 
-The lead instrument changed several times too: the synth was too muffled, the violin didn't sound good, and in the end I used the piano samples from my Vocal Coach project. The samples don't cover the highest notes, so we synthesized and adjusted those from other notes.
+The lead instrument changed several times too: the synth was too muffled, and the violin was synthesized as well and sounded bad, which is what made me think of the piano samples from my Vocal Coach project; in the end that is what I used. The samples don't cover the highest notes, so we synthesized and adjusted those from other notes.
 
 Sunny Day is my first and, so far, only complete original work, with lyrics, melody, arrangement, vocals and even some immature harmonies. It goes back a long way, so there are many stories and memories around it. While I was making all this over the past two days they came back to mind, like fishing a few certain, beautiful things out of a hazy past.
 
