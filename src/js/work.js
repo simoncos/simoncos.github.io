@@ -2,6 +2,8 @@
 // Work: a wheel of work types that turns by scroll, drag, arrow keys or the
 // buttons, and one view per type. The type views are real sections with ids,
 // so #apps, #talks and so on open them directly and survive a reload.
+// #apps/hn-llm-research also brings one work's card into view and
+// highlights it; the home page links works this way.
 (function () {
     const shell = window.SITE_SHELL;
     const work = document.querySelector('[data-work]');
@@ -189,7 +191,30 @@
         return topics.findIndex((section) => section.id === id);
     }
     let shown = null;
-    function show(id) {
+    // The card a #type/work address points at, once its type is showing.
+    function pointAt(item) {
+        const current = topics.find((section) => section.classList.contains('is-current'));
+        const card = item && current ? current.querySelector(`[data-work="${CSS.escape(item)}"]`) : null;
+        if (!card)
+            return null;
+        card.scrollIntoView({ block: 'center' });
+        card.classList.remove('is-target');
+        void card.offsetWidth;
+        // Arriving from another page, the transition still covers the screen for about 0.45 s; ring the card after it lifts.
+        const arriving = document.documentElement.hasAttribute('data-arrive');
+        window.setTimeout(() => card.classList.add('is-target'), arriving ? 460 : 0);
+        // Other animations inside the card end too; only the ring's own end clears it.
+        const clear = (event) => {
+            if (event.animationName !== 'wcard-target')
+                return;
+            card.classList.remove('is-target');
+            card.removeEventListener('animationend', clear);
+        };
+        card.addEventListener('animationend', clear);
+        return card;
+    }
+    function show(address) {
+        let [id, item = ''] = address.split('/');
         // Keep old links to the retired single-item category useful.
         if (id === 'visual')
             id = 'research';
@@ -209,6 +234,7 @@
         }
         work.classList.add('is-topic');
         topics.forEach((section, i) => section.classList.toggle('is-current', i === index));
+        return pointAt(item);
     }
     // After a switch, put focus where the reader now is: the type's heading,
     // or the front card back on the wheel.
@@ -223,18 +249,22 @@
             target.tabIndex = -1;
         target.focus({ preventScroll: true });
     }
-    function swap(id) {
+    function swap(address) {
+        let [id, item = ''] = address.split('/');
         if (id === 'visual')
             id = 'research';
         // A fragment link fires both hashchange and popstate; act once.
         const target = topicIndex(id) < 0 ? '' : id;
-        if (target === shown)
+        if (target === shown && !item)
             return;
         shown = target;
         const change = () => {
-            show(id);
             window.scrollTo(0, 0);
-            focusView();
+            const card = show(item ? `${id}/${item}` : id);
+            if (card)
+                card.focus({ preventScroll: true });
+            else
+                focusView();
         };
         if (shell && shell.fade)
             shell.fade(change);
@@ -290,6 +320,10 @@
             return;
         event.preventDefault();
     });
-    show(window.location.hash.slice(1));
+    const arrival = window.location.hash.slice(1);
+    show(arrival.split('/')[0]);
     render();
+    // Point at the card after the first layout, so the scroll lands where the page has settled.
+    if (arrival.includes('/'))
+        requestAnimationFrame(() => pointAt(arrival.split('/')[1])?.focus({ preventScroll: true }));
 })();

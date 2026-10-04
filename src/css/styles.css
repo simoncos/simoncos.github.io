@@ -1654,6 +1654,29 @@ button {
     outline-offset: -1px;
 }
 
+/* The card a #type/work address points at (the home page links works this
+   way): a ring like the keyboard focus outline, held for a moment and then
+   faded, so the reader sees which card they were sent to. Drawn on ::after
+   and faded by opacity; an animated outline colour did not repaint. */
+.wcard.is-target {
+    position: relative;
+}
+
+.wcard.is-target::after {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    pointer-events: none;
+    animation: wcard-target 2.4s var(--ease) both;
+}
+
+@keyframes wcard-target {
+    0%, 60% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
 .wcard-img img {
     display: block;
     width: 100%;
