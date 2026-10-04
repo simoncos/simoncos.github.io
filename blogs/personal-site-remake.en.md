@@ -17,6 +17,8 @@ Between September and today I rebuilt this site from top to bottom, and made a 4
 
 The new version started from a design package. Late at night on September 26, I packed up the design drafts I had been polishing on and off with Claude Design for two or three weeks, put them in the repository, and had Claude build and deploy them. The new site was live a little over an hour later.
 
+<figure class="post-shots" role="group" aria-label="Screenshots of the site"><input class="post-shots-input" type="radio" name="site-shots" id="site-shot-home" checked><input class="post-shots-input" type="radio" name="site-shots" id="site-shot-phones"><input class="post-shots-input" type="radio" name="site-shots" id="site-shot-work"><input class="post-shots-input" type="radio" name="site-shots" id="site-shot-fav"><div class="post-shots-stage"><img src="assets/images/personal-site-remake/site-home.en.webp" alt="The home page on a computer: the Featured strip, with the first card, a scatter plot from ten years of sleep records, open and the others folded upright" width="1600" height="1000" loading="lazy" decoding="async"><img src="assets/images/personal-site-remake/site-phones.en.webp" alt="Four pages on a phone: the home page, the Work wheel, an article and Sunny Day" width="1600" height="1000" loading="lazy" decoding="async"><img src="assets/images/personal-site-remake/site-work.en.webp" alt="The Work page: covers for each kind of work arranged in a wheel, with Apps in front" width="1600" height="1000" loading="lazy" decoding="async"><img src="assets/images/personal-site-remake/site-fav.en.webp" alt="The Favorites page: four cover cards for books, films, music and games, each with its count and number of short reviews" width="1600" height="1000" loading="lazy" decoding="async"></div><figcaption class="post-shots-tabs"><label for="site-shot-home">Home</label><label for="site-shot-phones">Phone</label><label for="site-shot-work">Work</label><label for="site-shot-fav">Favorites</label></figcaption></figure>
+
 Over the next two weeks, I brought back the details and features of the old site that the AI had dropped, and moved more of my writing and projects over: from 8 articles at launch to 64 now, the earliest written in 2008, all in both Chinese and English.
 
 A few fun things about the new site:
@@ -58,6 +60,8 @@ Then I started expanding it: to 36 songs and 47 paths, and the new clues were st
 The visuals went through many rounds. At first Codex made a dark green background that looked muddy, and I sent it back; the cover image was also left to Codex at first, and the cassette tape it came up with I read, at first glance, as a belt.
 
 The final design is built around flowers. The cover became flowers, a piano and an Escher-like space; the route map is laid out in the shape of a rose, and each song is a flower too. This mostly borrows from the art concept of Eason Chan's Fear and Dreams concerts. A few songs about flowers were already fairly important in my original riddle.
+
+![The Endless Echoes page: the Escher-like piano staircase at the top, and below it the current song’s flower and the map of echoes](assets/images/personal-site-remake/site-echoes.en.jpg)
 
 Each time a song is guessed, its flower lights up and opens, and a chord sounds. The chords start from a Csus2 at the beginning and finally come to rest on C. Along the way, players can play back the little chord tune of the path they have lit.
 
