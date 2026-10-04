@@ -109,7 +109,7 @@ python3 scripts/music_riddle_data.py docs/templates/music-riddle.json
 
 ## 2026-10-02：独立死胡同与到达动效
 
-作者已将《绵绵》从 `open_answers` 升级为独立节点 `mian-mian`，`terminal: "dead-end"`、`next: []`，`quote` 保存作者给定原文；不把这段引用当成下一关谜面。猜中简繁体歌名后会收集该节点，隐藏答题框，并可退回上一首。原 26 个节点 ID、顺序和存储键不变。
+作者已将《绵绵》从 `open_answers` 升级为独立节点 `mian-mian`，`terminal: "dead-end"`、`next: []`，`quote` 保存作者给定原文（2026-10-04 按歌词资料把「下雨天」校正为「夏雨天」，粤语两字同音）；不把这段引用当成下一关谜面。猜中简繁体歌名后会收集该节点，隐藏答题框，并可退回上一首。原 26 个节点 ID、顺序和存储键不变。
 
 `terminal` 是可选的死胡同标记，不能与全局 `ending` 重合，也不能拥有出边。`quote` 是可选原文引用，与双语 `clue` 独立。仍可用 `open_answers` 保存其他尚未完整定义的答案；不应同时为同一答案保留节点和占位。
 
