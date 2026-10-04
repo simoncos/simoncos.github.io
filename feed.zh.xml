@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Sun, 04 Oct 2026 14:18:10 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>个人网站，Remake</title><link>https://simoncos.github.io/blogs/personal-site-remake.html</link><guid>https://simoncos.github.io/blogs/personal-site-remake.html</guid><pubDate>Sun, 04 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>个人网站，Remake</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Sun, 04 Oct 2026 14:22:12 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>个人网站，Remake</title><link>https://simoncos.github.io/blogs/personal-site-remake.html</link><guid>https://simoncos.github.io/blogs/personal-site-remake.html</guid><pubDate>Sun, 04 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>个人网站，Remake</h1>
 <p>九月到今天，我把网站从头到尾重做了一遍，顺手做了一支 40 秒的介绍视频。这次 remake 不只是外在的翻新，也是对自己的一次梳理。</p>
 <video aria-label="网站介绍视频，40 秒：睡眠数据、演讲、作品轮盘、《晴天》、漫无止尽的回响、文章、哈巴雪山和收藏，最后所有的点连成网站的名字" class="post-film" controls="" height="1280" playsinline="" poster="https://simoncos.github.io/blogs/assets/images/personal-site-remake/intro.zh.jpg" preload="none" src="https://simoncos.github.io/blogs/assets/images/personal-site-remake/intro.zh.mp4" width="720"></video>
 <p class="post-film-credit"><small><span>视频里的钢琴采样：<a href="https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html">YDP Grand Piano</a>，</span><span><span>Zenph Studios 录制，</span><span>FreePats 项目整理，<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。</span></span></small></p>
@@ -12,7 +12,7 @@
 <p><strong>可互动的页面。</strong> 可互动的富媒体内容是我未来创作的一个方向。站点里会有越来越多这样的内容：<a href="https://simoncos.github.io/gallery/research/sleep-2016-2026.html">十年睡眠档案</a>（3,656 个夜晚）、用 2015 年知乎数据做的<a href="https://simoncos.github.io/gallery/research/zhihu-2015.html?lang=zh">社交网络研究</a>、<a href="https://simoncos-hn-llm-research.vercel.app/">HN × LLM</a>数据分析、个人信息系统的<a href="https://simoncos.github.io/gallery/talks/pkm-2026-06-07/index.html">演讲 slides</a>、等会想再详细介绍的小解谜游戏<a href="https://simoncos.github.io/gallery/music/endless-echoes.html?lang=zh">《漫无止尽的回响》</a>，全部都是这样。在过去，这样的动态内容制作起来非常花时间，现在有AI的帮助，我有机会探索更多这样的想法。</p>
 <p><strong><a href="https://simoncos.github.io/favorites.html?lang=zh">收藏</a>。</strong> 豆瓣上我打过五星的书、影、音、游，一共 453 部，其中 222 部有短评。它们也是我的重要组成部分，是我的成长养分。</p>
 <p>接下来是更多可以展开讲讲的。</p>
-<h2>长青</h2>
+<h2>常青</h2>
 <p>网站上的作品里一共有 11 张点不进去的卡片。这些是过去几个月一直在做、但还没到能拿出来的程度的东西：</p>
 <ul>
 <li><strong>Daily Oracle</strong>：每天抽一张卡，去现实里做一件小事，回来记下。日子久了，卡册会慢慢扩展，花园会逐渐盛放。</li>
@@ -27,7 +27,7 @@
 <li><strong>谜案圆桌</strong>：一个人也能玩的剧本杀，AI 主持人和其他角色陪你搜证、讨论、投票。</li>
 <li>一个暂不公布的项目，是 Agentic 投资研究方向。</li>
 </ul>
-<p>一些项目生得早、长得慢，一些项目正相反，正如花园里的每朵花都是不一样的。而我就是那个花农，今天看看这个，明天看看那个，时常来回转转，用想法和token浇灌，顺其自然发展。对于那些不够成熟的，我们可以多等待等待；那些曾收获过的，有再度演化的可能；那些死去的，也有契机回响与重生。一切均无常形，生死明灭，这就是所谓的<a href="https://notes.andymatuschak.org/z5E5QawiXCMbtNtupvxeoEX"><strong>长青（Evergreen）</strong></a>，又或者是<a href="https://zh.wikipedia.org/zh-hans/%E5%BF%85%E7%84%B6">凯文凯利书里的<strong>形成（Becoming）</strong></a>。</p>
+<p>一些项目生得早、长得慢，一些项目正相反，正如花园里的每朵花都是不一样的。而我就是那个花农，今天看看这个，明天看看那个，时常来回转转，用想法和token浇灌，顺其自然发展。对于那些不够成熟的，我们可以多等待等待；那些曾收获过的，有再度演化的可能；那些死去的，也有契机回响与重生。一切均无常形，生死明灭，这就是所谓的<a href="https://notes.andymatuschak.org/z5E5QawiXCMbtNtupvxeoEX"><strong>常青（Evergreen）</strong></a>，又或者是<a href="https://zh.wikipedia.org/zh-hans/%E5%BF%85%E7%84%B6">凯文凯利书里的<strong>形成（Becoming）</strong></a>。</p>
 <h2>漫无止尽的回响</h2>
 <p>2017 年，我在虾米上做过一个陈奕迅的歌单谜题：每首歌的推荐语，是下一首歌的谜面。一共 26 首。最早这组谜题以文字的形式布置在了虾米音乐各首歌的评论区，<a href="https://www.jianshu.com/p/bacb95af08b1">关于游戏玩法说明的专栏文章</a>还拿了虾米的官方推荐。但是那时候的形态其实非常难玩下去，玩家得自己拿纸记录，也无法确知是否遇到了死胡同。在2021年虾米音乐关停前，我用豆瓣的豆列做了一个简单的备份。</p>
 <p>这回我最初的目标是用可交互、更用户友好的形式把谜题复原。第一版是 Codex 帮忙做的，按豆列还原出 26 首歌、31 条路，但我试玩时有点卡住了，怀疑也许是豆列备份不准确，但已经遗失了当初手画的完整设计图。后来翻出 OneDrive 里存着的虾米音乐导出记录，26 条推荐语逐条对上，才把答案确定下来。重新翻这些歌和推荐语，甚至是想起虾米音乐这个名字，都会翻涌起一些回忆。</p>
