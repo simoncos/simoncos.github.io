@@ -141,5 +141,13 @@ class EchoesPageTests(unittest.TestCase):
         self.assertRegex(self.css, r"\.echo-device-hint button::after\{content:'';position:absolute;inset:-10px\}")
 
 
+    def test_keyboard_resizes_the_page_and_the_typing_layout_keeps_the_clue_in_view(self):
+        # Without it Android Chrome pans the whole view 250 px up when the keyboard opens and back when it closes.
+        (meta,) = [attrs for tag, attrs in tags(self.page) if tag == 'meta' and attrs.get('name') == 'viewport']
+        self.assertIn('interactive-widget=resizes-content', meta['content'])
+        self.assertRegex(self.css, r'@media\(max-width:900px\) and \(max-height:480px\)\{\s*\.music-riddle \.hdr\{position:relative\}')
+        # Only this page asks for it.
+        self.assertNotIn('interactive-widget', (ROOT / 'index.html').read_text())
+
 if __name__ == '__main__':
     unittest.main()

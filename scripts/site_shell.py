@@ -305,6 +305,7 @@ def render_document(
     html_attrs: str = "",
     body_attrs: str = "",
     tail: str = "",
+    viewport: str = "width=device-width, initial-scale=1.0",
 ) -> str:
     """A full page: document head, shell blocks, the page's <main>."""
     parts = [
@@ -312,7 +313,7 @@ def render_document(
         f'<html lang="en"{html_attrs}>',
         "<head>",
         '    <meta charset="UTF-8">',
-        '    <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+        f'    <meta name="viewport" content="{viewport}">',
         head.rstrip("\n"),
         render_resource_block(config, page),
         "</head>",

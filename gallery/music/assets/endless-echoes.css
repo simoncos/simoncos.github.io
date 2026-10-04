@@ -55,6 +55,11 @@
 .echo-map-panel .echo-panel-top{gap:12px;flex-wrap:wrap}.echo-map-panel .echo-panel-top h2{margin-right:auto}
 .echo-progress{font-size:22px;letter-spacing:-.04em;color:var(--echo-ink);white-space:nowrap}.echo-progress>span+span{font-size:12px;letter-spacing:0;color:var(--echo-soft)}
 [data-map-zoom],[data-map-locate],[data-fullscreen]{border:1px solid var(--echo-line);border-radius:20px;padding:8px 13px;font-size:12px;letter-spacing:0;min-height:44px}
+/* Full screen is the way to play on a computer (the clue and the whole map on one screen), so it reads as the main control
+   in the map's header: accent outline and text over a faint accent fill, where the other two stay quiet. */
+.echo-text-button[data-fullscreen]{border-color:color-mix(in srgb,var(--echo-accent) 60%,transparent);background:color-mix(in srgb,var(--echo-accent) 14%,transparent);color:var(--echo-accent);font-size:13px;font-weight:500;padding-inline:16px}
+.echo-text-button[data-fullscreen]:not(:disabled):hover{background:var(--echo-accent);border-color:var(--echo-accent);color:var(--echo-button-ink)}
+.echo-text-button[data-fullscreen] [aria-hidden]{font-size:15px}
 .echo-progress-line{appearance:none;border:0;background:var(--echo-line);color:var(--echo-accent);height:2px;width:100%;margin:16px 0 0;border-radius:3px;overflow:hidden}.echo-progress-line::-webkit-progress-bar{background:var(--echo-line)}.echo-progress-line::-webkit-progress-value{background:var(--echo-accent);transition:width .6s}.echo-progress-line::-moz-progress-bar{background:var(--echo-accent)}
 .echo-map-stage{margin:24px -8px 0;min-height:360px;display:flex;align-items:center}
 .echo-map{width:100%;height:auto;display:block;overflow:visible;isolation:isolate}
@@ -287,6 +292,12 @@ button.echo-clue-flower:disabled{cursor:default}.echo-replay-cue{transition:colo
   .is-fullscreen .echo-clue-flower img{width:52px;height:52px}
   .is-fullscreen .echo-help summary{min-height:40px;padding-block:6px}
   .is-fullscreen .echo-branch{margin-bottom:6px}
+}
+/* Typing on a phone: the keyboard leaves about 330 px. The site header scrolls away and the song bar takes the top, so the whole
+   clue still shows above the field (header and bar together took 128 px and hid it). */
+@media(max-width:900px) and (max-height:480px){
+  .music-riddle .hdr{position:relative}
+  :root.js .echo-clue-panel > .echo-panel-top{top:0}
 }
 /* On a phone the map panel moves into the full-map dialog; full screen is a desktop control. */
 @media(max-width:900px){[data-fullscreen]{display:none}}

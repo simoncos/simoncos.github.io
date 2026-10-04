@@ -194,6 +194,19 @@
         if (playing)
             finishScore(playing, false);
     }
+    // When the keyboard opens the browser scrolls the field only just into view, under the song bar; set it right above the
+    // keyboard instead, so the clue stays readable while typing. The keyboard opens in steps (680, 394, 330 px on a real phone),
+    // so every shrink counts once the view is a keyboard shorter than its tallest (the toolbar alone is about 56 px); closing
+    // the keyboard leaves the page where it is.
+    let viewHeight = window.innerHeight, tallest = viewHeight;
+    window.addEventListener('resize', () => {
+        const shrank = window.innerHeight < viewHeight;
+        viewHeight = window.innerHeight;
+        tallest = Math.max(tallest, viewHeight);
+        if (!shrank || tallest - viewHeight < 150 || !compact.matches || document.activeElement !== input)
+            return;
+        window.requestAnimationFrame(() => window.scrollBy({ top: input.getBoundingClientRect().bottom - (window.innerHeight - 12), behavior: 'instant' }));
+    });
     function focusClue() {
         document.getElementById('echo-song').focus({ preventScroll: true });
     }
