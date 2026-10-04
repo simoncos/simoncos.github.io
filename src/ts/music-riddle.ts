@@ -1,6 +1,7 @@
 (function () {
     interface OpenAnswer { title:string; aliases:string[] }
-    interface Song { id:string; title:string; aliases:string[]; next:string[]; position:[number,number]; clue:{en:string;zh:string}; hint:{en:string;zh:string}; dead_ends?:string[]; open_answers?:OpenAnswer[]; terminal?:"dead-end"|"epilogue"; quote?:string; clue_format?:'prose'|'quote'; presentation:{flower:string;chord:{midi:number[]}} }
+    interface Decoy { title:string; aliases:string[]; message:{en:string;zh:string} }
+    interface Song { id:string; title:string; aliases:string[]; next:string[]; position:[number,number]; clue:{en:string;zh:string}; hint:{en:string;zh:string}; dead_ends?:string[]; open_answers?:OpenAnswer[]; decoys?:Decoy[]; terminal?:"dead-end"|"epilogue"; quote?:string; clue_format?:'prose'|'quote'; presentation:{flower:string;chord:{midi:number[]}} }
     interface Riddle { id:string; start:string; ending:string; bonus?:string; finale?:EchoScore.Finale; nodes:Song[] }
     interface Trail { current:string; found:string[]; edges:string[]; history:string[] }
     /** A score in progress: a walked path or the finale. `lit` is the song whose chord is sounding. */
@@ -104,7 +105,24 @@
         if(compact.matches)mapDialog.append(mapPanel);
         else cluePanel.after(mapPanel);
     }
-    compact.addEventListener('change',()=>{syncMapLayout();render();centerCurrentFlower();});
+    // Full screen: the clue and the map fill one screen (2026-10-04: the card is 914 px tall, more than a laptop's browser shows).
+    // The class carries the layout, so it also works where the Fullscreen API is missing (iPhone Safari): there the card covers the
+    // page and the browser bar stays. A phone already has the map dialog, so the button lives on the desktop map panel only.
+    const fullscreenButton=root.querySelector<HTMLButtonElement>('[data-fullscreen]');
+    const isFullscreen=()=>root.classList.contains('is-fullscreen');
+    function setFullscreen(on:boolean){
+        if(on===isFullscreen())return;
+        root.classList.toggle('is-fullscreen',on);document.documentElement.classList.toggle('echo-fullscreen-open',on);
+        render();centerCurrentFlower();
+    }
+    fullscreenButton.addEventListener('click',()=>{
+        if(isFullscreen()){if(document.fullscreenElement)void document.exitFullscreen().catch(()=>{});setFullscreen(false);return;}
+        setFullscreen(true);
+        if(root.requestFullscreen)void root.requestFullscreen({navigationUI:'hide'}).catch(()=>{});
+    });
+    // Esc in real full screen belongs to the browser: it leaves full screen, and the layout follows.
+    document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement)setFullscreen(false);});
+    compact.addEventListener('change',()=>{if(compact.matches){if(document.fullscreenElement)void document.exitFullscreen().catch(()=>{});setFullscreen(false);}syncMapLayout();render();centerCurrentFlower();});
     syncMapLayout();
     let notice:()=>string=()=>'';
     let feedbackKind='';
@@ -346,7 +364,7 @@
         if(zoomed){zoomed=false;render();}
         const bar=finaleBar.getBoundingClientRect(),stage=root.querySelector<HTMLElement>('.echo-map-stage').getBoundingClientRect();
         const header=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h'))||76;
-        if(bar.top<header||stage.bottom>window.innerHeight)finaleBar.scrollIntoView({block:'start',behavior:reducedMotion()?'auto':'smooth'});
+        if(!isFullscreen()&&(bar.top<header||stage.bottom>window.innerHeight))finaleBar.scrollIntoView({block:'start',behavior:reducedMotion()?'auto':'smooth'});
     }
     function light(run:Playing,index:number){
         const id=run.ids[index];
@@ -540,6 +558,8 @@
         root.classList.toggle('is-map-zoomed',zoomed);
         const zoomButton=root.querySelector<HTMLButtonElement>('[data-map-zoom]');
         zoomButton.textContent=zoomed?t('See full map','查看全图'):t('Enlarge map','放大地图');zoomButton.setAttribute('aria-pressed',String(zoomed));
+        fullscreenButton.setAttribute('aria-pressed',String(isFullscreen()));
+        fullscreenButton.querySelector('[data-fullscreen-label]').textContent=isFullscreen()?t('Exit full screen','退出全屏'):t('Full screen','全屏');
         root.querySelector('.echo-map-instruction').textContent=compact.matches?(zoomed?t('Scroll to explore · select a lit song to return to its clue','滑动查看 · 选择已点亮的歌，回到它的线索'):t('Full network · enlarge to explore the details','完整网络 · 放大查看细节')):zoomed?t('Scroll to explore · tap a lit song to select and replay','滑动查看 · 点已点亮的歌曲，切换并回放'):t('Tap a lit song to select and replay','点已点亮的歌曲，切换并回放');
         document.getElementById('echo-save-status').textContent=storage?t('Saved in this browser','进度已保存在此浏览器'):t('Saving unavailable · progress lasts while this page is open','无法保存 · 进度仅在此页面打开时保留');
         root.querySelectorAll<SVGGElement>('[data-node]').forEach(node=>{
@@ -587,6 +607,10 @@
         if(answer){solve(answer);return;}
         const openAnswer=song.open_answers?.find(answer=>[answer.title,...answer.aliases].some(value=>norm(value)===guess));
         if(openAnswer){acknowledgeOpen(openAnswer);return;}
+        // A near miss (a twin with other lyrics, a better-known song on the same theme) says so instead of the generic error;
+        // it is not counted towards the hint nudge and does not shake the field.
+        const decoy=song.decoys?.find(item=>[item.title,...item.aliases].some(value=>norm(value)===guess));
+        if(decoy){notice=()=>t(decoy.message.en,decoy.message.zh);feedbackKind='near';render();input.select();return;}
         if(song.dead_ends?.some(n=>norm(n)===guess))notice=()=>t('You found a side branch with no next clue here; revisit another song below.','你接上了一条支线。这里没有下一条谜面，可以在下方回到其他歌。');
         else{misses++;notice=()=>t('That song doesn’t follow this clue. Try another, or open a hint.','这首歌没有接上当前线索。可以再试一首，或打开提示。');}
         feedbackKind='error';render();input.select();
@@ -607,7 +631,8 @@
     });
     root.querySelector('[data-replay]').addEventListener('click',()=>{playChord(trail.current);ring(trail.current);});
     document.addEventListener('visibilitychange',()=>{if(document.hidden)silence();else preparePiano();});
-    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&playing)silence();});
+    // Escape stops a score first; with nothing playing it leaves the fallback full screen (the real one is the browser's).
+    document.addEventListener('keydown',event=>{if(event.key!=='Escape')return;if(playing)silence();else if(isFullscreen()&&!document.fullscreenElement&&!mapDialog.open)setFullscreen(false);});
     root.querySelector('[data-map-zoom]').addEventListener('click',()=>{
         zoomed=!zoomed;render();centerCurrentFlower();
     });

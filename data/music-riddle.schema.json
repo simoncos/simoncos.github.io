@@ -588,6 +588,58 @@
             "additionalProperties": false
           }
         },
+        "decoys": {
+          "type": "array",
+          "minItems": 1,
+          "description": "玩家很可能输入、但不是这条线答案的歌（同曲异词的孪生歌、更有名的同题歌、线索里撞上的歌名）。命中时显示 message，而不是通用的「没有接上」；不算答对，也不计入提示催促。不得与本节点的任何可接答案重名。",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "aliases": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "message": {
+                "type": "object",
+                "properties": {
+                  "zh": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "en": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "zh",
+                  "en"
+                ],
+                "additionalProperties": false
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "description": "为什么列为诱饵（出处与核实），不进页面。"
+              }
+            },
+            "required": [
+              "title",
+              "aliases",
+              "message",
+              "note"
+            ],
+            "additionalProperties": false
+          }
+        },
         "route_audit": {
           "type": "object",
           "properties": {

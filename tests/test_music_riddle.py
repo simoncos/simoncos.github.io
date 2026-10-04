@@ -166,7 +166,7 @@ class MusicRiddleTests(unittest.TestCase):
         self.assertFalse(song['next'])
         self.assertNotEqual(song['id'], self.data['ending'])
         self.assertIn('綿綿', song['aliases'])
-        self.assertEqual(song['quote'], '从来没细心数清楚，一个下雨天，一次愉快的睡眠，断多少发线')
+        self.assertEqual(song['quote'], '从来没细心数清楚，一个夏雨天，一次愉快的睡眠，断多少发线')
 
     def test_the_spellings_a_player_would_type_are_accepted(self):
         # The input says "简繁体均可"; these three were rejected until 2026-10-03 (浮夸 and 红玫瑰 had no traditional
@@ -203,6 +203,34 @@ class MusicRiddleTests(unittest.TestCase):
                     branch['clue'] = {'zh': '新写的谜面', 'en': 'Invented clue'}
                 else:
                     nodes['2113245']['next'].remove(data['start'])
+                with self.assertRaises(ValueError):
+                    validate(data)
+
+    def test_decoys_answer_near_misses_without_hiding_a_path(self):
+        # 2026-10-04: a twin with other lyrics, or a better-known song on the same theme, gets its own line; never accepted.
+        twins = {'孤独患者': {'白玫瑰', '不如不见'}, '红玫瑰': {'月黑风高', '爱情转移'}, '富士山下': {'好久不见'}, '不如不见': {'明年今日'}}
+        by_title = {n['title']: n for n in self.data['nodes']}
+        for title, expected in twins.items():
+            with self.subTest(node=title):
+                self.assertEqual({d['title'] for d in by_title[title]['decoys']}, expected)
+        html = (ROOT / 'gallery/music/endless-echoes.html').read_text(encoding='utf-8')
+        payload = json.loads(re.search(r'<script type="application/json" id="echo-data">(.*?)</script>', html, re.S).group(1))
+        shipped = {n['id']: n.get('decoys') for n in payload['nodes'] if n.get('decoys')}
+        self.assertEqual(set(shipped), {n['id'] for n in self.data['nodes'] if n.get('decoys')})
+        self.assertTrue(all(set(d) == {'title', 'aliases', 'message'} for ds in shipped.values() for d in ds))
+        for case in ('shadows-path', 'is-current-song', 'no-message', 'no-note'):
+            with self.subTest(case=case):
+                data = copy.deepcopy(self.data)
+                node = next(n for n in data['nodes'] if n['title'] == '孤独患者')
+                decoy = node['decoys'][0]
+                if case == 'shadows-path':
+                    decoy['aliases'].append('紅玫瑰')
+                elif case == 'is-current-song':
+                    decoy['aliases'].append('孤獨患者' if '孤獨患者' in node['aliases'] else node['title'])
+                elif case == 'no-message':
+                    del decoy['message']
+                else:
+                    del decoy['note']
                 with self.assertRaises(ValueError):
                     validate(data)
 
