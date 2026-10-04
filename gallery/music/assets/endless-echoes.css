@@ -10,6 +10,8 @@
 .echo-intro-note{margin-top:22px;display:grid;grid-template-columns:45px 1fr;gap:3px 16px}
 .echo-count{font:36px/1 var(--mono);letter-spacing:-.07em;grid-row:span 2;align-self:center}
 .echo-intro-note p{font-size:12px;line-height:1.8;margin:0;color:var(--muted)}.echo-intro-note br{display:none}
+/* Each sentence stays whole, so a narrow screen breaks between them rather than inside a word. */
+.echo-intro-line{display:inline-block}
 .echo-hero-art{width:100%;margin:0 0 0 auto;max-width:490px;background:#141d27;border-radius:8px;overflow:hidden}
 .echo-hero-art img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain}
 #echo-game{scroll-margin-top:100px}
