@@ -166,7 +166,7 @@ class MusicRiddleTests(unittest.TestCase):
         self.assertFalse(song['next'])
         self.assertNotEqual(song['id'], self.data['ending'])
         self.assertIn('綿綿', song['aliases'])
-        self.assertEqual(song['quote'], '从来没细心数清楚，一个下雨天，一次愉快的睡眠，断多少发线')
+        self.assertEqual(song['quote'], '从来没细心数清楚，一个夏雨天，一次愉快的睡眠，断多少发线')
 
     def test_the_spellings_a_player_would_type_are_accepted(self):
         # The input says "简繁体均可"; these three were rejected until 2026-10-03 (浮夸 and 红玫瑰 had no traditional
