@@ -265,7 +265,12 @@ function testRoute() {
   assert.deepEqual(EchoScore.route(walked, data.start, 'fOld7b901', data.ending), ['VbpP7694d', 'mQKhoF955e4', 'fOld7b901']);
   assert.deepEqual(EchoScore.route(walked, data.start, data.ending, data.ending), [], 'no walked path, no route');
   assert.deepEqual(EchoScore.route([], data.start, data.start, data.ending), [data.start], 'standing at the start is a one-song path');
-  assert.deepEqual(EchoScore.route(['a:b', 'b:a', 'b:c', 'a:d', 'c:d'], 'a', 'd', 'd'), ['a', 'd'], 'the shorter walked way wins over a longer one');
+  assert.deepEqual(EchoScore.route(['a:b', 'b:a', 'b:c', 'a:d', 'c:d'], 'a', 'd', 'd'), ['a', 'b', 'c', 'd'], 'the way walked last wins, even when longer');
+  assert.deepEqual(EchoScore.route(['a:b', 'b:a', 'b:c', 'c:d', 'a:d'], 'a', 'd', 'd'), ['a', 'd'], 'and a shorter way walked last wins too');
+  // 2026-10-04: 喜帖街 into 贝多芬 first, then 花花世界 into 贝多芬; the replay played 喜帖街.
+  assert.deepEqual(EchoScore.route(['s:x', 'x:b', 's:y', 'y:b'], 's', 'b', 'b'), ['s', 'y', 'b'], 'a song reached two ways replays the latest');
+  assert.deepEqual(EchoScore.route(['s:y', 'y:b', 's:x', 'x:b'], 's', 'b', 'b'), ['s', 'x', 'b']);
+  assert.deepEqual(EchoScore.route(['s:x', 'x:b', 'b:s', 's:y'], 's', 'b', 'b'), ['s', 'x', 'b'], 'an edge back into the start is not a way to it');
   assert.deepEqual(EchoScore.route(['a:b', 'b:a', 'b:c'], 'a', 'c', 'c'), ['a', 'b', 'c'], 'loops do not repeat songs');
   // The hidden coda follows the ending.
   assert.deepEqual(EchoScore.route(all, data.start, data.bonus, data.ending, data.bonus), [...shortest, data.bonus]);

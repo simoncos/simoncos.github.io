@@ -9,29 +9,41 @@ namespace EchoScore {
     export const pulse=.7;
 
     /**
-     * The shortest route from the start to `target` over the paths the player has actually walked ("from:to" strings).
-     * The hidden coda has no path of its own: it follows the ending. Empty when no walked route exists.
+     * The way the player came from the start to `target`, over the paths they have actually walked ("from:to" strings, kept in
+     * the order they were last walked). Traced back from the target, each song is entered by the path walked into it most
+     * recently, so a song reached two ways replays the latest one (seen 2026-10-04: 喜帖街 then 花花世界 into 贝多芬 replayed
+     * 喜帖街). No song repeats. The hidden coda has no path of its own: it follows the ending. Empty when no walked route exists.
      */
     export function route(edges:readonly string[],start:string,target:string,ending:string,bonus?:string):string[]{
         if(bonus&&target===bonus){
             const base=route(edges,start,ending,ending);
             return base.length?[...base,bonus]:[];
         }
-        const onward=new Map<string,string[]>();
-        for(const edge of edges){
-            const [from,to]=edge.split(':');
+        const onward=new Map<string,string[]>(),into=new Map<string,string[]>();
+        for(let i=edges.length-1;i>=0;i--){
+            const [from,to]=edges[i].split(':');
             if(!from||!to)continue;
             if(!onward.has(from))onward.set(from,[]);
             onward.get(from).push(to);
+            if(!into.has(to))into.set(to,[]);
+            into.get(to).push(from);
         }
-        const came=new Map<string,string>([[start,'']]),queue=[start];
-        for(let i=0;i<queue.length&&!came.has(target);i++){
-            for(const next of onward.get(queue[i])||[])if(!came.has(next)){came.set(next,queue[i]);queue.push(next);}
-        }
-        if(!came.has(target))return [];
-        const ids=[target];
-        while(ids[0]!==start)ids.unshift(came.get(ids[0]));
-        return ids;
+        // Only songs the start reaches can lie on the way back, which keeps the search from wandering.
+        const reached=new Set([start]),queue=[start];
+        for(let i=0;i<queue.length;i++)for(const next of onward.get(queue[i])||[])if(!reached.has(next)){reached.add(next);queue.push(next);}
+        if(!reached.has(target))return [];
+        const ids=[target],used=new Set([target]);
+        const back=(id:string):boolean=>{
+            if(id===start)return true;
+            for(const from of into.get(id)||[]){
+                if(used.has(from)||!reached.has(from))continue;
+                used.add(from);ids.unshift(from);
+                if(back(from))return true;
+                ids.shift();used.delete(from);
+            }
+            return false;
+        };
+        return back(target)?ids:[];
     }
 
     /**

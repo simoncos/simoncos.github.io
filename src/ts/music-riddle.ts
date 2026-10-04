@@ -263,7 +263,8 @@
         const previous=songs.get(trail.current);
         if(!previous.next.includes(id))return;
         const edge=previous.id+':'+id;
-        if(!trail.edges.includes(edge))trail.edges.push(edge);
+        // Edges stay in the order they were last walked, so the replayed path is the way the player came this time.
+        const walked=trail.edges.indexOf(edge);if(walked>=0)trail.edges.splice(walked,1);trail.edges.push(edge);
         const isNew=!trail.found.includes(id);
         if(isNew)trail.found.push(id);
         const unlocked=syncBonus();
