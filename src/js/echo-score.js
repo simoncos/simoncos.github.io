@@ -3,24 +3,25 @@
 var EchoScore;
 (function (EchoScore) {
     /**
-     * When each note of a broken chord enters, in seconds from the step, for `count` notes low to high spread over `roll`.
-     * up: low to high (the plain roll). down: high to low. bass: the bass on the step, then the upper notes rising after a
-     * breath, like a left hand and a right. skip: bass, top, then the middle notes upward, a figure that leaps across the voicing.
+     * When each note of a broken chord enters, in seconds from the step, for `count` notes low to high, one note every `every`
+     * seconds (an eighth or a sixteenth of the finale's beat), so the figure keeps the bar's pulse.
+     * up: low to high. down: high to low. bass: the bass on the step, then the upper notes twice as fast from the next note on,
+     * like a left hand and a right. skip: bass, top, then the middle notes upward, a figure that leaps across the voicing.
      */
-    function figure(shape, count, roll) {
-        const even = (n, from) => Array.from({ length: n }, (_, k) => n > 1 ? from + (roll - from) * k / (n - 1) : from);
+    function figure(shape, count, every) {
         if (count < 2)
             return [0];
+        const at = (k) => k * every;
         if (shape === 'down')
-            return even(count, 0).reverse();
+            return Array.from({ length: count }, (_, k) => at(count - 1 - k));
         if (shape === 'bass')
-            return [0, ...even(count - 1, roll * .4)];
+            return [0, ...Array.from({ length: count - 1 }, (_, k) => every + k * every / 2)];
         if (shape === 'skip') {
-            const order = [0, count - 1, ...Array.from({ length: count - 2 }, (_, k) => k + 1)], times = even(count, 0), out = [];
-            order.forEach((note, k) => { out[note] = times[k]; });
+            const order = [0, count - 1, ...Array.from({ length: count - 2 }, (_, k) => k + 1)], out = [];
+            order.forEach((note, k) => { out[note] = at(k); });
             return out;
         }
-        return even(count, 0);
+        return Array.from({ length: count }, (_, k) => at(k));
     }
     EchoScore.figure = figure;
     /** Share of a chord's span that it sounds before its fade begins; the rest overlaps the next chord, like a sustain pedal. */
@@ -104,7 +105,7 @@ var EchoScore;
             const span = step.beats * finale.beat;
             // `gate` is the share of its span a chord sounds: short gates are stabs that leave air before the next chord.
             const midi = midiOf(step.node);
-            steps.push({ at, midi, hold: span * (step.gate ?? EchoScore.legato), level: step.level, roll: step.roll, release: step.release, offsets: step.shape ? figure(step.shape, midi.length, step.roll ?? 0) : undefined });
+            steps.push({ at, midi, hold: span * (step.gate ?? EchoScore.legato), level: step.level, roll: step.roll, release: step.release, offsets: step.shape ? figure(step.shape, midi.length, (step.every ?? .5) * finale.beat) : undefined });
             at += span;
         }
         return steps;

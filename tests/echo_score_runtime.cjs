@@ -311,12 +311,16 @@ async function testFinaleAgainstTheData() {
   const finale = data.finale;
   const steps = EchoScore.finaleSteps(finale, id => byId.get(id).presentation.chord.midi);
   assert.equal(steps.length, finale.steps.length);
-  // Broken-chord figures: each note enters once, within the roll.
-  assert.deepEqual(plain(EchoScore.figure('up', 3, .6)), [0, .3, .6]);
-  assert.deepEqual(plain(EchoScore.figure('down', 3, .6)), [.6, .3, 0]);
-  assert.deepEqual(plain(EchoScore.figure('bass', 4, 1)).map(x => +x.toFixed(3)), [0, .4, .7, 1]);
-  assert.deepEqual(plain(EchoScore.figure('skip', 4, .9)).map(x => +x.toFixed(3)), [0, .6, .9, .3]);
-  finale.steps.forEach((step, i) => { if (step.shape) { const o = steps[i].offsets; assert.equal(o.length, steps[i].midi.length); assert.ok(Math.max(...o) <= step.roll + 1e-9 && Math.max(...o) < steps[i].hold, 'figure inside the chord ' + i); } });
+  // Broken-chord figures: each note enters once, on the grid of `every` seconds, inside its chord.
+  assert.deepEqual(plain(EchoScore.figure('up', 3, .25)), [0, .25, .5]);
+  assert.deepEqual(plain(EchoScore.figure('down', 3, .25)), [.5, .25, 0]);
+  assert.deepEqual(plain(EchoScore.figure('bass', 4, .5)), [0, .5, .75, 1]);
+  assert.deepEqual(plain(EchoScore.figure('skip', 4, .3)).map(x => +x.toFixed(3)), [0, .6, .9, .3]);
+  finale.steps.forEach((step, i) => { if (step.shape) { const o = steps[i].offsets; assert.equal(o.length, steps[i].midi.length); assert.ok(Math.max(...o) < steps[i].hold, 'figure inside the chord ' + i); } });
+  // Before 花花世界 the piece is in whole 4/4 bars, so the ear can find the downbeat.
+  const cadence = finale.steps.findIndex(s => byId.get(s.node).title === '花花世界');
+  const beforeCadence = finale.steps.slice(0, cadence).reduce((sum, s) => sum + s.beats, 0);
+  assert.equal(beforeCadence % 4, 2, 'whole bars, then 信心花舍 and 花花世界 share the last one');
   steps.forEach((s, i) => {
     near(s.hold, finale.steps[i].beats * finale.beat * (finale.steps[i].gate ?? EchoScore.legato), 'hold ' + i);
     if (i) near(s.at - steps[i - 1].at, finale.steps[i - 1].beats * finale.beat, 'onset ' + i);

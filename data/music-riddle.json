@@ -2914,219 +2914,219 @@
       {
         "node": "VbpP7694d",
         "beats": 4,
-        "level": 0.34,
-        "roll": 0.9,
-        "shape": "up"
+        "level": 0.36,
+        "shape": "up",
+        "every": 0.5
       },
       {
         "node": "b8OSHbf0e1",
-        "beats": 2.5,
-        "level": 0.38,
-        "roll": 0.7,
-        "shape": "bass"
+        "beats": 2,
+        "level": 0.4,
+        "shape": "bass",
+        "every": 0.5
       },
       {
         "node": "mQKhoF955e4",
-        "beats": 1.5,
-        "level": 0.42,
-        "roll": 0.45,
-        "shape": "down"
+        "beats": 2,
+        "level": 0.38,
+        "shape": "down",
+        "every": 0.5
       },
       {
         "node": "fOld7b901",
-        "beats": 3,
+        "beats": 4,
         "level": 0.46,
-        "roll": 0.9,
-        "shape": "bass"
+        "shape": "bass",
+        "every": 0.5
       },
       {
         "node": "wLB3e449",
-        "beats": 1,
-        "level": 0.5,
-        "roll": 0.02,
-        "gate": 0.55
+        "beats": 1.5,
+        "level": 0.56,
+        "roll": 0.015,
+        "gate": 0.5
       },
       {
         "node": "1769399775",
         "beats": 0.5,
-        "level": 0.56,
-        "roll": 0.01,
+        "level": 0.5,
+        "roll": 0.015,
         "gate": 0.6
       },
       {
         "node": "2113245",
-        "beats": 2.5,
-        "level": 0.52,
-        "roll": 0.8,
-        "shape": "skip"
+        "beats": 2,
+        "level": 0.54,
+        "shape": "skip",
+        "every": 0.5
       },
       {
         "node": "hmuda8eb",
-        "beats": 1,
-        "level": 0.5,
-        "roll": 0.02,
+        "beats": 1.5,
+        "level": 0.58,
+        "roll": 0.015,
         "gate": 0.5
       },
       {
         "node": "today",
-        "beats": 1.5,
-        "level": 0.58,
-        "roll": 0.45,
-        "shape": "up"
+        "beats": 2.5,
+        "level": 0.56,
+        "shape": "up",
+        "every": 0.5
       },
       {
         "node": "mQ9j8i76fc8",
-        "beats": 2.5,
-        "level": 0.42,
-        "roll": 0.8,
-        "shape": "down"
+        "beats": 4,
+        "level": 0.44,
+        "shape": "down",
+        "every": 0.5
       },
       {
         "node": "matchless",
-        "beats": 3,
-        "level": 0.44,
-        "roll": 1.1,
-        "shape": "bass"
+        "beats": 2,
+        "level": 0.52,
+        "shape": "bass",
+        "every": 0.5
       },
       {
         "node": "VbpM8f3ff",
-        "beats": 1,
-        "level": 0.48,
-        "roll": 0.02,
+        "beats": 1.5,
+        "level": 0.5,
+        "roll": 0.015,
         "gate": 0.5
       },
       {
         "node": "3075085",
         "beats": 0.5,
-        "level": 0.54,
-        "roll": 0.01,
+        "level": 0.56,
+        "roll": 0.015,
         "gate": 0.6
       },
       {
         "node": "3589514",
-        "beats": 1.5,
-        "level": 0.5,
-        "roll": 0.5,
-        "shape": "skip"
+        "beats": 2,
+        "level": 0.6,
+        "shape": "skip",
+        "every": 0.5
       },
       {
         "node": "3589522",
-        "beats": 1,
-        "level": 0.6,
-        "roll": 0.02,
+        "beats": 1.5,
+        "level": 0.58,
+        "roll": 0.015,
         "gate": 0.5
       },
       {
         "node": "e91122b1",
         "beats": 0.5,
         "level": 0.64,
-        "roll": 0.01,
+        "roll": 0.015,
         "gate": 0.6
       },
       {
         "node": "8Gmn27f4280",
-        "beats": 1,
-        "level": 0.66,
-        "roll": 0.3,
-        "shape": "up"
+        "beats": 1.5,
+        "level": 0.7,
+        "shape": "up",
+        "every": 0.25
       },
       {
         "node": "exaggerated",
-        "beats": 3.5,
+        "beats": 2.5,
         "level": 0.8,
-        "roll": 0.5,
-        "shape": "bass"
+        "shape": "bass",
+        "every": 0.5
       },
       {
         "node": "mQ9j8d7b7b0",
         "beats": 2,
         "level": 0.58,
-        "roll": 0.6,
-        "shape": "down"
+        "shape": "down",
+        "every": 0.5
       },
       {
         "node": "kavMc624b",
-        "beats": 1,
+        "beats": 2,
         "level": 0.5,
-        "roll": 0.3,
-        "shape": "up"
+        "shape": "up",
+        "every": 0.5
       },
       {
         "node": "9lmK42c6b",
-        "beats": 2.5,
+        "beats": 4,
         "level": 0.48,
-        "roll": 0.8,
-        "shape": "skip"
+        "shape": "skip",
+        "every": 0.5
       },
       {
         "node": "ten-years",
-        "beats": 1.5,
-        "level": 0.46,
-        "roll": 0.5,
-        "shape": "up"
+        "beats": 2,
+        "level": 0.48,
+        "shape": "up",
+        "every": 0.25
       },
       {
         "node": "next-year-today",
-        "beats": 3,
-        "level": 0.42,
-        "roll": 1.0,
-        "shape": "bass"
+        "beats": 2,
+        "level": 0.44,
+        "shape": "bass",
+        "every": 0.5
       },
       {
         "node": "mian-mian",
         "beats": 4,
         "level": 0.36,
-        "roll": 1.4,
-        "shape": "up"
+        "shape": "up",
+        "every": 0.75
       },
       {
         "node": "fOlr5231a",
-        "beats": 1.5,
-        "level": 0.44,
-        "roll": 0.5,
-        "shape": "down"
+        "beats": 2,
+        "level": 0.48,
+        "shape": "down",
+        "every": 0.5
       },
       {
         "node": "kau7b16d6",
-        "beats": 1,
-        "level": 0.5,
-        "roll": 0.02,
-        "gate": 0.55
+        "beats": 1.5,
+        "level": 0.56,
+        "roll": 0.015,
+        "gate": 0.5
       },
       {
         "node": "1769110881",
-        "beats": 2,
-        "level": 0.48,
-        "roll": 0.6,
-        "shape": "skip"
+        "beats": 0.5,
+        "level": 0.52,
+        "roll": 0.015,
+        "gate": 0.6
       },
       {
         "node": "kavMc624b",
-        "beats": 1,
-        "level": 0.52,
-        "roll": 0.02,
+        "beats": 1.5,
+        "level": 0.6,
+        "roll": 0.015,
         "gate": 0.5
       },
       {
         "node": "bqvdVl73c0ab",
         "beats": 0.5,
-        "level": 0.58,
-        "roll": 0.01,
+        "level": 0.62,
+        "roll": 0.015,
         "gate": 0.6
       },
       {
         "node": "b1qjuSo404ab",
-        "beats": 1.5,
-        "level": 0.64,
-        "roll": 0.5,
-        "shape": "up"
+        "beats": 2,
+        "level": 0.66,
+        "shape": "up",
+        "every": 0.25
       },
       {
         "node": "r9g304ba",
-        "beats": 1,
-        "level": 0.7,
-        "roll": 0.3,
-        "shape": "up"
+        "beats": 2,
+        "level": 0.72,
+        "shape": "up",
+        "every": 0.25
       },
       {
         "node": "8GcTLDedcc6",
