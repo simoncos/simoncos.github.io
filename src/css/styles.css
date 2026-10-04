@@ -55,6 +55,10 @@
     --mono: ui-monospace, 'SF Mono', Consolas, monospace;
     --pad: clamp(20px, 4vw, 56px);
     --page-top: 32px;
+    /* The sticky header: 44px buttons plus twice --hdr-pad. Scripts on long
+       pages overwrite --hdr-h with the measured height. */
+    --hdr-pad: 16px;
+    --hdr-h: 76px;
     --page-title-size: clamp(40px, 5vw, 72px);
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-io: cubic-bezier(0.76, 0, 0.24, 1);
@@ -369,7 +373,7 @@ button {
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 16px var(--pad);
+    padding: var(--hdr-pad) var(--pad);
     background: var(--bg-a);
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
@@ -492,7 +496,7 @@ button {
 
 .sheet {
     position: fixed;
-    inset: 76px 0 0 0;
+    inset: var(--hdr-h) 0 0 0;
     z-index: 45;
     background: var(--bg);
     padding: 12px 20px 40px;
@@ -532,8 +536,12 @@ button {
 }
 
 @media (max-width: 859.98px) {
+    /* A phone has little height to spare: a 60px header (the buttons stay
+       44px) and 12px above each page's heading, down from 76px and 20px. */
     :root {
-        --page-top: 20px;
+        --page-top: 12px;
+        --hdr-pad: 8px;
+        --hdr-h: 60px;
     }
 
     .hdr-nav {
@@ -1315,7 +1323,7 @@ button {
 
 .work-wheel {
     position: relative;
-    height: clamp(640px, calc(100vh - 76px), 940px);
+    height: clamp(640px, calc(100vh - var(--hdr-h)), 940px);
     overflow: hidden;
     /* Transformed cards must not make this a focus-scroll container. */
     overflow: clip;
@@ -1519,13 +1527,13 @@ button {
    and pushed the arrows below the fold on shorter screens. */
 @media (max-width: 859.98px) {
     .work-wheel {
-        --wheel-h: max(440px, calc(100vh - 76px));
+        --wheel-h: max(440px, calc(100vh - var(--hdr-h)));
         height: var(--wheel-h);
     }
 
     @supports (height: 100svh) {
         .work-wheel {
-            --wheel-h: max(440px, calc(100svh - 76px));
+            --wheel-h: max(440px, calc(100svh - var(--hdr-h)));
         }
     }
 
