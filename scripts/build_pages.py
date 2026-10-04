@@ -125,6 +125,13 @@ def article_entries(index: dict[str, Any]) -> dict[str, dict[str, Any]]:
 # ---- Home -------------------------------------------------------------------
 
 
+def work_place(work: dict[str, Any]) -> str:
+    """Where the home page sends a work: its card on the Work page, opened on
+    its type and highlighted, so a reader sees what it is before leaving the
+    site for it. Articles still go straight to the article."""
+    return f"gallery.html#{work['work_topic']}/{work['id']}"
+
+
 def home_panels(site: dict[str, Any], articles: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     works = {work["id"]: work for work in site["works"]}
     panels = []
@@ -142,7 +149,7 @@ def home_panels(site: dict[str, Any], articles: dict[str, dict[str, Any]]) -> li
                 "title": work["title"],
                 "desc": work["home_desc"],
                 "img": work["img"],
-                "href": work["href"],
+                "href": work_place(work),
             })
         else:
             article = articles[entry["article"]]
@@ -166,7 +173,7 @@ def home_rows(site: dict[str, Any], articles: dict[str, dict[str, Any]]) -> list
             "date": work["date"],
             "title": work_title(work),
             "kind": work["kind"],
-            "href": work["href"],
+            "href": work_place(work),
             "topic": work["home_topic"],
             "img": work["img"],
             "bilingual": not work.get("single"),
@@ -355,7 +362,7 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
             # Works in progress sit under their own 在做 heading, so the card shows only the year.
             when = esc(work["date"][:4])
             return (
-                f'                <{tag} class="wcard{"" if done else " is-wip"}"{attrs}>'
+                f'                <{tag} class="wcard{"" if done else " is-wip"}" data-work="{esc(work["id"])}"{attrs}>'
                 f'<span class="wcard-img"><img src="{esc(work["img"])}" alt="" decoding="async" loading="lazy"></span>'
                 '<span class="wcard-text">'
                 f'<span class="wcard-title">{bi_value(work_title(work, "work_title"))}</span>'
