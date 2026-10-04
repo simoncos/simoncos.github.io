@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Sun, 04 Oct 2026 14:22:12 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>个人网站，Remake</title><link>https://simoncos.github.io/blogs/personal-site-remake.html</link><guid>https://simoncos.github.io/blogs/personal-site-remake.html</guid><pubDate>Sun, 04 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>个人网站，Remake</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Sun, 04 Oct 2026 16:47:16 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>个人网站，Remake</title><link>https://simoncos.github.io/blogs/personal-site-remake.html</link><guid>https://simoncos.github.io/blogs/personal-site-remake.html</guid><pubDate>Sun, 04 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>个人网站，Remake</h1>
 <p>九月到今天，我把网站从头到尾重做了一遍，顺手做了一支 40 秒的介绍视频。这次 remake 不只是外在的翻新，也是对自己的一次梳理。</p>
 <video aria-label="网站介绍视频，40 秒：睡眠数据、演讲、作品轮盘、《晴天》、漫无止尽的回响、文章、哈巴雪山和收藏，最后所有的点连成网站的名字" class="post-film" controls="" height="1280" playsinline="" poster="https://simoncos.github.io/blogs/assets/images/personal-site-remake/intro.zh.jpg" preload="none" src="https://simoncos.github.io/blogs/assets/images/personal-site-remake/intro.zh.mp4" width="720"></video>
 <p class="post-film-credit"><small><span>视频里的钢琴采样：<a href="https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html">YDP Grand Piano</a>，</span><span><span>Zenph Studios 录制，</span><span>FreePats 项目整理，<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。</span></span></small></p>
@@ -1401,7 +1401,34 @@
 （三）：在线音乐商业<br/>
 （四）：媒体的性质与认知科学<br/>
 （五）：从复合媒体到原子化控制<br/>
-（六）：数字化与媒体的演化</p>]]></description></item><item><title>2018年我读过的好书</title><link>https://simoncos.github.io/blogs/reading-2018.html</link><guid>https://simoncos.github.io/blogs/reading-2018.html</guid><pubDate>Fri, 04 Jan 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>2018年我读过的好书</h1>
+（六）：数字化与媒体的演化</p>]]></description></item><item><title>MLE，MAP，EM 和 Point Estimation 之间的关系是怎样的？</title><link>https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.html</link><guid>https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.html</guid><pubDate>Tue, 16 Apr 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>MLE，MAP，EM 和 Point Estimation 之间的关系是怎样的？</h1>
+<p>关键词：参数估计 | 统计 | 机器学习</p>
+<p><a href="https://www.zhihu.com/question/19894595">原知乎问题</a></p>
+<h3>概念图</h3>
+<p>最近在尝试用thebrain画统计相关的概念图，标题里这几个东西从比较宏观的角度上看，关系大致是下面这样的。</p>
+<p><img alt="thebrain概念图（局部）：贝叶斯点估计居中，连着贝叶斯统计、点估计和最大后验估计（MAP）；最大似然估计（MLE）也连向点估计；期望最大化算法用一条标着 solve 的虚线连向 MLE 和 MAP；右上方是置信区间、可信区间和区间估计" decoding="async" height="218" src="https://simoncos.github.io/blogs/assets/images/mle-map-em-and-point-estimation/ce2bf4d865e94d379ff4d6e9583c2212.jpg" width="1240"/></p>
+<h3>解释</h3>
+<p>还是要大致解释一下。</p>
+<p>首先要有样本（Sample）和总体（Population）的概念，假设我们认为总体对应了一个真实分布，那么总体就有了定义分布需要的参数（Parameter）。因为总体不可见，所以需要通过观察样本（<strong>数据</strong>）来估计总体的参数，这叫参数估计。</p>
+<p>参数估计的结果可以是一个点（<strong>Point Estimation</strong>），也可以是一个区间（Interval Estimation）。无论是其中哪一类估计，都有多种估计的具体方法（Estimator），不同estimator表达了对<strong>最优</strong>估计的不同看法（其实estimator是一种<strong>目标函数/模型</strong>）。</p>
+<p>比如，<strong>最大似然估计（MLE）</strong>和最小均方误差估计（MMSE）都属于点估计的estimator，前者使用了似然（Likelihood）的概念；<strong>最大后验概率估计（MAP）</strong>也一样，只是它是一种贝叶斯统计/贝叶斯点估计视角下的estimator，引入了贝叶斯定理、先/后验概率的概念。<strong>MLE和MAP之间的关系</strong>又是一个可以继续展开说的事情了，只提一下和先验概率（Prior Probability）及正则化（Regularization）有关。</p>
+<p>而<strong>期望最大化算法（Expectation-Maximization Algorithm）</strong>则是一种可用来求解MLE和MAP的具体算法，它可以通过迭代不断给出新的解（估计值），直至收敛到estimator所定义的最优（其实是一种<strong>优化方法</strong>）。</p>
+<h3>不严谨的例子</h3>
+<p>参数估计是说我要通过一个样本（1000个中国人的身高）去估计全部中国人身高（总体）的分布，如果我们<strong>猜测（假设）</strong>总体满足正态分布，那么可估计的参数之一就是均值μ，另一个是标准差σ；</p>
+<p>点估计是说我就猜均值是x，区间估计是说我猜均值落在某个范围；</p>
+<p>MLE、MMSE、MAP等是说我认为怎样<strong>猜测</strong>，猜出来的人均身高是最优的，或者说最优的猜测是什么样的（可以看到猜测的方法无穷无尽，比如算样本均值、找众数，甚至从样本里随机选一个人的身高，都算是一种猜测方法、一种estimator，只是很多一看就知道不靠谱）；</p>
+<p>EM算法是说你们争论完什么是最优了，那么我们就以这个最优为目标开始算吧，但不是每种最优的定义我EM都能算。</p>
+<p>补充：注意上面的两个<strong>猜测</strong>很重要，意味着我们可能算出一个估计，不代表这个估计是足够好的。比如我们估计的是正态分布的参数，而实际上总体满足幂律分布，这时如何才能知道我们的猜测有问题呢？如果没有更多的测试，这其实是做不到的，但我们至少可以估计一下我们出错的概率有多大，这就涉及到假设检验（Hypothesis Testing）了。</p>]]></description></item><item><title>关于机器学习中的过拟合与正则化</title><link>https://simoncos.github.io/blogs/overfitting-and-regularization.html</link><guid>https://simoncos.github.io/blogs/overfitting-and-regularization.html</guid><pubDate>Fri, 01 Feb 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>关于机器学习中的过拟合与正则化</h1>
+<p><em>在知乎时间线又看到这个问题：<a href="https://www.zhihu.com/question/20700829/answer/587052674">机器学习中使用正则化来防止过拟合是什么原理？</a>恰好最近刚精读完《Deep Learning》正则化一章，于是手痒写了一下自己对于过拟合和正则化的一些理解。这部分内容我在<a href="https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.html">问题解决与设计系列</a>的下一篇文章也会涉及（标题暂定《解的优化与复杂度》），只是这两年自己对这部分问题的理解不断刷新，所以文章停留在积累想法的阶段。</em></p>
+<hr/>
+<p>据维基百科<a href="https://www.wikiwand.com/en/Regularization_%28mathematics%29">Regularization (mathematics)</a>：In mathematics, statistics, and computer science, particularly in machine learning and <a href="https://www.wikiwand.com/en/Inverse_problem">inverse problems</a>, regularization is the process of adding information in order to solve an <a href="https://www.wikiwand.com/en/Ill-posed_problem">ill-posed problem</a> or to prevent <a href="https://www.wikiwand.com/en/Overfitting">overfitting</a>.</p>
+<p>因此正则化本身的定义就是通过增加某种信息来防止过拟合的过程。</p>
+<p>机器学习问题基本都是优化问题，<strong>模型/参数</strong>给定解的空间（或者说假设空间），<strong>优化算法</strong>负责从空间里找到最优或足够优的解，<strong>目标/损失函数</strong>负责提供优劣的度量。模型的解空间越大，越有可能包含对于问题本身而言最优的解（意味着学习到了数据的真实生成过程或者说真实分布），但是优化/搜索的难度越大。</p>
+<p>对于有监督问题来说，解是特征到label的映射，学习的过程只使用训练数据，而<strong>训练数据的最优往往不是测试数据上的最优</strong>。这里原因要说清楚又要涉及很多东西了（比如独立同分布假设、经验风险、泛化误差，可以参考《统计学习方法》）。但有一个角度是：假设我们使用的模型能够提供足够大的解空间，而训练数据是有限的，那么解空间里存在一些解可以精确地将训练数据中所有的点都映射到正确的label上去，但这种映射不一定对测试数据有效，因为它<strong>考虑了训练数据的全部信息</strong>，而这些信息里有些来自于要学习的真实分布，还有一些是训练数据本身的一些信息，比如采样不良带来的某方向的偏差，或是噪音/随机扰动/异常点。测试数据其实也有一样的问题。</p>
+<p>举个比较极端的例子，特征是人的年龄，label是身高，如果解空间够大，那么可以找到这样一种解：对于每一个年龄值，我都记下来对应的身高值，对于训练集以外的年龄值则做某种简单的插值（比如最近邻回归），<strong>这样训练集错误可以到0</strong>（不考虑贝叶斯错误时）。但假设我们的训练集比较糟糕：恰好里面的所有人都很高，腿长一米八，或者里面混进去一只老鼠的年龄-身高，结果在测试集上就会很糟糕了。<strong>这种“记下来训练集中问题真实分布以外的信息”的现象，就是所谓过拟合。这种现象越强，越可能导致训练集错误较小，但测试集错误远大于训练集的结果。</strong>要量化过拟合的程度，我能想到的可能办法是度量两个数据集错误的差异。bias-variance，模型复杂度（VC维）之类的概念都有助于进一步理解过拟合的问题（很多书里都有讲）。</p>
+<p><img alt="Bias/Variance、欠拟合过拟合、模型复杂度/解空间：吴恩达（Andrew Ng）机器学习课程的一页幻灯片。用面积预测房价的三条拟合曲线：一次式是直线，欠拟合（高偏差）；二次式刚刚好；四次式穿过每一个点，过拟合（高方差）" decoding="async" height="414" src="https://simoncos.github.io/blogs/assets/images/overfitting-and-regularization/7a984f0ed6ea310975464b53f2f2d653.jpg" width="736"/></p>
+<p>而正则化的做法大致都可以看作是在<strong>阻止机器学习算法学到真实分布以外的信息</strong>，<strong>减小搜索空间，砍掉奇葩的解</strong>。实际的操作方法有多种多样：可以给目标函数增加约束（正则项，也有人用增加先验来解释这种做法），可以给训练数据增加随机noise，可以使用半监督，可以用多任务参数共享，可以用集成学习等等（可以参考花书《Deep Learning》，该书认为正则化和优化算法可能是机器学习最重要的两个问题）</p>
+<p>个人理解。</p>]]></description></item><item><title>2018年我读过的好书</title><link>https://simoncos.github.io/blogs/reading-2018.html</link><guid>https://simoncos.github.io/blogs/reading-2018.html</guid><pubDate>Fri, 04 Jan 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>2018年我读过的好书</h1>
 <h4>五星推荐（按推荐顺序）</h4>
 <ul>
 <li><a href="https://book.douban.com/subject/30164677/" title="我们为什么会生病">我们为什么会生病</a> by 伦道夫·M·尼斯、乔治·C·威廉斯</li>
@@ -1620,7 +1647,190 @@
 <li>多重标准的冲突和弥合，比如涉及多个主权国家的情况，法律之间及各条款之间优先级的情况，定义的模糊与再解释</li>
 <li>不同法系的差异：重判例的法系下除了法律文本本身还需要对判例数据的收集和理解</li>
 </ul>
-<p>最近几年已经见到有一些团队在尝试用自然语言理解、知识图谱去<strong>自动化</strong>地做法律的理解和推断，非常有意思，但道阻且长，仍需努力。</p>]]></description></item><item><title>那些没有记下的</title><link>https://simoncos.github.io/blogs/what-went-unwritten.html</link><guid>https://simoncos.github.io/blogs/what-went-unwritten.html</guid><pubDate>Fri, 07 Sep 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>那些没有记下的</h1>
+<p>最近几年已经见到有一些团队在尝试用自然语言理解、知识图谱去<strong>自动化</strong>地做法律的理解和推断，非常有意思，但道阻且长，仍需努力。</p>]]></description></item><item><title>Python功能点实现：重试机制</title><link>https://simoncos.github.io/blogs/python-retry.html</link><guid>https://simoncos.github.io/blogs/python-retry.html</guid><pubDate>Thu, 01 Nov 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>Python功能点实现：重试机制</h1>
+<p>关键词：重试 | 异常处理 | 递归 | 装饰器 | nonlocal</p>
+<p><a href="https://github.com/simoncos/practical-python/tree/master/features/retry">本文代码的Github地址</a></p>
+<p>有些程序的运行需要依赖多变而不可控的外部环境，比如网络爬虫。在程序中我们很难将所有外部引入的异常都考虑到，特别是那些时有时无的异常，这时如果程序有自动重试的机制，无疑可以省不少事。</p>
+<p>本文实现的重试机制在遇到异常时会记录遇到异常后重试的次数，如果次数小于允许的重试次数，则进行下一次重试，否则将异常上抛。下面第一部分是函数实现，第二部分在前者基础上略作改动，变成了更灵活的装饰器实现。实现只涉及<strong>异常处理、递归、装饰器</strong>的知识，示例也足够明晰，因此不多费口舌。</p>
+<h3>函数实现</h3>
+<pre><code class="language-python">import time, random
+
+MAXIMAL_RETRY = 3
+
+# Function Method
+
+def run():
+    result = random.random() # generate random double from 0 to 1
+    if result &gt; 0.3:
+        raise Exception(f'Wrong result: {result}')
+    else:
+        print(f'&gt;&gt; Success')
+        return result
+
+def run_with_retry(times=0):
+    time.sleep(1)
+    try:
+        return run()
+    except Exception as e:
+        if times &gt;= MAXIMAL_RETRY:
+            print(f'&gt;&gt; Exceed maximal retry {MAXIMAL_RETRY}, Raise exception...')
+            raise(e) # will stop the program without further handling
+        else:
+            times += 1
+            print(f'&gt;&gt; Exception, Retry {times} begins...')
+            return run_with_retry(times)
+
+if __name__ == "__main__":
+    while True:
+        print('\nBegin new run...')
+        time.sleep(1)
+        result = run_with_retry()
+        if result:
+            print(f'Get result: {result}')
+</code></pre>
+<h3>装饰器实现</h3>
+<pre><code class="language-python">import time, random
+
+MAXIMAL_RETRY = 3
+
+def retry(func, times=0):
+    def retried(*args, **kwargs):
+        nonlocal times # closure
+        time.sleep(1)
+        try:
+            result = func(*args, **kwargs)
+            times = 0 # reset after success
+            return result
+        except Exception as e:
+            if times &gt;= MAXIMAL_RETRY:
+                print(f'&gt;&gt; Exceed maximal retry {MAXIMAL_RETRY}, Raise exception...')
+                raise(e) # will stop the program without further handling
+            else:
+                times += 1
+                print(f'&gt;&gt; Exception, Retry {times} begins...')
+                return retried(*args, **kwargs)
+    return retried
+
+@retry
+def run_decorated():
+    result = random.random() # generate random double from 0 to 1
+    if result &gt; 0.3:
+        raise Exception(f'Wrong result: {result}')
+    else:
+        print(f'&gt;&gt; Success')
+        return result
+
+if __name__ == "__main__":
+    while True:
+        print('\nBegin new run...')
+        time.sleep(1)
+        result = run_decorated()
+        if result:
+            print(f'Get result: {result}')
+</code></pre>
+<p>注：关键字<code>nonlocal</code>的作用是让函数<code>retried</code>的变量名<code>times</code>绑定到外部函数<code>retry</code>的参数<code>times</code>，类似于引用传值。更详细说明可见<a href="https://docs.python.org/3/reference/simple_stmts.html#the-nonlocal-statement">Python官方文档</a>。</p>
+<hr/>
+<p>经过上一篇《数据热更新》的折磨这篇来个简单的（这句话用于凑够简书已公开文章10万总字数XD)</p>]]></description></item><item><title>Python功能点实现：数据热更新</title><link>https://simoncos.github.io/blogs/python-hot-reloading.html</link><guid>https://simoncos.github.io/blogs/python-hot-reloading.html</guid><pubDate>Wed, 31 Oct 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>Python功能点实现：数据热更新</h1>
+<p>关键词：热更新 | 热重载 | 定时更新 | 即时更新 | 缓存 | functools | cachetools | LRU | TTL</p>
+<ul>
+<li><a href="https://github.com/simoncos/practical-python/tree/master/features/hot-reloading">本文代码的Github地址</a></li>
+<li><a href="https://www.v2ex.com/t/527725">v2ex上关于本文的一些讨论</a></li>
+</ul>
+<p>假设应用需要加载一个配置文件<code>config.txt</code>，一般的做法类似于：</p>
+<pre><code class="language-python">with open('config.txt') as f:
+    parameters = f.read()
+</code></pre>
+<p>接下来<code>parameters</code>中存储的数据就可以被其他代码使用，但是这样写的话程序每次启动后，数据是固定死的，无法动态地自我更新，每次要修改配置/模型只能重启整个应用。</p>
+<p>本文中热更新的意思是在应用运行时内，从外部（如文件、数据库、REST API）中获得数据并更新应用内的Python对象。应用场景一般是应用作为服务（有对外的API），需要在<strong>不重启</strong>的前提下更新自己的配置参数或者算法模型。</p>
+<p>热更新可以分为两种：<strong>定时更新（periodic update）</strong>和<strong>即时更新（on-call update）</strong>，前者周期性地、主动地执行更新，后者则是被动地等待，直到接收到某种来自应用外部的信号才会执行更新。本文将通过内存缓存（Memory Cache）和装饰器（Decorator）技术来实现两种热更新。</p>
+<h3>内存缓存</h3>
+<p>先来说明一下内存缓存。缓存中的数据一般以键值对（key-value pair）的形式存在，value中放数据本身，key中放数据的某种描述名。缓存的<strong>容量</strong>决定了其最大可容纳的数据条数，当容量已满时再向缓存中存入新的数据，缓存就会采取开始<strong>清理行为</strong>：清除掉已存的部分数据，从而为新数据腾地方。<strong>清理的策略</strong>（判定何时需要清理、具体如何清理数据）有很多种，决定了缓存的不同类型。</p>
+<p>Python中缓存常被写成<strong>装饰器的形式</strong>，缓存数据的<code>key</code>里放的是被装饰原函数的参数值组合（<code>key</code>的生成方法可以不同，后面还会提到），<code>value</code>里放的则是原函数的返回值。这样<strong>当函数被调用时</strong>，程序会先去缓存数据里找是不是已经有相同的参数值，如果有就直接返回已缓存的返回值，不重复进行原函数内的计算。</p>
+<p>注意缓存的使用有一个<strong>隐含前提</strong>：函数本身是无状态的。假如函数内引用了全局变量，或者存在闭包，那同样的参数值不一定必然计算出相同的返回值。这样缓存的返回值和实际期望的返回值就不一定一致了。</p>
+<h3>定时热更新</h3>
+<p>定时更新的实现使用了来源于第三方库<a href="https://cachetools.readthedocs.io/en/latest/">cachetools</a>的<code>TTLCache</code>，TTL（Time-to-Live）指<strong>存在时长策略</strong>。这种缓存为每一条存入的数据记录其存在的时长。每次调用都会检查是否存在超过某个设定时长阈值的数据，如果有就会开始清理行为：所有超时数据都会被清除掉；如果没有超时数据，缓存将会换用LRU策略，使缓存不超出容量大小（下一部分会提到LRU的具体策略）。</p>
+<p>当我们将TTL缓存的容量设为1时、且用于加载数据的原函数参数不变的情况下，逻辑就变成了定时更新：</p>
+<ul>
+<li>未超过时长：缓存保留，每次调用都使用缓存数据</li>
+<li>超过时长，缓存清空（只有一条数据），程序重新计算（在这里即重新加载数据）</li>
+</ul>
+<p>示例代码如下（运行需要安装<code>cachetools</code>，并在文首链接里下载完整的项目）：</p>
+<pre><code class="language-python">import time
+import cachetools
+
+from utils import change_conf_file
+
+ROTATE = 5
+
+@cachetools.cached(cachetools.TTLCache(1, ROTATE))
+def reload():
+    print('Cache cleared, reloading config...')
+    with open('config.txt') as f:
+        parameters = f.read()
+    return parameters
+
+class Model():
+    def log(self):
+        self.model = reload()
+        print(self.model)
+
+if __name__ == '__main__':
+    # Reload automatically every [ROTATE] seconds
+    model = Model()
+    while True:
+        time.sleep(2)
+        change_conf_file() # change data
+        model.log()
+</code></pre>
+<h3>即时热更新</h3>
+<p>即时更新的实现使用了来源于Python内置库<a href="https://docs.python.org/3/library/functools.html">functools</a>的<code>lru_cache</code>，LRU（Least Recently Used）指<strong>最少使用策略</strong>。这种缓存为每一条存入的数据记录其被使用的次数，每次调用都会检查缓存大小是否超出容量，如超出就会开始清理行为：会从使用次数最少的数据开始清理，直到缓存大小处于容量以内。</p>
+<p>当我们将LRU缓存的容量设为1、且用于加载数据的原函数参数不变的情况下，原函数只有在第一次被调用时才会发生计算，之后调用都会直接返回缓存中的数据，到这里与一般的读取效果上并无区别。当我们需要热更新数据的时候，只需要主动清空缓存。如下例中<code>Getter.getModel.cache_clear()</code>。其中<code>Getter.getModel</code>是装饰后的函数，其中带有用于清理缓存的函数<code>cache_clear()</code>。有了这个扳机，我们只需要<strong>额外开发一个API（比如REST下的GET）来触发它</strong>，这样通过外部即时call API就可以进行热更新了。</p>
+<p>示例代码如下（运行需要在文首链接里下载完整的项目）：</p>
+<pre><code class="language-python">import time
+from functools import lru_cache
+
+from utils import change_conf_file
+
+class Getter:
+    @staticmethod
+    @lru_cache(1)
+    def getModel():
+        with open('config.txt') as f:
+            model = f.read()
+        return model
+
+class Model():
+    def log(self):
+        self.model = Getter.getModel()
+        print(self.model)
+
+if __name__ == '__main__':
+    # Reload only when cache_clear() is called
+    model = Model()
+    while True:
+        model.log()
+        time.sleep(2)
+        change_conf_file() # change data
+        Getter.getModel.cache_clear()
+        print('Cache cleared, reloading config...')
+        model.log()
+</code></pre>
+<p>这里补充一个细节，上面的示例中被缓存装饰器装饰的原函数<code>getModel</code>是一个<strong>无参数的函数</strong>，这种情况下<code>lru_cache</code>是如何运作的呢？<code>lru_cache</code>的实现中使用函数<code>functools._make_key</code>来生成缓存的<code>key</code>。在Python中，当原函数无参数时，默认参数<code>args</code>可认为是空元组<code>()</code>，可选参数可认为是空字典<code>{}</code>，在这种情况下生成的<code>key</code>将会是空列表<code>[]</code>（注意列表是不可hash的，不可直接作为字典的key，functools里的实际数据结构较为复杂，这里没有深入）。上一部分提到的第三方库<code>cachetools</code>实现了类似的方法<code>keys.typedkey</code>，两者生成的<code>key</code>存在区别，但是结合其他方法，行为在大部分情况是一样的，包括本文中的无参数函数情况。</p>
+<pre><code class="language-python">import time
+from functools import _make_key
+from cachetools.keys import typedkey
+
+if __name__ == '__main__':
+    print(_make_key((), {}, False)) # []
+    print(typedkey((), {}, False)) # ((), {}, &lt;class 'tuple'&gt;, &lt;class 'dict'&gt;)
+</code></pre>
+<h3>扩展问题</h3>
+<ul>
+<li><strong>多线程情况</strong>：本文的热更新方法均基于缓存，而由于缓存涉及到读写操作，在多线程环境下我们需要考虑其正确性。<del><code>functools.lru_cache</code>和<code>cachetools.TTLCache</code>里均有使用到锁的机制，再考虑到Python的GIL锁，本文所述的热更新在线程安全上应该算是有保障的，但目前未经试验无法完全下断言。</del>更正：<code>functools.lru_cache</code>的文档中提到<a href="https://docs.python.org/3/library/functools.html#functools.lru_cache">多线程环境下hit和miss的计数只是近似值</a>，而cachetools的文档中则明确提到<code>cachetools.TTLCache</code><a href="https://cachetools.readthedocs.io/en/stable/#cache-implementations">这样的类是非线程安全的</a>，<a href="https://cachetools.readthedocs.io/en/stable/#cachetools.cached">需要额外提供锁以实现同步</a>。最开始写这篇文章的时候我对GIL的理解有误，按我现在的理解，GIL宽泛地讲只会阻止多线程调用多个CPU，但同一个CPU下的多线程仍然是有效的（不然还要多线程干嘛），所以同步的问题还是要考虑清楚。</li>
+<li><strong>import</strong>：假如我们在一个模块（module）里更新model，而另一个模块<code>import</code>这个model，那么当原模块的model热更新后，<code>import</code>得到的model并不会更新，这种行为可能与Python自身的<a href="https://docs.python.org/3/reference/import.html#the-module-cache">module cache</a>有关。要实现所有module的热更新，能考虑的一个办法是让数据自己成为一个模块，<a href="https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules">使其变得可以在模块之间共享</a>。</li>
+</ul>
+<hr/>
+<p>吐槽：这篇写得我浑身无力啊，本来觉得很简单，就平时用的小东西拿来拎拎清，没想到越拎越深...很多时候我们很happy是因为我们站在冰山的最上面，不用面对水下的魔鬼细节...作为搞技术的，我们还是不能光看脸，也要多盯裆(≖＿≖)✧</p>]]></description></item><item><title>那些没有记下的</title><link>https://simoncos.github.io/blogs/what-went-unwritten.html</link><guid>https://simoncos.github.io/blogs/what-went-unwritten.html</guid><pubDate>Fri, 07 Sep 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>那些没有记下的</h1>
 <p>最近这两年，总觉得自由思考的时间大大压缩了，为什么呢？是因为工作消耗了太多精力，因为沉迷于更纯粹的娱乐，因为自觉生产不出有价值的内容，还是单纯因为人进入了一种稳定的状态，变得懒惰了呢？回想起来，在此之前的数年里，我的生活几乎是由一直停不下来的折腾组成，现下虽然并非没有令人很是烦恼或痛苦的事情，但总归是平稳了许多。</p>
 <p>曾经脑子中活火山一样不断迸发的火花，现在变得偃旗息鼓了。其实也并非完全没有新的想法，只是从前那种将每一个想法在脑海中仔细展览琢磨、一有机会便书写下来的习惯有些消失了，太多回生出的想法因为各种原因没有记下。大脑像任性奔跑的马不断被马缰牵制，它可能会说我耗费这么多能量，一点意义都没有，那何必要继续这样做呢？慢慢就习惯了，脑海中的声音安静了，“就像水消失在水中”。</p>
 <p>这个世界给了我们太多的便利，但也带来了限制。当人对24小时的商店和餐馆，对四通八达的交通网络，对自来水、电力、网络与地下管道系统如呼吸般习以为常时，也同时被其束缚在了原地。我想起不久前一个朋友听说我打算一个人去旅游时发出的讶异，对他来讲独自旅行有太多的不便，即使这种不便只是在餐馆想要去洗手间时没有人帮忙看守行李。</p>

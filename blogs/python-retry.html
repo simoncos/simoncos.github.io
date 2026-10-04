@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-page-lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python功能点实现：重试机制 · 文章 · simoncos</title>
+    <meta name="description" content="遇到时有时无的异常就自动重试，超过次数再上抛：先用递归函数实现，再改成用 nonlocal 计数的装饰器。">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/python-retry.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/python-retry.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/python-retry.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/python-retry.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Python功能点实现：重试机制">
+    <meta property="og:description" content="遇到时有时无的异常就自动重试，超过次数再上抛：先用递归函数实现，再改成用 nonlocal 计数的装饰器。">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/python-retry.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="simoncos — tools and research, articles and field notes">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Python功能点实现：重试机制">
+    <meta name="twitter:description" content="遇到时有时无的异常就自动重试，超过次数再上抛：先用递归函数实现，再改成用 nonlocal 计数的装饰器。">
+    <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400..700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20261004l"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20261004g">
+    <script src="../src/js/site.js?v=20261004l" defer></script>
+    <script src="../src/js/article.js?v=20261004l" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="python-retry">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="python-retry.en.html" hreflang="en" data-lang-nav="en"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← 文章</a>
+                <h1 class="article-title">Python功能点实现：重试机制</h1>
+            </div>
+            <aside class="toc" aria-label="目录"><span class="k toc-k">目录</span><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>函数实现</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>装饰器实现</span></a></aside>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">创建</span><span class="num">2018-11-01</span></span>
+                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-10-04</span></span>
+                    <span class="meta-item"><span class="k">阅读</span>1 分钟</span>
+                    <a class="meta-alt" href="python-retry.en.html" hreflang="en" lang="en" data-lang-nav="en">English ↗</a>
+                </div>
+                <details class="toc-box"><summary><span>目录</span><span class="toc-sign" aria-hidden="true"></span></summary><div class="toc-box-links"><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>函数实现</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>装饰器实现</span></a></div></details>
+                <div class="post-content">
+
+<p>关键词：重试 | 异常处理 | 递归 | 装饰器 | nonlocal</p>
+<p><a href="https://github.com/simoncos/practical-python/tree/master/features/retry">本文代码的Github地址</a></p>
+<p>有些程序的运行需要依赖多变而不可控的外部环境，比如网络爬虫。在程序中我们很难将所有外部引入的异常都考虑到，特别是那些时有时无的异常，这时如果程序有自动重试的机制，无疑可以省不少事。</p>
+<p>本文实现的重试机制在遇到异常时会记录遇到异常后重试的次数，如果次数小于允许的重试次数，则进行下一次重试，否则将异常上抛。下面第一部分是函数实现，第二部分在前者基础上略作改动，变成了更灵活的装饰器实现。实现只涉及<strong>异常处理、递归、装饰器</strong>的知识，示例也足够明晰，因此不多费口舌。</p>
+<h3 id="heading-1">函数实现</h3>
+<pre><code class="language-python">import time, random
+
+MAXIMAL_RETRY = 3
+
+# Function Method
+
+def run():
+    result = random.random() # generate random double from 0 to 1
+    if result &gt; 0.3:
+        raise Exception(f'Wrong result: {result}')
+    else:
+        print(f'&gt;&gt; Success')
+        return result
+
+def run_with_retry(times=0):
+    time.sleep(1)
+    try:
+        return run()
+    except Exception as e:
+        if times &gt;= MAXIMAL_RETRY:
+            print(f'&gt;&gt; Exceed maximal retry {MAXIMAL_RETRY}, Raise exception...')
+            raise(e) # will stop the program without further handling
+        else:
+            times += 1
+            print(f'&gt;&gt; Exception, Retry {times} begins...')
+            return run_with_retry(times)
+
+if __name__ == "__main__":
+    while True:
+        print('\nBegin new run...')
+        time.sleep(1)
+        result = run_with_retry()
+        if result:
+            print(f'Get result: {result}')
+</code></pre>
+<h3 id="heading-2">装饰器实现</h3>
+<pre><code class="language-python">import time, random
+
+MAXIMAL_RETRY = 3
+
+def retry(func, times=0):
+    def retried(*args, **kwargs):
+        nonlocal times # closure
+        time.sleep(1)
+        try:
+            result = func(*args, **kwargs)
+            times = 0 # reset after success
+            return result
+        except Exception as e:
+            if times &gt;= MAXIMAL_RETRY:
+                print(f'&gt;&gt; Exceed maximal retry {MAXIMAL_RETRY}, Raise exception...')
+                raise(e) # will stop the program without further handling
+            else:
+                times += 1
+                print(f'&gt;&gt; Exception, Retry {times} begins...')
+                return retried(*args, **kwargs)
+    return retried
+
+@retry
+def run_decorated():
+    result = random.random() # generate random double from 0 to 1
+    if result &gt; 0.3:
+        raise Exception(f'Wrong result: {result}')
+    else:
+        print(f'&gt;&gt; Success')
+        return result
+
+if __name__ == "__main__":
+    while True:
+        print('\nBegin new run...')
+        time.sleep(1)
+        result = run_decorated()
+        if result:
+            print(f'Get result: {result}')
+</code></pre>
+<p>注：关键字<code>nonlocal</code>的作用是让函数<code>retried</code>的变量名<code>times</code>绑定到外部函数<code>retry</code>的参数<code>times</code>，类似于引用传值。更详细说明可见<a href="https://docs.python.org/3/reference/simple_stmts.html#the-nonlocal-statement">Python官方文档</a>。</p>
+<hr/>
+<p>经过上一篇《数据热更新》的折磨这篇来个简单的（这句话用于凑够简书已公开文章10万总字数XD)</p>
+                </div>
+                <div class="series-box"><h2 class="k">系列 · Python功能点实现</h2><a href="python-hot-reloading.html"><span class="series-part">第 1 篇</span><span>Python功能点实现：数据热更新</span></a><a href="python-retry.html" aria-current="page"><span class="series-part">第 2 篇</span><span>Python功能点实现：重试机制</span></a></div>
+                <div class="article-tags"><h2 class="k">标签</h2><a class="tag" href="../blogs.html#topic-hack">Hack</a></div>
+                <section class="xref-grid"><div class="xrefs is-empty"><h2 class="k">提到本文</h2><span class="xrefs-empty">暂时还没有其他文章引用这篇。</span></div></section>
+                <nav class="post-nav" aria-label="继续阅读"><a class="post-nav-card post-nav-newer" rel="prev" href="hong-kong-drifters-and-mainland-income-tax.html"><span class="k">更新的一篇</span><span class="post-nav-title">对港漂与内地新个税法的一些研究</span></a><a class="post-nav-card post-nav-older" rel="next" href="python-hot-reloading.html"><span class="k">更早的一篇</span><span class="post-nav-title">Python功能点实现：数据热更新</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Oct 4, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-10-04</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="回到顶部" title="回到顶部">↑</button>
+</body>
+</html>

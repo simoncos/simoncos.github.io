@@ -1038,6 +1038,18 @@
       }
     },
     {
+      "name": "Python功能点实现",
+      "id": "python-features",
+      "title": {
+        "en": "Python Features in Practice",
+        "zh": "Python功能点实现"
+      },
+      "desc": {
+        "en": "Small features worked out in Python: hot reloading data without a restart, then retrying on intermittent exceptions.",
+        "zh": "用 Python 实现的小功能：不重启的数据热更新，以及遇到时有时无的异常时自动重试。"
+      }
+    },
+    {
       "name": "reading-roundups",
       "id": "reading-roundups",
       "title": {

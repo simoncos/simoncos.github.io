@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" data-page-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Are MLE, MAP, EM and Point Estimation Related? · Articles · simoncos</title>
+    <meta name="description" content="Where parameter estimation, point estimation, MLE, MAP and the EM algorithm each sit: one concept map, plus a loose example about the heights of Chinese people.">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.en.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="How Are MLE, MAP, EM and Point Estimation Related?">
+    <meta property="og:description" content="Where parameter estimation, point estimation, MLE, MAP and the EM algorithm each sit: one concept map, plus a loose example about the heights of Chinese people.">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.en.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="simoncos — tools and research, articles and field notes">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How Are MLE, MAP, EM and Point Estimation Related?">
+    <meta name="twitter:description" content="Where parameter estimation, point estimation, MLE, MAP and the EM algorithm each sit: one concept map, plus a loose example about the heights of Chinese people.">
+    <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400..700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20261004l"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20261004g">
+    <script src="../src/js/site.js?v=20261004l" defer></script>
+    <script src="../src/js/article.js?v=20261004l" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="mle-map-em-and-point-estimation">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="mle-map-em-and-point-estimation.html" hreflang="zh-Hans" data-lang-nav="zh"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← Articles</a>
+                <h1 class="article-title">How Are MLE, MAP, EM and Point Estimation Related?</h1>
+            </div>
+            <aside class="toc" aria-label="Contents"><span class="k toc-k">Contents</span><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>Concept map</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>Explanation</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>A loose example</span></a></aside>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">Created</span><span class="num">2019-04-16</span></span>
+                    <span class="meta-item"><span class="k">Updated</span><span class="num">2026-10-04</span></span>
+                    <span class="meta-item"><span class="k">Reading</span>2 min</span>
+                    <span class="meta-item"><span class="k">Translation</span>Claude Opus 5.5</span>
+                    <a class="meta-alt" href="mle-map-em-and-point-estimation.html" hreflang="zh-Hans" lang="zh-Hans" data-lang-nav="zh">中文 ↗</a>
+                </div>
+                <details class="toc-box"><summary><span>Contents</span><span class="toc-sign" aria-hidden="true"></span></summary><div class="toc-box-links"><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>Concept map</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>Explanation</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>A loose example</span></a></div></details>
+                <div class="post-content">
+
+<p>Keywords: parameter estimation | statistics | machine learning</p>
+<p><a href="https://www.zhihu.com/question/19894595">The original Zhihu question</a> (in Chinese)</p>
+<h3 id="heading-1">Concept map</h3>
+<p>Lately I have been trying to draw concept maps of statistics in TheBrain. Seen from a fairly high level, the things in the title relate roughly as follows.</p>
+<p><img alt='TheBrain concept map (detail): Bayesian Point Estimation in the centre, linked to Bayesian Statistics, Point Estimation and Maximum A Posteriori Estimation (MAP); Maximum Likelihood Estimation (MLE) also links to Point Estimation; the Expectation-Maximization Algorithm connects to MLE and MAP along a dashed line marked "solve"; at the upper right are confidence interval, credible interval and interval estimation' decoding="async" height="218" sizes="(max-width: 800px) calc(100vw - 40px), 760px" src="assets/images/mle-map-em-and-point-estimation/ce2bf4d865e94d379ff4d6e9583c2212.jpg" srcset="assets/images/mle-map-em-and-point-estimation/ce2bf4d865e94d379ff4d6e9583c2212.1080w.webp 1080w, assets/images/mle-map-em-and-point-estimation/ce2bf4d865e94d379ff4d6e9583c2212.jpg 1240w" width="1240"/></p>
+<h3 id="heading-2">Explanation</h3>
+<p>I should still explain it roughly.</p>
+<p>First you need the concepts of a sample and a population. If we take the population to correspond to a true distribution, then the population has the parameters needed to define that distribution. Because the population cannot be seen, we have to estimate its parameters by observing a sample (the <strong>data</strong>); this is called parameter estimation.</p>
+<p>The result of parameter estimation can be a point (<strong>Point Estimation</strong>) or an interval (Interval Estimation). Whichever kind of estimation it is, there are many concrete methods of estimating (estimators), and different estimators express different views on what the <strong>optimal</strong> estimate is (an estimator is really a kind of <strong>objective function/model</strong>).</p>
+<p>For example, <strong>maximum likelihood estimation (MLE)</strong> and minimum mean squared error estimation (MMSE) are both point estimators; the former uses the concept of likelihood. <strong>Maximum a posteriori estimation (MAP)</strong> is one too, except that it is an estimator from the viewpoint of Bayesian statistics/Bayesian point estimation, bringing in Bayes' theorem and the concepts of prior and posterior probability. <strong>The relationship between MLE and MAP</strong> is another matter that could be expanded on at length; I will only mention that it has to do with the prior probability and with regularization.</p>
+<p>The <strong>expectation-maximization algorithm</strong> is a concrete algorithm that can be used to solve for MLE and MAP. It keeps producing new solutions (estimates) by iteration until it converges to the optimum defined by the estimator (it is really an <strong>optimization method</strong>).</p>
+<h3 id="heading-3">A loose example</h3>
+<p>Parameter estimation means I want to use a sample (the heights of 1,000 Chinese people) to estimate the distribution of the heights of all Chinese people (the population). If we <strong>guess (assume)</strong> that the population follows a normal distribution, then one of the parameters to estimate is the mean μ, and another is the standard deviation σ;</p>
+<p>point estimation means I simply guess the mean is x, and interval estimation means I guess the mean falls within some range;</p>
+<p>MLE, MMSE, MAP and the rest are about how I think I should <strong>guess</strong> so that the average height I come up with is optimal, or what the optimal guess looks like (you can see there is no end of ways to guess: taking the sample mean, finding the mode, even picking one person's height from the sample at random all count as ways of guessing, as estimators, though many are obviously unreliable);</p>
+<p>the EM algorithm says: once you have finished arguing about what is optimal, let's start computing with that optimum as the target. But not every definition of optimal is one that I, EM, can compute.</p>
+<p>A further note: the two <strong>guesses</strong> above matter a great deal. They mean that being able to compute an estimate does not mean the estimate is good enough. Say we estimate the parameters of a normal distribution while the population actually follows a power-law distribution. How could we know our guess is wrong? Without more tests we actually can't, but we can at least estimate how likely we are to be wrong, and that brings in hypothesis testing.</p>
+                </div>
+                <div class="article-tags"><h2 class="k">Tags</h2><a class="tag" href="../blogs.html#topic-ai">AI</a><a class="tag" href="../blogs.html#topic-thinking">Thinking</a></div>
+                <section class="xref-grid"><div class="xrefs is-empty"><h2 class="k">Linked from</h2><span class="xrefs-empty">No other article links here yet.</span></div></section>
+                <nav class="post-nav" aria-label="More reading"><a class="post-nav-card post-nav-newer" rel="prev" href="media-and-content-business-1-communication-models.en.html"><span class="k">Newer</span><span class="post-nav-title">Media and Content Business (1): Communication Models</span></a><a class="post-nav-card post-nav-older" rel="next" href="overfitting-and-regularization.en.html"><span class="k">Older</span><span class="post-nav-title">On Overfitting and Regularization in Machine Learning</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Oct 4, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-10-04</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="Back to top" title="Back to top">↑</button>
+</body>
+</html>

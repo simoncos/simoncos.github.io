@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (English)</title><link>https://simoncos.github.io/</link><description>English posts feed</description><language>en</language><generator>generate_blog_pages.py</generator><lastBuildDate>Sun, 04 Oct 2026 14:18:10 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.en.xml" rel="self" type="application/rss+xml" /><item><title>Personal Site, Remake</title><link>https://simoncos.github.io/blogs/personal-site-remake.en.html</link><guid>https://simoncos.github.io/blogs/personal-site-remake.en.html</guid><pubDate>Sun, 04 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>Personal Site, Remake</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (English)</title><link>https://simoncos.github.io/</link><description>English posts feed</description><language>en</language><generator>generate_blog_pages.py</generator><lastBuildDate>Sun, 04 Oct 2026 16:47:16 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.en.xml" rel="self" type="application/rss+xml" /><item><title>Personal Site, Remake</title><link>https://simoncos.github.io/blogs/personal-site-remake.en.html</link><guid>https://simoncos.github.io/blogs/personal-site-remake.en.html</guid><pubDate>Sun, 04 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>Personal Site, Remake</h1>
 <p>Between September and today I rebuilt this site from top to bottom, and made a 40-second intro video along the way. This remake is not just a fresh coat of paint. It is also a way of sorting myself out.</p>
 <video aria-label="The 40-second intro video: sleep data, the talk, the Work wheel, Sunny Day, Endless Echoes, articles, Haba Snow Mountain and Favorites, until every dot connects into the site’s name" class="post-film" controls="" height="1280" playsinline="" poster="https://simoncos.github.io/blogs/assets/images/personal-site-remake/intro.en.jpg" preload="none" src="https://simoncos.github.io/blogs/assets/images/personal-site-remake/intro.en.mp4" width="720"></video>
 <p class="post-film-credit"><small><span>Piano samples in the video: <a href="https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html">YDP Grand Piano</a>,</span> <span><span>recorded by Zenph Studios,</span> <span>prepared by the FreePats project, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</span></span></small></p>
@@ -1392,7 +1392,34 @@ Recalls Borges, <em>Stories of Your Life and Others</em>, <em>Gulliver's Travels
 (3): The Online Music Business<br/>
 (4): The Nature of Media and Cognitive Science<br/>
 (5): From Composite Media to Atomised Control<br/>
-(6): Digitisation and the Evolution of Media</p>]]></description></item><item><title>Good Books I Read in 2018</title><link>https://simoncos.github.io/blogs/reading-2018.en.html</link><guid>https://simoncos.github.io/blogs/reading-2018.en.html</guid><pubDate>Fri, 04 Jan 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>Good Books I Read in 2018</h1>
+(6): Digitisation and the Evolution of Media</p>]]></description></item><item><title>How Are MLE, MAP, EM and Point Estimation Related?</title><link>https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.en.html</link><guid>https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.en.html</guid><pubDate>Tue, 16 Apr 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>How Are MLE, MAP, EM and Point Estimation Related?</h1>
+<p>Keywords: parameter estimation | statistics | machine learning</p>
+<p><a href="https://www.zhihu.com/question/19894595">The original Zhihu question</a> (in Chinese)</p>
+<h3>Concept map</h3>
+<p>Lately I have been trying to draw concept maps of statistics in TheBrain. Seen from a fairly high level, the things in the title relate roughly as follows.</p>
+<p><img alt='TheBrain concept map (detail): Bayesian Point Estimation in the centre, linked to Bayesian Statistics, Point Estimation and Maximum A Posteriori Estimation (MAP); Maximum Likelihood Estimation (MLE) also links to Point Estimation; the Expectation-Maximization Algorithm connects to MLE and MAP along a dashed line marked "solve"; at the upper right are confidence interval, credible interval and interval estimation' decoding="async" height="218" src="https://simoncos.github.io/blogs/assets/images/mle-map-em-and-point-estimation/ce2bf4d865e94d379ff4d6e9583c2212.jpg" width="1240"/></p>
+<h3>Explanation</h3>
+<p>I should still explain it roughly.</p>
+<p>First you need the concepts of a sample and a population. If we take the population to correspond to a true distribution, then the population has the parameters needed to define that distribution. Because the population cannot be seen, we have to estimate its parameters by observing a sample (the <strong>data</strong>); this is called parameter estimation.</p>
+<p>The result of parameter estimation can be a point (<strong>Point Estimation</strong>) or an interval (Interval Estimation). Whichever kind of estimation it is, there are many concrete methods of estimating (estimators), and different estimators express different views on what the <strong>optimal</strong> estimate is (an estimator is really a kind of <strong>objective function/model</strong>).</p>
+<p>For example, <strong>maximum likelihood estimation (MLE)</strong> and minimum mean squared error estimation (MMSE) are both point estimators; the former uses the concept of likelihood. <strong>Maximum a posteriori estimation (MAP)</strong> is one too, except that it is an estimator from the viewpoint of Bayesian statistics/Bayesian point estimation, bringing in Bayes' theorem and the concepts of prior and posterior probability. <strong>The relationship between MLE and MAP</strong> is another matter that could be expanded on at length; I will only mention that it has to do with the prior probability and with regularization.</p>
+<p>The <strong>expectation-maximization algorithm</strong> is a concrete algorithm that can be used to solve for MLE and MAP. It keeps producing new solutions (estimates) by iteration until it converges to the optimum defined by the estimator (it is really an <strong>optimization method</strong>).</p>
+<h3>A loose example</h3>
+<p>Parameter estimation means I want to use a sample (the heights of 1,000 Chinese people) to estimate the distribution of the heights of all Chinese people (the population). If we <strong>guess (assume)</strong> that the population follows a normal distribution, then one of the parameters to estimate is the mean μ, and another is the standard deviation σ;</p>
+<p>point estimation means I simply guess the mean is x, and interval estimation means I guess the mean falls within some range;</p>
+<p>MLE, MMSE, MAP and the rest are about how I think I should <strong>guess</strong> so that the average height I come up with is optimal, or what the optimal guess looks like (you can see there is no end of ways to guess: taking the sample mean, finding the mode, even picking one person's height from the sample at random all count as ways of guessing, as estimators, though many are obviously unreliable);</p>
+<p>the EM algorithm says: once you have finished arguing about what is optimal, let's start computing with that optimum as the target. But not every definition of optimal is one that I, EM, can compute.</p>
+<p>A further note: the two <strong>guesses</strong> above matter a great deal. They mean that being able to compute an estimate does not mean the estimate is good enough. Say we estimate the parameters of a normal distribution while the population actually follows a power-law distribution. How could we know our guess is wrong? Without more tests we actually can't, but we can at least estimate how likely we are to be wrong, and that brings in hypothesis testing.</p>]]></description></item><item><title>On Overfitting and Regularization in Machine Learning</title><link>https://simoncos.github.io/blogs/overfitting-and-regularization.en.html</link><guid>https://simoncos.github.io/blogs/overfitting-and-regularization.en.html</guid><pubDate>Fri, 01 Feb 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>On Overfitting and Regularization in Machine Learning</h1>
+<p><em>This question came up on my Zhihu timeline again: <a href="https://www.zhihu.com/question/20700829/answer/587052674">What is the principle behind using regularization to prevent overfitting in machine learning?</a> (in Chinese). I had just finished a close reading of the regularization chapter of </em>Deep Learning<em>, so my fingers itched and I wrote down some of my understanding of overfitting and regularization. The next article in my <a href="https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.en.html">Problem Solving and Design series</a> will also touch on this (working title "Optimizing Solutions and Complexity"), but my understanding of these questions has kept being refreshed over the past two years, so that article is still at the stage of collecting ideas.</em></p>
+<hr/>
+<p>According to Wikipedia, <a href="https://en.wikipedia.org/wiki/Regularization_%28mathematics%29">Regularization (mathematics)</a>: In mathematics, statistics, and computer science, particularly in machine learning and <a href="https://en.wikipedia.org/wiki/Inverse_problem">inverse problems</a>, regularization is the process of adding information in order to solve an <a href="https://en.wikipedia.org/wiki/Well-posed_problem">ill-posed problem</a> or to prevent <a href="https://en.wikipedia.org/wiki/Overfitting">overfitting</a>.</p>
+<p>So by its very definition, regularization is the process of preventing overfitting by adding some kind of information.</p>
+<p>Machine learning problems are basically optimization problems. The <strong>model/parameters</strong> define the space of solutions (also called the hypothesis space), the <strong>optimization algorithm</strong> is responsible for finding the optimal or a good-enough solution in that space, and the <strong>objective/loss function</strong> provides the measure of better and worse. The bigger the model's solution space, the more likely it is to contain the solution that is optimal for the problem itself (meaning it has learned the true generating process, or true distribution, of the data), but the harder the optimization/search becomes.</p>
+<p>For supervised problems, a solution is a mapping from features to labels, and learning uses only the training data, yet <strong>the optimum on the training data is often not the optimum on the test data</strong>. Explaining why properly would drag in a lot more (the i.i.d. assumption, empirical risk, generalization error; see Li Hang's <em>Statistical Learning Methods</em>). But here is one angle: suppose the model we use offers a large enough solution space and the training data is finite. Then the space contains solutions that map every point in the training data exactly onto the right label. Such a mapping is not necessarily valid for test data, because it <strong>takes into account all the information in the training data</strong>, and some of that information comes from the true distribution we want to learn, while some belongs to the training data itself, such as a bias in some direction from poor sampling, or noise, random perturbations and outliers. The test data actually has the same problems.</p>
+<p>To take a rather extreme example: the feature is a person's age and the label is height. If the solution space is big enough, we can find a solution like this: for every age value, record the corresponding height, and for age values outside the training set, do some simple interpolation (nearest-neighbour regression, say). <strong>The training error can then reach 0</strong> (ignoring the Bayes error). But suppose our training set is rather bad: by chance everyone in it is very tall, with legs 1.8 metres long, or the age and height of a mouse got mixed in. Then the result on the test set will be terrible. <strong>This phenomenon of "memorizing information in the training set that lies outside the problem's true distribution" is what we call overfitting. The stronger it is, the more likely we get a small training error but a test error far larger than the training error.</strong> To quantify the degree of overfitting, one possible way I can think of is to measure the difference between the errors on the two datasets. Concepts such as bias-variance and model complexity (VC dimension) all help in understanding overfitting further (many books cover them).</p>
+<p><img alt="Bias/variance, underfitting and overfitting, model complexity/solution space: a slide from Andrew Ng's machine learning course. Three curves fitting house price against size: a straight line (degree 1) underfits, with high bias; a quadratic is just right; a quartic passes through every point and overfits, with high variance" decoding="async" height="414" src="https://simoncos.github.io/blogs/assets/images/overfitting-and-regularization/7a984f0ed6ea310975464b53f2f2d653.jpg" width="736"/></p>
+<p>Regularization methods can roughly all be seen as <strong>stopping the learning algorithm from learning information outside the true distribution</strong>, <strong>shrinking the search space and cutting away the outlandish solutions</strong>. In practice there are all sorts of ways to do it: add a constraint to the objective function (a regularization term; some people explain this as adding a prior), add random noise to the training data, use semi-supervised learning, share parameters across multiple tasks, use ensemble learning, and so on (see the "flower book", <em>Deep Learning</em>, which considers regularization and optimization algorithms perhaps the two most important problems in machine learning)</p>
+<p>My personal understanding.</p>]]></description></item><item><title>Good Books I Read in 2018</title><link>https://simoncos.github.io/blogs/reading-2018.en.html</link><guid>https://simoncos.github.io/blogs/reading-2018.en.html</guid><pubDate>Fri, 04 Jan 2019 00:00:00 +0800</pubDate><description><![CDATA[<h1>Good Books I Read in 2018</h1>
 <h4>Five stars: highly recommended (in order of recommendation)</h4>
 <ul>
 <li><a href="https://book.douban.com/subject/30164677/" title="Why We Get Sick">Why We Get Sick</a> by Randolph M. Nesse and George C. Williams</li>
@@ -1610,7 +1637,190 @@ Recalls Borges, <em>Stories of Your Life and Others</em>, <em>Gulliver's Travels
 <li>conflicts between multiple standards and bridging them, for example cases involving several sovereign states, the order of precedence between laws and between provisions, and vague definitions and their reinterpretation</li>
 <li>differences between legal systems: in systems that rely on case law, besides the legal text itself, you need to collect and understand case data</li>
 </ul>
-<p>In the last few years I've seen some teams try to use natural language understanding and knowledge graphs to <strong>automate</strong> understanding of and reasoning about the law. It's very interesting, but the road is long and hard, and there is still much work to do.</p>]]></description></item><item><title>What Went Unwritten</title><link>https://simoncos.github.io/blogs/what-went-unwritten.en.html</link><guid>https://simoncos.github.io/blogs/what-went-unwritten.en.html</guid><pubDate>Fri, 07 Sep 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>What Went Unwritten</h1>
+<p>In the last few years I've seen some teams try to use natural language understanding and knowledge graphs to <strong>automate</strong> understanding of and reasoning about the law. It's very interesting, but the road is long and hard, and there is still much work to do.</p>]]></description></item><item><title>Python Features in Practice: Retry</title><link>https://simoncos.github.io/blogs/python-retry.en.html</link><guid>https://simoncos.github.io/blogs/python-retry.en.html</guid><pubDate>Thu, 01 Nov 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>Python Features in Practice: Retry</h1>
+<p>Keywords: retry | exception handling | recursion | decorators | nonlocal</p>
+<p><a href="https://github.com/simoncos/practical-python/tree/master/features/retry">The code for this article on GitHub</a></p>
+<p>Some programs depend on an external environment that is changeable and beyond their control, such as web crawlers. It is hard to account in the program for every exception the outside world can bring in, especially the ones that come and go. If the program then has an automatic retry mechanism, it undoubtedly saves a lot of trouble.</p>
+<p>The retry mechanism implemented here records how many times it has retried after hitting an exception. If that number is below the allowed number of retries, it retries again; otherwise it raises the exception. The first part below is a function implementation; the second changes it slightly into a more flexible decorator implementation. The implementation only involves <strong>exception handling, recursion and decorators</strong>, and the examples are clear enough, so I won't waste words.</p>
+<h3>Function implementation</h3>
+<pre><code class="language-python">import time, random
+
+MAXIMAL_RETRY = 3
+
+# Function Method
+
+def run():
+    result = random.random() # generate random double from 0 to 1
+    if result &gt; 0.3:
+        raise Exception(f'Wrong result: {result}')
+    else:
+        print(f'&gt;&gt; Success')
+        return result
+
+def run_with_retry(times=0):
+    time.sleep(1)
+    try:
+        return run()
+    except Exception as e:
+        if times &gt;= MAXIMAL_RETRY:
+            print(f'&gt;&gt; Exceed maximal retry {MAXIMAL_RETRY}, Raise exception...')
+            raise(e) # will stop the program without further handling
+        else:
+            times += 1
+            print(f'&gt;&gt; Exception, Retry {times} begins...')
+            return run_with_retry(times)
+
+if __name__ == "__main__":
+    while True:
+        print('\nBegin new run...')
+        time.sleep(1)
+        result = run_with_retry()
+        if result:
+            print(f'Get result: {result}')
+</code></pre>
+<h3>Decorator implementation</h3>
+<pre><code class="language-python">import time, random
+
+MAXIMAL_RETRY = 3
+
+def retry(func, times=0):
+    def retried(*args, **kwargs):
+        nonlocal times # closure
+        time.sleep(1)
+        try:
+            result = func(*args, **kwargs)
+            times = 0 # reset after success
+            return result
+        except Exception as e:
+            if times &gt;= MAXIMAL_RETRY:
+                print(f'&gt;&gt; Exceed maximal retry {MAXIMAL_RETRY}, Raise exception...')
+                raise(e) # will stop the program without further handling
+            else:
+                times += 1
+                print(f'&gt;&gt; Exception, Retry {times} begins...')
+                return retried(*args, **kwargs)
+    return retried
+
+@retry
+def run_decorated():
+    result = random.random() # generate random double from 0 to 1
+    if result &gt; 0.3:
+        raise Exception(f'Wrong result: {result}')
+    else:
+        print(f'&gt;&gt; Success')
+        return result
+
+if __name__ == "__main__":
+    while True:
+        print('\nBegin new run...')
+        time.sleep(1)
+        result = run_decorated()
+        if result:
+            print(f'Get result: {result}')
+</code></pre>
+<p>Note: the keyword <code>nonlocal</code> binds the name <code>times</code> in the function <code>retried</code> to the parameter <code>times</code> of the enclosing function <code>retry</code>, somewhat like passing by reference. For a fuller explanation, see the <a href="https://docs.python.org/3/reference/simple_stmts.html#the-nonlocal-statement">official Python documentation</a>.</p>
+<hr/>
+<p>After the torment of the previous article, <em>Hot Reloading Data</em>, here is an easy one (this sentence exists to bring my public Jianshu articles up to 100,000 characters in total XD)</p>]]></description></item><item><title>Python Features in Practice: Hot Reloading Data</title><link>https://simoncos.github.io/blogs/python-hot-reloading.en.html</link><guid>https://simoncos.github.io/blogs/python-hot-reloading.en.html</guid><pubDate>Wed, 31 Oct 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>Python Features in Practice: Hot Reloading Data</h1>
+<p>Keywords: hot update | hot reloading | periodic update | on-call update | cache | functools | cachetools | LRU | TTL</p>
+<ul>
+<li><a href="https://github.com/simoncos/practical-python/tree/master/features/hot-reloading">The code for this article on GitHub</a></li>
+<li><a href="https://www.v2ex.com/t/527725">Some discussion of this article on V2EX</a> (in Chinese)</li>
+</ul>
+<p>Suppose an application needs to load a configuration file, <code>config.txt</code>. The usual way is something like:</p>
+<pre><code class="language-python">with open('config.txt') as f:
+    parameters = f.read()
+</code></pre>
+<p>From then on, the data stored in <code>parameters</code> can be used by other code. But written this way, the data is fixed once the program starts and cannot update itself dynamically; every change to the configuration or model means restarting the whole application.</p>
+<p>In this article, hot reloading means getting data from outside (a file, a database, a REST API) while the application is running and updating Python objects inside the application. The typical scenario is an application running as a service (with an external API) that needs to update its configuration parameters or algorithm model <strong>without restarting</strong>.</p>
+<p>Hot reloading comes in two kinds: <strong>periodic update</strong> and <strong>on-call update</strong>. The former performs updates actively and periodically; the latter waits passively and updates only when it receives some signal from outside the application. This article implements both kinds with a memory cache and decorators.</p>
+<h3>Memory cache</h3>
+<p>First, a word on memory caches. Data in a cache is usually stored as key-value pairs: the value holds the data itself, the key holds some descriptive name for it. A cache's <strong>capacity</strong> determines the maximum number of entries it can hold. When the cache is full and new data is stored, the cache starts <strong>eviction</strong>: it removes part of the stored data to make room for the new. There are many <strong>eviction policies</strong> (deciding when eviction is needed and how exactly to remove data), and they determine the different types of cache.</p>
+<p>In Python, caches are often written <strong>as decorators</strong>. The cache <code>key</code> holds the combination of argument values of the decorated function (there are different ways of generating the <code>key</code>; more on that later), and the <code>value</code> holds the function's return value. So <strong>when the function is called</strong>, the program first looks in the cache for the same argument values; if they are there, it returns the cached return value directly instead of repeating the computation inside the function.</p>
+<p>Note that using a cache rests on an <strong>implicit premise</strong>: the function itself is stateless. If the function refers to a global variable or has a closure, the same argument values will not necessarily compute the same return value, and the cached return value may then differ from the one actually expected.</p>
+<h3>Periodic hot reloading</h3>
+<p>The periodic update uses <code>TTLCache</code> from the third-party library <a href="https://cachetools.readthedocs.io/en/latest/">cachetools</a>. TTL (time-to-live) refers to a <strong>lifetime policy</strong>. This cache records how long each stored entry has existed. On every call it checks whether any entry has exceeded a set lifetime threshold; if so, it starts eviction, and all expired entries are removed. If nothing has expired, the cache falls back on the LRU policy to keep within its capacity (the next part describes the LRU policy in detail).</p>
+<p>When we set the TTL cache's capacity to 1 and the arguments of the function that loads the data stay the same, the logic becomes a periodic update:</p>
+<ul>
+<li>Lifetime not exceeded: the cache is kept, and every call uses the cached data</li>
+<li>Lifetime exceeded: the cache is cleared (it holds only one entry), and the program computes again (here, that means reloading the data)</li>
+</ul>
+<p>Example code (to run it, install <code>cachetools</code> and download the full project from the link at the top):</p>
+<pre><code class="language-python">import time
+import cachetools
+
+from utils import change_conf_file
+
+ROTATE = 5
+
+@cachetools.cached(cachetools.TTLCache(1, ROTATE))
+def reload():
+    print('Cache cleared, reloading config...')
+    with open('config.txt') as f:
+        parameters = f.read()
+    return parameters
+
+class Model():
+    def log(self):
+        self.model = reload()
+        print(self.model)
+
+if __name__ == '__main__':
+    # Reload automatically every [ROTATE] seconds
+    model = Model()
+    while True:
+        time.sleep(2)
+        change_conf_file() # change data
+        model.log()
+</code></pre>
+<h3>On-call hot reloading</h3>
+<p>The on-call update uses <code>lru_cache</code> from Python's built-in library <a href="https://docs.python.org/3/library/functools.html">functools</a>. LRU (least recently used) refers to a <strong>least-used policy</strong>. This cache records how many times each stored entry has been used. On every call it checks whether the cache size exceeds its capacity; if so, it starts eviction, removing data starting from the least-used entries until the cache size is within capacity.</p>
+<p>When we set the LRU cache's capacity to 1 and the arguments of the function that loads the data stay the same, the function computes only the first time it is called; every later call returns the cached data directly, which so far is no different in effect from an ordinary read. When we need to hot-reload the data, we only have to clear the cache actively, as in <code>Getter.getModel.cache_clear()</code> in the example below. <code>Getter.getModel</code> is the decorated function, and it carries the function <code>cache_clear()</code> for clearing the cache. With this trigger in place, we only need to <strong>develop one more API (a GET under REST, say) to fire it</strong>, and an external, on-call API request can then hot-reload the data.</p>
+<p>Example code (to run it, download the full project from the link at the top):</p>
+<pre><code class="language-python">import time
+from functools import lru_cache
+
+from utils import change_conf_file
+
+class Getter:
+    @staticmethod
+    @lru_cache(1)
+    def getModel():
+        with open('config.txt') as f:
+            model = f.read()
+        return model
+
+class Model():
+    def log(self):
+        self.model = Getter.getModel()
+        print(self.model)
+
+if __name__ == '__main__':
+    # Reload only when cache_clear() is called
+    model = Model()
+    while True:
+        model.log()
+        time.sleep(2)
+        change_conf_file() # change data
+        Getter.getModel.cache_clear()
+        print('Cache cleared, reloading config...')
+        model.log()
+</code></pre>
+<p>One more detail. In the examples above, the function decorated by the cache, <code>getModel</code>, <strong>takes no arguments</strong>. How does <code>lru_cache</code> work in that case? Its implementation uses the function <code>functools._make_key</code> to generate the cache <code>key</code>. In Python, when a function takes no arguments, the positional <code>args</code> can be taken as an empty tuple <code>()</code> and the keyword arguments as an empty dict <code>{}</code>, and the <code>key</code> generated in that case is an empty list <code>[]</code> (note that lists are not hashable and cannot be used directly as dict keys; the actual data structure in functools is more complicated, and I did not dig into it here). The third-party library <code>cachetools</code> mentioned in the previous part implements a similar method, <code>keys.typedkey</code>. The <code>key</code>s the two generate differ, but combined with the other methods, they behave the same in most cases, including the no-argument case in this article.</p>
+<pre><code class="language-python">import time
+from functools import _make_key
+from cachetools.keys import typedkey
+
+if __name__ == '__main__':
+    print(_make_key((), {}, False)) # []
+    print(typedkey((), {}, False)) # ((), {}, &lt;class 'tuple'&gt;, &lt;class 'dict'&gt;)
+</code></pre>
+<h3>Further questions</h3>
+<ul>
+<li><strong>Multithreading</strong>: the hot reloading methods here are all based on caches, and since caches involve reads and writes, we need to consider their correctness in a multithreaded environment. <del><code>functools.lru_cache</code> and <code>cachetools.TTLCache</code> both use locking, and taking Python's GIL into account as well, the hot reloading described here should be reasonably safe for threads, though without testing I cannot say so with full certainty.</del> Correction: the documentation of <code>functools.lru_cache</code> says that <a href="https://docs.python.org/3/library/functools.html#functools.lru_cache">in a multithreaded environment the hit and miss counts are only approximate</a>, while the cachetools documentation states plainly that classes such as <code>cachetools.TTLCache</code> <a href="https://cachetools.readthedocs.io/en/stable/#cache-implementations">are not thread-safe</a> and <a href="https://cachetools.readthedocs.io/en/stable/#cachetools.cached">need a lock supplied for synchronization</a>. When I first wrote this article I misunderstood the GIL. As I understand it now, broadly speaking the GIL only stops multiple threads from using multiple CPUs; multithreading on a single CPU still works (otherwise why have threads at all), so synchronization still needs to be thought through clearly.</li>
+<li><strong>import</strong>: if we update the model in one module and another module <code>import</code>s that model, the model obtained by <code>import</code> is not updated when the original module's model is hot-reloaded. This behaviour may have to do with Python's own <a href="https://docs.python.org/3/reference/import.html#the-module-cache">module cache</a>. To hot-reload across all modules, one option worth considering is to make the data a module of its own, <a href="https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules">so that it can be shared between modules</a>.</li>
+</ul>
+<hr/>
+<p>A gripe: writing this one wore me out completely. I thought it would be simple, just sorting out a small thing I use every day, and the more I sorted the deeper it went... Much of the time we are happy because we stand on the very top of the iceberg and never have to face the devilish details below the waterline... As people who build technology, we still can't judge by the face alone; we have to keep an eye below the belt too (≖＿≖)✧</p>]]></description></item><item><title>What Went Unwritten</title><link>https://simoncos.github.io/blogs/what-went-unwritten.en.html</link><guid>https://simoncos.github.io/blogs/what-went-unwritten.en.html</guid><pubDate>Fri, 07 Sep 2018 00:00:00 +0800</pubDate><description><![CDATA[<h1>What Went Unwritten</h1>
 <p>For the past two years or so I have felt that my time for free thinking has been squeezed hard. Why? Is it because work uses up too much of my energy, because I have sunk into purer kinds of entertainment, because I feel I cannot produce anything of value, or simply because I have settled into a stable state and grown lazy? Looking back, in the years before this my life was made up almost entirely of restless upheaval that never stopped. Now, though there is no lack of things that trouble me or cause me real pain, life has on the whole become much calmer.</p>
 <p>The sparks that used to burst from my mind like an active volcano have died down. It is not that I have no new ideas at all. It is that the old habit of setting every idea out on display in my head, turning it over with care, and writing it down at the first chance has faded somewhat, and too many of the ideas that came to me went unwritten, for one reason or another. The brain is like a wilful horse at full gallop that keeps being reined in. It might say: I burn so much energy, and it means nothing at all, so why go on doing it? Little by little it gets used to it, and the voices in my head go quiet, "like water vanishing into water".<sup id="fnref:borges"><a aria-label="Footnote" class="footnote-ref" href="https://simoncos.github.io/blogs/what-went-unwritten.en.html#fn:borges">1</a></sup></p>
 <p>This world has given us a great many conveniences, but it has brought limits too. When we take 24-hour shops and restaurants, a transport network that reaches everywhere, running water, electricity, the internet and the pipes underground as much for granted as breathing, we are also tied to the spot by them. I remember a friend's surprise, not long ago, on hearing that I planned to travel on my own. To that friend, travelling alone meant far too many inconveniences, even if the inconvenience was only that, when you want to use the toilet in a restaurant, there is no one to watch your luggage.</p>

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-03",
+  "last_updated": "2026-10-04",
   "files": {
     "personal-site-remake.en.html": [],
     "personal-site-remake.html": [],
@@ -161,6 +161,10 @@
     "seen-and-heard-in-lhasa.html": [],
     "media-and-content-business-1-communication-models.en.html": [],
     "media-and-content-business-1-communication-models.html": [],
+    "mle-map-em-and-point-estimation.en.html": [],
+    "mle-map-em-and-point-estimation.html": [],
+    "overfitting-and-regularization.en.html": [],
+    "overfitting-and-regularization.html": [],
     "reading-2018.en.html": [
       {
         "group_id": "reading-2019",
@@ -195,6 +199,10 @@
     ],
     "hong-kong-drifters-and-mainland-income-tax.en.html": [],
     "hong-kong-drifters-and-mainland-income-tax.html": [],
+    "python-retry.en.html": [],
+    "python-retry.html": [],
+    "python-hot-reloading.en.html": [],
+    "python-hot-reloading.html": [],
     "what-went-unwritten.en.html": [],
     "what-went-unwritten.html": [],
     "ten-years-like-rain.en.html": [],
@@ -335,6 +343,20 @@
     ],
     "problem-solving-and-design-1-situation.en.html": [
       {
+        "group_id": "overfitting-and-regularization",
+        "date": "2019-02-01",
+        "languages": {
+          "zh": {
+            "title": "关于机器学习中的过拟合与正则化",
+            "file": "overfitting-and-regularization.html"
+          },
+          "en": {
+            "title": "On Overfitting and Regularization in Machine Learning",
+            "file": "overfitting-and-regularization.en.html"
+          }
+        }
+      },
+      {
         "group_id": "reading-2017-first-half",
         "date": "2017-06-21",
         "languages": {
@@ -378,6 +400,20 @@
       }
     ],
     "problem-solving-and-design-1-situation.html": [
+      {
+        "group_id": "overfitting-and-regularization",
+        "date": "2019-02-01",
+        "languages": {
+          "zh": {
+            "title": "关于机器学习中的过拟合与正则化",
+            "file": "overfitting-and-regularization.html"
+          },
+          "en": {
+            "title": "On Overfitting and Regularization in Machine Learning",
+            "file": "overfitting-and-regularization.en.html"
+          }
+        }
+      },
       {
         "group_id": "reading-2017-first-half",
         "date": "2017-06-21",

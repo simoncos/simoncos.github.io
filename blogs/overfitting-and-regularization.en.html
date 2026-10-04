@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-page-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On Overfitting and Regularization in Machine Learning · Articles · simoncos</title>
+    <meta name="description" content="Why does regularization prevent overfitting? Start from the solution space and the information in training data that lies outside the true distribution: overfitting is memorizing t...">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/overfitting-and-regularization.en.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/overfitting-and-regularization.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/overfitting-and-regularization.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/overfitting-and-regularization.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="On Overfitting and Regularization in Machine Learning">
+    <meta property="og:description" content="Why does regularization prevent overfitting? Start from the solution space and the information in training data that lies outside the true distribution: overfitting is memorizing t...">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/overfitting-and-regularization.en.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://simoncos.github.io/blogs/assets/images/overfitting-and-regularization/7a984f0ed6ea310975464b53f2f2d653.jpg">
+    <meta property="og:image:width" content="736">
+    <meta property="og:image:height" content="414">
+    <meta property="og:image:alt" content="Bias/variance, underfitting and overfitting, model complexity/solution space: a slide from Andrew Ng&#x27;s machine learning course. Three curves fitting house price against size: a straight line (degree 1) underfits, with high bias; a quadratic is just right; a quartic passes through every point and overfits, with high variance">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="On Overfitting and Regularization in Machine Learning">
+    <meta name="twitter:description" content="Why does regularization prevent overfitting? Start from the solution space and the information in training data that lies outside the true distribution: overfitting is memorizing t...">
+    <meta name="twitter:image" content="https://simoncos.github.io/blogs/assets/images/overfitting-and-regularization/7a984f0ed6ea310975464b53f2f2d653.jpg">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400..700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20261004l"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20261004g">
+    <script src="../src/js/site.js?v=20261004l" defer></script>
+    <script src="../src/js/article.js?v=20261004l" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="overfitting-and-regularization">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="overfitting-and-regularization.html" hreflang="zh-Hans" data-lang-nav="zh"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← Articles</a>
+                <h1 class="article-title">On Overfitting and Regularization in Machine Learning</h1>
+            </div>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">Created</span><span class="num">2019-02-01</span></span>
+                    <span class="meta-item"><span class="k">Updated</span><span class="num">2026-10-04</span></span>
+                    <span class="meta-item"><span class="k">Reading</span>3 min</span>
+                    <span class="meta-item"><span class="k">Translation</span>Claude Opus 5.5</span>
+                    <a class="meta-alt" href="overfitting-and-regularization.html" hreflang="zh-Hans" lang="zh-Hans" data-lang-nav="zh">中文 ↗</a>
+                </div>
+                <div class="post-content">
+
+<p><em>This question came up on my Zhihu timeline again: <a href="https://www.zhihu.com/question/20700829/answer/587052674">What is the principle behind using regularization to prevent overfitting in machine learning?</a> (in Chinese). I had just finished a close reading of the regularization chapter of </em>Deep Learning<em>, so my fingers itched and I wrote down some of my understanding of overfitting and regularization. The next article in my <a href="problem-solving-and-design-1-situation.en.html">Problem Solving and Design series</a> will also touch on this (working title "Optimizing Solutions and Complexity"), but my understanding of these questions has kept being refreshed over the past two years, so that article is still at the stage of collecting ideas.</em></p>
+<hr/>
+<p>According to Wikipedia, <a href="https://en.wikipedia.org/wiki/Regularization_%28mathematics%29">Regularization (mathematics)</a>: In mathematics, statistics, and computer science, particularly in machine learning and <a href="https://en.wikipedia.org/wiki/Inverse_problem">inverse problems</a>, regularization is the process of adding information in order to solve an <a href="https://en.wikipedia.org/wiki/Well-posed_problem">ill-posed problem</a> or to prevent <a href="https://en.wikipedia.org/wiki/Overfitting">overfitting</a>.</p>
+<p>So by its very definition, regularization is the process of preventing overfitting by adding some kind of information.</p>
+<p>Machine learning problems are basically optimization problems. The <strong>model/parameters</strong> define the space of solutions (also called the hypothesis space), the <strong>optimization algorithm</strong> is responsible for finding the optimal or a good-enough solution in that space, and the <strong>objective/loss function</strong> provides the measure of better and worse. The bigger the model's solution space, the more likely it is to contain the solution that is optimal for the problem itself (meaning it has learned the true generating process, or true distribution, of the data), but the harder the optimization/search becomes.</p>
+<p>For supervised problems, a solution is a mapping from features to labels, and learning uses only the training data, yet <strong>the optimum on the training data is often not the optimum on the test data</strong>. Explaining why properly would drag in a lot more (the i.i.d. assumption, empirical risk, generalization error; see Li Hang's <em>Statistical Learning Methods</em>). But here is one angle: suppose the model we use offers a large enough solution space and the training data is finite. Then the space contains solutions that map every point in the training data exactly onto the right label. Such a mapping is not necessarily valid for test data, because it <strong>takes into account all the information in the training data</strong>, and some of that information comes from the true distribution we want to learn, while some belongs to the training data itself, such as a bias in some direction from poor sampling, or noise, random perturbations and outliers. The test data actually has the same problems.</p>
+<p>To take a rather extreme example: the feature is a person's age and the label is height. If the solution space is big enough, we can find a solution like this: for every age value, record the corresponding height, and for age values outside the training set, do some simple interpolation (nearest-neighbour regression, say). <strong>The training error can then reach 0</strong> (ignoring the Bayes error). But suppose our training set is rather bad: by chance everyone in it is very tall, with legs 1.8 metres long, or the age and height of a mouse got mixed in. Then the result on the test set will be terrible. <strong>This phenomenon of "memorizing information in the training set that lies outside the problem's true distribution" is what we call overfitting. The stronger it is, the more likely we get a small training error but a test error far larger than the training error.</strong> To quantify the degree of overfitting, one possible way I can think of is to measure the difference between the errors on the two datasets. Concepts such as bias-variance and model complexity (VC dimension) all help in understanding overfitting further (many books cover them).</p>
+<p><img alt="Bias/variance, underfitting and overfitting, model complexity/solution space: a slide from Andrew Ng's machine learning course. Three curves fitting house price against size: a straight line (degree 1) underfits, with high bias; a quadratic is just right; a quartic passes through every point and overfits, with high variance" decoding="async" height="414" src="assets/images/overfitting-and-regularization/7a984f0ed6ea310975464b53f2f2d653.jpg" width="736"/></p>
+<p>Regularization methods can roughly all be seen as <strong>stopping the learning algorithm from learning information outside the true distribution</strong>, <strong>shrinking the search space and cutting away the outlandish solutions</strong>. In practice there are all sorts of ways to do it: add a constraint to the objective function (a regularization term; some people explain this as adding a prior), add random noise to the training data, use semi-supervised learning, share parameters across multiple tasks, use ensemble learning, and so on (see the "flower book", <em>Deep Learning</em>, which considers regularization and optimization algorithms perhaps the two most important problems in machine learning)</p>
+<p>My personal understanding.</p>
+                </div>
+                <div class="article-tags"><h2 class="k">Tags</h2><a class="tag" href="../blogs.html#topic-ai">AI</a><a class="tag" href="../blogs.html#topic-thinking">Thinking</a></div>
+                <section class="xref-grid"><div class="xrefs"><h2 class="k">This article links to</h2><a class="xref" href="problem-solving-and-design-1-situation.en.html"><span>Problem Solving and Design (1): The Problem Situation</span><span class="num">2016-10-24</span></a></div><div class="xrefs is-empty"><h2 class="k">Linked from</h2><span class="xrefs-empty">No other article links here yet.</span></div></section>
+                <nav class="post-nav" aria-label="More reading"><a class="post-nav-card post-nav-newer" rel="prev" href="mle-map-em-and-point-estimation.en.html"><span class="k">Newer</span><span class="post-nav-title">How Are MLE, MAP, EM and Point Estimation Related?</span></a><a class="post-nav-card post-nav-older" rel="next" href="reading-2018.en.html"><span class="k">Older</span><span class="post-nav-title">Good Books I Read in 2018</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Oct 4, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-10-04</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="Back to top" title="Back to top">↑</button>
+</body>
+</html>

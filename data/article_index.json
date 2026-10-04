@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-03",
+  "last_updated": "2026-10-04",
   "groups": [
     {
       "id": "personal-site-remake",
@@ -580,6 +580,64 @@
       }
     },
     {
+      "id": "mle-map-em-and-point-estimation",
+      "date": "2019-04-16",
+      "tags": [
+        "ai",
+        "thinking"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "MLE，MAP，EM 和 Point Estimation 之间的关系是怎样的？",
+          "file": "mle-map-em-and-point-estimation.html",
+          "markdown": "mle-map-em-and-point-estimation.md",
+          "excerpt": "关键词：参数估计 | 统计 | 机器学习\n原知乎问题\n概念图\n最近在尝试用thebrain画统计相关的概念图，标题里这几个东西从比较宏观的角度上看，关系大致是下面这样的。\n解释\n还是要大致解释一下。\n首先要有样本（Sample）和总体（Population）的概念，假设我们认为总体对应了一个...",
+          "description": "参数估计、点估计、MLE、MAP 与 EM 算法分别处在哪一层：一张概念图，加上用中国人身高做的不严谨的例子。",
+          "image": "blogs/assets/images/mle-map-em-and-point-estimation/ce2bf4d865e94d379ff4d6e9583c2212.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "How Are MLE, MAP, EM and Point Estimation Related?",
+          "file": "mle-map-em-and-point-estimation.en.html",
+          "markdown": "mle-map-em-and-point-estimation.en.md",
+          "excerpt": "Keywords: parameter estimation | statistics | machine learning\nThe original Zhihu question (in Chinese)\nConcept map\nLately I have been trying to draw concept maps of statistics in TheBrain. Seen from a fairly high level, the things in the title relate roughly as follows.\nExplanation\nI should still explain it roughly.\nFirst you need the concepts of a sample and a population. If we take the population to correspond to a true distribution, then the population has the parameters needed to define that distribution. Because the population cannot be seen, we have to estimate its parameters by observing a sample...",
+          "description": "Where parameter estimation, point estimation, MLE, MAP and the EM algorithm each sit: one concept map, plus a loose example about the heights of Chinese people.",
+          "image": "blogs/assets/images/mle-map-em-and-point-estimation/ce2bf4d865e94d379ff4d6e9583c2212.jpg",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "overfitting-and-regularization",
+      "date": "2019-02-01",
+      "tags": [
+        "ai",
+        "thinking"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "关于机器学习中的过拟合与正则化",
+          "file": "overfitting-and-regularization.html",
+          "markdown": "overfitting-and-regularization.md",
+          "excerpt": "在知乎时间线又看到这个问题： 机器学习中使用正则化来防止过拟合是什么原理？ 恰好最近刚精读完《Deep Learning》正则化一章，于是手痒写了一下自己对于过拟合和正则化的一些理解。这部分内容我在 问题解决与设计系列 的下一篇文章也会涉及（标题暂...",
+          "description": "正则化为什么能防止过拟合？从解空间、训练数据里真实分布以外的信息说起：过拟合是把这些信息也记了下来，正则化则是缩小搜索空间、砍掉奇葩的解。",
+          "image": "blogs/assets/images/overfitting-and-regularization/7a984f0ed6ea310975464b53f2f2d653.jpg",
+          "available": true
+        },
+        "en": {
+          "title": "On Overfitting and Regularization in Machine Learning",
+          "file": "overfitting-and-regularization.en.html",
+          "markdown": "overfitting-and-regularization.en.md",
+          "excerpt": "This question came up on my Zhihu timeline again: What is the principle behind using regularization to prevent overfitting in machine learning? (in Chinese). I had just finished a close reading of the regularization chapter of Deep Learning, so my fingers itched and I wrote down some of my understanding of overfitting and regularization. The next article in my Problem Solving and Design series will also touch on this (working title \"Optimizing Solutions and Complexity\"), but my understanding of these questions has kept being refreshed over the past two years, so that article is still at the stage of collecting...",
+          "description": "Why does regularization prevent overfitting? Start from the solution space and the information in training data that lies outside the true distribution: overfitting is memorizing that information too, and regularization shrinks the search space and cuts away the outlandish solutions.",
+          "image": "blogs/assets/images/overfitting-and-regularization/7a984f0ed6ea310975464b53f2f2d653.jpg",
+          "available": true
+        }
+      }
+    },
+    {
       "id": "reading-2018",
       "date": "2019-01-04",
       "tags": [
@@ -633,6 +691,68 @@
           "markdown": "hong-kong-drifters-and-mainland-income-tax.en.md",
           "excerpt": "If you still have questions after reading this, or if the subject touches your own interests, I suggest consulting a legal professional or the tax authorities. I also ask any professionals who read this to review and correct it where they can, so that it does not mislead anyone.\nNote, 2026: this piece was written in late 2018, before the implementing regulations of the Individual Income Tax Law were final. The final regulations and later tax announcements changed several of the provisions quoted here, so the analysis may no longer apply.\nThe Question\nChina's new Individual Income Tax Law (its...",
           "description": "On the eve of the new Individual Income Tax Law taking effect in 2019, does a Hong Kong drifter with mainland household registration, working only in Hong Kong, still owe mainland income tax? Reading the law, the draft implementing regulations and the Mainland–Hong Kong tax arrangement clause by clause, sorting out residence status and the tie-breaker rules, to reach a limited conclusion.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "python-retry",
+      "date": "2018-11-01",
+      "tags": [
+        "hack"
+      ],
+      "series": {
+        "name": "Python功能点实现",
+        "part": "2"
+      },
+      "languages": {
+        "zh": {
+          "title": "Python功能点实现：重试机制",
+          "file": "python-retry.html",
+          "markdown": "python-retry.md",
+          "excerpt": "关键词：重试 | 异常处理 | 递归 | 装饰器 | nonlocal\n本文代码的Github地址\n有些程序的运行需要依赖多变而不可控的外部环境，比如网络爬虫。在程序中我们很难将所有外部引入的异常都考虑到，特别是那些时有时无的异常，这时如果程序有自动重试的机制，无疑可...",
+          "description": "遇到时有时无的异常就自动重试，超过次数再上抛：先用递归函数实现，再改成用 nonlocal 计数的装饰器。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Python Features in Practice: Retry",
+          "file": "python-retry.en.html",
+          "markdown": "python-retry.en.md",
+          "excerpt": "Keywords: retry | exception handling | recursion | decorators | nonlocal\nThe code for this article on GitHub\nSome programs depend on an external environment that is changeable and beyond their control, such as web crawlers. It is hard to account in the program for every exception the outside world can bring in, especially the ones that come and go. If the program then has an automatic retry mechanism, it undoubtedly saves a lot of trouble.\nThe retry mechanism implemented here records how many times it has retried after hitting an exception. If that number is below the allowed number...",
+          "description": "Retry automatically on intermittent exceptions and raise once the limit is reached: first as a recursive function, then as a decorator that counts with nonlocal.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "python-hot-reloading",
+      "date": "2018-10-31",
+      "tags": [
+        "hack"
+      ],
+      "series": {
+        "name": "Python功能点实现",
+        "part": "1"
+      },
+      "languages": {
+        "zh": {
+          "title": "Python功能点实现：数据热更新",
+          "file": "python-hot-reloading.html",
+          "markdown": "python-hot-reloading.md",
+          "excerpt": "关键词：热更新 | 热重载 | 定时更新 | 即时更新 | 缓存 | functools | cachetools | LRU | TTL\n• 本文代码的Github地址\n• v2ex上关于本文的一些讨论\n假设应用需要加载一个配置文件 ，一般的做法类似于：\n接下来 中存储的数据就可以被其他代码使用，但是这样写的话程序每次启动后，数据是固定死的，无法...",
+          "description": "不重启服务也能更新配置和模型：用 cachetools 的 TTLCache 做定时热更新，用 functools 的 lru_cache 做即时热更新，以及多线程和 import 带来的问题。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Python Features in Practice: Hot Reloading Data",
+          "file": "python-hot-reloading.en.html",
+          "markdown": "python-hot-reloading.en.md",
+          "excerpt": "Keywords: hot update | hot reloading | periodic update | on-call update | cache | functools | cachetools | LRU | TTL\n• The code for this article on GitHub\n• Some discussion of this article on V2EX (in Chinese)\nSuppose an application needs to load a configuration file,. The usual way is something like:\nFrom then on, the data stored in can be used by other code. But written this way, the data is fixed once the program starts and cannot update itself dynamically; every change to the configuration or model means restarting the whole application.\nIn this article,...",
+          "description": "Update configuration and models without restarting the service: periodic hot reloading with cachetools' TTLCache, on-call hot reloading with functools' lru_cache, and the problems that threads and import bring.",
           "image": "",
           "available": true
         }

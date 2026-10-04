@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-page-lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python功能点实现：数据热更新 · 文章 · simoncos</title>
+    <meta name="description" content="不重启服务也能更新配置和模型：用 cachetools 的 TTLCache 做定时热更新，用 functools 的 lru_cache 做即时热更新，以及多线程和 import 带来的问题。">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/python-hot-reloading.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/python-hot-reloading.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/python-hot-reloading.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/python-hot-reloading.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Python功能点实现：数据热更新">
+    <meta property="og:description" content="不重启服务也能更新配置和模型：用 cachetools 的 TTLCache 做定时热更新，用 functools 的 lru_cache 做即时热更新，以及多线程和 import 带来的问题。">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/python-hot-reloading.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="simoncos — tools and research, articles and field notes">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Python功能点实现：数据热更新">
+    <meta name="twitter:description" content="不重启服务也能更新配置和模型：用 cachetools 的 TTLCache 做定时热更新，用 functools 的 lru_cache 做即时热更新，以及多线程和 import 带来的问题。">
+    <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400..700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20261004l"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20261004g">
+    <script src="../src/js/site.js?v=20261004l" defer></script>
+    <script src="../src/js/article.js?v=20261004l" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="python-hot-reloading">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="python-hot-reloading.en.html" hreflang="en" data-lang-nav="en"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← 文章</a>
+                <h1 class="article-title">Python功能点实现：数据热更新</h1>
+            </div>
+            <aside class="toc" aria-label="目录"><span class="k toc-k">目录</span><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>内存缓存</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>定时热更新</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>即时热更新</span></a><a class="toc-link toc-h3" href="#heading-4"><span class="toc-dot" aria-hidden="true"></span><span>扩展问题</span></a></aside>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">创建</span><span class="num">2018-10-31</span></span>
+                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-10-04</span></span>
+                    <span class="meta-item"><span class="k">阅读</span>5 分钟</span>
+                    <a class="meta-alt" href="python-hot-reloading.en.html" hreflang="en" lang="en" data-lang-nav="en">English ↗</a>
+                </div>
+                <details class="toc-box"><summary><span>目录</span><span class="toc-sign" aria-hidden="true"></span></summary><div class="toc-box-links"><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>内存缓存</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>定时热更新</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>即时热更新</span></a><a class="toc-link toc-h3" href="#heading-4"><span class="toc-dot" aria-hidden="true"></span><span>扩展问题</span></a></div></details>
+                <div class="post-content">
+
+<p>关键词：热更新 | 热重载 | 定时更新 | 即时更新 | 缓存 | functools | cachetools | LRU | TTL</p>
+<ul>
+<li><a href="https://github.com/simoncos/practical-python/tree/master/features/hot-reloading">本文代码的Github地址</a></li>
+<li><a href="https://www.v2ex.com/t/527725">v2ex上关于本文的一些讨论</a></li>
+</ul>
+<p>假设应用需要加载一个配置文件<code>config.txt</code>，一般的做法类似于：</p>
+<pre><code class="language-python">with open('config.txt') as f:
+    parameters = f.read()
+</code></pre>
+<p>接下来<code>parameters</code>中存储的数据就可以被其他代码使用，但是这样写的话程序每次启动后，数据是固定死的，无法动态地自我更新，每次要修改配置/模型只能重启整个应用。</p>
+<p>本文中热更新的意思是在应用运行时内，从外部（如文件、数据库、REST API）中获得数据并更新应用内的Python对象。应用场景一般是应用作为服务（有对外的API），需要在<strong>不重启</strong>的前提下更新自己的配置参数或者算法模型。</p>
+<p>热更新可以分为两种：<strong>定时更新（periodic update）</strong>和<strong>即时更新（on-call update）</strong>，前者周期性地、主动地执行更新，后者则是被动地等待，直到接收到某种来自应用外部的信号才会执行更新。本文将通过内存缓存（Memory Cache）和装饰器（Decorator）技术来实现两种热更新。</p>
+<h3 id="heading-1">内存缓存</h3>
+<p>先来说明一下内存缓存。缓存中的数据一般以键值对（key-value pair）的形式存在，value中放数据本身，key中放数据的某种描述名。缓存的<strong>容量</strong>决定了其最大可容纳的数据条数，当容量已满时再向缓存中存入新的数据，缓存就会采取开始<strong>清理行为</strong>：清除掉已存的部分数据，从而为新数据腾地方。<strong>清理的策略</strong>（判定何时需要清理、具体如何清理数据）有很多种，决定了缓存的不同类型。</p>
+<p>Python中缓存常被写成<strong>装饰器的形式</strong>，缓存数据的<code>key</code>里放的是被装饰原函数的参数值组合（<code>key</code>的生成方法可以不同，后面还会提到），<code>value</code>里放的则是原函数的返回值。这样<strong>当函数被调用时</strong>，程序会先去缓存数据里找是不是已经有相同的参数值，如果有就直接返回已缓存的返回值，不重复进行原函数内的计算。</p>
+<p>注意缓存的使用有一个<strong>隐含前提</strong>：函数本身是无状态的。假如函数内引用了全局变量，或者存在闭包，那同样的参数值不一定必然计算出相同的返回值。这样缓存的返回值和实际期望的返回值就不一定一致了。</p>
+<h3 id="heading-2">定时热更新</h3>
+<p>定时更新的实现使用了来源于第三方库<a href="https://cachetools.readthedocs.io/en/latest/">cachetools</a>的<code>TTLCache</code>，TTL（Time-to-Live）指<strong>存在时长策略</strong>。这种缓存为每一条存入的数据记录其存在的时长。每次调用都会检查是否存在超过某个设定时长阈值的数据，如果有就会开始清理行为：所有超时数据都会被清除掉；如果没有超时数据，缓存将会换用LRU策略，使缓存不超出容量大小（下一部分会提到LRU的具体策略）。</p>
+<p>当我们将TTL缓存的容量设为1时、且用于加载数据的原函数参数不变的情况下，逻辑就变成了定时更新：</p>
+<ul>
+<li>未超过时长：缓存保留，每次调用都使用缓存数据</li>
+<li>超过时长，缓存清空（只有一条数据），程序重新计算（在这里即重新加载数据）</li>
+</ul>
+<p>示例代码如下（运行需要安装<code>cachetools</code>，并在文首链接里下载完整的项目）：</p>
+<pre><code class="language-python">import time
+import cachetools
+
+from utils import change_conf_file
+
+ROTATE = 5
+
+@cachetools.cached(cachetools.TTLCache(1, ROTATE))
+def reload():
+    print('Cache cleared, reloading config...')
+    with open('config.txt') as f:
+        parameters = f.read()
+    return parameters
+
+class Model():
+    def log(self):
+        self.model = reload()
+        print(self.model)
+
+if __name__ == '__main__':
+    # Reload automatically every [ROTATE] seconds
+    model = Model()
+    while True:
+        time.sleep(2)
+        change_conf_file() # change data
+        model.log()
+</code></pre>
+<h3 id="heading-3">即时热更新</h3>
+<p>即时更新的实现使用了来源于Python内置库<a href="https://docs.python.org/3/library/functools.html">functools</a>的<code>lru_cache</code>，LRU（Least Recently Used）指<strong>最少使用策略</strong>。这种缓存为每一条存入的数据记录其被使用的次数，每次调用都会检查缓存大小是否超出容量，如超出就会开始清理行为：会从使用次数最少的数据开始清理，直到缓存大小处于容量以内。</p>
+<p>当我们将LRU缓存的容量设为1、且用于加载数据的原函数参数不变的情况下，原函数只有在第一次被调用时才会发生计算，之后调用都会直接返回缓存中的数据，到这里与一般的读取效果上并无区别。当我们需要热更新数据的时候，只需要主动清空缓存。如下例中<code>Getter.getModel.cache_clear()</code>。其中<code>Getter.getModel</code>是装饰后的函数，其中带有用于清理缓存的函数<code>cache_clear()</code>。有了这个扳机，我们只需要<strong>额外开发一个API（比如REST下的GET）来触发它</strong>，这样通过外部即时call API就可以进行热更新了。</p>
+<p>示例代码如下（运行需要在文首链接里下载完整的项目）：</p>
+<pre><code class="language-python">import time
+from functools import lru_cache
+
+from utils import change_conf_file
+
+class Getter:
+    @staticmethod
+    @lru_cache(1)
+    def getModel():
+        with open('config.txt') as f:
+            model = f.read()
+        return model
+
+class Model():
+    def log(self):
+        self.model = Getter.getModel()
+        print(self.model)
+
+if __name__ == '__main__':
+    # Reload only when cache_clear() is called
+    model = Model()
+    while True:
+        model.log()
+        time.sleep(2)
+        change_conf_file() # change data
+        Getter.getModel.cache_clear()
+        print('Cache cleared, reloading config...')
+        model.log()
+</code></pre>
+<p>这里补充一个细节，上面的示例中被缓存装饰器装饰的原函数<code>getModel</code>是一个<strong>无参数的函数</strong>，这种情况下<code>lru_cache</code>是如何运作的呢？<code>lru_cache</code>的实现中使用函数<code>functools._make_key</code>来生成缓存的<code>key</code>。在Python中，当原函数无参数时，默认参数<code>args</code>可认为是空元组<code>()</code>，可选参数可认为是空字典<code>{}</code>，在这种情况下生成的<code>key</code>将会是空列表<code>[]</code>（注意列表是不可hash的，不可直接作为字典的key，functools里的实际数据结构较为复杂，这里没有深入）。上一部分提到的第三方库<code>cachetools</code>实现了类似的方法<code>keys.typedkey</code>，两者生成的<code>key</code>存在区别，但是结合其他方法，行为在大部分情况是一样的，包括本文中的无参数函数情况。</p>
+<pre><code class="language-python">import time
+from functools import _make_key
+from cachetools.keys import typedkey
+
+if __name__ == '__main__':
+    print(_make_key((), {}, False)) # []
+    print(typedkey((), {}, False)) # ((), {}, &lt;class 'tuple'&gt;, &lt;class 'dict'&gt;)
+</code></pre>
+<h3 id="heading-4">扩展问题</h3>
+<ul>
+<li><strong>多线程情况</strong>：本文的热更新方法均基于缓存，而由于缓存涉及到读写操作，在多线程环境下我们需要考虑其正确性。<del><code>functools.lru_cache</code>和<code>cachetools.TTLCache</code>里均有使用到锁的机制，再考虑到Python的GIL锁，本文所述的热更新在线程安全上应该算是有保障的，但目前未经试验无法完全下断言。</del>更正：<code>functools.lru_cache</code>的文档中提到<a href="https://docs.python.org/3/library/functools.html#functools.lru_cache">多线程环境下hit和miss的计数只是近似值</a>，而cachetools的文档中则明确提到<code>cachetools.TTLCache</code><a href="https://cachetools.readthedocs.io/en/stable/#cache-implementations">这样的类是非线程安全的</a>，<a href="https://cachetools.readthedocs.io/en/stable/#cachetools.cached">需要额外提供锁以实现同步</a>。最开始写这篇文章的时候我对GIL的理解有误，按我现在的理解，GIL宽泛地讲只会阻止多线程调用多个CPU，但同一个CPU下的多线程仍然是有效的（不然还要多线程干嘛），所以同步的问题还是要考虑清楚。</li>
+<li><strong>import</strong>：假如我们在一个模块（module）里更新model，而另一个模块<code>import</code>这个model，那么当原模块的model热更新后，<code>import</code>得到的model并不会更新，这种行为可能与Python自身的<a href="https://docs.python.org/3/reference/import.html#the-module-cache">module cache</a>有关。要实现所有module的热更新，能考虑的一个办法是让数据自己成为一个模块，<a href="https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules">使其变得可以在模块之间共享</a>。</li>
+</ul>
+<hr/>
+<p>吐槽：这篇写得我浑身无力啊，本来觉得很简单，就平时用的小东西拿来拎拎清，没想到越拎越深...很多时候我们很happy是因为我们站在冰山的最上面，不用面对水下的魔鬼细节...作为搞技术的，我们还是不能光看脸，也要多盯裆(≖＿≖)✧</p>
+                </div>
+                <div class="series-box"><h2 class="k">系列 · Python功能点实现</h2><a href="python-hot-reloading.html" aria-current="page"><span class="series-part">第 1 篇</span><span>Python功能点实现：数据热更新</span></a><a href="python-retry.html"><span class="series-part">第 2 篇</span><span>Python功能点实现：重试机制</span></a></div>
+                <div class="article-tags"><h2 class="k">标签</h2><a class="tag" href="../blogs.html#topic-hack">Hack</a></div>
+                <section class="xref-grid"><div class="xrefs is-empty"><h2 class="k">提到本文</h2><span class="xrefs-empty">暂时还没有其他文章引用这篇。</span></div></section>
+                <nav class="post-nav" aria-label="继续阅读"><a class="post-nav-card post-nav-newer" rel="prev" href="python-retry.html"><span class="k">更新的一篇</span><span class="post-nav-title">Python功能点实现：重试机制</span></a><a class="post-nav-card post-nav-older" rel="next" href="what-went-unwritten.html"><span class="k">更早的一篇</span><span class="post-nav-title">那些没有记下的</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Oct 4, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-10-04</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="回到顶部" title="回到顶部">↑</button>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-page-lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLE，MAP，EM 和 Point Estimation 之间的关系是怎样的？ · 文章 · simoncos</title>
+    <meta name="description" content="参数估计、点估计、MLE、MAP 与 EM 算法分别处在哪一层：一张概念图，加上用中国人身高做的不严谨的例子。">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="MLE，MAP，EM 和 Point Estimation 之间的关系是怎样的？">
+    <meta property="og:description" content="参数估计、点估计、MLE、MAP 与 EM 算法分别处在哪一层：一张概念图，加上用中国人身高做的不严谨的例子。">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/mle-map-em-and-point-estimation.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="simoncos — tools and research, articles and field notes">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MLE，MAP，EM 和 Point Estimation 之间的关系是怎样的？">
+    <meta name="twitter:description" content="参数估计、点估计、MLE、MAP 与 EM 算法分别处在哪一层：一张概念图，加上用中国人身高做的不严谨的例子。">
+    <meta name="twitter:image" content="https://simoncos.github.io/assets/og/og-default.png">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400..700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20261004l"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20261004g">
+    <script src="../src/js/site.js?v=20261004l" defer></script>
+    <script src="../src/js/article.js?v=20261004l" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="mle-map-em-and-point-estimation">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="mle-map-em-and-point-estimation.en.html" hreflang="en" data-lang-nav="en"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← 文章</a>
+                <h1 class="article-title">MLE，MAP，EM 和 Point Estimation 之间的关系是怎样的？</h1>
+            </div>
+            <aside class="toc" aria-label="目录"><span class="k toc-k">目录</span><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>概念图</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>解释</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>不严谨的例子</span></a></aside>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">创建</span><span class="num">2019-04-16</span></span>
+                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-10-04</span></span>
+                    <span class="meta-item"><span class="k">阅读</span>2 分钟</span>
+                    <a class="meta-alt" href="mle-map-em-and-point-estimation.en.html" hreflang="en" lang="en" data-lang-nav="en">English ↗</a>
+                </div>
+                <details class="toc-box"><summary><span>目录</span><span class="toc-sign" aria-hidden="true"></span></summary><div class="toc-box-links"><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>概念图</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>解释</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>不严谨的例子</span></a></div></details>
+                <div class="post-content">
+
+<p>关键词：参数估计 | 统计 | 机器学习</p>
+<p><a href="https://www.zhihu.com/question/19894595">原知乎问题</a></p>
+<h3 id="heading-1">概念图</h3>
+<p>最近在尝试用thebrain画统计相关的概念图，标题里这几个东西从比较宏观的角度上看，关系大致是下面这样的。</p>
+<p><img alt="thebrain概念图（局部）：贝叶斯点估计居中，连着贝叶斯统计、点估计和最大后验估计（MAP）；最大似然估计（MLE）也连向点估计；期望最大化算法用一条标着 solve 的虚线连向 MLE 和 MAP；右上方是置信区间、可信区间和区间估计" decoding="async" height="218" sizes="(max-width: 800px) calc(100vw - 40px), 760px" src="assets/images/mle-map-em-and-point-estimation/ce2bf4d865e94d379ff4d6e9583c2212.jpg" srcset="assets/images/mle-map-em-and-point-estimation/ce2bf4d865e94d379ff4d6e9583c2212.1080w.webp 1080w, assets/images/mle-map-em-and-point-estimation/ce2bf4d865e94d379ff4d6e9583c2212.jpg 1240w" width="1240"/></p>
+<h3 id="heading-2">解释</h3>
+<p>还是要大致解释一下。</p>
+<p>首先要有样本（Sample）和总体（Population）的概念，假设我们认为总体对应了一个真实分布，那么总体就有了定义分布需要的参数（Parameter）。因为总体不可见，所以需要通过观察样本（<strong>数据</strong>）来估计总体的参数，这叫参数估计。</p>
+<p>参数估计的结果可以是一个点（<strong>Point Estimation</strong>），也可以是一个区间（Interval Estimation）。无论是其中哪一类估计，都有多种估计的具体方法（Estimator），不同estimator表达了对<strong>最优</strong>估计的不同看法（其实estimator是一种<strong>目标函数/模型</strong>）。</p>
+<p>比如，<strong>最大似然估计（MLE）</strong>和最小均方误差估计（MMSE）都属于点估计的estimator，前者使用了似然（Likelihood）的概念；<strong>最大后验概率估计（MAP）</strong>也一样，只是它是一种贝叶斯统计/贝叶斯点估计视角下的estimator，引入了贝叶斯定理、先/后验概率的概念。<strong>MLE和MAP之间的关系</strong>又是一个可以继续展开说的事情了，只提一下和先验概率（Prior Probability）及正则化（Regularization）有关。</p>
+<p>而<strong>期望最大化算法（Expectation-Maximization Algorithm）</strong>则是一种可用来求解MLE和MAP的具体算法，它可以通过迭代不断给出新的解（估计值），直至收敛到estimator所定义的最优（其实是一种<strong>优化方法</strong>）。</p>
+<h3 id="heading-3">不严谨的例子</h3>
+<p>参数估计是说我要通过一个样本（1000个中国人的身高）去估计全部中国人身高（总体）的分布，如果我们<strong>猜测（假设）</strong>总体满足正态分布，那么可估计的参数之一就是均值μ，另一个是标准差σ；</p>
+<p>点估计是说我就猜均值是x，区间估计是说我猜均值落在某个范围；</p>
+<p>MLE、MMSE、MAP等是说我认为怎样<strong>猜测</strong>，猜出来的人均身高是最优的，或者说最优的猜测是什么样的（可以看到猜测的方法无穷无尽，比如算样本均值、找众数，甚至从样本里随机选一个人的身高，都算是一种猜测方法、一种estimator，只是很多一看就知道不靠谱）；</p>
+<p>EM算法是说你们争论完什么是最优了，那么我们就以这个最优为目标开始算吧，但不是每种最优的定义我EM都能算。</p>
+<p>补充：注意上面的两个<strong>猜测</strong>很重要，意味着我们可能算出一个估计，不代表这个估计是足够好的。比如我们估计的是正态分布的参数，而实际上总体满足幂律分布，这时如何才能知道我们的猜测有问题呢？如果没有更多的测试，这其实是做不到的，但我们至少可以估计一下我们出错的概率有多大，这就涉及到假设检验（Hypothesis Testing）了。</p>
+                </div>
+                <div class="article-tags"><h2 class="k">标签</h2><a class="tag" href="../blogs.html#topic-ai">AI</a><a class="tag" href="../blogs.html#topic-thinking">思考</a></div>
+                <section class="xref-grid"><div class="xrefs is-empty"><h2 class="k">提到本文</h2><span class="xrefs-empty">暂时还没有其他文章引用这篇。</span></div></section>
+                <nav class="post-nav" aria-label="继续阅读"><a class="post-nav-card post-nav-newer" rel="prev" href="media-and-content-business-1-communication-models.html"><span class="k">更新的一篇</span><span class="post-nav-title">媒体与内容商业（一）：传播模型</span></a><a class="post-nav-card post-nav-older" rel="next" href="overfitting-and-regularization.html"><span class="k">更早的一篇</span><span class="post-nav-title">关于机器学习中的过拟合与正则化</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Oct 4, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-10-04</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="回到顶部" title="回到顶部">↑</button>
+</body>
+</html>

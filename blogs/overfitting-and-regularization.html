@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-page-lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于机器学习中的过拟合与正则化 · 文章 · simoncos</title>
+    <meta name="description" content="正则化为什么能防止过拟合？从解空间、训练数据里真实分布以外的信息说起：过拟合是把这些信息也记了下来，正则化则是缩小搜索空间、砍掉奇葩的解。">
+    <meta name="author" content="simoncos">
+    <link rel="canonical" href="https://simoncos.github.io/blogs/overfitting-and-regularization.html">
+    <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/overfitting-and-regularization.en.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/overfitting-and-regularization.html">
+    <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/overfitting-and-regularization.en.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="关于机器学习中的过拟合与正则化">
+    <meta property="og:description" content="正则化为什么能防止过拟合？从解空间、训练数据里真实分布以外的信息说起：过拟合是把这些信息也记了下来，正则化则是缩小搜索空间、砍掉奇葩的解。">
+    <meta property="og:url" content="https://simoncos.github.io/blogs/overfitting-and-regularization.html">
+    <meta property="og:site_name" content="simoncos">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://simoncos.github.io/blogs/assets/images/overfitting-and-regularization/7a984f0ed6ea310975464b53f2f2d653.jpg">
+    <meta property="og:image:width" content="736">
+    <meta property="og:image:height" content="414">
+    <meta property="og:image:alt" content="Bias/Variance、欠拟合过拟合、模型复杂度/解空间：吴恩达（Andrew Ng）机器学习课程的一页幻灯片。用面积预测房价的三条拟合曲线：一次式是直线，欠拟合（高偏差）；二次式刚刚好；四次式穿过每一个点，过拟合（高方差）">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="关于机器学习中的过拟合与正则化">
+    <meta name="twitter:description" content="正则化为什么能防止过拟合？从解空间、训练数据里真实分布以外的信息说起：过拟合是把这些信息也记了下来，正则化则是缩小搜索空间、砍掉奇葩的解。">
+    <meta name="twitter:image" content="https://simoncos.github.io/blogs/assets/images/overfitting-and-regularization/7a984f0ed6ea310975464b53f2f2d653.jpg">
+    <!-- site-shell:resources:start -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (中文)" href="../feed.zh.xml">
+    <link rel="alternate" type="application/rss+xml" title="simoncos RSS (English)" href="../feed.en.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Noto+Sans+SC:wght@400..700&amp;display=swap"></noscript>
+    <script src="../src/js/theme-init.js?v=20261004l"></script>
+    <link rel="stylesheet" href="../src/css/styles.css?v=20261004g">
+    <script src="../src/js/site.js?v=20261004l" defer></script>
+    <script src="../src/js/article.js?v=20261004l" defer></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js" defer data-cf-beacon="{&quot;token&quot;:&quot;27d42618c53846ada3300ce4fefe0f94&quot;}"></script>
+    <!-- site-shell:resources:end -->
+</head>
+<body class="article-page" data-article-group="overfitting-and-regularization">
+    <!-- site-shell:header:start -->
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <header class="hdr">
+        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <div class="hdr-right">
+            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            </nav>
+            <div class="hdr-tools">
+                <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
+                <a class="lang-btn" href="overfitting-and-regularization.en.html" hreflang="en" data-lang-nav="en"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    </nav>
+    <!-- site-shell:header:end -->
+    <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
+    <main id="main" class="article" tabindex="-1">
+        <div class="article-grid enter">
+            <span class="article-spacer" aria-hidden="true"></span>
+            <div class="article-head">
+                <a class="pill" href="../blogs.html">← 文章</a>
+                <h1 class="article-title">关于机器学习中的过拟合与正则化</h1>
+            </div>
+            <div class="article-main">
+                <div class="article-meta">
+                    <span class="meta-item"><span class="k">创建</span><span class="num">2019-02-01</span></span>
+                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-10-04</span></span>
+                    <span class="meta-item"><span class="k">阅读</span>3 分钟</span>
+                    <a class="meta-alt" href="overfitting-and-regularization.en.html" hreflang="en" lang="en" data-lang-nav="en">English ↗</a>
+                </div>
+                <div class="post-content">
+
+<p><em>在知乎时间线又看到这个问题：<a href="https://www.zhihu.com/question/20700829/answer/587052674">机器学习中使用正则化来防止过拟合是什么原理？</a>恰好最近刚精读完《Deep Learning》正则化一章，于是手痒写了一下自己对于过拟合和正则化的一些理解。这部分内容我在<a href="problem-solving-and-design-1-situation.html">问题解决与设计系列</a>的下一篇文章也会涉及（标题暂定《解的优化与复杂度》），只是这两年自己对这部分问题的理解不断刷新，所以文章停留在积累想法的阶段。</em></p>
+<hr/>
+<p>据维基百科<a href="https://www.wikiwand.com/en/Regularization_%28mathematics%29">Regularization (mathematics)</a>：In mathematics, statistics, and computer science, particularly in machine learning and <a href="https://www.wikiwand.com/en/Inverse_problem">inverse problems</a>, regularization is the process of adding information in order to solve an <a href="https://www.wikiwand.com/en/Ill-posed_problem">ill-posed problem</a> or to prevent <a href="https://www.wikiwand.com/en/Overfitting">overfitting</a>.</p>
+<p>因此正则化本身的定义就是通过增加某种信息来防止过拟合的过程。</p>
+<p>机器学习问题基本都是优化问题，<strong>模型/参数</strong>给定解的空间（或者说假设空间），<strong>优化算法</strong>负责从空间里找到最优或足够优的解，<strong>目标/损失函数</strong>负责提供优劣的度量。模型的解空间越大，越有可能包含对于问题本身而言最优的解（意味着学习到了数据的真实生成过程或者说真实分布），但是优化/搜索的难度越大。</p>
+<p>对于有监督问题来说，解是特征到label的映射，学习的过程只使用训练数据，而<strong>训练数据的最优往往不是测试数据上的最优</strong>。这里原因要说清楚又要涉及很多东西了（比如独立同分布假设、经验风险、泛化误差，可以参考《统计学习方法》）。但有一个角度是：假设我们使用的模型能够提供足够大的解空间，而训练数据是有限的，那么解空间里存在一些解可以精确地将训练数据中所有的点都映射到正确的label上去，但这种映射不一定对测试数据有效，因为它<strong>考虑了训练数据的全部信息</strong>，而这些信息里有些来自于要学习的真实分布，还有一些是训练数据本身的一些信息，比如采样不良带来的某方向的偏差，或是噪音/随机扰动/异常点。测试数据其实也有一样的问题。</p>
+<p>举个比较极端的例子，特征是人的年龄，label是身高，如果解空间够大，那么可以找到这样一种解：对于每一个年龄值，我都记下来对应的身高值，对于训练集以外的年龄值则做某种简单的插值（比如最近邻回归），<strong>这样训练集错误可以到0</strong>（不考虑贝叶斯错误时）。但假设我们的训练集比较糟糕：恰好里面的所有人都很高，腿长一米八，或者里面混进去一只老鼠的年龄-身高，结果在测试集上就会很糟糕了。<strong>这种“记下来训练集中问题真实分布以外的信息”的现象，就是所谓过拟合。这种现象越强，越可能导致训练集错误较小，但测试集错误远大于训练集的结果。</strong>要量化过拟合的程度，我能想到的可能办法是度量两个数据集错误的差异。bias-variance，模型复杂度（VC维）之类的概念都有助于进一步理解过拟合的问题（很多书里都有讲）。</p>
+<p><img alt="Bias/Variance、欠拟合过拟合、模型复杂度/解空间：吴恩达（Andrew Ng）机器学习课程的一页幻灯片。用面积预测房价的三条拟合曲线：一次式是直线，欠拟合（高偏差）；二次式刚刚好；四次式穿过每一个点，过拟合（高方差）" decoding="async" height="414" src="assets/images/overfitting-and-regularization/7a984f0ed6ea310975464b53f2f2d653.jpg" width="736"/></p>
+<p>而正则化的做法大致都可以看作是在<strong>阻止机器学习算法学到真实分布以外的信息</strong>，<strong>减小搜索空间，砍掉奇葩的解</strong>。实际的操作方法有多种多样：可以给目标函数增加约束（正则项，也有人用增加先验来解释这种做法），可以给训练数据增加随机noise，可以使用半监督，可以用多任务参数共享，可以用集成学习等等（可以参考花书《Deep Learning》，该书认为正则化和优化算法可能是机器学习最重要的两个问题）</p>
+<p>个人理解。</p>
+                </div>
+                <div class="article-tags"><h2 class="k">标签</h2><a class="tag" href="../blogs.html#topic-ai">AI</a><a class="tag" href="../blogs.html#topic-thinking">思考</a></div>
+                <section class="xref-grid"><div class="xrefs"><h2 class="k">本文提到</h2><a class="xref" href="problem-solving-and-design-1-situation.html"><span>问题解决与设计（一）：问题情境</span><span class="num">2016-10-24</span></a></div><div class="xrefs is-empty"><h2 class="k">提到本文</h2><span class="xrefs-empty">暂时还没有其他文章引用这篇。</span></div></section>
+                <nav class="post-nav" aria-label="继续阅读"><a class="post-nav-card post-nav-newer" rel="prev" href="mle-map-em-and-point-estimation.html"><span class="k">更新的一篇</span><span class="post-nav-title">MLE，MAP，EM 和 Point Estimation 之间的关系是怎样的？</span></a><a class="post-nav-card post-nav-older" rel="next" href="reading-2018.html"><span class="k">更早的一篇</span><span class="post-nav-title">2018年我读过的好书</span></a></nav>
+            </div>
+        </div>
+    </main>
+    <!-- site-shell:footer:start -->
+    <footer class="ftr">
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Oct 4, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-10-04</span></span></span>
+        <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
+    </footer>
+    <!-- site-shell:footer:end -->
+    <button class="to-top" type="button" data-to-top aria-label="回到顶部" title="回到顶部">↑</button>
+</body>
+</html>
