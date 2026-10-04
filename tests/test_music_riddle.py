@@ -172,10 +172,16 @@ class MusicRiddleTests(unittest.TestCase):
         self.assertEqual(song['quote'], '从来没细心数清楚，一个夏雨天，一次愉快的睡眠，断多少发线')
 
     def test_the_spellings_a_player_would_type_are_accepted(self):
-        # The input says "简繁体均可"; these three were rejected until 2026-10-03 (浮夸 and 红玫瑰 had no traditional
-        # spelling, and 囍帖街 is the title's official form). Each alias must belong to the one node it names.
-        spellings = {'exaggerated': '浮誇', 'red-rose': '紅玫瑰', 'wedding-card-street': '囍帖街'}
-        for node_id, spelling in spellings.items():
+        # The input says "简繁体均可"; retain traditional and regional title spellings.
+        # Each alias must belong to the one node it names.
+        spellings = [
+            ('exaggerated', '浮誇'),
+            ('red-rose', '紅玫瑰'),
+            ('wedding-card-street', '囍帖街'),
+            ('3589514', '還有甚麼可以送給你'),
+            ('3589514', '还有甚么可以送给你'),
+        ]
+        for node_id, spelling in spellings:
             self.assertIn(spelling, self.nodes[node_id]['aliases'], node_id)
             owners = [n['id'] for n in self.nodes.values() if spelling in (n['title'], *n['aliases'])]
             self.assertEqual(owners, [node_id], spelling)
