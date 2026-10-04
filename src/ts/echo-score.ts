@@ -1,6 +1,6 @@
 /** The pure side of the score player: which chords a path or the finale plays, and when. No DOM and no audio, so Node can test it. */
 namespace EchoScore {
-    export interface FinaleStep { node:string; beats:number; level:number; roll?:number; release?:number }
+    export interface FinaleStep { node:string; beats:number; level:number; roll?:number; release?:number; gate?:number }
     export interface Finale { beat:number; steps:readonly FinaleStep[] }
 
     /** Share of a chord's span that it sounds before its fade begins; the rest overlaps the next chord, like a sustain pedal. */
@@ -69,7 +69,8 @@ namespace EchoScore {
         let at=0;
         for(const step of finale.steps){
             const span=step.beats*finale.beat;
-            steps.push({at,midi:midiOf(step.node),hold:span*legato,level:step.level,roll:step.roll,release:step.release});
+            // `gate` is the share of its span a chord sounds: short gates are stabs that leave air before the next chord.
+            steps.push({at,midi:midiOf(step.node),hold:span*(step.gate??legato),level:step.level,roll:step.roll,release:step.release});
             at+=span;
         }
         return steps;

@@ -228,7 +228,7 @@ def validate(data):
     return data
 
 
-FINALE_STEP_KEYS = {'node', 'beats', 'level', 'roll', 'release'}
+FINALE_STEP_KEYS = {'node', 'beats', 'level', 'roll', 'release', 'gate'}
 MAX_FINALE_SECONDS = 120
 
 
@@ -244,7 +244,7 @@ def validate_finale(finale, by_id, data, require):
     require(isinstance(steps, list) and 2 <= len(steps) <= 128, 'finale.steps: expected 2–128 steps')
     for index, step in enumerate(steps):
         label = f'finale.steps[{index}]'
-        require(isinstance(step, dict) and set(step) <= FINALE_STEP_KEYS and {'node', 'beats', 'level'} <= set(step), f'{label}: expected node, beats and level (roll, release optional)')
+        require(isinstance(step, dict) and set(step) <= FINALE_STEP_KEYS and {'node', 'beats', 'level'} <= set(step), f'{label}: expected node, beats and level (roll, release, gate optional)')
         require(step['node'] in by_id, f'{label}.node: unknown node {step["node"]}')
         number(step['beats'], .25, 16, f'{label}.beats')
         number(step['level'], .1, 1, f'{label}.level')
@@ -252,6 +252,8 @@ def validate_finale(finale, by_id, data, require):
             number(step['roll'], 0, .6, f'{label}.roll')
         if 'release' in step:
             number(step['release'], .2, 6, f'{label}.release')
+        if 'gate' in step:
+            number(step['gate'], .2, 1, f'{label}.gate')
     require(sum(step['beats'] for step in steps) * finale['beat'] <= MAX_FINALE_SECONDS, f'finale: longer than {MAX_FINALE_SECONDS} seconds')
     closing = data.get('bonus') or data['ending']
     require(steps[-1]['node'] == closing, 'finale: the last step must be the hidden coda (or the ending when there is none)')

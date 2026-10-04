@@ -81,7 +81,8 @@ var EchoScore;
         let at = 0;
         for (const step of finale.steps) {
             const span = step.beats * finale.beat;
-            steps.push({ at, midi: midiOf(step.node), hold: span * EchoScore.legato, level: step.level, roll: step.roll, release: step.release });
+            // `gate` is the share of its span a chord sounds: short gates are stabs that leave air before the next chord.
+            steps.push({ at, midi: midiOf(step.node), hold: span * (step.gate ?? EchoScore.legato), level: step.level, roll: step.roll, release: step.release });
             at += span;
         }
         return steps;

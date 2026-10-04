@@ -312,7 +312,7 @@ async function testFinaleAgainstTheData() {
   const steps = EchoScore.finaleSteps(finale, id => byId.get(id).presentation.chord.midi);
   assert.equal(steps.length, finale.steps.length);
   steps.forEach((s, i) => {
-    near(s.hold, finale.steps[i].beats * finale.beat * EchoScore.legato, 'hold ' + i);
+    near(s.hold, finale.steps[i].beats * finale.beat * (finale.steps[i].gate ?? EchoScore.legato), 'hold ' + i);
     if (i) near(s.at - steps[i - 1].at, finale.steps[i - 1].beats * finale.beat, 'onset ' + i);
   });
   assert.deepEqual(plain(steps.map(s => s.midi)), finale.steps.map(s => byId.get(s.node).presentation.chord.midi), 'every step plays its own node chord');
