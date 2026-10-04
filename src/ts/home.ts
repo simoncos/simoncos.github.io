@@ -1,5 +1,5 @@
 // Home: the Selected work stage, which changes only when the reader asks
-// (hover on a wide screen, a tap on a narrow one), and the topic filter over
+// (a mouse hover on a wide screen, otherwise a tap), and the topic filter over
 // the Newest list.
 (function () {
     const WIDE = 860;
@@ -32,8 +32,10 @@
         }
 
         // No timer: a stage that moves by itself shifts the page under the
-        // reader. A wide screen follows the pointer; a narrow one, where the
-        // panels stack, opens a row on a tap (a second tap follows the link).
+        // reader. A mouse on a wide screen opens a panel by hovering. A touch
+        // opens it on the first tap and follows the link on the second, on a
+        // tablet too: a tap sends a synthetic hover before its click, which
+        // used to open the panel and then follow the link in one tap.
         bars.forEach((bar, i) => bar.addEventListener('click', () => setActive(i)));
 
         panels.forEach((panel, i) => {
@@ -42,8 +44,8 @@
                 event.preventDefault();
                 setActive(i);
             });
-            panel.addEventListener('mouseenter', () => {
-                if (wide() && i !== active) setActive(i);
+            panel.addEventListener('pointerenter', (event) => {
+                if (event.pointerType === 'mouse' && wide() && i !== active) setActive(i);
             });
         });
 

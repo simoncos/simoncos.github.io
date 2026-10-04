@@ -251,8 +251,8 @@
         card.querySelectorAll<HTMLElement>('.rnode').forEach((node) => {
             const index = Number(node.dataset.part) || 0;
             node.addEventListener('click', () => selectPart(card, index));
-            node.addEventListener('mouseenter', () => {
-                if (window.innerWidth >= 860 && !node.classList.contains('is-sel')) selectPart(card, index);
+            node.addEventListener('pointerenter', (event) => {
+                if (event.pointerType === 'mouse' && window.innerWidth >= 860 && !node.classList.contains('is-sel')) selectPart(card, index);
             });
         });
     });
