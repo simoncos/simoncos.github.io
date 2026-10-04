@@ -1,6 +1,7 @@
 (function () {
     interface OpenAnswer { title:string; aliases:string[] }
-    interface Song { id:string; title:string; aliases:string[]; next:string[]; position:[number,number]; clue:{en:string;zh:string}; hint:{en:string;zh:string}; dead_ends?:string[]; open_answers?:OpenAnswer[]; terminal?:"dead-end"|"epilogue"; quote?:string; clue_format?:'prose'|'quote'; presentation:{flower:string;chord:{midi:number[]}} }
+    interface Decoy { title:string; aliases:string[]; message:{en:string;zh:string} }
+    interface Song { id:string; title:string; aliases:string[]; next:string[]; position:[number,number]; clue:{en:string;zh:string}; hint:{en:string;zh:string}; dead_ends?:string[]; open_answers?:OpenAnswer[]; decoys?:Decoy[]; terminal?:"dead-end"|"epilogue"; quote?:string; clue_format?:'prose'|'quote'; presentation:{flower:string;chord:{midi:number[]}} }
     interface Riddle { id:string; start:string; ending:string; bonus?:string; finale?:EchoScore.Finale; nodes:Song[] }
     interface Trail { current:string; found:string[]; edges:string[]; history:string[] }
     /** A score in progress: a walked path or the finale. `lit` is the song whose chord is sounding. */
@@ -562,6 +563,10 @@
         if(answer){solve(answer);return;}
         const openAnswer=song.open_answers?.find(answer=>[answer.title,...answer.aliases].some(value=>norm(value)===guess));
         if(openAnswer){acknowledgeOpen(openAnswer);return;}
+        // A near miss (a twin with other lyrics, a better-known song on the same theme) says so instead of the generic error;
+        // it is not counted towards the hint nudge and does not shake the field.
+        const decoy=song.decoys?.find(item=>[item.title,...item.aliases].some(value=>norm(value)===guess));
+        if(decoy){notice=()=>t(decoy.message.en,decoy.message.zh);feedbackKind='near';render();input.select();return;}
         if(song.dead_ends?.some(n=>norm(n)===guess))notice=()=>t('You found a side branch with no next clue here; revisit another song below.','你接上了一条支线。这里没有下一条谜面，可以在下方回到其他歌。');
         else{misses++;notice=()=>t('That song doesn’t follow this clue. Try another, or open a hint.','这首歌没有接上当前线索。可以再试一首，或打开提示。');}
         feedbackKind='error';render();input.select();

@@ -175,6 +175,21 @@ def validate(data):
                 require(normalized not in answers or answers[normalized] == identity,
                         f'{node_id}: ambiguous open answer {value}')
                 answers[normalized] = identity
+        decoys = node.get('decoys', [])
+        require(isinstance(decoys, list), f'{node_id}.decoys: expected an array')
+        own = {normalize_answer(value) for value in [node['title'], *node['aliases']]}
+        for index, decoy in enumerate(decoys):
+            text(decoy.get('title'), f'{node_id}.decoys.title')
+            strings(decoy.get('aliases'), f'{node_id}.decoys.aliases')
+            bilingual(decoy.get('message'), f'{node_id}.decoys.message')
+            text(decoy.get('note'), f'{node_id}.decoys.note')
+            for value in [decoy['title'], *decoy['aliases']]:
+                normalized = normalize_answer(value)
+                identity = f'decoy-{index}'
+                # A decoy only answers a wrong guess; it must never hide a real answer or the song the player is on.
+                require(normalized not in own, f'{node_id}: a decoy cannot be the current song: {value}')
+                require(normalized not in answers or answers[normalized] == identity, f'{node_id}: decoy also matches an answer: {value}')
+                answers[normalized] = identity
         if 'route_audit' in node:
             audit = node['route_audit']
             iso_date(audit.get('date'), f'{node_id}.route_audit.date')

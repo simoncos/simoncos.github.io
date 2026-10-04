@@ -773,6 +773,16 @@
             acknowledgeOpen(openAnswer);
             return;
         }
+        // A near miss (a twin with other lyrics, a better-known song on the same theme) says so instead of the generic error;
+        // it is not counted towards the hint nudge and does not shake the field.
+        const decoy = song.decoys?.find(item => [item.title, ...item.aliases].some(value => norm(value) === guess));
+        if (decoy) {
+            notice = () => t(decoy.message.en, decoy.message.zh);
+            feedbackKind = 'near';
+            render();
+            input.select();
+            return;
+        }
         if (song.dead_ends?.some(n => norm(n) === guess))
             notice = () => t('You found a side branch with no next clue here; revisit another song below.', '你接上了一条支线。这里没有下一条谜面，可以在下方回到其他歌。');
         else {
