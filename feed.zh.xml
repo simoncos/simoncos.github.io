@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Sun, 04 Oct 2026 08:46:58 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>个人网站，Remake</title><link>https://simoncos.github.io/blogs/personal-site-remake.html</link><guid>https://simoncos.github.io/blogs/personal-site-remake.html</guid><pubDate>Sun, 04 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>个人网站，Remake</h1>
-<p>九月到今天，我把网站从头到尾重做了一遍，顺手做了一支 40 秒的介绍视频。代码大部分是 Claude 和 Codex 写的，我负责提要求、挑毛病、拍板。这次 remake 不只是外在的翻新，也是对自己的一次梳理。</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Sun, 04 Oct 2026 08:55:32 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>个人网站，Remake</title><link>https://simoncos.github.io/blogs/personal-site-remake.html</link><guid>https://simoncos.github.io/blogs/personal-site-remake.html</guid><pubDate>Sun, 04 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>个人网站，Remake</h1>
+<p>九月到今天，我把网站从头到尾重做了一遍，顺手做了一支 40 秒的介绍视频。这次 remake 不只是外在的翻新，也是对自己的一次梳理。</p>
 <video aria-label="网站介绍视频，40 秒：睡眠数据、演讲、作品轮盘、《晴天》、漫无止尽的回响、文章、哈巴雪山和收藏，最后所有的点连成网站的名字" class="post-film" controls="" height="1280" playsinline="" poster="https://simoncos.github.io/blogs/assets/images/personal-site-remake/intro.zh.jpg" preload="none" src="https://simoncos.github.io/blogs/assets/images/personal-site-remake/intro.zh.mp4" width="720"></video>
 <p><small>视频里的钢琴采样：<a href="https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html">YDP Grand Piano</a>，Zenph Studios 录制，FreePats 项目整理，<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。</small></p>
 <h2>网站</h2>
@@ -49,7 +49,7 @@
 <h2>connecting the dots.</h2>
 <p>connecting the dots. 这句话是我用了很多年的座右铭。</p>
 <p>制作第一版视频时，Claude在没有得到我的明显指示下，抓住了dots这个贯穿很多东西的意象。视频开头的每一夜睡眠数据是一个点；每一个作品、每一篇文章、每一个收藏，是一个点；《回响》里的每一首歌，也是一个点。</p>
-<p>正是这些点，以及它们背后相关的人与事、回忆与期待，组成了过去、现在和未来的我。是的，这个网站就是关于我的过去、现在与未来。</p>]]></description></item><item><title>和 Codex 一起，给慈善晚会搭把手</title><link>https://simoncos.github.io/blogs/charity-gala-with-codex.html</link><guid>https://simoncos.github.io/blogs/charity-gala-with-codex.html</guid><pubDate>Thu, 01 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>和 Codex 一起，给慈善晚会搭把手</h1>
+<p>正是这些点，以及它们背后相关的人与事、回忆与期待，组成了过去、现在和未来的我。是的，这个网站正是关于我的过去、现在与未来。</p>]]></description></item><item><title>和 Codex 一起，给慈善晚会搭把手</title><link>https://simoncos.github.io/blogs/charity-gala-with-codex.html</link><guid>https://simoncos.github.io/blogs/charity-gala-with-codex.html</guid><pubDate>Thu, 01 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>和 Codex 一起，给慈善晚会搭把手</h1>
 <p><img alt="沿用活动页主视觉改制的文章封面：不同人的双手托举孩子向前，走向明亮的门；标题为“和 Codex 一起，给慈善晚会搭把手”" decoding="async" height="853" src="https://simoncos.github.io/blogs/assets/images/charity-gala-with-codex/cover.jpg" width="1600"/></p>
 <p>今年参与了晓日春晖（一个公益组织）的年度慈善晚会，很高兴能继续贡献一份自己的力量。跟去年相比，这回多了几个 AI 帮手，花的时间少了，能做的事情却多了不少：宣传页面开发部署、拍卖系统的需求对接和测试、拍品信息维护、在线认捐表制作、宣传文案，还有活动结束后的各种收尾。</p>
 <p>其中有些事情，以前也能做，就是比较费时间；有些则是因为有了 AI，才有余力多接一点。整个过程有不少省心的地方，也有一些预想之外的小插曲，值得记下来。</p>

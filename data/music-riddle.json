@@ -434,14 +434,15 @@
         "flower": "blue",
         "flower_reason": "蓝色簇花像街上相似又陌生的面孔，留出缺席感。",
         "chord": {
-          "name": "Am(add9)",
+          "name": "Em11",
           "midi": [
+            52,
             57,
-            60,
-            64,
-            71
+            62,
+            66,
+            67
           ],
-          "reason": "小三度中的九音悬着，留住熟悉与疏离。"
+          "reason": "叠四度的小十一和弦没有明确归属，顶上的 F♯ 与 G 只隔半音，像熟悉的街里缺了一个人。"
         }
       }
     },
@@ -491,14 +492,15 @@
         "flower": "ivory",
         "flower_reason": "乳白花瓣和暖黄花心，像被照料的小花舍。",
         "chord": {
-          "name": "F6",
+          "name": "Fmaj7#11",
           "midi": [
             53,
             60,
-            62,
-            69
+            64,
+            69,
+            71
           ],
-          "reason": "大六和弦的柔和暖意，给这处庇护所安定感。"
+          "reason": "升十一的大七和弦明亮通透，像小院里的光；下一站在同一个 F 上再添一个音，花舍长成了世界。"
         }
       }
     },
@@ -520,7 +522,7 @@
       },
       "clue": {
         "zh": "如果爱上一座山，你只有自己走过去欣赏，然后头也不回地离开。人生不常如初见，不如在那一刹那品尽苦与甜，从此不再见。",
-        "en": "If you fall in love with a mountain, you can only walk over, appreciate it, and leave without looking back. Life seldom stays like the first meeting. Taste its bitterness and sweetness in that moment, then never meet again."
+        "en": "If you fall in love with a mountain, you can only walk over, appreciate it, and leave without looking back. Life seldom stays like the first meeting. Better to taste its bitterness and sweetness in that moment, and never meet again."
       },
       "hint": {
         "zh": "山与离别。",
@@ -553,14 +555,15 @@
         "flower": "blue",
         "flower_reason": "冷蓝色簇花对应远山与克制的告别。",
         "chord": {
-          "name": "Dm(add9)",
+          "name": "Dm9",
           "midi": [
             50,
             57,
             64,
-            65
+            65,
+            72
           ],
-          "reason": "低音与上方九音拉开距离，小三度留下一点酸楚。"
+          "reason": "小九和弦把低音与高音拉得很开，像山与人之间的距离；小三度留下一点酸楚。"
         }
       }
     },
@@ -674,14 +677,15 @@
         "flower": "ivory",
         "flower_reason": "舒展的乳白花瓣，贴近一个人过日子的柔软与从容。",
         "chord": {
-          "name": "C6",
+          "name": "C6/9",
           "midi": [
             48,
-            55,
+            62,
             64,
+            67,
             69
           ],
-          "reason": "大六度带一点亲近的甜，保留日常感。"
+          "reason": "六九和弦亲近、日常，带一点甜但不黏腻。"
         }
       }
     },
@@ -747,14 +751,14 @@
         "flower": "dahlia",
         "flower_reason": "向四周铺开的橙色花瓣，像朝外出发的旅程。",
         "chord": {
-          "name": "G6",
+          "name": "G6/9",
           "midi": [
             55,
             59,
             64,
-            67
+            69
           ],
-          "reason": "明亮的六音向上展开，给独行一点轻快。"
+          "reason": "六、九音叠在大三和弦上，亮而不满，给独行一点即兴的轻快。"
         }
       }
     },
@@ -806,14 +810,15 @@
         "flower": "ivory",
         "flower_reason": "乳白花瓣保留共同记忆的温度。",
         "chord": {
-          "name": "Fmaj7",
+          "name": "Fmaj13",
           "midi": [
             53,
-            57,
+            62,
             64,
-            72
+            67,
+            69
           ],
-          "reason": "温暖的大三和弦带大七度，承诺里仍有不舍。"
+          "reason": "大十三和弦把九音、十三音摊开成一串，承诺里仍有不舍；之后以 F 到 C 的变格落回日常。"
         }
       }
     },
@@ -839,7 +844,7 @@
       },
       "clue": {
         "zh": "即使能回到最初，再次远走他乡，在热岛的船上问你借火，看到你笑开的眼眉，我真的可以改变什么吗？",
-        "en": "Even if I could return to the beginning, go abroad again, ask you for a light on that boat in the heat, and see your eyes brighten with a smile, what could I really change?"
+        "en": "Even if I could return to the beginning, go abroad again, ask you for a light on the boat at the hot island, and see your eyes brighten with a smile, what could I really change?"
       },
       "hint": {
         "zh": "一条路向前出发，另一条路回到最初。",
@@ -948,14 +953,14 @@
         "flower": "dahlia",
         "flower_reason": "层层排列的橙色花瓣，借花的几何层次呼应时间与机械。",
         "chord": {
-          "name": "Em(add9)",
+          "name": "Bdim7/D",
           "midi": [
-            52,
+            50,
             59,
-            66,
-            67
+            65,
+            68
           ],
-          "reason": "九音与小三度的相邻色彩留下一点紧迫与反省。"
+          "reason": "减七和弦的四个音等距排开，没有重心，像永远追不上的齿轮；下一步落回 Csus2，把时间倒回去。"
         }
       }
     },
@@ -988,7 +993,7 @@
       },
       "hint": {
         "zh": "这条岔路可以通向对彼此的赞美。",
-        "en": "This detour points toward praise for an incomparable companion."
+        "en": "This side path can lead to praise for one another."
       },
       "next": [
         "matchless"
@@ -1025,14 +1030,15 @@
         "flower": "ivory",
         "flower_reason": "浅色花瓣像安静的床边灯，对应陪伴和晚安。",
         "chord": {
-          "name": "F6/9(no5)",
+          "name": "Ebmaj9",
           "midi": [
-            53,
-            57,
+            51,
             62,
-            67
+            65,
+            67,
+            70
           ],
-          "reason": "轻柔的六、九音展开成开放的摇篮和声。"
+          "reason": "降 E 的大九和弦把和声轻轻抬离 C 调，像摇篮曲里最安静的一段。"
         }
       }
     },
@@ -1085,14 +1091,15 @@
         "flower": "dahlia",
         "flower_reason": "暖橙色对应亲情记忆，放射花形也轻轻呼应车轮。",
         "chord": {
-          "name": "Cadd9",
+          "name": "Cmaj9",
           "midi": [
             48,
-            55,
             62,
-            64
+            64,
+            67,
+            71
           ],
-          "reason": "稳定低音托住明亮九音，像后来才懂得的亲近。"
+          "reason": "低音 C 托住上方叠起的大九和弦，明亮里带一点后来才懂得的怅然。"
         }
       }
     },
@@ -1164,14 +1171,15 @@
         "flower": "blue",
         "flower_reason": "冷蓝的花簇收住想见又不见的距离。",
         "chord": {
-          "name": "Am7",
+          "name": "Am9",
           "midi": [
             57,
             60,
             64,
-            67
+            67,
+            71
           ],
-          "reason": "克制的小七和弦，为回望保留温度。"
+          "reason": "小九和弦：在克制的小七之上再加一个九音，为回望保留温度。"
         }
       }
     },
@@ -1243,14 +1251,14 @@
         "flower": "blue",
         "flower_reason": "同样的蓝色把这首与前后的思念连接起来。",
         "chord": {
-          "name": "Am(add9)",
+          "name": "Am7",
           "midi": [
             57,
-            60,
             64,
-            71
+            67,
+            72
           ],
-          "reason": "比小七更悬的九音，对应仍然想见的心情。"
+          "reason": "开放排列的小七和弦，五音、七音、三音依次向上，干净克制，像隔着时间轻声开口。"
         }
       }
     },
@@ -1274,11 +1282,11 @@
       },
       "clue": {
         "zh": "喧闹里得不到的东西让内心骚动，真正得到后又觉得空荡荡。多年装腔作势、小心翼翼，于我究竟有多大意义？像卓别林的默片，幽默，却传不出心中的真实声音。",
-        "en": "In the noise, wanting something unsettles me; getting it leaves me empty. What have years of posing and caution really meant? Like a Chaplin silent film: funny, but unable to carry my true inner voice."
+        "en": "In the noise, what I cannot have stirs my heart; once I truly have it, I feel hollow. What have years of posing and caution really meant? Like a Chaplin silent film: funny, but unable to carry my true inner voice."
       },
       "hint": {
-        "zh": "从喧闹和孤独，回到一个想见的人。",
-        "en": "From noise and loneliness back to someone you want to see."
+        "zh": "从喧闹和孤独，回到一个想见的人；或者走向一朵得不到的花。",
+        "en": "From noise and loneliness back to someone you want to see, or toward a flower you cannot have."
       },
       "next": [
         "kavMc624b",
@@ -1316,14 +1324,14 @@
         "flower": "blue",
         "flower_reason": "聚在一起的蓝色小花，表现人群之中的孤独。",
         "chord": {
-          "name": "Em7",
+          "name": "Bm7b5",
           "midi": [
-            52,
             59,
             62,
-            67
+            65,
+            69
           ],
-          "reason": "较低的小七和弦收回声量，接住外放之后的空落。"
+          "reason": "半减七和弦由三个小三度叠成，空而偏凉，对应得到之后的空落。"
         }
       }
     },
@@ -1399,14 +1407,14 @@
         "flower": "dahlia",
         "flower_reason": "向外伸展而密集的橙色花瓣，对应远行与人群。",
         "chord": {
-          "name": "Dsus2",
+          "name": "D9sus4",
           "midi": [
             50,
-            57,
-            62,
-            64
+            60,
+            64,
+            67
           ],
-          "reason": "不定大小调的二度悬置，让脚步有继续向外的余地。"
+          "reason": "九音悬四的和弦没有三音，不分大小调，让脚步可以继续向外。"
         }
       }
     },
@@ -1458,14 +1466,14 @@
         "flower": "dahlia",
         "flower_reason": "圆而温暖的橙色花，借放射结构呼应摩天轮。",
         "chord": {
-          "name": "Fadd9",
+          "name": "Dmaj9",
           "midi": [
-            53,
-            60,
-            67,
-            69
+            50,
+            61,
+            64,
+            66
           ],
-          "reason": "大三和弦里的九音让温暖带一点轻盈与上升感。"
+          "reason": "D 大九和弦借来 F♯ 与 C♯ 两个升号，像摩天轮升到最高处，视野忽然变亮。"
         }
       }
     },
@@ -1495,7 +1503,7 @@
       },
       "hint": {
         "zh": "那个一起转过的圈，也许是游乐场里的。",
-        "en": "The circle you travelled together may belong to a fairground."
+        "en": "The circle you went around together may belong to a fairground."
       },
       "next": [
         "e91122b1"
@@ -1519,14 +1527,14 @@
         "flower": "ivory",
         "flower_reason": "乳白花瓣像把一个片刻轻轻留在相纸上。",
         "chord": {
-          "name": "Cmaj7",
+          "name": "Cmaj7#5",
           "midi": [
             48,
-            55,
             59,
-            64
+            64,
+            68
           ],
-          "reason": "熟悉的大三和弦添一枚大七度，让凝固的瞬间有余味。"
+          "reason": "增大七和弦的五音升高，音色悬空，像一个凝固的瞬间留有余味。"
         }
       }
     },
@@ -1550,7 +1558,7 @@
       },
       "clue": {
         "zh": "声、光、味，速度、温度、浓度，这些重要的碎片组成了我。当我鼓起勇气把所有重要的东西都送给了你，你就变成了我最重要的东西。",
-        "en": "Sound, light, taste, speed, warmth and intensity: these fragments make me. When I find the courage to give you everything that matters, you become what matters most."
+        "en": "Sound, light, taste, speed, temperature and concentration: these fragments make me. When I find the courage to give you everything that matters, you become what matters most."
       },
       "hint": {
         "zh": "把感官与回忆定格。",
@@ -1609,7 +1617,7 @@
       },
       "clue": {
         "zh": "风花雪月不可等人，但如果是山那一般近似永恒的东西，又该如何？",
-        "en": "Passing romance cannot wait. But what of something almost eternal, like a mountain?"
+        "en": "Wind, flowers, snow and moon will not wait for anyone. But what of something almost eternal, like a mountain?"
       },
       "hint": {
         "zh": "爱上一座山。",
@@ -1640,11 +1648,11 @@
           "name": "Fmaj7/A",
           "midi": [
             57,
-            60,
             64,
-            65
+            65,
+            72
           ],
-          "reason": "温暖的大七转位，上方半音让明亮里带一点将逝的酸楚。"
+          "reason": "大七和弦放在三音上，E 与 F 只隔半音，温暖里带一点将逝的酸楚。"
         }
       }
     },
@@ -1668,7 +1676,7 @@
       },
       "clue": {
         "zh": "花与水相遇，短暂同行，各自带走旧日的记忆与一份赠礼。",
-        "en": "A flower and flowing water meet, travel briefly together, and carry away old memories and a gift."
+        "en": "A flower and flowing water meet, travel briefly together, and each takes away old memories and a gift."
       },
       "hint": {
         "zh": "山是一条路，赠礼是另一条。",
@@ -1697,14 +1705,15 @@
         "flower": "poppy",
         "flower_reason": "薄而舒展的朱红花瓣，借轻盈感表现相遇与漂流。",
         "chord": {
-          "name": "Dm7",
+          "name": "Bbmaj9",
           "midi": [
-            50,
-            57,
-            60,
-            65
+            58,
+            62,
+            65,
+            69,
+            72
           ],
-          "reason": "开放的小七和弦保持流动，伤感不过分沉重。"
+          "reason": "降 B 的大九和弦柔软，不急着落地，像花与水相遇后短暂同行。"
         }
       }
     },
@@ -1759,14 +1768,15 @@
         "flower": "dahlia",
         "flower_reason": "繁密的橙色花瓣对应世界的丰盛与纷繁。",
         "chord": {
-          "name": "C6/9(no5)",
+          "name": "Fmaj9#11",
           "midi": [
-            48,
-            57,
-            62,
-            64
+            53,
+            59,
+            64,
+            67,
+            69
           ],
-          "reason": "六、九音同时展开，留下丰盛而不封闭的色彩。"
+          "reason": "升十一的大九和弦把空间撑到最大，像人生一路载满的随机与未解；之后平稳地回到 C。"
         }
       }
     },
@@ -1790,11 +1800,11 @@
       },
       "clue": {
         "zh": "如果在某个初夏你见到一朵花，一定记得珍惜她，与她好好告别，虽然一路上你还会见到不同的花，但你也许不会再见到她。谁只能陪你走过那一段短暂夕照下温柔的旅程，而谁会留下？",
-        "en": "If you meet a flower in early summer, treasure her and say goodbye properly. You will meet other flowers along the way, but may never see her again. Who can accompany you only through a brief sunset journey, and who will stay?"
+        "en": "If you meet a flower in early summer, treasure her and say goodbye properly. You will meet other flowers along the way, but may never see her again. Who can accompany you only through that gentle stretch of journey under a brief sunset glow, and who will stay?"
       },
       "hint": {
         "zh": "夕照、花与流动，或整个世界。",
-        "en": "Sunset, flowers and flowing water, or the whole world."
+        "en": "Sunset, flowers and things that flow, or the whole world."
       },
       "next": [
         "fOlr5231a",
@@ -1820,14 +1830,14 @@
         "flower": "blue",
         "flower_reason": "冷蓝色的花让短暂相遇显得遥远，回应跨越时间的记忆。",
         "chord": {
-          "name": "Em7",
+          "name": "F#m7b5",
           "midi": [
-            52,
-            55,
-            62,
-            71
+            54,
+            64,
+            69,
+            72
           ],
-          "reason": "拉开的小七配器把高音放远，留下时间的纵深。"
+          "reason": "半减七和弦带着黄昏的凉意，低音与上方拉开很远，留出时间的纵深。"
         }
       }
     },
@@ -1849,7 +1859,7 @@
       },
       "clue": {
         "zh": "人会恋物，或许是因为在那物品上连接着对某些事、某些人的记忆，背包、单车、钥匙、贺卡。如果我能再活一百倍这样长度的时间，那时世界肯定早已不是这个世界，或许只有到那时，我才可能抛下这些回忆中的遗憾，只保留其中的欢喜。",
-        "en": "Perhaps we love objects because they connect to memories of people and events: a backpack, a bicycle, keys, a card. If life were a hundred times longer, perhaps we could finally keep the joy and let go of regret."
+        "en": "Perhaps we love objects because they connect to memories of people and events: a backpack, a bicycle, keys, a card. If I could live a hundred times as long as this, the world by then would surely be a different world; perhaps only then could I set down the regrets in these memories and keep only the joy."
       },
       "hint": {
         "zh": "物件里的亲情；或者漫长的未来。",
@@ -1892,14 +1902,15 @@
         "flower": "dahlia",
         "flower_reason": "暖橙花心像旧物中留下的体温。",
         "chord": {
-          "name": "Am7/E",
+          "name": "Am9/E",
           "midi": [
             52,
-            57,
             60,
-            67
+            67,
+            69,
+            71
           ],
-          "reason": "小七转位减弱落点，像还舍不得放下的旧物。"
+          "reason": "小九和弦放在五音上，低音落在 E，像舍不得放下的旧物；上方 G、A、B 三个音紧挨着，留一点没理清的念想。"
         }
       }
     },
@@ -1954,14 +1965,14 @@
         "flower": "dahlia",
         "flower_reason": "层层环绕的花瓣对应四季轮转。",
         "chord": {
-          "name": "Gsus4",
+          "name": "Gsus4(add9)",
           "midi": [
             55,
             60,
             62,
-            67
+            69
           ],
-          "reason": "悬四和弦等待继续，像循环仍未停止。"
+          "reason": "悬四加九的和弦始终没有三音，循环里的等待没有结论。"
         }
       }
     },
@@ -2015,14 +2026,14 @@
         "flower": "poppy",
         "flower_reason": "饱满的暖红色对应等待之后的成熟。",
         "chord": {
-          "name": "F6",
+          "name": "Abmaj7#11",
           "midi": [
-            53,
-            57,
+            56,
+            60,
             62,
-            72
+            67
           ],
-          "reason": "暖和的大六和弦向高处舒展，给漫长等待一个开阔的回应。"
+          "reason": "降 A 的大七升十一和弦把暖色推到调外，熟得有点偏；半音下滑落进四季圈的悬四和弦，像果实终于坠地。"
         }
       }
     },
@@ -2120,14 +2131,15 @@
         "flower": "blue",
         "flower_reason": "冷蓝簇花对应雨天、发线与绵延的回忆。",
         "chord": {
-          "name": "Dm9(no5)",
+          "name": "Dm6/9",
           "midi": [
             50,
-            60,
+            57,
             64,
-            65
+            65,
+            71
           ],
-          "reason": "小和弦里保留七音和九音，让雨后的回忆悬而未决。"
+          "reason": "多利亚色彩的小六九和弦，六音带一点向前的亮意，让雨后的回忆悬而未决。"
         }
       }
     },
@@ -2182,14 +2194,15 @@
         "flower": "blue",
         "flower_reason": "沿用蓝色记忆线，把十年的距离留在同一花色里。",
         "chord": {
-          "name": "Am7",
+          "name": "Am9",
           "midi": [
             57,
-            60,
             64,
-            67
+            67,
+            71,
+            72
           ],
-          "reason": "与不如不见保留同一小七和声，像记忆没有走远。"
+          "reason": "与不如不见保留同一个小九和声，只换成更高的排列，像记忆没有走远，只是抬高了一点。"
         }
       }
     },
@@ -2230,14 +2243,14 @@
         "flower": "blue",
         "flower_reason": "冷蓝色收束这条关于相遇与流逝的支线。",
         "chord": {
-          "name": "Am(add9)",
+          "name": "Fmaj7#11/A",
           "midi": [
             57,
-            60,
             64,
+            65,
             71
           ],
-          "reason": "保留悬着的九音，让死胡同像余韵而非失败提示。"
+          "reason": "低音仍留在 A，上方只挪动一两个音，由小调转向温暖的大七，像余韵而非失败提示。"
         }
       },
       "clue_format": "quote"
@@ -2259,7 +2272,7 @@
         }
       },
       "clue": {
-        "zh": "就像圈中圈，了断也了不断",
+        "zh": "像处圈中圈，了断也了不断",
         "en": "Like circles within circles: even an ending cannot end it all."
       },
       "hint": {
@@ -2296,9 +2309,9 @@
           "name": "Cadd9/E",
           "midi": [
             52,
-            55,
             60,
-            62
+            62,
+            67
           ],
           "reason": "明亮的转位添九音，温柔地从纠结里抬起头。"
         }
@@ -2308,7 +2321,9 @@
     {
       "id": "exaggerated",
       "title": "浮夸",
-      "aliases": [],
+      "aliases": [
+        "浮誇"
+      ],
       "identity": {
         "evidence_type": "author",
         "evidence_urls": [],
@@ -2356,21 +2371,23 @@
         "flower": "poppy",
         "flower_reason": "高饱和的朱红与深色花心，像舞台上的外放和内里的缺口。",
         "chord": {
-          "name": "E7",
+          "name": "E7b13",
           "midi": [
             52,
-            59,
+            60,
             62,
             68
           ],
-          "reason": "属七和弦的三全音保留张力，表现用力寻求认可的急切。"
+          "reason": "属七和弦带降十三音，三全音的张力里掺进一点苦涩，像用力过猛的表演。"
         }
       }
     },
     {
       "id": "red-rose",
       "title": "红玫瑰",
-      "aliases": [],
+      "aliases": [
+        "紅玫瑰"
+      ],
       "identity": {
         "evidence_type": "author",
         "evidence_urls": [],
@@ -2388,8 +2405,8 @@
         "en": "Red, white or black—each is only one among countless others."
       },
       "hint": {
-        "zh": "沿着这段话里的意象，想想下一首歌。",
-        "en": "Follow the imagery in these words to the next song."
+        "zh": "黑是一条路，山是一条路，万千花色的世界是另一条。",
+        "en": "Black is one route, a mountain another, and a world of countless flowers the third."
       },
       "next": [
         "8GcTLDedcc6",
@@ -2432,14 +2449,15 @@
         "flower": "poppy",
         "flower_reason": "朱红花瓣与深色花心表现热烈与缺憾的对照。",
         "chord": {
-          "name": "Am(maj7)",
+          "name": "Am(maj9)",
           "midi": [
             57,
             60,
             64,
-            68
+            68,
+            71
           ],
-          "reason": "小三和弦加大七度，让欲望与不满足同时存在。"
+          "reason": "小和弦加大七度与九音，暖里带冷，欲望与不满足同时在场。"
         }
       }
     },
@@ -2496,14 +2514,14 @@
         "flower": "poppy",
         "flower_reason": "黑色花心周围仍有鲜红花瓣，回应暗处的生命力。",
         "chord": {
-          "name": "Cm(add9)",
+          "name": "Cm6/9",
           "midi": [
             48,
-            55,
             62,
-            63
+            63,
+            69
           ],
-          "reason": "低处的小三和弦带九音，保留黑暗中向外的力量。"
+          "reason": "C 小调的六九和弦：低音沉着，D 与降 E 并置留出一道缝，像置之死地后透进来的光。"
         }
       }
     },
@@ -2528,8 +2546,8 @@
         "en": "Before we reach the end, let us sing with all our strength. This is proof that we were here."
       },
       "hint": {
-        "zh": "沿着这段话里的意象，想想下一首歌。",
-        "en": "Follow the imagery in these words to the next song."
+        "zh": "一间太安静的房间里，有一首歌想为整段人生作证。",
+        "en": "A room too quiet, and a song that wants to bear witness to a whole life."
       },
       "next": [
         "rAx50113"
@@ -2561,9 +2579,9 @@
           "name": "G7",
           "midi": [
             55,
-            59,
             62,
-            65
+            65,
+            71
           ],
           "reason": "属七和弦把张力交给下一站的 C 大三和弦，形成抵达感。"
         }
@@ -2608,12 +2626,13 @@
         "flower": "ivory",
         "flower_reason": "干净的乳白与暖黄花心，表达独一无二的陪伴。",
         "chord": {
-          "name": "Fmaj9(no5)",
+          "name": "Fmaj9",
           "midi": [
             53,
-            57,
+            60,
             64,
-            67
+            67,
+            69
           ],
           "reason": "柔和的大七与九音，像愿意一直奔向的温暖。"
         }
@@ -2623,7 +2642,9 @@
     {
       "id": "wedding-card-street",
       "title": "喜帖街",
-      "aliases": [],
+      "aliases": [
+        "囍帖街"
+      ],
       "identity": {
         "evidence_type": "author",
         "evidence_urls": [],
@@ -2642,7 +2663,7 @@
       },
       "hint": {
         "zh": "一路唱过，最后回到平静。",
-        "en": "Sing through a life, until it returns to stillness."
+        "en": "Singing all the way, and returning to stillness at the end."
       },
       "next": [
         "rAx50113"
@@ -2671,14 +2692,14 @@
         "flower": "ivory",
         "flower_reason": "乳白花瓣呼应婚礼，也保留告别旧日的轻。",
         "chord": {
-          "name": "G7sus4",
+          "name": "G9sus4",
           "midi": [
             55,
-            60,
-            62,
-            65
+            65,
+            69,
+            72
           ],
-          "reason": "悬四中的属七等待终点，喜悦与失去都暂时悬在一起。"
+          "reason": "九音悬四的属和弦，听上去像 F 大三和弦叠在 G 上，喜悦与失去都悬着，下一站才落地。"
         }
       }
     },
@@ -2719,17 +2740,252 @@
         "flower": "ivory",
         "flower_reason": "与终点同一乳白花，像结束后仍亮着的一盏灯。",
         "chord": {
-          "name": "C6/9(no5)",
+          "name": "Cmaj7#11",
           "midi": [
             60,
-            62,
             64,
-            69
+            66,
+            71
           ],
-          "reason": "在更高音区重述 C 的六、九音色彩，把结束变成轻盈的回声。"
+          "reason": "在更高音区重述 C，大七升十一带一点闪光，把结束变成轻盈的回声。"
         }
       }
     }
   ],
-  "bonus": "allegro"
+  "bonus": "allegro",
+  "finale": {
+    "beat": 0.5,
+    "steps": [
+      {
+        "node": "VbpP7694d",
+        "beats": 4,
+        "level": 0.34,
+        "roll": 0.24
+      },
+      {
+        "node": "b8OSHbf0e1",
+        "beats": 2,
+        "level": 0.38,
+        "roll": 0.18
+      },
+      {
+        "node": "mQKhoF955e4",
+        "beats": 2,
+        "level": 0.42,
+        "roll": 0.14
+      },
+      {
+        "node": "fOld7b901",
+        "beats": 2,
+        "level": 0.46,
+        "roll": 0.12
+      },
+      {
+        "node": "wLB3e449",
+        "beats": 1.5,
+        "level": 0.52,
+        "roll": 0.06
+      },
+      {
+        "node": "1769399775",
+        "beats": 1.5,
+        "level": 0.52,
+        "roll": 0.06
+      },
+      {
+        "node": "2113245",
+        "beats": 3,
+        "level": 0.5,
+        "roll": 0.1
+      },
+      {
+        "node": "hmuda8eb",
+        "beats": 1.5,
+        "level": 0.56,
+        "roll": 0.05
+      },
+      {
+        "node": "today",
+        "beats": 1.5,
+        "level": 0.56,
+        "roll": 0.05
+      },
+      {
+        "node": "mQ9j8i76fc8",
+        "beats": 2,
+        "level": 0.44,
+        "roll": 0.12
+      },
+      {
+        "node": "matchless",
+        "beats": 3,
+        "level": 0.42,
+        "roll": 0.16
+      },
+      {
+        "node": "VbpM8f3ff",
+        "beats": 1.5,
+        "level": 0.5,
+        "roll": 0.05
+      },
+      {
+        "node": "3075085",
+        "beats": 1.5,
+        "level": 0.54,
+        "roll": 0.05
+      },
+      {
+        "node": "3589514",
+        "beats": 1.5,
+        "level": 0.58,
+        "roll": 0.05
+      },
+      {
+        "node": "3589522",
+        "beats": 1.5,
+        "level": 0.62,
+        "roll": 0.05
+      },
+      {
+        "node": "e91122b1",
+        "beats": 1.5,
+        "level": 0.66,
+        "roll": 0.04
+      },
+      {
+        "node": "8Gmn27f4280",
+        "beats": 1.5,
+        "level": 0.68,
+        "roll": 0.04
+      },
+      {
+        "node": "exaggerated",
+        "beats": 1.5,
+        "level": 0.78,
+        "roll": 0.03
+      },
+      {
+        "node": "mQ9j8d7b7b0",
+        "beats": 2,
+        "level": 0.6,
+        "roll": 0.08
+      },
+      {
+        "node": "kavMc624b",
+        "beats": 1.5,
+        "level": 0.52,
+        "roll": 0.06
+      },
+      {
+        "node": "9lmK42c6b",
+        "beats": 2,
+        "level": 0.5,
+        "roll": 0.08
+      },
+      {
+        "node": "ten-years",
+        "beats": 2,
+        "level": 0.48,
+        "roll": 0.08
+      },
+      {
+        "node": "next-year-today",
+        "beats": 3,
+        "level": 0.42,
+        "roll": 0.14
+      },
+      {
+        "node": "mian-mian",
+        "beats": 3,
+        "level": 0.38,
+        "roll": 0.14
+      },
+      {
+        "node": "fOlr5231a",
+        "beats": 2,
+        "level": 0.44,
+        "roll": 0.08
+      },
+      {
+        "node": "kau7b16d6",
+        "beats": 2,
+        "level": 0.5,
+        "roll": 0.08
+      },
+      {
+        "node": "1769110881",
+        "beats": 2,
+        "level": 0.46,
+        "roll": 0.1
+      },
+      {
+        "node": "kavMc624b",
+        "beats": 1.5,
+        "level": 0.52,
+        "roll": 0.05
+      },
+      {
+        "node": "bqvdVl73c0ab",
+        "beats": 1.5,
+        "level": 0.6,
+        "roll": 0.05
+      },
+      {
+        "node": "b1qjuSo404ab",
+        "beats": 1.5,
+        "level": 0.66,
+        "roll": 0.04
+      },
+      {
+        "node": "r9g304ba",
+        "beats": 1.5,
+        "level": 0.72,
+        "roll": 0.04
+      },
+      {
+        "node": "8GcTLDedcc6",
+        "beats": 2,
+        "level": 0.82,
+        "roll": 0.04
+      },
+      {
+        "node": "wedding-card-street",
+        "beats": 3,
+        "level": 0.9,
+        "roll": 0.03
+      },
+      {
+        "node": "red-rose",
+        "beats": 1.5,
+        "level": 0.62,
+        "roll": 0.1
+      },
+      {
+        "node": "black-zek-ming",
+        "beats": 2,
+        "level": 0.74,
+        "roll": 0.06
+      },
+      {
+        "node": "the-end",
+        "beats": 3,
+        "level": 0.92,
+        "roll": 0.03
+      },
+      {
+        "node": "rAx50113",
+        "beats": 6,
+        "level": 0.88,
+        "roll": 0.16,
+        "release": 3.2
+      },
+      {
+        "node": "allegro",
+        "beats": 6,
+        "level": 0.42,
+        "roll": 0.3,
+        "release": 4.5
+      }
+    ]
+  }
 }

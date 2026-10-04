@@ -142,11 +142,13 @@ text{font-size:22px}` out-specifies it (baseline CSS, untouched).
   sound control 44x44.
 - Glide (Chrome, iPhone 13 Pro and 360 px Android profiles, English and Chinese; touches here
   are dispatched `touchstart` events, the real ones are under "Real device"): the heading ends
-  about 15 px clear of the sticky bar (15.2-15.4); reduced motion is one jump instead of an
-  eased scroll; a touch 120 ms after the answer leaves the page where it was (700 -> 700); a
-  touch during the glide ends it: `scrollY` read 537 at the touch, moved once more in the next
-  frame (to 426) and stayed there, 127 px short of the heading at 299; on desktop the page
-  does not scroll after the answer (167 before and after) and focus stays in the field.
+  12-15 px clear of the sticky bar (English and Chinese 15.4 and 15.2 in every run; the 360 px
+  Android profile 15.4, 13.4 and 12.4 in three runs, the last one against the deployed site);
+  reduced motion is one jump instead of an eased scroll; a touch 120 ms after the answer leaves
+  the page where it was (700 -> 700); a touch during the glide ends it: in three runs the page
+  moved in one more frame after the touch (by 111, 81 and 142 px, 9-37 ms later) and then
+  stayed, ending 96-238 px short of the heading's resting position (scroll 299); on desktop the
+  page does not scroll after the answer (167 before and after) and focus stays in the field.
 - Freeze-frame captures (WAAPI paused and stepped) of the answer moment on desktop and
   mobile; screenshots of fresh/mid/all-found, dead end, quote-format clue (ZH) and the
   epilogue.
@@ -323,10 +325,10 @@ by side (Chrome, 1440, device pixel ratio 2-3), not by the numbers alone.
   moved, so they were left as they were.
 - Aura gradients read the page's `--bloom-*` tokens, so a palette change needs no
   second edit; the arrowheads keep literal colours, as in the baseline.
-- `docs/ENDLESS_ECHOES_DESIGN.md` is not in git yet (it is the author's uncommitted
-  file), so it was not part of this release. It still needs: the walked/ghost/next path
-  styles, buds instead of numerals, the chord keyboard, the focus rule, and the new
-  answer-moment table row.
+- `docs/ENDLESS_ECHOES_DESIGN.md` was an uncommitted file of the author's at the time,
+  so it was not part of this release. It has since been committed with this release's
+  changes added (the walked/ghost/next path styles, buds instead of numerals, the chord
+  keyboard, the focus rule, the answer moment) and the score batch's.
 
 ## Evidence
 
