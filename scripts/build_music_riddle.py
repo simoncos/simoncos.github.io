@@ -153,6 +153,8 @@ def render_music_riddle(config):
         node['presentation'] = {'flower': art['flower'], 'chord': {'midi': art['chord']['midi']}}
         if source.get('open_answers'):
             node['open_answers'] = [{k:a[k] for k in ('title','aliases')} for a in source['open_answers']]
+        if source.get('decoys'):
+            node['decoys'] = [{k:a[k] for k in ('title','aliases','message')} for a in source['decoys']]
     serialized = json.dumps(payload,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')
     return render_document(config,page_config(config,PAGE),head=head,main=main,html_attrs=' data-page-theme="dark" data-theme="dark"',body_attrs=' class="music-riddle"',tail=f'<script type="application/json" id="echo-data">{serialized}</script>')
 

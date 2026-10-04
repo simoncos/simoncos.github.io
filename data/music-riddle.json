@@ -430,6 +430,19 @@
           }
         ]
       },
+      "decoys": [
+        {
+          "title": "不如不见",
+          "aliases": [
+            "不如不見"
+          ],
+          "message": {
+            "zh": "很近了：《不如不见》和这条路要接的歌是同一段旋律，它是粤语版。试试国语那首。",
+            "en": "Close: 不如不见 shares its melody with the song this path wants, but it is the Cantonese version. Try the Mandarin one."
+          },
+          "note": "同曲异词：《不如不见》粤语、《好久不见》国语。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        }
+      ],
       "presentation": {
         "flower": "blue",
         "flower_reason": "蓝色簇花像街上相似又陌生的面孔，留出缺席感。",
@@ -551,6 +564,19 @@
           }
         ]
       },
+      "decoys": [
+        {
+          "title": "好久不见",
+          "aliases": [
+            "好久不見"
+          ],
+          "message": {
+            "zh": "很近了：《好久不见》和这条路要接的歌是同一段旋律，它是国语版。试试粤语那首。",
+            "en": "Close: 好久不见 shares its melody with the song this path wants, but it is the Mandarin version. Try the Cantonese one."
+          },
+          "note": "同曲异词：《好久不见》国语、《不如不见》粤语。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        }
+      ],
       "presentation": {
         "flower": "blue",
         "flower_reason": "冷蓝色簇花对应远山与克制的告别。",
@@ -891,6 +917,19 @@
           }
         ]
       },
+      "decoys": [
+        {
+          "title": "热岛小夜曲",
+          "aliases": [
+            "熱島小夜曲"
+          ],
+          "message": {
+            "zh": "「热岛」在这里只是线索里的一个画面，不是要找的歌。",
+            "en": "The hot island is only an image in this clue, not the song you are looking for."
+          },
+          "note": "线索里的「热岛」正是这首歌（《Listen to Eason Chan》，2007）的标题词，但它的歌词与线索无关。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        }
+      ],
       "presentation": {
         "flower": "blue",
         "flower_reason": "与起点使用同一蓝色花，暗示记忆回到原处。",
@@ -1167,6 +1206,17 @@
         ],
         "candidates": []
       },
+      "decoys": [
+        {
+          "title": "明年今日",
+          "aliases": [],
+          "message": {
+            "zh": "很近了：《明年今日》和这条路要接的歌是同一段旋律，它是粤语版。试试国语那首。",
+            "en": "Close: 明年今日 shares its melody with the song this path wants, but it is the Cantonese version. Try the Mandarin one."
+          },
+          "note": "同曲异词：《明年今日》粤语、《十年》国语。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        }
+      ],
       "presentation": {
         "flower": "blue",
         "flower_reason": "冷蓝的花簇收住想见又不见的距离。",
@@ -1320,6 +1370,28 @@
         ],
         "candidates": []
       },
+      "decoys": [
+        {
+          "title": "白玫瑰",
+          "aliases": [],
+          "message": {
+            "zh": "很近了：《白玫瑰》和这条路要接的歌是同一段旋律，它是粤语版。试试国语那首。",
+            "en": "Close: 白玫瑰 shares its melody with the song this path wants, but it is the Cantonese version. Try the Mandarin one."
+          },
+          "note": "同曲异词：《白玫瑰》粤语、《红玫瑰》国语。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        },
+        {
+          "title": "不如不见",
+          "aliases": [
+            "不如不見"
+          ],
+          "message": {
+            "zh": "很近了：《不如不见》和这条路要接的歌是同一段旋律，它是粤语版。试试国语那首。",
+            "en": "Close: 不如不见 shares its melody with the song this path wants, but it is the Cantonese version. Try the Mandarin one."
+          },
+          "note": "同曲异词：《不如不见》粤语、《好久不见》国语。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        }
+      ],
       "presentation": {
         "flower": "blue",
         "flower_reason": "聚在一起的蓝色小花，表现人群之中的孤独。",
@@ -1641,6 +1713,19 @@
           }
         ]
       },
+      "decoys": [
+        {
+          "title": "爱情转移",
+          "aliases": [
+            "愛情轉移"
+          ],
+          "message": {
+            "zh": "很近了：《爱情转移》和这条路要接的歌是同一段旋律，它是国语版。试试粤语那首。",
+            "en": "Close: 爱情转移 shares its melody with the song this path wants, but it is the Mandarin version. Try the Cantonese one."
+          },
+          "note": "同曲异词：《爱情转移》是《富士山下》的国语版（《认了吧》，2007）。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        }
+      ],
       "presentation": {
         "flower": "dahlia",
         "flower_reason": "橙色花瓣直接回应夕照，繁盛中带着将尽的时间感。",
@@ -1701,6 +1786,19 @@
           }
         ]
       },
+      "decoys": [
+        {
+          "title": "爱情转移",
+          "aliases": [
+            "愛情轉移"
+          ],
+          "message": {
+            "zh": "很近了：《爱情转移》和这条路要接的歌是同一段旋律，它是国语版。试试粤语那首。",
+            "en": "Close: 爱情转移 shares its melody with the song this path wants, but it is the Mandarin version. Try the Cantonese one."
+          },
+          "note": "同曲异词：《爱情转移》是《富士山下》的国语版（《认了吧》，2007）。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        }
+      ],
       "presentation": {
         "flower": "poppy",
         "flower_reason": "薄而舒展的朱红花瓣，借轻盈感表现相遇与漂流。",
@@ -2022,6 +2120,17 @@
           }
         ]
       },
+      "decoys": [
+        {
+          "title": "四季",
+          "aliases": [],
+          "message": {
+            "zh": "方向对了，但不是《四季》。",
+            "en": "Right direction, but not 四季."
+          },
+          "note": "陈奕迅 2016 年粤语单曲（小克词、周国贤曲，国语版《I Do》），线索里四季与轮转的意象它同样贴合，而且更有名。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        }
+      ],
       "presentation": {
         "flower": "poppy",
         "flower_reason": "饱满的暖红色对应等待之后的成熟。",
@@ -2077,6 +2186,17 @@
         "xiami": "http://www.xiami.com/song/VbpP7694d",
         "predecessors": []
       },
+      "decoys": [
+        {
+          "title": "四季",
+          "aliases": [],
+          "message": {
+            "zh": "方向对了，但不是《四季》。",
+            "en": "Right direction, but not 四季."
+          },
+          "note": "陈奕迅 2016 年粤语单曲（小克词、周国贤曲，国语版《I Do》），线索里四季与轮转的意象它同样贴合，而且更有名。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        }
+      ],
       "presentation": {
         "flower": "blue",
         "flower_reason": "蓝色花簇作为夜间入口，也与倒带的回环相认。",
@@ -2302,6 +2422,17 @@
         ],
         "candidates": []
       },
+      "decoys": [
+        {
+          "title": "四季",
+          "aliases": [],
+          "message": {
+            "zh": "方向对了，但不是《四季》。",
+            "en": "Right direction, but not 四季."
+          },
+          "note": "陈奕迅 2016 年粤语单曲（小克词、周国贤曲，国语版《I Do》），线索里四季与轮转的意象它同样贴合，而且更有名。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        }
+      ],
       "presentation": {
         "flower": "ivory",
         "flower_reason": "浅色花瓣与暖心，回应接纳眼前生活的光。",
@@ -2445,6 +2576,30 @@
         ],
         "candidates": []
       },
+      "decoys": [
+        {
+          "title": "月黑风高",
+          "aliases": [
+            "月黑風高"
+          ],
+          "message": {
+            "zh": "很近了：《月黑风高》和这条路要接的歌是同一段旋律，它是国语版。试试粤语那首。",
+            "en": "Close: 月黑风高 shares its melody with the song this path wants, but it is the Mandarin version. Try the Cantonese one."
+          },
+          "note": "同曲异词：《月黑风高》是《黑择明》的国语版（《认了吧》，2007）。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        },
+        {
+          "title": "爱情转移",
+          "aliases": [
+            "愛情轉移"
+          ],
+          "message": {
+            "zh": "很近了：《爱情转移》和这条路要接的歌是同一段旋律，它是国语版。试试粤语那首。",
+            "en": "Close: 爱情转移 shares its melody with the song this path wants, but it is the Mandarin version. Try the Cantonese one."
+          },
+          "note": "同曲异词：《爱情转移》是《富士山下》的国语版（《认了吧》，2007）。2026-10-03 内容审阅 M2 列出的诱饵；2026-10-04 作者同意：孪生歌只提示、不算对。"
+        }
+      ],
       "presentation": {
         "flower": "poppy",
         "flower_reason": "朱红花瓣与深色花心表现热烈与缺憾的对照。",
