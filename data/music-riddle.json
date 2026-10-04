@@ -3076,8 +3076,10 @@
         "node": "mian-mian",
         "beats": 4,
         "level": 0.36,
+        "release": 0.45,
+        "gate": 0.7,
         "shape": "up",
-        "every": 0.75
+        "every": 0.5
       },
       {
         "node": "fOlr5231a",
