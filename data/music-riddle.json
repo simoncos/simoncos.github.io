@@ -2915,25 +2915,29 @@
         "node": "VbpP7694d",
         "beats": 4,
         "level": 0.34,
-        "roll": 0.24
+        "roll": 0.9,
+        "shape": "up"
       },
       {
         "node": "b8OSHbf0e1",
         "beats": 2.5,
         "level": 0.38,
-        "roll": 0.22
+        "roll": 0.7,
+        "shape": "bass"
       },
       {
         "node": "mQKhoF955e4",
         "beats": 1.5,
         "level": 0.42,
-        "roll": 0.12
+        "roll": 0.45,
+        "shape": "down"
       },
       {
         "node": "fOld7b901",
         "beats": 3,
         "level": 0.46,
-        "roll": 0.3
+        "roll": 0.9,
+        "shape": "bass"
       },
       {
         "node": "wLB3e449",
@@ -2953,7 +2957,8 @@
         "node": "2113245",
         "beats": 2.5,
         "level": 0.52,
-        "roll": 0.24
+        "roll": 0.8,
+        "shape": "skip"
       },
       {
         "node": "hmuda8eb",
@@ -2966,19 +2971,22 @@
         "node": "today",
         "beats": 1.5,
         "level": 0.58,
-        "roll": 0.1
+        "roll": 0.45,
+        "shape": "up"
       },
       {
         "node": "mQ9j8i76fc8",
         "beats": 2.5,
         "level": 0.42,
-        "roll": 0.28
+        "roll": 0.8,
+        "shape": "down"
       },
       {
         "node": "matchless",
         "beats": 3,
         "level": 0.44,
-        "roll": 0.32
+        "roll": 1.1,
+        "shape": "bass"
       },
       {
         "node": "VbpM8f3ff",
@@ -2998,7 +3006,8 @@
         "node": "3589514",
         "beats": 1.5,
         "level": 0.5,
-        "roll": 0.12
+        "roll": 0.5,
+        "shape": "skip"
       },
       {
         "node": "3589522",
@@ -3018,57 +3027,64 @@
         "node": "8Gmn27f4280",
         "beats": 1,
         "level": 0.66,
-        "roll": 0.02,
-        "gate": 0.55
+        "roll": 0.3,
+        "shape": "up"
       },
       {
         "node": "exaggerated",
         "beats": 3.5,
         "level": 0.8,
-        "roll": 0.18
+        "roll": 0.5,
+        "shape": "bass"
       },
       {
         "node": "mQ9j8d7b7b0",
         "beats": 2,
         "level": 0.58,
-        "roll": 0.16
+        "roll": 0.6,
+        "shape": "down"
       },
       {
         "node": "kavMc624b",
         "beats": 1,
         "level": 0.5,
-        "roll": 0.04,
-        "gate": 0.6
+        "roll": 0.3,
+        "shape": "up"
       },
       {
         "node": "9lmK42c6b",
         "beats": 2.5,
         "level": 0.48,
-        "roll": 0.24
+        "roll": 0.8,
+        "shape": "skip"
       },
       {
         "node": "ten-years",
         "beats": 1.5,
         "level": 0.46,
-        "roll": 0.12
+        "roll": 0.5,
+        "shape": "up"
       },
       {
         "node": "next-year-today",
         "beats": 3,
         "level": 0.42,
-        "roll": 0.3
+        "roll": 1.0,
+        "shape": "bass"
       },
       {
         "node": "mian-mian",
         "beats": 4,
         "level": 0.36,
-        "roll": 0.4
+        "roll": 1.4,
+        "shape": "up"
       },
       {
         "node": "fOlr5231a",
         "beats": 1.5,
         "level": 0.44,
-        "roll": 0.14
+        "roll": 0.5,
+        "shape": "down"
       },
       {
         "node": "kau7b16d6",
@@ -3081,7 +3097,8 @@
         "node": "1769110881",
         "beats": 2,
         "level": 0.48,
-        "roll": 0.2
+        "roll": 0.6,
+        "shape": "skip"
       },
       {
         "node": "kavMc624b",
@@ -3101,14 +3118,15 @@
         "node": "b1qjuSo404ab",
         "beats": 1.5,
         "level": 0.64,
-        "roll": 0.12
+        "roll": 0.5,
+        "shape": "up"
       },
       {
         "node": "r9g304ba",
         "beats": 1,
         "level": 0.7,
-        "roll": 0.02,
-        "gate": 0.6
+        "roll": 0.3,
+        "shape": "up"
       },
       {
         "node": "8GcTLDedcc6",

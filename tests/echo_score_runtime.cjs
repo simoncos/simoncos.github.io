@@ -311,6 +311,12 @@ async function testFinaleAgainstTheData() {
   const finale = data.finale;
   const steps = EchoScore.finaleSteps(finale, id => byId.get(id).presentation.chord.midi);
   assert.equal(steps.length, finale.steps.length);
+  // Broken-chord figures: each note enters once, within the roll.
+  assert.deepEqual(plain(EchoScore.figure('up', 3, .6)), [0, .3, .6]);
+  assert.deepEqual(plain(EchoScore.figure('down', 3, .6)), [.6, .3, 0]);
+  assert.deepEqual(plain(EchoScore.figure('bass', 4, 1)).map(x => +x.toFixed(3)), [0, .4, .7, 1]);
+  assert.deepEqual(plain(EchoScore.figure('skip', 4, .9)).map(x => +x.toFixed(3)), [0, .6, .9, .3]);
+  finale.steps.forEach((step, i) => { if (step.shape) { const o = steps[i].offsets; assert.equal(o.length, steps[i].midi.length); assert.ok(Math.max(...o) <= step.roll + 1e-9 && Math.max(...o) < steps[i].hold, 'figure inside the chord ' + i); } });
   steps.forEach((s, i) => {
     near(s.hold, finale.steps[i].beats * finale.beat * (finale.steps[i].gate ?? EchoScore.legato), 'hold ' + i);
     if (i) near(s.at - steps[i - 1].at, finale.steps[i - 1].beats * finale.beat, 'onset ' + i);

@@ -2,6 +2,27 @@
 /** The pure side of the score player: which chords a path or the finale plays, and when. No DOM and no audio, so Node can test it. */
 var EchoScore;
 (function (EchoScore) {
+    /**
+     * When each note of a broken chord enters, in seconds from the step, for `count` notes low to high spread over `roll`.
+     * up: low to high (the plain roll). down: high to low. bass: the bass on the step, then the upper notes rising after a
+     * breath, like a left hand and a right. skip: bass, top, then the middle notes upward, a figure that leaps across the voicing.
+     */
+    function figure(shape, count, roll) {
+        const even = (n, from) => Array.from({ length: n }, (_, k) => n > 1 ? from + (roll - from) * k / (n - 1) : from);
+        if (count < 2)
+            return [0];
+        if (shape === 'down')
+            return even(count, 0).reverse();
+        if (shape === 'bass')
+            return [0, ...even(count - 1, roll * .4)];
+        if (shape === 'skip') {
+            const order = [0, count - 1, ...Array.from({ length: count - 2 }, (_, k) => k + 1)], times = even(count, 0), out = [];
+            order.forEach((note, k) => { out[note] = times[k]; });
+            return out;
+        }
+        return even(count, 0);
+    }
+    EchoScore.figure = figure;
     /** Share of a chord's span that it sounds before its fade begins; the rest overlaps the next chord, like a sustain pedal. */
     EchoScore.legato = .92;
     /** Seconds per chord when a player's own path is played back, before the closing ritardando. */
@@ -82,7 +103,8 @@ var EchoScore;
         for (const step of finale.steps) {
             const span = step.beats * finale.beat;
             // `gate` is the share of its span a chord sounds: short gates are stabs that leave air before the next chord.
-            steps.push({ at, midi: midiOf(step.node), hold: span * (step.gate ?? EchoScore.legato), level: step.level, roll: step.roll, release: step.release });
+            const midi = midiOf(step.node);
+            steps.push({ at, midi, hold: span * (step.gate ?? EchoScore.legato), level: step.level, roll: step.roll, release: step.release, offsets: step.shape ? figure(step.shape, midi.length, step.roll ?? 0) : undefined });
             at += span;
         }
         return steps;

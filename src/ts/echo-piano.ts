@@ -5,7 +5,7 @@ namespace EchoPiano {
     /** Shortest and longest chord the piano plays at once (extended chords reach six notes). */
     export const minNotes = 3, maxNotes = 6;
     /** One chord of a piece. It starts `at` seconds after the piece begins, sounds for `hold` seconds, then fades over `release`. */
-    export interface Step { at:number; midi:readonly number[]; hold:number; level?:number; roll?:number; release?:number }
+    export interface Step { at:number; midi:readonly number[]; hold:number; level?:number; roll?:number; release?:number; offsets?:readonly number[] }
     export interface ScoreHooks {
         /** Audio is scheduled; the first step follows after `lead`. */
         onStart?():void;
@@ -148,7 +148,8 @@ namespace EchoPiano {
                 let previous=-1;
                 for(const step of steps){
                     if(!validChord(step.midi)||!finite(step.at,0,600)||step.at<previous||!finite(step.hold,.05,60)||!finite(step.level??defaultLevel,.01,1.2)
-                        ||!finite(step.roll??0,0,1)||!finite(step.release??defaultRelease,.05,12))throw new Error('Invalid score step');
+                        ||!finite(step.roll??0,0,3)||!finite(step.release??defaultRelease,.05,12)
+                        ||(step.offsets&&(step.offsets.length!==step.midi.length||!step.offsets.every(o=>finite(o,0,4)))))throw new Error('Invalid score step');
                     previous=step.at;
                 }
                 const Audio=window.AudioContext||(window as Window & {webkitAudioContext?:typeof AudioContext}).webkitAudioContext;
@@ -207,8 +208,8 @@ namespace EchoPiano {
                 const count=step.midi.length,level=.22*(step.level??defaultLevel)/Math.sqrt(count),roll=step.roll??0;
                 const fade=start+step.at+Math.max(step.hold,.03),release=step.release??defaultRelease;
                 for(let j=0;j<count;j++){
-                    // The roll spreads the chord low to high, like a hand; zero keeps it a block.
-                    const when=start+step.at+(count>1?roll*j/(count-1):0),hold=Math.max(fade,when+.02);
+                    // The roll spreads the chord low to high, like a hand; zero keeps it a block. A figure gives each note its own entry.
+                    const when=start+step.at+(step.offsets?step.offsets[j]:count>1?roll*j/(count-1):0),hold=Math.max(fade,when+.02);
                     const source=context.createBufferSource(),gain=context.createGain();
                     source.buffer=buffers.get(samples[i][j]);
                     source.playbackRate.setValueAtTime(Math.pow(2,(step.midi[j]-samples[i][j])/12),when);

@@ -102,7 +102,9 @@ class MusicRiddleTests(unittest.TestCase):
         broken(lambda f: f['steps'][3].pop('level'))
         broken(lambda f: f['steps'][3].update(level=1.5))
         broken(lambda f: f['steps'][3].update(beats=0.1))
-        broken(lambda f: f['steps'][3].update(roll=0.9))
+        broken(lambda f: f['steps'][3].update(roll=2.5))
+        broken(lambda f: f['steps'][3].update(shape='sideways'))
+        broken(lambda f: f['steps'][4].update(shape='up', roll=1.5))  # a figure longer than its chord
         broken(lambda f: f['steps'][3].update(release=0.05))
         broken(lambda f: f['steps'][3].update(volume=1))
         broken(lambda f: f.update(extra=1))
