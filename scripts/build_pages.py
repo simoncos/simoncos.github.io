@@ -48,8 +48,8 @@ ARTICLE_KIND = {"en": "Article", "zh": "文章"}
 NEWEST_SHOWN = 10
 TOPICS = (
     ("all", "All", "全部"),
-    ("build", "Creating", "创造"),
-    ("body", "Experiences", "体验"),
+    ("build", "Made", "创造"),
+    ("body", "Lived", "体验"),
     # The catch-all bucket, last. Labelled 其他 / Other so it does not collide
     # with the Articles page's narrower 思考 / Thinking tag; the key stays "think".
     ("think", "Other", "其他"),

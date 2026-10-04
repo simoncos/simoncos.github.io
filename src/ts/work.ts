@@ -193,6 +193,15 @@
     let shown: string | null = null;
 
     // The card a #type/work address points at, once its type is showing.
+    // Focus follows the reader to the card a link sent them to, for screen readers and the next Tab. The wash already shows
+    // which card it is, so the focus ring stays off until the reader moves focus themselves.
+    function land(card: HTMLElement | null) {
+        if (!card) return;
+        card.classList.add('is-landed');
+        card.addEventListener('blur', () => card.classList.remove('is-landed'), { once: true });
+        card.focus({ preventScroll: true });
+    }
+
     function pointAt(item: string) {
         const current = topics.find((section) => section.classList.contains('is-current'));
         const card = item && current ? current.querySelector<HTMLElement>(`[data-work="${CSS.escape(item)}"]`) : null;
@@ -257,7 +266,8 @@
         const change = () => {
             window.scrollTo(0, 0);
             const card = show(item ? `${id}/${item}` : id);
-            if (card) card.focus({ preventScroll: true });
+            if (card && item) land(card);
+            else if (card) card.focus({ preventScroll: true });
             else focusView();
         };
         if (shell && shell.fade) shell.fade(change);
@@ -313,5 +323,5 @@
     show(arrival.split('/')[0]);
     render();
     // Point at the card after the first layout, so the scroll lands where the page has settled.
-    if (arrival.includes('/')) requestAnimationFrame(() => pointAt(arrival.split('/')[1])?.focus({ preventScroll: true }));
+    if (arrival.includes('/')) requestAnimationFrame(() => land(pointAt(arrival.split('/')[1])));
 })();

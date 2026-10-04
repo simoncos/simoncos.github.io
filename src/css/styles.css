@@ -279,6 +279,13 @@ button {
     transition: background 0.25s, color 0.25s;
 }
 
+/* Four topics with counts fit a 360 px phone only with a little less air. */
+@media (max-width: 400px) {
+    .seg-btn {
+        padding: 0 12px;
+    }
+}
+
 .seg-btn[aria-pressed="true"],
 .seg-btn[aria-current="page"],
 .seg-btn[aria-current="true"] {
@@ -1655,21 +1662,29 @@ button {
 }
 
 /* The card a #type/work address points at (the home page links works this
-   way): a ring like the keyboard focus outline, held for a moment and then
-   faded, so the reader sees which card they were sent to. Drawn on ::after
-   and faded by opacity; an animated outline colour did not repaint. */
+   way): a warm wash behind it, the same --hl the archive and footnotes light
+   up on arrival, held for a moment and then faded, so the reader sees which
+   card they were sent to. Drawn on ::after and faded by opacity; an animated
+   outline colour did not repaint. */
 .wcard.is-target {
     position: relative;
+    isolation: isolate;
 }
 
 .wcard.is-target::after {
     content: "";
     position: absolute;
-    inset: -5px;
-    border: 2px solid var(--ink);
-    border-radius: 10px;
+    inset: -12px;
+    z-index: -1;
+    background: var(--hl);
+    border-radius: 24px;
     pointer-events: none;
     animation: wcard-target 2.4s var(--ease) both;
+}
+
+/* Focus arrives with the wash; its ring would only frame the card in black. */
+.wcard.is-landed:focus-visible {
+    outline: none;
 }
 
 @keyframes wcard-target {
