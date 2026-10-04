@@ -4152,6 +4152,84 @@ h2.k {
     background: var(--fill);
 }
 
+/* A few screenshots in one place, switched by tabs instead of stacked down
+   the page. Raw HTML in the article: radio inputs, then a stage of
+   same-sized images, then a caption of labels; the nth input shows the nth
+   image. No script, and the stage keeps its size as the tabs change. */
+.post-content figure.post-shots {
+    margin: 1.6em 0;
+}
+
+.post-shots-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.post-shots-stage {
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--fill);
+}
+
+.post-content .post-shots-stage img {
+    display: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+}
+
+.post-shots-input:nth-of-type(1):checked ~ .post-shots-stage img:nth-child(1),
+.post-shots-input:nth-of-type(2):checked ~ .post-shots-stage img:nth-child(2),
+.post-shots-input:nth-of-type(3):checked ~ .post-shots-stage img:nth-child(3),
+.post-shots-input:nth-of-type(4):checked ~ .post-shots-stage img:nth-child(4),
+.post-shots-input:nth-of-type(5):checked ~ .post-shots-stage img:nth-child(5) {
+    display: block;
+}
+
+.post-content figcaption.post-shots-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.post-shots-tabs label {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    color: var(--muted);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.post-shots-tabs label:hover {
+    color: var(--ink);
+}
+
+.post-shots-input:nth-of-type(1):checked ~ .post-shots-tabs label:nth-child(1),
+.post-shots-input:nth-of-type(2):checked ~ .post-shots-tabs label:nth-child(2),
+.post-shots-input:nth-of-type(3):checked ~ .post-shots-tabs label:nth-child(3),
+.post-shots-input:nth-of-type(4):checked ~ .post-shots-tabs label:nth-child(4),
+.post-shots-input:nth-of-type(5):checked ~ .post-shots-tabs label:nth-child(5) {
+    background: var(--ink);
+    color: var(--bg);
+}
+
+.post-shots-input:nth-of-type(1):focus-visible ~ .post-shots-tabs label:nth-child(1),
+.post-shots-input:nth-of-type(2):focus-visible ~ .post-shots-tabs label:nth-child(2),
+.post-shots-input:nth-of-type(3):focus-visible ~ .post-shots-tabs label:nth-child(3),
+.post-shots-input:nth-of-type(4):focus-visible ~ .post-shots-tabs label:nth-child(4),
+.post-shots-input:nth-of-type(5):focus-visible ~ .post-shots-tabs label:nth-child(5) {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
 .post-content figure {
     margin: 1.6em 0;
 }

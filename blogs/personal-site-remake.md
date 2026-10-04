@@ -16,6 +16,8 @@ description: 最近把个人网站从头重做了一遍：不只是外在的翻�
 
 新版是从一个设计包开始的。9 月 26 日深夜，我把间歇性用Claude Design打磨两三个星期的设计稿打包放进仓库，让 Claude 照着实现并部署，一个多小时后新版就上线了。
 
+<figure class="post-shots" role="group" aria-label="网站截图"><input class="post-shots-input" type="radio" name="site-shots" id="site-shot-home" checked><input class="post-shots-input" type="radio" name="site-shots" id="site-shot-phones"><input class="post-shots-input" type="radio" name="site-shots" id="site-shot-work"><input class="post-shots-input" type="radio" name="site-shots" id="site-shot-fav"><div class="post-shots-stage"><img src="assets/images/personal-site-remake/site-home.zh.webp" alt="网站首页（电脑）：「精选」一栏，展开的第一张是十年睡眠档案的散点图，其余几张竖着收起" width="1600" height="1000" loading="lazy" decoding="async"><img src="assets/images/personal-site-remake/site-phones.zh.webp" alt="手机上的四个页面：首页、作品轮盘、一篇文章和《晴天》" width="1600" height="1000" loading="lazy" decoding="async"><img src="assets/images/personal-site-remake/site-work.zh.webp" alt="作品页：作品类别的封面围成一个轮盘，当前一格是「应用」" width="1600" height="1000" loading="lazy" decoding="async"><img src="assets/images/personal-site-remake/site-fav.zh.webp" alt="收藏页：書、影、音、遊四张封面卡，各自标着数量和短评数" width="1600" height="1000" loading="lazy" decoding="async"></div><figcaption class="post-shots-tabs"><label for="site-shot-home">首页</label><label for="site-shot-phones">手机</label><label for="site-shot-work">作品</label><label for="site-shot-fav">收藏</label></figcaption></figure>
+
 之后两周，一边把旧版网站里被AI丢掉的细节设计和功能补回来，另一边是把我的文章、项目更多搬上来：从上线时的 8 篇到现在的 64 篇，最早一篇文章写于 2008 年，全部中英双语。
 
 关于新版本的网站，有几个好玩的地方：
@@ -30,7 +32,7 @@ description: 最近把个人网站从头重做了一遍：不只是外在的翻�
 
 ## 长青
 
-网站上的作品里一共有十一张点不进去的卡片。这些是过去几个月一直在做、但还没到能拿出来的程度的东西：
+网站上的作品里一共有 11 张点不进去的卡片。这些是过去几个月一直在做、但还没到能拿出来的程度的东西：
 
 - **Daily Oracle**：每天抽一张卡，去现实里做一件小事，回来记下。日子久了，卡册会慢慢扩展，花园会逐渐盛放。
 - **Vocal Coach**：练音准的手机应用，跟着目标音唱，实时看自己偏高还是偏低。《回响》和介绍视频里的钢琴声，最早来自我做这个app时找的真实采样。
@@ -57,6 +59,8 @@ description: 最近把个人网站从头重做了一遍：不只是外在的翻�
 视觉改了很多轮。一开始Codex做了一个暗绿色的背景，感觉脏脏的不好看，被我打回了；封面图一开始也是任由Codex自己生成，结果它生成的磁带意象，我第一眼看成了皮带。
 
 最终的设计以花为主要意象。封面图做成了花、钢琴和埃舍尔式的空间背景，路线图布局成了一朵玫瑰的形状，每首歌也是一朵花。这主要借鉴了陈奕迅Fear and Dreams 演唱会的艺术概念。有关花的几首歌曲，在我原本的谜题中本来也比较重要。
+
+![《漫无止尽的回响》页面：埃舍尔式的钢琴楼梯主图，下面是当前歌曲的花和回响地图](assets/images/personal-site-remake/site-echoes.zh.jpg)
 
 每首歌曲被猜中时会点亮绽开花朵，同时响起一个和弦。这些和弦从起点的 Csus2 走到最后会落在 C 上。玩家在过程中可以播放自己点亮路径的和弦小曲。
 
