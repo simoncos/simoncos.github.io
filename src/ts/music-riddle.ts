@@ -66,6 +66,14 @@
     const pathButton=root.querySelector<HTMLButtonElement>('[data-path-play]');
     const pathBeads=root.querySelector<HTMLElement>('[data-path-beads]');
     const pathCaption=root.querySelector<HTMLElement>('[data-path-caption]');
+    // On a computer the path plays over the map it is drawn on, so its row sits at the top of the map, in view without
+    // scrolling; on a phone the map is a separate view and the row stays under the answer field.
+    const pathRow=pathButton.closest<HTMLElement>('[data-path]'),pathHome=pathRow.parentElement,pathAfter=pathRow.nextSibling;
+    function placePath(){
+        if(compact.matches)pathHome.insertBefore(pathRow,pathAfter);
+        else mapPanel.querySelector('.echo-map-stage').before(pathRow);
+    }
+    placePath();compact.addEventListener('change',placePath);
     const finaleButton=root.querySelector<HTMLButtonElement>('[data-finale-play]');
     const finaleBar=root.querySelector<HTMLElement>('[data-finale-bar]');
     const finaleCaption=root.querySelector<HTMLElement>('[data-finale-caption]');
