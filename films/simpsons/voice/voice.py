@@ -41,6 +41,45 @@ MIN_STRETCH = 0.7   # a window may shrink to 70% of its scene length, no more
 LETTERS = {"A": "ei→", "B": "pi→"}
 
 
+def trim(audio: np.ndarray, rate: int) -> np.ndarray:
+    """Cut the model's leading and trailing silence."""
+    idx = np.flatnonzero(np.abs(audio) > 0.01)
+    return audio[max(0, idx[0] - int(0.03 * rate)) : idx[-1] + int(0.08 * rate)] if len(idx) else audio
+
+
+def pauses(whole: np.ndarray, rate: int) -> list[float]:
+    """Centres (s) of the pauses in a read: runs of 10 ms frames below 3% of the peak, 50 ms or longer."""
+    hop = int(0.01 * rate)
+    env = np.sqrt(np.convolve(whole ** 2, np.ones(hop) / hop, mode="same"))[::hop]
+    quiet = env < 0.03 * env.max()
+    out, i = [], 0
+    while i < len(quiet):
+        if quiet[i]:
+            j = i
+            while j < len(quiet) and quiet[j]:
+                j += 1
+            if j - i >= 5:
+                out.append((i + j) / 2 * hop / rate)
+            i = j
+        else:
+            i += 1
+    return out
+
+
+def split(whole: np.ndarray, prefixes: list[float], rate: int) -> list[np.ndarray]:
+    """Cut a paragraph's read into lines. prefixes[i] is how long the read of
+    the paragraph's first i+1 lines alone lasts: where line i ends, give or
+    take. Each cut goes to the pause nearest it, within 0.45 s."""
+    found = pauses(whole, rate)
+    cuts = []
+    for est in prefixes:
+        near = [p for p in found if abs(p - est) <= 0.45 and (not cuts or p * rate > cuts[-1])]
+        cut = min(near, key=lambda p: abs(p - est)) if near else est
+        cuts.append(int(cut * rate))
+    edges = [0] + cuts + [len(whole)]
+    return [whole[c0:c1] for c0, c1 in zip(edges, edges[1:])]
+
+
 def main() -> None:
     lang = sys.argv[1] if len(sys.argv) > 1 else "zh"
     spec = json.loads((HERE / f"lines.{lang}.json").read_text())
@@ -53,30 +92,48 @@ def main() -> None:
         from misaki import zh
         g2p = zh.ZHG2P()
 
-    clips, rate = [], 24000
-    for line in spec["lines"]:
+    rate = 24000
+
+    def say(text: str) -> np.ndarray:
+        nonlocal rate
         if g2p:
-            phonemes, _ = g2p(line["say"])
+            phonemes, _ = g2p(text)
             phonemes = re.sub(r"(?<![A-Za-z])([AB])(?![A-Za-z])", lambda m: LETTERS[m.group(1)], phonemes)
             audio, rate = kokoro.create(phonemes, voice=spec["voice"], speed=spec.get("speed", 1.0), is_phonemes=True)
         else:
-            audio, rate = kokoro.create(line["say"], voice=spec["voice"], speed=spec.get("speed", 1.0), lang="en-us")
-        # trim the model's leading and trailing silence
-        idx = np.flatnonzero(np.abs(audio) > 0.01)
-        audio = audio[max(0, idx[0] - int(0.03 * rate)) : idx[-1] + int(0.08 * rate)] if len(idx) else audio
-        clips.append(audio.astype(np.float32))
+            audio, rate = kokoro.create(text, voice=spec["voice"], speed=spec.get("speed", 1.0), lang="en-us")
+        return trim(audio.astype(np.float32), rate)
+
+    lines = spec["lines"]
+    clips = [say(l["say"]) for l in lines]          # each line alone, for its length
+    joined = [False] * len(lines)                    # True: follows the previous line within a paragraph
+    if "--paragraphs" in sys.argv:
+        # Read each paragraph in one go, so the sentences flow into each other, then
+        # cut it back into lines at the pauses nearest where each line should end.
+        for group in spec.get("paragraphs", []):
+            if len(group) < 2:
+                continue
+            whole = say("".join(lines[i]["say"] for i in group))
+            prefixes = [len(say("".join(lines[j]["say"] for j in group[: k + 1]))) / rate for k in range(len(group) - 1)]
+            parts = split(whole, prefixes, rate)
+            for k, (i, part) in enumerate(zip(group, parts)):
+                clips[i] = part
+                joined[i] = k > 0
 
     # the warp: scene time → film time
     warp = [[0.0, 0.0]]
     s_prev = f_prev = 0.0
     out_lines = []
-    for line, clip in zip(spec["lines"], clips):
+    for n, (line, clip) in enumerate(zip(lines, clips)):
         d = len(clip) / rate
         a, b = line["a"], line["b"]
+        last_in_para = n + 1 >= len(lines) or not joined[n + 1]
+        lead = 0.0 if joined[n] else LEAD
+        air = AIR if last_in_para else 0.0      # inside a paragraph, the read's own pause is the gap
         fa = f_prev + max(0.0, a - s_prev)
-        fb = fa + max(LEAD + d + AIR, MIN_STRETCH * (b - a))
+        fb = fa + max(lead + d + air, MIN_STRETCH * (b - a))
         warp += [[a, round(fa, 4)], [b, round(fb, 4)]]
-        out_lines.append({**line, "fa": round(fa, 4), "fb": round(fb, 4), "voice_at": round(fa + LEAD, 4), "voice_len": round(d, 4)})
+        out_lines.append({**line, "fa": round(fa, 4), "fb": round(fb, 4), "voice_at": round(fa + lead, 4), "voice_len": round(d, 4)})
         s_prev, f_prev = b, fb
     duration = round(f_prev + (SCENE_DURATION - s_prev), 3)
     warp.append([SCENE_DURATION, duration])
