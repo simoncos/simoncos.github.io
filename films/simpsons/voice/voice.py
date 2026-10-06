@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -35,6 +36,9 @@ SCENE_DURATION = 158.0
 LEAD = 0.3          # the voice starts this long after its caption appears
 AIR = 0.55          # and leaves this much before the window closes
 MIN_STRETCH = 0.7   # a window may shrink to 70% of its scene length, no more
+# The Chinese G2P passes Latin letters through untouched, and the model then
+# swallows them. Spell them as Mandarin speakers say them.
+LETTERS = {"A": "ei→", "B": "pi→"}
 
 
 def main() -> None:
@@ -53,6 +57,7 @@ def main() -> None:
     for line in spec["lines"]:
         if g2p:
             phonemes, _ = g2p(line["say"])
+            phonemes = re.sub(r"(?<![A-Za-z])([AB])(?![A-Za-z])", lambda m: LETTERS[m.group(1)], phonemes)
             audio, rate = kokoro.create(phonemes, voice=spec["voice"], speed=spec.get("speed", 1.0), is_phonemes=True)
         else:
             audio, rate = kokoro.create(line["say"], voice=spec["voice"], speed=spec.get("speed", 1.0), lang="en-us")
