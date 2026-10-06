@@ -34,7 +34,7 @@
     [106, 111.5, '可录取率不能这样相加。', 'Admission rates do not add up like that.'],
     [111.5, 117, '它们按报考人数加权平均。报考，是另一组要素：选择。', 'They average, weighted by who applies where. And where to apply is a choice.'],
     [117.5, 122.5, '换成几何来看：横轴是报名人数，纵轴是录取人数。', 'Geometrically: applicants along the bottom, admissions up the side.'],
-    [122.5, 128, '每个学院是一个向量，斜率就是录取率。A 学院，女生更陡。', 'Each school is a vector whose slope is its admission rate. In A, the women’s is steeper.'],
+    [122.5, 128, '每个学院是一个向量，斜率就是录取率。A 学院，女生更陡。', 'Each school is a vector, its slope the admission rate. In A, the women’s is steeper.'],
     [128, 133, 'B 学院，女生依然更陡。', 'In B, the women’s is steeper too.'],
     [133, 139.5, '首尾相接，男生的总向量却陡得多：能相加的是向量，不是斜率。', 'Joined end to end, the men’s total is far steeper. Vectors add; slopes do not.'],
     [140, 145, '在形式化之前，我们很难看见可加性这个隐含前提。', 'Until we write it down, the hidden premise of additivity is hard to see.'],
@@ -45,7 +45,7 @@
       const o = env(t, a, b, 0.35, 0.35);
       if (o <= 0) continue;
       F.text(ctx, S(zh, en), W / 2, 1000, {
-        size: L === 'en' ? 38 : 40, weight: 500, align: 'center', alpha: o, color: INK, maxWidth: 1500, valign: 'bottom', lineHeight: 1.35,
+        size: L === 'en' ? 38 : 40, weight: 500, align: 'center', alpha: o, color: INK, maxWidth: L === 'en' ? 1720 : 1500, valign: 'bottom', lineHeight: 1.35,
       });
     }
   }
@@ -466,10 +466,10 @@
     rows.forEach(([name, l, s, r, t0], i) => {
       const k = ep(t, t0, t0 + 0.7);
       const yy = 420 + i * 110;
-      F.text(ctx, name, 1420, yy, { size: 28, weight: 600, color: DIM, alpha: a * k });
-      F.text(ctx, l, 1640, yy, { size: 44, weight: 700, color: CW, align: 'right', alpha: a * k });
-      F.text(ctx, s, 1680, yy, { size: 44, weight: 500, align: 'center', alpha: a * k });
-      F.text(ctx, r, 1720, yy, { size: 44, weight: 700, color: CM, alpha: a * k });
+      F.text(ctx, name, 1360, yy, { size: 28, weight: 600, color: DIM, alpha: a * k });
+      F.text(ctx, l, 1660, yy, { size: 44, weight: 700, color: CW, align: 'right', alpha: a * k });
+      F.text(ctx, s, 1700, yy, { size: 44, weight: 500, align: 'center', alpha: a * k });
+      F.text(ctx, r, 1740, yy, { size: 44, weight: 700, color: CM, alpha: a * k });
     });
     const k = ep(t, 136.4, 137.2);
     F.text(ctx, S('斜率不可加，向量可加', 'slopes don’t add; vectors do'), 1590, 780, { size: 28, weight: 600, align: 'center', color: INK, alpha: a * k });

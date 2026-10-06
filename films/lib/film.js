@@ -39,7 +39,7 @@
   };
 
   F.SANS = '"Inter Variable", "Noto Sans SC Variable", sans-serif';
-  F.SERIF = '"Noto Serif SC Variable", serif';
+  F.SERIF = '"Noto Serif Variable", "Noto Serif SC Variable", serif';
   F.MONO = '"JetBrains Mono Variable", "Noto Sans SC Variable", monospace';
   F.font = (size, weight = 400, family = F.SANS) => `${weight} ${size}px ${family}`;
 
