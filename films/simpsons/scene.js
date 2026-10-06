@@ -478,8 +478,8 @@
   function closing(ctx, t) {
     const a = env(t, 145.6, 151.2, 0.9, 0.9);
     if (a) {
-      F.text(ctx, S('数字不会说谎，', 'Numbers don’t lie.'), W / 2, 500, { size: 76, weight: 700, align: 'center', alpha: a });
-      F.text(ctx, S('只会被算错。', 'They only get miscalculated.'), W / 2, 610, { size: 76, weight: 700, align: 'center', alpha: a * ep(t, 146.8, 147.6), color: CW });
+      F.text(ctx, S('数据不会说谎，', 'Data doesn’t lie.'), W / 2, 500, { size: 76, weight: 700, align: 'center', alpha: a });
+      F.text(ctx, S('悖论下面，都藏有深刻的原理。', 'Beneath every paradox lies a deeper principle.'), W / 2, 610, { size: L === 'en' ? 62 : 76, weight: 700, align: 'center', alpha: a * ep(t, 146.8, 147.6), color: CW });
     }
     const e = env(t, 151.6, DURATION + 1, 0.9, 0.1);
     if (e) {
@@ -528,8 +528,8 @@
 
   const strings = [
     ...CAPTIONS.map(c => (L === 'en' ? c[3] : c[2])),
-    '每一组都赢了，加起来却输了。文章辛普森悖论与直觉的缺陷学院女男生人录取报名整体全文率之差个百分点多若每都有则报考比例数字不会说谎只会被算错',
-    'Win in every group, and still lose overall. Essay Simpson’s Paradox Flaws Intuition School women men applied admitted overall share rate points vs Read it at numbers don’t lie miscalculated slopes vectors',
+    '每一组都赢了，加起来却输了。文章辛普森悖论与直觉的缺陷学院女男生人录取报名整体全文率之差个百分点多若每都有则报考比例数据不会说谎悖论下面都藏有深刻的原理',
+    'Win in every group, and still lose overall. Essay Simpson’s Paradox Flaws Intuition School women men applied admitted overall share rate points vs Read it at Data doesn’t lie Beneath every paradox lies a deeper principle slopes vectors',
     '→↑≠×…“”’',
   ];
   const film = F.create({

@@ -141,76 +141,92 @@ def groove(mus, drm, t0, t1, prog, level=1.0, drums=True, arp=True, hats16=False
         b += 1
 
 
+# One beat grid for the whole film, anchored on the groove's first downbeat.
+# Sections start on bar lines and hits land on beats, so no section enters
+# ahead of or behind the pulse the last one set.
+GRID0 = 13.4
+
+
+def B(t: float) -> float:
+    """The beat nearest t."""
+    return GRID0 + round((t - GRID0) / BEAT) * BEAT
+
+
+def BARLINE(t: float) -> float:
+    """The bar line nearest t."""
+    return GRID0 + round((t - GRID0) / BAR) * BAR
+
+
 def main() -> None:
     cues = json.loads((HERE / "cues.json").read_text())
     D = cues["duration"]
     mus, drm, sfx = A.track(D), A.track(D), A.track(D)
 
     # hook: two stabs on the two lines, a riser into the title
-    stab(mus, 0.6, CH["D"][1], 0.5, 2.5)
-    bass(mus, 0.6, 38, 1.2)
-    stab(mus, 2.1, CH["Bm"][1], 0.5, 2.5)
-    bass(mus, 2.1, 35, 1.2)
+    stab(mus, B(0.6), CH["D"][1], 0.5, 2.5)
+    bass(mus, B(0.6), 38, 1.2)
+    stab(mus, B(2.1), CH["Bm"][1], 0.5, 2.5)
+    bass(mus, B(2.1), 35, 1.2)
     for i in range(8):
-        mallet(mus, 3.4 + i * BEAT / 2, [74, 78, 81, 86, 81, 78, 74, 69][i], 0.08)
-    riser(sfx, 4.4, 2.2, 0.12)
-    kick(drm, 6.6, 0.55); stab(mus, 6.6, CH["G"][1], 0.55, 3)
+        mallet(mus, B(3.4) + i * BEAT / 2, [74, 78, 81, 86, 81, 78, 74, 69][i], 0.08)
+    riser(sfx, B(4.4 + 2.2) - 2.2, 2.2, 0.12)
+    kick(drm, B(6.6), 0.55); stab(mus, B(6.6), CH["G"][1], 0.55, 3)
     # title: arpeggio alone, then the groove comes in on the setup
-    groove(mus, drm, 6.6 + BAR / 2, 13.4, ["G", "A"], level=0.7, drums=False, stabs=False)
+    groove(mus, drm, BARLINE(6.6) + BAR / 2, BARLINE(13.4), ["G", "A"], level=0.7, drums=False, stabs=False)
 
     # setup → applications: the groove
-    groove(mus, drm, 13.4, 40.4, ["D", "Bm", "G", "A"], level=0.9)
+    groove(mus, drm, BARLINE(13.4), BARLINE(40.4), ["D", "Bm", "G", "A"], level=0.9)
     # admissions: busier hats, no arpeggio so the ticks come through
-    groove(mus, drm, 40.4, 52.0, ["D", "Bm", "G", "A"], level=0.85, arp=False, hats16=True)
+    groove(mus, drm, BARLINE(40.4), BARLINE(52.0), ["D", "Bm", "G", "A"], level=0.85, arp=False, hats16=True)
     # adding up: build to the flip
-    groove(mus, drm, 52.0, 59.6, ["G", "A"], level=0.95, hats16=True)
-    for i, tt in enumerate(np.arange(59.6, 61.45, BEAT / 4)):
+    groove(mus, drm, BARLINE(52.0), BARLINE(59.6), ["G", "A"], level=0.95, hats16=True)
+    for i, tt in enumerate(np.arange(BARLINE(59.6), B(61.5) - 0.01, BEAT / 4)):
         clap(drm, tt, 0.06 + 0.1 * i / 8)
-    riser(sfx, 58.8, 2.7, 0.16)
+    riser(sfx, B(58.8 + 2.7) - 2.7, 2.7, 0.16)
     # the flip: everything stops on a boom and a minor chord
-    boom(sfx, 61.5, 0.55)
-    stab(mus, 61.5, [47, 54, 59, 62, 66], 0.65, 4)
+    boom(sfx, B(61.5), 0.55)
+    stab(mus, B(61.5), [47, 54, 59, 62, 66], 0.65, 4)
     # question: suspense, a ticking clock and held chords
-    for i, tt in enumerate(np.arange(62.6, 71.3, BEAT)):
+    for i, tt in enumerate(np.arange(B(62.6), 71.3, BEAT)):
         hat(drm, tt, 0.05 if i % 2 else 0.07)
     for tt, ch in ((64.2, "G"), (66.0, "Em"), (68.0, "F#m")):
-        stab(mus, tt, CH[ch][1], 0.36, 2.5)
-        bass(mus, tt, CH[ch][0], 1.5, 0.25)
-    riser(sfx, 69.6, 1.9, 0.1)
+        stab(mus, B(tt), CH[ch][1], 0.36, 2.5)
+        bass(mus, B(tt), CH[ch][0], 1.5, 0.25)
+    riser(sfx, B(69.6 + 1.9) - 1.9, 1.9, 0.1)
 
     # explanation: the groove back, a little brighter
-    groove(mus, drm, 71.5, 95.2, ["G", "D", "A", "Bm"], level=1.0)
+    groove(mus, drm, BARLINE(71.5), BARLINE(95.2), ["G", "D", "A", "Bm"], level=1.0)
 
     # formula: half time, tension, a borrowed minor, then release
-    boom(sfx, 95.6, 0.3)
-    for i, tt in enumerate(np.arange(95.6, 106.0, BEAT)):
+    boom(sfx, BARLINE(95.2), 0.3)
+    for i, tt in enumerate(np.arange(BARLINE(95.2), B(106.0) - 0.01, BEAT)):
         if i % 4 == 0: kick(drm, tt, 0.35)
         if i % 4 == 2: clap(drm, tt, 0.16)
         hat(drm, tt + BEAT / 2, 0.05)
         mallet(mus, tt, 69 if i % 2 else 74, 0.07)
         if i % 4 == 0: bass(mus, tt, 38, 1.0, 0.28)
-    stab(mus, 106.0, CH["Gm"][1], 0.55, 3); bass(mus, 106.0, 43, 2.0)
-    boom(sfx, 106.0, 0.25)
-    for i, tt in enumerate(np.arange(107.6, 111.5, BEAT)):
+    stab(mus, B(106.0), CH["Gm"][1], 0.55, 3); bass(mus, B(106.0), 43, 2.0)
+    boom(sfx, B(106.0), 0.25)
+    for i, tt in enumerate(np.arange(B(107.6), 111.5, BEAT)):
         hat(drm, tt, 0.05); mallet(mus, tt, 70 if i % 2 else 74, 0.06)
-    riser(sfx, 109.8, 1.8, 0.1)
-    groove(mus, drm, 111.6, 117.4, ["D", "A"], level=0.85, stabs=True, arp=True)
+    riser(sfx, B(109.8 + 1.8) - 1.8, 1.8, 0.1)
+    groove(mus, drm, BARLINE(111.6), BARLINE(117.4), ["D", "A"], level=0.85, stabs=True, arp=True)
 
     # vectors: full groove, lifting at the totals
-    groove(mus, drm, 117.6, 133.6, ["Em", "G", "D", "A"], level=0.95)
-    riser(sfx, 131.8, 1.8, 0.12)
-    groove(mus, drm, 133.6, 139.6, ["G", "A"], level=1.1, hats16=True)
-    stab(mus, 139.6, CH["Bm"][1], 0.45, 3); bass(mus, 139.6, 35, 2)
+    groove(mus, drm, BARLINE(117.6), BARLINE(133.6), ["Em", "G", "D", "A"], level=0.95)
+    riser(sfx, B(131.8 + 1.8) - 1.8, 1.8, 0.12)
+    groove(mus, drm, BARLINE(133.6), BARLINE(139.6), ["G", "A"], level=1.1, hats16=True)
+    stab(mus, B(139.6), CH["Bm"][1], 0.45, 3); bass(mus, B(139.6), 35, 2)
 
     # closing: light, then a final hit on the quote and an open ending
-    groove(mus, drm, 140.4, 145.4, ["G", "A"], level=0.6, drums=False, stabs=False)
-    kick(drm, 145.6, 0.5); stab(mus, 145.6, [50, 62, 66, 69, 74], 0.6, 4); bass(mus, 145.6, 38, 2)
-    stab(mus, 147.0, CH["A"][1], 0.4, 3)
-    groove(mus, drm, 148.4, 151.4, ["G", "A"], level=0.5, drums=False, stabs=False)
-    kick(drm, 151.6, 0.45)
-    stab(mus, 151.6, [50, 57, 62, 66, 69, 76], 0.55, 6); bass(mus, 151.6, 38, 3)
+    groove(mus, drm, BARLINE(140.4), B(145.6), ["G", "A"], level=0.6, drums=False, stabs=False)
+    kick(drm, B(145.6), 0.5); stab(mus, B(145.6), [50, 62, 66, 69, 74], 0.6, 4); bass(mus, B(145.6), 38, 2)
+    stab(mus, B(147.0), CH["A"][1], 0.4, 3)
+    groove(mus, drm, BARLINE(148.4), B(151.6), ["G", "A"], level=0.5, drums=False, stabs=False)
+    kick(drm, B(151.6), 0.45)
+    stab(mus, B(151.6), [50, 57, 62, 66, 69, 76], 0.55, 6); bass(mus, B(151.6), 38, 3)
     for i in range(8):
-        mallet(mus, 152.2 + i * BEAT / 2, [74, 76, 78, 81, 83, 86, 88, 90][i], 0.06 * (1 - i / 10))
+        mallet(mus, B(152.2) + i * BEAT / 2, [74, 76, 78, 81, 83, 86, 88, 90][i], 0.06 * (1 - i / 10))
 
     # ticks from the film's cues
     penta = [74, 76, 78, 81, 83, 86, 88, 90, 93]

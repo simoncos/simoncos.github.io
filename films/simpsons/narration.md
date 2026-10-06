@@ -27,7 +27,7 @@
 | 20 | B 学院的两个向量 | B 学院，女生的依然更陡。 | In B, the women's is steeper too. |
 | 21 | 两条总向量 | 可首尾相接之后，男生的总向量却陡得多。能相加的是向量，不是斜率。 | Yet joined end to end, the men's total is far steeper. Vectors add; slopes don't. |
 | 22 | 收尾 | 在形式化之前，我们很难看见可加性这个隐含的前提。 | Until we write it down, the hidden premise of additivity is very hard to see. |
-| 23 | 金句 | 数字不会说谎，只会被算错。 | Numbers don't lie. They only get miscalculated. |
+| 23 | 金句 | 数据不会说谎，悖论下面，都藏有深刻的原理。 | Data doesn't lie. Beneath every paradox lies a deeper principle. |
 | 24 | 片尾 | 全文在 simoncos.github.io。 | The full essay is at simoncos.github.io. |
 
 中文约 760 字，按每秒 4.5 字左右，大约 2 分 50 秒；英文约 2 分 40 秒。比现在的无声版长 15 秒左右，画面节拍会跟着旁白重排。
