@@ -16,14 +16,15 @@
   // ---- captions -------------------------------------------------------
   const CAPTIONS = [
     [13.5, 18.5, '一所学校招生，有 A、B 两个学院。', 'A university admits students to two schools, A and B.'],
-    [18.5, 23.5, '在两个学院里，女生的录取率都比男生高。', 'In both schools, women are admitted at a higher rate than men.'],
-    [23.5, 28.5, '现在，男女生各 100 人报名。', 'Now 100 women and 100 men apply.'],
-    [28.5, 34, '但他们报的学院很不一样。', 'But they apply to very different schools.'],
-    [34, 40, '女生 10 人报 A，90 人报 B；男生 90 人报 A，10 人报 B。', '10 women apply to A and 90 to B; 90 men apply to A and 10 to B.'],
+    [18.5, 23.5, '男女生各 100 人报名。', '100 women and 100 men apply.'],
+    [23.5, 28.5, '但他们报的学院很不一样。', 'But they apply to very different schools.'],
+    [28.5, 34, '女生 10 人报 A，90 人报 B；男生 90 人报 A，10 人报 B。', '10 women apply to A and 90 to B; 90 men apply to A and 10 to B.'],
+    [34, 40.3, '两个学院就像两张筛子：A 的网眼大，B 的网眼细得多。', 'The two schools are like two sieves: A has wide holes, B very fine ones.'],
     [40.5, 46, 'A 学院：女生录取 100%，男生录取 90%。', 'School A admits 100% of the women and 90% of the men.'],
     [46, 51.5, 'B 学院：女生录取 10%，男生一个不收。', 'School B admits 10% of the women and none of the men.'],
-    [52, 58, '把两个学院加起来——', 'Now add the two schools together.'],
-    [58, 65.5, '女生共录取 19 人，男生共录取 81 人。', '19 women are admitted, and 81 men.'],
+    [51.6, 56, '在两个学院里，女生的录取率都比男生高。', 'In both schools, women are admitted at a higher rate than men.'],
+    [56, 59, '把两个学院加起来——', 'Now add the two schools together.'],
+    [59, 65.5, '女生共录取 19 人，男生共录取 81 人。', '19 women are admitted, and 81 men.'],
     [65.5, 71, '每个学院都是女生更高，整体却是男生大胜。这是怎么回事？', 'Women do better in every school, yet men win overall. How?'],
     [71.5, 77, '报 A 像赌输赢，风险小；报 B 像猜比分，风险大。', 'Applying to A is like betting on who wins; applying to B, on the exact score.'],
     [77, 82.5, '两个学院之间的难度差距，远远大过男女之间的差距。', 'The gap between the schools is far wider than the gap between women and men.'],
@@ -91,15 +92,20 @@
     return [80 + d.sx * (W - 160) + F.noise(t * 0.15, d.r * 100) * 40, 80 + d.sy * (H - 220) + F.noise(t * 0.15 + 9, d.r * 100) * 40];
   }
   const posPool = d => grid(d.g === 'W' ? 740 : 1180, 430, d.idx, 32);
-  const posCol = d => grid((d.c === 'A' ? XA : XB) + (d.g === 'W' ? -170 : 170), 420, d.ci, 30);
+  const posCol = d => grid((d.c === 'A' ? XA : XB) + (d.g === 'W' ? -170 : 170), 392, d.ci, 24);
+  // Under each school, a sieve; admitted dots fall through it to the same place below.
+  const SIEVE_Y = 628;
+  const posPass = d => { const [x, y] = posCol(d); return [x, y + 300]; };
   const posTotal = d => grid(d.g === 'W' ? 700 : 1220, 640, d.ti, 25);
 
   function dotPos(d, t) {
     let p = posScatter(d, t);
     const t1 = 14 + d.r * 2.5;
     p = mix(p, posPool(d), ep(t, t1, t1 + 2.6));
-    const t2 = 29 + d.r * 2.6 + (d.g === 'M' ? 0.4 : 0);
+    const t2 = 24 + d.r * 2.6 + (d.g === 'M' ? 0.4 : 0);
     p = mix(p, posCol(d), ep(t, t2, t2 + 2.2));
+    if (d.admitted) p = mix(p, posPass(d), ep(t, d.td, d.td + 0.6, ease.in));
+    else if (t > d.td) p = [p[0], p[1] + 4 * Math.sin(Math.PI * prog(t, d.td, d.td + 0.3))];   // bounces on the mesh
     if (d.admitted) p = mix(p, posTotal(d), ep(t, d.tArrive - 1.2, d.tArrive));
     return p;
   }
@@ -113,13 +119,13 @@
     for (const d of dots) {
       const [x, y] = dotPos(d, t);
       const color = d.g === 'W' ? CW : CM;
-      let a = 0.55 * appear, r = 10, filled = true, glow = 0;
+      let a = 0.55 * appear, r = 9, filled = true, glow = 0;
       if (t < 14) a *= 0.6;                      // drifting behind the title
       if (t >= d.td) {
         const k = ep(t, d.td, d.td + 0.35, ease.out);
         if (d.admitted) {
           a = lerp(0.55, 1, k);
-          r = 10 + 4 * Math.sin(Math.PI * k);
+          r = 9 + 3 * Math.sin(Math.PI * k);
           glow = k;
         } else {
           a = lerp(0.55, 0.32, k);
@@ -127,7 +133,7 @@
         }
       }
       if (!d.admitted && t > 55) a *= 1 - ep(t, 55, 57);
-      if (d.admitted && t > d.tArrive - 1.2) r = lerp(10, 8.5, ep(t, d.tArrive - 1.2, d.tArrive));
+      if (d.admitted && t > d.tArrive - 1.2) r = lerp(9, 8.5, ep(t, d.tArrive - 1.2, d.tArrive));
       a *= fadeAll;
       if (a <= 0.003) continue;
       ctx.save();
@@ -187,17 +193,46 @@
     }
   }
 
-  function pulseAt(t) { return t > 66 && t < 71 ? 0.5 + 0.5 * Math.sin((t - 66) * Math.PI * 1.6 - Math.PI / 2) : 0; }
+  function pulseAt(t) {
+    if (t > 52.2 && t < 55.4) return 0.5 + 0.5 * Math.sin((t - 52.2) * Math.PI * 1.6 - Math.PI / 2);
+    return t > 66 && t < 71 ? 0.5 + 0.5 * Math.sin((t - 66) * Math.PI * 1.6 - Math.PI / 2) : 0;
+  }
+
+  // Two sieves: the mesh is the school's difficulty. A's holes are wide,
+  // B's so fine that almost nothing gets through.
+  function sieves(ctx, t) {
+    const a = env(t, 34.2, 56.6, 0.8, 1.2);
+    if (!a) return;
+    for (const [c, x0, pitch] of [['A', XA, 38], ['B', XB, 7]]) {
+      const grow = ep(t, 34.2 + (c === 'B' ? 0.5 : 0), 35.4 + (c === 'B' ? 0.5 : 0));
+      const [s0, s1] = [SWEEP[c].W[0], SWEEP[c].M[1]];
+      const shake = t > s0 && t < s1 + 0.4 ? Math.sin(t * 46) * 2.5 : 0;
+      const half = 320 * grow, y = SIEVE_Y;
+      ctx.save();
+      ctx.globalAlpha = a;
+      ctx.translate(shake, 0);
+      ctx.strokeStyle = '#a4a49e'; ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.moveTo(x0 - half, y - 12); ctx.lineTo(x0 + half, y - 12); ctx.moveTo(x0 - half, y + 12); ctx.lineTo(x0 + half, y + 12); ctx.stroke();
+      ctx.strokeStyle = '#85857f'; ctx.lineWidth = c === 'A' ? 3.5 : 1.8;
+      ctx.beginPath();
+      for (let x = x0 - half; x <= x0 + half; x += pitch) { ctx.moveTo(x, y - 12); ctx.lineTo(x, y + 12); }
+      if (c === 'B') for (let yy = y - 8; yy <= y + 8; yy += 4) { ctx.moveTo(x0 - half, yy); ctx.lineTo(x0 + half, yy); }
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
 
   function headers(ctx, t) {
     const a = env(t, 13.4, 72, 0.7, 1.2);
     if (!a) return;
-    for (const [c, x, l, r, t0] of [['A', XA, '100%', '90%', 13.6], ['B', XB, '10%', '0%', 14.4]]) {
+    for (const [c, x, l, r, t0, tr] of [['A', XA, '100%', '90%', 13.6, 45.7], ['B', XB, '10%', '0%', 14.4, 51.2]]) {
       const k = ep(t, t0, t0 + 0.8);
       const ak = a * k;
       F.text(ctx, S(`${c} 学院`, `School ${c}`), x, 140 + (1 - k) * 12, { size: 40, weight: 700, align: 'center', alpha: ak });
-      const sk = ep(t, 18.6 + (c === 'B' ? 0.6 : 0), 19.6 + (c === 'B' ? 0.6 : 0));
-      compare(ctx, x, 222, l, '>', r, { size: 54, alpha: ak, signAlpha: sk, labels: true, pulse: pulseAt(t) });
+      const kind = c === 'A' ? S('宽松 · 网眼大', 'lenient · wide holes') : S('严格 · 网眼细', 'strict · fine mesh');
+      F.text(ctx, kind, x, 214, { size: 30, weight: 500, align: 'center', color: DIM, alpha: ak * env(t, 34.6, tr, 0.6, 0.4) });
+      const rk = ep(t, tr, tr + 0.6);
+      if (rk) compare(ctx, x, 222, l, '>', r, { size: 54, alpha: ak * rk, signAlpha: ep(t, tr + 0.4, tr + 0.9), labels: true, pulse: pulseAt(t) });
     }
     // divider between the schools
     ctx.save();
@@ -208,14 +243,14 @@
   }
 
   function poolLabels(ctx, t) {
-    const a = env(t, 22, 30, 0.6, 0.8);
+    const a = env(t, 18.2, 25.4, 0.6, 0.8);
     if (!a) return;
     F.text(ctx, S('女生 100 人', '100 women'), 740, 395, { size: 28, weight: 600, align: 'center', color: CW, alpha: a });
     F.text(ctx, S('男生 100 人', '100 men'), 1180, 395, { size: 28, weight: 600, align: 'center', color: CM, alpha: a });
   }
 
   function clusterLabels(ctx, t) {
-    const a = env(t, 33.5, 57, 0.6, 1.2);
+    const a = env(t, 28.4, 57, 0.6, 1.2);
     if (!a) return;
     for (const c of ['A', 'B']) for (const g of ['W', 'M']) {
       const [n, admitted] = plan[g][c];
@@ -225,7 +260,7 @@
       const label = t < s0 - 0.6
         ? S(`${n} 人`, `${n} ${g === 'W' ? 'women' : 'men'}`)
         : S(`录取 ${done}/${n}`, `${done} of ${n} in`);
-      F.text(ctx, label, x, 386, { size: 26, weight: 600, align: 'center', color: g === 'W' ? CW : CM, alpha: a });
+      F.text(ctx, label, x, 360, { size: 26, weight: 600, align: 'center', color: g === 'W' ? CW : CM, alpha: a });
     }
   }
 
@@ -512,6 +547,7 @@
     poolLabels(ctx, t);
     clusterLabels(ctx, t);
     totals(ctx, t);
+    sieves(ctx, t);
     drawDots(ctx, t);
     balance(ctx, t);
     formula(ctx, t);
@@ -528,7 +564,7 @@
 
   const strings = [
     ...CAPTIONS.map(c => (L === 'en' ? c[3] : c[2])),
-    '每一组都赢了，加起来却输了。文章辛普森悖论与直觉的缺陷学院女男生人录取报名整体全文率之差个百分点多若每都有则报考比例数据不会说谎悖论下面都藏有深刻的原理',
+    '筛子网眼大细宽松严格就像两张得多的每一组都赢了，加起来却输了。文章辛普森悖论与直觉的缺陷学院女男生人录取报名整体全文率之差个百分点多若每都有则报考比例数据不会说谎悖论下面都藏有深刻的原理',
     'Win in every group, and still lose overall. Essay Simpson’s Paradox Flaws Intuition School women men applied admitted overall share rate points vs Read it at Data doesn’t lie Beneath every paradox lies a deeper principle slopes vectors',
     '→↑≠×…“”’',
   ];
