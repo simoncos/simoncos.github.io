@@ -131,16 +131,64 @@ def crunch(buf, t: float, gain: float = 0.5, seed: int = 0):
     A.place(buf, A.sine(70, 0.18, decay=20), t, gain=gain * 0.6)
 
 
+def bpm_times(t0: float, t1: float, bpm0: float, bpm1: float, sub: int = 2):
+    """Note times from t0 to t1 with the tempo sliding from bpm0 to bpm1, `sub` per beat."""
+    t, out = t0, []
+    while t < t1:
+        out.append(t)
+        bpm = bpm0 + (bpm1 - bpm0) * (t - t0) / (t1 - t0)
+        t += 60 / bpm / sub
+    return out
+
+
+def ostinato(buf, t0, t1, bpm0, bpm1, notes, vel0, vel1):
+    """A low piano ostinato in eighths, accelerating and growing."""
+    times = bpm_times(t0, t1, bpm0, bpm1)
+    for i, t in enumerate(times):
+        k = (t - t0) / (t1 - t0)
+        seq = notes(t)
+        accent = 1.0 if i % 4 == 0 else 0.8
+        A.piano(buf, t + rng.normal(0, 0.004), seq[i % len(seq)], vel=(vel0 + (vel1 - vel0) * k) * accent, pan=-0.15, length=1.6, release=0.35)
+
+
+def pulse(buf, t0, t1, bpm0, bpm1, g0, g1):
+    for t in bpm_times(t0, t1, bpm0, bpm1, sub=1):
+        thump(buf, t, gain=g0 + (g1 - g0) * (t - t0) / (t1 - t0))
+
+
+def stabs(buf, t0, t1, chords, bpm, vel):
+    """One chord a bar, struck on beat 1 and pushed on the 'and' of 2."""
+    bar = 4 * 60 / bpm
+    t, i = t0, 0
+    while t < t1:
+        ch = chords[i % len(chords)]
+        roll(buf, t, ch, vel=vel, spread=0.012)
+        if t + 1.5 * 60 / bpm < t1:
+            roll(buf, t + 1.5 * 60 / bpm, ch[1:], vel=vel * 0.75, spread=0.01)
+        t += bar
+        i += 1
+
+
+def riser(buf, t: float, dur: float, gain: float = 0.1):
+    """Noise sweeping up into a moment."""
+    n = int(dur * R)
+    x = A.noise(dur, int(t * 10))[:n]
+    tt = np.arange(n) / n
+    lo = A.bandpass(x, 300, 1500) * (1 - tt) + A.bandpass(x, 1500, 7000) * tt
+    A.place(buf, (lo * tt ** 2.2).astype(np.float32), t, gain=gain)
+
+
 def main() -> None:
     cues = json.loads((HERE / "cues.json").read_text())
     D = cues["duration"]
+    ev = cues["events"]
     n = int(D * R) + R
     rain_c, sleet_c, snow_c = (curve(cues["curves"][k], n) for k in ("rain", "sleet", "snow"))
 
     # wind follows altitude and weather
     wind_level = A.envelope(
         [0, 1, 9, 16, 17, 34, 41, 76, 86, 93, 106, 118, 136, 141, 150, 158, 169, 176, 181, 184, 198, 206],
-        [0, 0.5, 0.45, 0.2, 0, 0, 0.1, 0.12, 0.25, 0.35, 0.45, 0.6, 0.9, 1.0, 0.8, 0.45, 0.25, 0.12, 0.08, 0.15, 0.12, 0],
+        [0, 0.5, 0.45, 0.2, 0, 0, 0.1, 0.12, 0.25, 0.35, 0.45, 0.6, 0.75, 1.0, 0.8, 0.45, 0.25, 0.12, 0.08, 0.15, 0.12, 0],
         D,
     )[:n] + snow_c * 0.25
     amb = wind(D, wind_level * 0.5) + rain(D, rain_c * 0.6, sleet_c)
@@ -189,38 +237,52 @@ def main() -> None:
         roll(music, t, notes, vel=0.33, spread=0.12)
     pad(music, 76.4, 86.0, [38, 44], gain=0.06)
 
-    # 2:59 — out the door; a pulse for the climb in the dark
+    # 2:59 — out the door. From here to the summit the music climbs: a low
+    # ostinato that speeds up and grows, louder chords on each "keep going up",
+    # a driving Slope of Despair, a cut to wind just before the top, then D major.
     roll(music, 86.4, [38, 50, 57, 62, 65], vel=0.45)
-    pad(music, 86.4, 117.5, [38, 45, 50], gain=0.08, attack=4, bright=1200)
-    t = 88.0
-    while t < 118.0:
-        thump(sfx, t, gain=0.15 + 0.07 * (t - 88) / 30)
-        t += 60 / 76
-    # "keep going up" ×3, climbing chords
-    for t, notes in ((97.6, [50, 57, 62, 65, 69]), (100.2, [53, 60, 65, 69, 72]), (102.8, [57, 64, 69, 72, 76])):
-        roll(music, t, notes, vel=0.42, spread=0.05)
-    # dawn
+    pad(music, 86.4, 118.0, [38, 45, 50], gain=0.07, attack=4, bright=1100)
+    ostinato(music, 88.0, 118.0, 72, 96, lambda t: [38, 50, 45, 50] if t < 106 else [38, 50, 46, 50], 0.22, 0.34)
+    pulse(sfx, 88.0, 118.0, 72, 96, 0.13, 0.22)
+    for i, (t, notes) in enumerate(((97.6, [50, 57, 62, 65, 69]), (100.2, [53, 60, 65, 69, 72]), (102.8, [57, 64, 69, 72, 76]))):
+        riser(sfx, t, 1.6, gain=0.05 + 0.03 * i)
+        roll(music, t, notes, vel=0.44 + 0.08 * i, spread=0.03)
+        A.piano(music, t, notes[0] - 12, vel=0.4 + 0.06 * i, length=5)
+    # dawn: a breath of light, but the ostinato keeps climbing underneath
     pad(music, 108.0, 118.5, [50, 57, 62, 69, 76], gain=0.06, attack=5, bright=2600)
     for t, m in ((110.8, 81), (112.2, 79), (113.6, 76), (115.2, 74)):
-        A.piano(music, t, m, vel=0.28, length=6)
+        A.piano(music, t, m, vel=0.3, length=6)
 
-    # the Slope of Despair
-    pad(music, 118.0, 141.0, [38, 45, 52, 57], gain=0.08, attack=3, bright=1000)
-    t = 118.4
-    while t < 140.6:
-        thump(sfx, t, gain=0.2)
-        t += 60 / 92
+    # the Slope of Despair: Dm – Bb – Gm – A, faster and louder bar by bar
+    slope_chords = [[50, 57, 62, 65], [46, 53, 58, 62], [43, 55, 58, 62], [45, 52, 57, 61]]
+    pad(music, 118.0, 124.0, [38, 45, 50, 57], gain=0.08, attack=1.5, bright=1100)
+    pad(music, 129.6, 140.4, [38, 45, 50, 57, 62], gain=0.13, attack=8, release=0.25, bright=2400)
+    ostinato(music, 118.2, 123.9, 100, 104, lambda t: [38, 50, 45, 50], 0.34, 0.38)
+    pulse(sfx, 118.2, 123.9, 100, 104, 0.22, 0.24)
+    stabs(music, 118.2, 123.9, slope_chords, 104, 0.34)
+    # the crampon rhythm: everything stops but the steps and a note each
     for i, e in enumerate(ev for ev in cues["events"] if ev["kind"] == "step"):
-        crunch(sfx, e["t"], gain=0.5, seed=100 + i)
-        A.piano(music, e["t"], [57, 60, 62, 64, 69][i], vel=0.36 + 0.03 * i, length=4)
+        crunch(sfx, e["t"], gain=0.55, seed=100 + i)
+        A.piano(music, e["t"], [57, 60, 62, 64, 69][i], vel=0.4 + 0.04 * i, length=4)
+        A.piano(music, e["t"], [45, 48, 50, 52, 45][i], vel=0.36, length=4)
+    # then back, harder: "seven or eight steps, then five or six"
+    ostinato(music, 129.6, 140.3, 108, 132, lambda t: [38, 50, 45, 50] if t < 136.4 else [45, 57, 52, 57], 0.36, 0.52)
+    pulse(sfx, 129.6, 140.3, 108, 132, 0.24, 0.34)
+    stabs(music, 129.6, 136.3, slope_chords, 116, 0.42)
     for i, t in enumerate(np.arange(130.0, 136.0, 0.62)):
         crunch(sfx, t + rng.normal(0, 0.03), gain=0.3, seed=200 + i)
-    roll(music, 136.4, [40, 52, 58, 62, 67], vel=0.4, spread=0.08)   # the sign, almost there
+    roll(music, 136.4, [33, 45, 52, 57, 61, 64, 67], vel=0.6, spread=0.03)   # the sign: A7, almost there
+    stabs(music, 137.6, 140.3, [[45, 52, 57, 61, 67]], 132, 0.48)
+    riser(sfx, 137.0, 3.4, gain=0.16)
+    # 140.4–141: only the wind
 
-    # summit: D major opens
-    roll(music, 141.0, [26 + 12, 50, 57, 62, 66, 69, 74, 78], vel=0.62, spread=0.045)
-    pad(music, 141.0, 150.5, [50, 57, 62, 66, 69], gain=0.1, attack=1.2, bright=3200)
-    melody(music, 143.4, [(0, 78), (1.0, 76), (2.0, 74), (3.4, 69), (4.8, 74)], vel=0.4)
+    # summit: D major opens, full
+    roll(music, 141.0, [26, 38, 50, 57, 62, 66, 69, 74, 78], vel=0.78, spread=0.03)
+    A.place(sfx, A.lowpass(A.noise(2.5, 77), 6000) * np.exp(-np.arange(int(2.5 * R)) / R * 1.8).astype(np.float32), 141.0, gain=0.12)
+    pad(music, 141.0, 150.5, [50, 57, 62, 66, 69, 74], gain=0.14, attack=0.6, bright=3600)
+    melody(music, 142.6, [(0, 78), (0.8, 76), (1.6, 74), (2.6, 81), (3.8, 78), (5.0, 74)], vel=0.5)
+    for k, ch in enumerate(([50, 57, 62, 66], [47, 55, 59, 62], [43, 55, 59, 62], [45, 57, 61, 64])):
+        roll(music, 143.0 + k * 1.8, ch, vel=0.42, spread=0.04)
 
     # descent: lighter, F major
     arps(music, 150.2, 168.8, [F_, C_, Gm, Bb], bar=3.0, vel=0.28)

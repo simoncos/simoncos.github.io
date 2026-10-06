@@ -1,6 +1,6 @@
 // 我的哈巴雪山之旅 / My Haba Snow Mountain Journey
 // 1920×1080, about 3.5 minutes. The article's own photos in route order,
-// carried by the elevation: 0 → 2,400 → 4,100 → 5,396 → 0 m.
+// carried by the elevation: 0 → 2,400 → 4,100 → 5,396 → 2,400 m.
 (function () {
   const F = Film;
   const { ep, env, prog, lerp, clamp, ease } = F;
@@ -25,7 +25,7 @@
   // ---- the route: elevation and clock over film time ---------------------
   const ELEV = [
     [34, 0], [40, 2400], [41, 2400], [52.5, 2900], [65.5, 4100], [86, 4100], [100, 4350], [106, 4500],
-    [114, 4750], [118, 4900], [136, 5300], [141, 5396], [150, 5396], [169, 4100], [175, 4100], [178, 2400], [181, 0],
+    [114, 4750], [118, 4900], [136, 5300], [141, 5396], [150, 5396], [169, 4100], [175, 4100], [178.5, 2400],
   ];
   // minutes after 00:00 on 09.29
   const CLOCK = [
@@ -116,10 +116,12 @@
   }
 
   // ---- weather and light -------------------------------------------------
+  // As it fell: light rain in the village and at the start of the mule ride,
+  // dry by Base Camp, heavy after one in the night, light on the summit push.
   const rainAmt = t => Math.max(
-    0.35 * env(t, 41, 76, 1, 1),
-    env(t, 76, 86.5, 1, 0.5) * lerp(0.3, 1, ep(t, 80, 84)),
-    0.45 * env(t, 86, 107, 0.5, 2),
+    0.35 * env(t, 46.8, 63, 0.8, 4),
+    env(t, 82.5, 88.5, 0.5, 2.5),
+    0.42 * env(t, 86.5, 107, 0.5, 2),
   );
   const sleetAmt = t => 0.5 * env(t, 105, 118.5, 2, 0.5);
   const snowAmt = t => Math.max(env(t, 117.5, 141.8, 0.8, 0.6), 0.45 * env(t, 141.2, 150.4, 0.3, 0.4), 0.35 * env(t, 149.8, 157.5, 0.4, 1.2));
@@ -241,7 +243,7 @@
     [41.0, 47.0, '6:00 出发。车子经过虎跳峡，云雾之中也很美。', 'Off at 6:00. The road passed Tiger Leaping Gorge, beautiful even in the mist.'],
     [47.0, 52.6, '进村时阴雨纷纷，有点头晕。阿叔现熬的酥油茶。', 'Rain in Haba Village, and a light head. An uncle’s fresh butter tea.'],
     [52.6, 59.0, '骑上骡子，哈巴雪山之旅正式开始。', 'Onto the mules. The journey had begun.'],
-    [59.0, 65.4, '雨雾泥泞的林间，一路颠簸向上 1200 米。', 'Through misty, muddy forest, 1,200 meters of jolting climb.'],
+    [59.0, 65.4, '薄雾的林间，泥泞中一路颠簸向上 1200 米。', 'Through misty, muddy forest, 1,200 meters of jolting climb.'],
     [65.6, 71.0, '大本营的棱角，终于从雾中浮现。', 'At last the outline of Base Camp appeared out of the fog.'],
     [71.0, 76.2, '八个人挤一间上下铺。饭菜，意外地好。', 'Eight men to a bunk room. The food, surprisingly good.'],
     [86.6, 92.4, '2:59，出发。黑暗中，已经有很多摇曳的光点。', '2:59, out the door. Up in the dark, many lights were already swaying.'],
