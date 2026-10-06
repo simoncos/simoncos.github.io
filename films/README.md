@@ -68,7 +68,8 @@ weather curves the scene exports) so sound lands on the frame.
   desktop, and records element boxes for the overlays. The typed answer is
   drawn as dots; a found song's name is a blurred bar; the found-songs chips
   are blurred.
-- The map lights to 35 / 36 and stops: the hidden echo is named, never shown.
+- The map lights to 35 / 36 and stops on one bud and a question (还差最后一首。
+  集齐之后，会发生什么？). What happens at 36 is never said or shown.
 - The score plays only the songs' own chords, struck together as the page
   strikes them, never the finale's arrangement.
 

@@ -1,7 +1,7 @@
 // 漫无止尽的回响 · 宣传片 / Endless Echoes · promo
 // 1080×1920, about one minute. The real game in its fresh state (no answer is
 // ever on screen), the flower map drawn from the puzzle's own geometry, a hook
-// for the hidden echo that is only named, never shown, and a QR code to play.
+// that asks what happens at 36 and never says, and a QR code to play.
 (function () {
   const F = Film;
   const { ep, env, prog, lerp, clamp, ease } = F;
@@ -467,7 +467,7 @@
     serif(ctx, S('通往终点，不止一条路。', 'More than one way to the end.'), W / 2, 250, 60, { alpha: o * env(t, 40.6, 44.6, 0.5, 0.5) });
   }
 
-  // ---- 44.6–49.2: the hook for what is hidden ---------------------------------------
+  // ---- 44.6–49.2: the hook. One bud left, and a question; what happens is never said ---------------------------------------
   function hiddenHook(ctx, t) {
     const o = env(t, 44.8, 49.4, 0.6, 0.5);
     if (!o) return;
@@ -484,8 +484,8 @@
     ctx.restore();
     ctx.save(); ctx.globalAlpha = o; ctx.strokeStyle = INK; ctx.lineWidth = 2.5; ctx.setLineDash([5, 6]); ctx.lineDashOffset = -t * 10;
     ctx.beginPath(); ctx.arc(x, y, 18 + 6 * p, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
-    serif(ctx, S('找全 36 首，', 'Find all 36,'), W / 2, 200, 66, { alpha: o });
-    serif(ctx, S('会有一段隐藏的回响。', 'and a hidden echo appears.'), W / 2, 300, 66, { alpha: o * ep(t, 45.6, 46.4), color: ACC });
+    serif(ctx, S('还差最后一首。', 'One song left.'), W / 2, 200, 66, { alpha: o });
+    serif(ctx, S('集齐之后，会发生什么？', 'And when you find it?'), W / 2, 300, 66, { alpha: o * ep(t, 45.6, 46.4), color: ACC });
   }
 
   // ---- 49–59: play now ---------------------------------------------------------------
@@ -563,7 +563,7 @@
 
   const strings = [
     ...STEPS.flatMap(s => [s[3], s[4]]),
-    S('每一首歌里，都藏着下一首歌。音乐谜题扩展版漫无止尽的回响36首陈奕迅的歌，不止一条路。读一段线索，猜下一首歌。在电脑上，线索和地图可以并排看。有分岔，有回环，也有死胡同。通往终点，不止一条路。找全36首，会有一段隐藏的回响。下一首是什么？来接上第一条路。扫码，在手机上开始作品→游戏→免费无需注册进度自动保存电脑上体验更佳首已点亮找到了一首起点终点',
+    S('每一首歌里，都藏着下一首歌。音乐谜题扩展版漫无止尽的回响36首陈奕迅的歌，不止一条路。读一段线索，猜下一首歌。在电脑上，线索和地图可以并排看。有分岔，有回环，也有死胡同。通往终点，不止一条路。还差最后一首。集齐之后，会发生什么？下一首是什么？来接上第一条路。扫码，在手机上开始作品→游戏→免费无需注册进度自动保存电脑上体验更佳首已点亮找到了一首起点终点',
       'Inside every song hides the next one. A music riddle expanded Endless Echoes 36 Eason Chan songs More than one way through Read a clue Guess the next song On a computer clue and map sit side by side Branches loops dead ends to the end Find all and a hidden echo appears Which song comes next? Come connect the first path Scan to play on your phone Work Games Free no sign-up progress saves itself Best songs found Song Start End'),
     'simoncos.github.io0123456789/·→',
   ];
