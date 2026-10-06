@@ -29,6 +29,18 @@ def decode(path: Path) -> np.ndarray:
     return np.frombuffer(raw, dtype=np.float32).copy()
 
 
+def decode_stereo(path: Path, n: int) -> np.ndarray:
+    """A sound file as (n, 2) float32 at RATE, padded or cut to n frames."""
+    raw = subprocess.run(
+        ["ffmpeg", "-nostdin", "-loglevel", "error", "-i", str(path), "-f", "f32le", "-ac", "2", "-ar", str(RATE), "-"],
+        check=True, capture_output=True,
+    ).stdout
+    x = np.frombuffer(raw, dtype=np.float32).reshape(-1, 2)
+    out = np.zeros((n, 2), dtype=np.float32)
+    out[: min(n, len(x))] = x[:n]
+    return out
+
+
 @lru_cache(maxsize=None)
 def _root(midi: int) -> np.ndarray:
     return decode(PIANO / f"root-{midi:03d}.mp3")

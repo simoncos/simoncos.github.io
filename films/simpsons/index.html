@@ -10,6 +10,10 @@
 </head>
 <body>
 <script src="../lib/film.js"></script>
+<script>
+  // narration, when there is one for this language and ?voice=0 is not set
+  if (!/[?&]voice=0/.test(location.search)) document.write('<script src="voice/voice.' + Film.lang + '.js"><\/script>');
+</script>
 <script src="scene.js"></script>
 </body>
 </html>

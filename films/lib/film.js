@@ -119,6 +119,18 @@
     ctx.roundRect(x, y, w, h, r);
   };
 
+  // A warp is [[sceneTime, filmTime], ...], both rising. unwarp maps a film
+  // time back to the scene time to draw, linearly between the pairs.
+  F.unwarp = (warp, t) => {
+    if (t <= warp[0][1]) return warp[0][0] + (t - warp[0][1]);
+    for (let i = 1; i < warp.length; i++) {
+      const [s0, f0] = warp[i - 1], [s1, f1] = warp[i];
+      if (t <= f1) return f1 === f0 ? s1 : s0 + ((t - f0) / (f1 - f0)) * (s1 - s0);
+    }
+    const [sl, fl] = warp[warp.length - 1];
+    return sl + (t - fl);
+  };
+
   F.loadImage = src => new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => img.decode().then(() => resolve(img), () => resolve(img));
@@ -152,7 +164,7 @@
         ctx.save();
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.globalAlpha = 1;
-        spec.draw(ctx, t, images);
+        spec.draw(ctx, spec.warp ? F.unwarp(spec.warp, t) : t, images);
         ctx.restore();
       },
     };

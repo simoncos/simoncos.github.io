@@ -83,3 +83,27 @@ node films/render.mjs echoes --lang zh --audio films/echoes/out/score.norm.wav -
 
 Files sent to a phone arrive only if they upload within about 30 s: send a
 720p preview of about 5 MB (see the site intro repo's RECIPE).
+
+## Narration (Simpson's paradox)
+
+`simpsons/voice/lines.zh.json` is the script: each line names the scene
+window it narrates, what the voice says and the caption shown. `voice.py`
+reads it with Kokoro (open source, Apache 2.0; model files from
+github.com/thewh1teagle/kokoro-onnx releases, `model-files-v1.0`), voice
+`zm_yunxi`, and fits the film to the voice: each line's window stretches or
+shrinks (to 70% at most) so the line fits with air, and the gaps keep their
+length. It writes `voice.zh.js` / `voice.zh.json` (the warp and line times)
+and `out/voice.zh.wav`. The scene loads `voice/voice.<lang>.js` when it
+exists and draws on the voice's clock; `?voice=0` turns it off. The score
+maps its scene times through the same warp, keeps its beat grid on the
+film's clock, ducks the music under each line and mixes the voice in.
+
+```sh
+python3 -m venv /home/user/tts/venv && . /home/user/tts/venv/bin/activate
+pip install kokoro-onnx soundfile "misaki[zh]"
+KOKORO_DIR=/home/user/tts python films/simpsons/voice/voice.py zh
+node films/render.mjs simpsons --events films/simpsons/cues.json
+python3 films/simpsons/score.py --voice zh
+films/lib/loudnorm.sh films/simpsons/out/score.voice.zh.wav films/simpsons/out/score.voice.zh.norm.wav
+node films/render.mjs simpsons --lang zh --audio films/simpsons/out/score.voice.zh.norm.wav --out films/simpsons/out/simpsons.zh.voice.mp4
+```

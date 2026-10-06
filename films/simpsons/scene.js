@@ -41,8 +41,15 @@
     [140, 145, '在形式化之前，我们很难看见可加性这个隐含前提。', 'Until we write it down, the hidden premise of additivity is hard to see.'],
   ];
 
+  // With narration (voice/voice.<lang>.js), captions are the spoken lines and
+  // the film is drawn on the voice's clock (see the warp in F.create below).
+  const V = window.VOICE && window.VOICE.lang === L ? window.VOICE : null;
+  const SHOWN = V
+    ? V.lines.filter(l => l.caption).map(l => [l.a, l.b, l.caption, l.caption])
+    : CAPTIONS;
+
   function captions(ctx, t) {
-    for (const [a, b, zh, en] of CAPTIONS) {
+    for (const [a, b, zh, en] of SHOWN) {
       const o = env(t, a, b, 0.35, 0.35);
       if (o <= 0) continue;
       F.text(ctx, S(zh, en), W / 2, 1000, {
@@ -568,8 +575,9 @@
     'Win in every group, and still lose overall. Essay Simpson’s Paradox Flaws Intuition School women men applied admitted overall share rate points vs Read it at Data doesn’t lie Beneath every paradox lies a deeper principle slopes vectors',
     '→↑≠×…“”’',
   ];
+  if (V) strings.push(...V.lines.map(l => l.caption || ''));
   const film = F.create({
-    width: W, height: H, duration: DURATION, strings, draw,
+    width: W, height: H, duration: V ? V.duration : DURATION, warp: V ? V.warp : null, strings, draw,
     fonts: [[400, F.SANS], [500, F.SANS], [600, F.SANS], [700, F.SANS], [800, F.SANS], [500, F.MONO]],
   });
   film.events = events.sort((p, q) => p.t - q.t);

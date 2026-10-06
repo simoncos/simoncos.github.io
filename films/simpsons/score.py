@@ -144,22 +144,42 @@ def groove(mus, drm, t0, t1, prog, level=1.0, drums=True, arp=True, hats16=False
 # One beat grid for the whole film, anchored on the groove's first downbeat.
 # Sections start on bar lines and hits land on beats, so no section enters
 # ahead of or behind the pulse the last one set.
-GRID0 = 13.4
+#
+# Times in this file are scene times. With narration (--voice zh), the film is
+# the scene stretched to the voice (voice/voice.zh.json); W() maps a scene time
+# to the film, and the grid is laid on the film's clock.
+VOICE = None
+if "--voice" in sys.argv:
+    VOICE = json.loads((HERE / "voice" / f"voice.{sys.argv[sys.argv.index('--voice') + 1]}.json").read_text())
+
+
+def W(t: float) -> float:
+    """Scene time → film time."""
+    if not VOICE:
+        return t
+    pairs = VOICE["warp"]
+    for (s0, f0), (s1, f1) in zip(pairs, pairs[1:]):
+        if t <= s1:
+            return f0 + (t - s0) * (f1 - f0) / (s1 - s0) if s1 > s0 else f1
+    return pairs[-1][1] + (t - pairs[-1][0])
+
+
+GRID0 = W(13.4)
 
 
 def B(t: float) -> float:
-    """The beat nearest t."""
-    return GRID0 + round((t - GRID0) / BEAT) * BEAT
+    """The beat nearest scene time t, on the film's clock."""
+    return GRID0 + round((W(t) - GRID0) / BEAT) * BEAT
 
 
 def BARLINE(t: float) -> float:
-    """The bar line nearest t."""
-    return GRID0 + round((t - GRID0) / BAR) * BAR
+    """The bar line nearest scene time t, on the film's clock."""
+    return GRID0 + round((W(t) - GRID0) / BAR) * BAR
 
 
 def main() -> None:
     cues = json.loads((HERE / "cues.json").read_text())
-    D = cues["duration"]
+    D = VOICE["duration"] if VOICE else cues["duration"]
     mus, drm, sfx = A.track(D), A.track(D), A.track(D)
 
     # hook: two stabs on the two lines, a riser into the title
@@ -187,7 +207,7 @@ def main() -> None:
     boom(sfx, B(61.5), 0.55)
     stab(mus, B(61.5), [47, 54, 59, 62, 66], 0.65, 4)
     # question: suspense, a ticking clock and held chords
-    for i, tt in enumerate(np.arange(B(62.6), 71.3, BEAT)):
+    for i, tt in enumerate(np.arange(B(62.6), W(71.3), BEAT)):
         hat(drm, tt, 0.05 if i % 2 else 0.07)
     for tt, ch in ((64.2, "G"), (66.0, "Em"), (68.0, "F#m")):
         stab(mus, B(tt), CH[ch][1], 0.36, 2.5)
@@ -207,7 +227,7 @@ def main() -> None:
         if i % 4 == 0: bass(mus, tt, 38, 1.0, 0.28)
     stab(mus, B(106.0), CH["Gm"][1], 0.55, 3); bass(mus, B(106.0), 43, 2.0)
     boom(sfx, B(106.0), 0.25)
-    for i, tt in enumerate(np.arange(B(107.6), 111.5, BEAT)):
+    for i, tt in enumerate(np.arange(B(107.6), W(111.5), BEAT)):
         hat(drm, tt, 0.05); mallet(mus, tt, 70 if i % 2 else 74, 0.06)
     riser(sfx, B(109.8 + 1.8) - 1.8, 1.8, 0.1)
     groove(mus, drm, BARLINE(111.6), BARLINE(117.4), ["D", "A"], level=0.85, stabs=True, arp=True)
@@ -234,24 +254,37 @@ def main() -> None:
     for e in cues["events"]:
         pan = -0.3 if e.get("group") == "W" else 0.3
         if e["kind"] == "admit":
-            A.place(sfx, A.sine(A.midi_hz(penta[int(rng.integers(0, 5))]), 0.3, decay=20, harmonics=((1, 1), (2, 0.25))), e["t"], gain=0.05, pan=pan)
+            A.place(sfx, A.sine(A.midi_hz(penta[int(rng.integers(0, 5))]), 0.3, decay=20, harmonics=((1, 1), (2, 0.25))), W(e["t"]), gain=0.05, pan=pan)
         elif e["kind"] == "reject":
             n = int(0.03 * R)
-            click = A.lowpass(A.noise(0.03, int(e["t"] * 1000)), 1800)[:n] * np.linspace(1, 0, n, dtype=np.float32)
-            A.place(sfx, click, e["t"], gain=0.05, pan=pan)
+            click = A.lowpass(A.noise(0.03, int(W(e["t"]) * 1000)), 1800)[:n] * np.linspace(1, 0, n, dtype=np.float32)
+            A.place(sfx, click, W(e["t"]), gain=0.05, pan=pan)
         elif e["kind"] == "arrive":
             g = e["group"]
             i = counts[g]
             counts[g] += 1
             ladder = [62, 64, 66, 69, 71, 74, 76, 78, 81, 83, 86, 88, 90, 93]
             m = ladder[min(len(ladder) - 1, i // (2 if g == "W" else 7))]
-            A.place(sfx, A.sine(A.midi_hz(m), 0.25, decay=18, harmonics=((1, 1), (3, 0.12))), e["t"], gain=0.045, pan=pan)
+            A.place(sfx, A.sine(A.midi_hz(m), 0.25, decay=18, harmonics=((1, 1), (3, 0.12))), W(e["t"]), gain=0.045, pan=pan)
 
     mus = A.reverb(mus, seconds=1.8, wet=0.18)
     drm = A.reverb(drm, seconds=0.9, wet=0.08)
     sfx = A.reverb(sfx, seconds=1.4, wet=0.15)
-    mix = A.normalize(mus * 0.9 + drm * 0.8 + sfx, -1.5)
-    out = HERE / "out" / "score.wav"
+    if VOICE:
+        # duck the music under every spoken line, then lay the voice on top
+        keys_t, keys_g = [0.0], [1.0]
+        for line in VOICE["lines"]:
+            a, b = line["voice_at"] - 0.2, line["voice_at"] + line["voice_len"] + 0.25
+            keys_t += [a, a + 0.15, b, b + 0.4]
+            keys_g += [1.0, 0.42, 0.42, 1.0]
+        duck = A.envelope(keys_t + [D + 1], keys_g + [1.0], D)[: len(mus)][:, None]
+        voice = A.decode_stereo(HERE / "out" / f"voice.{VOICE['lang']}.wav", len(mus))
+        voice *= 0.5 / (np.abs(voice).max() or 1)
+        mix = A.normalize((mus * 0.9 + drm * 0.8) * duck + sfx * 0.8 + voice * 1.6, -1.5)
+        out = HERE / "out" / f"score.voice.{VOICE['lang']}.wav"
+    else:
+        mix = A.normalize(mus * 0.9 + drm * 0.8 + sfx, -1.5)
+        out = HERE / "out" / "score.wav"
     A.write_wav(out, mix, D)
     print(out)
 
