@@ -101,14 +101,14 @@ film's clock, ducks the music under each line and mixes the voice in.
 ```sh
 python3 -m venv /home/user/tts/venv && . /home/user/tts/venv/bin/activate
 pip install kokoro-onnx soundfile "misaki[zh]"
-KOKORO_DIR=/home/user/tts python films/simpsons/voice/voice.py zh --paragraphs   # without --paragraphs: line by line
+KOKORO_DIR=/home/user/tts python films/simpsons/voice/voice.py zh   # line by line (the version in use)
 node films/render.mjs simpsons --events films/simpsons/cues.json
 python3 films/simpsons/score.py --voice zh
 films/lib/loudnorm.sh films/simpsons/out/score.voice.zh.wav films/simpsons/out/score.voice.zh.norm.wav
 node films/render.mjs simpsons --lang zh --audio films/simpsons/out/score.voice.zh.norm.wav --out films/simpsons/out/simpsons.zh.voice.mp4
 ```
 
-`--paragraphs` reads each paragraph of `lines.zh.json` (`paragraphs`) in one
+`--paragraphs` (tried, not used: Che found its phrasing odd, worse than line by line) reads each paragraph of `lines.zh.json` (`paragraphs`) in one
 go so the sentences flow, then cuts it back into lines: each cut is
 estimated by reading the paragraph's first lines alone, then snapped to the
 nearest pause. Pause length alone does not work, because a full stop inside
