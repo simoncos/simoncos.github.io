@@ -26,6 +26,12 @@ DATA = json.loads((ROOT / "data" / "music-riddle.json").read_text())
 CHORD = {n["id"]: n["presentation"]["chord"]["midi"] for n in DATA["nodes"]}
 START = DATA["start"]
 BEAT = 60 / 84
+G0 = 0.6   # the grid the scene uses: every sound lands on its beats
+
+
+def Q(t: float, d: float = BEAT) -> float:
+    return G0 + round((t - G0) / d) * d
+
 
 
 def chord(buf, t: float, notes, vel: float = 0.5, spread: float = 0.0, length: float = 7.0, up: int = 0):
@@ -50,21 +56,21 @@ def main() -> None:
     walk = [e["id"] for e in ev if e["kind"] == "walk"]
 
     # 0–5: the entrance chord, then the bud opens
-    chord(music, 0.6, CHORD[START], vel=0.45)
-    chord(music, 3.6, CHORD[START], vel=0.5)
+    chord(music, G0, CHORD[START], vel=0.45)
+    chord(music, Q(3.6), CHORD[START], vel=0.5)
     for i, m in enumerate([62, 67, 69, 74]):
-        A.piano(music, 3.62 + i * 0.07, m + 12, vel=0.28, pan=0.3, length=4)
+        A.piano(music, Q(3.6) + 0.02 + i * 0.07, m + 12, vel=0.28, pan=0.3, length=4)
 
     # 5–12: the world. Four songs' chords, slow, each with its top note an octave up
-    t = 5.2
+    t = Q(5.2)
     for i, sid in enumerate(walk[:4]):
         chord(music, t, CHORD[sid], vel=0.42, spread=0.03)
         A.piano(music, t + 2 * BEAT, CHORD[sid][-1] + 12, vel=0.26, pan=0.2, length=4)
-        t += 4 * BEAT * 0.62
-    chord(music, 10.6, CHORD[START], vel=0.4, spread=0.04)
+        t += 2 * BEAT
+    chord(music, Q(10.6), CHORD[START], vel=0.4, spread=0.04)
 
     # 12–31: how to play. A patient pulse on the start's chord, then the found song
-    t = 12.4
+    t = Q(12.4)
     while t < 31.2:
         notes = CHORD[START] if t < 24.0 else CHORD[walk[0]] if t < 28 else CHORD[START]
         for i, m in enumerate(notes):
@@ -80,12 +86,12 @@ def main() -> None:
         elif e["kind"] == "found":
             chord(music, e["t"], CHORD[e["id"]], vel=0.6)
             for i, m in enumerate(sorted(CHORD[e["id"]])[-3:]):
-                A.piano(music, e["t"] + 0.12 + i * 0.08, m + 12, vel=0.3, pan=0.35, length=3)
+                A.piano(music, e["t"] + BEAT / 2 + i * BEAT / 4, m + 12, vel=0.3, pan=0.35, length=3)
         elif e["kind"] == "tap":
             tick(sfx, e["t"], gain=0.07, hz=2200, seed=int(e["t"] * 10))
 
     # 31–35: the desktop, held
-    chord(music, 31.3, CHORD[START], vel=0.36, spread=0.05, length=6)
+    chord(music, Q(31.3), CHORD[START], vel=0.36, spread=0.05, length=6)
 
     # 35–44: the map. Each song on the walk sounds its chord as it lights,
     # as the page does; the rest come out as single high notes.
@@ -99,8 +105,8 @@ def main() -> None:
     # 44.8: the hidden echo — hush, one open chord, and a soft pulse on the last bud
     hook = next(e["t"] for e in ev if e["kind"] == "hook")
     chord(music, hook, [36, 43, 50], vel=0.42, length=6)
-    for i in range(4):
-        tp = hook + 0.3125 + i * 1.25
+    for i in range(3):
+        tp = hook + (i + 1) * 2 * BEAT
         A.place(sfx, A.sine(A.midi_hz(86), 0.9, decay=5, harmonics=((1, 1), (2.76, 0.25))), tp, gain=0.06)
 
     # 49–59: play now. The entrance chord again, rising, left open
@@ -108,11 +114,11 @@ def main() -> None:
     chord(music, cta, CHORD[START], vel=0.55)
     chord(music, cta, [36], vel=0.4)
     for i, m in enumerate([55, 62, 67, 69, 74, 79, 81, 84]):
-        A.piano(music, cta + 0.5 + i * BEAT / 2, m, vel=0.3, pan=0.4 * np.sin(i), length=4)
+        A.piano(music, cta + BEAT + i * BEAT / 2, m, vel=0.3, pan=0.4 * np.sin(i), length=4)
     for k, sid in enumerate(walk[1:3]):
-        chord(music, cta + 3.4 + k * 2.4, CHORD[sid], vel=0.38, spread=0.03)
-    chord(music, cta + 8.2, CHORD[START], vel=0.42, spread=0.06, length=8)
-    A.piano(music, cta + 8.4, 81, vel=0.24, length=6)
+        chord(music, cta + 5 * BEAT + k * 4 * BEAT, CHORD[sid], vel=0.38, spread=0.03)
+    chord(music, cta + 12 * BEAT, CHORD[START], vel=0.42, spread=0.06, length=8)
+    A.piano(music, cta + 12 * BEAT, 81, vel=0.24, length=6)
 
     music = A.reverb(music, seconds=3.0, wet=0.32, tone=4800)
     sfx = A.reverb(sfx, seconds=1.4, wet=0.18)

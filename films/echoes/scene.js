@@ -9,6 +9,12 @@
   const S = (zh, en) => (L === 'en' ? en : zh);
   const W = 1080, H = 1920, DURATION = 59;
   const D = window.ECHOES;
+  // One beat grid (84 BPM, from the first chord at 0.6 s) for every moment that
+  // makes a sound, so the picture and the score land on the same beats.
+  const BEAT = 60 / 84, G0 = 0.6;
+  const Q = (t, d = BEAT) => G0 + Math.round((t - G0) / d) * d;
+  const T_BLOOM = Q(3.6), KEY0 = Q(20.2, BEAT / 2), KEY = BEAT / 2, T_PRESS = Q(22.3), T_FOUND = Q(24.0);
+  const T_TAPS = [Q(28.0), Q(29.4)], T_HOOK = Q(44.8), T_CTA = Q(49.4);
 
   const BG = '#0f1016', MAPBG = '#161923', SURF = '#21202a', INK = '#f0e8e3', DIM = '#a39fa8', SOFT = '#777782';
   const ACC = '#f1b291', GOLD = '#efd9a8', BLUEPATH = '#91b5ed';
@@ -57,7 +63,7 @@
     const path = []; for (let u = b; u; u = prev.get(u)) path.unshift(u); return path;
   }
   const WALK = shortest(D.start, D.ending);
-  const WALK0 = 35.2, STEP = 0.72;
+  const WALK0 = Q(35.2), STEP = BEAT;
   // Then the rest of the map lights in breadth-first order, all but one song.
   const order = [];
   { const seen = new Set(WALK), q = [...WALK]; while (q.length) { const u = q.shift(); for (const v of byId.get(u).next) if (!seen.has(v)) { seen.add(v); order.push(v); q.push(v); } } for (const n of D.nodes) if (!seen.has(n.id)) order.push(n.id); }
@@ -65,7 +71,7 @@
   const SPREAD0 = WALK0 + WALK.length * STEP + 0.3, SPREAD1 = 44.4;
   const litAt = new Map();
   WALK.forEach((id, i) => litAt.set(id, i === 0 ? 0 : WALK0 + i * STEP));
-  order.forEach((id, i) => litAt.set(id, lerp(SPREAD0, SPREAD1, i / Math.max(1, order.length - 1))));
+  order.forEach((id, i) => litAt.set(id, Q(lerp(SPREAD0, SPREAD1, i / Math.max(1, order.length - 1)), BEAT / 2)));
 
   function edgeProgress(e, t) {
     const a = litAt.get(e.from), b = litAt.get(e.to);
@@ -194,7 +200,7 @@
     ctx.save(); ctx.globalAlpha = o; ctx.fillStyle = BG; ctx.fillRect(0, 0, W, H); ctx.restore();
     motes(ctx, t, o * 0.5, 30);
     const cx = W / 2, cy = 880;
-    const bloom = ep(t, 3.6, 4.6, ease.back);
+    const bloom = ep(t, T_BLOOM, T_BLOOM + 1.0, ease.back);
     // the bud
     ctx.save();
     ctx.globalAlpha = o * (1 - bloom) * ep(t, 0.2, 1.0);
@@ -295,29 +301,29 @@
     if (t > 19.8 && t < 24.2) {
       const [ix, iy] = P(BOX.input[0], BOX.input[1]);
       const ih = BOX.input[3] * s;
-      const n = Math.min(4, Math.floor((t - 20.2) / 0.38) + 1);
+      const n = Math.min(4, Math.floor((t - KEY0) / KEY) + 1);
       ctx.save();
       ctx.fillStyle = '#2a2833';
       F.roundRect(ctx, ix + 8, iy + 8, BOX.input[2] * s - 16, ih - 16, 12); ctx.fill();
-      if (t > 20.2) {
+      if (t > KEY0) {
         for (let i = 0; i < n; i++) {
           ctx.fillStyle = INK;
           ctx.beginPath(); ctx.arc(ix + 46 + i * 40, iy + ih / 2, 11, 0, Math.PI * 2); ctx.fill();
         }
       }
-      if (Math.floor(t * 2) % 2 === 0 || t < 20.2) { ctx.fillStyle = ACC; ctx.fillRect(ix + 36 + (t > 20.2 ? n * 40 : 0), iy + ih / 2 - 24, 3, 48); }
+      if (Math.floor(t * 2) % 2 === 0 || t < KEY0) { ctx.fillStyle = ACC; ctx.fillRect(ix + 36 + (t > KEY0 ? n * 40 : 0), iy + ih / 2 - 24, 3, 48); }
       ctx.restore();
     }
     // pressing "check answer"
-    const press = env(t, 22.2, 23.2, 0.12, 0.6);
+    const press = env(t, T_PRESS - 0.1, T_PRESS + 0.9, 0.12, 0.6);
     if (press) {
       const [bx, by] = P(BOX.submit[0], BOX.submit[1]);
       ctx.save(); ctx.globalAlpha = press * 0.55; ctx.fillStyle = ACC;
       F.roundRect(ctx, bx, by, BOX.submit[2] * s, BOX.submit[3] * s, 16); ctx.fill(); ctx.restore();
-      ripple(ctx, bx + BOX.submit[2] * s / 2, by + BOX.submit[3] * s / 2, t, 22.3);
+      ripple(ctx, bx + BOX.submit[2] * s / 2, by + BOX.submit[3] * s / 2, t, T_PRESS);
     }
     // the first way out turns into a flower; its name stays hidden
-    const found = ep(t, 24.0, 24.9, ease.back);
+    const found = ep(t, T_FOUND, T_FOUND + 0.9, ease.back);
     if (found > 0 && BOX.exits[0]) {
       const ex = BOX.exits[0];
       const [x, y] = P(ex[0], ex[1]);
@@ -339,12 +345,12 @@
       F.roundRect(ctx, x + 14, cy + 62, ex[2] * s - 28, 26, 10); ctx.fill();
       ctx.filter = 'none';
       ctx.restore();
-      ripple(ctx, cx, cy, t, 24.0, BLOOM.poppy);
+      ripple(ctx, cx, cy, t, T_FOUND, BLOOM.poppy);
     }
     // toast: found, 2 / 36
-    const toast = env(t, 24.4, 26.2, 0.3, 0.4);
+    const toast = env(t, T_FOUND + 0.4, T_FOUND + 2.2, 0.3, 0.4);
     if (toast) {
-      const y = 1500 + (1 - ease.out(prog(t, 24.4, 24.8))) * 30;
+      const y = 1500 + (1 - ease.out(prog(t, T_FOUND + 0.4, T_FOUND + 0.8))) * 30;
       ctx.save(); ctx.globalAlpha = toast;
       ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 30;
       F.roundRect(ctx, 200, y, 680, 110, 55); ctx.fillStyle = 'rgba(33,32,42,0.96)'; ctx.fill();
@@ -354,7 +360,7 @@
       sans(ctx, S('找到了一首 · 2 / 36', 'Song found · 2 / 36'), 560, y + 70, 36, { alpha: toast, color: INK, weight: 600 });
     }
     // tapping hint, then reveal
-    for (const [box, at] of [[BOX.hint, 28.0], [BOX.reveal, 29.4]]) {
+    for (const [box, at] of [[BOX.hint, T_TAPS[0]], [BOX.reveal, T_TAPS[1]]]) {
       const [x, y] = P(box[0], box[1]);
       ripple(ctx, x + 120, y + box[3] * s / 2, t, at);
     }
@@ -475,7 +481,7 @@
     const n = byId.get(LAST);
     const sc = (W - 40) / D.map.width;
     const x = 20 + n.x * sc, y = MAP_Y + n.y * sc;
-    const p = 0.5 + 0.5 * Math.sin((t - 44.8) * Math.PI * 1.6);
+    const p = 0.5 + 0.5 * Math.cos((t - T_HOOK) * Math.PI / BEAT);   // swells on every other beat
     ctx.save(); ctx.globalAlpha = o;
     ctx.globalCompositeOperation = 'lighter';
     const g = ctx.createRadialGradient(x, y, 0, x, y, 70 + 20 * p);
@@ -550,15 +556,15 @@
   // sound cues for score.py
   const events = [
     { t: 0.6, kind: 'chord', id: D.start, vel: 0.4 },
-    { t: 3.6, kind: 'bloom', id: D.start },
-    ...Array.from({ length: 4 }, (_, i) => ({ t: 20.2 + i * 0.38, kind: 'key' })),
-    { t: 22.3, kind: 'press' },
-    { t: 24.0, kind: 'found', id: byId.get(D.start).next[0] },
-    { t: 28.0, kind: 'tap' }, { t: 29.4, kind: 'tap' },
+    { t: T_BLOOM, kind: 'bloom', id: D.start },
+    ...Array.from({ length: 4 }, (_, i) => ({ t: KEY0 + i * KEY, kind: 'key' })),
+    { t: T_PRESS, kind: 'press' },
+    { t: T_FOUND, kind: 'found', id: byId.get(D.start).next[0] },
+    { t: T_TAPS[0], kind: 'tap' }, { t: T_TAPS[1], kind: 'tap' },
     ...WALK.slice(1).map((id, i) => ({ t: WALK0 + (i + 1) * STEP, kind: 'walk', id })),
     ...order.map(id => ({ t: litAt.get(id), kind: 'spread', id })),
-    { t: 44.8, kind: 'hook' },
-    { t: 49.4, kind: 'cta' },
+    { t: T_HOOK, kind: 'hook' },
+    { t: T_CTA, kind: 'cta' },
   ];
 
   const strings = [
