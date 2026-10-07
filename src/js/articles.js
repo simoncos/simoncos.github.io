@@ -76,8 +76,38 @@
             setHash(tag === 'all' ? '' : `topic-${slugOf(tag)}`);
     }
     chips.forEach((chip) => chip.addEventListener('click', () => setTag(chip.dataset.slug || 'all', true)));
-    if (search)
-        search.addEventListener('input', () => filter(true));
+    // The search lives in the address as ?q=, so going back from an
+    // article, reloading or sharing the link brings the same results.
+    // Browsers do not restore the field themselves (autocomplete is off).
+    let queryTimer = 0;
+    function recordQuery() {
+        window.clearTimeout(queryTimer);
+        const params = new URLSearchParams(window.location.search);
+        const q = search ? search.value.trim() : '';
+        if (q)
+            params.set('q', q);
+        else
+            params.delete('q');
+        const query = params.toString();
+        try {
+            history.replaceState(history.state, '', window.location.pathname + (query ? `?${query}` : '') + window.location.hash);
+        }
+        catch (_error) {
+            // Not fatal: the list still filters.
+        }
+    }
+    if (search) {
+        const saved = new URLSearchParams(window.location.search).get('q');
+        if (saved)
+            search.value = saved;
+        search.addEventListener('input', () => {
+            filter(true);
+            window.clearTimeout(queryTimer);
+            queryTimer = window.setTimeout(recordQuery, 300);
+        });
+        // Following a result before the pause still records the query.
+        window.addEventListener('pagehide', recordQuery);
+    }
     function setOpen(row) {
         rows.forEach((other) => {
             const open = other === row && !other.classList.contains('is-open');
