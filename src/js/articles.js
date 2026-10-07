@@ -117,8 +117,24 @@
         // records it before the article reads the list's address as its
         // referrer.
         main.addEventListener('click', (event) => {
-            if (event.target.closest('a[href]'))
-                recordQuery();
+            const link = event.target.closest('a[href]');
+            if (!link)
+                return;
+            recordQuery();
+            // Where the row stood, so "← Articles" can put it back there.
+            const row = link.closest('.arow');
+            if (!row)
+                return;
+            try {
+                sessionStorage.setItem('articles-spot', JSON.stringify({
+                    url: window.location.href,
+                    row: row.id,
+                    top: Math.round(row.getBoundingClientRect().top),
+                }));
+            }
+            catch (_error) {
+                // Then the list opens at the top.
+            }
         }, true);
         window.addEventListener('pagehide', recordQuery);
     }
@@ -358,7 +374,55 @@
             setView('list', false);
         }
     }
+    // Back through "← Articles": reopen the row the reader followed and put
+    // it where it stood. (The browser's own Back restores the page itself.)
+    function restoreSpot() {
+        let spot = null;
+        try {
+            if (sessionStorage.getItem('articles-back') !== window.location.href)
+                return;
+            sessionStorage.removeItem('articles-back');
+            spot = JSON.parse(sessionStorage.getItem('articles-spot') || 'null');
+        }
+        catch (_error) {
+            return;
+        }
+        if (!spot || spot.url !== window.location.href || !spot.row)
+            return;
+        const row = document.getElementById(spot.row);
+        if (!row || row.hidden || !rows.includes(row))
+            return;
+        // Open it at once, not over 0.55s, so it has its height before the
+        // scroll is measured.
+        const animated = Array.from(row.querySelectorAll('.arow-ex, .arow-ex-clip'));
+        animated.forEach((el) => {
+            el.style.transition = 'none';
+        });
+        if (!row.classList.contains('is-open'))
+            setOpen(row);
+        void row.offsetHeight;
+        animated.forEach((el) => {
+            el.style.transition = '';
+        });
+        const top = spot.top || 0;
+        let placed = 0;
+        const place = () => {
+            window.scrollBy(0, row.getBoundingClientRect().top - top);
+            placed = window.scrollY;
+        };
+        place();
+        // Fonts and images arriving later, and the excerpt that was open
+        // folding away, move the row; follow them until the reader scrolls.
+        const again = () => {
+            if (Math.abs(window.scrollY - placed) < 2)
+                place();
+        };
+        document.fonts?.ready.then(again);
+        window.addEventListener('load', again, { once: true });
+        window.setTimeout(again, 600);
+    }
     window.addEventListener('hashchange', fromHash);
     fromHash();
     filter();
+    restoreSpot();
 })();

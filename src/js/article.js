@@ -21,6 +21,15 @@
                     // Storage blocked: the referrer still has the search.
                 }
                 backToList.href = saved && saved.split('#')[0] === from.href ? saved : from.href;
+                // Tells the list to return to where the reader left it.
+                backToList.addEventListener('click', () => {
+                    try {
+                        sessionStorage.setItem('articles-back', backToList.href);
+                    }
+                    catch (_error) {
+                        // The list opens at the top.
+                    }
+                });
             }
         }
         catch (_error) {
