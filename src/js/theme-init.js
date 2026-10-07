@@ -36,13 +36,13 @@
     function route(pathname) {
         const path = pathname.replace(/\/{2,}/g, '/');
         const make = (section, label) => ({ section, label: LABELS[label] });
-        if (path === '/' || path === '/index.html')
+        if (path === '/' || /^\/index(\.zh)?\.html$/.test(path))
             return make('home', 'home');
-        if (path === '/blogs.html' || path === '/series.html' || path === '/tags.html')
+        if (/^\/blogs(\.zh)?\.html$/.test(path) || path === '/series.html' || path === '/tags.html')
             return make('articles', 'articles');
         if (/^\/blogs\/[^/]+\.html$/.test(path))
             return make('articles', 'reading');
-        if (path === '/gallery.html')
+        if (/^\/gallery(\.zh)?\.html$/.test(path))
             return make('work', 'work');
         if (path === '/apps.html')
             return make('work', 'apps');
@@ -52,7 +52,7 @@
             return make('work', 'music');
         if (path === '/favorites.html' || /^\/favorites\/[a-z]+\.html$/.test(path))
             return make('favorites', 'favorites');
-        if (path === '/about.html')
+        if (/^\/about(\.zh)?\.html$/.test(path))
             return make('about', 'about');
         return null;
     }
@@ -74,6 +74,31 @@
     // Language: articles are one language per file, so theirs is fixed.
     // Elsewhere ?lang= wins and is remembered, then the stored choice.
     const fixed = root.getAttribute('data-page-lang');
+    const sectionEn = root.getAttribute('data-section-en');
+    const sectionZh = root.getAttribute('data-section-zh');
+    if (sectionEn && sectionZh) {
+        const current = new URL(window.location.href);
+        const query = current.searchParams.get('lang');
+        const requested = query === 'en' || query === 'zh' ? query : null;
+        // The legacy English entry respects a saved choice. An explicit
+        // Chinese document keeps its language even when storage differs.
+        const legacyEntry = current.pathname === '/' || current.pathname.endsWith('/' + sectionEn);
+        const chosen = requested || (legacyEntry && read(localStorage, LANG_KEY) === 'zh' ? 'zh' : fixed);
+        if (chosen === 'zh' || chosen === 'en') {
+            try {
+                localStorage.setItem(LANG_KEY, chosen);
+            }
+            catch (_error) { /* URL remains sufficient. */ }
+            const target = new URL(chosen === 'zh' ? sectionZh : sectionEn, current);
+            const sameEnglishHome = sectionEn === 'index.html' && current.pathname === '/' && chosen === 'en';
+            if (target.pathname !== current.pathname && !sameEnglishHome) {
+                current.pathname = target.pathname;
+                current.searchParams.delete('lang');
+                window.location.replace(current.pathname + current.search + current.hash);
+                return;
+            }
+        }
+    }
     let lang = 'en';
     if (fixed === 'zh' || fixed === 'en') {
         lang = fixed;

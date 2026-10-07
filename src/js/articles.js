@@ -5,9 +5,10 @@
 // #topic-<slug> filters the list by a tag's English label (#topic-outdoors);
 // #2012-09 lands on a month.
 (function () {
-    const main = document.querySelector('[data-articles]');
-    if (!main)
+    const mainCandidate = document.querySelector('[data-articles]');
+    if (!mainCandidate)
         return;
+    const main = mainCandidate;
     const shownEl = main.querySelector('[data-shown]');
     const viewButtons = Array.from(main.querySelectorAll('[data-view]'));
     const search = main.querySelector('[data-search]');
@@ -261,16 +262,18 @@
                 invoker = null;
                 return;
             }
-            const current = cells.find((cell) => cell.getAttribute('aria-current') === 'true');
-            if (!current)
+            const currentCandidate = cells.find((cell) => cell.getAttribute('aria-current') === 'true');
+            if (!currentCandidate)
                 return;
+            const current = currentCandidate;
             index.scrollTop = Math.max(0, current.offsetTop - index.clientHeight / 2);
             current.focus({ preventScroll: true });
         });
         index.addEventListener('click', (event) => {
-            const link = event.target.closest('a[data-jump]');
-            if (!link)
+            const linkCandidate = event.target.closest('a[data-jump]');
+            if (!linkCandidate)
                 return;
+            const link = linkCandidate;
             event.preventDefault();
             index.hidePopover();
             jump(link.dataset.jump || '');
@@ -320,6 +323,7 @@
         const url = window.location.pathname + window.location.search + (hash ? `#${hash}` : '');
         try {
             history.replaceState(history.state, '', url);
+            window.SITE_SHELL?.syncLangToggle?.();
         }
         catch (_error) {
             // Not fatal: the view still switches.

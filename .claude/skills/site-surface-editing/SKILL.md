@@ -13,8 +13,11 @@ Use this skill for source-of-truth and verification discipline on the main perso
   - `index.html`, `gallery.html`, `apps.html`, `apps/sleep-toolkit*.html`, `about.html`, `404.html`: `scripts/build_pages.py` from `data/site.json` and `data/article_index.json`.
   - `blogs.html` and `blogs/*.html`: `generate_blog_pages.py` from `blogs/*.md` and `templates/`.
   - `favorites.html`, `favorites/*.html`: `scripts/update_favorites_pages.py` from `data/favorites.json`.
-- The shared head, header and footer come from `scripts/site_shell.py` (nav, toggles, footer, meta, script tags) and `data/site_shell.json` (page list, script profiles, cache keys, `site_updated`), applied by `scripts/update_site_shell.py`.
-- TypeScript source lives in `src/ts/*.ts`; compiled browser JS in `src/js/*.js` is tracked. Run `npm run build:ts` after TS edits. Each page loads `site.js` plus one page script from its profile.
+- The shared head, header and footer come from `scripts/site_shell.py` (nav, toggles, footer, meta, script tags and per-resource content hashes) and `data/site_shell.json` (page list, script profiles, `site_updated`), applied by `scripts/update_site_shell.py`.
+- Generator entrypoints delegate to `scripts/article_*.py` and `scripts/page_*.py`; edit the owning module and regenerate. Entrypoints retain their former helper imports for compatibility.
+- Shared CSS sources are `src/css/sections/*.css`, ordered by `src/css/styles.sources.json`. `scripts/build_styles.py` writes the tracked `src/css/styles.css` without changing source bytes or cascade order; do not hand-edit this output.
+- TypeScript source lives in `src/ts/`, including `shell/`, `music-riddle/`, `network/` and shared `lib/` modules. Compiled browser JS in `src/js/*.js` is tracked. Run `npm run build:ts` after TS edits; pinned esbuild bundles modular entrypoints into the existing classic script URLs. Keep strict typing and validate JSON/storage before use. Each page loads `site.js` plus one page script from its profile.
+- Sleep's hand-authored bilingual essays share `gallery/research/assets/sleep-charts.ts`, the published `sleep/data.json`, typed contracts, localization and section renderers. Edit these sources, then regenerate; `scripts/update_sleep_assets.py` refreshes both pages' content hashes. Retain lazy loading/retry and run the bilingual chart-output fixture check before handing back rendering edits.
 - `series.html` and `tags.html` are hand-authored redirects into the Articles page.
 - AI/agent-readable entrypoints are root `llms.txt` and `agent-index.json`; update them when navigation, public sections, or curated paths change.
 - Project skills are kept in `.claude/skills/` and `.agents/skills/` (Codex). Edit one, then run `python3 scripts/sync_skills.py`; see the drift guards in `docs/ARCHITECTURE.md`.
@@ -31,7 +34,7 @@ Use this skill for source-of-truth and verification discipline on the main perso
 4. Prefer small schema additions in `data/site.json` over DOM-only hacks when content needs controlled layout.
 5. When adding a curated item, decide whether it is a Work entry, a project, a related link, or a machine-readable entry. Do not duplicate the same object across sections unless the IA requires it.
 6. If a public label changes, search for it across `data/site.json`, generators, generated HTML, TS, `llms.txt`, `agent-index.json`, and docs.
-7. If `src/css/styles.css` or any page script changes, bump `css_version` / `js_version` in `data/site_shell.json`, then run `make generate`. Confirm the pages reference the new `?v=` key so local and deployed browsers do not keep stale files.
+7. If shared CSS sources or any page script changes, run `make generate`. Shared CSS, `src/js/*.js` and the four Sleep runtime/UI scripts use each file's SHA-256 content hash as their `?v=` key; do not add global `css_version` / `js_version` fields. Confirm changed assets have new keys, unchanged assets keep theirs, and `make check-all` verifies the keys and performance budgets. Other topic-specific assets retain their own loading/version policy.
 8. When a work, project or article is added, keep `site_updated` in `data/site_shell.json` at or after its date; `scripts/check_site.py` fails otherwise.
 
 ## Checks

@@ -1,11 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "build:ts": "tsc -p tsconfig.json && tsc -p gallery/talks/pkm-2026-06-07/tsconfig.json && tsc -p gallery/research/assets/tsconfig.json && tsc -p blogs/assets/haba-pretext.tsconfig.json",
-    "check:ts": "tsc -p tsconfig.json --noEmit && tsc -p gallery/talks/pkm-2026-06-07/tsconfig.json --noEmit && tsc -p gallery/research/assets/tsconfig.json --noEmit && tsc -p blogs/assets/haba-pretext.tsconfig.json --noEmit",
+    "build:ts": "npm run check:ts && node scripts/build_client.mjs && tsc -p gallery/talks/pkm-2026-06-07/tsconfig.json && tsc -p gallery/research/assets/tsconfig.json && tsc -p blogs/assets/haba-pretext.tsconfig.json",
+    "check:ts": "tsc -p tsconfig.json && tsc -p gallery/research/assets/sleep/tsconfig.json && tsc -p gallery/talks/pkm-2026-06-07/tsconfig.json --noEmit && tsc -p gallery/research/assets/tsconfig.json --noEmit && tsc -p blogs/assets/haba-pretext.tsconfig.json --noEmit",
     "check:generated-js": "python3 scripts/check_typescript_build.py"
   },
   "devDependencies": {
+    "esbuild": "0.28.2",
     "typescript": "6.0.3"
   }
 }

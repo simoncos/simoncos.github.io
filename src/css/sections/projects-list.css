@@ -1,0 +1,125 @@
+/* ---- Projects list ------------------------------------------------------ */
+
+.projects {
+    padding: 0 var(--pad) clamp(80px, 14vh, 160px);
+}
+
+.page-head {
+    padding: var(--page-top) 0 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px 32px;
+}
+
+.page-h1 {
+    font-size: var(--page-title-size);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.05em;
+    margin: 0;
+}
+
+.page-lead {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 36ch;
+}
+
+.plist {
+    display: flex;
+    flex-direction: column;
+}
+
+.prow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px clamp(20px, 3vw, 48px);
+    padding: clamp(20px, 3vw, 36px) 0;
+    transition: opacity 0.35s ease;
+}
+
+.prow-main {
+    flex: 1 1 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    transition: transform 0.6s var(--ease);
+}
+
+.prow-title {
+    font-size: clamp(36px, 6vw, 92px);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+    margin-left: -0.05em;
+}
+
+.prow-line {
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    max-width: 56ch;
+}
+
+.prow-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.prow-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.prow-cover {
+    flex: 0 0 auto;
+    width: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--fill);
+    transition: width 0.7s var(--ease);
+}
+
+.prow-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-width: 260px;
+    object-fit: cover;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .plist:has(.prow:hover) .prow:not(:hover) {
+        opacity: 0.3;
+    }
+
+    .prow:hover .prow-main {
+        transform: translate3d(12px, 0, 0);
+    }
+
+    .prow:hover .prow-cover {
+        width: 280px;
+    }
+}
+
+@media (max-width: 859.98px) {
+    .prow-cover {
+        width: 100%;
+    }
+
+    .prow-cover img {
+        min-width: 0;
+    }
+}
+

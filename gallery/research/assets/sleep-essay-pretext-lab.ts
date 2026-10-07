@@ -36,13 +36,13 @@ type DragState = {
 const labs = document.querySelectorAll<HTMLElement>("[data-pretext-lab]");
 
 labs.forEach((lab) => {
-  const stage = lab.querySelector<HTMLElement>("[data-pretext-stage]");
-  const source = lab.querySelector<HTMLElement>("[data-pretext-source]");
-  const linesLayer = lab.querySelector<HTMLElement>("[data-pretext-lines]");
-  const orb = lab.querySelector<HTMLButtonElement>("[data-pretext-orb]");
-  const orbLabel = lab.querySelector<HTMLElement>("[data-pretext-orb-label]");
-  const orbNote = lab.querySelector<HTMLElement>("[data-pretext-orb-note]");
-  const liveCopy = lab.querySelector<HTMLElement>("[data-pretext-live]");
+  const stageCandidate = lab.querySelector<HTMLElement>("[data-pretext-stage]");
+  const sourceCandidate = lab.querySelector<HTMLElement>("[data-pretext-source]");
+  const linesLayerCandidate = lab.querySelector<HTMLElement>("[data-pretext-lines]");
+  const orbCandidate = lab.querySelector<HTMLButtonElement>("[data-pretext-orb]");
+  const orbLabelCandidate = lab.querySelector<HTMLElement>("[data-pretext-orb-label]");
+  const orbNoteCandidate = lab.querySelector<HTMLElement>("[data-pretext-orb-note]");
+  const liveCopyCandidate = lab.querySelector<HTMLElement>("[data-pretext-live]");
   const presetButtons = Array.from(
     lab.querySelectorAll<HTMLButtonElement>("[data-pretext-preset]"),
   );
@@ -51,19 +51,26 @@ labs.forEach((lab) => {
   );
 
   if (
-    !stage ||
-    !source ||
-    !linesLayer ||
-    !orb ||
-    !orbLabel ||
-    !orbNote ||
-    !liveCopy ||
+    !stageCandidate ||
+    !sourceCandidate ||
+    !linesLayerCandidate ||
+    !orbCandidate ||
+    !orbLabelCandidate ||
+    !orbNoteCandidate ||
+    !liveCopyCandidate ||
     presetButtons.length === 0 ||
     copyNodes.length !== presetButtons.length
   ) {
     return;
   }
 
+  const stage = stageCandidate;
+  const source = sourceCandidate;
+  const linesLayer = linesLayerCandidate;
+  const orb = orbCandidate;
+  const orbLabel = orbLabelCandidate;
+  const orbNote = orbNoteCandidate;
+  const liveCopy = liveCopyCandidate;
   const isChinese = document.documentElement.lang.startsWith("zh");
   const presets: LensPreset[] = isChinese
     ? [

@@ -1,8 +1,10 @@
-.PHONY: check check-all generate serve
+.PHONY: check check-all check-performance generate serve
 
 TYPESCRIPT_SCOPE ?= site
 
 check:
+	python3 scripts/build_styles.py --check
+	python3 scripts/update_sleep_assets.py --check
 	npm run check:generated-js -- --scope $(TYPESCRIPT_SCOPE)
 	python3 scripts/update_site_shell.py --check
 	python3 scripts/update_favorites_pages.py --check
@@ -11,15 +13,23 @@ check:
 	python3 scripts/check_blog_generation.py
 	python3 scripts/build_pages.py --check
 	python3 scripts/check_site.py
+	python3 scripts/check_performance.py
 	python3 scripts/sync_skills.py --check
 	find src/js -name '*.js' -print0 | xargs -0 -n 1 node --check
+	node --test tests/*.test.cjs
+	node scripts/test_sleep_charts.cjs
 	PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_*.py'
 
 check-all:
 	$(MAKE) check TYPESCRIPT_SCOPE=all
 
+check-performance:
+	python3 scripts/check_performance.py
+
 generate:
+	python3 scripts/build_styles.py
 	npm run build:ts
+	python3 scripts/update_sleep_assets.py
 	python3 scripts/update_site_shell.py
 	python3 scripts/update_image_dimensions.py
 	python3 generate_blog_pages.py

@@ -17,10 +17,12 @@
         glyph.addEventListener('focusin', () => peek(id));
     });
     // ---- Category page ------------------------------------------------------
-    const main = document.querySelector('[data-fav-cat]');
-    const list = document.querySelector('[data-fav-list]');
-    if (!main || !list)
+    const mainCandidate = document.querySelector('[data-fav-cat]');
+    const listCandidate = document.querySelector('[data-fav-list]');
+    if (!mainCandidate || !listCandidate)
         return;
+    const main = mainCandidate;
+    const list = listCandidate;
     const FILTERS = ['all', 'reviewed', 'unreviewed'];
     const rows = Array.from(list.querySelectorAll(':scope > .fav-row'));
     const perPage = Number(main.dataset.perPage) || 20;
@@ -202,12 +204,13 @@
         let previous = '';
         let first = true;
         rows.forEach((row) => {
-            const on = shown.has(row);
-            row.hidden = !on;
+            const onCandidate = shown.has(row);
+            row.hidden = !onCandidate;
             row.classList.remove('is-open', 'is-all');
             row.querySelectorAll('[data-fav-fold], [data-fav-marks]').forEach((button) => button.setAttribute('aria-expanded', 'false'));
-            if (!on)
+            if (!onCandidate)
                 return;
+            const on = onCandidate;
             const date = row.dataset.marked || '';
             row.classList.toggle('is-repeat', !first && date === previous);
             row.classList.toggle('is-first', first);
@@ -260,6 +263,7 @@
         state = { filter, page, q: state.q };
         try {
             history.pushState(null, '', stateUrl(filter, page));
+            window.SITE_SHELL?.syncLangToggle?.();
         }
         catch (_error) {
             // The view still changes; only the address stays behind.
@@ -290,12 +294,14 @@
         });
     }
     list.addEventListener('click', (event) => {
-        const button = event.target.closest('[data-fav-fold], [data-fav-marks]');
-        if (!button)
+        const buttonCandidate = event.target.closest('[data-fav-fold], [data-fav-marks]');
+        if (!buttonCandidate)
             return;
-        const row = button.closest('.fav-row');
-        if (!row)
+        const button = buttonCandidate;
+        const rowCandidate = button.closest('.fav-row');
+        if (!rowCandidate)
             return;
+        const row = rowCandidate;
         const cls = button.hasAttribute('data-fav-fold') ? 'is-open' : 'is-all';
         const open = !row.classList.contains(cls);
         row.classList.toggle(cls, open);
@@ -312,6 +318,7 @@
         state = { filter: state.filter, page: 1, q };
         try {
             history.replaceState(null, '', stateUrl(state.filter, 1));
+            window.SITE_SHELL?.syncLangToggle?.();
         }
         catch (_error) {
             // The view still changes; only the address stays behind.

@@ -1,0 +1,98 @@
+/* simoncos — site v3.
+   Tokens are copied verbatim from the design handoff; everything else is
+   organised by page, in the order a reader meets them. */
+
+/* ---- Tokens ------------------------------------------------------------ */
+
+/* Arial, or a metric twin, scaled to Geist's width and line metrics, so text
+   does not rewrap when the web font arrives (the About page shifted by 0.21
+   CLS without it). Widths were measured in the browser against this site's
+   English prose: Geist 400 runs 2.5% narrower than its letter-frequency
+   estimate, while 500 matches it, hence two faces. The overrides are Geist's
+   ascender (1005) and descender (295) per 1000 units, divided by the
+   size-adjust. */
+@font-face {
+    font-family: 'Geist Fallback';
+    src: local('Arial'), local('ArialMT'), local('Arimo'), local('Liberation Sans');
+    font-weight: 100 450;
+    size-adjust: 102.84%;
+    ascent-override: 97.73%;
+    descent-override: 28.69%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: 'Geist Fallback';
+    src: local('Arial'), local('ArialMT'), local('Arimo'), local('Liberation Sans');
+    font-weight: 451 600;
+    size-adjust: 105.27%;
+    ascent-override: 95.47%;
+    descent-override: 28.02%;
+    line-gap-override: 0%;
+}
+
+:root {
+    --bg: #ffffff;
+    --bg-a: rgba(255, 255, 255, 0.9);
+    --bg-a2: rgba(255, 255, 255, 0.97);
+    --ink: #141414;
+    --ink-h: #333333;
+    --ink-2: #4a4a47;
+    --on-ink: #ffffff;
+    --fill: #f3f3f1;
+    --fill-2: #e8e8e5;
+    --fill-3: #ecece8;
+    --muted: #6b6b67;
+    --muted-2: #8a8a86;
+    --line: #e4e4e0;
+    --line-2: #c9c9c5;
+    --hl: #fbe6d2;
+    --a: #141414;
+    --live: #2fb35f;
+    color-scheme: light;
+
+    --font: 'Geist', 'Geist Fallback', 'Noto Sans SC', system-ui, sans-serif;
+    --mono: ui-monospace, 'SF Mono', Consolas, monospace;
+    --pad: clamp(20px, 4vw, 56px);
+    --page-top: 32px;
+    /* The sticky header: 44px buttons plus twice --hdr-pad. Scripts on long
+       pages overwrite --hdr-h with the measured height. */
+    --hdr-pad: 16px;
+    --hdr-h: 76px;
+    --page-title-size: clamp(40px, 5vw, 72px);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-io: cubic-bezier(0.76, 0, 0.24, 1);
+
+    /* Article-local components (the Haba reading scene) were written
+       against these names; map them onto the v3 palette. */
+    --font-sans: var(--font);
+    --editorial-serif: Georgia, 'Times New Roman', 'Songti SC', serif;
+    --editorial-ink: var(--ink);
+    --editorial-muted: var(--muted);
+    --editorial-rule: var(--line);
+    --editorial-accent: var(--ink);
+    --editorial-accent-soft: var(--fill);
+    --editorial-paper: var(--bg);
+    --editorial-paper-strong: var(--bg);
+}
+
+:root[data-theme="dark"] {
+    --bg: #111111;
+    --bg-a: rgba(17, 17, 17, 0.88);
+    --bg-a2: rgba(17, 17, 17, 0.97);
+    --ink: #f2f2ef;
+    --ink-h: #d9d9d5;
+    --ink-2: #bdbdb8;
+    --on-ink: #111111;
+    --fill: #1d1d1c;
+    --fill-2: #292927;
+    --fill-3: #242423;
+    --muted: #9a9a95;
+    --muted-2: #7a7a76;
+    --line: #2e2e2c;
+    --line-2: #4a4a47;
+    --hl: #3a3a37;
+    --a: #f2f2ef;
+    color-scheme: dark;
+}
+

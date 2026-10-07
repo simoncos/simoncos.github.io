@@ -1,0 +1,121 @@
+/* ---- Shared controls --------------------------------------------------- */
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--fill);
+    border: 0;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+
+.pill:hover {
+    background: var(--fill-2);
+}
+
+.pill-ink,
+.pill-ink:hover {
+    color: var(--on-ink);
+    background: var(--ink);
+}
+
+.seg {
+    display: flex;
+    gap: 4px;
+    background: var(--fill);
+    padding: 4px;
+    border-radius: 999px;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.seg::-webkit-scrollbar {
+    display: none;
+}
+
+.seg-btn {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    min-height: 36px;
+    padding: 0 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.25s, color 0.25s;
+}
+
+/* Four topics with counts fit a 360 px phone only with a little less air. */
+@media (max-width: 400px) {
+    .seg-btn {
+        padding: 0 12px;
+    }
+}
+
+.seg-btn[aria-pressed="true"],
+.seg-btn[aria-current="page"],
+.seg-btn[aria-current="true"] {
+    color: var(--on-ink);
+    background: var(--ink);
+}
+
+.seg-n {
+    opacity: 0.72;
+    font-variant-numeric: tabular-nums;
+}
+
+.round-btn {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    color: var(--ink);
+    background: var(--fill);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.round-btn:hover {
+    background: var(--fill-2);
+}
+
+.round-btn.ink,
+.round-btn.ink:hover {
+    color: var(--on-ink);
+    background: var(--ink);
+}
+
+.round-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.live-dot {
+    flex: 0 0 auto;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--live);
+    animation: om-pulse 2.4s ease-in-out infinite;
+}
+

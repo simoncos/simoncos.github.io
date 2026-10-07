@@ -1,0 +1,952 @@
+/* ---- Article ------------------------------------------------------------ */
+
+.k {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* Section labels that are headings for assistive technology (the series,
+   tags and links under an article) look the same as the others. */
+h2.k {
+    margin: 0;
+}
+
+.read-progress {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 3px;
+    z-index: 70;
+    pointer-events: none;
+}
+
+.read-progress-bar {
+    height: 100%;
+    width: 0;
+    background: var(--a);
+    transition: width 0.1s linear;
+}
+
+.article {
+    padding: 0 var(--pad) clamp(64px, 10vh, 120px);
+}
+
+.article-grid {
+    max-width: 1004px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 220px minmax(0, 760px);
+    gap: 0 22px;
+    align-items: start;
+    padding-top: var(--page-top);
+}
+
+.article-head {
+    grid-column: 2;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 6px;
+}
+
+.article-head .pill {
+    align-self: flex-start;
+}
+
+.article-title {
+    margin: 0;
+    max-width: 24ch;
+    font-size: clamp(2rem, 3.6vw, 3.6rem);
+    font-weight: 500;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+}
+
+.toc {
+    grid-column: 1;
+    position: sticky;
+    top: 96px;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 0;
+    max-height: calc(100vh - 8rem);
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.toc-k {
+    margin-bottom: 8px;
+}
+
+.toc-link {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 6px 0;
+    color: var(--muted);
+    transition: color 0.2s;
+}
+
+.toc-link:hover,
+.toc-link.is-active {
+    color: var(--ink);
+}
+
+.toc-link.is-active {
+    font-weight: 600;
+}
+
+.toc-link.toc-h3 {
+    padding-left: 16px;
+    font-size: 13px;
+}
+
+.toc-link.toc-h4 {
+    padding-left: 32px;
+    font-size: 13px;
+}
+
+.toc-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+    transform: translateY(-1px);
+    background: var(--a);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.toc-link.is-active .toc-dot {
+    opacity: 1;
+}
+
+.article-main {
+    grid-column: 2;
+    min-width: 0;
+    max-width: 760px;
+}
+
+.article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 20px;
+    margin: 14px 0 1.1rem;
+    font-size: 15px;
+    color: var(--ink-2);
+}
+
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.meta-item .k {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+.meta-alt {
+    margin-left: auto;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--fill);
+    padding: 6px 12px;
+    border-radius: 999px;
+    transition: background 0.2s;
+}
+
+.meta-alt:hover {
+    background: var(--fill-2);
+}
+
+.toc-box {
+    display: none;
+    margin-bottom: 22px;
+    background: var(--fill);
+    border-radius: 14px;
+}
+
+.toc-box summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    min-height: 44px;
+    padding: 0 16px;
+    cursor: pointer;
+}
+
+.toc-box summary::-webkit-details-marker {
+    display: none;
+}
+
+.toc-sign::before {
+    content: '+';
+    font-size: 16px;
+    letter-spacing: 0;
+}
+
+.toc-box[open] .toc-sign::before {
+    content: '\2212';
+}
+
+.toc-box-links {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px 12px;
+}
+
+.toc-box .toc-link {
+    font-size: 15px;
+    padding: 8px 0;
+}
+
+/* The shorthand above would otherwise flatten the levels. */
+.toc-box .toc-link.toc-h3 {
+    padding-left: 16px;
+}
+
+.toc-box .toc-link.toc-h4 {
+    padding-left: 32px;
+}
+
+.toc-box .toc-dot {
+    display: none;
+}
+
+.post-content {
+    font-size: 18.7px;
+    line-height: 1.7;
+    color: var(--ink);
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+}
+
+.post-content p {
+    margin: 0 0 1.05em;
+}
+
+.post-content :is(h2, h3, h4, h5, h6) {
+    scroll-margin-top: 96px;
+    text-wrap: balance;
+}
+
+.post-content h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    margin: 1.5em 0 0.45em;
+}
+
+.post-content h3 {
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 1.4em 0 0.4em;
+}
+
+.post-content :is(h4, h5, h6) {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 1.3em 0 0.35em;
+}
+
+.post-content a {
+    text-decoration: underline;
+    text-decoration-color: var(--a);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+}
+
+.post-content blockquote {
+    margin: 1.4rem 0;
+    padding: 0.25rem 0 0.25rem 1.2rem;
+    border-left: 3px solid var(--a);
+    color: var(--ink-2);
+    font-style: italic;
+}
+
+.post-content blockquote p {
+    margin: 0 0 0.6em;
+}
+
+.post-content blockquote > :last-child {
+    margin-bottom: 0;
+}
+
+.post-content code {
+    font-family: var(--mono);
+    font-size: 0.92em;
+    padding: 0.15rem 0.38rem;
+    border-radius: 0.4rem;
+    background: var(--fill);
+}
+
+.post-content pre {
+    margin: 1.4em 0;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: var(--fill);
+    overflow-x: auto;
+    font-size: 0.82em;
+    line-height: 1.55;
+}
+
+.post-content pre code {
+    padding: 0;
+    background: transparent;
+    font-size: inherit;
+}
+
+.post-content :is(ul, ol) {
+    margin: 0 0 1.1em;
+    padding-left: 1.35rem;
+}
+
+.post-content li {
+    margin-bottom: 0.45em;
+}
+
+.post-content li > :is(ul, ol) {
+    margin: 0.45em 0 0;
+}
+
+.post-content hr {
+    border: 0;
+    height: 1px;
+    background: var(--line);
+    margin: 2em 0;
+}
+
+.post-content img,
+.post-content video.post-loop {
+    display: block;
+    height: auto;
+    border-radius: 12px;
+    margin: 1.4em auto;
+}
+
+.post-content video.post-loop {
+    max-width: 100%;
+    background: var(--fill);
+}
+
+/* A film with sound, written as raw <video class="post-film"> in the article:
+   portrait, so its height is capped to keep it on one screen. */
+.post-content video.post-film {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 78vh;
+    margin: 1.4em auto;
+    border-radius: 12px;
+    background: var(--fill);
+}
+
+/* The credit under a film: centred beneath it, on two lines when one is not
+   enough. Raw <p class="post-film-credit"> in the article. */
+.post-content p.post-film-credit {
+    max-width: 30em;
+    margin: -0.4em auto 1.6em;
+    text-align: center;
+}
+
+/* Clauses that each stay whole, so the credit breaks between them and never
+   strands one character or a link's arrow on a line of its own. The second
+   half nests two clauses: whole on a wide screen, split on a phone. */
+.post-content p.post-film-credit small span {
+    display: inline-block;
+}
+
+.post-content p.post-film-credit a {
+    white-space: nowrap;
+}
+
+/* Beats the justified Chinese running text below. */
+.post-content p.post-film-credit:lang(zh) {
+    text-align: center;
+}
+
+/* A few screenshots in one place, switched by tabs instead of stacked down
+   the page. Raw HTML in the article: radio inputs, then a stage of
+   same-sized images, then a caption of labels; the nth input shows the nth
+   image. No script, and the stage keeps its size as the tabs change. */
+.post-content figure.post-shots {
+    margin: 1.6em 0;
+}
+
+.post-shots-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.post-shots-stage {
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--fill);
+}
+
+.post-content .post-shots-stage img {
+    display: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+}
+
+.post-shots-input:nth-of-type(1):checked ~ .post-shots-stage img:nth-child(1),
+.post-shots-input:nth-of-type(2):checked ~ .post-shots-stage img:nth-child(2),
+.post-shots-input:nth-of-type(3):checked ~ .post-shots-stage img:nth-child(3),
+.post-shots-input:nth-of-type(4):checked ~ .post-shots-stage img:nth-child(4),
+.post-shots-input:nth-of-type(5):checked ~ .post-shots-stage img:nth-child(5) {
+    display: block;
+}
+
+.post-content figcaption.post-shots-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.post-shots-tabs label {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    color: var(--muted);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.post-shots-tabs label:hover {
+    color: var(--ink);
+}
+
+.post-shots-input:nth-of-type(1):checked ~ .post-shots-tabs label:nth-child(1),
+.post-shots-input:nth-of-type(2):checked ~ .post-shots-tabs label:nth-child(2),
+.post-shots-input:nth-of-type(3):checked ~ .post-shots-tabs label:nth-child(3),
+.post-shots-input:nth-of-type(4):checked ~ .post-shots-tabs label:nth-child(4),
+.post-shots-input:nth-of-type(5):checked ~ .post-shots-tabs label:nth-child(5) {
+    background: var(--ink);
+    color: var(--bg);
+}
+
+.post-shots-input:nth-of-type(1):focus-visible ~ .post-shots-tabs label:nth-child(1),
+.post-shots-input:nth-of-type(2):focus-visible ~ .post-shots-tabs label:nth-child(2),
+.post-shots-input:nth-of-type(3):focus-visible ~ .post-shots-tabs label:nth-child(3),
+.post-shots-input:nth-of-type(4):focus-visible ~ .post-shots-tabs label:nth-child(4),
+.post-shots-input:nth-of-type(5):focus-visible ~ .post-shots-tabs label:nth-child(5) {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
+.post-content figure {
+    margin: 1.6em 0;
+}
+
+.post-content figure img {
+    margin: 0 auto;
+}
+
+.post-content figcaption {
+    margin-top: 0.6em;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--muted);
+    text-align: center;
+}
+
+.post-content dt {
+    font-weight: 600;
+}
+
+.post-content dd {
+    margin: 0 0 0.8em;
+}
+
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.88em;
+}
+
+.post-content :is(th, td) {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+}
+
+.post-content sup {
+    line-height: 0;
+}
+
+.post-content a.footnote-ref {
+    position: relative;
+    font-size: 0.72em;
+    color: var(--a);
+    padding: 0 2px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.6s, box-shadow 0.6s;
+}
+
+/* The number is a few pixels wide; this gives a finger something to hit
+   without changing how it looks. The back link gets the same. */
+.post-content a.footnote-ref::after,
+.post-content a.footnote-backref::after {
+    content: '';
+    position: absolute;
+    inset: -12px -10px;
+}
+
+/* Coming back from a note, the number it belongs to lights up briefly. */
+.post-content sup.is-hl a.footnote-ref {
+    background: var(--hl);
+    box-shadow: 0 0 0 3px var(--hl);
+}
+
+.post-content .footnote {
+    margin-top: 2.2em;
+}
+
+.post-content .footnote hr {
+    display: none;
+}
+
+.post-content .footnote ol {
+    margin: 0;
+    padding: 1.2em 0 0 1.35rem;
+    font-size: 0.86em;
+    line-height: 1.6;
+    color: var(--ink-2);
+    border-top: 1px solid var(--line);
+}
+
+.post-content sup[id^="fnref"] {
+    scroll-margin-top: 96px;
+}
+
+.post-content .footnote li {
+    margin-bottom: 0.5em;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: background 0.6s;
+    scroll-margin-top: 96px;
+}
+
+.post-content .footnote li.is-hl {
+    background: var(--hl);
+}
+
+.post-content .footnote li p {
+    margin: 0;
+}
+
+.post-content a.footnote-backref {
+    position: relative;
+    text-decoration: none;
+    color: var(--muted);
+}
+
+/* The generator draws the arrow as lines; without these it fills in as a
+   black blob, invisible in dark mode. */
+.footnote-backref-icon {
+    width: 0.9em;
+    height: 0.9em;
+    vertical-align: -0.1em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.15;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    overflow: visible;
+}
+
+.embedded-page {
+    display: block;
+    width: 100%;
+    min-height: 620px;
+    height: 82vh;
+    margin: 1.4em 0;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: var(--bg);
+}
+
+/* generate_blog_pages.py wraps each embedded page with a cover link. Where a
+   finger would scroll the frame instead of the article, the cover lies over
+   the frame: a swipe scrolls the article, a tap opens the page in a new tab. */
+.embed-frame {
+    position: relative;
+    margin: 1.4em 0;
+}
+
+.embed-frame .embedded-page {
+    margin: 0;
+}
+
+.embed-cover {
+    display: none;
+}
+
+@media (pointer: coarse), (max-width: 760px) {
+    .embed-frame .embedded-page {
+        min-height: 0;
+        height: min(56vh, 420px);
+        pointer-events: none;
+    }
+
+    .embed-cover {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 0 16px 20px;
+        border-radius: 20px;
+        background: linear-gradient(to bottom, transparent 55%, color-mix(in srgb, var(--bg) 88%, transparent));
+        text-decoration: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .embed-fallback {
+        display: none;
+    }
+
+    .embed-cover-label {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 20px;
+        border-radius: 999px;
+        background: var(--ink);
+        color: var(--bg);
+        font-size: 15px;
+        font-weight: 600;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    }
+}
+
+.series-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 2.2rem;
+    padding: 18px 20px;
+    background: var(--fill);
+    border-radius: 14px;
+}
+
+.series-box a {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-size: 16px;
+}
+
+.series-box a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.series-box a[aria-current="page"] {
+    font-weight: 600;
+}
+
+.series-part {
+    flex: 0 0 auto;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+}
+
+.article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.article-tags .k {
+    margin-right: 6px;
+}
+
+.tag {
+    font-size: 13px;
+    background: var(--fill);
+    padding: 6px 12px;
+    border-radius: 999px;
+    transition: background 0.2s;
+}
+
+.tag:hover {
+    background: var(--fill-2);
+}
+
+.xref-grid,
+.post-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+    gap: 12px;
+}
+
+.xref-grid {
+    margin-top: 2.5rem;
+}
+
+.post-nav {
+    margin-top: 12px;
+}
+
+.xrefs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 18px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+}
+
+.xrefs.is-empty {
+    border-style: dashed;
+    border-color: var(--line-2);
+}
+
+.xref {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.xref:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.xref .num {
+    flex: 0 0 auto;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+}
+
+.xrefs-empty {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--muted);
+}
+
+.post-nav-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: var(--fill);
+    transition: background 0.2s;
+}
+
+.post-nav-card:hover {
+    background: var(--fill-2);
+}
+
+.post-nav-older {
+    text-align: right;
+}
+
+.post-nav-title {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.to-top {
+    position: fixed;
+    right: clamp(16px, 3vw, 32px);
+    bottom: clamp(16px, 3vw, 32px);
+    z-index: 40;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--on-ink);
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.to-top.is-on {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+/* On narrow screens the button steps aside with the contents box while the
+   reader scrolls on (article.ts). */
+.to-top.is-on.is-away {
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: 0s, 0.3s;
+}
+
+@media (max-width: 859.98px) {
+    .article-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .article-spacer,
+    .toc {
+        display: none;
+    }
+
+    .article-head,
+    .article-main {
+        grid-column: 1;
+    }
+
+    .article-title {
+        font-size: clamp(2rem, 9vw, 3rem);
+    }
+
+    .toc-box {
+        display: block;
+    }
+
+    /* Past the title the contents box sticks under the header, so the
+       contents stay one tap away mid-article. article.ts hides it while the
+       reader scrolls down and brings it back when they scroll up. Without
+       JavaScript the header wraps to two rows, so the box stays in place. */
+    :root.js .toc-box {
+        position: sticky;
+        top: calc(var(--hdr-h, 76px) + 8px);
+        z-index: 30;
+        transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, visibility 0s linear 0s;
+    }
+
+    /* The middle shadow and the band below fill the gap under the header
+       and the rounded corners, where text scrolling past would otherwise
+       show as cut-off half lines. */
+    :root.js .toc-box.is-stuck {
+        box-shadow: 0 0 0 1px var(--line), 0 -6px 0 var(--bg), 0 10px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    :root.js .toc-box.is-stuck::before {
+        content: '';
+        position: absolute;
+        top: -9px;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background: var(--bg);
+    }
+
+    :root.js .toc-box.is-away {
+        opacity: 0;
+        transform: translateY(-8px);
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, visibility 0s linear 0.2s;
+    }
+
+    /* A long list scrolls inside the box rather than past the screen. */
+    :root.js .toc-box-links {
+        max-height: calc(100dvh - var(--hdr-h, 76px) - 76px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    /* Opened in place, the list pushes the article down as it always has.
+       Opened under the header, it drops over the text instead, so the page
+       under the reader does not move. article.ts keeps .is-stuck as it was
+       when the box opened. */
+    :root.js .toc-box.is-stuck[open] {
+        border-radius: 14px 14px 0 0;
+    }
+
+    :root.js .toc-box.is-stuck .toc-box-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--fill);
+        border-radius: 0 0 14px 14px;
+        box-shadow: 0 1px 0 1px var(--line), 0 18px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Headings and notes land clear of the header and the contents box. */
+    :root.js .post-content :is(h2, h3, h4, h5, h6),
+    :root.js .post-content sup[id^="fnref"],
+    :root.js .post-content .footnote li {
+        scroll-margin-top: calc(var(--hdr-h, 76px) + 64px);
+    }
+
+    .post-content {
+        font-size: 17.6px;
+    }
+
+    /* At 2rem a section heading was nearly the size of the title and wrapped
+       after ten characters. */
+    .post-content h2 {
+        font-size: 1.6rem;
+    }
+
+    .post-content h3 {
+        font-size: 1.3rem;
+    }
+
+    /* English stays ragged-right; hyphenation evens the edge of a narrow
+       column. Chinese is justified at every width (see Chinese text). */
+    .post-content :is(p, li):lang(en) {
+        -webkit-hyphens: auto;
+        hyphens: auto;
+    }
+
+    /* Stacked, the older-post card no longer sits on the right. */
+    .post-nav-older {
+        text-align: left;
+    }
+
+    .embedded-page {
+        min-height: 480px;
+        height: 65vh;
+    }
+}
+

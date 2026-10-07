@@ -1,0 +1,21 @@
+[
+  "sections/tokens.css",
+  "sections/base.css",
+  "sections/shared-controls.css",
+  "sections/shell-skip-link-header-menu-footer.css",
+  "sections/transitions.css",
+  "sections/home.css",
+  "sections/about.css",
+  "sections/404.css",
+  "sections/work-topic-wheel.css",
+  "sections/work-topic-view.css",
+  "sections/projects-list.css",
+  "sections/project-board.css",
+  "sections/music.css",
+  "sections/articles.css",
+  "sections/month-index.css",
+  "sections/article.css",
+  "sections/favorites.css",
+  "sections/chinese-text.css",
+  "sections/touch-hit-areas.css"
+]

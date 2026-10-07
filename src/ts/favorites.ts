@@ -21,9 +21,11 @@
 
     // ---- Category page ------------------------------------------------------
 
-    const main = document.querySelector<HTMLElement>('[data-fav-cat]');
-    const list = document.querySelector<HTMLOListElement>('[data-fav-list]');
-    if (!main || !list) return;
+    const mainCandidate = document.querySelector<HTMLElement>('[data-fav-cat]');
+    const listCandidate = document.querySelector<HTMLOListElement>('[data-fav-list]');
+    if (!mainCandidate || !listCandidate) return;
+    const main = mainCandidate;
+    const list = listCandidate;
 
     type Filter = 'all' | 'reviewed' | 'unreviewed';
     const FILTERS: Filter[] = ['all', 'reviewed', 'unreviewed'];
@@ -213,11 +215,12 @@
         let previous = '';
         let first = true;
         rows.forEach((row) => {
-            const on = shown.has(row);
-            row.hidden = !on;
+            const onCandidate = shown.has(row);
+            row.hidden = !onCandidate;
             row.classList.remove('is-open', 'is-all');
             row.querySelectorAll('[data-fav-fold], [data-fav-marks]').forEach((button) => button.setAttribute('aria-expanded', 'false'));
-            if (!on) return;
+            if (!onCandidate) return;
+            const on = onCandidate;
             const date = row.dataset.marked || '';
             row.classList.toggle('is-repeat', !first && date === previous);
             row.classList.toggle('is-first', first);
@@ -269,6 +272,7 @@
         state = { filter, page, q: state.q };
         try {
             history.pushState(null, '', stateUrl(filter, page));
+            window.SITE_SHELL?.syncLangToggle?.();
         } catch (_error) {
             // The view still changes; only the address stays behind.
         }
@@ -298,10 +302,12 @@
     }
 
     list.addEventListener('click', (event) => {
-        const button = (event.target as Element).closest<HTMLButtonElement>('[data-fav-fold], [data-fav-marks]');
-        if (!button) return;
-        const row = button.closest<HTMLLIElement>('.fav-row');
-        if (!row) return;
+        const buttonCandidate = (event.target as Element).closest<HTMLButtonElement>('[data-fav-fold], [data-fav-marks]');
+        if (!buttonCandidate) return;
+        const button = buttonCandidate;
+        const rowCandidate = button.closest<HTMLLIElement>('.fav-row');
+        if (!rowCandidate) return;
+        const row = rowCandidate;
         const cls = button.hasAttribute('data-fav-fold') ? 'is-open' : 'is-all';
         const open = !row.classList.contains(cls);
         row.classList.toggle(cls, open);
@@ -318,6 +324,7 @@
         state = { filter: state.filter, page: 1, q };
         try {
             history.replaceState(null, '', stateUrl(state.filter, 1));
+            window.SITE_SHELL?.syncLangToggle?.();
         } catch (_error) {
             // The view still changes; only the address stays behind.
         }

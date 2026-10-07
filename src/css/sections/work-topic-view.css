@@ -1,0 +1,288 @@
+/* ---- Work: topic view --------------------------------------------------- */
+
+.topic {
+    padding: var(--page-top) var(--pad) clamp(80px, 12vh, 140px);
+    animation: om-in 0.6s var(--ease) both;
+    scroll-margin-top: 96px;
+}
+
+/* With scripts one type view is the whole page, so a link such as
+   gallery.html#talks should land at the top, not with the back link under
+   the fixed header. A margin taller than the header clamps the jump to 0. */
+:root.js .topic {
+    scroll-margin-top: 100vh;
+}
+
+:root:not(.js) .topic + .topic {
+    border-top: 1px solid var(--line);
+}
+
+.topic-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px 24px;
+    margin-bottom: clamp(24px, 4vh, 40px);
+}
+
+/* On a phone the five type tabs share the row; "Visual essays" was cut off
+   at the rounded edge with nothing to say the row scrolls. In English the
+   labels need 277px of text, which fits a 375px screen only without the
+   gaps, and a 360px one only at 13px. */
+@media (max-width: 859.98px) {
+    .topic-bar .seg {
+        width: 100%;
+        gap: 0;
+    }
+
+    .topic-bar .seg-btn {
+        flex: 1 1 auto;
+        justify-content: center;
+        padding: 0 4px;
+    }
+}
+
+@media (max-width: 374.98px) {
+    .topic-bar .seg-btn {
+        font-size: 13px;
+    }
+}
+
+.topic-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px 40px;
+    margin-bottom: clamp(28px, 5vh, 56px);
+}
+
+.topic-head [tabindex="-1"]:focus {
+    outline: none;
+}
+
+.topic-head h1,
+.topic-head h2 {
+    font-size: clamp(44px, 8vw, 128px);
+    font-weight: 500;
+    line-height: 0.92;
+    letter-spacing: -0.06em;
+    margin: 0;
+}
+
+.topic-head p {
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 40ch;
+    text-wrap: pretty;
+}
+
+/* Every work is a card. A type with many works fills rows of three; one
+   with a single work lays its card out wide, picture beside the text. */
+.wgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: clamp(32px, 4vw, 56px) clamp(20px, 2.4vw, 36px);
+}
+
+.wcard {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-width: 0;
+}
+
+/* The hairline keeps a white cover (a table, a report page) from dissolving
+   into the page; outlines paint over the image. */
+.wcard-img {
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--fill);
+    outline: 1px solid var(--line);
+    outline-offset: -1px;
+}
+
+/* The card a #type/work address points at (the home page links works this
+   way): a warm wash behind it, the same --hl the archive and footnotes light
+   up on arrival, held for a moment and then faded, so the reader sees which
+   card they were sent to. Drawn on ::after and faded by opacity; an animated
+   outline colour did not repaint. */
+.wcard.is-target {
+    position: relative;
+    isolation: isolate;
+}
+
+.wcard.is-target::after {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    z-index: -1;
+    background: var(--hl);
+    border-radius: 24px;
+    pointer-events: none;
+    animation: wcard-target 2.4s var(--ease) both;
+}
+
+/* Focus arrives with the wash; its ring would only frame the card in black. */
+.wcard.is-landed:focus-visible {
+    outline: none;
+}
+
+@keyframes wcard-target {
+    0%, 60% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.wcard-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ease);
+}
+
+.wcard-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+}
+
+.wcard-title {
+    font-size: clamp(22px, 2.2vw, 30px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+}
+
+.wcard-desc {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 52ch;
+    text-wrap: pretty;
+}
+
+.wcard-year {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.wgroup-h {
+    margin: clamp(56px, 8vh, 96px) 0 clamp(20px, 3vh, 32px);
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+/* A type whose works are all in progress opens straight on the group. */
+.topic-head + .wgroup-h {
+    margin-top: 0;
+}
+
+/* Works in progress have no page yet: their cards are not links, so only
+   linked cards answer the pointer. */
+@media (hover: hover) and (pointer: fine) {
+    a.wcard:hover .wcard-img img {
+        transform: scale(1.04);
+    }
+
+    .wgrid:has(a.wcard:hover) a.wcard:not(:hover) {
+        opacity: 0.45;
+    }
+
+    .wcard {
+        transition: opacity 0.35s ease;
+    }
+}
+
+/* A lone work shows its whole picture: the covers are 3:2 or 16:10, and a
+   4:3 frame cut the title off the Echoes cover. */
+.wgrid[data-n="1"] .wcard-img {
+    aspect-ratio: auto;
+}
+
+.wgrid[data-n="1"] .wcard-img img {
+    height: auto;
+}
+
+@media (min-width: 860px) {
+    .wgrid[data-n="1"] {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .wgrid[data-n="1"] .wcard {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        gap: clamp(24px, 4vw, 64px);
+        align-items: end;
+    }
+
+    .wgrid[data-n="1"] .wcard-title {
+        font-size: clamp(28px, 3.2vw, 48px);
+        line-height: 1.04;
+        letter-spacing: -0.04em;
+    }
+
+    .wgrid[data-n="1"] .wcard-desc {
+        font-size: 17px;
+    }
+
+    .wgrid[data-n="2"] {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .wgrid[data-n="3"] {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.related {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 640px;
+    margin-top: clamp(40px, 6vh, 64px);
+    padding: 18px 20px;
+    background: var(--fill);
+    border-radius: 16px;
+}
+
+.related-label {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.related a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 6px 0;
+    transition: padding-left 0.3s var(--ease);
+}
+
+.related a:hover {
+    padding-left: 6px;
+}
+
+.related-t {
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+.related-k {
+    flex: 0 0 auto;
+    font-size: 13px;
+    color: var(--muted);
+}
+

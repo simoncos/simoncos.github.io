@@ -1,0 +1,308 @@
+/* ---- Articles ----------------------------------------------------------- */
+
+.articles {
+    padding: 0 var(--pad) clamp(80px, 14vh, 160px);
+}
+
+.ahead {
+    padding: var(--page-top) 0 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px 32px;
+}
+
+.ahead-n {
+    font-size: max(12px, 0.2em);
+    letter-spacing: 0;
+    vertical-align: top;
+    margin-left: 8px;
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.ahead-tools {
+    flex: 0 1 560px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.ahead-tools .seg {
+    flex: 0 0 auto;
+}
+
+.ahead-tools .seg-btn {
+    min-height: 40px;
+    padding: 0 16px;
+}
+
+@media (max-width: 1100px) {
+    .ahead {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .ahead-tools {
+        flex: none;
+        width: 100%;
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 600px) {
+    .ahead-tools {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ahead-tools .seg {
+        align-self: flex-start;
+    }
+
+    .ahead-tools .search {
+        flex: none;
+    }
+}
+
+.search {
+    flex: 1 1 220px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--fill);
+    border-radius: 999px;
+    padding: 0 18px;
+    min-height: 48px;
+}
+
+.search-icon {
+    font-size: 15px;
+    color: var(--muted);
+}
+
+.search input {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    outline: none;
+    padding: 12px 0;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.search input::placeholder {
+    color: var(--muted);
+}
+
+/* The browser's own clear button, drawn in the site's colours. Firefox has
+   none; Escape clears there. */
+.search input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    margin-right: -8px;
+    cursor: pointer;
+    background-color: var(--muted);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") center / 14px no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") center / 14px no-repeat;
+}
+
+.search input::-webkit-search-cancel-button:hover {
+    background-color: var(--ink);
+}
+
+.search:focus-within {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
+/* iOS Safari zooms into any field set below 16px when it gets focus. */
+@media (max-width: 859.98px) {
+    .search input {
+        font-size: 16px;
+    }
+}
+
+:root:not(.js) .ahead-tools,
+.articles.is-series [data-list-only] {
+    display: none;
+}
+
+:root.js .articles:not(.is-series) .series-view,
+:root.js .articles.is-series .alist-view {
+    display: none;
+}
+
+.tagbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: clamp(8px, 2vh, 16px);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.tagbar::-webkit-scrollbar {
+    display: none;
+}
+
+.chip {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--fill);
+    border: 0;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.25s, color 0.25s;
+}
+
+.chip[aria-pressed="true"] {
+    color: var(--on-ink);
+    background: var(--ink);
+}
+
+:root:not(.js) .chip {
+    display: none;
+}
+
+.rss-pill {
+    flex: 0 0 auto;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+
+.rss-pill span {
+    color: var(--muted);
+}
+
+.rss-pill:hover {
+    background: var(--fill);
+}
+
+.alist {
+    display: flex;
+    flex-direction: column;
+}
+
+/* The gap above a month is margin, outside the section, so a jump that
+   scrolls the section to the header puts its heading exactly where the
+   heading sticks. */
+.amonth {
+    margin-top: clamp(16px, 2.4vw, 28px);
+    scroll-margin-top: var(--hdr-h, 76px);
+}
+
+.amonth-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 2px 0;
+}
+
+/* The month in view stays under the site header, on the same frosted band,
+   and opens the month index. Without JavaScript the header can wrap to two
+   rows, so the heading stays in place. */
+:root.js .amonth-head {
+    position: sticky;
+    top: var(--hdr-h, 76px);
+    z-index: 20;
+    margin: 0 calc(-1 * var(--pad));
+    padding: 2px var(--pad);
+    background: var(--bg-a);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+}
+
+.amonth-head h2 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.amonth-jump {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 40px;
+    margin-left: -12px;
+    padding: 0 14px 0 12px;
+    font: inherit;
+    letter-spacing: inherit;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.amonth-chev {
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    opacity: 0.55;
+}
+
+@media (hover: hover) {
+    .amonth-jump:hover {
+        background: var(--fill);
+    }
+}
+
+/* Where a jump lands: the heading lights up once. */
+.amonth.is-arrived .amonth-jump {
+    animation: amonth-arrive 1.6s ease-out;
+}
+
+@keyframes amonth-arrive {
+    0%, 35% { background: var(--hl); }
+    100% { background: transparent; }
+}
+
+/* A browser without popovers cannot open the index; the heading is text. */
+@supports not selector(:popover-open) {
+    .amonth-jump {
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .amonth-chev {
+        display: none;
+    }
+}
+
+.amonth-n {
+    font-size: 13px;
+    color: var(--muted);
+}
+

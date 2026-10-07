@@ -1,26 +1,33 @@
 import { layoutNextLine, prepareWithSegments, } from "./vendor/pretext/layout.js";
 const labs = document.querySelectorAll("[data-pretext-lab]");
 labs.forEach((lab) => {
-    const stage = lab.querySelector("[data-pretext-stage]");
-    const source = lab.querySelector("[data-pretext-source]");
-    const linesLayer = lab.querySelector("[data-pretext-lines]");
-    const orb = lab.querySelector("[data-pretext-orb]");
-    const orbLabel = lab.querySelector("[data-pretext-orb-label]");
-    const orbNote = lab.querySelector("[data-pretext-orb-note]");
-    const liveCopy = lab.querySelector("[data-pretext-live]");
+    const stageCandidate = lab.querySelector("[data-pretext-stage]");
+    const sourceCandidate = lab.querySelector("[data-pretext-source]");
+    const linesLayerCandidate = lab.querySelector("[data-pretext-lines]");
+    const orbCandidate = lab.querySelector("[data-pretext-orb]");
+    const orbLabelCandidate = lab.querySelector("[data-pretext-orb-label]");
+    const orbNoteCandidate = lab.querySelector("[data-pretext-orb-note]");
+    const liveCopyCandidate = lab.querySelector("[data-pretext-live]");
     const presetButtons = Array.from(lab.querySelectorAll("[data-pretext-preset]"));
     const copyNodes = Array.from(lab.querySelectorAll("[data-pretext-copy]"));
-    if (!stage ||
-        !source ||
-        !linesLayer ||
-        !orb ||
-        !orbLabel ||
-        !orbNote ||
-        !liveCopy ||
+    if (!stageCandidate ||
+        !sourceCandidate ||
+        !linesLayerCandidate ||
+        !orbCandidate ||
+        !orbLabelCandidate ||
+        !orbNoteCandidate ||
+        !liveCopyCandidate ||
         presetButtons.length === 0 ||
         copyNodes.length !== presetButtons.length) {
         return;
     }
+    const stage = stageCandidate;
+    const source = sourceCandidate;
+    const linesLayer = linesLayerCandidate;
+    const orb = orbCandidate;
+    const orbLabel = orbLabelCandidate;
+    const orbNote = orbNoteCandidate;
+    const liveCopy = liveCopyCandidate;
     const isChinese = document.documentElement.lang.startsWith("zh");
     const presets = isChinese
         ? [

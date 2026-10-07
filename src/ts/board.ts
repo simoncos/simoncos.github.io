@@ -2,8 +2,9 @@
 // canvas, the pipeline stages and the privacy timeline.
 (function () {
     const shell = window.SITE_SHELL;
-    const board = document.querySelector<HTMLElement>('[data-board]');
-    if (!board) return;
+    const boardCandidate = document.querySelector<HTMLElement>('[data-board]');
+    if (!boardCandidate) return;
+    const board = boardCandidate;
 
     const root = document.documentElement;
     const reduced = !!(shell && shell.reduced);
@@ -91,8 +92,9 @@
             canvas.width = Math.floor(w * dpr);
             canvas.height = Math.floor(h * dpr);
         }
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
+        const ctxCandidate = canvas.getContext('2d');
+        if (!ctxCandidate) return;
+        const ctx = ctxCandidate;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.clearRect(0, 0, w, h);
         const cols = w < 520 ? 53 : COLS;

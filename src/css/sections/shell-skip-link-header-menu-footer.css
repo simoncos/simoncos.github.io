@@ -1,0 +1,313 @@
+/* ---- Shell: skip link, header, menu, footer ---------------------------- */
+
+.skip {
+    position: fixed;
+    left: 16px;
+    top: -80px;
+    z-index: 100;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--on-ink);
+    background: var(--ink);
+    padding: 12px 18px;
+    border-radius: 999px;
+    transition: top 0.2s;
+    white-space: nowrap;
+}
+
+.skip:focus,
+.skip:hover {
+    top: 16px;
+    color: var(--on-ink);
+}
+
+.hdr {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: var(--hdr-pad) var(--pad);
+    background: var(--bg-a);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    min-height: 44px;
+}
+
+.brand-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--a);
+}
+
+.hdr-right,
+.hdr-nav,
+.hdr-tools {
+    display: flex;
+    align-items: center;
+}
+
+.hdr-nav {
+    gap: 2px;
+}
+
+.tab {
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 14px;
+    border-radius: 999px;
+    opacity: 0.62;
+    transition: opacity 0.2s, background 0.2s;
+    white-space: nowrap;
+}
+
+.tab:hover,
+.tab[aria-current="page"] {
+    opacity: 1;
+}
+
+.tab:hover {
+    background: var(--fill);
+}
+
+.tab-dot {
+    position: absolute;
+    left: 50%;
+    bottom: 3px;
+    width: 4px;
+    height: 4px;
+    margin-left: -2px;
+    border-radius: 50%;
+    background: var(--a);
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.25s, transform 0.35s var(--ease);
+}
+
+.tab[aria-current="page"] .tab-dot {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.theme-btn {
+    font-size: 15px;
+    width: 36px;
+    height: 36px;
+    color: var(--ink);
+    background: var(--fill);
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 8px;
+    line-height: 1;
+}
+
+.i-sun,
+:root[data-theme="dark"] .i-moon {
+    display: none;
+}
+
+:root[data-theme="dark"] .i-sun {
+    display: inline;
+}
+
+.lang-btn {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--on-ink);
+    background: var(--ink);
+    padding: 9px 14px;
+    border-radius: 999px;
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+.lang-btn:hover {
+    color: var(--on-ink);
+}
+
+.menu-btn {
+    display: none;
+}
+
+.menu-btn[aria-expanded="true"] .menu-when-closed,
+.menu-btn:not([aria-expanded="true"]) .menu-when-open {
+    display: none;
+}
+
+.sheet {
+    position: fixed;
+    inset: var(--hdr-h) 0 0 0;
+    z-index: 45;
+    background: var(--bg);
+    padding: 12px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    animation: om-fade 0.25s ease both;
+}
+
+/* The sheet covers the page; a swipe on it must not scroll what is under it. */
+:root.menu-open,
+:root.menu-open body {
+    overflow: hidden;
+}
+
+.sheet-link {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    font-size: 44px;
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    padding: 10px 0;
+    opacity: 0.5;
+}
+
+.sheet-link[aria-current="page"] {
+    opacity: 1;
+}
+
+.sheet-n {
+    font-size: 13px;
+    letter-spacing: 0;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 859.98px) {
+    /* A phone has little height to spare: a 60px header (the buttons stay
+       44px) and 12px above each page's heading, down from 76px and 20px. */
+    :root {
+        --page-top: 12px;
+        --hdr-pad: 8px;
+        --hdr-h: 60px;
+    }
+
+    .hdr-nav {
+        display: none;
+    }
+
+    .hdr-tools {
+        gap: 8px;
+    }
+
+    .theme-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 16px;
+        margin-left: 0;
+    }
+
+    .lang-btn,
+    .lang-btn:hover {
+        color: var(--ink);
+        background: var(--fill);
+        min-height: 44px;
+        padding: 0 14px;
+        margin-left: 0;
+    }
+
+    .menu-btn {
+        display: inline-flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--on-ink);
+        background: var(--ink);
+        border: 0;
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: 999px;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+}
+
+@media (min-width: 860px) {
+    .sheet {
+        display: none !important;
+    }
+}
+
+/* Without scripts the theme and Menu buttons cannot work, nor can the
+   ?lang=zh switch on section pages (an article's switch is a real link to its
+   translation and stays). On phones the section links come back as a second
+   header row. */
+:root:not(.js) .theme-btn,
+:root:not(.js) .menu-btn,
+:root:not(.js) .lang-btn[href^="?"] {
+    display: none;
+}
+
+@media (max-width: 859.98px) {
+    :root:not(.js) .hdr {
+        flex-wrap: wrap;
+        row-gap: 4px;
+    }
+
+    :root:not(.js) .hdr-right {
+        display: contents;
+    }
+
+    /* The tabs' own padding would indent the first label; pull the row out
+       by that much so it lines up with the brand. */
+    :root:not(.js) .hdr-nav {
+        display: flex;
+        order: 3;
+        flex: 0 0 auto;
+        width: calc(100% + 28px);
+        margin: 0 -14px;
+        overflow-x: auto;
+    }
+}
+
+.ftr {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    justify-content: space-between;
+    padding: 28px var(--pad) 36px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.ftr-l,
+.ftr-r {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.ftr-r {
+    gap: 20px;
+    /* Mixed CJK/Latin runs have different font ascents: align text baselines. */
+    align-items: baseline;
+}
+
+.ftr a {
+    color: var(--muted);
+    transition: color 0.2s;
+}
+
+.ftr a:hover {
+    color: var(--ink);
+}
+

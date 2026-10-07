@@ -6,15 +6,13 @@
       "DOM",
       "ES2020"
     ],
-    "strict": false,
+    "strict": true,
     "ignoreDeprecations": "6.0",
     "noEmitOnError": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
   "files": [
-    "sleep-2016-2026.ts",
-    "sleep-2016-2026.en.ts",
     "sleep-essay-ui.ts",
     "sleep-essay-pretext-lab.ts",
     "sleep-chart-loader.ts"

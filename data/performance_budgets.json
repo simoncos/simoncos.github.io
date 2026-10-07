@@ -1,0 +1,203 @@
+{
+  "baseline_date": "2026-10-04",
+  "measurement": "Local static HTML tags and local asset bytes; gzip level 9. Browser timings and third-party payloads are separate.",
+  "headroom": "10 percent, rounded up to 512 bytes or 50 elements; zero remains zero. Review baseline and limits explicitly when adding features.",
+  "pages": {
+    "index.html": {
+      "baseline": {
+        "html_gzip_bytes": 10043,
+        "static_elements": 1227,
+        "initial_js_gzip_bytes": 8365,
+        "initial_css_gzip_bytes": 22200,
+        "eager_image_bytes": 392485
+      },
+      "limits": {
+        "html_gzip_bytes": 11264,
+        "static_elements": 1350,
+        "initial_js_gzip_bytes": 9216,
+        "initial_css_gzip_bytes": 24576,
+        "eager_image_bytes": 432128
+      }
+    },
+    "blogs.html": {
+      "baseline": {
+        "html_gzip_bytes": 35738,
+        "static_elements": 3887,
+        "initial_js_gzip_bytes": 11218,
+        "initial_css_gzip_bytes": 22200,
+        "eager_image_bytes": 0
+      },
+      "limits": {
+        "html_gzip_bytes": 39424,
+        "static_elements": 4300,
+        "initial_js_gzip_bytes": 12800,
+        "initial_css_gzip_bytes": 24576,
+        "eager_image_bytes": 0
+      }
+    },
+    "gallery.html": {
+      "baseline": {
+        "html_gzip_bytes": 7821,
+        "static_elements": 715,
+        "initial_js_gzip_bytes": 11359,
+        "initial_css_gzip_bytes": 22200,
+        "eager_image_bytes": 0
+      },
+      "limits": {
+        "html_gzip_bytes": 8704,
+        "static_elements": 800,
+        "initial_js_gzip_bytes": 12800,
+        "initial_css_gzip_bytes": 24576,
+        "eager_image_bytes": 0
+      }
+    },
+    "about.html": {
+      "baseline": {
+        "html_gzip_bytes": 2695,
+        "static_elements": 172,
+        "initial_js_gzip_bytes": 7184,
+        "initial_css_gzip_bytes": 22200,
+        "eager_image_bytes": 0
+      },
+      "limits": {
+        "html_gzip_bytes": 3072,
+        "static_elements": 200,
+        "initial_js_gzip_bytes": 8192,
+        "initial_css_gzip_bytes": 24576,
+        "eager_image_bytes": 0
+      }
+    },
+    "favorites/film.html": {
+      "baseline": {
+        "html_gzip_bytes": 20680,
+        "static_elements": 1869,
+        "initial_js_gzip_bytes": 11741,
+        "initial_css_gzip_bytes": 22200,
+        "eager_image_bytes": 0
+      },
+      "limits": {
+        "html_gzip_bytes": 23040,
+        "static_elements": 2100,
+        "initial_js_gzip_bytes": 13312,
+        "initial_css_gzip_bytes": 24576,
+        "eager_image_bytes": 0
+      }
+    },
+    "blogs/my-haba-snow-mountain-journey.html": {
+      "baseline": {
+        "html_gzip_bytes": 27048,
+        "static_elements": 621,
+        "initial_js_gzip_bytes": 13529,
+        "initial_css_gzip_bytes": 24218,
+        "eager_image_bytes": 20624
+      },
+      "limits": {
+        "html_gzip_bytes": 30208,
+        "static_elements": 700,
+        "initial_js_gzip_bytes": 15360,
+        "initial_css_gzip_bytes": 27136,
+        "eager_image_bytes": 23040
+      }
+    },
+    "gallery/music/endless-echoes.html": {
+      "baseline": {
+        "html_gzip_bytes": 23526,
+        "static_elements": 1044,
+        "initial_js_gzip_bytes": 29126,
+        "initial_css_gzip_bytes": 32280,
+        "eager_image_bytes": 96638
+      },
+      "limits": {
+        "html_gzip_bytes": 26112,
+        "static_elements": 1150,
+        "initial_js_gzip_bytes": 32256,
+        "initial_css_gzip_bytes": 35840,
+        "eager_image_bytes": 106496
+      }
+    },
+    "gallery/research/zhihu-2015.html": {
+      "baseline": {
+        "html_gzip_bytes": 17635,
+        "static_elements": 1948,
+        "initial_js_gzip_bytes": 16363,
+        "initial_css_gzip_bytes": 26452,
+        "eager_image_bytes": 188147
+      },
+      "limits": {
+        "html_gzip_bytes": 19456,
+        "static_elements": 2150,
+        "initial_js_gzip_bytes": 18432,
+        "initial_css_gzip_bytes": 29184,
+        "eager_image_bytes": 207360
+      }
+    },
+    "gallery/research/sleep-2016-2026.html": {
+      "baseline": {
+        "html_gzip_bytes": 27829,
+        "static_elements": 751,
+        "initial_js_gzip_bytes": 6228,
+        "initial_css_gzip_bytes": 3569,
+        "eager_image_bytes": 0
+      },
+      "limits": {
+        "html_gzip_bytes": 30720,
+        "static_elements": 850,
+        "initial_js_gzip_bytes": 7168,
+        "initial_css_gzip_bytes": 4096,
+        "eager_image_bytes": 0
+      },
+      "limit_rationale": "2026-10-05: retain the concurrent authored evidence/metric dictionary section; CSS and chart layout are unchanged by the engineering refactor. Original baseline remains recorded."
+    },
+    "gallery/research/sleep-2016-2026.en.html": {
+      "baseline": {
+        "html_gzip_bytes": 26914,
+        "static_elements": 756,
+        "initial_js_gzip_bytes": 6228,
+        "initial_css_gzip_bytes": 3569,
+        "eager_image_bytes": 0
+      },
+      "limits": {
+        "html_gzip_bytes": 29696,
+        "static_elements": 850,
+        "initial_js_gzip_bytes": 7168,
+        "initial_css_gzip_bytes": 4096,
+        "eager_image_bytes": 0
+      },
+      "limit_rationale": "2026-10-05: retain the concurrent authored evidence/metric dictionary section; CSS and chart layout are unchanged by the engineering refactor. Original baseline remains recorded."
+    }
+  },
+  "assets": {
+    "src/css/styles.css": {
+      "baseline": {
+        "gzip_bytes": 22200
+      },
+      "limits": {
+        "gzip_bytes": 24576
+      }
+    },
+    "src/js/site.js": {
+      "baseline": {
+        "gzip_bytes": 4764
+      },
+      "limits": {
+        "gzip_bytes": 5632
+      }
+    },
+    "src/js/theme-init.js": {
+      "baseline": {
+        "gzip_bytes": 2420
+      },
+      "limits": {
+        "gzip_bytes": 3072
+      }
+    },
+    "gallery/research/assets/sleep-charts.js": {
+      "baseline": {
+        "gzip_bytes": 147443
+      },
+      "limits": {
+        "gzip_bytes": 162304
+      }
+    }
+  }
+}

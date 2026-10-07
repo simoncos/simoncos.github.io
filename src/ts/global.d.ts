@@ -20,6 +20,7 @@ interface SiteShell {
     lastKey: string;
     setLang?: (lang: SiteLanguage) => void;
     onLang?: (listener: (lang: SiteLanguage) => void) => void;
+    syncLangToggle?: () => void;
     fade?: (swap: () => void) => void;
 }
 

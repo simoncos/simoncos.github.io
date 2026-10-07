@@ -51,20 +51,22 @@ var EchoPiano;
                 return Promise.resolve(true);
             if (this.preparation)
                 return this.preparation;
-            const Offline = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+            const OfflineCandidate = window.OfflineAudioContext || window.webkitOfflineAudioContext;
             // Decode ahead of the gesture without opening an output device or playing audio.
             // Older browsers can still use the normal interaction-time loading path.
-            if (!Offline)
+            if (!OfflineCandidate)
                 return Promise.resolve(false);
+            const Offline = OfflineCandidate;
             try {
                 this.decoder ?? (this.decoder = new Offline(1, 1, 44100));
             }
             catch {
                 return Promise.resolve(false);
             }
+            const decoder = this.decoder;
             const request = this.request;
             this.report('loading');
-            this.preparation = Promise.allSettled(EchoPiano.roots.map(root => this.load(root, this.decoder)))
+            this.preparation = Promise.allSettled(EchoPiano.roots.map(root => this.load(root, decoder)))
                 .then(results => {
                 const ready = results.every(result => result.status === 'fulfilled');
                 // Background completion must not override a newer click, mute or retry.
@@ -93,7 +95,7 @@ var EchoPiano;
                 this.releaseVoices();
                 const samples = midis.map(nearestRoot);
                 const cached = samples.map(root => this.decoded.get(root));
-                if (!resume && cached.every(Boolean)) {
+                if (!resume && cached.every((buffer) => buffer !== undefined)) {
                     // Schedule before the caller redraws the graph; a warm click has no await.
                     this.sound(midis, samples, cached, context);
                     return;
@@ -190,6 +192,8 @@ var EchoPiano;
         begin(steps, samples, buffers, context, request, hooks, lead, settle) {
             const out = this.output(context), start = context.currentTime + .08 + lead;
             const bus = this.bus;
+            if (!bus)
+                throw new Error("Piano output bus unavailable");
             // Fresh bus level: a previous cancellation faded it out.
             bus.gain.cancelScheduledValues(context.currentTime);
             bus.gain.setValueAtTime(1, context.currentTime);
@@ -231,7 +235,10 @@ var EchoPiano;
                     // The roll spreads the chord low to high, like a hand; zero keeps it a block. A figure gives each note its own entry.
                     const when = start + step.at + (step.offsets ? step.offsets[j] : count > 1 ? roll * j / (count - 1) : 0), hold = Math.max(fade, when + .02);
                     const source = context.createBufferSource(), gain = context.createGain();
-                    source.buffer = buffers.get(samples[i][j]);
+                    const buffer = buffers.get(samples[i][j]);
+                    if (!buffer)
+                        throw new Error("Piano sample unavailable");
+                    source.buffer = buffer;
                     source.playbackRate.setValueAtTime(Math.pow(2, (step.midi[j] - samples[i][j]) / 12), when);
                     gain.gain.setValueAtTime(.0001, when);
                     gain.gain.linearRampToValueAtTime(level, when + .008);
@@ -268,9 +275,10 @@ var EchoPiano;
             return this.bus;
         }
         endRun(finished) {
-            const run = this.run;
-            if (!run)
+            const runCandidate = this.run;
+            if (!runCandidate)
                 return;
+            const run = runCandidate;
             this.run = null;
             clearTimeout(run.timer);
             // A cancelled piece fades with its master bus instead of stopping on a click.

@@ -1,0 +1,264 @@
+/* ---- Music -------------------------------------------------------------- */
+
+/* A song page borrows the project board's bar and grid: the song on the
+   left, the recording on an ink card beside it, the lyrics below. */
+.song-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* Two characters carry the card; the board's tight Latin tracking would
+   press them together. */
+.song-title {
+    font-size: clamp(72px, 10vw, 152px);
+    letter-spacing: 0;
+}
+
+.song-credits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 36px;
+    margin: 24px 0 0;
+}
+
+.song-credits div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.song-credits dt {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.song-credits dd {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.song-audio {
+    width: 100%;
+    margin-top: auto;
+}
+
+.song-ui {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+/* The recording's loudness, one bar per 1/120 of the song; the played part
+   is the same drawing at full strength, uncovered from the left. */
+.song-wave {
+    position: relative;
+    flex: 1;
+    min-height: 160px;
+    cursor: pointer;
+    /* Vertical swipes scroll the page; song.ts seeks on a tap or a sideways
+       drag only. */
+    touch-action: pan-y;
+    border-radius: 6px;
+}
+
+.song-wave svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.wave-base {
+    opacity: 0.3;
+}
+
+.wave-done {
+    clip-path: inset(0 calc((1 - var(--p, 0)) * 100%) 0 0);
+}
+
+.song-wave:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 6px;
+}
+
+.song-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.song-play {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--on-ink);
+    color: var(--ink);
+    cursor: pointer;
+    transition: transform 0.3s var(--ease);
+}
+
+.song-play:hover {
+    transform: scale(1.05);
+}
+
+.song-play:active {
+    transform: scale(0.96);
+}
+
+.song-play:focus-visible {
+    outline: 2px solid var(--on-ink);
+    outline-offset: 4px;
+}
+
+.song-play svg {
+    grid-area: 1 / 1;
+    width: 26px;
+    height: 26px;
+    fill: currentColor;
+}
+
+.icon-pause,
+.label-pause,
+.is-playing .icon-play,
+.is-playing .label-play {
+    display: none;
+}
+
+.is-playing .icon-pause {
+    display: block;
+}
+
+.is-playing .label-pause {
+    display: inline;
+}
+
+.song-time {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* Each line is its own block, so a sung pause (眼前 是张张……) keeps its
+   gap and nothing is justified. Columns read like a lyric sheet. */
+.lyrics {
+    columns: 2;
+    column-gap: clamp(32px, 6vw, 96px);
+    margin-top: 28px;
+}
+
+.stanza {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0 0 32px;
+    break-inside: avoid;
+}
+
+.ly {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ly-zh {
+    font-size: clamp(18px, 1.5vw, 21px);
+    line-height: 1.6;
+    word-spacing: 0.6em;
+}
+
+.ly-en {
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--muted);
+}
+
+:root[data-lang="en"] .stanza {
+    gap: 12px;
+}
+
+/* The score: one card per file, the format large, what it is for below. */
+.song-score-note {
+    max-width: 62ch;
+    margin: 12px 0 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.song-files {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.song-file {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 100%;
+    padding: 20px;
+    border-radius: 16px;
+    background: var(--bg);
+    color: var(--ink);
+    transition: background 0.2s;
+}
+
+.song-file:hover {
+    background: var(--fill-2);
+}
+
+.song-file:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
+.song-file-format {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+.song-file-label {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.song-file-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+.song-file-size {
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+@media (max-width: 859.98px) {
+    .song-wave {
+        min-height: 120px;
+    }
+
+    .song-files {
+        grid-template-columns: 1fr;
+    }
+
+    .lyrics {
+        columns: 1;
+    }
+}
+

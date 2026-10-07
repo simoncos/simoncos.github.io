@@ -6,10 +6,12 @@
 // highlights it; the home page links works this way.
 (function () {
     const shell = window.SITE_SHELL;
-    const work = document.querySelector('[data-work]');
-    const wheel = document.querySelector('[data-wheel]');
-    if (!work || !wheel)
+    const workCandidate = document.querySelector('[data-work]');
+    const wheelCandidate = document.querySelector('[data-wheel]');
+    if (!workCandidate || !wheelCandidate)
         return;
+    const work = workCandidate;
+    const wheel = wheelCandidate;
     const WIDE = 860;
     const titles = Array.from(wheel.querySelectorAll('.wheel-title'));
     const cards = Array.from(wheel.querySelectorAll('.wheel-card'));
@@ -203,9 +205,10 @@
     }
     function pointAt(item) {
         const current = topics.find((section) => section.classList.contains('is-current'));
-        const card = item && current ? current.querySelector(`[data-work="${CSS.escape(item)}"]`) : null;
-        if (!card)
+        const cardCandidate = item && current ? current.querySelector(`[data-work="${CSS.escape(item)}"]`) : null;
+        if (!cardCandidate)
             return null;
+        const card = cardCandidate;
         card.scrollIntoView({ block: 'center' });
         card.classList.remove('is-target');
         void card.offsetWidth;
@@ -249,11 +252,12 @@
     // or the front card back on the wheel.
     function focusView() {
         const current = topics.find((section) => section.classList.contains('is-current'));
-        const target = current
+        const targetCandidate = current
             ? current.querySelector('.topic-head h1, .topic-head h2')
             : cards.find((card) => card.classList.contains('is-on'));
-        if (!target)
+        if (!targetCandidate)
             return;
+        const target = targetCandidate;
         if (current)
             target.tabIndex = -1;
         target.focus({ preventScroll: true });
@@ -286,10 +290,12 @@
         if (topicIndex(id) < 0)
             return;
         history.pushState(null, '', `#${id}`);
+        shell?.syncLangToggle?.();
         swap(id);
     }
     function backToWheel() {
         history.pushState(null, '', window.location.pathname + window.location.search);
+        shell?.syncLangToggle?.();
         swap('');
     }
     window.addEventListener('hashchange', () => swap(window.location.hash.slice(1)));

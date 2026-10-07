@@ -39,10 +39,10 @@ namespace EchoScore {
         for(let i=edges.length-1;i>=0;i--){
             const [from,to]=edges[i].split(':');
             if(!from||!to)continue;
-            if(!onward.has(from))onward.set(from,[]);
-            onward.get(from).push(to);
-            if(!into.has(to))into.set(to,[]);
-            into.get(to).push(from);
+            const onwardRows = onward.get(from) || [];
+            onwardRows.push(to); onward.set(from, onwardRows);
+            const intoRows = into.get(to) || [];
+            intoRows.push(from); into.set(to, intoRows);
         }
         // Only songs the start reaches can lie on the way back, which keeps the search from wandering.
         const reached=new Set([start]),queue=[start];

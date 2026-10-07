@@ -1,0 +1,725 @@
+/* ---- Favorites ---------------------------------------------------------- */
+
+.fav,
+.fav-cat {
+    padding: 0 var(--pad) clamp(80px, 14vh, 160px);
+}
+
+.fav-head {
+    padding: var(--page-top) 0 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px 40px;
+}
+
+.fav-h1 {
+    font-size: var(--page-title-size);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.05em;
+    margin: 0;
+}
+
+.fav-intro {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 34ch;
+}
+
+.fav-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0 0 clamp(20px, 4vh, 40px);
+}
+
+.glyphs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.glyph {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    padding: 10px;
+    border-radius: 20px;
+    background: var(--fill);
+    transition: background 0.35s ease;
+}
+
+.glyph.is-peek {
+    background: var(--fill-3);
+}
+
+.glyph-cover {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--fill-2);
+}
+
+.glyph-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease);
+}
+
+.glyph.is-peek .glyph-cover img {
+    transform: scale(1.02);
+}
+
+.glyph-label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--ink);
+    padding: 2px 6px 6px;
+}
+
+.glyph-name {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.glyph-char {
+    font-size: clamp(64px, 7vw, 112px);
+    font-weight: 500;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+}
+
+.glyph-en {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-2);
+}
+
+.glyph-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    font-size: 13px;
+    padding-bottom: 4px;
+}
+
+.glyph-count {
+    font-weight: 500;
+}
+
+.glyph-rev {
+    color: var(--muted);
+}
+
+.glyph-open {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.glyph.is-peek .glyph-open {
+    opacity: 1;
+}
+
+.reels {
+    margin-top: clamp(32px, 6vh, 64px);
+}
+
+:root.js .reel:not(.is-on) {
+    display: none;
+}
+
+:root:not(.js) .reel + .reel {
+    margin-top: clamp(32px, 6vh, 64px);
+}
+
+.reel.is-on {
+    animation: om-fade 0.4s ease both;
+}
+
+.reel-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px 24px;
+    margin-bottom: 8px;
+}
+
+.reel-h {
+    font-size: clamp(24px, 2.4vw, 32px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    margin: 0;
+}
+
+.reel-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.reel-ctas .pill {
+    min-height: 44px;
+    padding: 0 18px;
+}
+
+.reel-list,
+.fav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.reel-item {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 8px clamp(18px, 3vw, 44px);
+    padding: clamp(18px, 2.4vw, 28px) 0;
+}
+
+.reel-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    max-width: 760px;
+}
+
+.fav-title {
+    align-self: flex-start;
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+}
+
+.reel-text .fav-title {
+    font-size: clamp(20px, 2vw, 28px);
+}
+
+.fav-title:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.fav-ext {
+    font-size: 0.6em;
+    color: var(--muted);
+    margin-left: 6px;
+}
+
+.fav-review {
+    font-size: 16.5px;
+    line-height: 1.75;
+    color: var(--ink-2);
+    margin: 0;
+    white-space: pre-line;
+    text-wrap: pretty;
+    overflow-wrap: anywhere;
+}
+
+.fav-date {
+    font-size: 13px;
+    color: var(--muted);
+    padding-top: 6px;
+}
+
+.fav-about {
+    margin-top: clamp(32px, 6vh, 56px);
+    padding-top: 18px;
+    max-width: 760px;
+}
+
+.fav-about-k {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin: 0 0 8px;
+}
+
+.fav-about p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0;
+}
+
+/* Category pages: a rail of the four glyphs beside the list. */
+
+.fav-layout {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: clamp(20px, 4vw, 64px);
+    align-items: start;
+    padding-top: var(--page-top);
+}
+
+.fav-rail {
+    position: sticky;
+    top: 92px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--bg);
+}
+
+.fav-back {
+    align-self: flex-start;
+    padding: 0 14px;
+    margin-bottom: 18px;
+}
+
+.rail-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    color: var(--ink);
+    padding: 4px 0;
+}
+
+/* Other categories step back on the glyph only (large text, 3:1 or more);
+   their counts keep the muted colour so they stay readable. */
+.rail-item:not([aria-current="page"]) .rail-char {
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.rail-item:hover .rail-char {
+    opacity: 1;
+}
+
+.rail-char {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    transition: font-size 0.55s var(--ease);
+}
+
+.rail-item[aria-current="page"] .rail-char {
+    font-size: 96px;
+}
+
+.rail-count {
+    font-size: 13px;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.fav-body {
+    min-width: 0;
+}
+
+.fav-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
+    margin-bottom: 6px;
+}
+
+/* Grows to 320px but starts at 200, so the tools stay on one row down to
+   about 1000px. */
+.fav-search {
+    flex: 1 1 200px;
+    max-width: 320px;
+    min-height: 44px;
+}
+
+.fav-range {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+:root:not(.js) .fav-tools {
+    display: none;
+}
+
+.fav-empty {
+    margin: 0;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+}
+
+::highlight(fav-q) {
+    color: inherit;
+    background-color: var(--hl);
+}
+
+.fav-list {
+    outline: none;
+}
+
+:root.js .fav-list:not(.is-paged) > .fav-row:nth-child(n + 21) {
+    display: none;
+}
+
+.fav-row {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 4px clamp(18px, 3vw, 44px);
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 96px;
+}
+
+.fav-row.is-compact {
+    padding: 14px 0;
+}
+
+.fav-row.is-full {
+    padding: clamp(18px, 2.4vw, 26px) 0;
+}
+
+.fav-list > .fav-row:first-child,
+.fav-row.is-first,
+.fav-row.is-repeat {
+    border-top: 0;
+}
+
+.fav-row.is-repeat .fav-date {
+    visibility: hidden;
+}
+
+.fav-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 12px;
+    min-width: 0;
+}
+
+.fav-orig {
+    font-size: 15px;
+    color: var(--ink-2);
+}
+
+.fav-meta,
+.fav-multi {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.fav-full {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    max-width: 760px;
+}
+
+.fav-titleline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+}
+
+.fav-essay {
+    align-self: flex-start;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--line-2);
+    text-underline-offset: 0.2em;
+}
+
+.fav-essay:hover {
+    text-decoration-color: var(--ink);
+}
+
+.fav-main {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.fav-main-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-2);
+}
+
+.fav-marks {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0 0 0 16px;
+    border-left: 2px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+:root.js .fav-row:not(.is-all) .fav-marks,
+:root.js .fav-row.is-all .fav-main,
+:root:not(.js) .fav-row.is-multi .fav-main,
+:root:not(.js) .fav-actions,
+.fav-actions:empty {
+    display: none;
+}
+
+.fav-mark {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.fav-mark-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    font-size: 13px;
+}
+
+.fav-mark-head a {
+    font-weight: 500;
+}
+
+.fav-mark-head a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.fav-mark-date {
+    color: var(--muted);
+}
+
+.fav-mark-review {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin: 0;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.fav-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pill-sm {
+    font-size: 13px;
+    min-height: 36px;
+    padding: 0 14px;
+}
+
+[aria-expanded="true"] > .when-closed,
+[aria-expanded="false"] > .when-open {
+    display: none;
+}
+
+/* A long main review folds to five lines (eight on a narrow screen). */
+.fav-fold-btn,
+.fav-row.is-all .fav-fold-btn {
+    display: none;
+}
+
+:root.js .fav-row.fold-wide:not(.is-all) .fav-fold-btn {
+    display: inline-flex;
+}
+
+:root.js .fav-row.fold-wide:not(.is-open) .fav-main .fav-review {
+    max-height: calc(5 * 1.75em);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent);
+}
+
+.fav-pager {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: clamp(28px, 5vh, 48px);
+}
+
+.fav-pager-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.fav-prev,
+.fav-next {
+    min-height: 44px;
+}
+
+.fav-prev.is-disabled,
+.fav-next.is-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.fav-pages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.fav-page {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-variant-numeric: tabular-nums;
+    transition: background 0.2s, color 0.2s;
+}
+
+.fav-page:hover {
+    background: var(--fill);
+}
+
+.fav-page[aria-current="page"] {
+    color: var(--on-ink);
+    background: var(--ink);
+}
+
+.fav-pos {
+    display: none;
+    font-size: 14px;
+    padding: 0 8px;
+}
+
+.fav-range-long {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+@media (max-width: 859.98px) {
+    .glyphs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .glyph-char {
+        font-size: 56px;
+    }
+
+    .reel-item,
+    .fav-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .fav-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* The back pill takes its own line so all four glyphs fit at 360px. */
+    .fav-rail {
+        position: relative;
+        top: auto;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        align-items: start;
+        gap: 14px 8px;
+        padding-bottom: 12px;
+    }
+
+    .fav-back {
+        grid-column: 1 / -1;
+        justify-self: start;
+        margin-bottom: 0;
+    }
+
+    .rail-item {
+        min-width: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 0;
+    }
+
+    .rail-char {
+        font-size: 40px;
+        line-height: 1.2;
+    }
+
+    .rail-item[aria-current="page"] .rail-char {
+        font-size: 40px;
+    }
+
+    .rail-item:not([aria-current="page"]) .rail-count {
+        visibility: hidden;
+    }
+
+    .rail-count {
+        font-size: 11px;
+    }
+
+    /* The English filter labels overflow at 375px with the default padding;
+       the three pills share the row instead of scrolling. */
+    .fav-filter {
+        width: 100%;
+    }
+
+    .fav-filter .seg-btn {
+        flex: 1 1 auto;
+        justify-content: center;
+        gap: 4px;
+        padding: 0 8px;
+    }
+
+    .fav-search {
+        flex-basis: 100%;
+        max-width: none;
+    }
+
+    .fav-range {
+        margin-left: 0;
+    }
+
+    .fav-row.is-repeat .fav-date {
+        display: none;
+    }
+
+    :root.js .fav-row.fold-wide:not(.fold-narrow):not(.is-all) .fav-fold-btn {
+        display: none;
+    }
+
+    :root.js .fav-row.fold-wide:not(.fold-narrow):not(.is-open) .fav-main .fav-review {
+        max-height: none;
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    :root.js .fav-row.fold-narrow:not(.is-open) .fav-main .fav-review {
+        max-height: calc(8 * 1.75em);
+    }
+
+    .fav-pages {
+        display: none;
+    }
+
+    .fav-pos {
+        display: inline;
+    }
+}
+

@@ -5,16 +5,22 @@
 // On a touch screen a vertical swipe over it scrolls the page; a tap or a
 // sideways drag seeks.
 (function () {
-    const player = document.querySelector('[data-song-player]');
-    if (!player)
+    const playerCandidate = document.querySelector('[data-song-player]');
+    if (!playerCandidate)
         return;
-    const audio = player.querySelector('audio');
-    const ui = player.querySelector('.song-ui');
-    const wave = player.querySelector('[data-wave]');
-    const play = player.querySelector('[data-play]');
-    const now = player.querySelector('[data-now]');
-    if (!audio || !ui || !wave || !play || !now)
+    const player = playerCandidate;
+    const audioCandidate = player.querySelector('audio');
+    const uiCandidate = player.querySelector('.song-ui');
+    const waveCandidate = player.querySelector('[data-wave]');
+    const playCandidate = player.querySelector('[data-play]');
+    const nowCandidate = player.querySelector('[data-now]');
+    if (!audioCandidate || !uiCandidate || !waveCandidate || !playCandidate || !nowCandidate)
         return;
+    const audio = audioCandidate;
+    const ui = uiCandidate;
+    const wave = waveCandidate;
+    const play = playCandidate;
+    const now = nowCandidate;
     audio.controls = false;
     audio.hidden = true;
     ui.hidden = false;

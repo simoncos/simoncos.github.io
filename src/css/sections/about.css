@@ -1,0 +1,151 @@
+/* ---- About -------------------------------------------------------------- */
+
+.about {
+    max-width: 1180px;
+    padding: 0 var(--pad) clamp(80px, 14vh, 160px);
+}
+
+.about-prose {
+    padding: var(--page-top) 0 clamp(36px, 6vh, 64px);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.about-motto {
+    font-size: clamp(44px, 7.4vw, 112px);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    margin: 0 0 clamp(4px, 2vh, 24px);
+    text-wrap: balance;
+}
+
+.about-who {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0;
+}
+
+.about-p {
+    font-size: clamp(24px, 2.8vw, 42px);
+    font-weight: 400;
+    line-height: 1.28;
+    letter-spacing: -0.03em;
+    margin: 0;
+    text-wrap: pretty;
+}
+
+.about-p a {
+    text-decoration: underline;
+    text-decoration-color: var(--a);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.16em;
+    transition: text-underline-offset 0.3s;
+}
+
+/* A linked Chinese word stays on one line (游戏, not 游 / 戏). */
+.about-p a:lang(zh) {
+    white-space: nowrap;
+}
+
+.about-p a:hover {
+    text-underline-offset: 0.26em;
+}
+
+.about-p a[data-ext]::after {
+    content: none;
+}
+
+.contacts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.about-wechat {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 28px 0 0;
+}
+
+.about-wechat img {
+    width: 112px;
+    height: 112px;
+    padding: 6px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid var(--line);
+}
+
+.about-wechat figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.about-wechat-hint {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+}
+
+.copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--on-ink);
+    background: var(--ink);
+    border: 0;
+    min-height: 44px;
+    padding: 0 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.copy-state {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.copy-btn .copy-done,
+.copy-btn .copy-fail,
+.copy-btn.is-copied .copy-idle,
+.copy-btn.is-failed .copy-idle {
+    display: none;
+}
+
+.copy-btn.is-copied .copy-done,
+.copy-btn.is-failed .copy-fail {
+    display: inline;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    background: var(--fill);
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.contact:hover {
+    background: var(--fill-2);
+}
+
+.contact-arrow {
+    color: var(--muted);
+}
+

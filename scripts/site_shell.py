@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import re
 from datetime import date
+from hashlib import sha256
 from html import escape
 from pathlib import Path
 from typing import Any
@@ -115,6 +116,14 @@ def prefixed(asset_prefix: str, rel_path: str) -> str:
     return f"{asset_prefix}{normalized}"
 
 
+def asset_version(rel_path: str) -> str:
+    """A resource changes its cache key only when its bytes change."""
+    return sha256((ROOT / rel_path).read_bytes()).hexdigest()[:12]
+
+def versioned_asset(rel_path: str, asset_prefix: str = "") -> str:
+    return f"{prefixed(asset_prefix, rel_path)}?v={asset_version(rel_path)}"
+
+
 def render_attrs(attrs: dict[str, Any]) -> str:
     parts = []
     for name, value in attrs.items():
@@ -129,7 +138,7 @@ def render_script_tag(entry: dict[str, Any], asset_prefix: str, config: dict[str
     if entry.get("external_src"):
         src = entry["external_src"]
     else:
-        src = prefixed(asset_prefix, f"src/js/{entry['src']}") + f"?v={config['js_version']}"
+        src = versioned_asset(f"src/js/{entry['src']}", asset_prefix)
     attrs: dict[str, Any] = {"src": src}
     if entry.get("defer"):
         attrs["defer"] = True
@@ -176,11 +185,11 @@ def render_resource_block(config: dict[str, Any], page: dict[str, Any]) -> str:
 
     theme_init = config.get("theme_init")
     if theme_init:
-        src = prefixed(asset_prefix, f"src/js/{theme_init}") + f"?v={config['js_version']}"
+        src = versioned_asset(f"src/js/{theme_init}", asset_prefix)
         lines.append(f'    <script src="{src}"></script>')
 
     lines.append(
-        f'    <link rel="stylesheet" href="{prefixed(asset_prefix, "src/css/styles.css")}?v={config["css_version"]}">'
+        f'    <link rel="stylesheet" href="{versioned_asset("src/css/styles.css", asset_prefix)}">'
     )
     for script in config["script_profiles"][page["script_profile"]]:
         entry = {"src": script} if isinstance(script, str) else script

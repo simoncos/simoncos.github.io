@@ -1,10 +1,12 @@
 "use strict";
 // Progressive enhancement: evidence and data tables are already in the HTML.
 (function () {
-    const root = document.querySelector('.zr-main');
-    const source = document.getElementById('zr-data');
-    if (!root || !source)
+    const rootCandidate = document.querySelector('.zr-main');
+    const sourceCandidate = document.getElementById('zr-data');
+    if (!rootCandidate || !sourceCandidate)
         return;
+    const root = rootCandidate;
+    const source = sourceCandidate;
     let data;
     try {
         data = JSON.parse(source.textContent || '');
@@ -76,6 +78,7 @@
         Object.entries(state).forEach(([key, val]) => val === defaults[key] ? url.searchParams.delete(key) : url.searchParams.set(key, val));
         try {
             history.pushState(null, '', url.pathname + url.search + url.hash);
+            window.SITE_SHELL?.syncLangToggle?.();
         }
         catch (_) { /* Local-file previews can reject history changes. */ }
         render();
@@ -84,7 +87,8 @@
     root.querySelectorAll('button[data-cohort]').forEach(b => b.addEventListener('click', () => change({ cohort: b.dataset.cohort })));
     root.querySelectorAll('button[data-path]').forEach(b => b.addEventListener('click', () => change({ path: b.dataset.path })));
     root.querySelectorAll('button[data-view]').forEach(b => b.addEventListener('click', () => change({ view: b.dataset.view, node: '' })));
-    root.addEventListener('zrnetworkchange', (event) => change(event.detail));
+    root.addEventListener('zrnetworkchange', (event) => { if (event instanceof CustomEvent)
+        change(event.detail); });
     personSelect?.addEventListener('change', () => change({ person: personSelect.value }));
     topicSelect?.addEventListener('change', () => change({ order: topicSelect.value }));
     window.addEventListener('popstate', () => { readURL(); render(); });

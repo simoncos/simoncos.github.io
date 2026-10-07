@@ -8,9 +8,11 @@
         rankings: Record<string, Record<string, Row[]>>;
         topics: Record<string, Topic[]>;
     }
-    const root = document.querySelector<HTMLElement>('.zr-main');
-    const source = document.getElementById('zr-data');
-    if (!root || !source) return;
+    const rootCandidate = document.querySelector<HTMLElement>('.zr-main');
+    const sourceCandidate = document.getElementById('zr-data');
+    if (!rootCandidate || !sourceCandidate) return;
+    const root = rootCandidate;
+    const source = sourceCandidate;
     let data: ResearchData;
     try { data = JSON.parse(source.textContent || ''); } catch (_) { return; }
     const people = new Set(Object.values(data.rankings).flatMap(group => Object.values(group).flatMap(rows => rows.map(r => r.name))));
@@ -41,7 +43,7 @@
         root.querySelectorAll<HTMLElement>('[data-profile]').forEach(el => { el.hidden = el.dataset.profile !== state.metric; });
         root.querySelectorAll<HTMLElement>('[data-ranking-cohort]').forEach(el => { el.hidden = el.dataset.rankingCohort !== state.cohort; });
         root.querySelectorAll<HTMLElement>('[data-network]').forEach(el => { el.dataset.active = String(el.dataset.network === state.cohort); });
-        ['metric', 'cohort', 'path', 'view'].forEach(key => {
+        (['metric', 'cohort', 'path', 'view'] as const).forEach(key => {
             root.querySelectorAll<HTMLButtonElement>(`button[data-${key}]`).forEach(button => button.setAttribute('aria-pressed', String(button.dataset[key] === state[key])));
         });
         root.querySelectorAll<HTMLElement>('[data-ranking-person]').forEach(el => { el.dataset.selected = String(el.dataset.rankingPerson === state.person); });
@@ -70,16 +72,19 @@
     function change(next: Partial<typeof state>) {
         state = { ...state, ...next, ...(next.cohort && next.cohort !== state.cohort ? {node: ''} : {}) };
         const url = new URL(location.href);
-        const defaults = { metric: 'agree', cohort: 'Net50k', person: '', order: 'Net10k', path: 'D', view: 'mutual', node: '' };
+        const defaults: Record<string, string> = { metric: 'agree', cohort: 'Net50k', person: '', order: 'Net10k', path: 'D', view: 'mutual', node: '' };
         Object.entries(state).forEach(([key, val]) => val === defaults[key] ? url.searchParams.delete(key) : url.searchParams.set(key, val));
-        try { history.pushState(null, '', url.pathname + url.search + url.hash); } catch (_) { /* Local-file previews can reject history changes. */ }
+        try {
+            history.pushState(null, '', url.pathname + url.search + url.hash);
+            window.SITE_SHELL?.syncLangToggle?.();
+        } catch (_) { /* Local-file previews can reject history changes. */ }
         render();
     }
     root.querySelectorAll<HTMLButtonElement>('button[data-metric]').forEach(b => b.addEventListener('click', () => change({ metric: b.dataset.metric! })));
     root.querySelectorAll<HTMLButtonElement>('button[data-cohort]').forEach(b => b.addEventListener('click', () => change({ cohort: b.dataset.cohort! })));
     root.querySelectorAll<HTMLButtonElement>('button[data-path]').forEach(b => b.addEventListener('click', () => change({ path: b.dataset.path! })));
     root.querySelectorAll<HTMLButtonElement>('button[data-view]').forEach(b => b.addEventListener('click', () => change({ view: b.dataset.view!, node: '' })));
-    root.addEventListener('zrnetworkchange', (event: CustomEvent) => change(event.detail));
+    root.addEventListener('zrnetworkchange', (event: Event) => { if (event instanceof CustomEvent) change(event.detail); });
     personSelect?.addEventListener('change', () => change({ person: personSelect.value }));
     topicSelect?.addEventListener('change', () => change({ order: topicSelect.value }));
     window.addEventListener('popstate', () => { readURL(); render(); });

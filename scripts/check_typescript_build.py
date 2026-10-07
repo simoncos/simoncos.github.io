@@ -28,8 +28,10 @@ BUILD_TARGETS = (
         "gallery/research/assets/tsconfig.json",
         "gallery/research/assets",
         (
+            "gallery/research/assets/sleep-charts.js",
             "gallery/research/assets/sleep-2016-2026.js",
             "gallery/research/assets/sleep-2016-2026.en.js",
+            "gallery/research/assets/sleep-chart-loader.js",
             "gallery/research/assets/sleep-essay-pretext-lab.js",
             "gallery/research/assets/sleep-essay-ui.js",
         ),
@@ -84,7 +86,21 @@ def main() -> int:
         expected_outputs: set[Path] = set()
         generated_outputs: set[Path] = set()
 
+        checks = ["tsconfig.json"]
+        if args.scope == "all":
+            checks.append("gallery/research/assets/sleep/tsconfig.json")
+        for config in checks:
+            result = subprocess.run([compiler, "-p", config, "--noEmit"], cwd=ROOT)
+            if result.returncode:
+                return result.returncode
+        result = subprocess.run(["node", "scripts/build_client.mjs", "--output-root", str(temp_root), "--scope", args.scope], cwd=ROOT)
+        if result.returncode:
+            return result.returncode
+
         for config, output_dir, patterns in build_targets:
+            if config == "tsconfig.json":
+                expected_outputs.update(expand_outputs(patterns))
+                continue
             result = subprocess.run(
                 [compiler, "-p", config, "--outDir", str(temp_root / output_dir)],
                 cwd=ROOT,

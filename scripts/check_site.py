@@ -11,6 +11,7 @@ import json
 import re
 import struct
 import sys
+from hashlib import sha256
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlparse
@@ -117,8 +118,9 @@ def local_target_exists(source_file: Path, raw_url: str) -> bool:
 
 def check_local_refs(errors: list[str]) -> None:
     # data-zh-href is the Chinese twin of href (site.js swaps them), and
-    # data-float is the image a hover preview loads.
-    ref_attrs = {"href", "src", "poster", "data-zh-href", "data-float"}
+    # data-float is the image a hover preview loads; data-runtime is Sleep's
+    # deferred chart script, which is just as necessary as a script src.
+    ref_attrs = {"href", "src", "poster", "data-zh-href", "data-float", "data-runtime"}
     for html_file in iter_html_files():
         doc = parse_html(html_file)
         for tag, attrs in doc.tags:
@@ -637,24 +639,37 @@ def check_css_cache_keys(errors: list[str]) -> None:
         errors.append(f"multiple styles.css cache keys found: {sorted(versions)}")
     if not versions:
         errors.append("no styles.css cache key found")
+    expected = sha256((ROOT / "src/css/styles.css").read_bytes()).hexdigest()[:12]
+    if versions and versions != {expected}:
+        errors.append(f"styles.css cache key does not match its content: expected {expected}")
 
 
 def check_js_cache_keys(errors: list[str]) -> None:
-    versions: set[str] = set()
+    versions: dict[str, set[str]] = {}
     missing: list[str] = []
     script_pattern = re.compile(r"""<script\b[^>]*\bsrc=["']([^"']*src/js/[^"']+\.js(?:\?v=([^"']+))?)["']""")
     for html_file in iter_html_files() + sorted((ROOT / "templates").glob("*.html")):
         text = html_file.read_text(encoding="utf-8", errors="ignore")
         for script_src, version in script_pattern.findall(text):
+            parsed = urlparse(script_src)
+            if parsed.netloc and parsed.netloc != "simoncos.github.io":
+                continue
             if not version:
                 missing.append(f"{html_file.relative_to(ROOT)}: {script_src}")
             else:
-                versions.add(version)
+                asset_path = "src/js/" + parsed.path.rsplit("src/js/", 1)[1]
+                versions.setdefault(asset_path, set()).add(version)
 
     if missing:
         errors.extend(f"missing JS cache key: {item}" for item in missing)
-    if len(versions) > 1:
-        errors.append(f"multiple JS cache keys found: {sorted(versions)}")
+    for asset_path, keys in versions.items():
+        path = ROOT / asset_path
+        if not path.is_file():
+            errors.append(f"missing JS asset: {asset_path}")
+            continue
+        expected = sha256(path.read_bytes()).hexdigest()[:12]
+        if keys != {expected}:
+            errors.append(f"{asset_path} cache keys {sorted(keys)} do not match its content: expected {expected}")
     if not versions:
         errors.append("no JS cache key found")
 

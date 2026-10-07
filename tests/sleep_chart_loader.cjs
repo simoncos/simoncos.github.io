@@ -2,7 +2,8 @@ const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const fs = require('node:fs');
 
-function fixture({ observer = true } = {}) {
+function fixture({ observer = true, runtime = 'charts.js',
+    loader = 'gallery/research/assets/sleep-chart-loader.js' } = {}) {
     const scripts = [], draws = [], elements = new Map();
     let intersect;
     const element = id => ({
@@ -17,7 +18,7 @@ function fixture({ observer = true } = {}) {
     const window = { innerHeight: 844 };
     const document = {
         documentElement: { lang: 'zh' },
-        querySelector: () => ({ dataset: { runtime: 'charts.js' } }),
+        querySelector: () => ({ dataset: { runtime } }),
         querySelectorAll: () => [...elements.values()],
         getElementById: id => elements.get(id),
         createElement: tag => element(tag),
@@ -27,7 +28,7 @@ function fixture({ observer = true } = {}) {
         constructor(callback) { intersect = callback; }
         observe() {} unobserve() {}
     };
-    vm.runInNewContext(fs.readFileSync('gallery/research/assets/sleep-chart-loader.js', 'utf8'), {
+    vm.runInNewContext(fs.readFileSync(loader, 'utf8'), {
         window, document, IntersectionObserver: window.IntersectionObserver, console: { error() {} },
     });
     return {
@@ -37,6 +38,23 @@ function fixture({ observer = true } = {}) {
     };
 }
 const tick = () => new Promise(resolve => setImmediate(resolve));
+
+async function ready() {
+    const f = fixture();
+    f.plotly();
+    f.enter('chart-scatter');
+    f.scripts[0].onload();
+    await tick();
+    const jobs = [];
+    f.window.Plotly.newPlot = (chart, data) => new Promise((resolve, reject) => {
+        jobs.push({ data, reject, resolve() {
+            chart.replaceChildren();
+            chart.appendChild({textContent: 'DRAWN:' + data});
+            resolve();
+        }});
+    });
+    return { f, jobs, chart: f.elements.get('chart-scatter') };
+}
 
 (async () => {
     const f = fixture();
@@ -68,5 +86,62 @@ const tick = () => new Promise(resolve => setImmediate(resolve));
     assert.equal(f.draws[1][1][0], 'new filter', 'Latest filter wins before first render');
     const fallback = fixture({ observer: false });
     assert.equal(fallback.scripts.length, 1, 'Browsers without IntersectionObserver still get charts');
-    console.log('PASS: chart loading, deduplication, retry, visibility, filters, fallback');
+
+    const race = await ready();
+    race.f.window.SleepEssayPlotly.newPlot('chart-scatter', 'old filter');
+    await tick();
+    race.f.window.SleepEssayPlotly.newPlot('chart-scatter', 'latest filter');
+    await tick();
+    race.jobs[1].resolve();
+    await tick();
+    race.jobs[0].reject(new Error('Earlier draw failed late'));
+    await tick();
+    assert.equal(race.chart.children[0].textContent, 'DRAWN:latest filter',
+        'An old failure cannot erase a successful new filter');
+
+    const offscreen = await ready();
+    offscreen.f.window.SleepEssayPlotly.newPlot('chart-scatter', 'old filter');
+    await tick();
+    offscreen.chart.top = 6000;
+    offscreen.f.window.SleepEssayPlotly.newPlot('chart-scatter', 'latest filter');
+    offscreen.jobs[0].reject(new Error('Earlier visible draw failed late'));
+    await tick();
+    assert.ok(offscreen.chart.children[0].textContent.includes('加载图表'));
+    offscreen.f.enter('chart-scatter');
+    await tick();
+    assert.equal(offscreen.jobs[1].data, 'latest filter',
+        'A pending offscreen filter also supersedes an in-flight draw');
+
+    const retryRace = await ready();
+    retryRace.f.window.SleepEssayPlotly.newPlot('chart-scatter', 'old filter');
+    await tick();
+    retryRace.jobs[0].reject(new Error('Draw failed'));
+    await tick();
+    const oldRetry = retryRace.chart.children[0].listeners.click;
+    retryRace.f.window.SleepEssayPlotly.newPlot('chart-scatter', 'latest filter');
+    await tick();
+    oldRetry();
+    await tick();
+    assert.equal(retryRace.jobs[2].data, 'latest filter', 'Retry always uses the latest selection');
+    retryRace.jobs[2].resolve();
+    await tick();
+    retryRace.jobs[1].reject(new Error('Earlier retry failed late'));
+    await tick();
+    assert.equal(retryRace.chart.children[0].textContent, 'DRAWN:latest filter',
+        'Each retry has its own identity');
+
+    for (const name of ['sleep-2016-2026.js', 'sleep-2016-2026.en.js']) {
+        const cached = fixture({ runtime: 'assets/' + name + '?v=20261003',
+            loader: 'tests/fixtures/sleep-chart-loader-legacy.js' });
+        cached.plotly();
+        cached.enter('chart-scatter');
+        assert.equal(cached.scripts[0].src, 'assets/' + name + '?v=20261003');
+        assert.ok(fs.existsSync('gallery/research/assets/' + name), 'Cached loader URL remains available');
+        cached.scripts[0].onload();
+        await tick();
+        cached.window.SleepEssayPlotly.newPlot('chart-scatter', ['legacy chart']);
+        await tick();
+        assert.equal(cached.draws.length, 1, 'The cached loader still exposes the chart adapter');
+    }
+    console.log('PASS: lazy loading, retry, latest-filter races, fallback, cached loaders');
 })();

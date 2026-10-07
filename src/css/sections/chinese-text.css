@@ -1,0 +1,31 @@
+/* ---- Chinese text ------------------------------------------------------- */
+
+/* Chinese running text is set justified, as in print: its lines otherwise
+   end wherever a Latin word, a code span or a closing mark falls, and the
+   right edge looks broken on a phone. English stays ragged-right. */
+:is(
+    .post-content :is(p, li, dd),
+    .arow-ex-body p,
+    .fav-review
+):lang(zh) {
+    text-align: justify;
+}
+
+/* Balanced wrapping evens out line lengths by breaking early, and in
+   Chinese it breaks inside words (黑神话悟 / 空). Fill the line instead;
+   pretty still keeps a lone character off the last line. */
+:is(
+    .panel-title,
+    .row-t,
+    .wheel-name,
+    .work-title,
+    .arow-title,
+    .scard h2,
+    .rtitle,
+    .spart-title,
+    .article-title,
+    .post-content :is(h2, h3, h4, h5, h6)
+):lang(zh) {
+    text-wrap: pretty;
+}
+

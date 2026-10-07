@@ -94,24 +94,12 @@ class EchoesPageTests(unittest.TestCase):
                     self.assertGreater(before.rfind('try'), before.rfind('catch'), 'storage call outside try')
                     self.assertIn('catch', source[at:at + 200])
 
-    def test_riddle_starts_when_the_piano_script_fails_to_load(self):
-        # echo-piano.js is a separate deferred script. If it never arrives the riddle must still start, with sound reported unavailable.
-        for name, source in (('ts', self.ts), ('js', self.js)):
-            with self.subTest(source=name):
-                code = re.sub(r'//[^\n]*', '', source)
-                self.assertEqual(len(re.findall(r'new EchoPiano\.Player\(', code)), 1)
-                self.assertRegex(code, r"typeof EchoPiano\s*===?\s*'undefined'\s*\?\s*null\s*:\s*new EchoPiano\.Player\(")
-                # (EchoPiano.Status and EchoPiano.Step are type annotations in the .ts and are erased from the .js.)
-                self.assertEqual(re.findall(r'EchoPiano\.(?!Player\(|Status\b|Step\b)\w+', code), [])
-                # The player may be null: every call that is not optional-chained comes after a check on it in the same function,
-                # either `if(...piano...) void piano.x(` or an early `if(!...piano...)return;`.
-                bare = list(re.finditer(r'(?<![\w?-])piano\.(\w+)', code))
-                self.assertEqual(sorted({m.group(1) for m in bare}), ['play', 'playScore', 'prepare'])
-                for m in bare:
-                    # From the start of the enclosing function up to the call.
-                    body = code[code.rfind('function', 0, m.start()):m.start()]
-                    self.assertRegex(body, r'if\s*\([^)]*\bpiano\b[^)]*\)',
-                                     f'piano.{m.group(1)} has no check on the player before it')
+    def test_piano_remains_an_independent_optional_script(self):
+        # Runtime fallback is exercised in client-data.test.cjs. The page keeps the engine optional.
+        self.assertIn('src/js/echo-piano.js', self.page)
+        sound = (ROOT / 'src/ts/music-riddle/sound.ts').read_text()
+        self.assertRegex(sound, r"typeof EchoPiano\s*===?\s*['\"]undefined['\"]\s*\?\s*null")
+        self.assertIn('createSound', self.ts)
 
     def test_main_column_and_hero_art_have_a_width_before_their_images_and_fonts_arrive(self):
         # With only auto side margins a flex or grid item shrinks to its content, so the column measured itself from whatever had

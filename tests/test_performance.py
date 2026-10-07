@@ -12,7 +12,5 @@ class PerformanceTests(unittest.TestCase):
                        capture_output=True, text=True)
 
     def test_sleep_script_budget(self):
-        for language in ("", ".en"):
-            with self.subTest(language=language):
-                self.assertLess((ROOT / f"gallery/research/assets/sleep-2016-2026{language}.js").stat().st_size,
-                                1_500_000)
+        self.assertLess((ROOT / "gallery/research/assets/sleep-charts.js").stat().st_size,
+                        1_500_000)

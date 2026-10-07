@@ -4,14 +4,20 @@
 // On a touch screen a vertical swipe over it scrolls the page; a tap or a
 // sideways drag seeks.
 (function () {
-    const player = document.querySelector<HTMLElement>('[data-song-player]');
-    if (!player) return;
-    const audio = player.querySelector<HTMLAudioElement>('audio');
-    const ui = player.querySelector<HTMLElement>('.song-ui');
-    const wave = player.querySelector<HTMLElement>('[data-wave]');
-    const play = player.querySelector<HTMLButtonElement>('[data-play]');
-    const now = player.querySelector<HTMLElement>('[data-now]');
-    if (!audio || !ui || !wave || !play || !now) return;
+    const playerCandidate = document.querySelector<HTMLElement>('[data-song-player]');
+    if (!playerCandidate) return;
+    const player = playerCandidate;
+    const audioCandidate = player.querySelector<HTMLAudioElement>('audio');
+    const uiCandidate = player.querySelector<HTMLElement>('.song-ui');
+    const waveCandidate = player.querySelector<HTMLElement>('[data-wave]');
+    const playCandidate = player.querySelector<HTMLButtonElement>('[data-play]');
+    const nowCandidate = player.querySelector<HTMLElement>('[data-now]');
+    if (!audioCandidate || !uiCandidate || !waveCandidate || !playCandidate || !nowCandidate) return;
+    const audio = audioCandidate;
+    const ui = uiCandidate;
+    const wave = waveCandidate;
+    const play = playCandidate;
+    const now = nowCandidate;
 
     audio.controls = false;
     audio.hidden = true;

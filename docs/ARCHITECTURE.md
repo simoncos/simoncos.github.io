@@ -55,7 +55,7 @@ Hand-authored pages outside this table: `series.html` and `tags.html` (redirects
 
 ### Client scripts
 
-TypeScript in `src/ts/*.ts` compiles to tracked `src/js/*.js` (`npm run build:ts`). Each page loads `site.js` plus at most one page script chosen by its profile:
+TypeScript entrypoints in `src/ts/*.ts` compile to tracked `src/js/*.js` (`npm run build:ts`). Root TypeScript uses `strict: true`, including nested source modules. `scripts/build_client.mjs` uses the pinned esbuild dependency to bundle `site`, `music-riddle` and `zhihu-network` as classic IIFEs; the other small entrypoints retain their existing classic-script compilation. Nested modules add no browser requests. Each page loads `site.js` plus at most one page script chosen by its profile:
 
 - `site.ts` — language and theme, mobile menu, page transitions (a curtain between sections, a fade within one), external-link marking, cursor image previews, copy buttons.
 - `home.ts` — the Selected work stage and the topic filter over Newest.
@@ -67,9 +67,25 @@ TypeScript in `src/ts/*.ts` compiles to tracked `src/js/*.js` (`npm run build:ts
 - `favorites.ts` — index peeks; paging, filters and folds on category pages (`?filter=`, `?page=`).
 - `theme-init.ts` — runs in the head before paint; sets the theme and adds the `js` class that CSS uses to gate no-JS fallbacks.
 
+`src/ts/shell/` separates preferences, menus, navigation, link marking, previews and clipboard behavior. `src/ts/music-riddle/` separates typed data validation, saved progress, answer normalization, map rendering and optional sound controls. EchoPiano and EchoScore remain independent optional classic scripts. `src/ts/network/` separates validated network data/indexes from Canvas rendering. JSON and browser storage are read as `unknown` and checked before graph IDs or music routes are consumed; missing mandatory controls fail at named guards rather than through non-null assertions.
+
+### CSS sources
+
+Author shared CSS in `src/css/sections/*.css`. `src/css/styles.sources.json` lists their cascade order; `scripts/build_styles.py` joins their raw bytes into tracked `src/css/styles.css`. `make generate` runs this before asset hashing and `make check` rejects drift. The split preserves the stylesheet bytes and the single browser request; edit a section rather than the generated file.
+
 The PKM talk keeps its canonical desktop `deck.css` from Obsidian. Site-only phone reading rules live in `gallery/talks/pkm-2026-06-07/reader.css`; the site HTML loads this layer and the TypeScript navigation leaves native scrolling enabled below 901px. Preserve this web adaptation when syncing a canonical deck.
 
-Other TypeScript bundles: `gallery/talks/pkm-2026-06-07/deck.ts` / `deck.mts`, `gallery/research/assets/sleep-2016-2026*.ts`, and the Haba pretext runtime. `make check` compiles the shared site bundle into a temporary directory and compares it with the tracked output without rewriting the working tree; `make check-all` adds the frozen bundles, and CI runs it. The only unconverted `.js` file is `gallery/talks/pkm-2026-06-07/assets/motion.min.js`, a third-party minified vendor asset.
+Other TypeScript bundles: `gallery/talks/pkm-2026-06-07/deck.ts` / `deck.mts`, the Sleep runtime described below, and the Haba pretext runtime. `make check` compiles main-site entrypoints into a temporary directory and compares tracked output without rewriting the working tree; `make check-all` adds research, talk and Haba bundles, and CI runs it. Sleep chart modules, essay UI, pretext and loader also use strict typing. The talk and Haba compiler policies stay independent. The only unconverted `.js` file is `gallery/talks/pkm-2026-06-07/assets/motion.min.js`, a third-party minified vendor asset.
+
+### Sleep charts
+
+Both hand-authored Sleep essays load `gallery/research/assets/sleep-chart-loader.js`, which downloads Plotly and the common `sleep-charts.js` when a chart approaches the viewport. The common entrypoint `sleep-charts.ts` imports the single published payload `sleep/data.json`, its typed contracts, bilingual localization and section renderers under `sleep/`. It is bundled as one minified classic script. Data values, rendering order and each language's labels/layout choices are preserved; this is source consolidation, not a statistical reanalysis.
+
+The build also emits byte-identical compatibility copies at `sleep-2016-2026.js` and `sleep-2016-2026.en.js`. Keep these published URLs for essays/loaders cached before the shared-runtime migration; they require no separate source implementation or extra requests from current pages. The loader tracks the latest request per chart, including pending offscreen filters and retries, so an older rendering failure cannot clear the latest result.
+
+`scripts/update_sleep_assets.py` fingerprints the common runtime, loader, UI and pretext references in both essays. The chart payload remains one download at the first chart; individual charts still draw on approach, and failed loads offer retry. `scripts/test_sleep_charts.cjs` compares ordered default/filter Plotly calls against hashes captured from the pre-refactor bilingual bundles. The fixture covers 36 initial plots and 22 filter redraws per language; update it only after reviewing an intentional output change.
+
+The fingerprint updater parses real script attributes, accepts legal quoting, and fails for missing, unexpected or duplicate required entries before writing either page. `check_site.py` also checks the local target of `data-runtime`. Regression checks exercise the frozen old loader and both compatibility bundles, malformed references, and out-of-order drawing failures.
 
 ### AI / agent-readable
 
@@ -116,3 +132,9 @@ When adding a feature, ask first:
 1. Is this **authored content** or **inferred structure**?
 2. If inferred, can the generator compute it once and write it into the page?
 3. Are we preserving the real source faithfully, or inventing another interpretation layer?
+
+### Generator modules and performance checks
+
+Article generation delegates to six `scripts/article_*.py` modules; page generation delegates to seven `scripts/page_*.py` modules. Entrypoints retain their helper imports. Backlinks parse each source variant once and invert outgoing links while retaining original equal-date ordering.
+
+Shared resources use per-file SHA-256 cache keys. `data/performance_budgets.json` keeps the established baseline and explicit limits; `make check-all` rejects source/output drift and budget growth. The Sleep static-element limits remain 850 in this engineering candidate; the separate GEO expansion is still uncommitted.

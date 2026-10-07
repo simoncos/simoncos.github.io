@@ -1,0 +1,52 @@
+/* ---- 404 ---------------------------------------------------------------- */
+
+.nf {
+    padding: clamp(48px, 10vh, 120px) var(--pad) clamp(80px, 14vh, 160px);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    min-height: 70vh;
+}
+
+.nf-path {
+    font-size: 14px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+.nf h1 {
+    font-size: clamp(56px, 12vw, 180px);
+    font-weight: 500;
+    line-height: 0.9;
+    letter-spacing: -0.065em;
+    margin: 0;
+    max-width: 12ch;
+    text-wrap: pretty;
+}
+
+.nf-lede {
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 44ch;
+}
+
+.nf-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.nf-links .pill {
+    font-size: 15px;
+    min-height: 48px;
+    padding: 0 20px;
+}
+
+.nf-links .pill-ink {
+    padding: 0 22px;
+}
+

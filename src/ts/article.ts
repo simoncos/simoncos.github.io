@@ -46,8 +46,9 @@
     const heads: { el: HTMLElement; links: HTMLAnchorElement[] }[] = [];
     tocLinks.forEach((link) => {
         const id = decodeURIComponent((link.getAttribute('href') || '').slice(1));
-        const el = id ? document.getElementById(id) : null;
-        if (!el) return;
+        const elCandidate = id ? document.getElementById(id) : null;
+        if (!elCandidate) return;
+        const el = elCandidate;
         let entry = heads.find((head) => head.el === el);
         if (!entry) {
             entry = { el, links: [] };
@@ -224,8 +225,9 @@
     tocLinks.forEach((link) => {
         link.addEventListener('click', (event) => {
             const id = decodeURIComponent((link.getAttribute('href') || '').slice(1));
-            const el = id ? document.getElementById(id) : null;
-            if (!el) return;
+            const elCandidate = id ? document.getElementById(id) : null;
+            if (!elCandidate) return;
+            const el = elCandidate;
             event.preventDefault();
             // Close the box first: closing it after the jump pulls the
             // article up by the box's height and leaves the heading
@@ -268,8 +270,9 @@
     document.querySelectorAll<HTMLAnchorElement>('a.footnote-ref, a.footnote-backref').forEach((link) => {
         link.addEventListener('click', (event) => {
             const id = decodeURIComponent((link.getAttribute('href') || '').slice(1));
-            const target = id ? document.getElementById(id) : null;
-            if (!target) return;
+            const targetCandidate = id ? document.getElementById(id) : null;
+            if (!targetCandidate) return;
+            const target = targetCandidate;
             event.preventDefault();
             jump(target, id);
             highlight(id);

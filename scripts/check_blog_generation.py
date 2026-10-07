@@ -43,7 +43,10 @@ def prepare_temp_repo(temp_root: Path) -> None:
     for rel in ("generate_blog_pages.py", "requirements.txt", "scripts/site_shell.py"):
         copy_path(ROOT / rel, temp_root / rel)
 
-    for rel in ("blogs", "templates", "data"):
+    for module in (ROOT / "scripts").glob("article_*.py"):
+        copy_path(module, temp_root / "scripts" / module.name)
+
+    for rel in ("blogs", "templates", "data", "src/css", "src/js"):
         copy_path(ROOT / rel, temp_root / rel)
 
     # A fresh Git checkout does not preserve source mtimes. Normalize them here
