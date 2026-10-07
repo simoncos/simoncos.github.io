@@ -98,6 +98,13 @@
         } catch (_error) {
             // Not fatal: the list still filters.
         }
+        // A referrer drops the #topic-…, so the article's "← Articles" reads
+        // the whole address from here.
+        try {
+            sessionStorage.setItem('articles-list', window.location.href);
+        } catch (_error) {
+            // Then it goes back with the search only.
+        }
     }
 
     if (search) {
@@ -108,7 +115,12 @@
             window.clearTimeout(queryTimer);
             queryTimer = window.setTimeout(recordQuery, 300);
         });
-        // Following a result before the pause still records the query.
+        // Following a result before the pause still records the query, and
+        // records it before the article reads the list's address as its
+        // referrer.
+        main.addEventListener('click', (event) => {
+            if ((event.target as Element).closest('a[href]')) recordQuery();
+        }, true);
         window.addEventListener('pagehide', recordQuery);
     }
 

@@ -1,6 +1,30 @@
 // Article: reading progress, the contents list that follows the reader,
 // smooth jumps, footnote highlighting and a back-to-top button.
 (function () {
+    // "← Articles" returns to the list as the reader left it: the search
+    // and topic live in the list's address (?q=, #topic-…), which is the
+    // referrer when the article was opened from it. A referrer has no
+    // #topic-…, so the list also leaves its whole address in sessionStorage.
+    const backToList = document.querySelector<HTMLAnchorElement>('[data-back-to-list]');
+    if (backToList && document.referrer) {
+        try {
+            const from = new URL(document.referrer);
+            const list = new URL(backToList.href);
+            const page = (url: URL) => url.pathname.replace(/\.html$/, '');
+            if (from.origin === list.origin && page(from) === page(list)) {
+                let saved: string | null = null;
+                try {
+                    saved = sessionStorage.getItem('articles-list');
+                } catch (_error) {
+                    // Storage blocked: the referrer still has the search.
+                }
+                backToList.href = saved && saved.split('#')[0] === from.href ? saved : from.href;
+            }
+        } catch (_error) {
+            // Keep the plain link.
+        }
+    }
+
     const shell = window.SITE_SHELL;
     const reduced = !!(shell && shell.reduced);
     const behavior: ScrollBehavior = reduced ? 'auto' : 'smooth';
