@@ -1,2 +1,5 @@
-markdown
-beautifulsoup4
+# Exact versions so CI and local checks build the same pages; bump deliberately.
+markdown==3.11
+beautifulsoup4==4.15.0
+soupsieve==2.10
+typing-extensions==4.16.0
