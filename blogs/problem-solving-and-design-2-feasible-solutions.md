@@ -1,13 +1,15 @@
 ---
 tags: thinking,design
 date: 2016-11-11
-updated: 2026-09-28
+updated: 2026-10-08
 description: 从削苹果这个问题出发，讨论资源、方法、定势、功能固着与可供性，以及如何发现被忽略的可行解。
 series: 问题解决与设计
 series_part: 2
 ---
 
 # 问题解决与设计（二）：可行解
+
+> 交互版：[可行解](../gallery/talks/problem-solving-and-design/ch2.html)，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见[问题解决与设计 · 交互文章](../gallery/talks/problem-solving-and-design/index.html)。
 
 关键词：可行解 | 可能性空间 | 偏见 | 定势 | 功能固着 | 可供性
 

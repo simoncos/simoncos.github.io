@@ -1,7 +1,7 @@
 ---
 tags: thinking,design
 date: 2016-10-24
-updated: 2026-09-29
+updated: 2026-10-08
 translation: Claude Opus 5.5
 description: Why does the same problem get harder or easier depending on how it is put? From problem situations, information and search paths to interaction design.
 series: 问题解决与设计
@@ -9,6 +9,8 @@ series_part: 1
 ---
 
 # Problem Solving and Design (1): The Problem Situation
+
+> Interactive version: [The Problem Situation](../gallery/talks/problem-solving-and-design/ch1.html) (in Chinese), a condensed rewrite with figures you can drag and click. The whole series: [Problem Solving and Design](../gallery/talks/problem-solving-and-design/index.html) (in Chinese).
 
 Keywords: methodology | problem situation | interaction design | search problems
 

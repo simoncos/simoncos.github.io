@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Wed, 07 Oct 2026 22:12:55 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>个人网站，Remake</title><link>https://simoncos.github.io/blogs/personal-site-remake.html</link><guid>https://simoncos.github.io/blogs/personal-site-remake.html</guid><pubDate>Sun, 04 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>个人网站，Remake</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>simoncos RSS (中文)</title><link>https://simoncos.github.io/</link><description>中文文章订阅</description><language>zh-CN</language><generator>generate_blog_pages.py</generator><lastBuildDate>Thu, 08 Oct 2026 08:30:34 +0800</lastBuildDate><atom:link href="https://simoncos.github.io/feed.zh.xml" rel="self" type="application/rss+xml" /><item><title>个人网站，Remake</title><link>https://simoncos.github.io/blogs/personal-site-remake.html</link><guid>https://simoncos.github.io/blogs/personal-site-remake.html</guid><pubDate>Sun, 04 Oct 2026 00:00:00 +0800</pubDate><description><![CDATA[<h1>个人网站，Remake</h1>
 <p>九月到今天，我把网站从头到尾重做了一遍，顺手做了一支 40 秒的介绍视频。这次 remake 不只是外在的翻新，也是对自己的一次梳理。</p>
 <video aria-label="网站介绍视频，40 秒：睡眠数据、演讲、作品轮盘、《晴天》、漫无止尽的回响、文章、哈巴雪山和收藏，最后所有的点连成网站的名字" class="post-film" controls="" height="1280" playsinline="" poster="https://simoncos.github.io/blogs/assets/images/personal-site-remake/intro.zh.jpg" preload="none" src="https://simoncos.github.io/blogs/assets/images/personal-site-remake/intro.zh.mp4" width="720"></video>
 <p class="post-film-credit"><small><span>视频里的钢琴采样：<a href="https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html">YDP Grand Piano</a>，</span><span><span>Zenph Studios 录制，</span><span>FreePats 项目整理，<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。</span></span></small></p>
@@ -2021,6 +2021,9 @@ B=B1+B2+...+Bn，那么：
 </li>
 </ul>
 <p><em>注：本文整理自<a href="https://www.douban.com/people/simoncos/">我</a>在豆瓣上记录的书及读完时留下的短评，书籍信息链接及图片来源均为豆瓣。</em></p>]]></description></item><item><title>问题解决与设计（四）：纠结与最优解</title><link>https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html</link><guid>https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html</guid><pubDate>Wed, 10 May 2017 00:00:00 +0800</pubDate><description><![CDATA[<h1>问题解决与设计（四）：纠结与最优解</h1>
+<blockquote>
+<p>交互版：<a href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch4.html">纠结与最优解</a>，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见<a href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html">问题解决与设计 · 交互文章</a>。</p>
+</blockquote>
 <p><img alt="TBBT里的扩展版剪刀石头布（注意里面的箭头）" decoding="async" height="521" src="https://simoncos.github.io/blogs/assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg" width="695"/></p>
 <p>关键词：价值/损失函数 | 决策 | 偏好系统 | 最优解</p>
 <h3>纠结、选择与价值函数</h3>
@@ -2094,6 +2097,9 @@ B=B1+B2+...+Bn，那么：
 <p>当然，每个问题都有其比较适合的模型复杂度，太大太小均非好事，最佳莫过于刚刚好，这一点我将在接下来的文章里继续进一步的思考。</p>
 <hr/>
 <p>到此，这个系列已经从心理学教材硬生生扯到了决策/学习的基本概念，所以扯到游戏设计也算设计吧，我这样安慰自己:)</p>]]></description></item><item><title>问题解决与设计（三）：开放问题</title><link>https://simoncos.github.io/blogs/problem-solving-and-design-3-open-problems.html</link><guid>https://simoncos.github.io/blogs/problem-solving-and-design-3-open-problems.html</guid><pubDate>Thu, 04 May 2017 00:00:00 +0800</pubDate><description><![CDATA[<h1>问题解决与设计（三）：开放问题</h1>
+<blockquote>
+<p>交互版：<a href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch3.html">开放问题</a>，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见<a href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html">问题解决与设计 · 交互文章</a>。</p>
+</blockquote>
 <p><img alt="香港地铁路线图" decoding="async" height="810" src="https://simoncos.github.io/blogs/assets/images/problem-solving-and-design-3-open-problems/22938bf33f05d2bd85f5debab9c9eabe.jpg" width="1240"/></p>
 <p>关键词：开放问题 | 信息不完全 | 隐含前提条件 | 可证伪性</p>
 <p>有了<a href="https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.html">问题情境</a>，也对<a href="https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.html">可行解</a>这个东西有了更多了解，接下来要思考的就是如何大浪淘沙，在可能性空间中找到可行解。之所以说是大浪淘沙，是因为可能性空间可能会很大，视问题情境的约束强度而定。假设是这样一个问题：</p>
@@ -2180,6 +2186,9 @@ B=B1+B2+...+Bn，那么：
 <h4>小结</h4>
 <p>16年比之15年完成的书实在是少，17年先订个小目标：每月解决一部闲书（主要指小说）、一部泛读（广度拓展，活跃思维，比如《失控》、《精进》这样的）、每两个月解决一部精读（深入学习，如数学、coding之类）。估计实现起来还是略困难（特别是精读），但不设个目标的话，人的注意力就没机会分配到上面，也就很难有所进步。</p>
 <p><em>注：本文整理自我在豆瓣上记录的书及读完时留下的短评，书籍信息链接及图片来源均为豆瓣。</em></p>]]></description></item><item><title>问题解决与设计（二）：可行解</title><link>https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.html</link><guid>https://simoncos.github.io/blogs/problem-solving-and-design-2-feasible-solutions.html</guid><pubDate>Fri, 11 Nov 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>问题解决与设计（二）：可行解</h1>
+<blockquote>
+<p>交互版：<a href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch2.html">可行解</a>，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见<a href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html">问题解决与设计 · 交互文章</a>。</p>
+</blockquote>
 <p>关键词：可行解 | 可能性空间 | 偏见 | 定势 | 功能固着 | 可供性</p>
 <p><a href="https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.html">第一篇</a>中讨论的问题情境，在我的理解中实际上是一种对问题本身明确的表示（Representation）。一旦问题的表示确定下来，便可以开始寻找问题的可行解。我将借助一个简单的问题来开始本篇的思考：</p>
 <blockquote>
@@ -2221,6 +2230,9 @@ B=B1+B2+...+Bn，那么：
 <p>可供性之后在设计领域中有了另一个意思：（人）能够很直接、不进行太多思考就能从一个物体上看出的那部分功能（only those action possibilities which one is aware of）。关注这个含义是为了帮助设计师理解物体的功能有显隐之分，需要在设计新事物的时候有意识地调整那条界限，凸显最需要凸显的功能，隐藏不需要的可能，这实际上是<strong>对“功能固着”的正向利用</strong>。</p>
 <hr/>
 <p>本篇暂时写到这里啦，涉及到了定势和功能固着两个概念，数数原文中七个概念还剩下四个，争取第三篇一次搞定~</p>]]></description></item><item><title>问题解决与设计（一）：问题情境</title><link>https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.html</link><guid>https://simoncos.github.io/blogs/problem-solving-and-design-1-situation.html</guid><pubDate>Mon, 24 Oct 2016 00:00:00 +0800</pubDate><description><![CDATA[<h1>问题解决与设计（一）：问题情境</h1>
+<blockquote>
+<p>交互版：<a href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch1.html">问题情境</a>，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见<a href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html">问题解决与设计 · 交互文章</a>。</p>
+</blockquote>
 <p>关键词：方法论 | 问题情境 | 交互设计 | 搜索问题</p>
 <p>难以预料最近几个月以来泛读过的最有启发性的竟是这样一篇文章：摘自人教版《普通心理学》的<a href="https://web.archive.org/web/20160521150427/http://www.pep.com.cn/xgjy/xlyj/xlshuku/shuku13/shuku17/201008/t20100827_815322.htm">《影响问题解决的因素》</a>。</p>
 <p>文中提到的七种因素，每一种都可以单独拿出来玩味很久（虽然个人感觉有几种在概念上有重叠）：<strong>问题情境、迁移、原型启发、定势、功能固着、动机与情绪状态、个体特征</strong>。</p>

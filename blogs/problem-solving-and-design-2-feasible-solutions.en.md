@@ -1,7 +1,7 @@
 ---
 tags: thinking,design
 date: 2016-11-11
-updated: 2026-09-28
+updated: 2026-10-08
 translation: Claude Opus 5.5
 description: Starting from peeling an apple: resources and methods, mental set, functional fixedness and affordance, and how to find the feasible solutions we overlook.
 series: 问题解决与设计
@@ -9,6 +9,8 @@ series_part: 2
 ---
 
 # Problem Solving and Design (2): Feasible Solutions
+
+> Interactive version: [Feasible Solutions](../gallery/talks/problem-solving-and-design/ch2.html) (in Chinese), a condensed rewrite with figures you can drag and click. The whole series: [Problem Solving and Design](../gallery/talks/problem-solving-and-design/index.html) (in Chinese).
 
 Keywords: feasible solutions | possibility space | bias | mental set | functional fixedness | affordance
 

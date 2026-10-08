@@ -1,13 +1,15 @@
 ---
 tags: thinking,design
 date: 2017-05-10
-updated: 2026-09-29
+updated: 2026-10-08
 description: 为什么已有可行解仍然让人纠结？从价值函数与偏好系统，思考选择、最优解与模型复杂度。
 series: 问题解决与设计
 series_part: 4
 ---
 
 # 问题解决与设计（四）：纠结与最优解
+
+> 交互版：[纠结与最优解](../gallery/talks/problem-solving-and-design/ch4.html)，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见[问题解决与设计 · 交互文章](../gallery/talks/problem-solving-and-design/index.html)。
 
 ![TBBT里的扩展版剪刀石头布（注意里面的箭头）](assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg)
 

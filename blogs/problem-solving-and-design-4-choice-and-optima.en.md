@@ -1,7 +1,7 @@
 ---
 tags: thinking,design
 date: 2017-05-10
-updated: 2026-09-29
+updated: 2026-10-08
 translation: Claude Opus 5.5
 description: Why do we still agonize when feasible solutions are already in front of us? Value functions and systems of preferences, and what they say about choice, optimal solutions and model complexity.
 series: 问题解决与设计
@@ -9,6 +9,8 @@ series_part: 4
 ---
 
 # Problem Solving and Design (4): Indecision and the Optimal Solution
+
+> Interactive version: [Indecision and the Optimal Solution](../gallery/talks/problem-solving-and-design/ch4.html) (in Chinese), a condensed rewrite with figures you can drag and click. The whole series: [Problem Solving and Design](../gallery/talks/problem-solving-and-design/index.html) (in Chinese).
 
 ![The extended rock-paper-scissors from The Big Bang Theory (note the arrows)](assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg)
 

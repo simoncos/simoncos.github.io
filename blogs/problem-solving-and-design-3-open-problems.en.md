@@ -1,7 +1,7 @@
 ---
 tags: thinking,design
 date: 2017-05-04
-updated: 2026-09-29
+updated: 2026-10-08
 translation: Claude Opus 5.5
 description: Starting from a route across Hong Kong, from Central to Mong Kok: open-ended problems, incomplete information, hidden premises and falsifiability.
 series: 问题解决与设计
@@ -9,6 +9,8 @@ series_part: 3
 ---
 
 # Problem Solving and Design (3): Open-Ended Problems
+
+> Interactive version: [Open-Ended Problems](../gallery/talks/problem-solving-and-design/ch3.html) (in Chinese), a condensed rewrite with figures you can drag and click. The whole series: [Problem Solving and Design](../gallery/talks/problem-solving-and-design/index.html) (in Chinese).
 
 ![Hong Kong MTR route map](assets/images/problem-solving-and-design-3-open-problems/22938bf33f05d2bd85f5debab9c9eabe.jpg)
 

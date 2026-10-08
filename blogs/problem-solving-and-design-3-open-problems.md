@@ -1,13 +1,15 @@
 ---
 tags: thinking,design
 date: 2017-05-04
-updated: 2026-09-29
+updated: 2026-10-08
 description: 从香港中环到旺角的路线问题出发，讨论开放问题、信息不完全、隐含前提与可证伪性。
 series: 问题解决与设计
 series_part: 3
 ---
 
 # 问题解决与设计（三）：开放问题
+
+> 交互版：[开放问题](../gallery/talks/problem-solving-and-design/ch3.html)，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见[问题解决与设计 · 交互文章](../gallery/talks/problem-solving-and-design/index.html)。
 
 ![香港地铁路线图](assets/images/problem-solving-and-design-3-open-problems/22938bf33f05d2bd85f5debab9c9eabe.jpg)
 

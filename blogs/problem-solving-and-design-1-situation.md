@@ -1,13 +1,15 @@
 ---
 tags: thinking,design
 date: 2016-10-24
-updated: 2026-09-29
+updated: 2026-10-08
 description: 同一个问题为什么会因表述方式不同而变难或变易？从问题情境、信息与搜索路径，谈到交互设计。
 series: 问题解决与设计
 series_part: 1
 ---
 
 # 问题解决与设计（一）：问题情境
+
+> 交互版：[问题情境](../gallery/talks/problem-solving-and-design/ch1.html)，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见[问题解决与设计 · 交互文章](../gallery/talks/problem-solving-and-design/index.html)。
 
 关键词：方法论 | 问题情境 | 交互设计 | 搜索问题
 
