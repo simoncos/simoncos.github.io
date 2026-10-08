@@ -50,7 +50,7 @@ If `scripts/check_blog_generation.py` fails, isolate whether generated blog drif
 
 ## Deploy
 
-- A push to `master` publishes: `.github/workflows/site-check.yml` runs `make check-all`, then deploys the repo root, and a failed check leaves the last good version live.
+- A push to `master` publishes: `.github/workflows/site-check.yml` runs `make check-all`, then deploys the repo root minus the working files excluded in its "Stage site" step, and a failed check leaves the last good version live.
 - Push only with the owner's approval for that change. Work on a branch; once it fast-forwards (`git merge-base --is-ancestor origin/master <branch>`), run `git push origin <branch>:master`.
 - Watch the run in the background with `gh run list --workflow site-check.yml --limit 1` and `gh run watch <id> --exit-status`. Then check the live pages with a cache-busting query, since Pages caches for up to 600 s. `.claude/skills/article-publication/scripts/check_pages.cjs` does both for any page list.
 

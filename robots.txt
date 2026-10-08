@@ -5,8 +5,8 @@ Allow: /
 Allow: /src/css/
 Allow: /src/js/
 
-# Working files. GitHub Pages serves the repository branch as-is, so these are
-# reachable even though nothing links to them; keep them out of the index.
+# Working files. The deploy job leaves these out of the site; the rules stay
+# so they remain out of the index if one is ever published again.
 Disallow: /docs/
 Disallow: /tests/
 Disallow: /scripts/

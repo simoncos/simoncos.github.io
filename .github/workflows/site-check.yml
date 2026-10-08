@@ -65,13 +65,24 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 
-      # The repository root is the site, as it was with branch publishing.
-      # Dot-directories (.agents, .claude) are agent configuration and are
-      # left out, which the action does by default.
+      # The repository root is the site, minus the working files: notes, QA
+      # records, generators, tests and TypeScript sources stay in the repo
+      # but are not published. Dot-directories are left out as well.
+      - name: Stage site
+        run: |
+          rsync -a ./ _site/ \
+            --exclude='.*' --exclude='_site/' --exclude='node_modules/' \
+            --exclude='/docs/' --exclude='/tests/' --exclude='/scripts/' \
+            --exclude='/templates/' --exclude='/src/ts/' --exclude='/FutureBacklog/' \
+            --exclude='/design-qa.md' --exclude='/TODO.md' --exclude='/Makefile' \
+            --exclude='/generate_blog_pages.py' --exclude='/package.json' \
+            --exclude='/package-lock.json' --exclude='/requirements.txt' \
+            --exclude='/vercel.json' --exclude='*.ts' --exclude='*tsconfig.json'
+
       - name: Upload site
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
-          path: .
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment
