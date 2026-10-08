@@ -124,6 +124,7 @@ select{font:inherit;font-size:.85rem;padding:3px 6px;background:var(--bg);color:
 .stxt{fill:var(--muted);font-family:var(--body);font-size:12px}
 .stxt.k{fill:var(--ink);font-weight:700;font-size:13px}
 .stxt.warn{fill:var(--stop);font-weight:700}
+@media (max-width:520px){.stxt{font-size:22px}.stxt.k{font-size:24px}}
 .tram .body{fill:var(--ink)} .tram .win{fill:var(--surface)} .tram .wheel{fill:var(--ink)}
 .tram .lamp{fill:#ffd166}
 .idle{animation:bob 1.2s ease-in-out infinite}
@@ -132,7 +133,7 @@ select{font:inherit;font-size:.85rem;padding:3px 6px;background:var(--bg);color:
 @keyframes spark{to{opacity:0;transform:translate(var(--dx),var(--dy))}}
 .lever{cursor:pointer}
 .lever .arm{stroke:var(--accent);stroke-width:5;stroke-linecap:round;transition:transform .45s cubic-bezier(.3,1.5,.5,1);transform-origin:178px 178px}
-.lever .knob{fill:var(--accent)}
+.lever .knob{fill:var(--accent);stroke:transparent;stroke-width:56px}
 .lever .base{fill:var(--line)}
 .lever:hover .knob{fill:var(--stop)}
 .sig-post{stroke:var(--muted);stroke-width:3}
@@ -174,6 +175,7 @@ input[type=range]{width:100%}
 .pan.win{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2.5}
 .pantxt{font-family:var(--body);font-size:12px;fill:var(--ink);text-anchor:middle;font-weight:700}
 .panval{font-family:var(--mono);font-size:11px;fill:var(--muted);text-anchor:middle}
+@media (max-width:520px){.pantxt{font-size:14px}.panval{font-size:13px}}
 .you{font-family:var(--body);font-size:10px;font-weight:700;text-anchor:middle}
 .rows{display:flex;flex-direction:column;gap:6px;margin-top:6px}
 .row{display:grid;grid-template-columns:3.4em 1fr;gap:8px;align-items:center;font-size:.76rem;color:var(--muted)}
@@ -213,6 +215,7 @@ input[type=range]{width:100%}
 .ehit{stroke:transparent;stroke-width:22;cursor:pointer;fill:none}
 .elab{font-size:11px;fill:var(--muted);text-anchor:middle;dominant-baseline:central;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round;pointer-events:none;font-family:var(--body)}
 .elab.cyc{fill:var(--stop);font-weight:700}
+@media (max-width:520px){.elab{font-size:15px}}
 .arrow-n{fill:var(--ink)} .arrow-c{fill:var(--stop)}
 @keyframes pulse{50%{stroke-width:7;opacity:.55}}
 .checks{display:flex;flex-direction:column;gap:12px;min-width:0}
@@ -244,6 +247,8 @@ input[type=range]{width:100%}
 .map p{margin:2px 0 0;font-size:.88rem;color:var(--muted);line-height:1.65}
 .map .draft h4::after{content:"尚未成文";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
 footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
+/* touch screens: fingertip-sized controls */
+@media (pointer:coarse){input[type=range]{min-height:36px}select,input[type=number]{min-height:40px}.btn,.seg button,#presets button{min-height:40px}.series a{display:inline-flex;align-items:center;min-height:40px}input[type=checkbox]{width:18px;height:18px}}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 

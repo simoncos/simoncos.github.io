@@ -127,6 +127,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .timer{font-family:var(--mono);font-size:2rem;font-weight:600;font-variant-numeric:tabular-nums}
 #chart{width:100%;height:auto;display:block}
 #chart text{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+@media (max-width:520px){#chart text{font-size:13px}}
 #chart .ax{stroke:var(--line)}
 
 
@@ -147,6 +148,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 #tree .runner{fill:var(--go);filter:drop-shadow(0 0 6px var(--go))}
 #thist{width:100%;height:auto;display:block}
 #thist text{font-family:var(--mono);font-size:9px;fill:var(--muted)}
+@media (max-width:520px){#thist text{font-size:13px}}
 #tree .root{fill:var(--ink)}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .stat{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
@@ -169,6 +171,8 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .map p{margin:2px 0 0;font-size:.88rem;color:var(--muted);line-height:1.65}
 .map .draft h4::after{content:"尚未成文";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
 footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
+/* touch screens: fingertip-sized controls */
+@media (pointer:coarse){input[type=range]{min-height:36px}select,input[type=number]{min-height:40px}.btn,.seg button{min-height:40px}.series a{display:inline-flex;align-items:center;min-height:40px}input[type=checkbox]{width:18px;height:18px}}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 
@@ -588,7 +592,7 @@ function drawChart() {
   const tmax = Math.max(10, ...AR.results.map(r => r.t)), ymax = Math.ceil(tmax / 5) * 5;
   const sx = n => X0 + n / 100 * (X1 - X0), sy = t => Y0 - t / ymax * (Y0 - Y1);
   el('line', { x1: X0, y1: Y0, x2: X1, y2: Y0, class: 'ax' }, svg); el('line', { x1: X0, y1: Y0, x2: X0, y2: Y1, class: 'ax' }, svg);
-  for (const n of [0, 25, 50, 75, 100]) { const t = el('text', { x: sx(n), y: Y0 + 14, 'text-anchor': 'middle' }, svg); t.textContent = n + '%'; }
+  for (const n of [0, 25, 50, 75, 100]) { const t = el('text', { x: sx(n), y: Y0 + 14, 'text-anchor': n === 100 ? 'end' : 'middle' }, svg); t.textContent = n + '%'; }
   for (const v of [0, ymax / 2, ymax]) { const t = el('text', { x: X0 - 6, y: sy(v) + 3, 'text-anchor': 'end' }, svg); t.textContent = v; el('line', { x1: X0, y1: sy(v), x2: X1, y2: sy(v), class: 'ax', opacity: .5 }, svg); }
   if (!AR.results.length) { const t = el('text', { x: (X0 + X1) / 2, y: 80, 'text-anchor': 'middle', style: 'font-family:var(--body);font-size:12px' }, svg); t.textContent = '做几轮之后，这里会画出你的用时'; return; }
   AR.results.forEach((r, i) => el('circle', { cx: sx(r.n) + (i % 3 - 1) * 3, cy: sy(r.t), r: 5, fill: r.hint ? COL.go : COL.accent, 'fill-opacity': .85 }, svg));

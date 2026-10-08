@@ -125,6 +125,8 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .map p{margin:2px 0 0;font-size:.88rem;color:var(--muted);line-height:1.65}
 .map .draft h4::after{content:"尚未成文";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
 footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
+/* touch screens: fingertip-sized controls */
+@media (pointer:coarse){input[type=range]{min-height:36px}select,input[type=number]{min-height:40px}.btn,.seg button{min-height:40px}.series a{display:inline-flex;align-items:center;min-height:40px}input[type=checkbox]{width:18px;height:18px}}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 @media (max-width:699px){.hero-band{padding-bottom:56px}}
