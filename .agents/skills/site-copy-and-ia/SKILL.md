@@ -21,7 +21,7 @@ Use this skill to keep the personal site reader-facing, broad enough, and semant
 
 - Index: Selected work, then the newest articles and finished works with a topic filter (创造 / 其他 / 体验 on the home page; its 其他 / Other is a catch-all and must not reuse an Articles topic name such as 思考). It should help readers choose a path, not explain implementation.
 - Articles: long-form writing, with a list view (search, topics) and a series view (structured reading arcs).
-- Work: one view per type — App, Games, Talks, Research, Music (`work_topics` in `data/site.json`). Each type's wheel card shows one picture: the work whose `id` the type's optional `wheel_work` names, else its newest finished work. (Not `cover`: `check_site.py` reads any `cover` key as a file path.)
+- Work: one view per type — App, Games, Talks & Explainers (分享: talks with slides, plus interactive essays), Research, Music (`work_topics` in `data/site.json`). Each type's wheel card shows one picture: the work whose `id` the type's optional `wheel_work` names, else its newest finished work. (Not `cover`: `check_site.py` reads any `cover` key as a file path.)
 - A work with no `href` is in progress: its type page lists it under 在做 / In progress as a card that is not a link, `apps.html` lists it after the live apps, and the home page skips it. Its `date` is a bare year. Covers for these come from `~/Documents/simoncos-site-intro/covers-src/wip_covers.py` (real screenshots cropped to 4:3).
 - App (应用, `apps.html`): every work of type App in one list, live apps first and in-progress ones after; each opens as its own board or site. AI-readable files call it App, not Tools.
 - Favorites: every five-star Douban mark in four categories; see the `favorites-column` skill.

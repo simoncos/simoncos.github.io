@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="zh-Hans">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>可行解</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Shared with chapter 1 */
+
+/* Layout: same railway-notebook system as chapter 4. Reading column ~720px; figures and workbenches break out to ~1120px. */
+/* Layout: near-black page, quiet neutrals. Glow is reserved for the one moment in each figure where the answer appears.
+   Amber = what you operate; mint = the answer; blue / lime = the two data classes. Reading column ~720px; workbenches ~1120px. */
+:root{
+  --bg:#050607; --surface:#0c0e11; --surface-2:#0c0e11; --ink:#ebedf0; --muted:#8a9099; --line:#22262c; --sleeper:#111317;
+  --accent:#ffb347; --accent-soft:rgba(255,179,71,.12);
+  --stop:#ff5d7d; --go:#3cf2b4; --go-soft:rgba(60,242,180,.14);
+  --t1:#5cb8ff; --t2:#ff6ad5; --t3:#9cf06a;
+  --display:"Noto Serif SC","Songti SC","STSong",serif;
+  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85}
+::selection{background:rgba(255,179,71,.35)}
+.wrap{padding-inline:20px;padding-block:32px 80px;overflow-x:clip}
+.col{max-width:720px;margin-inline:auto}
+.wide{max-width:1120px;margin-inline:auto}
+h1,h2{font-family:var(--display);font-weight:900;text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(2.8rem,8vw,5rem);letter-spacing:.02em}
+h2{font-size:clamp(1.5rem,3.4vw,2.05rem);margin-block:0 .6em}
+p{margin:0 0 1em}
+b,strong{font-weight:700}
+a{color:var(--accent)}
+.eyebrow a.up{color:inherit;text-decoration:none;border-bottom:1px dotted var(--muted)}
+.eyebrow a.up:hover{color:var(--accent);border-color:var(--accent)}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--muted)}
+.lede{font-size:1.15rem;margin-top:1.1em;max-width:34em}
+.meta{font-size:.85rem;color:var(--muted)}
+section{margin-top:96px}
+.secno{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:.4em}
+.mono{font-family:var(--mono);font-size:.92em}
+.note{border-left:3px solid var(--accent);padding:4px 0 4px 16px;color:var(--muted);font-size:.95rem}
+blockquote{margin:1.2em 0;padding-left:16px;border-left:3px solid var(--line);color:var(--muted);font-size:.95rem}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,canvas:focus-visible,svg:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.series{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:48px}
+.series a,.series span{font-size:.8rem;padding:3px 10px;border:1px dashed var(--line);border-radius:999px;color:var(--muted);white-space:nowrap;text-decoration:none}
+.series a{border-style:solid}
+.series a:hover{border-color:var(--accent);color:var(--accent)}
+.series .cur{background:var(--ink);color:var(--bg);border:1px solid var(--ink);font-weight:700}
+.hero-band{position:relative;margin:-32px -20px 0;padding:32px 20px 56px;overflow:hidden;border-bottom:1px solid var(--line)}
+#heroCv{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.hero-band header{position:relative;z-index:1}
+.hero-text{position:relative}
+h1 .hl{color:var(--accent);text-shadow:0 0 24px rgba(255,179,71,.35)}
+/* hero emblem: same size and place as chapter 4's knot */
+.emblem{position:absolute;right:0;top:-10px;width:min(210px,36vw);height:auto;z-index:-1;pointer-events:none}
+.emblem .k1{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+.emblem .k2{fill:none;stroke:var(--t1);opacity:.35;stroke-width:1.1}
+.emblem .dot{fill:var(--ink);opacity:.55}
+@media (max-width:700px){.emblem{opacity:.5;right:-10px}}
+.hero-hint{font-family:var(--mono);font-size:.74rem;color:var(--muted);letter-spacing:.06em;margin-top:.6em}
+.hero-hint b{color:var(--accent);font-weight:600}
+/* big outlined section numerals in the left margin on wide screens */
+section > .col:first-child{position:relative}
+.bignum{position:absolute;right:calc(100% + 28px);top:-18px;font-family:var(--display);font-weight:900;font-size:7.5rem;line-height:1;color:transparent;-webkit-text-stroke:1.2px #2c3038;pointer-events:none;user-select:none;display:none}
+@media (min-width:1220px){.bignum{display:block}}
+@media (max-width:699px){.hero-band{padding-bottom:180px}}
+.factors{display:flex;flex-wrap:wrap;gap:6px;margin:1.2em 0 0}
+.factors span{font-size:.82rem;padding:2px 10px;border-radius:3px;background:var(--surface);border:1px solid var(--line)}
+.factors span.cur{border-color:var(--accent);color:var(--accent);font-weight:700}
+.factors small{color:var(--muted);font-size:.72rem;margin-left:4px}
+
+.bench{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;margin-block:28px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:32px;align-items:start}
+.split.rev{grid-template-columns:minmax(0,340px) minmax(0,1fr)}
+@media (max-width:820px){.split,.split.rev{grid-template-columns:minmax(0,1fr)}}
+.lab{font-size:.78rem;color:var(--muted);letter-spacing:.06em;margin-bottom:6px;display:block}
+.seg{display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:transparent}
+.seg button{flex:1 1 auto;border:0;background:transparent;color:var(--ink);padding:6px 10px;font-size:.84rem;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);font-weight:700}
+.btn{padding:7px 14px;border:1px solid var(--accent);background:var(--accent);color:#1a1205;border-radius:6px;font-size:.88rem;font-weight:700;transition:filter .2s}
+.btn:hover:not(:disabled){filter:brightness(1.12)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:disabled{opacity:.4;cursor:default}
+.slider{display:grid;grid-template-columns:5.5em 1fr 3.6em;align-items:center;gap:10px;font-size:.85rem}
+.slider output{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.ctl{display:flex;flex-direction:column;gap:16px;min-width:0}
+.big{font-family:var(--display);font-weight:900;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.cap{font-size:.82rem;color:var(--muted);margin-top:8px}
+
+.orig{margin:0;border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:8px 8px 4px}
+.orig img{display:block;width:100%;height:auto;filter:invert(.9) hue-rotate(180deg) contrast(1.05);mix-blend-mode:screen;border-radius:4px}
+.orig.keep img{filter:brightness(.93);mix-blend-mode:normal;background:#fff}
+.orig figcaption{font-size:.72rem;color:var(--muted);margin-top:4px;letter-spacing:.04em}
+.map{padding:0;margin:20px 0 0;border-top:1px solid var(--line)}
+.map li{list-style:none;display:grid;grid-template-columns:3.2em 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.map .no{font-family:var(--display);font-weight:900;font-size:1.4rem;color:var(--muted)}
+.map .cur .no{color:var(--accent)}
+.map h4{margin:0;font-size:1rem}
+.map h4 a{color:inherit}
+.map p{margin:2px 0 0;font-size:.88rem;color:var(--muted);line-height:1.65}
+.map .draft h4::after{content:"尚未成文";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
+footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+@media (max-width:699px){.hero-band{padding-bottom:56px}}
+/* 01 quiz */
+.quiz{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:28px;align-items:start}
+@media (max-width:820px){.quiz{grid-template-columns:minmax(0,1fr)}}
+.qcard{border:1px solid var(--line);border-radius:8px;padding:20px;background:var(--bg);min-height:300px;display:flex;flex-direction:column;gap:14px}
+.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.qno{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.08em}
+.qtext{font-size:1.15rem;line-height:1.6;font-weight:500;margin:0}
+.qtext b{color:var(--accent)}
+.icons{display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-height:84px}
+.icons svg{width:72px;height:72px}
+.icons .plus{font-family:var(--mono);color:var(--muted);font-size:1.2rem}
+.ico{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.ico .f{fill:var(--ink);stroke:none}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{padding:8px 16px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;font-size:.92rem}
+.opt:hover{border-color:var(--accent)}
+.opt[aria-pressed="true"]{background:var(--ink);color:var(--bg);font-weight:700;border-color:var(--ink)}
+.qnote{margin:0;font-size:.94rem;color:var(--muted);border-left:3px solid var(--accent);padding-left:12px;min-height:3em}
+.qnote b{color:var(--ink)}
+.qnav{display:flex;gap:8px;align-items:center;margin-top:auto}
+.dots{display:flex;gap:6px;margin-left:auto}
+.dots button{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--muted);font-family:var(--mono);font-size:.72rem;padding:0}
+.dots button.done{border-color:var(--muted);color:var(--ink)}
+.dots button.cur{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.ledger{display:flex;flex-direction:column;gap:6px;font-size:.86rem}
+.ledger div{display:grid;grid-template-columns:4.2em 1fr;gap:8px;padding:6px 10px;border:1px solid var(--line);border-radius:6px}
+.ledger span:first-child{font-family:var(--mono);color:var(--muted)}
+.ledger .mut{color:var(--muted)}
+
+/* 02 water jars */
+.jars{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,320px);gap:28px;align-items:start}
+@media (max-width:820px){.jars{grid-template-columns:minmax(0,1fr)}}
+.jhead{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.jhead .big{font-size:2rem}
+#jsvg{width:100%;height:auto;display:block}
+#jsvg .jug{fill:none;stroke:var(--ink);stroke-width:2.2}
+#jsvg .water{fill:var(--t1);opacity:.75}
+#jsvg .bwater{fill:var(--t1);opacity:.8;transition:y .5s cubic-bezier(.3,1.3,.5,1),height .5s cubic-bezier(.3,1.3,.5,1),fill .3s}
+#jsvg .bwater.hit{fill:var(--go);opacity:1;filter:drop-shadow(0 0 10px var(--go))}
+#jsvg .basin{fill:none;stroke:var(--ink);stroke-width:2.2}
+#jsvg .tline{stroke:var(--accent);stroke-width:2;stroke-dasharray:6 5}
+#jsvg text{font-family:var(--mono);font-size:13px;fill:var(--ink)}
+#jsvg .lab{fill:var(--muted);font-size:12px}
+#jsvg .cap{font-size:16px;font-weight:600}
+#jsvg .tl{fill:var(--accent);font-weight:600}
+#jsvg .pour{transition:transform .35s ease-in-out;transform-box:fill-box}
+.ops{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:6px;max-width:300px}
+.ops .grp{display:flex;gap:6px;justify-content:center}
+.ops button{flex:1;padding:7px 0;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;font-family:var(--mono);font-size:.9rem}
+.ops button:hover{border-color:var(--accent);color:var(--accent)}
+.ops button:disabled{opacity:.3;cursor:default}
+.formula{font-family:var(--mono);font-size:1.05rem;min-height:1.6em;margin:12px 0 0;word-break:break-all}
+.formula .eq{color:var(--muted)}
+.formula .ok{color:var(--go);text-shadow:0 0 12px rgba(60,242,180,.55)}
+.jrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.track{display:flex;flex-direction:column;gap:5px;font-size:.84rem}
+.track div{display:grid;grid-template-columns:1.6em 4.6em 1fr;gap:8px;align-items:center;padding:5px 10px;border:1px solid var(--line);border-radius:6px}
+.track div.cur{border-color:var(--ink)}
+.track .tag{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.track .res{font-family:var(--mono);font-size:.8rem;text-align:right}
+.track .hint{color:var(--muted);font-size:.72rem}
+.track .long{color:var(--accent)}
+.track .short{color:var(--go)}
+.track .skip{color:var(--muted)}
+.verdict{border:1px solid var(--accent);border-radius:8px;padding:14px 16px;margin-top:16px;background:var(--accent-soft)}
+.verdict b{color:var(--accent)}
+
+/* 03 affordance */
+.aff{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:900px){.aff{grid-template-columns:minmax(0,1fr)}}
+#tools{width:100%;height:auto;display:block}
+#tools .part{transition:transform .6s cubic-bezier(.3,1.25,.5,1);cursor:pointer}
+#tools .part path,#tools .part rect,#tools .part circle,#tools .part line,#tools .part polygon{fill:var(--surface);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+#tools .part .edge{stroke:var(--ink);stroke-width:3.5;fill:none}
+#tools .part.hot path,#tools .part.hot rect,#tools .part.hot circle,#tools .part.hot line,#tools .part.hot polygon{stroke:var(--accent)}
+#tools .plab{font-family:var(--body);font-size:12px;fill:var(--muted);transition:opacity .4s;opacity:0}
+#tools.open .plab{opacity:1}
+#tools .tags{font-family:var(--mono);font-size:10px;fill:var(--accent)}
+#tools .oname{font-family:var(--body);font-size:13px;font-weight:700;fill:var(--ink)}
+.mtx{width:100%;border-collapse:collapse;font-size:.86rem}
+.mtx th,.mtx td{border-bottom:1px solid var(--line);padding:9px 6px;text-align:center}
+.mtx th{font-weight:500;color:var(--muted);font-size:.78rem}
+.mtx td:first-child,.mtx th:first-child{text-align:left}
+.mtx .need{display:block;font-family:var(--mono);font-size:.66rem;color:var(--muted);font-weight:400;margin-top:2px}
+.cell{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);color:var(--muted);font-weight:700;transition:all .35s}
+.cell.y{border-color:var(--go);color:var(--go)}
+.cell.new{background:var(--go);color:#03140d;border-color:var(--go);box-shadow:0 0 14px rgba(60,242,180,.6)}
+tr.hot td:first-child,th.hot{color:var(--accent)}
+.count{display:flex;align-items:baseline;gap:10px;margin:14px 0 6px}
+.count .big{font-size:2.4rem}
+
+/* 04 muji */
+.muji{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,320px);gap:28px;align-items:center}
+@media (max-width:820px){.muji{grid-template-columns:minmax(0,1fr)}}
+#cd{width:100%;max-width:460px;display:block;margin-inline:auto;touch-action:none;border-radius:8px}
+#cd .wall{fill:#e7e7e5}
+#cd .shadow{fill:#000;opacity:.08;filter:blur(6px)}
+#cd .box{fill:#f6f6f4;stroke:#d9d9d6;stroke-width:1}
+#cd .grille circle{fill:#c9cac7}
+#cd .disc{fill:#fbfbfa;stroke:#dcdcd9;stroke-width:1}
+#cd .disc2{fill:none;stroke:#e8e8e5;stroke-width:1.2}
+#cd .hub{fill:#1c1d20}
+#cd .hub2{fill:#3c4048}
+#cd .glint{fill:#9aa3b5}
+#cd .spin{transform-origin:272px 118px;transform-box:view-box}
+#cd.playing .spin{animation:spin 1.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#cd .cord{stroke:#fbfbfa;stroke-width:2;filter:drop-shadow(1px 1px 0 rgba(0,0,0,.12))}
+#cd .knob{fill:var(--accent);cursor:grab}
+#cd .shelf{fill:#f9f9f8}
+#cd .shelf2{fill:#d4d4d1}
+#cd .case{fill:rgba(255,255,255,.55);stroke:#c4c6c9;stroke-width:1}
+#cd .wave{fill:none;stroke:#13b98a;stroke-width:2.5;opacity:0}
+#cd.playing .wave{animation:wave 1.4s ease-out infinite;filter:drop-shadow(0 0 5px rgba(19,185,138,.7))}
+#cd.playing .wave.w2{animation-delay:.35s} #cd.playing .wave.w3{animation-delay:.7s}
+@keyframes wave{0%{opacity:.9;transform:scale(.85)}100%{opacity:0;transform:scale(1.25)}}
+#cd .wave{transform-box:fill-box;transform-origin:left center}
+#cd .wave.l{transform-origin:right center}
+#cd .ann{font-family:var(--body);font-size:12px;fill:#4a4f57}
+#cd .ann.k{fill:#a85600;font-weight:700}
+#cd .lead{stroke:#8a8f97;stroke-width:1;stroke-dasharray:3 3}
+#cd .annot{transition:opacity .4s}
+#cd .fan{fill:none;stroke:#6b7079;stroke-width:1.5}
+.toggle{display:flex;gap:8px;align-items:center;font-size:.88rem}
+@media (prefers-reduced-motion: reduce){#cd.playing .spin{animation:none}}
+</style>
+
+<div class="wrap">
+<div class="hero-band" id="heroBand">
+<header class="col">
+  <nav class="series" aria-label="系列章节">
+    <a href="ch1.html">一 问题情境</a><span class="cur">二 可行解</span><a href="ch3.html">三 开放问题</a><a href="ch4.html">四 纠结与最优解</a><span>五 测量的局限</span><span>六 Duck Typing</span><span>七 工程实践</span>
+  </nav>
+  <div class="hero-text">
+    <svg class="emblem" id="ninedot" viewBox="0 0 400 400" aria-hidden="true"><rect class="k2" x="116" y="116" width="168" height="168" stroke-dasharray="5 7"></rect><g id="nd-dots"></g><path class="k1" id="nd-line" d="M140 140L320 140L140 320L140 140L260 260"></path></svg>
+    <div class="eyebrow"><a href="index.html" class="up">问题解决与设计</a> · 第二篇</div>
+    <h1><span class="hl">可行</span>解</h1>
+    <p class="lede">问题的表示一旦确定，就可以开始找可行解了。这一篇从一个苹果、一把水果刀和一把剪刀出发，讲两种让人看不见可行解的“缓存”：<strong>定势</strong>和<strong>功能固着</strong>。</p>
+    <div class="factors">
+      <span>问题情境<small>第一篇</small></span><span class="cur">定势<small>本篇</small></span><span class="cur">功能固着<small>本篇</small></span><span>迁移</span><span>原型启发</span><span>动机与情绪状态</span><span>个体特征</span>
+    </div>
+    <p class="meta" style="margin-top:1.2em">交互版 · 改编自作者发表在简书的同名旧文</p>
+  </div>
+</header>
+</div>
+
+<section id="s1">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">01</span><span class="secno">01 · 资源与方法</span>
+    <h2>六道削皮题</h2>
+    <p>可行解落到现实里指的是什么？我觉得可以简单分成两个必要的部分：<strong>资源（Resource）</strong>和<strong>方法（Method）</strong>。用水果刀给苹果削皮，水果刀是资源，削皮的手法是方法。</p>
+    <p>原文用一串越来越“侮辱智商”的小题往前推。你也答一遍，答案会记在右边。</p>
+  </div>
+  <div class="wide">
+    <div class="bench quiz">
+      <div class="qcard" id="qcard"></div>
+      <div>
+        <span class="lab">你的答卷</span>
+        <div class="ledger" id="ledger"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <p>问题 3 和问题 4 的差别值得停一下。我们选水果刀而不是剪刀时，其实在解一个更强的问题：<strong>只要提到选择，就一定有相应的标准</strong>。标准一明确，问题就成了一个最优化问题。搜索只是解决问题的过程，目的其实是选择。</p>
+  </div>
+</section>
+
+<section id="s2">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">02</span><span class="secno">02 · 定势</span>
+    <h2>量水实验</h2>
+    <p>如果真打不开那瓶红酒，可已经吃了四个苹果一个梨的李雷还想着用水果刀去开，他就是陷入了<strong>定势</strong>：连续解决相似的问题时，你会把之前的可行解缓存起来，下一题优先尝试。</p>
+    <p>原文提到的“水杯量水实验”是卢钦斯（Luchins）1942 年的经典实验。规则很简单：有三个容量不同的量杯 A、B、C，只能整杯地往盆里倒、或从盆里整杯舀出，要让盆里正好剩下目标的水量。一共十题，按顺序做，尽量少用步数。</p>
+  </div>
+  <div class="wide">
+    <div class="bench jars">
+      <div>
+        <div class="jhead"><span><span class="lab" style="display:inline">第</span> <span class="big" id="jno">1</span> <span class="lab" style="display:inline">/ 10 题</span></span><span class="meta" id="jgoal"></span></div>
+        <svg id="jsvg" viewBox="0 0 600 300" role="img" aria-label="三个量杯和一个水盆"></svg>
+        <div class="ops" id="ops"></div>
+        <p class="formula" id="formula"></p>
+        <div class="jrow"><button type="button" class="btn ghost" id="jreset">清空重来</button><button type="button" class="btn ghost" id="jskip">跳过这题</button><button type="button" class="btn" id="jnext" hidden>下一题</button></div>
+      </div>
+      <div>
+        <span class="lab">每一题你用的办法</span>
+        <div class="track" id="track"></div>
+        <div id="verdict"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <p>前五题只有一种解法：B − A − 2C。从第 6 题起，题目悄悄变了，A − C 或 A + C 两步就够；第 8 题甚至只有 A − C 这一种解法。卢钦斯的被试里，做过前五题的人大多在后面继续用四步的老办法，有些人在第 8 题直接卡住；没做过前五题的对照组几乎都直接用了两步。</p>
+    <p>如果之前的可行解太成功，比如解决了前面所有问题，那么在下一个它行不通的问题里，你可能要花很长时间才能摆脱它。手拿锤子看什么都是钉子，典型的过拟合。摆脱定势的办法可能是<strong>清除脑中的缓存，清除先验的偏见，从头寻找和评估所有的解</strong>。</p>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">03</span><span class="secno">03 · 功能固着与可供性</span>
+    <h2>把剪刀拆开看</h2>
+    <p>回到问题 2。韩梅梅坚持说没有可行解：剪刀是用来剪窗花的，怎么能去苹果皮？这就是<strong>功能固着</strong>。第一次认识一个物体时，我们往往只认识它最主要的功能，然后把功能和物体绑在一起：说起铅笔就想到写字，要意识到铅笔还能用来转磁带，可能是很久以后的事。</p>
+    <p>可物体是可以分解的。它由更原子的模块组成，每个模块有自己更基础的功能；<strong>功能不是物体本身</strong>。切换到“拆开看”，再把鼠标移到任何一个部件上，看它能撑起哪些任务。</p>
+  </div>
+  <div class="wide">
+    <div class="bench aff">
+      <div>
+        <div class="seg" id="affseg" style="margin-bottom:12px">
+          <button type="button" data-v="whole" aria-pressed="true">整体看（功能固着）</button>
+          <button type="button" data-v="open" aria-pressed="false">拆开看（可供性）</button>
+        </div>
+        <svg id="tools" viewBox="0 0 320 400" role="img" aria-label="水果刀、剪刀、铅笔，可以拆成部件"></svg>
+      </div>
+      <div>
+        <div class="count"><span class="big" id="fcount">3</span><span class="meta" id="fcountl">个可行解</span></div>
+        <table class="mtx" id="mtx"></table>
+        <p class="note" id="affnote" style="margin-top:14px"></p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <p>心理学和设计里有一个更 fancy 的词，把物体和功能区分开：<strong>可供性（Affordance）</strong>，原意是一个物体可供你进行的所有可能动作。这个“所有”暗示了两点：一个物体可能含有多种功能；我们对一个物体的认识可能是不完整的。</p>
+    <p>功能固着并非一无是处。它帮我们快速认识事物和它最有用的功能，并在之后的问题里更快地想起来，跟定势类似，像一种更长期的缓存。缺点在于“固化”。关注可供性，促使我们把问题的解看成可以分解、重组的系统，找到被忽略的可行解。</p>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">04</span><span class="secno">04 · 附图</span>
+    <h2>一根拉绳</h2>
+    <p>原文的附图是无印良品的壁挂式 CD 机（深泽直人设计），标题是“分解和重组”。它把 CD 机拆成转盘、扬声器和开关：整个正面就是扬声器，开关换成了排气扇上那根拉绳。</p>
+    <p>可供性后来在设计领域有了另一层意思：人不用多想、一眼就能看出来的那部分功能。看到一根垂下来的绳子，你不需要说明书。拉一下试试。</p>
+  </div>
+  <div class="wide">
+    <div class="bench muji">
+      <svg id="cd" viewBox="0 0 400 420" role="img" aria-label="壁挂式 CD 机，拖动或点击拉绳开始播放"></svg>
+      <div class="ctl">
+        <div><span class="lab">状态</span><div class="big" id="cdstate" style="font-size:1.8rem">停止</div></div>
+        <label class="toggle"><input type="checkbox" id="cdsound" checked> 播放音乐</label>
+        <p class="meta" style="margin:0">曲子是萨蒂《第一号吉姆诺佩迪》（Gymnopédie No.1，1888）的引子和前两个乐句，用浏览器实时合成的钢琴音色演奏。</p>
+        <label class="toggle"><input type="checkbox" id="cdann" checked> 显示拆解标注</label>
+        <figure class="orig keep"><img src="assets/ch2-img/fig-muji.png" alt="原文附图：白墙上挂着一台方形白色 CD 机，正面布满小孔，中间是碟片和黑色轴心，一根白色拉绳从机身底部垂下；左下的白色架子上放着几张 CD" width="496" height="496"><figcaption>原文附图 · 無印良品壁挂式 CD 机</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <p>设计师需要知道，物体的功能有显隐之分。设计新东西时要有意识地调整那条界限：凸显最需要凸显的功能，隐藏不需要的可能。这其实是<strong>对“功能固着”的正向利用</strong>：既然人会把拉绳和“拉一下就开”绑在一起，那就把这个缓存借过来用。</p>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <span class="secno">系列地图</span>
+    <h2>每一篇，一个可以动手的问题</h2>
+    <ol class="map">
+      <li><span class="no">一</span><div><h4><a href="ch1.html">问题情境</a></h4><p>两种画法的正方形、找箭头、搜索树、表示方式、设计。</p></div></li>
+      <li class="cur"><span class="no">二</span><div><h4>可行解</h4><p>本页：六道削皮题、量水实验、把剪刀拆开看、一根拉绳。</p></div></li>
+      <li><span class="no">三</span><div><h4><a href="ch3.html">开放问题</a></h4><p>只坐地铁、行动方式不限、抓大放小、证伪的是整个合式。</p></div></li>
+      <li><span class="no">四</span><div><h4><a href="ch4.html">纠结与最优解</a></h4><p>电车难题、价值天平、两千个可能的你、偏好系统、单因素模型。</p></div></li>
+      <li class="draft"><span class="no">五</span><div><h4>测量的局限</h4><p>来自 2026-03 的整合 Proposal：相似性、分类与理论负荷。</p></div></li>
+      <li class="draft"><span class="no">六</span><div><h4>Duck Typing 作为策略</h4><p>不问它是什么，问它能做什么；行为级数据，让用户自己设权重。</p></div></li>
+      <li class="draft"><span class="no">七</span><div><h4>工程实践</h4><p>测试环境作为反事实探索器，双重传感器，Bayesian Safety。</p></div></li>
+    </ol>
+  </div>
+</section>
+<footer class="col">正文改编自《问题解决与设计（二）：可行解》；量水题目取自卢钦斯 1942 年的实验；CD 机按原文附图重绘。</footer>
+</div>
+
+<script>
+(() => {
+const $ = (s, r = document) => r.querySelector(s);
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; };
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function segBind(id, fn) { const root = $(id); root.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { root.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); fn(b.dataset.v); })); }
+
+
+/* ---------- hero: the nine-dot problem; four strokes that only work outside the box ---------- */
+(() => {
+  const g = $('#nd-dots'), line = $('#nd-line');
+  for (let y = 0; y < 3; y++) for (let x = 0; x < 3; x++) el('circle', { cx: 140 + 60 * x, cy: 140 + 60 * y, r: 6, class: 'dot' }, g);
+  const L = line.getTotalLength();
+  line.style.strokeDasharray = L;
+  if (RM) { line.style.strokeDashoffset = 0; return; }
+  let vis = true;
+  new IntersectionObserver(es => vis = es[0].isIntersecting).observe($('#ninedot'));
+  const T = 9000, t0 = performance.now();
+  const loop = now => {
+    if (vis) {
+      const k = ((now - t0) % T) / T;                       // draw 0–45%, hold to 85%, fade out
+      const draw = Math.min(1, k / .45), e = draw < .5 ? 2 * draw * draw : 1 - Math.pow(-2 * draw + 2, 2) / 2;
+      line.style.strokeDashoffset = L * (1 - e);
+      line.style.opacity = k < .85 ? '' : String(.75 * (1 - (k - .85) / .15));
+    }
+    requestAnimationFrame(loop);
+  };
+  requestAnimationFrame(loop);
+})();
+/* ---------- icons ---------- */
+const IC = {
+  knife: `<svg viewBox="0 0 72 72" class="ico"><path d="M30 42 L64 12 L58 30 Z"/><line x1="10" y1="60" x2="30" y2="42" stroke-width="7"/></svg>`,
+  scissors: `<svg viewBox="0 0 72 72" class="ico"><circle cx="16" cy="52" r="8"/><circle cx="30" cy="60" r="8"/><path d="M21 46 L64 10 M35 54 L60 6"/><circle class="f" cx="38" cy="38" r="2.5"/></svg>`,
+  apple: `<svg viewBox="0 0 72 72" class="ico"><path d="M36 22 C22 12 8 24 12 42 C15 56 26 66 36 60 C46 66 57 56 60 42 C64 24 50 12 36 22 Z"/><path d="M36 22 C36 14 38 10 42 6"/><path d="M40 14 C46 8 54 10 54 12 C50 16 44 16 40 14 Z"/></svg>`,
+  pear: `<svg viewBox="0 0 72 72" class="ico"><path d="M36 14 C30 14 30 26 26 34 C18 44 18 62 36 64 C54 62 54 44 46 34 C42 26 42 14 36 14 Z"/><path d="M36 14 C36 9 38 6 40 4"/></svg>`,
+  wine: `<svg viewBox="0 0 72 72" class="ico"><path d="M31 4 H41 V20 C41 26 50 28 50 38 V66 H22 V38 C22 28 31 26 31 20 Z"/><rect x="31" y="4" width="10" height="7" class="f"/><path d="M22 46 H50"/></svg>`,
+};
+const plus = '<span class="plus">+</span>', arrow = '<span class="plus">→</span>';
+
+/* ---------- 01 quiz ---------- */
+const Q = [
+  { no: '问题 1', text: '手头有一把<b>水果刀</b>，去掉一个苹果的皮。', icons: ['knife', '→', 'apple'], opts: ['能', '不能'],
+    note: () => '当然能。水果刀是<b>资源</b>，削皮的手法是<b>方法</b>：可行解 = 资源 + 方法。' },
+  { no: '问题 2', text: '把水果刀抽走，换成一把<b>剪刀</b>，去掉一个苹果的皮。', icons: ['scissors', '→', 'apple'], opts: ['能', '不能'],
+    note: a => a === '不能' ? '你站在了韩梅梅这边：剪刀是剪窗花的。记住这一刻，<b>第 03 部分</b>会回来。' : '现实里这样做一定很怪，但剪掉，或者“当作”水果刀来削，多费些劲还是能行。' },
+  { no: '问题 3', text: '<b>水果刀和剪刀都有</b>，去掉一个苹果的皮。', icons: ['knife', '+', 'scissors', '→', 'apple'], opts: ['用水果刀', '用剪刀', '都行'],
+    note: a => a === '都行' ? '严格地说，对。题目只要求“去掉皮”，两样都是可行解。' : '你没选“都行”。题目只要求“去掉皮”，两样都是可行解；你其实在解一个<b>更强的问题</b>，看下一题。' },
+  { no: '问题 4', text: '水果刀和剪刀都有，去掉苹果的皮，<b>以最优的方式</b>。按什么标准算“最优”？', icons: ['knife', '+', 'scissors', '→', 'apple'], opts: ['费更少的劲', '更像正常人', '没说标准'],
+    note: a => a === '没说标准' ? '这其实不是一个完整的问题。<b>只要提到选择，就一定有相应的标准</b>，否则无从比较。' : `按“${a}”，水果刀是最优解。标准一明确，问题就成了一个<b>最优化</b>问题。` },
+  { no: '问题 5', text: '水果刀和剪刀都有，去掉一个<b>梨</b>的皮。', icons: ['knife', '+', 'scissors', '→', 'pear'], opts: ['用水果刀', '用剪刀'],
+    note: () => '嗯，我在逗你，当然用水果刀啦。' },
+  { no: '问题 6', text: '水果刀和剪刀都有，打开一瓶<b>红酒</b>。', icons: ['knife', '+', 'scissors', '→', 'wine'], opts: ['能', '不能'],
+    note: a => `原文的反应是：“这也能打开？”你选了“${a}”。先记下，<b>第 03 部分</b>拆开看的时候再对一次答案。` },
+];
+const QA = {}; let qi = 0;
+function renderQ() {
+  const q = Q[qi], a = QA[qi];
+  $('#qcard').innerHTML = `<div class="qhead"><span class="qno">${q.no}</span></div>
+    <p class="qtext">${q.text}</p>
+    <div class="icons">${q.icons.map(k => k === '+' ? plus : k === '→' ? arrow : IC[k]).join('')}</div>
+    <div class="opts">${q.opts.map(o => `<button type="button" class="opt" aria-pressed="${a === o}">${o}</button>`).join('')}</div>
+    <p class="qnote">${a ? q.note(a) : '<span style="color:var(--muted)">先选一个。</span>'}</p>
+    <div class="qnav"><button type="button" class="btn ghost" id="qprev"${qi ? '' : ' disabled'}>上一题</button><button type="button" class="btn" id="qnext"${a && qi < Q.length - 1 ? '' : ' disabled'}>下一题</button>
+    <div class="dots">${Q.map((_, i) => `<button type="button" class="${i === qi ? 'cur' : QA[i] ? 'done' : ''}" data-i="${i}" aria-label="问题 ${i + 1}">${i + 1}</button>`).join('')}</div></div>`;
+  $('#qcard').querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => { QA[qi] = b.textContent; renderQ(); renderLedger(); renderAff(); }));
+  $('#qprev').addEventListener('click', () => { qi--; renderQ(); });
+  $('#qnext').addEventListener('click', () => { qi++; renderQ(); });
+  $('#qcard').querySelectorAll('.dots button').forEach(b => b.addEventListener('click', () => { qi = +b.dataset.i; renderQ(); }));
+}
+function renderLedger() { $('#ledger').innerHTML = Q.map((q, i) => `<div><span>${q.no.replace('问题 ', 'Q')}</span><span class="${QA[i] ? '' : 'mut'}">${QA[i] || '未作答'}</span></div>`).join(''); }
+
+/* ---------- 02 Luchins water jars ---------- */
+const JP = [
+  [21, 127, 3, 100], [14, 163, 25, 99], [18, 43, 10, 5], [9, 42, 6, 21], [20, 59, 4, 31],
+  [23, 49, 3, 20], [15, 39, 3, 18], [28, 76, 3, 25], [18, 48, 4, 22], [14, 36, 8, 6],
+];
+const JTAG = ['练习', '练习', '练习', '练习', '练习', '关键', '关键', '只有短解', '关键', '关键'];
+const SHORT = ['B − A − 2C', 'B − A − 2C', 'B − A − 2C', 'B − A − 2C', 'B − A − 2C', 'A − C', 'A + C', 'A − C', 'A + C', 'A − C'];
+let ji = 0, amt = 0, seq = [], solved = false;
+const JR = {};
+const jsvg = $('#jsvg');
+let JV = null;  // persistent svg nodes for the current problem, so levels and tilts can animate
+function buildJars() {
+  const [A, B, C, T] = JP[ji], caps = [A, B, C], names = ['A', 'B', 'C'], maxB = 163, base = 250;
+  const bcap = Math.max(B, T) * 1.15, bx = 340, bw = 230, bh = 210;
+  jsvg.innerHTML = '';
+  const jugs = caps.map((c, i) => {
+    const h = 26 + c / maxB * 190, w = 62, x = 26 + i * 96;
+    const g = el('g', { class: 'pour', style: `transform-origin:${x + w}px ${base - h}px` }, jsvg);
+    el('rect', { x: x + 2, y: base - h + 6, width: w - 4, height: h - 8, class: 'water' }, g);
+    el('path', { d: `M${x} ${base - h} V${base} H${x + w} V${base - h}`, class: 'jug' }, g);
+    const t = el('text', { x: x + w / 2, y: base + 22, 'text-anchor': 'middle', class: 'cap' }, jsvg); t.textContent = `${names[i]} ${c}`;
+    return g;
+  });
+  const water = el('rect', { x: bx + 2, y: base, width: bw - 4, height: 0, class: 'bwater' }, jsvg);
+  el('path', { d: `M${bx} ${base - bh} V${base} H${bx + bw} V${base - bh}`, class: 'basin' }, jsvg);
+  const tl = base - T / bcap * bh;
+  el('line', { x1: bx - 6, y1: tl, x2: bx + bw + 6, y2: tl, class: 'tline' }, jsvg);
+  const tt = el('text', { x: bx + bw, y: tl - 7, 'text-anchor': 'end', class: 'tl' }, jsvg); tt.textContent = `目标 ${T}`;
+  const at = el('text', { x: bx + 8, y: base - 8, class: 'cap' }, jsvg);
+  const bl = el('text', { x: bx + bw / 2, y: base + 22, 'text-anchor': 'middle', class: 'lab' }, jsvg); bl.textContent = '水盆';
+  JV = { jugs, water, at, bcap, bh, base, T };
+}
+function drawJars(pourIdx) {
+  if (!JV) buildJars();
+  const lv = Math.max(0, amt) / JV.bcap * JV.bh;
+  JV.water.setAttribute('y', JV.base - lv); JV.water.setAttribute('height', lv);
+  JV.water.classList.toggle('hit', amt === JV.T);
+  JV.at.setAttribute('y', JV.base - lv - 8); JV.at.textContent = amt;
+  JV.jugs.forEach((g, i) => { g.style.transform = pourIdx === i ? 'rotate(24deg)' : 'rotate(0deg)'; });
+}
+function renderJar(pourIdx) {
+  const [A, B, C, T] = JP[ji], caps = [A, B, C];
+  $('#jno').textContent = ji + 1;
+  $('#jgoal').textContent = `用 A=${A}、B=${B}、C=${C}，让盆里正好是 ${T}`;
+  drawJars(pourIdx);
+  $('#ops').innerHTML = ['A', 'B', 'C'].map((n, i) => `<div class="grp"><button type="button" data-i="${i}" data-s="1"${solved ? ' disabled' : ''} aria-label="倒入一杯 ${n}">+${n}</button><button type="button" data-i="${i}" data-s="-1"${solved || amt < caps[i] ? ' disabled' : ''} aria-label="舀出一杯 ${n}">−${n}</button></div>`).join('');
+  $('#ops').querySelectorAll('button').forEach(b => b.addEventListener('click', () => op(+b.dataset.i, +b.dataset.s)));
+  const f = seq.map((s, k) => (k ? (s[1] > 0 ? ' + ' : ' − ') : (s[1] > 0 ? '' : '−')) + 'ABC'[s[0]]).join('');
+  $('#formula').innerHTML = seq.length ? `${f} <span class="eq">=</span> <span class="${solved ? 'ok' : ''}">${amt}</span>${solved ? ` <span class="ok">✓ ${seq.length} 步</span>` : ''}` : '<span class="eq">点 +A / −A 等按钮开始</span>';
+  $('#jnext').hidden = !solved || ji === JP.length - 1;
+  $('#jskip').hidden = solved;
+  renderTrack();
+}
+function op(i, s) {
+  const caps = JP[ji].slice(0, 3);
+  amt += s * caps[i]; seq.push([i, s]);
+  if (amt === JP[ji][3]) { solved = true; JR[ji] = { steps: seq.length, f: fmtSeq(seq), cls: classify(seq) }; }
+  renderJar(RM ? -1 : i);
+  if (!RM) setTimeout(() => drawJars(-1), 380);
+}
+const fmtSeq = q => { const c = [0, 0, 0]; q.forEach(([i, s]) => c[i] += s); return [1, 0, 2].map(i => { const v = c[i]; return v === 0 ? '' : `${v > 0 ? '+' : '−'}${Math.abs(v) > 1 ? Math.abs(v) : ''}${'ABC'[i]}`; }).filter(Boolean).join(' ').replace(/^\+/, ''); };
+function classify(q) { const c = [0, 0, 0]; q.forEach(([i, s]) => c[i] += s); if (c[1] === 1 && c[0] === -1 && c[2] === -2) return 'long'; if (c[1] === 0 && Math.abs(c[0]) === 1 && Math.abs(c[2]) === 1) return 'short'; return 'other'; }
+function renderTrack() {
+  $('#track').innerHTML = JP.map((p, i) => {
+    const r = JR[i]; let res = '<span class="skip">—</span>';
+    if (r === 'skip') res = '<span class="skip">跳过</span>';
+    else if (r) { const stale = i >= 5 && r.cls === 'long'; res = `<span class="${stale ? 'long' : r.steps <= (i < 5 ? 4 : 2) ? 'short' : ''}">${r.f} · ${r.steps} 步</span>${stale ? `<br><span class="hint">其实 ${SHORT[i]} 两步就够</span>` : ''}`; }
+    return `<div class="${i === ji ? 'cur' : ''}"><span class="tag">${i + 1}</span><span class="tag">${JTAG[i]}</span><span class="res">${res}</span></div>`;
+  }).join('');
+  const crit = [5, 6, 8, 9].filter(i => JR[i] && JR[i] !== 'skip');
+  if (Object.keys(JR).length >= 8 || crit.length >= 2) {
+    const longN = crit.filter(i => JR[i].cls === 'long').length, stuck = JR[7] === 'skip';
+    $('#verdict').innerHTML = `<div class="verdict">${longN ? `在 ${crit.length} 道关键题里，你有 <b>${longN}</b> 道还在用四步的 B − A − 2C。` : `关键题你都用了两步的短解，定势没抓住你。`}${stuck ? ' 第 8 题你跳过了：它只有 A − C 一种解法，老办法在这里失效。' : ''}</div>`;
+  } else $('#verdict').innerHTML = '';
+}
+const reset = () => { amt = 0; seq = []; solved = false; JV = null; renderJar(-1); };
+$('#jreset').addEventListener('click', () => { if (JR[ji] && JR[ji] !== 'skip') delete JR[ji]; reset(); });
+$('#jskip').addEventListener('click', () => { JR[ji] = 'skip'; if (ji < JP.length - 1) { ji++; reset(); } else renderTrack(); });
+$('#jnext').addEventListener('click', () => { ji++; reset(); });
+
+/* ---------- 03 tools, parts, affordances ---------- */
+const OBJ = [
+  { id: 'knife', name: '水果刀', y: 20, primary: ['peel'], parts: [
+    { n: '刀柄', tags: ['可握持'], dx: -22, dy: 0, draw: g => el('rect', { x: 20, y: 52, width: 78, height: 20, rx: 8 }, g), lab: [50, 92] },
+    { n: '刀身', tags: ['刚性长条'], dx: 0, dy: -18, draw: g => el('path', { d: 'M100 50 H226 L236 56 H100 Z' }, g), lab: [150, 38] },
+    { n: '刃口', tags: ['锋利'], dx: 0, dy: 18, draw: g => el('path', { d: 'M100 58 H236 L246 62 Q190 76 100 74 Z' }, g), lab: [160, 100] },
+    { n: '刀尖', tags: ['尖'], dx: 26, dy: 0, draw: g => el('path', { d: 'M248 54 L290 62 L248 66 Z' }, g), lab: [276, 46] },
+  ] },
+  { id: 'sc', name: '剪刀', y: 150, primary: ['cut'], parts: [
+    { n: '握环', tags: ['可握持'], dx: -22, dy: 0, draw: g => { el('circle', { cx: 44, cy: 50, r: 15 }, g); el('circle', { cx: 44, cy: 86, r: 15 }, g); }, lab: [40, 120] },
+    { n: '铰链', tags: ['可开合'], dx: 0, dy: 22, draw: g => el('circle', { cx: 124, cy: 68, r: 6 }, g), lab: [124, 106] },
+    { n: '双刃', tags: ['锋利', '成对刃', '刚性长条'], dx: 26, dy: -10, draw: g => { el('path', { d: 'M58 54 L290 62 L288 66 L60 60 Z' }, g); el('path', { d: 'M58 82 L290 70 L288 74 L60 88 Z' }, g); }, lab: [220, 44] },
+  ] },
+  { id: 'pen', name: '铅笔', y: 290, primary: ['write', 'tape'], parts: [
+    { n: '橡皮', tags: ['可擦'], dx: -10, dy: 0, draw: g => el('rect', { x: 18, y: 52, width: 26, height: 22, rx: 4 }, g), lab: [34, 92] },
+    { n: '六棱笔杆', tags: ['细长杆', '可握持'], dx: 0, dy: -18, draw: g => el('path', { d: 'M48 52 H222 V74 H48 Z M48 63 H222' }, g), lab: [134, 38] },
+    { n: '笔芯', tags: ['可书写'], dx: 26, dy: 0, draw: g => el('path', { d: 'M226 52 L276 63 L226 74 Z M262 60 L276 63 L262 66' }, g), lab: [262, 92] },
+  ] },
+];
+const TASKS = [
+  { id: 'peel', n: '削苹果皮', need: ['锋利', '可握持'] },
+  { id: 'cut', n: '剪窗花', need: ['成对刃', '可开合'] },
+  { id: 'write', n: '写字', need: ['可书写'] },
+  { id: 'tape', n: '转磁带', need: ['细长杆'] },
+  { id: 'wine', n: '开红酒：把木塞推进瓶里', need: ['刚性长条', '可握持'] },
+];
+let affOpen = false, hotTags = null;
+const tools = $('#tools');
+OBJ.forEach(o => {
+  const g = el('g', { transform: `translate(0 ${o.y})` }, tools);
+  const nm = el('text', { x: 0, y: 14, class: 'oname' }, g); nm.textContent = o.name;
+  o.parts.forEach(p => {
+    const pg = el('g', { class: 'part', tabindex: '0', 'aria-label': `${o.name}的${p.n}：${p.tags.join('、')}` }, g);
+    p.draw(pg); p.g = pg;
+    const lt = el('text', { x: p.lab[0], y: p.lab[1], 'text-anchor': 'middle', class: 'plab' }, pg); lt.textContent = p.n;
+    const tg = el('text', { x: p.lab[0], y: p.lab[1] + 13, 'text-anchor': 'middle', class: 'plab tags' }, pg); tg.textContent = p.tags.join(' · ');
+    const on = () => { if (!affOpen) return; hotTags = p.tags; pg.classList.add('hot'); renderMtx(); };
+    const off = () => { hotTags = null; pg.classList.remove('hot'); renderMtx(); };
+    pg.addEventListener('pointerenter', on); pg.addEventListener('pointerleave', off);
+    pg.addEventListener('focus', on); pg.addEventListener('blur', off);
+  });
+});
+function feasible(o, t) { if (!affOpen) return o.primary.includes(t.id); const tags = new Set(o.parts.flatMap(p => p.tags)); return t.need.every(x => tags.has(x)); }
+function renderMtx() {
+  let n = 0;
+  const rows = TASKS.map(t => {
+    const hot = hotTags && t.need.some(x => hotTags.includes(x));
+    return `<tr class="${hot ? 'hot' : ''}"><td>${t.n}<span class="need">需要：${t.need.join(' + ')}</span></td>${OBJ.map(o => { const y = feasible(o, t), isNew = y && !o.primary.includes(t.id); if (y) n++; return `<td><span class="cell ${y ? 'y' : ''} ${isNew ? 'new' : ''}">${y ? '✓' : '·'}</span></td>`; }).join('')}</tr>`;
+  }).join('');
+  $('#mtx').innerHTML = `<thead><tr><th>任务</th>${OBJ.map(o => `<th>${o.name}</th>`).join('')}</tr></thead><tbody>${rows}</tbody>`;
+  $('#fcount').textContent = n;
+  $('#fcountl').textContent = affOpen ? '个可行解（拆开看）' : '个可行解（只看熟悉的用法）';
+  return n;
+}
+function renderAff() {
+  tools.classList.toggle('open', affOpen);
+  OBJ.forEach(o => o.parts.forEach(p => { p.g.style.transform = affOpen ? `translate(${p.dx}px, ${p.dy}px)` : ''; }));
+  const whole = OBJ.reduce((a, o) => a + o.primary.length, 0), n = renderMtx();
+  const q2 = QA[1], q6 = QA[5];
+  $('#affnote').innerHTML = affOpen
+    ? `剪刀的“双刃”是锋利的，握环可以握住，所以它能削皮${q2 === '不能' ? '（问题 2 你选了“不能”）' : ''}。刀身和合拢的剪刀都是一根刚性长条，可以把木塞推进瓶里，红酒就倒得出来了${q6 ? `（问题 6 你选了“${q6}”）` : ''}。可行解从 ${whole} 个变成了 ${n} 个，资源一个都没加。`
+    : '整体看时，每个物体只对应我们熟悉的那一两种用法：刀削皮，剪刀剪窗花，铅笔写字，顺便转磁带（暴露年龄）。';
+}
+segBind('#affseg', v => { affOpen = v === 'open'; renderAff(); });
+
+/* ---------- 04 wall-mounted CD player ---------- */
+const cd = $('#cd');
+let playing = false, pull = 0, audio = null, timer = null;
+(function drawCD() {
+  // after the original photo: a white wall, the player up and to the right, cord from the bottom centre, a shelf with CD cases
+  el('rect', { x: 0, y: 0, width: 400, height: 420, class: 'wall' }, cd);
+  el('rect', { x: 196, y: 46, width: 160, height: 160, rx: 24, class: 'shadow' }, cd);
+  el('rect', { x: 190, y: 38, width: 164, height: 160, rx: 24, class: 'box' }, cd);
+  const gr = el('g', { class: 'grille' }, cd);
+  for (let y = 48; y <= 190; y += 7) for (let x = 200; x <= 344; x += 7) {
+    const dx = Math.max(0, 214 - x, x - 330), dy = Math.max(0, 62 - y, y - 174);
+    if (Math.hypot(dx, dy) > 14) continue;                      // keep the rounded corners clean
+    if (Math.hypot(x - 272, y - 118) < 64) continue;            // leave room for the disc
+    el('circle', { cx: x, cy: y, r: 1.15 }, gr);
+  }
+  const sp = el('g', { class: 'spin' }, cd);
+  el('circle', { cx: 272, cy: 118, r: 58, class: 'disc' }, sp);
+  el('circle', { cx: 272, cy: 118, r: 40, class: 'disc2' }, sp);
+  el('circle', { cx: 272, cy: 118, r: 13, class: 'hub' }, sp);
+  el('circle', { cx: 272, cy: 118, r: 6.5, class: 'hub2' }, sp);
+  el('circle', { cx: 268, cy: 114, r: 2.2, class: 'glint' }, sp);
+  for (const [cls, d] of [['wave w1', 'M362 88 Q380 118 362 148'], ['wave w2', 'M370 76 Q394 118 370 160'], ['wave w3', 'M378 64 Q408 118 378 172']]) el('path', { d, class: cls }, cd);
+  for (const [cls, d] of [['wave l w1', 'M182 88 Q164 118 182 148'], ['wave l w2', 'M174 76 Q150 118 174 160'], ['wave l w3', 'M166 64 Q136 118 166 172']]) el('path', { d, class: cls }, cd);
+  el('line', { x1: 272, y1: 198, x2: 272, y2: 330, class: 'cord', id: 'cord' }, cd);
+  el('rect', { x: 266, y: 330, width: 12, height: 24, rx: 5, class: 'knob', id: 'knob', tabindex: '0', role: 'button', 'aria-label': '拉绳：开始或停止播放' }, cd);
+  el('rect', { x: 0, y: 384, width: 250, height: 12, class: 'shelf' }, cd);
+  el('rect', { x: 0, y: 396, width: 250, height: 3, class: 'shelf2' }, cd);
+  el('rect', { x: 52, y: 372, width: 96, height: 6, rx: 1, class: 'case' }, cd);
+  el('rect', { x: 50, y: 378, width: 100, height: 6, rx: 1, class: 'case' }, cd);
+  const an = el('g', { class: 'annot', id: 'annot' }, cd);
+  const lab = (x, y, t, k, lx, ly) => { el('line', { x1: x, y1: y, x2: lx, y2: ly, class: 'lead' }, an); const tx = el('text', { x: lx - 4, y: ly + 4, 'text-anchor': 'end', class: 'ann' + (k ? ' k' : '') }, an); tx.textContent = t; };
+  lab(240, 96, '转盘：CD 机', 0, 150, 40);
+  lab(204, 170, '扬声器：整个正面', 0, 150, 190);
+  lab(266, 342, '开关：排气扇的拉绳', 1, 200, 300);
+  const fan = el('g', { transform: 'translate(98 322)' }, an);
+  el('rect', { x: 0, y: 0, width: 18, height: 18, rx: 2, class: 'fan' }, fan);
+  el('path', { d: 'M9 9 L9 3 M9 9 L15 12 M9 9 L3 12 M14 18 V26', class: 'fan' }, fan);
+  const ft = el('text', { x: 24, y: 14, class: 'ann' }, fan); ft.textContent = '借自排气扇';
+})();
+const knob = $('#knob'), cord = $('#cord');
+function setPull(p) { pull = p; knob.setAttribute('y', 330 + p); cord.setAttribute('y2', 330 + p); }
+function toggle() {
+  playing = !playing; cd.classList.toggle('playing', playing);
+  $('#cdstate').textContent = playing ? '播放中' : '停止';
+  $('#cdstate').style.color = playing ? 'var(--go)' : '';
+  if (playing && $('#cdsound').checked) startSound(); else stopSound();
+}
+// Satie, Gymnopédie No.1 (1888, public domain): introduction and the first two phrases.
+// Synthesised live: a small additive piano (inharmonic partials, faster decay for higher partials,
+// a soft hammer click), left-hand chords slightly rolled, sustain-pedal tails, stereo by pitch, hall reverb.
+const BPM = 66, BEAT = 60 / BPM, BAR = 3 * BEAT;
+const SONG = (() => {
+  const ev = [], m = (bar, beat, midi, beats, vel, hand) => ev.push({ t: bar * BAR + beat * BEAT, midi, dur: beats * BEAT, vel, hand });
+  const BARS = 20;
+  for (let b = 0; b < BARS; b++) {
+    const g = b % 2 === 0;                                     // G maj7 / D maj7 rocking in the left hand
+    m(b, 0, g ? 43 : 38, 3, .62, 'L');
+    (g ? [59, 62, 66] : [57, 61, 66]).forEach((n, i) => m(b, 1 + i * .045, n, 2, .34 - i * .02, 'L'));
+  }
+  const R = (bar, beat, midi, beats, vel = .6) => m(bar, beat, midi, beats, vel, 'R');
+  for (const o of [0, 8]) {                                     // the same opening gesture, twice
+    R(3 + o, 1, 78, 1, .55); R(3 + o, 2, 81, 1, .62);           // F#5 A5
+    R(4 + o, 0, 79, 1, .6); R(4 + o, 1, 78, 1, .52); R(4 + o, 2, 73, 1, .5);   // G5 F#5 C#5
+    R(5 + o, 0, 71, 1, .5); R(5 + o, 1, 73, 1, .52); R(5 + o, 2, 74, 1, .58);  // B4 C#5 D5
+    R(6 + o, 0, 69, 3, .6);                                     // A4
+  }
+  R(7, 0, 66, 12, .55);                                         // first phrase ends on a long F#4
+  R(15, 0, 73, 3, .58); R(16, 0, 78, 3, .64); R(17, 0, 76, 9, .58);   // second phrase: C#5, F#5, then E5 held
+  return { ev: ev.sort((a, b) => a.t - b.t), len: BARS * BAR };
+})();
+function buildGraph(ctx) {
+  const master = ctx.createGain(), comp = ctx.createDynamicsCompressor(), verb = ctx.createConvolver(), pre = ctx.createDelay(), wet = ctx.createGain(), wlp = ctx.createBiquadFilter();
+  comp.threshold.value = -16; comp.ratio.value = 3; comp.attack.value = .01; comp.release.value = .25;
+  const sr = ctx.sampleRate, len = Math.floor(sr * 3.4), ir = ctx.createBuffer(2, len, sr);
+  for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); let lp = 0; for (let i = 0; i < len; i++) { const n = Math.random() * 2 - 1; lp += (n - lp) * (.35 - .25 * i / len); d[i] = lp * Math.pow(1 - i / len, 3.2) * (i < sr * .004 ? i / (sr * .004) : 1); } }
+  verb.buffer = ir; pre.delayTime.value = .022; wet.gain.value = .5; wlp.type = 'lowpass'; wlp.frequency.value = 3800;
+  master.connect(comp); comp.connect(ctx.destination);
+  master.connect(pre); pre.connect(verb); verb.connect(wlp); wlp.connect(wet); wet.connect(comp);
+  return master;
+}
+const PARTIALS = [1, .42, .26, .15, .09, .05, .03];
+function voice(ctx, bus, t, midi, dur, vel) {
+  const f0 = 440 * Math.pow(2, (midi - 69) / 12), B = .00035;
+  const sustain = Math.max(1.6, Math.min(7, 5.2 * Math.pow(220 / f0, .45)));   // low notes ring longer
+  const off = t + dur + .35, end = Math.min(t + sustain * 1.6, off + 1.2);    // pedal lifts a little after the written length
+  const pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+  const out = ctx.createGain(); out.gain.value = vel * .3;
+  if (pan) { pan.pan.value = Math.max(-.6, Math.min(.6, (midi - 62) / 26)); out.connect(pan); pan.connect(bus); } else out.connect(bus);
+  PARTIALS.forEach((amp, i) => {
+    const n = i + 1, f = f0 * n * Math.sqrt(1 + B * n * n);
+    if (f > 9000) return;
+    const o = ctx.createOscillator(), g = ctx.createGain(), tau = sustain / (1 + .9 * i);
+    o.frequency.value = f * (i === 0 ? 1 : 1 + (Math.random() - .5) * .0006);
+    const a = amp * (.75 + .5 * vel) * (i ? Math.pow(vel, .5 + i * .15) : 1);   // softer touch, darker tone
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(a, t + .004 + i * .0015);
+    g.gain.setTargetAtTime(a * .55, t + .01, .09 + .02 * i);                    // quick initial drop, like a struck string
+    g.gain.setTargetAtTime(0, t + .3, tau * .45);
+    g.gain.setTargetAtTime(0, off, .18);                                        // damper
+    o.connect(g); g.connect(out); o.start(t); o.stop(end + .1);
+  });
+  // a faint second string, slightly detuned, for the beating of a real unison
+  const o2 = ctx.createOscillator(), g2 = ctx.createGain(); o2.frequency.value = f0 * 1.0009;
+  g2.gain.setValueAtTime(0, t); g2.gain.linearRampToValueAtTime(.32, t + .006); g2.gain.setTargetAtTime(0, t + .25, sustain * .4); g2.gain.setTargetAtTime(0, off, .18);
+  o2.connect(g2); g2.connect(out); o2.start(t); o2.stop(end + .1);
+  // hammer: a very short filtered click
+  const nb = ctx.createBuffer(1, Math.floor(ctx.sampleRate * .03), ctx.sampleRate), nd = nb.getChannelData(0);
+  for (let i = 0; i < nd.length; i++) nd[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / nd.length, 4);
+  const ns = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), ng = ctx.createGain();
+  ns.buffer = nb; bp.type = 'bandpass'; bp.frequency.value = Math.min(6000, f0 * 4); bp.Q.value = 1.2; ng.gain.value = .018 * vel;
+  ns.connect(bp); bp.connect(ng); ng.connect(out); ns.start(t);
+}
+// small human variations, fixed per performance so a loop does not sound mechanical
+const human = e => ({ dt: (Math.random() - .5) * (e.hand === 'R' ? .03 : .018), dv: 1 + (Math.random() - .5) * .14 });
+let AU = null, sched = null;
+function startSound() {
+  try {
+    if (!AU) { const ctx = new (window.AudioContext || window.webkitAudioContext)(); AU = { ctx, bus: buildGraph(ctx) }; }
+    const { ctx, bus } = AU; ctx.resume();
+    bus.gain.cancelScheduledValues(ctx.currentTime); bus.gain.setValueAtTime(1, ctx.currentTime);
+    const start = ctx.currentTime + .1; let k = 0, round = 0;
+    clearInterval(sched);
+    sched = setInterval(() => {
+      const horizon = ctx.currentTime + .4;
+      while (true) {
+        const e = SONG.ev[k], at = start + round * SONG.len + e.t;
+        if (at > horizon) break;
+        const h = human(e); voice(ctx, bus, Math.max(ctx.currentTime, at + h.dt), e.midi, e.dur, Math.min(1, e.vel * h.dv));
+        if (++k === SONG.ev.length) { k = 0; round++; }
+      }
+    }, 100);
+  } catch (e) {}
+}
+function stopSound() {
+  clearInterval(sched); sched = null;
+  if (AU) { const g = AU.bus.gain, t = AU.ctx.currentTime; g.cancelScheduledValues(t); g.setValueAtTime(g.value, t); g.linearRampToValueAtTime(0, t + .8); }
+}
+$('#cdsound').addEventListener('change', () => { if (playing && $('#cdsound').checked) startSound(); else stopSound(); });
+$('#cdann').addEventListener('change', e => { $('#annot').style.opacity = e.target.checked ? 1 : 0; });
+let drag = null;
+const cy = e => { const r = cd.getBoundingClientRect(); return (e.clientY - r.top) * 420 / r.height; };
+knob.addEventListener('pointerdown', e => { drag = { y0: cy(e), moved: false }; knob.setPointerCapture(e.pointerId); });
+knob.addEventListener('pointermove', e => { if (!drag) return; const d = Math.max(0, Math.min(44, cy(e) - drag.y0)); if (d > 3) drag.moved = true; setPull(d); });
+const release = () => {
+  if (!drag) return;
+  const fired = pull > 22 || !drag.moved; drag = null;
+  if (fired) toggle();
+  const from = pull, t0 = performance.now();
+  const back = now => { const k = Math.min(1, (now - t0) / 380), e = 1 - Math.pow(1 - k, 3) * Math.cos(k * 9); setPull(from * (1 - e)); if (k < 1) requestAnimationFrame(back); else setPull(0); };
+  if (RM) setPull(0); else requestAnimationFrame(back);
+};
+knob.addEventListener('pointerup', release); knob.addEventListener('pointercancel', release);
+knob.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+
+/* ---------- boot ---------- */
+renderQ(); renderLedger(); renderJar(-1); renderAff();
+})();
+</script>

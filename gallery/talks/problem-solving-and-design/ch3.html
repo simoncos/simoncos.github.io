@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="zh-Hans">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>开放问题</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Shared with chapter 1 */
+
+/* Layout: same railway-notebook system as chapter 4. Reading column ~720px; figures and workbenches break out to ~1120px. */
+/* Layout: near-black page, quiet neutrals. Glow is reserved for the one moment in each figure where the answer appears.
+   Amber = what you operate; mint = the answer; blue / lime = the two data classes. Reading column ~720px; workbenches ~1120px. */
+:root{
+  --bg:#050607; --surface:#0c0e11; --surface-2:#0c0e11; --ink:#ebedf0; --muted:#8a9099; --line:#22262c; --sleeper:#111317;
+  --accent:#ffb347; --accent-soft:rgba(255,179,71,.12);
+  --stop:#ff5d7d; --go:#3cf2b4; --go-soft:rgba(60,242,180,.14);
+  --t1:#5cb8ff; --t2:#ff6ad5; --t3:#9cf06a;
+  --display:"Noto Serif SC","Songti SC","STSong",serif;
+  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85}
+::selection{background:rgba(255,179,71,.35)}
+.wrap{padding-inline:20px;padding-block:32px 80px;overflow-x:clip}
+.col{max-width:720px;margin-inline:auto}
+.wide{max-width:1120px;margin-inline:auto}
+h1,h2{font-family:var(--display);font-weight:900;text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(2.8rem,8vw,5rem);letter-spacing:.02em}
+h2{font-size:clamp(1.5rem,3.4vw,2.05rem);margin-block:0 .6em}
+p{margin:0 0 1em}
+b,strong{font-weight:700}
+a{color:var(--accent)}
+.eyebrow a.up{color:inherit;text-decoration:none;border-bottom:1px dotted var(--muted)}
+.eyebrow a.up:hover{color:var(--accent);border-color:var(--accent)}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--muted)}
+.lede{font-size:1.15rem;margin-top:1.1em;max-width:34em}
+.meta{font-size:.85rem;color:var(--muted)}
+section{margin-top:96px}
+.secno{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:.4em}
+.mono{font-family:var(--mono);font-size:.92em}
+.note{border-left:3px solid var(--accent);padding:4px 0 4px 16px;color:var(--muted);font-size:.95rem}
+blockquote{margin:1.2em 0;padding-left:16px;border-left:3px solid var(--line);color:var(--muted);font-size:.95rem}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,canvas:focus-visible,svg:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.series{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:48px}
+.series a,.series span{font-size:.8rem;padding:3px 10px;border:1px dashed var(--line);border-radius:999px;color:var(--muted);white-space:nowrap;text-decoration:none}
+.series a{border-style:solid}
+.series a:hover{border-color:var(--accent);color:var(--accent)}
+.series .cur{background:var(--ink);color:var(--bg);border:1px solid var(--ink);font-weight:700}
+.hero-band{position:relative;margin:-32px -20px 0;padding:32px 20px 56px;overflow:hidden;border-bottom:1px solid var(--line)}
+#heroCv{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.hero-band header{position:relative;z-index:1}
+.hero-text{position:relative}
+h1 .hl{color:var(--accent);text-shadow:0 0 24px rgba(255,179,71,.35)}
+/* hero emblem: same size and place as chapter 4's knot */
+.emblem{position:absolute;right:0;top:-10px;width:min(210px,36vw);height:auto;z-index:-1;pointer-events:none}
+.emblem .k1{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+.emblem .k2{fill:none;stroke:var(--t1);opacity:.35;stroke-width:1.1}
+.emblem .dot{fill:var(--ink);opacity:.55}
+@media (max-width:700px){.emblem{opacity:.5;right:-10px}}
+.hero-hint{font-family:var(--mono);font-size:.74rem;color:var(--muted);letter-spacing:.06em;margin-top:.6em}
+.hero-hint b{color:var(--accent);font-weight:600}
+/* big outlined section numerals in the left margin on wide screens */
+section > .col:first-child{position:relative}
+.bignum{position:absolute;right:calc(100% + 28px);top:-18px;font-family:var(--display);font-weight:900;font-size:7.5rem;line-height:1;color:transparent;-webkit-text-stroke:1.2px #2c3038;pointer-events:none;user-select:none;display:none}
+@media (min-width:1220px){.bignum{display:block}}
+@media (max-width:699px){.hero-band{padding-bottom:180px}}
+.factors{display:flex;flex-wrap:wrap;gap:6px;margin:1.2em 0 0}
+.factors span{font-size:.82rem;padding:2px 10px;border-radius:3px;background:var(--surface);border:1px solid var(--line)}
+.factors span.cur{border-color:var(--accent);color:var(--accent);font-weight:700}
+.factors small{color:var(--muted);font-size:.72rem;margin-left:4px}
+
+.bench{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;margin-block:28px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:32px;align-items:start}
+.split.rev{grid-template-columns:minmax(0,340px) minmax(0,1fr)}
+@media (max-width:820px){.split,.split.rev{grid-template-columns:minmax(0,1fr)}}
+.lab{font-size:.78rem;color:var(--muted);letter-spacing:.06em;margin-bottom:6px;display:block}
+.seg{display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:transparent}
+.seg button{flex:1 1 auto;border:0;background:transparent;color:var(--ink);padding:6px 10px;font-size:.84rem;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);font-weight:700}
+.btn{padding:7px 14px;border:1px solid var(--accent);background:var(--accent);color:#1a1205;border-radius:6px;font-size:.88rem;font-weight:700;transition:filter .2s}
+.btn:hover:not(:disabled){filter:brightness(1.12)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:disabled{opacity:.4;cursor:default}
+.slider{display:grid;grid-template-columns:5.5em 1fr 3.6em;align-items:center;gap:10px;font-size:.85rem}
+.slider output{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.ctl{display:flex;flex-direction:column;gap:16px;min-width:0}
+.big{font-family:var(--display);font-weight:900;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.cap{font-size:.82rem;color:var(--muted);margin-top:8px}
+
+.orig{margin:0;border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:8px 8px 4px}
+.orig img{display:block;width:100%;height:auto;filter:invert(.9) hue-rotate(180deg) contrast(1.05);mix-blend-mode:screen;border-radius:4px}
+.orig.keep img{filter:brightness(.93);mix-blend-mode:normal;background:#fff}
+.orig figcaption{font-size:.72rem;color:var(--muted);margin-top:4px;letter-spacing:.04em}
+.map{padding:0;margin:20px 0 0;border-top:1px solid var(--line)}
+.map li{list-style:none;display:grid;grid-template-columns:3.2em 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.map .no{font-family:var(--display);font-weight:900;font-size:1.4rem;color:var(--muted)}
+.map .cur .no{color:var(--accent)}
+.map h4{margin:0;font-size:1rem}
+.map h4 a{color:inherit}
+.map p{margin:2px 0 0;font-size:.88rem;color:var(--muted);line-height:1.65}
+.map .draft h4::after{content:"尚未成文";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
+footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+@media (max-width:699px){.hero-band{padding-bottom:56px}}
+
+/* 01 MTR */
+.mapwrap{overflow-x:auto;border-radius:8px;border:1px solid var(--line);background:#fff}
+.mapbox{position:relative;width:100%;min-width:760px;aspect-ratio:1240/810}
+.mapbox img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.mapbox svg{position:absolute;inset:0;width:100%;height:100%}
+.st{fill:transparent;stroke:transparent;stroke-width:3;cursor:pointer}
+.st:hover{stroke:#111;fill:rgba(255,179,71,.35)}
+.st.a{stroke:#e08a00;stroke-width:5;fill:rgba(255,179,71,.35)}
+.st.b{stroke:#0f9f74;stroke-width:5;fill:rgba(60,242,180,.35)}
+.dim{fill:#0a0c10;opacity:0;transition:opacity .4s;pointer-events:none}
+.dim.on{opacity:.35}
+.rcase{fill:none;stroke:#0a0c10;stroke-width:15;stroke-linecap:round;stroke-linejoin:round}
+.rseg{fill:none;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(255,179,71,.95))}
+.rseg.walk{stroke:#fff;stroke-dasharray:2 10;stroke-width:6}
+.runner{fill:#fff;stroke:#0a0c10;stroke-width:3;filter:drop-shadow(0 0 8px #ffb347)}
+.pin text{font-family:var(--body);font-size:20px;font-weight:700;paint-order:stroke;stroke:#0a0c10;stroke-width:5px}
+.mtrctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px 22px;margin-top:18px;align-items:end}
+select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;width:100%}
+.legs{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.leg{display:grid;grid-template-columns:12px 1fr auto;gap:10px;align-items:center;font-size:.9rem;padding:6px 10px;border:1px solid var(--line);border-radius:6px}
+.leg i{width:12px;height:12px;border-radius:50%}
+.leg .mono{color:var(--muted);font-size:.8rem}
+.rsum{display:flex;gap:22px;flex-wrap:wrap;margin-top:16px}
+.rsum div{display:flex;flex-direction:column}
+.rsum .big{font-size:2rem}
+.rsum span:last-child{font-size:.78rem;color:var(--muted)}
+
+/* 02 possibility space: real routes on a map traced from OpenStreetMap coastlines */
+.space{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;align-items:start}
+@media (max-width:860px){.space{grid-template-columns:minmax(0,1fr)}}
+.modes{display:flex;flex-wrap:wrap;gap:8px}
+.mode{padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);font-size:.86rem;display:flex;gap:6px;align-items:center}
+.mode i{width:9px;height:9px;border-radius:50%;opacity:.4}
+.mode[aria-pressed="true"]{color:var(--ink);border-color:var(--ink)}
+.mode[aria-pressed="true"] i{opacity:1}
+.qs{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.q .lab{margin-bottom:4px}
+.q .seg button{font-size:.8rem;padding:5px 8px}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.num{border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.num .big{font-size:2rem;display:block;font-variant-numeric:tabular-nums}
+.num span:last-child{font-size:.78rem;color:var(--muted)}
+.best{color:var(--go)}
+.best.none{color:var(--stop);font-size:1.4rem!important}
+#hk{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);background:#07111a}
+#hk .land{fill:#121418;stroke:#2a2f37;stroke-width:1}
+#hk .place{font-family:var(--body);font-size:12px;fill:#6b727c;letter-spacing:.08em}
+#hk .sea{font-family:var(--body);font-size:13px;fill:#2f5878;letter-spacing:.3em}
+#hk .rt{fill:none;stroke-linecap:round;stroke-linejoin:round;transition:opacity .3s}
+#hk .rt.dim{opacity:.28}
+#hk .rt.walk{stroke-dasharray:1 7}
+#hk .rt.swim{stroke-dasharray:6 6}
+#hk .rt.air{stroke-dasharray:10 6}
+#hk .case{fill:none;stroke:#07111a;stroke-linecap:round;stroke-linejoin:round}
+#hk .glow{filter:drop-shadow(0 0 6px rgba(60,242,180,.9))}
+#hk .end{fill:var(--ink);stroke:#07111a;stroke-width:3}
+#hk .endl{font-family:var(--body);font-size:15px;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:#07111a;stroke-width:4px}
+#hk .x{stroke:var(--stop);stroke-width:3;stroke-linecap:round}
+.routes{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;margin-top:18px;align-items:start}
+@media (min-width:900px){.routes{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.route{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:4px 12px;align-items:center;text-align:left;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;padding:8px 12px;font-size:.9rem}
+.route:hover{border-color:var(--accent)}
+.route[aria-pressed="true"]{border-color:var(--ink)}
+.route .bar{display:flex;gap:2px;height:6px}
+.route .bar i{flex:1;border-radius:2px}
+.route .nm{font-weight:700}
+.route .nm small{font-weight:400;color:var(--muted);margin-left:6px}
+.route .tm{font-family:var(--mono);font-size:.85rem;text-align:right;white-space:nowrap}
+.route .tm.fast{color:var(--go)}
+.route .why{grid-column:2/4;font-size:.78rem;color:var(--muted);line-height:1.5}
+.route.cut{opacity:.55}
+.route.cut .nm{text-decoration:line-through;text-decoration-color:var(--stop)}
+.route.cut .why{color:var(--stop)}
+.route.grey .why{color:var(--muted)}
+.routes .empty{font-size:.85rem;color:var(--muted);padding:6px 2px}
+@media (max-width:520px){.route{grid-template-columns:36px minmax(0,1fr)}.route .tm{grid-column:2;text-align:left}}
+
+/* 03 precision */
+.prec{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.prec{grid-template-columns:minmax(0,1fr)}}
+#bars{width:100%;height:auto;display:block}
+#bars text{font-family:var(--body);font-size:12px;fill:var(--ink)}
+#bars .val{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+#bars .ax{stroke:var(--line)}
+#bars .tick{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+#bars rect{transition:width .5s cubic-bezier(.3,1.2,.5,1),x .5s}
+#bars .hl{fill:var(--accent)}
+#bars .nm{fill:#3a3f48}
+.cmp{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.cmp select{width:auto}
+.ans{margin-top:14px;border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.ans .big{font-size:1.8rem;display:block;margin-bottom:4px}
+.ans .ok{color:var(--go);text-shadow:0 0 14px rgba(60,242,180,.5)}
+.ans .no{color:var(--stop)}
+.bits{font-family:var(--mono);font-size:.82rem;color:var(--muted);margin-top:8px}
+
+/* 04 implicit premises */
+.prem{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.prem{grid-template-columns:minmax(0,1fr)}}
+#orbit{width:100%;max-width:460px;aspect-ratio:1;display:block;margin-inline:auto;border-radius:8px;background:#000;border:1px solid var(--line)}
+.logic{font-family:var(--mono);font-size:1.15rem;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 14px}
+.chipx{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;padding:4px 10px;font-family:var(--mono);font-size:1rem}
+.chipx.q{border-style:dashed;cursor:default}
+.chipx.sus{border-color:var(--stop);color:var(--stop);text-decoration:line-through}
+.plist{display:flex;flex-direction:column;gap:8px;font-size:.9rem}
+.plist button{text-align:left;display:grid;grid-template-columns:2.4em 1fr auto;gap:8px;align-items:center;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;padding:8px 10px;font-size:.9rem}
+.plist button:hover{border-color:var(--accent)}
+.plist button .mono{color:var(--accent)}
+.plist button[aria-pressed="true"]{border-color:var(--stop)}
+.plist button[aria-pressed="true"] .tg{color:var(--stop)}
+.plist .tg{font-size:.76rem;color:var(--muted)}
+.obs{font-size:.9rem;border-left:3px solid var(--stop);padding-left:12px;margin:12px 0}
+.outcome{border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-top:14px;min-height:5em}
+.outcome.good{border-color:var(--go)}
+.outcome.good b{color:var(--go)}
+.outcome.bad b{color:var(--stop)}
+</style>
+
+<div class="wrap">
+<div class="hero-band">
+<header class="col">
+  <nav class="series" aria-label="系列章节">
+    <a href="ch1.html">一 问题情境</a><a href="ch2.html">二 可行解</a><span class="cur">三 开放问题</span><a href="ch4.html">四 纠结与最优解</a><span>五 测量的局限</span><span>六 Duck Typing</span><span>七 工程实践</span>
+  </nav>
+  <div class="hero-text">
+    <svg class="emblem" id="sprawl" viewBox="0 0 400 400" aria-hidden="true"><path class="k2" id="sp-tree"></path><path class="k1" id="sp-edge"></path><circle class="dot" cx="200" cy="200" r="5"></circle></svg>
+    <div class="eyebrow"><a href="index.html" class="up">问题解决与设计</a> · 第三篇</div>
+    <h1><span class="hl">开放</span>问题</h1>
+    <p class="lede">有了问题情境，也知道了可行解是什么，接下来要在可能性空间里大浪淘沙。可如果这个空间大得没有边，还会自己变呢？</p>
+    <p class="meta" style="margin-top:1.2em">交互版 · 改编自作者发表在简书的同名旧文</p>
+  </div>
+</header>
+</div>
+
+<section id="s1">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">01</span><span class="secno">01 · 附图</span>
+    <h2>只坐地铁，从中环到旺角</h2>
+    <blockquote>A1. 只乘坐地铁，找到从香港中环到旺角的最短路线。</blockquote>
+    <p>借助地铁路线图，不难很快找到 A1 的可行解，这里也是唯一的最优解。下面就是原文那张图。点任意两个车站（第一下是起点，第二下是终点），或者用下面的选单。</p>
+  </div>
+  <div class="wide">
+    <div class="bench">
+      <div class="mapwrap"><div class="mapbox" id="mapbox"><img src="assets/ch3-img/mtr.webp" alt="原文附图：香港地铁路线图" width="1240" height="810"><svg id="mtr" viewBox="0 0 1240 810" role="img" aria-label="可点击的车站与计算出的路线"></svg></div></div>
+      <div class="mtrctl">
+        <div><span class="lab">起点</span><select id="from"></select></div>
+        <div><span class="lab">终点</span><select id="to"></select></div>
+        <div><span class="lab">“最短”指什么</span>
+          <div class="seg" id="crit"><button type="button" data-v="time" aria-pressed="true">时间</button><button type="button" data-v="xfer" aria-pressed="false">换乘</button><button type="button" data-v="stops" aria-pressed="false">站数</button></div>
+        </div>
+      </div>
+      <div class="rsum" id="rsum"></div>
+      <div class="legs" id="legs"></div>
+      <p class="meta" style="margin:12px 0 0">时间按每站约 2 分钟、过海约 3 分钟、普通换乘 4 分钟、旺角太子油麻地同站对面换乘 1 分钟估算；香港—中环、尖沙咀—尖东、旺角—旺角东按步行连接。线路以原图为准。</p>
+    </div>
+  </div>
+  <div class="col">
+    <p>连“最短”都要先问一句指什么：时间、换乘还是站数？这是上一篇说的“标准”。不过在 A1 里，三种标准给出的都是同一条荃湾线。问题被约束得很紧，可能性空间很小。</p>
+  </div>
+</section>
+
+<section id="s2">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">02</span><span class="secno">02 · 可能性空间</span>
+    <h2>行动方式不限</h2>
+    <blockquote>A2. 找到从香港中环到旺角的最短路线，行动方式不限。</blockquote>
+    <p>去掉地铁的限制，巴士、的士、渡轮、步行加游泳、直升机乃至多种混合，都在可能性空间之中。所谓<strong>开放问题</strong>，一部分含义就在于<strong>广阔的可能性空间</strong>。更棘手的是另一部分：<strong>可能性空间是会变化的</strong>。哪天发明了瞬间移动，它是不是也该算进去？</p>
+    <p>左边逐个放开交通方式，看可行的路线怎么变多；再回答下面几个原题里没说的问题，看空间怎么缩回来。路线都是真实存在的走法，地图按 OpenStreetMap 的海岸线描绘。</p>
+  </div>
+  <div class="wide">
+    <div class="bench">
+      <div class="space">
+        <div class="ctl">
+          <div><span class="lab">放开的交通方式</span><div class="modes" id="modes"></div></div>
+          <div class="nums">
+            <div class="num"><span class="big" id="ncombo">1</span><span>条可行路线</span></div>
+            <div class="num"><span class="big best" id="nbest">—</span><span id="nbestl">目前最快</span></div>
+          </div>
+          <div class="qs" id="qs"></div>
+        </div>
+        <svg id="hk" viewBox="0 0 600 649" role="img" aria-label="中环到旺角的真实路线，画在维多利亚港两岸的地图上"></svg>
+      </div>
+      <div class="routes" id="routes" aria-label="路线列表"></div>
+      <p class="meta" style="margin:12px 0 0">时间是门到门的估算，按港铁行程规划、运输署巴士数据和天星小轮公布的班次推算；车费为成人八达通，查于 2026-10。的士按 2024 年 7 月起的收费表和过海隧道费估算，实际随路况变化。红色小巴的资料来自非官方来源。</p>
+    </div>
+  </div>
+  <div class="col">
+    <p><strong>问题开放的根本原因是不完全的信息</strong>，来自两方面：问题本身，和问题解决者。A1 和 A2 其实都很模糊：只给了行动方式，没给可支配的资金；没说是“谁”去行动，他游泳多快；连“不限定行动方式”这个条件本身都是开放的。</p>
+    <p>右边那几个问题，就是原文的第二个策略：<strong>对问题本身提问题</strong>。向提出问题的人追问，增加显性的约束，空泛的问题就变得明确。问题的提出和解决因此不是单向的流水线，而是一个反馈、迭代的循环。</p>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">03</span><span class="secno">03 · 抓大放小</span>
+    <h2>不需要精确的速度</h2>
+    <p>面对信息不完全，第一个策略是<strong>抓大放小</strong>。在 A2 里区分优劣最明显的特征是速度。从中环到旺角，精确到时速也太夸张了；我们只需要量级，再进一步，连量级都不需要，只要知道谁比谁快。这一连串的抓大放小能迅速缩小可能性空间，凭借的是我们脑中关于速度的先验知识。</p>
+    <p>调低精度，看看哪些比较还做得出来。</p>
+  </div>
+  <div class="wide">
+    <div class="bench prec">
+      <div>
+        <div class="seg" id="plev" style="margin-bottom:12px"><button type="button" data-v="exact" aria-pressed="true">精确数值</button><button type="button" data-v="mag" aria-pressed="false">只看量级</button><button type="button" data-v="order" aria-pressed="false">只看顺序</button></div>
+        <svg id="bars" viewBox="0 0 560 330" role="img" aria-label="各种交通方式的速度"></svg>
+      </div>
+      <div class="ctl">
+        <div><span class="lab">比较这两个</span><div class="cmp"><select id="ca"></select><span class="meta">还是</span><select id="cb"></select><span class="meta">更快？</span></div></div>
+        <div class="ans" id="pans"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <p>差距大的时候，量级甚至顺序就够用；差距小的时候，抓大放小会抓丢。地铁和的士都是“每小时几十公里”，只看量级就分不出来，这时要么回到更精确的信息，要么承认它们差不多，再换一个特征（比如会不会塞车）来比。</p>
+    <p>从问题提出者的角度，很多信息不完全的问题，要建立在和解决者共享这些先验知识的共识之上，换句话说就是用了隐含条件。共识用得好，省下许多沟通成本；用不好也可能是灾难：很多自以为的共识，其实并不是事实上的共识。</p>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">04</span><span class="secno">04 · 隐含前提</span>
+    <h2>证伪的是一整个合式</h2>
+    <p>隐含条件可以联系到科学哲学里的<strong>波普尔可证伪性原则</strong>。整体论者指出：我们看到一个条件命题 <span class="mono">p → q</span> 时，它更完整的表述其实是 <span class="mono">(p ∧ a1 ∧ a2 ∧ …) → q</span>，<span class="mono">a1</span>、<span class="mono">a2</span> 都是隐含的前提。所以由 <span class="mono">¬q</span> 推不出 <span class="mono">¬p</span>，只能推出 <span class="mono">¬(p ∧ a1 ∧ a2 ∧ …)</span>：证伪的是各条件的合式整体。</p>
+    <p>原文提到了海王星。下面是天文学史上形式完全相同、结局却相反的两次“证伪”。观察到 ¬q 之后，你会怀疑哪一个前提？</p>
+  </div>
+  <div class="wide">
+    <div class="bench prem">
+      <div>
+        <div class="seg" id="case" style="margin-bottom:12px"><button type="button" data-v="u" aria-pressed="true">天王星，1846</button><button type="button" data-v="m" aria-pressed="false">水星，1859</button></div>
+        <canvas id="orbit" width="460" height="460" aria-label="轨道示意"></canvas>
+      </div>
+      <div class="ctl">
+        <div class="logic" id="logic"></div>
+        <p class="obs" id="obs"></p>
+        <span class="lab">点一个前提，表示你怀疑它</span>
+        <div class="plist" id="plist"></div>
+        <div class="outcome" id="outcome"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <p>形式一模一样：理论 + 隐含前提 → 预测，预测落空。天王星那次，问题出在隐含前提“没有未知的行星”，于是找到了海王星；水星那次，同样的思路找来的“祝融星”并不存在，问题出在理论本身，最后由广义相对论解决。光看 ¬q，你没法知道该怪谁。</p>
+    <p>理想地讲，一种理论在形成时，是有能力、也必须把前提条件明确下来的。即使存在海王星这样预先没考虑到的隐含条件，也不是可证伪性本身的瑕疵（只是只能证伪整个理论的话，对科学发展的意义似乎大大减少了）。或许可以说，科学理论也需要尽量确保它讨论的问题不是开放的：理论越成熟，已明确的约束条件就越多。</p>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <span class="secno">系列地图</span>
+    <h2>每一篇，一个可以动手的问题</h2>
+    <ol class="map">
+      <li><span class="no">一</span><div><h4><a href="ch1.html">问题情境</a></h4><p>两种画法的正方形、找箭头、搜索树、表示方式、设计。</p></div></li>
+      <li><span class="no">二</span><div><h4><a href="ch2.html">可行解</a></h4><p>六道削皮题、量水实验、把剪刀拆开看、一根拉绳。</p></div></li>
+      <li class="cur"><span class="no">三</span><div><h4>开放问题</h4><p>本页：只坐地铁、行动方式不限、抓大放小、证伪的是整个合式。</p></div></li>
+      <li><span class="no">四</span><div><h4><a href="ch4.html">纠结与最优解</a></h4><p>电车难题、价值天平、两千个可能的你、偏好系统、单因素模型。</p></div></li>
+      <li class="draft"><span class="no">五</span><div><h4>测量的局限</h4><p>来自 2026-03 的整合 Proposal：相似性、分类与理论负荷。</p></div></li>
+      <li class="draft"><span class="no">六</span><div><h4>Duck Typing 作为策略</h4><p>不问它是什么，问它能做什么；行为级数据，让用户自己设权重。</p></div></li>
+      <li class="draft"><span class="no">七</span><div><h4>工程实践</h4><p>测试环境作为反事实探索器，双重传感器，Bayesian Safety。</p></div></li>
+    </ol>
+  </div>
+</section>
+<footer class="col">正文改编自《问题解决与设计（三）：开放问题》；地铁图为原文附图；“行动方式不限”的海岸线描自 OpenStreetMap（© OpenStreetMap 贡献者，ODbL），路线与车费查于 2026-10；“抓大放小”的速度是示意性的估算。</footer>
+</div>
+
+<script>
+(() => {
+const $ = (s, r = document) => r.querySelector(s);
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; };
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function segBind(id, fn) { const root = $(id); root.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { root.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); fn(b.dataset.v); })); }
+
+
+/* ---------- hero: paths branching out of one point; the open boundary is pushed outward as they grow ---------- */
+(() => {
+  let seed = 11; const rnd = () => (seed = seed * 16807 % 2147483647) / 2147483647;
+  const segs = [];                                           // [x0, y0, x1, y1, distance from the centre at the start]
+  const grow = (x, y, a, d, depth) => {
+    const len = (34 + rnd() * 26) * .68, x1 = x + Math.cos(a) * len, y1 = y + Math.sin(a) * len;
+    segs.push([x, y, x1, y1, d, len]);
+    if (depth < 4) { const n = rnd() < .35 ? 1 : 2; for (let i = 0; i < n; i++) grow(x1, y1, a + (n === 1 ? (rnd() - .5) * .5 : (i ? 1 : -1) * (.25 + rnd() * .35)), d + len, depth + 1); }
+  };
+  for (let i = 0; i < 7; i++) grow(200, 200, i / 7 * Math.PI * 2 + rnd() * .4, 0, 0);
+  const tree = $('#sp-tree'), edge = $('#sp-edge');
+  const draw = (r, rot) => {
+    let d = '', far = 0;
+    for (const [x0, y0, x1, y1, d0, len] of segs) {
+      if (d0 >= r) continue;
+      const f = Math.min(1, (r - d0) / len), x = x0 + (x1 - x0) * f, y = y0 + (y1 - y0) * f;
+      d += `M${x0.toFixed(1)} ${y0.toFixed(1)}L${x.toFixed(1)} ${y.toFixed(1)}`;
+      far = Math.max(far, Math.hypot(x - 200, y - 200));
+    }
+    tree.setAttribute('d', d);
+    const R = Math.min(196, far + 14), a0 = rot, a1 = rot + Math.PI * 1.72;
+    edge.setAttribute('d', far ? `M${200 + R * Math.cos(a0)} ${200 + R * Math.sin(a0)}A${R} ${R} 0 1 1 ${200 + R * Math.cos(a1)} ${200 + R * Math.sin(a1)}` : '');
+  };
+  const RMAX = Math.max(...segs.map(s => s[4] + s[5]));
+  if (RM) { draw(RMAX, -1.2); return; }
+  let vis = true;
+  new IntersectionObserver(es => vis = es[0].isIntersecting).observe($('#sprawl'));
+  const T = 11000, t0 = performance.now();
+  const loop = now => {
+    if (vis) {
+      const t = now - t0, k = (t % T) / T, g = Math.min(1, k / .7);
+      draw(RMAX * (1 - Math.pow(1 - g, 2)), -1.2 + t / 14000);
+      const o = k < .9 ? 1 : 1 - (k - .9) / .1;
+      tree.style.opacity = .35 * o; edge.style.opacity = .75 * o;
+    }
+    requestAnimationFrame(loop);
+  };
+  requestAnimationFrame(loop);
+})();
+/* ---------- 01 MTR, on top of the original map (pixel coordinates of the 1240×810 image) ---------- */
+const ST = {
+  KET: ['坚尼地城', 268, 606], HKU: ['香港大学', 332, 606], SYP: ['西营盘', 396, 606], SHW: ['上环', 461, 606], CEN: ['中环', 528, 606], ADM: ['金钟', 595, 606],
+  WAC: ['湾仔', 660, 606], CAB: ['铜锣湾', 723, 606], TIH: ['天后', 789, 606], FOH: ['炮台山', 852, 606], NOP: ['北角', 921, 606], QUB: ['鲗鱼涌', 985, 606],
+  TAK: ['太古', 1048, 606], SWH: ['西湾河', 1112, 606], SKW: ['筲箕湾', 1172, 652], HFC: ['杏花邨', 1202, 708], CHW: ['柴湾', 1201, 766],
+  TSW: ['荃湾', 150, 300], TWH: ['大窝口', 213, 300], KWH: ['葵兴', 271, 300], KWF: ['葵芳', 334, 300], LAK: ['荔景', 382, 300], MEF: ['美孚', 436, 300],
+  LCK: ['荔枝角', 486, 300], CSW: ['长沙湾', 532, 300], SSP: ['深水埗', 601, 300], PRE: ['太子', 636, 338], MOK: ['旺角', 636, 380], YMT: ['油麻地', 636, 422],
+  JOR: ['佐敦', 636, 466], TST: ['尖沙咀', 636, 505],
+  WHA: ['黄埔', 802, 498], HOM: ['何文田', 777, 470], SKM: ['石硖尾', 673, 300], KOT: ['九龙塘', 754, 300], LOF: ['乐富', 806, 300], WTS: ['黄大仙', 862, 300],
+  DIH: ['钻石山', 918, 300], CHH: ['彩虹', 977, 300], KOB: ['九龙湾', 1022, 300], NTK: ['牛头角', 1022, 345], KWT: ['观塘', 1022, 387], LAT: ['蓝田', 1022, 430],
+  YAT: ['油塘', 1057, 468], TIK: ['调景岭', 1113, 468], TKO: ['将军澳', 1166, 476], HAH: ['坑口', 1200, 405], POA: ['宝琳', 1200, 350],
+  HUH: ['红磡', 754, 510], MKE: ['旺角东', 754, 380], TAW: ['大围', 754, 232], SHT: ['沙田', 754, 185], FOT: ['火炭', 754, 138], UNI: ['大学', 726, 73],
+  HOK: ['香港', 528, 580], KOW: ['九龙', 430, 500], OLY: ['奥运', 430, 432], NAC: ['南昌', 430, 363], TSY: ['青衣', 316, 348],
+  ETS: ['尖东', 652, 527], AUS: ['柯士甸', 520, 500],
+  OCP: ['海洋公园', 633, 676], WCH: ['黄竹坑', 556, 710], LET: ['利东', 457, 750], SOH: ['海怡半岛', 370, 750],
+};
+const LINES = {
+  ISL: { n: '港岛线', c: '#0075c2', s: ['KET', 'HKU', 'SYP', 'SHW', 'CEN', 'ADM', 'WAC', 'CAB', 'TIH', 'FOH', 'NOP', 'QUB', 'TAK', 'SWH', 'SKW', 'HFC', 'CHW'] },
+  TWL: { n: '荃湾线', c: '#e2231a', s: ['TSW', 'TWH', 'KWH', 'KWF', 'LAK', 'MEF', 'LCK', 'CSW', 'SSP', 'PRE', 'MOK', 'YMT', 'JOR', 'TST', 'ADM', 'CEN'], t: { 'TST-ADM': 3 } },
+  KTL: { n: '观塘线', c: '#00a040', s: ['WHA', 'HOM', 'YMT', 'MOK', 'PRE', 'SKM', 'KOT', 'LOF', 'WTS', 'DIH', 'CHH', 'KOB', 'NTK', 'KWT', 'LAT', 'YAT', 'TIK'] },
+  EAL: { n: '东铁线', c: '#5eb6e4', s: ['HUH', 'MKE', 'KOT', 'TAW', 'SHT', 'FOT', 'UNI'], t: { 'MKE-KOT': 3, 'KOT-TAW': 4 } },
+  TCL: { n: '东涌线', c: '#f7943e', s: ['HOK', 'KOW', 'OLY', 'NAC', 'LAK', 'TSY'], t: { 'HOK-KOW': 4 } },
+  WRL: { n: '西铁线', c: '#a40084', s: ['HUH', 'ETS', 'AUS', 'NAC', 'MEF'], t: { 'AUS-NAC': 3 } },
+  TKL: { n: '将军澳线', c: '#7d499d', s: ['NOP', 'QUB', 'YAT', 'TIK', 'TKO', 'HAH', 'POA'], t: { 'QUB-YAT': 4 } },
+  SIL: { n: '南港岛线', c: '#bac429', s: ['ADM', 'OCP', 'WCH', 'LET', 'SOH'], t: { 'ADM-OCP': 4 } },
+  WALK: { n: '步行', c: '#ffffff', s: [] },
+};
+const WALKS = [['CEN', 'HOK', 6], ['TST', 'ETS', 5], ['MOK', 'MKE', 8]];
+const XPLAT = new Set(['PRE', 'MOK', 'YMT']);   // Tsuen Wan ↔ Kwun Tong cross-platform
+// state graph: node = "STA|LINE"
+const G = {};
+const addE = (a, b, w, line) => { (G[a] = G[a] || []).push({ to: b, w, line }); };
+for (const [id, L] of Object.entries(LINES)) for (let i = 1; i < L.s.length; i++) {
+  const a = L.s[i - 1], b = L.s[i], w = (L.t && (L.t[a + '-' + b] || L.t[b + '-' + a])) || 2;
+  addE(a + '|' + id, b + '|' + id, w, id); addE(b + '|' + id, a + '|' + id, w, id);
+}
+for (const [a, b, w] of WALKS) { addE(a + '|WALK', b + '|WALK', w, 'WALK'); addE(b + '|WALK', a + '|WALK', w, 'WALK'); }
+const linesAt = s => Object.keys(LINES).filter(id => LINES[id].s.includes(s) || (id === 'WALK' && WALKS.some(w => w[0] === s || w[1] === s)));
+for (const s of Object.keys(ST)) { const ls = linesAt(s); for (const a of ls) for (const b of ls) if (a !== b) addE(s + '|' + a, s + '|' + b, a === 'WALK' || b === 'WALK' ? 0 : (XPLAT.has(s) && ((a === 'TWL' && b === 'KTL') || (a === 'KTL' && b === 'TWL')) ? 1 : 4), 'XFER'); }
+function route(from, to, crit) {
+  // Dijkstra on a lexicographic cost: [primary, time]
+  const key = c => crit === 'time' ? c.time : (crit === 'xfer' ? c.x * 1000 + c.time : c.n * 1000 + c.time);
+  const dist = {}, prev = {}, Q = [];
+  for (const l of linesAt(from)) { const k = from + '|' + l; dist[k] = { time: 0, x: 0, n: 0 }; Q.push(k); }
+  const done = new Set();
+  while (Q.length) {
+    Q.sort((a, b) => key(dist[a]) - key(dist[b])); const u = Q.shift();
+    if (done.has(u)) continue; done.add(u);
+    if (u.startsWith(to + '|')) { const path = []; let k = u; while (k) { path.unshift(k); k = prev[k]; } return { path, cost: dist[u] }; }
+    for (const e of G[u] || []) {
+      const c = dist[u], nc = { time: c.time + e.w, x: c.x + (e.line === 'XFER' && e.w > 0 ? 1 : 0), n: c.n + (e.line !== 'XFER' ? 1 : 0) };
+      if (!dist[e.to] || key(nc) < key(dist[e.to])) { dist[e.to] = nc; prev[e.to] = u; Q.push(e.to); }
+    }
+  }
+  return null;
+}
+const mtr = $('#mtr');
+let A = 'CEN', B = 'MOK', crit = 'time', pick = 0, runAnim = 0;
+const opts = Object.entries(ST).sort((a, b) => a[1][0].localeCompare(b[1][0], 'zh')).map(([k, v]) => `<option value="${k}">${v[0]}</option>`).join('');
+$('#from').innerHTML = opts; $('#to').innerHTML = opts;
+function drawRoute() {
+  $('#from').value = A; $('#to').value = B;
+  mtr.innerHTML = '';
+  el('rect', { x: 0, y: 0, width: 1240, height: 810, class: 'dim on' }, mtr);
+  const r = A === B ? null : route(A, B, crit);
+  const rg = el('g', {}, mtr);
+  const legs = [];
+  if (r) {
+    // group consecutive same-line moves into legs
+    const steps = r.path.map(k => k.split('|'));
+    let cur = null;
+    for (let i = 1; i < steps.length; i++) {
+      const [s0, l0] = steps[i - 1], [s1, l1] = steps[i];
+      if (s0 === s1) continue;               // transfer edge
+      if (!cur || cur.line !== l1) { cur = { line: l1, st: [s0] }; legs.push(cur); }
+      cur.st.push(s1);
+    }
+    const pts = [];
+    for (const L of legs) {
+      const d = L.st.map((s, i) => (i ? 'L' : 'M') + ST[s][1] + ' ' + ST[s][2]).join('');
+      el('path', { d, class: 'rcase' }, rg);
+      L.st.forEach(s => pts.push([ST[s][1], ST[s][2]]));
+    }
+    for (const L of legs) {
+      const d = L.st.map((s, i) => (i ? 'L' : 'M') + ST[s][1] + ' ' + ST[s][2]).join('');
+      el('path', { d, class: 'rseg' + (L.line === 'WALK' ? ' walk' : ''), stroke: LINES[L.line].c }, rg);
+    }
+    // on narrow screens the map scrolls sideways: bring the route into view
+    const wrap = $('.mapwrap'), box = $('#mapbox');
+    if (wrap.scrollWidth > wrap.clientWidth + 4 && pts.length) {
+      const xs = pts.map(q => q[0]), mid = (Math.min(...xs) + Math.max(...xs)) / 2 / 1240 * box.clientWidth;
+      wrap.scrollTo({ left: Math.max(0, mid - wrap.clientWidth / 2), behavior: RM ? 'auto' : 'smooth' });
+    }
+    if (!RM && pts.length > 1) {
+      const dot = el('circle', { r: 9, class: 'runner' }, rg), tok = ++runAnim;
+      const seg = []; let tot = 0; for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); seg.push(l); tot += l; }
+      const t0 = performance.now(), D = Math.max(1200, tot * 3);
+      const go = now => { if (tok !== runAnim) return; let d = ((now - t0) % (D + 800)) / D * tot; if (d > tot) d = tot; let i = 0; while (i < seg.length - 1 && d > seg[i]) { d -= seg[i]; i++; } const k = seg[i] ? Math.min(1, d / seg[i]) : 0; dot.setAttribute('cx', pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k); dot.setAttribute('cy', pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k); requestAnimationFrame(go); };
+      requestAnimationFrame(go);
+    }
+  }
+  for (const [k, v] of Object.entries(ST)) {
+    const c = el('circle', { cx: v[1], cy: v[2], r: 13, class: 'st' + (k === A ? ' a' : k === B ? ' b' : ''), tabindex: '0', role: 'button', 'aria-label': v[0] }, mtr);
+    const set = () => { if (pick === 0) { A = k; pick = 1; } else { B = k; pick = 0; } drawRoute(); };
+    c.addEventListener('click', set); c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); set(); } });
+  }
+  for (const [k, lab, cls] of [[A, '起', '#e08a00'], [B, '终', '#0f9f74']]) { const g = el('g', { class: 'pin' }, mtr); const t = el('text', { x: ST[k][1] + 14, y: ST[k][2] - 14, fill: cls }, g); t.textContent = lab; }
+  if (!r) { $('#rsum').innerHTML = '<div><span class="big">—</span><span>起点和终点相同</span></div>'; $('#legs').innerHTML = ''; return; }
+  const xf = legs.filter(l => l.line !== 'WALK').length - 1, stops = legs.reduce((a, l) => a + l.st.length - 1, 0);
+  $('#rsum').innerHTML = `<div><span class="big">${r.cost.time}</span><span>分钟（估算）</span></div><div><span class="big">${Math.max(0, xf)}</span><span>次换乘</span></div><div><span class="big">${stops}</span><span>站</span></div>`;
+  $('#legs').innerHTML = legs.map(L => `<div class="leg"><i style="background:${LINES[L.line].c};${L.line === 'WALK' ? 'border:1px solid var(--muted)' : ''}"></i><span>${LINES[L.line].n}：${ST[L.st[0]][0]} → ${ST[L.st[L.st.length - 1]][0]}</span><span class="mono">${L.st.length - 1} 站</span></div>`).join('');
+}
+$('#from').addEventListener('change', e => { A = e.target.value; drawRoute(); });
+$('#to').addEventListener('change', e => { B = e.target.value; drawRoute(); });
+segBind('#crit', v => { crit = v; drawRoute(); });
+
+/* ---------- 02 possibility space: real routes from Central to Mong Kok ---------- */
+// Map frame: lon 114.140–114.192, lat 22.274–22.326, equirectangular at 22.3°N, 600 px wide.
+// Coastline traced from OpenStreetMap (natural=coastline, © OpenStreetMap contributors, ODbL), simplified.
+const LAND = 'M612,438L606,433L602,433L578,456L558,479L549,473L547,474L564,486L563,487L567,498L575,502L574,505L576,505L576,509L574,509L570,512L526,523L518,530L518,533L498,545L496,542L500,517L500,515L497,515L496,516L495,513L500,511L493,513L489,504L488,505L491,513L486,515L483,518L478,517L483,519L482,526L483,526L483,534L464,542L461,533L473,523L473,521L471,520L450,536L445,536L440,533L421,536L419,527L416,528L416,536L400,538L397,534L396,526L398,519L400,519L397,510L396,509L394,511L395,515L388,515L380,513L373,515L369,518L368,526L361,536L356,540L349,541L329,538L318,534L298,532L267,519L262,515L255,495L228,484L176,469L164,481L159,478L124,469L114,456L66,443L4,441L-12,445L-14,441L-15,441L-13,446L-18,447L-19,442L-21,443L-19,447L-33,451L-34,447L-36,447L-35,451L-45,454L-46,450L-48,450L-47,455L-55,457L-56,452L-58,453L-56,457L-65,460L-231,823L808,823ZM-93,102L-77,111L-68,155L-66,154L-67,148L-65,145L-74,97L-30,89L-21,136L-55,142L-55,143L-51,143L-18,137L-24,101L-18,99L-13,99L-14,101L-11,101L2,103L12,121L19,126L27,137L29,136L29,134L36,125L37,119L47,109L51,102L55,101L55,100L51,99L50,91L54,84L58,80L58,76L70,64L81,59L86,59L88,52L79,33L71,28L65,23L60,23L53,20L53,21L62,27L57,31L60,34L58,35L56,32L49,39L51,40L44,47L37,40L36,41L43,48L36,56L29,48L31,45L28,48L27,47L31,43L28,41L25,44L14,34L32,16L39,13L42,14L43,13L6,-8L53,-37L98,-8L107,-1L102,5L103,6L108,0L118,8L113,14L114,15L119,9L130,18L128,20L130,19L136,24L132,29L133,30L137,24L143,29L138,34L139,35L143,29L151,36L139,51L145,56L158,42L163,46L172,62L172,128L174,127L174,114L224,114L230,131L230,237L198,282L173,282L173,273L172,268L168,265L163,264L163,266L170,268L172,273L172,289L167,295L166,301L166,328L167,332L177,341L208,341L212,335L219,327L233,322L302,313L297,316L298,317L303,314L312,313L313,325L312,327L308,328L312,328L312,329L310,330L310,333L287,338L286,339L287,340L316,334L325,379L284,388L286,396L327,388L329,396L322,405L323,406L328,400L332,405L328,411L328,412L336,405L339,405L341,413L378,408L383,402L385,402L386,409L401,408L400,403L408,402L415,394L421,379L422,380L428,373L468,336L469,338L472,337L471,333L475,330L491,329L491,350L485,354L487,359L497,353L497,330L506,330L510,340L565,316L570,323L572,321L569,314L576,311L578,312L583,310L582,308L587,306L589,300L594,302L596,302L613,290L609,277L621,220L598,201L598,197L603,197L603,193L598,193L600,144L601,143L603,144L602,143L607,141L605,139L621,108L623,110L624,108L628,110L621,106L623,102L631,104L631,103L629,101L808,-175L-231,-175ZM548,486L548,486ZM182,249L182,249ZM298,328L298,328ZM147,456L147,456ZM477,518L477,518ZM136,465L136,465Z';
+const KX = 600 / (0.052 * Math.cos(22.3 * Math.PI / 180));
+const px = ([lon, lat]) => [(lon - 114.140) * Math.cos(22.3 * Math.PI / 180) * KX, (22.326 - lat) * KX];
+const HK = {
+  CEN: [114.1581, 22.2819], ADM: [114.1652, 22.2793], TSM: [114.1722, 22.2975], JOR: [114.1716, 22.3049], YMT: [114.1706, 22.3128], MOK: [114.1694, 22.3193],
+  HOK: [114.1582, 22.2849], KOW: [114.1617, 22.3049], OLY: [114.1602, 22.3178], P7: [114.1610, 22.2873], TSP: [114.1686, 22.2939],
+  CHTH: [114.1810, 22.2862], CHTK: [114.1801, 22.3028], WHCH: [114.1430, 22.2890], WHCK: [114.1592, 22.3050],
+  STAT: [114.1596, 22.2807], CMKT: [114.1554, 22.2849], NELS: [114.1694, 22.3187], MKRD: [114.1666, 22.3205],
+  WCP: [114.1757, 22.2830], LKF: [114.1556, 22.2810], LGP: [114.1682, 22.3180], HELI: [114.1525, 22.2893], PEN: [114.1717, 22.2952],
+};
+// shared road shapes
+const toCHT = [[114.1650, 22.2805], [114.1740, 22.2800], [114.1790, 22.2818], HK.CHTH, HK.CHTK];
+const nathanN = [[114.1720, 22.2958], HK.TSM, HK.JOR, HK.YMT, HK.MOK];
+const chtToNathan = [HK.CHTK, [114.1770, 22.3045], [114.1718, 22.3060], HK.YMT, HK.NELS];
+const MODES = [
+  { id: 'mtr', n: '地铁', c: '#e2231a', on: true },
+  { id: 'bus', n: '巴士', c: '#e6d35a' },
+  { id: 'mini', n: '小巴', c: '#3cb371' },
+  { id: 'taxi', n: '的士', c: '#c9a0ff' },
+  { id: 'ferry', n: '渡轮', c: '#5cb8ff' },
+  { id: 'walk', n: '步行', c: '#b0b6c0' },
+  { id: 'bike', n: '单车', c: '#9cf06a' },
+  { id: 'swim', n: '游泳', c: '#4fd1c5' },
+  { id: 'heli', n: '直升机', c: '#ff8fb1' },
+  { id: 'tele', n: '瞬间移动', c: '#ffffff' },
+];
+const MC = Object.fromEntries(MODES.map(m => [m.id, m.c]));
+// day / night: door-to-door minutes [low, high]; null = not running. fare: adult HKD, used by the budget question.
+const ROUTES = [
+  { id: 'twl', n: '港铁荃湾线', sub: '中环直达旺角', need: ['mtr'], legs: [['mtr', [HK.CEN, HK.ADM, HK.TSM, HK.JOR, HK.YMT, HK.MOK]]],
+    day: [20, 22], off: '凌晨停驶：中环首班 06:06，尾班 00:54', fare: 13.2, why: '列车 12 分钟，加上进出站和候车。' },
+  { id: 'tcl', n: '港铁东涌线 + 步行', sub: '香港站到奥运，再走 0.9 公里', need: ['mtr', 'walk'], legs: [['walk', [HK.CEN, HK.HOK]], ['mtr', [HK.HOK, HK.KOW, HK.OLY]], ['walk', [HK.OLY, [114.1640, 22.3192], HK.MOK]]],
+    day: [25, 30], off: '凌晨停驶：首班 06:01，尾班 00:50', fare: 13.2, why: '列车只要 7 分钟，两头步行更久，总比直达慢。' },
+  { id: 'fmtr', n: '天星小轮 + 港铁', sub: '中环 7 号码头渡海，尖沙咀转荃湾线', need: ['ferry', 'mtr'], legs: [['walk', [HK.CEN, HK.P7]], ['ferry', [HK.P7, HK.TSP]], ['walk', [HK.TSP, HK.TSM]], ['mtr', [HK.TSM, HK.JOR, HK.YMT, HK.MOK]]],
+    day: [35, 45], off: '凌晨停航：小轮 06:30–23:30', fare: 10.9, why: '船票平日上层 5 元，地铁 5.9 元。' },
+  { id: 'fwalk', n: '天星小轮 + 步行', sub: '渡海后沿弥敦道走约 3 公里', need: ['ferry', 'walk'], legs: [['walk', [HK.CEN, HK.P7]], ['ferry', [HK.P7, HK.TSP]], ['walk', [HK.TSP, ...nathanN]]],
+    day: [60, 65], off: '凌晨停航：小轮 06:30–23:30', fare: 5, why: '最便宜的过海方式之一。' },
+  { id: 'b104', n: '过海巴士 104', sub: '皇后像广场上车，经红隧，弥敦道下车', need: ['bus'], legs: [['bus', [HK.STAT, ...toCHT, ...chtToNathan.slice(1)]]],
+    day: [45, 60], off: '凌晨停驶：坚尼地城开出 05:45–23:50', fare: 12.9, why: '平日 15–30 分钟一班，繁忙时红隧常塞车。' },
+  { id: 'b905', n: '过海巴士 905', sub: '中环街市上车，经西隧，旺角道下车', need: ['bus'], legs: [['bus', [HK.CMKT, [114.1500, 22.2876], HK.WHCH, HK.WHCK, [114.1612, 22.3120], [114.1610, 22.3175], HK.MKRD]]],
+    day: [45, 60], off: '凌晨停驶：06:00–24:00', fare: 12.9, why: '在中环上车、在旺角下车的日间过海线，只有 104 和 905。' },
+  { id: 'night', n: '通宵巴士 N121 转 N122', sub: '没有一条通宵线同时经过中环和旺角，要在红隧巴士站换车', need: ['bus'], legs: [['bus', [HK.STAT, ...toCHT]], ['bus', chtToNathan]],
+    night: [45, 75], off: '只在深夜行驶：N121 00:45–05:00', fare: 35.4, why: '两程各 17.7 元；换车要等 20–35 分钟一班的 N122（或 N118、N171）。' },
+  { id: 'mini', n: '红色小巴', sub: '兰桂坊到旺角朗豪坊，经红隧', need: ['mini'], legs: [['mini', [HK.LKF, [114.1620, 22.2793], ...toCHT, [114.1770, 22.3045], [114.1718, 22.3060], HK.YMT, HK.LGP]]],
+    night: [20, 30], off: '只在深夜行驶：23:55–06:00', fare: 15, wc: '红色小巴没有轮椅设施。', why: '非官方资料，时间是估算。' },
+  { id: 'tcht', n: '的士经红隧', sub: '红磡海底隧道', need: ['taxi'], legs: [['taxi', [HK.CEN, ...toCHT, [114.1790, 22.3100], [114.1785, 22.3190], HK.MOK]]],
+    day: [30, 45], night: [15, 20], fare: 150, fareTxt: 'HK$145–155', wc: '多数的士不能直接上轮椅，无障碍的士要另约。', why: '打表约 95 元，另付隧道费来回 50 元。' },
+  { id: 'twhc', n: '的士经西隧', sub: '西区海底隧道', need: ['taxi'], legs: [['taxi', [HK.CEN, [114.1540, 22.2860], [114.1490, 22.2878], HK.WHCH, HK.WHCK, [114.1615, 22.3130], [114.1640, 22.3195], HK.MOK]]],
+    day: [20, 30], night: [12, 18], fare: 140, fareTxt: 'HK$135–145', wc: '多数的士不能直接上轮椅，无障碍的士要另约。', why: '的士过海隧道费全天 25 元，西隧不比红隧贵。' },
+  { id: 'bike', n: '单车 + 湾仔渡轮', sub: '骑到湾仔码头，渡海后骑上弥敦道', need: ['bike', 'ferry'], legs: [['bike', [HK.CEN, [114.1650, 22.2808], [114.1720, 22.2812], HK.WCP]], ['ferry', [HK.WCP, HK.TSP]], ['bike', [HK.TSP, ...nathanN]]],
+    day: [40, 50], off: '夜间停航', fare: 20, fareTxt: '船票 + 单车附加费', wc: '要能骑车。', why: '中环线和过海隧道都不准带单车，只有湾仔线可以。' },
+  { id: 'heli', n: '直升机包机', sub: '上环直升机场飞到尖沙咀半岛酒店天台，两头坐的士', need: ['heli', 'taxi'], legs: [['taxi', [HK.CEN, HK.HELI]], ['heli', [HK.HELI, HK.PEN]], ['taxi', [HK.PEN, ...nathanN.slice(1)]]],
+    day: [30, 40], off: '夜间能否包机未核实，暂不计入', fare: 20000, fareTxt: '约两万港元起', why: '没有公开航线。飞行几分钟，加上两头接驳，并不比地铁快。' },
+  { id: 'walk', n: '只靠步行', sub: '走到海边就没路了', need: ['walk'], legs: [['walk', [HK.CEN, HK.P7]]], never: '维港没有行人过海通道，隧道禁止行人。', x: HK.P7 },
+  { id: 'swim', n: '步行 + 游泳', sub: '从 7 号码头游约 1 公里到尖沙咀', need: ['walk', 'swim'], legs: [['walk', [HK.CEN, HK.P7]], ['swim', [HK.P7, HK.TSP]], ['walk', [HK.TSP, ...nathanN]]],
+    grey: '法例没有明文禁止一个人横渡，但要穿过繁忙航道，海事处只为批准的渡海泳比赛封航。可行吗？算灰色地带。', fare: 0, day: [80, 95], night: [80, 95] },
+  { id: 'tele', n: '瞬间移动', sub: '', need: ['tele'], legs: [['tele', [HK.CEN, HK.MOK]]], day: [0, 0], night: [0, 0], fare: 0, fareTxt: '—' },
+];
+const QS = [
+  { id: 'who', q: '谁去？', o: ['我自己', '坐轮椅的乘客'] },
+  { id: 'money', q: '预算多少？', o: ['不限', '50 元以内', '身无分文'] },
+  { id: 'time', q: '什么时候出发？', o: ['平日白天', '凌晨三点'] },
+  { id: 'tech', q: '瞬间移动发明了吗？', o: ['还没有', '发明了'] },
+];
+const ans = { who: 0, money: 0, time: 0, tech: 0 };
+let selRoute = 'twl';
+const mid = t => (t[0] + t[1]) / 2;
+const fmtT = t => t[0] === t[1] ? `${t[0]} 分钟` : `${t[0]}–${t[1]} 分钟`;
+const fmtF = r => r.fareTxt || (r.fare ? `HK$${r.fare}` : '免费');
+function judge(r) {
+  const t = ans.time ? r.night : r.day;
+  if (r.never) return { st: 'cut', why: r.never };
+  if (r.id === 'tele' && !ans.tech) return { st: 'cut', why: '还没有发明。' };
+  if (!t) return { st: 'cut', why: r.off };
+  if (ans.who === 1 && (r.wc || r.need.includes('swim'))) return { st: 'cut', why: r.wc || '不现实。' };
+  if (ans.money === 1 && r.fare > 50) return { st: 'cut', why: `${fmtF(r)}，超出预算。` };
+  if (ans.money === 2 && r.fare > 0) return { st: 'cut', why: `要付 ${fmtF(r)}。` };
+  if (r.grey) return { st: 'grey', why: r.grey, t };
+  return { st: 'ok', why: r.why, t };
+}
+function renderModes() {
+  $('#modes').innerHTML = MODES.map(m => `<button type="button" class="mode" data-id="${m.id}" aria-pressed="${!!m.on}"><i style="background:${m.c}"></i>${m.n}</button>`).join('');
+  $('#modes').querySelectorAll('.mode').forEach(b => b.addEventListener('click', () => { const m = MODES.find(x => x.id === b.dataset.id); m.on = !m.on; renderModes(); }));
+  renderRoutes();
+}
+function renderQs() {
+  $('#qs').innerHTML = QS.map(q => `<div class="q"><span class="lab">${q.q}</span><div class="seg" data-q="${q.id}">${q.o.map((o, i) => `<button type="button" data-i="${i}" aria-pressed="${ans[q.id] === i}">${o}</button>`).join('')}</div></div>`).join('');
+  $('#qs').querySelectorAll('.seg').forEach(sg => sg.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { ans[sg.dataset.q] = +b.dataset.i; if (sg.dataset.q === 'tech' && +b.dataset.i === 1) MODES.find(m => m.id === 'tele').on = true; renderQs(); renderModes(); })));
+}
+function renderRoutes() {
+  const on = new Set(MODES.filter(m => m.on).map(m => m.id));
+  const vis = ROUTES.filter(r => r.need.every(n => on.has(n))).map(r => ({ r, ...judge(r) }));
+  const ok = vis.filter(v => v.st === 'ok').sort((a, b) => mid(a.t) - mid(b.t));
+  const rank = { ok: 0, grey: 1, cut: 2 };
+  vis.sort((a, b) => rank[a.st] - rank[b.st] || (a.t && b.t ? mid(a.t) - mid(b.t) : 0));
+  const best = ok[0];
+  if (!vis.some(v => v.r.id === selRoute && v.st !== 'cut')) selRoute = best ? best.r.id : null;
+  countTo($('#ncombo'), ok.length);
+  $('#nbest').textContent = best ? fmtT(best.t) : '无解';
+  $('#nbest').classList.toggle('none', !best);
+  $('#nbestl').textContent = best ? `目前最快：${best.r.n}` : '在这些条件下没有可行路线';
+  $('#routes').innerHTML = vis.length ? vis.map(v => `<button type="button" class="route ${v.st}" data-id="${v.r.id}" aria-pressed="${v.r.id === selRoute}"${v.st === 'cut' ? ' disabled' : ''}>
+      <span class="bar">${v.r.legs.map(([m]) => `<i style="background:${MC[m]}"></i>`).join('')}</span>
+      <span class="nm">${v.r.n}${v.r.sub ? `<small>${v.r.sub}</small>` : ''}</span>
+      <span class="tm${v === best ? ' fast' : ''}">${v.t ? fmtT(v.t) : '—'}${v.st !== 'cut' ? ` · ${fmtF(v.r)}` : ''}</span>
+      ${v.why ? `<span class="why">${v.why}</span>` : ''}</button>`).join('') : '<p class="empty">只放开这些方式，连一条路线都拼不出来。</p>';
+  $('#routes').querySelectorAll('.route:not(.cut)').forEach(b => b.addEventListener('click', () => { selRoute = b.dataset.id; renderRoutes(); }));
+  drawMap(vis, best);
+}
+const hk = $('#hk');
+function drawMap(vis, best) {
+  hk.innerHTML = '';
+  el('path', { d: LAND, class: 'land' }, hk);
+  for (const [t, ll, cls] of [['维 多 利 亚 港', [114.1785, 22.2915], 'sea'], ['尖沙咀', [114.1748, 22.2990], 'place'], ['红磡', [114.1850, 22.3060], 'place'], ['油麻地', [114.1655, 22.3125], 'place'], ['上环', [114.1490, 22.2840], 'place'], ['湾仔', [114.1745, 22.2785], 'place']]) {
+    const [x, y] = px(ll), n = el('text', { x, y, class: cls, 'text-anchor': 'middle' }, hk); n.textContent = t;
+  }
+  const line = pts => pts.map(px).map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(1)},${y.toFixed(1)}`).join('');
+  const drawn = vis.filter(v => v.st !== 'cut' || v.r.never);
+  drawn.sort((a, b) => (a.r.id === selRoute) - (b.r.id === selRoute));
+  for (const v of drawn) {
+    const sel = v.r.id === selRoute, g = el('g', { class: v === best ? 'glow' : '' }, hk);
+    for (const [m, pts] of v.r.legs) {
+      const d = line(pts), w = sel ? 5 : 3;
+      if (sel) el('path', { d, class: 'case', 'stroke-width': w + 4 }, g);
+      const cls = m === 'walk' ? ' walk' : m === 'swim' ? ' swim' : m === 'heli' || m === 'tele' ? ' air' : '';
+      el('path', { d, class: 'rt' + cls + (sel ? '' : ' dim'), stroke: MC[m], 'stroke-width': m === 'walk' ? w + 1 : w }, g);
+    }
+    if (v.r.x) { const [x, y] = px(v.r.x); el('path', { d: `M${x - 7},${y - 7}L${x + 7},${y + 7}M${x + 7},${y - 7}L${x - 7},${y + 7}`, class: 'x' }, hk); }
+  }
+  for (const [ll, t, dx] of [[HK.CEN, '中环', -44], [HK.MOK, '旺角', 12]]) {
+    const [x, y] = px(ll); el('circle', { cx: x, cy: y, r: 6, class: 'end' }, hk);
+    const n = el('text', { x: x + dx, y: y + 5, class: 'endl' }, hk); n.textContent = t;
+  }
+}
+let shown = 0;
+function countTo(node, v) { const from = shown, t0 = performance.now(); shown = v; if (RM) { node.textContent = v; return; } const st = now => { const k = Math.min(1, (now - t0) / 400); node.textContent = Math.round(from + (v - from) * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(st); }; requestAnimationFrame(st); }
+
+/* ---------- 03 precision ---------- */
+const SPD = [['游泳', 3], ['步行', 5], ['单车', 15], ['过海巴士', 20], ['的士', 28], ['地铁', 33], ['直升机', 220], ['民航客机', 850]];
+let plev = 'exact';
+['#ca', '#cb'].forEach((q, i) => { $(q).innerHTML = SPD.map(([n], j) => `<option value="${j}">${n}</option>`).join(''); $(q).value = i ? 5 : 7; $(q).addEventListener('change', renderPrec); });
+const mag = v => Math.pow(10, Math.floor(Math.log10(v)));            // order of magnitude: 1, 10, 100…
+const magName = v => ({ 1: '个位数', 10: '几十', 100: '几百', 1000: '几千' })[mag(v)];
+function renderPrec() {
+  const svg = $('#bars'); svg.innerHTML = '';
+  const a = +$('#ca').value, b = +$('#cb').value;
+  const X0 = 90, X1 = 470, rowH = 36, lx = v => X0 + (Math.log10(v) - Math.log10(1)) / 3 * (X1 - X0);
+  if (plev !== 'order') for (const v of [1, 10, 100, 1000]) { el('line', { x1: lx(v), y1: 10, x2: lx(v), y2: 300, class: 'ax' }, svg); const t = el('text', { x: lx(v), y: 318, 'text-anchor': 'middle', class: 'tick' }, svg); t.textContent = v + ' km/h'; }
+  SPD.forEach(([n, v], i) => {
+    const y = 14 + i * rowH, hl = i === a || i === b;
+    const t = el('text', { x: X0 - 10, y: y + 17, 'text-anchor': 'end' }, svg); t.textContent = n;
+    let w, label;
+    if (plev === 'exact') { w = lx(v) - X0; label = v + ' km/h'; }
+    else if (plev === 'mag') { w = lx(mag(v) * 3.16) - X0; label = magName(v); }
+    else { w = (i + 1) / SPD.length * (X1 - X0); label = '第 ' + (SPD.length - i) + ' 快'; }
+    el('rect', { x: X0, y: y + 4, width: Math.max(2, w), height: 20, rx: 3, class: hl ? 'hl' : 'nm' }, svg);
+    const vt = el('text', { x: X0 + Math.max(2, w) + 8, y: y + 18, class: 'val' }, svg); vt.textContent = label;
+  });
+  const [na, va] = SPD[a], [nb, vb] = SPD[b];
+  let can, why, bits;
+  if (a === b) { can = null; why = '同一种方式，换一个来比。'; }
+  else if (plev === 'exact') { can = true; why = `${va > vb ? na : nb}更快：${Math.max(va, vb)} 对 ${Math.min(va, vb)} km/h。`; bits = '需要的信息：两个精确的数字'; }
+  else if (plev === 'mag') { const same = mag(va) === mag(vb); can = !same; why = same ? `两个都是“每小时${magName(va)}公里”，只看量级分不出来。` : `${va > vb ? na : nb}是“每小时${magName(Math.max(va, vb))}公里”，${va > vb ? nb : na}只有“${magName(Math.min(va, vb))}”，不用精确数值就够了。`; bits = '需要的信息：两个量级'; }
+  else { can = true; why = `只要先验知识里有“${va > vb ? na : nb}比${va > vb ? nb : na}快”这一条就够了。`; bits = '需要的信息：一条先后顺序（如果你本来就知道）'; }
+  $('#pans').innerHTML = can === null ? `<span class="big">—</span>${why}` : `<span class="big ${can ? 'ok' : 'no'}">${can ? '分得出来' : '分不出来'}</span>${why}${bits ? `<div class="bits">${bits}</div>` : ''}`;
+}
+segBind('#plev', v => { plev = v; renderPrec(); });
+
+/* ---------- 04 implicit premises ---------- */
+const CASES = {
+  u: {
+    p: '牛顿的万有引力定律', a1: '对天王星的观测是可靠的', a2: '天王星外面没有未知的大行星', q: '天王星按计算出的轨道运行',
+    obs: '观测到 ¬q：到 1840 年代，天王星的实际位置和计算越差越远。',
+    out: { p: ['bad', '抛弃牛顿？当时几乎没人这样做，事后看也确实不是牛顿的问题。'], a1: ['bad', '观测被一再复核，偏差是真的。'], a2: ['good', '勒维耶（和亚当斯）假设外面还有一颗行星，算出它该在的位置。1846 年 9 月 23 日，伽勒在离预测不到 1° 的地方找到了它：<b>海王星</b>。'] },
+    fix: 'a2',
+  },
+  m: {
+    p: '牛顿的万有引力定律', a1: '对水星的观测是可靠的', a2: '水星轨道内侧没有未知的行星', q: '水星近日点的进动符合计算',
+    obs: '观测到 ¬q：水星近日点每世纪比计算多进动约 43 角秒。',
+    out: { p: ['good', '1915 年，爱因斯坦的<b>广义相对论</b>正好算出了这 43 角秒。问题出在理论本身。'], a1: ['bad', '观测同样被反复核对，偏差是真的。'], a2: ['bad', '勒维耶故技重施，预言了一颗更靠近太阳的“祝融星”。几十年里不断有人声称看到它，但它<b>并不存在</b>。'] },
+    fix: 'p',
+  },
+};
+let cs = 'u', sus = null;
+function renderPrem() {
+  const C = CASES[cs];
+  const chip = k => `<span class="chipx${sus === k ? ' sus' : ''}">${k}</span>`;
+  $('#logic').innerHTML = `(${chip('p')}<span>∧</span>${chip('a1')}<span>∧</span>${chip('a2')}) <span>→</span> <span class="chipx q">q</span>`;
+  $('#obs').textContent = C.obs;
+  $('#plist').innerHTML = [['p', C.p, '理论'], ['a1', C.a1, '隐含前提'], ['a2', C.a2, '隐含前提']].map(([k, t, g]) => `<button type="button" data-k="${k}" aria-pressed="${sus === k}"><span class="mono">${k}</span><span>${t}</span><span class="tg">${sus === k ? '怀疑' : g}</span></button>`).join('') + `<div class="meta" style="font-size:.82rem">q：${C.q}</div>`;
+  $('#plist').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { sus = sus === b.dataset.k ? null : b.dataset.k; renderPrem(); drawOrbit(); }));
+  const o = sus ? C.out[sus] : null;
+  $('#outcome').className = 'outcome' + (o ? ' ' + o[0] : '');
+  $('#outcome').innerHTML = o ? o[1] : '<span class="meta">¬q 只告诉你：三者至少有一个是错的。先选一个怀疑对象。</span>';
+}
+segBind('#case', v => { cs = v; sus = null; renderPrem(); drawOrbit(); });
+const oc = $('#orbit'), octx = oc.getContext('2d');
+let ot = 0;
+function drawOrbit() {
+  const W = 460, cx = W / 2, cy = W / 2;
+  octx.fillStyle = '#000'; octx.fillRect(0, 0, W, W);
+  // stars
+  octx.fillStyle = 'rgba(255,255,255,.35)'; for (let i = 0; i < 70; i++) { const x = (i * 97) % W, y = (i * 61 + 13) % W; octx.fillRect(x, y, 1, 1); }
+  octx.fillStyle = '#ffcf6b'; octx.shadowColor = '#ffb347'; octx.shadowBlur = 18; octx.beginPath(); octx.arc(cx, cy, 9, 0, 7); octx.fill(); octx.shadowBlur = 0;
+  const solved = sus === CASES[cs].fix;
+  octx.font = '12px "Noto Sans SC", sans-serif'; octx.textAlign = 'left';
+  if (cs === 'u') {
+    const R = 150, wP = ot * .6, dev = solved ? 0 : .22 * Math.sin(ot * .35);       // predicted vs observed angle
+    octx.strokeStyle = 'rgba(255,255,255,.25)'; octx.setLineDash([4, 6]); octx.beginPath(); octx.arc(cx, cy, R, 0, 7); octx.stroke(); octx.setLineDash([]);
+    const pp = [cx + R * Math.cos(wP), cy + R * Math.sin(wP)], op = [cx + R * Math.cos(wP + dev), cy + R * Math.sin(wP + dev)];
+    octx.strokeStyle = 'rgba(255,255,255,.6)'; octx.beginPath(); octx.arc(pp[0], pp[1], 8, 0, 7); octx.stroke();
+    octx.fillStyle = '#9fe3e8'; octx.beginPath(); octx.arc(op[0], op[1], 6, 0, 7); octx.fill();
+    octx.fillStyle = 'rgba(255,255,255,.7)'; octx.fillText('○ 计算位置', 14, 24); octx.fillStyle = '#9fe3e8'; octx.fillText('● 实际位置（天王星）', 14, 42);
+    if (solved) {
+      const RN = 205, wN = ot * .37; const np = [cx + RN * Math.cos(wN), cy + RN * Math.sin(wN)];
+      octx.strokeStyle = 'rgba(92,140,255,.35)'; octx.beginPath(); octx.arc(cx, cy, RN, 0, 7); octx.stroke();
+      octx.fillStyle = '#4f7cff'; octx.shadowColor = '#4f7cff'; octx.shadowBlur = 16; octx.beginPath(); octx.arc(np[0], np[1], 7, 0, 7); octx.fill(); octx.shadowBlur = 0;
+      octx.fillStyle = '#7fa0ff'; octx.fillText('海王星', np[0] + 10, np[1] + 4);
+      octx.fillStyle = css('--go'); octx.fillText('计算与实际重合', 14, 60);
+    }
+  } else {
+    // Mercury: the ellipse's long axis slowly turns (precession, hugely exaggerated)
+    const a = 120, e = .45, b = a * Math.sqrt(1 - e * e), c = a * e;
+    const predicted = 0, observed = (ot * .05) % (Math.PI * 2);
+    const ell = (rot, style, dash) => { octx.save(); octx.translate(cx, cy); octx.rotate(rot); octx.strokeStyle = style; octx.setLineDash(dash); octx.beginPath(); octx.ellipse(-c, 0, a, b, 0, 0, 7); octx.stroke(); octx.restore(); octx.setLineDash([]); };
+    ell(solved ? observed : predicted, 'rgba(255,255,255,.3)', [4, 6]);
+    ell(observed, solved ? css('--go') : '#d9a26b', []);
+    const ang = ot * 1.4, x = -c + a * Math.cos(ang), y = b * Math.sin(ang);
+    const px = cx + x * Math.cos(observed) - y * Math.sin(observed), py = cy + x * Math.sin(observed) + y * Math.cos(observed);
+    octx.fillStyle = '#d9a26b'; octx.beginPath(); octx.arc(px, py, 5, 0, 7); octx.fill();
+    octx.fillStyle = 'rgba(255,255,255,.7)'; octx.fillText('虚线：按牛顿算的轨道', 14, 24); octx.fillStyle = '#d9a26b'; octx.fillText('实线：实际轨道（进动被夸张放大）', 14, 42);
+    if (sus === 'a2') { const vr = 48, va = ot * 2.2; octx.fillStyle = 'rgba(255,90,120,.45)'; octx.beginPath(); octx.arc(cx + vr * Math.cos(va), cy + vr * Math.sin(va), 5, 0, 7); octx.fill(); octx.fillStyle = css('--stop'); octx.fillText('祝融星？（找不到）', 14, 60); }
+    if (solved) { octx.fillStyle = css('--go'); octx.fillText('广义相对论：计算与实际重合', 14, 60); }
+  }
+}
+function loop() { ot += RM ? 0 : .016; drawOrbit(); if (!RM) requestAnimationFrame(loop); }
+
+/* ---------- boot ---------- */
+drawRoute(); renderQs(); renderModes(); renderPrec(); renderPrem(); loop();
+})();
+</script>

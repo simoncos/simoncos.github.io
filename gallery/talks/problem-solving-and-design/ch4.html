@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="zh-Hans">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>纠结与最优解</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: railway-signalling notebook. Reading column ~720px; scrollytelling stage and workbenches break out to ~1120px. */
+:root{
+  --bg:#050607; --surface:#0c0e11; --surface-2:#0c0e11; --ink:#ebedf0; --muted:#8a9099; --line:#22262c; --sleeper:#111317;
+  --accent:#ffb347; --accent-soft:rgba(255,179,71,.12);
+  --stop:#ff5d7d; --go:#3cf2b4; --go-soft:rgba(60,242,180,.14);
+  --t1:#5cb8ff; --t2:#ff6ad5; --t3:#9cf06a;
+  --display:"Noto Serif SC","Songti SC","STSong",serif;
+  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85}
+.wrap{padding-inline:20px;padding-block:32px 80px;overflow-x:clip}
+.col{max-width:720px;margin-inline:auto}
+.wide{max-width:1120px;margin-inline:auto}
+h1,h2{font-family:var(--display);font-weight:900;text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(2.8rem,8vw,5rem);letter-spacing:.02em}
+h2{font-size:clamp(1.5rem,3.4vw,2.05rem);margin-block:0 .6em}
+p{margin:0 0 1em}
+b,strong{font-weight:700}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--muted)}
+.lede{font-size:1.15rem;margin-top:1.1em;max-width:34em}
+.meta{font-size:.85rem;color:var(--muted)}
+section{margin-top:96px}
+.secno{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:.4em}
+.mono{font-family:var(--mono);font-size:.92em}
+.note{border-left:3px solid var(--accent);padding:4px 0 4px 16px;color:var(--muted);font-size:.95rem}
+.defs{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:1em 0 1.4em;font-size:.95rem}
+.defs dt{font-family:var(--mono);font-weight:600}
+.defs dd{margin:0}
+.c1{color:var(--t1)} .c2{color:var(--t2)} .c3{color:var(--t3)}
+::selection{background:rgba(255,179,71,.35)}
+a{color:var(--accent)}
+.eyebrow a.up{color:inherit;text-decoration:none;border-bottom:1px dotted var(--muted)}
+.eyebrow a.up:hover{color:var(--accent);border-color:var(--accent)}
+blockquote{margin:1.2em 0;padding-left:16px;border-left:3px solid var(--line);color:var(--muted);font-size:.95rem}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,canvas:focus-visible,svg:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* series strip */
+.series{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:48px}
+.series span,.series a{font-size:.8rem;padding:3px 10px;border:1px dashed var(--line);border-radius:999px;color:var(--muted);white-space:nowrap;text-decoration:none}
+.series a{border-style:solid}
+.series a:hover{border-color:var(--accent);color:var(--accent)}
+.series .cur{background:var(--ink);color:var(--bg);border:1px solid var(--ink);font-weight:700}
+
+/* hero */
+.hero-band{position:relative;margin:-32px -20px 0;padding:32px 20px 56px;overflow:hidden;border-bottom:1px solid var(--line)}
+#heroCv{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.hero-band header{position:relative;z-index:1}
+h1 .hl{color:var(--accent);text-shadow:0 0 24px rgba(255,179,71,.35)}
+.hero-hint{font-family:var(--mono);font-size:.74rem;color:var(--muted);letter-spacing:.06em;margin-top:.6em}
+.hero-hint b{color:var(--accent);font-weight:600}
+/* big outlined section numerals in the left margin on wide screens */
+section > .col:first-child{position:relative}
+.bignum{position:absolute;right:calc(100% + 28px);top:-18px;font-family:var(--display);font-weight:900;font-size:7.5rem;line-height:1;color:transparent;-webkit-text-stroke:1.2px #2c3038;pointer-events:none;user-select:none;display:none}
+@media (min-width:1220px){.bignum{display:block}}
+@media (max-width:699px){.hero-band{padding-bottom:56px}}
+.hero-text{position:relative;z-index:1}
+#knot{position:absolute;right:0;top:-10px;width:min(210px,36vw);height:auto;z-index:-1;pointer-events:none}
+#knot path{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;opacity:.75}
+#knot path.k2{stroke:var(--t1);opacity:.35;stroke-width:1.1}
+@media (max-width:700px){#knot{opacity:.5;right:-10px}}
+
+/* ---------- 01 scrollytelling ---------- */
+.scrolly{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:48px;margin-top:32px}
+.steps{display:flex;flex-direction:column;padding-block:6vh 20vh}
+.step{min-height:78vh;display:flex;align-items:center}
+.step:first-child{min-height:60vh}
+.scard{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 20px 16px;transition:opacity .4s,border-color .4s,transform .4s;opacity:.5;width:100%}
+.step.on .scard{opacity:1;border-color:var(--accent);transform:translateX(4px)}
+.scard header{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--accent);border:1px solid var(--accent);padding:0 6px;border-radius:3px}
+.scard h3{margin:0;font-size:1.05rem;line-height:1.4}
+.scard p{font-size:.92rem;color:var(--muted);line-height:1.7;margin:0 0 12px}
+.btns{display:flex;gap:8px}
+.choose{flex:1;padding:8px 10px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:4px;font-size:.92rem}
+.choose:hover{border-color:var(--accent)}
+.choose[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface);font-weight:700}
+.custom-ctl{display:flex;gap:8px 12px;flex-wrap:wrap;font-size:.84rem;align-items:center;margin-bottom:12px}
+select{font:inherit;font-size:.85rem;padding:3px 6px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:4px}
+.answers{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:.92rem;margin-bottom:10px}
+.answers .mut{color:var(--muted)}
+.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 9vh);align-self:start;order:2}
+.steps{order:1}
+.stage-box{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+#scene{display:block;width:100%;height:auto}
+.stage-cap{padding:12px 18px 14px;border-top:1px solid var(--line);font-size:.92rem;min-height:3.6em}
+.stage-cap b{color:var(--accent)}
+@media (max-width:860px){
+  .scrolly{grid-template-columns:minmax(0,1fr);gap:0}
+  .stage{order:0;top:env(safe-area-inset-top,0px);z-index:3;background:var(--bg);padding-block:8px;margin-inline:-20px;padding-inline:12px}
+  .stage-cap{font-size:.82rem;padding:8px 12px;min-height:3.2em}
+  .step{min-height:62vh}
+  .step:first-child{min-height:40vh}
+}
+/* scene parts */
+.rail{fill:none;stroke:var(--line);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.sleep{fill:none;stroke:#1b1f25;stroke-width:16;stroke-dasharray:3 10}
+.route{fill:none;stroke:var(--accent);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:900;stroke-dashoffset:0;animation:draw .9s ease-out;filter:drop-shadow(0 0 5px rgba(255,179,71,.7))}
+@keyframes draw{from{stroke-dashoffset:900}}
+.pp{fill:var(--muted);transform-box:fill-box;transform-origin:50% 100%;transition:fill .4s,opacity .6s,transform .6s}
+.pp.doom{fill:var(--stop);opacity:.55;transform:scaleY(.82)}
+.pp.safe{fill:var(--go);animation:hop .5s ease-out 2}
+.pop{animation:popin .45s cubic-bezier(.3,1.6,.5,1) backwards}
+@keyframes popin{from{transform:scale(.2);opacity:0}}
+@keyframes hop{50%{transform:translateY(-9px)}}
+.dot{fill:var(--muted);transition:fill .5s}
+.dot.doom{fill:var(--stop);opacity:.5}
+.dot.safe{fill:var(--go);animation:hop .5s ease-out 1}
+.relring{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:3 3;animation:spin 6s linear infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+.stxt{fill:var(--muted);font-family:var(--body);font-size:12px}
+.stxt.k{fill:var(--ink);font-weight:700;font-size:13px}
+.stxt.warn{fill:var(--stop);font-weight:700}
+.tram .body{fill:var(--ink)} .tram .win{fill:var(--surface)} .tram .wheel{fill:var(--ink)}
+.tram .lamp{fill:#ffd166}
+.idle{animation:bob 1.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-1.5px)}}
+.spark{stroke:#ffb347;stroke-width:2;stroke-linecap:round;animation:spark .6s ease-out forwards}
+@keyframes spark{to{opacity:0;transform:translate(var(--dx),var(--dy))}}
+.lever{cursor:pointer}
+.lever .arm{stroke:var(--accent);stroke-width:5;stroke-linecap:round;transition:transform .45s cubic-bezier(.3,1.5,.5,1);transform-origin:178px 178px}
+.lever .knob{fill:var(--accent)}
+.lever .base{fill:var(--line)}
+.lever:hover .knob{fill:var(--stop)}
+.sig-post{stroke:var(--muted);stroke-width:3}
+.sig-head{fill:#16191e;stroke:var(--line);stroke-width:1.5}
+.lamp-a{fill:#f0a048;animation:blink 1s steps(2) infinite}
+.lamp-g{fill:#45c26f}
+.lamp-off{fill:#2a2f36}
+@keyframes blink{50%{fill:#2a2f36}}
+
+/* ---------- 02 scales ---------- */
+.bench{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;margin-block:28px}
+.ctlbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px 28px;padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.lab{font-size:.78rem;color:var(--muted);letter-spacing:.06em;margin-bottom:6px;display:block}
+.seg{display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:transparent}
+.seg button{flex:1 1 auto;border:0;background:transparent;color:var(--ink);padding:6px 10px;font-size:.84rem;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);font-weight:700}
+.fx{font-family:var(--mono);font-size:1rem;padding:8px 0;white-space:nowrap;overflow-x:auto}
+.fx span{font-weight:600}
+.slider{display:grid;grid-template-columns:2.4em 1fr 6.2em;align-items:center;gap:10px}
+.slider .k{font-family:var(--mono);font-weight:700;font-size:.92rem;border-radius:3px;text-align:center;color:var(--surface)}
+.k1{background:var(--t1)} .k2{background:var(--t2)} .k3{background:var(--t3)}
+.slider output{font-family:var(--mono);font-size:.9rem;text-align:right;font-variant-numeric:tabular-nums}
+.slider small{grid-column:2/4;color:var(--muted);font-size:.74rem;margin-top:-8px}
+input[type=range]{width:100%}
+#a1{accent-color:var(--t1)} #a2{accent-color:var(--t2)} #a3{accent-color:var(--t3)}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.presets button{font-size:.8rem;padding:3px 10px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink)}
+.presets button:hover{border-color:var(--accent);color:var(--accent)}
+.scales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.scale{border:1px solid var(--line);border-radius:6px;padding:12px 14px;min-width:0;background:var(--bg)}
+.scale header{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.scale h4{margin:0;font-size:.9rem}
+.scale svg{display:block;width:100%;height:auto}
+.beam{stroke:var(--ink);stroke-width:4;stroke-linecap:round}
+.stand{fill:var(--line)}
+.string{stroke:var(--muted);stroke-width:1}
+.pan{fill:var(--surface);stroke:var(--ink);stroke-width:1.5;transition:fill .3s}
+.pan.win{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2.5}
+.pantxt{font-family:var(--body);font-size:12px;fill:var(--ink);text-anchor:middle;font-weight:700}
+.panval{font-family:var(--mono);font-size:11px;fill:var(--muted);text-anchor:middle}
+.you{font-family:var(--body);font-size:10px;font-weight:700;text-anchor:middle}
+.rows{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.row{display:grid;grid-template-columns:3.4em 1fr;gap:8px;align-items:center;font-size:.76rem;color:var(--muted)}
+.dbar{position:relative;height:12px;background:var(--surface);border-radius:2px}
+.dbar::after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;border-left:1px solid var(--muted)}
+.dbar i{position:absolute;top:0;bottom:0;transition:left .35s,width .35s}
+.dbar .b1{background:var(--t1)} .dbar .b2{background:var(--t2)} .dbar .b3{background:var(--t3)}
+
+/* ---------- 03 particles ---------- */
+.infer{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:820px){.infer{grid-template-columns:minmax(0,1fr)}}
+.plane-wrap{position:relative;width:100%;max-width:560px;aspect-ratio:1;justify-self:center}
+.plane-wrap canvas{width:100%;height:100%;display:block;cursor:crosshair;touch-action:none;border-radius:4px}
+.empty{position:absolute;inset:36px;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:20px;background:color-mix(in srgb,var(--surface) 82%,transparent);border:1px dashed var(--accent);border-radius:6px;font-size:.92rem;color:var(--muted)}
+.empty b{font-family:var(--display);font-size:1.4rem;color:var(--ink)}
+.empty a{color:var(--surface);background:var(--accent);padding:6px 14px;border-radius:4px;text-decoration:none;font-weight:700;margin-top:6px}
+.status{display:flex;flex-direction:column;gap:12px;font-size:.95rem}
+.big{font-family:var(--display);font-weight:900;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.big.bad{color:var(--stop)} .big.ok{color:var(--go)}
+.chip{font-size:.75rem;padding:1px 8px;border-radius:999px;border:1px solid currentColor;display:inline-block}
+.chip.ok{color:var(--go)} .chip.bad{color:var(--stop)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--muted)}
+.sw{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:0;margin-right:5px}
+
+/* ---------- 04/05 graphs ---------- */
+.gbench{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:28px;align-items:center}
+@media (max-width:820px){.gbench{grid-template-columns:minmax(0,1fr)}}
+.gsvg{width:100%;max-width:460px;height:auto;display:block;justify-self:center}
+.node circle{fill:var(--surface);stroke:var(--ink);stroke-width:1.6;transition:fill .3s,stroke .3s}
+.node.best circle{fill:var(--go-soft);stroke:var(--go);stroke-width:2.6;filter:drop-shadow(0 0 8px rgba(60,242,180,.6))}
+.node text{fill:var(--ink);font-size:15px;font-weight:700;text-anchor:middle;dominant-baseline:central;font-family:var(--body)}
+.edge{stroke:var(--ink);stroke-width:1.6;fill:none}
+.edge.cyc{stroke:var(--stop);stroke-width:2.6;stroke-dasharray:7 5;animation:flow .8s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-12}}
+.edge.none{stroke:var(--line);stroke-dasharray:4 5}
+.ehit{stroke:transparent;stroke-width:22;cursor:pointer;fill:none}
+.elab{font-size:11px;fill:var(--muted);text-anchor:middle;dominant-baseline:central;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round;pointer-events:none;font-family:var(--body)}
+.elab.cyc{fill:var(--stop);font-weight:700}
+.arrow-n{fill:var(--ink)} .arrow-c{fill:var(--stop)}
+@keyframes pulse{50%{stroke-width:7;opacity:.55}}
+.checks{display:flex;flex-direction:column;gap:12px;min-width:0}
+.check{display:grid;grid-template-columns:4.6em 1fr;gap:10px;align-items:start;font-size:.9rem}
+.pill{font-size:.75rem;text-align:center;border-radius:3px;padding:2px 0;font-weight:700;color:var(--surface);transition:background .3s}
+.pill.ok{background:var(--go)} .pill.bad{background:var(--stop)} .pill.mut{background:var(--muted)}
+.check small{display:block;color:var(--muted);font-size:.82rem;line-height:1.6;margin-top:2px}
+
+/* offers */
+.offer-tbl{border-collapse:collapse;width:100%;font-size:.85rem}
+.offer-tbl th,.offer-tbl td{padding:6px 6px;border-bottom:1px solid var(--line);text-align:left}
+.offer-tbl th{font-weight:500;color:var(--muted);font-size:.76rem}
+.offer-tbl input{width:3.4em;font:inherit;font-family:var(--mono);padding:2px 4px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:3px}
+.oname{font-weight:700}
+.tri-wrap{width:100%;max-width:320px;aspect-ratio:1/0.9;margin-inline:auto}
+.tri-wrap canvas{width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}
+.bars{display:flex;flex-direction:column;gap:6px}
+.bar{display:grid;grid-template-columns:4.6em 1fr 3em;gap:10px;align-items:center;font-size:.85rem}
+.bar i{display:block;height:12px;border-radius:2px;transition:width .35s}
+.bar .mono{text-align:right;font-variant-numeric:tabular-nums}
+
+/* series map */
+.map{padding:0;margin:20px 0 0;border-top:1px solid var(--line)}
+.map li{list-style:none;display:grid;grid-template-columns:3.2em 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.map .no{font-family:var(--display);font-weight:900;font-size:1.4rem;color:var(--muted)}
+.map .cur .no{color:var(--accent)}
+.map h4{margin:0;font-size:1rem}
+.map h4 a{color:inherit}
+.map p{margin:2px 0 0;font-size:.88rem;color:var(--muted);line-height:1.65}
+.map .draft h4::after{content:"尚未成文";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
+footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+<div class="hero-band">
+<header class="col hero">
+  <nav class="series" aria-label="系列章节">
+    <a href="ch1.html">一 问题情境</a><a href="ch2.html">二 可行解</a><a href="ch3.html">三 开放问题</a><span class="cur">四 纠结与最优解</span><span>五 测量的局限</span><span>六 Duck Typing</span><span>七 工程实践</span>
+  </nav>
+  <div class="hero-text">
+    <svg id="knot" viewBox="0 0 400 400" aria-hidden="true"><path class="k2"></path><path class="k1"></path></svg>
+    <div class="eyebrow"><a href="index.html" class="up">问题解决与设计</a> · 第四篇</div>
+    <h1><span class="hl">纠结</span>与<br>最优解</h1>
+    <p class="lede">纠结，字面意思是一团缠在一起的线：拆也不是，剪也不是，胡乱尝试之下还会缠得更紧。我们面对问题时，往往已经有好几个可行解摆在面前，难的是从里面挑一个。<strong>纠结的其实是如何选择。</strong></p>
+    <p class="meta">交互版 · 改编自作者发表在简书的同名旧文</p>
+  </div>
+</header>
+</div>
+
+<section id="sec1">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">01</span><span class="secno">01 · 电车难题</span>
+    <h2>先做几道让人纠结的题</h2>
+    <p>一辆刹车失灵的有轨电车，即将撞上前方轨道上的 5 个人。旁边的备用轨道上只有 1 个人。你手边有一根拉杆。凭直觉把下面四道题做一遍，你的选择后面会用到。</p>
+  </div>
+  <div class="wide scrolly">
+    <div class="stage">
+      <div class="stage-box">
+        <svg id="scene" viewBox="0 0 640 250" role="img" aria-label="电车轨道示意图"></svg>
+        <div class="stage-cap" id="stagecap"></div>
+      </div>
+    </div>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<section id="sec2">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">02</span><span class="secno">02 · 价值函数</span>
+    <h2>把纠结放上天平</h2>
+    <p>在绝对的理性面前，这几道题其实没有难度。假设你对这个问题的价值函数是一个简单的多元线性函数：</p>
+    <p class="fx" style="font-size:1.15rem">f = <span class="c1">a1·x1</span> + <span class="c2">a2·x2</span> + <span class="c3">a3·x3</span></p>
+    <dl class="defs">
+      <dt class="c1">x1</dt><dd>所有轨道上最后存活的人数</dd>
+      <dt class="c2">x2</dt><dd>轨道上存活的亲人数</dd>
+      <dt class="c3">x3</dt><dd>你主动杀死的人数</dd>
+    </dl>
+    <p>给出 a1、a2、a3，你就有了自己的模型。下面每道题是一架天平，两边分别是不拉杆和拉杆，价值高的一边更重、会沉下去。天平下的彩条是三项各自贡献了多少，颜色和上面的权重一一对应。原文的例子是 (1, 100, −2)，在变体 1 里得出 3 和 91。</p>
+  </div>
+  <div class="wide">
+    <div class="bench">
+      <div class="ctlbar">
+        <div>
+          <span class="lab">权重</span>
+          <div class="slider"><span class="k k1">a1</span><input id="a1" type="range" min="1" max="100" step="1" aria-label="a1 存活人数的权重"><output id="a1o"></output><small>每多活一个人</small></div>
+          <div class="slider"><span class="k k2">a2</span><input id="a2" type="range" min="-1000" max="1000" step="1" aria-label="a2 亲人的权重"><output id="a2o"></output><small>每多活一个亲人</small></div>
+          <div class="slider"><span class="k k3">a3</span><input id="a3" type="range" min="-1000" max="1000" step="1" aria-label="a3 主动杀人的权重"><output id="a3o"></output><small>每主动杀死一个人</small></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div><span class="lab">模型</span>
+            <div class="seg" id="model">
+              <button type="button" data-v="linear" aria-pressed="true">线性</button>
+              <button type="button" data-v="log">边际递减</button>
+              <button type="button" data-v="inter">交互项</button>
+            </div>
+            <div class="fx" id="fx"></div>
+          </div>
+          <div><span class="lab">x3 怎么数</span>
+            <div class="seg" id="x3def">
+              <button type="button" data-v="orig" aria-pressed="true">死亡都算（原文）</button>
+              <button type="button" data-v="active">只算拉杆</button>
+            </div>
+          </div>
+          <div><span class="lab">几种人格</span>
+            <div class="presets" id="presets">
+              <button type="button" data-w="1,100,-2">原文 (1, 100, −2)</button>
+              <button type="button" data-w="1,0,0">纯功利</button>
+              <button type="button" data-w="1,10000000,0">亲人至上</button>
+              <button type="button" data-w="1,0,-20">不愿动手</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scales" id="scales"></div>
+    </div>
+  </div>
+  <div class="col">
+    <p class="note">关于 x3 怎么数：原文算出 91 时，把不拉杆导致的 5 人死亡也算进了“主动杀死”。如果只把拉杆后撞死的人算作主动杀死，同一组权重下救亲人的价值是 101。变量怎么定义，本身就是一个隐含前提。</p>
+    <p>还可以设置更复杂的价值函数。<strong>边际递减</strong>：救 2 人和救 1 人差别很大，救 10000 人和救 9000 人就没那么有实感，于是把 x1 换成 ln x1。<strong>交互项</strong>：原文写作 a3·x1·x3，让“主动杀人”的痛苦随救下的人数一起变化。</p>
+  </div>
+</section>
+
+<section id="sec3">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">03</span><span class="secno">03 · 反推</span>
+    <h2>两千个可能的你</h2>
+    <p>反过来也成立。下图每个点都是一个可能的你：横坐标是你给亲人的权重 a2，纵坐标是你给主动杀人的权重 a3（a1 取当前值，两轴都是对数刻度）。你在第一部分做的每个选择，都会让一批“你”出局。<strong>剩下的点，才是和你目前全部选择相符的价值观。</strong>点击或拖动图面可以设置权重。</p>
+  </div>
+  <div class="wide">
+    <div class="bench infer">
+      <div class="status" id="status"></div>
+      <div class="plane-wrap"><div class="empty" id="pempty"><b>还没有任何选择</b><span>所有 2,000 个“你”都还在，因为你还没告诉页面你会怎么选。</span><a href="#sec1">回到第一部分作答 ↑</a></div><canvas id="plane" tabindex="0" aria-label="权重平面：横轴 a2，纵轴 a3"></canvas></div>
+    </div>
+  </div>
+  <div class="col">
+    <p>如果所有点都掉光了，说明在当前模型里，没有任何一组权重能同时解释你的选择。最常见的原因是原题和变体 3 选得不一样：两道题的数字完全相同，变的只是你看待它的方式。模型里没有一个变量能装下这种差别。</p>
+  </div>
+</section>
+
+<section id="sec4">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">04</span><span class="secno">04 · 偏好系统</span>
+    <h2>剪刀石头布里没有最优解</h2>
+    <p>价值函数真正提供的是<strong>可比较</strong>：任意两个选项都能分出高低。选项之间这种相对的优劣关系叫偏好。一个能选出最优解的偏好系统，至少要满足三条：</p>
+    <dl class="defs">
+      <dt>完整性</dt><dd>任意两个选项都可以比较。</dd>
+      <dt>可传递性</dt><dd>A &gt; B 且 B &gt; C，则 A &gt; C。</dd>
+      <dt>一致性</dt><dd>A &gt; B 时，不能同时 B &gt; A。</dd>
+    </dl>
+    <p>剪刀石头布看起来是简单明确的偏好。可它是一个环，红色虚线标出了环流动的方向。点击连线可以翻转方向或设为不可比，试试把它修成一个有最优解的系统：修好时，最优的那个选项会亮起绿色。</p>
+  </div>
+  <div class="wide">
+    <div class="bench gbench">
+      <div class="checks">
+        <div><span class="lab">偏好系统</span>
+          <div class="seg" id="pset">
+            <button type="button" data-v="rps" aria-pressed="true">剪刀石头布</button>
+            <button type="button" data-v="rpsls">TBBT 扩展版</button>
+            <button type="button" data-v="fe">火焰纹章</button>
+            <button type="button" data-v="wx">五行相克</button>
+            <button type="button" data-v="mine">你的周末</button>
+          </div>
+        </div>
+        <div id="pcheck" class="checks"></div>
+        <p class="meta" id="pnote" style="margin:0"></p>
+      </div>
+      <svg class="gsvg" id="pgraph" viewBox="0 0 400 380" role="img" aria-label="偏好关系图"></svg>
+    </div>
+  </div>
+  <div class="col">
+    <p>游戏里的相克环（火焰纹章的剑斧枪、梦幻西游的门派相克）是有意设计的：目的就是消除最优解，平衡每种选择。三个人以上玩剪刀石头布，三种手势同时出现就直接重来，等于暂时放弃了可传递性，直到某一局只出现两种手势。</p>
+  </div>
+</section>
+
+<section id="sec5">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">05</span><span class="secno">05 · 以复杂对抗纠结</span>
+    <h2>单因素模型会造出环</h2>
+    <p>现实里的环从哪里来？石头赢剪刀，因为能把剪刀砸坏；剪刀赢布，因为能把布剪开；布赢石头，靠的却是把石头包。起。来。前两条的标准是破坏，第三条悄悄换成了包裹。两个单因素轮流上场，就是双重标准。</p>
+    <p>选工作也一样。三份 offer 各有长处。如果两两比较时只看哪边占优的因素多，就会绕出一个环。换成同时考虑所有因素的加权模型，环就消失了。表格里的分数可以改。</p>
+  </div>
+  <div class="wide">
+    <div class="bench gbench">
+      <div class="checks">
+        <table class="offer-tbl">
+          <thead><tr><th></th><th>薪资</th><th>成长</th><th>生活</th></tr></thead>
+          <tbody id="otable"></tbody>
+        </table>
+        <div><span class="lab">两两比较的方式</span>
+          <div class="seg" id="omode">
+            <button type="button" data-v="major" aria-pressed="true">占优因素多者胜</button>
+            <button type="button" data-v="sum">加权求和</button>
+          </div>
+        </div>
+        <div id="osum" hidden>
+          <span class="lab">拖动圆点设置三个因素的权重，底色是该权重下胜出的 offer</span>
+          <div class="tri-wrap"><canvas id="tri" tabindex="0" aria-label="权重三角形"></canvas></div>
+          <div class="bars" id="obars"></div>
+        </div>
+        <p class="note" id="onote" style="margin:0"></p>
+      </div>
+      <svg class="gsvg" id="ograph" viewBox="0 0 400 380" role="img" aria-label="offer 偏好关系图"></svg>
+    </div>
+  </div>
+  <div class="col">
+    <p>没有把多个因素形式化地记下来审视，对于重要的问题，我们隔三差五就会不自觉地重复同一个怪圈。<strong>我们永远在建立新的偏好系统，却从没建立起一个同时满足完整性、可传递性和一致性的系统，所以永远找不到最优解。</strong></p>
+    <p>大脑喜欢简单。上一篇讲的抓大放小，对开放问题很有用。但过度简化是对理性的逃避，只会越来越纠结。每个问题都有适合它的模型复杂度，太简单和太复杂都不好，这是下一篇要想的事。</p>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <span class="secno">系列地图</span>
+    <h2>每一篇，一个可以动手的问题</h2>
+    <ol class="map">
+      <li><span class="no">一</span><div><h4><a href="ch1.html">问题情境</a></h4><p>两种画法的正方形、找箭头、搜索树、表示方式、设计。</p></div></li>
+      <li><span class="no">二</span><div><h4><a href="ch2.html">可行解</a></h4><p>六道削皮题、量水实验、把剪刀拆开看、一根拉绳。</p></div></li>
+      <li><span class="no">三</span><div><h4><a href="ch3.html">开放问题</a></h4><p>只坐地铁、行动方式不限、抓大放小、证伪的是整个合式。</p></div></li>
+      <li class="cur"><span class="no">四</span><div><h4>纠结与最优解</h4><p>本页：电车难题、价值天平、两千个可能的你、偏好系统、单因素模型。</p></div></li>
+      <li class="draft"><span class="no">五</span><div><h4>测量的局限</h4><p>来自 2026-03 的整合 Proposal：相似性、分类与理论负荷。</p></div></li>
+      <li class="draft"><span class="no">六</span><div><h4>Duck Typing 作为策略</h4><p>不问它是什么，问它能做什么；行为级数据，让用户自己设权重。</p></div></li>
+      <li class="draft"><span class="no">七</span><div><h4>工程实践</h4><p>测试环境作为反事实探索器，双重传感器，Bayesian Safety。</p></div></li>
+    </ol>
+  </div>
+</section>
+<footer class="col">正文改编自《问题解决与设计（四）：纠结与最优解》。</footer>
+</div>
+
+<script>
+(() => {
+const $ = (s, r = document) => r.querySelector(s);
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; };
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const rng = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+let COL = {};
+const readCols = () => { const cs = getComputedStyle(document.documentElement); for (const k of ['bg','surface','ink','muted','line','accent','stop','go','t1','t2','t3']) COL[k] = cs.getPropertyValue('--' + k).trim(); };
+readCols();
+const onTheme = fn => { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', fn); new MutationObserver(fn).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] }); };
+
+/* numbers */
+const MAXE = 7;
+const symlog = v => Math.sign(v) * Math.log10(1 + Math.abs(v)) / MAXE;
+const isymlog = t => Math.sign(t) * (Math.pow(10, Math.abs(t) * MAXE) - 1);
+const roundSig = v => { if (v === 0) return 0; const a = Math.abs(v); if (a < 1) return Math.round(v * 100) / 100; const p = Math.pow(10, Math.floor(Math.log10(a)) - 1); return Math.round(v / p) * p; };
+const fmt = v => { if (!isFinite(v)) return '—'; const a = Math.abs(v); if (a >= 1e4) return (v < 0 ? '−' : '') + Math.round(a).toLocaleString('zh-CN'); const r = Math.round(v * 100) / 100; return (r < 0 ? '−' : '') + Math.abs(r); };
+
+/* ---------- hero knot ---------- */
+(() => {
+  const ps = [...document.querySelectorAll('#knot path')];
+  const draw = ph => ps.forEach((p, k) => {
+    let d = '';
+    for (let i = 0; i <= 600; i++) {
+      const t = i / 600 * Math.PI * 2;
+      const x = 200 + 150 * Math.sin(3 * t + ph + k * .7) + 30 * Math.sin(7 * t - ph * 1.3);
+      const y = 200 + 150 * Math.sin(4 * t + k * .4) + 30 * Math.cos(5 * t + ph);
+      d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
+    }
+    p.setAttribute('d', d);
+  });
+  draw(0);
+  if (RM) return;
+  let vis = true;
+  new IntersectionObserver(es => vis = es[0].isIntersecting).observe($('#knot'));
+  const t0 = performance.now();
+  const loop = now => { if (vis) draw((now - t0) / 9000); requestAnimationFrame(loop); };
+  requestAnimationFrame(loop);
+})();
+
+/* ---------- shared model ---------- */
+const S = { a1: 1, a2: 100, a3: -2, model: 'linear', x3def: 'orig', choice: {}, custom: { main: 5, side: 1, rel: true } };
+const SCN = [
+  { id: 's0', tag: '原题', title: '5 个陌生人 vs 1 个陌生人', main: 5, side: 1, rel: false, text: '主轨道上 5 个人，备用轨道上 1 个人，你都不认识。拉不拉？' },
+  { id: 's1', tag: '变体 1', title: '5 个陌生人 vs 1 个亲人', main: 5, side: 1, rel: true, text: '还是 5 比 1，但备用轨道上那个人，是你的亲人。' },
+  { id: 's2', tag: '变体 2', title: '1,000,000 个陌生人 vs 1 个亲人', main: 1000000, side: 1, rel: true, text: '主轨道上换成一百万个陌生人。备用轨道上仍然是你的亲人。' },
+  { id: 's3', tag: '变体 3', title: '拉杆，就是亲手杀人', main: 5, side: 1, rel: false, text: '人数和原题一模一样。但这次你清楚意识到：拉下拉杆，那个人是你主动杀死的，会一辈子良心不安；什么都不做，至少你没有亲手选择谁死。' },
+  { id: 's4', tag: '自定义', title: '继续细思恐极', custom: true, text: '自己改人数，决定备用轨道上是不是你的亲人。' },
+];
+const P = s => s.custom ? S.custom : s;
+function xs(p, c) { const R = p.rel ? p.side : 0; return c === 'stay' ? [p.side, R, S.x3def === 'orig' ? p.main : 0] : [p.main, 0, p.side]; }
+function phi(p, c) { const [x1, x2, x3] = xs(p, c); return S.model === 'log' ? [Math.log(x1), x2, x3] : S.model === 'inter' ? [x1, x2, x1 * x3] : [x1, x2, x3]; }
+const W = () => [S.a1, S.a2, S.a3];
+const terms = (p, c) => { const f = phi(p, c), a = W(); return [a[0] * f[0], a[1] * f[1], a[2] * f[2]]; };
+const val = (p, c) => terms(p, c).reduce((s, v) => s + v, 0);
+function pick(p) { const vs = val(p, 'stay'), vp = val(p, 'pull'); const eps = 1e-9 * Math.max(1, Math.abs(vs), Math.abs(vp)); return { vs, vp, pick: Math.abs(vs - vp) <= eps ? 'tie' : vs > vp ? 'stay' : 'pull' }; }
+const LBL = { stay: '不拉杆', pull: '拉杆', tie: '一样' };
+const listeners = [];
+const changed = () => listeners.forEach(f => f());
+
+/* ---------- 01 scene ---------- */
+const MY = 100, SY = 198, SWX = 222, SX2 = 292;
+const ROUTE = { stay: [[78, MY], [388, MY]], pull: [[78, MY], [SWX, MY], [SX2, SY], [412, SY]] };
+const scene = $('#scene');
+let active = 's0', animToken = 0;
+function along(pts, t) {
+  const segs = []; let L = 0;
+  for (let i = 1; i < pts.length; i++) { const dx = pts[i][0] - pts[i - 1][0], dy = pts[i][1] - pts[i - 1][1], l = Math.hypot(dx, dy); segs.push([pts[i - 1], dx, dy, l]); L += l; }
+  let d = t * L;
+  for (let i = 0; i < segs.length; i++) { const [p0, dx, dy, l] = segs[i]; if (d <= l || i === segs.length - 1) { const k = l ? Math.min(1, d / l) : 0; return { x: p0[0] + dx * k, y: p0[1] + dy * k, a: Math.atan2(dy, dx) * 180 / Math.PI }; } d -= l; }
+}
+function person(g, x, y, rel, delay) {
+  const p = el('g', { class: 'pp pop', style: `animation-delay:${delay}ms` }, g);
+  el('circle', { cx: x, cy: y - 22, r: 5.5 }, p);
+  el('rect', { x: x - 6, y: y - 15, width: 12, height: 16, rx: 5 }, p);
+  if (rel) el('circle', { cx: x, cy: y - 12, r: 15, class: 'relring' }, g);
+  return p;
+}
+const crowdCache = (() => { const r = rng(7), pts = []; for (let i = 0; i < 640; i++) pts.push([438 + r() * 194, MY - 72 + Math.pow(r(), .9) * 92]); return pts; })();
+function renderScene(mode) {
+  const s = P(SCN.find(x => x.id === active)), c = S.choice[active];
+  const tok = ++animToken;
+  scene.innerHTML = '';
+  const mainD = `M8 ${MY} H632`, sideD = `M${SWX} ${MY} L${SX2} ${SY} H632`;
+  for (const d of [mainD, sideD]) { el('path', { d, class: 'sleep' }, scene); el('path', { d, class: 'rail' }, scene); }
+  if (c) el('path', { d: c === 'stay' ? mainD : `M8 ${MY} H${SWX} L${SX2} ${SY} H632`, class: 'route' }, scene);
+  // signal
+  el('line', { x1: 140, y1: MY - 14, x2: 140, y2: MY - 50, class: 'sig-post' }, scene);
+  el('rect', { x: 128, y: MY - 92, width: 24, height: 44, rx: 6, class: 'sig-head' }, scene);
+  el('circle', { cx: 140, cy: MY - 81, r: 6.5, class: c ? 'lamp-off' : 'lamp-a' }, scene);
+  el('circle', { cx: 140, cy: MY - 60, r: 6.5, class: c ? 'lamp-g' : 'lamp-off' }, scene);
+  // people
+  const mainG = el('g', {}, scene), sideG = el('g', {}, scene);
+  const pop = mode === 'enter' && !RM;
+  const mainPeople = [], sidePeople = [];
+  if (s.main > 5) {
+    crowdCache.forEach(([x, y], i) => mainPeople.push(el('circle', { cx: x, cy: y, r: 2.6, class: 'dot' + (pop ? ' pop' : ''), style: pop ? `animation-delay:${Math.round((x - 438) * 2.6 + i % 7 * 10)}ms` : '' }, mainG)));
+    const per = s.main / crowdCache.length;
+    const t = el('text', { x: 535, y: MY - 80, class: 'stxt k', 'text-anchor': 'middle' }, scene);
+    t.textContent = s.main.toLocaleString('zh-CN') + ' 人' + (per >= 1.5 ? `（每个点约 ${Math.round(per).toLocaleString('zh-CN')} 人）` : '');
+    if (per < 1) mainPeople.splice(Math.round(s.main)).forEach(n => n.remove());
+  } else for (let i = 0; i < s.main; i++) mainPeople.push(person(mainG, 430 + i * 30, MY, false, pop ? i * 70 : 0));
+  for (let i = 0; i < s.side; i++) sidePeople.push(person(sideG, 470 + i * 30, SY, s.rel, pop ? 380 : 0));
+  if (s.rel) { const t = el('text', { x: 494, y: SY - 30, class: 'stxt k' }, scene); t.textContent = '你的亲人'; }
+  if (!pop) [...scene.querySelectorAll('.pop')].forEach(n => n.classList.remove('pop'));
+  // lever
+  const lv = el('g', { class: 'lever', tabindex: '0', role: 'button', 'aria-label': c === 'pull' ? '推回拉杆' : '拉下拉杆' }, scene);
+  el('rect', { x: 160, y: 176, width: 36, height: 9, rx: 3, class: 'base' }, lv);
+  const arm = el('g', { class: 'arm' }, lv);
+  el('line', { x1: 178, y1: 178, x2: 178, y2: 138, class: 'arm', style: 'transform:none' }, arm);
+  el('circle', { cx: 178, cy: 136, r: 7.5, class: 'knob' }, arm);
+  arm.style.transform = `rotate(${c === 'pull' ? 32 : -32}deg)`;
+  const lt = el('text', { x: 178, y: 204, class: 'stxt' + (active === 's3' ? ' warn' : ''), 'text-anchor': 'middle' }, scene);
+  lt.textContent = active === 's3' ? '这一下是你做的' : '拉杆';
+  const flip = () => choose(active, c === 'pull' ? 'stay' : 'pull');
+  lv.addEventListener('click', flip);
+  lv.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
+  // tram
+  const tram = el('g', { class: 'tram' }, scene);
+  const inner = el('g', { class: c ? '' : 'idle' }, tram);
+  el('rect', { x: -34, y: -22, width: 68, height: 26, rx: 6, class: 'body' }, inner);
+  for (const x of [-27, -11, 5]) el('rect', { x, y: -17, width: 12, height: 10, rx: 2, class: 'win' }, inner);
+  el('circle', { cx: 31, cy: -6, r: 3, class: 'lamp' }, inner);
+  el('circle', { cx: -20, cy: 6, r: 5, class: 'wheel' }, inner); el('circle', { cx: 20, cy: 6, r: 5, class: 'wheel' }, inner);
+  const route = ROUTE[c || 'stay'];
+  const place = t => { const pt = along(route, t); tram.setAttribute('transform', `translate(${pt.x} ${pt.y - 6}) rotate(${pt.a})`); return pt; };
+  const settle = burst => {
+    const doomMain = c === 'stay', cls = (ok) => ok ? 'safe' : 'doom';
+    mainPeople.forEach((n, i) => { if (burst && n.tagName === 'circle') n.style.animationDelay = Math.round((+n.getAttribute('cx') - 438) * 3) + 'ms'; n.classList.add(cls(!doomMain)); });
+    sidePeople.forEach(n => n.classList.add(cls(doomMain)));
+  };
+  if (!c) { place(0); renderCap(); return; }
+  if (mode !== 'choose' || RM) { place(1); settle(false); renderCap(); return; }
+  const t0 = performance.now(), D = 1100;
+  const step = now => {
+    if (tok !== animToken) return;
+    const t = Math.min(1, (now - t0) / D), pt = place(1 - Math.pow(1 - t, 3));
+    if (t < 1) requestAnimationFrame(step);
+    else {
+      for (let i = 0; i < 9; i++) { const a = Math.PI * (0.6 + Math.random() * 0.8), r = 14 + Math.random() * 16; const sp = el('line', { x1: pt.x + 30, y1: pt.y + 2, x2: pt.x + 34, y2: pt.y + 2, class: 'spark', style: `--dx:${Math.cos(a) * -r}px;--dy:${-Math.abs(Math.sin(a)) * r}px` }, scene); setTimeout(() => sp.remove(), 700); }
+      settle(true); renderCap();
+    }
+  };
+  place(0); renderCap(true); requestAnimationFrame(step);
+}
+function renderCap(moving) {
+  const s0 = SCN.find(x => x.id === active), s = P(s0), c = S.choice[active];
+  const mainTxt = s.main.toLocaleString('zh-CN') + ' 人';
+  const sideTxt = s.rel ? (s.side > 1 ? s.side + ' 个亲人' : '你的亲人') : s.side + ' 个陌生人';
+  let t = `<b>${s0.tag}</b> · 主轨道 ${mainTxt}，备用轨道 ${sideTxt}。`;
+  if (moving) t += ' 电车开过去了……';
+  else if (c === 'stay') t += ` 你没有动。主轨道上 ${mainTxt}死去，${sideTxt}活了下来。`;
+  else if (c === 'pull') t += ` 你拉下了拉杆。${mainTxt}得救，${sideTxt}死去${active === 's3' ? '，是你亲手让电车转向的' : ''}。`;
+  else t += ' 点左边的按钮，或者直接点场景里的拉杆。';
+  $('#stagecap').innerHTML = t;
+}
+const stepsEl = $('#steps');
+for (const s of SCN) {
+  const st = document.createElement('div');
+  st.className = 'step'; st.dataset.id = s.id;
+  st.innerHTML = `<div class="scard"><header><span class="tag">${s.tag}</span><h3>${s.title}</h3></header><p>${s.text}</p>
+    ${s.custom ? `<div class="custom-ctl">
+      <label>主轨道 <select id="cmain">${[1,2,5,10,100,1000,1000000].map(n => `<option value="${n}"${n===5?' selected':''}>${n.toLocaleString('zh-CN')} 人</option>`).join('')}</select></label>
+      <label>备用轨道 <select id="cside">${[1,2,3,5].map(n => `<option value="${n}">${n} 人</option>`).join('')}</select></label>
+      <label><input type="checkbox" id="crel" checked> 是你的亲人</label></div>` : ''}
+    <div class="btns"><button type="button" class="choose" data-c="stay" aria-pressed="false">不拉杆</button><button type="button" class="choose" data-c="pull" aria-pressed="false">拉杆</button></div></div>`;
+  st.querySelectorAll('.choose').forEach(b => b.addEventListener('click', () => choose(s.id, b.dataset.c)));
+  stepsEl.appendChild(st);
+}
+const sumStep = document.createElement('div');
+sumStep.className = 'step'; sumStep.dataset.id = 'sum';
+sumStep.innerHTML = `<div class="scard"><header><span class="tag">答卷</span><h3>你的四个选择</h3></header><div class="answers" id="answers"></div><p style="margin:0">纠结吗？救人多的一边是功利，救亲人是感情，不愿亲手拉杆是自我保护，几种考虑轮流占上风。<strong style="color:var(--ink)">我们显然不如自己通常认为的那样理性。</strong></p></div>`;
+stepsEl.appendChild(sumStep);
+function renderAnswers() {
+  $('#answers').innerHTML = SCN.map(s => `<span>${s.tag}</span><span class="${S.choice[s.id] ? '' : 'mut'}">${S.choice[s.id] ? LBL[S.choice[s.id]] : '未作答'}</span>`).join('');
+}
+function setActive(id) {
+  document.querySelectorAll('.step').forEach(n => n.classList.toggle('on', n.dataset.id === id));
+  if (id === 'sum' || id === active) return;
+  active = id; renderScene('enter');
+}
+function choose(id, c) {
+  S.choice[id] = c;
+  document.querySelectorAll(`.step[data-id="${id}"] .choose`).forEach(b => b.setAttribute('aria-pressed', b.dataset.c === c));
+  if (id !== active) { active = id; document.querySelectorAll('.step').forEach(n => n.classList.toggle('on', n.dataset.id === id)); }
+  renderScene('choose'); renderAnswers(); changed();
+}
+const syncCustom = () => {
+  S.custom = { main: +$('#cmain').value, side: +$('#cside').value, rel: $('#crel').checked };
+  if (active === 's4') renderScene('enter');
+  changed();
+};
+['#cmain', '#cside', '#crel'].forEach(q => $(q).addEventListener('change', syncCustom));
+// The active step is the card nearest the reading line: viewport middle on desktop,
+// middle of the area below the sticky stage on phones.
+const stageEl = document.querySelector('.stage');
+let stepQueued = false;
+function pickStep() {
+  stepQueued = false;
+  const sr = stageEl.getBoundingClientRect();
+  const stacked = getComputedStyle(document.querySelector('.scrolly')).gridTemplateColumns.split(' ').length === 1;
+  const anchor = stacked ? (Math.max(0, sr.bottom) + innerHeight) / 2 : innerHeight / 2;
+  let best = null, bd = Infinity;
+  document.querySelectorAll('.step').forEach(st => {
+    const r = st.querySelector('.scard').getBoundingClientRect();
+    const d = Math.abs((r.top + r.bottom) / 2 - anchor);
+    if (d < bd) { bd = d; best = st; }
+  });
+  if (best) setActive(best.dataset.id);
+}
+addEventListener('scroll', () => { if (!stepQueued) { stepQueued = true; requestAnimationFrame(pickStep); } }, { passive: true });
+addEventListener('resize', pickStep);
+document.querySelector('.step').classList.add('on');
+
+/* ---------- 02 scales ---------- */
+const a1In = $('#a1'), a2In = $('#a2'), a3In = $('#a3');
+const setSliders = () => { a1In.value = Math.round(S.a1 * 10); a2In.value = Math.round(symlog(S.a2) * 1000); a3In.value = Math.round(symlog(S.a3) * 1000); };
+a1In.addEventListener('input', () => { S.a1 = +a1In.value / 10; changed(); });
+a2In.addEventListener('input', () => { S.a2 = roundSig(isymlog(+a2In.value / 1000)); changed(); });
+a3In.addEventListener('input', () => { S.a3 = roundSig(isymlog(+a3In.value / 1000)); changed(); });
+$('#presets').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { [S.a1, S.a2, S.a3] = b.dataset.w.split(',').map(Number); setSliders(); changed(); }));
+function segBind(id, fn) {
+  const root = $(id);
+  root.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { root.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); fn(b.dataset.v); }));
+}
+segBind('#model', v => { S.model = v; changed(); });
+segBind('#x3def', v => { S.x3def = v; changed(); });
+const fw = v => v < 0 ? '(' + fmt(v) + ')' : fmt(v);
+function expr(p, c) {
+  const [x1, x2, x3] = xs(p, c);
+  const t1 = S.model === 'log' ? `${fw(S.a1)}·ln ${fmt(x1)}` : `${fw(S.a1)}·${fmt(x1)}`;
+  const t3 = S.model === 'inter' ? `${fw(S.a3)}·${fmt(x1)}·${fmt(x3)}` : `${fw(S.a3)}·${fmt(x3)}`;
+  return `${t1} + ${fw(S.a2)}·${fmt(x2)} + ${t3}`;
+}
+function renderCtl() {
+  $('#a1o').textContent = fmt(S.a1); $('#a2o').textContent = fmt(S.a2); $('#a3o').textContent = fmt(S.a3);
+  const f1 = S.model === 'log' ? 'a1·ln x1' : 'a1·x1', f3 = S.model === 'inter' ? 'a3·x1·x3' : 'a3·x3';
+  $('#fx').innerHTML = `f = <span class="c1">${f1}</span> + <span class="c2">a2·x2</span> + <span class="c3">${f3}</span>`;
+}
+const SCL = [];
+for (const s of SCN) {
+  const d = document.createElement('div'); d.className = 'scale';
+  d.innerHTML = `<header><span class="tag">${s.tag}</span><h4>${s.title}</h4></header><svg viewBox="0 0 300 152" aria-hidden="true"></svg>
+    <div class="rows"><div class="row"><span>不拉杆</span><div class="dbar" data-c="stay"></div></div><div class="row"><span>拉杆</span><div class="dbar" data-c="pull"></div></div></div>`;
+  $('#scales').appendChild(d);
+  const svg = d.querySelector('svg');
+  el('path', { d: 'M150 36 L137 146 H163 Z', class: 'stand' }, svg);
+  const beam = el('line', { class: 'beam' }, svg);
+  const mk = () => { const g = el('g', {}, svg); return { s1: el('line', { class: 'string' }, g), s2: el('line', { class: 'string' }, g), pan: el('path', { class: 'pan' }, g), you: el('text', { class: 'you' }, g), t: el('text', { class: 'pantxt' }, g), v: el('text', { class: 'panval' }, g) }; };
+  const L = mk(), R = mk();
+  el('circle', { cx: 150, cy: 36, r: 5, class: 'stand', style: 'fill:var(--ink)' }, svg);
+  const bars = { stay: d.querySelector('[data-c=stay]'), pull: d.querySelector('[data-c=pull]') };
+  for (const k in bars) bars[k].innerHTML = '<i class="b1"></i><i class="b2"></i><i class="b3"></i>';
+  SCL.push({ s, beam, L, R, bars, ang: 0, vel: 0, target: 0 });
+}
+function placeScale(o) {
+  const r = o.ang * Math.PI / 180, c = Math.cos(r), sn = Math.sin(r), A = 108;
+  const lx = 150 - A * c, ly = 36 - A * sn, rx = 150 + A * c, ry = 36 + A * sn;
+  o.beam.setAttribute('x1', lx); o.beam.setAttribute('y1', ly); o.beam.setAttribute('x2', rx); o.beam.setAttribute('y2', ry);
+  for (const [P_, x, y] of [[o.L, lx, ly], [o.R, rx, ry]]) {
+    const Y = y + 46;
+    P_.s1.setAttribute('x1', x); P_.s1.setAttribute('y1', y); P_.s1.setAttribute('x2', x - 34); P_.s1.setAttribute('y2', Y);
+    P_.s2.setAttribute('x1', x); P_.s2.setAttribute('y1', y); P_.s2.setAttribute('x2', x + 34); P_.s2.setAttribute('y2', Y);
+    P_.pan.setAttribute('d', `M${x - 40} ${Y} Q${x} ${Y + 30} ${x + 40} ${Y} Z`);
+    P_.t.setAttribute('x', x); P_.t.setAttribute('y', Y + 13);
+    P_.v.setAttribute('x', x); P_.v.setAttribute('y', Y + 34);
+    P_.you.setAttribute('x', x); P_.you.setAttribute('y', Y - 8);
+  }
+}
+let springOn = false;
+function spring() {
+  let moving = false;
+  for (const o of SCL) {
+    o.vel += 0.07 * (o.target - o.ang) - 0.16 * o.vel; o.ang += o.vel;
+    if (Math.abs(o.target - o.ang) > 0.02 || Math.abs(o.vel) > 0.02) moving = true; else { o.ang = o.target; o.vel = 0; }
+    placeScale(o);
+  }
+  if (moving) requestAnimationFrame(spring); else springOn = false;
+}
+function kickScales() { if (RM) { SCL.forEach(o => { o.ang = o.target; placeScale(o); }); return; } if (!springOn) { springOn = true; requestAnimationFrame(spring); } }
+function updScales() {
+  for (const o of SCL) {
+    const p = P(o.s), m = pick(p), mine = S.choice[o.s.id], diff = m.vp - m.vs;
+    o.target = Math.sign(diff) * Math.min(1, Math.log10(1 + Math.abs(diff)) / 3) * 17;
+    for (const [side, c, v] of [[o.L, 'stay', m.vs], [o.R, 'pull', m.vp]]) {
+      side.pan.classList.toggle('win', m.pick === c);
+      side.t.textContent = LBL[c]; side.v.textContent = fmt(v);
+      side.you.textContent = mine === c ? '你选这边' : '';
+      side.you.style.fill = mine === c ? (m.pick === c || m.pick === 'tie' ? 'var(--go)' : 'var(--stop)') : 'none';
+    }
+    const ts = { stay: terms(p, 'stay'), pull: terms(p, 'pull') };
+    let M = 0;
+    for (const k in ts) { let po = 0, ne = 0; ts[k].forEach(v => v > 0 ? po += v : ne -= v); M = Math.max(M, po, ne); }
+    M = M || 1;
+    for (const k in ts) {
+      let po = 0, ne = 0;
+      o.bars[k].querySelectorAll('i').forEach((iEl, j) => { const v = ts[k][j], w = Math.abs(v) / M * 50; if (v >= 0) { iEl.style.left = (50 + po) + '%'; po += w; } else { ne += w; iEl.style.left = (50 - ne) + '%'; } iEl.style.width = w + '%'; });
+      o.bars[k].title = `${LBL[k]}：${expr(p, k)} = ${fmt(val(p, k))}`;
+    }
+  }
+  kickScales();
+}
+
+/* ---------- 03 particles ---------- */
+const cv = $('#plane'), ctx = cv.getContext('2d'), PAD = 36, NP = 2000;
+const R3 = rng(42);
+const pts = Array.from({ length: NP }, () => ({ u: R3() * 2 - 1, v: R3() * 2 - 1, alive: true, a: 1, dy: 0, vy: 0 }));
+function constraints() {
+  const cs = [];
+  for (const s of SCN) {
+    const c = S.choice[s.id]; if (!c) continue;
+    const p = P(s), o = c === 'stay' ? 'pull' : 'stay', a = phi(p, c), b = phi(p, o);
+    cs.push({ id: s.id, d: [a[0] - b[0], a[1] - b[1], a[2] - b[2]] });
+  }
+  return cs;
+}
+const okc = (cs, a1, a2, a3) => cs.every(({ d }) => a1 * d[0] + a2 * d[1] + a3 * d[2] >= -1e-9 * (Math.abs(a1 * d[0]) + Math.abs(a2 * d[1]) + Math.abs(a3 * d[2]) + 1));
+function recompute() {
+  const cs = constraints(); let n = 0;
+  for (const p of pts) { const al = okc(cs, S.a1, isymlog(p.u), isymlog(p.v)); if (al && !p.alive) { p.dy = 0; p.vy = 0; } p.alive = al; if (al) n++; }
+  renderStatus(cs, n); kickPlane();
+}
+let planeOn = false;
+const kickPlane = () => { if (!planeOn) { planeOn = true; requestAnimationFrame(frame); } };
+function frame() { if (drawPlane()) requestAnimationFrame(frame); else planeOn = false; }
+function drawPlane() {
+  const Wd = cv.clientWidth; if (!Wd) return false;
+  const dpr = window.devicePixelRatio || 1;
+  if (cv.width !== Math.round(Wd * dpr)) { cv.width = Math.round(Wd * dpr); cv.height = Math.round(Wd * dpr); }
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const H = Wd, inner = Wd - PAD * 2;
+  const tx = v => PAD + (symlog(v) + 1) / 2 * inner, ty = v => PAD + (1 - (symlog(v) + 1) / 2) * inner;
+  ctx.fillStyle = COL.bg; ctx.fillRect(0, 0, Wd, H);
+  ctx.strokeStyle = COL.line; ctx.lineWidth = 1; ctx.fillStyle = COL.muted; ctx.font = '10px "JetBrains Mono", monospace';
+  const ticks = [-1e6, -1e4, -100, 0, 100, 1e4, 1e6];
+  const tl = v => v === 0 ? '0' : (v < 0 ? '−' : '') + ({ 100: '100', 10000: '1万', 1000000: '100万' })[Math.abs(v)];
+  for (const v of ticks) {
+    ctx.globalAlpha = v === 0 ? 1 : .45;
+    ctx.beginPath(); ctx.moveTo(tx(v), PAD); ctx.lineTo(tx(v), H - PAD); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(PAD, ty(v)); ctx.lineTo(Wd - PAD, ty(v)); ctx.stroke();
+    ctx.globalAlpha = 1;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillText(tl(v), tx(v), H - PAD + 6);
+    ctx.textAlign = 'right'; ctx.textBaseline = 'middle'; ctx.fillText(tl(v), PAD - 4, ty(v));
+  }
+  let moving = false;
+  for (const p of pts) {
+    if (RM) { p.a = p.alive ? 1 : 0; p.dy = 0; }
+    else if (p.alive) { if (p.a < 1) { p.a = Math.min(1, p.a + .05); moving = true; } }
+    else if (p.a > 0) { p.vy += .35; p.dy += p.vy; p.a = Math.max(0, p.a - .022); moving = true; }
+    if (p.a <= 0) continue;
+    const x = PAD + (p.u + 1) / 2 * inner, y = PAD + (1 - (p.v + 1) / 2) * inner + p.dy;
+    ctx.globalAlpha = p.a * .85; ctx.fillStyle = p.alive ? COL.go : COL.stop;
+    ctx.fillRect(x - 1.7, y - 1.7, 3.4, 3.4);
+  }
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = COL.ink; ctx.strokeRect(PAD, PAD, inner, inner);
+  ctx.fillStyle = COL.ink; ctx.font = '11px "Noto Sans SC", sans-serif'; ctx.textBaseline = 'bottom';
+  ctx.textAlign = 'right'; ctx.fillText('a2 亲人权重 →', Wd - PAD, PAD - 6);
+  ctx.textAlign = 'left'; ctx.fillText('↑ a3 主动杀人权重', PAD, PAD - 6);
+  const ax = tx(100), ay = ty(-2);
+  ctx.strokeStyle = COL.ink; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(ax - 5, ay - 5); ctx.lineTo(ax + 5, ay + 5); ctx.moveTo(ax + 5, ay - 5); ctx.lineTo(ax - 5, ay + 5); ctx.stroke();
+  const cx = tx(S.a2), cy = ty(S.a3);
+  ctx.fillStyle = COL.accent; ctx.globalAlpha = .25; ctx.beginPath(); ctx.arc(cx, cy, 14, 0, 7); ctx.fill();
+  ctx.globalAlpha = 1; ctx.strokeStyle = COL.surface; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.arc(cx, cy, 7, 0, 7); ctx.fill(); ctx.stroke();
+  return moving;
+}
+function renderStatus(cs, n) {
+  $('#pempty').hidden = cs.length > 0;
+  const here = okc(cs, S.a1, S.a2, S.a3);
+  const miss = cs.filter(c => !okc([c], S.a1, S.a2, S.a3)).map(c => SCN.find(s => s.id === c.id).tag);
+  $('#status').innerHTML = `<span class="lab">用上了 ${cs.length} 个选择</span>
+    <div><span class="big ${!cs.length ? '' : n ? 'ok' : 'bad'}">${n.toLocaleString('zh-CN')}</span> <span class="meta">/ 2,000 个可能的你还在</span></div>
+    <p style="margin:0">${!cs.length ? '先在第一部分做几道题。每做一个选择，就会有一批点掉下去。' : n === 0 ? '全部出局了：在当前模型下，你的选择互相矛盾。试试换个模型，或者换一种 x3 的数法。' : '剩下的每个点，都是一个与你目前全部选择相符的价值观。'}</p>
+    <p style="margin:0">当前权重 <span class="mono">(${fmt(S.a1)}, ${fmt(S.a2)}, ${fmt(S.a3)})</span><br>${cs.length ? (here ? '<span class="chip ok">能解释你的全部选择</span>' : `<span class="chip bad">解释不了：${miss.join('、')}</span>`) : ''}</p>
+    <div class="legend"><span><i class="sw" style="background:var(--go)"></i>还在的你</span><span><i class="sw" style="background:var(--stop)"></i>正在出局</span><span><i class="sw" style="background:var(--accent)"></i>当前权重</span><span>× 原文</span></div>`;
+}
+function planeSet(e) {
+  const r = cv.getBoundingClientRect(), inner = r.width - PAD * 2;
+  const u = Math.min(1, Math.max(0, (e.clientX - r.left - PAD) / inner)), v = Math.min(1, Math.max(0, (e.clientY - r.top - PAD) / inner));
+  S.a2 = roundSig(isymlog(u * 2 - 1)); S.a3 = roundSig(isymlog(1 - v * 2)); setSliders(); changed();
+}
+let drag = false;
+cv.addEventListener('pointerdown', e => { drag = true; cv.setPointerCapture(e.pointerId); planeSet(e); });
+cv.addEventListener('pointermove', e => { if (drag) planeSet(e); });
+cv.addEventListener('pointerup', () => drag = false);
+cv.addEventListener('pointercancel', () => drag = false);
+new ResizeObserver(kickPlane).observe(cv);
+
+/* ---------- 04 graphs ---------- */
+const PRESETS = {
+  rps: { nodes: ['石头', '剪刀', '布'], edges: [['石头', '剪刀', '砸坏'], ['剪刀', '布', '剪开'], ['布', '石头', '包住']], note: '剪刀 > 布，布 > 石头，石头 > 剪刀。三条偏好单独看都很明确。' },
+  rpsls: { nodes: ['剪刀', '布', '石头', '蜥蜴', '史波克'], edges: [['剪刀', '布', '剪开'], ['布', '石头', '包住'], ['石头', '蜥蜴', '压扁'], ['蜥蜴', '史波克', '毒死'], ['史波克', '剪刀', '砸坏'], ['剪刀', '蜥蜴', '斩首'], ['蜥蜴', '布', '吃掉'], ['布', '史波克', '驳倒'], ['史波克', '石头', '蒸发'], ['石头', '剪刀', '砸坏']], note: '《生活大爆炸》里的扩展版：5 个手势，10 条关系，每个手势恰好赢 2 个、输 2 个。' },
+  fe: { nodes: ['剑', '斧', '枪'], edges: [['剑', '斧', '克'], ['斧', '枪', '克'], ['枪', '剑', '克']], note: '火焰纹章的武器相克三角。设计目的就是让没有一种武器绝对最优。' },
+  wx: { nodes: ['金', '木', '土', '水', '火'], edges: [['金', '木', '克'], ['木', '土', '克'], ['土', '水', '克'], ['水', '火', '克'], ['火', '金', '克']], note: '五行相克：金克木，木克土，土克水，水克火，火克金。10 对关系里只定义了 5 对，连完整性都不满足。' },
+  mine: { nodes: ['爬山', '看电影', '打游戏', '睡懒觉'], edges: [], note: '这个周末做什么？点击每一条虚线，按你的真实偏好定方向，看看会不会绕出环。' },
+};
+function makeGraph(def) {
+  const n = def.nodes.length, M = {};
+  for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) M[i + ',' + j] = { dir: 0, verb: '' };
+  for (const [w, l, verb] of def.edges) { const i = def.nodes.indexOf(w), j = def.nodes.indexOf(l); M[Math.min(i, j) + ',' + Math.max(i, j)] = { dir: i < j ? 1 : -1, verb }; }
+  return { nodes: def.nodes.slice(), M };
+}
+function analyze(g) {
+  const n = g.nodes.length, out = Array.from({ length: n }, () => []);
+  for (const k in g.M) { const [i, j] = k.split(',').map(Number), e = g.M[k]; if (e.dir === 1) out[i].push(j); else if (e.dir === -1) out[j].push(i); }
+  const missing = Object.values(g.M).filter(e => e.dir === 0).length;
+  const col = new Array(n).fill(0), par = new Array(n).fill(-1); let cyc = null;
+  const dfs = u => { col[u] = 1; for (const v of out[u]) { if (cyc) return; if (col[v] === 1) { const c = [v]; let x = u; while (x !== v) { c.push(x); x = par[x]; } c.reverse(); cyc = [v, ...c.slice(0, -1)]; return; } if (col[v] === 0) { par[v] = u; dfs(v); } } col[u] = 2; };
+  for (let i = 0; i < n && !cyc; i++) if (!col[i]) dfs(i);
+  const indeg = new Array(n).fill(0); out.forEach(vs => vs.forEach(v => indeg[v]++));
+  const unbeaten = [...Array(n).keys()].filter(i => indeg[i] === 0);
+  const best = !cyc && unbeaten.length === 1 && out[unbeaten[0]].length === n - 1 ? unbeaten[0] : -1;
+  return { out, missing, cyc, unbeaten, best };
+}
+function drawGraph(svg, g, an, opts) {
+  svg.innerHTML = '';
+  const n = g.nodes.length, cx = 200, cy = 190, R = n <= 3 ? 125 : 145, r = 30, pid = svg.id;
+  const defs = el('defs', {}, svg);
+  for (const [id, cls] of [['n', 'arrow-n'], ['c', 'arrow-c']]) { const m = el('marker', { id: pid + id, viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto-start-reverse' }, defs); el('path', { d: 'M0,0 L10,5 L0,10 z', class: cls }, m); }
+  const pos = g.nodes.map((_, i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n; return [cx + R * Math.cos(a), cy + R * Math.sin(a)]; });
+  const cycE = new Set(); if (an.cyc) an.cyc.forEach((u, i) => cycE.add(u + '>' + an.cyc[(i + 1) % an.cyc.length]));
+  for (const k in g.M) {
+    const [i, j] = k.split(',').map(Number), e = g.M[k], [a, b] = e.dir === -1 ? [j, i] : [i, j];
+    const [x1, y1] = pos[a], [x2, y2] = pos[b], L = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / L, uy = (y2 - y1) / L;
+    const sx = x1 + ux * r, sy = y1 + uy * r, ex = x2 - ux * (r + 3), ey = y2 - uy * (r + 3);
+    const isC = e.dir !== 0 && cycE.has(a + '>' + b);
+    const ln = el('line', { x1: sx, y1: sy, x2: ex, y2: ey, class: 'edge' + (e.dir === 0 ? ' none' : '') + (isC ? ' cyc' : '') }, svg);
+    if (e.dir !== 0) ln.setAttribute('marker-end', `url(#${pid}${isC ? 'c' : 'n'})`);
+    if (opts.interactive) {
+      const hit = el('line', { x1: sx, y1: sy, x2: ex, y2: ey, class: 'ehit', tabindex: '0', role: 'button', 'aria-label': `${g.nodes[i]} 与 ${g.nodes[j]}：切换偏好方向` }, svg);
+      const flip = () => { e.dir = e.dir === 1 ? -1 : e.dir === -1 ? 0 : 1; opts.onChange(); };
+      hit.addEventListener('click', flip);
+      hit.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); flip(); } });
+    }
+    const t = el('text', { x: sx + (ex - sx) * .58, y: sy + (ey - sy) * .58, class: 'elab' + (isC ? ' cyc' : '') }, svg);
+    t.textContent = e.dir === 0 ? '?' : (e.verb || '>');
+  }
+  g.nodes.forEach((name, i) => {
+    const gn = el('g', { class: 'node' + (i === an.best ? ' best' : '') }, svg);
+    el('circle', { cx: pos[i][0], cy: pos[i][1], r }, gn);
+    const t = el('text', { x: pos[i][0], y: pos[i][1] }, gn); t.textContent = name;
+    if (name.length > 2) t.setAttribute('font-size', name.length > 4 ? '11' : '13');
+  });
+}
+function checksHTML(g, an) {
+  const N = g.nodes, total = N.length * (N.length - 1) / 2;
+  let cycTxt = '';
+  if (an.cyc) { const c = an.cyc.map(i => N[i]), chain = c.join(' > '); cycTxt = `由可传递性，${chain} ⇒ ${c[0]} > ${c[c.length - 1]}；但同时 ${c[c.length - 1]} > ${c[0]}。两者矛盾，一致性被破坏。`; }
+  let bt, bc;
+  if (an.best >= 0) { bt = `${N[an.best]}：它比其他所有选项都好。`; bc = 'ok'; }
+  else if (an.cyc && !an.unbeaten.length) { bt = '不存在：每个选项都会被某个选项打败。'; bc = 'bad'; }
+  else if (an.unbeaten.length === 1) { bt = `${N[an.unbeaten[0]]} 没有输过，但它和一些选项不可比，说不上最优。`; bc = 'mut'; }
+  else if (an.unbeaten.length > 1) { bt = `无法确定：${an.unbeaten.map(i => N[i]).join('、')} 都没有输过，彼此也没比较过。`; bc = 'mut'; }
+  else { bt = '不存在。'; bc = 'bad'; }
+  return `<div class="check"><span class="pill ${an.missing ? 'bad' : 'ok'}">完整性</span><div>${an.missing ? `${total} 对里有 ${an.missing} 对不可比` : `${total} 对全部可比`}</div></div>
+    <div class="check"><span class="pill ${an.cyc ? 'bad' : 'ok'}">传递一致</span><div>${an.cyc ? '可传递性与一致性不能同时成立' : '没有环，两条都可以成立'}${cycTxt ? `<small>${cycTxt}</small>` : ''}</div></div>
+    <div class="check"><span class="pill ${bc}">最优解</span><div>${bt}</div></div>`;
+}
+let PG = makeGraph(PRESETS.rps), pkey = 'rps';
+function renderPref() { const an = analyze(PG); drawGraph($('#pgraph'), PG, an, { interactive: true, onChange: renderPref }); $('#pcheck').innerHTML = checksHTML(PG, an); $('#pnote').textContent = PRESETS[pkey].note; }
+segBind('#pset', v => { pkey = v; PG = makeGraph(PRESETS[v]); renderPref(); });
+
+/* ---------- 05 offers ---------- */
+const OF = { names: ['A', 'B', 'C'], score: [[5, 1, 3], [3, 5, 1], [1, 3, 5]], mode: 'major', w: [.5, .3, .2] };
+const FN = ['薪资', '成长', '生活'], OCOL = ['t1', 't2', 't3'];
+$('#otable').innerHTML = OF.names.map((n, i) => `<tr><th scope="row" class="oname" style="color:var(--${OCOL[i]})">Offer ${n}</th>${OF.score[i].map((v, j) => `<td><input type="number" min="1" max="5" step="1" value="${v}" id="o${i}${j}" aria-label="Offer ${n} ${FN[j]}"></td>`).join('')}</tr>`).join('');
+document.querySelectorAll('#otable input').forEach(inp => inp.addEventListener('input', () => { const [i, j] = inp.id.slice(1).split('').map(Number); OF.score[i][j] = Math.max(1, Math.min(5, Math.round(+inp.value || 1))); renderOffers(); }));
+segBind('#omode', v => { OF.mode = v; renderOffers(); });
+const tri = $('#tri'), tctx = tri.getContext('2d');
+const triGeo = () => { const w = tri.clientWidth, h = tri.clientHeight; return { w, h, A: [w / 2, 26], B: [18, h - 26], C: [w - 18, h - 26] }; };
+const bary = (G, x, y) => { const [A, B, C] = [G.A, G.B, G.C]; const d = (B[1] - C[1]) * (A[0] - C[0]) + (C[0] - B[0]) * (A[1] - C[1]); const l1 = ((B[1] - C[1]) * (x - C[0]) + (C[0] - B[0]) * (y - C[1])) / d; const l2 = ((C[1] - A[1]) * (x - C[0]) + (A[0] - C[0]) * (y - C[1])) / d; return [l1, l2, 1 - l1 - l2]; };
+const winner = w => { const s = OF.score.map(r => r[0] * w[0] + r[1] * w[1] + r[2] * w[2]); const m = Math.max(...s); const ws = s.map((v, i) => Math.abs(v - m) < 1e-9 ? i : -1).filter(i => i >= 0); return ws.length === 1 ? ws[0] : -1; };
+function drawTri() {
+  if (tri.closest('[hidden]')) return;
+  const G = triGeo(); if (!G.w) return;
+  const dpr = window.devicePixelRatio || 1;
+  if (tri.width !== Math.round(G.w * dpr)) { tri.width = Math.round(G.w * dpr); tri.height = Math.round(G.h * dpr); }
+  tctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  tctx.fillStyle = COL.surface; tctx.fillRect(0, 0, G.w, G.h);
+  const S_ = 3;
+  for (let y = 0; y < G.h; y += S_) for (let x = 0; x < G.w; x += S_) {
+    const b = bary(G, x + S_ / 2, y + S_ / 2); if (b[0] < 0 || b[1] < 0 || b[2] < 0) continue;
+    const wi = winner(b); tctx.globalAlpha = wi < 0 ? .5 : .32; tctx.fillStyle = wi < 0 ? COL.muted : COL[OCOL[wi]]; tctx.fillRect(x, y, S_, S_);
+  }
+  tctx.globalAlpha = 1; tctx.strokeStyle = COL.ink; tctx.lineWidth = 1.2;
+  tctx.beginPath(); tctx.moveTo(...G.A); tctx.lineTo(...G.B); tctx.lineTo(...G.C); tctx.closePath(); tctx.stroke();
+  tctx.fillStyle = COL.ink; tctx.font = '12px "Noto Sans SC", sans-serif'; tctx.textAlign = 'center';
+  tctx.textBaseline = 'bottom'; tctx.fillText('只看薪资', G.A[0], G.A[1] - 6);
+  tctx.textBaseline = 'top'; tctx.textAlign = 'left'; tctx.fillText('只看成长', G.B[0] - 6, G.B[1] + 6); tctx.textAlign = 'right'; tctx.fillText('只看生活', G.C[0] + 6, G.C[1] + 6);
+  const px = OF.w[0] * G.A[0] + OF.w[1] * G.B[0] + OF.w[2] * G.C[0], py = OF.w[0] * G.A[1] + OF.w[1] * G.B[1] + OF.w[2] * G.C[1];
+  tctx.fillStyle = COL.accent; tctx.globalAlpha = .25; tctx.beginPath(); tctx.arc(px, py, 13, 0, 7); tctx.fill();
+  tctx.globalAlpha = 1; tctx.strokeStyle = COL.surface; tctx.lineWidth = 2; tctx.beginPath(); tctx.arc(px, py, 7, 0, 7); tctx.fill(); tctx.stroke();
+}
+function triSet(e) {
+  const r = tri.getBoundingClientRect(), G = triGeo();
+  let b = bary(G, e.clientX - r.left, e.clientY - r.top).map(v => Math.max(0, v)); const s = b[0] + b[1] + b[2] || 1;
+  OF.w = b.map(v => Math.round(v / s * 100) / 100); renderOffers();
+}
+let tdrag = false;
+tri.addEventListener('pointerdown', e => { tdrag = true; tri.setPointerCapture(e.pointerId); triSet(e); });
+tri.addEventListener('pointermove', e => { if (tdrag) triSet(e); });
+tri.addEventListener('pointerup', () => tdrag = false);
+tri.addEventListener('pointercancel', () => tdrag = false);
+new ResizeObserver(drawTri).observe(tri);
+function renderOffers() {
+  const g = { nodes: OF.names.map(n => 'Offer ' + n), M: {} };
+  const sum = OF.score.map(r => r[0] * OF.w[0] + r[1] * OF.w[1] + r[2] * OF.w[2]);
+  for (let i = 0; i < 3; i++) for (let j = i + 1; j < 3; j++) {
+    let dir = 0, verb = '';
+    if (OF.mode === 'major') {
+      const fi = [], fj = [];
+      for (let k = 0; k < 3; k++) { if (OF.score[i][k] > OF.score[j][k]) fi.push(FN[k]); else if (OF.score[i][k] < OF.score[j][k]) fj.push(FN[k]); }
+      dir = fi.length > fj.length ? 1 : fj.length > fi.length ? -1 : 0; verb = (dir === 1 ? fi : fj).join('+');
+    } else { const d = sum[i] - sum[j]; dir = Math.abs(d) < 1e-9 ? 0 : d > 0 ? 1 : -1; verb = dir ? '+' + fmt(Math.abs(d)) : ''; }
+    g.M[i + ',' + j] = { dir, verb };
+  }
+  const an = analyze(g), sm = OF.mode === 'sum';
+  drawGraph($('#ograph'), g, an, { interactive: false });
+  $('#osum').hidden = !sm;
+  if (sm) {
+    const mx = Math.max(...sum, .01);
+    $('#obars').innerHTML = `<div class="bar"><span class="meta">权重</span><span class="mono" style="text-align:left">${FN.map((f, k) => f + ' ' + Math.round(OF.w[k] * 100) + '%').join(' · ')}</span><span></span></div>` +
+      [0, 1, 2].sort((a, b) => sum[b] - sum[a]).map(i => `<div class="bar"><span class="oname" style="color:var(--${OCOL[i]})">Offer ${OF.names[i]}</span><i style="width:${sum[i] / mx * 100}%;background:var(--${OCOL[i]})"></i><span class="mono">${fmt(sum[i])}</span></div>`).join('');
+    drawTri();
+  }
+  const N = g.nodes;
+  $('#onote').innerHTML = an.cyc
+    ? `绕出了环：${an.cyc.map(i => N[i]).join(' > ')} > ${N[an.cyc[0]]}。每一次比较都“有理有据”，合起来却选不出来。连线上标的是每次赢下比较靠的因素，它们在轮换。`
+    : an.best >= 0
+      ? (sm ? `加权求和给每份 offer 一个分数，分数之间天然可传递，环不可能出现。代价是你得先说清楚每个因素有多重要：拖动三角形里的圆点，看最优解在哪里换人。` : `这组分数下多数原则恰好没有绕出环。把表格改回 5-1-3 / 3-5-1 / 1-3-5 试试。`)
+      : `有选项之间打平，还选不出最优解。${sm ? '换个权重试试。' : ''}`;
+}
+
+/* ---------- boot ---------- */
+listeners.push(renderCtl, updScales, recompute);
+onTheme(() => { readCols(); kickPlane(); drawTri(); });
+setSliders();
+renderScene('static'); renderAnswers();
+changed();
+SCL.forEach(placeScale);
+renderPref();
+renderOffers();
+})();
+</script>

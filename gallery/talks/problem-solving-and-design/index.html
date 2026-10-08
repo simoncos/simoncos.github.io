@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="zh-Hans">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>问题解决与设计</title>
+<meta name="description" content="2016 年前后写在简书的四篇短文，各做成一个可以动手的交互页面：问题情境、可行解、开放问题、纠结与最优解。">
+<link rel="canonical" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="问题解决与设计 · Simon Zhao">
+<meta property="og:description" content="2016 年前后写在简书的四篇短文，各做成一个可以动手的交互页面。">
+<meta property="og:url" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html">
+<meta property="og:site_name" content="simoncos">
+<meta property="og:image" content="https://simoncos.github.io/gallery/assets/og-problem-solving.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="问题解决与设计：四篇交互文章的开场图形">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="问题解决与设计 · Simon Zhao">
+<meta name="twitter:description" content="2016 年前后写在简书的四篇短文，各做成一个可以动手的交互页面。">
+<meta name="twitter:image" content="https://simoncos.github.io/gallery/assets/og-problem-solving.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Shared with chapter 1 */
+
+/* Layout: same railway-notebook system as chapter 4. Reading column ~720px; figures and workbenches break out to ~1120px. */
+/* Layout: near-black page, quiet neutrals. Glow is reserved for the one moment in each figure where the answer appears.
+   Amber = what you operate; mint = the answer; blue / lime = the two data classes. Reading column ~720px; workbenches ~1120px. */
+:root{
+  --bg:#050607; --surface:#0c0e11; --surface-2:#0c0e11; --ink:#ebedf0; --muted:#8a9099; --line:#22262c; --sleeper:#111317;
+  --accent:#ffb347; --accent-soft:rgba(255,179,71,.12);
+  --stop:#ff5d7d; --go:#3cf2b4; --go-soft:rgba(60,242,180,.14);
+  --t1:#5cb8ff; --t2:#ff6ad5; --t3:#9cf06a;
+  --display:"Noto Serif SC","Songti SC","STSong",serif;
+  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85}
+::selection{background:rgba(255,179,71,.35)}
+.wrap{padding-inline:20px;padding-block:32px 80px;overflow-x:clip}
+.col{max-width:720px;margin-inline:auto}
+.wide{max-width:1120px;margin-inline:auto}
+h1,h2{font-family:var(--display);font-weight:900;text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(2.8rem,8vw,5rem);letter-spacing:.02em}
+h2{font-size:clamp(1.5rem,3.4vw,2.05rem);margin-block:0 .6em}
+p{margin:0 0 1em}
+b,strong{font-weight:700}
+a{color:var(--accent)}
+.eyebrow a.up{color:inherit;text-decoration:none;border-bottom:1px dotted var(--muted)}
+.eyebrow a.up:hover{color:var(--accent);border-color:var(--accent)}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--muted)}
+.lede{font-size:1.15rem;margin-top:1.1em;max-width:34em}
+.meta{font-size:.85rem;color:var(--muted)}
+section{margin-top:96px}
+.secno{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:.4em}
+.mono{font-family:var(--mono);font-size:.92em}
+.note{border-left:3px solid var(--accent);padding:4px 0 4px 16px;color:var(--muted);font-size:.95rem}
+blockquote{margin:1.2em 0;padding-left:16px;border-left:3px solid var(--line);color:var(--muted);font-size:.95rem}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,canvas:focus-visible,svg:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.series{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:48px}
+.series a,.series span{font-size:.8rem;padding:3px 10px;border:1px dashed var(--line);border-radius:999px;color:var(--muted);white-space:nowrap;text-decoration:none}
+.series a{border-style:solid}
+.series a:hover{border-color:var(--accent);color:var(--accent)}
+.series .cur{background:var(--ink);color:var(--bg);border:1px solid var(--ink);font-weight:700}
+.hero-band{position:relative;margin:-32px -20px 0;padding:32px 20px 56px;overflow:hidden;border-bottom:1px solid var(--line)}
+#heroCv{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.hero-band header{position:relative;z-index:1}
+.hero-text{position:relative}
+h1 .hl{color:var(--accent);text-shadow:0 0 24px rgba(255,179,71,.35)}
+/* hero emblem: same size and place as chapter 4's knot */
+.emblem{position:absolute;right:0;top:-10px;width:min(210px,36vw);height:auto;z-index:-1;pointer-events:none}
+.emblem .k1{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+.emblem .k2{fill:none;stroke:var(--t1);opacity:.35;stroke-width:1.1}
+.emblem .dot{fill:var(--ink);opacity:.55}
+@media (max-width:700px){.emblem{opacity:.5;right:-10px}}
+.hero-hint{font-family:var(--mono);font-size:.74rem;color:var(--muted);letter-spacing:.06em;margin-top:.6em}
+.hero-hint b{color:var(--accent);font-weight:600}
+/* big outlined section numerals in the left margin on wide screens */
+section > .col:first-child{position:relative}
+.bignum{position:absolute;right:calc(100% + 28px);top:-18px;font-family:var(--display);font-weight:900;font-size:7.5rem;line-height:1;color:transparent;-webkit-text-stroke:1.2px #2c3038;pointer-events:none;user-select:none;display:none}
+@media (min-width:1220px){.bignum{display:block}}
+@media (max-width:699px){.hero-band{padding-bottom:180px}}
+.factors{display:flex;flex-wrap:wrap;gap:6px;margin:1.2em 0 0}
+.factors span{font-size:.82rem;padding:2px 10px;border-radius:3px;background:var(--surface);border:1px solid var(--line)}
+.factors span.cur{border-color:var(--accent);color:var(--accent);font-weight:700}
+.factors small{color:var(--muted);font-size:.72rem;margin-left:4px}
+
+.bench{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;margin-block:28px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:32px;align-items:start}
+.split.rev{grid-template-columns:minmax(0,340px) minmax(0,1fr)}
+@media (max-width:820px){.split,.split.rev{grid-template-columns:minmax(0,1fr)}}
+.lab{font-size:.78rem;color:var(--muted);letter-spacing:.06em;margin-bottom:6px;display:block}
+.seg{display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:transparent}
+.seg button{flex:1 1 auto;border:0;background:transparent;color:var(--ink);padding:6px 10px;font-size:.84rem;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);font-weight:700}
+.btn{padding:7px 14px;border:1px solid var(--accent);background:var(--accent);color:#1a1205;border-radius:6px;font-size:.88rem;font-weight:700;transition:filter .2s}
+.btn:hover:not(:disabled){filter:brightness(1.12)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:disabled{opacity:.4;cursor:default}
+.slider{display:grid;grid-template-columns:5.5em 1fr 3.6em;align-items:center;gap:10px;font-size:.85rem}
+.slider output{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.ctl{display:flex;flex-direction:column;gap:16px;min-width:0}
+.big{font-family:var(--display);font-weight:900;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.cap{font-size:.82rem;color:var(--muted);margin-top:8px}
+
+.orig{margin:0;border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:8px 8px 4px}
+.orig img{display:block;width:100%;height:auto;filter:invert(.9) hue-rotate(180deg) contrast(1.05);mix-blend-mode:screen;border-radius:4px}
+.orig.keep img{filter:brightness(.93);mix-blend-mode:normal;background:#fff}
+.orig figcaption{font-size:.72rem;color:var(--muted);margin-top:4px;letter-spacing:.04em}
+.map{padding:0;margin:20px 0 0;border-top:1px solid var(--line)}
+.map li{list-style:none;display:grid;grid-template-columns:3.2em 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.map .no{font-family:var(--display);font-weight:900;font-size:1.4rem;color:var(--muted)}
+.map .cur .no{color:var(--accent)}
+.map h4{margin:0;font-size:1rem}
+.map h4 a{color:inherit}
+.map p{margin:2px 0 0;font-size:.88rem;color:var(--muted);line-height:1.65}
+.map .draft h4::after{content:"尚未成文";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
+footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+@media (max-width:699px){.hero-band{padding-bottom:56px}}
+.chapters{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin-top:40px}
+@media (min-width:760px){.chapters{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.card{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:8px 18px;padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none;transition:border-color .2s}
+.card:hover{border-color:var(--accent)}
+.card .no{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--muted)}
+.card h2{margin:.25em 0 .35em;font-size:clamp(1.5rem,3vw,1.9rem)}
+.card .q{font-size:.95rem;margin:0 0 .8em}
+.card ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.card li{font-size:.76rem;padding:2px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.card .go{grid-column:1/-1;font-size:.88rem;color:var(--accent);font-weight:700;margin-top:6px}
+.card svg{width:112px;height:112px;align-self:start}
+.card svg .k1{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:.8}
+.card svg .k2{fill:none;stroke:var(--t1);stroke-width:1.4;opacity:.4}
+.card svg .dot{fill:var(--ink);opacity:.55}
+@media (max-width:420px){.card{grid-template-columns:minmax(0,1fr) 72px}.card svg{width:72px;height:72px}}
+.about p{color:var(--ink)}
+</style>
+
+<div class="wrap">
+<div class="hero-band">
+<header class="col">
+  <div class="hero-text">
+    <div class="eyebrow">交互文章 · 系列</div>
+    <h1>问题解决<br>与<span class="hl">设计</span></h1>
+    <p class="lede">2016 年前后，我在简书上写了一组短文，从一本心理学教材里的“影响问题解决的因素”出发，想把问题解决和设计这两件事放在一起想清楚。十年后把其中四篇做成了可以动手的页面：正文压缩改写，每篇围绕几个能拖、能点、能算的小实验。</p>
+    <p class="meta" style="margin-top:1.2em">四篇已完成 · 三篇尚未成文 · 原文配图都配了一个重绘的交互版本</p>
+  </div>
+</header>
+</div>
+
+<section style="margin-top:56px">
+  <div class="wide">
+    <div class="chapters">
+      <a class="card" href="ch1.html">
+        <div><span class="no">第一篇</span><h2>问题情境</h2><p class="q">同一个问题，换一种表述，难度就会不同。</p>
+          <ul><li>两种画法的正方形</li><li>找箭头</li><li>搜索树</li><li>表示方式</li><li>设计</li></ul></div>
+        <svg viewBox="0 0 120 120" aria-hidden="true" id="e1"></svg>
+        <span class="go">开始 →</span>
+      </a>
+      <a class="card" href="ch2.html">
+        <div><span class="no">第二篇</span><h2>可行解</h2><p class="q">让人看不见可行解的两种“缓存”：定势和功能固着。</p>
+          <ul><li>六道削皮题</li><li>量水实验</li><li>把剪刀拆开看</li><li>一根拉绳</li></ul></div>
+        <svg viewBox="98 98 240 240" aria-hidden="true"><rect class="k2" x="116" y="116" width="168" height="168" stroke-dasharray="6 8"></rect><g id="e2"></g><path class="k1" d="M140 140L320 140L140 320L140 140L260 260" style="stroke-width:6"></path></svg>
+        <span class="go">开始 →</span>
+      </a>
+      <a class="card" href="ch3.html">
+        <div><span class="no">第三篇</span><h2>开放问题</h2><p class="q">可能性空间大得没有边，还会自己变，怎么找路？</p>
+          <ul><li>只坐地铁</li><li>行动方式不限</li><li>抓大放小</li><li>证伪的是整个合式</li></ul></div>
+        <svg viewBox="0 0 400 400" aria-hidden="true"><path class="k2" id="e3t" style="stroke-width:4"></path><path class="k1" id="e3e" style="stroke-width:9"></path><circle class="dot" cx="200" cy="200" r="12"></circle></svg>
+        <span class="go">开始 →</span>
+      </a>
+      <a class="card" href="ch4.html">
+        <div><span class="no">第四篇</span><h2>纠结与最优解</h2><p class="q">好几个可行解摆在面前，难的是挑一个。</p>
+          <ul><li>电车难题</li><li>价值天平</li><li>两千个可能的你</li><li>偏好系统</li><li>单因素模型</li></ul></div>
+        <svg viewBox="0 0 400 400" aria-hidden="true"><path class="k2" id="e4b" style="stroke-width:3"></path><path class="k1" id="e4a" style="stroke-width:7"></path></svg>
+        <span class="go">开始 →</span>
+      </a>
+    </div>
+  </div>
+  <div class="col">
+    <ol class="map" style="margin-top:40px">
+      <li class="draft"><span class="no">五</span><div><h4>测量的局限</h4><p>相似性、分类与理论负荷。</p></div></li>
+      <li class="draft"><span class="no">六</span><div><h4>Duck Typing 作为策略</h4><p>不问它是什么，问它能做什么；行为级数据，让用户自己设权重。</p></div></li>
+      <li class="draft"><span class="no">七</span><div><h4>工程实践</h4><p>测试环境作为反事实探索器，双重传感器，Bayesian Safety。</p></div></li>
+    </ol>
+    <p class="meta" style="margin-top:12px">五至七篇来自 2026-03 的一份整合提纲，正文还没有写。</p>
+  </div>
+</section>
+
+<section class="about">
+  <div class="col">
+    <span class="secno">关于这个系列</span>
+    <p>原文是边读边想的札记，论点和语气尽量保留，篇幅压到原来的一半左右。交互部分有两种来源：原文附图按原图重绘成可以操作的版本，原图作为“原文附图”放在旁边；原文只用文字描述的实验和例子（量水实验、搜索树、真实的过海路线等）是这次补上的，页面上都注明了出处和哪些数字是估算。</p>
+    <p>颜色在四篇里意思一致：琥珀色是可以动手的东西，薄荷绿是答案，红色是出局或矛盾。</p>
+  </div>
+</section>
+<footer class="col">改编自作者 2016 年前后发表在简书的《问题解决与设计》系列。</footer>
+</div>
+
+<script>
+(() => {
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; };
+// 一: the hidden arrow on its lattice
+const e1 = document.getElementById('e1'), G = 12;
+let lat = '';
+for (let k = 0; k <= 10; k++) lat += `M${k * G} 0V120M0 ${k * G}H120`;
+for (let k = -10; k <= 10; k++) lat += `M${k * G} 0L${k * G + 120} 120`;
+el('path', { d: lat, class: 'k2', style: 'opacity:.18;stroke-width:1' }, e1);
+el('path', { d: 'M' + [[0, 2], [2, 0], [2, 1], [6, 1], [6, 3], [2, 3], [2, 4]].map(([x, y]) => `${(x + 2) * G} ${(y + 3) * G}`).join('L') + 'Z', class: 'k1' }, e1);
+// 二: nine dots
+const e2 = document.getElementById('e2');
+for (let y = 0; y < 3; y++) for (let x = 0; x < 3; x++) el('circle', { cx: 140 + 60 * x, cy: 140 + 60 * y, r: 9, class: 'dot' }, e2);
+// 三: branching paths inside an open boundary (same generator as chapter 3's opening)
+let seed = 11; const rnd = () => (seed = seed * 16807 % 2147483647) / 2147483647;
+let d = '', far = 0;
+const grow = (x, y, a, depth) => {
+  const len = (34 + rnd() * 26) * .68, x1 = x + Math.cos(a) * len, y1 = y + Math.sin(a) * len;
+  d += `M${x.toFixed(1)} ${y.toFixed(1)}L${x1.toFixed(1)} ${y1.toFixed(1)}`; far = Math.max(far, Math.hypot(x1 - 200, y1 - 200));
+  if (depth < 4) { const n = rnd() < .35 ? 1 : 2; for (let i = 0; i < n; i++) grow(x1, y1, a + (n === 1 ? (rnd() - .5) * .5 : (i ? 1 : -1) * (.25 + rnd() * .35)), depth + 1); }
+};
+for (let i = 0; i < 7; i++) grow(200, 200, i / 7 * Math.PI * 2 + rnd() * .4, 0);
+document.getElementById('e3t').setAttribute('d', d);
+const R = Math.min(196, far + 14), a0 = -1.2, a1 = a0 + Math.PI * 1.72;
+document.getElementById('e3e').setAttribute('d', `M${200 + R * Math.cos(a0)} ${200 + R * Math.sin(a0)}A${R} ${R} 0 1 1 ${200 + R * Math.cos(a1)} ${200 + R * Math.sin(a1)}`);
+// 四: the knot (same curve as chapter 4's opening, at rest)
+['e4a', 'e4b'].forEach((id, k) => {
+  let p = '';
+  for (let i = 0; i <= 600; i++) { const t = i / 600 * Math.PI * 2; p += (i ? 'L' : 'M') + (200 + 150 * Math.sin(3 * t + k * .7) + 30 * Math.sin(7 * t)).toFixed(1) + ' ' + (200 + 150 * Math.sin(4 * t + k * .4) + 30 * Math.cos(5 * t)).toFixed(1); }
+  document.getElementById(id).setAttribute('d', p);
+});
+})();
+</script>
