@@ -290,11 +290,13 @@
             setMenu(false);
     });
     // The arrival overlay is a pseudo-element animated by CSS alone; drop the
-    // attribute once it has played so it cannot replay.
+    // attribute once it has played so it cannot replay. The arrival replaced
+    // <main>'s own entrance (.enter), which would otherwise start over then.
     if (root.hasAttribute('data-arrive')) {
         window.setTimeout(() => {
             root.removeAttribute('data-arrive');
             root.removeAttribute('data-curtain');
+            document.querySelectorAll('main.enter').forEach((el) => el.classList.remove('enter'));
         }, 900);
     }
     // ---- External links -------------------------------------------------

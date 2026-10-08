@@ -376,25 +376,46 @@
     }
     // Back through "← Articles": reopen the row the reader followed and put
     // it where it stood. (The browser's own Back restores the page itself.)
+    // theme-init keeps the list hidden meanwhile (is-returning).
+    function reveal() {
+        document.documentElement.classList.remove('is-returning');
+    }
+    // The web fonts' stylesheet loaded and the faces it lays out with
+    // arrived, or `limit` ms, whichever comes first.
+    function fontsSettled(limit) {
+        const link = document.querySelector('link[rel="stylesheet"][href^="https://fonts.googleapis.com/"]');
+        const sheet = link && !link.sheet
+            ? new Promise((resolve) => {
+                link.addEventListener('load', () => resolve(), { once: true });
+                link.addEventListener('error', () => resolve(), { once: true });
+            })
+            : Promise.resolve();
+        const fonts = sheet.then(() => {
+            // Lay out once so the faces in use start loading before waiting.
+            void document.body.offsetHeight;
+            return document.fonts ? document.fonts.ready.then(() => undefined) : undefined;
+        });
+        return Promise.race([fonts, new Promise((resolve) => window.setTimeout(resolve, limit))]);
+    }
     function restoreSpot() {
         let spot = null;
         try {
             if (sessionStorage.getItem('articles-back') !== window.location.href)
-                return;
+                return reveal();
             sessionStorage.removeItem('articles-back');
             spot = JSON.parse(sessionStorage.getItem('articles-spot') || 'null');
         }
         catch (_error) {
-            return;
+            return reveal();
         }
         if (!spot || spot.url !== window.location.href || !spot.row)
-            return;
+            return reveal();
         const row = document.getElementById(spot.row);
         if (!row || row.hidden || !rows.includes(row))
-            return;
-        // Open it at once, not over 0.55s, so it has its height before the
-        // scroll is measured.
-        const animated = Array.from(row.querySelectorAll('.arow-ex, .arow-ex-clip'));
+            return reveal();
+        // Open it, and fold the excerpt that was open, at once rather than
+        // over 0.55s, so the rows have their heights before the scroll.
+        const animated = Array.from(main.querySelectorAll('.arow-ex, .arow-ex-clip'));
         animated.forEach((el) => {
             el.style.transition = 'none';
         });
@@ -410,16 +431,20 @@
             window.scrollBy(0, row.getBoundingClientRect().top - top);
             placed = window.scrollY;
         };
-        place();
-        // Fonts and images arriving later, and the excerpt that was open
-        // folding away, move the row; follow them until the reader scrolls.
+        // Images arriving later can still move the row; follow them until
+        // the reader scrolls.
         const again = () => {
             if (Math.abs(window.scrollY - placed) < 2)
                 place();
         };
-        document.fonts?.ready.then(again);
-        window.addEventListener('load', again, { once: true });
-        window.setTimeout(again, 600);
+        fontsSettled(1500).then(() => {
+            // Fade in without the arrival's slide, which would move the row
+            // after it is placed.
+            main.style.animation = 'main-in-o 0.28s ease both';
+            place();
+            reveal();
+            window.addEventListener('load', again, { once: true });
+        });
     }
     window.addEventListener('hashchange', fromHash);
     fromHash();

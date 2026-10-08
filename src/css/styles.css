@@ -221,6 +221,11 @@ button {
     animation: om-in 0.6s var(--ease) both;
 }
 
+/* Back on the article list through "← Articles", until the row is placed. */
+.is-returning [data-articles] {
+    visibility: hidden;
+}
+
 /* ---- Shared controls --------------------------------------------------- */
 
 .pill {

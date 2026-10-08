@@ -100,6 +100,18 @@
     fonts.href = FONTS;
     document.head.appendChild(fonts);
 
+    // Back on the article list through "← Articles": the list stays hidden
+    // until articles.js has put the reader's row back in its final type,
+    // and never longer than 2.5 s.
+    try {
+        if (sessionStorage.getItem('articles-back') === window.location.href) {
+            root.classList.add('is-returning');
+            window.setTimeout(() => root.classList.remove('is-returning'), 2500);
+        }
+    } catch (_error) {
+        // Storage blocked: the list shows at once.
+    }
+
     const here = route(window.location.pathname);
     const reduced = typeof window.matchMedia === 'function'
         && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
