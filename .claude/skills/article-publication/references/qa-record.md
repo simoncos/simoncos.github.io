@@ -1,8 +1,8 @@
 # QA record for an article batch
 
-Every batch leaves `docs/qa/<YYYY-MM-DD>-<batch>.md`, in Chinese. It is the one place for the batch's numbers and the owner's decisions. Commit messages, chat reports and later docs point at it rather than repeating it. `/tmp` is wiped at every reboot, so write each number into the record while its source still exists.
+Every batch leaves `qa/<YYYY-MM-DD>-<batch>.md` in the owner's private notes repo, in Chinese. Records hold privacy findings and unpublished decisions, so they never go into this public repo. It is the one place for the batch's numbers and the owner's decisions. Commit messages, chat reports and later docs point at it rather than repeating it. `/tmp` is wiped at every reboot, so write each number into the record while its source still exists.
 
-Model a new record on the latest one. `docs/qa/2026-09-30-seven-older-essays.md` is the fullest example. Leave out a section only when the batch has nothing for it.
+Model a new record on the latest one. `qa/2026-09-30-seven-older-essays.md` is the fullest example. Leave out a section only when the batch has nothing for it.
 
 ## Sections, in order
 

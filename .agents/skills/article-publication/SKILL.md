@@ -11,7 +11,7 @@ Every article goes live in Chinese and English, dated by when it was written. Ch
 
 - **Policy**: `docs/ARTICLE_PUBLICATION.md`. It covers the bilingual gate, Dates, Editing the text, Privacy and Translation. Read it whole before each batch, and do not restate its rules in commits, records or skills; point at it.
 - **Pages and generators**: `docs/ARCHITECTURE.md`.
-- **Precedent**: the newest `docs/qa/*-older-essays.md` or `*-old-memories.md` record. Mirror its structure (see `references/qa-record.md`).
+- **Precedent**: the newest `qa/*-older-essays.md` or `*-old-memories.md` record in the owner's private notes repo. Mirror its structure (see `references/qa-record.md`). Since 2026-10-08 QA records are not kept in this public repo; if the notes repo is not available, ask for it.
 - **Originals**: the Obsidian vault at `/Users/simoncbot/Documents/obsidian/simoncos/`, under `Write/Blog/{思-Meta,技-Hack,探-Explore,游-Wander,存档-Archive}/`.
   - Read only; never modify the originals.
   - Find a piece by title with `find` or `mdfind`. Reading files directly is fine when the Obsidian MCP times out.
@@ -84,7 +84,7 @@ Every article goes live in Chinese and English, dated by when it was written. Ch
   - Ask for a final report that names the decisions needed. Every number in it must also be in the committed record, because `/tmp` is wiped at reboot.
 - **Preview.** `preview_start` from a worktree serves the main checkout. Serve the worktree itself with `python3 -m http.server <port> --bind 127.0.0.1 --directory <worktree>`.
 - **Integrate on a fresh branch** from `origin/master`:
-  1. Take the batch's sources with `git checkout <commit> -- blogs/<slug>*.md blogs/assets/images/<slug>/ docs/qa/<record>.md`.
+  1. Take the batch's sources with `git checkout <commit> -- blogs/<slug>*.md blogs/assets/images/<slug>/`. The batch's QA record goes to the private notes repo, not here.
   2. Bring in script changes with `git diff <base> <commit> -- <file> | git apply -3`.
   3. Rebuild `sitemap.xml` entries by script rather than merging conflicting hunks.
   4. Run `make generate` on the result. Generated HTML, JSON and feeds are never merged by hand.
@@ -94,7 +94,7 @@ Every article goes live in Chinese and English, dated by when it was written. Ch
 
 - **Title**:
   1. Edit the H1 in both files and keep the slug.
-  2. Search for the old title in other articles' link text (`blogs/*.md`), in `docs/` (QA records, examples in the policy doc), `data/site.json`, `llms.txt` and `agent-index.json`.
+  2. Search for the old title in other articles' link text (`blogs/*.md`), in `docs/` (examples in the policy doc), in the QA records in the private notes repo, `data/site.json`, `llms.txt` and `agent-index.json`.
   3. Regenerate, then search the generated HTML, feeds and `data/*.json` for leftovers.
   4. Rewrite any record sentence the change made false, and add a 用户决定 item.
   5. Feed GUIDs are URLs, so readers see a rename, not a new post.

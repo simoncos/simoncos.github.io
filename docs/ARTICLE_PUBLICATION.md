@@ -29,7 +29,7 @@ Owner policy, confirmed 2026-09-28 and simplified 2026-09-30: **an article has o
 
 These are the owner's standing decisions for republished essays, held since the 2026-09-30 batches. The Obsidian original is never modified; changes are made in the site copy only.
 
-- **Typos only.** Fix clear typos in the Chinese: a wrong character, a misspelled name or term, a doubled word. List each fix in the batch's QA record.
+- **Typos only.** Fix clear typos in the Chinese: a wrong character, a misspelled name or term, a doubled word. List each fix in the batch's QA record (kept in the private notes repo, never in this one).
 - **Everything else stays as written, in both languages.** This covers factual, argumentative, dated and mathematical claims. Check them anyway and list the problems for the owner. A factual fix happens only when the owner approves that item. Once approved, change both versions together; 十年如雨's 三月的雪灾 became 年初的雪灾 this way (2026-09-29).
 - **Mechanical cleanup is allowed.** It leaves the words unchanged:
   - add a missing H1, and turn setext headings into `#`;
@@ -67,4 +67,4 @@ These are the owner's standing decisions for republished essays, held since the 
   - point concept links at English Wikipedia;
   - link sibling articles as `<slug>.en.html`.
 
-Pages publishes through `.github/workflows/site-check.yml` (since 2026-09-29): on a push to `master`, the `deploy` job runs only after `make check-all` passes, so a failed check leaves the last good version live. Run the checks locally anyway, since a failed push holds back everything behind it. See the [2026-09-28 QA report](qa/2026-09-28-redesign-and-article-publication.md).
+Pages publishes through `.github/workflows/site-check.yml` (since 2026-09-29): on a push to `master`, the `deploy` job runs only after `make check-all` passes, so a failed check leaves the last good version live. Run the checks locally anyway, since a failed push holds back everything behind it. See the 2026-09-28 QA report, `qa/2026-09-28-redesign-and-article-publication.md` in the private notes repo.

@@ -1,6 +1,6 @@
 """Guard the Endless Echoes page against the phone and loading faults found on 2026-10-03.
 
-The browser measurements behind each rule are in docs/qa/2026-10-03-echoes-mobile-fixes.md; these tests only pin the rules that
+The browser measurements behind each rule are in qa/2026-10-03-echoes-mobile-fixes.md in the private notes repo; these tests only pin the rules that
 made them pass, so a later edit cannot quietly bring a fault back."""
 import re
 import sys
