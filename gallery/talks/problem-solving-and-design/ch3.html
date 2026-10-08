@@ -116,6 +116,7 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
 /* 01 MTR */
 .mapwrap{overflow-x:auto;border-radius:8px;border:1px solid var(--line);background:#fff}
 .mapbox{position:relative;width:100%;min-width:760px;aspect-ratio:1240/810}
+@media (max-width:700px){.mapbox{min-width:1000px}}
 .mapbox img{position:absolute;inset:0;width:100%;height:100%;display:block}
 .mapbox svg{position:absolute;inset:0;width:100%;height:100%}
 .st{fill:transparent;stroke:transparent;stroke-width:3;cursor:pointer}
@@ -171,6 +172,7 @@ select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:v
 #hk .end{fill:var(--ink);stroke:#07111a;stroke-width:3}
 #hk .endl{font-family:var(--body);font-size:15px;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:#07111a;stroke-width:4px}
 #hk .x{stroke:var(--stop);stroke-width:3;stroke-linecap:round}
+@media (max-width:520px){#hk .place{font-size:21px;letter-spacing:.04em}#hk .sea{font-size:21px;letter-spacing:.15em}#hk .endl{font-size:26px;stroke-width:6px}}
 .routes{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;margin-top:18px;align-items:start}
 @media (min-width:900px){.routes{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 .route{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:4px 12px;align-items:center;text-align:left;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;padding:8px 12px;font-size:.9rem}
@@ -201,6 +203,7 @@ select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:v
 #bars rect{transition:width .5s cubic-bezier(.3,1.2,.5,1),x .5s}
 #bars .hl{fill:var(--accent)}
 #bars .nm{fill:#3a3f48}
+#bars.nar text{font-size:14px}#bars.nar .val{font-size:13px}#bars.nar .tick{font-size:12px}
 .cmp{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .cmp select{width:auto}
 .ans{margin-top:14px;border:1px solid var(--line);border-radius:8px;padding:14px 16px}
@@ -252,7 +255,7 @@ select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:v
     <span class="bignum" aria-hidden="true">01</span><span class="secno">01 · 附图</span>
     <h2>只坐地铁，从中环到旺角</h2>
     <blockquote>A1. 只乘坐地铁，找到从香港中环到旺角的最短路线。</blockquote>
-    <p>借助地铁路线图，不难很快找到 A1 的可行解，这里也是唯一的最优解。下面就是原文那张图。点任意两个车站（第一下是起点，第二下是终点），或者用下面的选单。</p>
+    <p>借助地铁路线图，不难很快找到 A1 的可行解，这里也是唯一的最优解。下面就是原文那张图。点任意两个车站（第一下是起点，第二下是终点），或者用下面的选单。手机上地图可以左右滑动。</p>
   </div>
   <div class="wide">
     <div class="bench">
@@ -537,6 +540,14 @@ function drawRoute() {
   $('#rsum').innerHTML = `<div><span class="big">${r.cost.time}</span><span>分钟（估算）</span></div><div><span class="big">${Math.max(0, xf)}</span><span>次换乘</span></div><div><span class="big">${stops}</span><span>站</span></div>`;
   $('#legs').innerHTML = legs.map(L => `<div class="leg"><i style="background:${LINES[L.line].c};${L.line === 'WALK' ? 'border:1px solid var(--muted)' : ''}"></i><span>${LINES[L.line].n}：${ST[L.st[0]][0]} → ${ST[L.st[L.st.length - 1]][0]}</span><span class="mono">${L.st.length - 1} 站</span></div>`).join('');
 }
+// a fingertip rarely lands inside a station ring: a tap anywhere on the map picks the nearest station
+$('#mtr').addEventListener('click', e => {
+  if (e.target.closest('.st')) return;
+  const m = $('#mtr').getScreenCTM(); if (!m) return;
+  const q = new DOMPoint(e.clientX, e.clientY).matrixTransform(m.inverse());
+  let k = null, bd = 30; for (const [id, v] of Object.entries(ST)) { const d = Math.hypot(v[1] - q.x, v[2] - q.y); if (d < bd) { bd = d; k = id; } }
+  if (!k) return; if (pick === 0) { A = k; pick = 1; } else { B = k; pick = 0; } drawRoute();
+});
 $('#from').addEventListener('change', e => { A = e.target.value; drawRoute(); });
 $('#to').addEventListener('change', e => { B = e.target.value; drawRoute(); });
 segBind('#crit', v => { crit = v; drawRoute(); });
@@ -673,9 +684,9 @@ function drawMap(vis, best) {
     }
     if (v.r.x) { const [x, y] = px(v.r.x); el('path', { d: `M${x - 7},${y - 7}L${x + 7},${y + 7}M${x + 7},${y - 7}L${x - 7},${y + 7}`, class: 'x' }, hk); }
   }
-  for (const [ll, t, dx] of [[HK.CEN, '中环', -44], [HK.MOK, '旺角', 12]]) {
+  for (const [ll, t, dx] of [[HK.CEN, '中环', -12], [HK.MOK, '旺角', 12]]) {
     const [x, y] = px(ll); el('circle', { cx: x, cy: y, r: 6, class: 'end' }, hk);
-    const n = el('text', { x: x + dx, y: y + 5, class: 'endl' }, hk); n.textContent = t;
+    const n = el('text', { x: x + dx, y: y + 5, class: 'endl', 'text-anchor': dx < 0 ? 'end' : 'start' }, hk); n.textContent = t;
   }
 }
 let shown = 0;
@@ -690,17 +701,21 @@ const magName = v => ({ 1: '个位数', 10: '几十', 100: '几百', 1000: '几�
 function renderPrec() {
   const svg = $('#bars'); svg.innerHTML = '';
   const a = +$('#ca').value, b = +$('#cb').value;
-  const X0 = 90, X1 = 470, rowH = 36, lx = v => X0 + (Math.log10(v) - Math.log10(1)) / 3 * (X1 - X0);
-  if (plev !== 'order') for (const v of [1, 10, 100, 1000]) { el('line', { x1: lx(v), y1: 10, x2: lx(v), y2: 300, class: 'ax' }, svg); const t = el('text', { x: lx(v), y: 318, 'text-anchor': 'middle', class: 'tick' }, svg); t.textContent = v + ' km/h'; }
+  // phones: names sit above the bars, so the bars can use the full width
+  const nar = svg.clientWidth > 0 && svg.clientWidth < 460; svg.classList.toggle('nar', nar);
+  svg.setAttribute('viewBox', nar ? '0 0 340 400' : '0 0 560 330');
+  const X0 = nar ? 8 : 90, X1 = nar ? 262 : 470, rowH = nar ? 44 : 36, by = nar ? 18 : 4, lx = v => X0 + (Math.log10(v) - Math.log10(1)) / 3 * (X1 - X0);
+  const axB = nar ? 14 + SPD.length * rowH - 4 : 300;
+  if (plev !== 'order') for (const v of [1, 10, 100, 1000]) { el('line', { x1: lx(v), y1: 10, x2: lx(v), y2: axB, class: 'ax' }, svg); const t = el('text', { x: lx(v), y: axB + 18, 'text-anchor': nar && v === 1 ? 'start' : nar && v === 1000 ? 'end' : 'middle', class: 'tick' }, svg); t.textContent = nar && v < 1000 ? String(v) : v + ' km/h'; }
   SPD.forEach(([n, v], i) => {
     const y = 14 + i * rowH, hl = i === a || i === b;
-    const t = el('text', { x: X0 - 10, y: y + 17, 'text-anchor': 'end' }, svg); t.textContent = n;
+    const t = el('text', nar ? { x: X0, y: y + 12 } : { x: X0 - 10, y: y + 17, 'text-anchor': 'end' }, svg); t.textContent = n;
     let w, label;
     if (plev === 'exact') { w = lx(v) - X0; label = v + ' km/h'; }
     else if (plev === 'mag') { w = lx(mag(v) * 3.16) - X0; label = magName(v); }
     else { w = (i + 1) / SPD.length * (X1 - X0); label = '第 ' + (SPD.length - i) + ' 快'; }
-    el('rect', { x: X0, y: y + 4, width: Math.max(2, w), height: 20, rx: 3, class: hl ? 'hl' : 'nm' }, svg);
-    const vt = el('text', { x: X0 + Math.max(2, w) + 8, y: y + 18, class: 'val' }, svg); vt.textContent = label;
+    el('rect', { x: X0, y: y + by, width: Math.max(2, w), height: nar ? 16 : 20, rx: 3, class: hl ? 'hl' : 'nm' }, svg);
+    const vt = el('text', { x: X0 + Math.max(2, w) + 8, y: y + by + (nar ? 13 : 14), class: 'val' }, svg); vt.textContent = label;
   });
   const [na, va] = SPD[a], [nb, vb] = SPD[b];
   let can, why, bits;
@@ -711,6 +726,7 @@ function renderPrec() {
   $('#pans').innerHTML = can === null ? `<span class="big">—</span>${why}` : `<span class="big ${can ? 'ok' : 'no'}">${can ? '分得出来' : '分不出来'}</span>${why}${bits ? `<div class="bits">${bits}</div>` : ''}`;
 }
 segBind('#plev', v => { plev = v; renderPrec(); });
+addEventListener('resize', renderPrec);
 
 /* ---------- 04 implicit premises ---------- */
 const CASES = {
