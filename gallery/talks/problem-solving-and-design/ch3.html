@@ -5,7 +5,7 @@
 <title>开放问题</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=STIX+Two+Text:ital,wght@0,400;1,400&display=swap">
 <style>
 /* Shared with chapter 1 */
 
@@ -30,6 +30,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font
 .col{max-width:720px;margin-inline:auto}
 .wide{max-width:1120px;margin-inline:auto}
 h1,h2{font-family:var(--display);font-weight:900;text-wrap:balance;line-height:1.2;margin:0}
+h2{text-wrap:pretty}
 h1{font-size:clamp(2.8rem,8vw,5rem);letter-spacing:.02em}
 h2{font-size:clamp(1.5rem,3.4vw,2.05rem);margin-block:0 .6em}
 p{margin:0 0 1em}
@@ -43,7 +44,7 @@ a{color:var(--accent)}
 section{margin-top:96px}
 .secno{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:.4em}
 .mono{font-family:var(--mono);font-size:.92em}
-.note{border-left:3px solid var(--accent);padding:4px 0 4px 16px;color:var(--muted);font-size:.95rem}
+.note{border-left:3px solid #3a3f47;padding:4px 0 4px 16px;color:var(--muted);font-size:.95rem}
 blockquote{margin:1.2em 0;padding-left:16px;border-left:3px solid var(--line);color:var(--muted);font-size:.95rem}
 button{font:inherit;cursor:pointer}
 button:focus-visible,input:focus-visible,canvas:focus-visible,svg:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -57,13 +58,15 @@ button:focus-visible,input:focus-visible,canvas:focus-visible,svg:focus-visible,
 #heroCv{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 .hero-band header{position:relative;z-index:1}
 .hero-text{position:relative}
-h1 .hl{color:var(--accent);text-shadow:0 0 24px rgba(255,179,71,.35)}
+h1 .hl{color:var(--accent)}
 /* hero emblem: same size and place as chapter 4's knot */
 .emblem{position:absolute;right:0;top:-10px;width:min(210px,36vw);height:auto;z-index:-1;pointer-events:none}
 .emblem .k1{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
-.emblem .k2{fill:none;stroke:var(--t1);opacity:.35;stroke-width:1.1}
+.emblem .k2{fill:none;stroke:var(--muted);opacity:.45;stroke-width:1.1}
 .emblem .dot{fill:var(--ink);opacity:.55}
 @media (max-width:700px){.emblem{opacity:.5;right:-10px}}
+/* wide screens: the lede stops short of the emblem instead of running under it */
+@media (min-width:701px){.hero-text:has(.emblem) .lede{max-width:calc(100% - 230px)}}
 .hero-hint{font-family:var(--mono);font-size:.74rem;color:var(--muted);letter-spacing:.06em;margin-top:.6em}
 .hero-hint b{color:var(--accent);font-weight:600}
 /* big outlined section numerals in the left margin on wide screens */
@@ -73,7 +76,7 @@ section > .col:first-child{position:relative}
 @media (max-width:699px){.hero-band{padding-bottom:180px}}
 .factors{display:flex;flex-wrap:wrap;gap:6px;margin:1.2em 0 0}
 .factors span{font-size:.82rem;padding:2px 10px;border-radius:3px;background:var(--surface);border:1px solid var(--line)}
-.factors span.cur{border-color:var(--accent);color:var(--accent);font-weight:700}
+.factors span.cur{border-color:var(--ink);color:var(--ink);font-weight:700}
 .factors small{color:var(--muted);font-size:.72rem;margin-left:4px}
 
 .bench{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;margin-block:28px}
@@ -111,6 +114,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
 /* touch screens: fingertip-sized controls */
 @media (pointer:coarse){input[type=range]{min-height:36px}select,input[type=number]{min-height:40px}.btn,.seg button{min-height:40px}.series a{display:inline-flex;align-items:center;min-height:40px}input[type=checkbox]{width:18px;height:18px}}
+input[type=checkbox]{accent-color:var(--accent)}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 @media (max-width:699px){.hero-band{padding-bottom:56px}}
@@ -123,16 +127,19 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
 .mapbox svg{position:absolute;inset:0;width:100%;height:100%}
 .st{fill:transparent;stroke:transparent;stroke-width:3;cursor:pointer}
 .st:hover{stroke:#111;fill:rgba(255,179,71,.35)}
-.st.a{stroke:#e08a00;stroke-width:5;fill:rgba(255,179,71,.35)}
-.st.b{stroke:#0f9f74;stroke-width:5;fill:rgba(60,242,180,.35)}
+.st.a{stroke:#e08a00;stroke-width:4;fill:none}
+.st.b{stroke:#0f9f74;stroke-width:4;fill:none}
 .dim{fill:#0a0c10;opacity:0;transition:opacity .4s;pointer-events:none}
 .dim.on{opacity:.35}
 .rcase{fill:none;stroke:#0a0c10;stroke-width:15;stroke-linecap:round;stroke-linejoin:round}
-.rseg{fill:none;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(255,179,71,.95))}
+.rseg{fill:none;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(60,242,180,.9))}
 .rseg.walk{stroke:#fff;stroke-dasharray:2 10;stroke-width:6}
-.runner{fill:#fff;stroke:#0a0c10;stroke-width:3;filter:drop-shadow(0 0 8px #ffb347)}
+.runner{fill:#fff;stroke:#0a0c10;stroke-width:3}
 .pin text{font-family:var(--body);font-size:20px;font-weight:700;paint-order:stroke;stroke:#0a0c10;stroke-width:5px}
 .mtrctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px 22px;margin-top:18px;align-items:end}
+/* the menus come first in the tab order (before 65 stations), the map still shows first */
+.mtrb{display:flex;flex-direction:column}
+.mtrb>.mapwrap{order:-1}
 select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;width:100%}
 .legs{display:flex;flex-direction:column;gap:6px;margin-top:14px}
 .leg{display:grid;grid-template-columns:12px 1fr auto;gap:10px;align-items:center;font-size:.9rem;padding:6px 10px;border:1px solid var(--line);border-radius:6px}
@@ -149,6 +156,7 @@ select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:v
 .modes{display:flex;flex-wrap:wrap;gap:8px}
 .mode{padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);font-size:.86rem;display:flex;gap:6px;align-items:center}
 .mode i{width:9px;height:9px;border-radius:50%;opacity:.4}
+.emo{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;margin-right:4px;font-style:normal}
 .mode[aria-pressed="true"]{color:var(--ink);border-color:var(--ink)}
 .mode[aria-pressed="true"] i{opacity:1}
 .qs{display:flex;flex-direction:column;gap:12px;margin-top:6px}
@@ -218,18 +226,34 @@ select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:v
 .prem{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
 @media (max-width:860px){.prem{grid-template-columns:minmax(0,1fr)}}
 #orbit{width:100%;max-width:460px;aspect-ratio:1;display:block;margin-inline:auto;border-radius:8px;background:#000;border:1px solid var(--line)}
-.logic{font-family:var(--mono);font-size:1.15rem;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 14px}
-.chipx{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;padding:4px 10px;font-family:var(--mono);font-size:1rem}
-.chipx.q{border-style:dashed;cursor:default}
-.chipx.sus{border-color:var(--stop);color:var(--stop);text-decoration:line-through}
+.tex{font-family:"STIX Two Text","Latin Modern Roman","Cambria Math","Times New Roman",serif;font-size:1.08em;white-space:nowrap}
+.tex i,i.tex{font-style:italic}
+.tex sub{font-size:.68em;vertical-align:-.3em;line-height:0;font-style:normal}
+.stp{display:inline-grid;place-items:center;width:1.45em;height:1.45em;border-radius:50%;border:1px solid var(--muted);font-size:.72rem;line-height:1;font-weight:500;margin-right:6px;color:var(--ink);font-family:var(--mono);flex:none}
+.ctl>.lab{display:flex;align-items:center;margin-top:4px}
+.logic{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:flex-start;margin:8px 0 14px}
+.logic .op{font-family:"STIX Two Text","Cambria Math",serif;font-size:1.3rem;padding-top:3px;color:var(--muted)}
+.chipx{display:flex;flex-direction:column;align-items:center;gap:3px;max-width:6.4em}
+.chipx .tex{border:1px solid var(--line);border-radius:6px;padding:1px 10px;font-size:1.3rem;line-height:1.4}
+.chipx small{font-size:.72rem;color:var(--muted);text-align:center;line-height:1.3}
+.chipx.q .tex{border-style:dashed}
+.chipx.sus .tex{border-color:var(--stop);color:var(--stop);text-decoration:line-through}
+.chipx.sus small{color:var(--stop)}
+.cmptbl{width:100%;border-collapse:collapse;font-size:.88rem;margin:4px 0 18px}
+.cmptbl th,.cmptbl td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+.cmptbl th{color:var(--muted);font-weight:500;font-size:.78rem}
+.cmptbl td.go{color:var(--go)}
+.cmptbl td.unk{color:var(--muted)}
+@media (max-width:520px){.logic{flex-wrap:nowrap;gap:2px;justify-content:space-between}.logic .op{font-size:1.05rem}.chipx{max-width:4.4em;min-width:0}.chipx .tex{font-size:1.1rem;padding:1px 7px}.chipx small{font-size:.66rem}}
+@media (max-width:520px){.cmptbl th:nth-child(2),.cmptbl td:nth-child(2),.cmptbl th:nth-child(3),.cmptbl td:nth-child(3){display:none}}
 .plist{display:flex;flex-direction:column;gap:8px;font-size:.9rem}
 .plist button{text-align:left;display:grid;grid-template-columns:2.4em 1fr auto;gap:8px;align-items:center;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;padding:8px 10px;font-size:.9rem}
 .plist button:hover{border-color:var(--accent)}
-.plist button .mono{color:var(--accent)}
+.plist button .tex{color:var(--accent);font-size:1.15rem}
 .plist button[aria-pressed="true"]{border-color:var(--stop)}
 .plist button[aria-pressed="true"] .tg{color:var(--stop)}
 .plist .tg{font-size:.76rem;color:var(--muted)}
-.obs{font-size:.9rem;border-left:3px solid var(--stop);padding-left:12px;margin:12px 0}
+.obs{font-size:.9rem;border-left:3px solid var(--stop);padding-left:12px;margin:8px 0 14px;min-height:5em}
 .outcome{border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-top:14px;min-height:5em}
 .outcome.good{border-color:var(--go)}
 .outcome.good b{color:var(--go)}
@@ -257,18 +281,19 @@ select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:v
     <span class="bignum" aria-hidden="true">01</span><span class="secno">01 · 附图</span>
     <h2>只坐地铁，从中环到旺角</h2>
     <blockquote>A1. 只乘坐地铁，找到从香港中环到旺角的最短路线。</blockquote>
-    <p>借助地铁路线图，不难很快找到 A1 的可行解，这里也是唯一的最优解。下面就是原文那张图。点任意两个车站（第一下是起点，第二下是终点），或者用下面的选单。手机上地图可以左右滑动。</p>
+    <p>借助地铁路线图，不难很快找到 A1 的可行解，这里也是唯一的最优解。下面就是原文那张图。点任意两个车站（第一下是起点，第二下是终点），或者用上面的下拉框。手机上地图可以左右滑动。</p>
   </div>
   <div class="wide">
-    <div class="bench">
-      <div class="mapwrap"><div class="mapbox" id="mapbox"><img src="assets/ch3-img/mtr.webp" alt="原文附图：香港地铁路线图" width="1240" height="810"><svg id="mtr" viewBox="0 0 1240 810" role="img" aria-label="可点击的车站与计算出的路线"></svg></div></div>
+    <div class="bench mtrb">
       <div class="mtrctl">
-        <div><span class="lab">起点</span><select id="from"></select></div>
-        <div><span class="lab">终点</span><select id="to"></select></div>
+        <div><label class="lab" for="from">起点</label><select id="from"></select></div>
+        <div><label class="lab" for="to">终点</label><select id="to"></select></div>
         <div><span class="lab">“最短”指什么</span>
           <div class="seg" id="crit"><button type="button" data-v="time" aria-pressed="true">时间</button><button type="button" data-v="xfer" aria-pressed="false">换乘</button><button type="button" data-v="stops" aria-pressed="false">站数</button></div>
         </div>
       </div>
+      <div class="mapwrap"><div class="mapbox" id="mapbox"><img src="assets/ch3-img/mtr.webp" alt="原文附图：香港地铁路线图" width="1240" height="810"><svg id="mtr" viewBox="0 0 1240 810" role="img" aria-label="可点击的车站与计算出的路线"></svg></div></div>
+      <p class="meta" id="pickhint" style="margin:10px 0 0"></p>
       <div class="rsum" id="rsum"></div>
       <div class="legs" id="legs"></div>
       <p class="meta" style="margin:12px 0 0">时间按每站约 2 分钟、过海约 3 分钟、普通换乘 4 分钟、旺角太子油麻地同站对面换乘 1 分钟估算；香港—中环、尖沙咀—尖东、旺角—旺角东按步行连接。线路以原图为准。</p>
@@ -285,7 +310,7 @@ select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:v
     <h2>行动方式不限</h2>
     <blockquote>A2. 找到从香港中环到旺角的最短路线，行动方式不限。</blockquote>
     <p>去掉地铁的限制，巴士、的士、渡轮、步行加游泳、直升机乃至多种混合，都在可能性空间之中。所谓<strong>开放问题</strong>，一部分含义就在于<strong>广阔的可能性空间</strong>。更棘手的是另一部分：<strong>可能性空间是会变化的</strong>。哪天发明了瞬间移动，它是不是也该算进去？</p>
-    <p>左边逐个放开交通方式，看可行的路线怎么变多；再回答下面几个原题里没说的问题，看空间怎么缩回来。路线都是真实存在的走法，地图按 OpenStreetMap 的海岸线描绘。</p>
+    <p>逐个放开交通方式，看可行的路线怎么变多；再回答几个原题里没说的问题，看空间怎么缩回来。路线都是真实存在的走法，地图按 OpenStreetMap 的海岸线描绘。</p>
   </div>
   <div class="wide">
     <div class="bench">
@@ -305,8 +330,8 @@ select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:v
     </div>
   </div>
   <div class="col">
-    <p><strong>问题开放的根本原因是不完全的信息</strong>，来自两方面：问题本身，和问题解决者。A1 和 A2 其实都很模糊：只给了行动方式，没给可支配的资金；没说是“谁”去行动，他游泳多快；连“不限定行动方式”这个条件本身都是开放的。</p>
-    <p>右边那几个问题，就是原文的第二个策略：<strong>对问题本身提问题</strong>。向提出问题的人追问，增加显性的约束，空泛的问题就变得明确。问题的提出和解决因此不是单向的流水线，而是一个反馈、迭代的循环。</p>
+    <p><strong>问题开放的根本原因是不完全的信息</strong>，来自两方面：问题本身，和问题解决者。A1 和 A2 其实都很模糊：只给了行动方式，没给可支配的资金；没说是“谁”去行动，他游泳多快；连“不限定行动方式”这个条件本身都是开放的。另一方面，即使问题给的信息已经很完整，解决者自己对问题的理解也可能有局限；理解深入以后，从原问题里抽出来的子问题和问题情境还会变。</p>
+    <p>刚才那四个追问，就是原文的第二个策略：<strong>对问题本身提问题</strong>。向提出问题的人追问，增加显性的约束，空泛的问题就变得明确。问题的提出和解决因此不是单向的流水线，而是一个反馈、迭代的循环。</p>
   </div>
 </section>
 
@@ -330,7 +355,7 @@ select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:v
     </div>
   </div>
   <div class="col">
-    <p>差距大的时候，量级甚至顺序就够用；差距小的时候，抓大放小会抓丢。地铁和的士都是“每小时几十公里”，只看量级就分不出来，这时要么回到更精确的信息，要么承认它们差不多，再换一个特征（比如会不会塞车）来比。</p>
+    <p>差距大的时候，量级就够用；差距小的时候，抓大放小会抓丢。地铁和的士都是“每小时几十公里”，只看量级就分不出来，这时要么回到更精确的信息，要么承认它们差不多，再换一个特征（比如会不会塞车）来比。“只看顺序”需要的信息最少，但前提是你本来就知道谁快谁慢；差距越小的两样，这条先后关系越靠不住。</p>
     <p>从问题提出者的角度，很多信息不完全的问题，要建立在和解决者共享这些先验知识的共识之上，换句话说就是用了隐含条件。共识用得好，省下许多沟通成本；用不好也可能是灾难：很多自以为的共识，其实并不是事实上的共识。</p>
   </div>
 </section>
@@ -339,8 +364,8 @@ select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:v
   <div class="col">
     <span class="bignum" aria-hidden="true">04</span><span class="secno">04 · 隐含前提</span>
     <h2>证伪的是一整个合式</h2>
-    <p>隐含条件可以联系到科学哲学里的<strong>波普尔可证伪性原则</strong>。整体论者指出：我们看到一个条件命题 <span class="mono">p → q</span> 时，它更完整的表述其实是 <span class="mono">(p ∧ a1 ∧ a2 ∧ …) → q</span>，<span class="mono">a1</span>、<span class="mono">a2</span> 都是隐含的前提。所以由 <span class="mono">¬q</span> 推不出 <span class="mono">¬p</span>，只能推出 <span class="mono">¬(p ∧ a1 ∧ a2 ∧ …)</span>：证伪的是各条件的合式整体。</p>
-    <p>原文提到了海王星。下面是天文学史上形式完全相同、结局却相反的两次“证伪”。观察到 ¬q 之后，你会怀疑哪一个前提？</p>
+    <p>隐含条件可以联系到科学哲学里的<strong>波普尔可证伪性原则</strong>。整体论者指出：我们看到一个条件命题 <span class="tex"><i>p</i> → <i>q</i></span>（如果 <i class="tex">p</i>，那么 <i class="tex">q</i>）时，它更完整的表述其实是 <span class="tex">(<i>p</i> ∧ <i>a</i><sub>1</sub> ∧ <i>a</i><sub>2</sub> ∧ ⋯) → <i>q</i></span>，<span class="tex"><i>a</i><sub>1</sub></span>、<span class="tex"><i>a</i><sub>2</sub></span> 都是没说出口的前提。所以看到 <span class="tex">¬<i>q</i></span>（<i class="tex">q</i> 没发生）推不出 <span class="tex">¬<i>p</i></span>，只能推出 <span class="tex">¬(<i>p</i> ∧ <i>a</i><sub>1</sub> ∧ <i>a</i><sub>2</sub> ∧ ⋯)</span>：这一串条件里<strong>至少有一个</strong>是错的，但不知道是哪一个。</p>
+    <p>原文提到了海王星。下面是天文学史上形式完全相同、结局却相反的两次“证伪”。两次都是同一个人，法国天文学家勒维耶，用同一种思路去解。你来替他选：预测落空之后，该怀疑哪一条？</p>
   </div>
   <div class="wide">
     <div class="bench prem">
@@ -349,16 +374,20 @@ select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:v
         <canvas id="orbit" width="460" height="460" aria-label="轨道示意"></canvas>
       </div>
       <div class="ctl">
+        <span class="lab"><b class="stp">1</b>推理：三条加在一起，推出一个预测</span>
         <div class="logic" id="logic"></div>
+        <span class="lab"><b class="stp">2</b>观测：预测落空</span>
         <p class="obs" id="obs"></p>
-        <span class="lab">点一个前提，表示你怀疑它</span>
+        <span class="lab"><b class="stp">3</b>三条里至少错了一条。你怀疑哪一条？</span>
         <div class="plist" id="plist"></div>
+        <span class="lab"><b class="stp">4</b>历史上的结果</span>
         <div class="outcome" id="outcome"></div>
       </div>
     </div>
   </div>
   <div class="col">
-    <p>形式一模一样：理论 + 隐含前提 → 预测，预测落空。天王星那次，问题出在隐含前提“没有未知的行星”，于是找到了海王星；水星那次，同样的思路找来的“祝融星”并不存在，问题出在理论本身，最后由广义相对论解决。光看 ¬q，你没法知道该怪谁。</p>
+    <table class="cmptbl" id="cmp" aria-label="两次证伪对照"></table>
+    <p>形式一模一样：理论 + 隐含前提 → 预测，预测落空。天王星那次，问题出在隐含前提“没有未知的行星”，于是找到了海王星；水星那次，同样的思路找来的“祝融星”并不存在，问题出在理论本身，最后由广义相对论解决。光看 <span class="tex">¬<i>q</i></span>，你没法知道该怪谁。</p>
     <p>理想地讲，一种理论在形成时，是有能力、也必须把前提条件明确下来的。即使存在海王星这样预先没考虑到的隐含条件，也不是可证伪性本身的瑕疵（只是只能证伪整个理论的话，对科学发展的意义似乎大大减少了）。或许可以说，科学理论也需要尽量确保它讨论的问题不是开放的：理论越成熟，已明确的约束条件就越多。</p>
   </div>
 </section>
@@ -371,7 +400,7 @@ select{font:inherit;font-size:.9rem;padding:6px 8px;background:var(--bg);color:v
       <li><span class="no">一</span><div><h4><a href="ch1.html">问题情境</a></h4><p>两种画法的正方形、找箭头、搜索树、表示方式、设计。</p></div></li>
       <li><span class="no">二</span><div><h4><a href="ch2.html">可行解</a></h4><p>六道削皮题、量水实验、把剪刀拆开看、一根拉绳。</p></div></li>
       <li class="cur"><span class="no">三</span><div><h4>开放问题</h4><p>本页：只坐地铁、行动方式不限、抓大放小、证伪的是整个合式。</p></div></li>
-      <li><span class="no">四</span><div><h4><a href="ch4.html">纠结与最优解</a></h4><p>电车难题、价值天平、两千个可能的你、偏好系统、单因素模型。</p></div></li>
+      <li><span class="no">四</span><div><h4><a href="ch4.html">纠结与最优解</a></h4><p>电车难题、价值天平、两千个可能的你、偏好系统、标准轮换造出的环。</p></div></li>
       <li class="draft"><span class="no">五</span><div><h4>测量的局限</h4><p>来自 2026-03 的整合 Proposal：相似性、分类与理论负荷。</p></div></li>
       <li class="draft"><span class="no">六</span><div><h4>Duck Typing 作为策略</h4><p>不问它是什么，问它能做什么；行为级数据，让用户自己设权重。</p></div></li>
       <li class="draft"><span class="no">七</span><div><h4>工程实践</h4><p>测试环境作为反事实探索器，双重传感器，Bayesian Safety。</p></div></li>
@@ -416,16 +445,16 @@ function segBind(id, fn) { const root = $(id); root.querySelectorAll('button').f
   };
   const RMAX = Math.max(...segs.map(s => s[4] + s[5]));
   if (RM) { draw(RMAX, -1.2); return; }
-  let vis = true;
-  new IntersectionObserver(es => vis = es[0].isIntersecting).observe($('#sprawl'));
+  // offscreen the loop stops altogether, and the observer restarts it
+  let vis = true, idle = false;
+  new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis && idle) { idle = false; requestAnimationFrame(loop); } }).observe($('#sprawl'));
   const T = 11000, t0 = performance.now();
   const loop = now => {
-    if (vis) {
-      const t = now - t0, k = (t % T) / T, g = Math.min(1, k / .7);
-      draw(RMAX * (1 - Math.pow(1 - g, 2)), -1.2 + t / 14000);
-      const o = k < .9 ? 1 : 1 - (k - .9) / .1;
-      tree.style.opacity = .35 * o; edge.style.opacity = .75 * o;
-    }
+    if (!vis) { idle = true; return; }
+    const t = now - t0, k = (t % T) / T, g = Math.min(1, k / .7);
+    draw(RMAX * (1 - Math.pow(1 - g, 2)), -1.2 + t / 14000);
+    const o = k < .9 ? 1 : 1 - (k - .9) / .1;
+    tree.style.opacity = .35 * o; edge.style.opacity = .75 * o;
     requestAnimationFrame(loop);
   };
   requestAnimationFrame(loop);
@@ -466,35 +495,45 @@ for (const [id, L] of Object.entries(LINES)) for (let i = 1; i < L.s.length; i++
   const a = L.s[i - 1], b = L.s[i], w = (L.t && (L.t[a + '-' + b] || L.t[b + '-' + a])) || 2;
   addE(a + '|' + id, b + '|' + id, w, id); addE(b + '|' + id, a + '|' + id, w, id);
 }
-for (const [a, b, w] of WALKS) { addE(a + '|WALK', b + '|WALK', w, 'WALK'); addE(b + '|WALK', a + '|WALK', w, 'WALK'); }
-const linesAt = s => Object.keys(LINES).filter(id => LINES[id].s.includes(s) || (id === 'WALK' && WALKS.some(w => w[0] === s || w[1] === s)));
-for (const s of Object.keys(ST)) { const ls = linesAt(s); for (const a of ls) for (const b of ls) if (a !== b) addE(s + '|' + a, s + '|' + b, a === 'WALK' || b === 'WALK' ? 0 : (XPLAT.has(s) && ((a === 'TWL' && b === 'KTL') || (a === 'KTL' && b === 'TWL')) ? 1 : 4), 'XFER'); }
+const linesAt = s => Object.keys(LINES).filter(id => id !== 'WALK' && LINES[id].s.includes(s));
+// a walk joins a line at one station to a line at the other; it is a change of line, and its minutes are the walk
+for (const [a, b, w] of WALKS) for (const la of linesAt(a)) for (const lb of linesAt(b)) { addE(a + '|' + la, b + '|' + lb, w, 'WALK'); addE(b + '|' + lb, a + '|' + la, w, 'WALK'); }
+for (const s of Object.keys(ST)) { const ls = linesAt(s); for (const a of ls) for (const b of ls) if (a !== b) addE(s + '|' + a, s + '|' + b, XPLAT.has(s) && ((a === 'TWL' && b === 'KTL') || (a === 'KTL' && b === 'TWL')) ? 1 : 4, 'XFER'); }
+const walkMin = (a, b) => (WALKS.find(w => (w[0] === a && w[1] === b) || (w[0] === b && w[1] === a)) || [, , 0])[2];
 function route(from, to, crit) {
   // Dijkstra on a lexicographic cost: [primary, time]
   const key = c => crit === 'time' ? c.time : (crit === 'xfer' ? c.x * 1000 + c.time : c.n * 1000 + c.time);
-  const dist = {}, prev = {}, Q = [];
+  const dist = {}, prev = {}, via = {}, Q = [];
   for (const l of linesAt(from)) { const k = from + '|' + l; dist[k] = { time: 0, x: 0, n: 0 }; Q.push(k); }
   const done = new Set();
   while (Q.length) {
     Q.sort((a, b) => key(dist[a]) - key(dist[b])); const u = Q.shift();
     if (done.has(u)) continue; done.add(u);
-    if (u.startsWith(to + '|')) { const path = []; let k = u; while (k) { path.unshift(k); k = prev[k]; } return { path, cost: dist[u] }; }
+    if (u.startsWith(to + '|')) { const path = []; let k = u; while (k) { path.unshift(k); k = prev[k]; } return { path, via, cost: dist[u] }; }
     for (const e of G[u] || []) {
-      const c = dist[u], nc = { time: c.time + e.w, x: c.x + (e.line === 'XFER' && e.w > 0 ? 1 : 0), n: c.n + (e.line !== 'XFER' ? 1 : 0) };
-      if (!dist[e.to] || key(nc) < key(dist[e.to])) { dist[e.to] = nc; prev[e.to] = u; Q.push(e.to); }
+      const ride = e.line !== 'XFER' && e.line !== 'WALK';
+      const c = dist[u], nc = { time: c.time + e.w, x: c.x + (ride ? 0 : 1), n: c.n + (ride ? 1 : 0) };
+      if (!dist[e.to] || key(nc) < key(dist[e.to])) { dist[e.to] = nc; prev[e.to] = u; via[e.to] = e.line; Q.push(e.to); }
     }
   }
   return null;
 }
 const mtr = $('#mtr');
-let A = 'CEN', B = 'MOK', crit = 'time', pick = 0, runAnim = 0;
-const opts = Object.entries(ST).sort((a, b) => a[1][0].localeCompare(b[1][0], 'zh')).map(([k, v]) => `<option value="${k}">${v[0]}</option>`).join('');
-$('#from').innerHTML = opts; $('#to').innerHTML = opts;
+let A = 'CEN', B = 'MOK', crit = 'time', pick = 0, runAnim = 0, mapSeen = true, mapResume = null;
+new IntersectionObserver(es => { mapSeen = es[0].isIntersecting; if (mapSeen && mapResume) { const g = mapResume; mapResume = null; requestAnimationFrame(g); } }).observe($('#mtr'));
+// the menus offer a handful of stations spread over the districts; a station tapped on the map is added to them
+const PICK = ['CEN', 'KET', 'CAB', 'CHW', 'SOH', 'TST', 'MOK', 'KWT', 'TKO', 'TSW', 'SHT'];
+function fillSel() {
+  const ks = [...new Set([...PICK, A, B])];
+  const opts = ks.map(k => `<option value="${k}">${ST[k][0]}</option>`).join('');
+  if ($('#from').dataset.ks !== ks.join()) { $('#from').innerHTML = opts; $('#to').innerHTML = opts; $('#from').dataset.ks = ks.join(); }
+}
 function drawRoute() {
-  $('#from').value = A; $('#to').value = B;
+  fillSel(); $('#from').value = A; $('#to').value = B;
   mtr.innerHTML = '';
   el('rect', { x: 0, y: 0, width: 1240, height: 810, class: 'dim on' }, mtr);
   const r = A === B ? null : route(A, B, crit);
+  runAnim++;                                 // any running dot belongs to the previous route
   const rg = el('g', {}, mtr);
   const legs = [];
   if (r) {
@@ -502,9 +541,9 @@ function drawRoute() {
     const steps = r.path.map(k => k.split('|'));
     let cur = null;
     for (let i = 1; i < steps.length; i++) {
-      const [s0, l0] = steps[i - 1], [s1, l1] = steps[i];
+      const [s0] = steps[i - 1], [s1] = steps[i], line = r.via[r.path[i]];
       if (s0 === s1) continue;               // transfer edge
-      if (!cur || cur.line !== l1) { cur = { line: l1, st: [s0] }; legs.push(cur); }
+      if (!cur || cur.line !== line) { cur = { line, st: [s0] }; legs.push(cur); }
       cur.st.push(s1);
     }
     const pts = [];
@@ -524,23 +563,25 @@ function drawRoute() {
       wrap.scrollTo({ left: Math.max(0, mid - wrap.clientWidth / 2), behavior: RM ? 'auto' : 'smooth' });
     }
     if (!RM && pts.length > 1) {
-      const dot = el('circle', { r: 9, class: 'runner' }, rg), tok = ++runAnim;
+      const dot = el('circle', { r: 9, class: 'runner' }, rg), tok = runAnim;
       const seg = []; let tot = 0; for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); seg.push(l); tot += l; }
       const t0 = performance.now(), D = Math.max(1200, tot * 3);
-      const go = now => { if (tok !== runAnim) return; let d = ((now - t0) % (D + 800)) / D * tot; if (d > tot) d = tot; let i = 0; while (i < seg.length - 1 && d > seg[i]) { d -= seg[i]; i++; } const k = seg[i] ? Math.min(1, d / seg[i]) : 0; dot.setAttribute('cx', pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k); dot.setAttribute('cy', pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k); requestAnimationFrame(go); };
+      const go = now => { if (tok !== runAnim) return; if (!mapSeen) { mapResume = go; return; } let d = ((now - t0) % (D + 800)) / D * tot; if (d > tot) d = tot; let i = 0; while (i < seg.length - 1 && d > seg[i]) { d -= seg[i]; i++; } const k = seg[i] ? Math.min(1, d / seg[i]) : 0; dot.setAttribute('cx', pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k); dot.setAttribute('cy', pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k); requestAnimationFrame(go); };
       requestAnimationFrame(go);
     }
   }
   for (const [k, v] of Object.entries(ST)) {
     const c = el('circle', { cx: v[1], cy: v[2], r: 13, class: 'st' + (k === A ? ' a' : k === B ? ' b' : ''), tabindex: '0', role: 'button', 'aria-label': v[0] }, mtr);
-    const set = () => { if (pick === 0) { A = k; pick = 1; } else { B = k; pick = 0; } drawRoute(); };
+    const set = () => { const kb = document.activeElement === c; if (pick === 0) { A = k; pick = 1; } else { B = k; pick = 0; } drawRoute(); if (kb) { const n = mtr.querySelector(`.st[data-k="${k}"]`); n && n.focus(); } };
+    c.dataset.k = k;
     c.addEventListener('click', set); c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); set(); } });
   }
+  $('#pickhint').innerHTML = `在地图上点车站：下一下设为<b>${pick === 0 ? '起点' : '终点'}</b>。`;
   for (const [k, lab, cls] of [[A, '起', '#e08a00'], [B, '终', '#0f9f74']]) { const g = el('g', { class: 'pin' }, mtr); const t = el('text', { x: ST[k][1] + 14, y: ST[k][2] - 14, fill: cls }, g); t.textContent = lab; }
   if (!r) { $('#rsum').innerHTML = '<div><span class="big">—</span><span>起点和终点相同</span></div>'; $('#legs').innerHTML = ''; return; }
-  const xf = legs.filter(l => l.line !== 'WALK').length - 1, stops = legs.reduce((a, l) => a + l.st.length - 1, 0);
+  const xf = legs.filter(l => l.line !== 'WALK').length - 1, stops = legs.reduce((a, l) => a + (l.line === 'WALK' ? 0 : l.st.length - 1), 0);
   $('#rsum').innerHTML = `<div><span class="big">${r.cost.time}</span><span>分钟（估算）</span></div><div><span class="big">${Math.max(0, xf)}</span><span>次换乘</span></div><div><span class="big">${stops}</span><span>站</span></div>`;
-  $('#legs').innerHTML = legs.map(L => `<div class="leg"><i style="background:${LINES[L.line].c};${L.line === 'WALK' ? 'border:1px solid var(--muted)' : ''}"></i><span>${LINES[L.line].n}：${ST[L.st[0]][0]} → ${ST[L.st[L.st.length - 1]][0]}</span><span class="mono">${L.st.length - 1} 站</span></div>`).join('');
+  $('#legs').innerHTML = legs.map(L => `<div class="leg"><i style="background:${LINES[L.line].c};${L.line === 'WALK' ? 'border:1px solid var(--muted)' : ''}"></i><span><span class="emo" aria-hidden="true">${L.line === 'WALK' ? '🚶' : '🚇'}</span>${LINES[L.line].n}：${ST[L.st[0]][0]} → ${ST[L.st[L.st.length - 1]][0]}</span><span class="mono">${L.line === 'WALK' ? walkMin(L.st[0], L.st[1]) + ' 分钟' : L.st.length - 1 + ' 站'}</span></div>`).join('');
 }
 // a fingertip rarely lands inside a station ring: a tap anywhere on the map picks the nearest station
 $('#mtr').addEventListener('click', e => {
@@ -572,17 +613,18 @@ const toCHT = [[114.1650, 22.2805], [114.1740, 22.2800], [114.1790, 22.2818], HK
 const nathanN = [[114.1720, 22.2958], HK.TSM, HK.JOR, HK.YMT, HK.MOK];
 const chtToNathan = [HK.CHTK, [114.1770, 22.3045], [114.1718, 22.3060], HK.YMT, HK.NELS];
 const MODES = [
-  { id: 'mtr', n: '地铁', c: '#e2231a', on: true },
-  { id: 'bus', n: '巴士', c: '#e6d35a' },
-  { id: 'mini', n: '小巴', c: '#3cb371' },
-  { id: 'taxi', n: '的士', c: '#c9a0ff' },
-  { id: 'ferry', n: '渡轮', c: '#5cb8ff' },
-  { id: 'walk', n: '步行', c: '#b0b6c0' },
-  { id: 'bike', n: '单车', c: '#9cf06a' },
-  { id: 'swim', n: '游泳', c: '#4fd1c5' },
-  { id: 'heli', n: '直升机', c: '#ff8fb1' },
-  { id: 'tele', n: '瞬间移动', c: '#ffffff' },
+  { id: 'mtr', n: '地铁', e: '🚇', c: '#e2231a', on: true },
+  { id: 'bus', n: '巴士', e: '🚌', c: '#e6d35a' },
+  { id: 'mini', n: '小巴', e: '🚐', c: '#3cb371' },
+  { id: 'taxi', n: '的士', e: '🚕', c: '#c9a0ff' },
+  { id: 'ferry', n: '渡轮', e: '⛴️', c: '#5cb8ff' },
+  { id: 'walk', n: '步行', e: '🚶', c: '#b0b6c0' },
+  { id: 'bike', n: '单车', e: '🚲', c: '#9cf06a' },
+  { id: 'swim', n: '游泳', e: '🏊', c: '#4fd1c5' },
+  { id: 'heli', n: '直升机', e: '🚁', c: '#ff8fb1' },
+  { id: 'tele', n: '瞬间移动', e: '✨', c: '#ffffff' },
 ];
+const ME = Object.fromEntries(MODES.map(m => [m.id, m.e]));
 const MC = Object.fromEntries(MODES.map(m => [m.id, m.c]));
 // day / night: door-to-door minutes [low, high]; null = not running. fare: adult HKD, used by the budget question.
 const ROUTES = [
@@ -638,13 +680,15 @@ function judge(r) {
   return { st: 'ok', why: r.why, t };
 }
 function renderModes() {
-  $('#modes').innerHTML = MODES.map(m => `<button type="button" class="mode" data-id="${m.id}" aria-pressed="${!!m.on}"><i style="background:${m.c}"></i>${m.n}</button>`).join('');
-  $('#modes').querySelectorAll('.mode').forEach(b => b.addEventListener('click', () => { const m = MODES.find(x => x.id === b.dataset.id); m.on = !m.on; renderModes(); }));
+  $('#modes').innerHTML = MODES.map(m => `<button type="button" class="mode" data-id="${m.id}" aria-pressed="${!!m.on}"><i style="background:${m.c}"></i><span class="emo" aria-hidden="true">${m.e}</span>${m.n}</button>`).join('');
+  $('#modes').querySelectorAll('.mode').forEach(b => b.addEventListener('click', () => { const m = MODES.find(x => x.id === b.dataset.id); m.on = !m.on; keepFocus(b, () => renderModes(), `#modes .mode[data-id="${m.id}"]`); }));
   renderRoutes();
 }
+// controls rebuilt with innerHTML: put keyboard focus back on the one that was pressed
+function keepFocus(btn, render, sel) { const kb = document.activeElement === btn; render(); if (kb) { const n = document.querySelector(sel); n && n.focus(); } }
 function renderQs() {
   $('#qs').innerHTML = QS.map(q => `<div class="q"><span class="lab">${q.q}</span><div class="seg" data-q="${q.id}">${q.o.map((o, i) => `<button type="button" data-i="${i}" aria-pressed="${ans[q.id] === i}">${o}</button>`).join('')}</div></div>`).join('');
-  $('#qs').querySelectorAll('.seg').forEach(sg => sg.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { ans[sg.dataset.q] = +b.dataset.i; if (sg.dataset.q === 'tech' && +b.dataset.i === 1) MODES.find(m => m.id === 'tele').on = true; renderQs(); renderModes(); })));
+  $('#qs').querySelectorAll('.seg').forEach(sg => sg.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { ans[sg.dataset.q] = +b.dataset.i; if (sg.dataset.q === 'tech' && +b.dataset.i === 1) MODES.find(m => m.id === 'tele').on = true; keepFocus(b, () => { renderQs(); renderModes(); }, `#qs .seg[data-q="${sg.dataset.q}"] button[data-i="${b.dataset.i}"]`); })));
 }
 function renderRoutes() {
   const on = new Set(MODES.filter(m => m.on).map(m => m.id));
@@ -660,10 +704,10 @@ function renderRoutes() {
   $('#nbestl').textContent = best ? `目前最快：${best.r.n}` : '在这些条件下没有可行路线';
   $('#routes').innerHTML = vis.length ? vis.map(v => `<button type="button" class="route ${v.st}" data-id="${v.r.id}" aria-pressed="${v.r.id === selRoute}"${v.st === 'cut' ? ' disabled' : ''}>
       <span class="bar">${v.r.legs.map(([m]) => `<i style="background:${MC[m]}"></i>`).join('')}</span>
-      <span class="nm">${v.r.n}${v.r.sub ? `<small>${v.r.sub}</small>` : ''}</span>
+      <span class="nm"><span class="emo" aria-hidden="true">${v.r.legs.map(([m]) => ME[m]).filter((e, i, a) => e !== a[i - 1]).join('')}</span>${v.r.n}${v.r.sub ? `<small>${v.r.sub}</small>` : ''}</span>
       <span class="tm${v === best ? ' fast' : ''}">${v.t ? fmtT(v.t) : '—'}${v.st !== 'cut' ? ` · ${fmtF(v.r)}` : ''}</span>
       ${v.why ? `<span class="why">${v.why}</span>` : ''}</button>`).join('') : '<p class="empty">只放开这些方式，连一条路线都拼不出来。</p>';
-  $('#routes').querySelectorAll('.route:not(.cut)').forEach(b => b.addEventListener('click', () => { selRoute = b.dataset.id; renderRoutes(); }));
+  $('#routes').querySelectorAll('.route:not(.cut)').forEach(b => b.addEventListener('click', () => { selRoute = b.dataset.id; keepFocus(b, renderRoutes, `#routes .route[data-id="${b.dataset.id}"]`); }));
   drawMap(vis, best);
 }
 const hk = $('#hk');
@@ -695,11 +739,14 @@ let shown = 0;
 function countTo(node, v) { const from = shown, t0 = performance.now(); shown = v; if (RM) { node.textContent = v; return; } const st = now => { const k = Math.min(1, (now - t0) / 400); node.textContent = Math.round(from + (v - from) * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(st); }; requestAnimationFrame(st); }
 
 /* ---------- 03 precision ---------- */
-const SPD = [['游泳', 3], ['步行', 5], ['单车', 15], ['过海巴士', 20], ['的士', 28], ['地铁', 33], ['直升机', 220], ['民航客机', 850]];
+const SPD = [['游泳', 3, '🏊'], ['步行', 5, '🚶'], ['单车', 15, '🚲'], ['过海巴士', 20, '🚌'], ['的士', 28, '🚕'], ['地铁', 33, '🚇'], ['直升机', 220, '🚁'], ['民航客机', 850, '✈️']];
 let plev = 'exact';
-['#ca', '#cb'].forEach((q, i) => { $(q).innerHTML = SPD.map(([n], j) => `<option value="${j}">${n}</option>`).join(''); $(q).value = i ? 5 : 7; $(q).addEventListener('change', renderPrec); });
-const mag = v => Math.pow(10, Math.floor(Math.log10(v)));            // order of magnitude: 1, 10, 100…
-const magName = v => ({ 1: '个位数', 10: '几十', 100: '几百', 1000: '几千' })[mag(v)];
+['#ca', '#cb'].forEach((q, i) => { $(q).innerHTML = SPD.map(([n, , e], j) => `<option value="${j}">${e} ${n}</option>`).join(''); $(q).value = i ? 5 : 7; $(q).addEventListener('change', renderPrec); });
+// the rough sizes people actually say out loud; 十几 is a band of its own in Chinese, so 15 and 33 are not the same size
+const BANDS = [[10, '个位数'], [20, '十几'], [100, '几十'], [1000, '几百'], [Infinity, '几千']];
+const band = v => BANDS.findIndex(([hi]) => v < hi);
+const magName = v => BANDS[band(v)][1];
+const bandMid = v => { const i = band(v), lo = i ? BANDS[i - 1][0] : 1; return Math.sqrt(lo * Math.min(BANDS[i][0], lo * 10)); };
 function renderPrec() {
   const svg = $('#bars'); svg.innerHTML = '';
   const a = +$('#ca').value, b = +$('#cb').value;
@@ -708,13 +755,13 @@ function renderPrec() {
   svg.setAttribute('viewBox', nar ? '0 0 340 400' : '0 0 560 330');
   const X0 = nar ? 8 : 90, X1 = nar ? 262 : 470, rowH = nar ? 44 : 36, by = nar ? 18 : 4, lx = v => X0 + (Math.log10(v) - Math.log10(1)) / 3 * (X1 - X0);
   const axB = nar ? 14 + SPD.length * rowH - 4 : 300;
-  if (plev !== 'order') for (const v of [1, 10, 100, 1000]) { el('line', { x1: lx(v), y1: 10, x2: lx(v), y2: axB, class: 'ax' }, svg); const t = el('text', { x: lx(v), y: axB + 18, 'text-anchor': nar && v === 1 ? 'start' : nar && v === 1000 ? 'end' : 'middle', class: 'tick' }, svg); t.textContent = nar ? String(v) : v + ' km/h'; }
+  if (plev !== 'order') for (const v of plev === 'mag' ? [1, 10, 20, 100, 1000] : [1, 10, 100, 1000]) { el('line', { x1: lx(v), y1: 10, x2: lx(v), y2: axB, class: 'ax' }, svg); const t = el('text', { x: lx(v), y: axB + 18, 'text-anchor': nar && v === 1 ? 'start' : nar && v === 1000 ? 'end' : 'middle', class: 'tick' }, svg); t.textContent = nar || v === 20 ? String(v) : v + ' km/h'; }
   SPD.forEach(([n, v], i) => {
     const y = 14 + i * rowH, hl = i === a || i === b;
-    const t = el('text', nar ? { x: X0, y: y + 12 } : { x: X0 - 10, y: y + 17, 'text-anchor': 'end' }, svg); t.textContent = n;
+    const t = el('text', nar ? { x: X0, y: y + 12 } : { x: X0 - 10, y: y + 17, 'text-anchor': 'end' }, svg); t.textContent = SPD[i][2] + ' ' + n;
     let w, label;
     if (plev === 'exact') { w = lx(v) - X0; label = v + ' km/h'; }
-    else if (plev === 'mag') { w = lx(mag(v) * 3.16) - X0; label = magName(v); }
+    else if (plev === 'mag') { w = lx(bandMid(v)) - X0; label = magName(v); }
     else { w = (i + 1) / SPD.length * (X1 - X0); label = '第 ' + (SPD.length - i) + ' 快'; }
     el('rect', { x: X0, y: y + by, width: Math.max(2, w), height: nar ? 16 : 20, rx: 3, class: hl ? 'hl' : 'nm' }, svg);
     const vt = el('text', { x: X0 + Math.max(2, w) + 8, y: y + by + (nar ? 13 : 14), class: 'val' }, svg); vt.textContent = label;
@@ -723,7 +770,7 @@ function renderPrec() {
   let can, why, bits;
   if (a === b) { can = null; why = '同一种方式，换一个来比。'; }
   else if (plev === 'exact') { can = true; why = `${va > vb ? na : nb}更快：${Math.max(va, vb)} 对 ${Math.min(va, vb)} km/h。`; bits = '需要的信息：两个精确的数字'; }
-  else if (plev === 'mag') { const same = mag(va) === mag(vb); can = !same; why = same ? `两个都是“每小时${magName(va)}公里”，只看量级分不出来。` : `${va > vb ? na : nb}是“每小时${magName(Math.max(va, vb))}公里”，${va > vb ? nb : na}只有“${magName(Math.min(va, vb))}”，不用精确数值就够了。`; bits = '需要的信息：两个量级'; }
+  else if (plev === 'mag') { const same = band(va) === band(vb); can = !same; why = same ? `两个都是“每小时${magName(va)}公里”，只看量级分不出来。` : `${va > vb ? na : nb}是“每小时${magName(Math.max(va, vb))}公里”，${va > vb ? nb : na}只有“${magName(Math.min(va, vb))}”，不用精确数值就够了。`; bits = '需要的信息：两个量级'; }
   else { can = true; why = `只要先验知识里有“${va > vb ? na : nb}比${va > vb ? nb : na}快”这一条就够了。`; bits = '需要的信息：一条先后顺序（如果你本来就知道）'; }
   $('#pans').innerHTML = can === null ? `<span class="big">—</span>${why}` : `<span class="big ${can ? 'ok' : 'no'}">${can ? '分得出来' : '分不出来'}</span>${why}${bits ? `<div class="bits">${bits}</div>` : ''}`;
 }
@@ -734,30 +781,43 @@ addEventListener('resize', renderPrec);
 const CASES = {
   u: {
     p: '牛顿的万有引力定律', a1: '对天王星的观测是可靠的', a2: '天王星外面没有未知的大行星', q: '天王星按计算出的轨道运行',
-    obs: '观测到 ¬q：到 1840 年代，天王星的实际位置和计算越差越远。',
+    sh: { p: '牛顿引力', a1: '观测可靠', a2: '外面没有别的行星', q: '天王星按算的走' }, name: '天王星', who: '外面没有别的行星', end: '找到海王星',
+    obs: '到 1840 年代，天王星的实际位置和计算越差越远。',
     out: { p: ['bad', '抛弃牛顿？当时几乎没人这样做，事后看也确实不是牛顿的问题。'], a1: ['bad', '观测被一再复核，偏差是真的。'], a2: ['good', '勒维耶（和亚当斯）假设外面还有一颗行星，算出它该在的位置。1846 年 9 月 23 日，伽勒在离预测不到 1° 的地方找到了它：<b>海王星</b>。'] },
     fix: 'a2',
   },
   m: {
     p: '牛顿的万有引力定律', a1: '对水星的观测是可靠的', a2: '水星轨道内侧没有未知的行星', q: '水星近日点的进动符合计算',
-    obs: '观测到 ¬q：水星近日点每世纪比计算多进动约 43 角秒。',
+    sh: { p: '牛顿引力', a1: '观测可靠', a2: '内侧没有别的行星', q: '水星按算的转' }, name: '水星', who: '牛顿引力本身', end: '广义相对论',
+    obs: '水星轨道离太阳最近的那一点，每一百年会慢慢转过一个小角度（近日点进动）。勒维耶 1859 年算出，实测比按牛顿算的每世纪多转约 38 角秒，后来修正为约 43 角秒。',
     out: { p: ['good', '1915 年，爱因斯坦的<b>广义相对论</b>正好算出了这 43 角秒。问题出在理论本身。'], a1: ['bad', '观测同样被反复核对，偏差是真的。'], a2: ['bad', '勒维耶故技重施，预言了一颗更靠近太阳的“祝融星”。几十年里不断有人声称看到它，但它<b>并不存在</b>。'] },
     fix: 'p',
   },
 };
 let cs = 'u', sus = null;
+const SUS = { u: null, m: null };
+const solvedCases = {};
+// p, a1, ¬q … typeset the way a textbook would: italic letters, subscript digits, upright operators
+const tex = k => `<span class="tex">${k.replace(/^(¬?)([a-z])(\d?)$/, (_, n, v, d) => `${n}<i>${v}</i>${d ? `<sub>${d}</sub>` : ''}`)}</span>`;
 function renderPrem() {
   const C = CASES[cs];
-  const chip = k => `<span class="chipx${sus === k ? ' sus' : ''}">${k}</span>`;
-  $('#logic').innerHTML = `(${chip('p')}<span>∧</span>${chip('a1')}<span>∧</span>${chip('a2')}) <span>→</span> <span class="chipx q">q</span>`;
-  $('#obs').textContent = C.obs;
-  $('#plist').innerHTML = [['p', C.p, '理论'], ['a1', C.a1, '隐含前提'], ['a2', C.a2, '隐含前提']].map(([k, t, g]) => `<button type="button" data-k="${k}" aria-pressed="${sus === k}"><span class="mono">${k}</span><span>${t}</span><span class="tg">${sus === k ? '怀疑' : g}</span></button>`).join('') + `<div class="meta" style="font-size:.82rem">q：${C.q}</div>`;
-  $('#plist').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { sus = sus === b.dataset.k ? null : b.dataset.k; renderPrem(); drawOrbit(); }));
+  const chip = (k, q) => `<span class="chipx${q ? ' q' : ''}${sus === k ? ' sus' : ''}">${tex(k)}<small>${C.sh[k]}</small></span>`;
+  const op = t => `<span class="op">${t}</span>`;
+  $('#logic').innerHTML = `${op('(')}${chip('p')}${op('∧')}${chip('a1')}${op('∧')}${chip('a2')}${op(')')}${op('→')}${chip('q', 1)}`;
+  $('#obs').innerHTML = `${tex('¬q')}　${C.obs}`;
+  $('#plist').innerHTML = [['p', C.p, '理论'], ['a1', C.a1, '隐含前提'], ['a2', C.a2, '隐含前提']].map(([k, t, g]) => `<button type="button" data-k="${k}" aria-pressed="${sus === k}">${tex(k)}<span>${t}</span><span class="tg">${sus === k ? '怀疑' : g}</span></button>`).join('');
+  if (sus === C.fix) solvedCases[cs] = true;
+  $('#cmp').innerHTML = `<tr><th></th><th>推理形式</th><th>预测落空</th><th>真正错的是</th><th>结果</th></tr>` + ['u', 'm'].map(k => { const D = CASES[k], ok = solvedCases[k]; return `<tr><td>${D.name}</td><td>${tex('p')} ∧ ${tex('a1')} ∧ ${tex('a2')} → ${tex('q')}</td><td>${tex('¬q')}</td><td class="${ok ? 'go' : 'unk'}">${ok ? `${tex(D.fix)}：${D.who}` : '？'}</td><td class="${ok ? '' : 'unk'}">${ok ? D.end : '在上面试试看'}</td></tr>`; }).join('');
+  $('#plist').querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    const kb = document.activeElement === b;
+    sus = SUS[cs] = sus === b.dataset.k ? null : b.dataset.k; renderPrem(); drawOrbit();
+    if (kb) $(`#plist button[data-k="${b.dataset.k}"]`).focus();
+  }));
   const o = sus ? C.out[sus] : null;
   $('#outcome').className = 'outcome' + (o ? ' ' + o[0] : '');
-  $('#outcome').innerHTML = o ? o[1] : '<span class="meta">¬q 只告诉你：三者至少有一个是错的。先选一个怀疑对象。</span>';
+  $('#outcome').innerHTML = o ? o[1] : `<span class="meta">${tex('¬q')} 只告诉你三条里至少有一条错了，没说是哪一条。在第 3 步选一个。</span>`;
 }
-segBind('#case', v => { cs = v; sus = null; renderPrem(); drawOrbit(); });
+segBind('#case', v => { cs = v; sus = SUS[cs]; renderPrem(); drawOrbit(); });
 const oc = $('#orbit'), octx = oc.getContext('2d');
 let ot = 0;
 function drawOrbit() {
@@ -797,7 +857,13 @@ function drawOrbit() {
     if (solved) { octx.fillStyle = css('--go'); octx.fillText('广义相对论：计算与实际重合', 14, 60); }
   }
 }
-function loop() { ot += RM ? 0 : .016; drawOrbit(); if (!RM) requestAnimationFrame(loop); }
+let orbitSeen = true, orbitIdle = false;
+function loop() {
+  if (RM) { ot = 4.5; drawOrbit(); return; }   // frozen where the calculated and real positions are furthest apart
+  if (!orbitSeen) { orbitIdle = true; return; }
+  ot += .016; drawOrbit(); requestAnimationFrame(loop);
+}
+new IntersectionObserver(es => { orbitSeen = es[0].isIntersecting; if (orbitSeen && orbitIdle) { orbitIdle = false; requestAnimationFrame(loop); } }).observe($('#orbit'));
 
 /* ---------- boot ---------- */
 drawRoute(); renderQs(); renderModes(); renderPrec(); renderPrem(); loop();

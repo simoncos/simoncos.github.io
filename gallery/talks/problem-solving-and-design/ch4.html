@@ -12,7 +12,14 @@
   --bg:#050607; --surface:#0c0e11; --surface-2:#0c0e11; --ink:#ebedf0; --muted:#8a9099; --line:#22262c; --sleeper:#111317;
   --accent:#ffb347; --accent-soft:rgba(255,179,71,.12);
   --stop:#ff5d7d; --go:#3cf2b4; --go-soft:rgba(60,242,180,.14);
-  --t1:#5cb8ff; --t2:#ff6ad5; --t3:#9cf06a;
+  --t1:#5cb8ff; --t2:#b48cff; --t3:#d9c78e;
+  /* Colour roles, the same in every block:
+     accent  amber: what you can operate (lever, sliders, the draggable weight point) and the track the tram takes;
+             a chosen answer is white on black like every selected state in the series
+     go      mint:  holds / survives / best
+     stop    red:   out / dies / contradiction / cycle
+     t1–t3   three parallel quantities: x1 x2 x3 in 02 (x2, the relative, also marks the relative in 01) and the three offers in 05
+     everything else stays neutral: ink, muted, line */
   --display:"Noto Serif SC","Songti SC","STSong",serif;
   --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -25,6 +32,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font
 .col{max-width:720px;margin-inline:auto}
 .wide{max-width:1120px;margin-inline:auto}
 h1,h2{font-family:var(--display);font-weight:900;text-wrap:balance;line-height:1.2;margin:0}
+h2{text-wrap:pretty}
 h1{font-size:clamp(2.8rem,8vw,5rem);letter-spacing:.02em}
 h2{font-size:clamp(1.5rem,3.4vw,2.05rem);margin-block:0 .6em}
 p{margin:0 0 1em}
@@ -35,7 +43,7 @@ b,strong{font-weight:700}
 section{margin-top:96px}
 .secno{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:.4em}
 .mono{font-family:var(--mono);font-size:.92em}
-.note{border-left:3px solid var(--accent);padding:4px 0 4px 16px;color:var(--muted);font-size:.95rem}
+.note{border-left:3px solid #3a3f47;padding:4px 0 4px 16px;color:var(--muted);font-size:.95rem}
 .defs{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:1em 0 1.4em;font-size:.95rem}
 .defs dt{font-family:var(--mono);font-weight:600}
 .defs dd{margin:0}
@@ -59,7 +67,7 @@ button:focus-visible,input:focus-visible,canvas:focus-visible,svg:focus-visible,
 .hero-band{position:relative;margin:-32px -20px 0;padding:32px 20px 56px;overflow:hidden;border-bottom:1px solid var(--line)}
 #heroCv{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 .hero-band header{position:relative;z-index:1}
-h1 .hl{color:var(--accent);text-shadow:0 0 24px rgba(255,179,71,.35)}
+h1 .hl{color:var(--accent)}
 .hero-hint{font-family:var(--mono);font-size:.74rem;color:var(--muted);letter-spacing:.06em;margin-top:.6em}
 .hero-hint b{color:var(--accent);font-weight:600}
 /* big outlined section numerals in the left margin on wide screens */
@@ -70,41 +78,58 @@ section > .col:first-child{position:relative}
 .hero-text{position:relative;z-index:1}
 #knot{position:absolute;right:0;top:-10px;width:min(210px,36vw);height:auto;z-index:-1;pointer-events:none}
 #knot path{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;opacity:.75}
-#knot path.k2{stroke:var(--t1);opacity:.35;stroke-width:1.1}
+#knot path.k2{stroke:var(--muted);opacity:.45;stroke-width:1.1}
 @media (max-width:700px){#knot{opacity:.5;right:-10px}}
+@media (min-width:701px){.hero-text .lede{max-width:calc(100% - 230px)}}
 
 /* ---------- 01 scrollytelling ---------- */
-.scrolly{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:48px;margin-top:32px}
-.steps{display:flex;flex-direction:column;padding-block:6vh 20vh}
-.step{min-height:78vh;display:flex;align-items:center}
-.step:first-child{min-height:60vh}
-.scard{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 20px 16px;transition:opacity .4s,border-color .4s,transform .4s;opacity:.5;width:100%}
-.step.on .scard{opacity:1;border-color:var(--accent);transform:translateX(4px)}
+/* A tall track with a one-screen sticky frame inside: the scene and the card both stay centred,
+   and each stretch of scrolling swaps in the next card. If the frame does not fit the screen
+   (.flat), it stops pinning and the pills switch cards directly. */
+.scrolly{position:relative;margin-top:16px;overflow-anchor:none}
+.pin{position:sticky;top:0;height:100vh;height:100svh;display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:48px;align-items:center;align-content:center}
+.scrolly.flat .pin{position:static;height:auto;padding-block:16px}
+.left{display:flex;flex-direction:column;gap:14px;min-width:0}
+.steps{display:grid}
+.step{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .3s,transform .3s,visibility 0s .3s}
+.step.on{opacity:1;visibility:visible;transform:none;transition:opacity .3s,transform .3s}
+.step .phint{margin-top:10px}
+.scard{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 20px 16px;width:100%}
+/* six equal pills in one row; the answered mark sits in the corner so nothing reflows */
+.pdots{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px}
+.pdots button{position:relative;font-size:.72rem;padding:3px 2px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:clip}
+.pdots button.done::after{content:"";position:absolute;top:3px;right:5px;width:5px;height:5px;border-radius:50%;background:var(--muted)}
+.pdots button[aria-current="step"]{background:var(--ink);border-color:var(--ink);color:var(--bg);font-weight:700}
+.pdots button[aria-current="step"].done::after{background:var(--bg)}
+.phint{font-size:.78rem;color:var(--muted);margin:0}
+.left{align-self:center}
+.scrolly.sumview .lever{opacity:.35;pointer-events:none}
 .scard header{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
-.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--accent);border:1px solid var(--accent);padding:0 6px;border-radius:3px}
+.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--muted);border:1px solid #3a3f47;padding:0 6px;border-radius:3px}
 .scard h3{margin:0;font-size:1.05rem;line-height:1.4}
 .scard p{font-size:.92rem;color:var(--muted);line-height:1.7;margin:0 0 12px}
 .btns{display:flex;gap:8px}
 .choose{flex:1;padding:8px 10px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:4px;font-size:.92rem}
 .choose:hover{border-color:var(--accent)}
-.choose[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface);font-weight:700}
+.choose[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg);font-weight:700}
 .custom-ctl{display:flex;gap:8px 12px;flex-wrap:wrap;font-size:.84rem;align-items:center;margin-bottom:12px}
 select{font:inherit;font-size:.85rem;padding:3px 6px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:4px}
 .answers{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:.92rem;margin-bottom:10px}
 .answers .mut{color:var(--muted)}
-.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 9vh);align-self:start;order:2}
-.steps{order:1}
+.stage{order:2;min-width:0}
+.left{order:1}
 .stage-box{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
 #scene{display:block;width:100%;height:auto}
 .stage-cap{padding:12px 18px 14px;border-top:1px solid var(--line);font-size:.92rem;min-height:3.6em}
-.stage-cap b{color:var(--accent)}
+.stage-cap b{color:var(--ink)}
 @media (max-width:860px){
-  .scrolly{grid-template-columns:minmax(0,1fr);gap:0}
-  .stage{order:0;top:env(safe-area-inset-top,0px);z-index:3;background:var(--bg);padding-block:8px;margin-inline:-20px;padding-inline:12px}
+  .pin{grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:24px}
   .stage-cap{font-size:.82rem;padding:8px 12px;min-height:3.2em}
-  .step{min-height:62vh}
-  .step:first-child{min-height:40vh}
+  .scard{padding:14px 16px 12px}
 }
+/* phones: scene on top, card below. Must come after the 860px block, which it overrides. */
+@media (max-width:640px){.pin{grid-template-columns:minmax(0,1fr);gap:12px}.stage{order:0}}
+@media (pointer:coarse){.pdots button{min-height:34px}}
 /* scene parts */
 .rail{fill:none;stroke:var(--line);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
 .sleep{fill:none;stroke:#1b1f25;stroke-width:16;stroke-dasharray:3 10}
@@ -119,11 +144,12 @@ select{font:inherit;font-size:.85rem;padding:3px 6px;background:var(--bg);color:
 .dot{fill:var(--muted);transition:fill .5s}
 .dot.doom{fill:var(--stop);opacity:.5}
 .dot.safe{fill:var(--go);animation:hop .5s ease-out 1}
-.relring{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:3 3;animation:spin 6s linear infinite;transform-box:fill-box;transform-origin:center}
+.relring{fill:none;stroke:var(--t2);stroke-width:2;stroke-dasharray:3 3;animation:spin 6s linear infinite;transform-box:fill-box;transform-origin:center}
 @keyframes spin{to{transform:rotate(360deg)}}
 .stxt{fill:var(--muted);font-family:var(--body);font-size:12px}
 .stxt.k{fill:var(--ink);font-weight:700;font-size:13px}
 .stxt.warn{fill:var(--stop);font-weight:700}
+.stxt.rel{fill:var(--t2)}
 @media (max-width:520px){.stxt{font-size:22px}.stxt.k{font-size:24px}}
 .tram .body{fill:var(--ink)} .tram .win{fill:var(--surface)} .tram .wheel{fill:var(--ink)}
 .tram .lamp{fill:#ffd166}
@@ -135,7 +161,7 @@ select{font:inherit;font-size:.85rem;padding:3px 6px;background:var(--bg);color:
 .lever .arm{stroke:var(--accent);stroke-width:5;stroke-linecap:round;transition:transform .45s cubic-bezier(.3,1.5,.5,1);transform-origin:178px 178px}
 .lever .knob{fill:var(--accent);stroke:transparent;stroke-width:56px}
 .lever .base{fill:var(--line)}
-.lever:hover .knob{fill:var(--stop)}
+.lever:hover .knob{fill:#ffd08a}
 .sig-post{stroke:var(--muted);stroke-width:3}
 .sig-head{fill:#16191e;stroke:var(--line);stroke-width:1.5}
 .lamp-a{fill:#f0a048;animation:blink 1s steps(2) infinite}
@@ -161,8 +187,15 @@ select{font:inherit;font-size:.85rem;padding:3px 6px;background:var(--bg);color:
 input[type=range]{width:100%}
 #a1{accent-color:var(--t1)} #a2{accent-color:var(--t2)} #a3{accent-color:var(--t3)}
 .presets{display:flex;flex-wrap:wrap;gap:6px}
+@media (max-width:520px){.presets{display:grid;grid-template-columns:1fr 1fr}}
+/* five systems: a tidy 3 + 2 grid instead of one orphan on its own row */
+#pset{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line)}
+#pset button{border-right:0;background:var(--surface)}
+#pset button[aria-pressed="true"]{background:var(--ink)}
+input[type=checkbox]{accent-color:var(--accent)}
 .presets button{font-size:.8rem;padding:3px 10px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink)}
 .presets button:hover{border-color:var(--accent);color:var(--accent)}
+.presets button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg);font-weight:700}
 .scales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
 .scale{border:1px solid var(--line);border-radius:6px;padding:12px 14px;min-width:0;background:var(--bg)}
 .scale header{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
@@ -172,7 +205,7 @@ input[type=range]{width:100%}
 .stand{fill:var(--line)}
 .string{stroke:var(--muted);stroke-width:1}
 .pan{fill:var(--surface);stroke:var(--ink);stroke-width:1.5;transition:fill .3s}
-.pan.win{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2.5}
+.pan.win{fill:rgba(235,237,240,.22);stroke:var(--ink);stroke-width:3}
 .pantxt{font-family:var(--body);font-size:12px;fill:var(--ink);text-anchor:middle;font-weight:700}
 .panval{font-family:var(--mono);font-size:11px;fill:var(--muted);text-anchor:middle}
 @media (max-width:520px){.pantxt{font-size:14px}.panval{font-size:13px}}
@@ -188,7 +221,7 @@ input[type=range]{width:100%}
 .infer{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:28px;align-items:start}
 @media (max-width:820px){.infer{grid-template-columns:minmax(0,1fr)}}
 .plane-wrap{position:relative;width:100%;max-width:560px;aspect-ratio:1;justify-self:center}
-.plane-wrap canvas{width:100%;height:100%;display:block;cursor:crosshair;touch-action:none;border-radius:4px}
+.plane-wrap canvas{width:100%;height:100%;display:block;cursor:crosshair;touch-action:pan-y;border-radius:4px}
 .empty{position:absolute;inset:36px;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:20px;background:color-mix(in srgb,var(--surface) 82%,transparent);border:1px dashed var(--accent);border-radius:6px;font-size:.92rem;color:var(--muted)}
 .empty b{font-family:var(--display);font-size:1.4rem;color:var(--ink)}
 .empty a{color:var(--surface);background:var(--accent);padding:6px 14px;border-radius:4px;text-decoration:none;font-weight:700;margin-top:6px}
@@ -231,7 +264,7 @@ input[type=range]{width:100%}
 .offer-tbl input{width:3.4em;font:inherit;font-family:var(--mono);padding:2px 4px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:3px}
 .oname{font-weight:700}
 .tri-wrap{width:100%;max-width:320px;aspect-ratio:1/0.9;margin-inline:auto}
-.tri-wrap canvas{width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}
+.tri-wrap canvas{width:100%;height:100%;display:block;touch-action:pan-y;cursor:crosshair}
 .bars{display:flex;flex-direction:column;gap:6px}
 .bar{display:grid;grid-template-columns:4.6em 1fr 3em;gap:10px;align-items:center;font-size:.85rem}
 .bar i{display:block;height:12px;border-radius:2px;transition:width .35s}
@@ -274,14 +307,20 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
     <h2>先做几道让人纠结的题</h2>
     <p>一辆刹车失灵的有轨电车，即将撞上前方轨道上的 5 个人。旁边的备用轨道上只有 1 个人。你手边有一根拉杆。凭直觉把下面四道题做一遍，你的选择后面会用到。</p>
   </div>
-  <div class="wide scrolly">
-    <div class="stage">
-      <div class="stage-box">
-        <svg id="scene" viewBox="0 0 640 250" role="img" aria-label="电车轨道示意图"></svg>
-        <div class="stage-cap" id="stagecap"></div>
+  <div class="wide scrolly" id="scrolly">
+    <div class="pin">
+      <div class="stage">
+        <div class="stage-box">
+          <svg id="scene" viewBox="0 0 640 250" role="img" aria-label="电车轨道示意图"></svg>
+          <div class="stage-cap" id="stagecap"></div>
+        </div>
+      </div>
+      <div class="left">
+        <nav class="pdots" id="pdots" aria-label="选择题目"></nav>
+        <div class="steps" id="steps"></div>
+        <p class="phint" id="phint"></p>
       </div>
     </div>
-    <div class="steps" id="steps"></div>
   </div>
 </section>
 
@@ -296,7 +335,7 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
       <dt class="c2">x2</dt><dd>轨道上存活的亲人数</dd>
       <dt class="c3">x3</dt><dd>你主动杀死的人数</dd>
     </dl>
-    <p>给出 a1、a2、a3，你就有了自己的模型。下面每道题是一架天平，两边分别是不拉杆和拉杆，价值高的一边更重、会沉下去。天平下的彩条是三项各自贡献了多少，颜色和上面的权重一一对应。原文的例子是 (1, 100, −2)，在变体 1 里得出 3 和 91。</p>
+    <p>给出 a1、a2、a3，你就有了自己的模型。下面每道题是一架天平，两边分别是不拉杆和拉杆，价值高的一边更重、会沉下去。天平下的彩条是三项各自贡献了多少，颜色和上面的权重一一对应。原文的例子是 (1, 100, −2)，在变体 1 里得出 3 和 101。</p>
   </div>
   <div class="wide">
     <div class="bench">
@@ -318,8 +357,8 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
           </div>
           <div><span class="lab">x3 怎么数</span>
             <div class="seg" id="x3def">
-              <button type="button" data-v="orig" aria-pressed="true">死亡都算（原文）</button>
-              <button type="button" data-v="active">只算拉杆</button>
+              <button type="button" data-v="active" aria-pressed="true">只算拉杆（原文）</button>
+              <button type="button" data-v="orig">死亡都算（简书原稿）</button>
             </div>
           </div>
           <div><span class="lab">几种人格</span>
@@ -336,8 +375,9 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
     </div>
   </div>
   <div class="col">
-    <p class="note">关于 x3 怎么数：原文算出 91 时，把不拉杆导致的 5 人死亡也算进了“主动杀死”。如果只把拉杆后撞死的人算作主动杀死，同一组权重下救亲人的价值是 101。变量怎么定义，本身就是一个隐含前提。</p>
-    <p>还可以设置更复杂的价值函数。<strong>边际递减</strong>：救 2 人和救 1 人差别很大，救 10000 人和救 9000 人就没那么有实感，于是把 x1 换成 ln x1。<strong>交互项</strong>：原文写作 a3·x1·x3，让“主动杀人”的痛苦随救下的人数一起变化。</p>
+    <p class="note">关于 x3 怎么数：只有拉下拉杆、电车转过去撞死的人，才算“你主动杀死的”，所以救亲人的价值是 101。2017 年发在简书上的原稿算的是 91，那里把不拉杆导致的 5 人死亡也算进了“主动杀死”，后来在网站上更正了。把开关拨到“死亡都算”就能看到原稿的算法：按那种数法，变体 2 不拉杆等于主动杀死一百万人。变量怎么定义，本身就是一个隐含前提。</p>
+    <p>还可以设置更复杂的价值函数。<strong>边际递减</strong>：救 2 人和救 1 人差别很大，救 10000 人和救 9000 人就没那么有实感，于是把 x1 换成 ln x1。<strong>交互项</strong>：原文写作 a3·x2·x3，你救的亲人越多，越会因为主动杀死别人而痛苦。在这几道题里亲人都在备用轨道上，拉杆时 x2 = 0，不拉杆时 x3 = 0，所以这一项总是 0；把 x3 拨到“死亡都算”才看得出它的作用。</p>
+    <p>这个例子也许太血淋淋了，我们很难做到绝对理性。但意思应该清楚了：许多纠结的根源是非理性，解决办法是建立形式化、量化的模型，用价值函数去评估每一种选择。</p>
   </div>
 </section>
 
@@ -345,12 +385,12 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
   <div class="col">
     <span class="bignum" aria-hidden="true">03</span><span class="secno">03 · 反推</span>
     <h2>两千个可能的你</h2>
-    <p>反过来也成立。下图每个点都是一个可能的你：横坐标是你给亲人的权重 a2，纵坐标是你给主动杀人的权重 a3（a1 取当前值，两轴都是对数刻度）。你在第一部分做的每个选择，都会让一批“你”出局。<strong>剩下的点，才是和你目前全部选择相符的价值观。</strong>点击或拖动图面可以设置权重。</p>
+    <p>反过来，也可以从你的选择倒推权重。下图每个点都是一个可能的你：横坐标是你给亲人的权重 a2，纵坐标是你给主动杀人的权重 a3（a1 取当前值；两轴跨过 0，正负两侧各按对数刻度）。你在第一部分做的每个选择，都会让一批“你”出局。<strong>剩下的点，才是和你目前全部选择相符的价值观。</strong>点击或拖动图面可以设置权重，键盘上用方向键。</p>
   </div>
   <div class="wide">
     <div class="bench infer">
       <div class="status" id="status"></div>
-      <div class="plane-wrap"><div class="empty" id="pempty"><b>还没有任何选择</b><span>所有 2,000 个“你”都还在，因为你还没告诉页面你会怎么选。</span><a href="#sec1">回到第一部分作答 ↑</a></div><canvas id="plane" tabindex="0" aria-label="权重平面：横轴 a2，纵轴 a3"></canvas></div>
+      <div class="plane-wrap"><div class="empty" id="pempty"><b>还没有任何选择</b><span>所有 2,000 个“你”都还在，因为你还没告诉页面你会怎么选。</span><a href="#sec1">回到第一部分作答 ↑</a></div><canvas id="plane" tabindex="0" aria-label="权重平面：横轴 a2，纵轴 a3。方向键移动当前权重"></canvas></div>
     </div>
   </div>
   <div class="col">
@@ -396,9 +436,9 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
 <section id="sec5">
   <div class="col">
     <span class="bignum" aria-hidden="true">05</span><span class="secno">05 · 以复杂对抗纠结</span>
-    <h2>单因素模型会造出环</h2>
+    <h2>标准一轮换，就会造出环</h2>
     <p>现实里的环从哪里来？石头赢剪刀，因为能把剪刀砸坏；剪刀赢布，因为能把布剪开；布赢石头，靠的却是把石头包。起。来。前两条的标准是破坏，第三条悄悄换成了包裹。两个单因素轮流上场，就是双重标准。</p>
-    <p>选工作也一样。三份 offer 各有长处。如果两两比较时只看哪边占优的因素多，就会绕出一个环。换成同时考虑所有因素的加权模型，环就消失了。表格里的分数可以改。</p>
+    <p>选工作也一样（这个例子是交互版补的）。三份 offer 各有长处。如果两两比较时只看哪边占优的因素多，每一次起决定作用的因素都不一样，等于标准在轮换，就会绕出一个环。换成同时考虑所有因素的加权模型，环就消失了。表格里的分数可以改。</p>
   </div>
   <div class="wide">
     <div class="bench gbench">
@@ -414,8 +454,8 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
           </div>
         </div>
         <div id="osum" hidden>
-          <span class="lab">拖动圆点设置三个因素的权重，底色是该权重下胜出的 offer</span>
-          <div class="tri-wrap"><canvas id="tri" tabindex="0" aria-label="权重三角形"></canvas></div>
+          <span class="lab">拖动圆点（或用方向键）设置三个因素的权重，底色是该权重下胜出的 offer</span>
+          <div class="tri-wrap"><canvas id="tri" tabindex="0" aria-label="权重三角形：三个角分别是只看薪资、只看成长、只看生活。方向键移动圆点"></canvas></div>
           <div class="bars" id="obars"></div>
         </div>
         <p class="note" id="onote" style="margin:0"></p>
@@ -425,7 +465,7 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
   </div>
   <div class="col">
     <p>没有把多个因素形式化地记下来审视，对于重要的问题，我们隔三差五就会不自觉地重复同一个怪圈。<strong>我们永远在建立新的偏好系统，却从没建立起一个同时满足完整性、可传递性和一致性的系统，所以永远找不到最优解。</strong></p>
-    <p>大脑喜欢简单。上一篇讲的抓大放小，对开放问题很有用。但过度简化是对理性的逃避，只会越来越纠结。每个问题都有适合它的模型复杂度，太简单和太复杂都不好，这是下一篇要想的事。</p>
+    <p>大脑喜欢简单。上一篇讲的抓大放小，对开放问题很有用。但过度简化是对理性的逃避，只会越来越纠结。每个问题都有适合它的模型复杂度，太简单和太复杂都不好。原文说这个问题留到之后的文章再想。</p>
   </div>
 </section>
 
@@ -437,7 +477,7 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
       <li><span class="no">一</span><div><h4><a href="ch1.html">问题情境</a></h4><p>两种画法的正方形、找箭头、搜索树、表示方式、设计。</p></div></li>
       <li><span class="no">二</span><div><h4><a href="ch2.html">可行解</a></h4><p>六道削皮题、量水实验、把剪刀拆开看、一根拉绳。</p></div></li>
       <li><span class="no">三</span><div><h4><a href="ch3.html">开放问题</a></h4><p>只坐地铁、行动方式不限、抓大放小、证伪的是整个合式。</p></div></li>
-      <li class="cur"><span class="no">四</span><div><h4>纠结与最优解</h4><p>本页：电车难题、价值天平、两千个可能的你、偏好系统、单因素模型。</p></div></li>
+      <li class="cur"><span class="no">四</span><div><h4>纠结与最优解</h4><p>本页：电车难题、价值天平、两千个可能的你、偏好系统、标准轮换造出的环。</p></div></li>
       <li class="draft"><span class="no">五</span><div><h4>测量的局限</h4><p>来自 2026-03 的整合 Proposal：相似性、分类与理论负荷。</p></div></li>
       <li class="draft"><span class="no">六</span><div><h4>Duck Typing 作为策略</h4><p>不问它是什么，问它能做什么；行为级数据，让用户自己设权重。</p></div></li>
       <li class="draft"><span class="no">七</span><div><h4>工程实践</h4><p>测试环境作为反事实探索器，双重传感器，Bayesian Safety。</p></div></li>
@@ -481,15 +521,16 @@ const fmt = v => { if (!isFinite(v)) return '—'; const a = Math.abs(v); if (a 
   });
   draw(0);
   if (RM) return;
-  let vis = true;
-  new IntersectionObserver(es => vis = es[0].isIntersecting).observe($('#knot'));
+  // offscreen the loop stops altogether, and the observer restarts it
+  let vis = true, idle = false;
+  new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis && idle) { idle = false; requestAnimationFrame(loop); } }).observe($('#knot'));
   const t0 = performance.now();
-  const loop = now => { if (vis) draw((now - t0) / 9000); requestAnimationFrame(loop); };
+  const loop = now => { if (!vis) { idle = true; return; } draw((now - t0) / 9000); requestAnimationFrame(loop); };
   requestAnimationFrame(loop);
 })();
 
 /* ---------- shared model ---------- */
-const S = { a1: 1, a2: 100, a3: -2, model: 'linear', x3def: 'orig', choice: {}, custom: { main: 5, side: 1, rel: true } };
+const S = { a1: 1, a2: 100, a3: -2, model: 'linear', x3def: 'active', choice: {}, custom: { main: 5, side: 1, rel: true } };
 const SCN = [
   { id: 's0', tag: '原题', title: '5 个陌生人 vs 1 个陌生人', main: 5, side: 1, rel: false, text: '主轨道上 5 个人，备用轨道上 1 个人，你都不认识。拉不拉？' },
   { id: 's1', tag: '变体 1', title: '5 个陌生人 vs 1 个亲人', main: 5, side: 1, rel: true, text: '还是 5 比 1，但备用轨道上那个人，是你的亲人。' },
@@ -499,7 +540,7 @@ const SCN = [
 ];
 const P = s => s.custom ? S.custom : s;
 function xs(p, c) { const R = p.rel ? p.side : 0; return c === 'stay' ? [p.side, R, S.x3def === 'orig' ? p.main : 0] : [p.main, 0, p.side]; }
-function phi(p, c) { const [x1, x2, x3] = xs(p, c); return S.model === 'log' ? [Math.log(x1), x2, x3] : S.model === 'inter' ? [x1, x2, x1 * x3] : [x1, x2, x3]; }
+function phi(p, c) { const [x1, x2, x3] = xs(p, c); return S.model === 'log' ? [Math.log(x1), x2, x3] : S.model === 'inter' ? [x1, x2, x2 * x3] : [x1, x2, x3]; }
 const W = () => [S.a1, S.a2, S.a3];
 const terms = (p, c) => { const f = phi(p, c), a = W(); return [a[0] * f[0], a[1] * f[1], a[2] * f[2]]; };
 const val = (p, c) => terms(p, c).reduce((s, v) => s + v, 0);
@@ -530,6 +571,7 @@ const crowdCache = (() => { const r = rng(7), pts = []; for (let i = 0; i < 640;
 function renderScene(mode) {
   const s = P(SCN.find(x => x.id === active)), c = S.choice[active];
   const tok = ++animToken;
+  const leverFocused = !!(document.activeElement && document.activeElement.closest && document.activeElement.closest('.lever'));
   scene.innerHTML = '';
   const mainD = `M8 ${MY} H632`, sideD = `M${SWX} ${MY} L${SX2} ${SY} H632`;
   for (const d of [mainD, sideD]) { el('path', { d, class: 'sleep' }, scene); el('path', { d, class: 'rail' }, scene); }
@@ -551,7 +593,7 @@ function renderScene(mode) {
     if (per < 1) mainPeople.splice(Math.round(s.main)).forEach(n => n.remove());
   } else for (let i = 0; i < s.main; i++) mainPeople.push(person(mainG, 430 + i * 30, MY, false, pop ? i * 70 : 0));
   for (let i = 0; i < s.side; i++) sidePeople.push(person(sideG, 470 + i * 30, SY, s.rel, pop ? 380 : 0));
-  if (s.rel) { const t = el('text', { x: 494, y: SY - 30, class: 'stxt k' }, scene); t.textContent = '你的亲人'; }
+  if (s.rel) { const t = el('text', { x: 494, y: SY - 30, class: 'stxt k rel' }, scene); t.textContent = '你的亲人'; }
   if (!pop) [...scene.querySelectorAll('.pop')].forEach(n => n.classList.remove('pop'));
   // lever
   const lv = el('g', { class: 'lever', tabindex: '0', role: 'button', 'aria-label': c === 'pull' ? '推回拉杆' : '拉下拉杆' }, scene);
@@ -562,7 +604,8 @@ function renderScene(mode) {
   arm.style.transform = `rotate(${c === 'pull' ? 32 : -32}deg)`;
   const lt = el('text', { x: 178, y: 204, class: 'stxt' + (active === 's3' ? ' warn' : ''), 'text-anchor': 'middle' }, scene);
   lt.textContent = active === 's3' ? '这一下是你做的' : '拉杆';
-  const flip = () => choose(active, c === 'pull' ? 'stay' : 'pull');
+  const flip = () => { if (shownStep !== 'sum') choose(active, c === 'pull' ? 'stay' : 'pull'); };
+  if (leverFocused) lv.focus({ preventScroll: true });
   lv.addEventListener('click', flip);
   lv.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
   // tram
@@ -597,14 +640,14 @@ function renderCap(moving) {
   const s0 = SCN.find(x => x.id === active), s = P(s0), c = S.choice[active];
   const mainTxt = s.main.toLocaleString('zh-CN') + ' 人';
   const sideTxt = s.rel ? (s.side > 1 ? s.side + ' 个亲人' : '你的亲人') : s.side + ' 个陌生人';
-  let t = `<b>${s0.tag}</b> · 主轨道 ${mainTxt}，备用轨道 ${sideTxt}。`;
+  let t = `<b>${s0.tag}</b> · 主轨道上 ${mainTxt}，备用轨道上${/^\d/.test(sideTxt) ? ' ' : '是'}${sideTxt}。`;
   if (moving) t += ' 电车开过去了……';
   else if (c === 'stay') t += ` 你没有动。主轨道上 ${mainTxt}死去，${sideTxt}活了下来。`;
   else if (c === 'pull') t += ` 你拉下了拉杆。${mainTxt}得救，${sideTxt}死去${active === 's3' ? '，是你亲手让电车转向的' : ''}。`;
-  else t += ' 用下面两个按钮选，或者直接点场景里的拉杆。';
+  else t += ' 用题卡上的按钮选，或者直接点场景里的拉杆。';
   $('#stagecap').innerHTML = t;
 }
-const stepsEl = $('#steps');
+const stepsEl = $('#steps'), scrollyEl = $('#scrolly');
 for (const s of SCN) {
   const st = document.createElement('div');
   st.className = 'step'; st.dataset.id = s.id;
@@ -619,48 +662,124 @@ for (const s of SCN) {
 }
 const sumStep = document.createElement('div');
 sumStep.className = 'step'; sumStep.dataset.id = 'sum';
-sumStep.innerHTML = `<div class="scard"><header><span class="tag">答卷</span><h3>你的四个选择</h3></header><div class="answers" id="answers"></div><p style="margin:0">纠结吗？救人多的一边是功利，救亲人是感情，不愿亲手拉杆是自我保护，几种考虑轮流占上风。<strong style="color:var(--ink)">我们显然不如自己通常认为的那样理性。</strong></p></div>`;
+sumStep.innerHTML = `<div class="scard"><header><span class="tag">答卷</span><h3>你的选择</h3></header><div class="answers" id="answers"></div><p style="margin:0">纠结吗？救人多的一边是功利，救亲人是感情，不愿亲手拉杆是自我保护，几种考虑轮流占上风。<strong style="color:var(--ink)">我们显然不如自己通常认为的那样理性。</strong></p></div>`;
 stepsEl.appendChild(sumStep);
 function renderAnswers() {
   $('#answers').innerHTML = SCN.map(s => `<span>${s.tag}</span><span class="${S.choice[s.id] ? '' : 'mut'}">${S.choice[s.id] ? LBL[S.choice[s.id]] : '未作答'}</span>`).join('');
 }
+const STEPS = [...SCN.map(s => s.id), 'sum'];
+let shownStep = 's0';
 function setActive(id) {
+  shownStep = id;
   document.querySelectorAll('.step').forEach(n => n.classList.toggle('on', n.dataset.id === id));
+  scrollyEl.classList.toggle('sumview', id === 'sum');   // the lever is idle while the answer sheet is up
+  updDots();
   if (id === 'sum' || id === active) return;
   active = id; renderScene('enter');
 }
+const pdots = $('#pdots');
+pdots.innerHTML = STEPS.map((id, i) => `<button type="button" data-i="${i}">${id === 'sum' ? '答卷' : SCN[i].tag}</button>`).join('');
+function updDots() {
+  pdots.querySelectorAll('button').forEach((b, i) => {
+    const id = STEPS[i];
+    if (id === shownStep) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    b.classList.toggle('done', !!S.choice[id]);
+    b.setAttribute('aria-label', b.textContent + (S.choice[id] ? '，已作答' : ''));
+  });
+  const flat = scrollyEl.classList.contains('flat'), last = shownStep === 'sum';
+  const on = document.querySelector(`.step[data-id="${shownStep}"]`), hint = $('#phint');
+  if (on && hint.parentNode !== on) on.appendChild(hint);
+  hint.textContent = last ? '' : flat ? '点上面的标签换题。' : S.choice[shownStep] ? '往下滚动，进入下一题 ↓' : '选好之后往下滚动，进入下一题 ↓';
+}
+// answers survive a reload within the tab; 03 depends on them
+const SAVE = 'psd-ch4-answers';
+const save = () => { try { sessionStorage.setItem(SAVE, JSON.stringify({ choice: S.choice, custom: S.custom })); } catch (e) { /* storage unavailable: answers just are not kept */ } };
+function setPressed(id) { document.querySelectorAll(`.step[data-id="${id}"] .choose`).forEach(b => b.setAttribute('aria-pressed', b.dataset.c === S.choice[id])); }
 function choose(id, c) {
   S.choice[id] = c;
-  document.querySelectorAll(`.step[data-id="${id}"] .choose`).forEach(b => b.setAttribute('aria-pressed', b.dataset.c === c));
-  if (id !== active) { active = id; document.querySelectorAll('.step').forEach(n => n.classList.toggle('on', n.dataset.id === id)); }
-  renderScene('choose'); renderAnswers(); changed();
+  setPressed(id);
+  if (id !== active) active = id;
+  renderScene('choose'); renderAnswers(); updDots(); save(); changed();
 }
 const syncCustom = () => {
   S.custom = { main: +$('#cmain').value, side: +$('#cside').value, rel: $('#crel').checked };
+  // a different question: the old answer does not carry over
+  delete S.choice.s4; setPressed('s4');
   if (active === 's4') renderScene('enter');
-  changed();
+  renderAnswers(); updDots(); save(); changed();
 };
 ['#cmain', '#cside', '#crel'].forEach(q => $(q).addEventListener('change', syncCustom));
-// The active step is the card nearest the reading line: viewport middle on desktop,
-// middle of the area below the sticky stage on phones.
-const stageEl = document.querySelector('.stage');
-let stepQueued = false;
+try {
+  const got = JSON.parse(sessionStorage.getItem(SAVE) || 'null');
+  if (got && got.choice) {
+    for (const id of STEPS) if (got.choice[id] === 'stay' || got.choice[id] === 'pull') S.choice[id] = got.choice[id];
+    const c = got.custom || {};
+    if ([...$('#cmain').options].some(o => +o.value === c.main)) $('#cmain').value = c.main;
+    if ([...$('#cside').options].some(o => +o.value === c.side)) $('#cside').value = c.side;
+    if (typeof c.rel === 'boolean') $('#crel').checked = c.rel;
+    S.custom = { main: +$('#cmain').value, side: +$('#cside').value, rel: $('#crel').checked };
+    STEPS.forEach(setPressed);
+  }
+} catch (e) { /* nothing saved, or storage unavailable */ }
+// Pinned frame: each card owns SEG pixels of scrolling; the track is one screen plus one SEG
+// per card. A height change under 120px (a phone's URL bar) is ignored so the card under the
+// reader does not shift; anything larger re-measures. After a re-layout the reader is put back
+// on the card they were reading.
+const pinEl = scrollyEl.querySelector('.pin');
+let SEG = 0, layW = 0, layH = 0, stepQueued = false;
+const isFlat = () => scrollyEl.classList.contains('flat');
+const trackTop = () => scrollyEl.getBoundingClientRect().top + scrollY;
+function layoutScrolly(force) {
+  const vh = document.documentElement.clientHeight;
+  if (!force && SEG && innerWidth === layW && Math.abs(vh - layH) < 120) return;
+  const r = scrollyEl.getBoundingClientRect(), inside = SEG && r.top < 1 && r.bottom > 0, keep = STEPS.indexOf(shownStep);
+  layW = innerWidth; layH = vh;
+  scrollyEl.classList.remove('flat'); scrollyEl.style.height = '';
+  pinEl.style.height = 'auto'; const need = pinEl.offsetHeight; pinEl.style.height = '';
+  if (need > vh - 12) {
+    scrollyEl.classList.add('flat'); SEG = 1; updDots();
+    if (inside) scrollTo(0, trackTop());
+    return;
+  }
+  SEG = Math.max(320, Math.round(vh * .6));
+  scrollyEl.style.height = vh + STEPS.length * SEG + 'px';
+  if (inside) scrollTo(0, trackTop() + (keep + .5) * SEG);
+  pickStep();
+}
 function pickStep() {
   stepQueued = false;
-  const sr = stageEl.getBoundingClientRect();
-  const stacked = getComputedStyle(document.querySelector('.scrolly')).gridTemplateColumns.split(' ').length === 1;
-  const anchor = stacked ? (Math.max(0, sr.bottom) + innerHeight) / 2 : innerHeight / 2;
-  let best = null, bd = Infinity;
-  document.querySelectorAll('.step').forEach(st => {
-    const r = st.querySelector('.scard').getBoundingClientRect();
-    const d = Math.abs((r.top + r.bottom) / 2 - anchor);
-    if (d < bd) { bd = d; best = st; }
-  });
-  if (best) setActive(best.dataset.id);
+  if (isFlat()) return;
+  const i = Math.max(0, Math.min(STEPS.length - 1, Math.floor(-scrollyEl.getBoundingClientRect().top / SEG)));
+  if (STEPS[i] !== shownStep) setActive(STEPS[i]);
 }
+// while a smooth scroll is still travelling, the next key press counts from where it is heading
+let heading = -1, headTimer = 0;
+function goStep(i, focus) {
+  heading = i; clearTimeout(headTimer); headTimer = setTimeout(() => { heading = -1; }, RM ? 0 : 900);
+  if (isFlat()) setActive(STEPS[i]);
+  else scrollTo({ top: trackTop() + (i + .5) * SEG, behavior: RM ? 'auto' : 'smooth' });
+  if (focus) { const c = document.querySelector(`.step[data-id="${STEPS[i]}"] .scard`); c.tabIndex = -1; c.focus({ preventScroll: true }); }
+}
+pdots.addEventListener('click', e => { const b = e.target.closest('button'); if (b) goStep(+b.dataset.i, true); });
+// PageDown / PageUp / Space move exactly one card while the frame is pinned, so no card is skipped
+addEventListener('keydown', e => {
+  if (isFlat() || e.altKey || e.ctrlKey || e.metaKey || e.defaultPrevented) return;
+  const down = e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey), up = e.key === 'PageUp' || (e.key === ' ' && e.shiftKey);
+  if (!down && !up) return;
+  if (e.key === ' ' && e.target.closest && e.target.closest('input,select,textarea,button,a,[role=button],[tabindex]:not([tabindex="-1"])')) return;
+  const r = scrollyEl.getBoundingClientRect(), vh = innerHeight, i = heading >= 0 ? heading : STEPS.indexOf(shownStep);
+  let j = -1;
+  if (r.top < 1 && r.bottom > vh - 1) j = i + (down ? 1 : -1);        // pinned
+  else if (down && r.top > 0 && r.top < vh) j = 0;                      // section just coming up
+  else if (up && r.bottom < vh && r.bottom > 0) j = STEPS.length - 1;   // section just above
+  if (j < 0 || j >= STEPS.length) return;
+  e.preventDefault(); goStep(j);
+});
 addEventListener('scroll', () => { if (!stepQueued) { stepQueued = true; requestAnimationFrame(pickStep); } }, { passive: true });
-addEventListener('resize', pickStep);
+addEventListener('resize', () => layoutScrolly());
 document.querySelector('.step').classList.add('on');
+layoutScrolly(); updDots();
+document.fonts && document.fonts.ready.then(() => layoutScrolly(true));
 
 /* ---------- 02 scales ---------- */
 const a1In = $('#a1'), a2In = $('#a2'), a3In = $('#a3');
@@ -679,13 +798,14 @@ const fw = v => v < 0 ? '(' + fmt(v) + ')' : fmt(v);
 function expr(p, c) {
   const [x1, x2, x3] = xs(p, c);
   const t1 = S.model === 'log' ? `${fw(S.a1)}·ln ${fmt(x1)}` : `${fw(S.a1)}·${fmt(x1)}`;
-  const t3 = S.model === 'inter' ? `${fw(S.a3)}·${fmt(x1)}·${fmt(x3)}` : `${fw(S.a3)}·${fmt(x3)}`;
+  const t3 = S.model === 'inter' ? `${fw(S.a3)}·${fmt(x2)}·${fmt(x3)}` : `${fw(S.a3)}·${fmt(x3)}`;
   return `${t1} + ${fw(S.a2)}·${fmt(x2)} + ${t3}`;
 }
 function renderCtl() {
   $('#a1o').textContent = fmt(S.a1); $('#a2o').textContent = fmt(S.a2); $('#a3o').textContent = fmt(S.a3);
-  const f1 = S.model === 'log' ? 'a1·ln x1' : 'a1·x1', f3 = S.model === 'inter' ? 'a3·x1·x3' : 'a3·x3';
+  const f1 = S.model === 'log' ? 'a1·ln x1' : 'a1·x1', f3 = S.model === 'inter' ? 'a3·x2·x3' : 'a3·x3';
   $('#fx').innerHTML = `f = <span class="c1">${f1}</span> + <span class="c2">a2·x2</span> + <span class="c3">${f3}</span>`;
+  $('#presets').querySelectorAll('button').forEach(b => { const w = b.dataset.w.split(',').map(Number); b.setAttribute('aria-pressed', w[0] === S.a1 && w[1] === S.a2 && w[2] === S.a3); });
 }
 const SCL = [];
 for (const s of SCN) {
@@ -782,14 +902,15 @@ function drawPlane() {
   const tx = v => PAD + (symlog(v) + 1) / 2 * inner, ty = v => PAD + (1 - (symlog(v) + 1) / 2) * inner;
   ctx.fillStyle = COL.bg; ctx.fillRect(0, 0, Wd, H);
   ctx.strokeStyle = COL.line; ctx.lineWidth = 1; ctx.fillStyle = COL.muted; ctx.font = '10px "JetBrains Mono", monospace';
-  const ticks = [-1e6, -1e4, -100, 0, 100, 1e4, 1e6];
+  const ticks = [-1e6, -1e4, -100, 0, 100, 1e4, 1e6], nar = Wd < 420;
   const tl = v => v === 0 ? '0' : (v < 0 ? '−' : '') + ({ 100: '100', 10000: '1万', 1000000: '100万' })[Math.abs(v)];
   for (const v of ticks) {
     ctx.globalAlpha = v === 0 ? 1 : .45;
     ctx.beginPath(); ctx.moveTo(tx(v), PAD); ctx.lineTo(tx(v), H - PAD); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(PAD, ty(v)); ctx.lineTo(Wd - PAD, ty(v)); ctx.stroke();
     ctx.globalAlpha = 1;
-    ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillText(tl(v), tx(v), H - PAD + 6);
+    // narrow: the x axis keeps only its ends and zero, so the labels do not run together
+    if (!nar || Math.abs(v) !== 100 && Math.abs(v) !== 1e4) { ctx.textAlign = nar && v < 0 ? 'left' : nar && v > 0 ? 'right' : 'center'; ctx.textBaseline = 'top'; ctx.fillText(tl(v), nar && v < 0 ? PAD : nar && v > 0 ? Wd - PAD : tx(v), H - PAD + 6); }
     ctx.textAlign = 'right'; ctx.textBaseline = 'middle'; ctx.fillText(tl(v), PAD - 4, ty(v));
   }
   let moving = false;
@@ -805,7 +926,8 @@ function drawPlane() {
   ctx.globalAlpha = 1;
   ctx.strokeStyle = COL.ink; ctx.strokeRect(PAD, PAD, inner, inner);
   ctx.fillStyle = COL.ink; ctx.font = '11px "Noto Sans SC", sans-serif'; ctx.textBaseline = 'bottom';
-  ctx.textAlign = 'right'; ctx.fillText('a2 亲人权重 →', Wd - PAD, PAD - 6);
+  if (nar) { ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillText('a2 亲人权重 →', Wd / 2, H - PAD + 18); ctx.textBaseline = 'bottom'; }
+  else { ctx.textAlign = 'right'; ctx.fillText('a2 亲人权重 →', Wd - PAD, PAD - 6); }
   ctx.textAlign = 'left'; ctx.fillText('↑ a3 主动杀人权重', PAD, PAD - 6);
   const ax = tx(100), ay = ty(-2);
   ctx.strokeStyle = COL.ink; ctx.lineWidth = 1.5;
@@ -831,11 +953,26 @@ function planeSet(e) {
   const u = Math.min(1, Math.max(0, (e.clientX - r.left - PAD) / inner)), v = Math.min(1, Math.max(0, (e.clientY - r.top - PAD) / inner));
   S.a2 = roundSig(isymlog(u * 2 - 1)); S.a3 = roundSig(isymlog(1 - v * 2)); setSliders(); changed();
 }
-let drag = false;
-cv.addEventListener('pointerdown', e => { drag = true; cv.setPointerCapture(e.pointerId); planeSet(e); });
+// Mouse: click or drag anywhere. Touch: a vertical swipe scrolls the page as usual; a tap sets
+// the weights, and a drag that starts on the current point moves it.
+let drag = false, tap = null;
+const nearPoint = (x, y) => { const r = cv.getBoundingClientRect(), inner = r.width - PAD * 2; return Math.hypot(x - r.left - PAD - (symlog(S.a2) + 1) / 2 * inner, y - r.top - PAD - (1 - (symlog(S.a3) + 1) / 2) * inner) < 30; };
+cv.addEventListener('touchstart', e => { const t = e.touches[0]; if (e.touches.length === 1 && nearPoint(t.clientX, t.clientY)) e.preventDefault(); }, { passive: false });
+cv.addEventListener('pointerdown', e => {
+  if (e.pointerType === 'touch' && !nearPoint(e.clientX, e.clientY)) { tap = [e.clientX, e.clientY]; return; }
+  drag = true; cv.setPointerCapture(e.pointerId); planeSet(e);
+});
 cv.addEventListener('pointermove', e => { if (drag) planeSet(e); });
-cv.addEventListener('pointerup', () => drag = false);
-cv.addEventListener('pointercancel', () => drag = false);
+cv.addEventListener('pointerup', e => { if (tap && Math.hypot(e.clientX - tap[0], e.clientY - tap[1]) < 10) planeSet(e); drag = false; tap = null; });
+cv.addEventListener('pointercancel', () => { drag = false; tap = null; });
+// keyboard: arrows move the point (Shift for bigger steps)
+cv.addEventListener('keydown', e => {
+  const d = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, 1], ArrowDown: [0, -1] }[e.key]; if (!d) return;
+  e.preventDefault(); const k = e.shiftKey ? .1 : .025, cl = v => Math.max(-1, Math.min(1, v));
+  if (d[0]) S.a2 = roundSig(isymlog(cl(symlog(S.a2) + d[0] * k)));
+  if (d[1]) S.a3 = roundSig(isymlog(cl(symlog(S.a3) + d[1] * k)));
+  setSliders(); changed();
+});
 new ResizeObserver(kickPlane).observe(cv);
 
 /* ---------- 04 graphs ---------- */
@@ -861,8 +998,12 @@ function analyze(g) {
   for (let i = 0; i < n && !cyc; i++) if (!col[i]) dfs(i);
   const indeg = new Array(n).fill(0); out.forEach(vs => vs.forEach(v => indeg[v]++));
   const unbeaten = [...Array(n).keys()].filter(i => indeg[i] === 0);
-  const best = !cyc && unbeaten.length === 1 && out[unbeaten[0]].length === n - 1 ? unbeaten[0] : -1;
-  return { out, missing, cyc, unbeaten, best };
+  const best = unbeaten.length === 1 && out[unbeaten[0]].length === n - 1 ? unbeaten[0] : -1;
+  // transitivity gaps: i reaches j through other preferences but the pair itself is left incomparable
+  const reach = u => { const seen = new Set(), st = [...out[u]]; while (st.length) { const v = st.pop(); if (!seen.has(v)) { seen.add(v); st.push(...out[v]); } } return seen; };
+  const gaps = [];
+  if (!cyc) for (let i = 0; i < n; i++) { const R = reach(i); for (const j of R) { const k = i < j ? i + ',' + j : j + ',' + i; if (g.M[k] && g.M[k].dir === 0) gaps.push([i, j]); } }
+  return { out, missing, cyc, unbeaten, best, gaps };
 }
 function drawGraph(svg, g, an, opts) {
   svg.innerHTML = '';
@@ -879,8 +1020,16 @@ function drawGraph(svg, g, an, opts) {
     const ln = el('line', { x1: sx, y1: sy, x2: ex, y2: ey, class: 'edge' + (e.dir === 0 ? ' none' : '') + (isC ? ' cyc' : '') }, svg);
     if (e.dir !== 0) ln.setAttribute('marker-end', `url(#${pid}${isC ? 'c' : 'n'})`);
     if (opts.interactive) {
-      const hit = el('line', { x1: sx, y1: sy, x2: ex, y2: ey, class: 'ehit', tabindex: '0', role: 'button', 'aria-label': `${g.nodes[i]} 与 ${g.nodes[j]}：切换偏好方向` }, svg);
-      const flip = () => { e.dir = e.dir === 1 ? -1 : e.dir === -1 ? 0 : 1; opts.onChange(); };
+      const now = e.dir === 0 ? '不可比' : `${g.nodes[a]} 比 ${g.nodes[b]} 好`;
+      const hit = el('line', { x1: sx, y1: sy, x2: ex, y2: ey, class: 'ehit', tabindex: '0', role: 'button', 'data-k': k, 'aria-label': `${g.nodes[i]} 与 ${g.nodes[j]}：现在${now}，按一下切换` }, svg);
+      // every edge cycles the same way from where it started: flip → incomparable → back
+      if (e.orig === undefined) e.orig = e.dir || 1;
+      const flip = () => {
+        e.dir = e.dir === e.orig ? -e.orig : e.dir === -e.orig ? 0 : e.orig;
+        const refocus = document.activeElement === hit;
+        opts.onChange();
+        if (refocus) { const h = svg.querySelector(`[data-k="${k}"]`); h && h.focus(); }
+      };
       hit.addEventListener('click', flip);
       hit.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); flip(); } });
     }
@@ -899,13 +1048,13 @@ function checksHTML(g, an) {
   let cycTxt = '';
   if (an.cyc) { const c = an.cyc.map(i => N[i]), chain = c.join(' > '); cycTxt = `由可传递性，${chain} ⇒ ${c[0]} > ${c[c.length - 1]}；但同时 ${c[c.length - 1]} > ${c[0]}。两者矛盾，一致性被破坏。`; }
   let bt, bc;
-  if (an.best >= 0) { bt = `${N[an.best]}：它比其他所有选项都好。`; bc = 'ok'; }
+  if (an.best >= 0) { bt = `${N[an.best]}：它比其他所有选项都好。${an.cyc ? '其余选项之间的环不影响它。' : ''}`; bc = 'ok'; }
   else if (an.cyc && !an.unbeaten.length) { bt = '不存在：每个选项都会被某个选项打败。'; bc = 'bad'; }
   else if (an.unbeaten.length === 1) { bt = `${N[an.unbeaten[0]]} 没有输过，但它和一些选项不可比，说不上最优。`; bc = 'mut'; }
   else if (an.unbeaten.length > 1) { bt = `无法确定：${an.unbeaten.map(i => N[i]).join('、')} 都没有输过，彼此也没比较过。`; bc = 'mut'; }
   else { bt = '不存在。'; bc = 'bad'; }
   return `<div class="check"><span class="pill ${an.missing ? 'bad' : 'ok'}">完整性</span><div>${an.missing ? `${total} 对里有 ${an.missing} 对不可比` : `${total} 对全部可比`}</div></div>
-    <div class="check"><span class="pill ${an.cyc ? 'bad' : 'ok'}">传递一致</span><div>${an.cyc ? '可传递性与一致性不能同时成立' : '没有环，两条都可以成立'}${cycTxt ? `<small>${cycTxt}</small>` : ''}</div></div>
+    <div class="check"><span class="pill ${an.cyc ? 'bad' : 'ok'}">传递一致</span><div>${an.cyc ? '可传递性与一致性不能同时成立' : '没有环，两条都可以成立'}${cycTxt ? `<small>${cycTxt}</small>` : an.gaps.length ? `<small>不过按可传递性，${an.gaps.slice(0, 2).map(([i, j]) => `${N[i]} &gt; ${N[j]}`).join('、')} 已经可以推出来，这${an.gaps.length > 1 ? '几' : '一'}对现在还标着不可比。</small>` : ''}</div></div>
     <div class="check"><span class="pill ${bc}">最优解</span><div>${bt}</div></div>`;
 }
 let PG = makeGraph(PRESETS.rps), pkey = 'rps';
@@ -916,7 +1065,12 @@ segBind('#pset', v => { pkey = v; PG = makeGraph(PRESETS[v]); renderPref(); });
 const OF = { names: ['A', 'B', 'C'], score: [[5, 1, 3], [3, 5, 1], [1, 3, 5]], mode: 'major', w: [.5, .3, .2] };
 const FN = ['薪资', '成长', '生活'], OCOL = ['t1', 't2', 't3'];
 $('#otable').innerHTML = OF.names.map((n, i) => `<tr><th scope="row" class="oname" style="color:var(--${OCOL[i]})">Offer ${n}</th>${OF.score[i].map((v, j) => `<td><input type="number" min="1" max="5" step="1" value="${v}" id="o${i}${j}" aria-label="Offer ${n} ${FN[j]}"></td>`).join('')}</tr>`).join('');
-document.querySelectorAll('#otable input').forEach(inp => inp.addEventListener('input', () => { const [i, j] = inp.id.slice(1).split('').map(Number); OF.score[i][j] = Math.max(1, Math.min(5, Math.round(+inp.value || 1))); renderOffers(); }));
+document.querySelectorAll('#otable input').forEach(inp => {
+  const [i, j] = inp.id.slice(1).split('').map(Number);
+  inp.addEventListener('input', () => { OF.score[i][j] = Math.max(1, Math.min(5, Math.round(+inp.value || 1))); renderOffers(); });
+  // once the reader leaves the box, show the score the model is actually using
+  inp.addEventListener('change', () => { inp.value = OF.score[i][j]; });
+});
 segBind('#omode', v => { OF.mode = v; renderOffers(); });
 const tri = $('#tri'), tctx = tri.getContext('2d');
 const triGeo = () => { const w = tri.clientWidth, h = tri.clientHeight; return { w, h, A: [w / 2, 26], B: [18, h - 26], C: [w - 18, h - 26] }; };
@@ -943,16 +1097,29 @@ function drawTri() {
   tctx.fillStyle = COL.accent; tctx.globalAlpha = .25; tctx.beginPath(); tctx.arc(px, py, 13, 0, 7); tctx.fill();
   tctx.globalAlpha = 1; tctx.strokeStyle = COL.surface; tctx.lineWidth = 2; tctx.beginPath(); tctx.arc(px, py, 7, 0, 7); tctx.fill(); tctx.stroke();
 }
-function triSet(e) {
-  const r = tri.getBoundingClientRect(), G = triGeo();
-  let b = bary(G, e.clientX - r.left, e.clientY - r.top).map(v => Math.max(0, v)); const s = b[0] + b[1] + b[2] || 1;
-  OF.w = b.map(v => Math.round(v / s * 100) / 100); renderOffers();
+// weights stay unrounded so they always sum to 1; only the labels round
+function triAt(x, y) {
+  const b = bary(triGeo(), x, y).map(v => Math.max(0, v)), s = b[0] + b[1] + b[2] || 1;
+  OF.w = b.map(v => v / s); renderOffers();
 }
-let tdrag = false;
-tri.addEventListener('pointerdown', e => { tdrag = true; tri.setPointerCapture(e.pointerId); triSet(e); });
+const triPoint = () => { const G = triGeo(); return [OF.w[0] * G.A[0] + OF.w[1] * G.B[0] + OF.w[2] * G.C[0], OF.w[0] * G.A[1] + OF.w[1] * G.B[1] + OF.w[2] * G.C[1]]; };
+const triSet = e => { const r = tri.getBoundingClientRect(); triAt(e.clientX - r.left, e.clientY - r.top); };
+const nearTri = (x, y) => { const r = tri.getBoundingClientRect(), [px, py] = triPoint(); return Math.hypot(x - r.left - px, y - r.top - py) < 30; };
+let tdrag = false, ttap = null;
+tri.addEventListener('touchstart', e => { const t = e.touches[0]; if (e.touches.length === 1 && nearTri(t.clientX, t.clientY)) e.preventDefault(); }, { passive: false });
+tri.addEventListener('pointerdown', e => {
+  if (e.pointerType === 'touch' && !nearTri(e.clientX, e.clientY)) { ttap = [e.clientX, e.clientY]; return; }
+  tdrag = true; tri.setPointerCapture(e.pointerId); triSet(e);
+});
 tri.addEventListener('pointermove', e => { if (tdrag) triSet(e); });
-tri.addEventListener('pointerup', () => tdrag = false);
-tri.addEventListener('pointercancel', () => tdrag = false);
+tri.addEventListener('pointerup', e => { if (ttap && Math.hypot(e.clientX - ttap[0], e.clientY - ttap[1]) < 10) triSet(e); tdrag = false; ttap = null; });
+tri.addEventListener('pointercancel', () => { tdrag = false; ttap = null; });
+tri.addEventListener('keydown', e => {
+  const d = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key]; if (!d) return;
+  e.preventDefault(); const k = e.shiftKey ? 24 : 8, [px, py] = triPoint(); triAt(px + d[0] * k, py + d[1] * k);
+});
+// percentages that add up to exactly 100
+const pct = w => { const f = w.map(v => v * 100), r = f.map(Math.floor); let left = 100 - r.reduce((a, b) => a + b, 0); f.map((v, i) => [v - r[i], i]).sort((a, b) => b[0] - a[0]).forEach(([, i]) => { if (left > 0) { r[i]++; left--; } }); return r; };
 new ResizeObserver(drawTri).observe(tri);
 function renderOffers() {
   const g = { nodes: OF.names.map(n => 'Offer ' + n), M: {} };
@@ -971,7 +1138,7 @@ function renderOffers() {
   $('#osum').hidden = !sm;
   if (sm) {
     const mx = Math.max(...sum, .01);
-    $('#obars').innerHTML = `<div class="bar"><span class="meta">权重</span><span class="mono" style="text-align:left">${FN.map((f, k) => f + ' ' + Math.round(OF.w[k] * 100) + '%').join(' · ')}</span><span></span></div>` +
+    $('#obars').innerHTML = `<div class="bar"><span class="meta">权重</span><span class="mono" style="text-align:left">${(p => FN.map((f, k) => f + ' ' + p[k] + '%').join(' · '))(pct(OF.w))}</span><span></span></div>` +
       [0, 1, 2].sort((a, b) => sum[b] - sum[a]).map(i => `<div class="bar"><span class="oname" style="color:var(--${OCOL[i]})">Offer ${OF.names[i]}</span><i style="width:${sum[i] / mx * 100}%;background:var(--${OCOL[i]})"></i><span class="mono">${fmt(sum[i])}</span></div>`).join('');
     drawTri();
   }
