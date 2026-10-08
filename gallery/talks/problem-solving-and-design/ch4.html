@@ -190,6 +190,7 @@ input[type=range]{width:100%}
 .empty{position:absolute;inset:36px;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:20px;background:color-mix(in srgb,var(--surface) 82%,transparent);border:1px dashed var(--accent);border-radius:6px;font-size:.92rem;color:var(--muted)}
 .empty b{font-family:var(--display);font-size:1.4rem;color:var(--ink)}
 .empty a{color:var(--surface);background:var(--accent);padding:6px 14px;border-radius:4px;text-decoration:none;font-weight:700;margin-top:6px}
+@media (max-width:480px){.empty{inset:6px;padding:10px 12px;gap:4px}.empty b{font-size:1.1rem}.empty span{font-size:.8rem;line-height:1.5}.empty a{margin-top:2px;padding:8px 14px}}
 .status{display:flex;flex-direction:column;gap:12px;font-size:.95rem}
 .big{font-family:var(--display);font-weight:900;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}
 .big.bad{color:var(--stop)} .big.ok{color:var(--go)}
@@ -595,7 +596,7 @@ function renderCap(moving) {
   if (moving) t += ' 电车开过去了……';
   else if (c === 'stay') t += ` 你没有动。主轨道上 ${mainTxt}死去，${sideTxt}活了下来。`;
   else if (c === 'pull') t += ` 你拉下了拉杆。${mainTxt}得救，${sideTxt}死去${active === 's3' ? '，是你亲手让电车转向的' : ''}。`;
-  else t += ' 点左边的按钮，或者直接点场景里的拉杆。';
+  else t += ' 用下面两个按钮选，或者直接点场景里的拉杆。';
   $('#stagecap').innerHTML = t;
 }
 const stepsEl = $('#steps');

@@ -131,11 +131,13 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
 .opt[aria-pressed="true"]{background:var(--ink);color:var(--bg);font-weight:700;border-color:var(--ink)}
 .qnote{margin:0;font-size:.94rem;color:var(--muted);border-left:3px solid var(--accent);padding-left:12px;min-height:3em}
 .qnote b{color:var(--ink)}
-.qnav{display:flex;gap:8px;align-items:center;margin-top:auto}
+.qnav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:auto}
+.qnav .btn{white-space:nowrap}
 .dots{display:flex;gap:6px;margin-left:auto}
 .dots button{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--muted);font-family:var(--mono);font-size:.72rem;padding:0}
 .dots button.done{border-color:var(--muted);color:var(--ink)}
 .dots button.cur{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+@media (max-width:520px){.dots{order:-1;flex:1 0 100%;flex-wrap:wrap;gap:6px;margin:0 0 4px}.dots button{width:34px;height:34px}.qnav .btn{flex:1;min-height:40px}}
 .ledger{display:flex;flex-direction:column;gap:6px;font-size:.86rem}
 .ledger div{display:grid;grid-template-columns:4.2em 1fr;gap:8px;padding:6px 10px;border:1px solid var(--line);border-radius:6px}
 .ledger span:first-child{font-family:var(--mono);color:var(--muted)}
@@ -313,7 +315,7 @@ tr.hot td:first-child,th.hot{color:var(--accent)}
     <span class="bignum" aria-hidden="true">03</span><span class="secno">03 · 功能固着与可供性</span>
     <h2>把剪刀拆开看</h2>
     <p>回到问题 2。韩梅梅坚持说没有可行解：剪刀是用来剪窗花的，怎么能去苹果皮？这就是<strong>功能固着</strong>。第一次认识一个物体时，我们往往只认识它最主要的功能，然后把功能和物体绑在一起：说起铅笔就想到写字，要意识到铅笔还能用来转磁带，可能是很久以后的事。</p>
-    <p>可物体是可以分解的。它由更原子的模块组成，每个模块有自己更基础的功能；<strong>功能不是物体本身</strong>。切换到“拆开看”，再把鼠标移到任何一个部件上，看它能撑起哪些任务。</p>
+    <p>可物体是可以分解的。它由更原子的模块组成，每个模块有自己更基础的功能；<strong>功能不是物体本身</strong>。切换到“拆开看”，再把鼠标移到（手机上点一下）任何一个部件上，看它能撑起哪些任务。</p>
   </div>
   <div class="wide">
     <div class="bench aff">
@@ -569,7 +571,9 @@ OBJ.forEach(o => {
     const tg = el('text', { x: p.lab[0], y: p.lab[1] + 13, 'text-anchor': 'middle', class: 'plab tags' }, pg); tg.textContent = p.tags.join(' · ');
     const on = () => { if (!affOpen) return; hotTags = p.tags; pg.classList.add('hot'); renderMtx(); };
     const off = () => { hotTags = null; pg.classList.remove('hot'); renderMtx(); };
-    pg.addEventListener('pointerenter', on); pg.addEventListener('pointerleave', off);
+    pg.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') on(); }); pg.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') off(); });
+    // no hover on touch: a tap lights this part and puts out the others
+    pg.addEventListener('pointerup', e => { if (e.pointerType === 'mouse') return; tools.querySelectorAll('.part.hot').forEach(x => x !== pg && x.classList.remove('hot')); on(); });
     pg.addEventListener('focus', on); pg.addEventListener('blur', off);
   });
 });
