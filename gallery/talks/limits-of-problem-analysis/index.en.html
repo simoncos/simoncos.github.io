@@ -93,6 +93,10 @@ h1 .hl{color:var(--accent)}
 .game{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,330px);gap:28px;align-items:start}
 @media (max-width:860px){.game{grid-template-columns:minmax(0,1fr)}}
 #gameCv{width:100%;aspect-ratio:16/9;border-radius:8px;background:#0b0d10;touch-action:pan-y;cursor:ew-resize}
+.hit-demo{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;margin-top:12px}
+.hit-demo .btn{flex-shrink:0;min-height:44px}
+#hitReadout{flex:1 1 180px;margin:0;font-size:.8rem;line-height:1.6;color:var(--muted);font-variant-numeric:tabular-nums}
+#hitReadout.hit{color:var(--accent)}
 .innards{margin-top:12px;border:1px dashed var(--line);border-radius:8px;padding:10px 12px}
 .innards .lab{display:flex;justify-content:space-between;gap:8px}
 #innards{font-family:var(--mono);font-size:.7rem;line-height:1.6;color:#4a5059;height:4.8em;overflow:hidden;word-break:break-all}
@@ -118,7 +122,7 @@ h1 .hl{color:var(--accent)}
 @media (max-width:860px){.ladder{grid-template-columns:minmax(0,1fr)}}
 .pear-view{min-width:0}
 .pear-viewport{overflow-x:auto;margin-top:10px;overscroll-behavior-x:contain}
-.pear-viewport.zoomed #pearSvg{min-width:640px}
+@media (max-width:860px){.pear-viewport.zoomed #pearSvg{min-width:max(640px,150%)}}
 .pear-viewport:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media (min-width:861px){#pearZoom,#pearHint{display:none}}
 #pearSvg{width:100%;height:auto;display:block;background:var(--bg);border:1px solid var(--line);border-radius:8px;overflow:hidden}
@@ -259,6 +263,7 @@ h1{font-size:clamp(2.6rem,5.5vw,4.15rem);letter-spacing:-.03em}
   <div class="bench wide game">
     <div>
       <canvas id="gameCv" tabindex="0" aria-label="Bot test bench: a slime keeps attacking the hero. Drag left or right to move the probe along the HP bar."></canvas>
+      <div class="hit-demo"><button class="btn ghost" id="heavyBtn">Try a heavy hit</button><p id="hitReadout" role="status">Watch whether a heavy hit can cross the probe.</p></div>
       <div class="innards">
         <span class="lab"><span>Inside the game · The bot reads none of this</span><span class="mono" id="innCount"></span></span>
         <div id="innards" aria-hidden="true"></div>
@@ -440,18 +445,25 @@ const C = {
   slime: "#58c46a", slimeD: "#3c9a4c", slimeL: "#9be3a5", eye: "#0b0d10", white: "#ffffff", heal: "#3cf2b4", grey: "#5f6670"
 };
 const SPK = []; { const r = rng(7); for (let i = 0; i < 46; i++) SPK.push([Math.floor(r() * PW), 27 + Math.floor(r() * 9)]); }
-function newSim() { return { hp: 100, mp: 100, next: 1.2, hurt: 0, healT: 0, lunge: 0, dead: 0, poison: false, heals: 0, waste: 0, downs: 0, alive: 0, frame: 0, lastDmg: 0, crit: false, rs: 0x3f9a }; }
+function newSim() { return { hp: 100, mp: 100, next: 1.2, hurt: 0, healT: 0, lunge: 0, dead: 0, poison: false, heals: 0, waste: 0, downs: 0, alive: 0, frame: 0, lastDmg: 0, crit: false, impact: null, forceHeavy: false, heavyCooldown: 0, rs: 0x3f9a }; }
 function stepSim(s, dt, r) {
   s.frame++;
   s.hurt = Math.max(0, s.hurt - dt); s.healT = Math.max(0, s.healT - dt); s.lunge = Math.max(0, s.lunge - dt);
+  s.heavyCooldown = Math.max(0, s.heavyCooldown - dt);
+  if (s.impact) s.impact.left = Math.max(0, s.impact.left - dt);
   if (s.dead > 0) { s.dead -= dt; if (s.dead <= 0) { s.dead = 0; s.hp = 100; s.next = 1.4; } return; }
   s.alive += dt; s.mp = Math.min(100, s.mp + dt * 6);
   if (s.poison) s.hp -= dt * 2.4;
   s.next -= dt;
-  if (s.next <= 0) {
-    s.next = 0.7 + r() * 0.65; s.lunge = 0.28; s.crit = r() < 0.07;
-    const d = s.crit ? 38 + r() * 9 : 5 + r() * 11;
-    s.hp -= d; s.hurt = 0.32; s.lastDmg = d; s.rs = (s.rs * 75 + 74) % 65537;
+  if (s.next <= 0 || s.forceHeavy) {
+    const requested = s.forceHeavy; s.forceHeavy = false;
+    s.next = 0.7 + r() * 0.65; s.lunge = 0.28; s.crit = r() < 0.07 || requested;
+    const d = Math.round(s.crit ? 38 + r() * 9 : 5 + r() * 11);
+    const before = s.hp;
+    s.hp -= d; s.hurt = s.crit ? 0.48 : 0.32; s.lastDmg = d; s.rs = (s.rs * 75 + 74) % 65537;
+    const impact = { crit: s.crit, damage: d, before, after: Math.max(0, s.hp), left: s.crit ? 1.4 : 0.65 };
+    if (s.crit || !s.impact || s.impact.left <= 0 || !s.impact.crit) s.impact = impact;
+    if (s.crit) { s.heavyCooldown = 1.4; s.onHeavy && s.onHeavy(impact); }
   }
   if (s.hp <= 0) { s.hp = 0; s.dead = 1.5; s.downs++; if (s.poison) s.pdT = s.alive; s.poison = false; s.onDown && s.onDown(); }
 }
@@ -473,7 +485,8 @@ function drawScene(g, s, t) {
   rect(g, C.mpE, BAR_X, 8, 18, 1);
   rect(g, C.mp, BAR_X, 8, Math.round(18 * s.mp / 100), 1);
   // hero
-  const hx = 15, fl = s.hurt > 0 && Math.floor(s.hurt * 22) % 2 === 0;
+  const kick = !RM && s.impact?.crit && s.impact.left > 1.05 ? Math.round(Math.sin((1.4 - s.impact.left) / .35 * Math.PI) * 3) : 0;
+  const hx = 15 - kick, fl = s.hurt > 0 && Math.floor(s.hurt * 22) % 2 === 0;
   if (s.dead > 0) {
     rect(g, C.grey, hx - 2, 25, 9, 2); rect(g, C.skin, hx + 7, 24, 3, 3); rect(g, C.sword, hx - 6, 26, 4, 1);
   } else {
@@ -493,12 +506,16 @@ function drawScene(g, s, t) {
     for (let i = 0; i < 6; i++) g.fillRect(hx - 1 + i * 2 - (i % 2), Math.round(24 - k * 14 - (i % 3) * 2), 1, 1);
   }
   // slime
-  const lunge = s.lunge > 0 ? Math.round(Math.sin((1 - s.lunge / 0.28) * Math.PI) * 14) : 0;
+  const lunge = s.lunge > 0 ? Math.round(Math.sin((1 - s.lunge / 0.28) * Math.PI) * (s.crit ? 20 : 14)) : 0;
   const sq = Math.floor(t * 3) % 2, sx = 43 - lunge;
   rect(g, C.slime, sx + 3, 21 + sq, 5, 1); rect(g, C.slime, sx + 2, 22 + sq, 7, 1);
   rect(g, C.slime, sx + 1, 23 + sq, 9, 3 - sq); rect(g, C.slimeD, sx, 26, 11, 1);
   rect(g, C.slimeL, sx + 3, 22 + sq, 1, 1);
   rect(g, C.eye, sx + 3, 24, 1, 1); rect(g, C.eye, sx + 6, 24, 1, 1);
+  if (s.impact?.crit && s.impact.left > .9) {
+    const spread = RM ? 0 : Math.floor((1.4 - s.impact.left) * 6);
+    for (const [x, y, w, h] of [[25,17-spread,1,3],[28+spread,19,3,1],[27+spread,24+spread,2,2],[21-spread,12-spread,2,2]]) rect(g, "#ffb347", x, y, w, h);
+  }
 }
 const HP_RGB = [226, 56, 77], EMPTY_RGB = [58, 63, 71];
 function classify(rgb) {
@@ -677,10 +694,19 @@ function drawBits(g, w, h, hist, now, span) {
   // see the screen the way the bot does: everything but one pixel goes dark
   $("#eyeBtn").addEventListener("click", e => { eye = !eye; e.currentTarget.setAttribute("aria-pressed", eye); });
   const pBtn = $("#poisonBtn");
+  const heavyBtn = $("#heavyBtn"), hitReadout = $("#hitReadout");
+  const hitIdle = hitReadout.textContent;
+  function showHeavy(hit) {
+    hitReadout.textContent = `Heavy hit −${Math.round(hit.damage)} · HP on impact ${Math.round(hit.before)} → ${Math.round(hit.after)}`;
+    hitReadout.classList.add("hit");
+  }
+  sim.onHeavy = showHeavy;
+  heavyBtn.addEventListener("click", () => { if (sim.dead <= 0 && sim.heavyCooldown <= 0) sim.forceHeavy = true; });
   pBtn.addEventListener("click", () => { if (sim.dead > 0) return; sim.poison = !sim.poison; pBtn.setAttribute("aria-pressed", sim.poison); });
   sim.onDown = () => pBtn.setAttribute("aria-pressed", "false");
   $("#resetBtn").addEventListener("click", () => {
-    sim = newSim(); sim.onDown = () => pBtn.setAttribute("aria-pressed", "false"); pBtn.setAttribute("aria-pressed", "false");
+    sim = newSim(); sim.onHeavy = showHeavy; sim.onDown = () => pBtn.setAttribute("aria-pressed", "false"); pBtn.setAttribute("aria-pressed", "false");
+    hitReadout.textContent = hitIdle; hitReadout.classList.remove("hit"); heavyBtn.disabled = false;
     prev = "red"; hist = [{ t: clock, c: "red" }]; msgKey = "";
   });
   const sw = $("#sw"), hexEl = $("#hex"), clsEl = $("#cls"), act = $("#ruleAct"), inn = $("#innards");
@@ -702,7 +728,7 @@ function drawBits(g, w, h, hist, now, span) {
     if (!bot) { k = "off"; m = "The bot is off. Watch the health bar, decide, and press H to heal. This tiny loop is exactly what the bot takes over for you."; }
     else if (sim.poison) { k = "p"; m = "The health bar is green. The bot knows only <b>red</b> and <b>gray</b>. Green is simply “not red,” so it heals once when the poison starts, then never sees another red-to-gray transition."; }
     else if (sim.pdT !== undefined && sim.alive - sim.pdT < 9) { k = "pd"; m = "The bot did nothing more while the hero was poisoned, and the hero fell. After revival, the health bar turns red again, and the bot can “understand” it once more."; }
-    else if (sim.downs > 0 && P < 0.45) { k = "low"; m = "The probe is too low. A heavy hit of over 40 HP can empty the bar from above the threshold before the bot gets a chance to react."; }
+    else if (sim.downs > 0 && P < 0.45) { k = "low"; m = "The probe is too low: one hit can empty the health bar from above it. By the time the bot sees red turn gray, the hero is already down. Healing comes too late."; }
     else if (sim.heals > 4 && sim.waste / sim.heals > 18) { k = "high"; m = "The probe is too high. It often heals near full health, wasting much of each dose."; }
     else if (sim.alive > 20 && sim.downs === 0) { k = "ok"; m = "Reading just <b>one pixel, one bit</b>, the bot has kept you alive for " + Math.floor(sim.alive) + " seconds. It does not need to understand the game."; }
     else { k = "idle"; m = "Drag left or right, or use the slider, to move the probe along the HP bar and choose when the bot acts."; }
@@ -723,6 +749,19 @@ function drawBits(g, w, h, hist, now, span) {
     eyeK = lerp(eyeK, eye ? 1 : 0, 1 - Math.exp(-dt * 5));
     g.fillStyle = C.bg; g.fillRect(0, 0, W, H);
     blit(g, off.canvas, 0, y0, cell, 1 - 0.9 * eyeK);
+    // Feedback is painted only after sampling; the bot still reads the raw HP pixel.
+    const hit = sim.impact;
+    if (hit?.left > 0 && eyeK < .05) {
+      g.save(); g.textAlign = "center"; g.textBaseline = "middle";
+      const x = W * .74, y = H * .32, size = clamp(W * .025, 12, 19);
+      g.font = `700 ${size}px Arial, sans-serif`;
+      const label = (hit.crit ? "Heavy hit " : "") + "−" + Math.round(hit.damage);
+      const tw = Math.max(g.measureText(label).width, hit.crit ? size * 6 : 0) + 16;
+      g.fillStyle = "rgba(5,6,7,.9)"; g.fillRect(x - tw / 2, y - size, tw, hit.crit ? size * 3.3 : size * 2);
+      g.fillStyle = hit.crit ? css("--accent") : "#ebedf0"; g.fillText(label, x, y);
+      if (hit.crit) { g.font = `500 ${size * .8}px JetBrains Mono, monospace`; g.fillText(`${Math.round(hit.before)} → ${Math.round(hit.after)} HP`, x, y + size * 1.5); }
+      g.restore();
+    }
     if (eyeK > 0.01) {
       g.drawImage(off.canvas, px, BAR_Y, 1, 1, rx, ry, cell - (cell > 6 ? 1 : 0), cell - (cell > 6 ? 1 : 0));
       g.globalAlpha = eyeK; g.font = `500 ${Math.max(11, cell * 0.95)}px Arial, sans-serif`; g.fillStyle = "#8a9099"; g.textAlign = "center"; g.textBaseline = "middle";
@@ -747,6 +786,7 @@ function drawBits(g, w, h, hist, now, span) {
     fireT = Math.max(0, fireT - dt * 2.2); act.classList.toggle("fire", fireT > 0.5);
     $("#stT").textContent = fmtT(sim.alive); $("#stD").textContent = sim.downs; $("#stH").textContent = sim.heals; $("#stW").textContent = Math.round(sim.waste);
     $("#stD").classList.toggle("bad", sim.downs > 0);
+    heavyBtn.disabled = sim.dead > 0 || sim.heavyCooldown > 0 || sim.forceHeavy;
     if ((lastInn += dt) > 0.12) { lastInn = 0; innards(); }
     if ((msgT += dt) > 0.5) { msgT = 0; message(); }
   }
