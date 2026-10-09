@@ -1,29 +1,29 @@
 <!doctype html>
-<html lang="zh-Hans">
+<html lang="en">
 <meta charset="utf-8">
-<link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html">
+<link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html">
 <link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.en.html">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>问题解决与设计</title>
-<meta name="description" content="2016 至 2017 年写在简书的四篇短文，各做成一个可以动手的交互页面：问题情境、可行解、开放问题、纠结与最优解。">
-<link rel="canonical" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html">
+<title>Problem Solving and Design</title>
+<meta name="description" content="Four essays first published on Jianshu in 2016–2017, rebuilt as interactive pages: the problem situation, feasible solutions, open problems, and choice and optima.">
+<link rel="canonical" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.en.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="问题解决与设计 · Simon Zhao">
-<meta property="og:description" content="2016 至 2017 年写在简书的四篇短文，各做成一个可以动手的交互页面。">
-<meta property="og:url" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html">
+<meta property="og:title" content="Problem Solving and Design · Simon Zhao">
+<meta property="og:description" content="Four short essays from 2016–2017, rebuilt as interactive pages you can explore hands-on.">
+<meta property="og:url" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.en.html">
 <meta property="og:site_name" content="simoncos">
-<meta property="og:image" content="https://simoncos.github.io/gallery/assets/og-problem-solving.jpg">
+<meta property="og:image" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/assets/og.en.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="问题解决与设计：四篇交互文章的开场图形">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:image:alt" content="Problem Solving and Design: opening illustrations from four interactive essays">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="问题解决与设计 · Simon Zhao">
-<meta name="twitter:description" content="2016 至 2017 年写在简书的四篇短文，各做成一个可以动手的交互页面。">
-<meta name="twitter:image" content="https://simoncos.github.io/gallery/assets/og-problem-solving.jpg">
+<meta name="twitter:title" content="Problem Solving and Design · Simon Zhao">
+<meta name="twitter:description" content="Four short essays from 2016–2017, rebuilt as interactive pages you can explore hands-on.">
+<meta name="twitter:image" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/assets/og.en.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@600;900&family=Noto+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 /* Shared with chapter 1 */
 
@@ -35,8 +35,8 @@
   --accent:#ffb347; --accent-soft:rgba(255,179,71,.12);
   --stop:#ff5d7d; --go:#3cf2b4; --go-soft:rgba(60,242,180,.14);
   --t1:#5cb8ff; --t2:#ff6ad5; --t3:#9cf06a;
-  --display:"Noto Serif SC","Songti SC","STSong",serif;
-  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --display:"Noto Serif","Songti SC","STSong",serif;
+  --body:"Noto Sans","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
   color-scheme:dark;
 }
@@ -128,7 +128,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .map h4{margin:0;font-size:1rem}
 .map h4 a{color:inherit}
 .map p{margin:2px 0 0;font-size:.88rem;color:var(--muted);line-height:1.65}
-.map .draft h4::after{content:"尚未成文";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
+.map .draft h4::after{content:"Not yet written";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
 footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
 /* touch screens: fingertip-sized controls */
 @media (pointer:coarse){input[type=range]{min-height:36px}select,input[type=number]{min-height:40px}.btn,.seg button{min-height:40px}.series a{display:inline-flex;align-items:center;min-height:40px}input[type=checkbox]{width:18px;height:18px}}
@@ -154,17 +154,54 @@ input[type=checkbox]{accent-color:var(--accent)}
 .about p{color:var(--ink)}
 
 .language-switch{display:flex;justify-content:flex-end;gap:14px;position:relative;z-index:2;max-width:1120px;margin:0 auto 20px;font-size:.85rem}.language-switch a,.language-switch span{padding:8px 4px}.language-switch [aria-current]{color:var(--muted)}
+
+/* English copy is longer: retain the original visual system with room to wrap. */
+html[lang="en"] body{line-height:1.75}
+html[lang="en"] h1{font-size:clamp(2.6rem,7vw,4.5rem);letter-spacing:-.025em}
+html[lang="en"] h2{letter-spacing:-.015em}
+html[lang="en"] .eyebrow,html[lang="en"] .lab,html[lang="en"] .secno{letter-spacing:.035em}
+html[lang="en"] .series a,html[lang="en"] .series span{white-space:normal}
+html[lang="en"] .series{gap:8px}
+html[lang="en"] .card h2{font-size:clamp(1.3rem,3vw,1.8rem)}
+html[lang="en"] .card{gap:12px}
+html[lang="en"] .seg button{white-space:normal;line-height:1.4;min-height:40px}
+html[lang="en"] button,html[lang="en"] label{overflow-wrap:break-word}
+html[lang="en"] .chipx{max-width:7.5em}
+html[lang="en"] .node text{font-size:12px}
+@media(max-width:520px){
+ html[lang="en"] .wrap{padding-inline:16px}
+ html[lang="en"] .bench{padding:14px}
+ html[lang="en"] .slider{flex-wrap:wrap}
+ html[lang="en"] .emblem{opacity:.25}
+ html[lang="en"] .card{grid-template-columns:minmax(0,1fr) 60px;padding:18px}
+ html[lang="en"] .card svg{width:60px;height:60px}
+ html[lang="en"] .node text{font-size:14px}
+}
+html[lang="en"]:has(#tree) .slider{grid-template-columns:minmax(0,1fr) 3.6em;gap:4px 10px}
+html[lang="en"]:has(#tree) .slider label{grid-column:1/-1;overflow-wrap:normal}
+html[lang="en"]:has(#tree) .slider input{grid-column:1;grid-row:2}
+html[lang="en"]:has(#tree) .slider output{grid-column:2;grid-row:2}
+html[lang="en"] .check{grid-template-columns:8.5em minmax(0,1fr)}
+html[lang="en"] .pill{padding:4px 8px;line-height:1.45;overflow-wrap:normal}
+html[lang="en"] .track div{grid-template-columns:1.6em 6.8em minmax(0,1fr)}
+html[lang="en"] #pans .big{font-size:clamp(1.3rem,5vw,2rem);overflow-wrap:normal}
+@media(max-width:520px){
+ html[lang="en"] .check{grid-template-columns:minmax(0,1fr);gap:6px}
+ html[lang="en"] .pill{justify-self:start}
+ html[lang="en"] .check small{overflow-wrap:anywhere}
+}
+
 </style>
 
 <div class="wrap">
-<nav class="language-switch" aria-label="语言 / Language"><span aria-current="page">中文</span><a href="index.en.html" lang="en" hreflang="en">English</a></nav>
+<nav class="language-switch" aria-label="Language"><a href="index.html" lang="zh-Hans" hreflang="zh-Hans">中文</a><span aria-current="page">English</span></nav>
 <div class="hero-band">
 <header class="col">
   <div class="hero-text">
-    <div class="eyebrow">交互文章 · 系列</div>
-    <h1>问题解决<br>与<span class="hl">设计</span></h1>
-    <p class="lede">2016 到 2017 年，我在简书上写了一组短文，从一本心理学教材里的“影响问题解决的因素”出发，想把问题解决和设计这两件事放在一起想清楚。十年后把其中四篇做成了可以动手的页面：正文压缩改写，每篇围绕几个能拖、能点、能算的小实验。</p>
-    <p class="meta" style="margin-top:1.2em">四篇已完成 · 三篇尚未成文 · 原文配图都配了一个重绘的交互版本</p>
+    <div class="eyebrow">Interactive essays · A series</div>
+    <h1>Problem Solving<br> and <span class="hl">Design</span></h1>
+    <p class="lede">In 2016–2017, I wrote a series of short essays on Jianshu. Starting with a psychology textbook’s account of the factors that affect problem solving, I wanted to think through problem solving and design together. Ten years later, four of those essays have become pages you can play with: condensed text, each built around a few small experiments to drag, click, and calculate.</p>
+    <p class="meta" style="margin-top:1.2em">Four essays complete · Three not yet written · Original figures paired with interactive redrawings</p>
   </div>
 </header>
 </div>
@@ -172,51 +209,51 @@ input[type=checkbox]{accent-color:var(--accent)}
 <section style="margin-top:56px">
   <div class="wide">
     <div class="chapters">
-      <a class="card" href="ch1.html">
-        <div><span class="no">第一篇</span><h2>问题情境</h2><p class="q">同一个问题，换一种表述，难度就会不同。</p>
-          <ul><li>两种画法的正方形</li><li>找箭头</li><li>搜索树</li><li>表示方式</li><li>设计</li></ul></div>
+      <a class="card" href="ch1.en.html">
+        <div><span class="no">Part 1</span><h2>The Problem Situation</h2><p class="q">The same problem can become harder or easier depending on how it is presented.</p>
+          <ul><li>One square, two drawings</li><li>Find the arrow</li><li>Search tree</li><li>Representation</li><li>Design</li></ul></div>
         <svg viewBox="0 0 120 120" aria-hidden="true" id="e1"></svg>
-        <span class="go">开始 →</span>
+        <span class="go">Explore →</span>
       </a>
-      <a class="card" href="ch2.html">
-        <div><span class="no">第二篇</span><h2>可行解</h2><p class="q">让人看不见可行解的两种“缓存”：定势和功能固着。</p>
-          <ul><li>六道削皮题</li><li>量水实验</li><li>把剪刀拆开看</li><li>一根拉绳</li></ul></div>
+      <a class="card" href="ch2.en.html">
+        <div><span class="no">Part 2</span><h2>Feasible Solutions</h2><p class="q">Two kinds of “cache” that hide feasible solutions: mental set and functional fixedness.</p>
+          <ul><li>Six peeling questions</li><li>Water-jar experiment</li><li>Take scissors apart</li><li>A pull cord</li></ul></div>
         <svg viewBox="98 98 240 240" aria-hidden="true"><rect class="k2" x="116" y="116" width="168" height="168" stroke-dasharray="6 8"></rect><g id="e2"></g><path class="k1" d="M140 140L320 140L140 320L140 140L260 260" style="stroke-width:6"></path></svg>
-        <span class="go">开始 →</span>
+        <span class="go">Explore →</span>
       </a>
-      <a class="card" href="ch3.html">
-        <div><span class="no">第三篇</span><h2>开放问题</h2><p class="q">可能性空间大得没有边，还会自己变，怎么找路？</p>
-          <ul><li>只坐地铁</li><li>行动方式不限</li><li>抓大放小</li><li>证伪的是整个合式</li></ul></div>
+      <a class="card" href="ch3.en.html">
+        <div><span class="no">Part 3</span><h2>Open Problems</h2><p class="q">How do you find a path through a possibility space that has no clear boundary—and keeps changing?</p>
+          <ul><li>By metro alone</li><li>Any way across</li><li>Keep the big picture</li><li>What is falsified is the whole conjunction</li></ul></div>
         <svg viewBox="0 0 400 400" aria-hidden="true"><path class="k2" id="e3t" style="stroke-width:4"></path><path class="k1" id="e3e" style="stroke-width:9"></path><circle class="dot" cx="200" cy="200" r="12"></circle></svg>
-        <span class="go">开始 →</span>
+        <span class="go">Explore →</span>
       </a>
-      <a class="card" href="ch4.html">
-        <div><span class="no">第四篇</span><h2>纠结与最优解</h2><p class="q">好几个可行解摆在面前，难的是挑一个。</p>
-          <ul><li>电车难题</li><li>价值天平</li><li>两千个可能的你</li><li>偏好系统</li><li>标准轮换造出的环</li></ul></div>
+      <a class="card" href="ch4.en.html">
+        <div><span class="no">Part 4</span><h2>Choice and Optima</h2><p class="q">When several feasible solutions are in front of you, the hard part is choosing one.</p>
+          <ul><li>The trolley problem</li><li>A balance of values</li><li>Two thousand possible yous</li><li>Preference systems</li><li>Changing criteria creates a cycle</li></ul></div>
         <svg viewBox="0 0 400 400" aria-hidden="true"><path class="k2" id="e4b" style="stroke-width:3"></path><path class="k1" id="e4a" style="stroke-width:7"></path></svg>
-        <span class="go">开始 →</span>
+        <span class="go">Explore →</span>
       </a>
     </div>
   </div>
   <div class="col">
     <ol class="map" style="margin-top:40px">
-      <li class="draft"><span class="no">五</span><div><h4>测量的局限</h4><p>相似性、分类与理论负荷。</p></div></li>
-      <li class="draft"><span class="no">六</span><div><h4>Duck Typing 作为策略</h4><p>不问它是什么，问它能做什么；行为级数据，让用户自己设权重。</p></div></li>
-      <li class="draft"><span class="no">七</span><div><h4>工程实践</h4><p>测试环境作为反事实探索器，双重传感器，Bayesian Safety。</p></div></li>
+      <li class="draft"><span class="no">5</span><div><h4>The Limits of Measurement</h4><p>Similarity, classification, and theory-laden observation.</p></div></li>
+      <li class="draft"><span class="no">6</span><div><h4>Duck Typing as a Strategy</h4><p>Ask what it can do, not what it is. Work with behavioral data and let users set their own weights.</p></div></li>
+      <li class="draft"><span class="no">7</span><div><h4>Engineering Practice</h4><p>Test environments as counterfactual explorers, dual sensors, and Bayesian Safety.</p></div></li>
     </ol>
-    <p class="meta" style="margin-top:12px">五至七篇来自 2026-03 的一份整合 Proposal，正文还没有写。</p>
+    <p class="meta" style="margin-top:12px">Parts 5–7 come from a March 2026 proposal for extending the series. They have not yet been written.</p>
   </div>
 </section>
 
 <section class="about">
   <div class="col">
-    <span class="secno">关于这个系列</span>
-    <p>原文是边读边想的札记，论点和语气尽量保留，篇幅压到原来的六成左右。交互部分有两种来源：前三篇的原文附图按原图重绘成可以操作的版本，原图作为“原文附图”放在旁边（第四篇的两张附图，《生活大爆炸》的扩展版剪刀石头布和《火焰纹章》的武器相克，没有转载原图，直接做成了“偏好系统”里的两个例子）；原文只用文字描述的实验和例子（量水实验、搜索树、真实的过海路线等）是这次补上的，页面上都注明了出处和哪些数字是估算。</p>
-    <p>原文也在这个网站上，除了 2026 年改正的几处笔误，保持原样：<a href="../../../blogs/problem-solving-and-design-1-situation.html">《问题情境》</a>、<a href="../../../blogs/problem-solving-and-design-2-feasible-solutions.html">《可行解》</a>、<a href="../../../blogs/problem-solving-and-design-3-open-problems.html">《开放问题》</a>、<a href="../../../blogs/problem-solving-and-design-4-choice-and-optima.html">《纠结与最优解》</a>。</p>
-    <p>颜色在四篇里意思一致：琥珀色是可以动手的东西，薄荷绿是答案，红色是出局或矛盾。</p>
+    <span class="secno">About this series</span>
+    <p>The originals were notes made while reading and thinking. These adaptations preserve their arguments and voice while reducing the text to roughly 60% of its original length. The interactions have two sources. Figures in the first three essays are redrawn as interactive versions, with the originals shown alongside. Part 4 turns its two illustrations—the expanded rock-paper-scissors game from The Big Bang Theory and Fire Emblem’s weapon triangle—into examples in the preference explorer, without reproducing the images. Experiments and examples previously described only in words, such as the water jars, search tree, and real harbour-crossing routes, have been added here. Sources and estimated figures are identified on each page.</p>
+    <p>The original essays are also on this site, with English translations. Apart from a few typos corrected in 2026, their text is unchanged: <a href="../../../blogs/problem-solving-and-design-1-situation.en.html">The Problem Situation</a>, <a href="../../../blogs/problem-solving-and-design-2-feasible-solutions.en.html">Feasible Solutions</a>, <a href="../../../blogs/problem-solving-and-design-3-open-problems.en.html">Open Problems</a>, <a href="../../../blogs/problem-solving-and-design-4-choice-and-optima.en.html">Choice and Optima</a>.</p>
+    <p>Colors mean the same thing throughout: amber marks things you can manipulate, mint green marks answers, and red marks elimination or contradiction.</p>
   </div>
 </section>
-<footer class="col">改编自作者 2016 至 2017 年发表在简书的《问题解决与设计》系列。</footer>
+<footer class="col">Adapted from the author’s Problem Solving and Design essays, first published on Jianshu in 2016–2017.</footer>
 </div>
 
 <script>

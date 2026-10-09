@@ -10,7 +10,7 @@ series_part: 1
 
 # Problem Solving and Design (1): The Problem Situation
 
-> Interactive version: [The Problem Situation](../gallery/talks/problem-solving-and-design/ch1.html) (in Chinese), a condensed rewrite with figures you can drag and click. The whole series: [Problem Solving and Design](../gallery/talks/problem-solving-and-design/index.html) (in Chinese).
+> Interactive version: [The Problem Situation](../gallery/talks/problem-solving-and-design/ch1.en.html), a condensed rewrite with figures you can drag and click. The whole series: [Problem Solving and Design](../gallery/talks/problem-solving-and-design/index.en.html).
 
 Keywords: methodology | problem situation | interaction design | search problems
 

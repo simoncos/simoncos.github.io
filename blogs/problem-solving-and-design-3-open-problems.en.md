@@ -10,7 +10,7 @@ series_part: 3
 
 # Problem Solving and Design (3): Open-Ended Problems
 
-> Interactive version: [Open-Ended Problems](../gallery/talks/problem-solving-and-design/ch3.html) (in Chinese), a condensed rewrite with figures you can drag and click. The whole series: [Problem Solving and Design](../gallery/talks/problem-solving-and-design/index.html) (in Chinese).
+> Interactive version: [Open-Ended Problems](../gallery/talks/problem-solving-and-design/ch3.en.html), a condensed rewrite with figures you can drag and click. The whole series: [Problem Solving and Design](../gallery/talks/problem-solving-and-design/index.en.html).
 
 ![Hong Kong MTR route map](assets/images/problem-solving-and-design-3-open-problems/22938bf33f05d2bd85f5debab9c9eabe.jpg)
 

@@ -10,7 +10,7 @@ series_part: 2
 
 # Problem Solving and Design (2): Feasible Solutions
 
-> Interactive version: [Feasible Solutions](../gallery/talks/problem-solving-and-design/ch2.html) (in Chinese), a condensed rewrite with figures you can drag and click. The whole series: [Problem Solving and Design](../gallery/talks/problem-solving-and-design/index.html) (in Chinese).
+> Interactive version: [Feasible Solutions](../gallery/talks/problem-solving-and-design/ch2.en.html), a condensed rewrite with figures you can drag and click. The whole series: [Problem Solving and Design](../gallery/talks/problem-solving-and-design/index.en.html).
 
 Keywords: feasible solutions | possibility space | bias | mental set | functional fixedness | affordance
 

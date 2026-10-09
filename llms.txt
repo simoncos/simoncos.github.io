@@ -34,6 +34,7 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 - [Sunny Day (晴天)](https://simoncos.github.io/gallery/music/qingtian.html): Original song, words, music and vocals by Che Zhao, with the recording, the lyrics, and the score (numbered-notation PDF, MusicXML, MIDI).
 - [My Personal Knowledge Management System, 2026-03](https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html): Essay on personal systems and the publishing layer.
 - [My Haba Snow Mountain Journey](https://simoncos.github.io/blogs/my-haba-snow-mountain-journey.en.html): Field note about outdoor experience, risk, and body feedback.
+- [Problem Solving and Design — interactive edition](https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.en.html): Four hands-on essays, with complete English and Chinese editions and a language switch on every page.
 - [Problem Solving and Design](https://simoncos.github.io/blogs.html#series-problem-solving-and-design): Four completed essays in Chinese and English, from problem situations and feasible solutions to open-ended problems, indecision and the optimal solution.
 
 - [Reading Roundups (读书小结)](https://simoncos.github.io/blogs.html#series-reading-roundups): Six bilingual reading roundups from 2015 to 2019, preserving the original reviews and historical dates.

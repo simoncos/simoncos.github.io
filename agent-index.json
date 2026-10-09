@@ -107,6 +107,13 @@
       "description": "Four completed essays, in Chinese and English, on problem situations, feasible solutions, open-ended problems, and indecision and the optimal solution."
     },
     {
+      "id": "problem-solving-interactive",
+      "type": "interactive_essay",
+      "label": "Problem Solving and Design — Interactive Edition",
+      "url": "https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.en.html",
+      "description": "Four interactive essays in English and Chinese, covering problem situations, feasible solutions, open problems, and choice and optima. Switch languages on each page."
+    },
+    {
       "id": "zhihu-2015",
       "type": "research_artifact",
       "label": "Zhihu 2015: People, Connections and Influence",

@@ -1,26 +1,26 @@
 <!doctype html>
-<html lang="zh-Hans">
+<html lang="en">
 <meta charset="utf-8">
-<link rel="canonical" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch2.html">
-<link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch2.html">
+<link rel="canonical" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch2.en.html">
+<link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch2.html">
 <link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch2.en.html">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>可行解</title>
-<meta name="description" content="让人看不见可行解的两种“缓存”：定势和功能固着。">
+<title>Feasible Solutions</title>
+<meta name="description" content="Two kinds of “cache” that hide feasible solutions: mental set and functional fixedness.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="可行解 · Simon Zhao">
-<meta property="og:description" content="让人看不见可行解的两种“缓存”：定势和功能固着。">
-<meta property="og:url" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch2.html">
+<meta property="og:title" content="Feasible Solutions · Simon Zhao">
+<meta property="og:description" content="Two kinds of “cache” that hide feasible solutions: mental set and functional fixedness.">
+<meta property="og:url" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch2.en.html">
 <meta property="og:site_name" content="simoncos">
-<meta property="og:image" content="https://simoncos.github.io/gallery/assets/og-problem-solving.jpg">
+<meta property="og:image" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/assets/og.en.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@600;900&family=Noto+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 /* Shared with chapter 1 */
 
@@ -32,8 +32,8 @@
   --accent:#ffb347; --accent-soft:rgba(255,179,71,.12);
   --stop:#ff5d7d; --go:#3cf2b4; --go-soft:rgba(60,242,180,.14);
   --t1:#5cb8ff; --t2:#ff6ad5; --t3:#9cf06a;
-  --display:"Noto Serif SC","Songti SC","STSong",serif;
-  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --display:"Noto Serif","Songti SC","STSong",serif;
+  --body:"Noto Sans","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
   color-scheme:dark;
 }
@@ -125,7 +125,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .map h4{margin:0;font-size:1rem}
 .map h4 a{color:inherit}
 .map p{margin:2px 0 0;font-size:.88rem;color:var(--muted);line-height:1.65}
-.map .draft h4::after{content:"尚未成文";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
+.map .draft h4::after{content:"Not yet written";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
 footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
 /* touch screens: fingertip-sized controls */
 @media (pointer:coarse){input[type=range]{min-height:36px}select,input[type=number]{min-height:40px}.btn,.seg button{min-height:40px}.series a{display:inline-flex;align-items:center;min-height:40px}input[type=checkbox]{width:18px;height:18px}}
@@ -271,146 +271,183 @@ tr.hot td:first-child,th.hot{color:var(--accent)}
 @media (prefers-reduced-motion: reduce){#cd.playing .spin,#cd.playing .annot{animation:none}}
 
 .language-switch{display:flex;justify-content:flex-end;gap:14px;position:relative;z-index:2;max-width:1120px;margin:0 auto 20px;font-size:.85rem}.language-switch a,.language-switch span{padding:8px 4px}.language-switch [aria-current]{color:var(--muted)}
+
+/* English copy is longer: retain the original visual system with room to wrap. */
+html[lang="en"] body{line-height:1.75}
+html[lang="en"] h1{font-size:clamp(2.6rem,7vw,4.5rem);letter-spacing:-.025em}
+html[lang="en"] h2{letter-spacing:-.015em}
+html[lang="en"] .eyebrow,html[lang="en"] .lab,html[lang="en"] .secno{letter-spacing:.035em}
+html[lang="en"] .series a,html[lang="en"] .series span{white-space:normal}
+html[lang="en"] .series{gap:8px}
+html[lang="en"] .card h2{font-size:clamp(1.3rem,3vw,1.8rem)}
+html[lang="en"] .card{gap:12px}
+html[lang="en"] .seg button{white-space:normal;line-height:1.4;min-height:40px}
+html[lang="en"] button,html[lang="en"] label{overflow-wrap:break-word}
+html[lang="en"] .chipx{max-width:7.5em}
+html[lang="en"] .node text{font-size:12px}
+@media(max-width:520px){
+ html[lang="en"] .wrap{padding-inline:16px}
+ html[lang="en"] .bench{padding:14px}
+ html[lang="en"] .slider{flex-wrap:wrap}
+ html[lang="en"] .emblem{opacity:.25}
+ html[lang="en"] .card{grid-template-columns:minmax(0,1fr) 60px;padding:18px}
+ html[lang="en"] .card svg{width:60px;height:60px}
+ html[lang="en"] .node text{font-size:14px}
+}
+html[lang="en"]:has(#tree) .slider{grid-template-columns:minmax(0,1fr) 3.6em;gap:4px 10px}
+html[lang="en"]:has(#tree) .slider label{grid-column:1/-1;overflow-wrap:normal}
+html[lang="en"]:has(#tree) .slider input{grid-column:1;grid-row:2}
+html[lang="en"]:has(#tree) .slider output{grid-column:2;grid-row:2}
+html[lang="en"] .check{grid-template-columns:8.5em minmax(0,1fr)}
+html[lang="en"] .pill{padding:4px 8px;line-height:1.45;overflow-wrap:normal}
+html[lang="en"] .track div{grid-template-columns:1.6em 6.8em minmax(0,1fr)}
+html[lang="en"] #pans .big{font-size:clamp(1.3rem,5vw,2rem);overflow-wrap:normal}
+@media(max-width:520px){
+ html[lang="en"] .check{grid-template-columns:minmax(0,1fr);gap:6px}
+ html[lang="en"] .pill{justify-self:start}
+ html[lang="en"] .check small{overflow-wrap:anywhere}
+}
+
 </style>
 
 <div class="wrap">
-<nav class="language-switch" aria-label="语言 / Language"><span aria-current="page">中文</span><a href="ch2.en.html" lang="en" hreflang="en">English</a></nav>
+<nav class="language-switch" aria-label="Language"><a href="ch2.html" lang="zh-Hans" hreflang="zh-Hans">中文</a><span aria-current="page">English</span></nav>
 <div class="hero-band" id="heroBand">
 <header class="col">
-  <nav class="series" aria-label="系列章节">
-    <a href="ch1.html">一 问题情境</a><span class="cur">二 可行解</span><a href="ch3.html">三 开放问题</a><a href="ch4.html">四 纠结与最优解</a><span>五 测量的局限</span><span>六 Duck Typing</span><span>七 工程实践</span>
+  <nav class="series" aria-label="Chapters in this series">
+    <a href="ch1.en.html">1 The Problem Situation</a><span class="cur">2 Feasible Solutions</span><a href="ch3.en.html">3 Open Problems</a><a href="ch4.en.html">4 Choice and Optima</a><span>5 Measurement</span><span>6 Duck Typing</span><span>7 Engineering</span>
   </nav>
   <div class="hero-text">
     <svg class="emblem" id="ninedot" viewBox="0 0 400 400" aria-hidden="true"><rect class="k2" x="116" y="116" width="168" height="168" stroke-dasharray="5 7"></rect><g id="nd-dots"></g><path class="k1" id="nd-line" d="M140 140L320 140L140 320L140 140L260 260"></path></svg>
-    <div class="eyebrow"><a href="index.html" class="up">问题解决与设计</a> · 第二篇</div>
-    <h1><span class="hl">可行</span>解</h1>
-    <p class="lede">问题的表示一旦确定，就可以开始找可行解了。这一篇从一个苹果、一把水果刀和一把剪刀出发，讲两种让人错过解的“缓存”：<strong>定势</strong>和<strong>功能固着</strong>。</p>
+    <div class="eyebrow"><a href="index.en.html" class="up">Problem Solving and Design</a> · Part 2</div>
+    <h1><span class="hl">Feasible </span>Solutions</h1>
+    <p class="lede">Once the representation is settled, we can search for feasible solutions. Starting with an apple, a fruit knife, and a pair of scissors, this essay explores two kinds of “cache” that can hide a solution: <strong>Mental set</strong> and <strong>functional fixedness</strong>.</p>
     <div class="factors">
-      <span>问题情境<small>第一篇</small></span><span class="cur">定势<small>本篇</small></span><span class="cur">功能固着<small>本篇</small></span><span>迁移</span><span>原型启发</span><span>动机与情绪状态</span><span>个体特征</span>
+      <span>The Problem Situation<small>Part 1</small></span><span class="cur">Mental set<small>This part</small></span><span class="cur">Functional fixedness<small>This part</small></span><span>Transfer</span><span>Prototype heuristics</span><span>Motivation and emotion</span><span>Individual characteristics</span>
     </div>
-    <p class="meta" style="margin-top:1.2em">交互版 · 改编自作者 2016 年发表在简书的同名旧文 · <a href="../../../blogs/problem-solving-and-design-2-feasible-solutions.html">读原文</a></p>
+    <p class="meta" style="margin-top:1.2em">Interactive edition · Adapted from the author’s 2016 essay on Jianshu · <a href="../../../blogs/problem-solving-and-design-2-feasible-solutions.en.html">Read the original essay</a></p>
   </div>
 </header>
 </div>
 
 <section id="s1">
   <div class="col">
-    <span class="bignum" aria-hidden="true">01</span><span class="secno">01 · 资源与方法</span>
-    <h2>六道削皮题</h2>
-    <p>可行解落到现实里指的是什么？我觉得可以简单分成两个必要的部分：<strong>资源（Resource）</strong>和<strong>方法（Method）</strong>。用水果刀给苹果削皮，水果刀是资源，削皮的手法是方法。</p>
-    <p>原文用一串越来越“侮辱智商”的小题往前推。你也答一遍：选完自动进入下一题，答案和点评记在答卷里，点题号可以回去改。</p>
+    <span class="bignum" aria-hidden="true">01</span><span class="secno">01 · Resources and methods</span>
+    <h2>Six peeling questions</h2>
+    <p>What does a feasible solution consist of in practice? I think it has two necessary parts: <strong>resources</strong> and <strong>methods</strong>. To peel an apple with a knife, the knife is the resource; the way you peel is the method.</p>
+    <p>The original essay proceeds through a series of increasingly silly questions. Try them: choosing an answer advances to the next question. Your answers and comments stay on the answer sheet; click a question number to go back.</p>
   </div>
   <div class="wide">
     <div class="bench quiz">
       <div class="qcard" id="qcard"></div>
       <div>
-        <span class="lab">你的答卷</span>
+        <span class="lab">Your answer sheet</span>
         <div class="ledger" id="ledger"></div>
       </div>
     </div>
   </div>
   <div class="col">
-    <p>问题 3 和问题 4 的差别值得停一下。我们选水果刀而不是剪刀时，其实在解一个更强的问题：以最优的方式去皮。可“最优”按什么标准算？<strong>只要提到选择，就一定有相应的标准</strong>。标准一明确，问题就成了一个最优化问题。搜索只是解决问题的过程，目的其实是选择。</p>
+    <p>Pause at the difference between questions 3 and 4. When we choose a knife over scissors, we are actually solving a stronger problem: removing the peel optimally. But by what standard?<strong>Every choice requires a criterion</strong>. Once the criterion is explicit, the task becomes an optimization problem. Search is only the process; the purpose is to choose.</p>
   </div>
 </section>
 
 <section id="s2">
   <div class="col">
-    <span class="bignum" aria-hidden="true">02</span><span class="secno">02 · 定势</span>
-    <h2>量水实验</h2>
-    <p>如果真打不开那瓶红酒，可已经吃了四个苹果一个梨的李雷还想着用水果刀去开，他就是陷入了<strong>定势</strong>：连续解决相似的问题时，你会把之前的可行解缓存起来，下一题优先尝试。</p>
-    <p>原文提到的“水杯量水实验”是卢钦斯（Luchins）1942 年的经典实验。规则很简单：有三个容量不同的量杯 A、B、C，只能整杯地往盆里倒、或从盆里整杯舀出，要让盆里正好剩下目标的水量。一共十题，按顺序做，尽量少用步数。</p>
+    <span class="bignum" aria-hidden="true">02</span><span class="secno">02 · Mental set</span>
+    <h2>Water-jar experiment</h2>
+    <p>Suppose the knife cannot open the wine bottle, yet Li Lei—having peeled four apples and a pear—still insists on using it. He has fallen into a <strong>Mental set</strong>: when solving similar problems in succession, you cache a previous solution and try it first on the next problem.</p>
+    <p>The water-jar task mentioned in the original comes from Luchins’s classic 1942 experiment. You have three jars, A, B, and C. Add or remove one whole jarful at a time until the basin holds the target amount. Work through all ten problems in order, using as few steps as possible.</p>
   </div>
   <div class="wide">
     <div class="bench jars">
       <div>
-        <div class="jhead"><span><span class="lab" style="display:inline">第</span> <span class="big" id="jno">1</span> <span class="lab" style="display:inline">/ 10 题</span></span><span class="meta" id="jgoal"></span></div>
-        <svg id="jsvg" viewBox="0 0 600 300" role="img" aria-label="三个量杯和一个水盆"></svg>
+        <div class="jhead"><span><span class="lab" style="display:inline">No. </span> <span class="big" id="jno">1</span> <span class="lab" style="display:inline">/ 10</span></span><span class="meta" id="jgoal"></span></div>
+        <svg id="jsvg" viewBox="0 0 600 300" role="img" aria-label="Three measuring jars and a basin"></svg>
         <div class="ops" id="ops"></div>
         <p class="formula" id="formula"></p>
-        <div class="jrow"><button type="button" class="btn ghost" id="jreset">清空重来</button><button type="button" class="btn ghost" id="jskip">跳过这题</button><button type="button" class="btn" id="jnext" hidden>下一题</button></div>
+        <div class="jrow"><button type="button" class="btn ghost" id="jreset">Empty and restart</button><button type="button" class="btn ghost" id="jskip">Skip this problem</button><button type="button" class="btn" id="jnext" hidden>Next question</button></div>
       </div>
       <div>
-        <span class="lab">每一题你用的办法</span>
+        <span class="lab">Your method for each problem</span>
         <div class="track" id="track"></div>
         <div id="verdict"></div>
       </div>
     </div>
   </div>
   <div class="col">
-    <p>前五题都能用 B − A − 2C 解出。从第 6 题起，题目悄悄变了，A − C 或 A + C 两步就够；第 8 题甚至只有 A − C 这一种解法。卢钦斯的被试里，做过前五题的人大多在后面继续用四步的老办法，有些人在第 8 题直接卡住；没做过前五题的对照组几乎都直接用了两步。</p>
-    <p>按原文的说法，量水实验还算稍好的情况：关键题上老办法照样能用，被试充其量只是<strong>忽略了最优解，仍然找到了可行解</strong>。但如果之前的可行解太成功，比如解决了前面所有问题，那么在下一个它行不通的问题里（就像第 8 题），你可能要花很长时间才能摆脱它。手拿锤子看什么都是钉子，典型的过拟合。摆脱定势的办法可能是<strong>清除脑中的缓存，清除先验的偏见，从头寻找和评估所有的解</strong>。</p>
+    <p>The first five problems can all be solved with B − A − 2C. From problem 6, something changes: A − C or A + C takes only two steps. In problem 8, only A − C works. Most of Luchins’s participants who had practiced the first five kept using the old four-step method; some became stuck at problem 8. A control group without that practice usually found the two-step solution directly.</p>
+    <p>As the original essay notes, the water-jar experiment is a relatively mild case: on the critical problems where the old method still works, participants merely <strong>overlook the optimal solution while still finding a feasible one</strong>. But when a method has solved every previous problem, you may take a long time to abandon it on one where it fails, as in problem 8. With a hammer in hand, everything looks like a nail: a kind of overfitting. Escaping mental set may require you to <strong>clear the mental cache, set aside prior bias, and search for and evaluate solutions afresh</strong>.</p>
   </div>
 </section>
 
 <section id="s3">
   <div class="col">
-    <span class="bignum" aria-hidden="true">03</span><span class="secno">03 · 功能固着与可供性</span>
-    <h2>把剪刀拆开看</h2>
-    <p>回到问题 2。韩梅梅坚持说没有可行解：剪刀是用来剪窗花的，怎么能去苹果皮？这就是<strong>功能固着</strong>。第一次认识一个物体时，我们往往只认识它最主要的功能，然后把功能和物体绑在一起：说起铅笔就想到写字，要意识到铅笔还能用来转磁带，可能是很久以后的事。</p>
-    <p>可物体是可以分解的。它由更原子的模块组成，每个模块有自己更基础的功能；<strong>功能不是物体本身</strong>。切换到“拆开看”，再把鼠标移到（手机上点一下）任何一个部件上，看它能撑起哪些任务。</p>
+    <span class="bignum" aria-hidden="true">03</span><span class="secno">03 · Functional fixedness and affordance</span>
+    <h2>Take scissors apart</h2>
+    <p>Return to question 2. Han Meimei insists there is no solution: scissors are for cutting paper decorations, so how could they peel an apple? This is <strong>functional fixedness</strong>. When we first encounter an object, we often learn only its main function and bind the two together. A pencil means writing; it may be much later before we realize it can rewind a cassette.</p>
+    <p>But objects can be decomposed into more basic parts, each with simpler functions. <strong>A function is not the object itself</strong>. Switch to “Take apart,” then hover over or tap a component to see which tasks it can support.</p>
   </div>
   <div class="wide">
     <div class="bench aff">
       <div class="seg" id="affseg">
-        <button type="button" data-v="whole" aria-pressed="true">整体看（功能固着）</button>
-        <button type="button" data-v="open" aria-pressed="false">拆开看（可供性）</button>
+        <button type="button" data-v="whole" aria-pressed="true">Whole objects</button>
+        <button type="button" data-v="open" aria-pressed="false">Take apart</button>
       </div>
       <div>
-        <svg id="tools" viewBox="0 0 320 420" role="img" aria-label="水果刀、剪刀、铅笔，可以拆成部件"></svg>
+        <svg id="tools" viewBox="0 0 320 420" role="img" aria-label="A knife, scissors, and pencil, with components you can inspect"></svg>
         <p class="pcap" id="pcap" aria-live="polite"></p>
       </div>
       <div>
-        <div class="count"><span class="big" id="fcount">3</span><span class="meta" id="fcountl">个可行解</span></div>
+        <div class="count"><span class="big" id="fcount">3</span><span class="meta" id="fcountl">feasible solutions</span></div>
         <table class="mtx" id="mtx"></table>
         <p class="note" id="affnote" style="margin-top:14px"></p>
       </div>
     </div>
   </div>
   <div class="col">
-    <p>心理学和设计里有一个更 fancy 的词，把物体和功能区分开：<strong>可供性（Affordance）</strong>，原意是一个物体可供你进行的所有可能动作。这个“所有”暗示了两点：一个物体可能含有多种功能；我们对一个物体的认识可能是不完整的。</p>
-    <p>功能固着并非一无是处。它帮我们快速认识事物和它最有用的功能，并在之后的问题里更快地想起来，跟定势类似，像一种更长期的缓存。缺点在于“固化”。关注可供性，促使我们把问题的解看成可以分解、重组的系统，找到被忽略的可行解。</p>
+    <p>Psychology and design offer a more precise term for separating an object from its functions: <strong>affordance</strong>, originally meaning all the actions an object makes possible. “All” suggests two things: an object may have multiple functions, and our knowledge of it may be incomplete.</p>
+    <p>Functional fixedness is not useless. It helps us learn an object’s most useful function and recall it quickly later—a longer-term cache, much like mental set. The problem is the fixedness. Focusing on affordances encourages us to treat solutions as systems that can be taken apart and recombined, revealing overlooked possibilities.</p>
   </div>
 </section>
 
 <section id="s4">
   <div class="col">
-    <span class="bignum" aria-hidden="true">04</span><span class="secno">04 · 附图</span>
-    <h2>一根拉绳</h2>
-    <p>原文的附图是无印良品的壁挂式 CD 机（深泽直人设计），标题是“分解和重组”。它把 CD 机拆成转盘、扬声器和开关：整个正面就是扬声器，开关换成了排气扇上那根拉绳。</p>
-    <p>可供性后来在设计领域有了另一层意思：人不用多想、一眼就能看出来的那部分功能。看到一根垂下来的绳子，你不需要说明书。点一下画面，绳子会被拉一下；再点一下，停。</p>
+    <span class="bignum" aria-hidden="true">04</span><span class="secno">04 · The original figure</span>
+    <h2>A pull cord</h2>
+    <p>The original illustration is MUJI’s wall-mounted CD player, designed by Naoto Fukasawa, captioned “Decomposition and recombination.” It separates a player into a turntable, speaker, and switch. The whole front becomes a speaker; an extractor fan’s pull cord becomes the switch.</p>
+    <p>In design, affordance later acquired another sense: the functions you can perceive without much thought. A hanging cord needs no instruction manual. Click the player to pull the cord and start; click again to stop.</p>
   </div>
   <div class="wide">
     <div class="bench muji">
-      <svg id="cd" viewBox="0 0 400 420" role="button" tabindex="0" aria-pressed="false" aria-label="壁挂式 CD 机：点击拉一下拉绳，开始或停止播放"></svg>
+      <svg id="cd" viewBox="0 0 400 420" role="button" tabindex="0" aria-pressed="false" aria-label="Wall-mounted CD player: click to pull the cord and start or stop playback"></svg>
       <div class="ctl">
-        <div><span class="lab">状态</span><div class="big" id="cdstate" style="font-size:1.8rem">停止</div></div>
-        <p class="meta" style="margin:0">曲子是萨蒂《第一号吉姆诺佩迪》（Gymnopédie No.1，1888）的引子和前两个乐句，用浏览器实时合成的钢琴音色演奏。</p>
-        <figure class="orig keep"><img src="assets/ch2-img/fig-muji.png" alt="原文附图：白墙上挂着一台方形白色 CD 机，正面布满小孔，中间是碟片和黑色轴心，一根白色拉绳从机身底部垂下；左下的白色架子上放着几张 CD" width="496" height="496"><figcaption>原文附图 · 无印良品壁挂式 CD 机</figcaption></figure>
+        <div><span class="lab">Status</span><div class="big" id="cdstate" style="font-size:1.8rem">Stopped</div></div>
+        <p class="meta" style="margin:0">The music is the introduction and first two phrases of Erik Satie’s Gymnopédie No. 1 (1888), played with a piano sound synthesized in your browser.</p>
+        <figure class="orig keep"><img src="assets/ch2-img/fig-muji.png" alt="Original figure: a square white CD player on a white wall, with a perforated front, central disc, and a pull cord hanging below; CDs rest on a shelf at lower left" width="496" height="496"><figcaption>Original figure · MUJI wall-mounted CD player</figcaption></figure>
       </div>
     </div>
   </div>
   <div class="col">
-    <p>设计师需要知道，物体的功能有显隐之分。设计新东西时要有意识地调整那条界限：凸显最需要凸显的功能，隐藏不需要的可能。这其实是<strong>对“功能固着”的正向利用</strong>：既然人会把拉绳和“拉一下就开”绑在一起，那就把这个缓存借过来用。</p>
+    <p>Designers need to distinguish visible and hidden functions, deliberately moving the boundary to reveal what matters and hide unnecessary possibilities. This is a <strong>constructive use of functional fixedness</strong>: if people already associate a pull cord with switching something on, borrow that cached association.</p>
   </div>
 </section>
 
 <section>
   <div class="col">
-    <span class="secno">系列地图</span>
-    <h2>每一篇，一个可以动手的问题</h2>
+    <span class="secno">Series map</span>
+    <h2>One hands-on question in each essay</h2>
     <ol class="map">
-      <li><span class="no">一</span><div><h4><a href="ch1.html">问题情境</a></h4><p>两种画法的正方形、找箭头、搜索树、表示方式、设计。</p></div></li>
-      <li class="cur"><span class="no">二</span><div><h4>可行解</h4><p>本页：六道削皮题、量水实验、把剪刀拆开看、一根拉绳。</p></div></li>
-      <li><span class="no">三</span><div><h4><a href="ch3.html">开放问题</a></h4><p>只坐地铁、行动方式不限、抓大放小、证伪的是整个合式。</p></div></li>
-      <li><span class="no">四</span><div><h4><a href="ch4.html">纠结与最优解</a></h4><p>电车难题、价值天平、两千个可能的你、偏好系统、标准轮换造出的环。</p></div></li>
-      <li class="draft"><span class="no">五</span><div><h4>测量的局限</h4><p>来自 2026-03 的整合 Proposal：相似性、分类与理论负荷。</p></div></li>
-      <li class="draft"><span class="no">六</span><div><h4>Duck Typing 作为策略</h4><p>不问它是什么，问它能做什么；行为级数据，让用户自己设权重。</p></div></li>
-      <li class="draft"><span class="no">七</span><div><h4>工程实践</h4><p>测试环境作为反事实探索器，双重传感器，Bayesian Safety。</p></div></li>
+      <li><span class="no">1</span><div><h4><a href="ch1.en.html">The Problem Situation</a></h4><p>One square in two drawings, the hidden arrow, search trees, representation, and design.</p></div></li>
+      <li class="cur"><span class="no">2</span><div><h4>Feasible Solutions</h4><p>This page: six peeling questions, water jars, taking scissors apart, and a pull cord.</p></div></li>
+      <li><span class="no">3</span><div><h4><a href="ch3.en.html">Open Problems</a></h4><p>Metro routes, unrestricted travel, the big picture, and falsifying a conjunction.</p></div></li>
+      <li><span class="no">4</span><div><h4><a href="ch4.en.html">Choice and Optima</a></h4><p>The trolley problem, a balance of values, two thousand possible yous, preference systems, and cycles from changing criteria.</p></div></li>
+      <li class="draft"><span class="no">5</span><div><h4>The Limits of Measurement</h4><p>From the March 2026 proposal: similarity, classification, and theory-laden observation.</p></div></li>
+      <li class="draft"><span class="no">6</span><div><h4>Duck Typing as a Strategy</h4><p>Ask what it can do, not what it is. Work with behavioral data and let users set their own weights.</p></div></li>
+      <li class="draft"><span class="no">7</span><div><h4>Engineering Practice</h4><p>Test environments as counterfactual explorers, dual sensors, and Bayesian Safety.</p></div></li>
     </ol>
   </div>
 </section>
-<footer class="col">正文改编自<a href="../../../blogs/problem-solving-and-design-2-feasible-solutions.html">《问题解决与设计（二）：可行解》</a>；量水题目取自卢钦斯 1942 年的实验；CD 机按原文附图重绘。</footer>
+<footer class="col">Text adapted from <a href="../../../blogs/problem-solving-and-design-2-feasible-solutions.en.html">Problem Solving and Design (2): Feasible Solutions</a>. Water-jar problems are from Luchins’s 1942 experiment. The CD player is redrawn from the original illustration.</footer>
 </div>
 
 <script>
@@ -455,27 +492,27 @@ const plus = '<span class="plus">+</span>', arrow = '<span class="plus">→</spa
 
 /* ---------- 01 quiz ---------- */
 const Q = [
-  { no: '问题 1', text: '手头有一把<b>水果刀</b>，去掉一个苹果的皮。', icons: ['knife', '→', 'apple'], opts: ['能', '不能'],
-    note: () => '当然能。水果刀是<b>资源</b>，削皮的手法是<b>方法</b>：可行解 = 资源 + 方法。' },
-  { no: '问题 2', text: '把水果刀抽走，换成一把<b>剪刀</b>，去掉一个苹果的皮。', icons: ['scissors', '→', 'apple'], opts: ['能', '不能'],
-    note: a => a === '不能' ? '你站在了韩梅梅这边：剪刀是剪窗花的。记住这一刻，<b>第 03 部分</b>会回来。' : '现实里这样做一定很怪，但剪掉，或者“当作”水果刀来削，多费些劲还是能行。' },
-  { no: '问题 3', text: '<b>水果刀和剪刀都有</b>，去掉一个苹果的皮。', icons: ['knife', '+', 'scissors', '→', 'apple'], opts: ['用水果刀', '用剪刀', '都行'],
-    note: a => a === '都行' ? '严格地说，对。题目只要求“去掉皮”，两样都是可行解。' : '你没选“都行”。题目只要求“去掉皮”，两样都是可行解；你其实在解一个<b>更强的问题</b>，看下一题。' },
-  { no: '问题 4', text: '水果刀和剪刀都有，去掉苹果的皮，<b>以最优的方式</b>。按什么标准算“最优”？', icons: ['knife', '+', 'scissors', '→', 'apple'], opts: ['费更少的劲', '更像正常人', '没说标准'],
-    note: a => a === '没说标准' ? '这其实不是一个完整的问题。<b>只要提到选择，就一定有相应的标准</b>，否则无从比较。' : `按“${a}”，水果刀是最优解。标准一明确，问题就成了一个<b>最优化</b>问题。` },
-  { no: '问题 5', text: '水果刀和剪刀都有，去掉一个<b>梨</b>的皮。', icons: ['knife', '+', 'scissors', '→', 'pear'], opts: ['用水果刀', '用剪刀'],
-    note: () => '嗯，我在逗你，当然用水果刀啦。' },
-  { no: '问题 6', text: '水果刀和剪刀都有，打开一瓶<b>红酒</b>。', icons: ['knife', '+', 'scissors', '→', 'wine'], opts: ['能', '不能'],
-    note: a => `原文的反应是：“这TM也能打开？”你选了“${a}”。先记下，<b>第 03 部分</b>拆开看的时候再对一次答案。` },
+  { no: 'Question 1', text: 'You have a <b>fruit knife</b>. Can you remove an apple’s peel?', icons: ['knife', '→', 'apple'], opts: ['Yes', 'No'],
+    note: () => 'Of course. The knife is the <b>resource</b>; the peeling technique is the <b>method</b>. Feasible solution = resource + method.' },
+  { no: 'Question 2', text: 'Replace the knife with a pair of <b>scissors</b>. Can you remove an apple’s peel?', icons: ['scissors', '→', 'apple'], opts: ['Yes', 'No'],
+    note: a => a === 'No' ? 'You sided with Han Meimei: scissors are for cutting paper. Remember that response; <b>section 03</b> will return to it.' : 'It may feel odd, but you can cut off the peel or use a blade like a knife. It takes more effort, but it works.' },
+  { no: 'Question 3', text: '<b>You have both a knife and scissors</b>. Can you remove an apple’s peel?', icons: ['knife', '+', 'scissors', '→', 'apple'], opts: ['Use the knife', 'Use the scissors', 'Either works'],
+    note: a => a === 'Either works' ? 'Strictly speaking, yes. The task only says to remove the peel. Both are feasible solutions.' : 'You did not choose “Either works.” Both can remove the peel; you are actually solving a <b>stronger problem</b>. See the next question.' },
+  { no: 'Question 4', text: 'With both a knife and scissors available, remove an apple’s peel <b>in the optimal way</b>. What makes a method “optimal”?', icons: ['knife', '+', 'scissors', '→', 'apple'], opts: ['Less effort', 'Looks more normal', 'No criterion given'],
+    note: a => a === 'No criterion given' ? 'This is not yet a complete problem. <b>Every choice requires a criterion</b>; otherwise comparison is impossible.' : `By the criterion “${a},” the knife is optimal. Once the criterion is clear, this becomes an <b>optimization</b> problem.` },
+  { no: 'Question 5', text: 'With a knife and scissors available, remove the peel from a <b>pear</b>.', icons: ['knife', '+', 'scissors', '→', 'pear'], opts: ['Use the knife', 'Use the scissors'],
+    note: () => 'Yes, I’m teasing you. The knife, of course.' },
+  { no: 'Question 6', text: 'With a knife and scissors available, open a bottle of <b>wine</b>.', icons: ['knife', '+', 'scissors', '→', 'wine'], opts: ['Yes', 'No'],
+    note: a => `The original reaction was: “How the hell could that work?” You chose “${a}.” Remember that; <b>section 03</b> will revisit it when we take things apart.` },
 ];
 const QA = {}; let qi = 0;
 function renderQ() {
   const q = Q[qi], a = QA[qi];
-  $('#qcard').innerHTML = `<div class="qhead"><span class="qno">${q.no}</span><div class="dots">${Q.map((_, i) => `<button type="button" class="${i === qi ? 'cur' : QA[i] ? 'done' : ''}" data-i="${i}" aria-label="问题 ${i + 1}"${i === qi ? ' aria-current="step"' : ''}>${i + 1}</button>`).join('')}</div></div>
+  $('#qcard').innerHTML = `<div class="qhead"><span class="qno">${q.no}</span><div class="dots">${Q.map((_, i) => `<button type="button" class="${i === qi ? 'cur' : QA[i] ? 'done' : ''}" data-i="${i}" aria-label="Question ${i + 1}"${i === qi ? ' aria-current="step"' : ''}>${i + 1}</button>`).join('')}</div></div>
     <p class="qtext">${q.text}</p>
     <div class="icons">${q.icons.map(k => k === '+' ? plus : k === '→' ? arrow : IC[k]).join('')}</div>
     <div class="opts">${q.opts.map(o => `<button type="button" class="opt" aria-pressed="${a === o}">${o}</button>`).join('')}</div>
-    <p class="qnote">${a ? q.note(a) : '<span style="color:var(--muted)">选一个，会自动进入下一题。</span>'}</p>`;
+    <p class="qnote">${a ? q.note(a) : '<span style="color:var(--muted)">Choose an answer to move to the next question.</span>'}</p>`;
   // choosing moves on by itself after a beat; the note stays in the answer sheet
   // the card is rebuilt on every change, so a keyboard user's focus is put back by hand
   const inCard = () => $('#qcard').contains(document.activeElement) || document.activeElement === document.body;
@@ -488,14 +525,14 @@ function renderQ() {
   $('#qcard').querySelectorAll('.dots button').forEach(b => b.addEventListener('click', () => { const had = document.activeElement === b; qTok++; qi = +b.dataset.i; renderQ(); renderLedger(); if (had) $(`#qcard .dots button[data-i="${qi}"]`)?.focus(); }));
 }
 let qTok = 0;
-function renderLedger() { $('#ledger').innerHTML = Q.map((q, i) => `<div class="${i === qi ? 'cur' : ''}"><span>${q.no.replace('问题 ', 'Q')}</span><span class="${QA[i] ? '' : 'mut'}">${QA[i] || '未作答'}</span>${QA[i] ? `<span class="ln">${q.note(QA[i])}</span>` : ''}</div>`).join(''); }
+function renderLedger() { $('#ledger').innerHTML = Q.map((q, i) => `<div class="${i === qi ? 'cur' : ''}"><span>${q.no.replace('Problem  ', 'Q')}</span><span class="${QA[i] ? '' : 'mut'}">${QA[i] || 'Not answered'}</span>${QA[i] ? `<span class="ln">${q.note(QA[i])}</span>` : ''}</div>`).join(''); }
 
 /* ---------- 02 Luchins water jars ---------- */
 const JP = [
   [21, 127, 3, 100], [14, 163, 25, 99], [18, 43, 10, 5], [9, 42, 6, 21], [20, 59, 4, 31],
   [23, 49, 3, 20], [15, 39, 3, 18], [28, 76, 3, 25], [18, 48, 4, 22], [14, 36, 8, 6],
 ];
-const JTAG = ['练习', '练习', '练习', '练习', '练习', '关键', '关键', '只有短解', '关键', '关键'];
+const JTAG = ['Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Critical', 'Critical', 'Short only', 'Critical', 'Critical'];
 const SHORT = ['B − A − 2C', 'B − A − 2C', 'B − A − 2C', 'B − A − 2C', 'B − A − 2C', 'A − C', 'A + C', 'A − C', 'A + C', 'A − C'];
 let ji = 0, amt = 0, seq = [], solved = false;
 // the basin has a rim: a little more than the biggest jug, so the long way (B first) always fits
@@ -519,9 +556,9 @@ function buildJars() {
   el('path', { d: `M${bx} ${base - bh} V${base} H${bx + bw} V${base - bh}`, class: 'basin' }, jsvg);
   const tl = base - T / bcap * bh;
   el('line', { x1: bx - 6, y1: tl, x2: bx + bw + 6, y2: tl, class: 'tline' }, jsvg);
-  const tt = el('text', { x: bx + bw, y: tl - 7, 'text-anchor': 'end', class: 'tl' }, jsvg); tt.textContent = `目标 ${T}`;
+  const tt = el('text', { x: bx + bw, y: tl - 7, 'text-anchor': 'end', class: 'tl' }, jsvg); tt.textContent = `Target: ${T}`;
   const at = el('text', { x: bx + 8, y: base - 8, class: 'cap' }, jsvg);
-  const bl = el('text', { x: bx + bw / 2, y: base + 22, 'text-anchor': 'middle', class: 'lab' }, jsvg); bl.textContent = `水盆 · 最多 ${bcap}`;
+  const bl = el('text', { x: bx + bw / 2, y: base + 22, 'text-anchor': 'middle', class: 'lab' }, jsvg); bl.textContent = `Basin · max ${bcap}`;
   JV = { jugs, water, at, bcap, bh, base, T };
 }
 function drawJars(pourIdx, dir = 1) {
@@ -537,12 +574,12 @@ function renderJar(pourIdx, dir) {
   const [A, B, C, T] = JP[ji], caps = [A, B, C];
   $('#jno').textContent = ji + 1;
   const cap = basinCap();
-  $('#jgoal').textContent = `用 A=${A}、B=${B}、C=${C}，让盆里正好是 ${T}（盆最多装 ${cap}）`;
+  $('#jgoal').textContent = `Use A=${A}, B=${B}, C=${C} to leave exactly ${T} (basin capacity: ${cap})`;
   drawJars(pourIdx, dir);
-  $('#ops').innerHTML = ['A', 'B', 'C'].map((n, i) => `<div class="grp"><button type="button" data-i="${i}" data-s="1"${solved || amt + caps[i] > cap ? ' disabled' : ''} aria-label="倒入一杯 ${n}">+${n}</button><button type="button" data-i="${i}" data-s="-1"${solved || amt < caps[i] ? ' disabled' : ''} aria-label="舀出一杯 ${n}">−${n}</button></div>`).join('');
+  $('#ops').innerHTML = ['A', 'B', 'C'].map((n, i) => `<div class="grp"><button type="button" data-i="${i}" data-s="1"${solved || amt + caps[i] > cap ? ' disabled' : ''} aria-label="Add one jarful: ${n}">+${n}</button><button type="button" data-i="${i}" data-s="-1"${solved || amt < caps[i] ? ' disabled' : ''} aria-label="Remove one jarful: ${n}">−${n}</button></div>`).join('');
   $('#ops').querySelectorAll('button').forEach(b => b.addEventListener('click', () => op(+b.dataset.i, +b.dataset.s)));
   const f = seq.map((s, k) => (k ? (s[1] > 0 ? ' + ' : ' − ') : (s[1] > 0 ? '' : '−')) + 'ABC'[s[0]]).join('');
-  $('#formula').innerHTML = seq.length ? `${f} <span class="eq">=</span> <span class="${solved ? 'ok' : ''}">${amt}</span>${solved ? ` <span class="ok">✓ ${seq.length} 步</span>` : ''}` : '<span class="eq">点 +A / −A 等按钮开始</span>';
+  $('#formula').innerHTML = seq.length ? `${f} <span class="eq">=</span> <span class="${solved ? 'ok' : ''}">${amt}</span>${solved ? ` <span class="ok">✓ ${seq.length} steps</span>` : ''}` : '<span class="eq">Click +A / −A, etc. to begin</span>';
   $('#jnext').hidden = !solved || ji === JP.length - 1;
   $('#jskip').hidden = solved;
   renderTrack();
@@ -565,19 +602,19 @@ function classify(q) { const c = [0, 0, 0]; q.forEach(([i, s]) => c[i] += s); if
 function renderTrack() {
   $('#track').innerHTML = JP.map((p, i) => {
     const r = JR[i]; let res = '<span class="skip">—</span>';
-    if (r === 'skip') res = '<span class="skip">跳过</span>';
-    else if (r) { const stale = i >= 5 && r.cls === 'long'; res = `<span class="${stale ? 'long' : r.steps <= (i < 5 ? 4 : 2) ? 'short' : ''}">${r.f} · ${r.steps} 步</span>${stale ? `<br><span class="hint">其实 ${SHORT[i]} 两步就够</span>` : ''}`; }
+    if (r === 'skip') res = '<span class="skip">Skipped</span>';
+    else if (r) { const stale = i >= 5 && r.cls === 'long'; res = `<span class="${stale ? 'long' : r.steps <= (i < 5 ? 4 : 2) ? 'short' : ''}">${r.f} · ${r.steps} steps</span>${stale ? `<br><span class="hint">Just ${SHORT[i]}  takes two steps</span>` : ''}`; }
     return `<div class="${i === ji ? 'cur' : ''}"><span class="tag">${i + 1}</span><span class="tag">${JTAG[i]}</span><span class="res">${res}</span></div>`;
   }).join('');
   const crit = [5, 6, 8, 9].filter(i => JR[i] && JR[i] !== 'skip'), stuck = JR[7] === 'skip';
-  const tail = stuck ? ' 第 8 题你跳过了：它只有 A − C 一种解法，老办法在这里失效。' : '';
+  const tail = stuck ? ' You skipped problem 8: only A − C works there. The old method fails.' : '';
   let v = '';
   if (crit.length >= 2) {
     const longN = crit.filter(i => JR[i].cls === 'long').length, shortN = crit.filter(i => JR[i].cls === 'short').length;
-    v = longN ? `在 ${crit.length} 道关键题里，你有 <b>${longN}</b> 道还在用四步的 B − A − 2C。`
-      : shortN === crit.length ? `你做的 ${crit.length} 道关键题都用了两步的短解，定势没抓住你。`
-      : `你做的 ${crit.length} 道关键题没有用四步的老办法，但有 ${crit.length - shortN} 道走了别的路。`;
-  } else if (Object.keys(JR).length >= 8) v = `关键题（第 6、7、9、10 题）你只做了 ${crit.length} 道，还看不出定势有没有抓住你。`;
+    v = longN ? `Of ${crit.length}  critical problems, you used the old method on  <b>${longN}</b> : four-step B − A − 2C.`
+      : shortN === crit.length ? `You solved all ${crit.length}  critical problems in two steps. Mental set did not catch you.`
+      : `You solved all ${crit.length}  critical problems avoided the old four-step method; ${crit.length - shortN}  used another route.`;
+  } else if (Object.keys(JR).length >= 8) v = `You have completed only ${crit.length}  critical problems (6, 7, 9, 10). It is too early to judge a mental-set effect.`;
   $('#verdict').innerHTML = v ? `<div class="verdict">${v}${tail}</div>` : '';
 }
 const reset = () => { amt = 0; seq = []; solved = false; JV = null; renderJar(-1); };
@@ -587,29 +624,29 @@ $('#jnext').addEventListener('click', () => { ji++; reset(); $('#ops button')?.f
 
 /* ---------- 03 tools, parts, affordances ---------- */
 const OBJ = [
-  { id: 'knife', name: '水果刀', y: 20, primary: ['peel'], parts: [
-    { n: '刀柄', tags: ['可握持'], dx: -18, dy: 0, draw: g => el('rect', { x: 20, y: 52, width: 78, height: 20, rx: 8 }, g), lab: [50, 92] },
-    { n: '刀身', tags: ['刚性长条'], dx: 0, dy: -18, draw: g => el('path', { d: 'M100 50 H226 L236 56 H100 Z' }, g), lab: [150, 26] },
-    { n: '刃口', tags: ['锋利'], dx: 0, dy: 18, draw: g => el('path', { d: 'M100 58 H236 L246 62 Q190 76 100 74 Z' }, g), lab: [160, 100] },
-    { n: '刀尖', tags: ['尖'], dx: 26, dy: 0, draw: g => el('path', { d: 'M248 54 L290 62 L248 66 Z' }, g), lab: [284, 34] },
+  { id: 'knife', name: 'fruit knife', y: 20, primary: ['peel'], parts: [
+    { n: 'Handle', tags: ['Grippable'], dx: -18, dy: 0, draw: g => el('rect', { x: 20, y: 52, width: 78, height: 20, rx: 8 }, g), lab: [50, 92] },
+    { n: 'Blade body', tags: ['Rigid bar'], dx: 0, dy: -18, draw: g => el('path', { d: 'M100 50 H226 L236 56 H100 Z' }, g), lab: [150, 26] },
+    { n: 'Edge', tags: ['Sharp'], dx: 0, dy: 18, draw: g => el('path', { d: 'M100 58 H236 L246 62 Q190 76 100 74 Z' }, g), lab: [160, 100] },
+    { n: 'Point', tags: ['Pointed'], dx: 26, dy: 0, draw: g => el('path', { d: 'M248 54 L290 62 L248 66 Z' }, g), lab: [284, 34] },
   ] },
-  { id: 'sc', name: '剪刀', y: 150, primary: ['cut'], parts: [
-    { n: '握环', tags: ['可握持'], dx: -22, dy: 0, draw: g => { el('circle', { cx: 44, cy: 50, r: 15 }, g); el('circle', { cx: 44, cy: 86, r: 15 }, g); }, lab: [40, 120] },
-    { n: '铰链', tags: ['可开合'], dx: 0, dy: 22, draw: g => el('circle', { cx: 124, cy: 68, r: 6 }, g), lab: [124, 106] },
-    { n: '双刃', tags: ['锋利', '成对刃', '刚性长条'], dx: 26, dy: -10, draw: g => { el('path', { d: 'M58 54 L290 62 L288 66 L60 60 Z' }, g); el('path', { d: 'M58 82 L290 70 L288 74 L60 88 Z' }, g); }, lab: [220, 30] },
+  { id: 'sc', name: 'scissors', y: 150, primary: ['cut'], parts: [
+    { n: 'Finger rings', tags: ['Grippable'], dx: -22, dy: 0, draw: g => { el('circle', { cx: 44, cy: 50, r: 15 }, g); el('circle', { cx: 44, cy: 86, r: 15 }, g); }, lab: [40, 120] },
+    { n: 'Pivot', tags: ['Opens/closes'], dx: 0, dy: 22, draw: g => el('circle', { cx: 124, cy: 68, r: 6 }, g), lab: [124, 106] },
+    { n: 'Twin blades', tags: ['Sharp', 'Paired edges', 'Rigid bar'], dx: 26, dy: -10, draw: g => { el('path', { d: 'M58 54 L290 62 L288 66 L60 60 Z' }, g); el('path', { d: 'M58 82 L290 70 L288 74 L60 88 Z' }, g); }, lab: [220, 30] },
   ] },
-  { id: 'pen', name: '铅笔', y: 306, primary: ['write'], parts: [
-    { n: '橡皮', tags: ['可擦'], dx: -10, dy: 0, draw: g => el('rect', { x: 18, y: 52, width: 26, height: 22, rx: 4 }, g), lab: [34, 92] },
-    { n: '六棱笔杆', tags: ['细长杆', '可握持'], dx: 0, dy: -18, draw: g => el('path', { d: 'M48 52 H222 V74 H48 Z M48 63 H222' }, g), lab: [134, 24] },
-    { n: '笔芯', tags: ['可书写'], dx: 26, dy: 0, draw: g => el('path', { d: 'M226 52 L276 63 L226 74 Z M262 60 L276 63 L262 66' }, g), lab: [262, 92] },
+  { id: 'pen', name: 'Pencil', y: 306, primary: ['write'], parts: [
+    { n: 'Eraser', tags: ['Erases'], dx: -10, dy: 0, draw: g => el('rect', { x: 18, y: 52, width: 26, height: 22, rx: 4 }, g), lab: [34, 92] },
+    { n: 'Hexagonal barrel', tags: ['Slender rod', 'Grippable'], dx: 0, dy: -18, draw: g => el('path', { d: 'M48 52 H222 V74 H48 Z M48 63 H222' }, g), lab: [134, 24] },
+    { n: 'Graphite core', tags: ['Makes marks'], dx: 26, dy: 0, draw: g => el('path', { d: 'M226 52 L276 63 L226 74 Z M262 60 L276 63 L262 66' }, g), lab: [262, 92] },
   ] },
 ];
 const TASKS = [
-  { id: 'peel', n: '削苹果皮', need: ['锋利', '可握持'] },
-  { id: 'cut', n: '剪窗花', need: ['成对刃', '可开合'] },
-  { id: 'write', n: '写字', need: ['可书写'] },
-  { id: 'tape', n: '转磁带', need: ['细长杆'] },
-  { id: 'wine', n: '开红酒：把木塞推进瓶里', need: ['刚性长条', '可握持'] },
+  { id: 'peel', n: 'Peel an apple', need: ['Sharp', 'Grippable'] },
+  { id: 'cut', n: 'Cut paper decorations', need: ['Paired edges', 'Opens/closes'] },
+  { id: 'write', n: 'Write', need: ['Makes marks'] },
+  { id: 'tape', n: 'Rewind a cassette', need: ['Slender rod'] },
+  { id: 'wine', n: 'Open wine: push the cork in', need: ['Rigid bar', 'Grippable'] },
 ];
 let affOpen = false, hotTags = null;
 const tools = $('#tools');
@@ -617,15 +654,15 @@ OBJ.forEach(o => {
   const g = el('g', { transform: `translate(0 ${o.y})` }, tools);
   const nm = el('text', { x: 0, y: 14, class: 'oname' }, g); nm.textContent = o.name;
   o.parts.forEach(p => {
-    const pg = el('g', { class: 'part', tabindex: '0', 'aria-label': `${o.name}的${p.n}：${p.tags.join('、')}` }, g);
+    const pg = el('g', { class: 'part', tabindex: '0', 'aria-label': `${o.name}: ${p.n}: ${p.tags.join(', ')}` }, g);
     p.draw(pg); p.g = pg;
     const bb = pg.getBBox(), px = Math.max(6, (28 - bb.width) / 2), py = Math.max(6, (28 - bb.height) / 2);
     pg.insertBefore(el('rect', { x: bb.x - px, y: bb.y - py, width: bb.width + 2 * px, height: bb.height + 2 * py, class: 'hit' }), pg.firstChild);
     const lt = el('text', { x: p.lab[0], y: p.lab[1], 'text-anchor': 'middle', class: 'plab' }, pg); lt.textContent = p.n;
     const tg = el('text', { x: p.lab[0], y: p.lab[1] + 13, 'text-anchor': 'middle', class: 'plab tags' }, pg); tg.textContent = p.tags.join(' · ');
-    const uses = TASKS.filter(t => t.need.some(x => p.tags.includes(x))).map(t => t.n.replace(/：.*/, ''));
-    const on = () => { if (!affOpen) return; hotTags = p.tags; pg.classList.add('hot'); renderMtx(); $('#pcap').innerHTML = `${o.name}的<b>${p.n}</b>：${p.tags.join('、')}。能参与：${uses.join('、')}`; };
-    const off = () => { hotTags = null; pg.classList.remove('hot'); renderMtx(); $('#pcap').innerHTML = affOpen ? '点（或指向）一个部件，看它能撑起哪些任务。' : ''; };
+    const uses = TASKS.filter(t => t.need.some(x => p.tags.includes(x))).map(t => t.n.replace(/: .*/, ''));
+    const on = () => { if (!affOpen) return; hotTags = p.tags; pg.classList.add('hot'); renderMtx(); $('#pcap').innerHTML = `${o.name}: <b>${p.n}</b>: ${p.tags.join(', ')}. Can help with: ${uses.join(', ')}`; };
+    const off = () => { hotTags = null; pg.classList.remove('hot'); renderMtx(); $('#pcap').innerHTML = affOpen ? 'Tap or hover over a component to see which tasks it supports.' : ''; };
     pg.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') on(); }); pg.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') off(); });
     // no hover on touch: a tap lights this part and puts out the others
     pg.addEventListener('pointerup', e => { if (e.pointerType === 'mouse') return; tools.querySelectorAll('.part.hot').forEach(x => x !== pg && x.classList.remove('hot')); on(); });
@@ -637,22 +674,22 @@ function renderMtx() {
   let n = 0;
   const rows = TASKS.map(t => {
     const hot = hotTags && t.need.some(x => hotTags.includes(x));
-    return `<tr class="${hot ? 'hot' : ''}"><td>${t.n}<span class="need">需要：${t.need.join(' + ')}</span></td>${OBJ.map(o => { const y = feasible(o, t), isNew = y && !o.primary.includes(t.id); if (y) n++; return `<td><span class="cell ${y ? 'y' : ''} ${isNew ? 'new' : ''}">${y ? '✓' : '·'}</span></td>`; }).join('')}</tr>`;
+    return `<tr class="${hot ? 'hot' : ''}"><td>${t.n}<span class="need">Needs: ${t.need.join(' + ')}</span></td>${OBJ.map(o => { const y = feasible(o, t), isNew = y && !o.primary.includes(t.id); if (y) n++; return `<td><span class="cell ${y ? 'y' : ''} ${isNew ? 'new' : ''}">${y ? '✓' : '·'}</span></td>`; }).join('')}</tr>`;
   }).join('');
-  $('#mtx').innerHTML = `<thead><tr><th>任务</th>${OBJ.map(o => `<th>${o.name}</th>`).join('')}</tr></thead><tbody>${rows}</tbody>`;
+  $('#mtx').innerHTML = `<thead><tr><th>Task</th>${OBJ.map(o => `<th>${o.name}</th>`).join('')}</tr></thead><tbody>${rows}</tbody>`;
   $('#fcount').textContent = n;
-  $('#fcountl').textContent = affOpen ? '个可行解（拆开看）' : '个可行解（只看熟悉的用法）';
+  $('#fcountl').textContent = affOpen ? 'feasible solutions (taking apart)' : 'feasible solutions (familiar uses only)';
   return n;
 }
 function renderAff() {
   tools.classList.toggle('open', affOpen);
-  $('#pcap').innerHTML = affOpen ? '点（或指向）一个部件，看它能撑起哪些任务。' : '';
+  $('#pcap').innerHTML = affOpen ? 'Tap or hover over a component to see which tasks it supports.' : '';
   OBJ.forEach(o => o.parts.forEach(p => { p.g.style.transform = affOpen ? `translate(${p.dx}px, ${p.dy}px)` : ''; }));
   const whole = OBJ.reduce((a, o) => a + o.primary.length, 0), n = renderMtx();
   const q2 = QA[1], q6 = QA[5];
   $('#affnote').innerHTML = affOpen
-    ? `剪刀的“双刃”是锋利的，握环可以握住，所以它能削皮${q2 === '不能' ? '（问题 2 你选了“不能”）' : ''}。刀身和合拢的剪刀都是一根刚性长条，可以把木塞推进瓶里，红酒就倒得出来了${q6 ? `（问题 6 你选了“${q6}”）` : ''}。铅笔的六棱笔杆是一根细长杆，插进磁带的齿轮孔就能倒带（暴露年龄）。可行解从 ${whole} 个变成了 ${n} 个，资源一个都没加。`
-    : '整体看时，每个物体只对应我们最熟悉的那一种用法：刀削皮，剪刀剪窗花，铅笔写字。';
+    ? `Scissors have sharp blades and grippable rings, so they can peel an apple${q2 === 'No' ? ' (you answered “No” to question 2)' : ''}. The knife body and closed scissors are rigid bars: either can push a cork into the bottle, letting you pour the wine${q6 ? ` (in question 6, you chose “${q6}”)` : ''}. A pencil’s hexagonal barrel can turn a cassette reel (yes, that dates me). Feasible solutions rise from ${whole}  to ${n}  without adding a single resource.`
+    : 'Seen as whole objects, each has only its familiar use: a knife peels, scissors cut paper, and a pencil writes.';
 }
 segBind('#affseg', v => { affOpen = v === 'open'; renderAff(); });
 
@@ -687,19 +724,19 @@ let playing = false, pull = 0, audio = null, timer = null;
   el('rect', { x: 50, y: 378, width: 100, height: 6, rx: 1, class: 'case' }, cd);
   const an = el('g', { class: 'annot', id: 'annot' }, cd);
   const lab = (x, y, t, k, lx, ly) => { el('line', { x1: x, y1: y, x2: lx, y2: ly, class: 'lead' }, an); const tx = el('text', { x: lx - 4, y: ly + 4, 'text-anchor': 'end', class: 'ann' + (k ? ' k' : '') }, an); tx.textContent = t; };
-  lab(240, 96, '转盘：CD 机', 0, 150, 40);
-  lab(204, 170, '扬声器：整个正面', 0, 150, 190);
-  lab(266, 342, '开关：排气扇的拉绳', 1, 200, 300);
+  lab(240, 96, 'Turntable: CD player', 0, 150, 40);
+  lab(204, 170, 'Speaker: entire front', 0, 150, 190);
+  lab(266, 342, 'Switch: fan pull cord', 1, 200, 300);
   const fan = el('g', { transform: 'translate(98 322)' }, an);
   el('rect', { x: 0, y: 0, width: 18, height: 18, rx: 2, class: 'fan' }, fan);
   el('path', { d: 'M9 9 L9 3 M9 9 L15 12 M9 9 L3 12 M14 18 V26', class: 'fan' }, fan);
-  const ft = el('text', { x: 24, y: 14, class: 'ann' }, fan); ft.textContent = '借自排气扇';
+  const ft = el('text', { x: 24, y: 14, class: 'ann' }, fan); ft.textContent = 'From an extractor fan';
 })();
 const knob = $('#knob'), cord = $('#cord');
 function setPull(p) { pull = p; knob.setAttribute('y', 330 + p); cord.setAttribute('y2', 330 + p); }
 function toggle() {
   playing = !playing; cd.classList.toggle('playing', playing); cd.setAttribute('aria-pressed', playing);
-  $('#cdstate').textContent = playing ? '播放中' : '停止';
+  $('#cdstate').textContent = playing ? 'Playing' : 'Stopped';
   $('#cdstate').style.color = playing ? 'var(--go)' : '';
   if (playing) startSound(); else stopSound();
 }

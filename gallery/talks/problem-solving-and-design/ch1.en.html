@@ -1,26 +1,26 @@
 <!doctype html>
-<html lang="zh-Hans">
+<html lang="en">
 <meta charset="utf-8">
-<link rel="canonical" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch1.html">
-<link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch1.html">
+<link rel="canonical" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch1.en.html">
+<link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch1.html">
 <link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch1.en.html">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>问题情境</title>
-<meta name="description" content="同一个问题，换一种表述，难度就会不同。">
+<title>The Problem Situation</title>
+<meta name="description" content="The same problem can become harder or easier depending on how it is presented.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="问题情境 · Simon Zhao">
-<meta property="og:description" content="同一个问题，换一种表述，难度就会不同。">
-<meta property="og:url" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch1.html">
+<meta property="og:title" content="The Problem Situation · Simon Zhao">
+<meta property="og:description" content="The same problem can become harder or easier depending on how it is presented.">
+<meta property="og:url" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch1.en.html">
 <meta property="og:site_name" content="simoncos">
-<meta property="og:image" content="https://simoncos.github.io/gallery/assets/og-problem-solving.jpg">
+<meta property="og:image" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/assets/og.en.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@600;900&family=Noto+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 /* Layout: same railway-notebook system as chapter 4. Reading column ~720px; figures and workbenches break out to ~1120px. */
 /* Layout: near-black page, quiet neutrals. Glow is reserved for the one moment in each figure where the answer appears.
@@ -30,8 +30,8 @@
   --accent:#ffb347; --accent-soft:rgba(255,179,71,.12);
   --stop:#ff5d7d; --go:#3cf2b4; --go-soft:rgba(60,242,180,.14);
   --t1:#5cb8ff; --t2:#ff6ad5; --t3:#9cf06a;
-  --display:"Noto Serif SC","Songti SC","STSong",serif;
-  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --display:"Noto Serif","Songti SC","STSong",serif;
+  --body:"Noto Sans","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
   color-scheme:dark;
 }
@@ -193,7 +193,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .map h4{margin:0;font-size:1rem}
 .map h4 a{color:inherit}
 .map p{margin:2px 0 0;font-size:.88rem;color:var(--muted);line-height:1.65}
-.map .draft h4::after{content:"尚未成文";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
+.map .draft h4::after{content:"Not yet written";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
 footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
 /* touch screens: fingertip-sized controls */
 @media (pointer:coarse){input[type=range]{min-height:36px}select,input[type=number]{min-height:40px}.btn,.seg button{min-height:40px}.series a{display:inline-flex;align-items:center;min-height:40px}input[type=checkbox]{width:18px;height:18px}}
@@ -201,198 +201,235 @@ input[type=checkbox]{accent-color:var(--accent)}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 .language-switch{display:flex;justify-content:flex-end;gap:14px;position:relative;z-index:2;max-width:1120px;margin:0 auto 20px;font-size:.85rem}.language-switch a,.language-switch span{padding:8px 4px}.language-switch [aria-current]{color:var(--muted)}
+
+/* English copy is longer: retain the original visual system with room to wrap. */
+html[lang="en"] body{line-height:1.75}
+html[lang="en"] h1{font-size:clamp(2.6rem,7vw,4.5rem);letter-spacing:-.025em}
+html[lang="en"] h2{letter-spacing:-.015em}
+html[lang="en"] .eyebrow,html[lang="en"] .lab,html[lang="en"] .secno{letter-spacing:.035em}
+html[lang="en"] .series a,html[lang="en"] .series span{white-space:normal}
+html[lang="en"] .series{gap:8px}
+html[lang="en"] .card h2{font-size:clamp(1.3rem,3vw,1.8rem)}
+html[lang="en"] .card{gap:12px}
+html[lang="en"] .seg button{white-space:normal;line-height:1.4;min-height:40px}
+html[lang="en"] button,html[lang="en"] label{overflow-wrap:break-word}
+html[lang="en"] .chipx{max-width:7.5em}
+html[lang="en"] .node text{font-size:12px}
+@media(max-width:520px){
+ html[lang="en"] .wrap{padding-inline:16px}
+ html[lang="en"] .bench{padding:14px}
+ html[lang="en"] .slider{flex-wrap:wrap}
+ html[lang="en"] .emblem{opacity:.25}
+ html[lang="en"] .card{grid-template-columns:minmax(0,1fr) 60px;padding:18px}
+ html[lang="en"] .card svg{width:60px;height:60px}
+ html[lang="en"] .node text{font-size:14px}
+}
+html[lang="en"]:has(#tree) .slider{grid-template-columns:minmax(0,1fr) 3.6em;gap:4px 10px}
+html[lang="en"]:has(#tree) .slider label{grid-column:1/-1;overflow-wrap:normal}
+html[lang="en"]:has(#tree) .slider input{grid-column:1;grid-row:2}
+html[lang="en"]:has(#tree) .slider output{grid-column:2;grid-row:2}
+html[lang="en"] .check{grid-template-columns:8.5em minmax(0,1fr)}
+html[lang="en"] .pill{padding:4px 8px;line-height:1.45;overflow-wrap:normal}
+html[lang="en"] .track div{grid-template-columns:1.6em 6.8em minmax(0,1fr)}
+html[lang="en"] #pans .big{font-size:clamp(1.3rem,5vw,2rem);overflow-wrap:normal}
+@media(max-width:520px){
+ html[lang="en"] .check{grid-template-columns:minmax(0,1fr);gap:6px}
+ html[lang="en"] .pill{justify-self:start}
+ html[lang="en"] .check small{overflow-wrap:anywhere}
+}
+
 </style>
 
 <div class="wrap">
-<nav class="language-switch" aria-label="语言 / Language"><span aria-current="page">中文</span><a href="ch1.en.html" lang="en" hreflang="en">English</a></nav>
+<nav class="language-switch" aria-label="Language"><a href="ch1.html" lang="zh-Hans" hreflang="zh-Hans">中文</a><span aria-current="page">English</span></nav>
 <div class="hero-band" id="heroBand">
 <canvas id="heroCv" aria-hidden="true"></canvas>
 <header class="col">
-  <nav class="series" aria-label="系列章节">
-    <span class="cur">一 问题情境</span><a href="ch2.html">二 可行解</a><a href="ch3.html">三 开放问题</a><a href="ch4.html">四 纠结与最优解</a><span>五 测量的局限</span><span>六 Duck Typing</span><span>七 工程实践</span>
+  <nav class="series" aria-label="Chapters in this series">
+    <span class="cur">1 The Problem Situation</span><a href="ch2.en.html">2 Feasible Solutions</a><a href="ch3.en.html">3 Open Problems</a><a href="ch4.en.html">4 Choice and Optima</a><span>5 Measurement</span><span>6 Duck Typing</span><span>7 Engineering</span>
   </nav>
   <div class="hero-text">
-    <div class="eyebrow"><a href="index.html" class="up">问题解决与设计</a> · 第一篇</div>
-    <h1>问题<span class="hl">情境</span></h1>
-    <p class="lede">同一个问题，换一种表述，难度就会不同。这一篇想说明：<strong>问题怎么被呈现，决定了解决它要走多远的路。</strong></p>
-    <p>这个系列的起点，是人教版《普通心理学》里一篇叫《影响问题解决的因素》的短文（下面简称“教材”）。它列了七种因素，每一种都可以单独拿出来玩味很久：</p>
+    <div class="eyebrow"><a href="index.en.html" class="up">Problem Solving and Design</a> · Part 1</div>
+    <h1>Problem <span class="hl">Situation</span></h1>
+    <p class="lede">The same problem can become harder or easier depending on how it is presented. This essay makes one point: <strong>how a problem is presented determines how far you have to travel to solve it.</strong></p>
+    <p>This series began with “Factors That Affect Problem Solving,” a passage in the People’s Education Press textbook General Psychology (called “the textbook” below). It lists seven factors, each worth thinking about at length:</p>
     <div class="factors">
-      <span class="cur">问题情境<small>本篇</small></span><span>定势<small>第二篇</small></span><span>功能固着<small>第二篇</small></span><span>迁移</span><span>原型启发</span><span>动机与情绪状态</span><span>个体特征</span>
+      <span class="cur">The Problem Situation<small>This part</small></span><span>Mental set<small>Part 2</small></span><span>Functional fixedness<small>Part 2</small></span><span>Transfer</span><span>Prototype heuristics</span><span>Motivation and emotion</span><span>Individual characteristics</span>
     </div>
-    <p class="meta" style="margin-top:1.2em">交互版 · 改编自作者 2016 年发表在简书的同名旧文 · <a href="../../../blogs/problem-solving-and-design-1-situation.html">读原文</a> · 每张原文附图都配了一个按原图重绘、可以动手的版本</p>
-    <p class="hero-hint">背景的线里藏着一个箭头。<b>移动鼠标（手机上点一下）</b>，拨开无关的线。</p>
+    <p class="meta" style="margin-top:1.2em">Interactive edition · Adapted from the author’s 2016 essay on Jianshu · <a href="../../../blogs/problem-solving-and-design-1-situation.en.html">Read the original essay</a> · Original figures paired with interactive redrawings</p>
+    <p class="hero-hint">An arrow is hidden in the background lines. <b>Move your mouse (or tap on a phone)</b> to brush away the irrelevant lines.</p>
   </div>
 </header>
 </div>
 
 <section id="s1">
   <div class="col">
-    <span class="bignum" aria-hidden="true">01</span><span class="secno">01 · 附图一</span>
-    <h2>同一个正方形，两种画法</h2>
-    <p>教材的第一个例子：已知圆的半径是 2 cm，求它的外切正方形的面积。图 A 和图 B 是同一道题，只是半径画的方向不同：A 斜着指向右下，B 水平指向右边。为什么 B 比 A 容易？</p>
+    <span class="bignum" aria-hidden="true">01</span><span class="secno">01 · Figure 1</span>
+    <h2>One square, two drawings</h2>
+    <p>The textbook’s first example: a circle has a radius of 2 cm. Find the area of the square circumscribed around it. A and B show the same problem; only the radius points in a different direction—diagonally down and right in A, horizontally right in B. Why is B easier?</p>
   </div>
   <div class="wide">
     <div class="bench split">
       <div>
-        <svg id="sq" viewBox="34 34 292 292" tabindex="0" role="slider" aria-label="圆与外切正方形：半径的方向，可拖动，方向键旋转" aria-valuemin="0" aria-valuemax="359" aria-valuenow="45"></svg>
-        <p class="cap" style="text-align:center">拖动橙色半径的端点（手机上也可以点圆上任意一处），或用键盘方向键旋转。</p>
+        <svg id="sq" viewBox="34 34 292 292" tabindex="0" role="slider" aria-label="Circle and circumscribed square: drag the radius or rotate it with arrow keys" aria-valuemin="0" aria-valuemax="359" aria-valuenow="45"></svg>
+        <p class="cap" style="text-align:center">Drag the orange endpoint, tap anywhere on the circle on a phone, or rotate with the arrow keys.</p>
       </div>
       <div class="ctl">
-        <figure class="orig"><img src="assets/ch1-img/fig-a-b.png" alt="原文附图：圆与外切正方形，图 A 的半径斜向右下，图 B 的半径水平向右，都标着 2 cm" width="609" height="327"><figcaption>原文附图</figcaption></figure>
-        <div><span class="lab">切换画法</span>
+        <figure class="orig"><img src="assets/ch1-img/fig-a-b.png" alt="Original figure: a circle in a square; the radius points diagonally in A and horizontally in B, both labeled 2 cm" width="609" height="327"><figcaption>Original figure</figcaption></figure>
+        <div><span class="lab">Choose a drawing</span>
           <div class="seg" id="sqseg">
-            <button type="button" data-v="A" aria-pressed="true">图 A：斜向右下</button>
-            <button type="button" data-v="B" aria-pressed="false">图 B：水平向右</button>
+            <button type="button" data-v="A" aria-pressed="true">A: diagonal</button>
+            <button type="button" data-v="B" aria-pressed="false">B: horizontal</button>
           </div>
         </div>
-        <div><span class="lab">从题目到答案，需要的思维步骤</span>
-          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:10px"><span class="big" id="sqn">3</span><span class="meta">步</span></div>
+        <div><span class="lab">Steps of thought from question to answer</span>
+          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:10px"><span class="big" id="sqn">3</span><span class="meta">steps</span></div>
           <ol class="steps" id="sqsteps"></ol>
         </div>
-        <button type="button" class="btn ghost" id="sqthink">替我在脑中转一下</button>
+        <button type="button" class="btn ghost" id="sqthink">Show the mental rotation</button>
       </div>
     </div>
   </div>
   <div class="col">
-    <p>教材的解释是：问题情境中的刺激模式，与个人知识结构的接近程度不同。关键是“正方形边长等于半径的两倍”。B 的画法让人一眼看出 2 cm 是边长的一半；A 的画法则要求你先在脑中搜出另一个知识点，<strong>圆心到圆上任何一点的距离都是半径</strong>，把 A 等价转换成 B，再得出同样的结论。</p>
-    <p>多出来的这一步，就是难度的差别。这其实把我们平时说的“直观”“直白”具体化了：<strong>直观，就是少走一步。</strong></p>
+    <p>The textbook explains that the stimulus patterns in the two situations are differently aligned with what we already know. The key is that the square’s side is twice the radius. B makes it obvious that 2 cm is half a side. A requires you to recall one more fact—<strong>the distance from the center to any point on the circle is the radius</strong>—then mentally turn A into B before reaching the same conclusion.</p>
+    <p>That extra step accounts for the difference in difficulty. It makes “intuitive” or “obvious” more concrete: <strong>intuitive means one fewer step.</strong></p>
   </div>
 </section>
 
 <section id="s2">
   <div class="col">
-    <span class="bignum" aria-hidden="true">02</span><span class="secno">02 · 附图二</span>
-    <h2>来找箭头吧</h2>
-    <p>第二个例子是在一张复杂图形里找出一个简单图形：左上角那个空心箭头，就藏在右下那块画满网格和斜线的图形里。它想说明，不仅信息过少会让问题变难，<strong>信息过多也会</strong>。</p>
-    <p>下面按原图的做法生成新的题目：箭头的每条边都落在网格线或 45° 斜线上，周围的线一穿过去，它的轮廓就融进了整块图形。找到后点它的<strong>尖端</strong>。从最简单的一级开始，每过关 3 次升一级；也可以自己拖“无关线条”调难度。每一轮的用时都会画进用时图。</p>
+    <span class="bignum" aria-hidden="true">02</span><span class="secno">02 · Figure 2</span>
+    <h2>Find the arrow</h2>
+    <p>The second example asks you to find a simple shape inside a complex one. The hollow arrow at the top left is hidden in the grid and diagonal lines at the bottom right. The point: too little information can make a problem harder, but <strong>so can too much</strong>.</p>
+    <p>The puzzles below follow the original construction. Every edge of the arrow lies on a grid line or a 45° diagonal. Lines running through it blend its outline into the pattern. When you find it, click its <strong>tip</strong>. Start at the easiest level and advance after three successes, or adjust “Irrelevant lines” yourself. Each round’s time appears on the chart.</p>
   </div>
   <div class="wide">
     <div class="bench split">
       <div class="arrow-stage">
-        <canvas id="ar" width="560" height="560" tabindex="0" aria-label="找箭头的图形：点击你认为箭头尖端所在的位置；键盘用方向键移动准星，回车确认"></canvas>
-        <div class="overlay" id="arov"><b>准备好了吗</b><span class="meta">图形里藏着一个和右边一模一样的箭头，大小、方向都不变。找到后点它的尖端。</span><button type="button" class="btn" id="arstart">开始一轮</button></div>
+        <canvas id="ar" width="560" height="560" tabindex="0" aria-label="Find the arrow: click its tip; use arrow keys to move the crosshair and Enter to confirm"></canvas>
+        <div class="overlay" id="arov"><b>Ready?</b><span class="meta">An arrow of exactly the same size and direction as the target is hidden in the pattern. Find it and click its tip.</span><button type="button" class="btn" id="arstart">Start a round</button></div>
       </div>
       <div class="ctl">
-        <figure class="orig"><img src="assets/ch1-img/fig-arrow.png" alt="原文附图：左上一个空心箭头，右下一块画满网格和斜线的六边形图形，箭头藏在其中" width="423" height="429"><figcaption>原文附图</figcaption></figure>
-        <div class="target"><svg viewBox="0 0 64 64" id="artarget"><path d=""></path><circle r="4" class="tip"></circle></svg><div><span class="lab" style="margin:0">要找的箭头</span><span class="timer" id="artime">0.0s</span></div></div>
-        <div class="slider"><label for="arnoise">无关线条</label><input id="arnoise" type="range" min="0" max="100" step="10" value="20"><output id="arnoiseo">20%</output></div>
+        <figure class="orig"><img src="assets/ch1-img/fig-arrow.png" alt="Original figure: a hollow arrow at top left, hidden in a hexagonal grid of lines at bottom right" width="423" height="429"><figcaption>Original figure</figcaption></figure>
+        <div class="target"><svg viewBox="0 0 64 64" id="artarget"><path d=""></path><circle r="4" class="tip"></circle></svg><div><span class="lab" style="margin:0">Target arrow</span><span class="timer" id="artime">0.0s</span></div></div>
+        <div class="slider"><label for="arnoise">Irrelevant lines</label><input id="arnoise" type="range" min="0" max="100" step="10" value="20"><output id="arnoiseo">20%</output></div>
         <p class="meta" id="arlevel" style="margin:0"></p>
-        <label class="toggle"><input type="checkbox" id="arhint"> 加一条冗余线索：箭头染色</label>
-        <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" id="arnext">下一轮</button><button type="button" class="btn ghost" id="argive" disabled>放弃，告诉我在哪</button></div>
+        <label class="toggle"><input type="checkbox" id="arhint"> Add a redundant clue: color the arrow</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" id="arnext">Next round</button><button type="button" class="btn ghost" id="argive" disabled>Give up and reveal it</button></div>
         <div>
-          <span class="lab">你的用时（秒） × 无关线条比例</span>
-          <svg id="chart" viewBox="0 0 320 170" role="img" aria-label="找箭头用时图"></svg>
-          <div class="legend"><span><i class="sw" style="background:var(--ink)"></i>无线索</span><span><i class="sw" style="background:var(--t1)"></i>箭头染色</span></div>
+          <span class="lab">Time (seconds) × irrelevant lines</span>
+          <svg id="chart" viewBox="0 0 320 170" role="img" aria-label="Arrow search time chart"></svg>
+          <div class="legend"><span><i class="sw" style="background:var(--ink)"></i>No clue</span><span><i class="sw" style="background:var(--t1)"></i>Colored arrow</span></div>
         </div>
       </div>
     </div>
   </div>
   <div class="col">
-    <p>“过多的信息”是指什么？我认为不是冗余的信息，而是<strong>无关的信息</strong>。箭头以外那些网格和斜线，和“找到箭头”这个任务没有关系，却一直在干扰你；解决问题的过程中，你得持续抵抗这种干扰，难度自然上升。</p>
-    <p>而那个“染色”开关是另一种多出来的信息：它和任务相关，而且是冗余的（形状已经够你找到它了）。打开它，用时通常会一下子掉下来。</p>
+    <p>What does “too much information” mean? I think the problem is not redundant information, but <strong>irrelevant information</strong>. The other lines have nothing to do with finding the arrow, yet they keep interfering. You have to resist that interference throughout the search, so the task becomes harder.</p>
+    <p>The color switch adds a different kind of information: relevant but redundant, since the shape alone is enough to identify the arrow. Switch it on and the search usually becomes much faster.</p>
   </div>
 </section>
 
 <section id="s3">
   <div class="col">
-    <span class="bignum" aria-hidden="true">03</span><span class="secno">03 · 搜索</span>
-    <h2>解决问题，就是在可能性空间里找一条路</h2>
-    <p>到这里可以说明一个观点：在某种程度上，<strong>所有定义明确的问题都可以视为一个搜索问题</strong>。问题往往要拆成子问题，解决所有子问题并到达答案的过程，就像在一棵树（或一张网）里找一条通往解的路径。每到一个节点，你都要从几个子节点里挑一个往下走。</p>
-    <p>下面这棵树里，标着“答案”的那片叶子就是要找的解。每个节点的亮度，是你对“从这里走下去能到答案”的估计：越亮越像。虚线圆圈是看上去不太像的节点，只有更亮的都试过了才会轮到它们。搜索每到一个节点，先试最亮的孩子。</p>
+    <span class="bignum" aria-hidden="true">03</span><span class="secno">03 · Search</span>
+    <h2>Solving a problem means finding a path through possibility space</h2>
+    <p>This suggests a broader point: to some extent, <strong>every well-defined problem can be treated as a search problem</strong>. We often break a problem into subproblems. Solving them and reaching an answer resembles finding a path through a tree or network. At each node, you choose which child to try next.</p>
+    <p>The leaf labeled “Answer” is the solution. A node’s brightness represents your estimate that it leads there: brighter means more promising. Dashed circles look less promising and are tried after brighter nodes. At each step, the search tries the brightest child first.</p>
   </div>
   <div class="wide">
     <div class="bench split rev">
       <div class="ctl">
-        <div><span class="lab">问题情境</span>
+        <div><span class="lab">The Problem Situation</span>
           <div class="seg" id="tmode">
-            <button type="button" data-v="few" aria-pressed="false"><span>相关信息</span><span>过少</span></button>
-            <button type="button" data-v="noise" aria-pressed="true"><span>无关信息</span><span>过多</span></button>
-            <button type="button" data-v="red" aria-pressed="false"><span>相关信息</span><span>冗余</span></button>
+            <button type="button" data-v="few" aria-pressed="false"><span>Relevant information</span><span>Too little</span></button>
+            <button type="button" data-v="noise" aria-pressed="true"><span>Irrelevant information</span><span>Too much</span></button>
+            <button type="button" data-v="red" aria-pressed="false"><span>Relevant information</span><span>Redundant</span></button>
           </div>
         </div>
-        <div class="slider"><label for="ts">相关信息</label><input id="ts" type="range" min="0" max="100" value="25"><output id="tso"></output></div>
-        <div class="slider"><label for="tn">无关信息</label><input id="tn" type="range" min="0" max="100" value="90"><output id="tno"></output></div>
-        <div class="slider"><label for="tb">每步可选</label><input id="tb" type="range" min="2" max="5" value="5"><output id="tbo"></output></div>
+        <div class="slider"><label for="ts">Relevant information</label><input id="ts" type="range" min="0" max="100" value="25"><output id="tso"></output></div>
+        <div class="slider"><label for="tn">Irrelevant information</label><input id="tn" type="range" min="0" max="100" value="90"><output id="tno"></output></div>
+        <div class="slider"><label for="tb">Choices per step</label><input id="tb" type="range" min="2" max="5" value="5"><output id="tbo"></output></div>
         <div class="stats">
-          <div class="stat"><div class="big" id="tcount">0</div><span>这一次尝试了多少个节点</span></div>
-          <div class="stat"><div class="big" id="tavg">0</div><span>同样情境下，300 次搜索的平均</span></div>
+          <div class="stat"><div class="big" id="tcount">0</div><span>Nodes tried in this search</span></div>
+          <div class="stat"><div class="big" id="tavg">0</div><span>Average over 300 searches in the same situation</span></div>
         </div>
-        <div><span class="lab">300 次搜索各尝试了多少个节点</span><svg id="thist" viewBox="0 0 320 96" role="img" aria-label="尝试次数分布"></svg></div>
+        <div><span class="lab">Nodes tried in each of 300 searches</span><svg id="thist" viewBox="0 0 320 96" role="img" aria-label="Distribution of search attempts"></svg></div>
         <p class="note" id="tlook" style="margin:0"></p>
         <p class="meta" id="tnote" style="margin:0"></p>
-        <button type="button" class="btn" id="trun">再搜一次</button>
+        <button type="button" class="btn" id="trun">Search again</button>
       </div>
       <div>
-        <svg id="tree" viewBox="-248 -236 496 472" role="img" aria-label="搜索树"></svg>
-        <div class="legend" style="justify-content:center;margin-top:8px"><span><i class="sw" style="border:2px solid var(--go);border-radius:50%"></i>答案</span><span><i class="sw" style="background:var(--t1)"></i>尝试过</span><span><i class="sw" style="background:var(--go)"></i>找到的路径</span><span><i class="sw" style="border:1px dashed var(--muted)"></i>看着不像，放到最后</span></div>
+        <svg id="tree" viewBox="-248 -236 496 472" role="img" aria-label="Search tree"></svg>
+        <div class="legend" style="justify-content:center;margin-top:8px"><span><i class="sw" style="border:2px solid var(--go);border-radius:50%"></i>Answer</span><span><i class="sw" style="background:var(--t1)"></i>Tried</span><span><i class="sw" style="background:var(--go)"></i>Path found</span><span><i class="sw" style="border:1px dashed var(--muted)"></i>Less promising; try last</span></div>
       </div>
     </div>
   </div>
   <div class="col">
     <ul>
-      <li><strong>相关信息过少</strong>：可选的子节点太少。更量化地说，很多子节点看上去都不像通往答案（预期效用没达到你的决策阈值），只能用近乎暴力的方式一个个试（做过智商测试的人应该知道我在说什么）。</li>
-      <li><strong>无关信息过多</strong>：可选的子节点太多，大量干扰让它们的预期效用差别不显著，于是选择困难。</li>
-      <li><strong>相关信息冗余</strong>：不仅可选项多，冗余的相关信息还能帮你区分子节点的预期效用大小，更容易找到更短的路径。</li>
+      <li><strong>Too little relevant information</strong>: too few children look promising. More precisely, their expected utility falls below your decision threshold, so you must try them almost by brute force. Anyone who has taken an IQ test may recognize this.</li>
+      <li><strong>Too much irrelevant information</strong>: too many children look promising. Interference obscures differences in expected utility, making it harder to choose.</li>
+      <li><strong>Redundant relevant information</strong>: there are many options, but overlapping clues help distinguish their expected utilities and reveal a shorter path.</li>
     </ul>
-    <p>教材讲问题情境时一共提了三点。第一点关于元素的空间位置，再泛化一点，就是元素之间的某种距离（大小、形状、颜色、空间、时间），也就是一些可量化的相关关系；后两点，正方形和找箭头这两个例子已经分别解释过了。</p>
+    <p>The textbook makes three points about the problem situation. The first concerns the spatial positions of elements. More generally, it concerns distance between elements—in size, shape, color, space, or time—and thus quantifiable relationships. The square and arrow examples explain the other two points.</p>
   </div>
 </section>
 
 <section id="s4">
   <div class="col">
-    <span class="bignum" aria-hidden="true">04</span><span class="secno">04 · 附图三</span>
-    <h2>换一种表示，直线就够了</h2>
-    <p>原文最后放了一张《Deep Learning》里的图：同一个分类问题的两种表示。机器学习里，这叫表示（representation）；放在这个系列里，它就是问题情境。</p>
-    <p>两类点：蓝色圆点聚在中心，绿色三角围成一圈。你的任务是画一条直线把它们分开。拖动直线两端的圆点试试，再切换到极坐标，看点怎么移动到原图右边的样子。</p>
+    <span class="bignum" aria-hidden="true">04</span><span class="secno">04 · Figure 3</span>
+    <h2>Change the representation, and a straight line is enough</h2>
+    <p>The original essay ended with a figure from Deep Learning: two representations of the same classification problem. Machine learning calls this representation; in this series, it is the problem situation.</p>
+    <p>There are two classes: blue dots cluster in the center, surrounded by green triangles. Try separating them with a straight line. Drag either endpoint, then switch to polar coordinates and watch the points move into the arrangement on the right of the original figure.</p>
   </div>
   <div class="wide">
     <div class="bench split">
-      <div class="rep-wrap"><canvas id="rep" tabindex="0" aria-label="分类散点图，可拖动直线两端；键盘用方向键移动一端，回车换另一端"></canvas></div>
+      <div class="rep-wrap"><canvas id="rep" tabindex="0" aria-label="Classification plot: drag the line endpoints; arrow keys move one endpoint and Enter switches endpoints"></canvas></div>
       <div class="ctl">
-        <figure class="orig keep"><img src="assets/ch1-img/fig-dl.png" alt="原文附图：《Deep Learning》图 1.1，左为笛卡尔坐标下中心一团蓝点被一圈绿色三角包围，右为极坐标下蓝点在左、绿色三角在右" width="443" height="266"><figcaption>原文附图 · 《Deep Learning》图 1.1</figcaption></figure>
-        <div><span class="lab">表示方式</span>
+        <figure class="orig keep"><img src="assets/ch1-img/fig-dl.png" alt="Original figure, Deep Learning 1.1: blue dots inside a ring of green triangles in Cartesian coordinates; blue dots to the left of green triangles in polar coordinates" width="443" height="266"><figcaption>Original figure · Deep Learning, Fig. 1.1</figcaption></figure>
+        <div><span class="lab">Representation</span>
           <div class="seg" id="rseg">
-            <button type="button" data-v="0" aria-pressed="true">笛卡尔坐标 (x, y)</button>
-            <button type="button" data-v="1" aria-pressed="false">极坐标 (r, θ)</button>
+            <button type="button" data-v="0" aria-pressed="true">Cartesian (x, y)</button>
+            <button type="button" data-v="1" aria-pressed="false">Polar (r, θ)</button>
           </div>
         </div>
-        <div><span class="lab">这条直线分对了</span><div class="acc"><span class="big" id="racc">0%</span><span class="meta" id="raccn"></span></div></div>
-        <button type="button" class="btn ghost" id="rbest">画出这种表示下所有最好的直线</button>
+        <div><span class="lab">Correctly classified</span><div class="acc"><span class="big" id="racc">0%</span><span class="meta" id="raccn"></span></div></div>
+        <button type="button" class="btn ghost" id="rbest">Show all best lines in this representation</button>
         <p class="meta" id="rnote" style="margin:0"></p>
       </div>
     </div>
   </div>
   <div class="col">
-    <p>在笛卡尔坐标里，蓝点被绿色三角整个包住，无论直线怎么摆都分不干净；换成极坐标，横轴是到中心的距离 r，一条竖线就把两类分开了。数据没有变，变的只是看它的方式。对一个只会画直线的“解题者”来说，表示方式决定了这道题是不可能，还是一眼就能解。</p>
+    <p>In Cartesian coordinates, the triangles surround the blue dots, so no straight line separates them completely. In polar coordinates, the horizontal axis is distance r from the center; a vertical line separates the classes. The data have not changed, only the way we look at them. For a solver that can only draw straight lines, the representation determines whether the problem is impossible or immediately solvable.</p>
   </div>
 </section>
 
 <section id="s5">
   <div class="col">
-    <span class="bignum" aria-hidden="true">05</span><span class="secno">05 · 设计</span>
-    <h2>设计，就是给每个功能铺一条最佳的路</h2>
-    <p>问题情境和设计有什么关系？我这里说的设计，去掉了一般理解里艺术、美学的那部分，更接近可用性（Usability）：用互联网产品的分类来说，更偏交互而非视觉。这种设计的目的就是问题的解决。</p>
-    <p>拿软件交互设计来说，死磕的其实就是如何通过各种可交互的元素，传达出合适的信息，为每一个功能形成一条最佳路径。回头看上面几张图：把半径画成水平，是在帮用户省掉一步；去掉无关的线条、给目标染色，是在降低干扰、增加相关的冗余；换一种表示，是让本来走不通的路变成直线。</p>
-    <p>当然，这个“最佳”可能是极致的可用，也可能是更复杂的价值函数，比如还要考虑软件商的盈利。这让现实中的交互设计非常有挑战。至于价值函数，那是<a href="ch4.html">第四篇</a>的事了。</p>
+    <span class="bignum" aria-hidden="true">05</span><span class="secno">05 · Design</span>
+    <h2>Design lays an optimal path to every function</h2>
+    <p>What does the problem situation have to do with design? Here I set aside art and aesthetics and focus on usability—interaction more than visual design. The purpose of this kind of design is to solve problems.</p>
+    <p>In software interaction design, the central challenge is to convey the right information through interactive elements, creating an optimal path to every function. Drawing the radius horizontally saves a step. Removing irrelevant lines or coloring the target reduces interference and adds useful redundancy. Changing the representation can turn an impassable route into a straight line.</p>
+    <p>“Optimal” might mean maximum usability, or a more complex value function that also includes the software vendor’s profit. That makes real interaction design challenging. Value functions are the subject of <a href="ch4.en.html">Part 4</a>.</p>
   </div>
 </section>
 
 <section>
   <div class="col">
-    <span class="secno">系列地图</span>
-    <h2>每一篇，一个可以动手的问题</h2>
+    <span class="secno">Series map</span>
+    <h2>One hands-on question in each essay</h2>
     <ol class="map">
-      <li class="cur"><span class="no">一</span><div><h4>问题情境</h4><p>本页：两种画法的正方形、找箭头、搜索树、表示方式、设计。</p></div></li>
-      <li><span class="no">二</span><div><h4><a href="ch2.html">可行解</a></h4><p>六道削皮题、量水实验、把剪刀拆开看、一根拉绳。</p></div></li>
-      <li><span class="no">三</span><div><h4><a href="ch3.html">开放问题</a></h4><p>只坐地铁、行动方式不限、抓大放小、证伪的是整个合式。</p></div></li>
-      <li><span class="no">四</span><div><h4><a href="ch4.html">纠结与最优解</a></h4><p>电车难题、价值天平、两千个可能的你、偏好系统、标准轮换造出的环。</p></div></li>
-      <li class="draft"><span class="no">五</span><div><h4>测量的局限</h4><p>来自 2026-03 的整合 Proposal：相似性、分类与理论负荷。</p></div></li>
-      <li class="draft"><span class="no">六</span><div><h4>Duck Typing 作为策略</h4><p>不问它是什么，问它能做什么；行为级数据，让用户自己设权重。</p></div></li>
-      <li class="draft"><span class="no">七</span><div><h4>工程实践</h4><p>测试环境作为反事实探索器，双重传感器，Bayesian Safety。</p></div></li>
+      <li class="cur"><span class="no">1</span><div><h4>The Problem Situation</h4><p>This page: one square in two drawings, the hidden arrow, search trees, representation, and design.</p></div></li>
+      <li><span class="no">2</span><div><h4><a href="ch2.en.html">Feasible Solutions</a></h4><p>Six peeling questions, the water-jar experiment, taking scissors apart, and a pull cord.</p></div></li>
+      <li><span class="no">3</span><div><h4><a href="ch3.en.html">Open Problems</a></h4><p>Metro routes, unrestricted travel, the big picture, and falsifying a conjunction.</p></div></li>
+      <li><span class="no">4</span><div><h4><a href="ch4.en.html">Choice and Optima</a></h4><p>The trolley problem, a balance of values, two thousand possible yous, preference systems, and cycles from changing criteria.</p></div></li>
+      <li class="draft"><span class="no">5</span><div><h4>The Limits of Measurement</h4><p>From the March 2026 proposal: similarity, classification, and theory-laden observation.</p></div></li>
+      <li class="draft"><span class="no">6</span><div><h4>Duck Typing as a Strategy</h4><p>Ask what it can do, not what it is. Work with behavioral data and let users set their own weights.</p></div></li>
+      <li class="draft"><span class="no">7</span><div><h4>Engineering Practice</h4><p>Test environments as counterfactual explorers, dual sensors, and Bayesian Safety.</p></div></li>
     </ol>
   </div>
 </section>
-<footer class="col">正文改编自<a href="../../../blogs/problem-solving-and-design-1-situation.html">《问题解决与设计（一）：问题情境》</a>；附图一、二出自人教版《普通心理学》的《影响问题解决的因素》，附图三出自《Deep Learning》图 1.1；交互图按原图重绘。</footer>
+<footer class="col">Text adapted from <a href="../../../blogs/problem-solving-and-design-1-situation.en.html">Problem Solving and Design (1): The Problem Situation</a>. Figures 1–2 come from “Factors That Affect Problem Solving” in General Psychology (People’s Education Press); figure 3 is from Deep Learning, Fig. 1.1. Interactive versions redraw the originals.</footer>
 </div>
 
 <script>
@@ -476,8 +513,8 @@ function setSeg(id, v) { $(id).querySelectorAll('button').forEach(x => x.setAttr
 const sq = $('#sq'), C = 180, R = 110;
 let theta = 45, thinking = false, trail = [], wasOk = false, lastN = 3;
 const STEPS = {
-  A: [['回忆一个知识点：圆心到圆上任意一点的距离都是 2 cm', 'extra'], ['把斜着的半径在脑中转到水平：2 cm + 2 cm 正好横跨正方形', ''], ['所以边长 = 4 cm，面积 = 4 × 4 = 16 cm²', '']],
-  B: [['回忆一个知识点：圆心到圆上任意一点的距离都是 2 cm', 'gone'], ['看图：2 cm + 2 cm 正好横跨正方形，边长 = 4 cm', ''], ['面积 = 4 × 4 = 16 cm²', '']],
+  A: [['Recall: every point on the circle is 2 cm from its center', 'extra'], ['Mentally rotate the radius: 2 cm + 2 cm spans the square', ''], ['So the side is 4 cm and the area is 4 × 4 = 16 cm²', '']],
+  B: [['Recall: every point on the circle is 2 cm from its center', 'gone'], ['Read the drawing: 2 cm + 2 cm spans the square; side = 4 cm', ''], ['Area = 4 × 4 = 16 cm²', '']],
 };
 const aligned = () => { const m = ((theta % 90) + 90) % 90; return m < 0.5 || m > 89.5; };
 function drawSq() {
@@ -492,10 +529,10 @@ function drawSq() {
     const ox = C - R * Math.cos(a), oy = C - R * Math.sin(a), horiz = Math.abs(Math.cos(a)) > .5;
     el('line', { x1: ox, y1: oy, x2: C, y2: C, class: 'dim' + fresh }, sq);
     const rt = el('text', { x: (C + ox) / 2, y: (C + oy) / 2 + (horiz ? -10 : 5), 'text-anchor': 'middle', class: 'sl' + fresh, transform: horiz ? '' : `translate(${-28 * Math.sign(Math.cos(a) || 1)} 0)` }, sq); rt.textContent = '2 cm';
-    if (horiz) { el('line', { x1: C - R, y1: C - R - 8, x2: C + R, y2: C - R - 8, class: 'dim' + fresh }, sq); const t = el('text', { x: C, y: C - R - 16, 'text-anchor': 'middle', class: 'sl' + fresh }, sq); t.textContent = '边长 4 cm'; }
-    else { el('line', { x1: C + R + 8, y1: C - R, x2: C + R + 8, y2: C + R, class: 'dim' + fresh }, sq); const t = el('text', { x: C + R + 22, y: C, class: 'sl' + fresh, 'text-anchor': 'middle', transform: `rotate(90 ${C + R + 22} ${C})` }, sq); t.textContent = '边长 4 cm'; }
+    if (horiz) { el('line', { x1: C - R, y1: C - R - 8, x2: C + R, y2: C - R - 8, class: 'dim' + fresh }, sq); const t = el('text', { x: C, y: C - R - 16, 'text-anchor': 'middle', class: 'sl' + fresh }, sq); t.textContent = 'Side: 4 cm'; }
+    else { el('line', { x1: C + R + 8, y1: C - R, x2: C + R + 8, y2: C + R, class: 'dim' + fresh }, sq); const t = el('text', { x: C + R + 22, y: C, class: 'sl' + fresh, 'text-anchor': 'middle', transform: `rotate(90 ${C + R + 22} ${C})` }, sq); t.textContent = 'Side: 4 cm'; }
   } else {
-    const q = el('text', { x: C, y: C - R - 14, 'text-anchor': 'middle', class: 'q' }, sq); q.textContent = '边长 = ?';
+    const q = el('text', { x: C, y: C - R - 14, 'text-anchor': 'middle', class: 'q' }, sq); q.textContent = 'Side = ?';
   }
   trail.forEach((ang, i) => { const b = ang * Math.PI / 180; el('line', { x1: C, y1: C, x2: C + R * Math.cos(b), y2: C + R * Math.sin(b), class: 'trail', opacity: ((i + 1) / trail.length * .3).toFixed(2) }, sq); });
   el('line', { x1: C, y1: C, x2: hx, y2: hy, class: 'rad' }, sq);
@@ -507,7 +544,7 @@ function drawSq() {
   el('circle', { cx: hx, cy: hy, r: 8, class: 'handle' }, sq);
   const key = ok ? 'B' : 'A';
   setSeg('#sqseg', Math.abs(deg - 45) < .5 ? 'A' : deg < .5 || deg > 359.5 ? 'B' : '');   // neither, when the radius points elsewhere
-  sq.setAttribute('aria-valuenow', Math.round(deg) % 360); sq.setAttribute('aria-valuetext', `${Math.round(deg) % 360}°，${ok ? '和正方形的边平行：2 步' : '斜着：3 步'}`);
+  sq.setAttribute('aria-valuenow', Math.round(deg) % 360); sq.setAttribute('aria-valuetext', `${Math.round(deg) % 360}°, ${ok ? 'parallel to a side: 2 steps' : 'diagonal: 3 steps'}`);
   const n = ok ? 2 : 3, nEl = $('#sqn');
   if (n !== lastN) { nEl.classList.remove('bump'); void nEl.offsetWidth; nEl.classList.add('bump'); lastN = n; }
   nEl.textContent = n; wasOk = ok;
@@ -564,9 +601,9 @@ const ADPR = Math.min(2, devicePixelRatio || 1); ar.width = ar.height = Math.rou
 const LEVELS = [20, 40, 60, 80, 100], WINS_UP = 3;
 function levelText(msg) {
   const v = +$('#arnoise').value, k = LEVELS.indexOf(v);
-  const where = k >= 0 ? `第 ${k + 1} 级（共 ${LEVELS.length} 级）` : `自定难度（${v}%）`;
+  const where = k >= 0 ? `Level ${k + 1}  of ${LEVELS.length} ` : `Custom (${v}%)`;
   const next = LEVELS.find(x => x > v);
-  $('#arlevel').innerHTML = (msg ? `<b style="color:var(--go)">${msg}</b> ` : '') + where + (next !== undefined ? ` · 再找到 ${WINS_UP - AR.wins} 次升到下一级` : ' · 已经是最难的一级');
+  $('#arlevel').innerHTML = (msg ? `<b style="color:var(--go)">${msg}</b> ` : '') + where + (next !== undefined ? ` · Find ${WINS_UP - AR.wins}  more to level up` : ' · Hardest level reached');
 }
 const tween = (D, fn, done) => { if (RM) { fn(1); done && done(); return; } const t0 = performance.now(); const st = now => { const k = Math.min(1, (now - t0) / D); fn(k); if (k < 1) requestAnimationFrame(st); else done && done(); }; requestAnimationFrame(st); };
 const P = ([x, y]) => [M + x * U, M + y * U];
@@ -637,12 +674,12 @@ function tryAt(px, py) {
     liftNoise(); drawChart();
     AR.wins++;
     const next = LEVELS.find(x => x > AR.noise);
-    if (AR.wins >= WINS_UP && next !== undefined) { AR.wins = 0; $('#arnoise').value = next; $('#arnoiseo').textContent = next + '%'; levelText('升级！下一轮'); }
-    else levelText('找到了。');
+    if (AR.wins >= WINS_UP && next !== undefined) { AR.wins = 0; $('#arnoise').value = next; $('#arnoiseo').textContent = next + '%'; levelText('Level up! Next round:'); }
+    else levelText('Found it.');
   } else {
     const near = inPoly([(px - M) / U, (py - M) / U], AR.arrow);
     actx.strokeStyle = near ? COL.accent : COL.stop; actx.lineWidth = 3; actx.beginPath(); actx.arc(px, py, 12, 0, 7); actx.stroke();
-    if (near) $('#arlevel').innerHTML = '<b style="color:var(--accent)">在箭头上了，再点它的尖端。</b>';
+    if (near) $('#arlevel').innerHTML = '<b style="color:var(--accent)">You’re on the arrow. Now click its tip.</b>';
     setTimeout(() => { if (AR.running) { drawArrow(); if (near) levelText(); } }, near ? 900 : 350);
   }
 }
@@ -675,7 +712,7 @@ function drawChart() {
   el('line', { x1: X0, y1: Y0, x2: X1, y2: Y0, class: 'ax' }, svg); el('line', { x1: X0, y1: Y0, x2: X0, y2: Y1, class: 'ax' }, svg);
   for (const n of [0, 25, 50, 75, 100]) { const t = el('text', { x: sx(n), y: Y0 + 14, 'text-anchor': n === 100 ? 'end' : 'middle' }, svg); t.textContent = n + '%'; }
   for (const v of [0, ymax / 2, ymax]) { const t = el('text', { x: X0 - 6, y: sy(v) + 3, 'text-anchor': 'end' }, svg); t.textContent = v; el('line', { x1: X0, y1: sy(v), x2: X1, y2: sy(v), class: 'ax', opacity: .5 }, svg); }
-  if (!AR.results.length) { const t = el('text', { x: (X0 + X1) / 2, y: 80, 'text-anchor': 'middle', style: 'font-family:var(--body);font-size:12px' }, svg); t.textContent = '做几轮之后，这里会画出你的用时'; return; }
+  if (!AR.results.length) { const t = el('text', { x: (X0 + X1) / 2, y: 80, 'text-anchor': 'middle', style: 'font-family:var(--body);font-size:12px' }, svg); t.textContent = 'Your times will appear after a few rounds'; return; }
   AR.results.forEach((r, i) => el('circle', { cx: sx(r.n) + (i % 3 - 1) * 3, cy: sy(r.t), r: 5, fill: r.hint ? COL.t1 : COL.ink, 'fill-opacity': .85 }, svg));
 }
 genArrow(); drawArrow(); drawChart(); levelText(); themeFns.push(drawArrow, drawChart);
@@ -723,8 +760,8 @@ function drawHist(runs, total, mine) {
   const mx = Math.max(...bins), X0 = 4, X1 = 316, Y0 = 80, w = (X1 - X0) / NB, mb = Math.min(NB - 1, Math.floor((mine - 1) / bw));
   bins.forEach((c, i) => { const h = c / mx * 70; el('rect', { x: X0 + i * w + 1, y: Y0 - h, width: w - 2, height: Math.max(h, c ? 1.5 : 0), rx: 1.5, fill: i === mb ? COL.t1 : COL.muted, 'fill-opacity': i === mb ? 1 : .45 }, svg); });
   el('line', { x1: X0, y1: Y0, x2: X1, y2: Y0, stroke: COL.line }, svg);
-  const a = el('text', { x: X0, y: 93 }, svg); a.textContent = '3 个（直达）';
-  const b = el('text', { x: X1, y: 93, 'text-anchor': 'end' }, svg); b.textContent = total + ' 个（全试一遍）';
+  const a = el('text', { x: X0, y: 93 }, svg); a.textContent = '3 (direct)';
+  const b = el('text', { x: X1, y: 93, 'text-anchor': 'end' }, svg); b.textContent = total + '  (try all)';
 }
 function params() { return [+$('#ts').value / 100, +$('#tn').value / 100, +$('#tb').value]; }
 function runTree() {
@@ -739,7 +776,7 @@ function runTree() {
   $('#tavg').textContent = Math.round(tot / 300);
   drawHist(runs, T.nodes.length - 1, seq.length);
   const total = T.nodes.length - 1, frac = (tot / 300 - 3) / (total - 3);   // 0 = straight there, 1 = tried everything
-  $('#tnote').textContent = `整棵树共 ${total} 个节点，最短路径只需要 3 步。`;
+  $('#tnote').textContent = `The tree has ${total}  nodes; the shortest path takes just 3 steps.`;
   tree.innerHTML = '';
   const L = T.nodes.map((n, i) => i ? el('line', { x1: T.nodes[n.p].x, y1: T.nodes[n.p].y, x2: n.x, y2: n.y }, tree) : null);
   const D = T.nodes.map((n, i) => {
@@ -750,13 +787,13 @@ function runTree() {
   el('circle', { cx: T.nodes[goal].x, cy: T.nodes[goal].y, r: 9, class: 'goal' }, tree);
   // the label sits just outside the goal leaf, pushed out by its own half-width/half-height so it never leaves the frame
   const ga = T.nodes[goal].ang, gc = Math.cos(ga), gs = Math.sin(ga), gr = 197 + Math.abs(gc) * 22 + Math.abs(gs) * 11;
-  const gl = el('text', { x: gr * gc, y: gr * gs, 'text-anchor': 'middle', 'dominant-baseline': 'central', class: 'glab' }, tree); gl.textContent = '答案';
+  const gl = el('text', { x: gr * gc, y: gr * gs, 'text-anchor': 'middle', 'dominant-baseline': 'central', class: 'glab' }, tree); gl.textContent = 'Answer';
   // the explanation follows what the 300 searches actually did, not just where the sliders are
-  $('#tlook').innerHTML = '<b>看哪里：</b>' + (frac < .06
-    ? (nz >= .6 ? '到处都有亮节点，但通往答案的那一路更亮：相关线索够强，盖过了干扰，几乎每一步都选对。' : '通往答案的那一路节点特别亮，别的都暗。多条线索指向同一处，彼此印证，几乎每一步都选对。')
-    : nz >= .6 ? '到处都有亮节点，亮度和是否通往答案关系不大。每一步都有好几个“看着都像”的，只能挨个试。'
-    : s <= .3 ? '大多数节点是虚线，没有哪个显得更像。没有线索可依，只能近乎暴力地一个个试。'
-    : '通往答案的那一路比别的亮一些，但还有不少干扰。');
+  $('#tlook').innerHTML = '<b>What to look for: </b>' + (frac < .06
+    ? (nz >= .6 ? 'Bright nodes are everywhere, but the path to the answer is brighter. Relevant clues outweigh the noise, so almost every choice is right.' : 'The answer’s path is especially bright; other nodes are dim. Several clues reinforce each other, so almost every choice is right.')
+    : nz >= .6 ? 'Bright nodes are everywhere, with little relation to the answer. Several choices look equally promising, so you must try them one by one.'
+    : s <= .3 ? 'Most nodes are dashed and none stands out. With no useful clues, the search is almost brute force.'
+    : 'The answer’s path is somewhat brighter, but there is still plenty of interference.');
   let k = 0; $('#tcount').textContent = 0;
   const finish = () => {
     const path = []; for (let i = goal; i > 0; i = T.nodes[i].p) { L[i].setAttribute('class', 'p'); D[i].setAttribute('class', 'p'); D[i].removeAttribute('fill-opacity'); path.unshift(i); }
@@ -810,10 +847,10 @@ function drawRep(trailing) {
   rctx.strokeStyle = COL.line; rctx.lineWidth = 1;
   rctx.beginPath(); rctx.moveTo(tx(-1), ty(0)); rctx.lineTo(tx(1), ty(0)); rctx.moveTo(tx(0), ty(-1)); rctx.lineTo(tx(0), ty(1)); rctx.stroke();
   rctx.strokeRect(tx(-1), ty(1), 2 * S, 2 * S);
-  rctx.fillStyle = COL.muted; rctx.font = '12px "Noto Sans SC", sans-serif';
+  rctx.fillStyle = COL.muted; rctx.font = '12px "Noto Sans", sans-serif';
   rctx.textAlign = 'right'; rctx.textBaseline = 'top';
   rctx.globalAlpha = 1 - mt; rctx.fillText('x →', tx(1), ty(-1) + 6); rctx.textAlign = 'left'; rctx.fillText('↑ y', tx(-1), 8);
-  rctx.globalAlpha = mt; rctx.textAlign = 'right'; rctx.fillText('r：到中心的距离 →', tx(1), ty(-1) + 6); rctx.textAlign = 'left'; rctx.fillText('↑ θ：角度', tx(-1), 8);
+  rctx.globalAlpha = mt; rctx.textAlign = 'right'; rctx.fillText('r: distance from center →', tx(1), ty(-1) + 6); rctx.textAlign = 'left'; rctx.fillText('↑ θ: angle', tx(-1), 8);
   rctx.globalAlpha = 1;
   const [p1, p2] = handles, dx = p2[0] - p1[0], dy = p2[1] - p1[1];
   for (const p of PTS) {
@@ -842,7 +879,7 @@ function drawRep(trailing) {
   const a = acc0;
   $('#racc').textContent = Math.round(a * 100) + '%';
   $('#racc').style.color = a > .99 ? 'var(--go)' : '';
-  $('#raccn').textContent = `${Math.round(a * PTS.length)} / ${PTS.length} 个点`;
+  $('#raccn').textContent = `${Math.round(a * PTS.length)} / ${PTS.length} points`;
 }
 function toData(e) { const r = rep.getBoundingClientRect(), pad = 30, S = (r.width - pad * 2) / 2; return [(e.clientX - r.left - pad) / S - 1, 1 - (e.clientY - r.top - pad) / S]; }
 const clampP = p => p.map(v => Math.max(-1, Math.min(1, v)));
@@ -897,8 +934,8 @@ function bestLine() {
 function noteRep() {
   const [b, , all] = bestLine();
   $('#rnote').textContent = mt < .5
-    ? `在笛卡尔坐标里，最好的直线也只能分对 ${Math.round(b * 100)}%。蓝点被绿色三角围在中间，直线切不开一个圆。` + (fan ? `分对这么多的直线不止一条，${all.length > 1 ? '都画成了淡绿色。' : ''}` : '')
-    : `在极坐标里，横轴 r 是到中心的距离，两类点之间隔着一段空隙。空隙里的竖线、略斜一点的线，都能分对 ${Math.round(b * 100)}%：最优解不是一条，而是一整片。` + (fan ? '淡绿色画的就是它们。' : '');
+    ? `In Cartesian coordinates, even the best line classifies only ${Math.round(b * 100)}% correctly. The triangles surround the blue dots; a line cannot untangle a ring.` + (fan ? `More than one line achieves this score. ${all.length > 1 ? 'They are shown in pale green.' : ''}` : '')
+    : `In polar coordinates, r measures distance from the center. There is a gap between the classes. Vertical or slightly tilted lines in that gap all classify ${Math.round(b * 100)}% correctly: there is a whole region of optimal lines.` + (fan ? 'They are shown in pale green.' : '');
 }
 segBind('#rseg', v => { fan = null; morphTo(+v); });
 // show every tying line; put the handles on the plainest one (most upright), in the middle of its run

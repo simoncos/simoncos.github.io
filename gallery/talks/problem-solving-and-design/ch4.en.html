@@ -1,26 +1,26 @@
 <!doctype html>
-<html lang="zh-Hans">
+<html lang="en">
 <meta charset="utf-8">
-<link rel="canonical" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch4.html">
-<link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch4.html">
+<link rel="canonical" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch4.en.html">
+<link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch4.html">
 <link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch4.en.html">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>纠结与最优解</title>
-<meta name="description" content="好几个可行解摆在面前，难的是挑一个。">
+<title>Choice and Optima</title>
+<meta name="description" content="When several feasible solutions are in front of you, the hard part is choosing one.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="纠结与最优解 · Simon Zhao">
-<meta property="og:description" content="好几个可行解摆在面前，难的是挑一个。">
-<meta property="og:url" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch4.html">
+<meta property="og:title" content="Choice and Optima · Simon Zhao">
+<meta property="og:description" content="When several feasible solutions are in front of you, the hard part is choosing one.">
+<meta property="og:url" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/ch4.en.html">
 <meta property="og:site_name" content="simoncos">
-<meta property="og:image" content="https://simoncos.github.io/gallery/assets/og-problem-solving.jpg">
+<meta property="og:image" content="https://simoncos.github.io/gallery/talks/problem-solving-and-design/assets/og.en.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@600;900&family=Noto+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 /* Layout: railway-signalling notebook. Reading column ~720px; scrollytelling stage and workbenches break out to ~1120px. */
 :root{
@@ -35,8 +35,8 @@
      stop    red:   out / dies / contradiction / cycle
      t1–t3   three parallel quantities: x1 x2 x3 in 02 (x2, the relative, also marks the relative in 01) and the three offers in 05
      everything else stays neutral: ink, muted, line */
-  --display:"Noto Serif SC","Songti SC","STSong",serif;
-  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --display:"Noto Serif","Songti SC","STSong",serif;
+  --body:"Noto Sans","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
   color-scheme:dark;
 }
@@ -293,48 +293,85 @@ input[type=checkbox]{accent-color:var(--accent)}
 .map h4{margin:0;font-size:1rem}
 .map h4 a{color:inherit}
 .map p{margin:2px 0 0;font-size:.88rem;color:var(--muted);line-height:1.65}
-.map .draft h4::after{content:"尚未成文";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
+.map .draft h4::after{content:"Not yet written";font-size:.7rem;font-weight:400;margin-left:8px;padding:0 6px;border:1px dashed var(--muted);border-radius:3px;color:var(--muted)}
 footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
 /* touch screens: fingertip-sized controls */
 @media (pointer:coarse){input[type=range]{min-height:36px}select,input[type=number]{min-height:40px}.btn,.seg button,#presets button{min-height:40px}.series a{display:inline-flex;align-items:center;min-height:40px}input[type=checkbox]{width:18px;height:18px}}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 .language-switch{display:flex;justify-content:flex-end;gap:14px;position:relative;z-index:2;max-width:1120px;margin:0 auto 20px;font-size:.85rem}.language-switch a,.language-switch span{padding:8px 4px}.language-switch [aria-current]{color:var(--muted)}
+
+/* English copy is longer: retain the original visual system with room to wrap. */
+html[lang="en"] body{line-height:1.75}
+html[lang="en"] h1{font-size:clamp(2.6rem,7vw,4.5rem);letter-spacing:-.025em}
+html[lang="en"] h2{letter-spacing:-.015em}
+html[lang="en"] .eyebrow,html[lang="en"] .lab,html[lang="en"] .secno{letter-spacing:.035em}
+html[lang="en"] .series a,html[lang="en"] .series span{white-space:normal}
+html[lang="en"] .series{gap:8px}
+html[lang="en"] .card h2{font-size:clamp(1.3rem,3vw,1.8rem)}
+html[lang="en"] .card{gap:12px}
+html[lang="en"] .seg button{white-space:normal;line-height:1.4;min-height:40px}
+html[lang="en"] button,html[lang="en"] label{overflow-wrap:break-word}
+html[lang="en"] .chipx{max-width:7.5em}
+html[lang="en"] .node text{font-size:12px}
+@media(max-width:520px){
+ html[lang="en"] .wrap{padding-inline:16px}
+ html[lang="en"] .bench{padding:14px}
+ html[lang="en"] .slider{flex-wrap:wrap}
+ html[lang="en"] .emblem{opacity:.25}
+ html[lang="en"] .card{grid-template-columns:minmax(0,1fr) 60px;padding:18px}
+ html[lang="en"] .card svg{width:60px;height:60px}
+ html[lang="en"] .node text{font-size:14px}
+}
+html[lang="en"]:has(#tree) .slider{grid-template-columns:minmax(0,1fr) 3.6em;gap:4px 10px}
+html[lang="en"]:has(#tree) .slider label{grid-column:1/-1;overflow-wrap:normal}
+html[lang="en"]:has(#tree) .slider input{grid-column:1;grid-row:2}
+html[lang="en"]:has(#tree) .slider output{grid-column:2;grid-row:2}
+html[lang="en"] .check{grid-template-columns:8.5em minmax(0,1fr)}
+html[lang="en"] .pill{padding:4px 8px;line-height:1.45;overflow-wrap:normal}
+html[lang="en"] .track div{grid-template-columns:1.6em 6.8em minmax(0,1fr)}
+html[lang="en"] #pans .big{font-size:clamp(1.3rem,5vw,2rem);overflow-wrap:normal}
+@media(max-width:520px){
+ html[lang="en"] .check{grid-template-columns:minmax(0,1fr);gap:6px}
+ html[lang="en"] .pill{justify-self:start}
+ html[lang="en"] .check small{overflow-wrap:anywhere}
+}
+
 </style>
 
 <div class="wrap">
-<nav class="language-switch" aria-label="语言 / Language"><span aria-current="page">中文</span><a href="ch4.en.html" lang="en" hreflang="en">English</a></nav>
+<nav class="language-switch" aria-label="Language"><a href="ch4.html" lang="zh-Hans" hreflang="zh-Hans">中文</a><span aria-current="page">English</span></nav>
 <div class="hero-band">
 <header class="col hero">
-  <nav class="series" aria-label="系列章节">
-    <a href="ch1.html">一 问题情境</a><a href="ch2.html">二 可行解</a><a href="ch3.html">三 开放问题</a><span class="cur">四 纠结与最优解</span><span>五 测量的局限</span><span>六 Duck Typing</span><span>七 工程实践</span>
+  <nav class="series" aria-label="Chapters in this series">
+    <a href="ch1.en.html">1 The Problem Situation</a><a href="ch2.en.html">2 Feasible Solutions</a><a href="ch3.en.html">3 Open Problems</a><span class="cur">4 Choice and Optima</span><span>5 Measurement</span><span>6 Duck Typing</span><span>7 Engineering</span>
   </nav>
   <div class="hero-text">
     <svg id="knot" viewBox="0 0 400 400" aria-hidden="true"><path class="k2"></path><path class="k1"></path></svg>
-    <div class="eyebrow"><a href="index.html" class="up">问题解决与设计</a> · 第四篇</div>
-    <h1><span class="hl">纠结</span>与<br>最优解</h1>
-    <p class="lede">纠结，字面意思是一团缠在一起的线：拆也不是，剪也不是，胡乱尝试之下还会缠得更紧。我们面对问题时，往往已经有好几个可行解摆在面前，难的是从里面挑一个。<strong>纠结的其实是如何选择。</strong></p>
-    <p class="meta">交互版 · 改编自作者 2017 年发表在简书的同名旧文 · <a href="../../../blogs/problem-solving-and-design-4-choice-and-optima.html">读原文</a></p>
+    <div class="eyebrow"><a href="index.en.html" class="up">Problem Solving and Design</a> · Part 4</div>
+    <h1><span class="hl">Choice</span> and <br>Optima</h1>
+    <p class="lede">The Chinese word for indecision, jiujie, literally evokes tangled threads: pull them apart or cut them, and clumsy attempts only tighten the knot. When facing a problem, we often already have several feasible solutions. The hard part is choosing one.<strong>What tangles us up is how to choose.</strong></p>
+    <p class="meta">Interactive edition · Adapted from the author’s 2017 essay on Jianshu · <a href="../../../blogs/problem-solving-and-design-4-choice-and-optima.en.html">Read the original essay</a></p>
   </div>
 </header>
 </div>
 
 <section id="sec1">
   <div class="col">
-    <span class="bignum" aria-hidden="true">01</span><span class="secno">01 · 电车难题</span>
-    <h2>先做几道让人纠结的题</h2>
-    <p>一辆刹车失灵的有轨电车，即将撞上前方轨道上的 5 个人。旁边的备用轨道上只有 1 个人。你手边有一根拉杆。凭直觉把下面四道题做一遍，你的选择后面会用到。</p>
+    <span class="bignum" aria-hidden="true">01</span><span class="secno">01 · The trolley problem</span>
+    <h2>Start with a few difficult choices</h2>
+    <p>A runaway trolley is about to hit five people on the main track. One person stands on a side track. There is a lever within reach. Answer the following four questions intuitively; we will use your choices later.</p>
   </div>
   <div class="wide scrolly" id="scrolly">
     <div class="pin">
       <div class="stage">
         <div class="stage-box">
-          <svg id="scene" viewBox="0 0 640 250" role="img" aria-label="电车轨道示意图"></svg>
+          <svg id="scene" viewBox="0 0 640 250" role="img" aria-label="Trolley track illustration"></svg>
           <div class="stage-cap" id="stagecap"></div>
         </div>
       </div>
       <div class="left">
-        <nav class="pdots" id="pdots" aria-label="选择题目"></nav>
+        <nav class="pdots" id="pdots" aria-label="Choose a question"></nav>
         <div class="steps" id="steps"></div>
         <p class="phint" id="phint"></p>
       </div>
@@ -344,47 +381,47 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
 
 <section id="sec2">
   <div class="col">
-    <span class="bignum" aria-hidden="true">02</span><span class="secno">02 · 价值函数</span>
-    <h2>把纠结放上天平</h2>
-    <p>在绝对的理性面前，这几道题其实没有难度。假设你对这个问题的价值函数是一个简单的多元线性函数：</p>
+    <span class="bignum" aria-hidden="true">02</span><span class="secno">02 · Value functions</span>
+    <h2>Put the dilemma on a balance</h2>
+    <p>Under absolute rationality, these questions become straightforward. Suppose your value function is a simple multivariable linear function:</p>
     <p class="fx" style="font-size:1.15rem">f = <span class="c1">a1·x1</span> + <span class="c2">a2·x2</span> + <span class="c3">a3·x3</span></p>
     <dl class="defs">
-      <dt class="c1">x1</dt><dd>所有轨道上最后存活的人数</dd>
-      <dt class="c2">x2</dt><dd>轨道上存活的亲人数</dd>
-      <dt class="c3">x3</dt><dd>你主动杀死的人数</dd>
+      <dt class="c1">x1</dt><dd>Total survivors on all tracks</dd>
+      <dt class="c2">x2</dt><dd>Surviving relatives on the tracks</dd>
+      <dt class="c3">x3</dt><dd>People you actively kill</dd>
     </dl>
-    <p>给出 a1、a2、a3，你就有了自己的模型。下面每道题是一架天平，两边分别是不拉杆和拉杆，价值高的一边更重、会沉下去。天平下的彩条是三项各自贡献了多少，颜色和上面的权重一一对应。原文的例子是 (1, 100, −2)，在变体 1 里得出 3 和 101。</p>
+    <p>Choose a1, a2, and a3 to define your model. Each question below becomes a balance: leave the lever on one side, pull it on the other. The higher-value side weighs more and drops. Colored bars show each term’s contribution, matching the weights above. The original example uses (1, 100, −2), yielding 3 and 101 in variant 1.</p>
   </div>
   <div class="wide">
     <div class="bench">
       <div class="ctlbar">
         <div>
-          <span class="lab">权重</span>
-          <div class="slider"><span class="k k1">a1</span><input id="a1" type="range" min="1" max="100" step="1" aria-label="a1 存活人数的权重"><output id="a1o"></output><small>每多活一个人</small></div>
-          <div class="slider"><span class="k k2">a2</span><input id="a2" type="range" min="-1000" max="1000" step="1" aria-label="a2 亲人的权重"><output id="a2o"></output><small>每多活一个亲人</small></div>
-          <div class="slider"><span class="k k3">a3</span><input id="a3" type="range" min="-1000" max="1000" step="1" aria-label="a3 主动杀人的权重"><output id="a3o"></output><small>每主动杀死一个人</small></div>
+          <span class="lab">Weights</span>
+          <div class="slider"><span class="k k1">a1</span><input id="a1" type="range" min="1" max="100" step="1" aria-label="a1: weight of survivors"><output id="a1o"></output><small>Each additional survivor</small></div>
+          <div class="slider"><span class="k k2">a2</span><input id="a2" type="range" min="-1000" max="1000" step="1" aria-label="a2: weight of relatives"><output id="a2o"></output><small>Each additional surviving relative</small></div>
+          <div class="slider"><span class="k k3">a3</span><input id="a3" type="range" min="-1000" max="1000" step="1" aria-label="a3: weight of actively killing"><output id="a3o"></output><small>Each person actively killed</small></div>
         </div>
         <div style="display:flex;flex-direction:column;gap:14px">
-          <div><span class="lab">模型</span>
+          <div><span class="lab">Model</span>
             <div class="seg" id="model">
-              <button type="button" data-v="linear" aria-pressed="true">线性</button>
-              <button type="button" data-v="log">边际递减</button>
-              <button type="button" data-v="inter">交互项</button>
+              <button type="button" data-v="linear" aria-pressed="true">Linear</button>
+              <button type="button" data-v="log">Diminishing returns</button>
+              <button type="button" data-v="inter">Interaction term</button>
             </div>
             <div class="fx" id="fx"></div>
           </div>
-          <div><span class="lab">x3 怎么数</span>
+          <div><span class="lab">How to count x3</span>
             <div class="seg" id="x3def">
-              <button type="button" data-v="active" aria-pressed="true">只算拉杆（原文）</button>
-              <button type="button" data-v="orig">死亡都算（简书原稿）</button>
+              <button type="button" data-v="active" aria-pressed="true">Only if I pull</button>
+              <button type="button" data-v="orig">Count all deaths</button>
             </div>
           </div>
-          <div><span class="lab">几种人格</span>
+          <div><span class="lab">Weight presets</span>
             <div class="presets" id="presets">
-              <button type="button" data-w="1,100,-2">原文 (1, 100, −2)</button>
-              <button type="button" data-w="1,0,0">纯功利</button>
-              <button type="button" data-w="1,10000000,0">亲人至上</button>
-              <button type="button" data-w="1,0,-20">不愿动手</button>
+              <button type="button" data-w="1,100,-2">Original (1, 100, −2)</button>
+              <button type="button" data-w="1,0,0">Utilitarian</button>
+              <button type="button" data-w="1,10000000,0">Family first</button>
+              <button type="button" data-w="1,0,-20">Reluctant to act</button>
             </div>
           </div>
         </div>
@@ -393,116 +430,116 @@ footer{margin-top:72px;font-size:.8rem;color:var(--muted)}
     </div>
   </div>
   <div class="col">
-    <p class="note">关于 x3 怎么数：只有拉下拉杆、电车转过去撞死的人，才算“你主动杀死的”，所以救亲人的价值是 101。2017 年发在简书上的原稿算的是 91，那里把不拉杆导致的 5 人死亡也算进了“主动杀死”，后来在网站上更正了。把开关拨到“死亡都算”就能看到原稿的算法：按那种数法，变体 2 不拉杆等于主动杀死一百万人。变量怎么定义，本身就是一个隐含前提。</p>
-    <p>还可以设置更复杂的价值函数。<strong>边际递减</strong>：救 2 人和救 1 人差别很大，救 10000 人和救 9000 人就没那么有实感，于是把 x1 换成 ln x1。<strong>交互项</strong>：原文写作 a3·x2·x3，你救的亲人越多，越会因为主动杀死别人而痛苦。在这几道题里亲人都在备用轨道上，拉杆时 x2 = 0，不拉杆时 x3 = 0，所以这一项总是 0；把 x3 拨到“死亡都算”才看得出它的作用。</p>
-    <p>这个例子也许太血淋淋了，我们很难做到绝对理性。但意思应该清楚了：许多纠结的根源是非理性，解决办法是建立形式化、量化的模型，用价值函数去评估每一种选择。</p>
+    <p class="note">Counting x3: in the corrected essay, only deaths caused by diverting the trolley count as actively killing. Saving your relative therefore scores 101. The 2017 Jianshu original scored it as 91, counting the five deaths from inaction as active killing too. “Count all deaths” reproduces that original convention; in variant 2, leaving the lever then counts as actively killing a million people. A variable’s definition is itself an implicit premise.</p>
+    <p>More complex value functions are possible. <strong>Diminishing returns</strong>: saving two people rather than one feels very different, while saving 10,000 rather than 9,000 may feel less distinct. Replace x1 with ln x1.<strong>Interaction term</strong>: the original uses a3·x2·x3—the more relatives you save, the more distress you feel about actively killing others. In these examples, relatives are on the side track: pulling makes x2 = 0, while inaction makes x3 = 0. The term is always zero unless you switch to “Count all deaths.”</p>
+    <p>The example may be too visceral for us to be absolutely rational. But the argument should be clear: much indecision comes from non-rational responses. A formal, quantitative model evaluates each option with a value function.</p>
   </div>
 </section>
 
 <section id="sec3">
   <div class="col">
-    <span class="bignum" aria-hidden="true">03</span><span class="secno">03 · 反推</span>
-    <h2>两千个可能的你</h2>
-    <p>反过来，也可以从你的选择倒推权重。下图每个点都是一个可能的你：横坐标是你给亲人的权重 a2，纵坐标是你给主动杀人的权重 a3（a1 取当前值；两轴跨过 0，正负两侧各按对数刻度）。你在第一部分做的每个选择，都会让一批“你”出局。<strong>剩下的点，才是和你目前全部选择相符的价值观。</strong>点击或拖动图面可以设置权重，键盘上用方向键。</p>
+    <span class="bignum" aria-hidden="true">03</span><span class="secno">03 · Working backward</span>
+    <h2>Two thousand possible yous</h2>
+    <p>We can also infer weights from your choices. Each point is one possible you: the horizontal axis is your weight for relatives, a2, and the vertical axis your weight for active killing, a3. The current a1 is held fixed; both axes cross zero and use logarithmic scaling on each side. Every choice in section 1 rules out some of these possible yous.<strong>The remaining points are the values consistent with all your choices so far.</strong>Click or drag to set the weights, or use the arrow keys.</p>
   </div>
   <div class="wide">
     <div class="bench infer">
       <div class="status" id="status"></div>
-      <div class="plane-wrap"><div class="empty" id="pempty"><b>还没有任何选择</b><span>所有 2,000 个“你”都还在，因为你还没告诉页面你会怎么选。</span><a href="#sec1">回到第一部分作答 ↑</a></div><canvas id="plane" tabindex="0" aria-label="权重平面：横轴 a2，纵轴 a3。方向键移动当前权重"></canvas></div>
+      <div class="plane-wrap"><div class="empty" id="pempty"><b>No choices yet</b><span>All 2,000 possible yous remain because you have not made any choices yet.</span><a href="#sec1">Go back and answer ↑</a></div><canvas id="plane" tabindex="0" aria-label="Weight plane: a2 horizontally, a3 vertically. Arrow keys move the current weights"></canvas></div>
     </div>
   </div>
   <div class="col">
-    <p>如果所有点都掉光了，说明在当前模型里，没有任何一组权重能同时解释你的选择。最常见的原因是原题和变体 3 选得不一样：两道题的数字完全相同，变的只是你看待它的方式。模型里没有一个变量能装下这种差别。</p>
+    <p>If every point disappears, no sampled weights in this model explain all your choices. A common reason is answering the original and variant 3 differently: the numbers are identical; only the framing changes. No variable in this model captures that difference.</p>
   </div>
 </section>
 
 <section id="sec4">
   <div class="col">
-    <span class="bignum" aria-hidden="true">04</span><span class="secno">04 · 偏好系统</span>
-    <h2>剪刀石头布里没有最优解</h2>
-    <p>价值函数真正提供的是<strong>可比较</strong>：任意两个选项都能分出高低。选项之间这种相对的优劣关系叫偏好。一个能选出最优解的偏好系统，至少要满足三条：</p>
+    <span class="bignum" aria-hidden="true">04</span><span class="secno">04 · Preference systems</span>
+    <h2>Rock-paper-scissors has no best move</h2>
+    <p>What a value function gives us is <strong>comparability</strong>: any two options can be ranked. Their relative ranking is a preference. A preference system that can select an optimum needs at least three properties:</p>
     <dl class="defs">
-      <dt>完整性</dt><dd>任意两个选项都可以比较。</dd>
-      <dt>可传递性</dt><dd>A &gt; B 且 B &gt; C，则 A &gt; C。</dd>
-      <dt>一致性</dt><dd>A &gt; B 时，不能同时 B &gt; A。</dd>
+      <dt>Completeness</dt><dd>Any two options can be compared.</dd>
+      <dt>Transitivity</dt><dd>If A &gt; B and B &gt; C, then A &gt; C.</dd>
+      <dt>Consistency</dt><dd>If A &gt; B, we cannot also have B &gt; A.</dd>
     </dl>
-    <p>剪刀石头布看起来是简单明确的偏好。可它是一个环，红色虚线标出了环流动的方向。点击连线可以翻转方向或设为不可比，试试把它修成一个有最优解的系统：修好时，最优的那个选项会亮起绿色。</p>
+    <p>Rock-paper-scissors looks clear and simple, but it forms a cycle, shown by red dashed arrows. Click a connection to reverse it or make the pair incomparable. Try repairing the system so it has a best option; that option will light up green.</p>
   </div>
   <div class="wide">
     <div class="bench gbench">
       <div class="checks">
-        <div><span class="lab">偏好系统</span>
+        <div><span class="lab">Preference systems</span>
           <div class="seg" id="pset">
-            <button type="button" data-v="rps" aria-pressed="true">剪刀石头布</button>
-            <button type="button" data-v="rpsls">TBBT 扩展版</button>
-            <button type="button" data-v="fe">火焰纹章</button>
-            <button type="button" data-v="wx">五行相克</button>
-            <button type="button" data-v="mine">你的周末</button>
+            <button type="button" data-v="rps" aria-pressed="true">Rock-paper-scissors</button>
+            <button type="button" data-v="rpsls">Big Bang Theory</button>
+            <button type="button" data-v="fe">Fire Emblem</button>
+            <button type="button" data-v="wx">Five elements</button>
+            <button type="button" data-v="mine">Your weekend</button>
           </div>
         </div>
         <div id="pcheck" class="checks"></div>
         <p class="meta" id="pnote" style="margin:0"></p>
       </div>
-      <svg class="gsvg" id="pgraph" viewBox="0 0 400 380" role="img" aria-label="偏好关系图"></svg>
+      <svg class="gsvg" id="pgraph" viewBox="0 0 400 380" role="img" aria-label="Preference graph"></svg>
     </div>
   </div>
   <div class="col">
-    <p>游戏里的相克环（火焰纹章的剑斧枪、梦幻西游的门派相克）是有意设计的：目的就是消除最优解，平衡每种选择。三个人以上玩剪刀石头布，三种手势同时出现就直接重来，等于暂时放弃了可传递性，直到某一局只出现两种手势。</p>
+    <p>Game designers use cycles deliberately, such as Fire Emblem’s sword-axe-lance triangle or faction counters in Fantasy Westward Journey. The point is to remove a dominant choice and balance the options. In rock-paper-scissors with more than two players, all three gestures appearing means a replay: effectively setting aside transitivity until only two gestures remain.</p>
   </div>
 </section>
 
 <section id="sec5">
   <div class="col">
-    <span class="bignum" aria-hidden="true">05</span><span class="secno">05 · 以复杂对抗纠结</span>
-    <h2>标准一轮换，就会造出环</h2>
-    <p>现实里的环从哪里来？石头赢剪刀，因为能把剪刀砸坏；剪刀赢布，因为能把布剪开；布赢石头，靠的却是把石头包。起。来。前两条的标准是破坏，第三条悄悄换成了包裹。两个单因素轮流上场，就是双重标准。</p>
-    <p>选工作也一样（这个例子是交互版补的）。三份 offer 各有长处。如果两两比较时只看哪边占优的因素多，每一次起决定作用的因素都不一样，等于标准在轮换，就会绕出一个环。换成同时考虑所有因素的加权模型，环就消失了。表格里的分数可以改。</p>
+    <span class="bignum" aria-hidden="true">05</span><span class="secno">05 · More complexity, less indecision</span>
+    <h2>Changing criteria creates a cycle</h2>
+    <p>Where do real-world cycles come from? Rock beats scissors by smashing them; scissors beat paper by cutting it; paper beats rock by… wrapping it up. The first two use destruction as the criterion, while the third quietly switches to wrapping. Alternating between two single factors is a double standard.</p>
+    <p>Job offers work similarly in this added example. Each of three offers has strengths. If each pair is compared by counting the factors it wins, different factors decide each match. The criteria rotate and a cycle appears. A weighted model considers all factors together and removes that cycle. You can edit the scores.</p>
   </div>
   <div class="wide">
     <div class="bench gbench">
       <div class="checks">
         <table class="offer-tbl">
-          <thead><tr><th></th><th>薪资</th><th>成长</th><th>生活</th></tr></thead>
+          <thead><tr><th></th><th>Pay</th><th>Growth</th><th>Life</th></tr></thead>
           <tbody id="otable"></tbody>
         </table>
-        <div><span class="lab">两两比较的方式</span>
+        <div><span class="lab">Pairwise comparison method</span>
           <div class="seg" id="omode">
-            <button type="button" data-v="major" aria-pressed="true">占优因素多者胜</button>
-            <button type="button" data-v="sum">加权求和</button>
+            <button type="button" data-v="major" aria-pressed="true">Majority of factors</button>
+            <button type="button" data-v="sum">Weighted sum</button>
           </div>
         </div>
         <div id="osum" hidden>
-          <span class="lab">拖动圆点（或用方向键）设置三个因素的权重，底色是该权重下胜出的 offer</span>
-          <div class="tri-wrap"><canvas id="tri" tabindex="0" aria-label="权重三角形：三个角分别是只看薪资、只看成长、只看生活。方向键移动圆点"></canvas></div>
+          <span class="lab">Drag the point or use arrow keys to set the three weights. Background colors show the winning offer.</span>
+          <div class="tri-wrap"><canvas id="tri" tabindex="0" aria-label="Weight triangle: corners mean pay only, growth only, or life only. Arrow keys move the point"></canvas></div>
           <div class="bars" id="obars"></div>
         </div>
         <p class="note" id="onote" style="margin:0"></p>
       </div>
-      <svg class="gsvg" id="ograph" viewBox="0 0 400 380" role="img" aria-label="offer 偏好关系图"></svg>
+      <svg class="gsvg" id="ograph" viewBox="0 0 400 380" role="img" aria-label="Job-offer preference graph"></svg>
     </div>
   </div>
   <div class="col">
-    <p>没有把多个因素形式化地记下来审视，对于重要的问题，我们隔三差五就会不自觉地重复同一个怪圈。<strong>我们永远在建立新的偏好系统，却从没建立起一个同时满足完整性、可传递性和一致性的系统，所以永远找不到最优解。</strong></p>
-    <p>大脑喜欢简单。上一篇讲的抓大放小，对开放问题很有用。但过度简化是对理性的逃避，只会越来越纠结。每个问题都有适合它的模型复杂度，太简单和太复杂都不好。原文说这个问题留到之后的文章再想。</p>
+    <p>Without formally recording and examining multiple factors, we unconsciously revisit the same loops on important decisions.<strong>We keep creating new preference systems without establishing one that is complete, transitive, and consistent—so we never find an optimum.</strong></p>
+    <p>The brain likes simplicity. The previous essay’s strategy of keeping the big picture is useful for open problems. But oversimplification can evade rational thought and deepen indecision. Each problem needs an appropriate model complexity: too simple and too complex are both unhelpful. The original essay leaves that question for later.</p>
   </div>
 </section>
 
 <section>
   <div class="col">
-    <span class="secno">系列地图</span>
-    <h2>每一篇，一个可以动手的问题</h2>
+    <span class="secno">Series map</span>
+    <h2>One hands-on question in each essay</h2>
     <ol class="map">
-      <li><span class="no">一</span><div><h4><a href="ch1.html">问题情境</a></h4><p>两种画法的正方形、找箭头、搜索树、表示方式、设计。</p></div></li>
-      <li><span class="no">二</span><div><h4><a href="ch2.html">可行解</a></h4><p>六道削皮题、量水实验、把剪刀拆开看、一根拉绳。</p></div></li>
-      <li><span class="no">三</span><div><h4><a href="ch3.html">开放问题</a></h4><p>只坐地铁、行动方式不限、抓大放小、证伪的是整个合式。</p></div></li>
-      <li class="cur"><span class="no">四</span><div><h4>纠结与最优解</h4><p>本页：电车难题、价值天平、两千个可能的你、偏好系统、标准轮换造出的环。</p></div></li>
-      <li class="draft"><span class="no">五</span><div><h4>测量的局限</h4><p>来自 2026-03 的整合 Proposal：相似性、分类与理论负荷。</p></div></li>
-      <li class="draft"><span class="no">六</span><div><h4>Duck Typing 作为策略</h4><p>不问它是什么，问它能做什么；行为级数据，让用户自己设权重。</p></div></li>
-      <li class="draft"><span class="no">七</span><div><h4>工程实践</h4><p>测试环境作为反事实探索器，双重传感器，Bayesian Safety。</p></div></li>
+      <li><span class="no">1</span><div><h4><a href="ch1.en.html">The Problem Situation</a></h4><p>One square in two drawings, the hidden arrow, search trees, representation, and design.</p></div></li>
+      <li><span class="no">2</span><div><h4><a href="ch2.en.html">Feasible Solutions</a></h4><p>Six peeling questions, the water-jar experiment, taking scissors apart, and a pull cord.</p></div></li>
+      <li><span class="no">3</span><div><h4><a href="ch3.en.html">Open Problems</a></h4><p>Metro routes, unrestricted travel, the big picture, and falsifying a conjunction.</p></div></li>
+      <li class="cur"><span class="no">4</span><div><h4>Choice and Optima</h4><p>This page: trolley choices, value balances, two thousand possible yous, preference systems, and cycles from changing criteria.</p></div></li>
+      <li class="draft"><span class="no">5</span><div><h4>The Limits of Measurement</h4><p>From the March 2026 proposal: similarity, classification, and theory-laden observation.</p></div></li>
+      <li class="draft"><span class="no">6</span><div><h4>Duck Typing as a Strategy</h4><p>Ask what it can do, not what it is. Work with behavioral data and let users set their own weights.</p></div></li>
+      <li class="draft"><span class="no">7</span><div><h4>Engineering Practice</h4><p>Test environments as counterfactual explorers, dual sensors, and Bayesian Safety.</p></div></li>
     </ol>
   </div>
 </section>
-<footer class="col">正文改编自<a href="../../../blogs/problem-solving-and-design-4-choice-and-optima.html">《问题解决与设计（四）：纠结与最优解》</a>。</footer>
+<footer class="col">Text adapted from <a href="../../../blogs/problem-solving-and-design-4-choice-and-optima.en.html">Problem Solving and Design (4): Choice and Optima</a>.</footer>
 </div>
 
 <script>
@@ -522,7 +559,7 @@ const MAXE = 7;
 const symlog = v => Math.sign(v) * Math.log10(1 + Math.abs(v)) / MAXE;
 const isymlog = t => Math.sign(t) * (Math.pow(10, Math.abs(t) * MAXE) - 1);
 const roundSig = v => { if (v === 0) return 0; const a = Math.abs(v); if (a < 1) return Math.round(v * 100) / 100; const p = Math.pow(10, Math.floor(Math.log10(a)) - 1); return Math.round(v / p) * p; };
-const fmt = v => { if (!isFinite(v)) return '—'; const a = Math.abs(v); if (a >= 1e4) return (v < 0 ? '−' : '') + Math.round(a).toLocaleString('zh-CN'); const r = Math.round(v * 100) / 100; return (r < 0 ? '−' : '') + Math.abs(r); };
+const fmt = v => { if (!isFinite(v)) return '—'; const a = Math.abs(v); if (a >= 1e4) return (v < 0 ? '−' : '') + Math.round(a).toLocaleString('en-US'); const r = Math.round(v * 100) / 100; return (r < 0 ? '−' : '') + Math.abs(r); };
 
 /* ---------- hero knot ---------- */
 (() => {
@@ -550,11 +587,11 @@ const fmt = v => { if (!isFinite(v)) return '—'; const a = Math.abs(v); if (a 
 /* ---------- shared model ---------- */
 const S = { a1: 1, a2: 100, a3: -2, model: 'linear', x3def: 'active', choice: {}, custom: { main: 5, side: 1, rel: true } };
 const SCN = [
-  { id: 's0', tag: '原题', title: '5 个陌生人 vs 1 个陌生人', main: 5, side: 1, rel: false, text: '主轨道上 5 个人，备用轨道上 1 个人，你都不认识。拉不拉？' },
-  { id: 's1', tag: '变体 1', title: '5 个陌生人 vs 1 个亲人', main: 5, side: 1, rel: true, text: '还是 5 比 1，但备用轨道上那个人，是你的亲人。' },
-  { id: 's2', tag: '变体 2', title: '1,000,000 个陌生人 vs 1 个亲人', main: 1000000, side: 1, rel: true, text: '主轨道上换成一百万个陌生人。备用轨道上仍然是你的亲人。' },
-  { id: 's3', tag: '变体 3', title: '拉杆，就是亲手杀人', main: 5, side: 1, rel: false, text: '人数和原题一模一样。但这次你清楚意识到：拉下拉杆，那个人是你主动杀死的，会一辈子良心不安；什么都不做，至少你没有亲手选择谁死。' },
-  { id: 's4', tag: '自定义', title: '继续细思恐极', custom: true, text: '自己改人数，决定备用轨道上是不是你的亲人。' },
+  { id: 's0', tag: 'Original', title: '5 strangers vs. 1 stranger', main: 5, side: 1, rel: false, text: 'Five people are on the main track and one on the side track. You know none of them. Pull the lever?' },
+  { id: 's1', tag: 'Variant 1', title: '5 strangers vs. 1 relative', main: 5, side: 1, rel: true, text: 'Still five versus one, but the person on the side track is your relative.' },
+  { id: 's2', tag: 'Variant 2', title: '1,000,000 strangers vs. 1 relative', main: 1000000, side: 1, rel: true, text: 'Now a million strangers are on the main track. Your relative is still on the side track.' },
+  { id: 's3', tag: 'Variant 3', title: 'Pulling means actively killing', main: 5, side: 1, rel: false, text: 'The numbers are exactly the same as in the original. But this time you vividly recognize that pulling means actively killing someone, with a lifelong burden on your conscience. If you do nothing, at least you have not personally chosen who dies.' },
+  { id: 's4', tag: 'Custom', title: 'Take the dilemma further', custom: true, text: 'Change the numbers and decide whether the people on the side track are your relatives.' },
 ];
 const P = s => s.custom ? S.custom : s;
 function xs(p, c) { const R = p.rel ? p.side : 0; return c === 'stay' ? [p.side, R, S.x3def === 'orig' ? p.main : 0] : [p.main, 0, p.side]; }
@@ -563,7 +600,7 @@ const W = () => [S.a1, S.a2, S.a3];
 const terms = (p, c) => { const f = phi(p, c), a = W(); return [a[0] * f[0], a[1] * f[1], a[2] * f[2]]; };
 const val = (p, c) => terms(p, c).reduce((s, v) => s + v, 0);
 function pick(p) { const vs = val(p, 'stay'), vp = val(p, 'pull'); const eps = 1e-9 * Math.max(1, Math.abs(vs), Math.abs(vp)); return { vs, vp, pick: Math.abs(vs - vp) <= eps ? 'tie' : vs > vp ? 'stay' : 'pull' }; }
-const LBL = { stay: '不拉杆', pull: '拉杆', tie: '一样' };
+const LBL = { stay: 'Leave it', pull: 'Pull', tie: 'Equal' };
 const listeners = [];
 const changed = () => listeners.forEach(f => f());
 
@@ -607,21 +644,21 @@ function renderScene(mode) {
     crowdCache.forEach(([x, y], i) => mainPeople.push(el('circle', { cx: x, cy: y, r: 2.6, class: 'dot' + (pop ? ' pop' : ''), style: pop ? `animation-delay:${Math.round((x - 438) * 2.6 + i % 7 * 10)}ms` : '' }, mainG)));
     const per = s.main / crowdCache.length;
     const t = el('text', { x: 535, y: MY - 80, class: 'stxt k', 'text-anchor': 'middle' }, scene);
-    t.textContent = s.main.toLocaleString('zh-CN') + ' 人' + (per >= 1.5 ? `（每个点约 ${Math.round(per).toLocaleString('zh-CN')} 人）` : '');
+    t.textContent = s.main.toLocaleString('en-US') + ' people' + (per >= 1.5 ? `(each dot ≈ ${Math.round(per).toLocaleString('en-US')}  people)` : '');
     if (per < 1) mainPeople.splice(Math.round(s.main)).forEach(n => n.remove());
   } else for (let i = 0; i < s.main; i++) mainPeople.push(person(mainG, 430 + i * 30, MY, false, pop ? i * 70 : 0));
   for (let i = 0; i < s.side; i++) sidePeople.push(person(sideG, 470 + i * 30, SY, s.rel, pop ? 380 : 0));
-  if (s.rel) { const t = el('text', { x: 494, y: SY - 30, class: 'stxt k rel' }, scene); t.textContent = '你的亲人'; }
+  if (s.rel) { const t = el('text', { x: 494, y: SY - 30, class: 'stxt k rel' }, scene); t.textContent = 'Your relative'; }
   if (!pop) [...scene.querySelectorAll('.pop')].forEach(n => n.classList.remove('pop'));
   // lever
-  const lv = el('g', { class: 'lever', tabindex: '0', role: 'button', 'aria-label': c === 'pull' ? '推回拉杆' : '拉下拉杆' }, scene);
+  const lv = el('g', { class: 'lever', tabindex: '0', role: 'button', 'aria-label': c === 'pull' ? 'Return the lever' : 'Pull the lever' }, scene);
   el('rect', { x: 160, y: 176, width: 36, height: 9, rx: 3, class: 'base' }, lv);
   const arm = el('g', { class: 'arm' }, lv);
   el('line', { x1: 178, y1: 178, x2: 178, y2: 138, class: 'arm', style: 'transform:none' }, arm);
   el('circle', { cx: 178, cy: 136, r: 7.5, class: 'knob' }, arm);
   arm.style.transform = `rotate(${c === 'pull' ? 32 : -32}deg)`;
   const lt = el('text', { x: 178, y: 204, class: 'stxt' + (active === 's3' ? ' warn' : ''), 'text-anchor': 'middle' }, scene);
-  lt.textContent = active === 's3' ? '这一下是你做的' : '拉杆';
+  lt.textContent = active === 's3' ? 'You caused this' : 'Pull';
   const flip = () => { if (shownStep !== 'sum') choose(active, c === 'pull' ? 'stay' : 'pull'); };
   if (leverFocused) lv.focus({ preventScroll: true });
   lv.addEventListener('click', flip);
@@ -656,13 +693,13 @@ function renderScene(mode) {
 }
 function renderCap(moving) {
   const s0 = SCN.find(x => x.id === active), s = P(s0), c = S.choice[active];
-  const mainTxt = s.main.toLocaleString('zh-CN') + ' 人';
-  const sideTxt = s.rel ? (s.side > 1 ? s.side + ' 个亲人' : '你的亲人') : s.side + ' 个陌生人';
-  let t = `<b>${s0.tag}</b> · 主轨道上 ${mainTxt}，备用轨道上${/^\d/.test(sideTxt) ? ' ' : '是'}${sideTxt}。`;
-  if (moving) t += ' 电车开过去了……';
-  else if (c === 'stay') t += ` 你没有动。主轨道上 ${mainTxt}死去，${sideTxt}活了下来。`;
-  else if (c === 'pull') t += ` 你拉下了拉杆。${mainTxt}得救，${sideTxt}死去${active === 's3' ? '，是你亲手让电车转向的' : ''}。`;
-  else t += ' 用题卡上的按钮选，或者直接点场景里的拉杆。';
+  const mainTxt = s.main.toLocaleString('en-US') + (s.main === 1 ? ' person' : ' people');
+  const sideTxt = s.rel ? (s.side > 1 ? s.side + ' relatives' : 'your relative') : s.side + (s.side === 1 ? ' stranger' : ' strangers');
+  let t = `<b>${s0.tag}</b> · Main track: ${mainTxt}; side track: ${sideTxt}.`;
+  if (moving) t += ' The trolley has passed…';
+  else if (c === 'stay') t += ` You did nothing. On the main track, ${mainTxt} died; ${sideTxt} survived.`;
+  else if (c === 'pull') t += ` You pulled the lever. ${mainTxt} were saved; ${sideTxt} died${active === 's3' ? ' because you diverted the trolley' : ''}.`;
+  else t += ' Use the question’s buttons, or click the lever in the scene.';
   $('#stagecap').innerHTML = t;
 }
 const stepsEl = $('#steps'), scrollyEl = $('#scrolly');
@@ -671,19 +708,19 @@ for (const s of SCN) {
   st.className = 'step'; st.dataset.id = s.id;
   st.innerHTML = `<div class="scard"><header><span class="tag">${s.tag}</span><h3>${s.title}</h3></header><p>${s.text}</p>
     ${s.custom ? `<div class="custom-ctl">
-      <label>主轨道 <select id="cmain">${[1,2,5,10,100,1000,1000000].map(n => `<option value="${n}"${n===5?' selected':''}>${n.toLocaleString('zh-CN')} 人</option>`).join('')}</select></label>
-      <label>备用轨道 <select id="cside">${[1,2,3,5].map(n => `<option value="${n}">${n} 人</option>`).join('')}</select></label>
-      <label><input type="checkbox" id="crel" checked> 是你的亲人</label></div>` : ''}
-    <div class="btns"><button type="button" class="choose" data-c="stay" aria-pressed="false">不拉杆</button><button type="button" class="choose" data-c="pull" aria-pressed="false">拉杆</button></div></div>`;
+      <label>Main track <select id="cmain">${[1,2,5,10,100,1000,1000000].map(n => `<option value="${n}"${n===5?' selected':''}>${n.toLocaleString('en-US')} people</option>`).join('')}</select></label>
+      <label>Side track <select id="cside">${[1,2,3,5].map(n => `<option value="${n}">${n} people</option>`).join('')}</select></label>
+      <label><input type="checkbox" id="crel" checked> are your relatives</label></div>` : ''}
+    <div class="btns"><button type="button" class="choose" data-c="stay" aria-pressed="false">Leave it</button><button type="button" class="choose" data-c="pull" aria-pressed="false">Pull</button></div></div>`;
   st.querySelectorAll('.choose').forEach(b => b.addEventListener('click', () => choose(s.id, b.dataset.c)));
   stepsEl.appendChild(st);
 }
 const sumStep = document.createElement('div');
 sumStep.className = 'step'; sumStep.dataset.id = 'sum';
-sumStep.innerHTML = `<div class="scard"><header><span class="tag">答卷</span><h3>你的选择</h3></header><div class="answers" id="answers"></div><p style="margin:0">纠结吗？救人多的一边是功利，救亲人是感情，不愿亲手拉杆是自我保护，几种考虑轮流占上风。<strong style="color:var(--ink)">我们显然不如自己通常认为的那样理性。</strong></p></div>`;
+sumStep.innerHTML = `<div class="scard"><header><span class="tag">Answers</span><h3>Your choices</h3></header><div class="answers" id="answers"></div><p style="margin:0">Feeling torn? Saving more lives favors utility; saving relatives favors attachment; avoiding the lever favors self-protection. Different considerations take turns dominating.<strong style="color:var(--ink)">We are plainly less rational than we tend to think.</strong></p></div>`;
 stepsEl.appendChild(sumStep);
 function renderAnswers() {
-  $('#answers').innerHTML = SCN.map(s => `<span>${s.tag}</span><span class="${S.choice[s.id] ? '' : 'mut'}">${S.choice[s.id] ? LBL[S.choice[s.id]] : '未作答'}</span>`).join('');
+  $('#answers').innerHTML = SCN.map(s => `<span>${s.tag}</span><span class="${S.choice[s.id] ? '' : 'mut'}">${S.choice[s.id] ? LBL[S.choice[s.id]] : 'Not answered'}</span>`).join('');
 }
 const STEPS = [...SCN.map(s => s.id), 'sum'];
 let shownStep = 's0';
@@ -696,18 +733,18 @@ function setActive(id) {
   active = id; renderScene('enter');
 }
 const pdots = $('#pdots');
-pdots.innerHTML = STEPS.map((id, i) => `<button type="button" data-i="${i}">${id === 'sum' ? '答卷' : SCN[i].tag}</button>`).join('');
+pdots.innerHTML = STEPS.map((id, i) => `<button type="button" data-i="${i}">${id === 'sum' ? 'Answers' : SCN[i].tag}</button>`).join('');
 function updDots() {
   pdots.querySelectorAll('button').forEach((b, i) => {
     const id = STEPS[i];
     if (id === shownStep) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
     b.classList.toggle('done', !!S.choice[id]);
-    b.setAttribute('aria-label', b.textContent + (S.choice[id] ? '，已作答' : ''));
+    b.setAttribute('aria-label', b.textContent + (S.choice[id] ? ', answered' : ''));
   });
   const flat = scrollyEl.classList.contains('flat'), last = shownStep === 'sum';
   const on = document.querySelector(`.step[data-id="${shownStep}"]`), hint = $('#phint');
   if (on && hint.parentNode !== on) on.appendChild(hint);
-  hint.textContent = last ? '' : flat ? '点上面的标签换题。' : S.choice[shownStep] ? '往下滚动，进入下一题 ↓' : '选好之后往下滚动，进入下一题 ↓';
+  hint.textContent = last ? '' : flat ? 'Use the tabs above to change questions.' : S.choice[shownStep] ? 'Scroll down for the next question ↓' : 'Choose, then scroll down for the next question ↓';
 }
 // answers survive a reload within the tab; 03 depends on them
 const SAVE = 'psd-ch4-answers';
@@ -829,7 +866,7 @@ const SCL = [];
 for (const s of SCN) {
   const d = document.createElement('div'); d.className = 'scale';
   d.innerHTML = `<header><span class="tag">${s.tag}</span><h4>${s.title}</h4></header><svg viewBox="0 0 300 152" aria-hidden="true"></svg>
-    <div class="rows"><div class="row"><span>不拉杆</span><div class="dbar" data-c="stay"></div></div><div class="row"><span>拉杆</span><div class="dbar" data-c="pull"></div></div></div>`;
+    <div class="rows"><div class="row"><span>Leave it</span><div class="dbar" data-c="stay"></div></div><div class="row"><span>Pull</span><div class="dbar" data-c="pull"></div></div></div>`;
   $('#scales').appendChild(d);
   const svg = d.querySelector('svg');
   el('path', { d: 'M150 36 L137 146 H163 Z', class: 'stand' }, svg);
@@ -873,7 +910,7 @@ function updScales() {
     for (const [side, c, v] of [[o.L, 'stay', m.vs], [o.R, 'pull', m.vp]]) {
       side.pan.classList.toggle('win', m.pick === c);
       side.t.textContent = LBL[c]; side.v.textContent = fmt(v);
-      side.you.textContent = mine === c ? '你选这边' : '';
+      side.you.textContent = mine === c ? 'Your choice' : '';
       side.you.style.fill = mine === c ? (m.pick === c || m.pick === 'tie' ? 'var(--go)' : 'var(--stop)') : 'none';
     }
     const ts = { stay: terms(p, 'stay'), pull: terms(p, 'pull') };
@@ -883,7 +920,7 @@ function updScales() {
     for (const k in ts) {
       let po = 0, ne = 0;
       o.bars[k].querySelectorAll('i').forEach((iEl, j) => { const v = ts[k][j], w = Math.abs(v) / M * 50; if (v >= 0) { iEl.style.left = (50 + po) + '%'; po += w; } else { ne += w; iEl.style.left = (50 - ne) + '%'; } iEl.style.width = w + '%'; });
-      o.bars[k].title = `${LBL[k]}：${expr(p, k)} = ${fmt(val(p, k))}`;
+      o.bars[k].title = `${LBL[k]}: ${expr(p, k)} = ${fmt(val(p, k))}`;
     }
   }
   kickScales();
@@ -921,7 +958,7 @@ function drawPlane() {
   ctx.fillStyle = COL.bg; ctx.fillRect(0, 0, Wd, H);
   ctx.strokeStyle = COL.line; ctx.lineWidth = 1; ctx.fillStyle = COL.muted; ctx.font = '10px "JetBrains Mono", monospace';
   const ticks = [-1e6, -1e4, -100, 0, 100, 1e4, 1e6], nar = Wd < 420;
-  const tl = v => v === 0 ? '0' : (v < 0 ? '−' : '') + ({ 100: '100', 10000: '1万', 1000000: '100万' })[Math.abs(v)];
+  const tl = v => v === 0 ? '0' : (v < 0 ? '−' : '') + ({ 100: '100', 10000: '10k', 1000000: '1m' })[Math.abs(v)];
   for (const v of ticks) {
     ctx.globalAlpha = v === 0 ? 1 : .45;
     ctx.beginPath(); ctx.moveTo(tx(v), PAD); ctx.lineTo(tx(v), H - PAD); ctx.stroke();
@@ -943,10 +980,10 @@ function drawPlane() {
   }
   ctx.globalAlpha = 1;
   ctx.strokeStyle = COL.ink; ctx.strokeRect(PAD, PAD, inner, inner);
-  ctx.fillStyle = COL.ink; ctx.font = '11px "Noto Sans SC", sans-serif'; ctx.textBaseline = 'bottom';
-  if (nar) { ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillText('a2 亲人权重 →', Wd / 2, H - PAD + 18); ctx.textBaseline = 'bottom'; }
-  else { ctx.textAlign = 'right'; ctx.fillText('a2 亲人权重 →', Wd - PAD, PAD - 6); }
-  ctx.textAlign = 'left'; ctx.fillText('↑ a3 主动杀人权重', PAD, PAD - 6);
+  ctx.fillStyle = COL.ink; ctx.font = '11px "Noto Sans", sans-serif'; ctx.textBaseline = 'bottom';
+  if (nar) { ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillText('a2: relative weight →', Wd / 2, H - PAD + 18); ctx.textBaseline = 'bottom'; }
+  else { ctx.textAlign = 'right'; ctx.fillText('a2: relative weight →', Wd - PAD, PAD - 6); }
+  ctx.textAlign = 'left'; ctx.fillText('↑ a3: active-killing weight', PAD, PAD - 6);
   const ax = tx(100), ay = ty(-2);
   ctx.strokeStyle = COL.ink; ctx.lineWidth = 1.5;
   ctx.beginPath(); ctx.moveTo(ax - 5, ay - 5); ctx.lineTo(ax + 5, ay + 5); ctx.moveTo(ax + 5, ay - 5); ctx.lineTo(ax - 5, ay + 5); ctx.stroke();
@@ -960,11 +997,11 @@ function renderStatus(cs, n) {
   $('#pempty').hidden = cs.length > 0;
   const here = okc(cs, S.a1, S.a2, S.a3);
   const miss = cs.filter(c => !okc([c], S.a1, S.a2, S.a3)).map(c => SCN.find(s => s.id === c.id).tag);
-  $('#status').innerHTML = `<span class="lab">用上了 ${cs.length} 个选择</span>
-    <div><span class="big ${!cs.length ? '' : n ? 'ok' : 'bad'}">${n.toLocaleString('zh-CN')}</span> <span class="meta">/ 2,000 个可能的你还在</span></div>
-    <p style="margin:0">${!cs.length ? '先在第一部分做几道题。每做一个选择，就会有一批点掉下去。' : n === 0 ? '全部出局了：在当前模型下，你的选择互相矛盾。试试换个模型，或者换一种 x3 的数法。' : '剩下的每个点，都是一个与你目前全部选择相符的价值观。'}</p>
-    <p style="margin:0">当前权重 <span class="mono">(${fmt(S.a1)}, ${fmt(S.a2)}, ${fmt(S.a3)})</span><br>${cs.length ? (here ? '<span class="chip ok">能解释你的全部选择</span>' : `<span class="chip bad">解释不了：${miss.join('、')}</span>`) : ''}</p>
-    <div class="legend"><span><i class="sw" style="background:var(--go)"></i>还在的你</span><span><i class="sw" style="background:var(--stop)"></i>正在出局</span><span><i class="sw" style="background:var(--accent)"></i>当前权重</span><span>× 原文</span></div>`;
+  $('#status').innerHTML = `<span class="lab">Using ${cs.length}  choices</span>
+    <div><span class="big ${!cs.length ? '' : n ? 'ok' : 'bad'}">${n.toLocaleString('en-US')}</span> <span class="meta">/ 2,000 possible yous remain</span></div>
+    <p style="margin:0">${!cs.length ? 'Answer a few questions in section 1. Each choice rules out some points.' : n === 0 ? 'All sampled points are ruled out. Try another model or another way to count x3; no sampled weights explain these choices under the current settings.' : 'Each remaining point represents values consistent with all your choices so far.'}</p>
+    <p style="margin:0">Current weights <span class="mono">(${fmt(S.a1)}, ${fmt(S.a2)}, ${fmt(S.a3)})</span><br>${cs.length ? (here ? '<span class="chip ok">Explain all your choices</span>' : `<span class="chip bad">Cannot explain: ${miss.join(', ')}</span>`) : ''}</p>
+    <div class="legend"><span><i class="sw" style="background:var(--go)"></i>Still possible</span><span><i class="sw" style="background:var(--stop)"></i>Being ruled out</span><span><i class="sw" style="background:var(--accent)"></i>Current weights</span><span>× Original</span></div>`;
 }
 function planeSet(e) {
   const r = cv.getBoundingClientRect(), inner = r.width - PAD * 2;
@@ -995,11 +1032,11 @@ new ResizeObserver(kickPlane).observe(cv);
 
 /* ---------- 04 graphs ---------- */
 const PRESETS = {
-  rps: { nodes: ['石头', '剪刀', '布'], edges: [['石头', '剪刀', '砸坏'], ['剪刀', '布', '剪开'], ['布', '石头', '包住']], note: '剪刀 > 布，布 > 石头，石头 > 剪刀。三条偏好单独看都很明确。' },
-  rpsls: { nodes: ['剪刀', '布', '石头', '蜥蜴', '史波克'], edges: [['剪刀', '布', '剪开'], ['布', '石头', '包住'], ['石头', '蜥蜴', '压扁'], ['蜥蜴', '史波克', '毒死'], ['史波克', '剪刀', '砸坏'], ['剪刀', '蜥蜴', '斩首'], ['蜥蜴', '布', '吃掉'], ['布', '史波克', '驳倒'], ['史波克', '石头', '蒸发'], ['石头', '剪刀', '砸坏']], note: '《生活大爆炸》里的扩展版：5 个手势，10 条关系，每个手势恰好赢 2 个、输 2 个。' },
-  fe: { nodes: ['剑', '斧', '枪'], edges: [['剑', '斧', '克'], ['斧', '枪', '克'], ['枪', '剑', '克']], note: '火焰纹章的武器相克三角。设计目的就是让没有一种武器绝对最优。' },
-  wx: { nodes: ['金', '木', '土', '水', '火'], edges: [['金', '木', '克'], ['木', '土', '克'], ['土', '水', '克'], ['水', '火', '克'], ['火', '金', '克']], note: '五行相克：金克木，木克土，土克水，水克火，火克金。10 对关系里只定义了 5 对，连完整性都不满足。' },
-  mine: { nodes: ['爬山', '看电影', '打游戏', '睡懒觉'], edges: [], note: '这个周末做什么？点击每一条虚线，按你的真实偏好定方向，看看会不会绕出环。' },
+  rps: { nodes: ['Rock', 'Scissors', 'Paper'], edges: [['Rock', 'Scissors', 'crushes'], ['Scissors', 'Paper', 'cuts'], ['Paper', 'Rock', 'wraps']], note: 'Scissors > Paper; Paper > Rock; Rock > Scissors. Each relation is clear on its own.' },
+  rpsls: { nodes: ['Scissors', 'Paper', 'Rock', 'Lizard', 'Spock'], edges: [['Scissors', 'Paper', 'cuts'], ['Paper', 'Rock', 'wraps'], ['Rock', 'Lizard', 'crushes'], ['Lizard', 'Spock', 'poisons'], ['Spock', 'Scissors', 'crushes'], ['Scissors', 'Lizard', 'decapitates'], ['Lizard', 'Paper', 'eats'], ['Paper', 'Spock', 'disproves'], ['Spock', 'Rock', 'vaporizes'], ['Rock', 'Scissors', 'crushes']], note: 'The Big Bang Theory’s expanded game: five gestures, ten relations. Each gesture wins against two and loses to two.' },
+  fe: { nodes: ['Sword', 'Axe', 'Lance'], edges: [['Sword', 'Axe', 'beats'], ['Axe', 'Lance', 'beats'], ['Lance', 'Sword', 'beats']], note: 'Fire Emblem’s weapon triangle deliberately prevents any one weapon from being absolutely best.' },
+  wx: { nodes: ['Metal', 'Wood', 'Earth', 'Water', 'Fire'], edges: [['Metal', 'Wood', 'beats'], ['Wood', 'Earth', 'beats'], ['Earth', 'Water', 'beats'], ['Water', 'Fire', 'beats'], ['Fire', 'Metal', 'beats']], note: 'The five-element overcoming cycle: metal beats wood, wood beats earth, earth beats water, water beats fire, and fire beats metal. Only five of ten pairs are defined, so the system is not even complete.' },
+  mine: { nodes: ['Hiking', 'Cinema', 'Gaming', 'Sleep in'], edges: [], note: 'What will you do this weekend? Click each dashed connection to set your preference. See whether a cycle emerges.' },
 };
 function makeGraph(def) {
   const n = def.nodes.length, M = {};
@@ -1038,8 +1075,8 @@ function drawGraph(svg, g, an, opts) {
     const ln = el('line', { x1: sx, y1: sy, x2: ex, y2: ey, class: 'edge' + (e.dir === 0 ? ' none' : '') + (isC ? ' cyc' : '') }, svg);
     if (e.dir !== 0) ln.setAttribute('marker-end', `url(#${pid}${isC ? 'c' : 'n'})`);
     if (opts.interactive) {
-      const now = e.dir === 0 ? '不可比' : `${g.nodes[a]} 比 ${g.nodes[b]} 好`;
-      const hit = el('line', { x1: sx, y1: sy, x2: ex, y2: ey, class: 'ehit', tabindex: '0', role: 'button', 'data-k': k, 'aria-label': `${g.nodes[i]} 与 ${g.nodes[j]}：现在${now}，按一下切换` }, svg);
+      const now = e.dir === 0 ? 'Incomparable' : `${g.nodes[a]}  beats ${g.nodes[b]} `;
+      const hit = el('line', { x1: sx, y1: sy, x2: ex, y2: ey, class: 'ehit', tabindex: '0', role: 'button', 'data-k': k, 'aria-label': `${g.nodes[i]}  and ${g.nodes[j]}: currently ${now}; click to change` }, svg);
       // every edge cycles the same way from where it started: flip → incomparable → back
       if (e.orig === undefined) e.orig = e.dir || 1;
       const flip = () => {
@@ -1064,16 +1101,16 @@ function drawGraph(svg, g, an, opts) {
 function checksHTML(g, an) {
   const N = g.nodes, total = N.length * (N.length - 1) / 2;
   let cycTxt = '';
-  if (an.cyc) { const c = an.cyc.map(i => N[i]), chain = c.join(' > '); cycTxt = `由可传递性，${chain} ⇒ ${c[0]} > ${c[c.length - 1]}；但同时 ${c[c.length - 1]} > ${c[0]}。两者矛盾，一致性被破坏。`; }
+  if (an.cyc) { const c = an.cyc.map(i => N[i]), chain = c.join(' > '); cycTxt = `Transitivity implies ${chain} ⇒ ${c[0]} > ${c[c.length - 1]}, but also ${c[c.length - 1]} > ${c[0]}. These contradict each other, violating consistency.`; }
   let bt, bc;
-  if (an.best >= 0) { bt = `${N[an.best]}：它比其他所有选项都好。${an.cyc ? '其余选项之间的环不影响它。' : ''}`; bc = 'ok'; }
-  else if (an.cyc && !an.unbeaten.length) { bt = '不存在：每个选项都会被某个选项打败。'; bc = 'bad'; }
-  else if (an.unbeaten.length === 1) { bt = `${N[an.unbeaten[0]]} 没有输过，但它和一些选项不可比，说不上最优。`; bc = 'mut'; }
-  else if (an.unbeaten.length > 1) { bt = `无法确定：${an.unbeaten.map(i => N[i]).join('、')} 都没有输过，彼此也没比较过。`; bc = 'mut'; }
-  else { bt = '不存在。'; bc = 'bad'; }
-  return `<div class="check"><span class="pill ${an.missing ? 'bad' : 'ok'}">完整性</span><div>${an.missing ? `${total} 对里有 ${an.missing} 对不可比` : `${total} 对全部可比`}</div></div>
-    <div class="check"><span class="pill ${an.cyc ? 'bad' : 'ok'}">传递一致</span><div>${an.cyc ? '可传递性与一致性不能同时成立' : '没有环，两条都可以成立'}${cycTxt ? `<small>${cycTxt}</small>` : an.gaps.length ? `<small>不过按可传递性，${an.gaps.slice(0, 2).map(([i, j]) => `${N[i]} &gt; ${N[j]}`).join('、')} 已经可以推出来，这${an.gaps.length > 1 ? '几' : '一'}对现在还标着不可比。</small>` : ''}</div></div>
-    <div class="check"><span class="pill ${bc}">最优解</span><div>${bt}</div></div>`;
+  if (an.best >= 0) { bt = `${N[an.best]}: it beats every other option. ${an.cyc ? 'A cycle among the remaining options does not affect it.' : ''}`; bc = 'ok'; }
+  else if (an.cyc && !an.unbeaten.length) { bt = 'None: every option loses to another.'; bc = 'bad'; }
+  else if (an.unbeaten.length === 1) { bt = `${N[an.unbeaten[0]]}  has no losses, but is incomparable with some options, so it cannot be called best.`; bc = 'mut'; }
+  else if (an.unbeaten.length > 1) { bt = `Undetermined: ${an.unbeaten.map(i => N[i]).join(', ')}  have no losses, but have not been compared with each other.`; bc = 'mut'; }
+  else { bt = 'None.'; bc = 'bad'; }
+  return `<div class="check"><span class="pill ${an.missing ? 'bad' : 'ok'}">Completeness</span><div>${an.missing ? `${total}  pairs; ${an.missing}  incomparable` : `${total}  pairs, all comparable`}</div></div>
+    <div class="check"><span class="pill ${an.cyc ? 'bad' : 'ok'}">Transitive and consistent</span><div>${an.cyc ? 'Transitivity and consistency cannot both hold' : 'No cycle: both can hold'}${cycTxt ? `<small>${cycTxt}</small>` : an.gaps.length ? `<small>However, transitivity already implies ${an.gaps.slice(0, 2).map(([i, j]) => `${N[i]} &gt; ${N[j]}`).join(', ')} ; these ${an.gaps.length > 1 ? 'several' : '1'} pairs are still marked incomparable.</small>` : ''}</div></div>
+    <div class="check"><span class="pill ${bc}">Optima</span><div>${bt}</div></div>`;
 }
 let PG = makeGraph(PRESETS.rps), pkey = 'rps';
 function renderPref() { const an = analyze(PG); drawGraph($('#pgraph'), PG, an, { interactive: true, onChange: renderPref }); $('#pcheck').innerHTML = checksHTML(PG, an); $('#pnote').textContent = PRESETS[pkey].note; }
@@ -1081,7 +1118,7 @@ segBind('#pset', v => { pkey = v; PG = makeGraph(PRESETS[v]); renderPref(); });
 
 /* ---------- 05 offers ---------- */
 const OF = { names: ['A', 'B', 'C'], score: [[5, 1, 3], [3, 5, 1], [1, 3, 5]], mode: 'major', w: [.5, .3, .2] };
-const FN = ['薪资', '成长', '生活'], OCOL = ['t1', 't2', 't3'];
+const FN = ['Pay', 'Growth', 'Life'], OCOL = ['t1', 't2', 't3'];
 $('#otable').innerHTML = OF.names.map((n, i) => `<tr><th scope="row" class="oname" style="color:var(--${OCOL[i]})">Offer ${n}</th>${OF.score[i].map((v, j) => `<td><input type="number" min="1" max="5" step="1" value="${v}" id="o${i}${j}" aria-label="Offer ${n} ${FN[j]}"></td>`).join('')}</tr>`).join('');
 document.querySelectorAll('#otable input').forEach(inp => {
   const [i, j] = inp.id.slice(1).split('').map(Number);
@@ -1108,9 +1145,9 @@ function drawTri() {
   }
   tctx.globalAlpha = 1; tctx.strokeStyle = COL.ink; tctx.lineWidth = 1.2;
   tctx.beginPath(); tctx.moveTo(...G.A); tctx.lineTo(...G.B); tctx.lineTo(...G.C); tctx.closePath(); tctx.stroke();
-  tctx.fillStyle = COL.ink; tctx.font = '12px "Noto Sans SC", sans-serif'; tctx.textAlign = 'center';
-  tctx.textBaseline = 'bottom'; tctx.fillText('只看薪资', G.A[0], G.A[1] - 6);
-  tctx.textBaseline = 'top'; tctx.textAlign = 'left'; tctx.fillText('只看成长', G.B[0] - 6, G.B[1] + 6); tctx.textAlign = 'right'; tctx.fillText('只看生活', G.C[0] + 6, G.C[1] + 6);
+  tctx.fillStyle = COL.ink; tctx.font = '12px "Noto Sans", sans-serif'; tctx.textAlign = 'center';
+  tctx.textBaseline = 'bottom'; tctx.fillText('Pay only', G.A[0], G.A[1] - 6);
+  tctx.textBaseline = 'top'; tctx.textAlign = 'left'; tctx.fillText('Growth only', G.B[0] - 6, G.B[1] + 6); tctx.textAlign = 'right'; tctx.fillText('Life only', G.C[0] + 6, G.C[1] + 6);
   const px = OF.w[0] * G.A[0] + OF.w[1] * G.B[0] + OF.w[2] * G.C[0], py = OF.w[0] * G.A[1] + OF.w[1] * G.B[1] + OF.w[2] * G.C[1];
   tctx.fillStyle = COL.accent; tctx.globalAlpha = .25; tctx.beginPath(); tctx.arc(px, py, 13, 0, 7); tctx.fill();
   tctx.globalAlpha = 1; tctx.strokeStyle = COL.surface; tctx.lineWidth = 2; tctx.beginPath(); tctx.arc(px, py, 7, 0, 7); tctx.fill(); tctx.stroke();
@@ -1156,16 +1193,16 @@ function renderOffers() {
   $('#osum').hidden = !sm;
   if (sm) {
     const mx = Math.max(...sum, .01);
-    $('#obars').innerHTML = `<div class="bar"><span class="meta">权重</span><span class="mono" style="text-align:left">${(p => FN.map((f, k) => f + ' ' + p[k] + '%').join(' · '))(pct(OF.w))}</span><span></span></div>` +
+    $('#obars').innerHTML = `<div class="bar"><span class="meta">Weights</span><span class="mono" style="text-align:left">${(p => FN.map((f, k) => f + ' ' + p[k] + '%').join(' · '))(pct(OF.w))}</span><span></span></div>` +
       [0, 1, 2].sort((a, b) => sum[b] - sum[a]).map(i => `<div class="bar"><span class="oname" style="color:var(--${OCOL[i]})">Offer ${OF.names[i]}</span><i style="width:${sum[i] / mx * 100}%;background:var(--${OCOL[i]})"></i><span class="mono">${fmt(sum[i])}</span></div>`).join('');
     drawTri();
   }
   const N = g.nodes;
   $('#onote').innerHTML = an.cyc
-    ? `绕出了环：${an.cyc.map(i => N[i]).join(' > ')} > ${N[an.cyc[0]]}。每一次比较都“有理有据”，合起来却选不出来。连线上标的是每次赢下比较靠的因素，它们在轮换。`
+    ? `A cycle appears: ${an.cyc.map(i => N[i]).join(' > ')} > ${N[an.cyc[0]]}. Every comparison has a reason, but together they give no best choice. Edge labels show the factors deciding each comparison—they keep changing.`
     : an.best >= 0
-      ? (sm ? `加权求和给每份 offer 一个分数，分数之间天然可传递，环不可能出现。代价是你得先说清楚每个因素有多重要：拖动三角形里的圆点，看最优解在哪里换人。` : `这组分数下多数原则恰好没有绕出环。把表格改回 5-1-3 / 3-5-1 / 1-3-5 试试。`)
-      : `有选项之间打平，还选不出最优解。${sm ? '换个权重试试。' : ''}`;
+      ? (sm ? `A weighted sum assigns each offer a score. Scores are naturally transitive, so no cycle can form. The cost is making each factor’s importance explicit. Drag the point in the triangle to see where the best offer changes.` : `These scores happen to produce no majority cycle. Try restoring 5-1-3 / 3-5-1 / 1-3-5.`)
+      : `Some options tie, so there is no unique best choice yet. ${sm ? 'Try different weights.' : ''}`;
 }
 
 /* ---------- boot ---------- */
