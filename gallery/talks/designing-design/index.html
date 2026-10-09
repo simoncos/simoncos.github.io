@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="zh-Hans">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>设计中的设计</title>
+<meta name="description" content="读原研哉《设计中的设计》：信息过剩只是假象。Exformation 把已知的事物重新变得未知；离开屏幕，用身体去感受世界。">
+<link rel="canonical" href="https://simoncos.github.io/gallery/talks/designing-design/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计中的设计 · 交互版">
+<meta property="og:description" content="读原研哉《设计中的设计》：信息过剩只是假象。Exformation 把已知的事物重新变得未知；离开屏幕，用身体去感受世界。">
+<meta property="og:url" content="https://simoncos.github.io/gallery/talks/designing-design/index.html">
+<meta property="og:site_name" content="simoncos">
+<meta property="og:image" content="https://simoncos.github.io/gallery/assets/og-designing-design.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="设计中的设计交互页的开场画面">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="设计中的设计 · 交互版">
+<meta name="twitter:description" content="读原研哉《设计中的设计》：信息过剩只是假象。Exformation 把已知的事物重新变得未知；离开屏幕，用身体去感受世界。">
+<meta name="twitter:image" content="https://simoncos.github.io/gallery/assets/og-designing-design.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+/* A bright afternoon. Paper, sky and grass; ink is soft navy, never black.
+   Sky blue = what you can touch; warm gold = the moment something opens up. Fixed light theme. */
+:root{
+  --paper:#f8f6f0; --paper-2:#f1eee5; --ink:#2b3645; --muted:#64717d; --line:#e2ddd0;
+  --sky:#47718b; --sky-soft:rgba(71,113,139,.1); --gold:#b69a66; --grass:#7d9270;
+  --scene-saturation:.58;
+  --display:"Noto Serif SC","Songti SC","STSong",serif;
+  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.95;letter-spacing:.01em}
+::selection{background:rgba(59,143,217,.2)}
+canvas{display:block}
+.hero canvas,.cel canvas,.away canvas{filter:saturate(var(--scene-saturation))}
+a{color:var(--sky)}
+p{margin:0 0 1.1em}
+b,strong{font-weight:700}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,canvas:focus-visible,a:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+.col{max-width:680px;margin-inline:auto;padding-inline:20px}
+.wide{max-width:1120px;margin-inline:auto;padding-inline:20px}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(1.55rem,3.6vw,2.15rem);line-height:1.35;margin:0 0 .7em;letter-spacing:.04em;text-wrap:balance}
+.secno{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:.95rem;color:var(--muted);letter-spacing:.3em;margin-bottom:.9em}
+.secno::after{content:"";flex:0 0 48px;height:1px;background:var(--line)}
+section{margin-top:120px}
+.quote{font-family:var(--display);font-size:1.12rem;line-height:2;color:var(--ink);border-left:2px solid var(--gold);padding:2px 0 2px 18px;margin:1.6em 0}
+.quote small{display:block;font-family:var(--body);font-size:.8rem;color:var(--muted);margin-top:.3em}
+.aside{font-size:.88rem;color:var(--muted)}
+
+/* illustrated frames ("cels") */
+.cel{position:relative;border-radius:18px;overflow:hidden;background:#cfe7f7;box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 24px 60px -24px rgba(40,70,110,.35),0 2px 8px rgba(40,70,110,.06);margin-block:34px 14px}
+.cel canvas{width:100%;height:auto}
+.celbar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cap{font-size:.84rem;color:var(--muted);margin:0}
+.btn{border:1px solid var(--sky);background:var(--sky);color:#fff;border-radius:999px;padding:7px 18px;font-size:.88rem;letter-spacing:.04em;transition:background .25s,color .25s,transform .25s}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:rgba(255,255,255,.7);color:var(--sky)}
+.btn:disabled{opacity:.4;cursor:default;transform:none}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.range{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:.95rem;color:var(--ink)}
+.range input{width:min(320px,52vw);accent-color:var(--sky)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:min(94vh,860px);min-height:560px;overflow:hidden;background:#7fbdf0}
+@media (pointer:coarse){input[type=range]{min-height:44px}.btn{min-height:44px}}
+#heroCv{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:pan-y}
+.hero-text{position:absolute;left:0;right:0;top:clamp(56px,13vh,140px);pointer-events:none}
+.hero-text .in{max-width:1120px;margin-inline:auto;padding-inline:clamp(20px,5vw,56px);color:#fff;text-shadow:0 0 2px rgba(20,60,120,.35),0 1px 18px rgba(20,70,140,.45)}
+.eyebrow{font-size:.8rem;letter-spacing:.24em;opacity:.95;pointer-events:auto}
+.eyebrow a{color:#fff;text-underline-offset:3px}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,12.5vw,5.6rem);line-height:1.15;letter-spacing:.12em;margin:.35em 0 .15em}
+.sub{font-family:var(--display);font-size:clamp(1rem,2.4vw,1.35rem);letter-spacing:.18em;opacity:.95;margin:0}
+.lede{max-width:25em;font-size:1.02rem;line-height:2;margin-top:1.4em}
+.hint{position:absolute;left:0;right:0;bottom:22px;padding-inline:20px;text-align:center;font-size:.8rem;letter-spacing:.2em;color:rgba(255,255,255,.95);text-shadow:0 1px 10px rgba(30,60,30,.5);pointer-events:none}
+
+/* ---------- 01 jar & dandelion ---------- */
+#talkCv{aspect-ratio:16/9}
+@media (max-width:700px){#talkCv{aspect-ratio:4/3.4}}
+.talkbtns{position:absolute;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding-inline:12px}
+@media (max-width:700px){.talkbtns{position:static;flex-direction:column;padding:12px;background:var(--paper)}}
+.qlist{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 8px}
+.qlist li{font-size:.8rem;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:2px 12px;animation:pop .6s ease}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+
+/* ---------- 02 river ---------- */
+#riverCv{aspect-ratio:16/9}
+@media (max-width:700px){#riverCv{aspect-ratio:4/3.6}}
+.rlabel{display:flex;justify-content:space-between;font-family:var(--display);font-size:.9rem;color:var(--muted);width:min(320px,52vw)}
+
+/* ---------- 03 footprints ---------- */
+#footCv{aspect-ratio:16/8.5;cursor:none;touch-action:none}
+@media (max-width:700px){#footCv{aspect-ratio:4/4.4}}
+.counts{font-family:var(--display);font-size:.92rem;color:var(--muted)}
+.counts b{color:var(--ink);font-weight:600}
+
+/* ---------- 04 shore ---------- */
+#shoreCv{aspect-ratio:16/8.5;cursor:crosshair;touch-action:none}
+@media (max-width:700px){#shoreCv{aspect-ratio:4/4.6}}
+.touch-mode{display:none}
+@media (pointer:coarse){.touch-mode{display:inline-flex}#footCv,#shoreCv{touch-action:pan-y}#footCv.drawing,#shoreCv.drawing{touch-action:none}}
+
+/* ---------- coda ---------- */
+.coda{margin-top:140px}
+#endCv{aspect-ratio:16/8}
+@media (max-width:700px){#endCv{aspect-ratio:4/4.8}}
+.coda .cel{margin-top:0}
+.leave{position:absolute;inset:auto 0 26px 0;display:flex;justify-content:center}
+.leave .btn{padding:10px 28px;font-size:.95rem;box-shadow:0 10px 30px -10px rgba(30,80,140,.6)}
+.away{position:fixed;inset:0;z-index:50;background:#8cc6f2;opacity:0;transition:opacity 2.4s ease;pointer-events:none}
+.away.on{opacity:1;pointer-events:auto}
+.away canvas{position:absolute;inset:0;width:100%;height:100%}
+.away .lines{position:absolute;left:0;right:0;top:30%;text-align:center;color:#fff;font-family:var(--display);font-size:clamp(1.2rem,3.2vw,1.9rem);letter-spacing:.2em;line-height:2.4;text-shadow:0 0 3px rgba(25,70,125,.45),0 1px 22px rgba(25,75,140,.6);pointer-events:none}
+.away .lines span{display:block;opacity:0;transition:opacity 3s ease}
+.away .lines span.on{opacity:1}
+.away .lines{padding-inline:20px;top:clamp(30px,25vh,240px)}
+.away .back{position:absolute;left:50%;transform:translateX(-50%);bottom:max(24px,env(safe-area-inset-bottom));min-height:44px;padding:8px 18px;white-space:nowrap;border:1px solid rgba(255,255,255,.7);border-radius:999px;background:rgba(35,55,66,.65);font-size:.82rem;color:#fff}
+footer{margin-top:90px;padding-bottom:70px;font-size:.8rem;color:var(--muted);line-height:1.9}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <canvas id="heroCv" aria-label="晴朗午后的天空与草地。积云慢慢飘过，草随风摇晃；空中飘着细小的碎片，凑近看是“已读”“+1”“99+”这样的字。"></canvas>
+  <div class="hero-text"><div class="in">
+    <p class="eyebrow">交互版 · 改编自作者 2014 年的读书笔记 · <a href="https://simoncos.github.io/blogs/exformation-and-information.html">读原文</a></p>
+    <h1>设计中的设计</h1>
+    <p class="sub">Exformation 与 Information</p>
+    <p class="lede">读原研哉。信息好像多到吃不完，我们却越来越饿。也许要做的不是知道得更多，而是让熟悉的东西，重新变得陌生。</p>
+  </div></div>
+  <p class="hint">移动指针（手机上用手指横着划），起一阵风。空中飘的不是花瓣，是信息的碎屑。</p>
+</header>
+
+<main>
+<section class="col" style="margin-top:84px">
+  <p>相信不少人和我一样，在工作和学习上慢慢形成了一套明晰的方法：做事的流程，评价和取舍的标准。我花大量功夫控制接收信息的管道，看着笔记、书签和文件夹有序地膨胀。互联网和电脑成了另一个大脑。世界虽大，却逃不出两个大脑协力搭起的认知框架。</p>
+  <p>可是我觉得自己越来越充实，也越来越空虚。对世界越来越了解，世界于我却越来越不新鲜。那种隐隐的、让人虚弱的饥饿感，也是真实的。</p>
+  <p>原研哉的回答是：<b>信息过剩只是假象。</b>泛滥的是像空中乱飞的草屑一样的碎片，每一片都极轻。它们像调料一样附在大脑上，让我们误以为自己知道得很多。网上这些看似卷帙浩繁的信息，加起来还不如光脚踩在地上，脚底传来的多。</p>
+</section>
+
+<!-- 01 -->
+<section>
+  <div class="col">
+    <div class="secno">一</div>
+    <h2>“我知道，我知道”</h2>
+    <p>常有这样的对话：一个人刚抛出一个话题，另一个人马上接上“我知道，我知道”“那不就是……”，给出一个笼统的描述，暗示自己已经懂了。几个人在心领神会的气氛里结束这个话题，再抛出下一个。其实谁也没有真正交流。</p>
+    <p>原研哉更期待另一种对话：不是交换已知，而是让事物<b>未知化</b>，去“弄懂我们知道的这么少”。</p>
+  </div>
+  <div class="wide">
+    <div class="cel">
+      <canvas id="talkCv" aria-label="山坡上一棵大树，天上飘着一个话题。左下角是一个玻璃罐，装着说过“我知道”的话题。"></canvas>
+      <div class="talkbtns">
+        <button class="btn ghost" id="knowBtn">我知道，我知道</button>
+        <button class="btn" id="unknowBtn">……其实，我不太知道</button>
+      </div>
+    </div>
+    <div class="celbar"><p class="cap" id="talkCap">In-formation，把未知放进已知的框里，像收进罐子；Ex-formation，把它从框里拿出来，让它散开。</p></div>
+    <ul class="qlist" id="qlist" aria-label="被吹散的问题"></ul>
+  </div>
+  <div class="col" style="margin-top:28px">
+    <p>原研哉把这种理念叫作 <b>Exformation</b>，和 Information 配成一对。一个是 In + Formation，把未知的世界纳入已知的框架；一个是 Ex + Formation，把对事物的认识从刻板的思维体系里抽出来，发现更多未知的内涵、理解的角度和可能。</p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section>
+  <div class="col">
+    <div class="secno">二</div>
+    <h2>河流是一条路</h2>
+    <p>他带着设计科学系的学生，做了许多 Exformation 的题目。其中一个，是把河流和公路的照片叠在一起，让人用一种奇异的、驾驶员的视角去看河。</p>
+  </div>
+  <div class="wide">
+    <div class="cel"><canvas id="riverCv" aria-label="沿着一条蜿蜒的河向前滑行，两岸是树和草地。滑杆可以把河叠成一条公路，视角变成驾驶座。"></canvas></div>
+    <div class="celbar">
+      <div>
+        <div class="rlabel"><span>河</span><span>路</span></div>
+        <div class="range"><input id="blend" type="range" min="0" max="1" step="0.01" value="0" aria-label="河与路的叠合程度"></div>
+      </div>
+      <p class="cap">往右拖，河面叠上路面，你坐进了驾驶座。弯道来时，地平线会跟着倾斜。</p>
+    </div>
+  </div>
+  <div class="col" style="margin-top:28px">
+    <p>原来河流不是风景照里那种美丽但不可触碰的东西。可以想象沿着它走路时脚下的滑腻或干爽，甚至想象在河流变成的马路上开车，身体随着蜿蜒的河道倾斜。</p>
+  </div>
+</section>
+
+<!-- 03 -->
+<section>
+  <div class="col">
+    <div class="secno">三</div>
+    <h2>脚印</h2>
+    <p>另一个题目，是用脚印形状的蒙版去拍河边的地面。有的全是杂草，有的全是石头，还有的是野花，是浅滩上躺着的鱼。无论是什么，都会让人想象用脚踏上去的感觉。</p>
+  </div>
+  <div class="wide">
+    <div class="cel"><canvas id="footCv" tabindex="0" aria-label="一片空白的地面。移动指针走过去，脚印里会露出下面的草、石头、野花和浅水。"></canvas></div>
+    <div class="celbar">
+      <p class="counts" id="footCount">在白纸一样的地面上走一走。</p>
+      <div class="row"><button class="btn ghost touch-mode" id="footDraw" aria-pressed="false" aria-controls="footCv">用手指走一走</button><button class="btn ghost" id="soundBtn" aria-pressed="false">打开声音</button><button class="btn ghost" id="footReset">换一片地面</button></div>
+    </div>
+    <p class="cap">方向键也能走。手机上先点“用手指走一走”，结束后点“继续滚动页面”。</p>
+  </div>
+  <div class="col" style="margin-top:28px">
+    <p>还有一个题目是“度假地”：把海滩和公园常见的救生圈、彩条图案叠到路标上，或者干脆只是在阳光灿烂的午后，让一群人随意躺在草地上打盹。度假地不一定是山清水秀或雕梁画栋的胜地。暂时放下拘束，闭上眼感受一阵随机吹来的风，就是一种真正的度假。</p>
+    <p class="aside">这些题目看起来奇怪、文艺而无用，却意外地让人共鸣。</p>
+  </div>
+</section>
+
+<!-- 04 -->
+<section>
+  <div class="col">
+    <div class="secno">四</div>
+    <h2>水的边缘</h2>
+    <p>书里最让我共鸣的一段，说的是现代主义让我们在做事时附加了太多不必要的理性和秩序，走向完善和僵化。要是整个世界都被这种理性和成熟包围，人会感到幽闭恐惧。设计的智慧，在于不仅意识到生的方向，也意识到灭的方向。</p>
+    <p class="quote">世界就像水的边缘，创造与耗尽交汇。<small>原研哉《设计中的设计》</small></p>
+  </div>
+  <div class="wide">
+    <div class="cel"><canvas id="shoreCv" tabindex="0" aria-label="俯瞰的海滩，浪一次次涌上沙滩又退下。在沙上画画，浪会把它慢慢抹去。键盘方向键移动，空格落笔或抬笔。"></canvas></div>
+    <div class="celbar"><p class="cap" id="shoreCap">在沙上写点什么。浪会来。</p><div class="row"><button class="btn ghost touch-mode" id="shoreDraw" aria-pressed="false" aria-controls="shoreCv">用手指画画</button><button class="btn ghost" id="calmBtn" aria-pressed="false">让浪停一会儿</button></div></div>
+    <p class="cap">方向键移动，空格落笔或抬笔。手机上先点“用手指画画”，结束后点“继续滚动页面”。</p>
+  </div>
+  <div class="col" style="margin-top:28px">
+    <p>人类最原始的工具是手。手可以利用周边的事物改变世界；手也可以作为容器，像捧起湖水一样接受世界。生与灭，外与内，有与无。</p>
+    <p>我们需要创造：将未知纳入已知，将无序变为有序，建筑起理性的殿堂。我们也同样需要包容：承认未知多于已知，无序大于有序，放下规则和逻辑，回到一种空虚寂寥的状态，把自身融入世界，得到灵性的补充。</p>
+  </div>
+</section>
+
+<!-- coda -->
+<section class="coda">
+  <div class="col">
+    <div class="secno">尾声</div>
+    <h2>离开这块屏幕</h2>
+    <p>不久前，我趁着春光去了一个依水而建、桥很多的江南古镇。最触动我的不是雅致的景色或小吃，而是水乡温润的空气、流动的风、深夜桥下的水声，还有树皮的纹理擦过手掌的感觉。</p>
+    <p>科技已经征服了听觉和视觉，却仍然无法表达嗅觉、触觉和味觉。一阵真实的风，是听、触、嗅的综合。为什么演唱会唯有亲临才有那种难以言说的氛围，纸书有一种电子书没有的质感？</p>
+  </div>
+  <div class="wide">
+    <div class="cel">
+      <canvas id="endCv" aria-label="仰躺在草地上看到的天空：近处是几根草叶，远处是慢慢移动的云。"></canvas>
+      <div class="leave"><button class="btn" id="leaveBtn">离开这块屏幕</button></div>
+    </div>
+    <p class="cap" style="text-align:center">点了之后，页面会退场，只留下风声和天空。点任意处或按 Esc 回来。</p>
+  </div>
+  <div class="col" style="margin-top:40px">
+    <p>随便挑一个地方，感受无法用像素衡量的任何一帧视象，感受一丝下一刻不知吹往何方、摇晃毛发的风，感受立体包围着自己、层次多到数不清的白噪声，感受一缕光线钻进皮肤上的某条细小纹路，感受这个宇宙的随机、混沌与不可理解。</p>
+  </div>
+</section>
+</main>
+
+<div class="away" id="away" role="dialog" aria-modal="true" aria-label="离开屏幕" aria-hidden="true" inert>
+  <canvas id="awayCv"></canvas>
+  <div class="lines"><span>单纯地去享用和消耗世界的美妙，</span><span>然后告诉自己，</span><span>无知也好。</span></div>
+  <button class="back" id="backBtn">回到文章 · Esc</button>
+</div>
+
+<footer class="col">
+  交互版改编自作者 2014 年的读书笔记<a href="https://simoncos.github.io/blogs/exformation-and-information.html">《Exformation 和 Information——读〈设计中的设计｜全本〉》</a>。书：原研哉《设计中的设计｜全本》，朱锷译，广西师范大学出版社。书中的 Exformation 课题（河流与公路、脚印、度假地）在这里被重新画成可以动手的场景；插画底图由 AI 生成，动态、交互与声音由程序实时生成。
+</footer>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function rng(seed) { let s = seed >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
+const DPR = Math.min(2, devicePixelRatio || 1);
+function fit(cv) {
+  const w = cv.clientWidth, h = cv.clientHeight;
+  cv.width = Math.round(w * DPR); cv.height = Math.round(h * DPR);
+  const g = cv.getContext("2d"); g.setTransform(DPR, 0, 0, DPR, 0, 0); return [g, w, h];
+}
+const loops = [];
+let stillPending = false;
+function repaint() {
+  if (!RM || stillPending) return;
+  stillPending = true;
+  requestAnimationFrame(() => { stillPending = false; for (const o of loops) if (o.vis) o.fn(0); });
+}
+function addLoop(el, fn) { const o = { fn, vis: false }; loops.push(o); new IntersectionObserver(es => { o.vis = es[0].isIntersecting; repaint(); }, { rootMargin: "60px" }).observe(el); return o; }
+for (const type of ["input", "click", "pointermove", "pointerdown", "pointerleave", "keydown", "resize"]) addEventListener(type, repaint);
+document.fonts.ready.then(repaint);
+let lastT = performance.now();
+if (!RM) requestAnimationFrame(function tick(now) {
+  const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
+  for (const o of loops) if (o.vis) o.fn(dt, now / 1000);
+  requestAnimationFrame(tick);
+});
+
+/* =========================================================
+   Painting kit. The scenery is hand-painted background plates
+   (assets/*.webp); code only adds what moves or answers you.
+   ========================================================= */
+const IMG = {};
+function img(name, cb) {
+  let i = IMG[name];
+  if (!i) { i = IMG[name] = new Image(); i.decoding = "async"; i.cbs = []; i.onload = () => { i.cbs.forEach(f => f(i)); i.cbs = []; repaint(); }; i.src = `assets/${name}.webp`; }
+  if (cb) ready(i) ? cb(i) : i.cbs.push(cb);
+  return i;
+}
+const ready = i => i.complete && i.naturalWidth > 0;
+// Cover-fit a plate; ax/ay choose which part survives the crop.
+function cover(g, im, W, H, ax = .5, ay = .5, zoom = 1, dx = 0, dy = 0) {
+  const k = Math.max(W / im.naturalWidth, H / im.naturalHeight) * zoom, w = im.naturalWidth * k, h = im.naturalHeight * k;
+  g.drawImage(im, (W - w) * ax + dx, (H - h) * ay + dy, w, h);
+  return { x: (W - w) * ax + dx, y: (H - h) * ay + dy, w, h };
+}
+function sky(g, W, H, top = "#2f84d8", mid = "#78bdf1", bot = "#dcf0fd", hz = 1) {
+  const gr = g.createLinearGradient(0, 0, 0, H * hz);
+  gr.addColorStop(0, top); gr.addColorStop(.58, mid); gr.addColorStop(1, bot);
+  g.fillStyle = gr; g.fillRect(-W * .2, -H * .2, W * 1.4, H * hz + H * .2 + 2);
+}
+// Canvas patterns don't mipmap, so a texture seen far away sparkles. Keep halved copies and pick one by scale.
+function mipPatterns(g, im, n = 5) {
+  const out = []; let c = im;
+  for (let i = 0; i < n; i++) {
+    if (i) { const d = document.createElement("canvas"); d.width = Math.max(4, c.width >> 1); d.height = Math.max(4, c.height >> 1); const x = d.getContext("2d"); x.imageSmoothingQuality = "high"; x.drawImage(c, 0, 0, d.width, d.height); c = d; }
+    out.push({ p: g.createPattern(c, "repeat"), k: 1 << i });
+  }
+  return out;
+}
+// Fill a rect with a texture whose texels are `sc` screen px wide, anchored at texture point (u0, v0) → screen (x0, y0).
+const M = new DOMMatrix();
+function texFill(g, mp, sc, x0, y0, u0, v0, rx, ry, rw, rh) {
+  const lv = clamp(Math.floor(Math.log2(1 / Math.max(1e-4, sc)) + 0.35), 0, mp.length - 1), L = mp[lv], s = sc * L.k;
+  M.a = M.d = s; M.b = M.c = 0; M.e = x0 - (u0 / L.k) * s; M.f = y0 - (v0 / L.k) * s;
+  L.p.setTransform(M); g.fillStyle = L.p; g.fillRect(rx, ry, rw, rh);
+}
+// A painted sprite standing on (x, y), h px tall, with a soft contact shadow.
+function standSprite(g, im, x, y, h, shadow = 0.22) {
+  if (!ready(im)) return;
+  const w = h * im.naturalWidth / im.naturalHeight;
+  if (shadow) { g.fillStyle = `rgba(36,70,40,${shadow})`; g.beginPath(); g.ellipse(x + w * 0.06, y, w * 0.42, Math.max(1, h * 0.035), 0, 0, 7); g.fill(); }
+  g.drawImage(im, x - w / 2, y - h + h * 0.012, w, h);
+}
+function makeMotes(n, seed) { const r = rng(seed); return Array.from({ length: n }, () => ({ x: r(), y: r(), s: 0.6 + r() * 1.8, ph: r() * 6.28 })); }
+function drawMotes(g, W, H, motes, t, wind = 0) {
+  for (const m of motes) {
+    m.x += (0.004 + wind * 0.02) * m.s * 0.016; if (m.x > 1.05) m.x = -0.05;
+    const x = m.x * W, y = (m.y + Math.sin(t * 0.5 + m.ph) * 0.02) * H, a = 0.2 + 0.2 * Math.sin(t * 1.3 + m.ph);
+    g.fillStyle = `rgba(255,253,235,${a})`; g.beginPath(); g.arc(x, y, m.s, 0, 7); g.fill();
+  }
+}
+
+// Touch users can scroll through a canvas until they explicitly enter drawing mode.
+function touchDrawing(cv, buttonId) {
+  const button = $(buttonId), label = button.textContent;
+  button.addEventListener("click", () => {
+    const on = cv.classList.toggle("drawing");
+    button.setAttribute("aria-pressed", on);
+    button.textContent = on ? "继续滚动页面" : label;
+    cv.dispatchEvent(new Event("drawingmodechange"));
+  });
+  return e => e.pointerType !== "touch" || cv.classList.contains("drawing");
+}
+
+/* ---------- tiny synth for footsteps, slips and wind ---------- */
+let AC = null, soundOn = false;
+function ac() { if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === "suspended") AC.resume(); return AC; }
+function noiseBuf(sec = 2) { const a = ac(), b = a.createBuffer(1, a.sampleRate * sec, a.sampleRate), d = b.getChannelData(0); let l = 0; for (let i = 0; i < d.length; i++) { const w = Math.random() * 2 - 1; l = (l + 0.02 * w) / 1.02; d[i] = l * 3.5; } return b; }
+let NB = null, WB = null;
+function whiteBuf() { const a = ac(), b = a.createBuffer(1, a.sampleRate, a.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; return b; }
+function step(kind) {
+  if (!soundOn) return; const a = ac(), t = a.currentTime; WB = WB || whiteBuf();
+  const out = a.createGain(); out.connect(a.destination);
+  if (kind === "grass" || kind === "flower") {
+    const s = a.createBufferSource(); s.buffer = WB; const f = a.createBiquadFilter(); f.type = "bandpass"; f.frequency.value = 2400 + Math.random() * 1600; f.Q.value = 0.8;
+    s.connect(f); f.connect(out); out.gain.setValueAtTime(0, t); out.gain.linearRampToValueAtTime(0.16, t + 0.03); out.gain.exponentialRampToValueAtTime(0.001, t + 0.28); s.start(t, Math.random() * 0.5); s.stop(t + 0.3);
+  } else if (kind === "stone") {
+    for (let i = 0; i < 2; i++) { const o = a.createOscillator(), gg = a.createGain(); o.type = "triangle"; o.frequency.value = 900 + Math.random() * 900; o.connect(gg); gg.connect(out); const tt = t + i * 0.045; gg.gain.setValueAtTime(0.12, tt); gg.gain.exponentialRampToValueAtTime(0.001, tt + 0.07); o.start(tt); o.stop(tt + 0.08); }
+    out.gain.value = 1;
+  } else if (kind === "water") {
+    const o = a.createOscillator(), gg = a.createGain(); o.type = "sine"; o.frequency.setValueAtTime(700 + Math.random() * 300, t); o.frequency.exponentialRampToValueAtTime(260, t + 0.12);
+    o.connect(gg); gg.connect(out); gg.gain.setValueAtTime(0.0, t); gg.gain.linearRampToValueAtTime(0.14, t + 0.01); gg.gain.exponentialRampToValueAtTime(0.001, t + 0.18); o.start(t); o.stop(t + 0.2);
+    const s = a.createBufferSource(); s.buffer = WB; const f = a.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = 900; const g2 = a.createGain(); s.connect(f); f.connect(g2); g2.connect(out);
+    g2.gain.setValueAtTime(0.08, t); g2.gain.exponentialRampToValueAtTime(0.001, t + 0.25); s.start(t); s.stop(t + 0.26); out.gain.value = 1;
+  } else if (kind === "sand") {
+    const s = a.createBufferSource(); s.buffer = WB; const f = a.createBiquadFilter(); f.type = "highpass"; f.frequency.value = 3000; s.connect(f); f.connect(out);
+    out.gain.setValueAtTime(0.05, t); out.gain.exponentialRampToValueAtTime(0.001, t + 0.15); s.start(t, Math.random() * .5); s.stop(t + .16);
+  }
+}
+
+/* =========================================================
+   Hero: a painted meadow; drifting fragments of information
+   ========================================================= */
+(() => {
+  const cv = $("#heroCv"), plate = img("hero"); let g, W, H, motes, frags, t = 0, px = -999, pxs = 0, gust = 0, gustT = 0, textB = 0, textR = 0, hintTop = 0;
+  const WORDS = ["+1", "已读", "99+", "转发", "热搜", "刚刚", "赞", "收藏", "我知道", "新消息", "@你", "更新", "链接", "置顶", "已推送", "未读 12"];
+  function setup() {
+    [g, W, H] = fit(cv);
+    const m = W < 700;
+    motes = makeMotes(30, 2);
+    // on a phone the copy covers the upper part of the frame: fragments drifting behind it are dimmed
+    const lede = document.querySelector(".lede"); textB = lede.getBoundingClientRect().bottom - cv.getBoundingClientRect().top + 16; textR = lede.getBoundingClientRect().right + 24;
+    hintTop = $(".hint").getBoundingClientRect().top - cv.getBoundingClientRect().top;
+    const r = rng(12); frags = Array.from({ length: m ? 12 : 20 }, () => ({ x: r() * W, y: fragY(r()), z: 0.5 + r() * 0.9, rot: r() * 6, vr: (r() - .5) * 1.4, ph: r() * 6.28, txt: WORDS[Math.floor(r() * WORDS.length)] }));
+  }
+  // where a fragment drifts: on a phone, in the band between the copy and the hint below it
+  const fragY = u => W < 700 ? lerp(textB, Math.max(textB, hintTop - 24), u) : H * (0.3 + u * 0.5);
+  setup(); addEventListener("resize", setup);
+  document.fonts && document.fonts.ready.then(() => { setup(); repaint(); });
+  const move = e => { const b = cv.getBoundingClientRect(); const nx = e.clientX - b.left; gust = clamp(gust + Math.abs(nx - px) * 0.004, 0, 1); px = nx; gustT = 1.2; };
+  cv.addEventListener("pointermove", move); cv.addEventListener("pointerleave", () => px = -999);
+  const wind = x => 0.08 + gust * 0.42 * Math.exp(-(((x - px) / 240) ** 2)) + gust * 0.1;
+  function frame(dt) {
+    t += dt; gustT -= dt; if (gustT < 0) gust = Math.max(0, gust - dt * 0.5);
+    // the painting breathes a little and leans away from the pointer
+    pxs = lerp(pxs, px < -900 ? 0 : px / W - 0.5, 1 - Math.exp(-dt * 1.5));
+    if (ready(plate)) cover(g, plate, W, H, W < 700 ? 0.7 : 0.5, 0.6, 1.05 + Math.sin(t * 0.07) * 0.008, -pxs * 14, 0);
+    else sky(g, W, H, "#1f6fcc", "#6db6ee", "#e3f3fd", 0.72);
+    // a cool veil behind the title so white type reads on any part of the sky
+    const vg = W < 700 ? g.createLinearGradient(0, 0, 0, Math.max(H * .7, textB / .8)) : g.createLinearGradient(0, 0, W * .7, 0);
+    vg.addColorStop(0, "rgba(24,38,48,.64)"); vg.addColorStop(W < 700 ? .8 : .7, "rgba(24,38,48,.62)"); vg.addColorStop(1, "rgba(24,38,48,0)");
+    g.fillStyle = vg; g.fillRect(0, 0, W, H);
+    for (const f of frags) {
+      const w = wind(f.x); f.x += (16 + w * 160) * f.z * dt; f.y += Math.sin(t * 1.1 + f.ph) * 10 * dt - w * 5 * dt; f.rot += f.vr * dt * (1 + w * 3);
+      if (f.x > W + 40) { f.x = -40; f.y = fragY(Math.random()); }
+      if (f.y < H * 0.2) f.y = H * 0.8;
+      g.save(); g.translate(f.x, f.y); g.rotate(Math.sin(f.rot) * 0.6);
+      const behindCopy = f.y < textB && (W < 700 || f.x < textR);
+      const behindHint = f.y > hintTop - 24 || (W < 700 && hintTop - textB < 48);
+      g.globalAlpha = (0.5 + 0.35 * f.z) * (behindCopy || behindHint ? 0 : 1); g.fillStyle = "#fbfdf2"; g.shadowColor = "rgba(30,70,40,.35)"; g.shadowBlur = 4; g.font = `500 ${Math.round(9 + f.z * 4)}px Noto Sans SC, sans-serif`;
+      g.fillText(f.txt, 0, 0); g.restore();
+    }
+    g.globalAlpha = 1;
+    drawMotes(g, W, H * 0.85, motes, t, gust);
+  }
+  addLoop(cv, frame);
+})();
+
+/* =========================================================
+   01 · The jar (in-formation) and the dandelion (ex-formation)
+   ========================================================= */
+(() => {
+  const cv = $("#talkCv"), plate = img("talk"); let g, W, H, t = 0;
+  const TOPICS = [
+    { w: "河流", q: ["沿着它走，脚底是滑腻还是干爽？", "如果它是一条路，车会往哪边倾斜？", "夜里桥下的水声，是什么节奏？", "它是从哪一滴雨开始的？", "鱼看见的河面，是什么样子？", "水底的石头，磨圆用了多少年？", "河水闻起来像什么？", "涨水和枯水时，它还是同一条河吗？", "两岸的人，叫它同一个名字吗？", "把手伸进去，水有多凉？", "最窄的地方，能一步跨过去吗？", "一片叶子从上游漂到这里，要多久？", "流进大海的那一刻，它会犹豫吗？"] },
+    { w: "度假", q: ["一定要去很远的地方吗？", "闭上眼，一阵风吹来，算不算度假？", "躺在草地上打盹的人，在度什么假？", "关掉手机一个下午，会发生什么？", "度假是换一个地方，还是换一种时间？", "小时候的暑假，和现在的假期差在哪？", "救生圈的颜色，为什么让人放松？", "什么都不做，是浪费还是休息？", "家门口的公园，能不能度假？", "度假时拍的照片，后来还看吗？", "如果不用回来，还叫度假吗？", "上一次真正放松，是在哪里？", "一个人的假期，和一群人的，哪个更像假期？"] },
+    { w: "风", q: ["它从哪里来，又吹往哪里？", "它闻起来是什么味道？", "拂过头发时，它有多重？", "看不见它，怎么知道它在？", "海边的风和山上的风，哪里不一样？", "风停的那一刻，你听到了什么？", "树叶是被它吹动，还是在回应它？", "一阵风能走多远？", "冬天的风和春天的风，皮肤分得出吗？", "是它推着云走，还是云带着它？", "关上窗，屋里还有风吗？", "你记得的第一阵风，在哪里？", "它是空气在动，还是在找一个去处？"] },
+    { w: "脚下的地面", q: ["光脚踩上去，是石头还是草？", "脚底一秒钟收到的，比一屏消息多吗？", "上一次赤脚走路，是什么时候？", "往下一米，是什么？", "雨后的泥土，为什么有那种味道？", "一块砖下面，住着多少只虫？", "一百年前，这里是什么样的地面？", "它是凉的，还是温的？", "走快和走慢，脚下的东西一样多吗？", "鞋底隔开了什么？", "柏油路下面，还有原来的土吗？", "每天走的那条路，有几种地面？", "小时候趴在地上看到的，现在还看得到吗？"] },
+    { w: "演唱会", q: ["录音再好，为什么还想去现场？", "“氛围”是什么做的？", "纸书的质感，屏幕上缺了什么？", "低音是听到的，还是胸口感觉到的？", "身边陌生人一起唱时，发生了什么？", "同一首歌，现场和耳机里是同一首吗？", "散场后的耳鸣，算不算演出的一部分？", "隔着手机屏幕看舞台，还算在现场吗？", "灯光暗下来那一秒，为什么最激动？", "歌手看到的台下，是什么样子？", "散场时的风，和进场时一样吗？", "记得最清楚的，为什么常是唱错的那句？", "坐在最后一排，听到的是同一场演出吗？"] }
+  ];
+  let ti = 0, state = "float", anim = 0, slips = [], flying = null, known = 0, asked = 0, appear = 0, dand = null, fly = [];
+  function setup() { [g, W, H] = fit(cv); }
+  setup(); addEventListener("resize", setup);
+  const nar = () => W < 700;
+  const hillY = () => H * 0.82;
+  const jar = () => { const m = nar(), x = W * (m ? 0.16 : 0.13); return { x, y: H * 0.93, w: m ? 64 : 92, h: m ? 80 : 116 }; };
+  const bubblePos = () => ({ x: W * 0.45, y: H * (nar() ? 0.28 : 0.3) + Math.sin(t * 1.2) * 4 });
+  const topic = () => TOPICS[ti % TOPICS.length];
+  const kb = $("#knowBtn"), ub = $("#unknowBtn"), list = $("#qlist");
+  function setBtns(on) { kb.disabled = ub.disabled = !on; }
+  kb.addEventListener("click", () => { if (state !== "float") return; state = "know"; anim = 0; setBtns(false); const b = bubblePos(); flying = { x0: b.x, y0: b.y }; if (RM) { slips.push(topic().w); known++; next(); repaint(); } });
+  ub.addEventListener("click", () => {
+    if (state !== "float") return; state = "open"; anim = 0; setBtns(false); list.innerHTML = "";
+    if (RM) { for (const q of topic().q) addQ(q); next(); repaint(); return; }
+    dand = makeDandelion(bubblePos());
+  });
+  function addQ(q) { const li = document.createElement("li"); li.textContent = q; list.appendChild(li); asked++; }
+  function next() {
+    const tp = topic();
+    if (state === "open") $("#talkCap").textContent = `一个“${tp.w}”，散成了 ${tp.q.length} 个问题。罐子里装着 ${known} 个“我知道”，天上一共飘过 ${asked} 个问题。`;
+    ti++; state = "float"; anim = 0; appear = 0; setBtns(true);
+    if (dand) dand.fading = true;
+  }
+
+  /* ---- a dandelion clock: seeds on a sphere, each a beak with a parachute of hairs ---- */
+  function makeDandelion(b) {
+    const tp = topic(), R = Math.min(W, H) * (nar() ? 0.14 : 0.115), n = nar() ? 96 : 150, r = rng(ti * 7 + 3), seeds = [];
+    const ga = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < n; i++) {
+      const z0 = 1 - (i + 0.5) / n * 2, rr = Math.sqrt(1 - z0 * z0), th = i * ga, x0 = Math.cos(th) * rr, y0 = Math.sin(th) * rr;
+      // tip the ball toward us a little, so its pole isn't dead centre
+      const dy = y0 * 0.94 - z0 * 0.34, dz = y0 * 0.34 + z0 * 0.94;
+      seeds.push({ dx: x0, dy, dz, l: Math.hypot(x0, dy), a: Math.atan2(dy, x0), j: r() });
+    }
+    // the questions ride side-on seeds on the downwind half, one after another, each in its own lane of sky
+    const LANES = nar() ? 6 : 8, DQ = nar() ? 0.55 : 0.45;
+    const cand = seeds.filter(s => s.dz > -0.15 && s.l > 0.72 && s.dx > -0.25).sort((p, q) => q.dx - p.dx);
+    tp.q.forEach((q, i) => { const s = cand[Math.floor(i * cand.length / tp.q.length)]; s.q = q; s.rel = 0.9 + i * DQ; s.lane = i % LANES; });
+    // everything else lets go downwind first, over a few seconds
+    for (const s of seeds) if (!s.q) s.rel = 0.5 + (1 - s.dx) / 2 * 4 + s.j * 1.4;
+    return { x: b.x, y: b.y, R, seeds, born: t, fade: 1, fading: false, lanes: LANES, dq: DQ, last: 0.9 + (tp.q.length - 1) * DQ };
+  }
+  const laneY = (k, n) => H * (nar() ? 0.07 : 0.09) + k * H * (nar() ? 0.57 : 0.55) / (n - 1);
+  function launch(d, s, hx, hy, R) {
+    const tr = R * 0.74, rot = s.a + Math.PI / 2;
+    fly.push({ x: hx + s.dx * tr, y: hy + s.dy * tr, vx: s.dx * 18 + 8, vy: s.dy * 12 - 8, rot: Math.atan2(Math.sin(rot), Math.cos(rot)), R, q: s.q, ly: s.q ? laneY(s.lane, d.lanes) : 0, life: 0, span: s.q ? d.lanes * d.dq : 3.5 + Math.random() * 2.5, ph: Math.random() * 6.28 });
+    if (s.q) addQ(s.q);
+  }
+  function drawDandelion(d, dt) {
+    if (d.fading) d.fade -= dt * 1.6;
+    const age = t - d.born, k = ease(clamp(age / 0.7, 0, 1)), R = d.R * (0.5 + 0.5 * k), a0 = d.fade * k;
+    if (a0 <= 0) return;
+    const sway = Math.sin(t * 1.3) * 6 + Math.sin(t * 3.1) * 1.5, hx = d.x + sway, hy = d.y, r0 = R * 0.09, gy = hillY() + 14;
+    for (const s of d.seeds) if (!s.gone && age >= s.rel) { s.gone = true; launch(d, s, hx, hy, R); }
+    g.save(); g.globalAlpha = a0; g.lineCap = "round";
+    // a hollow stem, lit on one side, with the bracts folded back under the head
+    const stem = () => { g.beginPath(); g.moveTo(hx, hy + r0); g.quadraticCurveTo(d.x + sway * 0.4 + R * 0.25, (hy + gy) / 2, d.x - R * 0.1, gy); };
+    g.strokeStyle = "#86ad5f"; g.lineWidth = nar() ? 2.6 : 3.4; stem(); g.stroke();
+    g.strokeStyle = "rgba(228,243,196,.55)"; g.lineWidth = 1; g.save(); g.translate(-0.9, 0); stem(); g.stroke(); g.restore();
+    g.strokeStyle = "#6c9447"; g.lineWidth = 1.3; g.beginPath();
+    for (let i = -3; i <= 3; i++) { const bx = hx + i * r0 * 0.45; g.moveTo(bx, hy + r0 * 0.9); g.quadraticCurveTo(bx + i * r0 * 0.9, hy + r0 * 1.4, bx + i * r0 * 1.15, hy + r0 * 2.8 + Math.abs(i) * 0.6); }
+    g.stroke();
+    // the ball reads as a soft white sphere before it reads as hairs
+    const gl = g.createRadialGradient(hx, hy, r0, hx, hy, R * 1.08); gl.addColorStop(0, "rgba(255,255,255,.3)"); gl.addColorStop(.75, "rgba(255,255,255,.12)"); gl.addColorStop(1, "rgba(255,255,255,0)");
+    g.fillStyle = gl; g.beginPath(); g.arc(hx, hy, R * 1.08, 0, 7); g.fill();
+    const beak = [new Path2D(), new Path2D()], hair = [new Path2D(), new Path2D()], seedP = new Path2D(), tr = R * 0.74;
+    for (const s of d.seeds) {
+      if (s.gone) continue;
+      const f = s.dz < 0 ? 0 : 1, ex = hx + s.dx * tr, ey = hy + s.dy * tr;
+      beak[f].moveTo(hx + s.dx * r0, hy + s.dy * r0); beak[f].lineTo(ex, ey);
+      if (f) { seedP.moveTo(hx + s.dx * r0 * 1.9 + 1, hy + s.dy * r0 * 1.9); seedP.arc(hx + s.dx * r0 * 1.9, hy + s.dy * r0 * 1.9, 1, 0, 7); }
+      // the parachute: a fan seen side-on, a full star seen end-on
+      const spread = lerp(Math.PI, 1.2, s.l), hl = R * 0.3 * (0.72 + 0.28 * s.l), N = 11;
+      for (let m = 0; m < N; m++) {
+        const b = spread > 2.9 ? m / N * 6.283 : s.a + (m / (N - 1) - 0.5) * 2 * spread, L = spread > 2.9 ? hl * 0.8 : hl;
+        hair[f].moveTo(ex, ey); hair[f].lineTo(ex + Math.cos(b) * L, ey + Math.sin(b) * L);
+      }
+    }
+    g.lineWidth = 0.7; g.strokeStyle = "rgba(255,255,255,.22)"; g.stroke(beak[0]); g.lineWidth = 0.55; g.strokeStyle = "rgba(255,255,255,.3)"; g.stroke(hair[0]);
+    g.fillStyle = "#b39a63"; g.beginPath(); g.arc(hx, hy, r0, 0, 7); g.fill();
+    g.fillStyle = "rgba(124,96,58,.75)"; g.fill(seedP);
+    g.lineWidth = 0.75; g.strokeStyle = "rgba(255,255,255,.55)"; g.stroke(beak[1]); g.lineWidth = 0.6; g.strokeStyle = "rgba(255,255,255,.8)"; g.stroke(hair[1]);
+    g.restore();
+  }
+  // a seed in flight: parachute on top, beak hanging below, the brown seed at its end
+  function drawFlyers(dt) {
+    const wind = W * (nar() ? 0.05 : 0.042), buckets = new Map(), labels = [];
+    fly = fly.filter(f => f.life < f.span && f.x < W + 80 && f.y > -80);
+    for (const f of fly) {
+      f.life += dt;
+      const tx = wind * (f.q ? 1 : 1.7 + Math.sin(f.ph) * 0.5), ty = f.q ? (f.ly + 16 - f.y) * 1.4 : -H * 0.03 + Math.sin(t * 1.6 + f.ph) * H * 0.05;
+      f.vx += (tx - f.vx) * dt * 1.3; f.vy += (ty - f.vy) * dt * 1.6;
+      f.x += f.vx * dt; f.y += f.vy * dt;
+      f.rot += (Math.sin(t * 1.9 + f.ph) * 0.16 + clamp(f.vx * 0.003, -0.25, 0.25) - f.rot) * Math.min(1, dt * 2.2);
+      const fade = f.q ? clamp((f.life - 0.15) / 0.3, 0, 1) * clamp((f.span - 0.3 - f.life) / 0.45, 0, 1) : clamp((f.span - f.life) / 1.2, 0, 1);
+      const al = f.q ? Math.max(fade, clamp(1 - f.life / 0.4, 0, 1)) : fade;
+      const key = Math.round(al * 8) / 8; if (key <= 0) continue;
+      let B = buckets.get(key); if (!B) buckets.set(key, B = { h: new Path2D(), b: new Path2D(), s: new Path2D() });
+      const c = Math.cos(f.rot), s = Math.sin(f.rot), P = (lx, ly) => [f.x + lx * c - ly * s, f.y + lx * s + ly * c];
+      const R = f.R, Lb = R * 0.5, hl = R * 0.27;
+      for (let m = 0; m < 11; m++) { const b = -Math.PI / 2 + (m / 10 - 0.5) * 2.5, e = P(Math.cos(b) * hl, Math.sin(b) * hl * 0.8); B.h.moveTo(f.x, f.y); B.h.lineTo(e[0], e[1]); }
+      const e1 = P(0, Lb), e2 = P(0, Lb + 4); B.b.moveTo(f.x, f.y); B.b.lineTo(e1[0], e1[1]); B.s.moveTo(e1[0], e1[1]); B.s.lineTo(e2[0], e2[1]);
+      if (f.q && fade > 0) labels.push({ q: f.q, x: f.x, y: f.ly, a: fade });
+    }
+    g.save(); g.lineCap = "round";
+    for (const [a, B] of buckets) {
+      g.globalAlpha = a;
+      g.lineWidth = 0.6; g.strokeStyle = "rgba(255,255,255,.9)"; g.stroke(B.h);
+      g.lineWidth = 0.7; g.strokeStyle = "rgba(255,255,255,.7)"; g.stroke(B.b);
+      g.lineWidth = 2; g.strokeStyle = "#8d6b3d"; g.stroke(B.s);
+    }
+    g.restore();
+    const fs = nar() ? 12 : 13; g.font = `500 ${fs}px Noto Sans SC, sans-serif`; g.textBaseline = "middle";
+    for (const l of labels) {
+      const tw = g.measureText(l.q).width, x = clamp(l.x + 12, 6, W - tw - 22);
+      g.globalAlpha = l.a; g.fillStyle = "rgba(255,255,255,.93)"; g.beginPath(); g.roundRect(x, l.y - 12, tw + 16, 24, 12); g.fill();
+      g.fillStyle = "#2b3645"; g.fillText(l.q, x + 8, l.y + 1);
+    }
+    g.globalAlpha = 1; g.textBaseline = "alphabetic";
+  }
+  function drawJar() {
+    const j = jar(), x = j.x, y = j.y, w = j.w, h = j.h, L = x - w / 2, R = x + w / 2, top = y - h;
+    // contact shadow on the grass
+    g.fillStyle = "rgba(30,64,30,.28)"; g.beginPath(); g.ellipse(x + w * 0.12, y + 2, w * 0.62, 6, 0, 0, 7); g.fill();
+    const body = () => { g.beginPath(); g.moveTo(L + 8, top + 12); g.lineTo(R - 8, top + 12); g.quadraticCurveTo(R, top + 16, R, top + 30); g.lineTo(R, y - 10); g.quadraticCurveTo(R, y, R - 10, y); g.lineTo(L + 10, y); g.quadraticCurveTo(L, y, L, y - 10); g.lineTo(L, top + 30); g.quadraticCurveTo(L, top + 16, L + 8, top + 12); g.closePath(); };
+    // what is behind the glass, seen slightly tinted
+    g.save(); body(); g.clip();
+    g.fillStyle = "rgba(225,242,236,.22)"; g.fillRect(L, top, w, h);
+    slips.forEach((s, i) => {
+      const sy = y - 10 - (i % 7) * 11 - Math.floor(i / 7) * 3, sx = x + Math.sin(i * 2.3) * w * 0.12;
+      g.save(); g.translate(sx, sy); g.rotate(Math.sin(i * 1.7) * 0.25);
+      g.fillStyle = ["#fff6df", "#ffe9c6", "#f3efff", "#e6f4ff"][i % 4]; g.fillRect(-w * .3, -5.5, w * .6, 11);
+      g.fillStyle = "#7c6a4e"; g.font = "500 8px Noto Sans SC, sans-serif"; g.textAlign = "center"; g.fillText(s, 0, 3); g.restore();
+    });
+    // glass: darker at the turned edges, a broad soft highlight, a crisp reflection line
+    const gl = g.createLinearGradient(L, 0, R, 0);
+    gl.addColorStop(0, "rgba(120,170,170,.35)"); gl.addColorStop(.18, "rgba(255,255,255,.28)"); gl.addColorStop(.32, "rgba(255,255,255,.06)"); gl.addColorStop(.8, "rgba(255,255,255,.02)"); gl.addColorStop(1, "rgba(110,160,165,.38)");
+    g.fillStyle = gl; g.fillRect(L, top, w, h);
+    g.restore();
+    g.strokeStyle = "rgba(255,255,255,.75)"; g.lineWidth = 1.2; body(); g.stroke();
+    g.strokeStyle = "rgba(255,255,255,.9)"; g.lineWidth = 2.5; g.lineCap = "round"; g.beginPath(); g.moveTo(L + w * 0.16, top + 34); g.lineTo(L + w * 0.16, y - 26); g.stroke();
+    g.strokeStyle = "rgba(255,255,255,.5)"; g.lineWidth = 1.2; g.beginPath(); g.moveTo(R - w * 0.12, top + 40); g.lineTo(R - w * 0.12, top + 62); g.stroke();
+    // a wooden lid with a lit top edge
+    const lg = g.createLinearGradient(0, top, 0, top + 14); lg.addColorStop(0, "#d9b27a"); lg.addColorStop(1, "#a97f4b");
+    g.fillStyle = lg; g.beginPath(); g.roundRect(L + 3, top, w - 6, 14, 4); g.fill();
+    g.fillStyle = "rgba(255,240,205,.6)"; g.fillRect(L + 6, top + 1, w - 12, 1.5);
+    // the paper label
+    g.save(); g.translate(x, y - h * 0.5); g.rotate(-0.03);
+    g.fillStyle = "#fffaf0"; g.shadowColor = "rgba(60,60,40,.18)"; g.shadowBlur = 3; g.beginPath(); g.roundRect(-22, -11, 44, 22, 2); g.fill(); g.shadowColor = "transparent";
+    g.fillStyle = "#5e6b7a"; g.font = "600 12px Noto Serif SC, serif"; g.textAlign = "center"; g.fillText("已知", 0, 4.5); g.restore(); g.textAlign = "left";
+  }
+  function bubble(x, y, w, s, a) {
+    if (a <= 0) return;
+    g.save(); g.globalAlpha = a; g.translate(x, y); g.scale(s, s);
+    g.font = "600 26px Noto Serif SC, serif"; const tw = g.measureText(w).width, bw = tw + 52, bh = 58;
+    g.shadowColor = "rgba(40,80,130,.18)"; g.shadowBlur = 22; g.shadowOffsetY = 8;
+    g.fillStyle = "#fffefb"; g.beginPath(); g.roundRect(-bw / 2, -bh / 2, bw, bh, 29); g.fill();
+    g.beginPath(); g.moveTo(-10, bh / 2 - 2); g.lineTo(-22, bh / 2 + 16); g.lineTo(6, bh / 2 - 2); g.fill();
+    g.shadowColor = "transparent"; g.fillStyle = "#2b3645"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(w, 0, 1);
+    g.restore();
+  }
+  function frame(dt) {
+    t += dt; anim += dt; appear = RM ? 1 : Math.min(1, appear + dt * 1.6);
+    if (ready(plate)) cover(g, plate, W, H, nar() ? 0.62 : 0.5, 0.7, 1.03 + Math.sin(t * 0.08) * 0.006);
+    else sky(g, W, H, "#2b80d8", "#86c6f3", "#eaf6ff", 0.78);
+    drawJar();
+    const tp = topic(), b = bubblePos();
+    if (dand) { drawDandelion(dand, dt); if (dand.fade <= 0) dand = null; }
+    if (state === "float") bubble(b.x, b.y, tp.w, 0.8 + 0.2 * ease(appear), ease(appear));
+    if (state === "know") {
+      const k = clamp(anim / 1.1, 0, 1), j = jar();
+      if (k < 0.3) bubble(b.x, b.y, tp.w, 1 - k * 2, 1);
+      else {
+        const u = ease((k - 0.3) / 0.7), x = lerp(flying.x0, j.x, u), y = lerp(flying.y0, j.y - j.h + 10, u) - Math.sin(u * Math.PI) * H * 0.12;
+        g.save(); g.translate(x, y); g.rotate(u * 3); g.fillStyle = "#fff7e3"; g.fillRect(-22, -7, 44, 14);
+        g.fillStyle = "#8b7a5e"; g.font = "500 10px Noto Sans SC, sans-serif"; g.textAlign = "center"; g.fillText(tp.w, 0, 4); g.restore();
+      }
+      if (k >= 1) { slips.push(tp.w); known++; next(); }
+    }
+    if (state === "open") {
+      // the word gives way to the seed head
+      const k = clamp(anim / 0.5, 0, 1); if (k < 1) bubble(b.x, b.y, tp.w, 1 + k * 0.3, 1 - k);
+      if (dand && t - dand.born > dand.last + 0.7) next();
+    }
+    drawFlyers(dt);
+  }
+  addLoop(cv, frame);
+})();
+
+/* =========================================================
+   02 · The river is a road
+   The ground is one perspective-mapped plane drawn by a small WebGL shader
+   (painted textures, real mipmaps); sky, trees and the cockpit are 2D on top.
+   ========================================================= */
+(() => {
+  const cv = $("#riverCv"), blendIn = $("#blend"); let g, W, H, groundDpr = 1, t = 0, camZ = 0, tilt = 0, blend = 0, trees = [], tufts = [];
+  const HW = 130, CAMH = 100;
+  const SKY = img("river-sky"), SPR = [img("tree-broadleaf"), img("tree-conifer"), img("bush")];
+  const A1 = 700, K1 = 0.00045, A2 = 320, K2 = 0.0011, P2 = 1.7;
+  const xt = z => A1 * Math.sin(z * K1) + A2 * Math.sin(z * K2 + P2);
+  const dxt = z => A1 * K1 * Math.cos(z * K1) + A2 * K2 * Math.cos(z * K2 + P2);
+  const ddxt = z => -A1 * K1 ** 2 * Math.sin(z * K1) - A2 * K2 ** 2 * Math.sin(z * K2 + P2);
+  // ---- ground shader ----
+  const gcv = document.createElement("canvas");
+  const gl = gcv.getContext("webgl", { premultipliedAlpha: true, preserveDrawingBuffer: true, antialias: false });
+  let prog = null, U = {}, texOK = 0;
+  if (gl) {
+    const VS = "attribute vec2 p; void main(){ gl_Position = vec4(p, 0., 1.); }";
+    const FS = `precision highp float;
+uniform vec2 uSize; uniform float uDpr, uOx, uHz, uF, uCamZ, uCamX, uSlope, uBlend, uT, uSunX;
+uniform sampler2D uGrass, uPeb, uWater;
+const float HW = ${HW}.0, CAMH = ${CAMH}.0, TS = 2.0 / 1024.0;
+float xt(float z){ return ${A1}.0 * sin(z * ${K1}) + ${A2}.0 * sin(z * ${K2} + ${P2}); }
+float hash(vec2 q){ return fract(sin(dot(q, vec2(12.9898, 78.233))) * 43758.5453); }
+void main(){
+  float x = gl_FragCoord.x / uDpr - uOx, y = (uSize.y - gl_FragCoord.y) / uDpr;
+  float dy = y - uHz; if (dy <= 0.0) { gl_FragColor = vec4(0.); return; }
+  float d = CAMH * uF / dy, z = uCamZ + d, s = uF / d;
+  float X = uCamX + uSlope * d + (x - uSize.x / uDpr * 0.5 + uOx) / s;
+  float rel = X - xt(z), a = abs(rel), e = 1.2 / s;
+  float fog = clamp(d / 5200., 0., 1.);
+  vec3 grass = texture2D(uGrass, vec2(X, z) * TS).rgb;
+  vec3 peb = texture2D(uPeb, vec2(rel, z) * TS * 0.8).rgb;
+  vec3 wat = texture2D(uWater, vec2(rel * 0.8, z * 0.8 - uT * 60.) * TS).rgb;
+  // the water mirrors more sky the flatter we look at it; greenery reflected along both banks
+  wat = mix(wat, vec3(.10, .44, .56), .42);
+  wat = mix(wat, vec3(.46, .72, .93), .22 + .6 * pow(fog, .45));
+  wat = mix(wat, vec3(.20, .40, .32), .35 * (1. - fog) * smoothstep(HW * .8, HW, a));
+  // glitter gathered under the sun
+  vec2 cell = vec2(floor(z / 4.), floor(X / 3.));
+  float gl = step(.985, hash(cell)) * (.5 + .5 * sin(uT * 5. + hash(cell + 3.) * 30.));
+  wat += vec3(gl) * .8 * (1. - uBlend) * exp(-pow((x - uSunX) / (uSize.x / uDpr * .25), 2.)) * smoothstep(.02, .12, fog) * (1. - fog);
+  // the road, laid over the river
+  vec3 road = mix(vec3(.36, .39, .44), vec3(.74, .77, .80), fog);
+  float lw = 3.0 + e;
+  float line = 1. - smoothstep(lw - e, lw, abs(a - HW * .93));
+  line = max(line, (1. - smoothstep(lw - e, lw, a)) * step(.5, fract(z / 520.)));
+  road = mix(road, vec3(.98, .98, .96), line);
+  wat = mix(wat, road, uBlend);
+  vec3 bank = mix(peb, peb * vec3(.8, .78, .74), 1. - smoothstep(HW, HW * 1.12, a));
+  vec3 c = mix(wat, bank, smoothstep(HW - e, HW + e, a));
+  c = mix(c, grass, smoothstep(HW * 1.12 - e, HW * 1.12 + e, a));
+  vec3 haze = vec3(.80, .88, .93);
+  c = mix(c, haze, pow(fog, .8) * .85);
+  // fade the far ground out so the painted far fields of the backdrop show through
+  float al = 1. - smoothstep(.35, 1., fog);
+  gl_FragColor = vec4(c * al, al);
+}`;
+    const sh = (type, src) => { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(o)); return null; } return o; };
+    const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+    if (vs && fs) {
+      prog = gl.createProgram(); gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) prog = null;
+    }
+    if (prog) {
+      gl.useProgram(prog);
+      const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      for (const n of ["uSize", "uDpr", "uOx", "uHz", "uF", "uCamZ", "uCamX", "uSlope", "uBlend", "uT", "uSunX", "uGrass", "uPeb", "uWater"]) U[n] = gl.getUniformLocation(prog, n);
+      const aniso = gl.getExtension("EXT_texture_filter_anisotropic");
+      ["tex-grass", "tex-pebbles", "tex-shallow"].forEach((n, i) => img(n, im => {
+        const tx = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + i); gl.bindTexture(gl.TEXTURE_2D, tx);
+        try { gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, im); } catch (_) { return; } // file:// blocks this; the flat fallback draws instead
+        gl.generateMipmap(gl.TEXTURE_2D);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        if (aniso) gl.texParameterf(gl.TEXTURE_2D, aniso.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(8, gl.getParameter(aniso.MAX_TEXTURE_MAX_ANISOTROPY_EXT)));
+        gl.useProgram(prog); gl.uniform1i(U[["uGrass", "uPeb", "uWater"][i]], i); texOK++;
+      }));
+    }
+  }
+  function setup() {
+    [g, W, H] = fit(cv);
+    // The textured ground needs fewer pixels than the foreground trees and controls.
+    // Keep the 2D canvas sharp while reducing the expensive WebGL-to-canvas transfer.
+    groundDpr = Math.min(DPR, W < 700 ? 1 : 1.5);
+    gcv.width = Math.round(W * 1.4 * groundDpr); gcv.height = Math.round(H * 1.2 * groundDpr);
+  }
+  setup(); addEventListener("resize", setup);
+  { const r = rng(17); for (let z = 300; z < 400000; z += 140 + r() * 260) { const side = r() < .5 ? -1 : 1, k = r() < .22 ? 1 : r() < .45 ? 2 : 0; trees.push({ z, off: side * (HW + (k === 2 ? 70 : 170) + r() * 460), s: (k === 2 ? 0.4 : 1) * (0.8 + r() * 0.6), k }); }
+    for (let z = 50; z < 400000; z += 26 + r() * 46) tufts.push({ z, off: (r() < .5 ? -1 : 1) * (HW * 1.14 + Math.pow(r(), 1.6) * 900), h: 0.6 + r() * 0.8, c: r() }); }
+  blendIn.addEventListener("input", () => blend = +blendIn.value);
+  function frame(dt) {
+    t += dt; camZ += dt * (600 + blend * 260);
+    const slope = dxt(camZ), camX = xt(camZ), F = H * 0.95, hz = H * 0.44;
+    const target = clamp(-ddxt(camZ) * 900 * (0.5 + blend * 0.8), -0.11, 0.11); tilt = lerp(tilt, target, 1 - Math.exp(-dt * 2));
+    g.save(); g.translate(W / 2, H / 2); g.rotate(tilt); g.scale(1.14, 1.14); g.translate(-W / 2, -H / 2);
+    const head = Math.atan(slope), off = -head * W * 1.4, sunX = W * 0.3 + off * 0.2;
+    // painted sky: its horizon line sits on ours, and it pans as we turn
+    if (ready(SKY)) {
+      const w = W * 1.6, h = w * SKY.naturalHeight / SKY.naturalWidth, x = clamp(-W * 0.3 + off * 0.25, -w + W * 1.2, -W * 0.2);
+      g.drawImage(SKY, x, hz - h * 0.665, w, h);
+    } else sky(g, W, H, "#2a7fd6", "#8ccaf3", "#eef8ff", 0.44);
+    if (prog && texOK === 3) {
+      gl.viewport(0, 0, gcv.width, gcv.height); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.useProgram(prog);
+      gl.uniform2f(U.uSize, gcv.width, gcv.height); gl.uniform1f(U.uDpr, groundDpr); gl.uniform1f(U.uOx, W * 0.2); gl.uniform1f(U.uHz, hz); gl.uniform1f(U.uF, F);
+      gl.uniform1f(U.uCamZ, camZ); gl.uniform1f(U.uCamX, camX); gl.uniform1f(U.uSlope, slope); gl.uniform1f(U.uBlend, blend); gl.uniform1f(U.uT, t); gl.uniform1f(U.uSunX, sunX);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      g.drawImage(gcv, -W * 0.2, 0, W * 1.4, H * 1.2);
+    } else {
+      // no WebGL (or textures still loading): flat painted bands
+      for (let y = Math.ceil(hz) + 1; y < H * 1.12; y += 3) {
+        const d = CAMH * F / (y - hz), z = camZ + d, s = F / d, sx = W / 2 + (xt(z) - camX - slope * d) * s, half = HW * s;
+        g.fillStyle = "#7fb85a"; g.fillRect(-W * .2, y, W * 1.4, 3); g.fillStyle = "#cdbf98"; g.fillRect(sx - half * 1.12, y, half * 2.24, 3);
+        g.fillStyle = blend > .5 ? "#6a717b" : "#5aa8d4"; g.fillRect(sx - half, y, half * 2, 3);
+      }
+    }
+    // trees, shrubs and grass tufts, far to near
+    const vis = [];
+    for (const tr of trees) { const d = tr.z - camZ; if (d > 160 && d < 7000) vis.push([d, 0, tr]); }
+    for (const tf of tufts) { const d = tf.z - camZ; if (d > 40 && d < 1600) vis.push([d, 1, tf]); }
+    vis.sort((a, b) => b[0] - a[0]);
+    for (const [d, kind, o] of vis) {
+      const s = F / d, by = hz + CAMH * s, x = W / 2 + (xt(o.z) + o.off - camX - slope * d) * s;
+      if (x < -300 || x > W + 300) continue;
+      g.globalAlpha = clamp(1.25 - d / 6500, 0, 1);
+      if (kind === 0) standSprite(g, SPR[o.k], x, by, 210 * o.s * s, 0.18);
+      else { const k = s * o.h; g.fillStyle = o.c < .5 ? "#4f8a3c" : "#6aa548"; for (let i = -2; i <= 2; i++) { g.beginPath(); g.moveTo(x + i * 2.6 * k - k, by); g.lineTo(x + i * 6 * k, by - (13 - Math.abs(i) * 2.4) * k); g.lineTo(x + i * 2.6 * k + k, by); g.fill(); } }
+      g.globalAlpha = 1;
+    }
+    g.restore();
+    if (blend > 0.02) {
+      g.globalAlpha = clamp((blend - 0.25) / 0.6, 0, 1);
+      const dg = g.createLinearGradient(0, H * 0.8, 0, H); dg.addColorStop(0, "#2d3e57"); dg.addColorStop(1, "#1e2b3e");
+      g.fillStyle = dg; g.beginPath(); g.moveTo(0, H); g.lineTo(0, H * 0.86); g.quadraticCurveTo(W * 0.5, H * 0.78, W, H * 0.86); g.lineTo(W, H); g.fill();
+      g.strokeStyle = "rgba(255,255,255,.12)"; g.lineWidth = 1.5; g.beginPath(); g.moveTo(0, H * 0.862); g.quadraticCurveTo(W * 0.5, H * 0.782, W, H * 0.862); g.stroke();
+      const steer = clamp((dxt(camZ + 400) - slope) * 10, -0.45, 0.45) + tilt * 1.5;
+      const R = Math.min(W * 0.22, H * 0.4);
+      g.save(); g.translate(W * 0.5, H * 1.1); g.rotate(steer);
+      g.strokeStyle = "#17212f"; g.lineCap = "round"; g.lineWidth = Math.max(11, W * 0.02); g.beginPath(); g.arc(0, 0, R, 0, Math.PI * 2); g.stroke();
+      g.lineWidth = Math.max(7, W * 0.012); g.beginPath(); g.moveTo(-R, -R * 0.08); g.lineTo(-R * 0.25, -R * 0.12); g.moveTo(R, -R * 0.08); g.lineTo(R * 0.25, -R * 0.12); g.stroke();
+      g.fillStyle = "#17212f"; g.beginPath(); g.arc(0, 0, R * 0.26, 0, 7); g.fill();
+      g.restore(); g.globalAlpha = 1;
+    }
+  }
+  addLoop(cv, frame);
+})();
+
+/* =========================================================
+   03 · Footprints reveal the riverbank
+   ========================================================= */
+(() => {
+  const cv = $("#footCv"), canDraw = touchDrawing(cv, "#footDraw"); let g, W, H, scene, mask, mg, tmp, tg, prints = [], last = null, side = 1, t = 0, fish = [], count = { grass: 0, flower: 0, stone: 0, sand: 0, water: 0 }, seed = 1, cursor = null, hintA = 1, lastA = -Math.PI / 2;
+  function setup() {
+    [g, W, H] = fit(cv);
+    const mk = () => { const c = document.createElement("canvas"); c.width = W * DPR; c.height = H * DPR; const x = c.getContext("2d"); x.setTransform(DPR, 0, 0, DPR, 0, 0); return [c, x]; };
+    [scene] = mk(); [mask, mg] = mk(); [tmp, tg] = mk();
+    paintScene(scene.getContext("2d")); redrawMask();
+    const r = rng(seed + 9); fish = Array.from({ length: 5 }, () => ({ x: r() * W, y: H * (0.8 + r() * 0.16), v: 12 + r() * 16, ph: r() * 6, s: 0.7 + r() * 0.5 }));
+  }
+  // zones from top to bottom: meadow with flowers → pebbles → wet sand → shallow water, with wandering edges
+  const ZT = ["tex-grass", "tex-pebbles", "tex-wetsand", "tex-shallow"], ZK = ["grass", "stone", "sand", "water"];
+  let edges = [0.34, 0.6, 0.72], pix = null;
+  ZT.forEach(n => img(n, () => { if (W && ZT.every(k => ready(IMG[k]))) setup(); }));
+  const edgeY = (i, x) => H * edges[i] + Math.sin(x * 0.013 + seed * 1.7 + i * 2) * H * 0.025 + Math.sin(x * 0.041 + seed + i) * H * 0.01;
+  const band = (x, y) => { for (let i = 0; i < 3; i++) if (y < edgeY(i, x)) return ZK[i]; return "water"; };
+  function paintScene(sg) {
+    sg.setTransform(DPR, 0, 0, DPR, 0, 0); pix = null;
+    if (!ZT.every(k => ready(IMG[k]))) { sg.fillStyle = "#cfe0b8"; sg.fillRect(0, 0, W, H); return; }
+    const r = rng(seed * 31 + 7), sc = W < 700 ? 0.6 : 0.8;
+    const layer = document.createElement("canvas"); layer.width = W * DPR; layer.height = H * DPR; const lg = layer.getContext("2d"); lg.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ZT.forEach((n, i) => {
+      lg.globalCompositeOperation = "source-over"; lg.clearRect(0, 0, W, H);
+      const pt = lg.createPattern(IMG[n], "repeat"); pt.setTransform(new DOMMatrix([sc, 0, 0, sc, -r() * 600, -r() * 600])); lg.fillStyle = pt; lg.fillRect(0, 0, W, H);
+      // a feathered mask: this zone from its top edge down (the next zone paints over the rest)
+      if (i) { lg.globalCompositeOperation = "destination-in"; lg.filter = "blur(5px)"; lg.fillStyle = "#000"; lg.beginPath(); lg.moveTo(-10, H + 10); for (let x = -10; x <= W + 10; x += 6) lg.lineTo(x, edgeY(i - 1, x)); lg.lineTo(W + 10, H + 10); lg.fill(); lg.filter = "none"; }
+      sg.drawImage(layer, 0, 0, W, H);
+    });
+    // the waterline: a thin bright film where sand turns to water
+    sg.strokeStyle = "rgba(255,255,255,.55)"; sg.lineWidth = 1.5; sg.beginPath(); for (let x = 0; x <= W + 6; x += 6) { const y = edgeY(2, x); x ? sg.lineTo(x, y) : sg.moveTo(x, y); } sg.stroke();
+    try { pix = sg.getImageData(0, 0, W * DPR, H * DPR); } catch (_) { pix = null; } // file:// pages can't read pixels back
+  }
+  // is there a flower under this print? look at the painted pixels themselves
+  function flowerAt(x, y, rad) {
+    if (!pix) return false; let n = 0, hit = 0;
+    for (let dy = -rad; dy <= rad; dy += 3) for (let dx = -rad; dx <= rad; dx += 3) {
+      if (dx * dx + dy * dy > rad * rad) continue; const px = Math.round((x + dx) * DPR), py = Math.round((y + dy) * DPR);
+      if (px < 0 || py < 0 || px >= pix.width || py >= pix.height) continue; const i = (py * pix.width + px) * 4, R = pix.data[i], G = pix.data[i + 1], B = pix.data[i + 2];
+      n++; if ((R > 215 && G > 215 && B > 195) || (R > 215 && G > 180 && B < 110) || (B > G + 10 && R > G + 10 && R > 150)) hit++;
+    }
+    return n && hit / n > 0.025;
+  }
+  function footPath(c, x, y, ang, s, left) {
+    c.save(); c.translate(x, y); c.rotate(ang + Math.PI / 2); if (left) c.scale(-1, 1); c.scale(s, s);
+    c.beginPath(); c.ellipse(0, 22, 11, 14, 0, 0, 7); // heel
+    c.moveTo(14, -4); c.ellipse(1, -6, 14, 19, 0.08, 0, 7); // ball
+    c.moveTo(0, 0); c.ellipse(4, 12, 9, 13, 0, 0, 7); // arch fill
+    for (const [tx, ty, tr] of [[-8, -31, 6.2], [1, -34, 5], [8, -32, 4.4], [13.5, -28, 3.8], [17.5, -22, 3.3]]) { c.moveTo(tx + tr, ty); c.arc(tx, ty, tr, 0, 7); }
+    c.restore();
+  }
+  function redrawMask() { mg.clearRect(0, 0, W, H); mg.fillStyle = "#000"; for (const p of prints) { footPath(mg, p.x, p.y, p.a, p.s, p.l); mg.fill(); } }
+  function stamp(x, y, a) {
+    side = -side; const nx = x + Math.cos(a + Math.PI / 2) * 17 * side, ny = y + Math.sin(a + Math.PI / 2) * 17 * side;
+    const s = W < 700 ? 0.78 : 1.12, p = { x: nx, y: ny, a, s, l: side < 0, t: 0 }; lastA = a;
+    prints.push(p); mg.fillStyle = "#000"; footPath(mg, p.x, p.y, p.a, p.s, p.l); mg.fill();
+    let k = band(nx, ny); if (k === "grass" && flowerAt(nx, ny, 20 * s)) k = "flower";
+    count[k]++; step(k === "flower" ? "grass" : k === "sand" ? "stone" : k); hintA = 0;
+    $("#footCount").innerHTML = `踩到 <b>${count.grass}</b> 片草、<b>${count.flower}</b> 丛野花、<b>${count.stone}</b> 块石头、<b>${count.sand}</b> 次湿沙、<b>${count.water}</b> 次浅水。`;
+  }
+  function moveTo(x, y) {
+    if (!last) { last = { x, y }; return; }
+    const d = Math.hypot(x - last.x, y - last.y), stride = W < 700 ? 44 : 62;
+    if (d >= stride) { const a = Math.atan2(y - last.y, x - last.x); const n = Math.floor(d / stride); for (let i = 1; i <= n; i++) stamp(last.x + Math.cos(a) * stride * i, last.y + Math.sin(a) * stride * i, a); last = { x: last.x + Math.cos(a) * stride * n, y: last.y + Math.sin(a) * stride * n }; }
+  }
+  const pos = e => { const b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; };
+  cv.addEventListener("pointermove", e => { if (!canDraw(e)) return; const [x, y] = pos(e); cursor = { x, y }; moveTo(x, y); });
+  cv.addEventListener("pointerdown", e => { if (!canDraw(e)) return; const [x, y] = pos(e); cursor = { x, y }; if (!last) last = { x, y: y + 1 }; stamp(x, y, last ? Math.atan2(y - last.y, x - last.x) || -Math.PI / 2 : -Math.PI / 2); last = { x, y }; });
+  for (const type of ["pointerleave", "pointercancel", "drawingmodechange"]) cv.addEventListener(type, () => { cursor = null; last = null; });
+  cv.addEventListener("keydown", e => { // walk with arrow keys
+    const m = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }[e.key]; if (!m) return; e.preventDefault();
+    const c = cursor || { x: W / 2, y: H / 2 }; cursor = { x: clamp(c.x + m[0] * 46, 10, W - 10), y: clamp(c.y + m[1] * 46, 10, H - 10) }; stamp(cursor.x, cursor.y, Math.atan2(m[1], m[0]));
+  });
+  $("#soundBtn").addEventListener("click", e => { soundOn = !soundOn; if (soundOn) ac(); e.currentTarget.setAttribute("aria-pressed", soundOn); e.currentTarget.textContent = soundOn ? "关掉声音" : "打开声音"; });
+  $("#footReset").addEventListener("click", () => { seed++; prints = []; last = null; for (const k in count) count[k] = 0; $("#footCount").textContent = "一片新的地面。"; hintA = 1; setup(); });
+  setup(); addEventListener("resize", () => { const old = prints.map(p => ({ ...p, x: p.x / W, y: p.y / H })); setup(); prints = old.map(p => ({ ...p, x: p.x * W, y: p.y * H })); redrawMask(); });
+  function frame(dt) {
+    t += dt;
+    // the unknown ground: a blank sheet of warm paper
+    g.fillStyle = "#f6f2e8"; g.fillRect(0, 0, W, H);
+    // what is under the prints: static scene + live water (fish, glints)
+    tg.globalCompositeOperation = "source-over"; tg.clearRect(0, 0, W, H); tg.drawImage(scene, 0, 0, W, H);
+    // small fish seen from above: a soft shadow on the bed, a translucent body over it
+    for (const f of fish) {
+      f.x += f.v * dt; if (f.x > W + 30) f.x = -30; const y = f.y + Math.sin(t * 1.4 + f.ph) * 4, s = f.s, wig = Math.sin(t * 9 + f.ph) * 0.22;
+      for (const [ox, oy, col] of [[5, 8, "rgba(30,60,70,.22)"], [0, 0, "rgba(70,96,96,.62)"]]) {
+        tg.save(); tg.translate(f.x + ox, y + oy); tg.scale(s, s); tg.fillStyle = col;
+        tg.beginPath(); tg.moveTo(13, 0); tg.bezierCurveTo(10, -5, -4, -5, -10, -1 + wig * 4); tg.lineTo(-18, -5 + wig * 10); tg.lineTo(-16, wig * 8); tg.lineTo(-18, 5 + wig * 10); tg.lineTo(-10, 1 + wig * 4); tg.bezierCurveTo(-4, 5, 10, 5, 13, 0); tg.fill(); tg.restore();
+      }
+    }
+    // light moving on the water
+    tg.save(); tg.beginPath(); tg.moveTo(0, H); for (let x = 0; x <= W + 6; x += 6) tg.lineTo(x, edgeY(2, x)); tg.lineTo(W + 6, H); tg.clip();
+    tg.strokeStyle = "rgba(255,255,255,.35)"; tg.lineWidth = 1;
+    for (let i = 0; i < 14; i++) { const x = ((i * 137 + t * 18) % (W + 60)) - 30, y = H * (0.77 + (i * 0.37 % 1) * 0.22); tg.beginPath(); tg.moveTo(x, y); tg.quadraticCurveTo(x + 10, y - 2 - Math.sin(t * 2 + i) * 2, x + 20, y); tg.stroke(); }
+    tg.restore();
+    tg.globalCompositeOperation = "destination-in"; tg.drawImage(mask, 0, 0, W, H); tg.globalCompositeOperation = "source-over";
+    // soft inner shadow so each print reads as pressed into the ground
+    g.save(); g.shadowColor = "rgba(120,100,70,.35)"; g.shadowBlur = 6; g.shadowOffsetY = 1.5; g.drawImage(tmp, 0, 0, W, H); g.restore();
+    if (hintA > 0) { g.fillStyle = `rgba(111,123,137,${0.8 * hintA})`; g.font = "500 15px Noto Serif SC, serif"; g.textAlign = "center"; g.fillText("走过去看看", W / 2, H / 2); g.textAlign = "left"; }
+    if (cursor) { g.strokeStyle = "rgba(43,54,69,.35)"; g.lineWidth = 1; g.setLineDash([3, 3]); g.save(); footPath(g, cursor.x, cursor.y, lastA, W < 700 ? .78 : 1.12, side > 0); g.stroke(); g.restore(); g.setLineDash([]); }
+  }
+  addLoop(cv, frame);
+})();
+
+/* =========================================================
+   04 · The water's edge: draw in the sand, waves take it back
+   ========================================================= */
+(() => {
+  const cv = $("#shoreCv"), canDraw = touchDrawing(cv, "#shoreDraw"), BEACH = img("tex-beach"), SEA = img("tex-sea"); let g, W, H, sand, wbuf, wg2, t = 0, phase = 0, calm = false, strokes = [], cur = null, wet = 0, written = 0, taken = 0, maxReach = 0.6, lastReach = 0.6;
+  function setup() {
+    [g, W, H] = fit(cv);
+    sand = document.createElement("canvas"); sand.width = W * DPR; sand.height = H * DPR; const sg = sand.getContext("2d"); sg.setTransform(DPR, 0, 0, DPR, 0, 0);
+    wbuf = document.createElement("canvas"); wbuf.width = W * DPR; wbuf.height = H * DPR; wg2 = wbuf.getContext("2d"); wg2.setTransform(DPR, 0, 0, DPR, 0, 0);
+    if (ready(BEACH)) { const pt = sg.createPattern(BEACH, "repeat"); pt.setTransform(new DOMMatrix([0.6, 0, 0, 0.6, 0, 0])); sg.fillStyle = pt; }
+    else sg.fillStyle = "#efe0c0";
+    sg.fillRect(0, 0, W, H);
+    // a touch darker and warmer up the beach, where the sand stays damp
+    const gr = sg.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, "rgba(170,130,80,.18)"); gr.addColorStop(.6, "rgba(170,130,80,0)"); sg.fillStyle = gr; sg.fillRect(0, 0, W, H);
+  }
+  setup(); addEventListener("resize", () => {
+    const oldW = W, oldH = H; setup();
+    for (const s of strokes) for (const p of s.pts) { p[0] *= W / oldW; p[1] *= H / oldH; }
+    pen = null; cur = null;
+  }); img("tex-beach", setup);
+  const shore = () => H * 0.24;
+  function waveK() { const p = phase % 1; if (p < 0.38) return 1 - Math.pow(1 - p / 0.38, 2.2); if (p < 0.48) return 1; return 1 - ease((p - 0.48) / 0.52); }
+  function frontY(x) {
+    const reach = shore() + (H * maxReach - shore()) * waveK();
+    return reach + Math.sin(x * 0.011 + Math.floor(phase) * 2.1) * 12 + Math.sin(x * 0.034 + t * 0.6) * 4;
+  }
+  const pos = e => { const b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; };
+  cv.addEventListener("pointerdown", e => { if (!canDraw(e)) return; try { cv.setPointerCapture(e.pointerId); } catch (_) {} const [x, y] = pos(e); cur = { pts: [[x, y, 1]] }; strokes.push(cur); written++; step("sand"); });
+  cv.addEventListener("pointermove", e => { if (!cur) return; const [x, y] = pos(e); const l = cur.pts[cur.pts.length - 1]; if (Math.hypot(x - l[0], y - l[1]) > 3) cur.pts.push([x, y, 1]); });
+  const up = () => { cur = null; }; cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up); cv.addEventListener("lostpointercapture", up); cv.addEventListener("drawingmodechange", up);
+  let pen = null;
+  cv.addEventListener("keydown", e => {
+    const direction = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }[e.key];
+    if (!direction && e.key !== " ") return;
+    e.preventDefault(); pen ||= [W / 2, H * .85];
+    if (e.key === " ") {
+      if (cur) cur = null;
+      else { cur = { pts: [[...pen, 1]] }; strokes.push(cur); written++; }
+    } else {
+      pen = [clamp(pen[0] + direction[0] * 12, 6, W - 6), clamp(pen[1] + direction[1] * 12, 6, H - 6)];
+      if (cur) cur.pts.push([...pen, 1]);
+    }
+  });
+  cv.addEventListener("blur", () => { pen = null; cur = null; repaint(); });
+  if (RM) { $("#calmBtn").textContent = "让浪带走笔迹"; $("#calmBtn").removeAttribute("aria-pressed"); }
+  $("#calmBtn").addEventListener("click", e => {
+    if (RM) { strokes = []; cur = null; taken = written; repaint(); return; }
+    calm = !calm; e.currentTarget.setAttribute("aria-pressed", calm); e.currentTarget.textContent = calm ? "让浪回来" : "让浪停一会儿";
+  });
+  function frame(dt) {
+    t += dt;
+    const p0 = phase % 1;
+    if (!(calm && p0 < 0.02)) { const before = Math.floor(phase); phase += dt / 7.5; if (Math.floor(phase) > before) { lastReach = maxReach; maxReach = 0.5 + Math.random() * 0.28; if (calm) phase = Math.floor(phase) + 0.0001; } }
+    g.drawImage(sand, 0, 0, W, H);
+    const p = phase % 1, k = waveK();
+    // the wet band the water leaves behind, glossy with sky
+    wet = p < 0.38 ? 1 : Math.max(0, wet - dt * 0.1);
+    const reachPrev = H * Math.max(maxReach * (p < 0.48 ? k : 1), lastReach * wet);
+    const wg = g.createLinearGradient(0, shore(), 0, reachPrev + 16);
+    wg.addColorStop(0, "rgba(176,138,88,.45)"); wg.addColorStop(.85, `rgba(180,142,92,${0.3 * Math.max(wet, .4)})`); wg.addColorStop(1, "rgba(165,135,92,0)");
+    g.fillStyle = wg; g.fillRect(0, shore(), W, reachPrev + 16 - shore());
+    if (p > 0.48) { const sh = g.createLinearGradient(0, H * maxReach * k + shore() * (1 - k), 0, H * maxReach); sh.addColorStop(0, "rgba(200,232,250,.35)"); sh.addColorStop(1, "rgba(200,232,250,0)"); g.fillStyle = sh; g.fillRect(0, shore(), W, H * maxReach - shore()); }
+    // strokes in the sand: groove + lit lip
+    for (const s of strokes) {
+      let any = false;
+      for (const pt of s.pts) { if (pt[1] < frontY(pt[0]) - 4 && pt[2] > 0) pt[2] = Math.max(0, pt[2] - dt * (0.9 + Math.random() * 0.8)); if (pt[2] > 0.02) any = true; }
+      if (!any) { if (!s.gone) { s.gone = true; taken++; } continue; }
+      for (const [col, ox, oy, lw, aa] of [["150,115,70", 0.8, 1.2, 5, .7], ["255,250,236", -1, -1.2, 1.6, .75], ["125,95,55", 0, 0, 3, .5]]) {
+        g.lineWidth = lw; g.lineCap = g.lineJoin = "round";
+        // one path per strength level, so overlapping caps never darken into beads
+        const buckets = {};
+        for (let i = 1; i < s.pts.length; i++) { const a = s.pts[i - 1], b = s.pts[i], al = Math.round(Math.min(a[2], b[2]) * 12) / 12; if (al < 0.02) continue; (buckets[al] = buckets[al] || []).push(a, b); }
+        for (const al in buckets) { const L = buckets[al]; g.strokeStyle = `rgba(${col},${al * aa})`; g.beginPath(); for (let i = 0; i < L.length; i += 2) { if (i === 0 || L[i] !== L[i - 1]) g.moveTo(L[i][0] + ox, L[i][1] + oy); g.lineTo(L[i + 1][0] + ox, L[i + 1][1] + oy); } g.stroke(); }
+        if (s.pts.length === 1) { const a = s.pts[0]; g.fillStyle = `rgba(${col},${a[2] * aa})`; g.beginPath(); g.arc(a[0] + ox, a[1] + oy, lw / 2 + 1, 0, 7); g.fill(); }
+      }
+    }
+    // water: the painted sea, deep far out and glass-clear over the sand at the edge
+    let fa = 0; for (let x = 0; x <= W; x += W / 8) fa += frontY(x); fa /= 9;
+    const w2 = wg2; w2.globalCompositeOperation = "source-over"; w2.clearRect(0, 0, W, H);
+    if (ready(SEA)) { const pt = w2.createPattern(SEA, "repeat"); pt.setTransform(new DOMMatrix([1.05, 0, 0, 1.05, (t * 4) % 1075, (-t * 6) % 1075])); w2.fillStyle = pt; }
+    else w2.fillStyle = "#3aa8cb";
+    w2.fillRect(0, 0, W, fa + 40);
+    const dg = w2.createLinearGradient(0, 0, 0, shore()); dg.addColorStop(0, "rgba(16,92,150,.45)"); dg.addColorStop(1, "rgba(16,92,150,0)"); w2.fillStyle = dg; w2.fillRect(0, 0, W, shore());
+    w2.globalCompositeOperation = "destination-in";
+    const am = w2.createLinearGradient(0, 0, 0, fa + 12); am.addColorStop(0, "#000"); am.addColorStop(clamp(shore() / fa, 0.1, 0.8), "rgba(0,0,0,.95)"); am.addColorStop(.86, "rgba(0,0,0,.5)"); am.addColorStop(1, "rgba(0,0,0,.12)");
+    w2.fillStyle = am; w2.fillRect(0, 0, W, fa + 40);
+    g.save(); g.beginPath(); g.moveTo(0, -2); for (let x = 0; x <= W + 8; x += 8) g.lineTo(x, frontY(x)); g.lineTo(W + 8, -2); g.closePath(); g.clip();
+    g.drawImage(wbuf, 0, 0, W, H);
+    g.restore();
+    // foam: a bright lace at the front, a fainter line behind, bubbles between
+    const lace = (dy, lw, col) => { g.strokeStyle = col; g.lineWidth = lw; g.beginPath(); for (let x = 0; x <= W + 6; x += 6) { const y = frontY(x) + dy(x); x ? g.lineTo(x, y) : g.moveTo(x, y); } g.stroke(); };
+    // foam is soft: a body built from wide faint strokes under a fine bright edge, and loose bubbles of uneven size.
+    // No ctx.filter here: a per-frame blur cost ~3x the frame budget on a phone-sized canvas
+    for (const [lw, al] of [[14, .1], [10, .14], [6, .2]]) lace(() => -4, lw, `rgba(255,255,255,${al})`);
+    lace(() => 0, 2, "rgba(255,255,255,.92)");
+    g.save();
+    lace(x => -14 - Math.sin(x * 0.045 + t * 0.8) * 5, 1.4, "rgba(255,255,255,.45)");
+    lace(x => -30 - Math.sin(x * 0.03 - t * 0.5) * 7, 1, "rgba(255,255,255,.25)");
+    for (let x = 0; x < W; x += 5) { const y = frontY(x), j = Math.sin(x * 12.9898 + Math.floor(phase) * 7) * 0.5 + 0.5, k = Math.sin(x * 78.233) * 0.5 + 0.5; g.fillStyle = `rgba(255,255,255,${0.25 + 0.5 * k})`; g.beginPath(); g.arc(x + j * 6, y - 3 - j * 14, 0.5 + j * j * 2, 0, 7); g.fill(); }
+    g.restore();
+    if (!strokes.length) { g.save(); g.fillStyle = "rgba(92,70,40,.8)"; g.shadowColor = "rgba(255,250,235,.9)"; g.shadowBlur = 10; g.font = "500 17px Noto Serif SC, serif"; g.textAlign = "center"; g.fillText("在沙上写点什么", W / 2, H * 0.86); g.restore(); }
+    strokes = strokes.filter(s => !s.gone || s === cur);
+    if (pen) { g.strokeStyle = "#594b3c"; g.lineWidth = 1.5; g.beginPath(); g.arc(pen[0], pen[1], 6, 0, Math.PI * 2); g.stroke(); }
+    if (written) $("#shoreCap").textContent = `写下 ${written} 笔，浪带走了 ${taken} 笔。` + (taken && taken === written ? "沙滩又是新的了。" : "");
+  }
+  addLoop(cv, frame);
+})();
+
+/* =========================================================
+   Coda · lying in the grass, looking up — and leaving the screen
+   ========================================================= */
+(() => {
+  const SKYUP = img("sky-up"), GRASS = img("grass-up");
+  // the painted grass, swaying: cut into horizontal strips, the tips moving most
+  function drawGrass(g, W, H, t, gust) {
+    // about 45% of the frame tall; repeated (every other copy mirrored) to fill wide frames
+    const iw = GRASS.naturalWidth, ih = GRASS.naturalHeight, k = Math.min(H * 0.45 / ih, W * 1.15 / iw), w = iw * k, h = ih * k, top = H - h, rows = 40, sh = ih / rows;
+    const n = Math.ceil((W + 40) / (w - 30));
+    for (let c = 0; c < n; c++) {
+      const x0 = -20 + c * (w - 30);
+      g.save(); if (c % 2) { g.translate(x0 * 2 + w, 0); g.scale(-1, 1); }
+      for (let i = 0; i < rows; i++) {
+        const u = i / rows, sway = (Math.sin(t * 1.1 + c) * 7 + 3 + gust * 26 * Math.sin(t * 3 + 1 + c * 0.7)) * (1 - u) * (1 - u) * (c % 2 ? -1 : 1);
+        g.drawImage(GRASS, 0, i * sh, iw, sh + 0.5, x0 + sway, top + i * sh * k, w, sh * k + 0.8);
+      }
+      g.restore();
+    }
+  }
+  function scene(cv) {
+    let g, W, H, blades, motes, t = Math.random() * 40, gust = 0, gustT = 4 + Math.random() * 6;
+    function setup() {
+      [g, W, H] = fit(cv);
+      motes = makeMotes(40, 8);
+      const r = rng(4); blades = Array.from({ length: Math.round(W / 26) }, () => { const ci = Math.floor(r() * 3); return { x: r() * W, h: H * (0.16 + r() * 0.36), w: 5 + r() * 9, ph: r() * 6.28, c: ["#24552e", "#2f6a34", "#3d7c3a"][ci], c2: ["#3f7d3a", "#5a9a45", "#79b257"][ci], blur: r() < .3 }; });
+    }
+    setup(); addEventListener("resize", setup);
+    return {
+      gust: () => gust,
+      frame(dt) {
+        t += dt; gustT -= dt;
+        if (gustT < 0) { gust = 1; gustT = 6 + Math.random() * 9; }
+        gust = Math.max(0, gust - dt * 0.35);
+        // the sky drifts overhead: a slow pan across the painted plate, a little faster in a gust
+        if (ready(SKYUP)) { const u = (Math.sin(t * 0.012) + 1) / 2; cover(g, SKYUP, W, H, u, 0.5 + Math.sin(t * 0.009) * 0.25, 1.18); }
+        else sky(g, W, H, "#1b6acb", "#5eaeee", "#cbe8fd", 1);
+        drawMotes(g, W, H, motes, t, gust);
+        if (ready(GRASS)) { drawGrass(g, W, H, t, gust); return; }
+        for (const b of blades) {
+          const lean = Math.sin(t * 1.1 + b.ph) * 0.08 + 0.05 + gust * 0.22 * Math.sin(t * 3 + b.ph * 0.3 + 1);
+          const tx = b.x + lean * b.h, ty = H - b.h, mx = b.x + lean * b.h * .3, my = H - b.h * .55;
+          if (b.blur) { g.save(); g.filter = "blur(6px)"; g.globalAlpha = 0.75; }
+          g.fillStyle = b.c; g.beginPath(); g.moveTo(b.x - b.w, H + 4); g.quadraticCurveTo(mx, my, tx, ty); g.quadraticCurveTo(mx + b.w * .6, H - b.h * .5, b.x + b.w, H + 4); g.fill();
+          // the lit half of the blade, flat, as in a cel
+          g.fillStyle = b.c2; g.beginPath(); g.moveTo(b.x - b.w, H + 4); g.quadraticCurveTo(mx, my, tx, ty); g.quadraticCurveTo(mx - b.w * .1, H - b.h * .52, b.x - b.w * .1, H + 4); g.fill();
+          if (b.blur) g.restore();
+        }
+      }
+    };
+  }
+  const inPage = scene($("#endCv"));
+  addLoop($("#endCv"), dt => inPage.frame(dt));
+  const away = $("#away"), acv = $("#awayCv"); let big = null, running = false, windNodes = null, lineT = [];
+  function startWind() {
+    try {
+      const a = ac(); NB = NB || noiseBuf(4);
+      const src = a.createBufferSource(); src.buffer = NB; src.loop = true;
+      const lp = a.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 500;
+      const hiSrc = a.createBufferSource(); hiSrc.buffer = WB || (WB = whiteBuf()); hiSrc.loop = true;
+      const bp = a.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 3200; bp.Q.value = 0.6;
+      const g1 = a.createGain(), g2 = a.createGain(), out = a.createGain(); g1.gain.value = 0.5; g2.gain.value = 0.0; out.gain.value = 0;
+      src.connect(lp); lp.connect(g1); g1.connect(out); hiSrc.connect(bp); bp.connect(g2); g2.connect(out); out.connect(a.destination);
+      src.start(); hiSrc.start(); out.gain.linearRampToValueAtTime(0.5, a.currentTime + 3);
+      windNodes = { src, hiSrc, lp, g1, g2, out };
+    } catch (e) { windNodes = null; }
+  }
+  function stopWind() { if (!windNodes) return; const a = ac(), n = windNodes; n.out.gain.cancelScheduledValues(a.currentTime); n.out.gain.setValueAtTime(n.out.gain.value, a.currentTime); n.out.gain.linearRampToValueAtTime(0, a.currentTime + 1.2); setTimeout(() => { n.src.stop(); n.hiSrc.stop(); }, 1400); windNodes = null; }
+  const background = [...document.querySelectorAll("body > header, body > main, body > footer")];
+  function open() {
+    if (running) return;
+    away.inert = false; background.forEach(el => el.inert = true);
+    away.classList.add("on"); away.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden";
+    if (!big) big = scene(acv); running = true; startWind(); $("#backBtn").focus({ preventScroll: true }); repaint();
+    const spans = away.querySelectorAll(".lines span"); spans.forEach(s => s.classList.remove("on"));
+    if (RM) spans.forEach(s => s.classList.add("on"));
+    else lineT = [4000, 7500, 11000].map((ms, i) => setTimeout(() => spans[i].classList.add("on"), ms));
+  }
+  function close() {
+    away.inert = true; background.forEach(el => el.inert = false);
+    away.classList.remove("on"); away.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; running = false; stopWind(); lineT.forEach(clearTimeout);
+    $("#leaveBtn").focus();
+  }
+  $("#leaveBtn").addEventListener("click", open);
+  away.addEventListener("click", () => { if (away.classList.contains("on")) close(); });
+  addEventListener("keydown", e => {
+    if (!running) return;
+    if (e.key === "Escape") close();
+    if (e.key === "Tab") { e.preventDefault(); $("#backBtn").focus(); }
+  });
+  addLoop(acv, dt => {
+    if (running && big) {
+      big.frame(dt);
+      if (windNodes) { const a = ac(), gu = big.gust(); windNodes.lp.frequency.setTargetAtTime(380 + gu * 900, a.currentTime, 0.4); windNodes.g2.gain.setTargetAtTime(gu * 0.07, a.currentTime, 0.5); windNodes.g1.gain.setTargetAtTime(0.4 + gu * 0.5, a.currentTime, 0.5); }
+    }
+  });
+})();
+</script>

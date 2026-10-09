@@ -1,0 +1,1315 @@
+<!doctype html>
+<html lang="zh-Hans">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>问题解析的极限</title>
+<meta name="description" content="一个游戏外挂只看屏幕上的一个像素。从描述到机制，解析没有尽头；解析的第一原则，是要带有限的结果回来。">
+<link rel="canonical" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="问题解析的极限 · 交互版">
+<meta property="og:description" content="一个游戏外挂只看屏幕上的一个像素。从描述到机制，解析没有尽头；解析的第一原则，是要带有限的结果回来。">
+<meta property="og:url" content="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html">
+<meta property="og:site_name" content="simoncos">
+<meta property="og:image" content="https://simoncos.github.io/gallery/assets/og-limits-of-problem-analysis.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="问题解析的极限交互页的开场画面">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="问题解析的极限 · 交互版">
+<meta name="twitter:description" content="一个游戏外挂只看屏幕上的一个像素。从描述到机制，解析没有尽头；解析的第一原则，是要带有限的结果回来。">
+<meta name="twitter:image" content="https://simoncos.github.io/gallery/assets/og-limits-of-problem-analysis.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Near-black page, quiet neutrals. Amber = what you operate; mint = the answer (glow only at that moment); red = out / contradiction.
+   Concrete things are drawn in their own colours; their abstractions are drawn in thin ink lines beside them. */
+:root{
+  --bg:#050607; --surface:#0c0e11; --ink:#ebedf0; --muted:#8a9099; --line:#22262c; --deep:#111317;
+  --accent:#ffb347; --accent-soft:rgba(255,179,71,.12);
+  --stop:#ff5d7d; --go:#3cf2b4; --go-soft:rgba(60,242,180,.14);
+  --hp:#e2384d; --mp:#3d7bff;
+  --display:"Noto Serif SC","Songti SC","STSong",serif;
+  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85}
+::selection{background:rgba(255,179,71,.35)}
+.wrap{padding-inline:20px;padding-block:32px 80px;overflow-x:clip}
+.col{max-width:720px;margin-inline:auto}
+.wide{max-width:1120px;margin-inline:auto}
+h1,h2{font-family:var(--display);font-weight:900;text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(2.6rem,7vw,4.6rem);letter-spacing:.02em}
+h2{font-size:clamp(1.5rem,3.4vw,2.05rem);margin-block:0 .6em}
+p{margin:0 0 1em}
+b,strong{font-weight:700}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--muted)}
+.lede{font-size:1.12rem;margin-top:1.1em;max-width:30em}
+section{margin-top:110px}
+.secno{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:.4em}
+.mono{font-family:var(--mono);font-size:.92em}
+.note{border-left:3px solid var(--line);padding:4px 0 4px 16px;color:var(--muted);font-size:.95rem}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,canvas:focus-visible,svg:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section > .col:first-child{position:relative}
+.bignum{position:absolute;right:calc(100% + 28px);top:-18px;font-family:var(--display);font-weight:900;font-size:7.5rem;line-height:1;color:transparent;-webkit-text-stroke:1.2px #2c3038;pointer-events:none;user-select:none;display:none}
+@media (min-width:1220px){.bignum{display:block}}
+
+.bench{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;margin-block:28px}
+.lab{font-size:.78rem;color:var(--muted);letter-spacing:.06em;margin-bottom:6px;display:block}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{min-height:44px;flex:1 1 auto;border:0;background:transparent;color:var(--ink);padding:6px 12px;font-size:.84rem;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);font-weight:700}
+.btn{min-height:44px;padding:7px 14px;border:1px solid var(--accent);background:var(--accent);color:#1a1205;border-radius:6px;font-size:.88rem;font-weight:700;transition:filter .2s}
+.btn:hover:not(:disabled){filter:brightness(1.12)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.ghost[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn:disabled{opacity:.4;cursor:default}
+.slider{display:grid;grid-template-columns:5em 1fr 3.4em;align-items:center;gap:10px;font-size:.85rem}
+.slider output{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cap{font-size:.82rem;color:var(--muted);margin:8px 0 0}
+kbd{font-family:var(--mono);font-size:.72rem;border:1px solid currentColor;border-radius:3px;padding:0 4px;margin-left:4px;opacity:.75}
+footer{margin-top:80px;font-size:.8rem;color:var(--muted)}
+canvas{display:block}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,600px);gap:44px;align-items:center;padding-top:28px}
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr);gap:28px}}
+h1 .hl{color:var(--accent)}
+.hero-fig{margin:0;position:relative}
+#heroCv{width:100%;aspect-ratio:16/10;border-radius:10px;border:1px solid var(--line);background:#07080a;cursor:ns-resize;touch-action:pan-y}
+.hero-hint{font-family:var(--mono);font-size:.74rem;color:var(--muted);letter-spacing:.04em;margin-top:10px}
+.hero-hint b{color:var(--accent);font-weight:600}
+
+/* ---------- 01 game ---------- */
+.game{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,330px);gap:28px;align-items:start}
+@media (max-width:860px){.game{grid-template-columns:minmax(0,1fr)}}
+#gameCv{width:100%;aspect-ratio:16/9;border-radius:8px;background:#0b0d10;touch-action:pan-y;cursor:ew-resize}
+.innards{margin-top:12px;border:1px dashed var(--line);border-radius:8px;padding:10px 12px}
+.innards .lab{display:flex;justify-content:space-between;gap:8px}
+#innards{font-family:var(--mono);font-size:.7rem;line-height:1.6;color:#4a5059;height:4.8em;overflow:hidden;word-break:break-all}
+.gctl{display:flex;flex-direction:column;gap:16px;min-width:0}
+.readout{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center}
+.sw{width:64px;height:64px;border-radius:6px;border:1px solid var(--line);transition:background .08s}
+#hex{font-family:var(--mono);font-size:.9rem}
+#cls{font-size:1.15rem;font-weight:700;margin-top:2px}
+#bitCv{width:100%;height:34px;margin-top:10px}
+.rule{margin:0;font-family:var(--mono);font-size:.8rem;line-height:1.75;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 14px;white-space:pre}
+.rule span{display:block;border-radius:3px;padding-inline:4px;margin-inline:-4px;transition:background .4s}
+.rule span.fire{background:rgba(60,242,180,.18);color:var(--go);transition:none}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0}
+.stats div{border-top:1px solid var(--line);padding-top:6px}
+.stats dt{font-size:.72rem;color:var(--muted)}
+.stats dd{margin:0;font-family:var(--mono);font-size:1.05rem;font-variant-numeric:tabular-nums}
+.stats dd.bad{color:var(--stop)}
+#gameMsg{min-height:3.4em;margin:0;font-size:.88rem;color:var(--muted);border-left:3px solid var(--line);padding-left:12px}
+#gameMsg b{color:var(--ink)}
+
+/* ---------- 02 ladder ---------- */
+.ladder{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,320px);gap:28px;align-items:start}
+@media (max-width:860px){.ladder{grid-template-columns:minmax(0,1fr)}}
+.pear-view{min-width:0}
+.pear-viewport{overflow-x:auto;margin-top:10px;overscroll-behavior-x:contain}
+.pear-viewport.zoomed #pearSvg{min-width:640px}
+.pear-viewport:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (min-width:861px){#pearZoom,#pearHint{display:none}}
+#pearSvg{width:100%;height:auto;display:block;background:var(--bg);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+#pearSvg .lay{transition:opacity .6s}
+#pearSvg .mv{transition:transform .95s cubic-bezier(.65,0,.2,1),opacity .6s}
+#pearSvg text{font-family:var(--body);fill:var(--muted);font-size:12px;paint-order:stroke;stroke:#050607;stroke-width:4px;stroke-linejoin:round}
+#pearSvg .ax{stroke:#2c3038;stroke-width:1}
+#pearSvg .dim{stroke:var(--ink);stroke-width:1;fill:none}
+#pearSvg .dimt{fill:var(--ink);font-family:var(--mono);font-size:12px}
+@media (max-width:520px){#pearSvg text,#pearSvg .dimt{font-size:22px}}
+@media (pointer:coarse){input[type=range]{min-height:44px}.seg button,.btn,.rungs button{min-height:44px}}
+@media (max-width:520px){.bench{padding:12px}.plan .phead b{font-size:.82rem}}
+#pearSvg .draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1s ease .3s}
+#pearSvg .on .draw{stroke-dashoffset:0}
+.rungs{list-style:none;margin:0;padding:0;position:relative}
+.rungs::before{content:"";position:absolute;left:15px;top:14px;bottom:14px;width:1px;background:var(--line)}
+.rungs button{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:center;width:100%;text-align:left;background:transparent;border:0;color:var(--muted);padding:6px 0}
+.rungs .dot{width:31px;height:31px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;font-family:var(--mono);font-size:.74rem;position:relative}
+.rungs .nm{font-weight:700;font-size:.95rem}
+.rungs .en{font-family:var(--mono);font-size:.7rem;margin-left:6px;opacity:.7}
+.rungs button:hover{color:var(--ink)}
+.rungs button[aria-current="true"]{color:var(--ink)}
+.rungs button[aria-current="true"] .dot{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.lvcard{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
+.lvcard p{font-size:.92rem;margin:0 0 .6em}
+.cost{display:grid;grid-template-columns:3.4em 1fr;gap:4px 10px;align-items:center;font-size:.72rem;color:var(--muted);margin-top:12px}
+.cost i{display:block;height:6px;border-radius:3px;background:#2a2e35;transition:background .3s}
+.cost i.cur{background:var(--accent)}
+.cost i.inf{background:linear-gradient(90deg,#2a2e35 70%,transparent)}
+.cost i.inf.cur{background:linear-gradient(90deg,var(--accent) 70%,transparent)}
+#lvctl{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+
+/* ---------- 03 hurricane: two worlds ---------- */
+.storm{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--bg)}
+.storm canvas{width:100%;height:auto;aspect-ratio:16/8}
+@media (max-width:700px){.storm canvas{aspect-ratio:4/3.3}}
+#stormOv{position:absolute;inset:0}
+#gapCv{width:100%;height:132px;margin-top:12px}
+.stormbar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;margin-top:14px}
+#stormDay{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+#stormDay b{color:var(--ink);font-weight:600}
+#stormRead{margin:10px 0 0;font-size:.9rem;color:var(--muted);min-height:1.7em}
+#stormRead b{color:var(--ink)}
+
+/* ---------- 04 one budget, three problems ---------- */
+.plan{display:grid;grid-template-columns:5.4em repeat(3,minmax(0,1fr));gap:6px}
+@media (max-width:700px){.plan{grid-template-columns:2.4em repeat(3,minmax(0,1fr));gap:4px}}
+.plegend{font-size:.78rem;color:var(--muted);margin:0 0 12px}
+.phead{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;padding:2px 2px 10px;min-width:0}
+.phead .ico{height:58px;width:auto;max-width:100%;display:block;margin-bottom:4px}
+.phead .ico.pix{image-rendering:pixelated;border-radius:3px}
+.phead b{font-size:.95rem;line-height:1.3}
+.phead .goal{font-size:.74rem;color:var(--muted);line-height:1.4}
+.phead .got{font-family:var(--mono);font-size:.74rem;color:var(--muted);line-height:1.4}
+@keyframes spin{to{transform:rotate(-360deg)}}
+.phead .spin{animation:spin 14s linear infinite}
+.prow{display:flex;flex-direction:column;justify-content:center;font-size:.86rem;font-weight:700;color:var(--muted);line-height:1.3}
+.prow .en{font-family:var(--mono);font-size:.62rem;font-weight:400;opacity:.7}
+.cell{display:flex;flex-direction:column;justify-content:space-between;gap:7px;text-align:left;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:6px;padding:8px 9px;min-height:64px;min-width:0;transition:background .2s,border-color .2s,color .2s}
+.cell:hover{border-color:var(--accent)}
+.cell .top{font-size:.8rem;line-height:1.35}
+.cell .price{margin-left:auto;padding-left:4px;white-space:nowrap;opacity:.9}
+.cell .bar{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.7rem;line-height:1}
+.cell .bar i{display:block;height:5px;border-radius:3px;background:#3a3f47;min-width:2px;flex:0 1 auto}
+.cell.dug{background:#15181d;color:var(--ink)}
+.cell.dug .bar i{background:var(--ink)}
+.cell.cur{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cell.cur .bar i{background:var(--bg)}
+.cell.over .price{color:var(--stop);opacity:1}
+.cell.deny{animation:deny .35s}
+@keyframes deny{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+.phead .got i{font-style:normal}
+@media (max-width:700px){.prow .en{display:none}.prow{font-size:.76rem}.cell{padding:6px 6px;min-height:70px}.cell .top{font-size:.72rem}.cell .bar{gap:4px;font-size:.66rem}.phead .ico{height:44px}.phead .goal{font-size:.68rem}.phead .got i{display:none}.phead .got span{display:block}}
+.hud{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,.6fr));gap:16px;margin-top:18px;align-items:end}
+@media (max-width:700px){.hud{grid-template-columns:1fr 1fr}.hud .bud{grid-column:1/-1}}
+.budbar{display:flex;height:12px;border-radius:6px;background:#1a1d22;overflow:hidden}
+.budbar i{display:block;height:100%;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.budbar i:nth-child(1){background:#ebedf0}.budbar i:nth-child(2){background:#9aa1ab}.budbar i:nth-child(3){background:#5f6670}
+.hud .num{font-family:var(--mono);font-size:1.35rem;font-variant-numeric:tabular-nums;line-height:1.2}
+.hud .num.go{color:var(--go)}
+#planMsg{margin:14px 0 0;font-size:.9rem;color:var(--muted);min-height:3.2em}
+#planMsg b{color:var(--ink)}
+#planMsg .bad{color:var(--stop)}
+#planMsg .go{color:var(--go)}
+
+.coda{margin-top:120px;text-align:center}
+.coda q{display:block;font-family:var(--display);font-weight:900;font-size:clamp(1.7rem,4.6vw,2.9rem);line-height:1.45;quotes:none}
+.coda q .hl{color:var(--go);text-shadow:0 0 26px rgba(60,242,180,.3)}
+.coda .src{margin-top:18px;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="hero wide">
+  <div>
+    <p class="eyebrow">交互版 · 改编自作者 2014 年的同名旧文 · <a href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html">读原文</a></p>
+    <h1>问题解析的<span class="hl">极限</span></h1>
+    <p class="lede">朋友讲过一个 RPG 外挂的做法：它不读游戏的内存，不懂伤害公式，只盯着屏幕上的一个像素。这个像素从红变灰，它就按下加血。</p>
+    <p class="lede" style="margin-top:0">它没有试图弄懂整个游戏。这篇讲的就是这件事：解析可以没有尽头，但我们得带着结果回来。</p>
+  </div>
+  <figure class="hero-fig">
+    <canvas id="heroCv" tabindex="0" aria-label="一棵向下生长的问题树：每回答一个问题，就分出两个新问题，越往下越密，消失在黑暗里。一条横线标出解析停在哪一层；可以用上下方向键移动它。"></canvas>
+    <p class="hero-hint">上下移动指针（手机上点一下，或拖那条横线）。每往下解析一层，答案多一层，<b>新冒出的问题多一倍</b>。</p>
+  </figure>
+</header>
+
+<!-- 01 -->
+<section id="s1">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">01</span>
+    <span class="secno">01 · 一个像素</span>
+    <h2>外挂只看一个点</h2>
+    <p>侦测 HP 条上某一点的颜色。颜色<b>从红变灰</b>，说明血量掉到了某条线以下，自动输入加血；反方向变化，什么也不做。</p>
+    <p>游戏的内部逻辑是个黑匣子。但为了让人能玩，它必须给<b>人</b>留下输入和输出的接口。外挂就接在这两个接口上：抓住一小块输出，配一条简单明确的逻辑，替人的眼、脑、手接管这一小段流程。</p>
+  </div>
+
+  <div class="bench wide game">
+    <div>
+      <canvas id="gameCv" tabindex="0" aria-label="外挂试验台：勇者被史莱姆持续攻击。左右拖动可以移动 HP 条上的探针。"></canvas>
+      <div class="innards">
+        <span class="lab"><span>游戏内部 · 外挂一个也不读</span><span class="mono" id="innCount"></span></span>
+        <div id="innards" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="gctl">
+      <div>
+        <span class="lab">外挂读到的全部信息</span>
+        <div class="readout">
+          <div class="sw" id="sw"></div>
+          <div><div id="hex">#E2384D</div><div id="cls">红</div></div>
+        </div>
+        <canvas id="bitCv" aria-label="最近十秒探针颜色的记录"></canvas>
+      </div>
+<pre class="rule" id="rule"><span>若 这一点 红 → 不是红</span><span id="ruleAct">    按下 加血</span><span>否则</span><span>    什么也不做</span></pre>
+      <div class="slider"><label for="probe">探针位置</label><input id="probe" type="range" min="4" max="96" value="50"><output id="probeOut">50%</output></div>
+      <div class="row">
+        <div class="seg" id="botSeg" role="group" aria-label="外挂开关"><button data-v="1" aria-pressed="true">外挂开</button><button data-v="0" aria-pressed="false">外挂关</button></div>
+        <button class="btn ghost" id="healBtn">手动加血<kbd>H</kbd></button>
+      </div>
+      <div class="row">
+        <button class="btn ghost" id="eyeBtn" aria-pressed="false">外挂的视野</button>
+        <button class="btn ghost" id="poisonBtn" aria-pressed="false">让角色中毒</button>
+        <button class="btn ghost" id="resetBtn">重来</button>
+      </div>
+      <dl class="stats">
+        <div><dt>坚持</dt><dd id="stT">0:00</dd></div>
+        <div><dt>倒下</dt><dd id="stD">0</dd></div>
+        <div><dt>用药</dt><dd id="stH">0</dd></div>
+        <div><dt>药效溢出</dt><dd id="stW">0</dd></div>
+      </dl>
+      <p id="gameMsg" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="col">
+    <p>它的野心没有大到把系统内部的逻辑全部破解，只把握住一点输出。可这一点已经够用，人就能从这一小块简单的流程里解放出来，把力气花在更复杂、更有意思的东西上。这简直是模块化思想的范本。</p>
+    <p class="note">试试“让角色中毒”：血条变成绿色，外挂只认识红和灰，再也等不到“红变灰”的那一刻。它的那一点理解，只在它的边界之内成立。（中毒这一段是交互版补的。）</p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="s2">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">02</span>
+    <span class="secno">02 · 看得多深</span>
+    <h2>从描述，到机制</h2>
+    <p>数据科学里，分析可以按目的分成几种，难度一级比一级高。最浅的是<b>描述</b>：把看到的数据讲清楚。最深的是<b>机制</b>：弄清楚产生这些数据的系统里，每个个体的哪些变量发生了变化，这些变化又引起了哪些别的变化。</p>
+    <p>拿一只梨来说。从上往下点，看要回答的问题怎样变深，需要的东西怎样变多。</p>
+  </div>
+
+  <div class="bench wide ladder">
+    <div class="pear-view">
+      <button class="btn ghost" id="pearZoom" aria-pressed="false" aria-controls="pearViewport">放大图示</button>
+      <div class="pear-viewport" id="pearViewport" tabindex="0" role="region" aria-label="梨的分析图，放大后可左右滚动"><svg id="pearSvg" viewBox="0 0 640 492" role="group" aria-label="一只梨在六种分析深度下的样子"></svg></div>
+      <p class="cap" id="pearHint">小字看不清时可放大，再左右滑动查看。</p>
+    </div>
+    <div>
+      <ol class="rungs" id="rungs"></ol>
+      <div class="lvcard">
+        <p id="lvText"></p>
+        <div id="lvctl"></div>
+        <div class="cost" id="cost" aria-label="每一级大致需要的数据与投入"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <p>原文只举了两端：描述只要我记下梨的形状、颜色、大小；机制要我弄清它为什么是这样的形状、颜色、大小，三者之间又有什么关系。然后还有一个问题：换一只梨，我们建立的模型还对吗？</p>
+    <p class="note">六种类型来自 Coursera 课程 <i>The Data Scientist’s Toolbox</i>（Jeff Leek）的讲义 <i>Types of Questions</i>。中间四级的梨子例子和机制图里的变量是交互版补的，只为示意，不是植物学结论。</p>
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="s3">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">03</span>
+    <span class="secno">03 · 飓风与蝴蝶</span>
+    <h2>信息永远不够</h2>
+    <p>理想中，我们想要机制级别的答案：从一场飓风里清晰地、精确地捕捉到一只蝴蝶的飞舞。可现实是，<b>我们所能掌握的信息永远是极为不足的。</b></p>
+    <p>下面是两个一模一样的世界，只差一件事：其中一个世界里，有只蝴蝶扇了一下翅膀。</p>
+  </div>
+
+  <div class="bench wide">
+    <div class="storm">
+      <canvas id="stormCv" aria-label="俯视的海图：左边是海岸和一座城，右边海上有一场飓风。两个世界的飓风从同一点出发，前半程完全重合；其中一个世界里有只蝴蝶扇了一下翅膀，后半程两场飓风分开，一场登陆了城市，一场转向海上。"></canvas>
+      <canvas id="stormOv" aria-hidden="true"></canvas>
+    </div>
+    <canvas id="gapCv" aria-label="两个世界的飓风相差多远，对数刻度：从几厘米开始按指数增长，直到上千公里。灰色带是测量误差，差别越过它之前，观测不出来。"></canvas>
+    <div class="stormbar">
+      <div class="row">
+        <button class="btn" id="flapBtn">让蝴蝶扇一下翅膀</button>
+        <span class="lab" style="margin:0 0 0 6px">观测点</span>
+        <div class="seg" id="sensSeg" role="group" aria-label="观测点数量"><button data-n="12" aria-pressed="false">12</button><button data-n="600" aria-pressed="true">600</button><button data-n="9000" aria-pressed="false">9 000</button></div>
+      </div>
+      <div id="stormDay"></div>
+    </div>
+    <p id="stormRead" aria-live="polite"></p>
+  </div>
+
+  <div class="col">
+    <p>即使到了数据产量超大的时代又怎样呢？数据倒是多起来了，从中提取信息的难度也变大了：观测点从 12 个加到 9 000 个，误差缩小了二十多倍，也只让人早一天多看出两个世界不一样，那时两场飓风已经快要分道扬镳。这种时候，一定要控制住自己的贪欲，步步为营。</p>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="s4">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">04</span>
+    <span class="secno">04 · 带回来</span>
+    <h2>够用了，就回来</h2>
+    <p>有时衡量过投入产出，一个问题研究到某个深度和广度就已经满足需要了，就像那个外挂。剩下的资源，更应该用在别的刀口上。</p>
+    <p>下面三个问题共用一份时间和精力。每一列从上往下，是上一节的六级分析。点一格，决定这个问题解析到哪一层。</p>
+  </div>
+
+  <div class="bench wide">
+    <p class="plegend">格子里的横条：解析到这一层，能多带回来多少用处。右下角的数字：这一层要花的时间和精力。</p>
+    <div class="plan" id="plan"></div>
+    <div class="hud">
+      <div class="bud"><span class="lab">时间和精力 · 用了 <span class="mono" id="budNum">0</span> / 100</span><div class="budbar" id="budBar"><i></i><i></i><i></i></div></div>
+      <div><span class="lab">带回来的用处</span><div class="num go" id="gotNum">0</div></div>
+      <div><span class="lab">同一份预算，最多</span><div class="num" id="bestNum">0</div></div>
+    </div>
+    <p id="planMsg" aria-live="polite"></p>
+    <div class="row"><button class="btn ghost" id="bestBtn">看看最好的分法</button><button class="btn ghost" id="clearBtn">清空重来</button></div>
+  </div>
+
+  <div class="col">
+    <p>想要较好地解析一个问题系统，当然需要“打破沙锅问到底”的集中力和恒心。但我们要一直提醒自己：在粗糙的现实之中，要解决的问题必须得有一个边界，这个边界让我们不至于在深挖隧道的过程中失去回来的路径。</p>
+  </div>
+
+  <div class="coda col">
+    <q>解析的第一原则，<br>便是要<span class="hl">带有限的结果回来</span>。</q>
+    <p class="src">这是我们不得不面对的一个极限。</p>
+  </div>
+</section>
+
+<footer class="col">
+  交互版改编自作者 2014 年的旧文<a href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html">《问题解析的极限》</a>。分析类型参考 Jeff Leek, <i>The Data Scientist’s Toolbox</i>（Coursera）讲义 <i>Types of Questions</i>。开头的问题树、外挂试验台、梨的中间四级、两个世界的飓风和三个问题的预算，都是交互版补的示意，数值都是为了说明而设定的。
+</footer>
+</div>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function rng(seed) { let s = seed >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
+function gauss(r) { return Math.sqrt(-2 * Math.log(r() + 1e-9)) * Math.cos(2 * Math.PI * r()); }
+function fit(cv, h) {
+  const dpr = Math.min(2, devicePixelRatio || 1), w = cv.clientWidth, hh = h ?? cv.clientHeight;
+  cv.width = Math.round(w * dpr); cv.height = Math.round(hh * dpr);
+  const g = cv.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); return [g, w, hh];
+}
+// One rAF loop; each module only runs while on screen.
+const loops = [];
+function addLoop(el, fn) {
+  const o = { fn, vis: false }; loops.push(o);
+  new IntersectionObserver(es => { o.vis = es[0].isIntersecting; }, { rootMargin: "80px" }).observe(el);
+}
+let lastT = performance.now();
+requestAnimationFrame(function tick(now) {
+  const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
+  // one module throwing must not stop the others
+  for (const o of loops) if (o.vis) { try { o.fn(dt, now / 1000); } catch (e) { if (!o.err) { o.err = 1; console.error(e); } } }
+  requestAnimationFrame(tick);
+});
+
+/* =========================================================
+   Pixel game shared by the hero and section 01
+   ========================================================= */
+const PW = 64, PH = 36, BAR_X = 3, BAR_W = 26, BAR_Y = 3;
+const C = {
+  bg: "#0b0d10", ground: "#15181d", ground2: "#1d2228", frame: "#4a505a", empty: "#3a3f47",
+  hp: "#e2384d", poison: "#4fd06a", mp: "#3d7bff", mpE: "#20263a",
+  skin: "#e8c39e", hair: "#4a3020", tunic: "#4a7bd1", tunicD: "#36609f", legs: "#2b2f38", sword: "#cfd6de",
+  slime: "#58c46a", slimeD: "#3c9a4c", slimeL: "#9be3a5", eye: "#0b0d10", white: "#ffffff", heal: "#3cf2b4", grey: "#5f6670"
+};
+const SPK = []; { const r = rng(7); for (let i = 0; i < 46; i++) SPK.push([Math.floor(r() * PW), 27 + Math.floor(r() * 9)]); }
+function newSim() { return { hp: 100, mp: 100, next: 1.2, hurt: 0, healT: 0, lunge: 0, dead: 0, poison: false, heals: 0, waste: 0, downs: 0, alive: 0, frame: 0, lastDmg: 0, crit: false, rs: 0x3f9a }; }
+function stepSim(s, dt, r) {
+  s.frame++;
+  s.hurt = Math.max(0, s.hurt - dt); s.healT = Math.max(0, s.healT - dt); s.lunge = Math.max(0, s.lunge - dt);
+  if (s.dead > 0) { s.dead -= dt; if (s.dead <= 0) { s.dead = 0; s.hp = 100; s.next = 1.4; } return; }
+  s.alive += dt; s.mp = Math.min(100, s.mp + dt * 6);
+  if (s.poison) s.hp -= dt * 2.4;
+  s.next -= dt;
+  if (s.next <= 0) {
+    s.next = 0.7 + r() * 0.65; s.lunge = 0.28; s.crit = r() < 0.07;
+    const d = s.crit ? 38 + r() * 9 : 5 + r() * 11;
+    s.hp -= d; s.hurt = 0.32; s.lastDmg = d; s.rs = (s.rs * 75 + 74) % 65537;
+  }
+  if (s.hp <= 0) { s.hp = 0; s.dead = 1.5; s.downs++; if (s.poison) s.pdT = s.alive; s.poison = false; s.onDown && s.onDown(); }
+}
+function healSim(s) {
+  if (s.dead > 0) return false;
+  const before = s.hp; s.hp = Math.min(100, s.hp + 50);
+  s.waste += 50 - (s.hp - before); s.heals++; s.healT = 0.7; s.mp = Math.max(0, s.mp - 12); return true;
+}
+function rect(g, c, x, y, w, h) { g.fillStyle = c; g.fillRect(x, y, w, h); }
+function drawScene(g, s, t) {
+  rect(g, C.bg, 0, 0, PW, PH);
+  rect(g, C.ground, 0, 27, PW, 9);
+  g.fillStyle = C.ground2; for (const [x, y] of SPK) g.fillRect(x, y, 1, 1);
+  // bars
+  rect(g, C.frame, BAR_X - 1, BAR_Y - 1, BAR_W + 2, 4);
+  rect(g, C.empty, BAR_X, BAR_Y, BAR_W, 2);
+  rect(g, s.poison ? C.poison : C.hp, BAR_X, BAR_Y, Math.round(BAR_W * clamp(s.hp, 0, 100) / 100), 2);
+  rect(g, C.frame, BAR_X - 1, 7, 20, 3);
+  rect(g, C.mpE, BAR_X, 8, 18, 1);
+  rect(g, C.mp, BAR_X, 8, Math.round(18 * s.mp / 100), 1);
+  // hero
+  const hx = 15, fl = s.hurt > 0 && Math.floor(s.hurt * 22) % 2 === 0;
+  if (s.dead > 0) {
+    rect(g, C.grey, hx - 2, 25, 9, 2); rect(g, C.skin, hx + 7, 24, 3, 3); rect(g, C.sword, hx - 6, 26, 4, 1);
+  } else {
+    const bob = Math.floor(t * 2) % 2;
+    rect(g, fl ? C.white : C.hair, hx + 1, 14 + bob, 5, 2);
+    rect(g, fl ? C.white : C.skin, hx + 1, 16 + bob, 5, 3);
+    rect(g, C.eye, hx + 4, 17 + bob, 1, 1);
+    rect(g, fl ? C.white : C.tunic, hx, 19 + bob, 7, 4);
+    rect(g, fl ? C.white : C.tunicD, hx, 22 + bob, 7, 1);
+    rect(g, C.legs, hx + 1, 23, 2, 4); rect(g, C.legs, hx + 4, 23, 2, 4);
+    rect(g, C.sword, hx + 7, 20 + bob, 1, 1); rect(g, C.sword, hx + 8, 19 + bob, 1, 1); rect(g, C.sword, hx + 9, 18 + bob, 1, 1); rect(g, C.sword, hx + 10, 17 + bob, 1, 1);
+    if (s.poison) { g.fillStyle = C.poison; const k = Math.floor(t * 3); g.fillRect(hx + (k % 6), 12 - (k % 3), 1, 1); }
+  }
+  // heal sparkles
+  if (s.healT > 0) {
+    g.fillStyle = C.heal; const k = 1 - s.healT / 0.7;
+    for (let i = 0; i < 6; i++) g.fillRect(hx - 1 + i * 2 - (i % 2), Math.round(24 - k * 14 - (i % 3) * 2), 1, 1);
+  }
+  // slime
+  const lunge = s.lunge > 0 ? Math.round(Math.sin((1 - s.lunge / 0.28) * Math.PI) * 14) : 0;
+  const sq = Math.floor(t * 3) % 2, sx = 43 - lunge;
+  rect(g, C.slime, sx + 3, 21 + sq, 5, 1); rect(g, C.slime, sx + 2, 22 + sq, 7, 1);
+  rect(g, C.slime, sx + 1, 23 + sq, 9, 3 - sq); rect(g, C.slimeD, sx, 26, 11, 1);
+  rect(g, C.slimeL, sx + 3, 22 + sq, 1, 1);
+  rect(g, C.eye, sx + 3, 24, 1, 1); rect(g, C.eye, sx + 6, 24, 1, 1);
+}
+const HP_RGB = [226, 56, 77], EMPTY_RGB = [58, 63, 71];
+function classify(rgb) {
+  const d = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+  if (d(rgb, HP_RGB) < 50) return "red";
+  if (d(rgb, EMPTY_RGB) < 50) return "grey";
+  return "other";
+}
+const hex = rgb => "#" + rgb.map(v => v.toString(16).padStart(2, "0")).join("").toUpperCase();
+function makeOff() { const c = document.createElement("canvas"); c.width = PW; c.height = PH; return c.getContext("2d", { willReadFrequently: true }); }
+// The 64×36 scene scaled up in one drawImage, then a hairline grid so it reads as pixels.
+function blit(g, src, x0, y0, cell, alpha = 1) {
+  g.imageSmoothingEnabled = false; g.globalAlpha = alpha;
+  g.drawImage(src, 0, 0, PW, PH, x0, y0, PW * cell, PH * cell); g.globalAlpha = 1;
+  if (cell > 6) {
+    g.fillStyle = C.bg; g.beginPath();
+    for (let x = 1; x <= PW; x++) g.rect(x0 + x * cell - 1, y0, 1, PH * cell);
+    for (let y = 1; y <= PH; y++) g.rect(x0, y0 + y * cell - 1, PW * cell, 1);
+    g.fill();
+  }
+}
+function drawBits(g, w, h, hist, now, span) {
+  g.clearRect(0, 0, w, h);
+  g.fillStyle = "#14171b"; g.fillRect(0, h / 2 - 9, w, 18);
+  for (let i = 0; i < hist.length; i++) {
+    const a = hist[i], b = hist[i + 1], t0 = a.t, t1 = b ? b.t : now;
+    const x0 = w - (now - t0) / span * w, x1 = w - (now - t1) / span * w;
+    if (x1 < 0) continue;
+    const col = a.c === "red" ? C.hp : a.c === "grey" ? C.empty : C.poison;
+    g.fillStyle = col; g.fillRect(Math.max(0, x0), h / 2 - 9, x1 - Math.max(0, x0), 18);
+  }
+  g.fillStyle = "rgba(60,242,180,.95)";
+  for (const a of hist) if (a.fire) { const x = w - (now - a.t) / span * w; if (x >= 0) g.fillRect(x - 1, 0, 2, h); }
+}
+
+/* ---------- hero: a question tree that never ends ---------- */
+(() => {
+  const cv = $("#heroCv"), L = 10, Q = 0.8, dpr = Math.min(2, devicePixelRatio || 1);
+  let g, W, H, lit, dim, nodes = [], d = 2.5, dT = 2.5, ph = -0.36, idle = 99, inside = false, focused = false, drag = false, down = null, cutY = 0, lastD = -1;
+  // each level sits a little closer to the one above: the tree sinks toward a floor it never reaches
+  const top = () => H * 0.12, span = () => H * 0.82;
+  const yOf = k => top() + span() * (1 - Math.pow(Q, k)) / (1 - Math.pow(Q, L));
+  const kOf = y => Math.log(1 - clamp((y - top()) / span(), 0, 0.999) * (1 - Math.pow(Q, L))) / Math.log(Q);
+  function layer(on) {
+    const c = document.createElement("canvas"); c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
+    const x = c.getContext("2d"); x.setTransform(dpr, 0, 0, dpr, 0, 0); x.lineCap = "round";
+    for (let k = 1; k <= L; k++) {
+      x.strokeStyle = on ? `rgba(235,237,240,${Math.max(0.3, 0.9 - k * 0.07)})` : `rgba(138,144,153,${0.55 * Math.pow(0.8, k)})`;
+      x.lineWidth = Math.max(0.5, 1.4 * Math.pow(0.86, k)); x.beginPath();
+      nodes[k].forEach((c2, i) => { const p = nodes[k - 1][i >> 1], dy = c2.y - p.y; x.moveTo(p.x, p.y); x.bezierCurveTo(p.x, p.y + dy * 0.55, c2.x, c2.y - dy * 0.55, c2.x, c2.y); });
+      x.stroke();
+    }
+    for (let k = 0; k <= L; k++) {
+      const rad = Math.max(0.7, 4.6 * Math.pow(0.76, k));
+      x.fillStyle = on ? "#ebedf0" : `rgba(138,144,153,${0.6 * Math.pow(0.8, k)})`; x.beginPath();
+      for (const p of nodes[k]) { x.moveTo(p.x + rad, p.y); x.arc(p.x, p.y, rad, 0, 7); }
+      x.fill();
+    }
+    return c;
+  }
+  function build() {
+    [g, W, H] = fit(cv); if (!W || !H) return;
+    const r = rng(31); nodes = [];
+    for (let k = 0; k <= L; k++) {
+      const n = 2 ** k, w = W * Math.min(0.94, 0.14 + 0.24 * k), gap = k ? yOf(k) - yOf(k - 1) : 0, row = [];
+      for (let i = 0; i < n; i++) row.push({ x: W / 2 + ((i + 0.5) / n - 0.5) * w + (r() - 0.5) * (w / n) * 0.5, y: yOf(k) + (r() - 0.5) * gap * 0.18 });
+      nodes.push(row);
+    }
+    lit = layer(true); dim = layer(false); lastD = -1;
+  }
+  build(); addEventListener("resize", build);
+  // input: hover (mouse), tap or drag the line (touch), arrow keys
+  const py = e => e.clientY - cv.getBoundingClientRect().top;
+  const setY = y => { dT = clamp(kOf(y), 0.5, L - 1.5); idle = 0; };
+  cv.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") inside = true; });
+  cv.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") { inside = false; idle = 0; } });
+  cv.addEventListener("pointermove", e => { if (e.pointerType === "mouse" || drag) setY(py(e)); });
+  cv.addEventListener("touchstart", e => { if (Math.abs(e.touches[0].clientY - cv.getBoundingClientRect().top - cutY) < 30) e.preventDefault(); }, { passive: false });
+  cv.addEventListener("pointerdown", e => {
+    if (e.pointerType === "mouse") return; down = [e.clientX, e.clientY];
+    if (Math.abs(py(e) - cutY) < 30) { drag = true; try { cv.setPointerCapture(e.pointerId); } catch (_) {} }
+  });
+  cv.addEventListener("pointerup", e => {
+    if (e.pointerType === "mouse") return;
+    if (!drag && down && Math.hypot(e.clientX - down[0], e.clientY - down[1]) < 10) setY(py(e));
+    drag = false; down = null; idle = 0;
+  });
+  cv.addEventListener("pointercancel", () => { drag = false; down = null; });
+  cv.addEventListener("focus", () => focused = true);
+  cv.addEventListener("blur", () => { focused = false; idle = 0; });
+  cv.addEventListener("keydown", e => {
+    const s = e.key === "ArrowDown" ? 1 : e.key === "ArrowUp" ? -1 : 0; if (!s) return; e.preventDefault();
+    dT = clamp(Math.floor(dT) + 0.5 + s * (e.shiftKey ? 2 : 1), 0.5, L - 1.5); idle = 0;
+  });
+  function label(txt, x, y, col, align, font) {
+    g.font = font; g.textAlign = align; g.textBaseline = "middle";
+    const w = g.measureText(txt).width, x0 = align === "right" ? x - w : x;
+    g.fillStyle = "rgba(7,8,10,.82)"; g.fillRect(x0 - 5, y - 10, w + 10, 20);
+    g.fillStyle = col; g.fillText(txt, x, y + 0.5); g.textAlign = "left";
+  }
+  function draw() {
+    if (!lit) return;
+    cutY = yOf(d);
+    g.fillStyle = "#07080a"; g.fillRect(0, 0, W, H);
+    g.drawImage(dim, 0, 0, W, H);
+    g.save(); g.beginPath(); g.rect(0, 0, W, cutY); g.clip(); g.drawImage(lit, 0, 0, W, H); g.restore();
+    // below the line the tree sinks into the dark
+    const f0 = Math.max(cutY, yOf(L - 4)), fg = g.createLinearGradient(0, f0, 0, H);
+    fg.addColorStop(0, "rgba(7,8,10,0)"); fg.addColorStop(1, "rgba(7,8,10,.94)"); g.fillStyle = fg; g.fillRect(0, f0, W, H - f0);
+    // the open questions right under the line
+    const kf = Math.floor(d) + 1, row = nodes[kf], few = row.length <= 16;
+    const rr = few ? clamp(W / row.length * 0.2, 6, 10) : Math.max(1.3, 3.4 * Math.pow(0.82, kf - 4));
+    g.strokeStyle = "rgba(235,237,240,.9)"; g.lineWidth = 1; g.setLineDash(few ? [2, 2] : []);
+    g.beginPath(); for (const p of row) { g.moveTo(p.x + rr, p.y); g.arc(p.x, p.y, rr, 0, 7); } g.stroke(); g.setLineDash([]);
+    if (few) {
+      g.fillStyle = "#ebedf0"; g.font = `700 ${Math.round(rr * 1.3)}px JetBrains Mono, monospace`; g.textAlign = "center"; g.textBaseline = "middle";
+      for (const p of row) g.fillText("?", p.x, p.y + 0.5);
+      g.textAlign = "left";
+    }
+    const root = nodes[0][0], small = W < 480, fs = small ? 11 : 12;
+    label("一个问题", root.x + 12, root.y, "#8a9099", "left", `500 ${fs}px Noto Sans SC, sans-serif`);
+    // the line where you stop
+    g.strokeStyle = css("--accent"); g.lineWidth = 1.5; g.setLineDash([6, 5]);
+    g.beginPath(); g.moveTo(24, cutY); g.lineTo(W - 10, cutY); g.stroke(); g.setLineDash([]);
+    g.fillStyle = css("--accent"); g.beginPath(); g.arc(14, cutY, 6, 0, 7); g.fill();
+    label("停在这里", 24, cutY - 15, css("--accent"), "left", `600 ${fs}px Noto Sans SC, sans-serif`);
+    const n = 2 ** kf;
+    label(`答了 ${n - 1} 个 · 冒出 ${n} 个新问题`, W - 10, cutY - 15, "#ebedf0", "right", `500 ${fs}px Noto Sans SC, sans-serif`);
+  }
+  function frame(dt) {
+    idle += dt;
+    const auto = !RM && !drag && !inside && !focused && idle > 3.5;
+    if (auto) { ph += dt * 0.32; dT = 3.4 + 2.6 * Math.sin(ph); }
+    d = lerp(d, dT, 1 - Math.exp(-dt * (auto ? 1.6 : 9)));
+    if (Math.abs(d - lastD) < 1e-3) return;
+    lastD = d; draw();
+  }
+  draw(); addLoop(cv, frame);
+})();
+
+/* ---------- 01 game ---------- */
+(() => {
+  const cv = $("#gameCv"), bit = $("#bitCv"), off = makeOff(), r = rng(23);
+  let g, W, H, bg, bw, bh, sim = newSim(), bot = true, P = 0.5, prev = "red", hist = [{ t: 0, c: "red" }], clock = 0, fireT = 0, lastInn = 0, msgKey = "", eye = false, eyeK = 0;
+  const resize = () => { [g, W, H] = fit(cv); [bg, bw, bh] = fit(bit); };
+  resize(); addEventListener("resize", resize);
+  const probeIn = $("#probe"), probeOut = $("#probeOut");
+  const setP = v => { P = clamp(v, 0.04, 0.96); probeIn.value = Math.round(P * 100); probeOut.textContent = Math.round(P * 100) + "%"; };
+  probeIn.addEventListener("input", () => setP(probeIn.value / 100));
+  // drag on canvas to move the probe
+  let drag = false, touchStart = null;
+  const toP = e => { const b = cv.getBoundingClientRect(), cell = b.width / PW; return ((e.clientX - b.left) / cell - BAR_X) / BAR_W; };
+  cv.addEventListener("pointerdown", e => {
+    if (e.pointerType === "touch") { touchStart = [e.clientX, e.clientY]; return; }
+    drag = true; try { cv.setPointerCapture(e.pointerId); } catch (_) {} setP(toP(e));
+  });
+  cv.addEventListener("pointermove", e => {
+    if (touchStart && !drag) {
+      const dx = Math.abs(e.clientX - touchStart[0]), dy = Math.abs(e.clientY - touchStart[1]);
+      if (dy > 8 && dy >= dx) { touchStart = null; return; }
+      if (dx <= 8) return;
+      drag = true; try { cv.setPointerCapture(e.pointerId); } catch (_) {}
+    }
+    if (drag) setP(toP(e));
+  });
+  cv.addEventListener("pointerup", e => { if (touchStart && !drag) setP(toP(e)); drag = false; touchStart = null; });
+  for (const type of ["pointercancel", "lostpointercapture"]) cv.addEventListener(type, () => { drag = false; touchStart = null; });
+  cv.addEventListener("keydown", e => { if (e.key === "ArrowLeft") { setP(P - 0.02); e.preventDefault(); } if (e.key === "ArrowRight") { setP(P + 0.02); e.preventDefault(); } });
+  $("#botSeg").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return; bot = b.dataset.v === "1";
+    for (const x of $("#botSeg").children) x.setAttribute("aria-pressed", x === b);
+  });
+  const manual = () => healSim(sim);
+  $("#healBtn").addEventListener("click", manual);
+  addEventListener("keydown", e => { if ((e.key === "h" || e.key === "H") && !e.target.closest("input")) { const b = cv.getBoundingClientRect(); if (b.bottom > 0 && b.top < innerHeight) manual(); } });
+  // see the screen the way the bot does: everything but one pixel goes dark
+  $("#eyeBtn").addEventListener("click", e => { eye = !eye; e.currentTarget.setAttribute("aria-pressed", eye); });
+  const pBtn = $("#poisonBtn");
+  pBtn.addEventListener("click", () => { if (sim.dead > 0) return; sim.poison = !sim.poison; pBtn.setAttribute("aria-pressed", sim.poison); });
+  sim.onDown = () => pBtn.setAttribute("aria-pressed", "false");
+  $("#resetBtn").addEventListener("click", () => {
+    sim = newSim(); sim.onDown = () => pBtn.setAttribute("aria-pressed", "false"); pBtn.setAttribute("aria-pressed", "false");
+    prev = "red"; hist = [{ t: clock, c: "red" }]; msgKey = "";
+  });
+  const sw = $("#sw"), hexEl = $("#hex"), clsEl = $("#cls"), act = $("#ruleAct"), inn = $("#innards");
+  $("#innCount").textContent = "34 个变量 · 每帧都在变";
+  const fmtT = s => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+  function innards() {
+    const s = sim, f = (x, d = 1) => x.toFixed(d);
+    const v = [
+      `hp=${f(s.hp)}`, `hp.max=100`, `mp=${f(s.mp)}`, `atk.timer=${f(s.next, 2)}`, `dmg.last=${f(s.lastDmg)}`, `crit=${s.crit ? 1 : 0}`, `crit.p=0.07`,
+      `rng=0x${s.rs.toString(16)}`, `slime.state=${s.lunge > 0 ? "LUNGE" : "IDLE"}`, `slime.hp=420`, `slime.def=3`, `buff.poison=${s.poison ? 1 : 0}`,
+      `poison.dps=2.4`, `hero.state=${s.dead > 0 ? "DOWN" : s.hurt > 0 ? "HURT" : "IDLE"}`, `hero.def=4`, `hero.lv=12`, `exp=1883`, `gold=274`,
+      `frame=${s.frame}`, `potion.cd=0`, `heal.amt=50`, `anim.t=${f(clock % 1, 3)}`, `cam.x=0`, `aggro=1`, `drop.table=7`, `weather=CLEAR`,
+      `music.bar=${Math.floor(clock * 2) % 64}`, `inv.slots=24`, `quest.flag=0b1011`, `ai.tick=${s.frame >> 2}`, `net.ping=31`, `save.dirty=1`, `ui.scale=1`, `fps=60`
+    ];
+    inn.textContent = v.join("  ");
+  }
+  function message() {
+    let k, m;
+    if (!bot) { k = "off"; m = "外挂关了，加血全靠你：盯着血条，判断，按 H。这一小段流程，正是外挂替人接管的部分。"; }
+    else if (sim.poison) { k = "p"; m = "血条变绿了。外挂只认识<b>红</b>和<b>灰</b>：绿色在它眼里只是“不是红”，于是它只在中毒那一刻按了一下，之后再也等不到“红变灰”。"; }
+    else if (sim.pdT !== undefined && sim.alive - sim.pdT < 9) { k = "pd"; m = "中毒的那段时间，外挂一次也没再出手，角色倒下了。复活后血条变回红色，它又“看得懂”了。"; }
+    else if (sim.downs > 0 && P < 0.45) { k = "low"; m = "探针放得太低：一记 40 多的重击，能从探针上方直接把血条打空，外挂来不及看到红变灰。"; }
+    else if (sim.heals > 4 && sim.waste / sim.heals > 18) { k = "high"; m = "探针放得太高：常常快满血就加血，药效一大半溢出。"; }
+    else if (sim.alive > 20 && sim.downs === 0) { k = "ok"; m = "外挂只读<b>一个像素、一个比特</b>，已经替你撑了 " + Math.floor(sim.alive) + " 秒。它不需要懂游戏。"; }
+    else { k = "idle"; m = "左右拖动画面（或用滑杆）移动 HP 条上的探针，决定外挂在哪条线出手。"; }
+    if (k !== msgKey || k === "ok") { msgKey = k; $("#gameMsg").innerHTML = m; }
+  }
+  let msgT = 0;
+  function frame(dt) {
+    clock += dt; stepSim(sim, dt, r); drawScene(off, sim, clock);
+    const px = BAR_X + Math.floor(P * BAR_W);
+    const pd = off.getImageData(px, BAR_Y, 1, 1).data, rgb = [pd[0], pd[1], pd[2]], c = classify(rgb);
+    if (c !== prev) {
+      const fire = bot && prev === "red" && c !== "red";
+      hist.push({ t: clock, c, fire }); if (hist.length > 60) hist.shift();
+      if (fire && healSim(sim)) fireT = 1;
+      prev = c;
+    }
+    const cell = W / PW, y0 = (H - cell * PH) / 2, rx = px * cell, ry = y0 + BAR_Y * cell;
+    eyeK = lerp(eyeK, eye ? 1 : 0, 1 - Math.exp(-dt * 5));
+    g.fillStyle = C.bg; g.fillRect(0, 0, W, H);
+    blit(g, off.canvas, 0, y0, cell, 1 - 0.9 * eyeK);
+    if (eyeK > 0.01) {
+      g.drawImage(off.canvas, px, BAR_Y, 1, 1, rx, ry, cell - (cell > 6 ? 1 : 0), cell - (cell > 6 ? 1 : 0));
+      g.globalAlpha = eyeK; g.font = `500 ${Math.max(11, cell * 0.95)}px Noto Sans SC, sans-serif`; g.fillStyle = "#8a9099"; g.textAlign = "center"; g.textBaseline = "middle";
+      g.fillText("外挂看到的，只有这一个像素", W / 2, y0 + cell * 31.5); g.textAlign = "left"; g.globalAlpha = 1;
+    }
+    // probe: a tall reticle on the chosen pixel + the threshold line it implies
+    g.strokeStyle = css("--accent"); g.lineWidth = 2;
+    g.strokeRect(rx - 3, ry - 3, cell + 5, cell * 2 + 5);
+    g.setLineDash([3, 4]); g.lineWidth = 1; g.beginPath(); g.moveTo(rx + cell / 2, ry + cell * 2 + 3); g.lineTo(rx + cell / 2, ry + cell * 6); g.stroke(); g.setLineDash([]);
+    g.font = `600 ${Math.max(11, cell * 0.9)}px JetBrains Mono, monospace`; g.fillStyle = css("--accent"); g.textBaseline = "top";
+    g.fillText("探针 " + Math.round(P * 100) + "%", rx - cell, ry + cell * 6.4);
+    if (sim.dead > 0) {
+      g.fillStyle = "rgba(5,6,7,.55)"; g.fillRect(0, 0, W, H);
+      g.font = `900 ${cell * 3.4}px Noto Serif SC, serif`; g.fillStyle = css("--stop"); g.textAlign = "center"; g.textBaseline = "middle";
+      g.fillText("倒下", W / 2, H / 2); g.textAlign = "left";
+    }
+    // readout
+    sw.style.background = hex(rgb); hexEl.textContent = hex(rgb);
+    clsEl.textContent = c === "red" ? "红" : c === "grey" ? "灰" : "？不认识";
+    clsEl.style.color = c === "red" ? C.hp : c === "grey" ? "#aab0b8" : css("--stop");
+    drawBits(bg, bw, bh, hist, clock, 10);
+    fireT = Math.max(0, fireT - dt * 2.2); act.classList.toggle("fire", fireT > 0.5);
+    $("#stT").textContent = fmtT(sim.alive); $("#stD").textContent = sim.downs; $("#stH").textContent = sim.heals; $("#stW").textContent = Math.round(sim.waste);
+    $("#stD").classList.toggle("bad", sim.downs > 0);
+    if ((lastInn += dt) > 0.12) { lastInn = 0; innards(); }
+    if ((msgT += dt) > 0.5) { msgT = 0; message(); }
+  }
+  setP(0.5); message();
+  addLoop($(".game"), frame);
+})();
+
+/* =========================================================
+   02 · The ladder: one pear, six depths
+   ========================================================= */
+(() => {
+  const NS = "http://www.w3.org/2000/svg", svg = $("#pearSvg");
+  $("#pearZoom").addEventListener("click", e => {
+    const on = $("#pearViewport").classList.toggle("zoomed");
+    e.currentTarget.setAttribute("aria-pressed", on); e.currentTarget.textContent = on ? "缩回全图" : "放大图示";
+  });
+  // phones draw this figure's text larger (see CSS), so a few stacked labels need more room
+  const NAR = matchMedia("(max-width:520px)").matches;
+  const el = (tag, attrs = {}, parent = svg) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
+  const PEAR = "M0,-1 C0.22,-1 0.3,-0.62 0.34,-0.36 C0.4,-0.02 0.76,0.12 0.76,0.56 C0.76,0.96 0.42,1.06 0,1.06 C-0.42,1.06 -0.76,0.96 -0.76,0.56 C-0.76,0.12 -0.4,-0.02 -0.34,-0.36 C-0.3,-0.62 -0.22,-1 0,-1Z";
+  const NASHI = "M0,-0.52 C0.5,-0.56 0.86,-0.3 0.88,0.22 C0.9,0.74 0.5,1.02 0,1.02 C-0.5,1.02 -0.9,0.74 -0.88,0.22 C-0.86,-0.3 -0.5,-0.56 0,-0.52Z";
+  const hueCol = (h, l = 54) => `hsl(${h},64%,${l}%)`;
+  // data: 40 sampled pears, 400 orchard pears. bigger -> yellower (lower hue)
+  const r = rng(5), model = s => 88 - (s - 6) * 6.4;
+  const mk = () => { const s = 6 + r() * 5; return { s, h: clamp(model(s) + gauss(r) * 4.2, 47, 92) }; };
+  const sample = Array.from({ length: 40 }, mk); sample[0] = { s: 8.7, h: 71 };
+  const orchard = Array.from({ length: 420 }, mk);
+  const X = s => 90 + (s - 5.5) / 6 * 500, Y = h => 410 - (92 - h) / 46 * 350;
+  const n = sample.length, mx = sample.reduce((a, p) => a + p.s, 0) / n, my = sample.reduce((a, p) => a + p.h, 0) / n;
+  let sxx = 0, sxy = 0; for (const p of sample) { sxx += (p.s - mx) ** 2; sxy += (p.s - mx) * (p.h - my); }
+  const b1 = sxy / sxx, b0 = my - b1 * mx, line = s => b0 + b1 * s;
+  const sig = Math.sqrt(sample.reduce((a, p) => a + (p.h - line(p.s)) ** 2, 0) / (n - 2));
+  const seFit = s => sig * Math.sqrt(1 / n + (s - mx) ** 2 / sxx), sePred = s => sig * Math.sqrt(1 + 1 / n + (s - mx) ** 2 / sxx);
+
+  const defs = el("defs");
+  const grad = el("radialGradient", { id: "pg", cx: "0.35", cy: "0.35", r: "0.85" }, defs);
+  const st0 = el("stop", { offset: "0" }, grad), st1 = el("stop", { offset: "0.55" }, grad), st2 = el("stop", { offset: "1" }, grad);
+  const clip = el("clipPath", { id: "pc" }, defs); el("path", { d: PEAR }, clip);
+  const blushG = el("radialGradient", { id: "bl", cx: "0.5", cy: "0.5", r: "0.5" }, defs);
+  el("stop", { offset: "0", "stop-color": "#e0503a", "stop-opacity": ".85" }, blushG); el("stop", { offset: "1", "stop-color": "#e0503a", "stop-opacity": "0" }, blushG);
+  const cg = el("linearGradient", { id: "cbar", x1: "0", y1: "1", x2: "0", y2: "0" }, defs);
+  el("stop", { offset: "0", "stop-color": hueCol(92) }, cg); el("stop", { offset: "1", "stop-color": hueCol(46) }, cg);
+  const glow = el("filter", { id: "glow", x: "-50%", y: "-50%", width: "200%", height: "200%" }, defs);
+  el("feGaussianBlur", { stdDeviation: "4", result: "b" }, glow); const fm = el("feMerge", {}, glow); el("feMergeNode", { in: "b" }, fm); el("feMergeNode", { in: "SourceGraphic" }, fm);
+
+  const L = {}; const layer = (k, show) => { const g = el("g", { class: "lay" }); g.dataset.show = show; L[k] = g; return g; };
+  // axes (2-4)
+  const ax = layer("ax", "2,3,4");
+  el("line", { x1: 80, y1: 420, x2: 610, y2: 420, class: "ax" }, ax); el("line", { x1: 80, y1: 50, x2: 80, y2: 420, class: "ax" }, ax);
+  el("rect", { x: 68, y: 60, width: 6, height: 350, rx: 3, fill: "url(#cbar)" }, ax);
+  for (const s of [6, 8, 10]) { el("line", { x1: X(s), y1: 420, x2: X(s), y2: 425, class: "ax" }, ax); el("text", { x: X(s), y: 440, "text-anchor": "middle" }, ax).textContent = s; }
+  el("text", { x: 610, y: 476, "text-anchor": "end" }, ax).textContent = "大小（cm）→";
+  el("text", { x: 92, y: 44 }, ax).textContent = "↑ 越黄";
+  // orchard (3)
+  const orc = layer("orc", "3");
+  for (const p of orchard) el("circle", { cx: X(p.s), cy: Y(p.h), r: 1.6, fill: "#5a616b", opacity: ".55" }, orc);
+  el("text", { x: 600, y: 70, "text-anchor": "end" }, orc).textContent = "灰点：整个果园（你看不到）";
+  // band + line (3-4)
+  const band = layer("band", "3,4");
+  const s0 = 5.8, s1 = 11.2, pts = []; for (let s = s0; s <= s1 + 1e-6; s += 0.2) pts.push(s);
+  const up = pts.map(s => `${X(s)},${Y(line(s) - 2 * seFit(s))}`), dn = pts.slice().reverse().map(s => `${X(s)},${Y(line(s) + 2 * seFit(s))}`);
+  el("polygon", { points: up.concat(dn).join(" "), fill: "rgba(255,179,71,.14)" }, band);
+  el("line", { x1: X(s0), y1: Y(line(s0)), x2: X(s1), y2: Y(line(s1)), stroke: "#ffb347", "stroke-width": 1.5 }, band);
+  const bandLab = el("text", { x: X(10.6), y: Y(line(10.6)) - 26, "text-anchor": "middle", fill: "#ffb347" }, band); bandLab.textContent = "趋势 ± 不确定";
+  // small pears (2-4)
+  const sp = layer("sp", "2,3,4");
+  const glyphs = sample.map((p, i) => {
+    const g = el("g", { class: "mv" }, sp);
+    el("path", { d: PEAR, fill: hueCol(p.h), "vector-effect": "non-scaling-stroke", stroke: "#050607", "stroke-width": ".6" }, g);
+    g.style.transitionDelay = (i * 14) + "ms"; return g;
+  });
+  const you = layer("you", "2,3");
+  el("text", { x: X(sample[0].s) + 12, y: Y(sample[0].h) + 22, fill: "#ffb347", "font-size": "12" }, you).textContent = "↖ 你那只";
+  // prediction (4)
+  const pr = layer("pr", "4");
+  const ghost = el("g", { class: "mv" }, pr); el("path", { d: PEAR, fill: "#1a1d22", stroke: "#ebedf0", "stroke-width": 1.2, "vector-effect": "non-scaling-stroke", "stroke-dasharray": "3 3" }, ghost);
+  const ebar = el("line", { stroke: "#ebedf0", "stroke-width": 1 }, pr), eT = el("line", { stroke: "#ebedf0" }, pr), eB = el("line", { stroke: "#ebedf0" }, pr);
+  const prLab = el("text", { fill: "#ebedf0" }, pr);
+  const actual = el("circle", { r: 7, fill: "none", stroke: "#3cf2b4", "stroke-width": 2, filter: "url(#glow)", opacity: 0 }, pr);
+  const actDot = el("circle", { r: 4, fill: "#3cf2b4", opacity: 0 }, pr);
+  // causal (5)
+  const ca = layer("ca", "5");
+  const sun = el("g", { transform: "translate(500,120)" }, ca);
+  const sunC = el("circle", { r: 26, fill: "#ffb347" }, sun);
+  const rays = Array.from({ length: 12 }, (_, i) => el("line", { stroke: "#ffb347", "stroke-width": 2, "stroke-linecap": "round", transform: `rotate(${i * 30})` }, sun));
+  el("path", { d: "M465,150 Q380,170 300,215", fill: "none", stroke: "#ebedf0", "stroke-width": 1, "stroke-dasharray": "4 4", "marker-end": "" }, ca);
+  el("path", { d: "M300,215 l10,-9 M300,215 l13,2", stroke: "#ebedf0", "stroke-width": 1, fill: "none" }, ca);
+  const caLab = el("text", { x: 500, y: 208, "text-anchor": "middle", fill: "#ebedf0", "font-family": "JetBrains Mono" }, ca);
+  const caOut = el("text", { x: 210, y: 430, "text-anchor": "middle", fill: "#ebedf0" }, ca);
+  const ctrl = el("g", { transform: "translate(500,318) scale(56)" }, ca);
+  el("path", { d: PEAR, fill: hueCol(clamp(84 - 1 * 4.3, 46, 90)), stroke: "#050607", "stroke-width": 1, "vector-effect": "non-scaling-stroke" }, ctrl);
+  el("path", { d: "M0,-1 C0.02,-1.15 0.06,-1.24 0.12,-1.3", stroke: "#6b4a2b", "stroke-width": 2, fill: "none", "vector-effect": "non-scaling-stroke" }, ctrl);
+  el("rect", { x: 430, y: 236, width: 140, height: 150, rx: 8, fill: "none", stroke: "#2c3038", "stroke-dasharray": "3 4" }, ca);
+  el("text", { x: 500, y: NAR ? 400 : 410, "text-anchor": "middle" }, ca).textContent = "对照组：遮光，每天 4 小时";
+  const caDiff = el("text", { x: 500, y: NAR ? 428 : 430, "text-anchor": "middle", fill: "#ebedf0", "font-family": "JetBrains Mono" }, ca);
+  // mechanism (6)
+  const me = layer("me", "6");
+  const edgesG = el("g", {}, me), nodesG = el("g", {}, me), unkG = el("g", {}, me);
+  // main pear (always present; moves between roles)
+  const mainG = el("g", { class: "mv" });
+  const mainPear = el("path", { d: PEAR, fill: "url(#pg)", stroke: "#050607", "stroke-width": "1", "vector-effect": "non-scaling-stroke" }, mainG);
+  const mainNashi = el("path", { d: NASHI, fill: "#b8834a", opacity: 0, stroke: "#050607", "stroke-width": "1", "vector-effect": "non-scaling-stroke", style: "transition:opacity .8s" }, mainG);
+  const speck = el("g", { opacity: 0, style: "transition:opacity .8s" }, mainG);
+  { const rr = rng(3); for (let i = 0; i < 40; i++) { const a = rr() * 6.28, d = Math.sqrt(rr()) * 0.78; el("circle", { cx: Math.cos(a) * d, cy: 0.25 + Math.sin(a) * d * 0.85, r: 0.018, fill: "#e8d2a6" }, speck); } }
+  const blush = el("ellipse", { cx: 0.28, cy: 0.36, rx: 0.6, ry: 0.68, fill: "url(#bl)", opacity: 0, "clip-path": "url(#pc)" }, mainG);
+  const stem = el("path", { d: "M0,-1 C0.02,-1.15 0.06,-1.24 0.12,-1.3", stroke: "#6b4a2b", "stroke-width": "2.5", fill: "none", "vector-effect": "non-scaling-stroke", "stroke-linecap": "round" }, mainG);
+  const leaf = el("path", { d: "M0.06,-1.18 C0.25,-1.38 0.5,-1.32 0.58,-1.22 C0.42,-1.08 0.2,-1.08 0.06,-1.18Z", fill: "#5b8f3a" }, mainG);
+  // dimensions (1)
+  const di = layer("di", "1");
+  const dimPaths = [
+    ["M195,128 L195,372", "M188,128 L202,128 M188,372 L202,372"],
+    ["M240,400 L400,400", "M240,393 L240,407 M400,393 L400,407"]
+  ];
+  for (const [a, b] of dimPaths) { const p = el("path", { d: a + " " + b, class: "dim draw" }, di); p.style.setProperty("--len", 400); }
+  el("text", { x: 185, y: 254, class: "dimt", "text-anchor": "end" }, di).textContent = "高 10.1 cm";
+  el("text", { x: 320, y: 424, class: "dimt", "text-anchor": "middle" }, di).textContent = "宽 6.8 cm";
+  const swG = el("g", { transform: "translate(450,170)" }, di);
+  const sw1 = el("rect", { width: 30, height: 30, rx: 4 }, swG);
+  el("text", { x: 40, y: NAR ? 8 : 13, class: "dimt" }, swG).textContent = "颜色";
+  const hueT = el("text", { x: 40, y: NAR ? 34 : 30, class: "dimt" }, swG);
+  const wG = el("g", { transform: "translate(450,240)" }, di);
+  el("text", { x: 0, y: 13, class: "dimt" }, wG).textContent = "重 186 g";
+  el("text", { x: 0, y: NAR ? 40 : 34, class: "dimt" }, wG).textContent = "形 葫芦形";
+  el("text", { x: 0, y: NAR ? 67 : 55, class: "dimt" }, wG).textContent = "斑 少量锈斑";
+
+  // pear colour
+  let pearHue = sample[0].h, pearBlush = 0;
+  function paintPear() {
+    st0.setAttribute("stop-color", `hsl(${pearHue},70%,70%)`); st1.setAttribute("stop-color", hueCol(pearHue)); st2.setAttribute("stop-color", `hsl(${pearHue + 6},58%,34%)`);
+    blush.setAttribute("opacity", pearBlush); sw1.setAttribute("fill", hueCol(pearHue)); hueT.textContent = "色相 " + Math.round(pearHue) + "°";
+  }
+
+  // mechanism graph
+  const CX = 320, CY = 236;
+  const NODES = [
+    ["日照", -245, -185], ["光合作用", -235, -112], ["糖分", -250, -30], ["细胞膨大", -215, 110], ["水分", -262, 190],
+    ["授粉", -110, -185], ["细胞分裂", -130, -95],
+    ["温度", 95, -195], ["采摘时间", 245, -190], ["乙烯", 250, -112], ["叶绿素分解", 215, -32], ["类胡萝卜素", 228, 78],
+    ["品种基因", -40, 190], ["石细胞", 125, 160]
+  ];
+  const SOCK = { "颜色": [92, 12], "大小": [-92, 36], "质地": [0, 96] };
+  const EDGES = [
+    ["日照", "光合作用"], ["光合作用", "糖分"], ["糖分", "细胞膨大"], ["水分", "细胞膨大"], ["细胞膨大", "大小"], ["授粉", "细胞分裂"], ["细胞分裂", "大小"],
+    ["温度", "叶绿素分解"], ["乙烯", "叶绿素分解"], ["采摘时间", "乙烯"], ["叶绿素分解", "颜色"], ["类胡萝卜素", "颜色"],
+    ["品种基因", "石细胞"], ["石细胞", "质地"], ["品种基因", "大小"], ["温度", "乙烯"]
+  ];
+  const pos = {}; for (const [k, x, y] of NODES) pos[k] = [CX + x, CY + y]; for (const k in SOCK) pos[k] = [CX + SOCK[k][0], CY + SOCK[k][1]];
+  const nodeEls = {}, edgeEls = [];
+  for (const [a, b] of EDGES) {
+    const [x1, y1] = pos[a], [x2, y2] = pos[b], qx = (x1 + x2) / 2 + (CY - (y1 + y2) / 2) * 0.12, qy = (y1 + y2) / 2 + ((x1 + x2) / 2 - CX) * 0.12;
+    const p = el("path", { d: `M${x1},${y1} Q${qx},${qy} ${x2},${y2}`, fill: "none", stroke: "#5a616b", "stroke-width": 1, class: "draw" }, edgesG);
+    p.style.setProperty("--len", Math.ceil(Math.hypot(x2 - x1, y2 - y1) * 1.2)); p.dataset.a = a; p.dataset.b = b; edgeEls.push(p);
+  }
+  const pill = (k, x, y, parent, cls) => {
+    const g = el("g", { transform: `translate(${x},${y})`, style: "transition:opacity .5s" }, parent);
+    const w = k.length * 13 + 16; el("rect", { x: -w / 2, y: -11, width: w, height: 22, rx: 11, fill: "#0c0e11", stroke: "#2c3038" }, g);
+    const t = el("text", { x: 0, y: 4.5, "text-anchor": "middle", fill: "#ebedf0", "font-size": "12" }, g); t.textContent = k; if (cls) g.classList.add(cls); return g;
+  };
+  NODES.forEach(([k], i) => { const g = pill(k, ...pos[k], nodesG); g.style.transitionDelay = (i * 60) + "ms"; nodeEls[k] = g; });
+  for (const k in SOCK) { const [x, y] = pos[k]; const t = el("text", { x, y: y + 4, "text-anchor": "middle", fill: "#ffb347", "font-size": "11", "font-weight": "700" }, nodesG); t.textContent = k; }
+  const rust = pill("果锈", CX + 40, CY - 150, nodesG); rust.setAttribute("opacity", 0);
+  // unknowns that keep spawning
+  const POOL = ["土壤微生物", "去年的修剪", "蜜蜂多不多", "基因怎样表达", "雨季早了几天", "隔壁那棵树的影子", "运输时的温度", "砧木", "根系深度", "夜间温差", "叶片病害", "挂果数量"];
+  let unk = [], known = NODES.length, pi = 0;
+  let occ = [];
+  const free = (x, y) => occ.every(([a, b]) => Math.abs(a - x) > 62 || Math.abs(b - y) > 30) && Math.hypot(x - CX, y - CY) > 120;
+  function addUnk(x, y) {
+    // nudge to a free spot so new questions never sit on top of old ones
+    let ok = false;
+    for (let k = 0; k < 40 && !ok; k++) {
+      const tx = clamp(x + (k ? (Math.random() - 0.5) * k * 9 : 0), 30, 610), ty = clamp(y + (k ? (Math.random() - 0.5) * k * 7 : 0), 22, 450);
+      if (free(tx, ty)) { x = tx; y = ty; ok = true; }
+    }
+    if (!ok) return;
+    occ.push([x, y]);
+    const g = el("g", { transform: `translate(${x},${y})`, style: "cursor:pointer" }, unkG);
+    el("circle", { r: 11, fill: "#050607", stroke: "#ffb347", "stroke-dasharray": "2 2" }, g);
+    const t = el("text", { y: 4, "text-anchor": "middle", fill: "#ffb347", "font-size": "12", "font-weight": "700" }, g); t.textContent = "?";
+    g.setAttribute("tabindex", 0); g.setAttribute("role", "button"); g.setAttribute("aria-label", "追问下去");
+    const open = () => {
+      if (g.dataset.done) return; g.dataset.done = 1; g.remove();
+      const name = POOL[pi++ % POOL.length]; pill(name, x, y, unkG).querySelector("rect").setAttribute("stroke", "#ffb347"); known++;
+      const a = Math.atan2(y - CY, x - CX);
+      for (const da of [-0.35, 0.35]) addUnk(x + Math.cos(a + da) * 70 + (Math.random() - 0.5) * 30, y + Math.sin(a + da) * 56 + (Math.random() - 0.5) * 24);
+      lvTextFor(6);
+    };
+    g.addEventListener("click", open); g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
+    unk.push(g);
+  }
+  function resetUnk() { unkG.innerHTML = ""; unk = []; known = NODES.length; pi = 0; occ = Object.values(pos).map(p => p.slice()); occ.push([CX + 40, CY - 150]); for (const [x, y] of [[40, 300], [600, 250], [150, 446], [470, 440], [320, 30]]) addUnk(x, y); }
+
+  // levels
+  const LV = [
+    { k: "描述", en: "Descriptive", need: "这一只", bar: 6 },
+    { k: "探索", en: "Exploratory", need: "几十只", bar: 18 },
+    { k: "推断", en: "Inferential", need: "合理的抽样", bar: 30 },
+    { k: "预测", en: "Predictive", need: "训练 + 检验", bar: 44 },
+    { k: "因果", en: "Causal", need: "对照实验", bar: 64 },
+    { k: "机制", en: "Mechanistic", need: "整个系统", bar: 100, inf: true }
+  ];
+  let lv = 1, swapped = false;
+  const rungs = $("#rungs");
+  LV.forEach((v, i) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<button><span class="dot">${i + 1}</span><span><span class="nm">${v.k}</span><span class="en">${v.en}</span></span></button>`;
+    li.firstChild.addEventListener("click", () => setLv(i + 1)); rungs.appendChild(li);
+  });
+  const cost = $("#cost");
+  LV.forEach(v => { cost.insertAdjacentHTML("beforeend", `<span>${v.k}</span><span style="display:flex;align-items:center;gap:8px"><i style="width:${v.bar}%" class="${v.inf ? "inf" : ""}"></i><span style="white-space:nowrap">${v.need}</span></span>`); });
+  cost.insertAdjacentHTML("afterbegin", `<span style="grid-column:1/-1;font-size:.72rem">大致需要什么</span>`);
+  const lvctl = $("#lvctl");
+  function lvTextFor(l) {
+    const T = {
+      1: "<b>描述：</b>确切记下这一只梨的形状、颜色、大小。只回答“它是什么样”，需要的只是这一只梨。",
+      2: "<b>探索：</b>多看几十只，找找规律：个头大的，好像更黄？这只是发现，还不能下结论。你那只梨，现在是图里的一个点。",
+      3: "<b>推断：</b>手上 40 只能说明整个果园吗？琥珀色的带子是“有多确定”。灰点是果园里你没看到的梨。",
+      4: "<b>预测：</b>来了一只新梨，只量了大小，猜它的颜色。猜的是一个区间，不是一个点。",
+      5: "<b>因果：</b>改变一个量，看另一个跟着怎么变。多晒太阳，梨会更黄、带红晕吗？这要做实验，光看不够。",
+      6: `<b>机制：</b>弄清楚每个变量为什么变、又牵动了谁。点虚线的“?”追问下去，每回答一个，就多出两个新问题。已列出 <b>${known}</b> 个变量。`
+    };
+    $("#lvText").innerHTML = T[l] + (l === 6 && swapped ? "<br><span style='color:var(--stop)'>换成了一只沙梨：品种变了，红色的连线要重新验证，还冒出了新的变量“果锈”。</span>" : "");
+  }
+  function setMain(tr, sc) { mainG.style.transform = `translate(${tr[0]}px,${tr[1]}px) scale(${sc})`; }
+  let pred = null;
+  function newPred() {
+    const s = 6.2 + Math.random() * 4.6, h = clamp(model(s) + gauss(Math.random) * 4.2, 47, 92), ph = line(s), e = 2 * sePred(s);
+    pred = { s, h, ph, e, shown: false };
+    ghost.style.transform = `translate(${X(s)}px,${Y(ph)}px) scale(17)`;
+    for (const [ln, y1, y2] of [[ebar, Y(ph - e), Y(ph + e)]]) { ln.setAttribute("x1", X(s) + 30); ln.setAttribute("x2", X(s) + 30); ln.setAttribute("y1", y1); ln.setAttribute("y2", y2); }
+    eT.setAttribute("x1", X(s) + 25); eT.setAttribute("x2", X(s) + 35); eT.setAttribute("y1", Y(ph + e)); eT.setAttribute("y2", Y(ph + e));
+    eB.setAttribute("x1", X(s) + 25); eB.setAttribute("x2", X(s) + 35); eB.setAttribute("y1", Y(ph - e)); eB.setAttribute("y2", Y(ph - e));
+    prLab.setAttribute("x", 320); prLab.setAttribute("y", 28); prLab.setAttribute("text-anchor", "middle"); prLab.textContent = `${s.toFixed(1)} cm → 猜色相 ${Math.round(ph - e)}–${Math.round(ph + e)}°`;
+    actual.setAttribute("opacity", 0); actDot.setAttribute("opacity", 0);
+  }
+  function reveal() {
+    if (!pred) return; pred.shown = true;
+    for (const c of [actual, actDot]) { c.setAttribute("cx", X(pred.s) + 30); c.setAttribute("cy", Y(pred.h)); c.setAttribute("opacity", 1); }
+    const inside = Math.abs(pred.h - pred.ph) <= pred.e;
+    prLab.textContent = `实际 ${Math.round(pred.h)}° · ${inside ? "落在区间里" : "落在区间外"}`;
+  }
+  function setLv(l) {
+    lv = l;
+    [...rungs.querySelectorAll("button")].forEach((b, i) => b.setAttribute("aria-current", i + 1 === l));
+    [...cost.querySelectorAll("i")].forEach((b, i) => b.classList.toggle("cur", i + 1 === l));
+    for (const k in L) { const on = L[k].dataset.show.split(",").includes(String(l)); L[k].style.opacity = on ? 1 : 0; L[k].style.visibility = on ? "visible" : "hidden"; L[k].setAttribute("aria-hidden", !on); L[k].style.pointerEvents = on ? "" : "none"; L[k].classList.toggle("on", on); }
+    // small pears
+    sample.forEach((p, i) => {
+      const g = glyphs[i];
+      if (l >= 2 && l <= 4) { g.style.transform = `translate(${X(p.s)}px,${Y(p.h)}px) scale(7)`; g.style.opacity = i === 0 ? 0 : l === 4 ? 0.4 : 1; }
+      else { g.style.transform = `translate(320px,240px) scale(${l === 1 ? 100 : 60})`; g.style.opacity = 0; }
+    });
+    // main pear
+    if (l !== 6 && swapped) swapPear(false);
+    if (l !== 5) { pearHue = sample[0].h; pearBlush = 0; paintPear(); }
+    leaf.style.opacity = stem.style.opacity = (l >= 2 && l <= 4) ? 0 : 1;
+    if (l === 1) setMain([320, 250], 104);
+    else if (l <= 4) setMain([X(sample[0].s), Y(sample[0].h)], 7);
+    else if (l === 5) setMain([210, 268], 92);
+    else setMain([CX, CY], 62);
+    mainG.querySelector("path").style.stroke = (l >= 2 && l <= 4) ? "#ffb347" : "#050607";
+    mainG.querySelector("path").style.strokeWidth = (l >= 2 && l <= 4) ? 2 : 1;
+    // mechanism reveal
+    for (const e of edgeEls) { e.style.transitionDelay = l === 6 ? (0.5 + Math.random() * 0.8) + "s" : "0s"; }
+    for (const k in nodeEls) nodeEls[k].style.opacity = l === 6 ? 1 : 0;
+    if (l === 6 && !unk.length) resetUnk();
+    // per-level controls
+    lvctl.innerHTML = "";
+    if (l === 4) {
+      lvctl.innerHTML = `<div class="row"><button class="btn ghost" id="pNew">来一只新梨</button><button class="btn" id="pRev">揭晓颜色</button></div>`;
+      $("#pNew").onclick = newPred; $("#pRev").onclick = reveal; newPred();
+    }
+    if (l === 5) {
+      lvctl.innerHTML = `<div class="slider"><label for="sunR">日照</label><input id="sunR" type="range" min="3" max="12" step=".1" value="6"><output id="sunO">6 h</output></div>`;
+      const s = $("#sunR"), upd = () => {
+        const v = +s.value; $("#sunO").textContent = v.toFixed(0) + " h";
+        pearHue = clamp(84 - (v - 3) * 4.3, 46, 90); pearBlush = clamp((v - 6) / 6, 0, 1) * 0.5; paintPear();
+        rays.forEach((ry, i) => { const len = 8 + v * 2.2; ry.setAttribute("x1", 0); ry.setAttribute("y1", -32); ry.setAttribute("x2", 0); ry.setAttribute("y2", -32 - len); });
+        sunC.setAttribute("r", 20 + v * 0.8);
+        caLab.textContent = `处理组：每天 ${v.toFixed(0)} 小时`; caOut.textContent = `处理组 · 色相 ${Math.round(pearHue)}° · 红晕 ${Math.round(pearBlush * 200)}%`; const d = Math.round(pearHue - (84 - 4.3)); caDiff.textContent = d === 0 ? "两组没有差别" : `差别：色相 ${d > 0 ? "+" : "−"}${Math.abs(d)}°`;
+      };
+      s.addEventListener("input", upd); upd();
+    }
+    if (l === 6) {
+      lvctl.innerHTML = `<div class="row"><button class="btn ghost" id="swapB" aria-pressed="${swapped}">换一只梨</button><button class="btn ghost" id="unkNext">追问一个变量</button><button class="btn ghost" id="unkR">收起追问</button></div>`;
+      $("#unkNext").onclick = () => { const q = unkG.querySelector('[role="button"]'); if (q) q.dispatchEvent(new Event("click")); else $("#unkNext").disabled = true; };
+      $("#swapB").onclick = () => { swapPear(!swapped); $("#swapB").setAttribute("aria-pressed", swapped); lvTextFor(6); };
+      $("#unkR").onclick = () => { resetUnk(); $("#unkNext").disabled = false; lvTextFor(6); };
+    }
+    lvTextFor(l);
+  }
+  function swapPear(on) {
+    swapped = on;
+    mainPear.style.opacity = on ? 0 : 1; mainNashi.setAttribute("opacity", on ? 1 : 0); speck.setAttribute("opacity", on ? 1 : 0);
+    leaf.style.opacity = on ? 0 : 1; rust.setAttribute("opacity", on ? 1 : 0); stem.setAttribute("transform", on ? "translate(0,0.48)" : "");
+    const bad = new Set(["品种基因", "石细胞", "乙烯"]);
+    for (const e of edgeEls) {
+      const b = on && (bad.has(e.dataset.a) || bad.has(e.dataset.b));
+      e.setAttribute("stroke", b ? "#ff5d7d" : "#5a616b"); e.style.strokeDasharray = b ? "4 4" : ""; e.style.strokeDashoffset = b ? "0" : "";
+    }
+    for (const k of bad) nodeEls[k].querySelector("rect").setAttribute("stroke", on ? "#ff5d7d" : "#2c3038");
+  }
+  mainPear.style.transition = "opacity .8s";
+  paintPear(); setLv(1);
+})();
+
+/* =========================================================
+   03 · Two worlds, one butterfly
+   Both worlds start from the same storm; in one, a butterfly flaps once.
+   The storm rides a ridge between two steering currents, so the offset grows
+   exponentially (doubling every ln2/LAM s) until each storm commits to a side.
+   ========================================================= */
+(() => {
+  const cv = $("#stormCv"), ov = $("#stormOv"), gc = $("#gapCv"), dpr = Math.min(2, devicePixelRatio || 1);
+  const T = 16, DAYS = 12, LAM = 1.5, U0 = 0.5e-7, YKM = 600;
+  const ERR = { 12: 80, 600: 11, 9000: 2.9 }; // km: the network's position error, shrinking like 1/√n
+  const NAME = { 12: "12", 600: "600", 9000: "9 000" };
+  const FLAP0 = 0.35, FLAP1 = 1.35;
+  let g, o, cg, W, H, GW, GH, bgc, R, t = 0, clock = 0, state = "ready", N = 600, P = [], said = "", dayTxt = "", chartKey = "";
+  const u = (u0, tt) => { const e = Math.exp(LAM * tt); return u0 * e / Math.sqrt(1 + u0 * u0 * (e * e - 1)); };
+  const uA = tt => u(-U0, tt), uB = tt => u(U0, tt); // A: the world with the butterfly
+  const gapKm = tt => Math.abs(uB(tt) - uA(tt)) * YKM;
+  const tDetect = n => Math.log(ERR[n] / (2 * U0 * YKM)) / LAM;
+  const day = tt => (tt / T * DAYS).toFixed(1);
+  const fmt = km => km < 0.001 ? Math.max(1, Math.round(km * 1e5)) + " 厘米" : km < 0.01 ? (km * 1000).toFixed(1) + " 米" : km < 1 ? Math.round(km * 1000) + " 米" : (km < 10 ? km.toFixed(1) : Math.round(km)) + " 公里";
+  // map, in frame fractions: a coast down the left edge, a city on it
+  const coastX = y => 0.15 + 0.022 * Math.sin(y * 9) + 0.011 * Math.sin(y * 23 + 1) + 0.025 * y;
+  const CITY = [coastX(0.74) - 0.018, 0.74];
+  // tracks: a shared start, the ridge between two outcomes, and the outcomes
+  const S0 = [0.88, 0.58], C1 = [0.7, 0.56];
+  const MID = [S0, C1, [0.52, 0.5], [0.38, 0.44]], SOUTH = [S0, C1, [0.42, 0.64], [CITY[0] + 0.01, CITY[1]]], NORTH = [S0, C1, [0.6, 0.3], [0.52, 0.07]];
+  function bez(p, s) { const m = 1 - s, a = m * m * m, b = 3 * m * m * s, c = 3 * m * s * s, d = s * s * s; return [a * p[0][0] + b * p[1][0] + c * p[2][0] + d * p[3][0], a * p[0][1] + b * p[1][1] + c * p[2][1] + d * p[3][1]]; }
+  function at(uu, tt) { const s = clamp(tt / T, 0, 1), m = bez(MID, s), q = bez(uu < 0 ? SOUTH : NORTH, s), k = Math.abs(uu); return [(m[0] + (q[0] - m[0]) * k) * W, (m[1] + (q[1] - m[1]) * k) * H]; }
+  // the map sits on the overlay, so the particle layer can fade to one flat colour (no ghosts of the grid)
+  function paintMap(x) {
+    x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    x.strokeStyle = "#0e1216"; x.lineWidth = 1; x.beginPath();
+    const st = Math.max(44, W / 14); for (let gx = st / 2; gx < W; gx += st) { x.moveTo(gx, 0); x.lineTo(gx, H); } for (let gy = st / 2; gy < H; gy += st) { x.moveTo(0, gy); x.lineTo(W, gy); } x.stroke();
+    x.beginPath(); x.moveTo(0, 0); for (let y = 0; y <= 1.0001; y += 0.02) x.lineTo(coastX(y) * W, y * H); x.lineTo(0, H); x.closePath();
+    x.fillStyle = "rgba(20,23,29,.55)"; x.fill(); x.strokeStyle = "#2c3038"; x.lineWidth = 1.2; x.stroke();
+    const qx = CITY[0] * W, qy = CITY[1] * H;
+    x.fillStyle = "#ebedf0"; x.fillRect(qx - 3, qy - 3, 6, 6);
+    x.font = `500 ${W < 700 ? 11 : 12}px Noto Sans SC, sans-serif`; x.fillStyle = "#8a9099"; x.textAlign = "center"; x.textBaseline = "top"; x.fillText("海边的城", qx, qy + 8); x.textAlign = "left";
+  }
+  const wipe = () => { g.fillStyle = "#06080b"; g.fillRect(0, 0, W, H); };
+  function setup() {
+    [g, W, H] = fit(cv); [o] = fit(ov, H); [cg, GW, GH] = fit(gc);
+    R = Math.min(W, H) * (W < 700 ? 0.15 : 0.13);
+    const r = rng(3); P = Array.from({ length: W < 700 ? 520 : 950 }, () => ({ r: 0.16 + Math.pow(r(), 0.8) * 0.84, a: r() * 6.283 }));
+    bgc = document.createElement("canvas"); bgc.width = Math.max(1, g.canvas.width); bgc.height = Math.max(1, g.canvas.height); paintMap(bgc.getContext("2d"));
+    wipe(); chartKey = "";
+  }
+  // one set of particles in storm coordinates, drawn around both worlds' storm centres.
+  // Each streak is the arc the particle swept in the last TAIL seconds, so nothing accumulates between frames.
+  function spin(dt, pa, pb) {
+    const A3 = [new Path2D(), new Path2D(), new Path2D()], B3 = [new Path2D(), new Path2D(), new Path2D()], ph = clock * 0.3, TAIL = 0.09;
+    for (const p of P) {
+      const v = p.r < 0.25 ? p.r / 0.25 : Math.pow(0.25 / p.r, 0.6), w = 1.9 * v / p.r;
+      p.a -= w * dt; p.r -= 0.05 * v * dt;
+      if (p.r < 0.15) { p.r = 0.95 + Math.random() * 0.05; p.a = Math.random() * 6.283; }
+      const rr = p.r * R, c0 = Math.cos(p.a) * rr, s0 = Math.sin(p.a) * rr * 0.92, c1 = Math.cos(p.a + w * TAIL) * rr, s1 = Math.sin(p.a + w * TAIL) * rr * 0.92;
+      const arm = Math.cos(2 * (p.a + ph - 2.3 * Math.log(p.r))), k = arm > 0.5 ? 2 : arm > -0.3 ? 1 : 0;
+      B3[k].moveTo(pb[0] + c1, pb[1] + s1); B3[k].lineTo(pb[0] + c0, pb[1] + s0);
+      A3[k].moveTo(pa[0] + c1, pa[1] + s1); A3[k].lineTo(pa[0] + c0, pa[1] + s0);
+    }
+    g.lineWidth = 1.1;
+    [0.22, 0.45, 0.82].forEach((a, k) => { g.strokeStyle = `rgba(170,186,210,${a})`; g.stroke(B3[k]); });
+    [0.22, 0.45, 0.82].forEach((a, k) => { g.strokeStyle = `rgba(242,234,222,${a})`; g.stroke(A3[k]); });
+  }
+  function butterfly(x, y, s, f, a) {
+    o.save(); o.globalAlpha = a; o.translate(x, y); o.scale(s, s); o.fillStyle = css("--accent");
+    const w = 0.3 + 0.7 * f;
+    for (const k of [-1, 1]) {
+      o.beginPath(); o.ellipse(k * 7 * w, -4, 7 * w, 8, k * 0.5, 0, 7); o.fill();
+      o.beginPath(); o.ellipse(k * 5 * w, 6, 4.5 * w, 5.5, -k * 0.4, 0, 7); o.fill();
+    }
+    o.fillStyle = "#050607"; o.fillRect(-0.8, -9, 1.6, 18);
+    o.strokeStyle = css("--accent"); o.lineWidth = 0.9; o.beginPath(); o.moveTo(-0.5, -9); o.quadraticCurveTo(-3, -14, -6, -15); o.moveTo(0.5, -9); o.quadraticCurveTo(3, -14, 6, -15); o.stroke();
+    o.restore();
+  }
+  function tag(txt, x, y, col, align = "center") {
+    o.font = `500 ${W < 700 ? 11 : 12}px Noto Sans SC, sans-serif`; o.textAlign = align; o.textBaseline = "middle";
+    const w = o.measureText(txt).width, x0 = clamp(align === "center" ? x - w / 2 : x, 6, W - w - 6);
+    o.fillStyle = "rgba(5,6,7,.8)"; o.fillRect(x0 - 5, y - 10, w + 10, 20);
+    o.fillStyle = col; o.textAlign = "left"; o.fillText(txt, x0, y + 0.5);
+  }
+  function track(uf, t1, dash, col) {
+    if (t1 <= 0) return;
+    o.strokeStyle = col; o.lineWidth = 1.5; o.setLineDash(dash); o.beginPath();
+    for (let tt = 0; ; tt = Math.min(t1, tt + 0.1)) { const [x, y] = at(uf(tt), tt); tt ? o.lineTo(x, y) : o.moveTo(x, y); if (tt >= t1) break; }
+    o.stroke(); o.setLineDash([]);
+  }
+  function overlay(tt, pa, pb) {
+    o.clearRect(0, 0, W, H); o.drawImage(bgc, 0, 0, W, H);
+    track(uB, tt, [5, 5], "rgba(170,186,210,.55)"); track(uA, tt, [], "rgba(242,234,222,.55)");
+    // the butterfly, drawn far larger than life
+    const s0 = at(0, 0), bx = s0[0] - R * 1.05, by = s0[1] + R * 0.6, s = clamp(R / 52, 0.7, 1.3);
+    if (state === "ready") { butterfly(bx, by, s, 0.75 + 0.25 * Math.sin(clock * 2.4), 1); tag("一只蝴蝶", bx, by + 24 * s, css("--accent")); }
+    else {
+      const fl = tt >= FLAP0 && tt <= FLAP1;
+      butterfly(bx, by, s, fl ? 0.5 + 0.5 * Math.sin(tt * 42) : 0.6, fl ? 1 : clamp(1.6 - tt * 0.25, 0.3, 1));
+      if (tt >= FLAP0 && tt < FLAP0 + 1.6) { const k = (tt - FLAP0) / 1.6; o.strokeStyle = `rgba(255,179,71,${1 - k})`; o.lineWidth = 1.5; o.beginPath(); o.arc(bx, by, 8 + k * R * 0.9, 0, 7); o.stroke(); }
+      if (tt < 3) tag("扇了一下", bx, by + 24 * s, css("--accent"));
+    }
+    // the eyes and their names
+    const sep = Math.hypot(pa[0] - pb[0], pa[1] - pb[1]);
+    for (const [p, c] of [[pb, "#aabad2"], [pa, "#f2eade"]]) { o.fillStyle = c; o.beginPath(); o.arc(p[0], p[1], 2.5, 0, 7); o.fill(); }
+    const above = p => p[1] - R - 14 > 12 ? p[1] - R - 14 : p[1] + R + 14;
+    if (sep < R * 1.6) tag(state === "ready" ? "飓风" : "两个世界的飓风：还重合着", pa[0], above(pa), "#ebedf0");
+    else { tag("有蝴蝶的世界", pa[0], above(pa), "#f2eade"); tag("没有蝴蝶的世界", pb[0], above(pb), "#aabad2"); }
+    if (tt > T * 0.93) {
+      const k = (tt - T * 0.93) / (T * 0.07), cx = CITY[0] * W, cy = CITY[1] * H;
+      o.strokeStyle = css("--stop"); o.lineWidth = 2; o.globalAlpha = k; o.beginPath(); o.arc(cx, cy, 12 + Math.sin(clock * 3) * 2, 0, 7); o.stroke(); o.globalAlpha = 1;
+      tag("登陆", cx + 22, cy, css("--stop"), "left");
+    }
+  }
+  function chart(tt) {
+    const key = [state, tt.toFixed(2), N, GW].join(); if (key === chartKey) return; chartKey = key;
+    const nar = GW < 600, x0 = nar ? 50 : 68, x1 = GW - 10, y0 = 18, y1 = GH - 22, L0 = -4, L1 = 3.3;
+    const X = s => x0 + s / T * (x1 - x0), Y = lg => y1 - (lg - L0) / (L1 - L0) * (y1 - y0);
+    cg.clearRect(0, 0, GW, GH);
+    const fs = nar ? 10 : 11; cg.font = `400 ${fs}px Noto Sans SC, sans-serif`; cg.textBaseline = "middle";
+    // the error band: anything below it, the network cannot tell apart
+    const e = Y(Math.log10(ERR[N]));
+    cg.fillStyle = "rgba(138,144,153,.12)"; cg.fillRect(x0, e, x1 - x0, y1 - e);
+    cg.strokeStyle = "rgba(138,144,153,.6)"; cg.setLineDash([3, 3]); cg.beginPath(); cg.moveTo(x0, e); cg.lineTo(x1, e); cg.stroke(); cg.setLineDash([]);
+    cg.fillStyle = "#8a9099"; cg.fillText(nar ? `误差 ±${ERR[N]} 公里 · 这以下测不出` : `${NAME[N]} 个观测点的误差 ±${ERR[N]} 公里 · 这以下，测不出两个世界的差别`, x0 + 8, e + 11);
+    cg.strokeStyle = "#2c3038"; cg.lineWidth = 1; cg.beginPath(); cg.moveTo(x0, y0); cg.lineTo(x0, y1); cg.lineTo(x1, y1); cg.stroke();
+    cg.textAlign = "right"; for (const [lg, s] of [[-4, "10 厘米"], [-2, "10 米"], [0, "1 公里"], [2, "100 公里"]]) cg.fillText(s, x0 - 6, Y(lg));
+    cg.textAlign = "center"; cg.textBaseline = "top"; for (let dd = 0; dd <= DAYS; dd += 3) cg.fillText(`第 ${dd} 天`, clamp(X(dd / DAYS * T), x0 + 16, x1 - 18), y1 + 6);
+    cg.textAlign = "left"; cg.textBaseline = "middle"; cg.fillStyle = "#ebedf0"; cg.fillText("两场飓风相差多远（对数刻度）", x0 + 8, y0 - 6);
+    if (state === "ready") return;
+    const td = tDetect(N);
+    if (tt >= td) {
+      cg.strokeStyle = "rgba(235,237,240,.5)"; cg.beginPath(); cg.moveTo(X(td), y0 + 6); cg.lineTo(X(td), y1); cg.stroke();
+      cg.fillStyle = "#ebedf0"; const s = `第 ${day(td)} 天：测得出来了`, w = cg.measureText(s).width;
+      cg.fillText(s, X(td) - w - 6 > x0 + 4 ? X(td) - w - 6 : X(td) + 6, Y(1.6));
+    }
+    cg.strokeStyle = "#ebedf0"; cg.lineWidth = 2; cg.beginPath();
+    for (let s = 0; ; s = Math.min(tt, s + 0.08)) { const x = X(s), y = Y(Math.log10(gapKm(s))); s ? cg.lineTo(x, y) : cg.moveTo(x, y); if (s >= tt) break; }
+    cg.stroke();
+    cg.fillStyle = "#ebedf0"; cg.beginPath(); cg.arc(X(tt), Y(Math.log10(gapKm(tt))), 3.5, 0, 7); cg.fill();
+  }
+  function say(h) { if (h !== said) { said = h; $("#stormRead").innerHTML = h; } }
+  function words(tt) {
+    const td = tDetect(N);
+    if (state === "ready") return say("两个世界的飓风，从同一个位置出发。");
+    if (state === "done") return say(`只差一次扇翅：有蝴蝶的世界里，飓风登陆了海边的城；没有蝴蝶的世界里，它转向了海上。${NAME[N]} 个观测点，要到第 ${day(td)} 天才测得出两个世界不一样。`);
+    if (tt < td) return say(`蝴蝶扇了一下翅膀。两场飓风此刻只差 <b>${fmt(gapKm(0))}</b>，${NAME[N]} 个观测点的误差却有 ±${ERR[N]} 公里：两个世界，测起来一模一样。`);
+    say(`第 ${day(td)} 天，差别长过了误差，这才测得出来。可这时离两场飓风分道扬镳，已经不远了。`);
+  }
+  function start() {
+    t = 0; state = "run"; chartKey = "";
+    $("#flapBtn").textContent = "再来一次";
+  }
+  $("#flapBtn").addEventListener("click", () => { start(); if (RM) { t = T; state = "done"; still(); } });
+  $("#sensSeg").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return; N = +b.dataset.n;
+    for (const x of $("#sensSeg").children) x.setAttribute("aria-pressed", x === b);
+    chart(state === "ready" ? 0 : t); words(state === "ready" ? 0 : t);
+  });
+  setup(); addEventListener("resize", () => { setup(); if (RM) still(); });
+  function frame(dt) {
+    clock += dt;
+    if (state === "run") { t += dt; if (t >= T) { t = T; state = "done"; } }
+    const tt = state === "ready" ? 0 : t, pa = at(uA(tt), tt), pb = at(uB(tt), tt);
+    if (!W) return;
+    wipe(); spin(dt, pa, pb); overlay(tt, pa, pb); chart(tt); words(tt);
+    const d = `第 <b>${day(tt)}</b> 天 · 两场飓风相差 <b>${fmt(gapKm(tt))}</b>`;
+    if (d !== dayTxt) { dayTxt = d; $("#stormDay").innerHTML = d; }
+  }
+  // reduced motion: the finished picture, no animation
+  function still() { clock = 0; for (let i = 0; i < 40; i++) frame(1 / 30); }
+  if (RM) { state = "done"; t = T; $("#flapBtn").textContent = "再来一次"; still(); }
+  else {
+    addLoop(cv, frame);
+    // the first time the figure is properly on screen, the butterfly flaps by itself
+    const io = new IntersectionObserver(es => { if (es[0].isIntersecting && state === "ready") { io.disconnect(); setTimeout(() => { if (state === "ready") start(); }, 900); } }, { threshold: 0.6 });
+    io.observe($(".storm"));
+  }
+})();
+
+/* =========================================================
+   04 · One budget, three problems
+   Each column is the six-level ladder applied to one problem; the bar in a cell
+   is what that level adds, the number is what it costs. Value saturates at a
+   different depth for each problem, so the best plan stops each one early.
+   ========================================================= */
+(() => {
+  const LV = ["描述", "探索", "推断", "预测", "因果", "机制"], EN = ["Descriptive", "Exploratory", "Inferential", "Predictive", "Causal", "Mechanistic"];
+  const BUDGET = 100;
+  const PR = [
+    { name: "游戏外挂", goal: "别让角色倒下", t: ["红还是灰", "多久掉一次血", "暴击有多常见", "下一击何时来", "伤害怎么算", "整个游戏的代码"], v: [30, 2, 1, 1, 1, 1], c: [4, 8, 13, 19, 27, 55] },
+    { name: "一只梨", goal: "摸清这一批梨", t: ["这只梨的样子", "大的更黄？", "整个果园呢？", "新梨什么颜色", "多晒会更黄？", "每个变量为什么变"], v: [4, 6, 7, 8, 3, 2], c: [4, 8, 12, 16, 24, 60] },
+    { name: "一场飓风", goal: "保住海边的城", t: ["风眼在哪", "以往的路径", "这类飓风的规律", "三天内会到哪", "暖海让它变强？", "每一只蝴蝶"], v: [6, 4, 4, 12, 3, 40], c: [5, 11, 16, 21, 32, Infinity] }
+  ];
+  const PEAR = "M0,-1 C0.22,-1 0.3,-0.62 0.34,-0.36 C0.4,-0.02 0.76,0.12 0.76,0.56 C0.76,0.96 0.42,1.06 0,1.06 C-0.42,1.06 -0.76,0.96 -0.76,0.56 C-0.76,0.12 -0.4,-0.02 -0.34,-0.36 C-0.3,-0.62 -0.22,-1 0,-1Z";
+  const plan = $("#plan"), depth = [0, 0, 0], cells = [[], [], []];
+  const cum = (a, k) => { let s = 0; for (let i = 0; i < k; i++) s += a[i]; return s; };
+  const spent = (d = depth) => PR.reduce((s, p, i) => s + cum(p.c, d[i]), 0);
+  const worth = (d = depth) => PR.reduce((s, p, i) => s + cum(p.v, d[i]), 0);
+  let best = { v: -1 };
+  for (let a = 0; a <= 6; a++) for (let b = 0; b <= 6; b++) for (let c = 0; c <= 6; c++) { const d = [a, b, c]; if (spent(d) <= BUDGET && worth(d) > best.v) best = { v: worth(d), d }; }
+  $("#bestNum").textContent = best.v;
+  const maxV = Math.max(...PR.flatMap(p => p.v));
+  const nm = d => d ? `「${LV[d - 1]}」` : "原地";
+  // a picture of each problem: the bot's own screen, a pear, a storm
+  function icon(i) {
+    if (i === 0) { const c = document.createElement("canvas"); c.width = PW; c.height = PH; c.className = "ico pix"; const s = newSim(); s.hp = 62; drawScene(c.getContext("2d"), s, 0.2); c.setAttribute("aria-hidden", "true"); return c; }
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("class", "ico"); svg.setAttribute("aria-hidden", "true");
+    if (i === 1) {
+      svg.setAttribute("viewBox", "-1.3 -1.5 2.6 2.7");
+      svg.innerHTML = `<path d="${PEAR}" fill="hsl(70,64%,54%)" stroke="#050607" stroke-width=".03"/><path d="M0,-1 C0.02,-1.15 0.06,-1.24 0.12,-1.3" stroke="#6b4a2b" stroke-width=".07" fill="none" stroke-linecap="round"/><path d="M0.06,-1.18 C0.25,-1.38 0.5,-1.32 0.58,-1.22 C0.42,-1.08 0.2,-1.08 0.06,-1.18Z" fill="#5b8f3a"/>`;
+    } else {
+      svg.setAttribute("viewBox", "-1.15 -1.15 2.3 2.3"); let d = "";
+      for (let k = 0; k < 3; k++) for (let j = 0; j <= 40; j++) { const th = j / 40 * 4.2, r = 0.14 * Math.exp(0.48 * th), a = -th + k * 2.094; d += (j ? "L" : "M") + (Math.cos(a) * r).toFixed(3) + "," + (Math.sin(a) * r).toFixed(3); }
+      svg.classList.add("spin"); svg.innerHTML = `<path d="${d}" fill="none" stroke="#aeb9cc" stroke-width=".07" stroke-linecap="round"/><circle r=".11" fill="#050607" stroke="#aeb9cc" stroke-width=".05"/>`;
+    }
+    return svg;
+  }
+  plan.appendChild(document.createElement("div"));
+  PR.forEach((p, i) => {
+    const h = document.createElement("div"); h.className = "phead"; h.append(icon(i));
+    h.insertAdjacentHTML("beforeend", `<b>${p.name}</b><span class="goal">${p.goal}</span><span class="got" id="got${i}"></span>`);
+    plan.appendChild(h);
+  });
+  LV.forEach((lv, l) => {
+    plan.insertAdjacentHTML("beforeend", `<div class="prow">${lv}<span class="en">${EN[l]}</span></div>`);
+    PR.forEach((p, i) => {
+      const b = document.createElement("button"), c = p.c[l], v = p.v[l];
+      b.className = "cell";
+      b.innerHTML = `<span class="top">${p.t[l]}</span><span class="bar"><i style="width:${Math.max(3, v / maxV * 100) * 0.62}%"></i>+${v}<span class="price">${c === Infinity ? "∞" : c}</span></span>`;
+      b.setAttribute("aria-label", `${p.name}，解析到「${lv}」：${p.t[l]}${/？$/.test(p.t[l]) ? "" : "。"}这一层多带回 ${v}，要花 ${c === Infinity ? "无穷多" : c}。`);
+      b.addEventListener("click", () => pick(i, l + 1, b));
+      b.addEventListener("keydown", e => {
+        const m = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }[e.key]; if (!m) return;
+        e.preventDefault(); cells[clamp(i + m[0], 0, 2)][clamp(l + m[1], 0, 5)].focus();
+      });
+      cells[i].push(b); plan.appendChild(b);
+    });
+  });
+  const msg = h => $("#planMsg").innerHTML = h;
+  function deny(b, m) { b.classList.remove("deny"); void b.offsetWidth; b.classList.add("deny"); msg(`<span class="bad">${m}</span>`); }
+  function render() {
+    const left = BUDGET - spent();
+    PR.forEach((p, i) => {
+      cells[i].forEach((b, l) => {
+        const L1 = l + 1, extra = cum(p.c, L1) - cum(p.c, depth[i]);
+        b.classList.toggle("dug", L1 <= depth[i]); b.classList.toggle("cur", L1 === depth[i]);
+        b.classList.toggle("over", L1 > depth[i] && !(extra <= left));
+        b.setAttribute("aria-pressed", L1 <= depth[i]);
+      });
+      $("#got" + i).innerHTML = `<span>花 ${cum(p.c, depth[i])}</span><i> · </i><span>用处 ${cum(p.v, depth[i])}</span>`;
+    });
+    $("#budNum").textContent = spent();
+    [...$("#budBar").children].forEach((e, i) => e.style.width = cum(PR[i].c, depth[i]) / BUDGET * 100 + "%");
+    $("#gotNum").textContent = worth();
+  }
+  const bestMsg = () => `<span class="go">同一份预算，最多带回 ${best.v}。</span>外挂停在${nm(best.d[0])}，梨停在${nm(best.d[1])}，飓风停在${nm(best.d[2])}：没有一个问题挖到底，每个都停在够用的那一层。`;
+  function explain(i, a, b) {
+    const p = PR[i];
+    if (worth() === best.v) return msg(bestMsg());
+    if (b < a) return msg(`${p.name}退回到${nm(b)}，省下 ${cum(p.c, a) - cum(p.c, b)}。`);
+    let m = `${p.name}解析到「${LV[b - 1]}」：花 ${cum(p.c, b) - cum(p.c, a)}，多带回 ${cum(p.v, b) - cum(p.v, a)}。`;
+    if (i === 0) m += b === 1 ? "读一个像素，就够外挂用了。" : "可它要的只是“红还是灰”，再往下的力气，几乎都白花了。";
+    if (i === 1 && b === 4) m += "已经能给新梨的颜色估一个区间。";
+    if (i === 1 && b > 4) m += "因果和机制都很贵，多出来的用处很少。";
+    if (i === 2 && b === 4) m += "知道它三天内大概会到哪，已经够决定撤不撤离。";
+    if (i === 2 && b === 5) m += "知道暖海让它变强，并不能让这座城更安全多少。";
+    if (BUDGET - spent() < 4) m += " 预算差不多用完了。";
+    msg(m);
+  }
+  function pick(i, l, b) {
+    const p = PR[i], nd = l === depth[i] ? l - 1 : l;
+    if (nd > depth[i]) {
+      const extra = cum(p.c, nd) - cum(p.c, depth[i]);
+      if (extra === Infinity) return deny(b, "要弄清每一只蝴蝶，再多的时间和精力也不够。飓风的机制，这张表上挖不到底。");
+      if (spent() + extra > BUDGET) return deny(b, `时间和精力不够了：挖到这一层还要 ${extra}，只剩 ${BUDGET - spent()}。先从别的问题上省一点。`);
+    }
+    const a = depth[i]; depth[i] = nd; render(); explain(i, a, nd);
+  }
+  const intro = "三个问题共用 100 的时间和精力。点格子，决定每个问题解析到哪一层；再点一次最深的那格，退回一层。";
+  $("#bestBtn").addEventListener("click", () => { best.d.forEach((v, i) => depth[i] = v); render(); msg(bestMsg()); });
+  $("#clearBtn").addEventListener("click", () => { depth.fill(0); render(); msg(intro); });
+  render(); msg(intro);
+})();
+</script>

@@ -5,7 +5,7 @@
     "owner": "simoncos / Che ZHAO",
     "motto": "connecting the dots.",
     "summary": "Personal site: software, AI collaboration, data projects, research, essays, talks, music and field notes.",
-    "last_updated": "2026-10-03"
+    "last_updated": "2026-10-09"
   },
   "language_policy": {
     "default_language": "en",
@@ -140,6 +140,20 @@
       "label": "HN × LLM: Model Releases and Discussion",
       "url": "https://simoncos-hn-llm-research.vercel.app/",
       "description": "How Hacker News discusses model releases across 14 AI companies, with source threads and coverage limits. An ongoing study."
+    },
+    {
+      "id": "limits-of-problem-analysis",
+      "type": "interactive_essay",
+      "label": "The Limits of Problem Analysis (问题解析的极限)",
+      "url": "https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html",
+      "description": "From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result. In Chinese only."
+    },
+    {
+      "id": "designing-design",
+      "type": "interactive_essay",
+      "label": "Designing Design (设计中的设计)",
+      "url": "https://simoncos.github.io/gallery/talks/designing-design/index.html",
+      "description": "Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again. In Chinese only."
     }
   ],
   "public_data_files": [

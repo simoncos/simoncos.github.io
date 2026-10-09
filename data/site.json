@@ -107,6 +107,58 @@
       "href": "gallery/talks/problem-solving-and-design/index.html"
     },
     {
+      "id": "limits-of-problem-analysis",
+      "kind": {
+        "en": "Interactive essay",
+        "zh": "交互文章"
+      },
+      "work_topic": "talks",
+      "home_topic": "think",
+      "date": "2026-10-09",
+      "single": true,
+      "zh_only": true,
+      "title": {
+        "en": "The Limits of Problem Analysis",
+        "zh": "问题解析的极限"
+      },
+      "home_desc": {
+        "en": "From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result.",
+        "zh": "从只看一个像素的游戏外挂，到一颗梨的层层解析：动手试试，何时该停止追问、带着结果回来。"
+      },
+      "desc": {
+        "en": "From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result.",
+        "zh": "从只看一个像素的游戏外挂，到一颗梨的层层解析：动手试试，何时该停止追问、带着结果回来。"
+      },
+      "img": "gallery/assets/gallery-card-limits-of-problem-analysis.jpg",
+      "href": "gallery/talks/limits-of-problem-analysis/index.html"
+    },
+    {
+      "id": "designing-design",
+      "kind": {
+        "en": "Interactive essay",
+        "zh": "交互文章"
+      },
+      "work_topic": "talks",
+      "home_topic": "think",
+      "date": "2026-10-09",
+      "single": true,
+      "zh_only": true,
+      "title": {
+        "en": "Designing Design",
+        "zh": "设计中的设计"
+      },
+      "home_desc": {
+        "en": "Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again.",
+        "zh": "读原研哉：把“我知道”放开，沿河滑行，在沙上写字，让熟悉的世界重新变得陌生。"
+      },
+      "desc": {
+        "en": "Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again.",
+        "zh": "读原研哉：把“我知道”放开，沿河滑行，在沙上写字，让熟悉的世界重新变得陌生。"
+      },
+      "img": "gallery/assets/gallery-card-designing-design.jpg",
+      "href": "gallery/talks/designing-design/index.html"
+    },
+    {
       "id": "hermes",
       "kind": {
         "en": "Research",
