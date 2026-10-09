@@ -138,6 +138,22 @@ footer{margin-top:90px;padding-bottom:70px;font-size:.8rem;color:var(--muted);li
 
 .language{display:flex;justify-content:flex-end;gap:4px;max-width:1120px;margin:0 auto;padding:4px 20px;font-size:.82rem}.language a,.language span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0 8px}.language span{color:var(--muted)}
 
+/* One shared sound control, also available inside the sky scene. */
+html{scroll-padding-bottom:110px}
+.hint{bottom:120px}
+@media(max-width:700px){.hero{min-height:700px}.hero-text{top:32px}}
+@media(min-width:701px) and (max-height:500px){.hero .lede{max-width:calc(100% - 300px)}}
+.sound-dock{position:fixed;z-index:45;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));width:280px;max-width:calc(100vw - 24px);padding:8px 12px;border:1px solid var(--line);border-radius:16px;background:rgba(248,246,240,.97);box-shadow:0 5px 24px rgba(43,54,69,.12);font-size:.75rem;line-height:1.5;color:var(--ink)}
+.sound-row{display:flex;gap:10px;align-items:center}
+.sound-dock .btn{min-height:44px;white-space:nowrap;padding:6px 12px;letter-spacing:0;font-size:.8rem}
+.sound-dock label{display:flex;gap:6px;align-items:center;flex:1;white-space:nowrap}
+.sound-dock input{width:100%;min-width:30px;height:44px;accent-color:var(--sky)}
+.sound-status{display:block;color:var(--muted);margin-top:2px;min-height:1.5em}
+.away .sound-dock{z-index:51;top:max(12px,env(safe-area-inset-top));bottom:auto}
+footer{padding-bottom:180px}
+.sound-credits{margin-top:18px}.sound-credits summary{cursor:pointer}.sound-credits ul{padding-left:20px}
+
+
 /* English typography and responsive labels. */
 :root{--display:Georgia,"Times New Roman",serif;--body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
 body{letter-spacing:0;line-height:1.8}
@@ -150,6 +166,8 @@ h1,h2{letter-spacing:-.025em}
 .talkbtns{flex-wrap:wrap}
 .talkbtns .btn{white-space:normal}
 @media(max-width:700px){.hero-text .in{padding-top:20px}.hero .lede{font-size:1rem;line-height:1.7}.hero .eyebrow{font-size:.69rem}.hero .hint{font-size:.71rem;line-height:1.55}.talkbtns{gap:8px}.talkbtns .btn{font-size:.78rem;padding:7px 12px}.away .lines{font-size:1.35rem}}
+
+@media(min-width:701px) and (max-height:500px){.hero .lede{max-width:calc(100% - 300px)}}
 
 </style>
 
@@ -277,13 +295,18 @@ h1,h2{letter-spacing:-.025em}
       <canvas id="endCv" aria-label="The sky seen while lying in the grass: blades of grass nearby, slowly moving clouds in the distance."></canvas>
       <div class="leave"><button class="btn" id="leaveBtn">Step away from the screen</button></div>
     </div>
-    <p class="cap" style="text-align:center">Tap to let the page fade away, leaving only wind and sky. Tap anywhere or press Esc to return.</p>
+    <p class="cap" style="text-align:center">The page fades away, leaving only the sky. Turn on sound to hear the wind. Tap the background or press Esc to return.</p>
   </div>
   <div class="col" style="margin-top:40px">
     <p>Pick any place. Take in a view that pixels cannot measure, a breath of wind that stirs your hair and may blow anywhere next, the countless layers of white noise surrounding you, a ray of light slipping into a fine line on your skin. Feel the randomness, the chaos and the incomprehensibility of the universe.</p>
   </div>
 </section>
 </main>
+
+<div id="soundHome"><div class="sound-dock" id="soundDock" role="group" aria-label="Page sound">
+  <div class="sound-row"><button class="btn ghost" id="soundToggle" aria-pressed="false" aria-describedby="soundStatus">Sound on</button><label for="soundVolume">Volume<input id="soundVolume" type="range" min="0" max="100" value="45" aria-valuetext="45%" disabled></label></div>
+  <span class="sound-status" id="soundStatus" role="status">Real recordings · sound off by default</span>
+</div></div>
 
 <div class="away" id="away" role="dialog" aria-modal="true" aria-label="Step away from the screen" aria-hidden="true" inert>
   <canvas id="awayCv"></canvas>
@@ -292,7 +315,20 @@ h1,h2{letter-spacing:-.025em}
 </div>
 
 <footer class="col">
-  Adapted from the author’s 2014 reading notes, <a href="https://simoncos.github.io/blogs/exformation-and-information.en.html">Exformation and Information: Reading Kenya Hara’s Designing Design</a>. Book: Kenya Hara, Designing Design (complete edition), Chinese translation by Zhu E, Guangxi Normal University Press. The book’s exformation projects—rivers and roads, footprints, holiday places—are reimagined here as interactive scenes. Illustrated backgrounds are AI-generated; motion, interaction and sound are generated in real time by code.
+  Adapted from the author’s 2014 reading notes, <a href="https://simoncos.github.io/blogs/exformation-and-information.en.html">Exformation and Information: Reading Kenya Hara’s Designing Design</a>. Book: Kenya Hara, Designing Design, expanded edition; Chinese translation by Zhu E, Guangxi Normal University Press. The book’s Exformation projects—rivers and roads, footprints, and holidays—are reimagined here as interactive scenes. The illustrated backgrounds are AI-generated; motion and interaction run in real time. Sound comes from recordings of real environments.
+
+  <details class="sound-credits" id="sound-credits"><summary>Sound credits and licenses</summary>
+    <p>These recordings are released under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>. This page uses excerpts from public preview files, with level adjustments and loops for ambience. No AI-generated audio is used. Both language editions share these samples.</p>
+    <ul>
+      <li>Wind · <a href="https://freesound.org/people/SamuelGremaud/sounds/547472/">WIND - 1 — SamuelGremaud</a></li>
+      <li>Stream · <a href="https://freesound.org/people/SamuelGremaud/sounds/437063/">STREAM — SamuelGremaud</a></li>
+      <li>Distant traffic · <a href="https://freesound.org/people/sounds_from_palestine/sounds/817606/">Wind in Trees &amp; Passing Cars — sounds_from_palestine</a></li>
+      <li>Waves · <a href="https://freesound.org/people/ralph.whitehead/sounds/470647/">Waves On The Beach — ralph.whitehead</a></li>
+      <li>Grass and gravel footsteps · <a href="https://freesound.org/people/LukaCafuka/sounds/752867/">Walking on pebbles and grass — LukaCafuka</a></li>
+      <li>Sand footsteps · <a href="https://freesound.org/people/fthgurdy/sounds/528953/">Walking on sand and gravel 2 — fthgurdy</a></li>
+      <li>Shallow-water footsteps · <a href="https://freesound.org/people/aglinder/sounds/265582/">Footsteps Water 01 — aglinder</a></li>
+    </ul>
+  </details>
 </footer>
 
 <script>
@@ -393,31 +429,165 @@ function touchDrawing(cv, buttonId) {
   return e => e.pointerType !== "touch" || cv.classList.contains("drawing");
 }
 
-/* ---------- tiny synth for footsteps, slips and wind ---------- */
-let AC = null, soundOn = false;
-function ac() { if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === "suspended") AC.resume(); return AC; }
-function noiseBuf(sec = 2) { const a = ac(), b = a.createBuffer(1, a.sampleRate * sec, a.sampleRate), d = b.getChannelData(0); let l = 0; for (let i = 0; i < d.length; i++) { const w = Math.random() * 2 - 1; l = (l + 0.02 * w) / 1.02; d[i] = l * 3.5; } return b; }
-let NB = null, WB = null;
-function whiteBuf() { const a = ac(), b = a.createBuffer(1, a.sampleRate, a.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; return b; }
-function step(kind) {
-  if (!soundOn) return; const a = ac(), t = a.currentTime; WB = WB || whiteBuf();
-  const out = a.createGain(); out.connect(a.destination);
-  if (kind === "grass" || kind === "flower") {
-    const s = a.createBufferSource(); s.buffer = WB; const f = a.createBiquadFilter(); f.type = "bandpass"; f.frequency.value = 2400 + Math.random() * 1600; f.Q.value = 0.8;
-    s.connect(f); f.connect(out); out.gain.setValueAtTime(0, t); out.gain.linearRampToValueAtTime(0.16, t + 0.03); out.gain.exponentialRampToValueAtTime(0.001, t + 0.28); s.start(t, Math.random() * 0.5); s.stop(t + 0.3);
-  } else if (kind === "stone") {
-    for (let i = 0; i < 2; i++) { const o = a.createOscillator(), gg = a.createGain(); o.type = "triangle"; o.frequency.value = 900 + Math.random() * 900; o.connect(gg); gg.connect(out); const tt = t + i * 0.045; gg.gain.setValueAtTime(0.12, tt); gg.gain.exponentialRampToValueAtTime(0.001, tt + 0.07); o.start(tt); o.stop(tt + 0.08); }
-    out.gain.value = 1;
-  } else if (kind === "water") {
-    const o = a.createOscillator(), gg = a.createGain(); o.type = "sine"; o.frequency.setValueAtTime(700 + Math.random() * 300, t); o.frequency.exponentialRampToValueAtTime(260, t + 0.12);
-    o.connect(gg); gg.connect(out); gg.gain.setValueAtTime(0.0, t); gg.gain.linearRampToValueAtTime(0.14, t + 0.01); gg.gain.exponentialRampToValueAtTime(0.001, t + 0.18); o.start(t); o.stop(t + 0.2);
-    const s = a.createBufferSource(); s.buffer = WB; const f = a.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = 900; const g2 = a.createGain(); s.connect(f); f.connect(g2); g2.connect(out);
-    g2.gain.setValueAtTime(0.08, t); g2.gain.exponentialRampToValueAtTime(0.001, t + 0.25); s.start(t); s.stop(t + 0.26); out.gain.value = 1;
-  } else if (kind === "sand") {
-    const s = a.createBufferSource(); s.buffer = WB; const f = a.createBiquadFilter(); f.type = "highpass"; f.frequency.value = 3000; s.connect(f); f.connect(out);
-    out.gain.setValueAtTime(0.05, t); out.gain.exponentialRampToValueAtTime(0.001, t + 0.15); s.start(t, Math.random() * .5); s.stop(t + .16);
+/* ---------- Field recordings: opt in once, follow the landscape ---------- */
+const soundscape = (() => {
+  const dock = $("#soundDock"), toggle = $("#soundToggle"), volume = $("#soundVolume"), status = $("#soundStatus"), footToggle = $("#soundBtn");
+  const files = ["wind", "river", "road", "waves", "grass", "stone", "sand", "water"];
+  const labels = { hero: "Wind in the meadow", talk: "Dandelions in the breeze", river: "Water and distant traffic", foot: "Sounds underfoot", shore: "Waves and sand", end: "Looking up at the sky" };
+  const sections = [$(".hero"), ...["#talkCv", "#riverCv", "#footCv", "#shoreCv", "#endCv"].map(id => $(id).closest("section"))];
+  const names = Object.keys(labels), buffers = new Map(), pending = new Map(), beds = new Map(), voices = new Set();
+  let ctx, master, enabled = false, active = "hero", immersive = false, river = 0, shoreStill = false, volumeValue = .45;
+  let revision = 0, loading = false, failed = false, scrollTimer = 0, lifecycle = 0, lastStep = -Infinity;
+  const live = () => enabled && !document.hidden && ctx?.state === "running";
+  function ui() {
+    for (const b of [toggle, footToggle]) {
+      b.setAttribute("aria-pressed", String(enabled));
+      b.textContent = enabled ? "Sound off" : "Sound on";
+    }
+    volume.disabled = !enabled;
+    status.textContent = !enabled ? (failed ? "Sound unavailable. Please try again." : "Real recordings · sound off by default") : document.hidden ? "Sound paused" : ctx?.state !== "running" ? "Playback paused. Toggle sound to retry." : loading ? "Loading sounds…" : failed ? "Some sounds failed. Toggle sound to retry." : labels[active];
   }
-}
+  function ramp(param, value, seconds = .4) {
+    const now = ctx.currentTime;
+    param.cancelScheduledValues(now); param.setTargetAtTime(value, now, seconds);
+  }
+  function dispose(b) {
+    clearTimeout(b.timer);
+    try { b.source.stop(); } catch (_) {}
+    b.source.disconnect(); b.gain.disconnect();
+  }
+  function stopAll() {
+    for (const b of beds.values()) dispose(b);
+    beds.clear();
+    for (const v of voices) dispose(v);
+    voices.clear();
+  }
+  async function load(name) {
+    if (buffers.has(name)) return buffers.get(name);
+    if (!pending.has(name)) {
+      const job = (async () => {
+        const controller = new AbortController(), timeout = setTimeout(() => controller.abort(), 15000);
+        try {
+          const response = await fetch(`assets/audio/${name}.mp3`, { signal: controller.signal });
+          if (!response.ok) throw new Error("Audio unavailable");
+          const buffer = await ctx.decodeAudioData(await response.arrayBuffer());
+          buffers.set(name, buffer); return buffer;
+        } finally { clearTimeout(timeout); pending.delete(name); }
+      })();
+      pending.set(name, job);
+    }
+    return pending.get(name);
+  }
+  function mix() {
+    if (active === "river") return { river: .9 * Math.cos(river * Math.PI / 2), road: .65 * Math.sin(river * Math.PI / 2), wind: .12 };
+    if (active === "shore") return { waves: shoreStill ? .15 : .85, wind: .1 };
+    return { wind: active === "talk" ? .75 : active === "foot" ? .28 : active === "end" ? .6 : .5 };
+  }
+  function applyMix() {
+    if (!live()) return;
+    const levels = mix();
+    for (const [name, bed] of beds) {
+      const level = levels[name] || 0;
+      if (Math.abs(level - bed.level) > .008) { ramp(bed.gain.gain, level); bed.level = level; }
+      if (name in levels) { clearTimeout(bed.timer); bed.timer = null; }
+      else if (!bed.timer) bed.timer = setTimeout(() => { if (beds.get(name) === bed) { dispose(bed); beds.delete(name); } }, 2200);
+    }
+  }
+  async function refresh() {
+    const token = ++revision;
+    if (!live()) { ui(); return; }
+    const wanted = Object.keys(mix());
+    const foley = active === "foot" ? ["grass", "stone", "sand", "water"] : active === "shore" ? ["sand"] : [];
+    loading = [...wanted, ...foley].some(n => !buffers.has(n)); failed = false;
+    applyMix(); ui();
+    const results = await Promise.allSettled([...new Set([...wanted, ...foley])].map(load));
+    if (token !== revision || !live()) return;
+    failed = results.some(r => r.status === "rejected"); loading = false;
+    for (const name of wanted) {
+      if (beds.has(name) || !buffers.has(name)) continue;
+      const source = ctx.createBufferSource(), gain = ctx.createGain();
+      source.buffer = buffers.get(name); source.loop = true; gain.gain.value = 0;
+      source.connect(gain); gain.connect(master); source.start();
+      beds.set(name, { source, gain, level: 0, timer: null });
+    }
+    applyMix(); ui();
+  }
+  function locate() {
+    scrollTimer = 0;
+    let next = "hero";
+    if (immersive) next = "end";
+    else sections.forEach((s, i) => { if (s.getBoundingClientRect().top <= innerHeight * .45) next = names[i]; });
+    if (next !== active) { active = next; refresh(); }
+  }
+  function scheduleLocate() { if (!scrollTimer) scrollTimer = setTimeout(locate, 80); }
+  async function setEnabled(on) {
+    const token = ++lifecycle; ++revision; enabled = on; failed = false;
+    if (!on) {
+      if (master) master.gain.setValueAtTime(0, ctx.currentTime);
+      stopAll(); if (ctx && ctx.state !== "closed") ctx.suspend().catch(() => {}); ui(); return;
+    }
+    try {
+      if (!ctx) {
+        const Audio = window.AudioContext || window.webkitAudioContext;
+        ctx = new Audio(); master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
+        ctx.addEventListener("statechange", ui);
+      }
+      // Resume inside this click gesture, before any network work (including iOS).
+      const resume = ctx.resume(); ui(); await resume;
+      if (token !== lifecycle || !enabled || document.hidden) return;
+      ramp(master.gain, volumeValue, .18); locate(); refresh();
+    } catch (_) {
+      if (token === lifecycle) { enabled = false; failed = true; stopAll(); ui(); }
+    }
+  }
+  for (const button of [toggle, footToggle]) button.addEventListener("click", () => setEnabled(!enabled));
+  volume.addEventListener("input", () => {
+    volumeValue = +volume.value / 100;
+    volume.setAttribute("aria-valuetext", `${volume.value}%`);
+    if (master) ramp(master.gain, document.hidden || !enabled ? 0 : volumeValue, .05);
+  });
+  dock.addEventListener("click", e => e.stopPropagation());
+  addEventListener("scroll", scheduleLocate, { passive: true }); addEventListener("resize", scheduleLocate);
+  function suspend() {
+    ++lifecycle; ++revision;
+    if (master) master.gain.setValueAtTime(0, ctx.currentTime);
+    stopAll(); if (ctx && ctx.state !== "closed") ctx.suspend().catch(() => {}); ui();
+  }
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) suspend();
+    else if (enabled) setEnabled(true);
+  });
+  addEventListener("pagehide", suspend);
+  addEventListener("pageshow", e => { locate(); if (e.persisted && enabled) setEnabled(true); });
+  ui(); locate();
+  return {
+    river(value) { river = value; if (active === "river") applyMix(); },
+    shore(still) { if (shoreStill !== still) { shoreStill = still; if (active === "shore") applyMix(); } },
+    immerse(on) { immersive = on; locate(); },
+    gust() {
+      const bed = beds.get("wind");
+      if (!live() || !bed || !["hero", "talk"].includes(active)) return;
+      const t = ctx.currentTime; ramp(bed.gain.gain, .95, .25);
+      bed.gain.gain.setTargetAtTime(mix().wind, t + 1.3, .9);
+    },
+    step(kind) {
+      if (!live() || !["foot", "shore"].includes(active) || ctx.currentTime - lastStep < .1 || voices.size >= 4) return;
+      const name = kind === "flower" ? "grass" : kind, buffer = buffers.get(name);
+      if (!buffer || !files.includes(name)) return;
+      lastStep = ctx.currentTime;
+      const source = ctx.createBufferSource(), gain = ctx.createGain();
+      source.buffer = buffer; source.playbackRate.value = .96 + Math.random() * .08;
+      const start = Math.floor(Math.random() * 3) * .7, duration = .65, now = ctx.currentTime;
+      gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(.6, now + .012);
+      gain.gain.setValueAtTime(.6, now + .5); gain.gain.linearRampToValueAtTime(0, now + duration);
+      source.connect(gain); gain.connect(master);
+      const voice = { source, gain }; voices.add(voice);
+      source.onended = () => { voices.delete(voice); source.disconnect(); gain.disconnect(); };
+      source.start(now, start, duration); source.stop(now + duration);
+    }
+  };
+})();
+const step = kind => soundscape.step(kind);
 
 /* =========================================================
    Hero: a painted meadow; drifting fragments of information
@@ -549,7 +719,7 @@ void main(){
   function setBtns(on) { kb.disabled = ub.disabled = !on; }
   kb.addEventListener("click", () => { if (state !== "float") return; state = "know"; anim = 0; setBtns(false); const b = bubblePos(); flying = { x0: b.x, y0: b.y }; if (RM) { slips.push(topic().w); known++; next(); repaint(); } });
   ub.addEventListener("click", () => {
-    if (state !== "float") return; state = "open"; anim = 0; setBtns(false); list.innerHTML = "";
+    if (state !== "float") return; state = "open"; soundscape.gust(); anim = 0; setBtns(false); list.innerHTML = "";
     if (RM) { for (const q of topic().q) addQ(q); next(); repaint(); return; }
     dand = makeDandelion(bubblePos());
   });
@@ -840,10 +1010,10 @@ void main(){
   setup(); addEventListener("resize", setup);
   { const r = rng(17); for (let z = 300; z < 400000; z += 140 + r() * 260) { const side = r() < .5 ? -1 : 1, k = r() < .22 ? 1 : r() < .45 ? 2 : 0; trees.push({ z, off: side * (HW + (k === 2 ? 70 : 170) + r() * 460), s: (k === 2 ? 0.4 : 1) * (0.8 + r() * 0.6), k }); }
     for (let z = 50; z < 400000; z += 26 + r() * 46) tufts.push({ z, off: (r() < .5 ? -1 : 1) * (HW * 1.14 + Math.pow(r(), 1.6) * 900), h: 0.6 + r() * 0.8, c: r() }); }
-  blendIn.addEventListener("input", () => blend = +blendIn.value);
+  blendIn.addEventListener("input", () => { blend = +blendIn.value; soundscape.river(blend); });
   function frame(dt) {
     if (!held) { phase = (phase + dt * Math.PI / 10) % (Math.PI * 2); blend = (1 - Math.cos(phase)) / 2; }
-    phaseOut.value = blend;
+    phaseOut.value = blend; soundscape.river(blend);
     t += dt; camZ += dt * (600 + blend * 260);
     const slope = dxt(camZ), camX = xt(camZ), F = H * 0.95, hz = H * 0.44;
     const target = clamp(-ddxt(camZ) * 900 * (0.5 + blend * 0.8), -0.11, 0.11); tilt = lerp(tilt, target, 1 - Math.exp(-dt * 2));
@@ -958,7 +1128,7 @@ void main(){
     const s = W < 700 ? 0.78 : 1.12, p = { x: nx, y: ny, a, s, l: side < 0, t: 0 }; lastA = a;
     prints.push(p); mg.fillStyle = "#000"; footPath(mg, p.x, p.y, p.a, p.s, p.l); mg.fill();
     let k = band(nx, ny); if (k === "grass" && flowerAt(nx, ny, 20 * s)) k = "flower";
-    count[k]++; step(k === "flower" ? "grass" : k === "sand" ? "stone" : k); hintA = 0;
+    count[k]++; step(k); hintA = 0;
     $("#footCount").innerHTML = `Steps on grass: <b>${count.grass}</b> · wildflowers: <b>${count.flower}</b> · stones: <b>${count.stone}</b> · wet sand: <b>${count.sand}</b> · shallow water: <b>${count.water}</b>.`;
   }
   function moveTo(x, y) {
@@ -974,7 +1144,6 @@ void main(){
     const m = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }[e.key]; if (!m) return; e.preventDefault();
     const c = cursor || { x: W / 2, y: H / 2 }; cursor = { x: clamp(c.x + m[0] * 46, 10, W - 10), y: clamp(c.y + m[1] * 46, 10, H - 10) }; stamp(cursor.x, cursor.y, Math.atan2(m[1], m[0]));
   });
-  $("#soundBtn").addEventListener("click", e => { soundOn = !soundOn; if (soundOn) ac(); e.currentTarget.setAttribute("aria-pressed", soundOn); e.currentTarget.textContent = soundOn ? "Sound off" : "Sound on"; });
   $("#footReset").addEventListener("click", () => { seed++; prints = []; last = null; for (const k in count) count[k] = 0; $("#footCount").textContent = "A fresh patch of ground."; hintA = 1; setup(); });
   setup(); addEventListener("resize", () => { const old = prints.map(p => ({ ...p, x: p.x / W, y: p.y / H })); setup(); prints = old.map(p => ({ ...p, x: p.x * W, y: p.y * H })); redrawMask(); });
   function frame(dt) {
@@ -1042,7 +1211,7 @@ void main(){
     e.preventDefault(); pen ||= [W / 2, H * .85];
     if (e.key === " ") {
       if (cur) cur = null;
-      else { cur = { pts: [[...pen, 1]] }; strokes.push(cur); written++; }
+      else { cur = { pts: [[...pen, 1]] }; strokes.push(cur); written++; step("sand"); }
     } else {
       pen = [clamp(pen[0] + direction[0] * 12, 6, W - 6), clamp(pen[1] + direction[1] * 12, 6, H - 6)];
       if (cur) cur.pts.push([...pen, 1]);
@@ -1059,7 +1228,7 @@ void main(){
     const p0 = phase % 1;
     if (!(calm && p0 < 0.02)) { const before = Math.floor(phase); phase += dt / 7.5; if (Math.floor(phase) > before) { lastReach = maxReach; maxReach = 0.5 + Math.random() * 0.28; if (calm) phase = Math.floor(phase) + 0.0001; } }
     g.drawImage(sand, 0, 0, W, H);
-    const p = phase % 1, k = waveK();
+    const p = phase % 1, k = waveK(); soundscape.shore(calm && p < .02);
     // the wet band the water leaves behind, glossy with sky
     wet = p < 0.38 ? 1 : Math.max(0, wet - dt * 0.1);
     const reachPrev = H * Math.max(maxReach * (p < 0.48 ? k : 1), lastReach * wet);
@@ -1166,34 +1335,20 @@ void main(){
   }
   const inPage = scene($("#endCv"));
   addLoop($("#endCv"), dt => inPage.frame(dt));
-  const away = $("#away"), acv = $("#awayCv"); let big = null, running = false, windNodes = null, lineT = [];
-  function startWind() {
-    try {
-      const a = ac(); NB = NB || noiseBuf(4);
-      const src = a.createBufferSource(); src.buffer = NB; src.loop = true;
-      const lp = a.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 500;
-      const hiSrc = a.createBufferSource(); hiSrc.buffer = WB || (WB = whiteBuf()); hiSrc.loop = true;
-      const bp = a.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 3200; bp.Q.value = 0.6;
-      const g1 = a.createGain(), g2 = a.createGain(), out = a.createGain(); g1.gain.value = 0.5; g2.gain.value = 0.0; out.gain.value = 0;
-      src.connect(lp); lp.connect(g1); g1.connect(out); hiSrc.connect(bp); bp.connect(g2); g2.connect(out); out.connect(a.destination);
-      src.start(); hiSrc.start(); out.gain.linearRampToValueAtTime(0.5, a.currentTime + 3);
-      windNodes = { src, hiSrc, lp, g1, g2, out };
-    } catch (e) { windNodes = null; }
-  }
-  function stopWind() { if (!windNodes) return; const a = ac(), n = windNodes; n.out.gain.cancelScheduledValues(a.currentTime); n.out.gain.setValueAtTime(n.out.gain.value, a.currentTime); n.out.gain.linearRampToValueAtTime(0, a.currentTime + 1.2); setTimeout(() => { n.src.stop(); n.hiSrc.stop(); }, 1400); windNodes = null; }
+  const away = $("#away"), acv = $("#awayCv"); let big = null, running = false, lineT = [];
   const background = [...document.querySelectorAll("body > header, body > main, body > footer")];
   function open() {
     if (running) return;
     away.inert = false; background.forEach(el => el.inert = true);
     away.classList.add("on"); away.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden";
-    if (!big) big = scene(acv); running = true; startWind(); $("#backBtn").focus({ preventScroll: true }); repaint();
+    if (!big) big = scene(acv); running = true; away.append($("#soundDock")); soundscape.immerse(true); $("#backBtn").focus({ preventScroll: true }); repaint();
     const spans = away.querySelectorAll(".lines span"); spans.forEach(s => s.classList.remove("on"));
     if (RM) spans.forEach(s => s.classList.add("on"));
     else lineT = [4000, 7500, 11000].map((ms, i) => setTimeout(() => spans[i].classList.add("on"), ms));
   }
   function close() {
     away.inert = true; background.forEach(el => el.inert = false);
-    away.classList.remove("on"); away.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; running = false; stopWind(); lineT.forEach(clearTimeout);
+    away.classList.remove("on"); away.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; running = false; $("#soundHome").append($("#soundDock")); soundscape.immerse(false); lineT.forEach(clearTimeout);
     $("#leaveBtn").focus();
   }
   $("#leaveBtn").addEventListener("click", open);
@@ -1201,12 +1356,16 @@ void main(){
   addEventListener("keydown", e => {
     if (!running) return;
     if (e.key === "Escape") close();
-    if (e.key === "Tab") { e.preventDefault(); $("#backBtn").focus(); }
+    if (e.key === "Tab") {
+      const controls = [...away.querySelectorAll("button, input:not(:disabled)")];
+      const first = controls[0], last = controls[controls.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
   });
   addLoop(acv, dt => {
     if (running && big) {
       big.frame(dt);
-      if (windNodes) { const a = ac(), gu = big.gust(); windNodes.lp.frequency.setTargetAtTime(380 + gu * 900, a.currentTime, 0.4); windNodes.g2.gain.setTargetAtTime(gu * 0.07, a.currentTime, 0.5); windNodes.g1.gain.setTargetAtTime(0.4 + gu * 0.5, a.currentTime, 0.5); }
     }
   });
 })();

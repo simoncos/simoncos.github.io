@@ -1,0 +1,193 @@
+{
+  "sources": [
+    {
+      "name": "wind",
+      "author": "SamuelGremaud",
+      "id": 547472,
+      "title": "Freesound - WIND - 1 by SamuelGremaud",
+      "url": "https://freesound.org/people/SamuelGremaud/sounds/547472/",
+      "preview": "https://cdn.freesound.org/previews/547/547472_8031303-hq.mp3",
+      "licenses": [
+        "http://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "preview_sha256": "1e1a8479c6925c9ab35b9cf5f64c63fd448e284042da9a1d27cae5320d4bbc26",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "name": "river",
+      "author": "SamuelGremaud",
+      "id": 437063,
+      "title": "Freesound - STREAM by SamuelGremaud",
+      "url": "https://freesound.org/people/SamuelGremaud/sounds/437063/",
+      "preview": "https://cdn.freesound.org/previews/437/437063_8031303-hq.mp3",
+      "licenses": [
+        "http://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "preview_sha256": "555bc19ba091932227390968a833b00e06b81fd168bbdeb1677089fc3c1bdd8b",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "name": "waves",
+      "author": "ralph.whitehead",
+      "id": 470647,
+      "title": "Freesound - Waves On The Beach.wav by ralph.whitehead",
+      "url": "https://freesound.org/people/ralph.whitehead/sounds/470647/",
+      "preview": "https://cdn.freesound.org/previews/470/470647_1971023-hq.mp3",
+      "licenses": [
+        "http://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "preview_sha256": "c58046f0846e6b686c2f5e15f4ed4ab63cc42a27d763cea78b077d8578523a16",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "download_note": "Only first 1 MiB of the public MP3 preview retrieved; sufficient for selected excerpt."
+    },
+    {
+      "name": "road",
+      "author": "sounds_from_palestine",
+      "id": 817606,
+      "title": "Freesound - Wind in Trees &amp; Passing Cars – Residential Ambience, Palestine by sounds_from_palestine",
+      "url": "https://freesound.org/people/sounds_from_palestine/sounds/817606/",
+      "preview": "https://cdn.freesound.org/previews/817/817606_17247322-hq.mp3",
+      "licenses": [
+        "http://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "preview_sha256": "424b3dc5392eb53707a75bbcb0ef8abf0a5a12f1926fb11536c970b043843248",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "name": "steps",
+      "author": "LukaCafuka",
+      "id": 752867,
+      "title": "Freesound - Walking on pebbles and grass by LukaCafuka",
+      "url": "https://freesound.org/people/LukaCafuka/sounds/752867/",
+      "preview": "https://cdn.freesound.org/previews/752/752867_16236894-hq.mp3",
+      "licenses": [
+        "http://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "preview_sha256": "c2919a812263d34364a1ae18822d94fc1f145ea60e9f23f9cfb7568c9f74405b",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "name": "sand",
+      "author": "fthgurdy",
+      "id": 528953,
+      "title": "Freesound - Walking on sand and gravel 2 by fthgurdy",
+      "url": "https://freesound.org/people/fthgurdy/sounds/528953/",
+      "preview": "https://cdn.freesound.org/previews/528/528953_3302313-hq.mp3",
+      "licenses": [
+        "http://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "preview_sha256": "9f55fe36a65699f4d6561414d6e86361aaef6af790093e0a3168984179fbef93",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "name": "water",
+      "author": "aglinder",
+      "id": 265582,
+      "title": "Freesound - Footsteps Water 01 by aglinder",
+      "url": "https://freesound.org/people/aglinder/sounds/265582/",
+      "preview": "https://cdn.freesound.org/previews/265/265582_1042839-hq.mp3",
+      "licenses": [
+        "http://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "preview_sha256": "6a6bd7bb2ee0c165c4b7293d707a0bc7591c01c4d78c9f419b7a84002d5ab1e5",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }
+  ],
+  "derived": [
+    {
+      "file": "wind.mp3",
+      "source": "wind",
+      "start_seconds": 1,
+      "source_duration_seconds": 20,
+      "loop_crossfade_seconds": 0.8,
+      "processing": "High-pass 90 Hz; wrap crossfade; -24 LUFS / -5 dBTP loudness target; 32 kHz stereo MP3 112 kbps",
+      "sha256": "20292bfcaf95c404ea7ce3ec650fb8d0f9e7bc5621b0402d504e6be80faf40c8"
+    },
+    {
+      "file": "river.mp3",
+      "source": "river",
+      "start_seconds": 2,
+      "source_duration_seconds": 26,
+      "loop_crossfade_seconds": 0.8,
+      "processing": "High-pass 90 Hz; wrap crossfade; -24 LUFS / -5 dBTP loudness target; 32 kHz stereo MP3 112 kbps",
+      "sha256": "9dac7fc5f6e94630e6e36be4ee499c1594453b4dd933f4121ea922582b7a73d2"
+    },
+    {
+      "file": "road.mp3",
+      "source": "road",
+      "start_seconds": 20,
+      "source_duration_seconds": 30,
+      "loop_crossfade_seconds": 0.8,
+      "processing": "High-pass 90 Hz; wrap crossfade; -24 LUFS / -5 dBTP loudness target; 32 kHz stereo MP3 112 kbps",
+      "sha256": "01d515a702265249966f3a7b9e6f311d1415c7831809529d1720854445825f9d"
+    },
+    {
+      "file": "waves.mp3",
+      "source": "waves",
+      "start_seconds": 5,
+      "source_duration_seconds": 28,
+      "loop_crossfade_seconds": 0.8,
+      "processing": "High-pass 90 Hz; wrap crossfade; -24 LUFS / -5 dBTP loudness target; 32 kHz stereo MP3 112 kbps",
+      "sha256": "5613d22a4771cd265eb97f1d03d3ff054e7d4c6e5291e7b02fc86f251a8f0e50"
+    },
+    {
+      "file": "grass.mp3",
+      "source": "steps",
+      "starts_seconds": [
+        28.18,
+        29.92,
+        33.68
+      ],
+      "clip_duration_seconds": 0.65,
+      "slot_seconds": 0.7,
+      "processing": "Three recorded steps; high-pass 100 Hz; 8 ms attack / 120 ms release; peak normalized to -12 dBFS; 32 kHz mono MP3 96 kbps",
+      "sha256": "3cafdef81449f39e8782c59d96a143fa00c1d5dd2cef02980ecb0d154aed5a2f"
+    },
+    {
+      "file": "stone.mp3",
+      "source": "steps",
+      "starts_seconds": [
+        5.88,
+        8.4,
+        10.92
+      ],
+      "clip_duration_seconds": 0.65,
+      "slot_seconds": 0.7,
+      "processing": "Three recorded steps; high-pass 100 Hz; 8 ms attack / 120 ms release; peak normalized to -12 dBFS; 32 kHz mono MP3 96 kbps",
+      "sha256": "4b1cf9978e0fde9a1b49e9db3f63c053d9fd50e6757f76870b402417fc9404b6"
+    },
+    {
+      "file": "sand.mp3",
+      "source": "sand",
+      "starts_seconds": [
+        6.72,
+        9.8,
+        14.84
+      ],
+      "clip_duration_seconds": 0.65,
+      "slot_seconds": 0.7,
+      "processing": "Three recorded steps; high-pass 100 Hz; 8 ms attack / 120 ms release; peak normalized to -12 dBFS; 32 kHz mono MP3 96 kbps",
+      "sha256": "a8c24819fcb160d383bbdb3a8abba41c86ae5b5419bcfe1ae216e159ee35e5f0"
+    },
+    {
+      "file": "water.mp3",
+      "source": "water",
+      "starts_seconds": [
+        27.2,
+        31.88,
+        45.08
+      ],
+      "clip_duration_seconds": 0.65,
+      "slot_seconds": 0.7,
+      "processing": "Three recorded steps; high-pass 100 Hz; 8 ms attack / 120 ms release; peak normalized to -12 dBFS; 32 kHz mono MP3 96 kbps",
+      "sha256": "104161abc2185d64cb1f280e6cf45a70f4144236140a78dd446de6194bda846d"
+    }
+  ]
+}
