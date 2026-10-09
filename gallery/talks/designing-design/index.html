@@ -107,7 +107,7 @@ h1{font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,12.5vw,5.6r
 .river-controls progress::-moz-progress-bar{background:var(--sky)}
 .river-controls .range input{width:100%;min-height:44px}
 #riverHold{min-width:140px;min-height:44px}
-.rlabel{display:flex;justify-content:space-between;font-family:var(--display);font-size:.9rem;color:var(--muted);width:min(320px,52vw)}
+.rlabel{display:flex;justify-content:space-between;font-family:var(--display);font-size:.9rem;color:var(--muted);width:100%}
 
 /* ---------- 03 footprints ---------- */
 #footCv{aspect-ratio:16/8.5;cursor:none;touch-action:none}
@@ -247,7 +247,7 @@ footer{padding-bottom:96px}
     <div class="cel"><canvas id="footCv" tabindex="0" aria-label="一片空白的地面。移动指针走过去，脚印里会露出下面的草、石头、野花和浅水。"></canvas></div>
     <div class="celbar">
       <p class="counts" id="footCount">在白纸一样的地面上走一走。</p>
-      <div class="row"><button class="btn ghost touch-mode" id="footDraw" aria-pressed="false" aria-controls="footCv">用手指走一走</button><button class="btn ghost" id="soundBtn" aria-pressed="false">打开声音</button><button class="btn ghost" id="footReset">换一片地面</button></div>
+      <div class="row"><button class="btn ghost touch-mode" id="footDraw" aria-pressed="false" aria-controls="footCv">用手指走一走</button><button class="btn ghost" id="footReset">换一片地面</button></div>
     </div>
     <p class="cap">方向键也能走。手机上先点“用手指走一走”，结束后点“继续滚动页面”。</p>
   </div>
@@ -432,7 +432,7 @@ function touchDrawing(cv, buttonId) {
 
 /* ---------- Field recordings: opt in once, follow the landscape ---------- */
 const soundscape = (() => {
-  const dock = $("#soundDock"), toggle = $("#soundToggle"), status = $("#soundStatus"), footToggle = $("#soundBtn"), skyToggle = $("#skySoundToggle");
+  const dock = $("#soundDock"), toggle = $("#soundToggle"), status = $("#soundStatus"), skyToggle = $("#skySoundToggle");
   const files = ["wind", "river", "road", "waves", "grass", "stone", "sand", "water"];
   const labels = { hero: "草地上的风", talk: "蒲公英与风", river: "流水与远处的车声", foot: "脚下的声音", shore: "海浪与沙", end: "仰望天空" };
   const sections = [$(".hero"), ...["#talkCv", "#riverCv", "#footCv", "#shoreCv", "#endCv"].map(id => $(id).closest("section"))];
@@ -443,11 +443,10 @@ const soundscape = (() => {
   const live = () => enabled && !document.hidden && ctx?.state === "running";
   function ui() {
     const action = enabled ? "关闭声音" : "开启声音";
-    for (const b of [toggle, footToggle, skyToggle]) {
+    for (const b of [toggle, skyToggle]) {
       b.setAttribute("aria-pressed", String(enabled));
       b.setAttribute("aria-label", action); b.title = action;
     }
-    footToggle.textContent = action;
     status.textContent = !enabled ? (failed ? "声音暂不可用，请重试" : "真实采样 · 默认静音") : document.hidden ? "声音已暂停" : ctx?.state !== "running" ? "播放已暂停，点声音开关重试" : loading ? "正在载入声音…" : failed ? "部分声音未载入，关闭后可重试" : labels[active];
   }
   function ramp(param, value, seconds = .4) {
@@ -543,7 +542,7 @@ const soundscape = (() => {
       if (token === lifecycle) { enabled = false; failed = true; stopAll(); ui(); }
     }
   }
-  for (const button of [toggle, footToggle, skyToggle]) button.addEventListener("click", e => { e.stopPropagation(); setEnabled(!enabled); });
+  for (const button of [toggle, skyToggle]) button.addEventListener("click", e => { e.stopPropagation(); setEnabled(!enabled); });
   const welcome = $("#soundWelcome");
   $("#soundWelcomeOn").addEventListener("click", () => {
     setEnabled(true); // Start inside the user's gesture, before closing the prompt.

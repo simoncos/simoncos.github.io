@@ -104,7 +104,7 @@ h1{font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,12.5vw,5.6r
 .river-controls progress::-moz-progress-bar{background:var(--sky)}
 .river-controls .range input{width:100%;min-height:44px}
 #riverHold{min-width:140px;min-height:44px}
-.rlabel{display:flex;justify-content:space-between;font-family:var(--display);font-size:.9rem;color:var(--muted);width:min(320px,52vw)}
+.rlabel{display:flex;justify-content:space-between;font-family:var(--display);font-size:.9rem;color:var(--muted);width:100%}
 
 /* ---------- 03 footprints ---------- */
 #footCv{aspect-ratio:16/8.5;cursor:none;touch-action:none}
@@ -173,8 +173,6 @@ h1,h2{letter-spacing:-.025em}
 .talkbtns{flex-wrap:wrap}
 .talkbtns .btn{white-space:normal}
 @media(max-width:700px){.hero-text .in{padding-top:20px}.hero .lede{font-size:1rem;line-height:1.7}.hero .eyebrow{font-size:.69rem}.hero .hint{font-size:.71rem;line-height:1.55}.talkbtns{gap:8px}.talkbtns .btn{font-size:.78rem;padding:7px 12px}.away .lines{font-size:1.35rem}}
-
-@media(min-width:701px) and (max-height:500px){.hero .lede{max-width:calc(100% - 300px)}}
 
 </style>
 
@@ -260,7 +258,7 @@ h1,h2{letter-spacing:-.025em}
     <div class="cel"><canvas id="footCv" tabindex="0" aria-label="A blank stretch of ground. Move your pointer across it; footprints reveal grass, stones, wildflowers and shallow water underneath."></canvas></div>
     <div class="celbar">
       <p class="counts" id="footCount">Walk across this ground, as blank as paper.</p>
-      <div class="row"><button class="btn ghost touch-mode" id="footDraw" aria-pressed="false" aria-controls="footCv">Walk with your finger</button><button class="btn ghost" id="soundBtn" aria-pressed="false">Sound on</button><button class="btn ghost" id="footReset">New ground</button></div>
+      <div class="row"><button class="btn ghost touch-mode" id="footDraw" aria-pressed="false" aria-controls="footCv">Walk with your finger</button><button class="btn ghost" id="footReset">New ground</button></div>
     </div>
     <p class="cap">You can walk with the arrow keys too. On a phone, tap “Walk with your finger,” then “Scroll the page” when you’re done.</p>
   </div>
@@ -445,7 +443,7 @@ function touchDrawing(cv, buttonId) {
 
 /* ---------- Field recordings: opt in once, follow the landscape ---------- */
 const soundscape = (() => {
-  const dock = $("#soundDock"), toggle = $("#soundToggle"), status = $("#soundStatus"), footToggle = $("#soundBtn"), skyToggle = $("#skySoundToggle");
+  const dock = $("#soundDock"), toggle = $("#soundToggle"), status = $("#soundStatus"), skyToggle = $("#skySoundToggle");
   const files = ["wind", "river", "road", "waves", "grass", "stone", "sand", "water"];
   const labels = { hero: "Wind in the meadow", talk: "Dandelions in the breeze", river: "Water and distant traffic", foot: "Sounds underfoot", shore: "Waves and sand", end: "Looking up at the sky" };
   const sections = [$(".hero"), ...["#talkCv", "#riverCv", "#footCv", "#shoreCv", "#endCv"].map(id => $(id).closest("section"))];
@@ -456,11 +454,10 @@ const soundscape = (() => {
   const live = () => enabled && !document.hidden && ctx?.state === "running";
   function ui() {
     const action = enabled ? "Sound off" : "Sound on";
-    for (const b of [toggle, footToggle, skyToggle]) {
+    for (const b of [toggle, skyToggle]) {
       b.setAttribute("aria-pressed", String(enabled));
       b.setAttribute("aria-label", action); b.title = action;
     }
-    footToggle.textContent = action;
     status.textContent = !enabled ? (failed ? "Sound unavailable. Please try again." : "Real recordings · sound off by default") : document.hidden ? "Sound paused" : ctx?.state !== "running" ? "Playback paused. Toggle sound to retry." : loading ? "Loading sounds…" : failed ? "Some sounds failed. Toggle sound to retry." : labels[active];
   }
   function ramp(param, value, seconds = .4) {
@@ -556,7 +553,7 @@ const soundscape = (() => {
       if (token === lifecycle) { enabled = false; failed = true; stopAll(); ui(); }
     }
   }
-  for (const button of [toggle, footToggle, skyToggle]) button.addEventListener("click", e => { e.stopPropagation(); setEnabled(!enabled); });
+  for (const button of [toggle, skyToggle]) button.addEventListener("click", e => { e.stopPropagation(); setEnabled(!enabled); });
   const welcome = $("#soundWelcome");
   $("#soundWelcomeOn").addEventListener("click", () => {
     setEnabled(true); // Start inside the user's gesture, before closing the prompt.
