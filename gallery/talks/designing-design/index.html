@@ -141,22 +141,19 @@ footer{margin-top:90px;padding-bottom:70px;font-size:.8rem;color:var(--muted);li
 
 .language{display:flex;justify-content:flex-end;gap:4px;max-width:1120px;margin:0 auto;padding:4px 20px;font-size:.82rem}.language a,.language span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0 8px}.language span{color:var(--muted)}
 
-/* One shared sound control, also available inside the sky scene. */
-html{scroll-padding-bottom:110px}
-.hint{bottom:120px}
+/* The same quiet sound switch in the article and in the sky. */
+html{scroll-padding-bottom:72px}
+.hint{bottom:84px}
 @media(max-width:700px){.hero{min-height:700px}.hero-text{top:32px}}
-@media(min-width:701px) and (max-height:500px){.hero .lede{max-width:calc(100% - 300px)}}
-.sound-dock{position:fixed;z-index:45;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));width:280px;max-width:calc(100vw - 24px);padding:8px 12px;border:1px solid var(--line);border-radius:16px;background:rgba(248,246,240,.97);box-shadow:0 5px 24px rgba(43,54,69,.12);font-size:.75rem;line-height:1.5;color:var(--ink)}
-.sound-row{display:flex;gap:10px;align-items:center}
-.sound-dock .btn{min-height:44px;white-space:nowrap;padding:6px 12px;letter-spacing:0;font-size:.8rem}
-.sound-dock label{display:flex;gap:6px;align-items:center;flex:1;white-space:nowrap}
-.sound-dock input{width:100%;min-width:30px;height:44px;accent-color:var(--sky)}
-.sound-status{display:block;color:var(--muted);margin-top:2px;min-height:1.5em}
-.sky-sound{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));display:grid;place-items:center;width:44px;height:44px;padding:11px;border:0;background:transparent;color:#fff;opacity:.62;transition:opacity .25s;filter:drop-shadow(0 1px 2px rgba(24,50,64,.8))}
-.sky-sound:hover,.sky-sound:focus-visible{opacity:1}.sky-sound:focus-visible{outline:1px solid #fff;outline-offset:2px;border-radius:50%}
-.sky-sound svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.sky-sound[aria-pressed="true"] .muted-mark,.sky-sound[aria-pressed="false"] .sound-waves{display:none}
-footer{padding-bottom:180px}
+.sound-dock{position:fixed;z-index:45;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));width:44px;height:44px}
+.sound-icon{display:grid;place-items:center;width:44px;height:44px;padding:10px;border:1px solid rgba(255,255,255,.6);border-radius:50%;background:rgba(255,255,255,.72);color:#355362;box-shadow:0 2px 12px rgba(27,48,57,.14);transition:background .2s;backdrop-filter:blur(5px)}
+.sound-icon:hover{background:rgba(255,255,255,.9)}
+.sound-icon:focus-visible{outline:2px solid #355362;outline-offset:3px;background:rgba(255,255,255,.94)}
+.sound-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sound-icon[aria-pressed="true"] .muted-mark,.sound-icon[aria-pressed="false"] .sound-waves{display:none}
+.sound-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.sky-sound{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom))}
+footer{padding-bottom:96px}
 .sound-credits{margin-top:18px}.sound-credits summary{cursor:pointer}.sound-credits ul{padding-left:20px}
 
 
@@ -301,13 +298,13 @@ footer{padding-bottom:180px}
 </main>
 
 <div id="soundHome"><div class="sound-dock" id="soundDock" role="group" aria-label="全页声音">
-  <div class="sound-row"><button class="btn ghost" id="soundToggle" aria-pressed="false" aria-describedby="soundStatus">开启声音</button><label for="soundVolume">音量<input id="soundVolume" type="range" min="0" max="100" value="45" aria-valuetext="45%" disabled></label></div>
+  <button class="sound-icon" id="soundToggle" aria-label="开启声音" title="开启声音" aria-pressed="false" aria-describedby="soundStatus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4Z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="muted-mark" d="m16 9 5 6m0-6-5 6"/></svg></button>
   <span class="sound-status" id="soundStatus" role="status">真实采样 · 默认静音</span>
 </div></div>
 
 <dialog class="sound-welcome" id="soundWelcome" aria-labelledby="soundWelcomeTitle" aria-describedby="soundWelcomeDescription">
   <h2 id="soundWelcomeTitle" tabindex="-1" autofocus>要打开音效吗？</h2>
-  <p id="soundWelcomeDescription">风、流水与脚步声会随场景变化。你可以随时关闭或调整音量。</p>
+  <p id="soundWelcomeDescription">风、流水与脚步声会随场景变化。你可以随时用右下角的开关开启或关闭。</p>
   <div class="row"><button class="btn" id="soundWelcomeOn">开启音效</button><button class="btn ghost" id="soundWelcomeOff">暂不开启</button></div>
 </dialog>
 
@@ -315,7 +312,7 @@ footer{padding-bottom:180px}
   <canvas id="awayCv"></canvas>
   <div class="lines"><span>单纯地去享用和消耗世界的美妙，</span><span>然后告诉自己，</span><span>无知也好。</span></div>
   <button class="back" id="backBtn">回到文章 · Esc</button>
-  <button class="sky-sound" id="skySoundToggle" aria-label="开启声音" title="开启声音" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4Z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="muted-mark" d="m16 9 5 6m0-6-5 6"/></svg></button>
+  <button class="sound-icon sky-sound" id="skySoundToggle" aria-label="开启声音" title="开启声音" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4Z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="muted-mark" d="m16 9 5 6m0-6-5 6"/></svg></button>
 </div>
 
 <footer class="col">
@@ -435,23 +432,22 @@ function touchDrawing(cv, buttonId) {
 
 /* ---------- Field recordings: opt in once, follow the landscape ---------- */
 const soundscape = (() => {
-  const dock = $("#soundDock"), toggle = $("#soundToggle"), volume = $("#soundVolume"), status = $("#soundStatus"), footToggle = $("#soundBtn"), skyToggle = $("#skySoundToggle");
+  const dock = $("#soundDock"), toggle = $("#soundToggle"), status = $("#soundStatus"), footToggle = $("#soundBtn"), skyToggle = $("#skySoundToggle");
   const files = ["wind", "river", "road", "waves", "grass", "stone", "sand", "water"];
   const labels = { hero: "草地上的风", talk: "蒲公英与风", river: "流水与远处的车声", foot: "脚下的声音", shore: "海浪与沙", end: "仰望天空" };
   const sections = [$(".hero"), ...["#talkCv", "#riverCv", "#footCv", "#shoreCv", "#endCv"].map(id => $(id).closest("section"))];
   const names = Object.keys(labels), buffers = new Map(), pending = new Map(), beds = new Map(), voices = new Set();
-  let ctx, master, enabled = false, active = "hero", immersive = false, river = 0, shoreStill = false, volumeValue = .45;
+  let ctx, master, enabled = false, active = "hero", immersive = false, river = 0, shoreStill = false;
+  const volumeLevel = .45;
   let revision = 0, loading = false, failed = false, scrollTimer = 0, lifecycle = 0, lastStep = -Infinity, lastDraw = -Infinity;
   const live = () => enabled && !document.hidden && ctx?.state === "running";
   function ui() {
-    for (const b of [toggle, footToggle]) {
+    const action = enabled ? "关闭声音" : "开启声音";
+    for (const b of [toggle, footToggle, skyToggle]) {
       b.setAttribute("aria-pressed", String(enabled));
-      b.textContent = enabled ? "关闭声音" : "开启声音";
+      b.setAttribute("aria-label", action); b.title = action;
     }
-    skyToggle.setAttribute("aria-pressed", String(enabled));
-    skyToggle.setAttribute("aria-label", enabled ? "关闭声音" : "开启声音");
-    skyToggle.title = enabled ? "关闭声音" : "开启声音";
-    volume.disabled = !enabled;
+    footToggle.textContent = action;
     status.textContent = !enabled ? (failed ? "声音暂不可用，请重试" : "真实采样 · 默认静音") : document.hidden ? "声音已暂停" : ctx?.state !== "running" ? "播放已暂停，点声音开关重试" : loading ? "正在载入声音…" : failed ? "部分声音未载入，关闭后可重试" : labels[active];
   }
   function ramp(param, value, seconds = .4) {
@@ -542,7 +538,7 @@ const soundscape = (() => {
       // Resume inside this click gesture, before any network work (including iOS).
       const resume = ctx.resume(); ui(); await resume;
       if (token !== lifecycle || !enabled || document.hidden) return;
-      ramp(master.gain, volumeValue, .18); locate(); refresh();
+      ramp(master.gain, volumeLevel, .18); locate(); refresh();
     } catch (_) {
       if (token === lifecycle) { enabled = false; failed = true; stopAll(); ui(); }
     }
@@ -562,11 +558,6 @@ const soundscape = (() => {
   if (typeof welcome.showModal === "function") welcome.showModal();
   else welcome.hidden = true;
 
-  volume.addEventListener("input", () => {
-    volumeValue = +volume.value / 100;
-    volume.setAttribute("aria-valuetext", `${volume.value}%`);
-    if (master) ramp(master.gain, document.hidden || !enabled ? 0 : volumeValue, .05);
-  });
   dock.addEventListener("click", e => e.stopPropagation());
   addEventListener("scroll", scheduleLocate, { passive: true }); addEventListener("resize", scheduleLocate);
   function suspend() {
