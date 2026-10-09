@@ -82,8 +82,12 @@ h1{font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,12.5vw,5.6r
 .hint{position:absolute;left:0;right:0;bottom:22px;padding-inline:20px;text-align:center;font-size:.8rem;letter-spacing:.2em;color:rgba(255,255,255,.95);text-shadow:0 1px 10px rgba(30,60,30,.5);pointer-events:none}
 
 /* ---------- 01 jar & dandelion ---------- */
-#talkCv{aspect-ratio:16/9}
+.talk-scene{position:relative;filter:saturate(var(--scene-saturation))}
+#talkCv,#talkWindCv{filter:none}
+#talkCv{position:relative;aspect-ratio:16/9}
+#talkWindCv{position:absolute;top:0;left:0;width:100%;height:auto;aspect-ratio:16/9;pointer-events:none}
 @media (max-width:700px){#talkCv{aspect-ratio:4/3.4}}
+@media (max-width:700px){#talkWindCv{aspect-ratio:4/3.4}}
 .talkbtns{position:absolute;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding-inline:12px}
 @media (max-width:700px){.talkbtns{position:static;flex-direction:column;padding:12px;background:var(--paper)}}
 .qlist{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 8px}
@@ -93,6 +97,13 @@ h1{font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,12.5vw,5.6r
 /* ---------- 02 river ---------- */
 #riverCv{aspect-ratio:16/9}
 @media (max-width:700px){#riverCv{aspect-ratio:4/3.6}}
+.river-controls{flex:1 1 240px;max-width:320px}
+.river-controls progress{display:block;width:100%;height:7px;border:0;border-radius:8px;overflow:hidden;background:var(--line);accent-color:var(--sky)}
+.river-controls progress::-webkit-progress-bar{background:var(--line)}
+.river-controls progress::-webkit-progress-value{background:var(--sky)}
+.river-controls progress::-moz-progress-bar{background:var(--sky)}
+.river-controls .range input{width:100%;min-height:44px}
+#riverHold{min-width:140px;min-height:44px}
 .rlabel{display:flex;justify-content:space-between;font-family:var(--display);font-size:.9rem;color:var(--muted);width:min(320px,52vw)}
 
 /* ---------- 03 footprints ---------- */
@@ -154,7 +165,10 @@ footer{margin-top:90px;padding-bottom:70px;font-size:.8rem;color:var(--muted);li
   </div>
   <div class="wide">
     <div class="cel">
-      <canvas id="talkCv" aria-label="山坡上一棵大树，天上飘着一个话题。左下角是一个玻璃罐，装着说过“我知道”的话题。"></canvas>
+      <div class="talk-scene">
+        <canvas id="talkWindCv" aria-hidden="true"></canvas>
+        <canvas id="talkCv" aria-label="风向右吹过山坡，树冠与草地轻轻摆动，蒲公英的种子顺风飞去。天上飘着一个话题，左下角的玻璃罐装着说过“我知道”的话题。"></canvas>
+      </div>
       <div class="talkbtns">
         <button class="btn ghost" id="knowBtn">我知道，我知道</button>
         <button class="btn" id="unknowBtn">……其实，我不太知道</button>
@@ -176,13 +190,15 @@ footer{margin-top:90px;padding-bottom:70px;font-size:.8rem;color:var(--muted);li
     <p>他带着设计科学系的学生，做了许多 Exformation 的题目。其中一个，是把河流和公路的照片叠在一起，让人用一种奇异的、驾驶员的视角去看河。</p>
   </div>
   <div class="wide">
-    <div class="cel"><canvas id="riverCv" aria-label="沿着一条蜿蜒的河向前滑行，两岸是树和草地。滑杆可以把河叠成一条公路，视角变成驾驶座。"></canvas></div>
+    <div class="cel"><canvas id="riverCv" aria-label="沿着蜿蜒的河向前滑行，河面自动渐变成公路，再渐变回河流。可以固定当前阶段，或继续往返渐变。"></canvas></div>
     <div class="celbar">
-      <div>
+      <div class="river-controls">
         <div class="rlabel"><span>河</span><span>路</span></div>
-        <div class="range"><input id="blend" type="range" min="0" max="1" step="0.01" value="0" aria-label="河与路的叠合程度"></div>
+        <progress id="riverPhase" max="1" value="0" aria-label="公路的显现程度"></progress>
+        <div class="range" id="riverManual" hidden><input id="blend" type="range" min="0" max="1" step="0.01" value="0" aria-label="河与路的叠合程度"></div>
       </div>
-      <p class="cap">往右拖，河面叠上路面，你坐进了驾驶座。弯道来时，地平线会跟着倾斜。</p>
+      <button class="btn" id="riverHold" aria-pressed="false" aria-controls="riverCv">固定这个阶段</button>
+      <p class="cap" id="riverCap">河流与公路会来回渐变。固定阶段后，仍会继续向前。</p>
     </div>
   </div>
   <div class="col" style="margin-top:28px">
@@ -438,6 +454,63 @@ function step(kind) {
    ========================================================= */
 (() => {
   const cv = $("#talkCv"), plate = img("talk"); let g, W, H, t = 0;
+  // Move the painted foliage, keeping the distant hills and tree roots still.
+  // Work in the source image's coordinates so the wind survives the mobile crop.
+  const paintWind = (() => {
+    const c = $("#talkWindCv"), gl = c.getContext("webgl", { alpha: false, antialias: false, depth: false });
+    if (!gl) { c.hidden = true; return null; }
+    const shader = (type, source) => {
+      const s = gl.createShader(type); gl.shaderSource(s, source); gl.compileShader(s);
+      return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
+    };
+    const vs = shader(gl.VERTEX_SHADER, "attribute vec2 p; varying vec2 v; void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}");
+    const fs = shader(gl.FRAGMENT_SHADER, `precision highp float;
+varying vec2 v; uniform sampler2D plate; uniform vec4 crop; uniform float time, wind;
+void main(){
+  vec2 uv=crop.xy+v*crop.zw;
+  float crown=1.-smoothstep(.65,1.05,length((uv-vec2(.80,.44))/vec2(.31,.28)));
+  float branch=clamp((.72-uv.y)/.35,0.,1.);
+  float grass=smoothstep(.80-.13*uv.x,.99,uv.y);
+  // Positive displacement bends everything downwind; the roots stay planted.
+  float bend=wind*(.72+.28*sin(time*1.3+uv.y*5.));
+  float ripple=.65+.35*sin(uv.x*24.-time*2.4+uv.y*9.);
+  vec2 shift=vec2(crown*branch*.013*bend+grass*.006*wind*ripple,
+                  crown*branch*.0015*wind*sin(time*1.7+uv.x*8.));
+  vec3 color=texture2D(plate,uv-shift).rgb;
+  // Broad light-and-shade ripples travel rightwards through the meadow.
+  color*=1.+grass*.035*wind*sin(uv.x*20.-time*1.8+uv.y*12.);
+  gl_FragColor=vec4(color,1.);
+}`);
+    if (!vs || !fs) return null;
+    const program = gl.createProgram(); gl.attachShader(program, vs); gl.attachShader(program, fs); gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return null;
+    gl.useProgram(program);
+    const buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+    const p = gl.getAttribLocation(program, "p"); gl.enableVertexAttribArray(p); gl.vertexAttribPointer(p, 2, gl.FLOAT, false, 0, 0);
+    const crop = gl.getUniformLocation(program, "crop"), time = gl.getUniformLocation(program, "time"), wind = gl.getUniformLocation(program, "wind");
+    const texture = gl.createTexture(); let loaded = false;
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    img("talk", im => {
+      try { gl.bindTexture(gl.TEXTURE_2D, texture); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, im); loaded = true; } catch (_) { /* file:// uses the painted fallback */ }
+      repaint();
+    });
+    return (windStrength) => {
+      if (!loaded || gl.isContextLost()) return false;
+      const dpr = Math.min(DPR, W < 700 ? 1 : 1.5), w = Math.round(W * dpr), h = Math.round(H * dpr);
+      if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+      const k = Math.max(W / plate.naturalWidth, H / plate.naturalHeight) * 1.03;
+      const pw = plate.naturalWidth * k, ph = plate.naturalHeight * k;
+      gl.viewport(0, 0, w, h); gl.useProgram(program);
+      gl.uniform4f(crop, (pw - W) * (W < 700 ? .62 : .5) / pw, (ph - H) * .7 / ph, W / pw, H / ph);
+      gl.uniform1f(time, t); gl.uniform1f(wind, windStrength);
+      // Let the compositor combine the canvases; avoid a WebGL-to-2D readback.
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      return true;
+    };
+  })();
   const TOPICS = [
     { w: "河流", q: ["沿着它走，脚底是滑腻还是干爽？", "如果它是一条路，车会往哪边倾斜？", "夜里桥下的水声，是什么节奏？", "它是从哪一滴雨开始的？", "鱼看见的河面，是什么样子？", "水底的石头，磨圆用了多少年？", "河水闻起来像什么？", "涨水和枯水时，它还是同一条河吗？", "两岸的人，叫它同一个名字吗？", "把手伸进去，水有多凉？", "最窄的地方，能一步跨过去吗？", "一片叶子从上游漂到这里，要多久？", "流进大海的那一刻，它会犹豫吗？"] },
     { w: "度假", q: ["一定要去很远的地方吗？", "闭上眼，一阵风吹来，算不算度假？", "躺在草地上打盹的人，在度什么假？", "关掉手机一个下午，会发生什么？", "度假是换一个地方，还是换一种时间？", "小时候的暑假，和现在的假期差在哪？", "救生圈的颜色，为什么让人放松？", "什么都不做，是浪费还是休息？", "家门口的公园，能不能度假？", "度假时拍的照片，后来还看吗？", "如果不用回来，还叫度假吗？", "上一次真正放松，是在哪里？", "一个人的假期，和一群人的，哪个更像假期？"] },
@@ -446,6 +519,7 @@ function step(kind) {
     { w: "演唱会", q: ["录音再好，为什么还想去现场？", "“氛围”是什么做的？", "纸书的质感，屏幕上缺了什么？", "低音是听到的，还是胸口感觉到的？", "身边陌生人一起唱时，发生了什么？", "同一首歌，现场和耳机里是同一首吗？", "散场后的耳鸣，算不算演出的一部分？", "隔着手机屏幕看舞台，还算在现场吗？", "灯光暗下来那一秒，为什么最激动？", "歌手看到的台下，是什么样子？", "散场时的风，和进场时一样吗？", "记得最清楚的，为什么常是唱错的那句？", "坐在最后一排，听到的是同一场演出吗？"] }
   ];
   let ti = 0, state = "float", anim = 0, slips = [], flying = null, known = 0, asked = 0, appear = 0, dand = null, fly = [];
+  const breeze = () => RM ? 0 : .9 + .25 * Math.sin(t * .8) + .15 * Math.sin(t * 1.7);
   function setup() { [g, W, H] = fit(cv); }
   setup(); addEventListener("resize", setup);
   const nar = () => W < 700;
@@ -497,7 +571,7 @@ function step(kind) {
     if (d.fading) d.fade -= dt * 1.6;
     const age = t - d.born, k = ease(clamp(age / 0.7, 0, 1)), R = d.R * (0.5 + 0.5 * k), a0 = d.fade * k;
     if (a0 <= 0) return;
-    const sway = Math.sin(t * 1.3) * 6 + Math.sin(t * 3.1) * 1.5, hx = d.x + sway, hy = d.y, r0 = R * 0.09, gy = hillY() + 14;
+    const sway = breeze() * (6 + Math.sin(t * 1.3) * 3), hx = d.x + sway, hy = d.y, r0 = R * 0.09, gy = hillY() + 14;
     for (const s of d.seeds) if (!s.gone && age >= s.rel) { s.gone = true; launch(d, s, hx, hy, R); }
     g.save(); g.globalAlpha = a0; g.lineCap = "round";
     // a hollow stem, lit on one side, with the bracts folded back under the head
@@ -531,7 +605,7 @@ function step(kind) {
   }
   // a seed in flight: parachute on top, beak hanging below, the brown seed at its end
   function drawFlyers(dt) {
-    const wind = W * (nar() ? 0.05 : 0.042), buckets = new Map(), labels = [];
+    const wind = W * (nar() ? 0.05 : 0.042) * breeze(), buckets = new Map(), labels = [];
     fly = fly.filter(f => f.life < f.span && f.x < W + 80 && f.y > -80);
     for (const f of fly) {
       f.life += dt;
@@ -608,7 +682,10 @@ function step(kind) {
   }
   function frame(dt) {
     t += dt; anim += dt; appear = RM ? 1 : Math.min(1, appear + dt * 1.6);
-    if (ready(plate)) cover(g, plate, W, H, nar() ? 0.62 : 0.5, 0.7, 1.03 + Math.sin(t * 0.08) * 0.006);
+    if (ready(plate)) {
+      if (paintWind && paintWind(breeze())) g.clearRect(0, 0, W, H);
+      else cover(g, plate, W, H, nar() ? 0.62 : 0.5, 0.7, 1.03);
+    }
     else sky(g, W, H, "#2b80d8", "#86c6f3", "#eaf6ff", 0.78);
     drawJar();
     const tp = topic(), b = bubblePos();
@@ -640,7 +717,18 @@ function step(kind) {
    (painted textures, real mipmaps); sky, trees and the cockpit are 2D on top.
    ========================================================= */
 (() => {
-  const cv = $("#riverCv"), blendIn = $("#blend"); let g, W, H, groundDpr = 1, t = 0, camZ = 0, tilt = 0, blend = 0, trees = [], tufts = [];
+  const cv = $("#riverCv"), blendIn = $("#blend"), holdBtn = $("#riverHold"), phaseOut = $("#riverPhase");
+  let g, W, H, groundDpr = 1, t = 0, camZ = 0, tilt = 0, blend = 0, phase = 0, held = RM, trees = [], tufts = [];
+  if (RM) {
+    holdBtn.hidden = phaseOut.hidden = true; $("#riverManual").hidden = false;
+    $("#riverCap").textContent = "已减少动态效果。拖动滑杆，静静地看河与路在同一处相遇。";
+    cv.setAttribute("aria-label", "蜿蜒的河与公路叠在一起。已减少动态效果，可以用滑杆选择河与路的叠合程度。");
+  }
+  holdBtn.addEventListener("click", () => {
+    held = !held; holdBtn.setAttribute("aria-pressed", String(held));
+    holdBtn.textContent = held ? "继续渐变" : "固定这个阶段";
+    $("#riverCap").textContent = held ? "停在这个阶段，继续沿着它向前。" : "河流与公路会来回渐变。固定阶段后，仍会继续向前。";
+  });
   const HW = 130, CAMH = 100;
   const SKY = img("river-sky"), SPR = [img("tree-broadleaf"), img("tree-conifer"), img("bush")];
   const A1 = 700, K1 = 0.00045, A2 = 320, K2 = 0.0011, P2 = 1.7;
@@ -728,6 +816,8 @@ void main(){
     for (let z = 50; z < 400000; z += 26 + r() * 46) tufts.push({ z, off: (r() < .5 ? -1 : 1) * (HW * 1.14 + Math.pow(r(), 1.6) * 900), h: 0.6 + r() * 0.8, c: r() }); }
   blendIn.addEventListener("input", () => blend = +blendIn.value);
   function frame(dt) {
+    if (!held) { phase = (phase + dt * Math.PI / 10) % (Math.PI * 2); blend = (1 - Math.cos(phase)) / 2; }
+    phaseOut.value = blend;
     t += dt; camZ += dt * (600 + blend * 260);
     const slope = dxt(camZ), camX = xt(camZ), F = H * 0.95, hz = H * 0.44;
     const target = clamp(-ddxt(camZ) * 900 * (0.5 + blend * 0.8), -0.11, 0.11); tilt = lerp(tilt, target, 1 - Math.exp(-dt * 2));
@@ -749,7 +839,7 @@ void main(){
       for (let y = Math.ceil(hz) + 1; y < H * 1.12; y += 3) {
         const d = CAMH * F / (y - hz), z = camZ + d, s = F / d, sx = W / 2 + (xt(z) - camX - slope * d) * s, half = HW * s;
         g.fillStyle = "#7fb85a"; g.fillRect(-W * .2, y, W * 1.4, 3); g.fillStyle = "#cdbf98"; g.fillRect(sx - half * 1.12, y, half * 2.24, 3);
-        g.fillStyle = blend > .5 ? "#6a717b" : "#5aa8d4"; g.fillRect(sx - half, y, half * 2, 3);
+        g.fillStyle = `rgb(${lerp(90,106,blend)},${lerp(168,113,blend)},${lerp(212,123,blend)})`; g.fillRect(sx - half, y, half * 2, 3);
       }
     }
     // trees, shrubs and grass tufts, far to near
@@ -780,7 +870,8 @@ void main(){
       g.restore(); g.globalAlpha = 1;
     }
   }
-  addLoop(cv, frame);
+  // Keep the loop available when the mobile controls sit below the canvas.
+  addLoop(cv.closest(".wide"), frame);
 })();
 
 /* =========================================================
