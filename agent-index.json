@@ -152,15 +152,15 @@
       "id": "limits-of-problem-analysis",
       "type": "interactive_essay",
       "label": "The Limits of Problem Analysis (问题解析的极限)",
-      "url": "https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html",
-      "description": "From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result. In Chinese only."
+      "url": "https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html",
+      "description": "From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result. Available in English and Chinese; switch languages on the page."
     },
     {
       "id": "designing-design",
       "type": "interactive_essay",
       "label": "Designing Design (设计中的设计)",
-      "url": "https://simoncos.github.io/gallery/talks/designing-design/index.html",
-      "description": "Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again. In Chinese only."
+      "url": "https://simoncos.github.io/gallery/talks/designing-design/index.en.html",
+      "description": "Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again. Available in English and Chinese; switch languages on the page."
     }
   ],
   "public_data_files": [

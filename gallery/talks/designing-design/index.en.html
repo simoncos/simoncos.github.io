@@ -1,30 +1,27 @@
 <!doctype html>
-<html lang="zh-Hans">
+<html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>设计中的设计</title>
-<meta name="description" content="读原研哉《设计中的设计》：信息过剩只是假象。Exformation 把已知的事物重新变得未知；离开屏幕，用身体去感受世界。">
-<link rel="canonical" href="https://simoncos.github.io/gallery/talks/designing-design/index.html">
+<title>Designing Design</title>
+<meta name="description" content="Reading Kenya Hara: information overload is an illusion. Exformation makes the familiar unfamiliar again. Step away from the screen and feel the world with your body.">
+<link rel="canonical" href="https://simoncos.github.io/gallery/talks/designing-design/index.en.html">
 <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/gallery/talks/designing-design/index.html">
 <link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/talks/designing-design/index.en.html">
 <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/gallery/talks/designing-design/index.en.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计中的设计 · 交互版">
-<meta property="og:description" content="读原研哉《设计中的设计》：信息过剩只是假象。Exformation 把已知的事物重新变得未知；离开屏幕，用身体去感受世界。">
-<meta property="og:url" content="https://simoncos.github.io/gallery/talks/designing-design/index.html">
+<meta property="og:title" content="Designing Design · An Interactive Essay">
+<meta property="og:description" content="Reading Kenya Hara: information overload is an illusion. Exformation makes the familiar unfamiliar again. Step away from the screen and feel the world with your body.">
+<meta property="og:url" content="https://simoncos.github.io/gallery/talks/designing-design/index.en.html">
 <meta property="og:site_name" content="simoncos">
-<meta property="og:image" content="https://simoncos.github.io/gallery/assets/og-designing-design.jpg">
+<meta property="og:image" content="https://simoncos.github.io/gallery/assets/og-designing-design.en.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="设计中的设计交互页的开场画面">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:image:alt" content="Opening scene of the Designing Design interactive essay">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="设计中的设计 · 交互版">
-<meta name="twitter:description" content="读原研哉《设计中的设计》：信息过剩只是假象。Exformation 把已知的事物重新变得未知；离开屏幕，用身体去感受世界。">
-<meta name="twitter:image" content="https://simoncos.github.io/gallery/assets/og-designing-design.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<meta name="twitter:title" content="Designing Design · An Interactive Essay">
+<meta name="twitter:description" content="Reading Kenya Hara: information overload is an illusion. Exformation makes the familiar unfamiliar again. Step away from the screen and feel the world with your body.">
+<meta name="twitter:image" content="https://simoncos.github.io/gallery/assets/og-designing-design.en.jpg">
 <style>
 /* A bright afternoon. Paper, sky and grass; ink is soft navy, never black.
    Sky blue = what you can touch; warm gold = the moment something opens up. Fixed light theme. */
@@ -32,8 +29,8 @@
   --paper:#f8f6f0; --paper-2:#f1eee5; --ink:#2b3645; --muted:#64717d; --line:#e2ddd0;
   --sky:#47718b; --sky-soft:rgba(71,113,139,.1); --gold:#b69a66; --grass:#7d9270;
   --scene-saturation:.58;
-  --display:"Noto Serif SC","Songti SC","STSong",serif;
-  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --display:"Georgia","Songti SC","STSong",serif;
+  --body:"Arial","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -140,148 +137,162 @@ footer{margin-top:90px;padding-bottom:70px;font-size:.8rem;color:var(--muted);li
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 .language{display:flex;justify-content:flex-end;gap:4px;max-width:1120px;margin:0 auto;padding:4px 20px;font-size:.82rem}.language a,.language span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0 8px}.language span{color:var(--muted)}
+
+/* English typography and responsive labels. */
+:root{--display:Georgia,"Times New Roman",serif;--body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+body{letter-spacing:0;line-height:1.8}
+h1,h2{letter-spacing:-.025em}
+.hero h1{font-size:clamp(2.8rem,6.5vw,5.4rem);line-height:1.12}
+.eyebrow,.sub,.hint{letter-spacing:.015em}
+.hero .lede{max-width:38em}
+.away .lines{letter-spacing:.01em;line-height:1.8;max-width:34em;margin-inline:auto}
+.away .lines span+span{margin-top:.65em}
+.talkbtns{flex-wrap:wrap}
+.talkbtns .btn{white-space:normal}
+@media(max-width:700px){.hero-text .in{padding-top:20px}.hero .lede{font-size:1rem;line-height:1.7}.hero .eyebrow{font-size:.69rem}.hero .hint{font-size:.71rem;line-height:1.55}.talkbtns{gap:8px}.talkbtns .btn{font-size:.78rem;padding:7px 12px}.away .lines{font-size:1.35rem}}
+
 </style>
 
-<nav class="language" aria-label="语言"><span lang="zh-Hans" aria-current="page">中文</span><a href="index.en.html" lang="en" hreflang="en">English</a></nav>
+<nav class="language" aria-label="Language"><a href="index.html" lang="zh-Hans" hreflang="zh-Hans">中文</a><span lang="en" aria-current="page">English</span></nav>
 
 <header class="hero">
-  <canvas id="heroCv" aria-label="晴朗午后的天空与草地。积云慢慢飘过，草随风摇晃；空中飘着细小的碎片，凑近看是“已读”“+1”“99+”这样的字。"></canvas>
+  <canvas id="heroCv" aria-label="Sky and grass on a clear afternoon. Clouds drift and grass sways; tiny fragments float through the air. Look closely: they say “Read,” “+1,” and “99+.”"></canvas>
   <div class="hero-text"><div class="in">
-    <p class="eyebrow">交互版 · 改编自作者 2014 年的读书笔记 · <a href="https://simoncos.github.io/blogs/exformation-and-information.html">读原文</a></p>
-    <h1>设计中的设计</h1>
-    <p class="sub">Exformation 与 Information</p>
-    <p class="lede">读原研哉。信息好像多到吃不完，我们却越来越饿。也许要做的不是知道得更多，而是让熟悉的东西，重新变得陌生。</p>
+    <p class="eyebrow">An interactive essay · Adapted from the author’s 2014 reading notes · <a href="https://simoncos.github.io/blogs/exformation-and-information.en.html">Read the original essay</a></p>
+    <h1>Designing Design</h1>
+    <p class="sub">Exformation and Information</p>
+    <p class="lede">Reading Kenya Hara. We seem to have more information than we can consume, yet we grow hungrier. Perhaps we need to make familiar things unfamiliar again.</p>
   </div></div>
-  <p class="hint">移动指针（手机上用手指横着划），起一阵风。空中飘的不是花瓣，是信息的碎屑。</p>
+  <p class="hint">Move your pointer, or swipe sideways on a phone, to stir the wind. Those drifting specks are fragments of information.</p>
 </header>
 
 <main>
 <section class="col" style="margin-top:84px">
-  <p>相信不少人和我一样，在工作和学习上慢慢形成了一套明晰的方法：做事的流程，评价和取舍的标准。我花大量功夫控制接收信息的管道，看着笔记、书签和文件夹有序地膨胀。互联网和电脑成了另一个大脑。世界虽大，却逃不出两个大脑协力搭起的认知框架。</p>
-  <p>可是我觉得自己越来越充实，也越来越空虚。对世界越来越了解，世界于我却越来越不新鲜。那种隐隐的、让人虚弱的饥饿感，也是真实的。</p>
-  <p>原研哉的回答是：<b>信息过剩只是假象。</b>泛滥的是像空中乱飞的草屑一样的碎片，每一片都极轻。它们像调料一样附在大脑上，让我们误以为自己知道得很多。网上这些看似卷帙浩繁的信息，加起来还不如光脚踩在地上，脚底传来的多。</p>
+  <p>Like many people, I have gradually built a clear method for work and study: a way of doing things, standards for judging and choosing. I spend a great deal of effort controlling how information reaches me, watching my notes, bookmarks and folders grow in orderly fashion. The internet and the computer have become another brain. The world is vast, yet it cannot escape the frame these two brains have built together.</p>
+  <p>Yet I feel fuller and emptier at the same time. The more I understand the world, the less fresh it feels. That faint, weakening hunger is real too.</p>
+  <p>Hara’s answer: <b>information overload is an illusion.</b> What floods us are fragments, like chaff blowing through the air, each carrying very little. They cling to our brains like seasoning, fooling us into thinking we know a great deal. All that seemingly vast information online adds up to less than what the soles of our bare feet receive when they touch the ground.</p>
 </section>
 
 <!-- 01 -->
 <section>
   <div class="col">
-    <div class="secno">一</div>
-    <h2>“我知道，我知道”</h2>
-    <p>常有这样的对话：一个人刚抛出一个话题，另一个人马上接上“我知道，我知道”“那不就是……”，给出一个笼统的描述，暗示自己已经懂了。几个人在心领神会的气氛里结束这个话题，再抛出下一个。其实谁也没有真正交流。</p>
-    <p>原研哉更期待另一种对话：不是交换已知，而是让事物<b>未知化</b>，去“弄懂我们知道的这么少”。</p>
+    <div class="secno">01</div>
+    <h2>“I know, I know”</h2>
+    <p>It happens all the time. Someone raises a topic; someone else jumps in with “I know, I know” or “Isn’t that just…,” offers a broad description, and signals that they already understand. Everyone closes the topic in an air of mutual understanding and moves on. No real exchange has taken place.</p>
+    <p>Hara hopes for another kind of conversation: one that makes things <b>unknown again</b>, helping us “understand how little we know.”</p>
   </div>
   <div class="wide">
     <div class="cel">
       <div class="talk-scene">
         <canvas id="talkWindCv" aria-hidden="true"></canvas>
-        <canvas id="talkCv" aria-label="风向右吹过山坡，树冠与草地轻轻摆动，蒲公英的种子顺风飞去。天上飘着一个话题，左下角的玻璃罐装着说过“我知道”的话题。"></canvas>
+        <canvas id="talkCv" aria-label="Wind blows right across the hillside. Trees and grass sway, and dandelion seeds drift with the breeze. A topic floats in the sky. The glass jar at the lower left holds topics already filed under “I know.”"></canvas>
       </div>
       <div class="talkbtns">
-        <button class="btn ghost" id="knowBtn">我知道，我知道</button>
-        <button class="btn" id="unknowBtn">……其实，我不太知道</button>
+        <button class="btn ghost" id="knowBtn">I know, I know</button>
+        <button class="btn" id="unknowBtn">…Actually, I’m not sure</button>
       </div>
     </div>
-    <div class="celbar"><p class="cap" id="talkCap">In-formation，把未知放进已知的框里，像收进罐子；Ex-formation，把它从框里拿出来，让它散开。</p></div>
-    <ul class="qlist" id="qlist" aria-label="被吹散的问题"></ul>
+    <div class="celbar"><p class="cap" id="talkCap">In-formation fits the unknown into a familiar frame, like putting it in a jar. Ex-formation takes it out and lets it scatter.</p></div>
+    <ul class="qlist" id="qlist" aria-label="Questions carried by the wind"></ul>
   </div>
   <div class="col" style="margin-top:28px">
-    <p>原研哉把这种理念叫作 <b>Exformation</b>，和 Information 配成一对。一个是 In + Formation，把未知的世界纳入已知的框架；一个是 Ex + Formation，把对事物的认识从刻板的思维体系里抽出来，发现更多未知的内涵、理解的角度和可能。</p>
+    <p>Hara calls this <b>Exformation</b>, a counterpart to Information. In + Formation brings the unknown world into a known frame. Ex + Formation draws our understanding out of rigid habits of thought, opening up new meanings, perspectives and possibilities.</p>
   </div>
 </section>
 
 <!-- 02 -->
 <section>
   <div class="col">
-    <div class="secno">二</div>
-    <h2>河流是一条路</h2>
-    <p>他带着设计科学系的学生，做了许多 Exformation 的题目。其中一个，是把河流和公路的照片叠在一起，让人用一种奇异的、驾驶员的视角去看河。</p>
+    <div class="secno">02</div>
+    <h2>A river is a road</h2>
+    <p>With his design students, he explored a series of exformation projects. In one, they overlaid photographs of rivers and roads, letting us see a river from the strange perspective of a driver.</p>
   </div>
   <div class="wide">
-    <div class="cel"><canvas id="riverCv" aria-label="沿着蜿蜒的河向前滑行，河面自动渐变成公路，再渐变回河流。可以固定当前阶段，或继续往返渐变。"></canvas></div>
+    <div class="cel"><canvas id="riverCv" aria-label="Glide forward along a winding river as it gradually becomes a road, then a river again. Hold any stage or resume the cycle."></canvas></div>
     <div class="celbar">
       <div class="river-controls">
-        <div class="rlabel"><span>河</span><span>路</span></div>
-        <progress id="riverPhase" max="1" value="0" aria-label="公路的显现程度"></progress>
-        <div class="range" id="riverManual" hidden><input id="blend" type="range" min="0" max="1" step="0.01" value="0" aria-label="河与路的叠合程度"></div>
+        <div class="rlabel"><span>River</span><span>Road</span></div>
+        <progress id="riverPhase" max="1" value="0" aria-label="How far the road has emerged"></progress>
+        <div class="range" id="riverManual" hidden><input id="blend" type="range" min="0" max="1" step="0.01" value="0" aria-label="River and road blend"></div>
       </div>
-      <button class="btn" id="riverHold" aria-pressed="false" aria-controls="riverCv">固定这个阶段</button>
-      <p class="cap" id="riverCap">河流与公路会来回渐变。固定阶段后，仍会继续向前。</p>
+      <button class="btn" id="riverHold" aria-pressed="false" aria-controls="riverCv">Hold this stage</button>
+      <p class="cap" id="riverCap">The river becomes a road, then a river again. Hold any stage and keep moving forward.</p>
     </div>
   </div>
   <div class="col" style="margin-top:28px">
-    <p>原来河流不是风景照里那种美丽但不可触碰的东西。可以想象沿着它走路时脚下的滑腻或干爽，甚至想象在河流变成的马路上开车，身体随着蜿蜒的河道倾斜。</p>
+    <p>A river is no longer a beautiful, untouchable thing in a landscape photograph. Imagine the slickness or dryness underfoot as you walk along it. Imagine driving along a road made of river, your body leaning into its bends.</p>
   </div>
 </section>
 
 <!-- 03 -->
 <section>
   <div class="col">
-    <div class="secno">三</div>
-    <h2>脚印</h2>
-    <p>另一个题目，是用脚印形状的蒙版去拍河边的地面。有的全是杂草，有的全是石头，还有的是野花，是浅滩上躺着的鱼。无论是什么，都会让人想象用脚踏上去的感觉。</p>
+    <div class="secno">03</div>
+    <h2>Footprints</h2>
+    <p>Another project photographed the ground beside a river through a footprint-shaped mask. Some frames held only weeds, some stones, others wildflowers or fish resting in the shallows. Whatever appeared, it made you imagine stepping onto it.</p>
   </div>
   <div class="wide">
-    <div class="cel"><canvas id="footCv" tabindex="0" aria-label="一片空白的地面。移动指针走过去，脚印里会露出下面的草、石头、野花和浅水。"></canvas></div>
+    <div class="cel"><canvas id="footCv" tabindex="0" aria-label="A blank stretch of ground. Move your pointer across it; footprints reveal grass, stones, wildflowers and shallow water underneath."></canvas></div>
     <div class="celbar">
-      <p class="counts" id="footCount">在白纸一样的地面上走一走。</p>
-      <div class="row"><button class="btn ghost touch-mode" id="footDraw" aria-pressed="false" aria-controls="footCv">用手指走一走</button><button class="btn ghost" id="soundBtn" aria-pressed="false">打开声音</button><button class="btn ghost" id="footReset">换一片地面</button></div>
+      <p class="counts" id="footCount">Walk across this ground, as blank as paper.</p>
+      <div class="row"><button class="btn ghost touch-mode" id="footDraw" aria-pressed="false" aria-controls="footCv">Walk with your finger</button><button class="btn ghost" id="soundBtn" aria-pressed="false">Sound on</button><button class="btn ghost" id="footReset">New ground</button></div>
     </div>
-    <p class="cap">方向键也能走。手机上先点“用手指走一走”，结束后点“继续滚动页面”。</p>
+    <p class="cap">You can walk with the arrow keys too. On a phone, tap “Walk with your finger,” then “Scroll the page” when you’re done.</p>
   </div>
   <div class="col" style="margin-top:28px">
-    <p>还有一个题目是“度假地”：把海滩和公园常见的救生圈、彩条图案叠到路标上，或者干脆只是在阳光灿烂的午后，让一群人随意躺在草地上打盹。度假地不一定是山清水秀或雕梁画栋的胜地。暂时放下拘束，闭上眼感受一阵随机吹来的风，就是一种真正的度假。</p>
-    <p class="aside">这些题目看起来奇怪、文艺而无用，却意外地让人共鸣。</p>
+    <p>Another project asked what makes a holiday place. Lifebuoys and stripes from beaches and parks appeared on road signs. Or people simply lay on the grass, dozing on a sunny afternoon. A holiday needs neither grand scenery nor ornate buildings. Let go for a moment, close your eyes, feel a passing breeze: that can be a real holiday.</p>
+    <p class="aside">These projects seem strange, arty and useless, yet they struck a surprisingly deep chord.</p>
   </div>
 </section>
 
 <!-- 04 -->
 <section>
   <div class="col">
-    <div class="secno">四</div>
-    <h2>水的边缘</h2>
-    <p>书里最让我共鸣的一段，说的是现代主义让我们在做事时附加了太多不必要的理性和秩序，走向完善和僵化。要是整个世界都被这种理性和成熟包围，人会感到幽闭恐惧。设计的智慧，在于不仅意识到生的方向，也意识到灭的方向。</p>
-    <p class="quote">世界就像水的边缘，创造与耗尽交汇。<small>原研哉《设计中的设计》</small></p>
+    <div class="secno">04</div>
+    <h2>The water’s edge</h2>
+    <p>The passage that resonated most with me describes how modernism attaches too much unnecessary reason and order to making things, leading toward perfection and rigidity. A whole world wrapped in such reason and maturity would feel claustrophobic. The wisdom of design lies in being aware of the direction of extinction as well as the direction of life.</p>
+    <p class="quote">The world is like the water’s edge, where creation and exhaustion meet.<small>Kenya Hara, Designing Design</small></p>
   </div>
   <div class="wide">
-    <div class="cel"><canvas id="shoreCv" tabindex="0" aria-label="俯瞰的海滩，浪一次次涌上沙滩又退下。在沙上画画，浪会把它慢慢抹去。键盘方向键移动，空格落笔或抬笔。"></canvas></div>
-    <div class="celbar"><p class="cap" id="shoreCap">在沙上写点什么。浪会来。</p><div class="row"><button class="btn ghost touch-mode" id="shoreDraw" aria-pressed="false" aria-controls="shoreCv">用手指画画</button><button class="btn ghost" id="calmBtn" aria-pressed="false">让浪停一会儿</button></div></div>
-    <p class="cap">方向键移动，空格落笔或抬笔。手机上先点“用手指画画”，结束后点“继续滚动页面”。</p>
+    <div class="cel"><canvas id="shoreCv" tabindex="0" aria-label="A beach seen from above. Waves wash up and retreat. Draw in the sand and watch them slowly erase it. Move with the arrow keys; press Space to start or stop drawing."></canvas></div>
+    <div class="celbar"><p class="cap" id="shoreCap">Write something in the sand. The waves will come.</p><div class="row"><button class="btn ghost touch-mode" id="shoreDraw" aria-pressed="false" aria-controls="shoreCv">Draw with your finger</button><button class="btn ghost" id="calmBtn" aria-pressed="false">Pause the waves</button></div></div>
+    <p class="cap">Move with the arrow keys; press Space to start or stop drawing. On a phone, tap “Draw with your finger,” then “Scroll the page” when you’re done.</p>
   </div>
   <div class="col" style="margin-top:28px">
-    <p>人类最原始的工具是手。手可以利用周边的事物改变世界；手也可以作为容器，像捧起湖水一样接受世界。生与灭，外与内，有与无。</p>
-    <p>我们需要创造：将未知纳入已知，将无序变为有序，建筑起理性的殿堂。我们也同样需要包容：承认未知多于已知，无序大于有序，放下规则和逻辑，回到一种空虚寂寥的状态，把自身融入世界，得到灵性的补充。</p>
+    <p>The hand is humanity’s most primitive tool. It can use what surrounds it to change the world. It can also be a vessel, receiving the world as it scoops up water from a lake. Life and extinction, outside and inside, being and nothing.</p>
+    <p>We need to create: to bring the unknown into the known, turn disorder into order, and build a temple of reason. We also need to embrace: to admit that the unknown outweighs the known and disorder outweighs order, let go of rules and logic, return to emptiness and stillness, and merge into the world to replenish the spirit.</p>
   </div>
 </section>
 
 <!-- coda -->
 <section class="coda">
   <div class="col">
-    <div class="secno">尾声</div>
-    <h2>离开这块屏幕</h2>
-    <p>不久前，我趁着春光去了一个依水而建、桥很多的江南古镇。最触动我的不是雅致的景色或小吃，而是水乡温润的空气、流动的风、深夜桥下的水声，还有树皮的纹理擦过手掌的感觉。</p>
-    <p>科技已经征服了听觉和视觉，却仍然无法表达嗅觉、触觉和味觉。一阵真实的风，是听、触、嗅的综合。为什么演唱会唯有亲临才有那种难以言说的氛围，纸书有一种电子书没有的质感？</p>
+    <div class="secno">Coda</div>
+    <h2>Step away from the screen</h2>
+    <p>Not long ago, I visited an old water town south of the Yangtze in the spring. What moved me most was not its elegant scenery or snacks, but the mild, damp air, the moving wind, the sound of water under bridges late at night, and the grain of tree bark against my palms.</p>
+    <p>Technology has conquered hearing and sight, yet it still cannot convey smell, touch or taste. A real breeze reaches us through hearing, touch and smell together. Why can a concert’s indescribable atmosphere only be felt in person? Why does a printed book have a texture an e-book lacks?</p>
   </div>
   <div class="wide">
     <div class="cel">
-      <canvas id="endCv" aria-label="仰躺在草地上看到的天空：近处是几根草叶，远处是慢慢移动的云。"></canvas>
-      <div class="leave"><button class="btn" id="leaveBtn">离开这块屏幕</button></div>
+      <canvas id="endCv" aria-label="The sky seen while lying in the grass: blades of grass nearby, slowly moving clouds in the distance."></canvas>
+      <div class="leave"><button class="btn" id="leaveBtn">Step away from the screen</button></div>
     </div>
-    <p class="cap" style="text-align:center">点了之后，页面会退场，只留下风声和天空。点任意处或按 Esc 回来。</p>
+    <p class="cap" style="text-align:center">Tap to let the page fade away, leaving only wind and sky. Tap anywhere or press Esc to return.</p>
   </div>
   <div class="col" style="margin-top:40px">
-    <p>随便挑一个地方，感受无法用像素衡量的任何一帧视象，感受一丝下一刻不知吹往何方、摇晃毛发的风，感受立体包围着自己、层次多到数不清的白噪声，感受一缕光线钻进皮肤上的某条细小纹路，感受这个宇宙的随机、混沌与不可理解。</p>
+    <p>Pick any place. Take in a view that pixels cannot measure, a breath of wind that stirs your hair and may blow anywhere next, the countless layers of white noise surrounding you, a ray of light slipping into a fine line on your skin. Feel the randomness, the chaos and the incomprehensibility of the universe.</p>
   </div>
 </section>
 </main>
 
-<div class="away" id="away" role="dialog" aria-modal="true" aria-label="离开屏幕" aria-hidden="true" inert>
+<div class="away" id="away" role="dialog" aria-modal="true" aria-label="Step away from the screen" aria-hidden="true" inert>
   <canvas id="awayCv"></canvas>
-  <div class="lines"><span>单纯地去享用和消耗世界的美妙，</span><span>然后告诉自己，</span><span>无知也好。</span></div>
-  <button class="back" id="backBtn">回到文章 · Esc</button>
+  <div class="lines"><span>Simply savor the wonder of the world.</span><span>Then tell yourself:</span><span>Not knowing is fine too.</span></div>
+  <button class="back" id="backBtn">Back to the essay · Esc</button>
 </div>
 
 <footer class="col">
-  交互版改编自作者 2014 年的读书笔记<a href="https://simoncos.github.io/blogs/exformation-and-information.html">《Exformation 和 Information——读〈设计中的设计｜全本〉》</a>。书：原研哉《设计中的设计｜全本》，朱锷译，广西师范大学出版社。书中的 Exformation 课题（河流与公路、脚印、度假地）在这里被重新画成可以动手的场景；插画底图由 AI 生成，动态、交互与声音由程序实时生成。
+  Adapted from the author’s 2014 reading notes, <a href="https://simoncos.github.io/blogs/exformation-and-information.en.html">Exformation and Information: Reading Kenya Hara’s Designing Design</a>. Book: Kenya Hara, Designing Design (complete edition), Chinese translation by Zhu E, Guangxi Normal University Press. The book’s exformation projects—rivers and roads, footprints, holiday places—are reimagined here as interactive scenes. Illustrated backgrounds are AI-generated; motion, interaction and sound are generated in real time by code.
 </footer>
 
 <script>
@@ -376,7 +387,7 @@ function touchDrawing(cv, buttonId) {
   button.addEventListener("click", () => {
     const on = cv.classList.toggle("drawing");
     button.setAttribute("aria-pressed", on);
-    button.textContent = on ? "继续滚动页面" : label;
+    button.textContent = on ? "Scroll the page" : label;
     cv.dispatchEvent(new Event("drawingmodechange"));
   });
   return e => e.pointerType !== "touch" || cv.classList.contains("drawing");
@@ -413,7 +424,7 @@ function step(kind) {
    ========================================================= */
 (() => {
   const cv = $("#heroCv"), plate = img("hero"); let g, W, H, motes, frags, t = 0, px = -999, pxs = 0, gust = 0, gustT = 0, textB = 0, textR = 0, hintTop = 0;
-  const WORDS = ["+1", "已读", "99+", "转发", "热搜", "刚刚", "赞", "收藏", "我知道", "新消息", "@你", "更新", "链接", "置顶", "已推送", "未读 12"];
+  const WORDS = ["+1", "Read", "99+", "Repost", "Trending", "Just now", "Like", "Save", "I know", "New message", "@you", "Update", "Link", "Pinned", "Delivered", "12 unread"];
   function setup() {
     [g, W, H] = fit(cv);
     const m = W < 700;
@@ -447,7 +458,7 @@ function step(kind) {
       g.save(); g.translate(f.x, f.y); g.rotate(Math.sin(f.rot) * 0.6);
       const behindCopy = f.y < textB && (W < 700 || f.x < textR);
       const behindHint = f.y > hintTop - 24 || (W < 700 && hintTop - textB < 48);
-      g.globalAlpha = (0.5 + 0.35 * f.z) * (behindCopy || behindHint ? 0 : 1); g.fillStyle = "#fbfdf2"; g.shadowColor = "rgba(30,70,40,.35)"; g.shadowBlur = 4; g.font = `500 ${Math.round(9 + f.z * 4)}px Noto Sans SC, sans-serif`;
+      g.globalAlpha = (0.5 + 0.35 * f.z) * (behindCopy || behindHint ? 0 : 1); g.fillStyle = "#fbfdf2"; g.shadowColor = "rgba(30,70,40,.35)"; g.shadowBlur = 4; g.font = `500 ${Math.round(9 + f.z * 4)}px Arial, sans-serif`;
       g.fillText(f.txt, 0, 0); g.restore();
     }
     g.globalAlpha = 1;
@@ -519,11 +530,11 @@ void main(){
     };
   })();
   const TOPICS = [
-    { w: "河流", q: ["沿着它走，脚底是滑腻还是干爽？", "如果它是一条路，车会往哪边倾斜？", "夜里桥下的水声，是什么节奏？", "它是从哪一滴雨开始的？", "鱼看见的河面，是什么样子？", "水底的石头，磨圆用了多少年？", "河水闻起来像什么？", "涨水和枯水时，它还是同一条河吗？", "两岸的人，叫它同一个名字吗？", "把手伸进去，水有多凉？", "最窄的地方，能一步跨过去吗？", "一片叶子从上游漂到这里，要多久？", "流进大海的那一刻，它会犹豫吗？"] },
-    { w: "度假", q: ["一定要去很远的地方吗？", "闭上眼，一阵风吹来，算不算度假？", "躺在草地上打盹的人，在度什么假？", "关掉手机一个下午，会发生什么？", "度假是换一个地方，还是换一种时间？", "小时候的暑假，和现在的假期差在哪？", "救生圈的颜色，为什么让人放松？", "什么都不做，是浪费还是休息？", "家门口的公园，能不能度假？", "度假时拍的照片，后来还看吗？", "如果不用回来，还叫度假吗？", "上一次真正放松，是在哪里？", "一个人的假期，和一群人的，哪个更像假期？"] },
-    { w: "风", q: ["它从哪里来，又吹往哪里？", "它闻起来是什么味道？", "拂过头发时，它有多重？", "看不见它，怎么知道它在？", "海边的风和山上的风，哪里不一样？", "风停的那一刻，你听到了什么？", "树叶是被它吹动，还是在回应它？", "一阵风能走多远？", "冬天的风和春天的风，皮肤分得出吗？", "是它推着云走，还是云带着它？", "关上窗，屋里还有风吗？", "你记得的第一阵风，在哪里？", "它是空气在动，还是在找一个去处？"] },
-    { w: "脚下的地面", q: ["光脚踩上去，是石头还是草？", "脚底一秒钟收到的，比一屏消息多吗？", "上一次赤脚走路，是什么时候？", "往下一米，是什么？", "雨后的泥土，为什么有那种味道？", "一块砖下面，住着多少只虫？", "一百年前，这里是什么样的地面？", "它是凉的，还是温的？", "走快和走慢，脚下的东西一样多吗？", "鞋底隔开了什么？", "柏油路下面，还有原来的土吗？", "每天走的那条路，有几种地面？", "小时候趴在地上看到的，现在还看得到吗？"] },
-    { w: "演唱会", q: ["录音再好，为什么还想去现场？", "“氛围”是什么做的？", "纸书的质感，屏幕上缺了什么？", "低音是听到的，还是胸口感觉到的？", "身边陌生人一起唱时，发生了什么？", "同一首歌，现场和耳机里是同一首吗？", "散场后的耳鸣，算不算演出的一部分？", "隔着手机屏幕看舞台，还算在现场吗？", "灯光暗下来那一秒，为什么最激动？", "歌手看到的台下，是什么样子？", "散场时的风，和进场时一样吗？", "记得最清楚的，为什么常是唱错的那句？", "坐在最后一排，听到的是同一场演出吗？"] }
+    { w: "River", q: ["Underfoot: slick or dry?", "As a road, which way would it lean?", "What rhythm runs under the bridge at night?", "Which raindrop began it?", "What does the surface look like to a fish?", "How long did the stones take to round?", "What does the water smell like?", "High water, low water: the same river?", "Do both banks give it the same name?", "Dip a hand in. How cool is it?", "Could you step across its narrowest point?", "How long does a leaf take to drift here?", "Does it hesitate on reaching the sea?"] },
+    { w: "Holidays", q: ["Must you go far away?", "Eyes closed, a breeze: a holiday?", "What holiday is a nap on the grass?", "What if your phone were off all afternoon?", "A change of place, or a change of time?", "How did childhood summers feel different?", "Why are a lifebuoy’s colors relaxing?", "Doing nothing: waste or rest?", "Could the local park be a holiday?", "Do you look at your holiday photos again?", "Without a return, is it still a holiday?", "Where did you last truly relax?", "Alone or together: which feels like a break?"] },
+    { w: "Wind", q: ["Where does it come from, and go?", "What does it smell like?", "How much does it weigh against your hair?", "How do you know it’s there, unseen?", "How does sea wind differ from mountain wind?", "What do you hear when it stops?", "Are leaves moved by it, or answering it?", "How far can a breeze travel?", "Can your skin tell winter wind from spring?", "Does it push clouds, or do clouds carry it?", "Close the window. Is there still wind inside?", "Where was the first breeze you remember?", "Air in motion, or air looking for a home?"] },
+    { w: "Underfoot", q: ["Barefoot: stone or grass?", "More in a second underfoot than on a screen?", "When did you last walk barefoot?", "What lies a meter below?", "Why does earth smell that way after rain?", "How many insects live under one brick?", "What was this ground like a century ago?", "Is it cool, or warm?", "Do fast and slow feet notice the same things?", "What do shoe soles keep out?", "Is the old earth still under the asphalt?", "How many surfaces on your daily walk?", "Can you still see what you saw as a child?"] },
+    { w: "Concerts", q: ["Why go live, however good the recording?", "What is “atmosphere” made of?", "What texture of a book is missing on screen?", "Do you hear bass, or feel it in your chest?", "What happens when strangers sing together?", "Live or in headphones: the same song?", "Is the ringing afterward part of the show?", "Watching through a phone: still there?", "Why the thrill as the lights go down?", "What does the crowd look like to the singer?", "Is the wind the same when you leave?", "Why remember the wrong lyric most clearly?", "From the back row, is it the same show?"] }
   ];
   let ti = 0, state = "float", anim = 0, slips = [], flying = null, known = 0, asked = 0, appear = 0, dand = null, fly = [];
   const breeze = () => RM ? 0 : .9 + .25 * Math.sin(t * .8) + .15 * Math.sin(t * 1.7);
@@ -545,7 +556,7 @@ void main(){
   function addQ(q) { const li = document.createElement("li"); li.textContent = q; list.appendChild(li); asked++; }
   function next() {
     const tp = topic();
-    if (state === "open") $("#talkCap").textContent = `一个“${tp.w}”，散成了 ${tp.q.length} 个问题。罐子里装着 ${known} 个“我知道”，天上一共飘过 ${asked} 个问题。`;
+    if (state === "open") $("#talkCap").textContent = `“${tp.w}” has scattered into ${tp.q.length} questions. The jar holds ${known} topics filed under “I know”; ${asked} questions have drifted across the sky.`;
     ti++; state = "float"; anim = 0; appear = 0; setBtns(true);
     if (dand) dand.fading = true;
   }
@@ -638,11 +649,19 @@ void main(){
       g.lineWidth = 2; g.strokeStyle = "#8d6b3d"; g.stroke(B.s);
     }
     g.restore();
-    const fs = nar() ? 12 : 13; g.font = `500 ${fs}px Noto Sans SC, sans-serif`; g.textBaseline = "middle";
+    const fs = nar() ? 12 : 13; g.font = `500 ${fs}px Arial, sans-serif`; g.textBaseline = "middle";
     for (const l of labels) {
-      const tw = g.measureText(l.q).width, x = clamp(l.x + 12, 6, W - tw - 22);
-      g.globalAlpha = l.a; g.fillStyle = "rgba(255,255,255,.93)"; g.beginPath(); g.roundRect(x, l.y - 12, tw + 16, 24, 12); g.fill();
-      g.fillStyle = "#2b3645"; g.fillText(l.q, x + 8, l.y + 1);
+      const lines = []; let line = "";
+      for (const word of l.q.split(" ")) {
+        const next = line ? line + " " + word : word;
+        if (line && g.measureText(next).width > W - 40) { lines.push(line); line = word; }
+        else line = next;
+      }
+      lines.push(line);
+      const tw = Math.max(...lines.map(s => g.measureText(s).width)), height = lines.length * 16 + 8;
+      const x = clamp(l.x + 12, 6, W - tw - 22), y = clamp(l.y - height / 2, 6, H - height - 6);
+      g.globalAlpha = l.a; g.fillStyle = "rgba(255,255,255,.93)"; g.beginPath(); g.roundRect(x, y, tw + 16, height, 12); g.fill();
+      g.fillStyle = "#2b3645"; lines.forEach((s, i) => g.fillText(s, x + 8, y + 12 + i * 16));
     }
     g.globalAlpha = 1; g.textBaseline = "alphabetic";
   }
@@ -658,7 +677,7 @@ void main(){
       const sy = y - 10 - (i % 7) * 11 - Math.floor(i / 7) * 3, sx = x + Math.sin(i * 2.3) * w * 0.12;
       g.save(); g.translate(sx, sy); g.rotate(Math.sin(i * 1.7) * 0.25);
       g.fillStyle = ["#fff6df", "#ffe9c6", "#f3efff", "#e6f4ff"][i % 4]; g.fillRect(-w * .3, -5.5, w * .6, 11);
-      g.fillStyle = "#7c6a4e"; g.font = "500 8px Noto Sans SC, sans-serif"; g.textAlign = "center"; g.fillText(s, 0, 3); g.restore();
+      g.fillStyle = "#7c6a4e"; g.font = "500 8px Arial, sans-serif"; g.textAlign = "center"; g.fillText(s, 0, 3, w * .55); g.restore();
     });
     // glass: darker at the turned edges, a broad soft highlight, a crisp reflection line
     const gl = g.createLinearGradient(L, 0, R, 0);
@@ -675,12 +694,12 @@ void main(){
     // the paper label
     g.save(); g.translate(x, y - h * 0.5); g.rotate(-0.03);
     g.fillStyle = "#fffaf0"; g.shadowColor = "rgba(60,60,40,.18)"; g.shadowBlur = 3; g.beginPath(); g.roundRect(-22, -11, 44, 22, 2); g.fill(); g.shadowColor = "transparent";
-    g.fillStyle = "#5e6b7a"; g.font = "600 12px Noto Serif SC, serif"; g.textAlign = "center"; g.fillText("已知", 0, 4.5); g.restore(); g.textAlign = "left";
+    g.fillStyle = "#5e6b7a"; g.font = "600 12px Georgia, serif"; g.textAlign = "center"; g.fillText("Known", 0, 4.5, 36); g.restore(); g.textAlign = "left";
   }
   function bubble(x, y, w, s, a) {
     if (a <= 0) return;
     g.save(); g.globalAlpha = a; g.translate(x, y); g.scale(s, s);
-    g.font = "600 26px Noto Serif SC, serif"; const tw = g.measureText(w).width, bw = tw + 52, bh = 58;
+    g.font = "600 26px Georgia, serif"; const tw = g.measureText(w).width, bw = tw + 52, bh = 58;
     g.shadowColor = "rgba(40,80,130,.18)"; g.shadowBlur = 22; g.shadowOffsetY = 8;
     g.fillStyle = "#fffefb"; g.beginPath(); g.roundRect(-bw / 2, -bh / 2, bw, bh, 29); g.fill();
     g.beginPath(); g.moveTo(-10, bh / 2 - 2); g.lineTo(-22, bh / 2 + 16); g.lineTo(6, bh / 2 - 2); g.fill();
@@ -704,7 +723,7 @@ void main(){
       else {
         const u = ease((k - 0.3) / 0.7), x = lerp(flying.x0, j.x, u), y = lerp(flying.y0, j.y - j.h + 10, u) - Math.sin(u * Math.PI) * H * 0.12;
         g.save(); g.translate(x, y); g.rotate(u * 3); g.fillStyle = "#fff7e3"; g.fillRect(-22, -7, 44, 14);
-        g.fillStyle = "#8b7a5e"; g.font = "500 10px Noto Sans SC, sans-serif"; g.textAlign = "center"; g.fillText(tp.w, 0, 4); g.restore();
+        g.fillStyle = "#8b7a5e"; g.font = "500 10px Arial, sans-serif"; g.textAlign = "center"; g.fillText(tp.w, 0, 4); g.restore();
       }
       if (k >= 1) { slips.push(tp.w); known++; next(); }
     }
@@ -728,13 +747,13 @@ void main(){
   let g, W, H, groundDpr = 1, t = 0, camZ = 0, tilt = 0, blend = 0, phase = 0, held = RM, trees = [], tufts = [];
   if (RM) {
     holdBtn.hidden = phaseOut.hidden = true; $("#riverManual").hidden = false;
-    $("#riverCap").textContent = "已减少动态效果。拖动滑杆，静静地看河与路在同一处相遇。";
-    cv.setAttribute("aria-label", "蜿蜒的河与公路叠在一起。已减少动态效果，可以用滑杆选择河与路的叠合程度。");
+    $("#riverCap").textContent = "Reduced motion is on. Move the slider to see river and road meet, at your own pace.";
+    cv.setAttribute("aria-label", "A winding river and road overlap. Reduced motion is on; use the slider to choose how much of each appears.");
   }
   holdBtn.addEventListener("click", () => {
     held = !held; holdBtn.setAttribute("aria-pressed", String(held));
-    holdBtn.textContent = held ? "继续渐变" : "固定这个阶段";
-    $("#riverCap").textContent = held ? "停在这个阶段，继续沿着它向前。" : "河流与公路会来回渐变。固定阶段后，仍会继续向前。";
+    holdBtn.textContent = held ? "Resume the cycle" : "Hold this stage";
+    $("#riverCap").textContent = held ? "Holding this stage, still moving forward." : "The river becomes a road, then a river again. Hold any stage and keep moving forward.";
   });
   const HW = 130, CAMH = 100;
   const SKY = img("river-sky"), SPR = [img("tree-broadleaf"), img("tree-conifer"), img("bush")];
@@ -940,7 +959,7 @@ void main(){
     prints.push(p); mg.fillStyle = "#000"; footPath(mg, p.x, p.y, p.a, p.s, p.l); mg.fill();
     let k = band(nx, ny); if (k === "grass" && flowerAt(nx, ny, 20 * s)) k = "flower";
     count[k]++; step(k === "flower" ? "grass" : k === "sand" ? "stone" : k); hintA = 0;
-    $("#footCount").innerHTML = `踩到 <b>${count.grass}</b> 片草、<b>${count.flower}</b> 丛野花、<b>${count.stone}</b> 块石头、<b>${count.sand}</b> 次湿沙、<b>${count.water}</b> 次浅水。`;
+    $("#footCount").innerHTML = `Steps on grass: <b>${count.grass}</b> · wildflowers: <b>${count.flower}</b> · stones: <b>${count.stone}</b> · wet sand: <b>${count.sand}</b> · shallow water: <b>${count.water}</b>.`;
   }
   function moveTo(x, y) {
     if (!last) { last = { x, y }; return; }
@@ -955,8 +974,8 @@ void main(){
     const m = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }[e.key]; if (!m) return; e.preventDefault();
     const c = cursor || { x: W / 2, y: H / 2 }; cursor = { x: clamp(c.x + m[0] * 46, 10, W - 10), y: clamp(c.y + m[1] * 46, 10, H - 10) }; stamp(cursor.x, cursor.y, Math.atan2(m[1], m[0]));
   });
-  $("#soundBtn").addEventListener("click", e => { soundOn = !soundOn; if (soundOn) ac(); e.currentTarget.setAttribute("aria-pressed", soundOn); e.currentTarget.textContent = soundOn ? "关掉声音" : "打开声音"; });
-  $("#footReset").addEventListener("click", () => { seed++; prints = []; last = null; for (const k in count) count[k] = 0; $("#footCount").textContent = "一片新的地面。"; hintA = 1; setup(); });
+  $("#soundBtn").addEventListener("click", e => { soundOn = !soundOn; if (soundOn) ac(); e.currentTarget.setAttribute("aria-pressed", soundOn); e.currentTarget.textContent = soundOn ? "Sound off" : "Sound on"; });
+  $("#footReset").addEventListener("click", () => { seed++; prints = []; last = null; for (const k in count) count[k] = 0; $("#footCount").textContent = "A fresh patch of ground."; hintA = 1; setup(); });
   setup(); addEventListener("resize", () => { const old = prints.map(p => ({ ...p, x: p.x / W, y: p.y / H })); setup(); prints = old.map(p => ({ ...p, x: p.x * W, y: p.y * H })); redrawMask(); });
   function frame(dt) {
     t += dt;
@@ -980,7 +999,7 @@ void main(){
     tg.globalCompositeOperation = "destination-in"; tg.drawImage(mask, 0, 0, W, H); tg.globalCompositeOperation = "source-over";
     // soft inner shadow so each print reads as pressed into the ground
     g.save(); g.shadowColor = "rgba(120,100,70,.35)"; g.shadowBlur = 6; g.shadowOffsetY = 1.5; g.drawImage(tmp, 0, 0, W, H); g.restore();
-    if (hintA > 0) { g.fillStyle = `rgba(111,123,137,${0.8 * hintA})`; g.font = "500 15px Noto Serif SC, serif"; g.textAlign = "center"; g.fillText("走过去看看", W / 2, H / 2); g.textAlign = "left"; }
+    if (hintA > 0) { g.fillStyle = `rgba(111,123,137,${0.8 * hintA})`; g.font = "500 15px Georgia, serif"; g.textAlign = "center"; g.fillText("Walk over and look", W / 2, H / 2); g.textAlign = "left"; }
     if (cursor) { g.strokeStyle = "rgba(43,54,69,.35)"; g.lineWidth = 1; g.setLineDash([3, 3]); g.save(); footPath(g, cursor.x, cursor.y, lastA, W < 700 ? .78 : 1.12, side > 0); g.stroke(); g.restore(); g.setLineDash([]); }
   }
   addLoop(cv, frame);
@@ -1030,10 +1049,10 @@ void main(){
     }
   });
   cv.addEventListener("blur", () => { pen = null; cur = null; repaint(); });
-  if (RM) { $("#calmBtn").textContent = "让浪带走笔迹"; $("#calmBtn").removeAttribute("aria-pressed"); }
+  if (RM) { $("#calmBtn").textContent = "Let the waves erase it"; $("#calmBtn").removeAttribute("aria-pressed"); }
   $("#calmBtn").addEventListener("click", e => {
     if (RM) { strokes = []; cur = null; taken = written; repaint(); return; }
-    calm = !calm; e.currentTarget.setAttribute("aria-pressed", calm); e.currentTarget.textContent = calm ? "让浪回来" : "让浪停一会儿";
+    calm = !calm; e.currentTarget.setAttribute("aria-pressed", calm); e.currentTarget.textContent = calm ? "Bring back the waves" : "Pause the waves";
   });
   function frame(dt) {
     t += dt;
@@ -1086,10 +1105,10 @@ void main(){
     lace(x => -30 - Math.sin(x * 0.03 - t * 0.5) * 7, 1, "rgba(255,255,255,.25)");
     for (let x = 0; x < W; x += 5) { const y = frontY(x), j = Math.sin(x * 12.9898 + Math.floor(phase) * 7) * 0.5 + 0.5, k = Math.sin(x * 78.233) * 0.5 + 0.5; g.fillStyle = `rgba(255,255,255,${0.25 + 0.5 * k})`; g.beginPath(); g.arc(x + j * 6, y - 3 - j * 14, 0.5 + j * j * 2, 0, 7); g.fill(); }
     g.restore();
-    if (!strokes.length) { g.save(); g.fillStyle = "rgba(92,70,40,.8)"; g.shadowColor = "rgba(255,250,235,.9)"; g.shadowBlur = 10; g.font = "500 17px Noto Serif SC, serif"; g.textAlign = "center"; g.fillText("在沙上写点什么", W / 2, H * 0.86); g.restore(); }
+    if (!strokes.length) { g.save(); g.fillStyle = "rgba(92,70,40,.8)"; g.shadowColor = "rgba(255,250,235,.9)"; g.shadowBlur = 10; g.font = "500 17px Georgia, serif"; g.textAlign = "center"; g.fillText("Write something in the sand", W / 2, H * 0.86); g.restore(); }
     strokes = strokes.filter(s => !s.gone || s === cur);
     if (pen) { g.strokeStyle = "#594b3c"; g.lineWidth = 1.5; g.beginPath(); g.arc(pen[0], pen[1], 6, 0, Math.PI * 2); g.stroke(); }
-    if (written) $("#shoreCap").textContent = `写下 ${written} 笔，浪带走了 ${taken} 笔。` + (taken && taken === written ? "沙滩又是新的了。" : "");
+    if (written) $("#shoreCap").textContent = `Strokes drawn: ${written}. Washed away: ${taken}. ` + (taken && taken === written ? "The beach is fresh again." : "");
   }
   addLoop(cv, frame);
 })();

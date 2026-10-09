@@ -23,8 +23,8 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 
 ## Key artifacts
 
-- [The Limits of Problem Analysis (问题解析的极限)](https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html): From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result. In Chinese only.
-- [Designing Design (设计中的设计)](https://simoncos.github.io/gallery/talks/designing-design/index.html): Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again. In Chinese only.
+- [The Limits of Problem Analysis (问题解析的极限)](https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html): From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result. Available in English and Chinese; switch languages on the page.
+- [Designing Design (设计中的设计)](https://simoncos.github.io/gallery/talks/designing-design/index.en.html): Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again. Available in English and Chinese; switch languages on the page.
 
 - [Zhihu 2015: People, Connections and Influence](https://simoncos.github.io/gallery/research/zhihu-2015.html): Bilingual interactive research page comparing the statistics, networks, influence rankings and topics from a 2015 sample. The two original articles remain in Articles.
 

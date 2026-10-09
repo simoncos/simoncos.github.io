@@ -116,8 +116,6 @@
       "work_topic": "talks",
       "home_topic": "think",
       "date": "2026-10-09",
-      "single": true,
-      "zh_only": true,
       "title": {
         "en": "The Limits of Problem Analysis",
         "zh": "问题解析的极限"
@@ -131,7 +129,10 @@
         "zh": "从只看一个像素的游戏外挂，到一颗梨的层层解析：动手试试，何时该停止追问、带着结果回来。"
       },
       "img": "gallery/assets/gallery-card-limits-of-problem-analysis.jpg",
-      "href": "gallery/talks/limits-of-problem-analysis/index.html"
+      "href": {
+        "en": "gallery/talks/limits-of-problem-analysis/index.en.html",
+        "zh": "gallery/talks/limits-of-problem-analysis/index.html"
+      }
     },
     {
       "id": "designing-design",
@@ -142,8 +143,6 @@
       "work_topic": "talks",
       "home_topic": "think",
       "date": "2026-10-09",
-      "single": true,
-      "zh_only": true,
       "title": {
         "en": "Designing Design",
         "zh": "设计中的设计"
@@ -157,7 +156,10 @@
         "zh": "读原研哉：把“我知道”放开，沿河滑行，在沙上写字，让熟悉的世界重新变得陌生。"
       },
       "img": "gallery/assets/gallery-card-designing-design.jpg",
-      "href": "gallery/talks/designing-design/index.html"
+      "href": {
+        "en": "gallery/talks/designing-design/index.en.html",
+        "zh": "gallery/talks/designing-design/index.html"
+      }
     },
     {
       "id": "hermes",

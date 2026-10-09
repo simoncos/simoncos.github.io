@@ -1,30 +1,27 @@
 <!doctype html>
-<html lang="zh-Hans">
+<html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>问题解析的极限</title>
-<meta name="description" content="一个游戏外挂只看屏幕上的一个像素。从描述到机制，解析没有尽头；解析的第一原则，是要带有限的结果回来。">
-<link rel="canonical" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html">
+<title>The Limits of Problem Analysis</title>
+<meta name="description" content="A game bot watches just one pixel. From description to mechanism, analysis has no end. Its first rule is to come back with a finite result.">
+<link rel="canonical" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html">
 <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html">
 <link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html">
 <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="问题解析的极限 · 交互版">
-<meta property="og:description" content="一个游戏外挂只看屏幕上的一个像素。从描述到机制，解析没有尽头；解析的第一原则，是要带有限的结果回来。">
-<meta property="og:url" content="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html">
+<meta property="og:title" content="The Limits of Problem Analysis · An Interactive Essay">
+<meta property="og:description" content="A game bot watches just one pixel. From description to mechanism, analysis has no end. Its first rule is to come back with a finite result.">
+<meta property="og:url" content="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html">
 <meta property="og:site_name" content="simoncos">
-<meta property="og:image" content="https://simoncos.github.io/gallery/assets/og-limits-of-problem-analysis.jpg">
+<meta property="og:image" content="https://simoncos.github.io/gallery/assets/og-limits-of-problem-analysis.en.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="问题解析的极限交互页的开场画面">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:image:alt" content="Opening scene of The Limits of Problem Analysis interactive essay">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="问题解析的极限 · 交互版">
-<meta name="twitter:description" content="一个游戏外挂只看屏幕上的一个像素。从描述到机制，解析没有尽头；解析的第一原则，是要带有限的结果回来。">
-<meta name="twitter:image" content="https://simoncos.github.io/gallery/assets/og-limits-of-problem-analysis.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<meta name="twitter:title" content="The Limits of Problem Analysis · An Interactive Essay">
+<meta name="twitter:description" content="A game bot watches just one pixel. From description to mechanism, analysis has no end. Its first rule is to come back with a finite result.">
+<meta name="twitter:image" content="https://simoncos.github.io/gallery/assets/og-limits-of-problem-analysis.en.jpg">
 <style>
 /* Near-black page, quiet neutrals. Amber = what you operate; mint = the answer (glow only at that moment); red = out / contradiction.
    Concrete things are drawn in their own colours; their abstractions are drawn in thin ink lines beside them. */
@@ -33,8 +30,8 @@
   --accent:#ffb347; --accent-soft:rgba(255,179,71,.12);
   --stop:#ff5d7d; --go:#3cf2b4; --go-soft:rgba(60,242,180,.14);
   --hp:#e2384d; --mp:#3d7bff;
-  --display:"Noto Serif SC","Songti SC","STSong",serif;
-  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --display:"Georgia","Songti SC","STSong",serif;
+  --body:"Arial","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
   color-scheme:dark;
 }
@@ -214,22 +211,38 @@ h1 .hl{color:var(--accent)}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 .language{display:flex;justify-content:flex-end;gap:4px;max-width:1120px;margin:0 auto;padding:4px 20px;font-size:.82rem}.language a,.language span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0 8px}.language span{color:var(--muted)}
+
+/* English typography and responsive labels. */
+:root{--display:Georgia,"Times New Roman",serif;--body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+h1{font-size:clamp(2.6rem,5.5vw,4.15rem);letter-spacing:-.03em}
+.eyebrow,.lab{letter-spacing:.01em}
+.rungs .en,.prow .en{display:none}
+.cost{grid-template-columns:7.3em minmax(0,1fr)}
+.cost>span>span{white-space:normal!important;flex-shrink:0;max-width:60%}
+.cost>span>i{flex-shrink:1}
+.innards .lab{flex-wrap:wrap}
+.plan{grid-template-columns:7.5em repeat(3,minmax(0,1fr))}
+.plan .prow{overflow-wrap:anywhere}
+.rule{font-size:.76rem}
+@media(max-width:700px){.plan{grid-template-columns:1fr;gap:8px}.plan>.prow{display:none}.plan>.phead{display:flex;align-items:flex-start;text-align:left;margin-top:16px;padding-bottom:4px}.plan>.phead .ico{display:none}.plan>.phead .goal{font-size:.8rem}.plan>.phead b{font-size:1.1rem}.plan>.phead .got{display:flex;gap:8px}.plan>.phead[data-problem="0"]{order:0}.plan>.phead[data-problem="1"]{order:1}.plan>.phead[data-problem="2"]{order:2}.plan>div:first-child{display:none}.plan .cell{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:6px 14px;min-height:68px;padding:10px 12px}.plan .cell::before{content:attr(data-level);grid-column:1;grid-row:1/3;font-size:.75rem;font-weight:700;align-self:center}.plan .cell .top,.plan .cell .bar{grid-column:2}.plan .cell .top{font-size:.8rem}.plan .cell[data-problem="0"]{order:0}.plan .cell[data-problem="1"]{order:1}.plan .cell[data-problem="2"]{order:2}#pearSvg text,#pearSvg .dimt{font-size:18px}.hero-hint{font-size:.72rem}.stormbar>.row{gap:8px}}
+
+
 </style>
 
 <div class="wrap">
 
-<nav class="language" aria-label="语言"><span lang="zh-Hans" aria-current="page">中文</span><a href="index.en.html" lang="en" hreflang="en">English</a></nav>
+<nav class="language" aria-label="Language"><a href="index.html" lang="zh-Hans" hreflang="zh-Hans">中文</a><span lang="en" aria-current="page">English</span></nav>
 
 <header class="hero wide">
   <div>
-    <p class="eyebrow">交互版 · 改编自作者 2014 年的同名旧文 · <a href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html">读原文</a></p>
-    <h1>问题解析的<span class="hl">极限</span></h1>
-    <p class="lede">朋友讲过一个 RPG 外挂的做法：它不读游戏的内存，不懂伤害公式，只盯着屏幕上的一个像素。这个像素从红变灰，它就按下加血。</p>
-    <p class="lede" style="margin-top:0">它没有试图弄懂整个游戏。这篇讲的就是这件事：解析可以没有尽头，但我们得带着结果回来。</p>
+    <p class="eyebrow">An interactive essay · Adapted from the author’s 2014 essay · <a href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.en.html">Read the original essay</a></p>
+    <h1>The <span class="hl">Limits</span> of Problem Analysis</h1>
+    <p class="lede">A friend once described an RPG bot. It reads no game memory and knows no damage formulas. It watches one pixel on the screen. When that pixel turns from red to gray, it presses heal.</p>
+    <p class="lede" style="margin-top:0">It never tries to understand the whole game. That is what this essay is about: analysis may have no end, but we have to come back with a result.</p>
   </div>
   <figure class="hero-fig">
-    <canvas id="heroCv" tabindex="0" aria-label="一棵向下生长的问题树：每回答一个问题，就分出两个新问题，越往下越密，消失在黑暗里。一条横线标出解析停在哪一层；可以用上下方向键移动它。"></canvas>
-    <p class="hero-hint">上下移动指针（手机上点一下，或拖那条横线）。每往下解析一层，答案多一层，<b>新冒出的问题多一倍</b>。</p>
+    <canvas id="heroCv" tabindex="0" aria-label="A question tree grows downward. Each answer branches into two new questions, growing denser until they disappear into darkness. A horizontal line marks where analysis stops. Move it with the up and down arrow keys."></canvas>
+    <p class="hero-hint">Move your pointer up or down. On a phone, tap or drag the line. Each deeper level brings more answers—and <b>twice as many new questions</b>.</p>
   </figure>
 </header>
 
@@ -237,53 +250,53 @@ h1 .hl{color:var(--accent)}
 <section id="s1">
   <div class="col">
     <span class="bignum" aria-hidden="true">01</span>
-    <span class="secno">01 · 一个像素</span>
-    <h2>外挂只看一个点</h2>
-    <p>侦测 HP 条上某一点的颜色。颜色<b>从红变灰</b>，说明血量掉到了某条线以下，自动输入加血；反方向变化，什么也不做。</p>
-    <p>游戏的内部逻辑是个黑匣子。但为了让人能玩，它必须给<b>人</b>留下输入和输出的接口。外挂就接在这两个接口上：抓住一小块输出，配一条简单明确的逻辑，替人的眼、脑、手接管这一小段流程。</p>
+    <span class="secno">01 · One pixel</span>
+    <h2>The bot watches one point</h2>
+    <p>Watch the color of one point on the HP bar. When it turns <b>from red to gray</b>, health has fallen below a threshold: press heal. When it changes the other way, do nothing.</p>
+    <p>The game’s internal logic is a black box. But to be playable, it must give a <b>human</b> ways to provide input and read output. The bot connects those interfaces: take a small piece of output, apply one simple rule, and take over a tiny loop from a person’s eyes, brain and hands.</p>
   </div>
 
   <div class="bench wide game">
     <div>
-      <canvas id="gameCv" tabindex="0" aria-label="外挂试验台：勇者被史莱姆持续攻击。左右拖动可以移动 HP 条上的探针。"></canvas>
+      <canvas id="gameCv" tabindex="0" aria-label="Bot test bench: a slime keeps attacking the hero. Drag left or right to move the probe along the HP bar."></canvas>
       <div class="innards">
-        <span class="lab"><span>游戏内部 · 外挂一个也不读</span><span class="mono" id="innCount"></span></span>
+        <span class="lab"><span>Inside the game · The bot reads none of this</span><span class="mono" id="innCount"></span></span>
         <div id="innards" aria-hidden="true"></div>
       </div>
     </div>
     <div class="gctl">
       <div>
-        <span class="lab">外挂读到的全部信息</span>
+        <span class="lab">Everything the bot can see</span>
         <div class="readout">
           <div class="sw" id="sw"></div>
-          <div><div id="hex">#E2384D</div><div id="cls">红</div></div>
+          <div><div id="hex">#E2384D</div><div id="cls">Red</div></div>
         </div>
-        <canvas id="bitCv" aria-label="最近十秒探针颜色的记录"></canvas>
+        <canvas id="bitCv" aria-label="Probe color over the last ten seconds"></canvas>
       </div>
-<pre class="rule" id="rule"><span>若 这一点 红 → 不是红</span><span id="ruleAct">    按下 加血</span><span>否则</span><span>    什么也不做</span></pre>
-      <div class="slider"><label for="probe">探针位置</label><input id="probe" type="range" min="4" max="96" value="50"><output id="probeOut">50%</output></div>
+<pre class="rule" id="rule"><span>if pixel: red → not red</span><span id="ruleAct">    press heal</span><span>else</span><span>    do nothing</span></pre>
+      <div class="slider"><label for="probe">Probe position</label><input id="probe" type="range" min="4" max="96" value="50"><output id="probeOut">50%</output></div>
       <div class="row">
-        <div class="seg" id="botSeg" role="group" aria-label="外挂开关"><button data-v="1" aria-pressed="true">外挂开</button><button data-v="0" aria-pressed="false">外挂关</button></div>
-        <button class="btn ghost" id="healBtn">手动加血<kbd>H</kbd></button>
+        <div class="seg" id="botSeg" role="group" aria-label="Bot switch"><button data-v="1" aria-pressed="true">Bot on</button><button data-v="0" aria-pressed="false">Bot off</button></div>
+        <button class="btn ghost" id="healBtn">Heal manually<kbd>H</kbd></button>
       </div>
       <div class="row">
-        <button class="btn ghost" id="eyeBtn" aria-pressed="false">外挂的视野</button>
-        <button class="btn ghost" id="poisonBtn" aria-pressed="false">让角色中毒</button>
-        <button class="btn ghost" id="resetBtn">重来</button>
+        <button class="btn ghost" id="eyeBtn" aria-pressed="false">Bot’s view</button>
+        <button class="btn ghost" id="poisonBtn" aria-pressed="false">Poison the hero</button>
+        <button class="btn ghost" id="resetBtn">Reset</button>
       </div>
       <dl class="stats">
-        <div><dt>坚持</dt><dd id="stT">0:00</dd></div>
-        <div><dt>倒下</dt><dd id="stD">0</dd></div>
-        <div><dt>用药</dt><dd id="stH">0</dd></div>
-        <div><dt>药效溢出</dt><dd id="stW">0</dd></div>
+        <div><dt>Survived</dt><dd id="stT">0:00</dd></div>
+        <div><dt>Downs</dt><dd id="stD">0</dd></div>
+        <div><dt>Heals</dt><dd id="stH">0</dd></div>
+        <div><dt>Wasted HP</dt><dd id="stW">0</dd></div>
       </dl>
       <p id="gameMsg" aria-live="polite"></p>
     </div>
   </div>
 
   <div class="col">
-    <p>它的野心没有大到把系统内部的逻辑全部破解，只把握住一点输出。可这一点已经够用，人就能从这一小块简单的流程里解放出来，把力气花在更复杂、更有意思的东西上。这简直是模块化思想的范本。</p>
-    <p class="note">试试“让角色中毒”：血条变成绿色，外挂只认识红和灰，再也等不到“红变灰”的那一刻。它的那一点理解，只在它的边界之内成立。（中毒这一段是交互版补的。）</p>
+    <p>The bot has no ambition to decode the whole system. It grasps just a little of the output. That is enough to free a person from this simple loop and leave their energy for more complex, more interesting things. It is a textbook case of modular thinking.</p>
+    <p class="note">Try “Poison the hero.” The health bar turns green, but the bot only knows red and gray. It can no longer detect that red-to-gray transition. Its tiny piece of understanding works only within its boundaries. (The poison scenario was added for this interactive edition.)</p>
   </div>
 </section>
 
@@ -291,31 +304,31 @@ h1 .hl{color:var(--accent)}
 <section id="s2">
   <div class="col">
     <span class="bignum" aria-hidden="true">02</span>
-    <span class="secno">02 · 看得多深</span>
-    <h2>从描述，到机制</h2>
-    <p>数据科学里，分析可以按目的分成几种，难度一级比一级高。最浅的是<b>描述</b>：把看到的数据讲清楚。最深的是<b>机制</b>：弄清楚产生这些数据的系统里，每个个体的哪些变量发生了变化，这些变化又引起了哪些别的变化。</p>
-    <p>拿一只梨来说。从上往下点，看要回答的问题怎样变深，需要的东西怎样变多。</p>
+    <span class="secno">02 · How deep to look</span>
+    <h2>From description to mechanism</h2>
+    <p>In data science, analysis can be classified by its purpose, with increasing levels of difficulty. The simplest is <b>descriptive</b>: clearly describe the data you see. The deepest is <b>mechanistic</b>: understand which variables changed in each individual within the system that produced the data, and which other changes they caused.</p>
+    <p>Take a pear. Work down the levels to see how the questions deepen and how much more you need to answer them.</p>
   </div>
 
   <div class="bench wide ladder">
     <div class="pear-view">
-      <button class="btn ghost" id="pearZoom" aria-pressed="false" aria-controls="pearViewport">放大图示</button>
-      <div class="pear-viewport" id="pearViewport" tabindex="0" role="region" aria-label="梨的分析图，放大后可左右滚动"><svg id="pearSvg" viewBox="0 0 640 492" role="group" aria-label="一只梨在六种分析深度下的样子"></svg></div>
-      <p class="cap" id="pearHint">小字看不清时可放大，再左右滑动查看。</p>
+      <button class="btn ghost" id="pearZoom" aria-pressed="false" aria-controls="pearViewport">Enlarge diagram</button>
+      <div class="pear-viewport" id="pearViewport" tabindex="0" role="region" aria-label="Pear analysis diagram. When enlarged, scroll horizontally to explore."><svg id="pearSvg" viewBox="0 0 640 492" role="group" aria-label="A pear at six levels of analysis"></svg></div>
+      <p class="cap" id="pearHint">Enlarge the diagram for small labels, then swipe sideways to explore.</p>
     </div>
     <div>
       <ol class="rungs" id="rungs"></ol>
       <div class="lvcard">
         <p id="lvText"></p>
         <div id="lvctl"></div>
-        <div class="cost" id="cost" aria-label="每一级大致需要的数据与投入"></div>
+        <div class="cost" id="cost" aria-label="Approximate data and effort needed at each level"></div>
       </div>
     </div>
   </div>
 
   <div class="col">
-    <p>原文只举了两端：描述只要我记下梨的形状、颜色、大小；机制要我弄清它为什么是这样的形状、颜色、大小，三者之间又有什么关系。然后还有一个问题：换一只梨，我们建立的模型还对吗？</p>
-    <p class="note">六种类型来自 Coursera 课程 <i>The Data Scientist’s Toolbox</i>（Jeff Leek）的讲义 <i>Types of Questions</i>。中间四级的梨子例子和机制图里的变量是交互版补的，只为示意，不是植物学结论。</p>
+    <p>The original essay described only the two ends. Description asks me to record a pear’s shape, color and size. Mechanism asks why it has that shape, color and size, and how the three relate. Then comes another question: if we try a different pear, does our model still hold?</p>
+    <p class="note">The six types come from Jeff Leek’s <i>Types of Questions</i> lecture in <i>The Data Scientist’s Toolbox</i> on Coursera. The four middle pear examples and the variables in the mechanism diagram were added for this edition. They are illustrations, not botanical findings.</p>
   </div>
 </section>
 
@@ -323,23 +336,23 @@ h1 .hl{color:var(--accent)}
 <section id="s3">
   <div class="col">
     <span class="bignum" aria-hidden="true">03</span>
-    <span class="secno">03 · 飓风与蝴蝶</span>
-    <h2>信息永远不够</h2>
-    <p>理想中，我们想要机制级别的答案：从一场飓风里清晰地、精确地捕捉到一只蝴蝶的飞舞。可现实是，<b>我们所能掌握的信息永远是极为不足的。</b></p>
-    <p>下面是两个一模一样的世界，只差一件事：其中一个世界里，有只蝴蝶扇了一下翅膀。</p>
+    <span class="secno">03 · A hurricane and a butterfly</span>
+    <h2>There is never enough information</h2>
+    <p>Ideally, we want mechanistic answers: to pick out, clearly and precisely, the flap of a butterfly’s wings within a hurricane. In practice, <b>the information we can get hold of is always far too little.</b></p>
+    <p>Below are two identical worlds, with one difference: in one of them, a butterfly flaps its wings once.</p>
   </div>
 
   <div class="bench wide">
     <div class="storm">
-      <canvas id="stormCv" aria-label="俯视的海图：左边是海岸和一座城，右边海上有一场飓风。两个世界的飓风从同一点出发，前半程完全重合；其中一个世界里有只蝴蝶扇了一下翅膀，后半程两场飓风分开，一场登陆了城市，一场转向海上。"></canvas>
+      <canvas id="stormCv" aria-label="A map viewed from above: a coast and a city on the left, a hurricane at sea on the right. Hurricanes in two worlds start together and follow the same early path. A butterfly flaps once in one world. Later their paths separate: one hits the city, the other turns out to sea."></canvas>
       <canvas id="stormOv" aria-hidden="true"></canvas>
     </div>
-    <canvas id="gapCv" aria-label="两个世界的飓风相差多远，对数刻度：从几厘米开始按指数增长，直到上千公里。灰色带是测量误差，差别越过它之前，观测不出来。"></canvas>
+    <canvas id="gapCv" aria-label="Distance between the two hurricanes on a logarithmic scale. A few centimeters grow exponentially to thousands of kilometers. The gray band shows measurement error; until the difference exceeds it, the worlds cannot be distinguished by observation."></canvas>
     <div class="stormbar">
       <div class="row">
-        <button class="btn" id="flapBtn">让蝴蝶扇一下翅膀</button>
-        <span class="lab" style="margin:0 0 0 6px">观测点</span>
-        <div class="seg" id="sensSeg" role="group" aria-label="观测点数量"><button data-n="12" aria-pressed="false">12</button><button data-n="600" aria-pressed="true">600</button><button data-n="9000" aria-pressed="false">9 000</button></div>
+        <button class="btn" id="flapBtn">Let the butterfly flap</button>
+        <span class="lab" style="margin:0 0 0 6px">Observations</span>
+        <div class="seg" id="sensSeg" role="group" aria-label="Number of observation points"><button data-n="12" aria-pressed="false">12</button><button data-n="600" aria-pressed="true">600</button><button data-n="9000" aria-pressed="false">9 000</button></div>
       </div>
       <div id="stormDay"></div>
     </div>
@@ -347,7 +360,7 @@ h1 .hl{color:var(--accent)}
   </div>
 
   <div class="col">
-    <p>即使到了数据产量超大的时代又怎样呢？数据倒是多起来了，从中提取信息的难度也变大了：观测点从 12 个加到 9 000 个，误差缩小了二十多倍，也只让人早一天多看出两个世界不一样，那时两场飓风已经快要分道扬镳。这种时候，一定要控制住自己的贪欲，步步为营。</p>
+    <p>Even in an age of enormous data production, what changes? We have more data, but extracting information becomes harder too. Here, raising the number of observation points from 12 to 9,000 cuts error by more than twentyfold, yet reveals the difference only a little over a day earlier. By then, the hurricanes are about to part ways. At times like this, we have to rein in our greed and advance one step at a time.</p>
   </div>
 </section>
 
@@ -355,36 +368,36 @@ h1 .hl{color:var(--accent)}
 <section id="s4">
   <div class="col">
     <span class="bignum" aria-hidden="true">04</span>
-    <span class="secno">04 · 带回来</span>
-    <h2>够用了，就回来</h2>
-    <p>有时衡量过投入产出，一个问题研究到某个深度和广度就已经满足需要了，就像那个外挂。剩下的资源，更应该用在别的刀口上。</p>
-    <p>下面三个问题共用一份时间和精力。每一列从上往下，是上一节的六级分析。点一格，决定这个问题解析到哪一层。</p>
+    <span class="secno">04 · Bring something back</span>
+    <h2>Come back when it is enough</h2>
+    <p>Sometimes, after weighing cost against return, we find that studying a problem to a certain depth and breadth already meets our needs, as with the bot. The resources left over are better spent where they count.</p>
+    <p>The three problems below share one budget of time and effort. Each column runs down the same six levels of analysis. Choose a cell to decide how far to go.</p>
   </div>
 
   <div class="bench wide">
-    <p class="plegend">格子里的横条：解析到这一层，能多带回来多少用处。右下角的数字：这一层要花的时间和精力。</p>
+    <p class="plegend">Each bar shows the additional value that level brings back. The number at the lower right is the time and effort it costs.</p>
     <div class="plan" id="plan"></div>
     <div class="hud">
-      <div class="bud"><span class="lab">时间和精力 · 用了 <span class="mono" id="budNum">0</span> / 100</span><div class="budbar" id="budBar"><i></i><i></i><i></i></div></div>
-      <div><span class="lab">带回来的用处</span><div class="num go" id="gotNum">0</div></div>
-      <div><span class="lab">同一份预算，最多</span><div class="num" id="bestNum">0</div></div>
+      <div class="bud"><span class="lab">Time and effort used · <span class="mono" id="budNum">0</span> / 100</span><div class="budbar" id="budBar"><i></i><i></i><i></i></div></div>
+      <div><span class="lab">Value brought back</span><div class="num go" id="gotNum">0</div></div>
+      <div><span class="lab">Best within this budget</span><div class="num" id="bestNum">0</div></div>
     </div>
     <p id="planMsg" aria-live="polite"></p>
-    <div class="row"><button class="btn ghost" id="bestBtn">看看最好的分法</button><button class="btn ghost" id="clearBtn">清空重来</button></div>
+    <div class="row"><button class="btn ghost" id="bestBtn">Show the best allocation</button><button class="btn ghost" id="clearBtn">Clear and restart</button></div>
   </div>
 
   <div class="col">
-    <p>想要较好地解析一个问题系统，当然需要“打破沙锅问到底”的集中力和恒心。但我们要一直提醒自己：在粗糙的现实之中，要解决的问题必须得有一个边界，这个边界让我们不至于在深挖隧道的过程中失去回来的路径。</p>
+    <p>To analyze a problem well, we need the focus and persistence to get to the bottom of it. But we must keep reminding ourselves: in the rough real world, a problem needs a boundary, one that keeps us from losing the way back as we dig our tunnel.</p>
   </div>
 
   <div class="coda col">
-    <q>解析的第一原则，<br>便是要<span class="hl">带有限的结果回来</span>。</q>
-    <p class="src">这是我们不得不面对的一个极限。</p>
+    <q>The first rule of analysis:<br><span class="hl">come back with a finite result.</span></q>
+    <p class="src">This is a limit we cannot get around.</p>
   </div>
 </section>
 
 <footer class="col">
-  交互版改编自作者 2014 年的旧文<a href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html">《问题解析的极限》</a>。分析类型参考 Jeff Leek, <i>The Data Scientist’s Toolbox</i>（Coursera）讲义 <i>Types of Questions</i>。开头的问题树、外挂试验台、梨的中间四级、两个世界的飓风和三个问题的预算，都是交互版补的示意，数值都是为了说明而设定的。
+  Adapted from the author’s 2014 essay, <a href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.en.html">The Limits of Problem Analysis</a>. Analysis types follow Jeff Leek’s <i>Types of Questions</i> lecture in <i>The Data Scientist’s Toolbox</i> (Coursera). The opening question tree, bot test bench, four middle pear levels, hurricanes in two worlds, and three-problem budget were added as illustrations. All numerical values are chosen for demonstration.
 </footer>
 </div>
 
@@ -606,14 +619,14 @@ function drawBits(g, w, h, hist, now, span) {
       g.textAlign = "left";
     }
     const root = nodes[0][0], small = W < 480, fs = small ? 11 : 12;
-    label("一个问题", root.x + 12, root.y, "#8a9099", "left", `500 ${fs}px Noto Sans SC, sans-serif`);
+    label("One question", root.x + 12, root.y, "#8a9099", "left", `500 ${fs}px Arial, sans-serif`);
     // the line where you stop
     g.strokeStyle = css("--accent"); g.lineWidth = 1.5; g.setLineDash([6, 5]);
     g.beginPath(); g.moveTo(24, cutY); g.lineTo(W - 10, cutY); g.stroke(); g.setLineDash([]);
     g.fillStyle = css("--accent"); g.beginPath(); g.arc(14, cutY, 6, 0, 7); g.fill();
-    label("停在这里", 24, cutY - 15, css("--accent"), "left", `600 ${fs}px Noto Sans SC, sans-serif`);
+    label("Stop here", 24, cutY - 15, css("--accent"), "left", `600 ${fs}px Arial, sans-serif`);
     const n = 2 ** kf;
-    label(`答了 ${n - 1} 个 · 冒出 ${n} 个新问题`, W - 10, cutY - 15, "#ebedf0", "right", `500 ${fs}px Noto Sans SC, sans-serif`);
+    label(`${n - 1} answered · ${n} new`, W - 10, cutY - 15, "#ebedf0", "right", `500 ${fs}px Arial, sans-serif`);
   }
   function frame(dt) {
     idle += dt;
@@ -671,7 +684,7 @@ function drawBits(g, w, h, hist, now, span) {
     prev = "red"; hist = [{ t: clock, c: "red" }]; msgKey = "";
   });
   const sw = $("#sw"), hexEl = $("#hex"), clsEl = $("#cls"), act = $("#ruleAct"), inn = $("#innards");
-  $("#innCount").textContent = "34 个变量 · 每帧都在变";
+  $("#innCount").textContent = "34 variables · changing every frame";
   const fmtT = s => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
   function innards() {
     const s = sim, f = (x, d = 1) => x.toFixed(d);
@@ -686,13 +699,13 @@ function drawBits(g, w, h, hist, now, span) {
   }
   function message() {
     let k, m;
-    if (!bot) { k = "off"; m = "外挂关了，加血全靠你：盯着血条，判断，按 H。这一小段流程，正是外挂替人接管的部分。"; }
-    else if (sim.poison) { k = "p"; m = "血条变绿了。外挂只认识<b>红</b>和<b>灰</b>：绿色在它眼里只是“不是红”，于是它只在中毒那一刻按了一下，之后再也等不到“红变灰”。"; }
-    else if (sim.pdT !== undefined && sim.alive - sim.pdT < 9) { k = "pd"; m = "中毒的那段时间，外挂一次也没再出手，角色倒下了。复活后血条变回红色，它又“看得懂”了。"; }
-    else if (sim.downs > 0 && P < 0.45) { k = "low"; m = "探针放得太低：一记 40 多的重击，能从探针上方直接把血条打空，外挂来不及看到红变灰。"; }
-    else if (sim.heals > 4 && sim.waste / sim.heals > 18) { k = "high"; m = "探针放得太高：常常快满血就加血，药效一大半溢出。"; }
-    else if (sim.alive > 20 && sim.downs === 0) { k = "ok"; m = "外挂只读<b>一个像素、一个比特</b>，已经替你撑了 " + Math.floor(sim.alive) + " 秒。它不需要懂游戏。"; }
-    else { k = "idle"; m = "左右拖动画面（或用滑杆）移动 HP 条上的探针，决定外挂在哪条线出手。"; }
+    if (!bot) { k = "off"; m = "The bot is off. Watch the health bar, decide, and press H to heal. This tiny loop is exactly what the bot takes over for you."; }
+    else if (sim.poison) { k = "p"; m = "The health bar is green. The bot knows only <b>red</b> and <b>gray</b>. Green is simply “not red,” so it heals once when the poison starts, then never sees another red-to-gray transition."; }
+    else if (sim.pdT !== undefined && sim.alive - sim.pdT < 9) { k = "pd"; m = "The bot did nothing more while the hero was poisoned, and the hero fell. After revival, the health bar turns red again, and the bot can “understand” it once more."; }
+    else if (sim.downs > 0 && P < 0.45) { k = "low"; m = "The probe is too low. A heavy hit of over 40 HP can empty the bar from above the threshold before the bot gets a chance to react."; }
+    else if (sim.heals > 4 && sim.waste / sim.heals > 18) { k = "high"; m = "The probe is too high. It often heals near full health, wasting much of each dose."; }
+    else if (sim.alive > 20 && sim.downs === 0) { k = "ok"; m = "Reading just <b>one pixel, one bit</b>, the bot has kept you alive for " + Math.floor(sim.alive) + " seconds. It does not need to understand the game."; }
+    else { k = "idle"; m = "Drag left or right, or use the slider, to move the probe along the HP bar and choose when the bot acts."; }
     if (k !== msgKey || k === "ok") { msgKey = k; $("#gameMsg").innerHTML = m; }
   }
   let msgT = 0;
@@ -712,23 +725,23 @@ function drawBits(g, w, h, hist, now, span) {
     blit(g, off.canvas, 0, y0, cell, 1 - 0.9 * eyeK);
     if (eyeK > 0.01) {
       g.drawImage(off.canvas, px, BAR_Y, 1, 1, rx, ry, cell - (cell > 6 ? 1 : 0), cell - (cell > 6 ? 1 : 0));
-      g.globalAlpha = eyeK; g.font = `500 ${Math.max(11, cell * 0.95)}px Noto Sans SC, sans-serif`; g.fillStyle = "#8a9099"; g.textAlign = "center"; g.textBaseline = "middle";
-      g.fillText("外挂看到的，只有这一个像素", W / 2, y0 + cell * 31.5); g.textAlign = "left"; g.globalAlpha = 1;
+      g.globalAlpha = eyeK; g.font = `500 ${Math.max(11, cell * 0.95)}px Arial, sans-serif`; g.fillStyle = "#8a9099"; g.textAlign = "center"; g.textBaseline = "middle";
+      g.fillText("All the bot sees is this one pixel", W / 2, y0 + cell * 31.5, W - 20); g.textAlign = "left"; g.globalAlpha = 1;
     }
     // probe: a tall reticle on the chosen pixel + the threshold line it implies
     g.strokeStyle = css("--accent"); g.lineWidth = 2;
     g.strokeRect(rx - 3, ry - 3, cell + 5, cell * 2 + 5);
     g.setLineDash([3, 4]); g.lineWidth = 1; g.beginPath(); g.moveTo(rx + cell / 2, ry + cell * 2 + 3); g.lineTo(rx + cell / 2, ry + cell * 6); g.stroke(); g.setLineDash([]);
     g.font = `600 ${Math.max(11, cell * 0.9)}px JetBrains Mono, monospace`; g.fillStyle = css("--accent"); g.textBaseline = "top";
-    g.fillText("探针 " + Math.round(P * 100) + "%", rx - cell, ry + cell * 6.4);
+    g.fillText("Probe " + Math.round(P * 100) + "%", rx - cell, ry + cell * 6.4);
     if (sim.dead > 0) {
       g.fillStyle = "rgba(5,6,7,.55)"; g.fillRect(0, 0, W, H);
-      g.font = `900 ${cell * 3.4}px Noto Serif SC, serif`; g.fillStyle = css("--stop"); g.textAlign = "center"; g.textBaseline = "middle";
-      g.fillText("倒下", W / 2, H / 2); g.textAlign = "left";
+      g.font = `900 ${cell * 3.4}px Georgia, serif`; g.fillStyle = css("--stop"); g.textAlign = "center"; g.textBaseline = "middle";
+      g.fillText("Down", W / 2, H / 2); g.textAlign = "left";
     }
     // readout
     sw.style.background = hex(rgb); hexEl.textContent = hex(rgb);
-    clsEl.textContent = c === "red" ? "红" : c === "grey" ? "灰" : "？不认识";
+    clsEl.textContent = c === "red" ? "Red" : c === "grey" ? "Gray" : "? Unknown";
     clsEl.style.color = c === "red" ? C.hp : c === "grey" ? "#aab0b8" : css("--stop");
     drawBits(bg, bw, bh, hist, clock, 10);
     fireT = Math.max(0, fireT - dt * 2.2); act.classList.toggle("fire", fireT > 0.5);
@@ -748,7 +761,7 @@ function drawBits(g, w, h, hist, now, span) {
   const NS = "http://www.w3.org/2000/svg", svg = $("#pearSvg");
   $("#pearZoom").addEventListener("click", e => {
     const on = $("#pearViewport").classList.toggle("zoomed");
-    e.currentTarget.setAttribute("aria-pressed", on); e.currentTarget.textContent = on ? "缩回全图" : "放大图示";
+    e.currentTarget.setAttribute("aria-pressed", on); e.currentTarget.textContent = on ? "Fit diagram" : "Enlarge diagram";
   });
   // phones draw this figure's text larger (see CSS), so a few stacked labels need more room
   const NAR = matchMedia("(max-width:520px)").matches;
@@ -785,19 +798,19 @@ function drawBits(g, w, h, hist, now, span) {
   el("line", { x1: 80, y1: 420, x2: 610, y2: 420, class: "ax" }, ax); el("line", { x1: 80, y1: 50, x2: 80, y2: 420, class: "ax" }, ax);
   el("rect", { x: 68, y: 60, width: 6, height: 350, rx: 3, fill: "url(#cbar)" }, ax);
   for (const s of [6, 8, 10]) { el("line", { x1: X(s), y1: 420, x2: X(s), y2: 425, class: "ax" }, ax); el("text", { x: X(s), y: 440, "text-anchor": "middle" }, ax).textContent = s; }
-  el("text", { x: 610, y: 476, "text-anchor": "end" }, ax).textContent = "大小（cm）→";
-  el("text", { x: 92, y: 44 }, ax).textContent = "↑ 越黄";
+  el("text", { x: 610, y: 476, "text-anchor": "end" }, ax).textContent = "Size (cm) →";
+  el("text", { x: 92, y: 44 }, ax).textContent = "↑ More yellow";
   // orchard (3)
   const orc = layer("orc", "3");
   for (const p of orchard) el("circle", { cx: X(p.s), cy: Y(p.h), r: 1.6, fill: "#5a616b", opacity: ".55" }, orc);
-  el("text", { x: 600, y: 70, "text-anchor": "end" }, orc).textContent = "灰点：整个果园（你看不到）";
+  el("text", { x: 600, y: 70, "text-anchor": "end" }, orc).textContent = "Gray: the whole orchard (unseen)";
   // band + line (3-4)
   const band = layer("band", "3,4");
   const s0 = 5.8, s1 = 11.2, pts = []; for (let s = s0; s <= s1 + 1e-6; s += 0.2) pts.push(s);
   const up = pts.map(s => `${X(s)},${Y(line(s) - 2 * seFit(s))}`), dn = pts.slice().reverse().map(s => `${X(s)},${Y(line(s) + 2 * seFit(s))}`);
   el("polygon", { points: up.concat(dn).join(" "), fill: "rgba(255,179,71,.14)" }, band);
   el("line", { x1: X(s0), y1: Y(line(s0)), x2: X(s1), y2: Y(line(s1)), stroke: "#ffb347", "stroke-width": 1.5 }, band);
-  const bandLab = el("text", { x: X(10.6), y: Y(line(10.6)) - 26, "text-anchor": "middle", fill: "#ffb347" }, band); bandLab.textContent = "趋势 ± 不确定";
+  const bandLab = el("text", { x: X(10.6), y: Y(line(10.6)) - 26, "text-anchor": "middle", fill: "#ffb347" }, band); bandLab.textContent = "Trend ± uncertainty";
   // small pears (2-4)
   const sp = layer("sp", "2,3,4");
   const glyphs = sample.map((p, i) => {
@@ -806,7 +819,7 @@ function drawBits(g, w, h, hist, now, span) {
     g.style.transitionDelay = (i * 14) + "ms"; return g;
   });
   const you = layer("you", "2,3");
-  el("text", { x: X(sample[0].s) + 12, y: Y(sample[0].h) + 22, fill: "#ffb347", "font-size": "12" }, you).textContent = "↖ 你那只";
+  el("text", { x: X(sample[0].s) + 12, y: Y(sample[0].h) + 22, fill: "#ffb347", "font-size": "12" }, you).textContent = "↖ Your pear";
   // prediction (4)
   const pr = layer("pr", "4");
   const ghost = el("g", { class: "mv" }, pr); el("path", { d: PEAR, fill: "#1a1d22", stroke: "#ebedf0", "stroke-width": 1.2, "vector-effect": "non-scaling-stroke", "stroke-dasharray": "3 3" }, ghost);
@@ -827,7 +840,7 @@ function drawBits(g, w, h, hist, now, span) {
   el("path", { d: PEAR, fill: hueCol(clamp(84 - 1 * 4.3, 46, 90)), stroke: "#050607", "stroke-width": 1, "vector-effect": "non-scaling-stroke" }, ctrl);
   el("path", { d: "M0,-1 C0.02,-1.15 0.06,-1.24 0.12,-1.3", stroke: "#6b4a2b", "stroke-width": 2, fill: "none", "vector-effect": "non-scaling-stroke" }, ctrl);
   el("rect", { x: 430, y: 236, width: 140, height: 150, rx: 8, fill: "none", stroke: "#2c3038", "stroke-dasharray": "3 4" }, ca);
-  el("text", { x: 500, y: NAR ? 400 : 410, "text-anchor": "middle" }, ca).textContent = "对照组：遮光，每天 4 小时";
+  el("text", { x: 500, y: NAR ? 400 : 410, "text-anchor": "middle" }, ca).textContent = "Control: 4 h of light/day";
   const caDiff = el("text", { x: 500, y: NAR ? 428 : 430, "text-anchor": "middle", fill: "#ebedf0", "font-family": "JetBrains Mono" }, ca);
   // mechanism (6)
   const me = layer("me", "6");
@@ -848,37 +861,37 @@ function drawBits(g, w, h, hist, now, span) {
     ["M240,400 L400,400", "M240,393 L240,407 M400,393 L400,407"]
   ];
   for (const [a, b] of dimPaths) { const p = el("path", { d: a + " " + b, class: "dim draw" }, di); p.style.setProperty("--len", 400); }
-  el("text", { x: 185, y: 254, class: "dimt", "text-anchor": "end" }, di).textContent = "高 10.1 cm";
-  el("text", { x: 320, y: 424, class: "dimt", "text-anchor": "middle" }, di).textContent = "宽 6.8 cm";
+  el("text", { x: 185, y: 254, class: "dimt", "text-anchor": "end" }, di).textContent = "10.1 cm tall";
+  el("text", { x: 320, y: 424, class: "dimt", "text-anchor": "middle" }, di).textContent = "6.8 cm wide";
   const swG = el("g", { transform: "translate(450,170)" }, di);
   const sw1 = el("rect", { width: 30, height: 30, rx: 4 }, swG);
-  el("text", { x: 40, y: NAR ? 8 : 13, class: "dimt" }, swG).textContent = "颜色";
+  el("text", { x: 40, y: NAR ? 8 : 13, class: "dimt" }, swG).textContent = "Color";
   const hueT = el("text", { x: 40, y: NAR ? 34 : 30, class: "dimt" }, swG);
   const wG = el("g", { transform: "translate(450,240)" }, di);
-  el("text", { x: 0, y: 13, class: "dimt" }, wG).textContent = "重 186 g";
-  el("text", { x: 0, y: NAR ? 40 : 34, class: "dimt" }, wG).textContent = "形 葫芦形";
-  el("text", { x: 0, y: NAR ? 67 : 55, class: "dimt" }, wG).textContent = "斑 少量锈斑";
+  el("text", { x: 0, y: 13, class: "dimt" }, wG).textContent = "Weight: 186 g";
+  el("text", { x: 0, y: NAR ? 40 : 34, class: "dimt" }, wG).textContent = "Shape: gourd-like";
+  el("text", { x: 0, y: NAR ? 67 : 55, class: "dimt" }, wG).textContent = "Few russet spots";
 
   // pear colour
   let pearHue = sample[0].h, pearBlush = 0;
   function paintPear() {
     st0.setAttribute("stop-color", `hsl(${pearHue},70%,70%)`); st1.setAttribute("stop-color", hueCol(pearHue)); st2.setAttribute("stop-color", `hsl(${pearHue + 6},58%,34%)`);
-    blush.setAttribute("opacity", pearBlush); sw1.setAttribute("fill", hueCol(pearHue)); hueT.textContent = "色相 " + Math.round(pearHue) + "°";
+    blush.setAttribute("opacity", pearBlush); sw1.setAttribute("fill", hueCol(pearHue)); hueT.textContent = "Hue " + Math.round(pearHue) + "°";
   }
 
   // mechanism graph
   const CX = 320, CY = 236;
   const NODES = [
-    ["日照", -245, -185], ["光合作用", -235, -112], ["糖分", -250, -30], ["细胞膨大", -215, 110], ["水分", -262, 190],
-    ["授粉", -110, -185], ["细胞分裂", -130, -95],
-    ["温度", 95, -195], ["采摘时间", 245, -190], ["乙烯", 250, -112], ["叶绿素分解", 215, -32], ["类胡萝卜素", 228, 78],
-    ["品种基因", -40, 190], ["石细胞", 125, 160]
+    ["Sunlight", -245, -185], ["Photosynthesis", -235, -112], ["Sugar", -250, -30], ["Cell expansion", -215, 110], ["Water", -262, 190],
+    ["Pollination", -110, -185], ["Cell division", -130, -95],
+    ["Temperature", 95, -195], ["Harvest time", 245, -190], ["Ethylene", 250, -112], ["Chlorophyll loss", 215, -32], ["Carotenoids", 228, 78],
+    ["Variety genes", -40, 190], ["Stone cells", 125, 160]
   ];
-  const SOCK = { "颜色": [92, 12], "大小": [-92, 36], "质地": [0, 96] };
+  const SOCK = { "Color": [92, 12], "Size": [-92, 36], "Texture": [0, 96] };
   const EDGES = [
-    ["日照", "光合作用"], ["光合作用", "糖分"], ["糖分", "细胞膨大"], ["水分", "细胞膨大"], ["细胞膨大", "大小"], ["授粉", "细胞分裂"], ["细胞分裂", "大小"],
-    ["温度", "叶绿素分解"], ["乙烯", "叶绿素分解"], ["采摘时间", "乙烯"], ["叶绿素分解", "颜色"], ["类胡萝卜素", "颜色"],
-    ["品种基因", "石细胞"], ["石细胞", "质地"], ["品种基因", "大小"], ["温度", "乙烯"]
+    ["Sunlight", "Photosynthesis"], ["Photosynthesis", "Sugar"], ["Sugar", "Cell expansion"], ["Water", "Cell expansion"], ["Cell expansion", "Size"], ["Pollination", "Cell division"], ["Cell division", "Size"],
+    ["Temperature", "Chlorophyll loss"], ["Ethylene", "Chlorophyll loss"], ["Harvest time", "Ethylene"], ["Chlorophyll loss", "Color"], ["Carotenoids", "Color"],
+    ["Variety genes", "Stone cells"], ["Stone cells", "Texture"], ["Variety genes", "Size"], ["Temperature", "Ethylene"]
   ];
   const pos = {}; for (const [k, x, y] of NODES) pos[k] = [CX + x, CY + y]; for (const k in SOCK) pos[k] = [CX + SOCK[k][0], CY + SOCK[k][1]];
   const nodeEls = {}, edgeEls = [];
@@ -888,15 +901,19 @@ function drawBits(g, w, h, hist, now, span) {
     p.style.setProperty("--len", Math.ceil(Math.hypot(x2 - x1, y2 - y1) * 1.2)); p.dataset.a = a; p.dataset.b = b; edgeEls.push(p);
   }
   const pill = (k, x, y, parent, cls) => {
+    const size = NAR ? 14 : 12, measure = document.createElement("canvas").getContext("2d");
+    measure.font = `${size}px Arial, sans-serif`;
+    const w = Math.ceil(measure.measureText(k).width) + 18;
+    x = clamp(x, w / 2 + 8, 632 - w / 2);
     const g = el("g", { transform: `translate(${x},${y})`, style: "transition:opacity .5s" }, parent);
-    const w = k.length * 13 + 16; el("rect", { x: -w / 2, y: -11, width: w, height: 22, rx: 11, fill: "#0c0e11", stroke: "#2c3038" }, g);
-    const t = el("text", { x: 0, y: 4.5, "text-anchor": "middle", fill: "#ebedf0", "font-size": "12" }, g); t.textContent = k; if (cls) g.classList.add(cls); return g;
+    el("rect", { x: -w / 2, y: -13, width: w, height: 26, rx: 13, fill: "#0c0e11", stroke: "#2c3038" }, g);
+    const t = el("text", { x: 0, y: 4.5, "text-anchor": "middle", fill: "#ebedf0", style: `font:${size}px Arial,sans-serif` }, g); t.textContent = k; if (cls) g.classList.add(cls); return g;
   };
   NODES.forEach(([k], i) => { const g = pill(k, ...pos[k], nodesG); g.style.transitionDelay = (i * 60) + "ms"; nodeEls[k] = g; });
   for (const k in SOCK) { const [x, y] = pos[k]; const t = el("text", { x, y: y + 4, "text-anchor": "middle", fill: "#ffb347", "font-size": "11", "font-weight": "700" }, nodesG); t.textContent = k; }
-  const rust = pill("果锈", CX + 40, CY - 150, nodesG); rust.setAttribute("opacity", 0);
+  const rust = pill("Russeting", CX + 40, CY - 150, nodesG); rust.setAttribute("opacity", 0);
   // unknowns that keep spawning
-  const POOL = ["土壤微生物", "去年的修剪", "蜜蜂多不多", "基因怎样表达", "雨季早了几天", "隔壁那棵树的影子", "运输时的温度", "砧木", "根系深度", "夜间温差", "叶片病害", "挂果数量"];
+  const POOL = ["Soil microbes", "Last year’s pruning", "Bee numbers", "Gene expression", "Early rains", "Neighboring shade", "Transit temperature", "Rootstock", "Root depth", "Night temperatures", "Leaf disease", "Fruit load"];
   let unk = [], known = NODES.length, pi = 0;
   let occ = [];
   const free = (x, y) => occ.every(([a, b]) => Math.abs(a - x) > 62 || Math.abs(b - y) > 30) && Math.hypot(x - CX, y - CY) > 120;
@@ -912,7 +929,7 @@ function drawBits(g, w, h, hist, now, span) {
     const g = el("g", { transform: `translate(${x},${y})`, style: "cursor:pointer" }, unkG);
     el("circle", { r: 11, fill: "#050607", stroke: "#ffb347", "stroke-dasharray": "2 2" }, g);
     const t = el("text", { y: 4, "text-anchor": "middle", fill: "#ffb347", "font-size": "12", "font-weight": "700" }, g); t.textContent = "?";
-    g.setAttribute("tabindex", 0); g.setAttribute("role", "button"); g.setAttribute("aria-label", "追问下去");
+    g.setAttribute("tabindex", 0); g.setAttribute("role", "button"); g.setAttribute("aria-label", "Ask another question");
     const open = () => {
       if (g.dataset.done) return; g.dataset.done = 1; g.remove();
       const name = POOL[pi++ % POOL.length]; pill(name, x, y, unkG).querySelector("rect").setAttribute("stroke", "#ffb347"); known++;
@@ -927,12 +944,12 @@ function drawBits(g, w, h, hist, now, span) {
 
   // levels
   const LV = [
-    { k: "描述", en: "Descriptive", need: "这一只", bar: 6 },
-    { k: "探索", en: "Exploratory", need: "几十只", bar: 18 },
-    { k: "推断", en: "Inferential", need: "合理的抽样", bar: 30 },
-    { k: "预测", en: "Predictive", need: "训练 + 检验", bar: 44 },
-    { k: "因果", en: "Causal", need: "对照实验", bar: 64 },
-    { k: "机制", en: "Mechanistic", need: "整个系统", bar: 100, inf: true }
+    { k: "Descriptive", en: "Descriptive", need: "This pear", bar: 6 },
+    { k: "Exploratory", en: "Exploratory", need: "Dozens of pears", bar: 18 },
+    { k: "Inferential", en: "Inferential", need: "A sound sample", bar: 30 },
+    { k: "Predictive", en: "Predictive", need: "Training + testing", bar: 44 },
+    { k: "Causal", en: "Causal", need: "Controlled trials", bar: 64 },
+    { k: "Mechanistic", en: "Mechanistic", need: "The whole system", bar: 100, inf: true }
   ];
   let lv = 1, swapped = false;
   const rungs = $("#rungs");
@@ -943,18 +960,18 @@ function drawBits(g, w, h, hist, now, span) {
   });
   const cost = $("#cost");
   LV.forEach(v => { cost.insertAdjacentHTML("beforeend", `<span>${v.k}</span><span style="display:flex;align-items:center;gap:8px"><i style="width:${v.bar}%" class="${v.inf ? "inf" : ""}"></i><span style="white-space:nowrap">${v.need}</span></span>`); });
-  cost.insertAdjacentHTML("afterbegin", `<span style="grid-column:1/-1;font-size:.72rem">大致需要什么</span>`);
+  cost.insertAdjacentHTML("afterbegin", `<span style="grid-column:1/-1;font-size:.72rem">What you roughly need</span>`);
   const lvctl = $("#lvctl");
   function lvTextFor(l) {
     const T = {
-      1: "<b>描述：</b>确切记下这一只梨的形状、颜色、大小。只回答“它是什么样”，需要的只是这一只梨。",
-      2: "<b>探索：</b>多看几十只，找找规律：个头大的，好像更黄？这只是发现，还不能下结论。你那只梨，现在是图里的一个点。",
-      3: "<b>推断：</b>手上 40 只能说明整个果园吗？琥珀色的带子是“有多确定”。灰点是果园里你没看到的梨。",
-      4: "<b>预测：</b>来了一只新梨，只量了大小，猜它的颜色。猜的是一个区间，不是一个点。",
-      5: "<b>因果：</b>改变一个量，看另一个跟着怎么变。多晒太阳，梨会更黄、带红晕吗？这要做实验，光看不够。",
-      6: `<b>机制：</b>弄清楚每个变量为什么变、又牵动了谁。点虚线的“?”追问下去，每回答一个，就多出两个新问题。已列出 <b>${known}</b> 个变量。`
+      1: "<b>Description:</b> Record this pear’s shape, color and size precisely. To answer “What is it like?”, you need only this one pear.",
+      2: "<b>Exploration:</b> Look at a few dozen pears for patterns. Larger ones seem yellower? That is an observation, not yet a conclusion. Your pear is now one point on the graph.",
+      3: "<b>Inference:</b> Can 40 pears tell you about the whole orchard? The amber band shows uncertainty. Gray dots are pears you have not seen.",
+      4: "<b>Prediction:</b> A new pear arrives. Measure only its size and predict its color. The prediction is a range, not a point.",
+      5: "<b>Causality:</b> Change one variable and see how another responds. Does more sunlight make a pear yellower, with a red blush? You need an experiment; observation alone is not enough.",
+      6: `<b>Mechanism:</b> Find out why each variable changes and what else it affects. Open a dotted “?” to keep asking: every answer brings two more questions. Variables listed: <b>${known}</b>.`
     };
-    $("#lvText").innerHTML = T[l] + (l === 6 && swapped ? "<br><span style='color:var(--stop)'>换成了一只沙梨：品种变了，红色的连线要重新验证，还冒出了新的变量“果锈”。</span>" : "");
+    $("#lvText").innerHTML = T[l] + (l === 6 && swapped ? "<br><span style='color:var(--stop)'>Now an Asian pear: the variety has changed. Red connections need to be tested again, and a new variable, russeting, appears.</span>" : "");
   }
   function setMain(tr, sc) { mainG.style.transform = `translate(${tr[0]}px,${tr[1]}px) scale(${sc})`; }
   let pred = null;
@@ -965,14 +982,14 @@ function drawBits(g, w, h, hist, now, span) {
     for (const [ln, y1, y2] of [[ebar, Y(ph - e), Y(ph + e)]]) { ln.setAttribute("x1", X(s) + 30); ln.setAttribute("x2", X(s) + 30); ln.setAttribute("y1", y1); ln.setAttribute("y2", y2); }
     eT.setAttribute("x1", X(s) + 25); eT.setAttribute("x2", X(s) + 35); eT.setAttribute("y1", Y(ph + e)); eT.setAttribute("y2", Y(ph + e));
     eB.setAttribute("x1", X(s) + 25); eB.setAttribute("x2", X(s) + 35); eB.setAttribute("y1", Y(ph - e)); eB.setAttribute("y2", Y(ph - e));
-    prLab.setAttribute("x", 320); prLab.setAttribute("y", 28); prLab.setAttribute("text-anchor", "middle"); prLab.textContent = `${s.toFixed(1)} cm → 猜色相 ${Math.round(ph - e)}–${Math.round(ph + e)}°`;
+    prLab.setAttribute("x", 320); prLab.setAttribute("y", 28); prLab.setAttribute("text-anchor", "middle"); prLab.textContent = `${s.toFixed(1)} cm → predicted hue ${Math.round(ph - e)}–${Math.round(ph + e)}°`;
     actual.setAttribute("opacity", 0); actDot.setAttribute("opacity", 0);
   }
   function reveal() {
     if (!pred) return; pred.shown = true;
     for (const c of [actual, actDot]) { c.setAttribute("cx", X(pred.s) + 30); c.setAttribute("cy", Y(pred.h)); c.setAttribute("opacity", 1); }
     const inside = Math.abs(pred.h - pred.ph) <= pred.e;
-    prLab.textContent = `实际 ${Math.round(pred.h)}° · ${inside ? "落在区间里" : "落在区间外"}`;
+    prLab.textContent = `Actual: ${Math.round(pred.h)}° · ${inside ? "within the range" : "outside the range"}`;
   }
   function setLv(l) {
     lv = l;
@@ -1002,22 +1019,22 @@ function drawBits(g, w, h, hist, now, span) {
     // per-level controls
     lvctl.innerHTML = "";
     if (l === 4) {
-      lvctl.innerHTML = `<div class="row"><button class="btn ghost" id="pNew">来一只新梨</button><button class="btn" id="pRev">揭晓颜色</button></div>`;
+      lvctl.innerHTML = `<div class="row"><button class="btn ghost" id="pNew">New pear</button><button class="btn" id="pRev">Reveal color</button></div>`;
       $("#pNew").onclick = newPred; $("#pRev").onclick = reveal; newPred();
     }
     if (l === 5) {
-      lvctl.innerHTML = `<div class="slider"><label for="sunR">日照</label><input id="sunR" type="range" min="3" max="12" step=".1" value="6"><output id="sunO">6 h</output></div>`;
+      lvctl.innerHTML = `<div class="slider"><label for="sunR">Sunlight</label><input id="sunR" type="range" min="3" max="12" step=".1" value="6"><output id="sunO">6 h</output></div>`;
       const s = $("#sunR"), upd = () => {
         const v = +s.value; $("#sunO").textContent = v.toFixed(0) + " h";
         pearHue = clamp(84 - (v - 3) * 4.3, 46, 90); pearBlush = clamp((v - 6) / 6, 0, 1) * 0.5; paintPear();
         rays.forEach((ry, i) => { const len = 8 + v * 2.2; ry.setAttribute("x1", 0); ry.setAttribute("y1", -32); ry.setAttribute("x2", 0); ry.setAttribute("y2", -32 - len); });
         sunC.setAttribute("r", 20 + v * 0.8);
-        caLab.textContent = `处理组：每天 ${v.toFixed(0)} 小时`; caOut.textContent = `处理组 · 色相 ${Math.round(pearHue)}° · 红晕 ${Math.round(pearBlush * 200)}%`; const d = Math.round(pearHue - (84 - 4.3)); caDiff.textContent = d === 0 ? "两组没有差别" : `差别：色相 ${d > 0 ? "+" : "−"}${Math.abs(d)}°`;
+        caLab.textContent = `Treatment: ${v.toFixed(0)} h/day`; caOut.textContent = `Treatment · hue ${Math.round(pearHue)}° · blush ${Math.round(pearBlush * 200)}%`; const d = Math.round(pearHue - (84 - 4.3)); caDiff.textContent = d === 0 ? "No difference" : `Hue difference: ${d > 0 ? "+" : "−"}${Math.abs(d)}°`;
       };
       s.addEventListener("input", upd); upd();
     }
     if (l === 6) {
-      lvctl.innerHTML = `<div class="row"><button class="btn ghost" id="swapB" aria-pressed="${swapped}">换一只梨</button><button class="btn ghost" id="unkNext">追问一个变量</button><button class="btn ghost" id="unkR">收起追问</button></div>`;
+      lvctl.innerHTML = `<div class="row"><button class="btn ghost" id="swapB" aria-pressed="${swapped}">Try another variety</button><button class="btn ghost" id="unkNext">Explore a variable</button><button class="btn ghost" id="unkR">Reset questions</button></div>`;
       $("#unkNext").onclick = () => { const q = unkG.querySelector('[role="button"]'); if (q) q.dispatchEvent(new Event("click")); else $("#unkNext").disabled = true; };
       $("#swapB").onclick = () => { swapPear(!swapped); $("#swapB").setAttribute("aria-pressed", swapped); lvTextFor(6); };
       $("#unkR").onclick = () => { resetUnk(); $("#unkNext").disabled = false; lvTextFor(6); };
@@ -1028,7 +1045,7 @@ function drawBits(g, w, h, hist, now, span) {
     swapped = on;
     mainPear.style.opacity = on ? 0 : 1; mainNashi.setAttribute("opacity", on ? 1 : 0); speck.setAttribute("opacity", on ? 1 : 0);
     leaf.style.opacity = on ? 0 : 1; rust.setAttribute("opacity", on ? 1 : 0); stem.setAttribute("transform", on ? "translate(0,0.48)" : "");
-    const bad = new Set(["品种基因", "石细胞", "乙烯"]);
+    const bad = new Set(["Variety genes", "Stone cells", "Ethylene"]);
     for (const e of edgeEls) {
       const b = on && (bad.has(e.dataset.a) || bad.has(e.dataset.b));
       e.setAttribute("stroke", b ? "#ff5d7d" : "#5a616b"); e.style.strokeDasharray = b ? "4 4" : ""; e.style.strokeDashoffset = b ? "0" : "";
@@ -1057,7 +1074,7 @@ function drawBits(g, w, h, hist, now, span) {
   const gapKm = tt => Math.abs(uB(tt) - uA(tt)) * YKM;
   const tDetect = n => Math.log(ERR[n] / (2 * U0 * YKM)) / LAM;
   const day = tt => (tt / T * DAYS).toFixed(1);
-  const fmt = km => km < 0.001 ? Math.max(1, Math.round(km * 1e5)) + " 厘米" : km < 0.01 ? (km * 1000).toFixed(1) + " 米" : km < 1 ? Math.round(km * 1000) + " 米" : (km < 10 ? km.toFixed(1) : Math.round(km)) + " 公里";
+  const fmt = km => km < 0.001 ? Math.max(1, Math.round(km * 1e5)) + " cm" : km < 0.01 ? (km * 1000).toFixed(1) + " m" : km < 1 ? Math.round(km * 1000) + " m" : (km < 10 ? km.toFixed(1) : Math.round(km)) + " km";
   // map, in frame fractions: a coast down the left edge, a city on it
   const coastX = y => 0.15 + 0.022 * Math.sin(y * 9) + 0.011 * Math.sin(y * 23 + 1) + 0.025 * y;
   const CITY = [coastX(0.74) - 0.018, 0.74];
@@ -1075,7 +1092,7 @@ function drawBits(g, w, h, hist, now, span) {
     x.fillStyle = "rgba(20,23,29,.55)"; x.fill(); x.strokeStyle = "#2c3038"; x.lineWidth = 1.2; x.stroke();
     const qx = CITY[0] * W, qy = CITY[1] * H;
     x.fillStyle = "#ebedf0"; x.fillRect(qx - 3, qy - 3, 6, 6);
-    x.font = `500 ${W < 700 ? 11 : 12}px Noto Sans SC, sans-serif`; x.fillStyle = "#8a9099"; x.textAlign = "center"; x.textBaseline = "top"; x.fillText("海边的城", qx, qy + 8); x.textAlign = "left";
+    x.font = `500 ${W < 700 ? 11 : 12}px Arial, sans-serif`; x.fillStyle = "#8a9099"; x.textAlign = "center"; x.textBaseline = "top"; x.fillText("Coastal city", qx, qy + 8); x.textAlign = "left";
   }
   const wipe = () => { g.fillStyle = "#06080b"; g.fillRect(0, 0, W, H); };
   function setup() {
@@ -1114,7 +1131,7 @@ function drawBits(g, w, h, hist, now, span) {
     o.restore();
   }
   function tag(txt, x, y, col, align = "center") {
-    o.font = `500 ${W < 700 ? 11 : 12}px Noto Sans SC, sans-serif`; o.textAlign = align; o.textBaseline = "middle";
+    o.font = `500 ${W < 700 ? 11 : 12}px Arial, sans-serif`; o.textAlign = align; o.textBaseline = "middle";
     const w = o.measureText(txt).width, x0 = clamp(align === "center" ? x - w / 2 : x, 6, W - w - 6);
     o.fillStyle = "rgba(5,6,7,.8)"; o.fillRect(x0 - 5, y - 10, w + 10, 20);
     o.fillStyle = col; o.textAlign = "left"; o.fillText(txt, x0, y + 0.5);
@@ -1130,23 +1147,23 @@ function drawBits(g, w, h, hist, now, span) {
     track(uB, tt, [5, 5], "rgba(170,186,210,.55)"); track(uA, tt, [], "rgba(242,234,222,.55)");
     // the butterfly, drawn far larger than life
     const s0 = at(0, 0), bx = s0[0] - R * 1.05, by = s0[1] + R * 0.6, s = clamp(R / 52, 0.7, 1.3);
-    if (state === "ready") { butterfly(bx, by, s, 0.75 + 0.25 * Math.sin(clock * 2.4), 1); tag("一只蝴蝶", bx, by + 24 * s, css("--accent")); }
+    if (state === "ready") { butterfly(bx, by, s, 0.75 + 0.25 * Math.sin(clock * 2.4), 1); tag("A butterfly", bx, by + 24 * s, css("--accent")); }
     else {
       const fl = tt >= FLAP0 && tt <= FLAP1;
       butterfly(bx, by, s, fl ? 0.5 + 0.5 * Math.sin(tt * 42) : 0.6, fl ? 1 : clamp(1.6 - tt * 0.25, 0.3, 1));
       if (tt >= FLAP0 && tt < FLAP0 + 1.6) { const k = (tt - FLAP0) / 1.6; o.strokeStyle = `rgba(255,179,71,${1 - k})`; o.lineWidth = 1.5; o.beginPath(); o.arc(bx, by, 8 + k * R * 0.9, 0, 7); o.stroke(); }
-      if (tt < 3) tag("扇了一下", bx, by + 24 * s, css("--accent"));
+      if (tt < 3) tag("One wingbeat", bx, by + 24 * s, css("--accent"));
     }
     // the eyes and their names
     const sep = Math.hypot(pa[0] - pb[0], pa[1] - pb[1]);
     for (const [p, c] of [[pb, "#aabad2"], [pa, "#f2eade"]]) { o.fillStyle = c; o.beginPath(); o.arc(p[0], p[1], 2.5, 0, 7); o.fill(); }
     const above = p => p[1] - R - 14 > 12 ? p[1] - R - 14 : p[1] + R + 14;
-    if (sep < R * 1.6) tag(state === "ready" ? "飓风" : "两个世界的飓风：还重合着", pa[0], above(pa), "#ebedf0");
-    else { tag("有蝴蝶的世界", pa[0], above(pa), "#f2eade"); tag("没有蝴蝶的世界", pb[0], above(pb), "#aabad2"); }
+    if (sep < R * 1.6) tag(state === "ready" ? "Hurricane" : "Two worlds: still together", pa[0], above(pa), "#ebedf0");
+    else { tag("With a butterfly", pa[0], above(pa), "#f2eade"); tag("Without a butterfly", pb[0], above(pb), "#aabad2"); }
     if (tt > T * 0.93) {
       const k = (tt - T * 0.93) / (T * 0.07), cx = CITY[0] * W, cy = CITY[1] * H;
       o.strokeStyle = css("--stop"); o.lineWidth = 2; o.globalAlpha = k; o.beginPath(); o.arc(cx, cy, 12 + Math.sin(clock * 3) * 2, 0, 7); o.stroke(); o.globalAlpha = 1;
-      tag("登陆", cx + 22, cy, css("--stop"), "left");
+      tag("Landfall", cx + 22, cy, css("--stop"), "left");
     }
   }
   function chart(tt) {
@@ -1154,21 +1171,21 @@ function drawBits(g, w, h, hist, now, span) {
     const nar = GW < 600, x0 = nar ? 50 : 68, x1 = GW - 10, y0 = 18, y1 = GH - 22, L0 = -4, L1 = 3.3;
     const X = s => x0 + s / T * (x1 - x0), Y = lg => y1 - (lg - L0) / (L1 - L0) * (y1 - y0);
     cg.clearRect(0, 0, GW, GH);
-    const fs = nar ? 10 : 11; cg.font = `400 ${fs}px Noto Sans SC, sans-serif`; cg.textBaseline = "middle";
+    const fs = nar ? 10 : 11; cg.font = `400 ${fs}px Arial, sans-serif`; cg.textBaseline = "middle";
     // the error band: anything below it, the network cannot tell apart
     const e = Y(Math.log10(ERR[N]));
     cg.fillStyle = "rgba(138,144,153,.12)"; cg.fillRect(x0, e, x1 - x0, y1 - e);
     cg.strokeStyle = "rgba(138,144,153,.6)"; cg.setLineDash([3, 3]); cg.beginPath(); cg.moveTo(x0, e); cg.lineTo(x1, e); cg.stroke(); cg.setLineDash([]);
-    cg.fillStyle = "#8a9099"; cg.fillText(nar ? `误差 ±${ERR[N]} 公里 · 这以下测不出` : `${NAME[N]} 个观测点的误差 ±${ERR[N]} 公里 · 这以下，测不出两个世界的差别`, x0 + 8, e + 11);
+    cg.fillStyle = "#8a9099"; cg.fillText(nar ? `Error band: ±${ERR[N]} km` : `${NAME[N]} observations · error ±${ERR[N]} km · indistinguishable below`, x0 + 8, e + 11);
     cg.strokeStyle = "#2c3038"; cg.lineWidth = 1; cg.beginPath(); cg.moveTo(x0, y0); cg.lineTo(x0, y1); cg.lineTo(x1, y1); cg.stroke();
-    cg.textAlign = "right"; for (const [lg, s] of [[-4, "10 厘米"], [-2, "10 米"], [0, "1 公里"], [2, "100 公里"]]) cg.fillText(s, x0 - 6, Y(lg));
-    cg.textAlign = "center"; cg.textBaseline = "top"; for (let dd = 0; dd <= DAYS; dd += 3) cg.fillText(`第 ${dd} 天`, clamp(X(dd / DAYS * T), x0 + 16, x1 - 18), y1 + 6);
-    cg.textAlign = "left"; cg.textBaseline = "middle"; cg.fillStyle = "#ebedf0"; cg.fillText("两场飓风相差多远（对数刻度）", x0 + 8, y0 - 6);
+    cg.textAlign = "right"; for (const [lg, s] of [[-4, "10 cm"], [-2, "10 m"], [0, "1 km"], [2, "100 km"]]) cg.fillText(s, x0 - 6, Y(lg));
+    cg.textAlign = "center"; cg.textBaseline = "top"; for (let dd = 0; dd <= DAYS; dd += 3) cg.fillText(`Day ${dd}`, clamp(X(dd / DAYS * T), x0 + 16, x1 - 18), y1 + 6);
+    cg.textAlign = "left"; cg.textBaseline = "middle"; cg.fillStyle = "#ebedf0"; cg.fillText("Distance apart (log scale)", x0 + 8, y0 - 6);
     if (state === "ready") return;
     const td = tDetect(N);
     if (tt >= td) {
       cg.strokeStyle = "rgba(235,237,240,.5)"; cg.beginPath(); cg.moveTo(X(td), y0 + 6); cg.lineTo(X(td), y1); cg.stroke();
-      cg.fillStyle = "#ebedf0"; const s = `第 ${day(td)} 天：测得出来了`, w = cg.measureText(s).width;
+      cg.fillStyle = "#ebedf0"; const s = `Day ${day(td)}: detectable`, w = cg.measureText(s).width;
       cg.fillText(s, X(td) - w - 6 > x0 + 4 ? X(td) - w - 6 : X(td) + 6, Y(1.6));
     }
     cg.strokeStyle = "#ebedf0"; cg.lineWidth = 2; cg.beginPath();
@@ -1179,14 +1196,14 @@ function drawBits(g, w, h, hist, now, span) {
   function say(h) { if (h !== said) { said = h; $("#stormRead").innerHTML = h; } }
   function words(tt) {
     const td = tDetect(N);
-    if (state === "ready") return say("两个世界的飓风，从同一个位置出发。");
-    if (state === "done") return say(`只差一次扇翅：有蝴蝶的世界里，飓风登陆了海边的城；没有蝴蝶的世界里，它转向了海上。${NAME[N]} 个观测点，要到第 ${day(td)} 天才测得出两个世界不一样。`);
-    if (tt < td) return say(`蝴蝶扇了一下翅膀。两场飓风此刻只差 <b>${fmt(gapKm(0))}</b>，${NAME[N]} 个观测点的误差却有 ±${ERR[N]} 公里：两个世界，测起来一模一样。`);
-    say(`第 ${day(td)} 天，差别长过了误差，这才测得出来。可这时离两场飓风分道扬镳，已经不远了。`);
+    if (state === "ready") return say("The hurricanes in both worlds start from the same place.");
+    if (state === "done") return say(`Just one wingbeat apart: with a butterfly, the hurricane hits the coastal city; without one, it turns out to sea. With ${NAME[N]} observation points, the difference becomes detectable only on day ${day(td)}.`);
+    if (tt < td) return say(`The butterfly flaps once. The hurricanes begin just <b>${fmt(gapKm(0))}</b> apart, while ${NAME[N]} observation points have an error of ±${ERR[N]} km. The two worlds look identical to measurement.`);
+    say(`On day ${day(td)}, the difference exceeds the error and becomes detectable. By then, the hurricanes are already close to parting ways.`);
   }
   function start() {
     t = 0; state = "run"; chartKey = "";
-    $("#flapBtn").textContent = "再来一次";
+    $("#flapBtn").textContent = "Try again";
   }
   $("#flapBtn").addEventListener("click", () => { start(); if (RM) { t = T; state = "done"; still(); } });
   $("#sensSeg").addEventListener("click", e => {
@@ -1201,12 +1218,12 @@ function drawBits(g, w, h, hist, now, span) {
     const tt = state === "ready" ? 0 : t, pa = at(uA(tt), tt), pb = at(uB(tt), tt);
     if (!W) return;
     wipe(); spin(dt, pa, pb); overlay(tt, pa, pb); chart(tt); words(tt);
-    const d = `第 <b>${day(tt)}</b> 天 · 两场飓风相差 <b>${fmt(gapKm(tt))}</b>`;
+    const d = `Day <b>${day(tt)}</b> · Hurricanes <b>${fmt(gapKm(tt))}</b> apart`;
     if (d !== dayTxt) { dayTxt = d; $("#stormDay").innerHTML = d; }
   }
   // reduced motion: the finished picture, no animation
   function still() { clock = 0; for (let i = 0; i < 40; i++) frame(1 / 30); }
-  if (RM) { state = "done"; t = T; $("#flapBtn").textContent = "再来一次"; still(); }
+  if (RM) { state = "done"; t = T; $("#flapBtn").textContent = "Try again"; still(); }
   else {
     addLoop(cv, frame);
     // the first time the figure is properly on screen, the butterfly flaps by itself
@@ -1222,12 +1239,12 @@ function drawBits(g, w, h, hist, now, span) {
    different depth for each problem, so the best plan stops each one early.
    ========================================================= */
 (() => {
-  const LV = ["描述", "探索", "推断", "预测", "因果", "机制"], EN = ["Descriptive", "Exploratory", "Inferential", "Predictive", "Causal", "Mechanistic"];
+  const LV = ["Descriptive", "Exploratory", "Inferential", "Predictive", "Causal", "Mechanistic"], EN = ["Descriptive", "Exploratory", "Inferential", "Predictive", "Causal", "Mechanistic"];
   const BUDGET = 100;
   const PR = [
-    { name: "游戏外挂", goal: "别让角色倒下", t: ["红还是灰", "多久掉一次血", "暴击有多常见", "下一击何时来", "伤害怎么算", "整个游戏的代码"], v: [30, 2, 1, 1, 1, 1], c: [4, 8, 13, 19, 27, 55] },
-    { name: "一只梨", goal: "摸清这一批梨", t: ["这只梨的样子", "大的更黄？", "整个果园呢？", "新梨什么颜色", "多晒会更黄？", "每个变量为什么变"], v: [4, 6, 7, 8, 3, 2], c: [4, 8, 12, 16, 24, 60] },
-    { name: "一场飓风", goal: "保住海边的城", t: ["风眼在哪", "以往的路径", "这类飓风的规律", "三天内会到哪", "暖海让它变强？", "每一只蝴蝶"], v: [6, 4, 4, 12, 3, 40], c: [5, 11, 16, 21, 32, Infinity] }
+    { name: "Game bot", goal: "Keep the hero alive", t: ["Red or gray", "Time between hits", "Critical-hit rate", "Next hit timing", "Damage formula", "All the game code"], v: [30, 2, 1, 1, 1, 1], c: [4, 8, 13, 19, 27, 55] },
+    { name: "A pear", goal: "Understand this batch", t: ["What it looks like", "Bigger, yellower?", "The whole orchard?", "A new pear’s color", "Does sun yellow it?", "Why each variable changes"], v: [4, 6, 7, 8, 3, 2], c: [4, 8, 12, 16, 24, 60] },
+    { name: "A hurricane", goal: "Protect the city", t: ["Find the eye", "Past paths", "Patterns in this type", "Where in three days", "Do warm seas strengthen it?", "Every butterfly"], v: [6, 4, 4, 12, 3, 40], c: [5, 11, 16, 21, 32, Infinity] }
   ];
   const PEAR = "M0,-1 C0.22,-1 0.3,-0.62 0.34,-0.36 C0.4,-0.02 0.76,0.12 0.76,0.56 C0.76,0.96 0.42,1.06 0,1.06 C-0.42,1.06 -0.76,0.96 -0.76,0.56 C-0.76,0.12 -0.4,-0.02 -0.34,-0.36 C-0.3,-0.62 -0.22,-1 0,-1Z";
   const plan = $("#plan"), depth = [0, 0, 0], cells = [[], [], []];
@@ -1238,7 +1255,7 @@ function drawBits(g, w, h, hist, now, span) {
   for (let a = 0; a <= 6; a++) for (let b = 0; b <= 6; b++) for (let c = 0; c <= 6; c++) { const d = [a, b, c]; if (spent(d) <= BUDGET && worth(d) > best.v) best = { v: worth(d), d }; }
   $("#bestNum").textContent = best.v;
   const maxV = Math.max(...PR.flatMap(p => p.v));
-  const nm = d => d ? `「${LV[d - 1]}」` : "原地";
+  const nm = d => d ? `“${LV[d - 1]}”` : "no analysis";
   // a picture of each problem: the bot's own screen, a pear, a storm
   function icon(i) {
     if (i === 0) { const c = document.createElement("canvas"); c.width = PW; c.height = PH; c.className = "ico pix"; const s = newSim(); s.hp = 62; drawScene(c.getContext("2d"), s, 0.2); c.setAttribute("aria-hidden", "true"); return c; }
@@ -1255,7 +1272,7 @@ function drawBits(g, w, h, hist, now, span) {
   }
   plan.appendChild(document.createElement("div"));
   PR.forEach((p, i) => {
-    const h = document.createElement("div"); h.className = "phead"; h.append(icon(i));
+    const h = document.createElement("div"); h.className = "phead"; h.dataset.problem = i; h.append(icon(i));
     h.insertAdjacentHTML("beforeend", `<b>${p.name}</b><span class="goal">${p.goal}</span><span class="got" id="got${i}"></span>`);
     plan.appendChild(h);
   });
@@ -1263,9 +1280,9 @@ function drawBits(g, w, h, hist, now, span) {
     plan.insertAdjacentHTML("beforeend", `<div class="prow">${lv}<span class="en">${EN[l]}</span></div>`);
     PR.forEach((p, i) => {
       const b = document.createElement("button"), c = p.c[l], v = p.v[l];
-      b.className = "cell";
+      b.className = "cell"; b.dataset.problem = i; b.dataset.level = lv;
       b.innerHTML = `<span class="top">${p.t[l]}</span><span class="bar"><i style="width:${Math.max(3, v / maxV * 100) * 0.62}%"></i>+${v}<span class="price">${c === Infinity ? "∞" : c}</span></span>`;
-      b.setAttribute("aria-label", `${p.name}，解析到「${lv}」：${p.t[l]}${/？$/.test(p.t[l]) ? "" : "。"}这一层多带回 ${v}，要花 ${c === Infinity ? "无穷多" : c}。`);
+      b.setAttribute("aria-label", `${p.name}, ${lv}: ${p.t[l]}. Adds ${v} value; costs ${c === Infinity ? "infinite effort" : c}.`);
       b.addEventListener("click", () => pick(i, l + 1, b));
       b.addEventListener("keydown", e => {
         const m = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }[e.key]; if (!m) return;
@@ -1274,6 +1291,17 @@ function drawBits(g, w, h, hist, now, span) {
       cells[i].push(b); plan.appendChild(b);
     });
   });
+  // Keep keyboard tab order aligned with the grouped mobile layout.
+  const planHeads = [...plan.querySelectorAll(".phead")], planRows = [...plan.querySelectorAll(".prow")], planSpacer = plan.firstElementChild;
+  const smallPlan = matchMedia("(max-width:700px)");
+  function layoutPlan() {
+    if (smallPlan.matches) for (let i = 0; i < PR.length; i++) plan.append(planHeads[i], ...cells[i]);
+    else {
+      plan.append(planSpacer, ...planHeads);
+      for (let l = 0; l < LV.length; l++) plan.append(planRows[l], ...cells.map(column => column[l]));
+    }
+  }
+  smallPlan.addEventListener("change", layoutPlan); layoutPlan();
   const msg = h => $("#planMsg").innerHTML = h;
   function deny(b, m) { b.classList.remove("deny"); void b.offsetWidth; b.classList.add("deny"); msg(`<span class="bad">${m}</span>`); }
   function render() {
@@ -1285,36 +1313,36 @@ function drawBits(g, w, h, hist, now, span) {
         b.classList.toggle("over", L1 > depth[i] && !(extra <= left));
         b.setAttribute("aria-pressed", L1 <= depth[i]);
       });
-      $("#got" + i).innerHTML = `<span>花 ${cum(p.c, depth[i])}</span><i> · </i><span>用处 ${cum(p.v, depth[i])}</span>`;
+      $("#got" + i).innerHTML = `<span>Cost ${cum(p.c, depth[i])}</span><i> · </i><span>Value ${cum(p.v, depth[i])}</span>`;
     });
     $("#budNum").textContent = spent();
     [...$("#budBar").children].forEach((e, i) => e.style.width = cum(PR[i].c, depth[i]) / BUDGET * 100 + "%");
     $("#gotNum").textContent = worth();
   }
-  const bestMsg = () => `<span class="go">同一份预算，最多带回 ${best.v}。</span>外挂停在${nm(best.d[0])}，梨停在${nm(best.d[1])}，飓风停在${nm(best.d[2])}：没有一个问题挖到底，每个都停在够用的那一层。`;
+  const bestMsg = () => `<span class="go">The same budget can bring back ${best.v}.</span> The bot stops at ${nm(best.d[0])}, the pear at ${nm(best.d[1])}, and the hurricane at ${nm(best.d[2])}. None goes all the way down. Each stops where it has enough.`;
   function explain(i, a, b) {
     const p = PR[i];
     if (worth() === best.v) return msg(bestMsg());
-    if (b < a) return msg(`${p.name}退回到${nm(b)}，省下 ${cum(p.c, a) - cum(p.c, b)}。`);
-    let m = `${p.name}解析到「${LV[b - 1]}」：花 ${cum(p.c, b) - cum(p.c, a)}，多带回 ${cum(p.v, b) - cum(p.v, a)}。`;
-    if (i === 0) m += b === 1 ? "读一个像素，就够外挂用了。" : "可它要的只是“红还是灰”，再往下的力气，几乎都白花了。";
-    if (i === 1 && b === 4) m += "已经能给新梨的颜色估一个区间。";
-    if (i === 1 && b > 4) m += "因果和机制都很贵，多出来的用处很少。";
-    if (i === 2 && b === 4) m += "知道它三天内大概会到哪，已经够决定撤不撤离。";
-    if (i === 2 && b === 5) m += "知道暖海让它变强，并不能让这座城更安全多少。";
-    if (BUDGET - spent() < 4) m += " 预算差不多用完了。";
+    if (b < a) return msg(`${p.name}: back to ${nm(b)}, saving ${cum(p.c, a) - cum(p.c, b)}. `);
+    let m = `${p.name}, ${LV[b - 1]}: costs ${cum(p.c, b) - cum(p.c, a)}, adds ${cum(p.v, b) - cum(p.v, a)} value. `;
+    if (i === 0) m += b === 1 ? "One pixel is enough for the bot." : "But it only needs “red or gray.” Almost all that extra effort is wasted.";
+    if (i === 1 && b === 4) m += "You can now estimate a color range for a new pear.";
+    if (i === 1 && b > 4) m += "Causality and mechanism cost a lot and add little value here.";
+    if (i === 2 && b === 4) m += "Knowing roughly where it will be in three days is enough to decide whether to evacuate.";
+    if (i === 2 && b === 5) m += "Knowing that warm seas strengthen it does little more to protect this city.";
+    if (BUDGET - spent() < 4) m += " Your budget is almost gone.";
     msg(m);
   }
   function pick(i, l, b) {
     const p = PR[i], nd = l === depth[i] ? l - 1 : l;
     if (nd > depth[i]) {
       const extra = cum(p.c, nd) - cum(p.c, depth[i]);
-      if (extra === Infinity) return deny(b, "要弄清每一只蝴蝶，再多的时间和精力也不够。飓风的机制，这张表上挖不到底。");
-      if (spent() + extra > BUDGET) return deny(b, `时间和精力不够了：挖到这一层还要 ${extra}，只剩 ${BUDGET - spent()}。先从别的问题上省一点。`);
+      if (extra === Infinity) return deny(b, "No amount of time and effort can account for every butterfly. On this table, you cannot reach the bottom of the hurricane’s mechanism.");
+      if (spent() + extra > BUDGET) return deny(b, `Not enough time and effort: this level needs ${extra} more, but only ${BUDGET - spent()} remains. Free up some budget from another problem first.`);
     }
     const a = depth[i]; depth[i] = nd; render(); explain(i, a, nd);
   }
-  const intro = "三个问题共用 100 的时间和精力。点格子，决定每个问题解析到哪一层；再点一次最深的那格，退回一层。";
+  const intro = "Three problems share 100 units of time and effort. Pick a cell to choose a depth. Click the deepest selected cell again to step back one level.";
   $("#bestBtn").addEventListener("click", () => { best.d.forEach((v, i) => depth[i] = v); render(); msg(bestMsg()); });
   $("#clearBtn").addEventListener("click", () => { depth.fill(0); render(); msg(intro); });
   render(); msg(intro);
