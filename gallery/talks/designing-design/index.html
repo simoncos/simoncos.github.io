@@ -86,11 +86,11 @@ h1{font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,12.5vw,5.6r
 
 /* ---------- 01 jar & dandelion ---------- */
 .talk-scene{position:relative;filter:saturate(var(--scene-saturation))}
-#talkCv,#talkWindCv{filter:none}
+#talkCv,#talkWindVideo{filter:none}
 #talkCv{position:relative;aspect-ratio:16/9}
-#talkWindCv{position:absolute;top:0;left:0;width:100%;height:auto;aspect-ratio:16/9;pointer-events:none}
+#talkWindVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 70%;pointer-events:none}
 @media (max-width:700px){#talkCv{aspect-ratio:4/3.4}}
-@media (max-width:700px){#talkWindCv{aspect-ratio:4/3.4}}
+@media (max-width:700px){#talkWindVideo{object-position:62% 70%}}
 .talkbtns{position:absolute;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding-inline:12px}
 @media (max-width:700px){.talkbtns{position:static;flex-direction:column;padding:12px;background:var(--paper)}}
 .qlist{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 8px}
@@ -156,6 +156,13 @@ html{scroll-padding-bottom:110px}
 footer{padding-bottom:180px}
 .sound-credits{margin-top:18px}.sound-credits summary{cursor:pointer}.sound-credits ul{padding-left:20px}
 
+
+.sound-welcome{width:min(420px,calc(100vw - 32px));max-height:calc(100dvh - 40px);overflow:auto;margin:auto;padding:28px;border:1px solid var(--line);border-radius:20px;background:var(--paper);color:var(--ink);box-shadow:0 20px 80px rgba(25,42,50,.2)}
+.sound-welcome::backdrop{background:rgba(32,49,58,.28);backdrop-filter:blur(3px)}
+.sound-welcome h2{font-size:1.45rem;letter-spacing:0;margin-bottom:12px;outline:none}
+.sound-welcome p{font-size:.9rem;line-height:1.8;color:var(--muted);margin-bottom:22px}
+.sound-welcome .row{gap:10px}.sound-welcome .btn{min-height:44px;flex:1;padding-inline:14px;white-space:nowrap;letter-spacing:0}
+@media(max-height:450px){.sound-welcome{padding:20px}.sound-welcome p{margin-bottom:14px}}
 </style>
 
 <nav class="language" aria-label="语言"><span lang="zh-Hans" aria-current="page">中文</span><a href="index.en.html" lang="en" hreflang="en">English</a></nav>
@@ -189,7 +196,7 @@ footer{padding-bottom:180px}
   <div class="wide">
     <div class="cel">
       <div class="talk-scene">
-        <canvas id="talkWindCv" aria-hidden="true"></canvas>
+        <video id="talkWindVideo" poster="assets/talk-wind-v2.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" hidden></video>
         <canvas id="talkCv" aria-label="风向右吹过山坡，树冠与草地轻轻摆动，蒲公英的种子顺风飞去。天上飘着一个话题，左下角的玻璃罐装着说过“我知道”的话题。"></canvas>
       </div>
       <div class="talkbtns">
@@ -294,6 +301,12 @@ footer{padding-bottom:180px}
   <div class="sound-row"><button class="btn ghost" id="soundToggle" aria-pressed="false" aria-describedby="soundStatus">开启声音</button><label for="soundVolume">音量<input id="soundVolume" type="range" min="0" max="100" value="45" aria-valuetext="45%" disabled></label></div>
   <span class="sound-status" id="soundStatus" role="status">真实采样 · 默认静音</span>
 </div></div>
+
+<dialog class="sound-welcome" id="soundWelcome" aria-labelledby="soundWelcomeTitle" aria-describedby="soundWelcomeDescription">
+  <h2 id="soundWelcomeTitle" tabindex="-1" autofocus>要打开音效吗？</h2>
+  <p id="soundWelcomeDescription">风、流水与脚步声会随场景变化。你可以随时关闭或调整音量。</p>
+  <div class="row"><button class="btn" id="soundWelcomeOn">开启音效</button><button class="btn ghost" id="soundWelcomeOff">暂不开启</button></div>
+</dialog>
 
 <div class="away" id="away" role="dialog" aria-modal="true" aria-label="离开屏幕" aria-hidden="true" inert>
   <canvas id="awayCv"></canvas>
@@ -528,6 +541,20 @@ const soundscape = (() => {
     }
   }
   for (const button of [toggle, footToggle]) button.addEventListener("click", () => setEnabled(!enabled));
+  const welcome = $("#soundWelcome");
+  $("#soundWelcomeOn").addEventListener("click", () => {
+    setEnabled(true); // Start inside the user's gesture, before closing the prompt.
+    welcome.close();
+  });
+  $("#soundWelcomeOff").addEventListener("click", () => welcome.close());
+  welcome.addEventListener("click", e => {
+    const b = welcome.getBoundingClientRect();
+    if (e.target === welcome && (e.clientX < b.left || e.clientX > b.right || e.clientY < b.top || e.clientY > b.bottom)) welcome.close();
+  });
+  welcome.addEventListener("close", () => toggle.focus({ preventScroll: true }));
+  if (typeof welcome.showModal === "function") welcome.showModal();
+  else welcome.hidden = true;
+
   volume.addEventListener("input", () => {
     volumeValue = +volume.value / 100;
     volume.setAttribute("aria-valuetext", `${volume.value}%`);
@@ -628,64 +655,33 @@ const step = kind => soundscape.step(kind);
    01 · The jar (in-formation) and the dandelion (ex-formation)
    ========================================================= */
 (() => {
-  const cv = $("#talkCv"), plate = img("talk"); let g, W, H, t = 0;
-  // Move the painted foliage, keeping the distant hills and tree roots still.
-  // Work in the source image's coordinates so the wind survives the mobile crop.
-  const paintWind = (() => {
-    const c = $("#talkWindCv"), gl = c.getContext("webgl", { alpha: false, antialias: false, depth: false });
-    if (!gl) { c.hidden = true; return null; }
-    const shader = (type, source) => {
-      const s = gl.createShader(type); gl.shaderSource(s, source); gl.compileShader(s);
-      return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
-    };
-    const vs = shader(gl.VERTEX_SHADER, "attribute vec2 p; varying vec2 v; void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}");
-    const fs = shader(gl.FRAGMENT_SHADER, `precision highp float;
-varying vec2 v; uniform sampler2D plate; uniform vec4 crop; uniform float time, wind;
-void main(){
-  vec2 uv=crop.xy+v*crop.zw;
-  float crown=1.-smoothstep(.65,1.05,length((uv-vec2(.80,.44))/vec2(.31,.28)));
-  float branch=clamp((.72-uv.y)/.35,0.,1.);
-  float grass=smoothstep(.80-.13*uv.x,.99,uv.y);
-  // Positive displacement bends everything downwind; the roots stay planted.
-  float bend=wind*(.72+.28*sin(time*1.3+uv.y*5.));
-  float ripple=.65+.35*sin(uv.x*24.-time*2.4+uv.y*9.);
-  vec2 shift=vec2(crown*branch*.013*bend+grass*.006*wind*ripple,
-                  crown*branch*.0015*wind*sin(time*1.7+uv.x*8.));
-  vec3 color=texture2D(plate,uv-shift).rgb;
-  // Broad light-and-shade ripples travel rightwards through the meadow.
-  color*=1.+grass*.035*wind*sin(uv.x*20.-time*1.8+uv.y*12.);
-  gl_FragColor=vec4(color,1.);
-}`);
-    if (!vs || !fs) return null;
-    const program = gl.createProgram(); gl.attachShader(program, vs); gl.attachShader(program, fs); gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return null;
-    gl.useProgram(program);
-    const buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
-    const p = gl.getAttribLocation(program, "p"); gl.enableVertexAttribArray(p); gl.vertexAttribPointer(p, 2, gl.FLOAT, false, 0, 0);
-    const crop = gl.getUniformLocation(program, "crop"), time = gl.getUniformLocation(program, "time"), wind = gl.getUniformLocation(program, "wind");
-    const texture = gl.createTexture(); let loaded = false;
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    img("talk", im => {
-      try { gl.bindTexture(gl.TEXTURE_2D, texture); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, im); loaded = true; } catch (_) { /* file:// uses the painted fallback */ }
-      repaint();
-    });
-    return (windStrength) => {
-      if (!loaded || gl.isContextLost()) return false;
-      const dpr = Math.min(DPR, W < 700 ? 1 : 1.5), w = Math.round(W * dpr), h = Math.round(H * dpr);
-      if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
-      const k = Math.max(W / plate.naturalWidth, H / plate.naturalHeight) * 1.03;
-      const pw = plate.naturalWidth * k, ph = plate.naturalHeight * k;
-      gl.viewport(0, 0, w, h); gl.useProgram(program);
-      gl.uniform4f(crop, (pw - W) * (W < 700 ? .62 : .5) / pw, (ph - H) * .7 / ph, W / pw, H / ph);
-      gl.uniform1f(time, t); gl.uniform1f(wind, windStrength);
-      // Let the compositor combine the canvases; avoid a WebGL-to-2D readback.
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      return true;
-    };
-  })();
+  const cv = $("#talkCv"), plate = img("talk-wind-v2"); let g, W, H, t = 0;
+  // Eight generated poses with offline inbetweens; the browser plays real frames.
+  const windVideo = $("#talkWindVideo");
+  let windVisible = false, videoReady = false, videoPending = false, videoFailed = false;
+  windVideo.muted = true; windVideo.defaultMuted = true;
+  const wantsWind = () => !RM && windVisible && !document.hidden && !videoFailed;
+  function updateWind() {
+    if (!wantsWind()) { windVideo.pause(); return; }
+    if (!windVideo.getAttribute("src")) windVideo.src = "assets/talk-wind-v2.mp4";
+    if (!windVideo.paused || videoPending) return;
+    videoPending = true;
+    windVideo.play().then(() => {
+      videoReady = true; windVideo.hidden = false; repaint();
+    }).catch(() => {
+      videoReady = false; windVideo.hidden = true; repaint();
+    }).finally(() => { videoPending = false; if (!wantsWind()) windVideo.pause(); });
+  }
+  windVideo.addEventListener("error", () => {
+    videoFailed = true; videoReady = false; windVideo.hidden = true; repaint();
+  });
+  new IntersectionObserver(entries => { windVisible = entries[0].isIntersecting; updateWind(); }, { rootMargin: "120px" }).observe(cv);
+  document.addEventListener("visibilitychange", updateWind);
+  addEventListener("pagehide", () => windVideo.pause());
+  addEventListener("pageshow", updateWind);
+  // A browser that blocks silent autoplay can retry on a real interaction.
+  cv.closest("section").addEventListener("pointerdown", updateWind, { passive: true });
+  cv.closest("section").addEventListener("keydown", updateWind);
   const TOPICS = [
     { w: "河流", q: ["沿着它走，脚底是滑腻还是干爽？", "如果它是一条路，车会往哪边倾斜？", "夜里桥下的水声，是什么节奏？", "它是从哪一滴雨开始的？", "鱼看见的河面，是什么样子？", "水底的石头，磨圆用了多少年？", "河水闻起来像什么？", "涨水和枯水时，它还是同一条河吗？", "两岸的人，叫它同一个名字吗？", "把手伸进去，水有多凉？", "最窄的地方，能一步跨过去吗？", "一片叶子从上游漂到这里，要多久？", "流进大海的那一刻，它会犹豫吗？"] },
     { w: "度假", q: ["一定要去很远的地方吗？", "闭上眼，一阵风吹来，算不算度假？", "躺在草地上打盹的人，在度什么假？", "关掉手机一个下午，会发生什么？", "度假是换一个地方，还是换一种时间？", "小时候的暑假，和现在的假期差在哪？", "救生圈的颜色，为什么让人放松？", "什么都不做，是浪费还是休息？", "家门口的公园，能不能度假？", "度假时拍的照片，后来还看吗？", "如果不用回来，还叫度假吗？", "上一次真正放松，是在哪里？", "一个人的假期，和一群人的，哪个更像假期？"] },
@@ -694,7 +690,7 @@ void main(){
     { w: "演唱会", q: ["录音再好，为什么还想去现场？", "“氛围”是什么做的？", "纸书的质感，屏幕上缺了什么？", "低音是听到的，还是胸口感觉到的？", "身边陌生人一起唱时，发生了什么？", "同一首歌，现场和耳机里是同一首吗？", "散场后的耳鸣，算不算演出的一部分？", "隔着手机屏幕看舞台，还算在现场吗？", "灯光暗下来那一秒，为什么最激动？", "歌手看到的台下，是什么样子？", "散场时的风，和进场时一样吗？", "记得最清楚的，为什么常是唱错的那句？", "坐在最后一排，听到的是同一场演出吗？"] }
   ];
   let ti = 0, state = "float", anim = 0, slips = [], flying = null, known = 0, asked = 0, appear = 0, dand = null, fly = [];
-  const breeze = () => RM ? 0 : .9 + .25 * Math.sin(t * .8) + .15 * Math.sin(t * 1.7);
+  const breeze = () => RM ? 0 : .8 + .35 * (1 - Math.cos((videoReady ? windVideo.currentTime : t) * Math.PI / 2)) / 2;
   function setup() { [g, W, H] = fit(cv); }
   setup(); addEventListener("resize", setup);
   const nar = () => W < 700;
@@ -858,8 +854,8 @@ void main(){
   function frame(dt) {
     t += dt; anim += dt; appear = RM ? 1 : Math.min(1, appear + dt * 1.6);
     if (ready(plate)) {
-      if (paintWind && paintWind(breeze())) g.clearRect(0, 0, W, H);
-      else cover(g, plate, W, H, nar() ? 0.62 : 0.5, 0.7, 1.03);
+      if (videoReady) g.clearRect(0, 0, W, H);
+      else cover(g, plate, W, H, nar() ? 0.62 : 0.5, 0.7);
     }
     else sky(g, W, H, "#2b80d8", "#86c6f3", "#eaf6ff", 0.78);
     drawJar();
