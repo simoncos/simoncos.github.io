@@ -174,7 +174,11 @@
       "clip_duration_seconds": 0.65,
       "slot_seconds": 0.7,
       "processing": "Three recorded steps; high-pass 100 Hz; 8 ms attack / 120 ms release; peak normalized to -12 dBFS; 32 kHz mono MP3 96 kbps",
-      "sha256": "a8c24819fcb160d383bbdb3a8abba41c86ae5b5419bcfe1ae216e159ee35e5f0"
+      "sha256": "a8c24819fcb160d383bbdb3a8abba41c86ae5b5419bcfe1ae216e159ee35e5f0",
+      "runtime_uses": [
+        "Footstep one-shots.",
+        "Sand drawing: overlapping 220 ms grains from recorded friction tails (100–190 ms after each slot), 25 ms attack and release; per-grain RMS adjustment capped at 0.36 peak before speed scaling; movement-dependent gain and playback rate 1.142–1.45. No synthesized noise; stopped or lifted finger ends the grains."
+      ]
     },
     {
       "file": "water.mp3",

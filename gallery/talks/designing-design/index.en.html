@@ -149,7 +149,10 @@ html{scroll-padding-bottom:110px}
 .sound-dock label{display:flex;gap:6px;align-items:center;flex:1;white-space:nowrap}
 .sound-dock input{width:100%;min-width:30px;height:44px;accent-color:var(--sky)}
 .sound-status{display:block;color:var(--muted);margin-top:2px;min-height:1.5em}
-.away .sound-dock{z-index:51;top:max(12px,env(safe-area-inset-top));bottom:auto}
+.sky-sound{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));display:grid;place-items:center;width:44px;height:44px;padding:11px;border:0;background:transparent;color:#fff;opacity:.62;transition:opacity .25s;filter:drop-shadow(0 1px 2px rgba(24,50,64,.8))}
+.sky-sound:hover,.sky-sound:focus-visible{opacity:1}.sky-sound:focus-visible{outline:1px solid #fff;outline-offset:2px;border-radius:50%}
+.sky-sound svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sky-sound[aria-pressed="true"] .muted-mark,.sky-sound[aria-pressed="false"] .sound-waves{display:none}
 footer{padding-bottom:180px}
 .sound-credits{margin-top:18px}.sound-credits summary{cursor:pointer}.sound-credits ul{padding-left:20px}
 
@@ -325,6 +328,7 @@ h1,h2{letter-spacing:-.025em}
   <canvas id="awayCv"></canvas>
   <div class="lines"><span>Simply savor the wonder of the world.</span><span>Then tell yourself:</span><span>Not knowing is fine too.</span></div>
   <button class="back" id="backBtn">Back to the essay · Esc</button>
+  <button class="sky-sound" id="skySoundToggle" aria-label="Sound on" title="Sound on" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4Z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="muted-mark" d="m16 9 5 6m0-6-5 6"/></svg></button>
 </div>
 
 <footer class="col">
@@ -444,19 +448,22 @@ function touchDrawing(cv, buttonId) {
 
 /* ---------- Field recordings: opt in once, follow the landscape ---------- */
 const soundscape = (() => {
-  const dock = $("#soundDock"), toggle = $("#soundToggle"), volume = $("#soundVolume"), status = $("#soundStatus"), footToggle = $("#soundBtn");
+  const dock = $("#soundDock"), toggle = $("#soundToggle"), volume = $("#soundVolume"), status = $("#soundStatus"), footToggle = $("#soundBtn"), skyToggle = $("#skySoundToggle");
   const files = ["wind", "river", "road", "waves", "grass", "stone", "sand", "water"];
   const labels = { hero: "Wind in the meadow", talk: "Dandelions in the breeze", river: "Water and distant traffic", foot: "Sounds underfoot", shore: "Waves and sand", end: "Looking up at the sky" };
   const sections = [$(".hero"), ...["#talkCv", "#riverCv", "#footCv", "#shoreCv", "#endCv"].map(id => $(id).closest("section"))];
   const names = Object.keys(labels), buffers = new Map(), pending = new Map(), beds = new Map(), voices = new Set();
   let ctx, master, enabled = false, active = "hero", immersive = false, river = 0, shoreStill = false, volumeValue = .45;
-  let revision = 0, loading = false, failed = false, scrollTimer = 0, lifecycle = 0, lastStep = -Infinity;
+  let revision = 0, loading = false, failed = false, scrollTimer = 0, lifecycle = 0, lastStep = -Infinity, lastDraw = -Infinity;
   const live = () => enabled && !document.hidden && ctx?.state === "running";
   function ui() {
     for (const b of [toggle, footToggle]) {
       b.setAttribute("aria-pressed", String(enabled));
       b.textContent = enabled ? "Sound off" : "Sound on";
     }
+    skyToggle.setAttribute("aria-pressed", String(enabled));
+    skyToggle.setAttribute("aria-label", enabled ? "Sound off" : "Sound on");
+    skyToggle.title = enabled ? "Sound off" : "Sound on";
     volume.disabled = !enabled;
     status.textContent = !enabled ? (failed ? "Sound unavailable. Please try again." : "Real recordings · sound off by default") : document.hidden ? "Sound paused" : ctx?.state !== "running" ? "Playback paused. Toggle sound to retry." : loading ? "Loading sounds…" : failed ? "Some sounds failed. Toggle sound to retry." : labels[active];
   }
@@ -553,7 +560,7 @@ const soundscape = (() => {
       if (token === lifecycle) { enabled = false; failed = true; stopAll(); ui(); }
     }
   }
-  for (const button of [toggle, footToggle]) button.addEventListener("click", () => setEnabled(!enabled));
+  for (const button of [toggle, footToggle, skyToggle]) button.addEventListener("click", e => { e.stopPropagation(); setEnabled(!enabled); });
   const welcome = $("#soundWelcome");
   $("#soundWelcomeOn").addEventListener("click", () => {
     setEnabled(true); // Start inside the user's gesture, before closing the prompt.
@@ -596,6 +603,37 @@ const soundscape = (() => {
       if (!live() || !bed || !["hero", "talk"].includes(active)) return;
       const t = ctx.currentTime; ramp(bed.gain.gain, .95, .25);
       bed.gain.gain.setTargetAtTime(mix().wind, t + 1.3, .9);
+    },
+    draw(speed = .5) {
+      // Short overlapping grains from the recorded sand tails: no synthetic noise,
+      // and no continuous sound when the finger stops moving.
+      if (!live() || active !== "shore" || ctx.currentTime - lastDraw < .055 || voices.size >= 6) return;
+      const buffer = buffers.get("sand"); if (!buffer) return;
+      const now = ctx.currentTime, strength = clamp(speed, .12, 1);
+      lastDraw = now;
+      const source = ctx.createBufferSource(), gain = ctx.createGain();
+      source.buffer = buffer; source.playbackRate.value = 1.1 + strength * .35;
+      const start = Math.floor(Math.random() * 3) * .7 + .1 + Math.random() * .09;
+      // Friction tails are much quieter than heel impacts. Normalize this exact
+      // excerpt, with a peak cap, so the texture stays audible beside the waves.
+      const data = buffer.getChannelData(0), first = Math.floor(start * buffer.sampleRate);
+      const count = Math.min(data.length - first, Math.ceil(.22 * source.playbackRate.value * buffer.sampleRate));
+      let power = 0, peak = 0;
+      for (let i = first; i < first + count; i++) { power += data[i] * data[i]; peak = Math.max(peak, Math.abs(data[i])); }
+      const level = Math.min(.075 / Math.max(.003, Math.sqrt(power / count)), .36 / Math.max(.015, peak)) * (.7 + strength * .3);
+      gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(level, now + .025);
+      gain.gain.setValueAtTime(level * .8, now + .1); gain.gain.linearRampToValueAtTime(0, now + .22);
+      source.connect(gain); gain.connect(master);
+      const voice = { source, gain, drawing: true }; voices.add(voice);
+      source.onended = () => { voices.delete(voice); source.disconnect(); gain.disconnect(); };
+      source.start(now, start, .22 * source.playbackRate.value); source.stop(now + .225);
+    },
+    stopDraw() {
+      if (!ctx) return;
+      for (const voice of voices) if (voice.drawing) {
+        ramp(voice.gain.gain, 0, .018);
+        try { voice.source.stop(ctx.currentTime + .07); } catch (_) {}
+      }
     },
     step(kind) {
       if (!live() || !["foot", "shore"].includes(active) || ctx.currentTime - lastStep < .1 || voices.size >= 4) return;
@@ -1174,49 +1212,66 @@ void main(){
    04 · The water's edge: draw in the sand, waves take it back
    ========================================================= */
 (() => {
-  const cv = $("#shoreCv"), canDraw = touchDrawing(cv, "#shoreDraw"), BEACH = img("tex-beach"), SEA = img("tex-sea"); let g, W, H, sand, wbuf, wg2, t = 0, phase = 0, calm = false, strokes = [], cur = null, wet = 0, written = 0, taken = 0, maxReach = 0.6, lastReach = 0.6;
+  const cv = $("#shoreCv"), canDraw = touchDrawing(cv, "#shoreDraw"), BEACH = img("shore-sand-v2"), SEA = img("tex-sea"); let g, W, H, sand, wbuf, wg2, seaTile, t = 0, phase = 0, calm = false, strokes = [], cur = null, wet = 0, written = 0, taken = 0, maxReach = 0.6, lastReach = 0.6, lastMotion = 0, pointer = null;
   function setup() {
     [g, W, H] = fit(cv);
     sand = document.createElement("canvas"); sand.width = W * DPR; sand.height = H * DPR; const sg = sand.getContext("2d"); sg.setTransform(DPR, 0, 0, DPR, 0, 0);
     wbuf = document.createElement("canvas"); wbuf.width = W * DPR; wbuf.height = H * DPR; wg2 = wbuf.getContext("2d"); wg2.setTransform(DPR, 0, 0, DPR, 0, 0);
-    if (ready(BEACH)) { const pt = sg.createPattern(BEACH, "repeat"); pt.setTransform(new DOMMatrix([0.6, 0, 0, 0.6, 0, 0])); sg.fillStyle = pt; }
-    else sg.fillStyle = "#efe0c0";
-    sg.fillRect(0, 0, W, H);
-    // a touch darker and warmer up the beach, where the sand stays damp
-    const gr = sg.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, "rgba(170,130,80,.18)"); gr.addColorStop(.6, "rgba(170,130,80,0)"); sg.fillStyle = gr; sg.fillRect(0, 0, W, H);
+    if (ready(BEACH)) cover(sg, BEACH, W, H, .5, .6);
+    else { sg.fillStyle = "#e7dac2"; sg.fillRect(0, 0, W, H); }
+    // One continuous fine-grained plate, with cool damp sand nearer the water.
+    const gr = sg.createLinearGradient(0, 0, W * .15, H);
+    gr.addColorStop(0, "rgba(116,134,133,.19)"); gr.addColorStop(.55, "rgba(212,202,181,.05)"); gr.addColorStop(1, "rgba(255,246,221,.08)");
+    sg.fillStyle = gr; sg.fillRect(0, 0, W, H);
   }
   setup(); addEventListener("resize", () => {
     const oldW = W, oldH = H; setup();
     for (const s of strokes) for (const p of s.pts) { p[0] *= W / oldW; p[1] *= H / oldH; }
     pen = null; cur = null;
-  }); img("tex-beach", setup);
+  }); img("shore-sand-v2", setup);
+  img("tex-sea", () => {
+    // Cache the expensive colour blend once, rather than recomputing it per frame.
+    seaTile = document.createElement("canvas"); seaTile.width = SEA.width; seaTile.height = SEA.height;
+    const tile = seaTile.getContext("2d"); tile.fillStyle = "#9ebcb8"; tile.fillRect(0, 0, SEA.width, SEA.height);
+    tile.globalCompositeOperation = "soft-light"; tile.drawImage(SEA, 0, 0);
+  });
   const shore = () => H * 0.24;
   function waveK() { const p = phase % 1; if (p < 0.38) return 1 - Math.pow(1 - p / 0.38, 2.2); if (p < 0.48) return 1; return 1 - ease((p - 0.48) / 0.52); }
   function frontY(x) {
     const reach = shore() + (H * maxReach - shore()) * waveK();
-    return reach + Math.sin(x * 0.011 + Math.floor(phase) * 2.1) * 12 + Math.sin(x * 0.034 + t * 0.6) * 4;
+    return reach + contour(x);
+  }
+  function contour(x) {
+    return (x / W - .5) * H * .13 + Math.sin(x / W * 6.2 + .5) * H * .024
+      + Math.sin(x / W * 17.5 - t * .18) * H * .008 + Math.sin(x * .058 + t * .3) * 1.1;
+  }
+  function waterPath(context, offset = 0, baseline = null) {
+    context.beginPath(); context.moveTo(-3, -3);
+    for (let x = -3; x <= W + 8; x += 6) context.lineTo(x, (baseline === null ? frontY(x) : baseline + contour(x)) + offset);
+    context.lineTo(W + 8, -3); context.closePath();
   }
   const pos = e => { const b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; };
-  cv.addEventListener("pointerdown", e => { if (!canDraw(e)) return; try { cv.setPointerCapture(e.pointerId); } catch (_) {} const [x, y] = pos(e); cur = { pts: [[x, y, 1]] }; strokes.push(cur); written++; step("sand"); });
-  cv.addEventListener("pointermove", e => { if (!cur) return; const [x, y] = pos(e); const l = cur.pts[cur.pts.length - 1]; if (Math.hypot(x - l[0], y - l[1]) > 3) cur.pts.push([x, y, 1]); });
-  const up = () => { cur = null; }; cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up); cv.addEventListener("lostpointercapture", up); cv.addEventListener("drawingmodechange", up);
+  cv.addEventListener("pointerdown", e => { if (!canDraw(e) || (pointer !== null && pointer !== e.pointerId)) return; try { cv.setPointerCapture(e.pointerId); } catch (_) {} const [x, y] = pos(e); pointer = e.pointerId; lastMotion = performance.now(); cur = { pts: [[x, y, 1]] }; strokes.push(cur); written++; soundscape.draw(.35); });
+  cv.addEventListener("pointermove", e => { if (!cur || e.pointerId !== pointer) return; const [x, y] = pos(e); const l = cur.pts[cur.pts.length - 1], distance = Math.hypot(x - l[0], y - l[1]);
+    if (distance > 2) { cur.pts.push([x, y, 1]); const now = performance.now(); soundscape.draw(distance / Math.max(16, now - lastMotion)); lastMotion = now; } });
+  const up = () => { cur = null; pointer = null; soundscape.stopDraw(); }; cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up); cv.addEventListener("lostpointercapture", up); cv.addEventListener("drawingmodechange", up);
   let pen = null;
   cv.addEventListener("keydown", e => {
     const direction = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }[e.key];
     if (!direction && e.key !== " ") return;
     e.preventDefault(); pen ||= [W / 2, H * .85];
     if (e.key === " ") {
-      if (cur) cur = null;
-      else { cur = { pts: [[...pen, 1]] }; strokes.push(cur); written++; step("sand"); }
+      if (cur) up();
+      else { cur = { pts: [[...pen, 1]] }; strokes.push(cur); written++; soundscape.draw(.35); }
     } else {
       pen = [clamp(pen[0] + direction[0] * 12, 6, W - 6), clamp(pen[1] + direction[1] * 12, 6, H - 6)];
-      if (cur) cur.pts.push([...pen, 1]);
+      if (cur) { cur.pts.push([...pen, 1]); soundscape.draw(.55); }
     }
   });
-  cv.addEventListener("blur", () => { pen = null; cur = null; repaint(); });
+  cv.addEventListener("blur", () => { pen = null; up(); repaint(); });
   if (RM) { $("#calmBtn").textContent = "Let the waves erase it"; $("#calmBtn").removeAttribute("aria-pressed"); }
   $("#calmBtn").addEventListener("click", e => {
-    if (RM) { strokes = []; cur = null; taken = written; repaint(); return; }
+    if (RM) { strokes = []; up(); taken = written; repaint(); return; }
     calm = !calm; e.currentTarget.setAttribute("aria-pressed", calm); e.currentTarget.textContent = calm ? "Bring back the waves" : "Pause the waves";
   });
   function frame(dt) {
@@ -1225,13 +1280,19 @@ void main(){
     if (!(calm && p0 < 0.02)) { const before = Math.floor(phase); phase += dt / 7.5; if (Math.floor(phase) > before) { lastReach = maxReach; maxReach = 0.5 + Math.random() * 0.28; if (calm) phase = Math.floor(phase) + 0.0001; } }
     g.drawImage(sand, 0, 0, W, H);
     const p = phase % 1, k = waveK(); soundscape.shore(calm && p < .02);
-    // the wet band the water leaves behind, glossy with sky
-    wet = p < 0.38 ? 1 : Math.max(0, wet - dt * 0.1);
-    const reachPrev = H * Math.max(maxReach * (p < 0.48 ? k : 1), lastReach * wet);
-    const wg = g.createLinearGradient(0, shore(), 0, reachPrev + 16);
-    wg.addColorStop(0, "rgba(176,138,88,.45)"); wg.addColorStop(.85, `rgba(180,142,92,${0.3 * Math.max(wet, .4)})`); wg.addColorStop(1, "rgba(165,135,92,0)");
-    g.fillStyle = wg; g.fillRect(0, shore(), W, reachPrev + 16 - shore());
-    if (p > 0.48) { const sh = g.createLinearGradient(0, H * maxReach * k + shore() * (1 - k), 0, H * maxReach); sh.addColorStop(0, "rgba(200,232,250,.35)"); sh.addColorStop(1, "rgba(200,232,250,0)"); g.fillStyle = sh; g.fillRect(0, shore(), W, H * maxReach - shore()); }
+    // A curved wet-sand footprint remains as the wash retreats, then dries slowly.
+    wet = p < 0.38 ? 1 : Math.max(0, wet - dt * .07);
+    const reachPrev = shore() + (H * Math.max(maxReach, lastReach) - shore()) * Math.max(k, wet);
+    g.save(); waterPath(g, 18, reachPrev); g.clip();
+    const damp = g.createLinearGradient(0, shore(), 0, reachPrev + 30);
+    damp.addColorStop(0, "rgba(95,119,117,.25)"); damp.addColorStop(.7, "rgba(126,130,116,.22)"); damp.addColorStop(1, "rgba(138,137,120,.02)");
+    g.fillStyle = damp; g.fillRect(0, 0, W, H);
+    if (p > .48) {
+      const sheen = g.createLinearGradient(0, shore(), W * .3, reachPrev + 20);
+      sheen.addColorStop(0, "rgba(233,246,242,.04)"); sheen.addColorStop(.65, `rgba(240,246,231,${wet * .27})`); sheen.addColorStop(1, "rgba(238,238,219,0)");
+      g.fillStyle = sheen; g.fillRect(0, 0, W, H);
+    }
+    g.restore();
     // strokes in the sand: groove + lit lip
     for (const s of strokes) {
       let any = false;
@@ -1246,30 +1307,62 @@ void main(){
         if (s.pts.length === 1) { const a = s.pts[0]; g.fillStyle = `rgba(${col},${a[2] * aa})`; g.beginPath(); g.arc(a[0] + ox, a[1] + oy, lw / 2 + 1, 0, 7); g.fill(); }
       }
     }
-    // water: the painted sea, deep far out and glass-clear over the sand at the edge
+    // Depth colour and a faint painted caustic layer, fading into transparent wash.
     let fa = 0; for (let x = 0; x <= W; x += W / 8) fa += frontY(x); fa /= 9;
     const w2 = wg2; w2.globalCompositeOperation = "source-over"; w2.clearRect(0, 0, W, H);
-    if (ready(SEA)) { const pt = w2.createPattern(SEA, "repeat"); pt.setTransform(new DOMMatrix([1.05, 0, 0, 1.05, (t * 4) % 1075, (-t * 6) % 1075])); w2.fillStyle = pt; }
-    else w2.fillStyle = "#3aa8cb";
-    w2.fillRect(0, 0, W, fa + 40);
-    const dg = w2.createLinearGradient(0, 0, 0, shore()); dg.addColorStop(0, "rgba(16,92,150,.45)"); dg.addColorStop(1, "rgba(16,92,150,0)"); w2.fillStyle = dg; w2.fillRect(0, 0, W, shore());
+    const sea = w2.createLinearGradient(0, 0, W * .08, fa + 24);
+    sea.addColorStop(0, "#50858e"); sea.addColorStop(.38, "#80aeb1"); sea.addColorStop(.72, "#adc7be"); sea.addColorStop(1, "#d3d9c4");
+    w2.fillStyle = sea; w2.fillRect(0, 0, W, fa + H * .16);
+    if (seaTile) {
+      const pt = w2.createPattern(seaTile, "repeat");
+      pt.setTransform(new DOMMatrix([.8, 0, 0, .8, (t * 2) % (SEA.width * .8), (-t * 3) % (SEA.height * .8)]));
+      w2.globalAlpha = .28; w2.fillStyle = pt; w2.fillRect(0, 0, W, H); w2.globalAlpha = 1;
+    }
     w2.globalCompositeOperation = "destination-in";
-    const am = w2.createLinearGradient(0, 0, 0, fa + 12); am.addColorStop(0, "#000"); am.addColorStop(clamp(shore() / fa, 0.1, 0.8), "rgba(0,0,0,.95)"); am.addColorStop(.86, "rgba(0,0,0,.5)"); am.addColorStop(1, "rgba(0,0,0,.12)");
-    w2.fillStyle = am; w2.fillRect(0, 0, W, fa + 40);
-    g.save(); g.beginPath(); g.moveTo(0, -2); for (let x = 0; x <= W + 8; x += 8) g.lineTo(x, frontY(x)); g.lineTo(W + 8, -2); g.closePath(); g.clip();
-    g.drawImage(wbuf, 0, 0, W, H);
+    const am = w2.createLinearGradient(0, 0, 0, fa + H * .08);
+    am.addColorStop(0, "#000"); am.addColorStop(.35, "rgba(0,0,0,.95)"); am.addColorStop(.7, "rgba(0,0,0,.55)"); am.addColorStop(1, "rgba(0,0,0,.13)");
+    w2.fillStyle = am; w2.fillRect(0, 0, W, H);
+    g.save(); waterPath(g); g.clip(); g.drawImage(wbuf, 0, 0, W, H);
+    // Long, quiet wavelets behind the shore; the highlights break up naturally.
+    for (let row = 0; row < 5; row++) {
+      const depth = 25 + row * (H * .043), drift = Math.sin(t * .23 + row) * 7;
+      g.strokeStyle = `rgba(235,250,243,${.09 - row * .01})`; g.lineWidth = 1.2 + row * .35;
+      g.beginPath();
+      for (let x = 0; x <= W + 8; x += 8) {
+        const y = frontY(x) - depth + Math.sin(x / W * 15 + row * 2 - t * .25) * (3 + row * 2) + drift;
+        x ? g.lineTo(x, y) : g.moveTo(x, y);
+      }
+      g.stroke();
+    }
     g.restore();
-    // foam: a bright lace at the front, a fainter line behind, bubbles between
-    const lace = (dy, lw, col) => { g.strokeStyle = col; g.lineWidth = lw; g.beginPath(); for (let x = 0; x <= W + 6; x += 6) { const y = frontY(x) + dy(x); x ? g.lineTo(x, y) : g.moveTo(x, y); } g.stroke(); };
-    // foam is soft: a body built from wide faint strokes under a fine bright edge, and loose bubbles of uneven size.
-    // No ctx.filter here: a per-frame blur cost ~3x the frame budget on a phone-sized canvas
-    for (const [lw, al] of [[14, .1], [10, .14], [6, .2]]) lace(() => -4, lw, `rgba(255,255,255,${al})`);
-    lace(() => 0, 2, "rgba(255,255,255,.92)");
-    g.save();
-    lace(x => -14 - Math.sin(x * 0.045 + t * 0.8) * 5, 1.4, "rgba(255,255,255,.45)");
-    lace(x => -30 - Math.sin(x * 0.03 - t * 0.5) * 7, 1, "rgba(255,255,255,.25)");
-    for (let x = 0; x < W; x += 5) { const y = frontY(x), j = Math.sin(x * 12.9898 + Math.floor(phase) * 7) * 0.5 + 0.5, k = Math.sin(x * 78.233) * 0.5 + 0.5; g.fillStyle = `rgba(255,255,255,${0.25 + 0.5 * k})`; g.beginPath(); g.arc(x + j * 6, y - 3 - j * 14, 0.5 + j * j * 2, 0, 7); g.fill(); }
-    g.restore();
+    // Foam is an irregular translucent sheet, with open lace and tiny bubbles.
+    // Geometry is stable between frames; no random flicker or per-frame blur.
+    const froth = x => 7 + (Math.sin(x * .027 + 1.3) + 1) * 5 + (Math.sin(x * .069 - t * .2) + 1) * 2;
+    const edge = x => Math.sin(x * .11) * .7 + Math.sin(x * .21 + .5) * .5;
+    g.fillStyle = `rgba(250,252,239,${.12 + .11 * k})`; g.beginPath();
+    for (let x = -3; x <= W + 6; x += 3) { const y = frontY(x) + edge(x); x === -3 ? g.moveTo(x, y) : g.lineTo(x, y); }
+    for (let x = W + 6; x >= -3; x -= 3) g.lineTo(x, frontY(x) - froth(x));
+    g.closePath(); g.fill();
+    const hash = n => { const f = Math.sin(n * 127.1 + 311.7) * 43758.5453; return f - Math.floor(f); };
+    g.lineCap = "round";
+    for (let i = 0; i < Math.ceil(W / 7); i++) {
+      const x = i * 7 + hash(i + 5) * 5, y = frontY(x), a = hash(i + 13), r = .45 + a * a * 1.7;
+      g.strokeStyle = `rgba(255,255,247,${.24 + hash(i + 20) * .4})`; g.lineWidth = .6;
+      g.beginPath(); g.ellipse(x, y - 2 - hash(i + 8) * froth(x), r * 1.5, r, -.25, 0, Math.PI * 2); g.stroke();
+      if (a > .25) {
+        g.strokeStyle = `rgba(255,255,249,${.45 + a * .3})`; g.lineWidth = .7 + a * .65;
+        g.beginPath(); g.moveTo(x, y + edge(x));
+        const end = Math.min(W + 3, x + 3 + a * 8);
+        g.quadraticCurveTo((x + end) / 2, frontY((x + end) / 2) + 1.4, end, frontY(end) + edge(end)); g.stroke();
+      }
+      if (a > .55) {
+        for (let dot = 0; dot < 5; dot++) {
+          const dx = hash(i * 7 + dot + 31) * 10, dy = hash(i * 11 + dot + 47) * froth(x);
+          g.fillStyle = `rgba(255,255,246,${.18 + hash(i + dot + 60) * .36})`;
+          g.beginPath(); g.arc(x + dx, frontY(x + dx) - dy, .3 + hash(i + dot * 3 + 93) * .8, 0, Math.PI * 2); g.fill();
+        }
+      }
+    }
     if (!strokes.length) { g.save(); g.fillStyle = "rgba(92,70,40,.8)"; g.shadowColor = "rgba(255,250,235,.9)"; g.shadowBlur = 10; g.font = "500 17px Georgia, serif"; g.textAlign = "center"; g.fillText("Write something in the sand", W / 2, H * 0.86); g.restore(); }
     strokes = strokes.filter(s => !s.gone || s === cur);
     if (pen) { g.strokeStyle = "#594b3c"; g.lineWidth = 1.5; g.beginPath(); g.arc(pen[0], pen[1], 6, 0, Math.PI * 2); g.stroke(); }
@@ -1332,19 +1425,19 @@ void main(){
   const inPage = scene($("#endCv"));
   addLoop($("#endCv"), dt => inPage.frame(dt));
   const away = $("#away"), acv = $("#awayCv"); let big = null, running = false, lineT = [];
-  const background = [...document.querySelectorAll("body > header, body > main, body > footer")];
+  const background = [...document.querySelectorAll("body > header, body > main, body > footer, body > nav, #soundHome")];
   function open() {
     if (running) return;
     away.inert = false; background.forEach(el => el.inert = true);
     away.classList.add("on"); away.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden";
-    if (!big) big = scene(acv); running = true; away.append($("#soundDock")); soundscape.immerse(true); $("#backBtn").focus({ preventScroll: true }); repaint();
+    if (!big) big = scene(acv); running = true; $("#soundDock").hidden = true; soundscape.immerse(true); $("#backBtn").focus({ preventScroll: true }); repaint();
     const spans = away.querySelectorAll(".lines span"); spans.forEach(s => s.classList.remove("on"));
     if (RM) spans.forEach(s => s.classList.add("on"));
     else lineT = [4000, 7500, 11000].map((ms, i) => setTimeout(() => spans[i].classList.add("on"), ms));
   }
   function close() {
     away.inert = true; background.forEach(el => el.inert = false);
-    away.classList.remove("on"); away.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; running = false; $("#soundHome").append($("#soundDock")); soundscape.immerse(false); lineT.forEach(clearTimeout);
+    away.classList.remove("on"); away.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; running = false; $("#soundDock").hidden = false; soundscape.immerse(false); lineT.forEach(clearTimeout);
     $("#leaveBtn").focus();
   }
   $("#leaveBtn").addEventListener("click", open);
