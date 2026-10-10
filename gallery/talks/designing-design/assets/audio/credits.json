@@ -98,6 +98,48 @@
       "preview_sha256": "6a6bd7bb2ee0c165c4b7293d707a0bc7591c01c4d78c9f419b7a84002d5ab1e5",
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "name": "blow",
+      "author": "Mikes-MultiMedia",
+      "id": 349698,
+      "title": "Freesound - light slow swoosh.mp3 by Mikes-MultiMedia",
+      "url": "https://freesound.org/people/Mikes-MultiMedia/sounds/349698/",
+      "preview": "https://cdn.freesound.org/previews/349/349698_5632532-hq.mp3",
+      "licenses": [
+        "http://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "preview_sha256": "ed23389fdcf54beeb207cb0948a04cb81780265fef2bdb3cd095efb85e46ed20",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "name": "glass",
+      "author": "Unicornaphobist",
+      "id": 262958,
+      "title": "Freesound - Glass Tap.wav by Unicornaphobist",
+      "url": "https://freesound.org/people/Unicornaphobist/sounds/262958/",
+      "preview": "https://cdn.freesound.org/previews/262/262958_4932087-hq.mp3",
+      "licenses": [
+        "http://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "preview_sha256": "392752ae436412efb86fff705930284bceca610f82ff901941b336a9627c3248",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "name": "paper",
+      "author": "12beesinatrenchcoat",
+      "id": 653953,
+      "title": "Freesound - paper rustling.wav by 12beesinatrenchcoat",
+      "url": "https://freesound.org/people/12beesinatrenchcoat/sounds/653953/",
+      "preview": "https://cdn.freesound.org/previews/653/653953_9149207-hq.mp3",
+      "licenses": [
+        "http://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "preview_sha256": "c1c5edb57ad7023e90e8566bfec159092e149609e72935259f04c1dc9347883d",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
     }
   ],
   "derived": [
@@ -192,6 +234,33 @@
       "slot_seconds": 0.7,
       "processing": "Three recorded steps; high-pass 100 Hz; 8 ms attack / 120 ms release; peak normalized to -12 dBFS; 32 kHz mono MP3 96 kbps",
       "sha256": "104161abc2185d64cb1f280e6cf45a70f4144236140a78dd446de6194bda846d"
+    },
+    {
+      "file": "blow.mp3",
+      "source": "blow",
+      "start_seconds": 0.35,
+      "source_duration_seconds": 1.25,
+      "pad_seconds": 0,
+      "processing": "Recorded gesture; high-pass 180 Hz / low-pass 8500 Hz; 0.035s attack / 0.3s release; peak -8 dBFS; 32 kHz mono MP3 96 kbps",
+      "sha256": "cccf523e018d78b21b54b60703e407e5e718efdb30ed3b926646e754604aa4d9"
+    },
+    {
+      "file": "paper.mp3",
+      "source": "paper",
+      "start_seconds": 0.8,
+      "source_duration_seconds": 0.65,
+      "pad_seconds": 0,
+      "processing": "Recorded gesture; paper dynamics gently compressed (4:1); high-pass 180 Hz / low-pass 9000 Hz; 0.018s attack / 0.15s release; peak -9 dBFS; 32 kHz mono MP3 96 kbps",
+      "sha256": "4af4dedc5e54d12251450a664c46008fd06b61bc74b58f1e3940efa66c47209f"
+    },
+    {
+      "file": "jar.mp3",
+      "source": "glass",
+      "start_seconds": 0,
+      "source_duration_seconds": 0.197,
+      "pad_seconds": 0.13,
+      "processing": "Recorded gesture; high-pass 150 Hz / low-pass 7000 Hz; 0.003s attack / 0.07s release; peak -10 dBFS; 32 kHz mono MP3 96 kbps",
+      "sha256": "f898caaba026d8f97facf5a38cb33602724c76c26a9a7262920532d61bcb7c6c"
     }
   ]
 }
