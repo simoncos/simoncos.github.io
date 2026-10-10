@@ -1148,6 +1148,7 @@ void main(){
 (() => {
   const cv = $("#footCv"), canDraw = touchDrawing(cv, "#footDraw"); let g, W, H, scene, mask, mg, tmp, tg, prints = [], last = null, side = 1, t = 0, fish = [], count = { grass: 0, flower: 0, stone: 0, sand: 0, water: 0 }, seed = 1, cursor = null, hintA = 1, lastA = -Math.PI / 2;
   function setup() {
+    if (cv.clientWidth < 1 || cv.clientHeight < 1) return;
     [g, W, H] = fit(cv);
     const mk = () => { const c = document.createElement("canvas"); c.width = W * DPR; c.height = H * DPR; const x = c.getContext("2d"); x.setTransform(DPR, 0, 0, DPR, 0, 0); return [c, x]; };
     [scene] = mk(); [mask, mg] = mk(); [tmp, tg] = mk();
@@ -1194,7 +1195,7 @@ void main(){
     for (const [tx, ty, tr] of [[-8, -31, 6.2], [1, -34, 5], [8, -32, 4.4], [13.5, -28, 3.8], [17.5, -22, 3.3]]) { c.moveTo(tx + tr, ty); c.arc(tx, ty, tr, 0, 7); }
     c.restore();
   }
-  function redrawMask() { mg.clearRect(0, 0, W, H); mg.fillStyle = "#000"; for (const p of prints) { footPath(mg, p.x, p.y, p.a, p.s, p.l); mg.fill(); } }
+  function redrawMask() { if (!mg) return; mg.clearRect(0, 0, W, H); mg.fillStyle = "#000"; for (const p of prints) { footPath(mg, p.x, p.y, p.a, p.s, p.l); mg.fill(); } }
   function stamp(x, y, a) {
     side = -side; const nx = x + Math.cos(a + Math.PI / 2) * 17 * side, ny = y + Math.sin(a + Math.PI / 2) * 17 * side;
     const s = W < 700 ? 0.78 : 1.12, p = { x: nx, y: ny, a, s, l: side < 0, t: 0 }; lastA = a;
@@ -1219,6 +1220,7 @@ void main(){
   $("#footReset").addEventListener("click", () => { seed++; prints = []; last = null; for (const k in count) count[k] = 0; $("#footCount").textContent = "一片新的地面。"; hintA = 1; setup(); });
   setup(); addEventListener("resize", () => { const old = prints.map(p => ({ ...p, x: p.x / W, y: p.y / H })); setup(); prints = old.map(p => ({ ...p, x: p.x * W, y: p.y * H })); redrawMask(); });
   function frame(dt) {
+    if (!g) { setup(); if (!g) return; }
     t += dt;
     // the unknown ground: a blank sheet of warm paper
     g.fillStyle = "#f6f2e8"; g.fillRect(0, 0, W, H);
@@ -1348,6 +1350,9 @@ void main(){
     waterField.getContext("2d").putImageData(pixels, 0, 0); wetField.getContext("2d").putImageData(dampPixels, 0, 0);
   }
   function setup() {
+    // Orientation/layout changes can briefly report an empty box. Keep the last
+    // valid surface until dimensions settle instead of allocating a zero field.
+    if (cv.clientWidth < 1 || cv.clientHeight < 1) return;
     [g, W, H] = fit(cv);
     sand = document.createElement("canvas"); sand.width = W * DPR; sand.height = H * DPR; const sg = sand.getContext("2d"); sg.setTransform(DPR, 0, 0, DPR, 0, 0);
 
@@ -1395,6 +1400,7 @@ void main(){
     calm = !calm; e.currentTarget.setAttribute("aria-pressed", calm); e.currentTarget.textContent = calm ? "让浪回来" : "让浪停一会儿";
   });
   function frame(dt) {
+    if (!g) { setup(); if (!g) return; }
     t += dt;
     const p0 = phase % 1;
     if (!(calm && p0 < 0.02)) { const before = Math.floor(phase); phase += dt / 7.5; if (Math.floor(phase) > before) { if (calm) phase = Math.floor(phase) + 0.0001; } }
