@@ -129,9 +129,9 @@ h1{font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,12.5vw,5.6r
 .away.on{opacity:1;pointer-events:auto}
 .away canvas{position:absolute;inset:0;width:100%;height:100%}
 .away .lines{position:absolute;left:0;right:0;top:30%;text-align:center;color:#fff;font-family:var(--display);font-size:clamp(1.2rem,3.2vw,1.9rem);letter-spacing:.2em;line-height:2.4;text-shadow:0 0 3px rgba(25,70,125,.45),0 1px 22px rgba(25,75,140,.6);pointer-events:none}
-.away .lines span{display:block;opacity:0;transition:opacity 3s ease}
+.away .lines span{display:block;opacity:0;transition:opacity 3s ease;word-break:keep-all}
 .away .lines span.on{opacity:1}
-.away .lines{padding-inline:20px;top:clamp(30px,25vh,240px)}
+.away .lines{padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right));top:50%;transform:translateY(-50%);text-wrap:balance}
 .away .back{position:absolute;left:50%;transform:translateX(-50%);bottom:max(24px,env(safe-area-inset-bottom));min-height:44px;padding:8px 18px;white-space:nowrap;border:1px solid rgba(255,255,255,.7);border-radius:999px;background:rgba(35,55,66,.65);font-size:.82rem;color:#fff}
 footer{margin-top:90px;padding-bottom:70px;font-size:.8rem;color:var(--muted);line-height:1.9}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
