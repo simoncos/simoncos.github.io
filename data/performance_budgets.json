@@ -44,12 +44,13 @@
         "eager_image_bytes": 0
       },
       "limits": {
-        "html_gzip_bytes": 8704,
+        "html_gzip_bytes": 9216,
         "static_elements": 800,
         "initial_js_gzip_bytes": 12800,
         "initial_css_gzip_bytes": 24576,
         "eager_image_bytes": 0
-      }
+      },
+      "limit_rationale": "2026-10-10: the Research type gained a third Work card (LoLA draft essay), about 0.3 KB gzip of bilingual card markup; no CSS or JS change. Original baseline remains recorded."
     },
     "about.html": {
       "baseline": {

@@ -186,6 +186,30 @@
       "href": "gallery/research/zhihu-2015.html"
     },
     {
+      "id": "lola-draft",
+      "kind": {
+        "en": "Research",
+        "zh": "研究"
+      },
+      "work_topic": "research",
+      "home_topic": "build",
+      "date": "2026-10-10",
+      "title": {
+        "en": "Does the draft decide the game?",
+        "zh": "选人阶段决定胜负吗？"
+      },
+      "home_desc": {
+        "en": "An interactive essay on 222,652 ranked LoL matches: the draft predicts winners only modestly, the first 10–20 minutes far better. Exploratory results.",
+        "zh": "基于 222,652 场英雄联盟排位赛的交互式长文：选人只能有限地预测胜负，前 10–20 分钟的局势准得多。结果属探索性分析。"
+      },
+      "desc": {
+        "en": "An interactive essay from 222,652 ranked LoL matches: the draft alone predicts the winner only modestly (AUC about 0.57), the first 10–20 minutes far better. Results are exploratory.",
+        "zh": "基于 222,652 场英雄联盟排位赛的交互式长文：仅凭选人预测胜负的效果有限（AUC 约 0.57），前 10–20 分钟的局势准得多。结果属探索性分析。"
+      },
+      "img": "gallery/assets/gallery-card-lola-draft.webp",
+      "href": "gallery/research/lola-draft.html"
+    },
+    {
       "id": "qingtian",
       "kind": {
         "en": "Original song",

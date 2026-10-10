@@ -5,7 +5,7 @@
     "owner": "simoncos / Che ZHAO",
     "motto": "connecting the dots.",
     "summary": "Personal site: software, AI collaboration, data projects, research, essays, talks, music and field notes.",
-    "last_updated": "2026-10-09"
+    "last_updated": "2026-10-10"
   },
   "language_policy": {
     "default_language": "en",
@@ -112,6 +112,13 @@
       "label": "Zhihu 2015: People, Connections and Influence",
       "url": "https://simoncos.github.io/gallery/research/zhihu-2015.html",
       "description": "Bilingual interactive presentation of a 2015 study: profile statistics, follow-network comparisons, published influence rankings and topics. Historical sample, not current platform data."
+    },
+    {
+      "id": "lola-draft",
+      "type": "research_artifact",
+      "label": "Does the draft decide the game? (选人阶段决定胜负吗？)",
+      "url": "https://simoncos.github.io/gallery/research/lola-draft.html",
+      "description": "Bilingual interactive essay built from 222,652 ranked League of Legends matches (Pre-Season 2016): the draft alone predicts winners only modestly (AUC about 0.57), the game state at 10 and 20 minutes far better (0.78, 0.89), and champion-pair interactions do not help. Learning-curve and ban-salience results are exploratory; aggregated statistics only, not endorsed by Riot Games."
     },
     {
       "id": "reading-roundups",
