@@ -442,7 +442,7 @@ const soundscape = (() => {
   let revision = 0, loading = false, failed = false, scrollTimer = 0, lifecycle = 0, lastStep = -Infinity, lastDraw = -Infinity;
   const live = () => enabled && !document.hidden && ctx?.state === "running";
   function ui() {
-    const action = enabled ? "关闭声音" : "开启声音";
+    const action = enabled ? (ctx?.state === "running" ? "关闭声音" : "恢复声音") : "开启声音";
     for (const b of [toggle, skyToggle]) {
       b.setAttribute("aria-pressed", String(enabled));
       b.setAttribute("aria-label", action); b.title = action;
@@ -522,6 +522,12 @@ const soundscape = (() => {
     if (next !== active) { active = next; refresh(); }
   }
   function scheduleLocate() { if (!scrollTimer) scrollTimer = setTimeout(locate, 80); }
+  function contextChanged() {
+    // A scene may change while Safari interrupts audio. Rebuild the current mix
+    // when playback returns, including loads invalidated during the interruption.
+    if (live()) { ramp(master.gain, volumeLevel, .18); locate(); refresh(); }
+    else { ++revision; ui(); }
+  }
   async function setEnabled(on) {
     const token = ++lifecycle; ++revision; enabled = on; failed = false;
     if (!on) {
@@ -532,7 +538,7 @@ const soundscape = (() => {
       if (!ctx) {
         const Audio = window.AudioContext || window.webkitAudioContext;
         ctx = new Audio(); master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
-        ctx.addEventListener("statechange", ui);
+        ctx.addEventListener("statechange", contextChanged);
       }
       // Resume inside this click gesture, before any network work (including iOS).
       const resume = ctx.resume(); ui(); await resume;
@@ -542,7 +548,9 @@ const soundscape = (() => {
       if (token === lifecycle) { enabled = false; failed = true; stopAll(); ui(); }
     }
   }
-  for (const button of [toggle, skyToggle]) button.addEventListener("click", e => { e.stopPropagation(); setEnabled(!enabled); });
+  for (const button of [toggle, skyToggle]) button.addEventListener("click", e => {
+    e.stopPropagation(); setEnabled(!enabled || ctx?.state !== "running");
+  });
   const welcome = $("#soundWelcome");
   $("#soundWelcomeOn").addEventListener("click", () => {
     setEnabled(true); // Start inside the user's gesture, before closing the prompt.
@@ -558,7 +566,18 @@ const soundscape = (() => {
   else welcome.hidden = true;
 
   dock.addEventListener("click", e => e.stopPropagation());
-  addEventListener("scroll", scheduleLocate, { passive: true }); addEventListener("resize", scheduleLocate);
+  addEventListener("scroll", scheduleLocate, { passive: true, capture: true });
+  for (const type of ["resize", "scrollend"]) addEventListener(type, scheduleLocate);
+  for (const type of ["scroll", "resize"]) window.visualViewport?.addEventListener(type, scheduleLocate, { passive: true });
+  const sceneObserver = new IntersectionObserver(scheduleLocate, { threshold: [0, .25, .5, .75, 1] });
+  sections.forEach(s => sceneObserver.observe(s.querySelector("canvas")));
+  function resumeFromGesture(e) {
+    scheduleLocate();
+    // Opt-in survives an OS interruption, but a reader's mute always wins.
+    // A swipe ending supplies a fresh iOS user gesture if resume is gated.
+    if (enabled && !document.hidden && ctx && ctx.state !== "running" && !e.target.closest?.("#soundToggle, #skySoundToggle, #soundWelcomeOn, #soundWelcomeOff")) setEnabled(true);
+  }
+  for (const type of ["pointerdown", "touchend", "pointerup", "keydown"]) addEventListener(type, resumeFromGesture, { passive: true });
   function suspend() {
     ++lifecycle; ++revision;
     if (master) master.gain.setValueAtTime(0, ctx.currentTime);
