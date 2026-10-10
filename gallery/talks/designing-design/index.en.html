@@ -207,7 +207,7 @@ h1,h2{letter-spacing:-.025em}
   <div class="wide">
     <div class="cel">
       <div class="talk-scene">
-        <video id="talkWindVideo" poster="assets/talk-wind-v2.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" hidden></video>
+        <video id="talkWindVideo" poster="assets/talk-wind-v3.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" hidden></video>
         <canvas id="talkCv" aria-label="Wind blows right across the hillside. Trees and grass sway, and dandelion seeds drift with the breeze. A topic floats in the sky. The glass jar at the lower left holds topics already filed under “I know.”"></canvas>
       </div>
       <div class="talkbtns">
@@ -694,15 +694,15 @@ const step = kind => soundscape.step(kind);
    01 · The jar (in-formation) and the dandelion (ex-formation)
    ========================================================= */
 (() => {
-  const cv = $("#talkCv"), plate = img("talk-wind-v2"); let g, W, H, t = 0;
-  // Eight generated poses with offline inbetweens; the browser plays real frames.
+  const cv = $("#talkCv"), plate = img("talk-wind-v3"); let g, W, H, t = 0;
+  // Painted branch and grass cutouts retain their identity throughout the loop.
   const windVideo = $("#talkWindVideo");
   let windVisible = false, videoReady = false, videoPending = false, videoFailed = false;
   windVideo.muted = true; windVideo.defaultMuted = true;
   const wantsWind = () => !RM && windVisible && !document.hidden && !videoFailed;
   function updateWind() {
     if (!wantsWind()) { windVideo.pause(); return; }
-    if (!windVideo.getAttribute("src")) windVideo.src = "assets/talk-wind-v2.mp4";
+    if (!windVideo.getAttribute("src")) windVideo.src = "assets/talk-wind-v3.mp4";
     if (!windVideo.paused || videoPending) return;
     videoPending = true;
     windVideo.play().then(() => {
@@ -729,7 +729,11 @@ const step = kind => soundscape.step(kind);
     { w: "Concerts", q: ["Why go live, however good the recording?", "What is “atmosphere” made of?", "What texture of a book is missing on screen?", "Do you hear bass, or feel it in your chest?", "What happens when strangers sing together?", "Live or in headphones: the same song?", "Is the ringing afterward part of the show?", "Watching through a phone: still there?", "Why the thrill as the lights go down?", "What does the crowd look like to the singer?", "Is the wind the same when you leave?", "Why remember the wrong lyric most clearly?", "From the back row, is it the same show?"] }
   ];
   let ti = 0, state = "float", anim = 0, slips = [], flying = null, known = 0, asked = 0, appear = 0, dand = null, fly = [];
-  const breeze = () => RM ? 0 : .8 + .35 * (1 - Math.cos((videoReady ? windVideo.currentTime : t) * Math.PI / 2)) / 2;
+  const breeze = () => {
+    if (RM) return 0;
+    const phase = (videoReady ? windVideo.currentTime : t) * Math.PI / 6;
+    return .82 + .18 * Math.sin(phase) + .10 * Math.sin(2 * phase + .6) + .045 * Math.sin(5 * phase + 1.7);
+  };
   function setup() { [g, W, H] = fit(cv); }
   setup(); addEventListener("resize", setup);
   const nar = () => W < 700;

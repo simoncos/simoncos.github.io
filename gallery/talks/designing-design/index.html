@@ -196,7 +196,7 @@ footer{padding-bottom:96px}
   <div class="wide">
     <div class="cel">
       <div class="talk-scene">
-        <video id="talkWindVideo" poster="assets/talk-wind-v2.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" hidden></video>
+        <video id="talkWindVideo" poster="assets/talk-wind-v3.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" hidden></video>
         <canvas id="talkCv" aria-label="风向右吹过山坡，树冠与草地轻轻摆动，蒲公英的种子顺风飞去。天上飘着一个话题，左下角的玻璃罐装着说过“我知道”的话题。"></canvas>
       </div>
       <div class="talkbtns">
@@ -683,15 +683,15 @@ const step = kind => soundscape.step(kind);
    01 · The jar (in-formation) and the dandelion (ex-formation)
    ========================================================= */
 (() => {
-  const cv = $("#talkCv"), plate = img("talk-wind-v2"); let g, W, H, t = 0;
-  // Eight generated poses with offline inbetweens; the browser plays real frames.
+  const cv = $("#talkCv"), plate = img("talk-wind-v3"); let g, W, H, t = 0;
+  // Painted branch and grass cutouts retain their identity throughout the loop.
   const windVideo = $("#talkWindVideo");
   let windVisible = false, videoReady = false, videoPending = false, videoFailed = false;
   windVideo.muted = true; windVideo.defaultMuted = true;
   const wantsWind = () => !RM && windVisible && !document.hidden && !videoFailed;
   function updateWind() {
     if (!wantsWind()) { windVideo.pause(); return; }
-    if (!windVideo.getAttribute("src")) windVideo.src = "assets/talk-wind-v2.mp4";
+    if (!windVideo.getAttribute("src")) windVideo.src = "assets/talk-wind-v3.mp4";
     if (!windVideo.paused || videoPending) return;
     videoPending = true;
     windVideo.play().then(() => {
@@ -718,7 +718,11 @@ const step = kind => soundscape.step(kind);
     { w: "演唱会", q: ["录音再好，为什么还想去现场？", "“氛围”是什么做的？", "纸书的质感，屏幕上缺了什么？", "低音是听到的，还是胸口感觉到的？", "身边陌生人一起唱时，发生了什么？", "同一首歌，现场和耳机里是同一首吗？", "散场后的耳鸣，算不算演出的一部分？", "隔着手机屏幕看舞台，还算在现场吗？", "灯光暗下来那一秒，为什么最激动？", "歌手看到的台下，是什么样子？", "散场时的风，和进场时一样吗？", "记得最清楚的，为什么常是唱错的那句？", "坐在最后一排，听到的是同一场演出吗？"] }
   ];
   let ti = 0, state = "float", anim = 0, slips = [], flying = null, known = 0, asked = 0, appear = 0, dand = null, fly = [];
-  const breeze = () => RM ? 0 : .8 + .35 * (1 - Math.cos((videoReady ? windVideo.currentTime : t) * Math.PI / 2)) / 2;
+  const breeze = () => {
+    if (RM) return 0;
+    const phase = (videoReady ? windVideo.currentTime : t) * Math.PI / 6;
+    return .82 + .18 * Math.sin(phase) + .10 * Math.sin(2 * phase + .6) + .045 * Math.sin(5 * phase + 1.7);
+  };
   function setup() { [g, W, H] = fit(cv); }
   setup(); addEventListener("resize", setup);
   const nar = () => W < 700;
