@@ -349,11 +349,17 @@ def render_meta(
 ) -> str:
     """Title, description, canonical and share metadata for a shell page."""
     site = config.get("site_url", "").rstrip("/")
+    share_cards = {
+        'gallery.html': ('og-work-v2.jpg', 'simoncos — Work / 作品'),
+        'gallery/music/endless-echoes.html': ('og-endless-echoes-v1.jpg', '漫无止尽的回响 / Endless Echoes — a music riddle'),
+        'gallery/research/zhihu-2015.html': ('og-zhihu-2015-v1.jpg', '知乎 2015 — people, connections and influence'),
+    }
+    card, card_alt = share_cards.get(canonical, ('og-site-v2.jpg', 'simoncos — connecting the dots.'))
     image = image or {
-        "url": f"{site}/assets/og/og-default.png",
+        "url": f"{site}/assets/og/{card}",
         "width": "1200",
         "height": "630",
-        "alt": "simoncos — tools and research, articles and field notes",
+        "alt": card_alt,
     }
     title_en, title_zh = title
     desc_en, desc_zh = description
@@ -385,5 +391,6 @@ def render_meta(
         f'    <meta name="twitter:title" content="{esc(title_en)}">',
         f'    <meta name="twitter:description" content="{esc(desc_en)}">',
         f'    <meta name="twitter:image" content="{esc(image["url"])}">',
+        f'    <meta name="twitter:image:alt" content="{esc(image["alt"])}">',
     ])
     return "\n".join(lines)

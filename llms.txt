@@ -29,7 +29,6 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 - [Zhihu 2015: People, Connections and Influence](https://simoncos.github.io/gallery/research/zhihu-2015.html): Bilingual interactive research page comparing the statistics, networks, influence rankings and topics from a 2015 sample. The two original articles remain in Articles.
 
 - [Personal Information Systems in the AI Era](https://simoncos.github.io/gallery/talks/pkm-2026-06-07/index.html): Talk slides on capture, memory, agents, projects, and boundaries. In Chinese only.
-- [Hermes Agent HV Analysis](https://simoncos.github.io/gallery/research/hermes-agent-hv-analysis.html): Horizontal-vertical analysis of Nous Research's open-source agent framework, in an evidence-first format. In Chinese only.
 - [Endless Echoes (漫无止尽的回响)](https://simoncos.github.io/gallery/music/endless-echoes.html): A game in Work → Games: a branching music riddle through 36 songs, first set in 2017 in Xiami playlist notes and restored from the Xiami archive and its Douban backup.
 - [Sunny Day (晴天)](https://simoncos.github.io/gallery/music/qingtian.html): Original song, words, music and vocals by Che Zhao, with the recording, the lyrics, and the score (numbered-notation PDF, MusicXML, MIDI).
 - [My Personal Knowledge Management System, 2026-03](https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html): Essay on personal systems and the publishing layer.

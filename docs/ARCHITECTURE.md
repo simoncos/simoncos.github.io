@@ -26,7 +26,7 @@ A new generated page must exist before `update_site_shell.py` will accept its en
 
 `make generate` first syncs the shell into `templates/` and refreshes `data/image_dimensions.json` (both are inputs to article generation), then runs the article, page and Favorites generators. It is idempotent apart from the feeds' `lastBuildDate`. `scripts/site_shell.py` is the single definition of the shell: navigation, language and theme toggles, footer, meta tags and script tags. `data/site_shell.json` lists the pages, their section and their script profile, plus the `css_version` / `js_version` cache keys and `site_updated`.
 
-Hand-authored pages outside this table: `series.html` and `tags.html` (redirects into the Articles page), the Sleep essay pages under `gallery/research/`, the talk deck and the Hermes research artifact under `gallery/`. The Zhihu research page is generated; see `docs/ZHIHU_RESEARCH.md`.
+Hand-authored pages outside this table: `series.html` and `tags.html` (redirects into the Articles page), the Sleep essay pages under `gallery/research/`, the talk deck under `gallery/`. The Zhihu research page is generated; see `docs/ZHIHU_RESEARCH.md`.
 
 ### Data
 
@@ -96,6 +96,7 @@ The fingerprint updater parses real script attributes, accepts legal quoting, an
 ### Public artifact metadata boundary
 
 - Every local HTML URL in `sitemap.xml` is public and indexable. It must have a title, description, matching canonical and `og:url`, plus basic Open Graph title, description and image metadata.
+- Share posters are rendered by `scripts/generate_og_images.py` at 1200×630. `site_shell.render_meta` selects dedicated cards by canonical URL for Work, Endless Echoes and Zhihu; explicit work images take precedence. Use versioned JPEG filenames when replacing artwork, and keep `og:image` and `twitter:image` identical. `tests/test_social_cards.py` checks every published local Work link so a new work cannot silently use the general site card.
 - Embedded support pages under `blogs/assets/pages/` are implementation artifacts, not standalone publications, and must declare `noindex`.
 - A new standalone artifact must be placed on one side of this boundary explicitly; being reachable in the repository is not enough to make it public.
 

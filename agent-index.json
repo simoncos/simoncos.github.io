@@ -86,13 +86,6 @@
       "description": "Talk slides on capture, memory, agents, projects, and boundaries. In Chinese only."
     },
     {
-      "id": "hermes-agent-hv-analysis",
-      "type": "research_artifact",
-      "label": "Hermes Agent HV Analysis",
-      "url": "https://simoncos.github.io/gallery/research/hermes-agent-hv-analysis.html",
-      "description": "Horizontal-vertical analysis of Nous Research's open-source agent framework, in an evidence-first format. In Chinese only."
-    },
-    {
       "id": "qingtian",
       "type": "song",
       "label": "Sunny Day (晴天)",

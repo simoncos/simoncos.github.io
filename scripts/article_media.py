@@ -15,10 +15,10 @@ from article_feeds import absolute_site_url
 def og_fallback_image():
     """The site's own share card, used when an article has no usable lead photo."""
     return {
-        'url': absolute_site_url('assets/og/og-default.png'),
+        'url': absolute_site_url('assets/og/og-site-v2.jpg'),
         'width': '1200',
         'height': '630',
-        'alt': 'simoncos — tools and research, articles and field notes',
+        'alt': 'simoncos — connecting the dots.',
     }
 
 

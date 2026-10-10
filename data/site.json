@@ -162,32 +162,6 @@
       }
     },
     {
-      "id": "hermes",
-      "kind": {
-        "en": "Research",
-        "zh": "研究"
-      },
-      "work_topic": "research",
-      "home_topic": "think",
-      "date": "2026-05-21",
-      "single": true,
-      "zh_only": true,
-      "title": {
-        "en": "Hermes Agent HV Analysis",
-        "zh": "Hermes Agent 横纵分析"
-      },
-      "home_desc": {
-        "en": "A horizontal-vertical analysis of Hermes Agent, Nous Research's open-source agent framework: where it came from, and how it compares with its peers.",
-        "zh": "Nous Research 的开源 Agent 框架 Hermes 的横纵分析：纵向看它从哪来，横向和同类框架比。"
-      },
-      "desc": {
-        "en": "A horizontal-vertical analysis of Hermes Agent, Nous Research's open-source agent framework: where it came from, and how it compares with its peers.",
-        "zh": "Nous Research 的开源 Agent 框架 Hermes 的横纵分析：纵向看它从哪来，横向和同类框架比。"
-      },
-      "img": "gallery/assets/gallery-card-hermes-report.webp",
-      "href": "gallery/research/hermes-agent-hv-analysis.html"
-    },
-    {
       "id": "zhihu-2015",
       "kind": {
         "en": "Research",
