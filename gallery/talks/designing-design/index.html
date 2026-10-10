@@ -1250,17 +1250,114 @@ void main(){
    04 · The water's edge: draw in the sand, waves take it back
    ========================================================= */
 (() => {
-  const cv = $("#shoreCv"), canDraw = touchDrawing(cv, "#shoreDraw"), BEACH = img("shore-sand-v2"), SEA = img("tex-sea"); let g, W, H, sand, wbuf, wg2, seaTile, t = 0, phase = 0, calm = false, strokes = [], cur = null, wet = 0, written = 0, taken = 0, maxReach = 0.6, lastReach = 0.6, lastMotion = 0, pointer = null;
+  const cv = $("#shoreCv"), canDraw = touchDrawing(cv, "#shoreDraw"), BEACH = img("shore-sand-v2"), SEA = img("tex-sea"); let g, W, H, sand, t = 0, phase = 0, calm = false, strokes = [], cur = null, written = 0, taken = 0, lastMotion = 0, pointer = null;
+  // A shallow wash with a persistent foam field. Foam is advected and decays
+  // in beach coordinates; it never travels as a rigid outline of the water.
+  let waterField, wetField, pixels, dampPixels, cols, rows, cell, foam, foamNext, dampness, texture, bubbles, fronts, previousFronts, velocities, surfaceA, surfaceB, crestA, crestB, freshField = true;
+  let caustics = null, waterElapsed = 0;
+  const noiseHash = (x, y) => { const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return n - Math.floor(n); };
+  const gradients = Array.from({ length: 256 }, (_, i) => { const a = noiseHash(i, 91) * Math.PI * 2; return [Math.cos(a), Math.sin(a)]; });
+  function noise(x, y) {
+    const ix = Math.floor(x), iy = Math.floor(y), fx = x - ix, fy = y - iy;
+    const u = fx * fx * fx * (fx * (fx * 6 - 15) + 10), v = fy * fy * fy * (fy * (fy * 6 - 15) + 10);
+    const dot = (dx, dy) => { const g = gradients[((ix + dx) * 37 + (iy + dy) * 97) & 255]; return g[0] * (fx - dx) + g[1] * (fy - dy); };
+    return clamp(.5 + .85 * lerp(lerp(dot(0, 0), dot(1, 0), u), lerp(dot(0, 1), dot(1, 1), u), v), 0, 1);
+  }
+  function setupWater() {
+    const old = dampness, oldCols = cols, oldRows = rows;
+    // Bound the simulation by area so a tall phone canvas costs no more than desktop.
+    // The sand and drawing still render at the full device resolution.
+    cols = Math.min(420, Math.floor(Math.sqrt(60000 * W / H))); rows = Math.ceil(cols * H / W); cell = W / cols;
+    waterField = document.createElement("canvas"); wetField = document.createElement("canvas");
+    for (const canvas of [waterField, wetField]) { canvas.width = cols; canvas.height = rows; }
+    pixels = waterField.getContext("2d").createImageData(cols, rows); dampPixels = wetField.getContext("2d").createImageData(cols, rows);
+    foam = new Float32Array(cols * rows); foamNext = new Float32Array(cols * rows); dampness = new Float32Array(cols * rows); texture = new Float32Array(cols * rows); bubbles = new Float32Array(cols * rows);
+    fronts = new Float32Array(cols); previousFronts = new Float32Array(cols); velocities = new Float32Array(cols); crestA = new Float32Array(cols); crestB = new Float32Array(cols);
+    surfaceA = new Float32Array(rows + cols * 2); surfaceB = new Float32Array(rows + cols * 2); freshField = true;
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      const i = y * cols + x, px = x * cell, py = y * cell;
+      texture[i] = .55 * noise(px / 22, py / 18) + .3 * noise(px / 7, py / 6) + .15 * noise(px / 2.8, py / 2.8);
+      bubbles[i] = noise(px / 3.7, py / 3.2);
+      if (old) dampness[i] = old[Math.min(oldRows - 1, Math.floor(y / rows * oldRows)) * oldCols + Math.min(oldCols - 1, Math.floor(x / cols * oldCols))];
+    }
+  }
+  function waveK(p) {
+    // A decelerating run-up and a longer draining backwash, with no frozen crest.
+    return p < .4 ? Math.sin(p / .4 * Math.PI / 2) ** 1.2 : Math.cos((p - .4) / .6 * Math.PI / 2) ** 1.7;
+  }
+  function frontY(x) {
+    const i = clamp(x / cell, 0, cols - 1), a = Math.floor(i);
+    return lerp(fronts[a], fronts[Math.min(cols - 1, a + 1)], i - a);
+  }
+  function paintWater(dt) {
+    const atRest = calm && phase % 1 < .02;
+    for (let x = 0; x < cols; x++) {
+      const u = x / (cols - 1), px = x * cell;
+      const local = atRest ? Math.floor(phase) : phase - .026 * Math.sin(u * 8 + .4) - .012 * Math.sin(u * 21);
+      const cycle = Math.floor(local), p = local - cycle, k = waveK(p);
+      const reach = .55 + noiseHash(cycle + 31, 7) * .19;
+      const coast = H * (.225 + (u - .5) * .09 + Math.sin(u * 6 + .4) * .019);
+      const fingers = (Math.sin(px * .035 + cycle * 1.7) * 3.8 + Math.sin(px * .081 - t * .35) * 1.7) * (.25 + k * .75);
+      fronts[x] = coast + (H * reach - coast) * k + fingers;
+      velocities[x] = freshField || !dt ? 0 : clamp((fronts[x] - previousFronts[x]) / dt, -H, H);
+    }
+    const decay = Math.exp(-dt * .95), airDecay = Math.exp(-dt * 1.1), dry = Math.exp(-dt * .035), scale = H / 575;
+    const pa = (t / 3.7) % 1, pb = (t / 4.3 + .53) % 1, pulseA = Math.sin(pa * Math.PI) ** 2 * .48, pulseB = Math.sin(pb * Math.PI) ** 2 * .48;
+    for (let x = 0; x < cols; x++) { crestA[x] = H * (.015 + pa * .215) + Math.sin(x * .034) * 4 * scale; crestB[x] = H * (.015 + pb * .215) + Math.sin(x * .034 + 2) * 4 * scale; }
+    for (let i = 0; i < surfaceA.length; i++) { surfaceA[i] = Math.sin(i * .17 - t * 1.5); surfaceB[i] = Math.sin(i * .091 + t * 1.1); }
+    for (let y = 0; y < rows; y++) {
+      const warpX = Math.sin(y * cell * .017 + t * .28) * 5 + t * 1.3;
+      const py = (y + .5) * cell, offshore = clamp(1 - py / (H * .34), 0, 1);
+      for (let x = 0; x < cols; x++) {
+        const i = y * cols + x, o = i * 4, n = texture[i], depth = fronts[x] - py, speed = velocities[x];
+        // Only a small fraction of the swash speed carries bubbles. Much of the
+        // foam is stranded, stretched, and dissolved as the water drains away.
+        const drift = speed * (speed > 0 ? .16 : .07) * dt / cell;
+        const sy = clamp(y - drift, 0, rows - 1), iy = Math.floor(sy), fy = sy - iy;
+        let f = lerp(foam[iy * cols + x], foam[Math.min(rows - 1, iy + 1) * cols + x], fy) * decay;
+        const width = (12 + n * 28) * scale, band = clamp(1 - Math.abs(depth - width * .42) / width, 0, 1);
+        const lace = clamp((n - .33) * 3.7, 0, 1);
+        const advancing = RM ? .3 : clamp(speed / (H * .09), 0, 1);
+        if (depth > -2 * scale) f = Math.max(f, band * lace * advancing);
+        // Small broken crests travel through the offshore water independently.
+        if (depth > H * .06) {
+          const da = Math.abs(py - crestA[x]), db = Math.abs(py - crestB[x]);
+          if (da < 5 * scale) f = Math.max(f, (1 - da / (5 * scale)) * pulseA * lace);
+          if (db < 5 * scale) f = Math.max(f, (1 - db / (5 * scale)) * pulseB * lace);
+        }
+        if (depth < 0) f *= airDecay;
+        foamNext[i] = f;
+        dampness[i] = depth > 0 ? Math.max(dampness[i], .7 + n * .3) : dampness[i] * dry;
+        dampPixels.data[o] = 93; dampPixels.data[o + 1] = 106; dampPixels.data[o + 2] = 89; dampPixels.data[o + 3] = dampness[i] * 58;
+        const a = depth > 0 ? Math.min(.95, depth / (depth + H * .105) * 1.12) : 0;
+        const laceAlpha = clamp((bubbles[i] - .26) * 2.9, 0, 1);
+        const fa = clamp((f - .14 - n * .12) * 1.7, 0, .9) * laceAlpha, alpha = fa + a * (1 - fa);
+        if (alpha < .002) { pixels.data[o + 3] = 0; continue; }
+        const ripple = surfaceA[y + Math.floor(x * .54)] + surfaceB[Math.floor(y * .6) + x];
+        const tx = Math.floor(x * cell * .4 + warpX) & 255, ty = Math.floor(py * .4 + surfaceB[x] * 3 - t * 1.8) & 255;
+        const glint = (caustics ? caustics[ty * 256 + tx] * 15 : 0) + Math.max(0, ripple - .72) ** 2 * (2 + offshore * 3) + (n - .5) * 4;
+        const wr = 149 - offshore * 93 + glint, wg = 178 - offshore * 64 + glint, wb = 160 - offshore * 37 + glint;
+        const body = a * (1 - fa);
+        pixels.data[o] = (wr * body + 246 * fa) / alpha;
+        pixels.data[o + 1] = (wg * body + 249 * fa) / alpha;
+        pixels.data[o + 2] = (wb * body + 239 * fa) / alpha;
+        pixels.data[o + 3] = alpha * 255;
+      }
+    }
+    [foam, foamNext] = [foamNext, foam]; previousFronts.set(fronts); freshField = false;
+    waterField.getContext("2d").putImageData(pixels, 0, 0); wetField.getContext("2d").putImageData(dampPixels, 0, 0);
+  }
   function setup() {
     [g, W, H] = fit(cv);
     sand = document.createElement("canvas"); sand.width = W * DPR; sand.height = H * DPR; const sg = sand.getContext("2d"); sg.setTransform(DPR, 0, 0, DPR, 0, 0);
-    wbuf = document.createElement("canvas"); wbuf.width = W * DPR; wbuf.height = H * DPR; wg2 = wbuf.getContext("2d"); wg2.setTransform(DPR, 0, 0, DPR, 0, 0);
+
     if (ready(BEACH)) cover(sg, BEACH, W, H, .5, .6);
     else { sg.fillStyle = "#e7dac2"; sg.fillRect(0, 0, W, H); }
     // One continuous fine-grained plate, with cool damp sand nearer the water.
     const gr = sg.createLinearGradient(0, 0, W * .15, H);
     gr.addColorStop(0, "rgba(116,134,133,.19)"); gr.addColorStop(.55, "rgba(212,202,181,.05)"); gr.addColorStop(1, "rgba(255,246,221,.08)");
     sg.fillStyle = gr; sg.fillRect(0, 0, W, H);
+    setupWater();
   }
   setup(); addEventListener("resize", () => {
     const oldW = W, oldH = H; setup();
@@ -1268,26 +1365,11 @@ void main(){
     pen = null; cur = null;
   }); img("shore-sand-v2", setup);
   img("tex-sea", () => {
-    // Cache the expensive colour blend once, rather than recomputing it per frame.
-    seaTile = document.createElement("canvas"); seaTile.width = SEA.width; seaTile.height = SEA.height;
-    const tile = seaTile.getContext("2d"); tile.fillStyle = "#9ebcb8"; tile.fillRect(0, 0, SEA.width, SEA.height);
-    tile.globalCompositeOperation = "soft-light"; tile.drawImage(SEA, 0, 0);
+    const tile = document.createElement("canvas"); tile.width = tile.height = 256;
+    const tg = tile.getContext("2d"); tg.drawImage(SEA, 0, 0, 256, 256);
+    const rgba = tg.getImageData(0, 0, 256, 256).data; caustics = new Float32Array(256 * 256);
+    for (let i = 0; i < caustics.length; i++) caustics[i] = (rgba[i * 4] * .3 + rgba[i * 4 + 1] * .59 + rgba[i * 4 + 2] * .11 - 160) / 95;
   });
-  const shore = () => H * 0.24;
-  function waveK() { const p = phase % 1; if (p < 0.38) return 1 - Math.pow(1 - p / 0.38, 2.2); if (p < 0.48) return 1; return 1 - ease((p - 0.48) / 0.52); }
-  function frontY(x) {
-    const reach = shore() + (H * maxReach - shore()) * waveK();
-    return reach + contour(x);
-  }
-  function contour(x) {
-    return (x / W - .5) * H * .13 + Math.sin(x / W * 6.2 + .5) * H * .024
-      + Math.sin(x / W * 17.5 - t * .18) * H * .008 + Math.sin(x * .058 + t * .3) * 1.1;
-  }
-  function waterPath(context, offset = 0, baseline = null) {
-    context.beginPath(); context.moveTo(-3, -3);
-    for (let x = -3; x <= W + 8; x += 6) context.lineTo(x, (baseline === null ? frontY(x) : baseline + contour(x)) + offset);
-    context.lineTo(W + 8, -3); context.closePath();
-  }
   const pos = e => { const b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; };
   cv.addEventListener("pointerdown", e => { if (!canDraw(e) || (pointer !== null && pointer !== e.pointerId)) return; try { cv.setPointerCapture(e.pointerId); } catch (_) {} const [x, y] = pos(e); pointer = e.pointerId; lastMotion = performance.now(); cur = { pts: [[x, y, 1]] }; strokes.push(cur); written++; soundscape.draw(.35); });
   cv.addEventListener("pointermove", e => { if (!cur || e.pointerId !== pointer) return; const [x, y] = pos(e); const l = cur.pts[cur.pts.length - 1], distance = Math.hypot(x - l[0], y - l[1]);
@@ -1315,22 +1397,13 @@ void main(){
   function frame(dt) {
     t += dt;
     const p0 = phase % 1;
-    if (!(calm && p0 < 0.02)) { const before = Math.floor(phase); phase += dt / 7.5; if (Math.floor(phase) > before) { lastReach = maxReach; maxReach = 0.5 + Math.random() * 0.28; if (calm) phase = Math.floor(phase) + 0.0001; } }
+    if (!(calm && p0 < 0.02)) { const before = Math.floor(phase); phase += dt / 7.5; if (Math.floor(phase) > before) { if (calm) phase = Math.floor(phase) + 0.0001; } }
     g.drawImage(sand, 0, 0, W, H);
-    const p = phase % 1, k = waveK(); soundscape.shore(calm && p < .02);
-    // A curved wet-sand footprint remains as the wash retreats, then dries slowly.
-    wet = p < 0.38 ? 1 : Math.max(0, wet - dt * .07);
-    const reachPrev = shore() + (H * Math.max(maxReach, lastReach) - shore()) * Math.max(k, wet);
-    g.save(); waterPath(g, 18, reachPrev); g.clip();
-    const damp = g.createLinearGradient(0, shore(), 0, reachPrev + 30);
-    damp.addColorStop(0, "rgba(95,119,117,.25)"); damp.addColorStop(.7, "rgba(126,130,116,.22)"); damp.addColorStop(1, "rgba(138,137,120,.02)");
-    g.fillStyle = damp; g.fillRect(0, 0, W, H);
-    if (p > .48) {
-      const sheen = g.createLinearGradient(0, shore(), W * .3, reachPrev + 20);
-      sheen.addColorStop(0, "rgba(233,246,242,.04)"); sheen.addColorStop(.65, `rgba(240,246,231,${wet * .27})`); sheen.addColorStop(1, "rgba(238,238,219,0)");
-      g.fillStyle = sheen; g.fillRect(0, 0, W, H);
-    }
-    g.restore();
+    // Update the fluid at 30 Hz; pointer feedback and the sand stay at display rate.
+    waterElapsed += dt;
+    if (freshField || RM || waterElapsed >= 1 / 30 - .001) { paintWater(waterElapsed); waterElapsed = 0; }
+    soundscape.shore(calm && phase % 1 < .02);
+    g.drawImage(wetField, 0, 0, W, H);
     // strokes in the sand: groove + lit lip
     for (const s of strokes) {
       let any = false;
@@ -1345,62 +1418,7 @@ void main(){
         if (s.pts.length === 1) { const a = s.pts[0]; g.fillStyle = `rgba(${col},${a[2] * aa})`; g.beginPath(); g.arc(a[0] + ox, a[1] + oy, lw / 2 + 1, 0, 7); g.fill(); }
       }
     }
-    // Depth colour and a faint painted caustic layer, fading into transparent wash.
-    let fa = 0; for (let x = 0; x <= W; x += W / 8) fa += frontY(x); fa /= 9;
-    const w2 = wg2; w2.globalCompositeOperation = "source-over"; w2.clearRect(0, 0, W, H);
-    const sea = w2.createLinearGradient(0, 0, W * .08, fa + 24);
-    sea.addColorStop(0, "#50858e"); sea.addColorStop(.38, "#80aeb1"); sea.addColorStop(.72, "#adc7be"); sea.addColorStop(1, "#d3d9c4");
-    w2.fillStyle = sea; w2.fillRect(0, 0, W, fa + H * .16);
-    if (seaTile) {
-      const pt = w2.createPattern(seaTile, "repeat");
-      pt.setTransform(new DOMMatrix([.8, 0, 0, .8, (t * 2) % (SEA.width * .8), (-t * 3) % (SEA.height * .8)]));
-      w2.globalAlpha = .28; w2.fillStyle = pt; w2.fillRect(0, 0, W, H); w2.globalAlpha = 1;
-    }
-    w2.globalCompositeOperation = "destination-in";
-    const am = w2.createLinearGradient(0, 0, 0, fa + H * .08);
-    am.addColorStop(0, "#000"); am.addColorStop(.35, "rgba(0,0,0,.95)"); am.addColorStop(.7, "rgba(0,0,0,.55)"); am.addColorStop(1, "rgba(0,0,0,.13)");
-    w2.fillStyle = am; w2.fillRect(0, 0, W, H);
-    g.save(); waterPath(g); g.clip(); g.drawImage(wbuf, 0, 0, W, H);
-    // Long, quiet wavelets behind the shore; the highlights break up naturally.
-    for (let row = 0; row < 5; row++) {
-      const depth = 25 + row * (H * .043), drift = Math.sin(t * .23 + row) * 7;
-      g.strokeStyle = `rgba(235,250,243,${.09 - row * .01})`; g.lineWidth = 1.2 + row * .35;
-      g.beginPath();
-      for (let x = 0; x <= W + 8; x += 8) {
-        const y = frontY(x) - depth + Math.sin(x / W * 15 + row * 2 - t * .25) * (3 + row * 2) + drift;
-        x ? g.lineTo(x, y) : g.moveTo(x, y);
-      }
-      g.stroke();
-    }
-    g.restore();
-    // Foam is an irregular translucent sheet, with open lace and tiny bubbles.
-    // Geometry is stable between frames; no random flicker or per-frame blur.
-    const froth = x => 7 + (Math.sin(x * .027 + 1.3) + 1) * 5 + (Math.sin(x * .069 - t * .2) + 1) * 2;
-    const edge = x => Math.sin(x * .11) * .7 + Math.sin(x * .21 + .5) * .5;
-    g.fillStyle = `rgba(250,252,239,${.12 + .11 * k})`; g.beginPath();
-    for (let x = -3; x <= W + 6; x += 3) { const y = frontY(x) + edge(x); x === -3 ? g.moveTo(x, y) : g.lineTo(x, y); }
-    for (let x = W + 6; x >= -3; x -= 3) g.lineTo(x, frontY(x) - froth(x));
-    g.closePath(); g.fill();
-    const hash = n => { const f = Math.sin(n * 127.1 + 311.7) * 43758.5453; return f - Math.floor(f); };
-    g.lineCap = "round";
-    for (let i = 0; i < Math.ceil(W / 7); i++) {
-      const x = i * 7 + hash(i + 5) * 5, y = frontY(x), a = hash(i + 13), r = .45 + a * a * 1.7;
-      g.strokeStyle = `rgba(255,255,247,${.24 + hash(i + 20) * .4})`; g.lineWidth = .6;
-      g.beginPath(); g.ellipse(x, y - 2 - hash(i + 8) * froth(x), r * 1.5, r, -.25, 0, Math.PI * 2); g.stroke();
-      if (a > .25) {
-        g.strokeStyle = `rgba(255,255,249,${.45 + a * .3})`; g.lineWidth = .7 + a * .65;
-        g.beginPath(); g.moveTo(x, y + edge(x));
-        const end = Math.min(W + 3, x + 3 + a * 8);
-        g.quadraticCurveTo((x + end) / 2, frontY((x + end) / 2) + 1.4, end, frontY(end) + edge(end)); g.stroke();
-      }
-      if (a > .55) {
-        for (let dot = 0; dot < 5; dot++) {
-          const dx = hash(i * 7 + dot + 31) * 10, dy = hash(i * 11 + dot + 47) * froth(x);
-          g.fillStyle = `rgba(255,255,246,${.18 + hash(i + dot + 60) * .36})`;
-          g.beginPath(); g.arc(x + dx, frontY(x + dx) - dy, .3 + hash(i + dot * 3 + 93) * .8, 0, Math.PI * 2); g.fill();
-        }
-      }
-    }
+    g.drawImage(waterField, 0, 0, W, H);
     if (!strokes.length) { g.save(); g.fillStyle = "rgba(92,70,40,.8)"; g.shadowColor = "rgba(255,250,235,.9)"; g.shadowBlur = 10; g.font = "500 17px Noto Serif SC, serif"; g.textAlign = "center"; g.fillText("在沙上写点什么", W / 2, H * 0.86); g.restore(); }
     strokes = strokes.filter(s => !s.gone || s === cur);
     if (pen) { g.strokeStyle = "#594b3c"; g.lineWidth = 1.5; g.beginPath(); g.arc(pen[0], pen[1], 6, 0, Math.PI * 2); g.stroke(); }
