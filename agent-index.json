@@ -116,14 +116,14 @@
     {
       "id": "lola-draft",
       "type": "research_artifact",
-      "label": "Does the draft decide the game? (选人阶段决定胜负吗？)",
+      "label": "League of Legends: Does the draft decide the game? (英雄联盟：选人阶段决定胜负吗？)",
       "url": "https://simoncos.github.io/gallery/research/lola-draft.html",
       "description": "Bilingual interactive essay built from 222,652 ranked League of Legends matches (Pre-Season 2016): the draft alone predicts winners only modestly (AUC about 0.57), the game state at 10 and 20 minutes far better (0.78, 0.89), and champion-pair interactions do not help. Learning-curve and ban-salience results are exploratory; aggregated statistics only, not endorsed by Riot Games."
     },
     {
       "id": "lola-matchups",
       "type": "research_artifact",
-      "label": "The map of champion matchups (英雄对位地图)",
+      "label": "League of Legends: The map of champion matchups (英雄联盟：英雄对位地图)",
       "url": "https://simoncos.github.io/gallery/research/lola-matchups.html",
       "description": "Bilingual interactive essay on every champion pair from 222,616 ranked League of Legends matches (Pre-Season 2016): 606 of 8,128 pairs show a clear edge, nearly all pointing from the stronger to the weaker champion; champion strength explains about 97% of pair win-rate differences and pair-specific interaction about 1.2%; no rock-paper-scissors cycles. Predictive, not causal; exploratory; aggregated statistics only, not endorsed by Riot Games."
     },
