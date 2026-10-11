@@ -210,6 +210,30 @@
       "href": "gallery/research/lola-draft.html"
     },
     {
+      "id": "lola-matchups",
+      "kind": {
+        "en": "Research",
+        "zh": "研究"
+      },
+      "work_topic": "research",
+      "home_topic": "build",
+      "date": "2026-10-11",
+      "title": {
+        "en": "The map of champion matchups",
+        "zh": "英雄对位地图"
+      },
+      "home_desc": {
+        "en": "An interactive essay on every champion pair in 222,616 ranked LoL matches: 606 of 8,128 pairs show a clear edge, nearly all from the stronger to the weaker champion. Exploratory.",
+        "zh": "基于 222,616 场英雄联盟排位赛、覆盖每一对英雄的交互式长文：8,128 对中有 606 对优势明显，几乎都是强者压制弱者。结果属探索性分析。"
+      },
+      "desc": {
+        "en": "An interactive essay on every champion pair from 222,616 ranked LoL matches: 606 of 8,128 pairs show a clear edge, nearly all pointing from the stronger to the weaker champion. Champion strength explains about 97% of pair win-rate differences and pair-specific interaction about 1.2%; no rock-paper-scissors cycles. Predictive, not causal; exploratory.",
+        "zh": "基于 222,616 场英雄联盟排位赛、覆盖每一对英雄的交互式长文：8,128 对中有 606 对优势明显，几乎都是强者压制弱者。英雄自身强度解释了约 97% 的配对胜率差异，配对特有的交互只占约 1.2%，没有“石头剪刀布”式的克制循环。结论是预测性而非因果的，结果属探索性分析。"
+      },
+      "img": "gallery/assets/gallery-card-lola-matchups.webp",
+      "href": "gallery/research/lola-matchups.html"
+    },
+    {
       "id": "qingtian",
       "kind": {
         "en": "Original song",
