@@ -62,7 +62,9 @@
       "type": "project",
       "label": "Sleep Toolkit",
       "url": "https://simoncos.github.io/apps/sleep-toolkit.en.html",
-      "description": "Project context, report preview, and routes to the web app and the ten-year sleep research."
+      "description": "Project context, report preview, and routes to the web app and the ten-year sleep research.",
+      "url_zh": "https://simoncos.github.io/apps/sleep-toolkit.html",
+      "url_en": "https://simoncos.github.io/apps/sleep-toolkit.en.html"
     },
     {
       "id": "sleep-toolkit",
@@ -76,7 +78,9 @@
       "type": "research_artifact",
       "label": "Ten Years of Sleep Records, Analyzed",
       "url": "https://simoncos.github.io/gallery/research/sleep-2016-2026.en.html",
-      "description": "A study of 3,656 nights of personal sleep records, with visual analysis and project context."
+      "description": "A study of 3,656 nights of personal sleep records, with visual analysis and project context.",
+      "url_zh": "https://simoncos.github.io/gallery/research/sleep-2016-2026.html",
+      "url_en": "https://simoncos.github.io/gallery/research/sleep-2016-2026.en.html"
     },
     {
       "id": "pkm-talk-2026-06-07",
@@ -104,7 +108,9 @@
       "type": "interactive_essay",
       "label": "Problem Solving and Design — Interactive Edition",
       "url": "https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.en.html",
-      "description": "Four interactive essays in English and Chinese, covering problem situations, feasible solutions, open problems, and choice and optima. Switch languages on each page."
+      "description": "Four interactive essays in English and Chinese, covering problem situations, feasible solutions, open problems, and choice and optima. Switch languages on each page.",
+      "url_zh": "https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html",
+      "url_en": "https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.en.html"
     },
     {
       "id": "zhihu-2015",
@@ -160,14 +166,18 @@
       "type": "interactive_essay",
       "label": "The Limits of Problem Analysis (问题解析的极限)",
       "url": "https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html",
-      "description": "From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result. Available in English and Chinese; switch languages on the page."
+      "description": "From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result. Available in English and Chinese; switch languages on the page.",
+      "url_zh": "https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html",
+      "url_en": "https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html"
     },
     {
       "id": "designing-design",
       "type": "interactive_essay",
       "label": "Designing Design (设计中的设计)",
       "url": "https://simoncos.github.io/gallery/talks/designing-design/index.en.html",
-      "description": "Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again. Available in English and Chinese; switch languages on the page."
+      "description": "Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again. Available in English and Chinese; switch languages on the page.",
+      "url_zh": "https://simoncos.github.io/gallery/talks/designing-design/index.html",
+      "url_en": "https://simoncos.github.io/gallery/talks/designing-design/index.en.html"
     }
   ],
   "public_data_files": [

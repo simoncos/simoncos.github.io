@@ -5,6 +5,44 @@
 <title>问题解析的极限</title>
 <meta name="description" content="一个游戏外挂只看屏幕上的一个像素。从描述到机制，解析没有尽头；解析的第一原则，是要带有限的结果回来。">
 <link rel="canonical" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html">
+<!-- work-jsonld:start -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "name": "问题解析的极限",
+ "headline": "问题解析的极限",
+ "description": "一个游戏外挂只看屏幕上的一个像素。从描述到机制，解析没有尽头；解析的第一原则，是要带有限的结果回来。",
+ "url": "https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html",
+ "inLanguage": "zh-Hans",
+ "author": {
+  "@type": "Person",
+  "name": "simoncos",
+  "alternateName": "Che ZHAO",
+  "url": "https://simoncos.github.io/about.html"
+ },
+ "creator": {
+  "@type": "Person",
+  "name": "simoncos",
+  "alternateName": "Che ZHAO",
+  "url": "https://simoncos.github.io/about.html"
+ },
+ "datePublished": "2026-10-09",
+ "dateModified": "2026-10-13",
+ "genre": "交互文章",
+ "about": [
+  "interactive essay",
+  "talks"
+ ],
+ "isPartOf": {
+  "@type": "WebSite",
+  "name": "simoncos",
+  "url": "https://simoncos.github.io/"
+ },
+ "image": "https://simoncos.github.io/gallery/assets/gallery-card-limits-of-problem-analysis.jpg"
+}
+</script>
+<!-- work-jsonld:end -->
 <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html">
 <link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html">
 <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html">
@@ -241,6 +279,7 @@ footer a{display:inline-block;padding-block:11px;margin-block:-11px}
 .site-back{margin:1.6em 0 0}.site-back a{display:inline-flex;align-items:center;min-height:44px}
 .tree-handle{display:none}
 @media (pointer:coarse){.tree-handle{display:grid;place-items:center;position:absolute;right:6px;top:0;width:44px;height:44px;margin-top:-22px;padding:0;border-radius:50%;border:1px solid var(--accent);background:rgba(5,6,7,.75);touch-action:none}.tree-handle::before{content:"↕";color:var(--accent);font-size:18px;line-height:1}}
+.kp{margin:56px auto 0}.kp-h{font-size:.82rem!important;letter-spacing:.14em!important;text-transform:uppercase;color:var(--muted,#777);margin:0 0 .6em!important;font-weight:600}.kp ul{margin:0;padding-left:1.15em;line-height:1.75}.kp li{margin:.3em 0}.kp-rel{margin:.9em 0 0;font-size:.9rem;color:var(--muted,#777)}.kp-rel a{display:inline-flex;align-items:center;min-height:44px}
 </style>
 
 <div class="wrap">
@@ -259,6 +298,18 @@ footer a{display:inline-block;padding-block:11px;margin-block:-11px}
     <p class="hero-hint">上下移动指针（手机上点一下，或拖右边的 ↕ 手柄）。每往下解析一层，答案多一层，<b>新冒出的问题多一倍</b>。</p>
   </figure>
 </header>
+<section class="kp col" aria-labelledby="kpH">
+  <h2 class="kp-h" id="kpH">要点</h2>
+  <ul>
+    <li>解析可以没有尽头：每往下一层，答案更多，新问题多一倍，所以必须给它划边界。</li>
+    <li>只盯血条上一个像素的游戏外挂说明：一小块有边界的理解，就能接管一个小循环；出了边界，它就失灵。</li>
+    <li>对数据的提问从“描述”到“机制”逐层加深（Jeff Leek 的六种类型），每深一层，需要的信息都更多。</li>
+    <li>在 Lorenz-63 飓风示意里（最大李雅普诺夫指数约 <span data-lz="lambda">0.906</span>，两个世界的差距约每 <span data-lz="dbl">0.77</span> 天翻一倍），观测点从 12 个增加到 9,000 个，误差缩小约 <span data-lz="ratio">27</span> 倍，可用的预报却只从约 <span data-lz="h12">7.4</span> 天延长到 <span data-lz="h9000">11.1</span> 天。</li>
+    <li>解析的第一原则：带有限的结果回来。</li>
+  </ul>
+  <p class="kp-rel">相关交互文章：<a href="../problem-solving-and-design/index.html">问题解决与设计</a> · <a href="../designing-design/index.html">设计中的设计</a></p>
+</section>
+
 
 <!-- 01 -->
 <section id="s1">

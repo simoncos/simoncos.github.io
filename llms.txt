@@ -17,14 +17,14 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 
 - [HN Field Notes](https://hn-waywo-dashboard.vercel.app/): Read-only project search, HN source evidence and monthly candidate trends. Updated monthly.
 - [HN × LLM: Model Releases and Discussion](https://simoncos-hn-llm-research.vercel.app/): How Hacker News discusses model releases across 14 AI companies, with source threads and coverage limits. An ongoing study.
-- [Sleep Toolkit project](https://simoncos.github.io/apps/sleep-toolkit.en.html): Project context, report preview, and routes to the tool and the ten-year sleep research.
+- [Sleep Toolkit project](https://simoncos.github.io/apps/sleep-toolkit.en.html): Project context, report preview, and routes to the tool and the ten-year sleep research. Chinese edition (中文版): https://simoncos.github.io/apps/sleep-toolkit.html
 - [Sleep Toolkit web app](https://sleep-toolkit-production.up.railway.app): Public tool for SleepCycle CSV analysis.
-- [Ten Years of Sleep Records, Analyzed](https://simoncos.github.io/gallery/research/sleep-2016-2026.en.html): Research based on 3,656 nights of personal sleep records, with visual analysis and project context.
+- [Ten Years of Sleep Records, Analyzed](https://simoncos.github.io/gallery/research/sleep-2016-2026.en.html): Research based on 3,656 nights of personal sleep records, with visual analysis and project context. Chinese edition (中文版): https://simoncos.github.io/gallery/research/sleep-2016-2026.html
 
 ## Key artifacts
 
-- [The Limits of Problem Analysis (问题解析的极限)](https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html): From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result. Available in English and Chinese; switch languages on the page.
-- [Designing Design (设计中的设计)](https://simoncos.github.io/gallery/talks/designing-design/index.en.html): Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again. Available in English and Chinese; switch languages on the page.
+- [The Limits of Problem Analysis (问题解析的极限)](https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html): From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result. Available in English and Chinese; switch languages on the page. Chinese edition (中文版): https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html
+- [Designing Design (设计中的设计)](https://simoncos.github.io/gallery/talks/designing-design/index.en.html): Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again. Available in English and Chinese; switch languages on the page. Chinese edition (中文版): https://simoncos.github.io/gallery/talks/designing-design/index.html
 
 - [Zhihu 2015: People, Connections and Influence](https://simoncos.github.io/gallery/research/zhihu-2015.html): Bilingual interactive research page comparing the statistics, networks, influence rankings and topics from a 2015 sample. The two original articles remain in Articles.
 
@@ -37,7 +37,7 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 - [Sunny Day (晴天)](https://simoncos.github.io/gallery/music/qingtian.html): Original song, words, music and vocals by Che Zhao, with the recording, the lyrics, and the score (numbered-notation PDF, MusicXML, MIDI).
 - [My Personal Knowledge Management System, 2026-03](https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html): Essay on personal systems and the publishing layer.
 - [My Haba Snow Mountain Journey](https://simoncos.github.io/blogs/my-haba-snow-mountain-journey.en.html): Field note about outdoor experience, risk, and body feedback.
-- [Problem Solving and Design — interactive edition](https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.en.html): Four hands-on essays, with complete English and Chinese editions and a language switch on every page.
+- [Problem Solving and Design — interactive edition](https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.en.html): Four hands-on essays, with complete English and Chinese editions and a language switch on every page. Chinese edition (中文版): https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html
 - [Problem Solving and Design](https://simoncos.github.io/blogs.html#series-problem-solving-and-design): Four completed essays in Chinese and English, from problem situations and feasible solutions to open-ended problems, indecision and the optimal solution.
 
 - [Reading Roundups (读书小结)](https://simoncos.github.io/blogs.html#series-reading-roundups): Six bilingual reading roundups from 2015 to 2019, preserving the original reviews and historical dates.

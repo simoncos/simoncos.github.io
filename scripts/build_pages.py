@@ -101,6 +101,8 @@ def build() -> dict[str, str]:
         outputs[project["href"][lang]] = render_board(config, site, lang)
     for song in site.get("songs", []):
         outputs[song["page"]] = render_song(config, site, song)
+    from update_work_jsonld import apply_to_outputs
+    apply_to_outputs(outputs, site)  # work pages carry schema.org JSON-LD generated from site.json
     return outputs
 
 

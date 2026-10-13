@@ -5,6 +5,44 @@
 <title>The Limits of Problem Analysis</title>
 <meta name="description" content="A game bot watches just one pixel. From description to mechanism, analysis has no end. Its first rule is to come back with a finite result.">
 <link rel="canonical" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html">
+<!-- work-jsonld:start -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "name": "The Limits of Problem Analysis",
+ "headline": "The Limits of Problem Analysis",
+ "description": "A game bot watches just one pixel. From description to mechanism, analysis has no end. Its first rule is to come back with a finite result.",
+ "url": "https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html",
+ "inLanguage": "en",
+ "author": {
+  "@type": "Person",
+  "name": "simoncos",
+  "alternateName": "Che ZHAO",
+  "url": "https://simoncos.github.io/about.html"
+ },
+ "creator": {
+  "@type": "Person",
+  "name": "simoncos",
+  "alternateName": "Che ZHAO",
+  "url": "https://simoncos.github.io/about.html"
+ },
+ "datePublished": "2026-10-09",
+ "dateModified": "2026-10-13",
+ "genre": "Interactive essay",
+ "about": [
+  "interactive essay",
+  "talks"
+ ],
+ "isPartOf": {
+  "@type": "WebSite",
+  "name": "simoncos",
+  "url": "https://simoncos.github.io/"
+ },
+ "image": "https://simoncos.github.io/gallery/assets/gallery-card-limits-of-problem-analysis.jpg"
+}
+</script>
+<!-- work-jsonld:end -->
 <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html">
 <link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html">
 <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html">
@@ -254,6 +292,7 @@ footer a{display:inline-block;padding-block:11px;margin-block:-11px}
 .site-back{margin:1.6em 0 0}.site-back a{display:inline-flex;align-items:center;min-height:44px}
 .tree-handle{display:none}
 @media (pointer:coarse){.tree-handle{display:grid;place-items:center;position:absolute;right:6px;top:0;width:44px;height:44px;margin-top:-22px;padding:0;border-radius:50%;border:1px solid var(--accent);background:rgba(5,6,7,.75);touch-action:none}.tree-handle::before{content:"↕";color:var(--accent);font-size:18px;line-height:1}}
+.kp{margin:56px auto 0}.kp-h{font-size:.82rem!important;letter-spacing:.14em!important;text-transform:uppercase;color:var(--muted,#777);margin:0 0 .6em!important;font-weight:600}.kp ul{margin:0;padding-left:1.15em;line-height:1.75}.kp li{margin:.3em 0}.kp-rel{margin:.9em 0 0;font-size:.9rem;color:var(--muted,#777)}.kp-rel a{display:inline-flex;align-items:center;min-height:44px}
 </style>
 
 <div class="wrap">
@@ -272,6 +311,18 @@ footer a{display:inline-block;padding-block:11px;margin-block:-11px}
     <p class="hero-hint">Move your pointer up or down. On a phone, tap, or drag the ↕ handle on the right. Each deeper level brings more answers—and <b>twice as many new questions</b>.</p>
   </figure>
 </header>
+<section class="kp col" aria-labelledby="kpH">
+  <h2 class="kp-h" id="kpH">Key points</h2>
+  <ul>
+    <li>Analysis can go on without end: each deeper level brings more answers and twice as many new questions, so it needs a boundary.</li>
+    <li>A game bot that watches one pixel of the health bar shows how a small, bounded piece of understanding can take over a loop, and how it fails outside its boundary.</li>
+    <li>Questions about data range from descriptive to mechanistic (Jeff Leek’s six types); each level asks for more information than the last.</li>
+    <li>In the Lorenz-63 hurricane illustration (largest Lyapunov exponent about <span data-lz="lambda">0.906</span>, so the gap doubles about every <span data-lz="dbl">0.77</span> days), raising observation points from 12 to 9,000 cuts error about <span data-lz="ratio">27</span>-fold but extends the useful forecast only from about <span data-lz="h12">7.4</span> to <span data-lz="h9000">11.1</span> days.</li>
+    <li>The first rule of analysis: come back with a finite result.</li>
+  </ul>
+  <p class="kp-rel">Related interactive essays: <a href="../problem-solving-and-design/index.en.html">Problem Solving and Design</a> · <a href="../designing-design/index.en.html">Designing Design</a></p>
+</section>
+
 
 <!-- 01 -->
 <section id="s1">
