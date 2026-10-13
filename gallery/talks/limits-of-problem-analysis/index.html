@@ -223,7 +223,8 @@ h1 .hl{color:var(--accent)}
 .seg button{min-width:44px}
 .eyebrow a{display:inline-block;padding:12px 4px;margin:-12px -4px}
 footer a{display:inline-block;padding-block:11px;margin-block:-11px}
-@media (max-width:700px){
+@media (max-width:700px),(pointer:coarse) and (max-height:500px){
+  .lab,#budNum,#innCount,kbd,.rungs .dot{font-size:.9rem}.seg button{font-size:15px}#stormRead{min-height:10em}
   .eyebrow{font-size:.85rem}.secno{font-size:.88rem}.hero-hint{font-size:.9rem}
   .btn,#hitReadout,#gameMsg,#stormRead,.plegend,.note,.lvcard p,#planMsg{font-size:15px}
   #stormDay{font-size:.92rem}.stats dt{font-size:.85rem}.rule{font-size:.85rem}.cost{font-size:.85rem}.rungs .en{font-size:.8rem}#innards{font-size:.8rem}
@@ -238,6 +239,8 @@ footer a{display:inline-block;padding-block:11px;margin-block:-11px}
   footer,.src{font-size:.85rem}
 }
 .site-back{margin:1.6em 0 0}.site-back a{display:inline-flex;align-items:center;min-height:44px}
+.tree-handle{display:none}
+@media (pointer:coarse){.tree-handle{display:grid;place-items:center;position:absolute;right:6px;top:0;width:44px;height:44px;margin-top:-22px;padding:0;border-radius:50%;border:1px solid var(--accent);background:rgba(5,6,7,.75);touch-action:none}.tree-handle::before{content:"↕";color:var(--accent);font-size:18px;line-height:1}}
 </style>
 
 <div class="wrap">
@@ -253,7 +256,7 @@ footer a{display:inline-block;padding-block:11px;margin-block:-11px}
   </div>
   <figure class="hero-fig">
     <canvas id="heroCv" tabindex="0" aria-label="一棵向下生长的问题树：每回答一个问题，就分出两个新问题，越往下越密，消失在黑暗里。一条横线标出解析停在哪一层；可以用上下方向键移动它。"></canvas>
-    <p class="hero-hint">上下移动指针（手机上点一下，或拖那条横线）。每往下解析一层，答案多一层，<b>新冒出的问题多一倍</b>。</p>
+    <p class="hero-hint">上下移动指针（手机上点一下，或拖右边的 ↕ 手柄）。每往下解析一层，答案多一层，<b>新冒出的问题多一倍</b>。</p>
   </figure>
 </header>
 
@@ -599,6 +602,12 @@ function drawBits(g, w, h, hist, now, span) {
   // input: hover (mouse), tap or drag the line (touch), arrow keys
   const py = e => e.clientY - cv.getBoundingClientRect().top;
   const setY = y => { dT = clamp(kOf(y), 0.5, L - 1.5); idle = 0; };
+  // touch: a real handle with touch-action:none, so dragging the line never fights page scroll
+  const handle = document.createElement("button"); handle.type = "button"; handle.className = "tree-handle"; handle.tabIndex = -1; handle.setAttribute("aria-hidden", "true"); handle.title = "拖动设置解析深度";
+  cv.parentElement.append(handle);
+  handle.addEventListener("pointerdown", e => { drag = true; try { handle.setPointerCapture(e.pointerId); } catch (_) {} e.preventDefault(); });
+  handle.addEventListener("pointermove", e => { if (drag) setY(py(e)); });
+  for (const t of ["pointerup", "pointercancel", "lostpointercapture"]) handle.addEventListener(t, () => { drag = false; });
   cv.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") inside = true; });
   cv.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") { inside = false; idle = 0; } });
   cv.addEventListener("pointermove", e => { if (e.pointerType === "mouse" || drag) setY(py(e)); });
@@ -627,7 +636,7 @@ function drawBits(g, w, h, hist, now, span) {
   }
   function draw() {
     if (!lit) return;
-    cutY = yOf(d);
+    cutY = yOf(d); handle.style.top = (cv.offsetTop + cutY) + "px";
     g.fillStyle = "#07080a"; g.fillRect(0, 0, W, H);
     g.drawImage(dim, 0, 0, W, H);
     g.save(); g.beginPath(); g.rect(0, 0, W, cutY); g.clip(); g.drawImage(lit, 0, 0, W, H); g.restore();
@@ -1243,6 +1252,11 @@ function drawBits(g, w, h, hist, now, span) {
       tag(S.landfall, cx + 22, cy, css("--stop"), "left");
     }
   }
+  function lbl(s, x, y, col, align) {
+    const w = cg.measureText(s).width, x0 = align === "right" ? x - w : x;
+    cg.fillStyle = "rgba(5,6,7,.82)"; cg.fillRect(x0 - 4, y - 10, w + 8, 20);
+    cg.fillStyle = col; cg.textAlign = "left"; cg.textBaseline = "middle"; cg.fillText(s, x0, y);
+  }
   function chart(tt) {
     const key = [state, tt.toFixed(2), N, GW].join(); if (key === chartKey) return; chartKey = key;
     const nar = GW < 600, fs = nar ? 13 : 13, x0 = nar ? 46 : 60, x1 = GW - 10, y0 = 30, y1 = GH - 26, L0 = -7, L1 = 2.4;
@@ -1253,28 +1267,31 @@ function drawBits(g, w, h, hist, now, span) {
     cg.fillStyle = "rgba(138,144,153,.12)"; cg.fillRect(x0, e, x1 - x0, y1 - e);
     cg.strokeStyle = "rgba(138,144,153,.6)"; cg.setLineDash([3, 3]); cg.beginPath(); cg.moveTo(x0, e); cg.lineTo(x1, e); cg.stroke();
     cg.strokeStyle = "rgba(255,179,71,.45)"; cg.beginPath(); cg.moveTo(x0, tl); cg.lineTo(x1, tl); cg.stroke(); cg.setLineDash([]);
-    cg.fillStyle = "#9aa0a9"; cg.textAlign = "left"; cg.fillText(S.errBand(NAME[N], fmt(eN), nar), x0 + 6, e + 12);
-    cg.fillStyle = "rgba(255,179,71,.9)"; cg.textAlign = "right"; cg.fillText(S.tolLine(nar), x1 - 4, tl + 12); cg.textAlign = "left";
+        
     cg.strokeStyle = "#2c3038"; cg.lineWidth = 1; cg.beginPath(); cg.moveTo(x0, y0); cg.lineTo(x0, y1); cg.lineTo(x1, y1); cg.stroke();
     cg.fillStyle = "#9aa0a9"; cg.textAlign = "right"; for (const lg of (nar ? [-6, -3, 0] : [-6, -4, -2, 0])) cg.fillText(lg === 0 ? "1" : pow10(lg), x0 - 6, Y(lg));
-    cg.textAlign = "center"; cg.textBaseline = "top"; for (let dd = 0; dd <= DAYS; dd += nar ? 5 : 2.5) { cg.textAlign = dd === 0 ? "left" : dd >= DAYS ? "right" : "center"; cg.fillText(S.dayTick(dd), dd === 0 ? x0 : dd >= DAYS ? x1 : X(dd), y1 + 6); }
+    cg.textAlign = "center"; cg.textBaseline = "top"; for (let dd = 0; dd <= DAYS; dd += nar ? 5 : 2.5) { if (nar && dd === 15) continue; cg.textAlign = dd === 0 ? "left" : dd >= DAYS ? "right" : "center"; cg.fillText(S.dayTick(dd), dd === 0 ? x0 : dd >= DAYS ? x1 : X(dd), y1 + 6); }
     cg.textAlign = "left"; cg.textBaseline = "middle"; cg.fillStyle = "#ebedf0"; cg.fillText(S.chartTitle(nar), x0, y0 - 18);
     // a reference: an error of size ε growing at the mean rate λ reaches the tolerance at the horizon
     const hz = horizon(N);
     cg.strokeStyle = "rgba(138,144,153,.55)"; cg.setLineDash([2, 4]); cg.beginPath(); cg.moveTo(X(0), e); cg.lineTo(X(hz), tl); cg.stroke(); cg.setLineDash([]);
-    if (state === "ready") return;
+    const labels = () => {
+      lbl(S.errBand(NAME[N], fmt(eN), nar), x0 + 6, e + 13, "#9aa0a9", "left");
+      lbl(S.tolLine(nar), x1 - 4, tl + 13, "rgba(255,179,71,.95)", "right");
+      if (state !== "ready" && tt >= detect(N)) { const td = detect(N), s = S.detected(day(td)), w = cg.measureText(s).width; lbl(s, X(td) - w - 8 > x0 + 4 ? X(td) - w - 8 : X(td) + 8, Y(-1.6), "#ebedf0", "left"); }
+    };
+    if (state === "ready") return labels();
     const td = detect(N);
     if (tt >= td) {
       cg.strokeStyle = "rgba(235,237,240,.5)"; cg.beginPath(); cg.moveTo(X(td), y0 + 6); cg.lineTo(X(td), y1); cg.stroke();
-      cg.fillStyle = "#ebedf0"; const s = S.detected(day(td)), w = cg.measureText(s).width, ly = Y(-1.4);
-      cg.fillText(s, X(td) - w - 6 > x0 + 4 ? X(td) - w - 6 : X(td) + 6, ly);
     }
-    if (tt <= tFlap) return;
+    if (tt <= tFlap) return labels();
     cg.strokeStyle = "#ebedf0"; cg.lineWidth = 2; cg.beginPath();
     const n = idx(tt), i0 = LZ.flapStep + 1;
     for (let i = i0; i <= n; i += 4) { const x = X(i * DT), y = Y(Math.log10(GAP[i])); i === i0 ? cg.moveTo(x, y) : cg.lineTo(x, y); }
     cg.lineTo(X(n * DT), Y(Math.log10(GAP[n] || 1e-9))); cg.stroke();
     cg.fillStyle = "#ebedf0"; cg.beginPath(); cg.arc(X(n * DT), Y(Math.log10(GAP[n] || 1e-9)), 3.5, 0, 7); cg.fill();
+    labels();
   }
   function say(h) { if (h !== said) { said = h; $("#stormRead").innerHTML = h; } }
   function words(tt) {
