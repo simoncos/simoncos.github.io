@@ -236,7 +236,7 @@ footer li a,footer p a{display:inline-block;padding-block:11px;margin-block:-11p
   .sound-welcome::backdrop{background:rgba(32,49,58,.12);backdrop-filter:none}
 }
 .site-back{margin:1.6em 0 0}.site-back a{display:inline-flex;align-items:center;min-height:44px}
-.kp{margin:56px auto 0}.kp-h{font-size:.82rem!important;letter-spacing:.14em!important;text-transform:uppercase;color:var(--muted,#777);margin:0 0 .6em!important;font-weight:600}.kp ul{margin:0;padding-left:1.15em;line-height:1.75}.kp li{margin:.3em 0}.kp-rel{margin:.9em 0 0;font-size:.9rem;color:var(--muted,#777)}.kp-rel a{display:inline-flex;align-items:center;min-height:44px}
+.kp{margin:44px auto 0}.kp-card{border:1px solid var(--line,#ccc);border-radius:10px;padding:0 16px}.kp-card>summary{display:flex;align-items:center;gap:12px;min-height:48px;cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}.kp-card>summary::-webkit-details-marker{display:none}.kp-card>summary .kp-h{margin:0!important;flex:1}.kp-card>summary .kp-n{font-size:.85rem;color:var(--muted,#777)}.kp-card>summary::after{content:"";width:8px;height:8px;border-right:1.5px solid var(--muted,#777);border-bottom:1.5px solid var(--muted,#777);transform:rotate(45deg) translateY(-2px);transition:transform .2s;flex:none}.kp-card[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}.kp-card>summary:focus-visible{outline:2px solid var(--accent,var(--gold,#c90));outline-offset:4px;border-radius:6px}.kp-card ul{margin:0 0 14px}.kp-h{font-size:.82rem!important;letter-spacing:.14em!important;text-transform:uppercase;color:var(--muted,#777);margin:0 0 .6em!important;font-weight:600}.kp ul{margin:0;padding-left:1.15em;line-height:1.75}.kp li{margin:.3em 0}.kp-rel{margin:.9em 0 0;font-size:.9rem;color:var(--muted,#777)}.kp-rel a{display:inline-flex;align-items:center;min-height:44px}
 </style>
 
 <nav class="language" aria-label="Language"><a href="index.html" lang="zh-Hans" hreflang="zh-Hans">中文</a><span lang="en" aria-current="page">English</span></nav>
@@ -252,7 +252,8 @@ footer li a,footer p a{display:inline-block;padding-block:11px;margin-block:-11p
   <p class="hint">Move your pointer, or swipe sideways on a phone, to stir the wind. Those drifting specks are fragments of information.</p>
 </header>
 <section class="kp col" aria-labelledby="kpH">
-  <h2 class="kp-h" id="kpH">Key points</h2>
+  <details class="kp-card">
+    <summary><h2 class="kp-h" id="kpH">Key points</h2><span class="kp-n">5 points</span></summary>
   <ul>
     <li>Kenya Hara argues that information overload is an illusion: what floods us are low-content fragments that make us feel we already know.</li>
     <li>“Exformation” (Ex + Formation) is the counterpart of Information: instead of fitting the unknown into a familiar frame, it makes the familiar unknown again.</li>
@@ -260,6 +261,7 @@ footer li a,footer p a{display:inline-block;padding-block:11px;margin-block:-11p
     <li>Design has to be aware of extinction as well as life: “The world is like the water’s edge, where creation and exhaustion meet.”</li>
     <li>Step away from the screen: wind, smell and touch carry what pixels cannot. Not knowing is fine too.</li>
   </ul>
+  </details>
   <p class="kp-rel">Related interactive essays: <a href="../problem-solving-and-design/index.en.html">Problem Solving and Design</a> · <a href="../limits-of-problem-analysis/index.en.html">The Limits of Problem Analysis</a></p>
 </section>
 

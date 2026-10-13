@@ -266,7 +266,7 @@ h1{font-size:clamp(2.6rem,5.5vw,4.15rem);letter-spacing:-.03em}
 .plan{grid-template-columns:7.5em repeat(3,minmax(0,1fr))}
 .plan .prow{overflow-wrap:anywhere}
 .rule{font-size:.76rem}
-@media(max-width:700px){.plan{grid-template-columns:1fr;gap:8px}.plan>.prow{display:none}.plan>.phead{display:flex;align-items:flex-start;text-align:left;margin-top:16px;padding-bottom:4px}.plan>.phead .ico{display:none}.plan>.phead .goal{font-size:.8rem}.plan>.phead b{font-size:1.1rem}.plan>.phead .got{display:flex;gap:8px}.plan>.phead[data-problem="0"]{order:0}.plan>.phead[data-problem="1"]{order:1}.plan>.phead[data-problem="2"]{order:2}.plan>div:first-child{display:none}.plan .cell{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:6px 14px;min-height:68px;padding:10px 12px}.plan .cell::before{content:attr(data-level);grid-column:1;grid-row:1/3;font-size:.75rem;font-weight:700;align-self:center}.plan .cell .top,.plan .cell .bar{grid-column:2}.plan .cell .top{font-size:.8rem}.plan .cell[data-problem="0"]{order:0}.plan .cell[data-problem="1"]{order:1}.plan .cell[data-problem="2"]{order:2}#pearSvg text,#pearSvg .dimt{font-size:18px}.hero-hint{font-size:.72rem}.stormbar>.row{gap:8px}}
+@media(max-width:700px){#pearSvg text,#pearSvg .dimt{font-size:18px}.hero-hint{font-size:.72rem}.stormbar>.row{gap:8px}}
 
 
 
@@ -290,9 +290,23 @@ footer a{display:inline-block;padding-block:11px;margin-block:-11px}
   footer,.src{font-size:.85rem}
 }
 .site-back{margin:1.6em 0 0}.site-back a{display:inline-flex;align-items:center;min-height:44px}
+
+/* Mobile polish (2026-10-13): no CJK orphans, readouts that keep together, calmer budget cards */
+p,li,.note,.lvcard p,#planMsg,#stormRead,.hero-hint,.cap,figcaption{text-wrap:pretty}
+.nw{white-space:nowrap}
+#stormRead{margin-bottom:14px}
+.innards .lab{flex-wrap:wrap;row-gap:2px}
+html[lang^="zh"] .cell .top{text-wrap:balance}
+@media (max-width:380px){.cell{padding:7px 6px}html[lang="en"] .plan .cell::before{font-size:10.5px;letter-spacing:-.01em;hyphens:auto}}
+.plan .cell::before{overflow-wrap:anywhere}
+.rungs button{min-height:46px}
+@media (max-width:700px),(pointer:coarse) and (max-height:500px){
+  .cell .bar{flex-wrap:nowrap}.cell .bar i{max-width:34%}
+}
 .tree-handle{display:none}
+@media (orientation:landscape) and (max-height:500px){#heroCv{aspect-ratio:auto;height:74svh}}
 @media (pointer:coarse){.tree-handle{display:grid;place-items:center;position:absolute;right:6px;top:0;width:44px;height:44px;margin-top:-22px;padding:0;border-radius:50%;border:1px solid var(--accent);background:rgba(5,6,7,.75);touch-action:none}.tree-handle::before{content:"↕";color:var(--accent);font-size:18px;line-height:1}}
-.kp{margin:56px auto 0}.kp-h{font-size:.82rem!important;letter-spacing:.14em!important;text-transform:uppercase;color:var(--muted,#777);margin:0 0 .6em!important;font-weight:600}.kp ul{margin:0;padding-left:1.15em;line-height:1.75}.kp li{margin:.3em 0}.kp-rel{margin:.9em 0 0;font-size:.9rem;color:var(--muted,#777)}.kp-rel a{display:inline-flex;align-items:center;min-height:44px}
+.kp{margin:44px auto 0}.kp-card{border:1px solid var(--line,#ccc);border-radius:10px;padding:0 16px}.kp-card>summary{display:flex;align-items:center;gap:12px;min-height:48px;cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}.kp-card>summary::-webkit-details-marker{display:none}.kp-card>summary .kp-h{margin:0!important;flex:1}.kp-card>summary .kp-n{font-size:.85rem;color:var(--muted,#777)}.kp-card>summary::after{content:"";width:8px;height:8px;border-right:1.5px solid var(--muted,#777);border-bottom:1.5px solid var(--muted,#777);transform:rotate(45deg) translateY(-2px);transition:transform .2s;flex:none}.kp-card[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}.kp-card>summary:focus-visible{outline:2px solid var(--accent,var(--gold,#c90));outline-offset:4px;border-radius:6px}.kp-card ul{margin:0 0 14px}.kp-h{font-size:.82rem!important;letter-spacing:.14em!important;text-transform:uppercase;color:var(--muted,#777);margin:0 0 .6em!important;font-weight:600}.kp ul{margin:0;padding-left:1.15em;line-height:1.75}.kp li{margin:.3em 0}.kp-rel{margin:.9em 0 0;font-size:.9rem;color:var(--muted,#777)}.kp-rel a{display:inline-flex;align-items:center;min-height:44px}
 </style>
 
 <div class="wrap">
@@ -312,7 +326,8 @@ footer a{display:inline-block;padding-block:11px;margin-block:-11px}
   </figure>
 </header>
 <section class="kp col" aria-labelledby="kpH">
-  <h2 class="kp-h" id="kpH">Key points</h2>
+  <details class="kp-card">
+    <summary><h2 class="kp-h" id="kpH">Key points</h2><span class="kp-n">5 points</span></summary>
   <ul>
     <li>Analysis can go on without end: each deeper level brings more answers and twice as many new questions, so it needs a boundary.</li>
     <li>A game bot that watches one pixel of the health bar shows how a small, bounded piece of understanding can take over a loop, and how it fails outside its boundary.</li>
@@ -320,6 +335,7 @@ footer a{display:inline-block;padding-block:11px;margin-block:-11px}
     <li>In the Lorenz-63 hurricane illustration (largest Lyapunov exponent about <span data-lz="lambda">0.906</span>, so the gap doubles about every <span data-lz="dbl">0.77</span> days), raising observation points from 12 to 9,000 cuts error about <span data-lz="ratio">27</span>-fold but extends the useful forecast only from about <span data-lz="h12">7.4</span> to <span data-lz="h9000">11.1</span> days.</li>
     <li>The first rule of analysis: come back with a finite result.</li>
   </ul>
+  </details>
   <p class="kp-rel">Related interactive essays: <a href="../problem-solving-and-design/index.en.html">Problem Solving and Design</a> · <a href="../designing-design/index.en.html">Designing Design</a></p>
 </section>
 
@@ -656,8 +672,8 @@ function drawBits(g, w, h, hist, now, span) {
     [g, W, H] = fit(cv); if (!W || !H) return;
     const r = rng(31); nodes = [];
     for (let k = 0; k <= L; k++) {
-      const n = 2 ** k, w = W * Math.min(0.94, 0.14 + 0.24 * k), gap = k ? yOf(k) - yOf(k - 1) : 0, row = [];
-      for (let i = 0; i < n; i++) row.push({ x: W / 2 + ((i + 0.5) / n - 0.5) * w + (r() - 0.5) * (w / n) * 0.5, y: yOf(k) + (r() - 0.5) * gap * 0.18 });
+      const tg = matchMedia("(pointer:coarse)").matches ? 50 : 0, cx = (W - tg) / 2, n = 2 ** k, w = Math.min((W - tg) * 0.94, W * (0.14 + 0.24 * k)), gap = k ? yOf(k) - yOf(k - 1) : 0, row = [];
+      for (let i = 0; i < n; i++) row.push({ x: cx + ((i + 0.5) / n - 0.5) * w + (r() - 0.5) * (w / n) * 0.5, y: yOf(k) + (r() - 0.5) * gap * 0.18 });
       nodes.push(row);
     }
     lit = layer(true); dim = layer(false); lastD = -1;
@@ -708,8 +724,8 @@ function drawBits(g, w, h, hist, now, span) {
     const f0 = Math.max(cutY, yOf(L - 4)), fg = g.createLinearGradient(0, f0, 0, H);
     fg.addColorStop(0, "rgba(7,8,10,0)"); fg.addColorStop(1, "rgba(7,8,10,.94)"); g.fillStyle = fg; g.fillRect(0, f0, W, H - f0);
     // the open questions right under the line
-    const kf = Math.floor(d) + 1, row = nodes[kf], few = row.length <= 16;
-    const rr = few ? clamp(W / row.length * 0.2, 6, 10) : Math.max(1.3, 3.4 * Math.pow(0.82, kf - 4));
+    const kf = Math.floor(d) + 1, row = nodes[kf], sp = (W - (handle.offsetWidth ? 50 : 0)) * 0.94 / row.length, few = row.length <= 16 && sp >= 24;  // "?" marks only where they have room
+    const rr = few ? clamp(sp * 0.3, 6, 10) : Math.max(1.3, 3.4 * Math.pow(0.82, kf - 4));
     g.strokeStyle = "rgba(235,237,240,.9)"; g.lineWidth = 1; g.setLineDash(few ? [2, 2] : []);
     g.beginPath(); for (const p of row) { g.moveTo(p.x + rr, p.y); g.arc(p.x, p.y, rr, 0, 7); } g.stroke(); g.setLineDash([]);
     if (few) {
@@ -718,14 +734,22 @@ function drawBits(g, w, h, hist, now, span) {
       g.textAlign = "left";
     }
     const root = nodes[0][0], small = W < 480, fs = 13;
-    label("One question", root.x + 12, root.y, "#8a9099", "left", `500 ${fs}px Arial, sans-serif`);
+    // the root caption steps aside when the stop line (and its labels) come up to the root
+    if (yOf(d) - root.y > 44) label("One question", root.x + 12, root.y, "#8a9099", "left", `500 ${fs}px Arial, sans-serif`);
     // the line where you stop
     g.strokeStyle = css("--accent"); g.lineWidth = 1.5; g.setLineDash([6, 5]);
-    g.beginPath(); g.moveTo(24, cutY); g.lineTo(W - 10, cutY); g.stroke(); g.setLineDash([]);
+    // touch: the drag handle owns a right-hand gutter, so no label or line ever sits under it
+    const gut = handle.offsetWidth ? handle.offsetWidth + 14 : 10;
+    g.beginPath(); g.moveTo(24, cutY); g.lineTo(W - gut, cutY); g.stroke(); g.setLineDash([]);
     g.fillStyle = css("--accent"); g.beginPath(); g.arc(14, cutY, 6, 0, 7); g.fill();
     label("Stop here", 24, cutY - 15, css("--accent"), "left", `600 ${fs}px Arial, sans-serif`);
-    const n = 2 ** kf;
-    label(`${n - 1} answered · ${n} new`, W - 10, cutY - 15, "#ebedf0", "right", `500 ${fs}px Arial, sans-serif`);
+    const n = 2 ** kf, cTxt = `${n - 1} answered · ${n} new`, cFont = `500 ${fs}px Arial, sans-serif`;
+    g.font = `600 ${fs}px Arial, sans-serif`; const stopEnd = 24 + g.measureText("Stop here").width + 5;
+    g.font = cFont; const cW = g.measureText(cTxt).width + 5;
+    // if the count would collide with "stop here" (narrow phones), it stacks one row higher;
+    // near the top of the canvas it goes just under the line instead (never past an edge)
+    const cY = W - gut - cW >= stopEnd + 12 ? cutY - 15 : cutY - 39 >= 12 ? cutY - 39 : cutY + 19;
+    label(cTxt, W - gut, cY, "#ebedf0", "right", cFont);
   }
   function frame(dt) {
     idle += dt;
@@ -1049,6 +1073,7 @@ function drawBits(g, w, h, hist, now, span) {
     if (!ok) return;
     occ.push([x, y]);
     const g = el("g", { transform: `translate(${x},${y})`, style: "cursor:pointer" }, unkG);
+    el("circle", { r: 26, fill: "transparent" }, g);
     el("circle", { r: 11, fill: "#050607", stroke: "#ffb347", "stroke-dasharray": "2 2" }, g);
     const t = el("text", { y: 4, "text-anchor": "middle", fill: "#ffb347", "font-size": "12", "font-weight": "700" }, g); t.textContent = "?";
     g.setAttribute("tabindex", 0); g.setAttribute("role", "button"); g.setAttribute("aria-label", "Ask another question");
@@ -1228,7 +1253,7 @@ function drawBits(g, w, h, hist, now, span) {
     before: (d, n, e) => `The butterfly flaps once. The two worlds' states differ by just <b>${d}</b>, while ${n} observation points have an error of ±${e}. To measurement, the worlds are identical.`,
     after: (td, sp) => `On day ${td}, the difference outgrows the error and becomes detectable. The gap doubles roughly every 0.77 days, but unevenly; by day ${sp}, the hurricanes part ways.`,
     done: (n, td, e, hz) => `Just one wingbeat apart: with a butterfly, the hurricane hits the coastal city; without one, it turns out to sea. With ${n} observation points (error ±${e}), the difference is detectable only on day ${td}, and at the average growth rate an error that size keeps the forecast useful only until about day ${hz}.`,
-    dayLine: (d, g) => `Day <b>${d}</b> (illustrative) · gap <b>${g}</b>`
+    dayLine: (d, g) => `Day <b>${d}</b> (illustrative) · <span class="nw">gap <b>${g}</b></span>`
   };
   let g, o, cg, W, H, GW, GH, bgc, R, t = 0, clock = 0, state = "ready", N = 600, P = [], said = "", dayTxt = "", chartKey = "", small = false;
   const coastX = y => 0.15 + 0.022 * Math.sin(y * 9) + 0.011 * Math.sin(y * 23 + 1) + 0.025 * y;
@@ -1338,13 +1363,21 @@ function drawBits(g, w, h, hist, now, span) {
         
     cg.strokeStyle = "#2c3038"; cg.lineWidth = 1; cg.beginPath(); cg.moveTo(x0, y0); cg.lineTo(x0, y1); cg.lineTo(x1, y1); cg.stroke();
     cg.fillStyle = "#9aa0a9"; cg.textAlign = "right"; for (const lg of (nar ? [-6, -3, 0] : [-6, -4, -2, 0])) cg.fillText(lg === 0 ? "1" : pow10(lg), x0 - 6, Y(lg));
-    cg.textAlign = "center"; cg.textBaseline = "top"; for (let dd = 0; dd <= DAYS; dd += nar ? 5 : 2.5) { if (nar && dd === 15) continue; cg.textAlign = dd === 0 ? "left" : dd >= DAYS ? "right" : "center"; cg.fillText(S.dayTick(dd), dd === 0 ? x0 : dd >= DAYS ? x1 : X(dd), y1 + 6); }
+    // day ticks: ends first, then the middle ones that fit without touching a neighbour
+    cg.textBaseline = "top"; const ticks = [], placed = [];
+    for (let dd = 0; dd <= DAYS; dd += nar ? 5 : 2.5) ticks.push(dd);
+    ticks.sort((a, b) => (b === 0 || b >= DAYS) - (a === 0 || a >= DAYS));
+    for (const dd of ticks) {
+      const t = S.dayTick(dd), w = cg.measureText(t).width, ax = dd === 0 ? x0 : dd >= DAYS ? x1 - w : X(dd) - w / 2;
+      if (placed.some(([a, b]) => ax < b + 8 && ax + w > a - 8)) continue;
+      placed.push([ax, ax + w]); cg.textAlign = "left"; cg.fillText(t, ax, y1 + 6);
+    }
     cg.textAlign = "left"; cg.textBaseline = "middle"; cg.fillStyle = "#ebedf0"; cg.fillText(S.chartTitle(nar), x0, y0 - 18);
     // a reference: an error of size ε growing at the mean rate λ reaches the tolerance at the horizon
     const hz = horizon(N);
     cg.strokeStyle = "rgba(138,144,153,.55)"; cg.setLineDash([2, 4]); cg.beginPath(); cg.moveTo(X(0), e); cg.lineTo(X(hz), tl); cg.stroke(); cg.setLineDash([]);
     const labels = () => {
-      lbl(S.errBand(NAME[N], fmt(eN), nar), x0 + 6, e + 13, "#9aa0a9", "left");
+      { let eb = S.errBand(NAME[N], fmt(eN), nar); if (cg.measureText(eb).width > x1 - x0 - 16) eb = eb.split(" · ")[0]; lbl(eb, x1 - 4, y1 - 11, "#9aa0a9", "right"); }  // bottom-right of the band: the early curve lives bottom-left
       lbl(S.tolLine(nar), x1 - 4, tl + 13, "rgba(255,179,71,.95)", "right");
       if (state !== "ready" && tt >= detect(N)) { const td = detect(N), s = S.detected(day(td)), w = cg.measureText(s).width; lbl(s, X(td) - w - 8 > x0 + 4 ? X(td) - w - 8 : X(td) + 8, Y(-1.6), "#ebedf0", "left"); }
     };
@@ -1455,17 +1488,7 @@ function drawBits(g, w, h, hist, now, span) {
       cells[i].push(b); plan.appendChild(b);
     });
   });
-  // Keep keyboard tab order aligned with the grouped mobile layout.
-  const planHeads = [...plan.querySelectorAll(".phead")], planRows = [...plan.querySelectorAll(".prow")], planSpacer = plan.firstElementChild;
-  const smallPlan = matchMedia("(max-width:700px)");
-  function layoutPlan() {
-    if (smallPlan.matches) for (let i = 0; i < PR.length; i++) plan.append(planHeads[i], ...cells[i]);
-    else {
-      plan.append(planSpacer, ...planHeads);
-      for (let l = 0; l < LV.length; l++) plan.append(planRows[l], ...cells.map(column => column[l]));
-    }
-  }
-  smallPlan.addEventListener("change", layoutPlan); layoutPlan();
+  // Phones use the same three-column card grid as the Chinese edition, so DOM (and tab) order stays row by row.
   const msg = h => $("#planMsg").innerHTML = h;
   function deny(b, m) { b.classList.remove("deny"); void b.offsetWidth; b.classList.add("deny"); msg(`<span class="bad">${m}</span>`); }
   function render() {

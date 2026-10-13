@@ -471,6 +471,8 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 figcaption,.ct,.result,.net-detail,.map-side{overflow-wrap:anywhere}
 .site-back{margin:1.6em 0 0}.site-back a{display:inline-flex;align-items:center;min-height:44px}
 .abstract{padding:56px 0 8px}.abstract h2{font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold,#f0c878);margin:0 0 12px}.abs-answer{font-size:1.15rem;line-height:1.6;margin:0 0 12px}.abs-list{margin:0;padding-left:1.2em;line-height:1.65;color:var(--mute,#aab)}.abs-list li{margin:.35em 0}
+.abs-card{border:1px solid rgba(240,200,120,.28);border-radius:12px;padding:0 18px}.abs-card>summary{display:flex;align-items:center;gap:12px;min-height:48px;cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}.abs-card>summary::-webkit-details-marker{display:none}.abs-card>summary h2{margin:0!important;flex:1}.abs-card>summary::after{content:"";width:8px;height:8px;border-right:1.5px solid var(--gold,#f0c878);border-bottom:1.5px solid var(--gold,#f0c878);transform:rotate(45deg) translateY(-2px);transition:transform .2s;flex:none}.abs-card[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}.abs-card>summary:focus-visible{outline:2px solid var(--gold,#f0c878);outline-offset:4px;border-radius:6px}.abs-card .abs-list{margin-bottom:16px}
+
 </style>
 </head>
 <body>
@@ -510,9 +512,11 @@ figcaption,.ct,.result,.net-detail,.map-side{overflow-wrap:anywhere}
 <!-- ============ 01 READ ============ -->
 <section class="abstract" id="summary" aria-labelledby="absH">
   <div class="wrap">
-    <h2 id="absH" data-i18n="abs.h">Key findings</h2>
+    <details class="abs-card">
+    <summary><h2 id="absH" data-i18n="abs.h">Key findings</h2></summary>
     <p class="abs-answer" id="absAnswer">There is a map, but it is mostly a map of strength. Champions differ in how often they win, and that shows up in nearly every clear matchup. Pair-specific counters, if any, are faint: no single pair clears the bar, and we find no rock-paper-scissors loops, in this dataset.</p>
     <ul class="abs-list" id="absList"><li>Strong champions beat weak ones, and it carries over to later games: 600 of 606 clear edges point from the stronger to the weaker champion, and 87% keep their direction in held-out games.</li><li>Beyond strength, the pair-level signal is tiny: interactions explain about 1.2% of the variance in pair win rates, and 1 of 7,324 testable pairs pass the filter.</li><li>Rock-paper-scissors loops: 0 among 540 triangles of clear edges. Fake worlds with no counters at all give about the same.</li></ul>
+    </details>
   </div>
 </section>
 <section class="chap" id="read" data-nav="nav.read">

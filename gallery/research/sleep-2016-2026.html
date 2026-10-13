@@ -392,6 +392,16 @@
     .hero-stats { gap: 2rem; flex-wrap: wrap; }
     .hero-stat-num { font-size: 1.8rem; }
   }
+  /* Key findings: collapsed card (2026-10-13) */
+  .kf-card{border:1px solid var(--border);border-radius:12px;padding:0 18px;margin:1.2rem 0}
+  .kf-card>summary{display:flex;align-items:center;gap:12px;min-height:48px;cursor:pointer;list-style:none;color:var(--accent);font-weight:600;-webkit-tap-highlight-color:transparent}
+  .kf-card>summary::-webkit-details-marker{display:none}
+  .kf-card>summary span{flex:1}
+  .kf-card>summary::after{content:"";width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s;flex:none}
+  .kf-card[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}
+  .kf-card>summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}
+  .kf-card .findings-list{margin-top:.2rem}
+  .editorial-intro .section-title{text-wrap:balance}
 </style>
 <link rel="stylesheet" href="assets/sleep-essay-editorial.css?v=20261001">
 <!-- work-jsonld:start -->
@@ -521,6 +531,8 @@
       而是把节律、身体信号、环境和主观感受放到同一条时间线上，看哪些模式反复出现。
     </p>
 
+    <details class="kf-card" id="kfCard">
+    <summary><span>展开五个结论</span></summary>
     <ol class="findings-list">
       <li class="finding-item">
         <div>
@@ -558,6 +570,7 @@
         </div>
       </li>
     </ol>
+    </details>
 
     <aside class="medical-boundary" aria-label="医学与数据边界">
       <strong>医学边界：</strong>
@@ -1609,5 +1622,6 @@
 <script src="assets/sleep-essay-ui.js?v=a42544efd532"></script>
 <script type="module" src="assets/sleep-essay-pretext-lab.js?v=49b36a28f9f3"></script>
 
+<script>(()=>{const d=document.getElementById("kfCard");if(!d)return;const o=()=>{if(location.hash==="#key-findings")d.open=true};o();addEventListener("hashchange",o);document.querySelectorAll('a[href="#key-findings"]').forEach(a=>a.addEventListener("click",()=>{d.open=true}))})();</script>
 </body>
 </html>

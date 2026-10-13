@@ -225,7 +225,7 @@ footer li a,footer p a{display:inline-block;padding-block:11px;margin-block:-11p
   .sound-welcome::backdrop{background:rgba(32,49,58,.12);backdrop-filter:none}
 }
 .site-back{margin:1.6em 0 0}.site-back a{display:inline-flex;align-items:center;min-height:44px}
-.kp{margin:56px auto 0}.kp-h{font-size:.82rem!important;letter-spacing:.14em!important;text-transform:uppercase;color:var(--muted,#777);margin:0 0 .6em!important;font-weight:600}.kp ul{margin:0;padding-left:1.15em;line-height:1.75}.kp li{margin:.3em 0}.kp-rel{margin:.9em 0 0;font-size:.9rem;color:var(--muted,#777)}.kp-rel a{display:inline-flex;align-items:center;min-height:44px}
+.kp{margin:44px auto 0}.kp-card{border:1px solid var(--line,#ccc);border-radius:10px;padding:0 16px}.kp-card>summary{display:flex;align-items:center;gap:12px;min-height:48px;cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}.kp-card>summary::-webkit-details-marker{display:none}.kp-card>summary .kp-h{margin:0!important;flex:1}.kp-card>summary .kp-n{font-size:.85rem;color:var(--muted,#777)}.kp-card>summary::after{content:"";width:8px;height:8px;border-right:1.5px solid var(--muted,#777);border-bottom:1.5px solid var(--muted,#777);transform:rotate(45deg) translateY(-2px);transition:transform .2s;flex:none}.kp-card[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}.kp-card>summary:focus-visible{outline:2px solid var(--accent,var(--gold,#c90));outline-offset:4px;border-radius:6px}.kp-card ul{margin:0 0 14px}.kp-h{font-size:.82rem!important;letter-spacing:.14em!important;text-transform:uppercase;color:var(--muted,#777);margin:0 0 .6em!important;font-weight:600}.kp ul{margin:0;padding-left:1.15em;line-height:1.75}.kp li{margin:.3em 0}.kp-rel{margin:.9em 0 0;font-size:.9rem;color:var(--muted,#777)}.kp-rel a{display:inline-flex;align-items:center;min-height:44px}
 </style>
 
 <nav class="language" aria-label="语言"><span lang="zh-Hans" aria-current="page">中文</span><a href="index.en.html" lang="en" hreflang="en">English</a></nav>
@@ -241,7 +241,8 @@ footer li a,footer p a{display:inline-block;padding-block:11px;margin-block:-11p
   <p class="hint">移动指针（手机上用手指横着划），起一阵风。空中飘的不是花瓣，是信息的碎屑。</p>
 </header>
 <section class="kp col" aria-labelledby="kpH">
-  <h2 class="kp-h" id="kpH">要点</h2>
+  <details class="kp-card">
+    <summary><h2 class="kp-h" id="kpH">要点</h2><span class="kp-n">5 条</span></summary>
   <ul>
     <li>原研哉认为“信息过剩”是一种错觉：淹没我们的是含量很低的碎片，它们让我们以为自己已经知道。</li>
     <li>Exformation（Ex + Formation）是 Information 的反面：不是把未知装进熟悉的框架，而是让熟悉的东西重新变得未知。</li>
@@ -249,6 +250,7 @@ footer li a,footer p a{display:inline-block;padding-block:11px;margin-block:-11p
     <li>设计既要意识到生的方向，也要意识到灭的方向：“世界就像水的边缘，创造与耗尽交汇。”</li>
     <li>离开屏幕：风、气味和触感，带来像素无法传达的东西。不知道，也没关系。</li>
   </ul>
+  </details>
   <p class="kp-rel">相关交互文章：<a href="../problem-solving-and-design/index.html">问题解决与设计</a> · <a href="../limits-of-problem-analysis/index.html">问题解析的极限</a></p>
 </section>
 
