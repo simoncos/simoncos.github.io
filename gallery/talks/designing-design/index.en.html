@@ -174,6 +174,29 @@ h1,h2{letter-spacing:-.025em}
 .talkbtns .btn{white-space:normal}
 @media(max-width:700px){.hero-text .in{padding-top:20px}.hero .lede{font-size:1rem;line-height:1.7}.hero .eyebrow{font-size:.69rem}.hero .hint{font-size:.71rem;line-height:1.55}.talkbtns{gap:8px}.talkbtns .btn{font-size:.78rem;padding:7px 12px}.away .lines{font-size:1.35rem}}
 
+
+/* Mobile reading layer (2026-10 review) */
+.btn{min-height:44px}
+.eyebrow a{display:inline-block;padding:12px 4px;margin:-12px -4px}
+footer li a,footer p a{display:inline-block;padding-block:11px;margin-block:-11px}
+.touch-start,.touch-done{display:none}
+@media (pointer:coarse){
+  .touch-start{display:inline-flex;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;align-items:center;min-height:48px;padding:10px 22px;border:0;border-radius:999px;background:rgba(53,83,98,.86);color:#fff;font-size:16px;letter-spacing:.04em;box-shadow:0 8px 24px -8px rgba(20,40,60,.5)}
+  .touch-done{display:none;position:absolute;right:10px;top:10px;z-index:2;min-height:44px;min-width:44px;padding:8px 16px;border:0;border-radius:999px;background:rgba(53,83,98,.86);color:#fff;font-size:15px}
+  .cel.drawing-on .touch-start{display:none}.cel.drawing-on .touch-done{display:inline-flex;align-items:center}
+}
+.sound-dock{transition:opacity .25s}.sound-dock.scrolling{opacity:.18;pointer-events:none}
+@media (max-width:700px){
+  .cap,.aside,.counts,.btn,.leave .btn,footer{font-size:15px}
+  .hint{font-size:.9rem;letter-spacing:.12em}.eyebrow{font-size:.85rem;letter-spacing:.16em}
+  .qlist li{font-size:.9rem}.away .back{font-size:.95rem}
+  .sound-welcome p{font-size:15px}
+}
+@media (max-width:700px),(max-height:500px){
+  .sound-welcome{margin:auto auto max(16px,env(safe-area-inset-bottom));padding:20px 22px}
+  .sound-welcome::backdrop{background:rgba(32,49,58,.12);backdrop-filter:none}
+}
+.site-back{margin:1.6em 0 0}.site-back a{display:inline-flex;align-items:center;min-height:44px}
 </style>
 
 <nav class="language" aria-label="Language"><a href="index.html" lang="zh-Hans" hreflang="zh-Hans">中文</a><span lang="en" aria-current="page">English</span></nav>
@@ -257,7 +280,7 @@ h1,h2{letter-spacing:-.025em}
   <div class="wide">
     <div class="cel"><canvas id="footCv" tabindex="0" aria-label="A blank stretch of ground. Move your pointer across it; footprints reveal grass, stones, wildflowers and shallow water underneath."></canvas></div>
     <div class="celbar">
-      <p class="counts" id="footCount">Walk across this ground, as blank as paper.</p>
+      <p class="counts" id="footCount" aria-live="polite">Walk across this ground, as blank as paper.</p>
       <div class="row"><button class="btn ghost touch-mode" id="footDraw" aria-pressed="false" aria-controls="footCv">Walk with your finger</button><button class="btn ghost" id="footReset">New ground</button></div>
     </div>
     <p class="cap">You can walk with the arrow keys too. On a phone, tap “Walk with your finger,” then “Scroll the page” when you’re done.</p>
@@ -278,7 +301,7 @@ h1,h2{letter-spacing:-.025em}
   </div>
   <div class="wide">
     <div class="cel"><canvas id="shoreCv" tabindex="0" aria-label="A beach seen from above. Waves wash up and retreat. Draw in the sand and watch them slowly erase it. Move with the arrow keys; press Space to start or stop drawing."></canvas></div>
-    <div class="celbar"><p class="cap" id="shoreCap">Write something in the sand. The waves will come.</p><div class="row"><button class="btn ghost touch-mode" id="shoreDraw" aria-pressed="false" aria-controls="shoreCv">Draw with your finger</button><button class="btn ghost" id="calmBtn" aria-pressed="false">Pause the waves</button></div></div>
+    <div class="celbar"><p class="cap" id="shoreCap" aria-live="polite">Write something in the sand. The waves will come.</p><div class="row"><button class="btn ghost touch-mode" id="shoreDraw" aria-pressed="false" aria-controls="shoreCv">Draw with your finger</button><button class="btn ghost" id="calmBtn" aria-pressed="false">Pause the waves</button></div></div>
     <p class="cap">Move with the arrow keys; press Space to start or stop drawing. On a phone, tap “Draw with your finger,” then “Scroll the page” when you’re done.</p>
   </div>
   <div class="col" style="margin-top:28px">
@@ -344,6 +367,7 @@ h1,h2{letter-spacing:-.025em}
       <li>A soft glass-jar tap · <a href="https://freesound.org/people/Unicornaphobist/sounds/262958/">Glass Tap — Unicornaphobist</a></li>
     </ul>
   </details>
+  <p class="site-back"><a href="../../../index.html">← Back to simoncos.github.io</a><span> · by simoncos</span></p>
 </footer>
 
 <script>
@@ -381,10 +405,13 @@ if (!RM) requestAnimationFrame(function tick(now) {
    Painting kit. The scenery is hand-painted background plates
    (assets/*.webp); code only adds what moves or answers you.
    ========================================================= */
+// Scene plates load about one screen before their scene; only the hero and the first talk plate load at once.
+const LAZY = { "river-sky": "#riverCv", "tree-broadleaf": "#riverCv", "tree-conifer": "#riverCv", "bush": "#riverCv", "tex-grass": "#riverCv", "tex-pebbles": "#riverCv", "tex-shallow": "#riverCv", "tex-wetsand": "#footCv", "shore-sand-v2": "#shoreCv", "tex-sea": "#shoreCv", "sky-up": "#endCv", "grass-up": "#endCv" };
+function whenNear(el, fn) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); fn(); } }, { rootMargin: "120% 0px" }); io.observe(el); }
 const IMG = {};
 function img(name, cb) {
   let i = IMG[name];
-  if (!i) { i = IMG[name] = new Image(); i.decoding = "async"; i.cbs = []; i.onload = () => { i.cbs.forEach(f => f(i)); i.cbs = []; repaint(); }; i.src = `assets/${name}.webp`; }
+  if (!i) { i = IMG[name] = new Image(); i.decoding = "async"; i.cbs = []; i.onload = () => { i.cbs.forEach(f => f(i)); i.cbs = []; repaint(); }; const src = `assets/${name}.webp`, own = LAZY[name] && $(LAZY[name]); own ? whenNear(own, () => { i.src = src; }) : (i.src = src); }
   if (cb) ready(i) ? cb(i) : i.cbs.push(cb);
   return i;
 }
@@ -435,8 +462,12 @@ function drawMotes(g, W, H, motes, t, wind = 0) {
 // Touch users can scroll through a canvas until they explicitly enter drawing mode.
 function touchDrawing(cv, buttonId) {
   const button = $(buttonId), label = button.textContent;
+  const cel = cv.parentElement, go = document.createElement("button"), done = document.createElement("button");
+  go.type = done.type = "button"; go.className = "touch-start"; done.className = "touch-done"; go.textContent = label; done.textContent = "Done";
+  go.setAttribute("aria-controls", cv.id); done.setAttribute("aria-controls", cv.id);
+  go.addEventListener("click", () => button.click()); done.addEventListener("click", () => button.click()); cel.append(go, done);
   button.addEventListener("click", () => {
-    const on = cv.classList.toggle("drawing");
+    const on = cv.classList.toggle("drawing"); cel.classList.toggle("drawing-on", on);
     button.setAttribute("aria-pressed", on);
     button.textContent = on ? "Scroll the page" : label;
     cv.dispatchEvent(new Event("drawingmodechange"));
@@ -592,6 +623,7 @@ const soundscape = (() => {
   else welcome.hidden = true;
 
   dock.addEventListener("click", e => e.stopPropagation());
+  { let fade = 0; addEventListener("scroll", () => { dock.classList.add("scrolling"); clearTimeout(fade); fade = setTimeout(() => dock.classList.remove("scrolling"), 650); }, { passive: true }); }
   addEventListener("scroll", scheduleLocate, { passive: true, capture: true });
   for (const type of ["resize", "scrollend"]) addEventListener(type, scheduleLocate);
   for (const type of ["scroll", "resize"]) window.visualViewport?.addEventListener(type, scheduleLocate, { passive: true });

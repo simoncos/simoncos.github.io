@@ -275,7 +275,8 @@ def render_footer_block(config: dict[str, Any], page: dict[str, Any]) -> str:
         '    <footer class="ftr">',
         '        <span class="ftr-l"><span>© 2026 simoncos</span>'
         f'<span class="num">{bi(updated_en, updated_zh)}</span></span>',
-        f'        <span class="ftr-r"><a href="{feeds["zh"]}">RSS <span lang="zh-Hans">中文</span></a>'
+        f'        <span class="ftr-r"><a href="{prefixed(asset_prefix, "index.html")}">{bi("← Back to simoncos.github.io", "← 返回 simoncos.github.io")}</a>'
+        f'<a href="{feeds["zh"]}">RSS <span lang="zh-Hans">中文</span></a>'
         f'<a href="{feeds["en"]}">RSS EN</a></span>',
         "    </footer>",
         f"    <!-- {FOOTER_END} -->",

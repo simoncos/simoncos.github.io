@@ -163,7 +163,7 @@ h1 .hl{color:var(--accent)}
 .storm canvas{width:100%;height:auto;aspect-ratio:16/8}
 @media (max-width:700px){.storm canvas{aspect-ratio:4/3.3}}
 #stormOv{position:absolute;inset:0}
-#gapCv{width:100%;height:132px;margin-top:12px}
+#gapCv{width:100%;height:190px;margin-top:12px}
 .stormbar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;margin-top:14px}
 #stormDay{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
 #stormDay b{color:var(--ink);font-weight:600}
@@ -218,6 +218,26 @@ h1 .hl{color:var(--accent)}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 .language{display:flex;justify-content:flex-end;gap:4px;max-width:1120px;margin:0 auto;padding:4px 20px;font-size:.82rem}.language a,.language span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0 8px}.language span{color:var(--muted)}
+
+/* Mobile reading layer (2026-10 review): larger captions, controls and budget cards; 44px targets. */
+.seg button{min-width:44px}
+.eyebrow a{display:inline-block;padding:12px 4px;margin:-12px -4px}
+footer a{display:inline-block;padding-block:11px;margin-block:-11px}
+@media (max-width:700px){
+  .eyebrow{font-size:.85rem}.secno{font-size:.88rem}.hero-hint{font-size:.9rem}
+  .btn,#hitReadout,#gameMsg,#stormRead,.plegend,.note,.lvcard p,#planMsg{font-size:15px}
+  #stormDay{font-size:.92rem}.stats dt{font-size:.85rem}.rule{font-size:.85rem}.cost{font-size:.85rem}.rungs .en{font-size:.8rem}#innards{font-size:.8rem}
+  .phead b{font-size:.95rem}.phead .goal,.phead .got{font-size:.85rem}
+  .plan{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .plan>div:first-child,.prow{display:none}
+  .cell{padding:8px;min-height:84px}
+  .cell::before{content:attr(data-lv);font-size:13px;font-weight:700;color:var(--muted);line-height:1}
+  .cell.cur::before{color:var(--bg)}
+  .cell .top{font-size:14px}
+  .cell .bar{font-size:13px;flex-wrap:wrap;row-gap:4px}
+  footer,.src{font-size:.85rem}
+}
+.site-back{margin:1.6em 0 0}.site-back a{display:inline-flex;align-items:center;min-height:44px}
 </style>
 
 <div class="wrap">
@@ -336,10 +356,10 @@ h1 .hl{color:var(--accent)}
 
   <div class="bench wide">
     <div class="storm">
-      <canvas id="stormCv" aria-label="俯视的海图：左边是海岸和一座城，右边海上有一场飓风。两个世界的飓风从同一点出发，前半程完全重合；其中一个世界里有只蝴蝶扇了一下翅膀，后半程两场飓风分开，一场登陆了城市，一场转向海上。"></canvas>
+      <canvas id="stormCv" role="img" aria-label="俯视的海图：左边是海岸和一座城，右边海上有一场飓风。两个世界的飓风由同一个 Lorenz 混沌模型驱动，从同一个状态出发；其中一个世界里有只蝴蝶扇了一下翅膀，状态只差百万分之一。前半程两场飓风重合，后半程分开：一场登陆了城市，一场转向海上。"></canvas>
       <canvas id="stormOv" aria-hidden="true"></canvas>
     </div>
-    <canvas id="gapCv" aria-label="两个世界的飓风相差多远，对数刻度：从几厘米开始按指数增长，直到上千公里。灰色带是测量误差，差别越过它之前，观测不出来。"></canvas>
+    <canvas id="gapCv" role="img" aria-label="两个世界的状态相差多少，对数刻度：从百万分之一开始，大致按指数增长，但并不均匀，直到和整个系统一样大。灰色带是测量误差，差别越过它之前，观测不出来；橙色虚线以上，就分不清飓风走哪条路。"></canvas>
     <div class="stormbar">
       <div class="row">
         <button class="btn" id="flapBtn">让蝴蝶扇一下翅膀</button>
@@ -349,10 +369,11 @@ h1 .hl{color:var(--accent)}
       <div id="stormDay"></div>
     </div>
     <p id="stormRead" aria-live="polite"></p>
+    <p class="note">示意，不是天气预报：飓风的路线由 Lorenz（1963）的三变量对流模型驱动（σ=10，ρ=28，β=8/3，固定步长 RK4，每台设备算出的结果完全相同）。模型里的 x 落在哪个“瓣”上，被当作把飓风推向南边还是北边的引导形势；1 个模型时间单位画成 1 天，只为示意。这个系统的最大 Lyapunov 指数约为 <span data-lz="lambda">0.906</span>，差距平均每 <span data-lz="dbl">0.77</span> 天左右翻一倍。真实大气里，小尺度的误差还会一层层传到大尺度，Lorenz（1969）据此认为，逐日天气的可预报性大约有两周的上限。蝴蝶也不是飓风登陆的“原因”：Lorenz 1972 年那场演讲的题目本身就是一个问句——《可预报性：巴西一只蝴蝶扇动翅膀，会在得克萨斯引起龙卷风吗？》</p>
   </div>
 
   <div class="col">
-    <p>即使到了数据产量超大的时代又怎样呢？数据倒是多起来了，从中提取信息的难度也变大了：观测点从 12 个加到 9 000 个，误差缩小了二十多倍，也只让人早一天多看出两个世界不一样，那时两场飓风已经快要分道扬镳。这种时候，一定要控制住自己的贪欲，步步为营。</p>
+    <p>即使到了数据产量超大的时代又怎样呢？数据倒是多起来了，从中提取信息的难度也变大了。在这个模型里，观测点从 12 个加到 9 000 个，误差缩小约 <span data-lz="ratio">27</span> 倍，可预报的时间却只从约 <span data-lz="h12">7.4</span> 天延长到约 <span data-lz="h9000">11.1</span> 天，多出 <span data-lz="gain">3.7</span> 天：误差每缩小到原来的 1/e（约 1/2.7），只多换来约 <span data-lz="invlam">1.1</span> 天。把蝴蝶那一点差别测出来，12 个观测点要等到第 <span data-lz="d12">9.2</span> 天，9 000 个也要第 <span data-lz="d9000">6.1</span> 天；而两场飓风在第 <span data-lz="split">14.5</span> 天左右分道扬镳。这种时候，一定要控制住自己的贪欲，步步为营。</p>
   </div>
 </section>
 
@@ -390,6 +411,7 @@ h1 .hl{color:var(--accent)}
 
 <footer class="col">
   交互版改编自作者 2014 年的旧文<a href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.html">《问题解析的极限》</a>。分析类型参考 Jeff Leek, <i>The Data Scientist’s Toolbox</i>（Coursera）讲义 <i>Types of Questions</i>。开头的问题树、外挂试验台、梨的中间四级、两个世界的飓风和三个问题的预算，都是交互版补的示意，数值都是为了说明而设定的。
+  <p class="site-back"><a href="../../../index.html">← 返回 simoncos.github.io</a><span> · 作者 simoncos</span></p>
 </footer>
 </div>
 
@@ -622,7 +644,7 @@ function drawBits(g, w, h, hist, now, span) {
       for (const p of row) g.fillText("?", p.x, p.y + 0.5);
       g.textAlign = "left";
     }
-    const root = nodes[0][0], small = W < 480, fs = small ? 11 : 12;
+    const root = nodes[0][0], small = W < 480, fs = 13;
     label("一个问题", root.x + 12, root.y, "#8a9099", "left", `500 ${fs}px Noto Sans SC, sans-serif`);
     // the line where you stop
     g.strokeStyle = css("--accent"); g.lineWidth = 1.5; g.setLineDash([6, 5]);
@@ -1080,33 +1102,66 @@ function drawBits(g, w, h, hist, now, span) {
 })();
 
 /* =========================================================
-   03 · Two worlds, one butterfly
-   Both worlds start from the same storm; in one, a butterfly flaps once.
-   The storm rides a ridge between two steering currents, so the offset grows
-   exponentially (doubling every ln2/LAM s) until each storm commits to a side.
+   03 · Two worlds, one butterfly — a real chaotic system
+   Lorenz-63 (σ=10, ρ=28, β=8/3), fixed-step RK4 (dt=0.005), precomputed once,
+   so every device gets bit-identical trajectories whatever its frame rate.
+   World A gets a 1e-6 nudge in x at the flap; before that both worlds share one state.
+   The storm is steered by a slow average of tanh(x/6): x<0 lobe pushes it south (the city), x>0 north (out to sea).
+   1 model time unit is drawn as 1 day (illustration only). tests/lorenz_storm.test.cjs re-derives every quoted number.
    ========================================================= */
 (() => {
+  const LZ = {"sigma":10,"rho":28,"beta":2.6666666666666665,"dt":0.005,"spinup":3660,"steps":4000,"flapStep":70,"nudge":-1e-6,"tau":1.5,"eps12":0.01,"tol":8.5,"lambda":0.906};
   const cv = $("#stormCv"), ov = $("#stormOv"), gc = $("#gapCv"), dpr = Math.min(2, devicePixelRatio || 1);
-  const T = 16, DAYS = 12, LAM = 1.5, U0 = 0.5e-7, YKM = 600;
-  const ERR = { 12: 80, 600: 11, 9000: 2.9 }; // km: the network's position error, shrinking like 1/√n
+  const STEPS = LZ.steps, DT = LZ.dt, T = STEPS * DT, DAYS = T, SPEED = 1.25; // model units per real second
+  const EPS = n => LZ.eps12 * Math.sqrt(12 / n); // observation error shrinks like 1/√n
   const NAME = { 12: "12", 600: "600", 9000: "9 000" };
-  const FLAP0 = 0.35, FLAP1 = 1.35;
-  let g, o, cg, W, H, GW, GH, bgc, R, t = 0, clock = 0, state = "ready", N = 600, P = [], said = "", dayTxt = "", chartKey = "";
-  const u = (u0, tt) => { const e = Math.exp(LAM * tt); return u0 * e / Math.sqrt(1 + u0 * u0 * (e * e - 1)); };
-  const uA = tt => u(-U0, tt), uB = tt => u(U0, tt); // A: the world with the butterfly
-  const gapKm = tt => Math.abs(uB(tt) - uA(tt)) * YKM;
-  const tDetect = n => Math.log(ERR[n] / (2 * U0 * YKM)) / LAM;
-  const day = tt => (tt / T * DAYS).toFixed(1);
-  const fmt = km => km < 0.001 ? Math.max(1, Math.round(km * 1e5)) + " 厘米" : km < 0.01 ? (km * 1000).toFixed(1) + " 米" : km < 1 ? Math.round(km * 1000) + " 米" : (km < 10 ? km.toFixed(1) : Math.round(km)) + " 公里";
-  // map, in frame fractions: a coast down the left edge, a city on it
+  // ---- the model ----
+  const f = (x, y, z) => [LZ.sigma * (y - x), x * (LZ.rho - z) - y, x * y - LZ.beta * z];
+  function rk4(s) {
+    const [x, y, z] = s, h = DT, a = f(x, y, z), b = f(x + a[0] * h / 2, y + a[1] * h / 2, z + a[2] * h / 2),
+      c = f(x + b[0] * h / 2, y + b[1] * h / 2, z + b[2] * h / 2), d = f(x + c[0] * h, y + c[1] * h, z + c[2] * h);
+    return [x + h / 6 * (a[0] + 2 * b[0] + 2 * c[0] + d[0]), y + h / 6 * (a[1] + 2 * b[1] + 2 * c[1] + d[1]), z + h / 6 * (a[2] + 2 * b[2] + 2 * c[2] + d[2])];
+  }
+  let s0 = [1, 1, 1]; for (let i = 0; i < LZ.spinup; i++) s0 = rk4(s0);
+  const GAP = new Float64Array(STEPS + 1), WA = new Float64Array(STEPS + 1), WB = new Float64Array(STEPS + 1);
+  { let A = s0.slice(), B = s0.slice(), wa = 0, wb = 0; const k = DT / LZ.tau;
+    for (let i = 0; i < STEPS; i++) {
+      if (i === LZ.flapStep) A[0] += LZ.nudge;
+      A = rk4(A); B = rk4(B);
+      wa += (Math.tanh(A[0] / 6) - wa) * k; wb += (Math.tanh(B[0] / 6) - wb) * k;
+      GAP[i + 1] = Math.hypot(A[0] - B[0], A[1] - B[1], A[2] - B[2]); WA[i + 1] = wa; WB[i + 1] = wb;
+    } }
+  const tFlap = LZ.flapStep * DT;
+  const detect = n => { const e = EPS(n); for (let i = 1; i <= STEPS; i++) if (GAP[i] > e) return i * DT; return T; };
+  const horizon = n => Math.log(LZ.tol / EPS(n)) / LZ.lambda;
+  const SPLIT = (() => { for (let i = 1; i <= STEPS; i++) if (GAP[i] > LZ.tol) return i * DT; return T; })();
+  const idx = tt => clamp(Math.round(tt / DT), 0, STEPS);
+  const day = tt => tt.toFixed(1);
+  const SUP = { "-": "⁻", 0: "⁰", 1: "¹", 2: "²", 3: "³", 4: "⁴", 5: "⁵", 6: "⁶", 7: "⁷", 8: "⁸", 9: "⁹" };
+  const pow10 = e => "10" + String(e).replace(/./g, ch => SUP[ch]);
+  const fmt = g => { if (g >= 0.1) return g.toFixed(g < 10 ? 1 : 0); const e = Math.floor(Math.log10(g)), m = g / 10 ** e; return (m < 1.05 ? "" : m.toFixed(1) + "×") + pow10(e); };
+  const S = {
+    font: "Noto Sans SC, sans-serif", city: "海边的城", bfly: "一只蝴蝶", flapped: "扇了一下", storm: "飓风", together: "两个世界的飓风：还重合着",
+    withB: "有蝴蝶的世界", noB: "没有蝴蝶的世界", landfall: "登陆", again: "再来一次",
+    errBand: (n, e, nar) => nar ? `误差 ±${e} · 这以下测不出` : `${n} 个观测点的误差 ±${e} · 这以下，测不出两个世界的差别`,
+    tolLine: nar => nar ? "分不清走哪条路" : "差到这里，就分不清飓风走哪条路了",
+    dayTick: d => `第 ${d} 天`, chartTitle: nar => nar ? "两个世界差多少（对数）" : "两个世界的状态差多少（模型单位，对数刻度）",
+    detected: d => `第 ${d} 天：测得出了`,
+    ready: "两个世界的飓风，从同一个状态出发。",
+    before: (d, n, e) => `蝴蝶扇了一下翅膀：两个世界的状态只差 <b>${d}</b>。${n} 个观测点的误差却有 ±${e}，两个世界测起来一模一样。`,
+    after: (td, sp) => `第 ${td} 天，差别长过了误差，这才测得出来。差距大约每 0.77 天翻一倍，但长得并不均匀；到第 ${sp} 天，两场飓风分道扬镳。`,
+    done: (n, td, e, hz) => `只差一次扇翅：有蝴蝶的世界里，飓风登陆了海边的城；没有蝴蝶的世界里，它转向了海上。${n} 个观测点（误差 ±${e}）：第 ${td} 天才测得出两个世界不一样；照平均增长率算，这样的误差让预报大约只能撑到第 ${hz} 天。`,
+    dayLine: (d, g) => `第 <b>${d}</b> 天（示意） · 两个世界相差 <b>${g}</b>`
+  };
+  let g, o, cg, W, H, GW, GH, bgc, R, t = 0, clock = 0, state = "ready", N = 600, P = [], said = "", dayTxt = "", chartKey = "", small = false;
   const coastX = y => 0.15 + 0.022 * Math.sin(y * 9) + 0.011 * Math.sin(y * 23 + 1) + 0.025 * y;
   const CITY = [coastX(0.74) - 0.018, 0.74];
-  // tracks: a shared start, the ridge between two outcomes, and the outcomes
   const S0 = [0.88, 0.58], C1 = [0.7, 0.56];
   const MID = [S0, C1, [0.52, 0.5], [0.38, 0.44]], SOUTH = [S0, C1, [0.42, 0.64], [CITY[0] + 0.01, CITY[1]]], NORTH = [S0, C1, [0.6, 0.3], [0.52, 0.07]];
   function bez(p, s) { const m = 1 - s, a = m * m * m, b = 3 * m * m * s, c = 3 * m * s * s, d = s * s * s; return [a * p[0][0] + b * p[1][0] + c * p[2][0] + d * p[3][0], a * p[0][1] + b * p[1][1] + c * p[2][1] + d * p[3][1]]; }
-  function at(uu, tt) { const s = clamp(tt / T, 0, 1), m = bez(MID, s), q = bez(uu < 0 ? SOUTH : NORTH, s), k = Math.abs(uu); return [(m[0] + (q[0] - m[0]) * k) * W, (m[1] + (q[1] - m[1]) * k) * H]; }
-  // the map sits on the overlay, so the particle layer can fade to one flat colour (no ghosts of the grid)
+  // w ∈ (-1, 1): the slow steering signal from the Lorenz x variable
+  function at(w, tt) { const s = clamp(tt / T, 0, 1), m = bez(MID, s), q = bez(w < 0 ? SOUTH : NORTH, s), k = Math.min(1, Math.abs(w) * 1.15); return [(m[0] + (q[0] - m[0]) * k) * W, (m[1] + (q[1] - m[1]) * k) * H]; }
+  const lab = () => small ? 13 : 13.5;
   function paintMap(x) {
     x.setTransform(dpr, 0, 0, dpr, 0, 0);
     x.strokeStyle = "#0e1216"; x.lineWidth = 1; x.beginPath();
@@ -1115,31 +1170,30 @@ function drawBits(g, w, h, hist, now, span) {
     x.fillStyle = "rgba(20,23,29,.55)"; x.fill(); x.strokeStyle = "#2c3038"; x.lineWidth = 1.2; x.stroke();
     const qx = CITY[0] * W, qy = CITY[1] * H;
     x.fillStyle = "#ebedf0"; x.fillRect(qx - 3, qy - 3, 6, 6);
-    x.font = `500 ${W < 700 ? 11 : 12}px Noto Sans SC, sans-serif`; x.fillStyle = "#8a9099"; x.textAlign = "center"; x.textBaseline = "top"; x.fillText("海边的城", qx, qy + 8); x.textAlign = "left";
+    x.font = `500 ${lab()}px ${S.font}`; x.fillStyle = "#9aa0a9"; x.textAlign = "left"; x.textBaseline = "top"; x.fillText(S.city, Math.max(4, qx - 10), qy + 8);
   }
   const wipe = () => { g.fillStyle = "#06080b"; g.fillRect(0, 0, W, H); };
   function setup() {
-    [g, W, H] = fit(cv); [o] = fit(ov, H); [cg, GW, GH] = fit(gc);
-    R = Math.min(W, H) * (W < 700 ? 0.15 : 0.13);
-    const r = rng(3); P = Array.from({ length: W < 700 ? 520 : 950 }, () => ({ r: 0.16 + Math.pow(r(), 0.8) * 0.84, a: r() * 6.283 }));
+    [g, W, H] = fit(cv); [o] = fit(ov, H); [cg, GW, GH] = fit(gc); small = W < 700;
+    R = Math.min(W, H) * (small ? 0.15 : 0.13);
+    const r = rng(3); P = Array.from({ length: small ? 420 : 900 }, () => ({ r: 0.16 + Math.pow(r(), 0.8) * 0.84, a: r() * 6.283 }));
     bgc = document.createElement("canvas"); bgc.width = Math.max(1, g.canvas.width); bgc.height = Math.max(1, g.canvas.height); paintMap(bgc.getContext("2d"));
     wipe(); chartKey = "";
   }
-  // one set of particles in storm coordinates, drawn around both worlds' storm centres.
-  // Each streak is the arc the particle swept in the last TAIL seconds, so nothing accumulates between frames.
+  const pr = rng(11); // cloud particles are decoration only and never touch the model
   function spin(dt, pa, pb) {
-    const A3 = [new Path2D(), new Path2D(), new Path2D()], B3 = [new Path2D(), new Path2D(), new Path2D()], ph = clock * 0.3, TAIL = 0.09;
+    const A3 = [new Path2D(), new Path2D(), new Path2D()], B3 = [new Path2D(), new Path2D(), new Path2D()], ph = clock * 0.3, TAIL = 0.09, both = Math.hypot(pa[0] - pb[0], pa[1] - pb[1]) > 1;
     for (const p of P) {
       const v = p.r < 0.25 ? p.r / 0.25 : Math.pow(0.25 / p.r, 0.6), w = 1.9 * v / p.r;
       p.a -= w * dt; p.r -= 0.05 * v * dt;
-      if (p.r < 0.15) { p.r = 0.95 + Math.random() * 0.05; p.a = Math.random() * 6.283; }
+      if (p.r < 0.15) { p.r = 0.95 + pr() * 0.05; p.a = pr() * 6.283; }
       const rr = p.r * R, c0 = Math.cos(p.a) * rr, s0 = Math.sin(p.a) * rr * 0.92, c1 = Math.cos(p.a + w * TAIL) * rr, s1 = Math.sin(p.a + w * TAIL) * rr * 0.92;
       const arm = Math.cos(2 * (p.a + ph - 2.3 * Math.log(p.r))), k = arm > 0.5 ? 2 : arm > -0.3 ? 1 : 0;
-      B3[k].moveTo(pb[0] + c1, pb[1] + s1); B3[k].lineTo(pb[0] + c0, pb[1] + s0);
+      if (both) { B3[k].moveTo(pb[0] + c1, pb[1] + s1); B3[k].lineTo(pb[0] + c0, pb[1] + s0); }
       A3[k].moveTo(pa[0] + c1, pa[1] + s1); A3[k].lineTo(pa[0] + c0, pa[1] + s0);
     }
     g.lineWidth = 1.1;
-    [0.22, 0.45, 0.82].forEach((a, k) => { g.strokeStyle = `rgba(170,186,210,${a})`; g.stroke(B3[k]); });
+    if (both) [0.22, 0.45, 0.82].forEach((a, k) => { g.strokeStyle = `rgba(170,186,210,${a})`; g.stroke(B3[k]); });
     [0.22, 0.45, 0.82].forEach((a, k) => { g.strokeStyle = `rgba(242,234,222,${a})`; g.stroke(A3[k]); });
   }
   function butterfly(x, y, s, f, a) {
@@ -1154,102 +1208,104 @@ function drawBits(g, w, h, hist, now, span) {
     o.restore();
   }
   function tag(txt, x, y, col, align = "center") {
-    o.font = `500 ${W < 700 ? 11 : 12}px Noto Sans SC, sans-serif`; o.textAlign = align; o.textBaseline = "middle";
-    const w = o.measureText(txt).width, x0 = clamp(align === "center" ? x - w / 2 : x, 6, W - w - 6);
-    o.fillStyle = "rgba(5,6,7,.8)"; o.fillRect(x0 - 5, y - 10, w + 10, 20);
+    o.font = `500 ${lab()}px ${S.font}`; o.textBaseline = "middle";
+    const w = o.measureText(txt).width, x0 = clamp(align === "center" ? x - w / 2 : x, 6, W - w - 6), hh = lab() + 9;
+    o.fillStyle = "rgba(5,6,7,.82)"; o.fillRect(x0 - 5, y - hh / 2, w + 10, hh);
     o.fillStyle = col; o.textAlign = "left"; o.fillText(txt, x0, y + 0.5);
   }
-  function track(uf, t1, dash, col) {
+  function track(W8, t1, dash, col) {
     if (t1 <= 0) return;
     o.strokeStyle = col; o.lineWidth = 1.5; o.setLineDash(dash); o.beginPath();
-    for (let tt = 0; ; tt = Math.min(t1, tt + 0.1)) { const [x, y] = at(uf(tt), tt); tt ? o.lineTo(x, y) : o.moveTo(x, y); if (tt >= t1) break; }
+    const n = idx(t1);
+    for (let i = 0; i <= n; i += 10) { const [x, y] = at(W8[i], i * DT); i ? o.lineTo(x, y) : o.moveTo(x, y); }
+    const [x, y] = at(W8[n], n * DT); o.lineTo(x, y);
     o.stroke(); o.setLineDash([]);
   }
   function overlay(tt, pa, pb) {
     o.clearRect(0, 0, W, H); o.drawImage(bgc, 0, 0, W, H);
-    track(uB, tt, [5, 5], "rgba(170,186,210,.55)"); track(uA, tt, [], "rgba(242,234,222,.55)");
-    // the butterfly, drawn far larger than life
-    const s0 = at(0, 0), bx = s0[0] - R * 1.05, by = s0[1] + R * 0.6, s = clamp(R / 52, 0.7, 1.3);
-    if (state === "ready") { butterfly(bx, by, s, 0.75 + 0.25 * Math.sin(clock * 2.4), 1); tag("一只蝴蝶", bx, by + 24 * s, css("--accent")); }
+    track(WB, tt, [5, 5], "rgba(170,186,210,.6)"); track(WA, tt, [], "rgba(242,234,222,.6)");
+    const st = at(0, 0), bx = st[0] - R * 1.05, by = st[1] + R * 0.6, s = clamp(R / 52, 0.7, 1.3);
+    const fl = state !== "ready" && tt >= tFlap && tt <= tFlap + 1;
+    if (state === "ready") { butterfly(bx, by, s, 0.75 + 0.25 * Math.sin(clock * 2.4), 1); tag(S.bfly, bx, by + 26 * s, css("--accent")); }
     else {
-      const fl = tt >= FLAP0 && tt <= FLAP1;
-      butterfly(bx, by, s, fl ? 0.5 + 0.5 * Math.sin(tt * 42) : 0.6, fl ? 1 : clamp(1.6 - tt * 0.25, 0.3, 1));
-      if (tt >= FLAP0 && tt < FLAP0 + 1.6) { const k = (tt - FLAP0) / 1.6; o.strokeStyle = `rgba(255,179,71,${1 - k})`; o.lineWidth = 1.5; o.beginPath(); o.arc(bx, by, 8 + k * R * 0.9, 0, 7); o.stroke(); }
-      if (tt < 3) tag("扇了一下", bx, by + 24 * s, css("--accent"));
+      butterfly(bx, by, s, fl ? 0.5 + 0.5 * Math.sin(clock * 42) : 0.6, tt < tFlap + 1 ? 1 : clamp(1.6 - (tt - tFlap) * 0.25, 0.3, 1));
+      if (tt >= tFlap && tt < tFlap + 1.6) { const k = (tt - tFlap) / 1.6; o.strokeStyle = `rgba(255,179,71,${1 - k})`; o.lineWidth = 1.5; o.beginPath(); o.arc(bx, by, 8 + k * R * 0.9, 0, 7); o.stroke(); }
+      if (tt >= tFlap && tt < 3) tag(S.flapped, bx, by + 26 * s, css("--accent"));
     }
-    // the eyes and their names
     const sep = Math.hypot(pa[0] - pb[0], pa[1] - pb[1]);
     for (const [p, c] of [[pb, "#aabad2"], [pa, "#f2eade"]]) { o.fillStyle = c; o.beginPath(); o.arc(p[0], p[1], 2.5, 0, 7); o.fill(); }
-    const above = p => p[1] - R - 14 > 12 ? p[1] - R - 14 : p[1] + R + 14;
-    if (sep < R * 1.6) tag(state === "ready" ? "飓风" : "两个世界的飓风：还重合着", pa[0], above(pa), "#ebedf0");
-    else { tag("有蝴蝶的世界", pa[0], above(pa), "#f2eade"); tag("没有蝴蝶的世界", pb[0], above(pb), "#aabad2"); }
+    const above = p => p[1] - R - 16 > 14 ? p[1] - R - 16 : p[1] + R + 16;
+    if (sep < R * 1.6) tag(state === "ready" ? S.storm : S.together, pa[0], above(pa), "#ebedf0");
+    else { tag(S.withB, pa[0], above(pa), "#f2eade"); tag(S.noB, pb[0], above(pb), "#aabad2"); }
     if (tt > T * 0.93) {
       const k = (tt - T * 0.93) / (T * 0.07), cx = CITY[0] * W, cy = CITY[1] * H;
       o.strokeStyle = css("--stop"); o.lineWidth = 2; o.globalAlpha = k; o.beginPath(); o.arc(cx, cy, 12 + Math.sin(clock * 3) * 2, 0, 7); o.stroke(); o.globalAlpha = 1;
-      tag("登陆", cx + 22, cy, css("--stop"), "left");
+      tag(S.landfall, cx + 22, cy, css("--stop"), "left");
     }
   }
   function chart(tt) {
     const key = [state, tt.toFixed(2), N, GW].join(); if (key === chartKey) return; chartKey = key;
-    const nar = GW < 600, x0 = nar ? 50 : 68, x1 = GW - 10, y0 = 18, y1 = GH - 22, L0 = -4, L1 = 3.3;
-    const X = s => x0 + s / T * (x1 - x0), Y = lg => y1 - (lg - L0) / (L1 - L0) * (y1 - y0);
+    const nar = GW < 600, fs = nar ? 13 : 13, x0 = nar ? 46 : 60, x1 = GW - 10, y0 = 30, y1 = GH - 26, L0 = -7, L1 = 2.4;
+    const X = s => x0 + s / T * (x1 - x0), Y = lg => y1 - (clamp(lg, L0, L1) - L0) / (L1 - L0) * (y1 - y0);
     cg.clearRect(0, 0, GW, GH);
-    const fs = nar ? 10 : 11; cg.font = `400 ${fs}px Noto Sans SC, sans-serif`; cg.textBaseline = "middle";
-    // the error band: anything below it, the network cannot tell apart
-    const e = Y(Math.log10(ERR[N]));
+    cg.font = `400 ${fs}px ${S.font}`; cg.textBaseline = "middle";
+    const eN = EPS(N), e = Y(Math.log10(eN)), tl = Y(Math.log10(LZ.tol));
     cg.fillStyle = "rgba(138,144,153,.12)"; cg.fillRect(x0, e, x1 - x0, y1 - e);
-    cg.strokeStyle = "rgba(138,144,153,.6)"; cg.setLineDash([3, 3]); cg.beginPath(); cg.moveTo(x0, e); cg.lineTo(x1, e); cg.stroke(); cg.setLineDash([]);
-    cg.fillStyle = "#8a9099"; cg.fillText(nar ? `误差 ±${ERR[N]} 公里 · 这以下测不出` : `${NAME[N]} 个观测点的误差 ±${ERR[N]} 公里 · 这以下，测不出两个世界的差别`, x0 + 8, e + 11);
+    cg.strokeStyle = "rgba(138,144,153,.6)"; cg.setLineDash([3, 3]); cg.beginPath(); cg.moveTo(x0, e); cg.lineTo(x1, e); cg.stroke();
+    cg.strokeStyle = "rgba(255,179,71,.45)"; cg.beginPath(); cg.moveTo(x0, tl); cg.lineTo(x1, tl); cg.stroke(); cg.setLineDash([]);
+    cg.fillStyle = "#9aa0a9"; cg.textAlign = "left"; cg.fillText(S.errBand(NAME[N], fmt(eN), nar), x0 + 6, e + 12);
+    cg.fillStyle = "rgba(255,179,71,.9)"; cg.textAlign = "right"; cg.fillText(S.tolLine(nar), x1 - 4, tl + 12); cg.textAlign = "left";
     cg.strokeStyle = "#2c3038"; cg.lineWidth = 1; cg.beginPath(); cg.moveTo(x0, y0); cg.lineTo(x0, y1); cg.lineTo(x1, y1); cg.stroke();
-    cg.textAlign = "right"; for (const [lg, s] of [[-4, "10 厘米"], [-2, "10 米"], [0, "1 公里"], [2, "100 公里"]]) cg.fillText(s, x0 - 6, Y(lg));
-    cg.textAlign = "center"; cg.textBaseline = "top"; for (let dd = 0; dd <= DAYS; dd += 3) cg.fillText(`第 ${dd} 天`, clamp(X(dd / DAYS * T), x0 + 16, x1 - 18), y1 + 6);
-    cg.textAlign = "left"; cg.textBaseline = "middle"; cg.fillStyle = "#ebedf0"; cg.fillText("两场飓风相差多远（对数刻度）", x0 + 8, y0 - 6);
+    cg.fillStyle = "#9aa0a9"; cg.textAlign = "right"; for (const lg of (nar ? [-6, -3, 0] : [-6, -4, -2, 0])) cg.fillText(lg === 0 ? "1" : pow10(lg), x0 - 6, Y(lg));
+    cg.textAlign = "center"; cg.textBaseline = "top"; for (let dd = 0; dd <= DAYS; dd += nar ? 5 : 2.5) { cg.textAlign = dd === 0 ? "left" : dd >= DAYS ? "right" : "center"; cg.fillText(S.dayTick(dd), dd === 0 ? x0 : dd >= DAYS ? x1 : X(dd), y1 + 6); }
+    cg.textAlign = "left"; cg.textBaseline = "middle"; cg.fillStyle = "#ebedf0"; cg.fillText(S.chartTitle(nar), x0, y0 - 18);
+    // a reference: an error of size ε growing at the mean rate λ reaches the tolerance at the horizon
+    const hz = horizon(N);
+    cg.strokeStyle = "rgba(138,144,153,.55)"; cg.setLineDash([2, 4]); cg.beginPath(); cg.moveTo(X(0), e); cg.lineTo(X(hz), tl); cg.stroke(); cg.setLineDash([]);
     if (state === "ready") return;
-    const td = tDetect(N);
+    const td = detect(N);
     if (tt >= td) {
       cg.strokeStyle = "rgba(235,237,240,.5)"; cg.beginPath(); cg.moveTo(X(td), y0 + 6); cg.lineTo(X(td), y1); cg.stroke();
-      cg.fillStyle = "#ebedf0"; const s = `第 ${day(td)} 天：测得出来了`, w = cg.measureText(s).width;
-      cg.fillText(s, X(td) - w - 6 > x0 + 4 ? X(td) - w - 6 : X(td) + 6, Y(1.6));
+      cg.fillStyle = "#ebedf0"; const s = S.detected(day(td)), w = cg.measureText(s).width, ly = Y(-1.4);
+      cg.fillText(s, X(td) - w - 6 > x0 + 4 ? X(td) - w - 6 : X(td) + 6, ly);
     }
+    if (tt <= tFlap) return;
     cg.strokeStyle = "#ebedf0"; cg.lineWidth = 2; cg.beginPath();
-    for (let s = 0; ; s = Math.min(tt, s + 0.08)) { const x = X(s), y = Y(Math.log10(gapKm(s))); s ? cg.lineTo(x, y) : cg.moveTo(x, y); if (s >= tt) break; }
-    cg.stroke();
-    cg.fillStyle = "#ebedf0"; cg.beginPath(); cg.arc(X(tt), Y(Math.log10(gapKm(tt))), 3.5, 0, 7); cg.fill();
+    const n = idx(tt), i0 = LZ.flapStep + 1;
+    for (let i = i0; i <= n; i += 4) { const x = X(i * DT), y = Y(Math.log10(GAP[i])); i === i0 ? cg.moveTo(x, y) : cg.lineTo(x, y); }
+    cg.lineTo(X(n * DT), Y(Math.log10(GAP[n] || 1e-9))); cg.stroke();
+    cg.fillStyle = "#ebedf0"; cg.beginPath(); cg.arc(X(n * DT), Y(Math.log10(GAP[n] || 1e-9)), 3.5, 0, 7); cg.fill();
   }
   function say(h) { if (h !== said) { said = h; $("#stormRead").innerHTML = h; } }
   function words(tt) {
-    const td = tDetect(N);
-    if (state === "ready") return say("两个世界的飓风，从同一个位置出发。");
-    if (state === "done") return say(`只差一次扇翅：有蝴蝶的世界里，飓风登陆了海边的城；没有蝴蝶的世界里，它转向了海上。${NAME[N]} 个观测点，要到第 ${day(td)} 天才测得出两个世界不一样。`);
-    if (tt < td) return say(`蝴蝶扇了一下翅膀。两场飓风此刻只差 <b>${fmt(gapKm(0))}</b>，${NAME[N]} 个观测点的误差却有 ±${ERR[N]} 公里：两个世界，测起来一模一样。`);
-    say(`第 ${day(td)} 天，差别长过了误差，这才测得出来。可这时离两场飓风分道扬镳，已经不远了。`);
+    const td = detect(N), eN = fmt(EPS(N)), hz = day(horizon(N));
+    if (state === "ready") return say(S.ready);
+    if (state === "done") return say(S.done(NAME[N], day(td), eN, hz));
+    if (tt < tFlap) return say(S.ready);
+    if (tt < td) return say(S.before(fmt(Math.abs(LZ.nudge)), NAME[N], eN));
+    say(S.after(day(td), day(SPLIT)));
   }
-  function start() {
-    t = 0; state = "run"; chartKey = "";
-    $("#flapBtn").textContent = "再来一次";
-  }
+  function start() { t = 0; state = "run"; chartKey = ""; $("#flapBtn").textContent = S.again; }
   $("#flapBtn").addEventListener("click", () => { start(); if (RM) { t = T; state = "done"; still(); } });
   $("#sensSeg").addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return; N = +b.dataset.n;
     for (const x of $("#sensSeg").children) x.setAttribute("aria-pressed", x === b);
-    chart(state === "ready" ? 0 : t); words(state === "ready" ? 0 : t);
+    chartKey = ""; chart(state === "ready" ? 0 : t); words(state === "ready" ? 0 : t);
   });
-  setup(); addEventListener("resize", () => { setup(); if (RM) still(); });
+  setup(); addEventListener("resize", () => { setup(); if (RM || state === "done") still(); });
   function frame(dt) {
     clock += dt;
-    if (state === "run") { t += dt; if (t >= T) { t = T; state = "done"; } }
-    const tt = state === "ready" ? 0 : t, pa = at(uA(tt), tt), pb = at(uB(tt), tt);
+    if (state === "run") { t += dt * SPEED; if (t >= T) { t = T; state = "done"; } }
+    const tt = state === "ready" ? 0 : t, n = idx(tt), pa = at(WA[n], tt), pb = at(WB[n], tt);
     if (!W) return;
     wipe(); spin(dt, pa, pb); overlay(tt, pa, pb); chart(tt); words(tt);
-    const d = `第 <b>${day(tt)}</b> 天 · 两场飓风相差 <b>${fmt(gapKm(tt))}</b>`;
+    const d = S.dayLine(day(tt), tt <= tFlap ? "0" : fmt(GAP[n]));
     if (d !== dayTxt) { dayTxt = d; $("#stormDay").innerHTML = d; }
   }
-  // reduced motion: the finished picture, no animation
-  function still() { clock = 0; for (let i = 0; i < 40; i++) frame(1 / 30); }
-  if (RM) { state = "done"; t = T; $("#flapBtn").textContent = "再来一次"; still(); }
+  function still() { const keep = state; clock = 0; for (let i = 0; i < 40; i++) frame(1 / 30); state = keep; }
+  if (RM) { state = "done"; t = T; $("#flapBtn").textContent = S.again; still(); }
   else {
     addLoop(cv, frame);
-    // the first time the figure is properly on screen, the butterfly flaps by itself
     const io = new IntersectionObserver(es => { if (es[0].isIntersecting && state === "ready") { io.disconnect(); setTimeout(() => { if (state === "ready") start(); }, 900); } }, { threshold: 0.6 });
     io.observe($(".storm"));
   }
@@ -1303,7 +1359,7 @@ function drawBits(g, w, h, hist, now, span) {
     plan.insertAdjacentHTML("beforeend", `<div class="prow">${lv}<span class="en">${EN[l]}</span></div>`);
     PR.forEach((p, i) => {
       const b = document.createElement("button"), c = p.c[l], v = p.v[l];
-      b.className = "cell";
+      b.className = "cell"; b.dataset.lv = LV[l];
       b.innerHTML = `<span class="top">${p.t[l]}</span><span class="bar"><i style="width:${Math.max(3, v / maxV * 100) * 0.62}%"></i>+${v}<span class="price">${c === Infinity ? "∞" : c}</span></span>`;
       b.setAttribute("aria-label", `${p.name}，解析到「${lv}」：${p.t[l]}${/？$/.test(p.t[l]) ? "" : "。"}这一层多带回 ${v}，要花 ${c === Infinity ? "无穷多" : c}。`);
       b.addEventListener("click", () => pick(i, l + 1, b));
