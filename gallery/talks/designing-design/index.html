@@ -368,7 +368,7 @@ const lerp = (a, b, t) => a + (b - a) * t;
 const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
 function rng(seed) { let s = seed >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
-const DPR = Math.min(2, devicePixelRatio || 1);
+const DPR = Math.min(matchMedia("(pointer: coarse)").matches ? 1.5 : 2, devicePixelRatio || 1); // painted scenes: 1.5× on phones is visually the same and ~45% fewer pixels to paint
 function fit(cv) {
   const w = cv.clientWidth, h = cv.clientHeight;
   cv.width = Math.round(w * DPR); cv.height = Math.round(h * DPR);
@@ -385,10 +385,14 @@ function addLoop(el, fn) { const o = { fn, vis: false }; loops.push(o); new Inte
 for (const type of ["input", "click", "pointermove", "pointerdown", "pointerleave", "keydown", "resize"]) addEventListener(type, repaint);
 document.fonts.ready.then(repaint);
 let lastT = performance.now();
+// When a device can't paint the scenes inside one frame, draw every other frame instead of dropping frames unevenly.
+let gap = 16, prev = performance.now(), odd = false;
 if (!RM) requestAnimationFrame(function tick(now) {
+  requestAnimationFrame(tick);
+  gap += (now - prev - gap) * 0.1; prev = now; odd = !odd;
+  if (gap > 24 && odd) return; // struggling (under ~42 fps): paint every other frame
   const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
   for (const o of loops) if (o.vis) o.fn(dt, now / 1000);
-  requestAnimationFrame(tick);
 });
 
 /* =========================================================
@@ -397,15 +401,23 @@ if (!RM) requestAnimationFrame(function tick(now) {
    ========================================================= */
 // Scene plates load about one screen before their scene; only the hero and the first talk plate load at once.
 const LAZY = { "river-sky": "#riverCv", "tree-broadleaf": "#riverCv", "tree-conifer": "#riverCv", "bush": "#riverCv", "tex-grass": "#riverCv", "tex-pebbles": "#riverCv", "tex-shallow": "#riverCv", "tex-wetsand": "#footCv", "shore-sand-v2": "#shoreCv", "tex-sea": "#shoreCv", "sky-up": "#endCv", "grass-up": "#endCv" };
-function whenNear(el, fn) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); fn(); } }, { rootMargin: "120% 0px" }); io.observe(el); }
+const idle = fn => window.requestIdleCallback ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 0);
+const lazyQ = [];
+function whenNear(el, fn) {
+  let done = false; const run = () => { if (done) return; done = true; io.disconnect(); fn(); };
+  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) run(); }, { rootMargin: "200% 0px" }); io.observe(el); lazyQ.push(run);
+}
+// After the first screen has loaded, fetch and prepare the remaining plates one at a time in idle time, so scrolling later finds them ready.
+addEventListener("load", () => setTimeout(function next() { const run = lazyQ.shift(); if (!run) return; run(); idle(() => setTimeout(next, 120)); }, 2500));
 const IMG = {};
 function img(name, cb) {
   let i = IMG[name];
-  if (!i) { i = IMG[name] = new Image(); i.decoding = "async"; i.cbs = []; i.onload = () => { i.cbs.forEach(f => f(i)); i.cbs = []; repaint(); }; const src = `assets/${name}.webp`, own = LAZY[name] && $(LAZY[name]); own ? whenNear(own, () => { i.src = src; }) : (i.src = src); }
+  if (!i) { i = IMG[name] = new Image(); i.decoding = "async"; i.cbs = []; i.onload = () => { (i.decode ? i.decode() : Promise.resolve()).catch(() => {}).then(() => { i.ok = true; const cbs = i.cbs; i.cbs = []; cbs.forEach(f => idle(() => f(i))); idle(repaint); }); }; const src = `assets/${name}.webp`, own = LAZY[name] && $(LAZY[name]); own ? whenNear(own, () => { i.src = src; }) : (i.src = src); }
   if (cb) ready(i) ? cb(i) : i.cbs.push(cb);
   return i;
 }
-const ready = i => i.complete && i.naturalWidth > 0;
+// Decode off the main thread first, then hand each scene its plate in an idle slot, so a lazily arriving plate never lands as one long task mid-scroll.
+const ready = i => !!i.ok && i.naturalWidth > 0;
 // Cover-fit a plate; ax/ay choose which part survives the crop.
 function cover(g, im, W, H, ax = .5, ay = .5, zoom = 1, dx = 0, dy = 0) {
   const k = Math.max(W / im.naturalWidth, H / im.naturalHeight) * zoom, w = im.naturalWidth * k, h = im.naturalHeight * k;
@@ -1183,38 +1195,49 @@ void main(){
   function setup() {
     if (cv.clientWidth < 1 || cv.clientHeight < 1) return;
     [g, W, H] = fit(cv);
-    const mk = () => { const c = document.createElement("canvas"); c.width = W * DPR; c.height = H * DPR; const x = c.getContext("2d"); x.setTransform(DPR, 0, 0, DPR, 0, 0); return [c, x]; };
-    [scene] = mk(); [mask, mg] = mk(); [tmp, tg] = mk();
+    const mk = (d = DPR) => { const c = document.createElement("canvas"); c.width = W * d; c.height = H * d; const x = c.getContext("2d"); x.setTransform(d, 0, 0, d, 0, 0); return [c, x]; };
+    SD = DPR;
+    [scene] = mk(SD); [mask, mg] = mk(); [tmp, tg] = mk();
     paintScene(scene.getContext("2d")); redrawMask();
     const r = rng(seed + 9); fish = Array.from({ length: 5 }, () => ({ x: r() * W, y: H * (0.8 + r() * 0.16), v: 12 + r() * 16, ph: r() * 6, s: 0.7 + r() * 0.5 }));
   }
   // zones from top to bottom: meadow with flowers → pebbles → wet sand → shallow water, with wandering edges
   const ZT = ["tex-grass", "tex-pebbles", "tex-wetsand", "tex-shallow"], ZK = ["grass", "stone", "sand", "water"];
-  let edges = [0.34, 0.6, 0.72], pix = null;
+  let edges = [0.34, 0.6, 0.72], pix = null, SD = DPR, sceneGen = 0;
   ZT.forEach(n => img(n, () => { if (W && ZT.every(k => ready(IMG[k]))) setup(); }));
   const edgeY = (i, x) => H * edges[i] + Math.sin(x * 0.013 + seed * 1.7 + i * 2) * H * 0.025 + Math.sin(x * 0.041 + seed + i) * H * 0.01;
   const band = (x, y) => { for (let i = 0; i < 3; i++) if (y < edgeY(i, x)) return ZK[i]; return "water"; };
   function paintScene(sg) {
-    sg.setTransform(DPR, 0, 0, DPR, 0, 0); pix = null;
+    sg.setTransform(SD, 0, 0, SD, 0, 0); pix = null;
     if (!ZT.every(k => ready(IMG[k]))) { sg.fillStyle = "#cfe0b8"; sg.fillRect(0, 0, W, H); return; }
     const r = rng(seed * 31 + 7), sc = W < 700 ? 0.6 : 0.8;
-    const layer = document.createElement("canvas"); layer.width = W * DPR; layer.height = H * DPR; const lg = layer.getContext("2d"); lg.setTransform(DPR, 0, 0, DPR, 0, 0);
-    ZT.forEach((n, i) => {
+    const layer = document.createElement("canvas"); layer.width = W * SD; layer.height = H * SD; const lg = layer.getContext("2d"); lg.setTransform(SD, 0, 0, SD, 0, 0);
+    const zone = (n, i) => {
       lg.globalCompositeOperation = "source-over"; lg.clearRect(0, 0, W, H);
       const pt = lg.createPattern(IMG[n], "repeat"); pt.setTransform(new DOMMatrix([sc, 0, 0, sc, -r() * 600, -r() * 600])); lg.fillStyle = pt; lg.fillRect(0, 0, W, H);
       // a feathered mask: this zone from its top edge down (the next zone paints over the rest)
-      if (i) { lg.globalCompositeOperation = "destination-in"; lg.filter = "blur(5px)"; lg.fillStyle = "#000"; lg.beginPath(); lg.moveTo(-10, H + 10); for (let x = -10; x <= W + 10; x += 6) lg.lineTo(x, edgeY(i - 1, x)); lg.lineTo(W + 10, H + 10); lg.fill(); lg.filter = "none"; }
+      if (i) { // blur a 1/5-size mask and let the upscale feather it: same soft edge, a fraction of the cost of blurring the full layer
+        const k = 5, mc = document.createElement("canvas"); mc.width = Math.ceil(W / k) + 2; mc.height = Math.ceil(H / k) + 2; const mx = mc.getContext("2d");
+        mx.scale(1 / k, 1 / k); mx.filter = `blur(${5 / k}px)`; mx.fillStyle = "#000"; mx.beginPath(); mx.moveTo(-10, H + 10); for (let x = -10; x <= W + 10; x += 6) mx.lineTo(x, edgeY(i - 1, x)); mx.lineTo(W + 10, H + 10); mx.fill();
+        lg.globalCompositeOperation = "destination-in"; lg.imageSmoothingQuality = "high"; lg.drawImage(mc, 0, 0, mc.width * k, mc.height * k); }
       sg.drawImage(layer, 0, 0, W, H);
-    });
+    };
+    // one zone per task: four smaller tasks instead of one long one when the plates arrive
+    const gen = ++sceneGen; let i = 0;
+    const step = () => { if (gen !== sceneGen) return; zone(ZT[i], i); i++; if (i < ZT.length) return idle(step); finish(); };
+    const finish = () => {
     // the waterline: a thin bright film where sand turns to water
     sg.strokeStyle = "rgba(255,255,255,.55)"; sg.lineWidth = 1.5; sg.beginPath(); for (let x = 0; x <= W + 6; x += 6) { const y = edgeY(2, x); x ? sg.lineTo(x, y) : sg.moveTo(x, y); } sg.stroke();
-    try { pix = sg.getImageData(0, 0, W * DPR, H * DPR); } catch (_) { pix = null; } // file:// pages can't read pixels back
+    idle(() => { try { pix = sg.getImageData(0, 0, W * SD, H * SD); } catch (_) { pix = null; } }); // read back later, in idle time (file:// pages can't read pixels back)
+    };
+    step();
   }
+
   // is there a flower under this print? look at the painted pixels themselves
   function flowerAt(x, y, rad) {
     if (!pix) return false; let n = 0, hit = 0;
     for (let dy = -rad; dy <= rad; dy += 3) for (let dx = -rad; dx <= rad; dx += 3) {
-      if (dx * dx + dy * dy > rad * rad) continue; const px = Math.round((x + dx) * DPR), py = Math.round((y + dy) * DPR);
+      if (dx * dx + dy * dy > rad * rad) continue; const px = Math.round((x + dx) * SD), py = Math.round((y + dy) * SD);
       if (px < 0 || py < 0 || px >= pix.width || py >= pix.height) continue; const i = (py * pix.width + px) * 4, R = pix.data[i], G = pix.data[i + 1], B = pix.data[i + 2];
       n++; if ((R > 215 && G > 215 && B > 195) || (R > 215 && G > 180 && B < 110) || (B > G + 10 && R > G + 10 && R > 150)) hit++;
     }
