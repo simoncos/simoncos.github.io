@@ -648,7 +648,8 @@ function drawBits(g, w, h, hist, now, span) {
   const cv = $("#heroCv"), L = 10, Q = 0.8, dpr = Math.min(2, devicePixelRatio || 1);
   let g, W, H, lit, dim, nodes = [], d = 2.5, dT = 2.5, ph = -0.36, idle = 99, inside = false, focused = false, drag = false, down = null, cutY = 0, lastD = -1;
   // each level sits a little closer to the one above: the tree sinks toward a floor it never reaches
-  const top = () => H * 0.12, span = () => H * 0.82;
+  // the readout owns a band under the tree (BAND px); the tree scales into the space above it
+  const BAND = 34, top = () => H * 0.12, span = () => H - BAND - 8 - H * 0.12;
   const yOf = k => top() + span() * (1 - Math.pow(Q, k)) / (1 - Math.pow(Q, L));
   const kOf = y => Math.log(1 - clamp((y - top()) / span(), 0, 0.999) * (1 - Math.pow(Q, L))) / Math.log(Q);
   function layer(on) {
@@ -723,6 +724,7 @@ function drawBits(g, w, h, hist, now, span) {
     // below the line the tree sinks into the dark
     const f0 = Math.max(cutY, yOf(L - 4)), fg = g.createLinearGradient(0, f0, 0, H);
     fg.addColorStop(0, "rgba(7,8,10,0)"); fg.addColorStop(1, "rgba(7,8,10,.94)"); g.fillStyle = fg; g.fillRect(0, f0, W, H - f0);
+    g.fillStyle = "#07080a"; g.fillRect(0, H - BAND, W, BAND); g.fillStyle = "rgba(138,144,153,.22)"; g.fillRect(12, H - BAND, W - 24, 1);
     // the open questions right under the line
     const kf = Math.floor(d) + 1, row = nodes[kf], sp = (W - (handle.offsetWidth ? 50 : 0)) * 0.94 / row.length, few = row.length <= 16 && sp >= 24;  // "?" marks only where they have room
     const rr = few ? clamp(sp * 0.3, 6, 10) : Math.max(1.3, 3.4 * Math.pow(0.82, kf - 4));
@@ -744,12 +746,8 @@ function drawBits(g, w, h, hist, now, span) {
     g.fillStyle = css("--accent"); g.beginPath(); g.arc(14, cutY, 6, 0, 7); g.fill();
     label("Stop here", 24, cutY - 15, css("--accent"), "left", `600 ${fs}px Arial, sans-serif`);
     const n = 2 ** kf, cTxt = `${n - 1} answered · ${n} new`, cFont = `500 ${fs}px Arial, sans-serif`;
-    g.font = `600 ${fs}px Arial, sans-serif`; const stopEnd = 24 + g.measureText("Stop here").width + 5;
-    g.font = cFont; const cW = g.measureText(cTxt).width + 5;
-    // if the count would collide with "stop here" (narrow phones), it stacks one row higher;
-    // near the top of the canvas it goes just under the line instead (never past an edge)
-    const cY = W - gut - cW >= stopEnd + 12 ? cutY - 15 : cutY - 39 >= 12 ? cutY - 39 : cutY + 19;
-    label(cTxt, W - gut, cY, "#ebedf0", "right", cFont);
+    // readout lives in its own band below the tree: never on a branch, never under the handle
+    g.font = cFont; g.fillStyle = "#ebedf0"; g.textBaseline = "middle"; g.fillText(cTxt, 14, H - BAND / 2 + 0.5);
   }
   function frame(dt) {
     idle += dt;
