@@ -20,7 +20,7 @@ Run relevant checks and report PASS/FAIL with evidence:
 - About page is reachable.
 - Articles page loads; list and series views switch.
 - Latest post opens and renders.
-- Work and Projects pages are checked when `data/site.json` or their IA changed; each Work type opens from its hash (`gallery.html#talks`).
+- Work and Projects pages are checked when `data/site.json` or their IA changed; each Work type opens from its hash (`gallery.html#sharing`).
 - Index Selected work stage renders when `data/site.json` `featured` or homepage copy changed.
 - Favorites index and one category page load; paging and filters work (`?filter=reviewed&page=2`).
 - `llms.txt` and `agent-index.json` return HTTP 200 when AI/agent-readable orientation changed.

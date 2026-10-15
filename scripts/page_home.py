@@ -18,7 +18,7 @@ from page_common import ARTICLE_KIND, NEWEST_SHOWN, TOPICS, href_attrs, work_pla
 def article_topic(tags: list[str]) -> str:
     if "out" in tags:
         return "body"
-    if {"km", "hack", "design"} & set(tags):
+    if {"km", "hack", "design", "ai"} & set(tags):
         return "build"
     return "think"
 
@@ -63,8 +63,8 @@ def home_panels(site: dict[str, Any], articles: dict[str, dict[str, Any]]) -> li
                 "date": work["date"],
                 "title": work["title"],
                 "desc": work["home_desc"],
-                "img": work["img"],
-                "href": work_place(work),
+                "img": entry.get("img", work["img"]),
+                "href": work["href"] if entry.get("direct") else work_place(work),
             })
         else:
             article = articles[entry["article"]]

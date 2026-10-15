@@ -313,11 +313,11 @@
       "canonical": "gallery/research/zhihu-2015.html"
     },
     {
-      "path": "gallery/music/endless-echoes.html",
+      "path": "gallery/games/endless-echoes.html",
       "asset_prefix": "../../",
       "script_profile": "music-riddle",
       "section": "work",
-      "canonical": "gallery/music/endless-echoes.html",
+      "canonical": "gallery/games/endless-echoes.html",
       "theme": "dark"
     }
   ],

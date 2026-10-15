@@ -352,7 +352,7 @@ def render_meta(
     site = config.get("site_url", "").rstrip("/")
     share_cards = {
         'gallery.html': ('og-work-v2.jpg', 'simoncos — Work / 作品'),
-        'gallery/music/endless-echoes.html': ('og-endless-echoes-v1.jpg', '漫无止尽的回响 / Endless Echoes — a music riddle'),
+        'gallery/games/endless-echoes.html': ('og-endless-echoes-v1.jpg', '漫无止尽的回响 / Endless Echoes — a music riddle'),
         'gallery/research/zhihu-2015.html': ('og-zhihu-2015-v1.jpg', '知乎 2015 — people, connections and influence'),
     }
     card, card_alt = share_cards.get(canonical, ('og-site-v2.jpg', 'simoncos — connecting the dots.'))

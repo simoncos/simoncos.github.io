@@ -118,7 +118,7 @@ class MusicRiddleTests(unittest.TestCase):
         subprocess.run(['node', 'tests/echo_score_runtime.cjs'], cwd=ROOT, check=True, capture_output=True, text=True)
 
     def test_generated_page_wires_the_path_player_and_the_finale(self):
-        html = (ROOT / 'gallery/music/endless-echoes.html').read_text(encoding='utf-8')
+        html = (ROOT / 'gallery/games/endless-echoes.html').read_text(encoding='utf-8')
         for hook in ('data-path-play', 'data-path-beads', 'data-finale-bar', 'data-finale-play', 'id="echo-score-status"', 'data-finale-status'):
             with self.subTest(hook=hook):
                 self.assertEqual(html.count(hook), 1)
@@ -222,7 +222,7 @@ class MusicRiddleTests(unittest.TestCase):
         for title, expected in twins.items():
             with self.subTest(node=title):
                 self.assertEqual({d['title'] for d in by_title[title]['decoys']}, expected)
-        html = (ROOT / 'gallery/music/endless-echoes.html').read_text(encoding='utf-8')
+        html = (ROOT / 'gallery/games/endless-echoes.html').read_text(encoding='utf-8')
         payload = json.loads(re.search(r'<script type="application/json" id="echo-data">(.*?)</script>', html, re.S).group(1))
         shipped = {n['id']: n.get('decoys') for n in payload['nodes'] if n.get('decoys')}
         self.assertEqual(set(shipped), {n['id'] for n in self.data['nodes'] if n.get('decoys')})

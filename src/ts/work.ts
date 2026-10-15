@@ -1,6 +1,6 @@
 // Work: a wheel of work types that turns by scroll, drag, arrow keys or the
 // buttons, and one view per type. The type views are real sections with ids,
-// so #apps, #talks and so on open them directly and survive a reload.
+// so #apps, #sharing and so on open them directly and survive a reload.
 // #apps/hn-llm-research also brings one work's card into view and
 // highlights it; the home page links works this way.
 (function () {
@@ -192,6 +192,17 @@
         return topics.findIndex((section) => section.id === id);
     }
 
+    function normalizeAddress(address: string) {
+        const [id, ...rest] = address.split('/');
+        const topic = id === 'talks' ? 'sharing' : id === 'visual' ? 'research' : id;
+        const canonical = [topic, ...rest].join('/');
+        if (canonical !== address) {
+            history.replaceState(null, '', `${location.pathname}${location.search}#${canonical}`);
+            shell?.syncLangToggle?.();
+        }
+        return canonical;
+    }
+
     let shown: string | null = null;
 
     // The card a #type/work address points at, once its type is showing.
@@ -226,9 +237,7 @@
     }
 
     function show(address: string) {
-        let [id, item = ''] = address.split('/');
-        // Keep old links to the retired single-item category useful.
-        if (id === 'visual') id = 'research';
+        const [id, item = ''] = normalizeAddress(address).split('/');
         const index = topicIndex(id);
         shown = index < 0 ? '' : id;
         if (index < 0) {
@@ -261,8 +270,7 @@
     }
 
     function swap(address: string) {
-        let [id, item = ''] = address.split('/');
-        if (id === 'visual') id = 'research';
+        const [id, item = ''] = normalizeAddress(address).split('/');
         // A fragment link fires both hashchange and popstate; act once.
         const target = topicIndex(id) < 0 ? '' : id;
         if (target === shown && !item) return;
@@ -325,7 +333,7 @@
         event.preventDefault();
     });
 
-    const arrival = window.location.hash.slice(1);
+    const arrival = normalizeAddress(window.location.hash.slice(1));
     show(arrival.split('/')[0]);
     render();
     // Point at the card after the first layout, so the scroll lands where the page has settled.

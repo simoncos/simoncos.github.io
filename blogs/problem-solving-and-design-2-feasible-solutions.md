@@ -9,7 +9,7 @@ series_part: 2
 
 # 问题解决与设计（二）：可行解
 
-> 交互版：[可行解](../gallery/talks/problem-solving-and-design/ch2.html)，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见[问题解决与设计 · 交互文章](../gallery/talks/problem-solving-and-design/index.html)。
+> 交互版：[可行解](../gallery/sharing/problem-solving-and-design/ch2.html)，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见[问题解决与设计 · 交互文章](../gallery/sharing/problem-solving-and-design/index.html)。
 
 关键词：可行解 | 可能性空间 | 偏见 | 定势 | 功能固着 | 可供性
 

@@ -91,7 +91,7 @@ def render_art_cards():
         put(draw, (64, 433), '应用 · 研究 · 音乐 · 分享', 26, MUTED, True)
         put(draw, (64, 558), 'simoncos.github.io', 24, MUTED)
         for path, box in (
-            ('gallery/music/assets/endless-echoes-garden-v5.webp', (580, 42, 570, 340)),
+            ('gallery/games/assets/endless-echoes-garden-v5.webp', (580, 42, 570, 340)),
             ('gallery/assets/gallery-card-sleep-scatter.webp', (580, 398, 277, 190)),
             ('gallery/assets/gallery-card-problem-solving.webp', (873, 398, 277, 190)),
         ):
@@ -100,7 +100,7 @@ def render_art_cards():
         save(im, name)
 
     im = Image.new('RGB', (WIDTH, HEIGHT), '#11151b')
-    im.paste(artwork('gallery/music/assets/endless-echoes-garden-v5.webp', (720, HEIGHT)), (480, 0))
+    im.paste(artwork('gallery/games/assets/endless-echoes-garden-v5.webp', (720, HEIGHT)), (480, 0))
     # An opaque text panel keeps the work legible even in a small link preview.
     draw = ImageDraw.Draw(im)
     put(draw, (58, 48), 'MUSIC RIDDLE / 音乐谜题', 23, '#d3ba93', True)

@@ -4,7 +4,7 @@ const test = require("node:test");
 const assert = require("node:assert");
 const fs = require("node:fs");
 const path = require("node:path");
-const DIR = path.join(__dirname, "..", "gallery", "talks", "limits-of-problem-analysis");
+const DIR = path.join(__dirname, "..", "gallery", "sharing", "limits-of-problem-analysis");
 
 function model(LZ) {
   const DT = LZ.dt, f = (x, y, z) => [LZ.sigma * (y - x), x * (LZ.rho - z) - y, x * y - LZ.beta * z];

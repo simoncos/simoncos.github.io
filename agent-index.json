@@ -86,7 +86,7 @@
       "id": "pkm-talk-2026-06-07",
       "type": "talk",
       "label": "Personal Information Systems in the AI Era",
-      "url": "https://simoncos.github.io/gallery/talks/pkm-2026-06-07/index.html",
+      "url": "https://simoncos.github.io/gallery/sharing/pkm-2026-06-07/index.html",
       "description": "Talk slides on capture, memory, agents, projects, and boundaries. In Chinese only."
     },
     {
@@ -107,10 +107,10 @@
       "id": "problem-solving-interactive",
       "type": "interactive_essay",
       "label": "Problem Solving and Design — Interactive Edition",
-      "url": "https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.en.html",
+      "url": "https://simoncos.github.io/gallery/sharing/problem-solving-and-design/index.en.html",
       "description": "Four interactive essays in English and Chinese, covering problem situations, feasible solutions, open problems, and choice and optima. Switch languages on each page.",
-      "url_zh": "https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.html",
-      "url_en": "https://simoncos.github.io/gallery/talks/problem-solving-and-design/index.en.html"
+      "url_zh": "https://simoncos.github.io/gallery/sharing/problem-solving-and-design/index.html",
+      "url_en": "https://simoncos.github.io/gallery/sharing/problem-solving-and-design/index.en.html"
     },
     {
       "id": "zhihu-2015",
@@ -144,7 +144,7 @@
       "id": "endless-echoes",
       "type": "game",
       "label": "Endless Echoes (漫无止尽的回响)",
-      "url": "https://simoncos.github.io/gallery/music/endless-echoes.html",
+      "url": "https://simoncos.github.io/gallery/games/endless-echoes.html",
       "description": "A game in Work → Games: a bilingual branching music riddle through 36 songs, first set in 2017 in Xiami playlist notes and restored from the Xiami archive and its Douban backup. Imagery clues and an author-selected quotation guide the trail; progress stays in the browser."
     },
     {
@@ -165,19 +165,19 @@
       "id": "limits-of-problem-analysis",
       "type": "interactive_essay",
       "label": "The Limits of Problem Analysis (问题解析的极限)",
-      "url": "https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html",
+      "url": "https://simoncos.github.io/gallery/sharing/limits-of-problem-analysis/index.en.html",
       "description": "From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result. Available in English and Chinese; switch languages on the page.",
-      "url_zh": "https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.html",
-      "url_en": "https://simoncos.github.io/gallery/talks/limits-of-problem-analysis/index.en.html"
+      "url_zh": "https://simoncos.github.io/gallery/sharing/limits-of-problem-analysis/index.html",
+      "url_en": "https://simoncos.github.io/gallery/sharing/limits-of-problem-analysis/index.en.html"
     },
     {
       "id": "designing-design",
       "type": "interactive_essay",
       "label": "Designing Design (设计中的设计)",
-      "url": "https://simoncos.github.io/gallery/talks/designing-design/index.en.html",
+      "url": "https://simoncos.github.io/gallery/sharing/designing-design/index.en.html",
       "description": "Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again. Available in English and Chinese; switch languages on the page.",
-      "url_zh": "https://simoncos.github.io/gallery/talks/designing-design/index.html",
-      "url_en": "https://simoncos.github.io/gallery/talks/designing-design/index.en.html"
+      "url_zh": "https://simoncos.github.io/gallery/sharing/designing-design/index.html",
+      "url_en": "https://simoncos.github.io/gallery/sharing/designing-design/index.en.html"
     }
   ],
   "public_data_files": [

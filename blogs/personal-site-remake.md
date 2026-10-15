@@ -24,7 +24,7 @@ description: 最近把个人网站从头重做了一遍：不只是外在的翻�
 
 **[作品轮盘](../gallery.html?lang=zh)。** 我把我的作品分成应用、游戏、演讲、研究、音乐五类，在作品页上横着滑，一次转一格。未来还会增加其他分类，比如摄影和视频。
 
-**可互动的页面。** 可互动的富媒体内容是我未来创作的一个方向。站点里会有越来越多这样的内容：[十年睡眠档案](../gallery/research/sleep-2016-2026.html)（3,656 个夜晚）、用 2015 年知乎数据做的[社交网络研究](../gallery/research/zhihu-2015.html?lang=zh)、[HN × LLM](https://simoncos-hn-llm-research.vercel.app/)数据分析、个人信息系统的[演讲 slides](../gallery/talks/pkm-2026-06-07/index.html)、等会想再详细介绍的小解谜游戏[《漫无止尽的回响》](../gallery/music/endless-echoes.html?lang=zh)，全部都是这样。在过去，这样的动态内容制作起来非常花时间，现在有AI的帮助，我有机会探索更多这样的想法。
+**可互动的页面。** 可互动的富媒体内容是我未来创作的一个方向。站点里会有越来越多这样的内容：[十年睡眠档案](../gallery/research/sleep-2016-2026.html)（3,656 个夜晚）、用 2015 年知乎数据做的[社交网络研究](../gallery/research/zhihu-2015.html?lang=zh)、[HN × LLM](https://simoncos-hn-llm-research.vercel.app/)数据分析、个人信息系统的[演讲 slides](../gallery/sharing/pkm-2026-06-07/index.html)、等会想再详细介绍的小解谜游戏[《漫无止尽的回响》](../gallery/games/endless-echoes.html?lang=zh)，全部都是这样。在过去，这样的动态内容制作起来非常花时间，现在有AI的帮助，我有机会探索更多这样的想法。
 
 **[收藏](../favorites.html?lang=zh)。** 豆瓣上我打过五星的书、影、音、游，一共 453 部，其中 222 部有短评。它们也是我的重要组成部分，是我的成长养分。
 

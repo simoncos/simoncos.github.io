@@ -60,8 +60,8 @@
         "en": "Talk",
         "zh": "演讲"
       },
-      "work_topic": "talks",
-      "home_topic": "think",
+      "work_topic": "sharing",
+      "home_topic": "build",
       "date": "2026-06-07",
       "single": true,
       "zh_only": true,
@@ -78,7 +78,7 @@
         "zh": "面向金融与科技从业者的 45 分钟分享：捕捉、知识库、Agent、项目孵化和安全边界，怎样连成一套运转的系统。"
       },
       "img": "gallery/assets/gallery-card-talk-slides.webp",
-      "href": "gallery/talks/pkm-2026-06-07/index.html"
+      "href": "gallery/sharing/pkm-2026-06-07/index.html"
     },
     {
       "id": "problem-solving",
@@ -86,8 +86,8 @@
         "en": "Interactive essays",
         "zh": "交互文章"
       },
-      "work_topic": "talks",
-      "home_topic": "think",
+      "work_topic": "sharing",
+      "home_topic": "build",
       "date": "2026-10-08",
       "title": {
         "en": "Problem Solving and Design",
@@ -103,8 +103,8 @@
       },
       "img": "gallery/assets/gallery-card-problem-solving.webp",
       "href": {
-        "en": "gallery/talks/problem-solving-and-design/index.en.html",
-        "zh": "gallery/talks/problem-solving-and-design/index.html"
+        "en": "gallery/sharing/problem-solving-and-design/index.en.html",
+        "zh": "gallery/sharing/problem-solving-and-design/index.html"
       }
     },
     {
@@ -113,8 +113,8 @@
         "en": "Interactive essay",
         "zh": "交互文章"
       },
-      "work_topic": "talks",
-      "home_topic": "think",
+      "work_topic": "sharing",
+      "home_topic": "build",
       "date": "2026-10-09",
       "title": {
         "en": "The Limits of Problem Analysis",
@@ -130,8 +130,8 @@
       },
       "img": "gallery/assets/gallery-card-limits-of-problem-analysis.jpg",
       "href": {
-        "en": "gallery/talks/limits-of-problem-analysis/index.en.html",
-        "zh": "gallery/talks/limits-of-problem-analysis/index.html"
+        "en": "gallery/sharing/limits-of-problem-analysis/index.en.html",
+        "zh": "gallery/sharing/limits-of-problem-analysis/index.html"
       }
     },
     {
@@ -140,8 +140,8 @@
         "en": "Interactive essay",
         "zh": "交互文章"
       },
-      "work_topic": "talks",
-      "home_topic": "think",
+      "work_topic": "sharing",
+      "home_topic": "build",
       "date": "2026-10-09",
       "title": {
         "en": "Designing Design",
@@ -157,8 +157,8 @@
       },
       "img": "gallery/assets/gallery-card-designing-design.jpg",
       "href": {
-        "en": "gallery/talks/designing-design/index.en.html",
-        "zh": "gallery/talks/designing-design/index.html"
+        "en": "gallery/sharing/designing-design/index.en.html",
+        "zh": "gallery/sharing/designing-design/index.html"
       }
     },
     {
@@ -168,7 +168,7 @@
         "zh": "研究"
       },
       "work_topic": "research",
-      "home_topic": "think",
+      "home_topic": "build",
       "date": "2015",
       "title": {
         "en": "Zhihu 2015: People, Connections and Influence",
@@ -240,7 +240,7 @@
         "zh": "原创歌曲"
       },
       "work_topic": "music",
-      "home_topic": "think",
+      "home_topic": "build",
       "date": "2011",
       "title": {
         "en": "Sunny Day",
@@ -279,13 +279,13 @@
         "en": "Read a clue, guess the next song, and find your own route through 36 songs. A 2017 riddle from Xiami playlist notes, backed up on Douban, rebuilt to play.",
         "zh": "读线索，猜下一首歌，在 36 首歌之间走出自己的路线。2017 年藏在虾米歌单推荐语里的谜题，靠豆列备份，重新做成了可以玩的版本。"
       },
-      "img": "gallery/music/assets/endless-echoes-cover.svg?v=20261002j",
-      "href": "gallery/music/endless-echoes.html",
+      "img": "gallery/games/assets/endless-echoes-cover.svg?v=20261002j",
+      "href": "gallery/games/endless-echoes.html",
       "work_kind": {
         "en": "Interactive music riddle",
         "zh": "交互音乐谜题"
       },
-      "wheel_img": "gallery/music/assets/endless-echoes-poster.svg?v=20261002j"
+      "wheel_img": "gallery/games/assets/endless-echoes-poster.svg?v=20261002j"
     },
     {
       "id": "hn-field-notes",
@@ -544,12 +544,8 @@
       "work": "talk"
     },
     {
-      "article": "emerging-from-abyss",
-      "img": "gallery/assets/gallery-card-abyss-bird.webp",
-      "desc": {
-        "en": "An OpenClaw agent's first six days, in its own voice: birth, switching models, and the files that hold an identity together.",
-        "zh": "一个 OpenClaw agent 用自己的声音讲述最初六天：诞生、切换模型，以及用文件维系身份。"
-      }
+      "work": "problem-solving",
+      "direct": true
     },
     {
       "article": "my-haba-snow-mountain-journey",
@@ -560,12 +556,9 @@
       }
     },
     {
-      "article": "exformation-and-information",
+      "work": "designing-design",
       "img": "gallery/assets/gallery-card-designing-design-v2.webp",
-      "desc": {
-        "en": "Reading Kenya Hara: exformation makes the known unknown again, and stepping away from the screen is the other half.",
-        "zh": "读原研哉：Exformation 把已知的事物重新变得未知，离开屏幕、用身体感受世界是另一半。"
-      }
+      "direct": true
     }
   ],
   "work_topics": [
@@ -648,7 +641,7 @@
       ]
     },
     {
-      "id": "talks",
+      "id": "sharing",
       "title": {
         "en": "Talks & Explainers",
         "zh": "分享"

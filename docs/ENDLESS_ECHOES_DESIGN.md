@@ -118,7 +118,7 @@
 
 当前主视觉为 `endless-echoes-garden-v5.webp`：
 
-![当前钢琴与琴键空间主视觉](../gallery/music/assets/endless-echoes-garden-v5.webp)
+![当前钢琴与琴键空间主视觉](../gallery/games/assets/endless-echoes-garden-v5.webp)
 
 ### 5.2 色彩与材质
 
@@ -237,7 +237,7 @@
 
 ### 8.2 音色与操作
 
-作者指定使用 Vocal Coach 项目已有的 YDP 钢琴采样。当前使用同源的 7 个根音 MP3，保留[采样署名](../gallery/music/assets/piano/ATTRIBUTION.txt)。音色统一，回放包括地图节点、当前花朵和已找到列表；重复点按同一个节点也应回应。
+作者指定使用 Vocal Coach 项目已有的 YDP 钢琴采样。当前使用同源的 7 个根音 MP3，保留[采样署名](../gallery/games/assets/piano/ATTRIBUTION.txt)。音色统一，回放包括地图节点、当前花朵和已找到列表；重复点按同一个节点也应回应。
 
 每组音符共享音频时钟起点，按音符数量调整增益。当前和弦尾音约 1.4 秒；连续点击会让上一组淡出，避免多组和声叠成杂音。静音、重置、页面隐藏和较新的点击会取消待播放的旧请求。
 
@@ -422,7 +422,7 @@
 | [music-riddle.ts](../src/ts/music-riddle.ts) | 探索状态、交互、聚焦邻域、总览与进度恢复。 |
 | [echo-piano.ts](../src/ts/echo-piano.ts) | 采样准备、同时和弦、缓存和取消，以及按编排播放一串和弦的 `playScore`（总线与压缩器、提前最多 6 秒排队）。 |
 | [echo-score.ts](../src/ts/echo-score.ts) | 纯函数：玩家走来的路径、路径乐句和终章的时间与力度，Node 可测。 |
-| [endless-echoes.css](../gallery/music/assets/endless-echoes.css) | 页面、网络、引用、动效与响应式样式。 |
+| [endless-echoes.css](../gallery/games/assets/endless-echoes.css) | 页面、网络、引用、动效与响应式样式。 |
 | [site.json](../data/site.json) | 首页、Work 分类与作品描述。 |
 | 初版复原与封面 QA（私有笔记仓库 `qa/2026-10-01-endless-echoes.md`） | 初始材料、歌名确认、分类与裁切教训；旧路径数量不是当前图。 |
 | 虾米存档核对（私有笔记仓库 `qa/2026-10-02-echoes-xiami-archive-audit.md`） | 26 首身份与推荐语对应；报告中的待定扩展状态后来已有变化。 |

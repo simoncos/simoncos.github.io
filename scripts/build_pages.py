@@ -18,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from build_zhihu_research import render_research
 from build_music_riddle import render_music_riddle, render_music_cover
+from page_redirects import redirect_pages
 
 from site_shell import (  # noqa: E402
     ROOT,
@@ -92,9 +93,9 @@ def build() -> dict[str, str]:
         "about.html": render_about(config, site),
         "404.html": render_not_found(config),
         "gallery/research/zhihu-2015.html": render_research(config),
-        "gallery/music/endless-echoes.html": render_music_riddle(config),
-        "gallery/music/assets/endless-echoes-cover.svg": render_music_cover(),
-        "gallery/music/assets/endless-echoes-poster.svg": render_music_cover(portrait=True),
+        "gallery/games/endless-echoes.html": render_music_riddle(config),
+        "gallery/games/assets/endless-echoes-cover.svg": render_music_cover(),
+        "gallery/games/assets/endless-echoes-poster.svg": render_music_cover(portrait=True),
     }
     for lang in ("en", "zh"):
         project = next(item for item in site["projects"] if item["id"] == "sleep-toolkit")
@@ -103,6 +104,7 @@ def build() -> dict[str, str]:
         outputs[song["page"]] = render_song(config, site, song)
     from update_work_jsonld import apply_to_outputs
     apply_to_outputs(outputs, site)  # work pages carry schema.org JSON-LD generated from site.json
+    outputs.update(redirect_pages(outputs))
     return outputs
 
 
@@ -119,6 +121,7 @@ def main() -> int:
             continue
         stale.append(rel_path)
         if not args.check:
+            path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(html, encoding="utf-8")
 
     if args.check and stale:

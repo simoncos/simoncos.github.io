@@ -5,7 +5,7 @@ from music_riddle_data import FLOWERS, presentation, load as load_music_riddle
 from music_riddle_layout import curves, svg_path, route_geometry, labels
 from site_shell import ROOT, bi, esc, i18n_attrs, page_config, render_document, render_meta
 
-PAGE = 'gallery/music/endless-echoes.html'
+PAGE = 'gallery/games/endless-echoes.html'
 
 
 def edge_path(start, end, *, inset=False):
@@ -168,7 +168,7 @@ def render_music_cover(portrait=False):
     """Use the same artwork as the page; keep crisp, editable text in SVG."""
     data = load_music_riddle()
     count = len(data['nodes']) - bool(data.get('bonus'))
-    artwork = base64.b64encode((ROOT / 'gallery/music/assets/endless-echoes-garden-v5.webp').read_bytes()).decode('ascii')
+    artwork = base64.b64encode((ROOT / 'gallery/games/assets/endless-echoes-garden-v5.webp').read_bytes()).decode('ascii')
     width, height = (600, 800) if portrait else (960, 600)
     if portrait:
         art = f'<image href="data:image/webp;base64,{artwork}" x="0" y="230" width="600" height="400"/>'

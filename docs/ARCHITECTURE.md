@@ -19,7 +19,7 @@ GitHub Pages serves the `master` tree as-is, with no build step, so generated HT
 | `index.html`, `gallery.html`, `apps.html`, `apps/sleep-toolkit*.html`, `gallery/music/*.html`, `about.html`, `404.html` | `scripts/build_pages.py` | `data/site.json`, `data/article_index.json`, `gallery/music/*.peaks.json` |
 | `favorites.html`, `favorites/*.html` | `scripts/update_favorites_pages.py` | `data/favorites.json` |
 | `gallery/research/zhihu-2015.html` | `scripts/build_zhihu_research.py`, called by `build_pages.py` | `data/zhihu-2015.json` and bilingual editorial copy |
-| `gallery/music/endless-echoes.html` and its graph cover | `scripts/build_music_riddle.py`, called by `build_pages.py` | `data/music-riddle.json`; [field contract](MUSIC_RIDDLE_DATA.md) and [design guide](ENDLESS_ECHOES_DESIGN.md) |
+| `gallery/games/endless-echoes.html` and its graph cover | `scripts/build_music_riddle.py`, called by `build_pages.py` | `data/music-riddle.json`; [field contract](MUSIC_RIDDLE_DATA.md) and [design guide](ENDLESS_ECHOES_DESIGN.md) |
 | Shared head, header and footer blocks on every page above | `scripts/update_site_shell.py` | `scripts/site_shell.py`, `data/site_shell.json` |
 
 A new generated page must exist before `update_site_shell.py` will accept its entry in `data/site_shell.json`, so run `python3 scripts/build_pages.py` once before the first `make generate`.
@@ -61,7 +61,7 @@ TypeScript entrypoints in `src/ts/*.ts` compile to tracked `src/js/*.js` (`npm r
 - `home.ts` — the Selected work stage and the topic filter over Newest.
 - `articles.ts` — search, tag filter and excerpts on the list (a click anywhere on a row opens its excerpt); the month index (each month heading sticks under the header and opens a popover of every month, which follows the filter; `#2012-09` lands on a month); the series view. Addresses: `#series`, `#series-<id>`, `#topic-<slug>` where the slug is the tag's English label (`#topic-outdoors`, from `tag_slug` in `generate_blog_pages.py`).
 - `article.ts` — reading progress, the contents list, footnote highlighting, back to top.
-- `work.ts` — the wheel of work types; `#apps`, `#talks` and so on open a type directly.
+- `work.ts` — the wheel of work types; `#apps`, `#sharing` and so on open a type directly.
 - `board.ts` — Board / Present modes on the Sleep Toolkit boards.
 - `song.ts` — the player on a Music page: play and pause, and the waveform as the seek bar (mouse, arrow keys, or a tap or sideways drag on a touch screen; a vertical swipe over it scrolls the page). Without scripts the browser's own audio controls show.
 - `favorites.ts` — index peeks; paging, filters and folds on category pages (`?filter=`, `?page=`).
@@ -73,9 +73,9 @@ TypeScript entrypoints in `src/ts/*.ts` compile to tracked `src/js/*.js` (`npm r
 
 Author shared CSS in `src/css/sections/*.css`. `src/css/styles.sources.json` lists their cascade order; `scripts/build_styles.py` joins their raw bytes into tracked `src/css/styles.css`. `make generate` runs this before asset hashing and `make check` rejects drift. The split preserves the stylesheet bytes and the single browser request; edit a section rather than the generated file.
 
-The PKM talk keeps its canonical desktop `deck.css` from Obsidian. Site-only phone reading rules live in `gallery/talks/pkm-2026-06-07/reader.css`; the site HTML loads this layer and the TypeScript navigation leaves native scrolling enabled below 901px. Preserve this web adaptation when syncing a canonical deck.
+The PKM talk keeps its canonical desktop `deck.css` from Obsidian. Site-only phone reading rules live in `gallery/sharing/pkm-2026-06-07/reader.css`; the site HTML loads this layer and the TypeScript navigation leaves native scrolling enabled below 901px. Preserve this web adaptation when syncing a canonical deck.
 
-Other TypeScript bundles: `gallery/talks/pkm-2026-06-07/deck.ts` / `deck.mts`, the Sleep runtime described below, and the Haba pretext runtime. `make check` compiles main-site entrypoints into a temporary directory and compares tracked output without rewriting the working tree; `make check-all` adds research, talk and Haba bundles, and CI runs it. Sleep chart modules, essay UI, pretext and loader also use strict typing. The talk and Haba compiler policies stay independent. The only unconverted `.js` file is `gallery/talks/pkm-2026-06-07/assets/motion.min.js`, a third-party minified vendor asset.
+Other TypeScript bundles: `gallery/sharing/pkm-2026-06-07/deck.ts` / `deck.mts`, the Sleep runtime described below, and the Haba pretext runtime. `make check` compiles main-site entrypoints into a temporary directory and compares tracked output without rewriting the working tree; `make check-all` adds research, talk and Haba bundles, and CI runs it. Sleep chart modules, essay UI, pretext and loader also use strict typing. The talk and Haba compiler policies stay independent. The only unconverted `.js` file is `gallery/sharing/pkm-2026-06-07/assets/motion.min.js`, a third-party minified vendor asset.
 
 ### Sleep charts
 
@@ -94,6 +94,9 @@ The fingerprint updater parses real script attributes, accepts legal quoting, an
 - These files describe public context only. They are not permission, training-control or licensing documents; `robots.txt` keeps that role.
 
 ### Public artifact metadata boundary
+
+- Canonical sharing pages live under `gallery/sharing/`, and games under `gallery/games/`. `data/redirects.json` lists published URLs that moved; `scripts/page_redirects.py` builds their compatibility pages with canonical/social metadata from the destination. JavaScript preserves query strings and fragments, with a no-JavaScript refresh and link fallback. Keep old published static assets for cached pages and download links; maintain their sources only in the new directories.
+- Work category links use `gallery.html#sharing`; the runtime also accepts the old `#talks` and `#talks/<work>` addresses. Other category IDs are `apps`, `research`, `games`, and `music`.
 
 - Every local HTML URL in `sitemap.xml` is public and indexable. It must have a title, description, matching canonical and `og:url`, plus basic Open Graph title, description and image metadata.
 - Share posters are rendered by `scripts/generate_og_images.py` at 1200×630. `site_shell.render_meta` selects dedicated cards by canonical URL for Work, Endless Echoes and Zhihu; explicit work images take precedence. Use versioned JPEG filenames when replacing artwork, and keep `og:image` and `twitter:image` identical. `tests/test_social_cards.py` checks every published local Work link so a new work cannot silently use the general site card.

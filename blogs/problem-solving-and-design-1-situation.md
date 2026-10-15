@@ -9,7 +9,7 @@ series_part: 1
 
 # 问题解决与设计（一）：问题情境
 
-> 交互版：[问题情境](../gallery/talks/problem-solving-and-design/ch1.html)，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见[问题解决与设计 · 交互文章](../gallery/talks/problem-solving-and-design/index.html)。
+> 交互版：[问题情境](../gallery/sharing/problem-solving-and-design/ch1.html)，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见[问题解决与设计 · 交互文章](../gallery/sharing/problem-solving-and-design/index.html)。
 
 关键词：方法论 | 问题情境 | 交互设计 | 搜索问题
 

@@ -13,7 +13,7 @@ Default workflow is **Obsidian canonical source → `simoncos.github.io` site ar
     ├── images/
     └── assets/
 
-~/Documents/simoncos.github.io/gallery/talks/<talk-slug>/  # deploy artifact
+~/Documents/simoncos.github.io/gallery/sharing/<talk-slug>/  # deploy artifact
 ```
 
 If a site/deployed copy appears newer, snapshot both copies under canonical `_versions/` and reconcile intentionally. Do not make the deploy artifact the source just because its mtime is newer.

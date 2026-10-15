@@ -37,8 +37,8 @@ class EchoesPageTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.data = load()
-        cls.page = (ROOT / 'gallery/music/endless-echoes.html').read_text()
-        cls.css = (ROOT / 'gallery/music/assets/endless-echoes.css').read_text()
+        cls.page = (ROOT / 'gallery/games/endless-echoes.html').read_text()
+        cls.css = (ROOT / 'gallery/games/assets/endless-echoes.css').read_text()
         cls.ts = (ROOT / 'src/ts/music-riddle.ts').read_text()
         cls.js = (ROOT / 'src/js/music-riddle.js').read_text()
 

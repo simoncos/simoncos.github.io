@@ -1,0 +1,1535 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Limits of Problem Analysis</title>
+<meta name="description" content="A game bot watches just one pixel. From description to mechanism, analysis has no end. Its first rule is to come back with a finite result.">
+<link rel="canonical" href="https://simoncos.github.io/gallery/sharing/limits-of-problem-analysis/index.en.html">
+<!-- work-jsonld:start -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "name": "The Limits of Problem Analysis",
+ "headline": "The Limits of Problem Analysis",
+ "description": "A game bot watches just one pixel. From description to mechanism, analysis has no end. Its first rule is to come back with a finite result.",
+ "url": "https://simoncos.github.io/gallery/sharing/limits-of-problem-analysis/index.en.html",
+ "inLanguage": "en",
+ "author": {
+  "@type": "Person",
+  "name": "simoncos",
+  "alternateName": "Che ZHAO",
+  "url": "https://simoncos.github.io/about.html"
+ },
+ "creator": {
+  "@type": "Person",
+  "name": "simoncos",
+  "alternateName": "Che ZHAO",
+  "url": "https://simoncos.github.io/about.html"
+ },
+ "datePublished": "2026-10-09",
+ "dateModified": "2026-10-13",
+ "genre": "Interactive essay",
+ "about": [
+  "interactive essay",
+  "sharing"
+ ],
+ "isPartOf": {
+  "@type": "WebSite",
+  "name": "simoncos",
+  "url": "https://simoncos.github.io/"
+ },
+ "image": "https://simoncos.github.io/gallery/assets/gallery-card-limits-of-problem-analysis.jpg"
+}
+</script>
+<!-- work-jsonld:end -->
+<link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/gallery/sharing/limits-of-problem-analysis/index.html">
+<link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/sharing/limits-of-problem-analysis/index.en.html">
+<link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/gallery/sharing/limits-of-problem-analysis/index.en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Limits of Problem Analysis · An Interactive Essay">
+<meta property="og:description" content="A game bot watches just one pixel. From description to mechanism, analysis has no end. Its first rule is to come back with a finite result.">
+<meta property="og:url" content="https://simoncos.github.io/gallery/sharing/limits-of-problem-analysis/index.en.html">
+<meta property="og:site_name" content="simoncos">
+<meta property="og:image" content="https://simoncos.github.io/gallery/assets/og-limits-of-problem-analysis.en.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Opening scene of The Limits of Problem Analysis interactive essay">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Limits of Problem Analysis · An Interactive Essay">
+<meta name="twitter:description" content="A game bot watches just one pixel. From description to mechanism, analysis has no end. Its first rule is to come back with a finite result.">
+<meta name="twitter:image" content="https://simoncos.github.io/gallery/assets/og-limits-of-problem-analysis.en.jpg">
+<style>
+/* Near-black page, quiet neutrals. Amber = what you operate; mint = the answer (glow only at that moment); red = out / contradiction.
+   Concrete things are drawn in their own colours; their abstractions are drawn in thin ink lines beside them. */
+:root{
+  --bg:#050607; --surface:#0c0e11; --ink:#ebedf0; --muted:#8a9099; --line:#22262c; --deep:#111317;
+  --accent:#ffb347; --accent-soft:rgba(255,179,71,.12);
+  --stop:#ff5d7d; --go:#3cf2b4; --go-soft:rgba(60,242,180,.14);
+  --hp:#e2384d; --mp:#3d7bff;
+  --display:"Georgia","Songti SC","STSong",serif;
+  --body:"Arial","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85}
+::selection{background:rgba(255,179,71,.35)}
+.wrap{padding-inline:20px;padding-block:32px 80px;overflow-x:clip}
+.col{max-width:720px;margin-inline:auto}
+.wide{max-width:1120px;margin-inline:auto}
+h1,h2{font-family:var(--display);font-weight:900;text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(2.6rem,7vw,4.6rem);letter-spacing:.02em}
+h2{font-size:clamp(1.5rem,3.4vw,2.05rem);margin-block:0 .6em}
+p{margin:0 0 1em}
+b,strong{font-weight:700}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--muted)}
+.lede{font-size:1.12rem;margin-top:1.1em;max-width:30em}
+section{margin-top:110px}
+.secno{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:.4em}
+.mono{font-family:var(--mono);font-size:.92em}
+.note{border-left:3px solid var(--line);padding:4px 0 4px 16px;color:var(--muted);font-size:.95rem}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,canvas:focus-visible,svg:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section > .col:first-child{position:relative}
+.bignum{position:absolute;right:calc(100% + 28px);top:-18px;font-family:var(--display);font-weight:900;font-size:7.5rem;line-height:1;color:transparent;-webkit-text-stroke:1.2px #2c3038;pointer-events:none;user-select:none;display:none}
+@media (min-width:1220px){.bignum{display:block}}
+
+.bench{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;margin-block:28px}
+.lab{font-size:.78rem;color:var(--muted);letter-spacing:.06em;margin-bottom:6px;display:block}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{min-height:44px;flex:1 1 auto;border:0;background:transparent;color:var(--ink);padding:6px 12px;font-size:.84rem;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);font-weight:700}
+.btn{min-height:44px;padding:7px 14px;border:1px solid var(--accent);background:var(--accent);color:#1a1205;border-radius:6px;font-size:.88rem;font-weight:700;transition:filter .2s}
+.btn:hover:not(:disabled){filter:brightness(1.12)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.ghost[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn:disabled{opacity:.4;cursor:default}
+.slider{display:grid;grid-template-columns:5em 1fr 3.4em;align-items:center;gap:10px;font-size:.85rem}
+.slider output{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cap{font-size:.82rem;color:var(--muted);margin:8px 0 0}
+kbd{font-family:var(--mono);font-size:.72rem;border:1px solid currentColor;border-radius:3px;padding:0 4px;margin-left:4px;opacity:.75}
+footer{margin-top:80px;font-size:.8rem;color:var(--muted)}
+canvas{display:block}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,600px);gap:44px;align-items:center;padding-top:28px}
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr);gap:28px}}
+h1 .hl{color:var(--accent)}
+.hero-fig{margin:0;position:relative}
+#heroCv{width:100%;aspect-ratio:16/10;border-radius:10px;border:1px solid var(--line);background:#07080a;cursor:ns-resize;touch-action:pan-y}
+.hero-hint{font-family:var(--mono);font-size:.74rem;color:var(--muted);letter-spacing:.04em;margin-top:10px}
+.hero-hint b{color:var(--accent);font-weight:600}
+
+/* ---------- 01 game ---------- */
+.game{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,330px);gap:28px;align-items:start}
+@media (max-width:860px){.game{grid-template-columns:minmax(0,1fr)}}
+#gameCv{width:100%;aspect-ratio:16/9;border-radius:8px;background:#0b0d10;touch-action:pan-y;cursor:ew-resize}
+.hit-demo{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;margin-top:12px}
+.hit-demo .btn{flex-shrink:0;min-height:44px}
+#hitReadout{flex:1 1 180px;margin:0;font-size:.8rem;line-height:1.6;color:var(--muted);font-variant-numeric:tabular-nums}
+#hitReadout.hit{color:var(--accent)}
+.innards{margin-top:12px;border:1px dashed var(--line);border-radius:8px;padding:10px 12px}
+.innards .lab{display:flex;justify-content:space-between;gap:8px}
+#innards{font-family:var(--mono);font-size:.7rem;line-height:1.6;color:#4a5059;height:4.8em;overflow:hidden;word-break:break-all}
+.gctl{display:flex;flex-direction:column;gap:16px;min-width:0}
+.readout{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center}
+.sw{width:64px;height:64px;border-radius:6px;border:1px solid var(--line);transition:background .08s}
+#hex{font-family:var(--mono);font-size:.9rem}
+#cls{font-size:1.15rem;font-weight:700;margin-top:2px}
+#bitCv{width:100%;height:34px;margin-top:10px}
+.rule{margin:0;font-family:var(--mono);font-size:.8rem;line-height:1.75;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 14px;white-space:pre}
+.rule span{display:block;border-radius:3px;padding-inline:4px;margin-inline:-4px;transition:background .4s}
+.rule span.fire{background:rgba(60,242,180,.18);color:var(--go);transition:none}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0}
+.stats div{border-top:1px solid var(--line);padding-top:6px}
+.stats dt{font-size:.72rem;color:var(--muted)}
+.stats dd{margin:0;font-family:var(--mono);font-size:1.05rem;font-variant-numeric:tabular-nums}
+.stats dd.bad{color:var(--stop)}
+#gameMsg{min-height:3.4em;margin:0;font-size:.88rem;color:var(--muted);border-left:3px solid var(--line);padding-left:12px}
+#gameMsg b{color:var(--ink)}
+
+/* ---------- 02 ladder ---------- */
+.ladder{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,320px);gap:28px;align-items:start}
+@media (max-width:860px){.ladder{grid-template-columns:minmax(0,1fr)}}
+.pear-view{min-width:0}
+.pear-viewport{overflow-x:auto;margin-top:10px;overscroll-behavior-x:contain}
+@media (max-width:860px){.pear-viewport.zoomed #pearSvg{min-width:max(640px,150%)}}
+.pear-viewport:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (min-width:861px){#pearZoom,#pearHint{display:none}}
+#pearSvg{width:100%;height:auto;display:block;background:var(--bg);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+#pearSvg .lay{transition:opacity .6s}
+#pearSvg .mv{transition:transform .95s cubic-bezier(.65,0,.2,1),opacity .6s}
+#pearSvg text{font-family:var(--body);fill:var(--muted);font-size:12px;paint-order:stroke;stroke:#050607;stroke-width:4px;stroke-linejoin:round}
+#pearSvg .ax{stroke:#2c3038;stroke-width:1}
+#pearSvg .dim{stroke:var(--ink);stroke-width:1;fill:none}
+#pearSvg .dimt{fill:var(--ink);font-family:var(--mono);font-size:12px}
+@media (max-width:520px){#pearSvg text,#pearSvg .dimt{font-size:22px}}
+@media (pointer:coarse){input[type=range]{min-height:44px}.seg button,.btn,.rungs button{min-height:44px}}
+@media (max-width:520px){.bench{padding:12px}.plan .phead b{font-size:.82rem}}
+#pearSvg .draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1s ease .3s}
+#pearSvg .on .draw{stroke-dashoffset:0}
+.rungs{list-style:none;margin:0;padding:0;position:relative}
+.rungs::before{content:"";position:absolute;left:15px;top:14px;bottom:14px;width:1px;background:var(--line)}
+.rungs button{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:center;width:100%;text-align:left;background:transparent;border:0;color:var(--muted);padding:6px 0}
+.rungs .dot{width:31px;height:31px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;font-family:var(--mono);font-size:.74rem;position:relative}
+.rungs .nm{font-weight:700;font-size:.95rem}
+.rungs .en{font-family:var(--mono);font-size:.7rem;margin-left:6px;opacity:.7}
+.rungs button:hover{color:var(--ink)}
+.rungs button[aria-current="true"]{color:var(--ink)}
+.rungs button[aria-current="true"] .dot{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.lvcard{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
+.lvcard p{font-size:.92rem;margin:0 0 .6em}
+.cost{display:grid;grid-template-columns:3.4em 1fr;gap:4px 10px;align-items:center;font-size:.72rem;color:var(--muted);margin-top:12px}
+.cost i{display:block;height:6px;border-radius:3px;background:#2a2e35;transition:background .3s}
+.cost i.cur{background:var(--accent)}
+.cost i.inf{background:linear-gradient(90deg,#2a2e35 70%,transparent)}
+.cost i.inf.cur{background:linear-gradient(90deg,var(--accent) 70%,transparent)}
+#lvctl{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+
+/* ---------- 03 hurricane: two worlds ---------- */
+.storm{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--bg)}
+.storm canvas{width:100%;height:auto;aspect-ratio:16/8}
+@media (max-width:700px){.storm canvas{aspect-ratio:4/3.3}}
+#stormOv{position:absolute;inset:0}
+#gapCv{width:100%;height:190px;margin-top:12px}
+.stormbar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;margin-top:14px}
+#stormDay{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+#stormDay b{color:var(--ink);font-weight:600}
+#stormRead{margin:10px 0 0;font-size:.9rem;color:var(--muted);min-height:1.7em}
+#stormRead b{color:var(--ink)}
+
+/* ---------- 04 one budget, three problems ---------- */
+.plan{display:grid;grid-template-columns:5.4em repeat(3,minmax(0,1fr));gap:6px}
+@media (max-width:700px){.plan{grid-template-columns:2.4em repeat(3,minmax(0,1fr));gap:4px}}
+.plegend{font-size:.78rem;color:var(--muted);margin:0 0 12px}
+.phead{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;padding:2px 2px 10px;min-width:0}
+.phead .ico{height:58px;width:auto;max-width:100%;display:block;margin-bottom:4px}
+.phead .ico.pix{image-rendering:pixelated;border-radius:3px}
+.phead b{font-size:.95rem;line-height:1.3}
+.phead .goal{font-size:.74rem;color:var(--muted);line-height:1.4}
+.phead .got{font-family:var(--mono);font-size:.74rem;color:var(--muted);line-height:1.4}
+@keyframes spin{to{transform:rotate(-360deg)}}
+.phead .spin{animation:spin 14s linear infinite}
+.prow{display:flex;flex-direction:column;justify-content:center;font-size:.86rem;font-weight:700;color:var(--muted);line-height:1.3}
+.prow .en{font-family:var(--mono);font-size:.62rem;font-weight:400;opacity:.7}
+.cell{display:flex;flex-direction:column;justify-content:space-between;gap:7px;text-align:left;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:6px;padding:8px 9px;min-height:64px;min-width:0;transition:background .2s,border-color .2s,color .2s}
+.cell:hover{border-color:var(--accent)}
+.cell .top{font-size:.8rem;line-height:1.35}
+.cell .price{margin-left:auto;padding-left:4px;white-space:nowrap;opacity:.9}
+.cell .bar{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.7rem;line-height:1}
+.cell .bar i{display:block;height:5px;border-radius:3px;background:#3a3f47;min-width:2px;flex:0 1 auto}
+.cell.dug{background:#15181d;color:var(--ink)}
+.cell.dug .bar i{background:var(--ink)}
+.cell.cur{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cell.cur .bar i{background:var(--bg)}
+.cell.over .price{color:var(--stop);opacity:1}
+.cell.deny{animation:deny .35s}
+@keyframes deny{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+.phead .got i{font-style:normal}
+@media (max-width:700px){.prow .en{display:none}.prow{font-size:.76rem}.cell{padding:6px 6px;min-height:70px}.cell .top{font-size:.72rem}.cell .bar{gap:4px;font-size:.66rem}.phead .ico{height:44px}.phead .goal{font-size:.68rem}.phead .got i{display:none}.phead .got span{display:block}}
+.hud{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,.6fr));gap:16px;margin-top:18px;align-items:end}
+@media (max-width:700px){.hud{grid-template-columns:1fr 1fr}.hud .bud{grid-column:1/-1}}
+.budbar{display:flex;height:12px;border-radius:6px;background:#1a1d22;overflow:hidden}
+.budbar i{display:block;height:100%;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.budbar i:nth-child(1){background:#ebedf0}.budbar i:nth-child(2){background:#9aa1ab}.budbar i:nth-child(3){background:#5f6670}
+.hud .num{font-family:var(--mono);font-size:1.35rem;font-variant-numeric:tabular-nums;line-height:1.2}
+.hud .num.go{color:var(--go)}
+#planMsg{margin:14px 0 0;font-size:.9rem;color:var(--muted);min-height:3.2em}
+#planMsg b{color:var(--ink)}
+#planMsg .bad{color:var(--stop)}
+#planMsg .go{color:var(--go)}
+
+.coda{margin-top:120px;text-align:center}
+.coda q{display:block;font-family:var(--display);font-weight:900;font-size:clamp(1.7rem,4.6vw,2.9rem);line-height:1.45;quotes:none}
+.coda q .hl{color:var(--go);text-shadow:0 0 26px rgba(60,242,180,.3)}
+.coda .src{margin-top:18px;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+.language{display:flex;justify-content:flex-end;gap:4px;max-width:1120px;margin:0 auto;padding:4px 20px;font-size:.82rem}.language a,.language span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0 8px}.language span{color:var(--muted)}
+
+/* English typography and responsive labels. */
+:root{--display:Georgia,"Times New Roman",serif;--body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+h1{font-size:clamp(2.6rem,5.5vw,4.15rem);letter-spacing:-.03em}
+.eyebrow,.lab{letter-spacing:.01em}
+.rungs .en,.prow .en{display:none}
+.cost{grid-template-columns:7.3em minmax(0,1fr)}
+.cost>span>span{white-space:normal!important;flex-shrink:0;max-width:60%}
+.cost>span>i{flex-shrink:1}
+.innards .lab{flex-wrap:wrap}
+.plan{grid-template-columns:7.5em repeat(3,minmax(0,1fr))}
+.plan .prow{overflow-wrap:anywhere}
+.rule{font-size:.76rem}
+@media(max-width:700px){#pearSvg text,#pearSvg .dimt{font-size:18px}.hero-hint{font-size:.72rem}.stormbar>.row{gap:8px}}
+
+
+
+/* Mobile reading layer (2026-10 review): larger captions, controls and budget cards; 44px targets. */
+.seg button{min-width:44px}
+.eyebrow a{display:inline-block;padding:12px 4px;margin:-12px -4px}
+footer a{display:inline-block;padding-block:11px;margin-block:-11px}
+@media (max-width:700px),(pointer:coarse) and (max-height:500px){
+  .lab,#budNum,#innCount,kbd,.rungs .dot{font-size:.9rem}.seg button{font-size:15px}#stormRead{min-height:10em}
+  .eyebrow{font-size:.85rem}.secno{font-size:.88rem}.hero-hint{font-size:.9rem}
+  .btn,#hitReadout,#gameMsg,#stormRead,.plegend,.note,.lvcard p,#planMsg{font-size:15px}
+  #stormDay{font-size:.92rem}.stats dt{font-size:.85rem}.rule{font-size:.85rem}.cost{font-size:.85rem}.rungs .en{font-size:.8rem}#innards{font-size:.8rem}
+  .phead b{font-size:.95rem}.phead .goal,.phead .got{font-size:.85rem}
+  .plan{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .plan>div:first-child,.prow{display:none}
+  .cell{padding:8px;min-height:84px}
+  .cell::before{content:attr(data-lv);font-size:13px;font-weight:700;color:var(--muted);line-height:1}
+  .cell.cur::before{color:var(--bg)}
+  .cell .top{font-size:14px}
+  .cell .bar{font-size:13px;flex-wrap:wrap;row-gap:4px}
+  footer,.src{font-size:.85rem}
+}
+.site-back{margin:1.6em 0 0}.site-back a{display:inline-flex;align-items:center;min-height:44px}
+
+/* Mobile polish (2026-10-13): no CJK orphans, readouts that keep together, calmer budget cards */
+p,li,.note,.lvcard p,#planMsg,#stormRead,.hero-hint,.cap,figcaption{text-wrap:pretty}
+.nw{white-space:nowrap}
+#stormRead{margin-bottom:14px}
+.innards .lab{flex-wrap:wrap;row-gap:2px}
+html[lang^="zh"] .cell .top{text-wrap:balance}
+@media (max-width:380px){.cell{padding:7px 6px}html[lang="en"] .plan .cell::before{font-size:10.5px;letter-spacing:-.01em;hyphens:auto}}
+.plan .cell::before{overflow-wrap:anywhere}
+.rungs button{min-height:46px}
+@media (max-width:700px),(pointer:coarse) and (max-height:500px){
+  .cell .bar{flex-wrap:nowrap}.cell .bar i{max-width:34%}
+}
+.tree-handle{display:none}
+@media (orientation:landscape) and (max-height:500px){#heroCv{aspect-ratio:auto;height:74svh}}
+@media (pointer:coarse){.tree-handle{display:grid;place-items:center;position:absolute;right:6px;top:0;width:44px;height:44px;margin-top:-22px;padding:0;border-radius:50%;border:1px solid var(--accent);background:rgba(5,6,7,.75);touch-action:none}.tree-handle::before{content:"↕";color:var(--accent);font-size:18px;line-height:1}}
+.kp{margin:44px auto 0}.kp-card{border:1px solid var(--line,#ccc);border-radius:10px;padding:0 16px}.kp-card>summary{display:flex;align-items:center;gap:12px;min-height:48px;cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}.kp-card>summary::-webkit-details-marker{display:none}.kp-card>summary .kp-h{margin:0!important;flex:1}.kp-card>summary .kp-n{font-size:.85rem;color:var(--muted,#777)}.kp-card>summary::after{content:"";width:8px;height:8px;border-right:1.5px solid var(--muted,#777);border-bottom:1.5px solid var(--muted,#777);transform:rotate(45deg) translateY(-2px);transition:transform .2s;flex:none}.kp-card[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}.kp-card>summary:focus-visible{outline:2px solid var(--accent,var(--gold,#c90));outline-offset:4px;border-radius:6px}.kp-card ul{margin:0 0 14px}.kp-h{font-size:.82rem!important;letter-spacing:.14em!important;text-transform:uppercase;color:var(--muted,#777);margin:0 0 .6em!important;font-weight:600}.kp ul{margin:0;padding-left:1.15em;line-height:1.75}.kp li{margin:.3em 0}.kp-rel{margin:.9em 0 0;font-size:.9rem;color:var(--muted,#777)}.kp-rel a{display:inline-flex;align-items:center;min-height:44px}
+</style>
+
+<div class="wrap">
+
+<nav class="language" aria-label="Language"><a href="index.html" lang="zh-Hans" hreflang="zh-Hans">中文</a><span lang="en" aria-current="page">English</span></nav>
+
+<header class="hero wide">
+  <div>
+    <p class="eyebrow">An interactive essay · Adapted from the author’s 2014 essay · <a href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.en.html">Read the original essay</a></p>
+    <h1>The <span class="hl">Limits</span> of Problem Analysis</h1>
+    <p class="lede">A friend once described an RPG bot. It reads no game memory and knows no damage formulas. It watches one pixel on the screen. When that pixel turns from red to gray, it presses heal.</p>
+    <p class="lede" style="margin-top:0">It never tries to understand the whole game. That is what this essay is about: analysis may have no end, but we have to come back with a result.</p>
+  </div>
+  <figure class="hero-fig">
+    <canvas id="heroCv" tabindex="0" aria-label="A question tree grows downward. Each answer branches into two new questions, growing denser until they disappear into darkness. A horizontal line marks where analysis stops. Move it with the up and down arrow keys."></canvas>
+    <p class="hero-hint">Move your pointer up or down. On a phone, tap, or drag the ↕ handle on the right. Each deeper level brings more answers—and <b>twice as many new questions</b>.</p>
+  </figure>
+</header>
+<section class="kp col" aria-labelledby="kpH">
+  <details class="kp-card">
+    <summary><h2 class="kp-h" id="kpH">Key points</h2><span class="kp-n">5 points</span></summary>
+  <ul>
+    <li>Analysis can go on without end: each deeper level brings more answers and twice as many new questions, so it needs a boundary.</li>
+    <li>A game bot that watches one pixel of the health bar shows how a small, bounded piece of understanding can take over a loop, and how it fails outside its boundary.</li>
+    <li>Questions about data range from descriptive to mechanistic (Jeff Leek’s six types); each level asks for more information than the last.</li>
+    <li>In the Lorenz-63 hurricane illustration (largest Lyapunov exponent about <span data-lz="lambda">0.906</span>, so the gap doubles about every <span data-lz="dbl">0.77</span> days), raising observation points from 12 to 9,000 cuts error about <span data-lz="ratio">27</span>-fold but extends the useful forecast only from about <span data-lz="h12">7.4</span> to <span data-lz="h9000">11.1</span> days.</li>
+    <li>The first rule of analysis: come back with a finite result.</li>
+  </ul>
+  </details>
+  <p class="kp-rel">Related interactive essays: <a href="../problem-solving-and-design/index.en.html">Problem Solving and Design</a> · <a href="../designing-design/index.en.html">Designing Design</a></p>
+</section>
+
+
+<!-- 01 -->
+<section id="s1">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">01</span>
+    <span class="secno">01 · One pixel</span>
+    <h2>The bot watches one point</h2>
+    <p>Watch the color of one point on the HP bar. When it turns <b>from red to gray</b>, health has fallen below a threshold: press heal. When it changes the other way, do nothing.</p>
+    <p>The game’s internal logic is a black box. But to be playable, it must give a <b>human</b> ways to provide input and read output. The bot connects those interfaces: take a small piece of output, apply one simple rule, and take over a tiny loop from a person’s eyes, brain and hands.</p>
+  </div>
+
+  <div class="bench wide game">
+    <div>
+      <canvas id="gameCv" tabindex="0" aria-label="Bot test bench: a slime keeps attacking the hero. Drag left or right to move the probe along the HP bar."></canvas>
+      <div class="hit-demo"><button class="btn ghost" id="heavyBtn">Try a heavy hit</button><p id="hitReadout" role="status">Watch whether a heavy hit can cross the probe.</p></div>
+      <div class="innards">
+        <span class="lab"><span>Inside the game · The bot reads none of this</span><span class="mono" id="innCount"></span></span>
+        <div id="innards" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="gctl">
+      <div>
+        <span class="lab">Everything the bot can see</span>
+        <div class="readout">
+          <div class="sw" id="sw"></div>
+          <div><div id="hex">#E2384D</div><div id="cls">Red</div></div>
+        </div>
+        <canvas id="bitCv" aria-label="Probe color over the last ten seconds"></canvas>
+      </div>
+<pre class="rule" id="rule"><span>if pixel: red → not red</span><span id="ruleAct">    press heal</span><span>else</span><span>    do nothing</span></pre>
+      <div class="slider"><label for="probe">Probe position</label><input id="probe" type="range" min="4" max="96" value="50"><output id="probeOut">50%</output></div>
+      <div class="row">
+        <div class="seg" id="botSeg" role="group" aria-label="Bot switch"><button data-v="1" aria-pressed="true">Bot on</button><button data-v="0" aria-pressed="false">Bot off</button></div>
+        <button class="btn ghost" id="healBtn">Heal manually<kbd>H</kbd></button>
+      </div>
+      <div class="row">
+        <button class="btn ghost" id="eyeBtn" aria-pressed="false">Bot’s view</button>
+        <button class="btn ghost" id="poisonBtn" aria-pressed="false">Poison the hero</button>
+        <button class="btn ghost" id="resetBtn">Reset</button>
+      </div>
+      <dl class="stats">
+        <div><dt>Survived</dt><dd id="stT">0:00</dd></div>
+        <div><dt>Downs</dt><dd id="stD">0</dd></div>
+        <div><dt>Heals</dt><dd id="stH">0</dd></div>
+        <div><dt>Wasted HP</dt><dd id="stW">0</dd></div>
+      </dl>
+      <p id="gameMsg" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="col">
+    <p>The bot has no ambition to decode the whole system. It grasps just a little of the output. That is enough to free a person from this simple loop and leave their energy for more complex, more interesting things. It is a textbook case of modular thinking.</p>
+    <p class="note">Try “Poison the hero.” The health bar turns green, but the bot only knows red and gray. It can no longer detect that red-to-gray transition. Its tiny piece of understanding works only within its boundaries. (The poison scenario was added for this interactive edition.)</p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="s2">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">02</span>
+    <span class="secno">02 · How deep to look</span>
+    <h2>From description to mechanism</h2>
+    <p>In data science, analysis can be classified by its purpose, with increasing levels of difficulty. The simplest is <b>descriptive</b>: clearly describe the data you see. The deepest is <b>mechanistic</b>: understand which variables changed in each individual within the system that produced the data, and which other changes they caused.</p>
+    <p>Take a pear. Work down the levels to see how the questions deepen and how much more you need to answer them.</p>
+  </div>
+
+  <div class="bench wide ladder">
+    <div class="pear-view">
+      <button class="btn ghost" id="pearZoom" aria-pressed="false" aria-controls="pearViewport">Enlarge diagram</button>
+      <div class="pear-viewport" id="pearViewport" tabindex="0" role="region" aria-label="Pear analysis diagram. When enlarged, scroll horizontally to explore."><svg id="pearSvg" viewBox="0 0 640 492" role="group" aria-label="A pear at six levels of analysis"></svg></div>
+      <p class="cap" id="pearHint">Enlarge the diagram for small labels, then swipe sideways to explore.</p>
+    </div>
+    <div>
+      <ol class="rungs" id="rungs"></ol>
+      <div class="lvcard">
+        <p id="lvText"></p>
+        <div id="lvctl"></div>
+        <div class="cost" id="cost" aria-label="Approximate data and effort needed at each level"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <p>The original essay described only the two ends. Description asks me to record a pear’s shape, color and size. Mechanism asks why it has that shape, color and size, and how the three relate. Then comes another question: if we try a different pear, does our model still hold?</p>
+    <p class="note">The six types come from Jeff Leek’s <i>Types of Questions</i> lecture in <i>The Data Scientist’s Toolbox</i> on Coursera. The four middle pear examples and the variables in the mechanism diagram were added for this edition. They are illustrations, not botanical findings.</p>
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="s3">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">03</span>
+    <span class="secno">03 · A hurricane and a butterfly</span>
+    <h2>There is never enough information</h2>
+    <p>Ideally, we want mechanistic answers: to pick out, clearly and precisely, the flap of a butterfly’s wings within a hurricane. In practice, <b>the information we can get hold of is always far too little.</b></p>
+    <p>Below are two identical worlds, with one difference: in one of them, a butterfly flaps its wings once.</p>
+  </div>
+
+  <div class="bench wide">
+    <div class="storm">
+      <canvas id="stormCv" role="img" aria-label="A map viewed from above: a coast and a city on the left, a hurricane at sea on the right. Both worlds' hurricanes are steered by the same Lorenz chaotic model and start from the same state. In one world a butterfly flaps once, changing the state by one millionth. The hurricanes travel together at first, then separate: one hits the city, the other turns out to sea."></canvas>
+      <canvas id="stormOv" aria-hidden="true"></canvas>
+    </div>
+    <canvas id="gapCv" role="img" aria-label="The gap between the two worlds' states on a logarithmic scale. It starts at one millionth and grows roughly exponentially, though unevenly, until it is as large as the system itself. The gray band is measurement error; until the gap exceeds it, the worlds cannot be told apart. Above the orange dashed line, nobody can tell which way the hurricane goes."></canvas>
+    <div class="stormbar">
+      <div class="row">
+        <button class="btn" id="flapBtn">Let the butterfly flap</button>
+        <span class="lab" style="margin:0 0 0 6px">Observations</span>
+        <div class="seg" id="sensSeg" role="group" aria-label="Number of observation points"><button data-n="12" aria-pressed="false">12</button><button data-n="600" aria-pressed="true">600</button><button data-n="9000" aria-pressed="false">9 000</button></div>
+      </div>
+      <div id="stormDay"></div>
+    </div>
+    <p id="stormRead" aria-live="polite"></p>
+    <p class="note">An illustration, not a weather forecast. The hurricane is steered by Lorenz’s 1963 three-variable convection model (σ=10, ρ=28, β=8/3, fixed-step RK4, so every device computes exactly the same result). Which “wing” of the attractor x is on stands in for the steering pattern that pushes the storm south or north; one model time unit is drawn as one day, for illustration only. The largest Lyapunov exponent of this system is about <span data-lz="lambda">0.906</span>, so the gap doubles on average about every <span data-lz="dbl">0.77</span> days. In the real atmosphere, small-scale errors also cascade up to larger scales, which led Lorenz (1969) to suggest that day-to-day weather has a predictability limit of about two weeks. Nor is the butterfly the “cause” of the landfall: the title of Lorenz’s 1972 talk was itself a question, “Predictability: Does the Flap of a Butterfly’s Wings in Brazil Set Off a Tornado in Texas?”</p>
+  </div>
+
+  <div class="col">
+    <p>Even in an age of enormous data production, what changes? We have more data, but extracting information becomes harder too. In this model, raising the number of observation points from 12 to 9,000 cuts error about <span data-lz="ratio">27</span>-fold, yet stretches the useful forecast only from about <span data-lz="h12">7.4</span> to about <span data-lz="h9000">11.1</span> days, a gain of <span data-lz="gain">3.7</span> days: each e-fold (about 2.7×) cut in error buys only about <span data-lz="invlam">1.1</span> days. Detecting the butterfly’s difference takes until day <span data-lz="d12">9.2</span> with 12 points and still until day <span data-lz="d9000">6.1</span> with 9,000, while the hurricanes part ways around day <span data-lz="split">14.5</span>. At times like this, we have to rein in our greed and advance one step at a time.</p>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="s4">
+  <div class="col">
+    <span class="bignum" aria-hidden="true">04</span>
+    <span class="secno">04 · Bring something back</span>
+    <h2>Come back when it is enough</h2>
+    <p>Sometimes, after weighing cost against return, we find that studying a problem to a certain depth and breadth already meets our needs, as with the bot. The resources left over are better spent where they count.</p>
+    <p>The three problems below share one budget of time and effort. Each column runs down the same six levels of analysis. Choose a cell to decide how far to go.</p>
+  </div>
+
+  <div class="bench wide">
+    <p class="plegend">Each bar shows the additional value that level brings back. The number at the lower right is the time and effort it costs.</p>
+    <div class="plan" id="plan"></div>
+    <div class="hud">
+      <div class="bud"><span class="lab">Time and effort used · <span class="mono" id="budNum">0</span> / 100</span><div class="budbar" id="budBar"><i></i><i></i><i></i></div></div>
+      <div><span class="lab">Value brought back</span><div class="num go" id="gotNum">0</div></div>
+      <div><span class="lab">Best within this budget</span><div class="num" id="bestNum">0</div></div>
+    </div>
+    <p id="planMsg" aria-live="polite"></p>
+    <div class="row"><button class="btn ghost" id="bestBtn">Show the best allocation</button><button class="btn ghost" id="clearBtn">Clear and restart</button></div>
+  </div>
+
+  <div class="col">
+    <p>To analyze a problem well, we need the focus and persistence to get to the bottom of it. But we must keep reminding ourselves: in the rough real world, a problem needs a boundary, one that keeps us from losing the way back as we dig our tunnel.</p>
+  </div>
+
+  <div class="coda col">
+    <q>The first rule of analysis:<br><span class="hl">come back with a finite result.</span></q>
+    <p class="src">This is a limit we cannot get around.</p>
+  </div>
+</section>
+
+<footer class="col">
+  Adapted from the author’s 2014 essay, <a href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.en.html">The Limits of Problem Analysis</a>. Analysis types follow Jeff Leek’s <i>Types of Questions</i> lecture in <i>The Data Scientist’s Toolbox</i> (Coursera). The opening question tree, bot test bench, four middle pear levels, hurricanes in two worlds, and three-problem budget were added as illustrations. All numerical values are chosen for demonstration.
+  <p class="site-back"><a href="../../../index.html">← Back to simoncos.github.io</a></p>
+</footer>
+</div>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function rng(seed) { let s = seed >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
+function gauss(r) { return Math.sqrt(-2 * Math.log(r() + 1e-9)) * Math.cos(2 * Math.PI * r()); }
+function fit(cv, h) {
+  const dpr = Math.min(2, devicePixelRatio || 1), w = cv.clientWidth, hh = h ?? cv.clientHeight;
+  cv.width = Math.round(w * dpr); cv.height = Math.round(hh * dpr);
+  const g = cv.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); return [g, w, hh];
+}
+// One rAF loop; each module only runs while on screen.
+const loops = [];
+function addLoop(el, fn) {
+  const o = { fn, vis: false }; loops.push(o);
+  new IntersectionObserver(es => { o.vis = es[0].isIntersecting; }, { rootMargin: "80px" }).observe(el);
+}
+let lastT = performance.now();
+requestAnimationFrame(function tick(now) {
+  const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
+  // one module throwing must not stop the others
+  for (const o of loops) if (o.vis) { try { o.fn(dt, now / 1000); } catch (e) { if (!o.err) { o.err = 1; console.error(e); } } }
+  requestAnimationFrame(tick);
+});
+
+/* =========================================================
+   Pixel game shared by the hero and section 01
+   ========================================================= */
+const PW = 64, PH = 36, BAR_X = 3, BAR_W = 26, BAR_Y = 3;
+const C = {
+  bg: "#0b0d10", ground: "#15181d", ground2: "#1d2228", frame: "#4a505a", empty: "#3a3f47",
+  hp: "#e2384d", poison: "#4fd06a", mp: "#3d7bff", mpE: "#20263a",
+  skin: "#e8c39e", hair: "#4a3020", tunic: "#4a7bd1", tunicD: "#36609f", legs: "#2b2f38", sword: "#cfd6de",
+  slime: "#58c46a", slimeD: "#3c9a4c", slimeL: "#9be3a5", eye: "#0b0d10", white: "#ffffff", heal: "#3cf2b4", grey: "#5f6670"
+};
+const SPK = []; { const r = rng(7); for (let i = 0; i < 46; i++) SPK.push([Math.floor(r() * PW), 27 + Math.floor(r() * 9)]); }
+function newSim() { return { hp: 100, mp: 100, next: 1.2, hurt: 0, healT: 0, lunge: 0, dead: 0, poison: false, heals: 0, waste: 0, downs: 0, alive: 0, frame: 0, lastDmg: 0, crit: false, impact: null, forceHeavy: false, heavyCooldown: 0, rs: 0x3f9a }; }
+function stepSim(s, dt, r) {
+  s.frame++;
+  s.hurt = Math.max(0, s.hurt - dt); s.healT = Math.max(0, s.healT - dt); s.lunge = Math.max(0, s.lunge - dt);
+  s.heavyCooldown = Math.max(0, s.heavyCooldown - dt);
+  if (s.impact) s.impact.left = Math.max(0, s.impact.left - dt);
+  if (s.dead > 0) { s.dead -= dt; if (s.dead <= 0) { s.dead = 0; s.hp = 100; s.next = 1.4; } return; }
+  s.alive += dt; s.mp = Math.min(100, s.mp + dt * 6);
+  if (s.poison) s.hp -= dt * 2.4;
+  s.next -= dt;
+  if (s.next <= 0 || s.forceHeavy) {
+    const requested = s.forceHeavy; s.forceHeavy = false;
+    s.next = 0.7 + r() * 0.65; s.lunge = 0.28; s.crit = r() < 0.07 || requested;
+    const d = Math.round(s.crit ? 38 + r() * 9 : 5 + r() * 11);
+    const before = s.hp;
+    s.hp -= d; s.hurt = s.crit ? 0.48 : 0.32; s.lastDmg = d; s.rs = (s.rs * 75 + 74) % 65537;
+    const impact = { crit: s.crit, damage: d, before, after: Math.max(0, s.hp), left: s.crit ? 1.4 : 0.65 };
+    if (s.crit || !s.impact || s.impact.left <= 0 || !s.impact.crit) s.impact = impact;
+    if (s.crit) { s.heavyCooldown = 1.4; s.onHeavy && s.onHeavy(impact); }
+  }
+  if (s.hp <= 0) { s.hp = 0; s.dead = 1.5; s.downs++; if (s.poison) s.pdT = s.alive; s.poison = false; s.onDown && s.onDown(); }
+}
+function healSim(s) {
+  if (s.dead > 0) return false;
+  const before = s.hp; s.hp = Math.min(100, s.hp + 50);
+  s.waste += 50 - (s.hp - before); s.heals++; s.healT = 0.7; s.mp = Math.max(0, s.mp - 12); return true;
+}
+function rect(g, c, x, y, w, h) { g.fillStyle = c; g.fillRect(x, y, w, h); }
+function drawScene(g, s, t) {
+  rect(g, C.bg, 0, 0, PW, PH);
+  rect(g, C.ground, 0, 27, PW, 9);
+  g.fillStyle = C.ground2; for (const [x, y] of SPK) g.fillRect(x, y, 1, 1);
+  // bars
+  rect(g, C.frame, BAR_X - 1, BAR_Y - 1, BAR_W + 2, 4);
+  rect(g, C.empty, BAR_X, BAR_Y, BAR_W, 2);
+  rect(g, s.poison ? C.poison : C.hp, BAR_X, BAR_Y, Math.round(BAR_W * clamp(s.hp, 0, 100) / 100), 2);
+  rect(g, C.frame, BAR_X - 1, 7, 20, 3);
+  rect(g, C.mpE, BAR_X, 8, 18, 1);
+  rect(g, C.mp, BAR_X, 8, Math.round(18 * s.mp / 100), 1);
+  // hero
+  const kick = !RM && s.impact?.crit && s.impact.left > 1.05 ? Math.round(Math.sin((1.4 - s.impact.left) / .35 * Math.PI) * 3) : 0;
+  const hx = 15 - kick, fl = s.hurt > 0 && Math.floor(s.hurt * 22) % 2 === 0;
+  if (s.dead > 0) {
+    rect(g, C.grey, hx - 2, 25, 9, 2); rect(g, C.skin, hx + 7, 24, 3, 3); rect(g, C.sword, hx - 6, 26, 4, 1);
+  } else {
+    const bob = Math.floor(t * 2) % 2;
+    rect(g, fl ? C.white : C.hair, hx + 1, 14 + bob, 5, 2);
+    rect(g, fl ? C.white : C.skin, hx + 1, 16 + bob, 5, 3);
+    rect(g, C.eye, hx + 4, 17 + bob, 1, 1);
+    rect(g, fl ? C.white : C.tunic, hx, 19 + bob, 7, 4);
+    rect(g, fl ? C.white : C.tunicD, hx, 22 + bob, 7, 1);
+    rect(g, C.legs, hx + 1, 23, 2, 4); rect(g, C.legs, hx + 4, 23, 2, 4);
+    rect(g, C.sword, hx + 7, 20 + bob, 1, 1); rect(g, C.sword, hx + 8, 19 + bob, 1, 1); rect(g, C.sword, hx + 9, 18 + bob, 1, 1); rect(g, C.sword, hx + 10, 17 + bob, 1, 1);
+    if (s.poison) { g.fillStyle = C.poison; const k = Math.floor(t * 3); g.fillRect(hx + (k % 6), 12 - (k % 3), 1, 1); }
+  }
+  // heal sparkles
+  if (s.healT > 0) {
+    g.fillStyle = C.heal; const k = 1 - s.healT / 0.7;
+    for (let i = 0; i < 6; i++) g.fillRect(hx - 1 + i * 2 - (i % 2), Math.round(24 - k * 14 - (i % 3) * 2), 1, 1);
+  }
+  // slime
+  const lunge = s.lunge > 0 ? Math.round(Math.sin((1 - s.lunge / 0.28) * Math.PI) * (s.crit ? 20 : 14)) : 0;
+  const sq = Math.floor(t * 3) % 2, sx = 43 - lunge;
+  rect(g, C.slime, sx + 3, 21 + sq, 5, 1); rect(g, C.slime, sx + 2, 22 + sq, 7, 1);
+  rect(g, C.slime, sx + 1, 23 + sq, 9, 3 - sq); rect(g, C.slimeD, sx, 26, 11, 1);
+  rect(g, C.slimeL, sx + 3, 22 + sq, 1, 1);
+  rect(g, C.eye, sx + 3, 24, 1, 1); rect(g, C.eye, sx + 6, 24, 1, 1);
+  if (s.impact?.crit && s.impact.left > .9) {
+    const spread = RM ? 0 : Math.floor((1.4 - s.impact.left) * 6);
+    for (const [x, y, w, h] of [[25,17-spread,1,3],[28+spread,19,3,1],[27+spread,24+spread,2,2],[21-spread,12-spread,2,2]]) rect(g, "#ffb347", x, y, w, h);
+  }
+}
+const HP_RGB = [226, 56, 77], EMPTY_RGB = [58, 63, 71];
+function classify(rgb) {
+  const d = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+  if (d(rgb, HP_RGB) < 50) return "red";
+  if (d(rgb, EMPTY_RGB) < 50) return "grey";
+  return "other";
+}
+const hex = rgb => "#" + rgb.map(v => v.toString(16).padStart(2, "0")).join("").toUpperCase();
+function makeOff() { const c = document.createElement("canvas"); c.width = PW; c.height = PH; return c.getContext("2d", { willReadFrequently: true }); }
+// The 64×36 scene scaled up in one drawImage, then a hairline grid so it reads as pixels.
+function blit(g, src, x0, y0, cell, alpha = 1) {
+  g.imageSmoothingEnabled = false; g.globalAlpha = alpha;
+  g.drawImage(src, 0, 0, PW, PH, x0, y0, PW * cell, PH * cell); g.globalAlpha = 1;
+  if (cell > 6) {
+    g.fillStyle = C.bg; g.beginPath();
+    for (let x = 1; x <= PW; x++) g.rect(x0 + x * cell - 1, y0, 1, PH * cell);
+    for (let y = 1; y <= PH; y++) g.rect(x0, y0 + y * cell - 1, PW * cell, 1);
+    g.fill();
+  }
+}
+function drawBits(g, w, h, hist, now, span) {
+  g.clearRect(0, 0, w, h);
+  g.fillStyle = "#14171b"; g.fillRect(0, h / 2 - 9, w, 18);
+  for (let i = 0; i < hist.length; i++) {
+    const a = hist[i], b = hist[i + 1], t0 = a.t, t1 = b ? b.t : now;
+    const x0 = w - (now - t0) / span * w, x1 = w - (now - t1) / span * w;
+    if (x1 < 0) continue;
+    const col = a.c === "red" ? C.hp : a.c === "grey" ? C.empty : C.poison;
+    g.fillStyle = col; g.fillRect(Math.max(0, x0), h / 2 - 9, x1 - Math.max(0, x0), 18);
+  }
+  g.fillStyle = "rgba(60,242,180,.95)";
+  for (const a of hist) if (a.fire) { const x = w - (now - a.t) / span * w; if (x >= 0) g.fillRect(x - 1, 0, 2, h); }
+}
+
+/* ---------- hero: a question tree that never ends ---------- */
+(() => {
+  const cv = $("#heroCv"), L = 10, Q = 0.8, dpr = Math.min(2, devicePixelRatio || 1);
+  let g, W, H, lit, dim, nodes = [], d = 2.5, dT = 2.5, ph = -0.36, idle = 99, inside = false, focused = false, drag = false, down = null, cutY = 0, lastD = -1;
+  // each level sits a little closer to the one above: the tree sinks toward a floor it never reaches
+  // the readout owns a band under the tree (BAND px); the tree scales into the space above it
+  const BAND = 34, top = () => H * 0.12, span = () => H - BAND - 8 - H * 0.12;
+  const yOf = k => top() + span() * (1 - Math.pow(Q, k)) / (1 - Math.pow(Q, L));
+  const kOf = y => Math.log(1 - clamp((y - top()) / span(), 0, 0.999) * (1 - Math.pow(Q, L))) / Math.log(Q);
+  function layer(on) {
+    const c = document.createElement("canvas"); c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
+    const x = c.getContext("2d"); x.setTransform(dpr, 0, 0, dpr, 0, 0); x.lineCap = "round";
+    for (let k = 1; k <= L; k++) {
+      x.strokeStyle = on ? `rgba(235,237,240,${Math.max(0.3, 0.9 - k * 0.07)})` : `rgba(138,144,153,${0.55 * Math.pow(0.8, k)})`;
+      x.lineWidth = Math.max(0.5, 1.4 * Math.pow(0.86, k)); x.beginPath();
+      nodes[k].forEach((c2, i) => { const p = nodes[k - 1][i >> 1], dy = c2.y - p.y; x.moveTo(p.x, p.y); x.bezierCurveTo(p.x, p.y + dy * 0.55, c2.x, c2.y - dy * 0.55, c2.x, c2.y); });
+      x.stroke();
+    }
+    for (let k = 0; k <= L; k++) {
+      const rad = Math.max(0.7, 4.6 * Math.pow(0.76, k));
+      x.fillStyle = on ? "#ebedf0" : `rgba(138,144,153,${0.6 * Math.pow(0.8, k)})`; x.beginPath();
+      for (const p of nodes[k]) { x.moveTo(p.x + rad, p.y); x.arc(p.x, p.y, rad, 0, 7); }
+      x.fill();
+    }
+    return c;
+  }
+  function build() {
+    [g, W, H] = fit(cv); if (!W || !H) return;
+    const r = rng(31); nodes = [];
+    for (let k = 0; k <= L; k++) {
+      const tg = matchMedia("(pointer:coarse)").matches ? 50 : 0, cx = (W - tg) / 2, n = 2 ** k, w = Math.min((W - tg) * 0.94, W * (0.14 + 0.24 * k)), gap = k ? yOf(k) - yOf(k - 1) : 0, row = [];
+      for (let i = 0; i < n; i++) row.push({ x: cx + ((i + 0.5) / n - 0.5) * w + (r() - 0.5) * (w / n) * 0.5, y: yOf(k) + (r() - 0.5) * gap * 0.18 });
+      nodes.push(row);
+    }
+    lit = layer(true); dim = layer(false); lastD = -1;
+  }
+  build(); addEventListener("resize", build);
+  // input: hover (mouse), tap or drag the line (touch), arrow keys
+  const py = e => e.clientY - cv.getBoundingClientRect().top;
+  const setY = y => { dT = clamp(kOf(y), 0.5, L - 1.5); idle = 0; };
+  // touch: a real handle with touch-action:none, so dragging the line never fights page scroll
+  const handle = document.createElement("button"); handle.type = "button"; handle.className = "tree-handle"; handle.tabIndex = -1; handle.setAttribute("aria-hidden", "true"); handle.title = "Drag to set the analysis depth";
+  cv.parentElement.append(handle);
+  handle.addEventListener("pointerdown", e => { drag = true; try { handle.setPointerCapture(e.pointerId); } catch (_) {} e.preventDefault(); });
+  handle.addEventListener("pointermove", e => { if (drag) setY(py(e)); });
+  for (const t of ["pointerup", "pointercancel", "lostpointercapture"]) handle.addEventListener(t, () => { drag = false; });
+  cv.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") inside = true; });
+  cv.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") { inside = false; idle = 0; } });
+  cv.addEventListener("pointermove", e => { if (e.pointerType === "mouse" || drag) setY(py(e)); });
+  cv.addEventListener("touchstart", e => { if (Math.abs(e.touches[0].clientY - cv.getBoundingClientRect().top - cutY) < 30) e.preventDefault(); }, { passive: false });
+  cv.addEventListener("pointerdown", e => {
+    if (e.pointerType === "mouse") return; down = [e.clientX, e.clientY];
+    if (Math.abs(py(e) - cutY) < 30) { drag = true; try { cv.setPointerCapture(e.pointerId); } catch (_) {} }
+  });
+  cv.addEventListener("pointerup", e => {
+    if (e.pointerType === "mouse") return;
+    if (!drag && down && Math.hypot(e.clientX - down[0], e.clientY - down[1]) < 10) setY(py(e));
+    drag = false; down = null; idle = 0;
+  });
+  cv.addEventListener("pointercancel", () => { drag = false; down = null; });
+  cv.addEventListener("focus", () => focused = true);
+  cv.addEventListener("blur", () => { focused = false; idle = 0; });
+  cv.addEventListener("keydown", e => {
+    const s = e.key === "ArrowDown" ? 1 : e.key === "ArrowUp" ? -1 : 0; if (!s) return; e.preventDefault();
+    dT = clamp(Math.floor(dT) + 0.5 + s * (e.shiftKey ? 2 : 1), 0.5, L - 1.5); idle = 0;
+  });
+  function label(txt, x, y, col, align, font) {
+    g.font = font; g.textAlign = align; g.textBaseline = "middle";
+    const w = g.measureText(txt).width, x0 = align === "right" ? x - w : x;
+    g.fillStyle = "rgba(7,8,10,.82)"; g.fillRect(x0 - 5, y - 10, w + 10, 20);
+    g.fillStyle = col; g.fillText(txt, x, y + 0.5); g.textAlign = "left";
+  }
+  function draw() {
+    if (!lit) return;
+    cutY = yOf(d); handle.style.top = (cv.offsetTop + cutY) + "px";
+    g.fillStyle = "#07080a"; g.fillRect(0, 0, W, H);
+    g.drawImage(dim, 0, 0, W, H);
+    g.save(); g.beginPath(); g.rect(0, 0, W, cutY); g.clip(); g.drawImage(lit, 0, 0, W, H); g.restore();
+    // below the line the tree sinks into the dark
+    const f0 = Math.max(cutY, yOf(L - 4)), fg = g.createLinearGradient(0, f0, 0, H);
+    fg.addColorStop(0, "rgba(7,8,10,0)"); fg.addColorStop(1, "rgba(7,8,10,.94)"); g.fillStyle = fg; g.fillRect(0, f0, W, H - f0);
+    g.fillStyle = "#07080a"; g.fillRect(0, H - BAND, W, BAND); g.fillStyle = "rgba(138,144,153,.22)"; g.fillRect(12, H - BAND, W - 24, 1);
+    // the open questions right under the line
+    const kf = Math.floor(d) + 1, row = nodes[kf], sp = (W - (handle.offsetWidth ? 50 : 0)) * 0.94 / row.length, few = row.length <= 16 && sp >= 24;  // "?" marks only where they have room
+    const rr = few ? clamp(sp * 0.3, 6, 10) : Math.max(1.3, 3.4 * Math.pow(0.82, kf - 4));
+    g.strokeStyle = "rgba(235,237,240,.9)"; g.lineWidth = 1; g.setLineDash(few ? [2, 2] : []);
+    g.beginPath(); for (const p of row) { g.moveTo(p.x + rr, p.y); g.arc(p.x, p.y, rr, 0, 7); } g.stroke(); g.setLineDash([]);
+    if (few) {
+      g.fillStyle = "#ebedf0"; g.font = `700 ${Math.round(rr * 1.3)}px JetBrains Mono, monospace`; g.textAlign = "center"; g.textBaseline = "middle";
+      for (const p of row) g.fillText("?", p.x, p.y + 0.5);
+      g.textAlign = "left";
+    }
+    const root = nodes[0][0], small = W < 480, fs = 13;
+    // the root caption steps aside when the stop line (and its labels) come up to the root
+    if (yOf(d) - root.y > 44) label("One question", root.x + 12, root.y, "#8a9099", "left", `500 ${fs}px Arial, sans-serif`);
+    // the line where you stop
+    g.strokeStyle = css("--accent"); g.lineWidth = 1.5; g.setLineDash([6, 5]);
+    // touch: the drag handle owns a right-hand gutter, so no label or line ever sits under it
+    const gut = handle.offsetWidth ? handle.offsetWidth + 14 : 10;
+    g.beginPath(); g.moveTo(24, cutY); g.lineTo(W - gut, cutY); g.stroke(); g.setLineDash([]);
+    g.fillStyle = css("--accent"); g.beginPath(); g.arc(14, cutY, 6, 0, 7); g.fill();
+    label("Stop here", 24, cutY - 15, css("--accent"), "left", `600 ${fs}px Arial, sans-serif`);
+    const n = 2 ** kf, cTxt = `${n - 1} answered · ${n} new`, cFont = `500 ${fs}px Arial, sans-serif`;
+    // readout lives in its own band below the tree: never on a branch, never under the handle
+    g.font = cFont; g.fillStyle = "#ebedf0"; g.textBaseline = "middle"; g.fillText(cTxt, 14, H - BAND / 2 + 0.5);
+  }
+  function frame(dt) {
+    idle += dt;
+    const auto = !RM && !drag && !inside && !focused && idle > 3.5;
+    if (auto) { ph += dt * 0.32; dT = 3.4 + 2.6 * Math.sin(ph); }
+    d = lerp(d, dT, 1 - Math.exp(-dt * (auto ? 1.6 : 9)));
+    if (Math.abs(d - lastD) < 1e-3) return;
+    lastD = d; draw();
+  }
+  draw(); addLoop(cv, frame);
+})();
+
+/* ---------- 01 game ---------- */
+(() => {
+  const cv = $("#gameCv"), bit = $("#bitCv"), off = makeOff(), r = rng(23);
+  let g, W, H, bg, bw, bh, sim = newSim(), bot = true, P = 0.5, prev = "red", hist = [{ t: 0, c: "red" }], clock = 0, fireT = 0, lastInn = 0, msgKey = "", eye = false, eyeK = 0;
+  const resize = () => { [g, W, H] = fit(cv); [bg, bw, bh] = fit(bit); };
+  resize(); addEventListener("resize", resize);
+  const probeIn = $("#probe"), probeOut = $("#probeOut");
+  const setP = v => { P = clamp(v, 0.04, 0.96); probeIn.value = Math.round(P * 100); probeOut.textContent = Math.round(P * 100) + "%"; };
+  probeIn.addEventListener("input", () => setP(probeIn.value / 100));
+  // drag on canvas to move the probe
+  let drag = false, touchStart = null;
+  const toP = e => { const b = cv.getBoundingClientRect(), cell = b.width / PW; return ((e.clientX - b.left) / cell - BAR_X) / BAR_W; };
+  cv.addEventListener("pointerdown", e => {
+    if (e.pointerType === "touch") { touchStart = [e.clientX, e.clientY]; return; }
+    drag = true; try { cv.setPointerCapture(e.pointerId); } catch (_) {} setP(toP(e));
+  });
+  cv.addEventListener("pointermove", e => {
+    if (touchStart && !drag) {
+      const dx = Math.abs(e.clientX - touchStart[0]), dy = Math.abs(e.clientY - touchStart[1]);
+      if (dy > 8 && dy >= dx) { touchStart = null; return; }
+      if (dx <= 8) return;
+      drag = true; try { cv.setPointerCapture(e.pointerId); } catch (_) {}
+    }
+    if (drag) setP(toP(e));
+  });
+  cv.addEventListener("pointerup", e => { if (touchStart && !drag) setP(toP(e)); drag = false; touchStart = null; });
+  for (const type of ["pointercancel", "lostpointercapture"]) cv.addEventListener(type, () => { drag = false; touchStart = null; });
+  cv.addEventListener("keydown", e => { if (e.key === "ArrowLeft") { setP(P - 0.02); e.preventDefault(); } if (e.key === "ArrowRight") { setP(P + 0.02); e.preventDefault(); } });
+  $("#botSeg").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return; bot = b.dataset.v === "1";
+    for (const x of $("#botSeg").children) x.setAttribute("aria-pressed", x === b);
+  });
+  const manual = () => healSim(sim);
+  $("#healBtn").addEventListener("click", manual);
+  addEventListener("keydown", e => { if ((e.key === "h" || e.key === "H") && !e.target.closest("input")) { const b = cv.getBoundingClientRect(); if (b.bottom > 0 && b.top < innerHeight) manual(); } });
+  // see the screen the way the bot does: everything but one pixel goes dark
+  $("#eyeBtn").addEventListener("click", e => { eye = !eye; e.currentTarget.setAttribute("aria-pressed", eye); });
+  const pBtn = $("#poisonBtn");
+  const heavyBtn = $("#heavyBtn"), hitReadout = $("#hitReadout");
+  const hitIdle = hitReadout.textContent;
+  function showHeavy(hit) {
+    hitReadout.textContent = `Heavy hit −${Math.round(hit.damage)} · HP on impact ${Math.round(hit.before)} → ${Math.round(hit.after)}`;
+    hitReadout.classList.add("hit");
+  }
+  sim.onHeavy = showHeavy;
+  heavyBtn.addEventListener("click", () => { if (sim.dead <= 0 && sim.heavyCooldown <= 0) sim.forceHeavy = true; });
+  pBtn.addEventListener("click", () => { if (sim.dead > 0) return; sim.poison = !sim.poison; pBtn.setAttribute("aria-pressed", sim.poison); });
+  sim.onDown = () => pBtn.setAttribute("aria-pressed", "false");
+  $("#resetBtn").addEventListener("click", () => {
+    sim = newSim(); sim.onHeavy = showHeavy; sim.onDown = () => pBtn.setAttribute("aria-pressed", "false"); pBtn.setAttribute("aria-pressed", "false");
+    hitReadout.textContent = hitIdle; hitReadout.classList.remove("hit"); heavyBtn.disabled = false;
+    prev = "red"; hist = [{ t: clock, c: "red" }]; msgKey = "";
+  });
+  const sw = $("#sw"), hexEl = $("#hex"), clsEl = $("#cls"), act = $("#ruleAct"), inn = $("#innards");
+  $("#innCount").textContent = "34 variables · changing every frame";
+  const fmtT = s => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+  function innards() {
+    const s = sim, f = (x, d = 1) => x.toFixed(d);
+    const v = [
+      `hp=${f(s.hp)}`, `hp.max=100`, `mp=${f(s.mp)}`, `atk.timer=${f(s.next, 2)}`, `dmg.last=${f(s.lastDmg)}`, `crit=${s.crit ? 1 : 0}`, `crit.p=0.07`,
+      `rng=0x${s.rs.toString(16)}`, `slime.state=${s.lunge > 0 ? "LUNGE" : "IDLE"}`, `slime.hp=420`, `slime.def=3`, `buff.poison=${s.poison ? 1 : 0}`,
+      `poison.dps=2.4`, `hero.state=${s.dead > 0 ? "DOWN" : s.hurt > 0 ? "HURT" : "IDLE"}`, `hero.def=4`, `hero.lv=12`, `exp=1883`, `gold=274`,
+      `frame=${s.frame}`, `potion.cd=0`, `heal.amt=50`, `anim.t=${f(clock % 1, 3)}`, `cam.x=0`, `aggro=1`, `drop.table=7`, `weather=CLEAR`,
+      `music.bar=${Math.floor(clock * 2) % 64}`, `inv.slots=24`, `quest.flag=0b1011`, `ai.tick=${s.frame >> 2}`, `net.ping=31`, `save.dirty=1`, `ui.scale=1`, `fps=60`
+    ];
+    inn.textContent = v.join("  ");
+  }
+  function message() {
+    let k, m;
+    if (!bot) { k = "off"; m = "The bot is off. Watch the health bar, decide, and press H to heal. This tiny loop is exactly what the bot takes over for you."; }
+    else if (sim.poison) { k = "p"; m = "The health bar is green. The bot knows only <b>red</b> and <b>gray</b>. Green is simply “not red,” so it heals once when the poison starts, then never sees another red-to-gray transition."; }
+    else if (sim.pdT !== undefined && sim.alive - sim.pdT < 9) { k = "pd"; m = "The bot did nothing more while the hero was poisoned, and the hero fell. After revival, the health bar turns red again, and the bot can “understand” it once more."; }
+    else if (sim.downs > 0 && P < 0.45) { k = "low"; m = "The probe is too low: one hit can empty the health bar from above it. By the time the bot sees red turn gray, the hero is already down. Healing comes too late."; }
+    else if (sim.heals > 4 && sim.waste / sim.heals > 18) { k = "high"; m = "The probe is too high. It often heals near full health, wasting much of each dose."; }
+    else if (sim.alive > 20 && sim.downs === 0) { k = "ok"; m = "Reading just <b>one pixel, one bit</b>, the bot has kept you alive for " + Math.floor(sim.alive) + " seconds. It does not need to understand the game."; }
+    else { k = "idle"; m = "Drag left or right, or use the slider, to move the probe along the HP bar and choose when the bot acts."; }
+    if (k !== msgKey || k === "ok") { msgKey = k; $("#gameMsg").innerHTML = m; }
+  }
+  let msgT = 0;
+  function frame(dt) {
+    clock += dt; stepSim(sim, dt, r); drawScene(off, sim, clock);
+    const px = BAR_X + Math.floor(P * BAR_W);
+    const pd = off.getImageData(px, BAR_Y, 1, 1).data, rgb = [pd[0], pd[1], pd[2]], c = classify(rgb);
+    if (c !== prev) {
+      const fire = bot && prev === "red" && c !== "red";
+      hist.push({ t: clock, c, fire }); if (hist.length > 60) hist.shift();
+      if (fire && healSim(sim)) fireT = 1;
+      prev = c;
+    }
+    const cell = W / PW, y0 = (H - cell * PH) / 2, rx = px * cell, ry = y0 + BAR_Y * cell;
+    eyeK = lerp(eyeK, eye ? 1 : 0, 1 - Math.exp(-dt * 5));
+    g.fillStyle = C.bg; g.fillRect(0, 0, W, H);
+    blit(g, off.canvas, 0, y0, cell, 1 - 0.9 * eyeK);
+    // Feedback is painted only after sampling; the bot still reads the raw HP pixel.
+    const hit = sim.impact;
+    if (hit?.left > 0 && eyeK < .05) {
+      g.save(); g.textAlign = "center"; g.textBaseline = "middle";
+      const x = W * .74, y = H * .32, size = clamp(W * .025, 12, 19);
+      g.font = `700 ${size}px Arial, sans-serif`;
+      const label = (hit.crit ? "Heavy hit " : "") + "−" + Math.round(hit.damage);
+      const tw = Math.max(g.measureText(label).width, hit.crit ? size * 6 : 0) + 16;
+      g.fillStyle = "rgba(5,6,7,.9)"; g.fillRect(x - tw / 2, y - size, tw, hit.crit ? size * 3.3 : size * 2);
+      g.fillStyle = hit.crit ? css("--accent") : "#ebedf0"; g.fillText(label, x, y);
+      if (hit.crit) { g.font = `500 ${size * .8}px JetBrains Mono, monospace`; g.fillText(`${Math.round(hit.before)} → ${Math.round(hit.after)} HP`, x, y + size * 1.5); }
+      g.restore();
+    }
+    if (eyeK > 0.01) {
+      g.drawImage(off.canvas, px, BAR_Y, 1, 1, rx, ry, cell - (cell > 6 ? 1 : 0), cell - (cell > 6 ? 1 : 0));
+      g.globalAlpha = eyeK; g.font = `500 ${Math.max(11, cell * 0.95)}px Arial, sans-serif`; g.fillStyle = "#8a9099"; g.textAlign = "center"; g.textBaseline = "middle";
+      g.fillText("All the bot sees is this one pixel", W / 2, y0 + cell * 31.5, W - 20); g.textAlign = "left"; g.globalAlpha = 1;
+    }
+    // probe: a tall reticle on the chosen pixel + the threshold line it implies
+    g.strokeStyle = css("--accent"); g.lineWidth = 2;
+    g.strokeRect(rx - 3, ry - 3, cell + 5, cell * 2 + 5);
+    g.setLineDash([3, 4]); g.lineWidth = 1; g.beginPath(); g.moveTo(rx + cell / 2, ry + cell * 2 + 3); g.lineTo(rx + cell / 2, ry + cell * 6); g.stroke(); g.setLineDash([]);
+    g.font = `600 ${Math.max(11, cell * 0.9)}px JetBrains Mono, monospace`; g.fillStyle = css("--accent"); g.textBaseline = "top";
+    g.fillText("Probe " + Math.round(P * 100) + "%", rx - cell, ry + cell * 6.4);
+    if (sim.dead > 0) {
+      g.fillStyle = "rgba(5,6,7,.55)"; g.fillRect(0, 0, W, H);
+      g.font = `900 ${cell * 3.4}px Georgia, serif`; g.fillStyle = css("--stop"); g.textAlign = "center"; g.textBaseline = "middle";
+      g.fillText("Down", W / 2, H / 2); g.textAlign = "left";
+    }
+    // readout
+    sw.style.background = hex(rgb); hexEl.textContent = hex(rgb);
+    clsEl.textContent = c === "red" ? "Red" : c === "grey" ? "Gray" : "? Unknown";
+    clsEl.style.color = c === "red" ? C.hp : c === "grey" ? "#aab0b8" : css("--stop");
+    drawBits(bg, bw, bh, hist, clock, 10);
+    fireT = Math.max(0, fireT - dt * 2.2); act.classList.toggle("fire", fireT > 0.5);
+    $("#stT").textContent = fmtT(sim.alive); $("#stD").textContent = sim.downs; $("#stH").textContent = sim.heals; $("#stW").textContent = Math.round(sim.waste);
+    $("#stD").classList.toggle("bad", sim.downs > 0);
+    heavyBtn.disabled = sim.dead > 0 || sim.heavyCooldown > 0 || sim.forceHeavy;
+    if ((lastInn += dt) > 0.12) { lastInn = 0; innards(); }
+    if ((msgT += dt) > 0.5) { msgT = 0; message(); }
+  }
+  setP(0.5); message();
+  addLoop($(".game"), frame);
+})();
+
+/* =========================================================
+   02 · The ladder: one pear, six depths
+   ========================================================= */
+(() => {
+  const NS = "http://www.w3.org/2000/svg", svg = $("#pearSvg");
+  $("#pearZoom").addEventListener("click", e => {
+    const on = $("#pearViewport").classList.toggle("zoomed");
+    e.currentTarget.setAttribute("aria-pressed", on); e.currentTarget.textContent = on ? "Fit diagram" : "Enlarge diagram";
+  });
+  // phones draw this figure's text larger (see CSS), so a few stacked labels need more room
+  const NAR = matchMedia("(max-width:520px)").matches;
+  const el = (tag, attrs = {}, parent = svg) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
+  const PEAR = "M0,-1 C0.22,-1 0.3,-0.62 0.34,-0.36 C0.4,-0.02 0.76,0.12 0.76,0.56 C0.76,0.96 0.42,1.06 0,1.06 C-0.42,1.06 -0.76,0.96 -0.76,0.56 C-0.76,0.12 -0.4,-0.02 -0.34,-0.36 C-0.3,-0.62 -0.22,-1 0,-1Z";
+  const NASHI = "M0,-0.52 C0.5,-0.56 0.86,-0.3 0.88,0.22 C0.9,0.74 0.5,1.02 0,1.02 C-0.5,1.02 -0.9,0.74 -0.88,0.22 C-0.86,-0.3 -0.5,-0.56 0,-0.52Z";
+  const hueCol = (h, l = 54) => `hsl(${h},64%,${l}%)`;
+  // data: 40 sampled pears, 400 orchard pears. bigger -> yellower (lower hue)
+  const r = rng(5), model = s => 88 - (s - 6) * 6.4;
+  const mk = () => { const s = 6 + r() * 5; return { s, h: clamp(model(s) + gauss(r) * 4.2, 47, 92) }; };
+  const sample = Array.from({ length: 40 }, mk); sample[0] = { s: 8.7, h: 71 };
+  const orchard = Array.from({ length: 420 }, mk);
+  const X = s => 90 + (s - 5.5) / 6 * 500, Y = h => 410 - (92 - h) / 46 * 350;
+  const n = sample.length, mx = sample.reduce((a, p) => a + p.s, 0) / n, my = sample.reduce((a, p) => a + p.h, 0) / n;
+  let sxx = 0, sxy = 0; for (const p of sample) { sxx += (p.s - mx) ** 2; sxy += (p.s - mx) * (p.h - my); }
+  const b1 = sxy / sxx, b0 = my - b1 * mx, line = s => b0 + b1 * s;
+  const sig = Math.sqrt(sample.reduce((a, p) => a + (p.h - line(p.s)) ** 2, 0) / (n - 2));
+  const seFit = s => sig * Math.sqrt(1 / n + (s - mx) ** 2 / sxx), sePred = s => sig * Math.sqrt(1 + 1 / n + (s - mx) ** 2 / sxx);
+
+  const defs = el("defs");
+  const grad = el("radialGradient", { id: "pg", cx: "0.35", cy: "0.35", r: "0.85" }, defs);
+  const st0 = el("stop", { offset: "0" }, grad), st1 = el("stop", { offset: "0.55" }, grad), st2 = el("stop", { offset: "1" }, grad);
+  const clip = el("clipPath", { id: "pc" }, defs); el("path", { d: PEAR }, clip);
+  const blushG = el("radialGradient", { id: "bl", cx: "0.5", cy: "0.5", r: "0.5" }, defs);
+  el("stop", { offset: "0", "stop-color": "#e0503a", "stop-opacity": ".85" }, blushG); el("stop", { offset: "1", "stop-color": "#e0503a", "stop-opacity": "0" }, blushG);
+  const cg = el("linearGradient", { id: "cbar", x1: "0", y1: "1", x2: "0", y2: "0" }, defs);
+  el("stop", { offset: "0", "stop-color": hueCol(92) }, cg); el("stop", { offset: "1", "stop-color": hueCol(46) }, cg);
+  const glow = el("filter", { id: "glow", x: "-50%", y: "-50%", width: "200%", height: "200%" }, defs);
+  el("feGaussianBlur", { stdDeviation: "4", result: "b" }, glow); const fm = el("feMerge", {}, glow); el("feMergeNode", { in: "b" }, fm); el("feMergeNode", { in: "SourceGraphic" }, fm);
+
+  const L = {}; const layer = (k, show) => { const g = el("g", { class: "lay" }); g.dataset.show = show; L[k] = g; return g; };
+  // axes (2-4)
+  const ax = layer("ax", "2,3,4");
+  el("line", { x1: 80, y1: 420, x2: 610, y2: 420, class: "ax" }, ax); el("line", { x1: 80, y1: 50, x2: 80, y2: 420, class: "ax" }, ax);
+  el("rect", { x: 68, y: 60, width: 6, height: 350, rx: 3, fill: "url(#cbar)" }, ax);
+  for (const s of [6, 8, 10]) { el("line", { x1: X(s), y1: 420, x2: X(s), y2: 425, class: "ax" }, ax); el("text", { x: X(s), y: 440, "text-anchor": "middle" }, ax).textContent = s; }
+  el("text", { x: 610, y: 476, "text-anchor": "end" }, ax).textContent = "Size (cm) →";
+  el("text", { x: 92, y: 44 }, ax).textContent = "↑ More yellow";
+  // orchard (3)
+  const orc = layer("orc", "3");
+  for (const p of orchard) el("circle", { cx: X(p.s), cy: Y(p.h), r: 1.6, fill: "#5a616b", opacity: ".55" }, orc);
+  el("text", { x: 600, y: 70, "text-anchor": "end" }, orc).textContent = "Gray: the whole orchard (unseen)";
+  // band + line (3-4)
+  const band = layer("band", "3,4");
+  const s0 = 5.8, s1 = 11.2, pts = []; for (let s = s0; s <= s1 + 1e-6; s += 0.2) pts.push(s);
+  const up = pts.map(s => `${X(s)},${Y(line(s) - 2 * seFit(s))}`), dn = pts.slice().reverse().map(s => `${X(s)},${Y(line(s) + 2 * seFit(s))}`);
+  el("polygon", { points: up.concat(dn).join(" "), fill: "rgba(255,179,71,.14)" }, band);
+  el("line", { x1: X(s0), y1: Y(line(s0)), x2: X(s1), y2: Y(line(s1)), stroke: "#ffb347", "stroke-width": 1.5 }, band);
+  const bandLab = el("text", { x: X(10.6), y: Y(line(10.6)) - 26, "text-anchor": "middle", fill: "#ffb347" }, band); bandLab.textContent = "Trend ± uncertainty";
+  // small pears (2-4)
+  const sp = layer("sp", "2,3,4");
+  const glyphs = sample.map((p, i) => {
+    const g = el("g", { class: "mv" }, sp);
+    el("path", { d: PEAR, fill: hueCol(p.h), "vector-effect": "non-scaling-stroke", stroke: "#050607", "stroke-width": ".6" }, g);
+    g.style.transitionDelay = (i * 14) + "ms"; return g;
+  });
+  const you = layer("you", "2,3");
+  el("text", { x: X(sample[0].s) + 12, y: Y(sample[0].h) + 22, fill: "#ffb347", "font-size": "12" }, you).textContent = "↖ Your pear";
+  // prediction (4)
+  const pr = layer("pr", "4");
+  const ghost = el("g", { class: "mv" }, pr); el("path", { d: PEAR, fill: "#1a1d22", stroke: "#ebedf0", "stroke-width": 1.2, "vector-effect": "non-scaling-stroke", "stroke-dasharray": "3 3" }, ghost);
+  const ebar = el("line", { stroke: "#ebedf0", "stroke-width": 1 }, pr), eT = el("line", { stroke: "#ebedf0" }, pr), eB = el("line", { stroke: "#ebedf0" }, pr);
+  const prLab = el("text", { fill: "#ebedf0" }, pr);
+  const actual = el("circle", { r: 7, fill: "none", stroke: "#3cf2b4", "stroke-width": 2, filter: "url(#glow)", opacity: 0 }, pr);
+  const actDot = el("circle", { r: 4, fill: "#3cf2b4", opacity: 0 }, pr);
+  // causal (5)
+  const ca = layer("ca", "5");
+  const sun = el("g", { transform: "translate(500,120)" }, ca);
+  const sunC = el("circle", { r: 26, fill: "#ffb347" }, sun);
+  const rays = Array.from({ length: 12 }, (_, i) => el("line", { stroke: "#ffb347", "stroke-width": 2, "stroke-linecap": "round", transform: `rotate(${i * 30})` }, sun));
+  el("path", { d: "M465,150 Q380,170 300,215", fill: "none", stroke: "#ebedf0", "stroke-width": 1, "stroke-dasharray": "4 4", "marker-end": "" }, ca);
+  el("path", { d: "M300,215 l10,-9 M300,215 l13,2", stroke: "#ebedf0", "stroke-width": 1, fill: "none" }, ca);
+  const caLab = el("text", { x: 500, y: 208, "text-anchor": "middle", fill: "#ebedf0", "font-family": "JetBrains Mono" }, ca);
+  const caOut = el("text", { x: 210, y: 430, "text-anchor": "middle", fill: "#ebedf0" }, ca);
+  const ctrl = el("g", { transform: "translate(500,318) scale(56)" }, ca);
+  el("path", { d: PEAR, fill: hueCol(clamp(84 - 1 * 4.3, 46, 90)), stroke: "#050607", "stroke-width": 1, "vector-effect": "non-scaling-stroke" }, ctrl);
+  el("path", { d: "M0,-1 C0.02,-1.15 0.06,-1.24 0.12,-1.3", stroke: "#6b4a2b", "stroke-width": 2, fill: "none", "vector-effect": "non-scaling-stroke" }, ctrl);
+  el("rect", { x: 430, y: 236, width: 140, height: 150, rx: 8, fill: "none", stroke: "#2c3038", "stroke-dasharray": "3 4" }, ca);
+  el("text", { x: 500, y: NAR ? 400 : 410, "text-anchor": "middle" }, ca).textContent = "Control: 4 h of light/day";
+  const caDiff = el("text", { x: 500, y: NAR ? 428 : 430, "text-anchor": "middle", fill: "#ebedf0", "font-family": "JetBrains Mono" }, ca);
+  // mechanism (6)
+  const me = layer("me", "6");
+  const edgesG = el("g", {}, me), nodesG = el("g", {}, me), unkG = el("g", {}, me);
+  // main pear (always present; moves between roles)
+  const mainG = el("g", { class: "mv" });
+  const mainPear = el("path", { d: PEAR, fill: "url(#pg)", stroke: "#050607", "stroke-width": "1", "vector-effect": "non-scaling-stroke" }, mainG);
+  const mainNashi = el("path", { d: NASHI, fill: "#b8834a", opacity: 0, stroke: "#050607", "stroke-width": "1", "vector-effect": "non-scaling-stroke", style: "transition:opacity .8s" }, mainG);
+  const speck = el("g", { opacity: 0, style: "transition:opacity .8s" }, mainG);
+  { const rr = rng(3); for (let i = 0; i < 40; i++) { const a = rr() * 6.28, d = Math.sqrt(rr()) * 0.78; el("circle", { cx: Math.cos(a) * d, cy: 0.25 + Math.sin(a) * d * 0.85, r: 0.018, fill: "#e8d2a6" }, speck); } }
+  const blush = el("ellipse", { cx: 0.28, cy: 0.36, rx: 0.6, ry: 0.68, fill: "url(#bl)", opacity: 0, "clip-path": "url(#pc)" }, mainG);
+  const stem = el("path", { d: "M0,-1 C0.02,-1.15 0.06,-1.24 0.12,-1.3", stroke: "#6b4a2b", "stroke-width": "2.5", fill: "none", "vector-effect": "non-scaling-stroke", "stroke-linecap": "round" }, mainG);
+  const leaf = el("path", { d: "M0.06,-1.18 C0.25,-1.38 0.5,-1.32 0.58,-1.22 C0.42,-1.08 0.2,-1.08 0.06,-1.18Z", fill: "#5b8f3a" }, mainG);
+  // dimensions (1)
+  const di = layer("di", "1");
+  const dimPaths = [
+    ["M195,128 L195,372", "M188,128 L202,128 M188,372 L202,372"],
+    ["M240,400 L400,400", "M240,393 L240,407 M400,393 L400,407"]
+  ];
+  for (const [a, b] of dimPaths) { const p = el("path", { d: a + " " + b, class: "dim draw" }, di); p.style.setProperty("--len", 400); }
+  el("text", { x: 185, y: 254, class: "dimt", "text-anchor": "end" }, di).textContent = "10.1 cm tall";
+  el("text", { x: 320, y: 424, class: "dimt", "text-anchor": "middle" }, di).textContent = "6.8 cm wide";
+  const swG = el("g", { transform: "translate(450,170)" }, di);
+  const sw1 = el("rect", { width: 30, height: 30, rx: 4 }, swG);
+  el("text", { x: 40, y: NAR ? 8 : 13, class: "dimt" }, swG).textContent = "Color";
+  const hueT = el("text", { x: 40, y: NAR ? 34 : 30, class: "dimt" }, swG);
+  const wG = el("g", { transform: "translate(450,240)" }, di);
+  el("text", { x: 0, y: 13, class: "dimt" }, wG).textContent = "Weight: 186 g";
+  el("text", { x: 0, y: NAR ? 40 : 34, class: "dimt" }, wG).textContent = "Shape: gourd-like";
+  el("text", { x: 0, y: NAR ? 67 : 55, class: "dimt" }, wG).textContent = "Few russet spots";
+
+  // pear colour
+  let pearHue = sample[0].h, pearBlush = 0;
+  function paintPear() {
+    st0.setAttribute("stop-color", `hsl(${pearHue},70%,70%)`); st1.setAttribute("stop-color", hueCol(pearHue)); st2.setAttribute("stop-color", `hsl(${pearHue + 6},58%,34%)`);
+    blush.setAttribute("opacity", pearBlush); sw1.setAttribute("fill", hueCol(pearHue)); hueT.textContent = "Hue " + Math.round(pearHue) + "°";
+  }
+
+  // mechanism graph
+  const CX = 320, CY = 236;
+  const NODES = [
+    ["Sunlight", -245, -185], ["Photosynthesis", -235, -112], ["Sugar", -250, -30], ["Cell expansion", -215, 110], ["Water", -262, 190],
+    ["Pollination", -110, -185], ["Cell division", -130, -95],
+    ["Temperature", 95, -195], ["Harvest time", 245, -190], ["Ethylene", 250, -112], ["Chlorophyll loss", 215, -32], ["Carotenoids", 228, 78],
+    ["Variety genes", -40, 190], ["Stone cells", 125, 160]
+  ];
+  const SOCK = { "Color": [92, 12], "Size": [-92, 36], "Texture": [0, 96] };
+  const EDGES = [
+    ["Sunlight", "Photosynthesis"], ["Photosynthesis", "Sugar"], ["Sugar", "Cell expansion"], ["Water", "Cell expansion"], ["Cell expansion", "Size"], ["Pollination", "Cell division"], ["Cell division", "Size"],
+    ["Temperature", "Chlorophyll loss"], ["Ethylene", "Chlorophyll loss"], ["Harvest time", "Ethylene"], ["Chlorophyll loss", "Color"], ["Carotenoids", "Color"],
+    ["Variety genes", "Stone cells"], ["Stone cells", "Texture"], ["Variety genes", "Size"], ["Temperature", "Ethylene"]
+  ];
+  const pos = {}; for (const [k, x, y] of NODES) pos[k] = [CX + x, CY + y]; for (const k in SOCK) pos[k] = [CX + SOCK[k][0], CY + SOCK[k][1]];
+  const nodeEls = {}, edgeEls = [];
+  for (const [a, b] of EDGES) {
+    const [x1, y1] = pos[a], [x2, y2] = pos[b], qx = (x1 + x2) / 2 + (CY - (y1 + y2) / 2) * 0.12, qy = (y1 + y2) / 2 + ((x1 + x2) / 2 - CX) * 0.12;
+    const p = el("path", { d: `M${x1},${y1} Q${qx},${qy} ${x2},${y2}`, fill: "none", stroke: "#5a616b", "stroke-width": 1, class: "draw" }, edgesG);
+    p.style.setProperty("--len", Math.ceil(Math.hypot(x2 - x1, y2 - y1) * 1.2)); p.dataset.a = a; p.dataset.b = b; edgeEls.push(p);
+  }
+  const pill = (k, x, y, parent, cls) => {
+    const size = NAR ? 14 : 12, measure = document.createElement("canvas").getContext("2d");
+    measure.font = `${size}px Arial, sans-serif`;
+    const w = Math.ceil(measure.measureText(k).width) + 18;
+    x = clamp(x, w / 2 + 8, 632 - w / 2);
+    const g = el("g", { transform: `translate(${x},${y})`, style: "transition:opacity .5s" }, parent);
+    el("rect", { x: -w / 2, y: -13, width: w, height: 26, rx: 13, fill: "#0c0e11", stroke: "#2c3038" }, g);
+    const t = el("text", { x: 0, y: 4.5, "text-anchor": "middle", fill: "#ebedf0", style: `font:${size}px Arial,sans-serif` }, g); t.textContent = k; if (cls) g.classList.add(cls); return g;
+  };
+  NODES.forEach(([k], i) => { const g = pill(k, ...pos[k], nodesG); g.style.transitionDelay = (i * 60) + "ms"; nodeEls[k] = g; });
+  for (const k in SOCK) { const [x, y] = pos[k]; const t = el("text", { x, y: y + 4, "text-anchor": "middle", fill: "#ffb347", "font-size": "11", "font-weight": "700" }, nodesG); t.textContent = k; }
+  const rust = pill("Russeting", CX + 40, CY - 150, nodesG); rust.setAttribute("opacity", 0);
+  // unknowns that keep spawning
+  const POOL = ["Soil microbes", "Last year’s pruning", "Bee numbers", "Gene expression", "Early rains", "Neighboring shade", "Transit temperature", "Rootstock", "Root depth", "Night temperatures", "Leaf disease", "Fruit load"];
+  let unk = [], known = NODES.length, pi = 0;
+  let occ = [];
+  const free = (x, y) => occ.every(([a, b]) => Math.abs(a - x) > 62 || Math.abs(b - y) > 30) && Math.hypot(x - CX, y - CY) > 120;
+  function addUnk(x, y) {
+    // nudge to a free spot so new questions never sit on top of old ones
+    let ok = false;
+    for (let k = 0; k < 40 && !ok; k++) {
+      const tx = clamp(x + (k ? (Math.random() - 0.5) * k * 9 : 0), 30, 610), ty = clamp(y + (k ? (Math.random() - 0.5) * k * 7 : 0), 22, 450);
+      if (free(tx, ty)) { x = tx; y = ty; ok = true; }
+    }
+    if (!ok) return;
+    occ.push([x, y]);
+    const g = el("g", { transform: `translate(${x},${y})`, style: "cursor:pointer" }, unkG);
+    el("circle", { r: 26, fill: "transparent" }, g);
+    el("circle", { r: 11, fill: "#050607", stroke: "#ffb347", "stroke-dasharray": "2 2" }, g);
+    const t = el("text", { y: 4, "text-anchor": "middle", fill: "#ffb347", "font-size": "12", "font-weight": "700" }, g); t.textContent = "?";
+    g.setAttribute("tabindex", 0); g.setAttribute("role", "button"); g.setAttribute("aria-label", "Ask another question");
+    const open = () => {
+      if (g.dataset.done) return; g.dataset.done = 1; g.remove();
+      const name = POOL[pi++ % POOL.length]; pill(name, x, y, unkG).querySelector("rect").setAttribute("stroke", "#ffb347"); known++;
+      const a = Math.atan2(y - CY, x - CX);
+      for (const da of [-0.35, 0.35]) addUnk(x + Math.cos(a + da) * 70 + (Math.random() - 0.5) * 30, y + Math.sin(a + da) * 56 + (Math.random() - 0.5) * 24);
+      lvTextFor(6);
+    };
+    g.addEventListener("click", open); g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
+    unk.push(g);
+  }
+  function resetUnk() { unkG.innerHTML = ""; unk = []; known = NODES.length; pi = 0; occ = Object.values(pos).map(p => p.slice()); occ.push([CX + 40, CY - 150]); for (const [x, y] of [[40, 300], [600, 250], [150, 446], [470, 440], [320, 30]]) addUnk(x, y); }
+
+  // levels
+  const LV = [
+    { k: "Descriptive", en: "Descriptive", need: "This pear", bar: 6 },
+    { k: "Exploratory", en: "Exploratory", need: "Dozens of pears", bar: 18 },
+    { k: "Inferential", en: "Inferential", need: "A sound sample", bar: 30 },
+    { k: "Predictive", en: "Predictive", need: "Training + testing", bar: 44 },
+    { k: "Causal", en: "Causal", need: "Controlled trials", bar: 64 },
+    { k: "Mechanistic", en: "Mechanistic", need: "The whole system", bar: 100, inf: true }
+  ];
+  let lv = 1, swapped = false;
+  const rungs = $("#rungs");
+  LV.forEach((v, i) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<button><span class="dot">${i + 1}</span><span><span class="nm">${v.k}</span><span class="en">${v.en}</span></span></button>`;
+    li.firstChild.addEventListener("click", () => setLv(i + 1)); rungs.appendChild(li);
+  });
+  const cost = $("#cost");
+  LV.forEach(v => { cost.insertAdjacentHTML("beforeend", `<span>${v.k}</span><span style="display:flex;align-items:center;gap:8px"><i style="width:${v.bar}%" class="${v.inf ? "inf" : ""}"></i><span style="white-space:nowrap">${v.need}</span></span>`); });
+  cost.insertAdjacentHTML("afterbegin", `<span style="grid-column:1/-1;font-size:.72rem">What you roughly need</span>`);
+  const lvctl = $("#lvctl");
+  function lvTextFor(l) {
+    const T = {
+      1: "<b>Description:</b> Record this pear’s shape, color and size precisely. To answer “What is it like?”, you need only this one pear.",
+      2: "<b>Exploration:</b> Look at a few dozen pears for patterns. Larger ones seem yellower? That is an observation, not yet a conclusion. Your pear is now one point on the graph.",
+      3: "<b>Inference:</b> Can 40 pears tell you about the whole orchard? The amber band shows uncertainty. Gray dots are pears you have not seen.",
+      4: "<b>Prediction:</b> A new pear arrives. Measure only its size and predict its color. The prediction is a range, not a point.",
+      5: "<b>Causality:</b> Change one variable and see how another responds. Does more sunlight make a pear yellower, with a red blush? You need an experiment; observation alone is not enough.",
+      6: `<b>Mechanism:</b> Find out why each variable changes and what else it affects. Open a dotted “?” to keep asking: every answer brings two more questions. Variables listed: <b>${known}</b>.`
+    };
+    $("#lvText").innerHTML = T[l] + (l === 6 && swapped ? "<br><span style='color:var(--stop)'>Now an Asian pear: the variety has changed. Red connections need to be tested again, and a new variable, russeting, appears.</span>" : "");
+  }
+  function setMain(tr, sc) { mainG.style.transform = `translate(${tr[0]}px,${tr[1]}px) scale(${sc})`; }
+  let pred = null;
+  function newPred() {
+    const s = 6.2 + Math.random() * 4.6, h = clamp(model(s) + gauss(Math.random) * 4.2, 47, 92), ph = line(s), e = 2 * sePred(s);
+    pred = { s, h, ph, e, shown: false };
+    ghost.style.transform = `translate(${X(s)}px,${Y(ph)}px) scale(17)`;
+    for (const [ln, y1, y2] of [[ebar, Y(ph - e), Y(ph + e)]]) { ln.setAttribute("x1", X(s) + 30); ln.setAttribute("x2", X(s) + 30); ln.setAttribute("y1", y1); ln.setAttribute("y2", y2); }
+    eT.setAttribute("x1", X(s) + 25); eT.setAttribute("x2", X(s) + 35); eT.setAttribute("y1", Y(ph + e)); eT.setAttribute("y2", Y(ph + e));
+    eB.setAttribute("x1", X(s) + 25); eB.setAttribute("x2", X(s) + 35); eB.setAttribute("y1", Y(ph - e)); eB.setAttribute("y2", Y(ph - e));
+    prLab.setAttribute("x", 320); prLab.setAttribute("y", 28); prLab.setAttribute("text-anchor", "middle"); prLab.textContent = `${s.toFixed(1)} cm → predicted hue ${Math.round(ph - e)}–${Math.round(ph + e)}°`;
+    actual.setAttribute("opacity", 0); actDot.setAttribute("opacity", 0);
+  }
+  function reveal() {
+    if (!pred) return; pred.shown = true;
+    for (const c of [actual, actDot]) { c.setAttribute("cx", X(pred.s) + 30); c.setAttribute("cy", Y(pred.h)); c.setAttribute("opacity", 1); }
+    const inside = Math.abs(pred.h - pred.ph) <= pred.e;
+    prLab.textContent = `Actual: ${Math.round(pred.h)}° · ${inside ? "within the range" : "outside the range"}`;
+  }
+  function setLv(l) {
+    lv = l;
+    [...rungs.querySelectorAll("button")].forEach((b, i) => b.setAttribute("aria-current", i + 1 === l));
+    [...cost.querySelectorAll("i")].forEach((b, i) => b.classList.toggle("cur", i + 1 === l));
+    for (const k in L) { const on = L[k].dataset.show.split(",").includes(String(l)); L[k].style.opacity = on ? 1 : 0; L[k].style.visibility = on ? "visible" : "hidden"; L[k].setAttribute("aria-hidden", !on); L[k].style.pointerEvents = on ? "" : "none"; L[k].classList.toggle("on", on); }
+    // small pears
+    sample.forEach((p, i) => {
+      const g = glyphs[i];
+      if (l >= 2 && l <= 4) { g.style.transform = `translate(${X(p.s)}px,${Y(p.h)}px) scale(7)`; g.style.opacity = i === 0 ? 0 : l === 4 ? 0.4 : 1; }
+      else { g.style.transform = `translate(320px,240px) scale(${l === 1 ? 100 : 60})`; g.style.opacity = 0; }
+    });
+    // main pear
+    if (l !== 6 && swapped) swapPear(false);
+    if (l !== 5) { pearHue = sample[0].h; pearBlush = 0; paintPear(); }
+    leaf.style.opacity = stem.style.opacity = (l >= 2 && l <= 4) ? 0 : 1;
+    if (l === 1) setMain([320, 250], 104);
+    else if (l <= 4) setMain([X(sample[0].s), Y(sample[0].h)], 7);
+    else if (l === 5) setMain([210, 268], 92);
+    else setMain([CX, CY], 62);
+    mainG.querySelector("path").style.stroke = (l >= 2 && l <= 4) ? "#ffb347" : "#050607";
+    mainG.querySelector("path").style.strokeWidth = (l >= 2 && l <= 4) ? 2 : 1;
+    // mechanism reveal
+    for (const e of edgeEls) { e.style.transitionDelay = l === 6 ? (0.5 + Math.random() * 0.8) + "s" : "0s"; }
+    for (const k in nodeEls) nodeEls[k].style.opacity = l === 6 ? 1 : 0;
+    if (l === 6 && !unk.length) resetUnk();
+    // per-level controls
+    lvctl.innerHTML = "";
+    if (l === 4) {
+      lvctl.innerHTML = `<div class="row"><button class="btn ghost" id="pNew">New pear</button><button class="btn" id="pRev">Reveal color</button></div>`;
+      $("#pNew").onclick = newPred; $("#pRev").onclick = reveal; newPred();
+    }
+    if (l === 5) {
+      lvctl.innerHTML = `<div class="slider"><label for="sunR">Sunlight</label><input id="sunR" type="range" min="3" max="12" step=".1" value="6"><output id="sunO">6 h</output></div>`;
+      const s = $("#sunR"), upd = () => {
+        const v = +s.value; $("#sunO").textContent = v.toFixed(0) + " h";
+        pearHue = clamp(84 - (v - 3) * 4.3, 46, 90); pearBlush = clamp((v - 6) / 6, 0, 1) * 0.5; paintPear();
+        rays.forEach((ry, i) => { const len = 8 + v * 2.2; ry.setAttribute("x1", 0); ry.setAttribute("y1", -32); ry.setAttribute("x2", 0); ry.setAttribute("y2", -32 - len); });
+        sunC.setAttribute("r", 20 + v * 0.8);
+        caLab.textContent = `Treatment: ${v.toFixed(0)} h/day`; caOut.textContent = `Treatment · hue ${Math.round(pearHue)}° · blush ${Math.round(pearBlush * 200)}%`; const d = Math.round(pearHue - (84 - 4.3)); caDiff.textContent = d === 0 ? "No difference" : `Hue difference: ${d > 0 ? "+" : "−"}${Math.abs(d)}°`;
+      };
+      s.addEventListener("input", upd); upd();
+    }
+    if (l === 6) {
+      lvctl.innerHTML = `<div class="row"><button class="btn ghost" id="swapB" aria-pressed="${swapped}">Try another variety</button><button class="btn ghost" id="unkNext">Explore a variable</button><button class="btn ghost" id="unkR">Reset questions</button></div>`;
+      $("#unkNext").onclick = () => { const q = unkG.querySelector('[role="button"]'); if (q) q.dispatchEvent(new Event("click")); else $("#unkNext").disabled = true; };
+      $("#swapB").onclick = () => { swapPear(!swapped); $("#swapB").setAttribute("aria-pressed", swapped); lvTextFor(6); };
+      $("#unkR").onclick = () => { resetUnk(); $("#unkNext").disabled = false; lvTextFor(6); };
+    }
+    lvTextFor(l);
+  }
+  function swapPear(on) {
+    swapped = on;
+    mainPear.style.opacity = on ? 0 : 1; mainNashi.setAttribute("opacity", on ? 1 : 0); speck.setAttribute("opacity", on ? 1 : 0);
+    leaf.style.opacity = on ? 0 : 1; rust.setAttribute("opacity", on ? 1 : 0); stem.setAttribute("transform", on ? "translate(0,0.48)" : "");
+    const bad = new Set(["Variety genes", "Stone cells", "Ethylene"]);
+    for (const e of edgeEls) {
+      const b = on && (bad.has(e.dataset.a) || bad.has(e.dataset.b));
+      e.setAttribute("stroke", b ? "#ff5d7d" : "#5a616b"); e.style.strokeDasharray = b ? "4 4" : ""; e.style.strokeDashoffset = b ? "0" : "";
+    }
+    for (const k of bad) nodeEls[k].querySelector("rect").setAttribute("stroke", on ? "#ff5d7d" : "#2c3038");
+  }
+  mainPear.style.transition = "opacity .8s";
+  paintPear(); setLv(1);
+})();
+
+/* =========================================================
+   03 · Two worlds, one butterfly — a real chaotic system
+   Lorenz-63 (σ=10, ρ=28, β=8/3), fixed-step RK4 (dt=0.005), precomputed once,
+   so every device gets bit-identical trajectories whatever its frame rate.
+   World A gets a 1e-6 nudge in x at the flap; before that both worlds share one state.
+   The storm is steered by a slow average of tanh(x/6): x<0 lobe pushes it south (the city), x>0 north (out to sea).
+   1 model time unit is drawn as 1 day (illustration only). tests/lorenz_storm.test.cjs re-derives every quoted number.
+   ========================================================= */
+(() => {
+  const LZ = {"sigma":10,"rho":28,"beta":2.6666666666666665,"dt":0.005,"spinup":3660,"steps":4000,"flapStep":70,"nudge":-1e-6,"tau":1.5,"eps12":0.01,"tol":8.5,"lambda":0.906};
+  const cv = $("#stormCv"), ov = $("#stormOv"), gc = $("#gapCv"), dpr = Math.min(2, devicePixelRatio || 1);
+  const STEPS = LZ.steps, DT = LZ.dt, T = STEPS * DT, DAYS = T, SPEED = 1.25; // model units per real second
+  const EPS = n => LZ.eps12 * Math.sqrt(12 / n); // observation error shrinks like 1/√n
+  const NAME = { 12: "12", 600: "600", 9000: "9 000" };
+  // ---- the model ----
+  const f = (x, y, z) => [LZ.sigma * (y - x), x * (LZ.rho - z) - y, x * y - LZ.beta * z];
+  function rk4(s) {
+    const [x, y, z] = s, h = DT, a = f(x, y, z), b = f(x + a[0] * h / 2, y + a[1] * h / 2, z + a[2] * h / 2),
+      c = f(x + b[0] * h / 2, y + b[1] * h / 2, z + b[2] * h / 2), d = f(x + c[0] * h, y + c[1] * h, z + c[2] * h);
+    return [x + h / 6 * (a[0] + 2 * b[0] + 2 * c[0] + d[0]), y + h / 6 * (a[1] + 2 * b[1] + 2 * c[1] + d[1]), z + h / 6 * (a[2] + 2 * b[2] + 2 * c[2] + d[2])];
+  }
+  let s0 = [1, 1, 1]; for (let i = 0; i < LZ.spinup; i++) s0 = rk4(s0);
+  const GAP = new Float64Array(STEPS + 1), WA = new Float64Array(STEPS + 1), WB = new Float64Array(STEPS + 1);
+  { let A = s0.slice(), B = s0.slice(), wa = 0, wb = 0; const k = DT / LZ.tau;
+    for (let i = 0; i < STEPS; i++) {
+      if (i === LZ.flapStep) A[0] += LZ.nudge;
+      A = rk4(A); B = rk4(B);
+      wa += (Math.tanh(A[0] / 6) - wa) * k; wb += (Math.tanh(B[0] / 6) - wb) * k;
+      GAP[i + 1] = Math.hypot(A[0] - B[0], A[1] - B[1], A[2] - B[2]); WA[i + 1] = wa; WB[i + 1] = wb;
+    } }
+  const tFlap = LZ.flapStep * DT;
+  const detect = n => { const e = EPS(n); for (let i = 1; i <= STEPS; i++) if (GAP[i] > e) return i * DT; return T; };
+  const horizon = n => Math.log(LZ.tol / EPS(n)) / LZ.lambda;
+  const SPLIT = (() => { for (let i = 1; i <= STEPS; i++) if (GAP[i] > LZ.tol) return i * DT; return T; })();
+  const idx = tt => clamp(Math.round(tt / DT), 0, STEPS);
+  const day = tt => tt.toFixed(1);
+  const SUP = { "-": "⁻", 0: "⁰", 1: "¹", 2: "²", 3: "³", 4: "⁴", 5: "⁵", 6: "⁶", 7: "⁷", 8: "⁸", 9: "⁹" };
+  const pow10 = e => "10" + String(e).replace(/./g, ch => SUP[ch]);
+  const fmt = g => { if (g >= 0.1) return g.toFixed(g < 10 ? 1 : 0); const e = Math.floor(Math.log10(g)), m = g / 10 ** e; return (m < 1.05 ? "" : m.toFixed(1) + "×") + pow10(e); };
+  const S = {
+    font: "Arial, sans-serif", city: "Coastal city", bfly: "A butterfly", flapped: "Flap", storm: "Hurricane", together: "Both worlds' hurricanes: still together",
+    withB: "World with the butterfly", noB: "World without", landfall: "Landfall", again: "Run again",
+    errBand: (n, e, nar) => nar ? `Error ±${e} · undetectable below` : `${n} observation points: error ±${e} · below this, the worlds look the same`,
+    tolLine: nar => nar ? "Path unknown" : "Beyond this, nobody can tell which way the storm goes",
+    dayTick: d => `Day ${d}`, chartTitle: nar => nar ? "Gap between worlds (log)" : "Gap between the two worlds' states (model units, log scale)",
+    detected: d => `Day ${d}: detectable`,
+    ready: "The hurricanes in both worlds start from the same state.",
+    before: (d, n, e) => `The butterfly flaps once. The two worlds' states differ by just <b>${d}</b>, while ${n} observation points have an error of ±${e}. To measurement, the worlds are identical.`,
+    after: (td, sp) => `On day ${td}, the difference outgrows the error and becomes detectable. The gap doubles roughly every 0.77 days, but unevenly; by day ${sp}, the hurricanes part ways.`,
+    done: (n, td, e, hz) => `Just one wingbeat apart: with a butterfly, the hurricane hits the coastal city; without one, it turns out to sea. With ${n} observation points (error ±${e}), the difference is detectable only on day ${td}, and at the average growth rate an error that size keeps the forecast useful only until about day ${hz}.`,
+    dayLine: (d, g) => `Day <b>${d}</b> (illustrative) · <span class="nw">gap <b>${g}</b></span>`
+  };
+  let g, o, cg, W, H, GW, GH, bgc, R, t = 0, clock = 0, state = "ready", N = 600, P = [], said = "", dayTxt = "", chartKey = "", small = false;
+  const coastX = y => 0.15 + 0.022 * Math.sin(y * 9) + 0.011 * Math.sin(y * 23 + 1) + 0.025 * y;
+  const CITY = [coastX(0.74) - 0.018, 0.74];
+  const S0 = [0.88, 0.58], C1 = [0.7, 0.56];
+  const MID = [S0, C1, [0.52, 0.5], [0.38, 0.44]], SOUTH = [S0, C1, [0.42, 0.64], [CITY[0] + 0.01, CITY[1]]], NORTH = [S0, C1, [0.6, 0.3], [0.52, 0.07]];
+  function bez(p, s) { const m = 1 - s, a = m * m * m, b = 3 * m * m * s, c = 3 * m * s * s, d = s * s * s; return [a * p[0][0] + b * p[1][0] + c * p[2][0] + d * p[3][0], a * p[0][1] + b * p[1][1] + c * p[2][1] + d * p[3][1]]; }
+  // w ∈ (-1, 1): the slow steering signal from the Lorenz x variable
+  function at(w, tt) { const s = clamp(tt / T, 0, 1), m = bez(MID, s), q = bez(w < 0 ? SOUTH : NORTH, s), k = Math.min(1, Math.abs(w) * 1.15); return [(m[0] + (q[0] - m[0]) * k) * W, (m[1] + (q[1] - m[1]) * k) * H]; }
+  const lab = () => small ? 13 : 13.5;
+  function paintMap(x) {
+    x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    x.strokeStyle = "#0e1216"; x.lineWidth = 1; x.beginPath();
+    const st = Math.max(44, W / 14); for (let gx = st / 2; gx < W; gx += st) { x.moveTo(gx, 0); x.lineTo(gx, H); } for (let gy = st / 2; gy < H; gy += st) { x.moveTo(0, gy); x.lineTo(W, gy); } x.stroke();
+    x.beginPath(); x.moveTo(0, 0); for (let y = 0; y <= 1.0001; y += 0.02) x.lineTo(coastX(y) * W, y * H); x.lineTo(0, H); x.closePath();
+    x.fillStyle = "rgba(20,23,29,.55)"; x.fill(); x.strokeStyle = "#2c3038"; x.lineWidth = 1.2; x.stroke();
+    const qx = CITY[0] * W, qy = CITY[1] * H;
+    x.fillStyle = "#ebedf0"; x.fillRect(qx - 3, qy - 3, 6, 6);
+    x.font = `500 ${lab()}px ${S.font}`; x.fillStyle = "#9aa0a9"; x.textAlign = "left"; x.textBaseline = "top"; x.fillText(S.city, Math.max(4, qx - 10), qy + 8);
+  }
+  const wipe = () => { g.fillStyle = "#06080b"; g.fillRect(0, 0, W, H); };
+  function setup() {
+    [g, W, H] = fit(cv); [o] = fit(ov, H); [cg, GW, GH] = fit(gc); small = W < 700;
+    R = Math.min(W, H) * (small ? 0.15 : 0.13);
+    const r = rng(3); P = Array.from({ length: small ? 420 : 900 }, () => ({ r: 0.16 + Math.pow(r(), 0.8) * 0.84, a: r() * 6.283 }));
+    bgc = document.createElement("canvas"); bgc.width = Math.max(1, g.canvas.width); bgc.height = Math.max(1, g.canvas.height); paintMap(bgc.getContext("2d"));
+    wipe(); chartKey = "";
+  }
+  const pr = rng(11); // cloud particles are decoration only and never touch the model
+  function spin(dt, pa, pb) {
+    const A3 = [new Path2D(), new Path2D(), new Path2D()], B3 = [new Path2D(), new Path2D(), new Path2D()], ph = clock * 0.3, TAIL = 0.09, both = Math.hypot(pa[0] - pb[0], pa[1] - pb[1]) > 1;
+    for (const p of P) {
+      const v = p.r < 0.25 ? p.r / 0.25 : Math.pow(0.25 / p.r, 0.6), w = 1.9 * v / p.r;
+      p.a -= w * dt; p.r -= 0.05 * v * dt;
+      if (p.r < 0.15) { p.r = 0.95 + pr() * 0.05; p.a = pr() * 6.283; }
+      const rr = p.r * R, c0 = Math.cos(p.a) * rr, s0 = Math.sin(p.a) * rr * 0.92, c1 = Math.cos(p.a + w * TAIL) * rr, s1 = Math.sin(p.a + w * TAIL) * rr * 0.92;
+      const arm = Math.cos(2 * (p.a + ph - 2.3 * Math.log(p.r))), k = arm > 0.5 ? 2 : arm > -0.3 ? 1 : 0;
+      if (both) { B3[k].moveTo(pb[0] + c1, pb[1] + s1); B3[k].lineTo(pb[0] + c0, pb[1] + s0); }
+      A3[k].moveTo(pa[0] + c1, pa[1] + s1); A3[k].lineTo(pa[0] + c0, pa[1] + s0);
+    }
+    g.lineWidth = 1.1;
+    if (both) [0.22, 0.45, 0.82].forEach((a, k) => { g.strokeStyle = `rgba(170,186,210,${a})`; g.stroke(B3[k]); });
+    [0.22, 0.45, 0.82].forEach((a, k) => { g.strokeStyle = `rgba(242,234,222,${a})`; g.stroke(A3[k]); });
+  }
+  function butterfly(x, y, s, f, a) {
+    o.save(); o.globalAlpha = a; o.translate(x, y); o.scale(s, s); o.fillStyle = css("--accent");
+    const w = 0.3 + 0.7 * f;
+    for (const k of [-1, 1]) {
+      o.beginPath(); o.ellipse(k * 7 * w, -4, 7 * w, 8, k * 0.5, 0, 7); o.fill();
+      o.beginPath(); o.ellipse(k * 5 * w, 6, 4.5 * w, 5.5, -k * 0.4, 0, 7); o.fill();
+    }
+    o.fillStyle = "#050607"; o.fillRect(-0.8, -9, 1.6, 18);
+    o.strokeStyle = css("--accent"); o.lineWidth = 0.9; o.beginPath(); o.moveTo(-0.5, -9); o.quadraticCurveTo(-3, -14, -6, -15); o.moveTo(0.5, -9); o.quadraticCurveTo(3, -14, 6, -15); o.stroke();
+    o.restore();
+  }
+  function tag(txt, x, y, col, align = "center") {
+    o.font = `500 ${lab()}px ${S.font}`; o.textBaseline = "middle";
+    const w = o.measureText(txt).width, x0 = clamp(align === "center" ? x - w / 2 : x, 6, W - w - 6), hh = lab() + 9;
+    o.fillStyle = "rgba(5,6,7,.82)"; o.fillRect(x0 - 5, y - hh / 2, w + 10, hh);
+    o.fillStyle = col; o.textAlign = "left"; o.fillText(txt, x0, y + 0.5);
+  }
+  function track(W8, t1, dash, col) {
+    if (t1 <= 0) return;
+    o.strokeStyle = col; o.lineWidth = 1.5; o.setLineDash(dash); o.beginPath();
+    const n = idx(t1);
+    for (let i = 0; i <= n; i += 10) { const [x, y] = at(W8[i], i * DT); i ? o.lineTo(x, y) : o.moveTo(x, y); }
+    const [x, y] = at(W8[n], n * DT); o.lineTo(x, y);
+    o.stroke(); o.setLineDash([]);
+  }
+  function overlay(tt, pa, pb) {
+    o.clearRect(0, 0, W, H); o.drawImage(bgc, 0, 0, W, H);
+    track(WB, tt, [5, 5], "rgba(170,186,210,.6)"); track(WA, tt, [], "rgba(242,234,222,.6)");
+    const st = at(0, 0), bx = st[0] - R * 1.05, by = st[1] + R * 0.6, s = clamp(R / 52, 0.7, 1.3);
+    const fl = state !== "ready" && tt >= tFlap && tt <= tFlap + 1;
+    if (state === "ready") { butterfly(bx, by, s, 0.75 + 0.25 * Math.sin(clock * 2.4), 1); tag(S.bfly, bx, by + 26 * s, css("--accent")); }
+    else {
+      butterfly(bx, by, s, fl ? 0.5 + 0.5 * Math.sin(clock * 42) : 0.6, tt < tFlap + 1 ? 1 : clamp(1.6 - (tt - tFlap) * 0.25, 0.3, 1));
+      if (tt >= tFlap && tt < tFlap + 1.6) { const k = (tt - tFlap) / 1.6; o.strokeStyle = `rgba(255,179,71,${1 - k})`; o.lineWidth = 1.5; o.beginPath(); o.arc(bx, by, 8 + k * R * 0.9, 0, 7); o.stroke(); }
+      if (tt >= tFlap && tt < 3) tag(S.flapped, bx, by + 26 * s, css("--accent"));
+    }
+    const sep = Math.hypot(pa[0] - pb[0], pa[1] - pb[1]);
+    for (const [p, c] of [[pb, "#aabad2"], [pa, "#f2eade"]]) { o.fillStyle = c; o.beginPath(); o.arc(p[0], p[1], 2.5, 0, 7); o.fill(); }
+    const above = p => p[1] - R - 16 > 14 ? p[1] - R - 16 : p[1] + R + 16;
+    if (sep < R * 1.6) tag(state === "ready" ? S.storm : S.together, pa[0], above(pa), "#ebedf0");
+    else { tag(S.withB, pa[0], above(pa), "#f2eade"); tag(S.noB, pb[0], above(pb), "#aabad2"); }
+    if (tt > T * 0.93) {
+      const k = (tt - T * 0.93) / (T * 0.07), cx = CITY[0] * W, cy = CITY[1] * H;
+      o.strokeStyle = css("--stop"); o.lineWidth = 2; o.globalAlpha = k; o.beginPath(); o.arc(cx, cy, 12 + Math.sin(clock * 3) * 2, 0, 7); o.stroke(); o.globalAlpha = 1;
+      tag(S.landfall, cx + 22, cy, css("--stop"), "left");
+    }
+  }
+  function lbl(s, x, y, col, align) {
+    const w = cg.measureText(s).width, x0 = align === "right" ? x - w : x;
+    cg.fillStyle = "rgba(5,6,7,.82)"; cg.fillRect(x0 - 4, y - 10, w + 8, 20);
+    cg.fillStyle = col; cg.textAlign = "left"; cg.textBaseline = "middle"; cg.fillText(s, x0, y);
+  }
+  function chart(tt) {
+    const key = [state, tt.toFixed(2), N, GW].join(); if (key === chartKey) return; chartKey = key;
+    const nar = GW < 600, fs = nar ? 13 : 13, x0 = nar ? 46 : 60, x1 = GW - 10, y0 = 30, y1 = GH - 26, L0 = -7, L1 = 2.4;
+    const X = s => x0 + s / T * (x1 - x0), Y = lg => y1 - (clamp(lg, L0, L1) - L0) / (L1 - L0) * (y1 - y0);
+    cg.clearRect(0, 0, GW, GH);
+    cg.font = `400 ${fs}px ${S.font}`; cg.textBaseline = "middle";
+    const eN = EPS(N), e = Y(Math.log10(eN)), tl = Y(Math.log10(LZ.tol));
+    cg.fillStyle = "rgba(138,144,153,.12)"; cg.fillRect(x0, e, x1 - x0, y1 - e);
+    cg.strokeStyle = "rgba(138,144,153,.6)"; cg.setLineDash([3, 3]); cg.beginPath(); cg.moveTo(x0, e); cg.lineTo(x1, e); cg.stroke();
+    cg.strokeStyle = "rgba(255,179,71,.45)"; cg.beginPath(); cg.moveTo(x0, tl); cg.lineTo(x1, tl); cg.stroke(); cg.setLineDash([]);
+
+    cg.strokeStyle = "#2c3038"; cg.lineWidth = 1; cg.beginPath(); cg.moveTo(x0, y0); cg.lineTo(x0, y1); cg.lineTo(x1, y1); cg.stroke();
+    cg.fillStyle = "#9aa0a9"; cg.textAlign = "right"; for (const lg of (nar ? [-6, -3, 0] : [-6, -4, -2, 0])) cg.fillText(lg === 0 ? "1" : pow10(lg), x0 - 6, Y(lg));
+    // day ticks: ends first, then the middle ones that fit without touching a neighbour
+    cg.textBaseline = "top"; const ticks = [], placed = [];
+    for (let dd = 0; dd <= DAYS; dd += nar ? 5 : 2.5) ticks.push(dd);
+    ticks.sort((a, b) => (b === 0 || b >= DAYS) - (a === 0 || a >= DAYS));
+    for (const dd of ticks) {
+      const t = S.dayTick(dd), w = cg.measureText(t).width, ax = dd === 0 ? x0 : dd >= DAYS ? x1 - w : X(dd) - w / 2;
+      if (placed.some(([a, b]) => ax < b + 8 && ax + w > a - 8)) continue;
+      placed.push([ax, ax + w]); cg.textAlign = "left"; cg.fillText(t, ax, y1 + 6);
+    }
+    cg.textAlign = "left"; cg.textBaseline = "middle"; cg.fillStyle = "#ebedf0"; cg.fillText(S.chartTitle(nar), x0, y0 - 18);
+    // a reference: an error of size ε growing at the mean rate λ reaches the tolerance at the horizon
+    const hz = horizon(N);
+    cg.strokeStyle = "rgba(138,144,153,.55)"; cg.setLineDash([2, 4]); cg.beginPath(); cg.moveTo(X(0), e); cg.lineTo(X(hz), tl); cg.stroke(); cg.setLineDash([]);
+    const labels = () => {
+      { let eb = S.errBand(NAME[N], fmt(eN), nar); if (cg.measureText(eb).width > x1 - x0 - 16) eb = eb.split(" · ")[0]; lbl(eb, x1 - 4, y1 - 11, "#9aa0a9", "right"); }  // bottom-right of the band: the early curve lives bottom-left
+      lbl(S.tolLine(nar), x1 - 4, tl + 13, "rgba(255,179,71,.95)", "right");
+      if (state !== "ready" && tt >= detect(N)) { const td = detect(N), s = S.detected(day(td)), w = cg.measureText(s).width; lbl(s, X(td) - w - 8 > x0 + 4 ? X(td) - w - 8 : X(td) + 8, Y(-1.6), "#ebedf0", "left"); }
+    };
+    if (state === "ready") return labels();
+    const td = detect(N);
+    if (tt >= td) {
+      cg.strokeStyle = "rgba(235,237,240,.5)"; cg.beginPath(); cg.moveTo(X(td), y0 + 6); cg.lineTo(X(td), y1); cg.stroke();
+    }
+    if (tt <= tFlap) return labels();
+    cg.strokeStyle = "#ebedf0"; cg.lineWidth = 2; cg.beginPath();
+    const n = idx(tt), i0 = LZ.flapStep + 1;
+    for (let i = i0; i <= n; i += 4) { const x = X(i * DT), y = Y(Math.log10(GAP[i])); i === i0 ? cg.moveTo(x, y) : cg.lineTo(x, y); }
+    cg.lineTo(X(n * DT), Y(Math.log10(GAP[n] || 1e-9))); cg.stroke();
+    cg.fillStyle = "#ebedf0"; cg.beginPath(); cg.arc(X(n * DT), Y(Math.log10(GAP[n] || 1e-9)), 3.5, 0, 7); cg.fill();
+    labels();
+  }
+  function say(h) { if (h !== said) { said = h; $("#stormRead").innerHTML = h; } }
+  function words(tt) {
+    const td = detect(N), eN = fmt(EPS(N)), hz = day(horizon(N));
+    if (state === "ready") return say(S.ready);
+    if (state === "done") return say(S.done(NAME[N], day(td), eN, hz));
+    if (tt < tFlap) return say(S.ready);
+    if (tt < td) return say(S.before(fmt(Math.abs(LZ.nudge)), NAME[N], eN));
+    say(S.after(day(td), day(SPLIT)));
+  }
+  function start() { t = 0; state = "run"; chartKey = ""; $("#flapBtn").textContent = S.again; }
+  $("#flapBtn").addEventListener("click", () => { start(); if (RM) { t = T; state = "done"; still(); } });
+  $("#sensSeg").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return; N = +b.dataset.n;
+    for (const x of $("#sensSeg").children) x.setAttribute("aria-pressed", x === b);
+    chartKey = ""; chart(state === "ready" ? 0 : t); words(state === "ready" ? 0 : t);
+  });
+  setup(); addEventListener("resize", () => { setup(); if (RM || state === "done") still(); });
+  function frame(dt) {
+    clock += dt;
+    if (state === "run") { t += dt * SPEED; if (t >= T) { t = T; state = "done"; } }
+    const tt = state === "ready" ? 0 : t, n = idx(tt), pa = at(WA[n], tt), pb = at(WB[n], tt);
+    if (!W) return;
+    wipe(); spin(dt, pa, pb); overlay(tt, pa, pb); chart(tt); words(tt);
+    const d = S.dayLine(day(tt), tt <= tFlap ? "0" : fmt(GAP[n]));
+    if (d !== dayTxt) { dayTxt = d; $("#stormDay").innerHTML = d; }
+  }
+  function still() { const keep = state; clock = 0; for (let i = 0; i < 40; i++) frame(1 / 30); state = keep; }
+  if (RM) { state = "done"; t = T; $("#flapBtn").textContent = S.again; still(); }
+  else {
+    addLoop(cv, frame);
+    const io = new IntersectionObserver(es => { if (es[0].isIntersecting && state === "ready") { io.disconnect(); setTimeout(() => { if (state === "ready") start(); }, 900); } }, { threshold: 0.6 });
+    io.observe($(".storm"));
+  }
+})();
+
+/* =========================================================
+   04 · One budget, three problems
+   Each column is the six-level ladder applied to one problem; the bar in a cell
+   is what that level adds, the number is what it costs. Value saturates at a
+   different depth for each problem, so the best plan stops each one early.
+   ========================================================= */
+(() => {
+  const LV = ["Descriptive", "Exploratory", "Inferential", "Predictive", "Causal", "Mechanistic"], EN = ["Descriptive", "Exploratory", "Inferential", "Predictive", "Causal", "Mechanistic"];
+  const BUDGET = 100;
+  const PR = [
+    { name: "Game bot", goal: "Keep the hero alive", t: ["Red or gray", "Time between hits", "Critical-hit rate", "Next hit timing", "Damage formula", "All the game code"], v: [30, 2, 1, 1, 1, 1], c: [4, 8, 13, 19, 27, 55] },
+    { name: "A pear", goal: "Understand this batch", t: ["What it looks like", "Bigger, yellower?", "The whole orchard?", "A new pear’s color", "Does sun yellow it?", "Why each variable changes"], v: [4, 6, 7, 8, 3, 2], c: [4, 8, 12, 16, 24, 60] },
+    { name: "A hurricane", goal: "Protect the city", t: ["Find the eye", "Past paths", "Patterns in this type", "Where in three days", "Do warm seas strengthen it?", "Every butterfly"], v: [6, 4, 4, 12, 3, 40], c: [5, 11, 16, 21, 32, Infinity] }
+  ];
+  const PEAR = "M0,-1 C0.22,-1 0.3,-0.62 0.34,-0.36 C0.4,-0.02 0.76,0.12 0.76,0.56 C0.76,0.96 0.42,1.06 0,1.06 C-0.42,1.06 -0.76,0.96 -0.76,0.56 C-0.76,0.12 -0.4,-0.02 -0.34,-0.36 C-0.3,-0.62 -0.22,-1 0,-1Z";
+  const plan = $("#plan"), depth = [0, 0, 0], cells = [[], [], []];
+  const cum = (a, k) => { let s = 0; for (let i = 0; i < k; i++) s += a[i]; return s; };
+  const spent = (d = depth) => PR.reduce((s, p, i) => s + cum(p.c, d[i]), 0);
+  const worth = (d = depth) => PR.reduce((s, p, i) => s + cum(p.v, d[i]), 0);
+  let best = { v: -1 };
+  for (let a = 0; a <= 6; a++) for (let b = 0; b <= 6; b++) for (let c = 0; c <= 6; c++) { const d = [a, b, c]; if (spent(d) <= BUDGET && worth(d) > best.v) best = { v: worth(d), d }; }
+  $("#bestNum").textContent = best.v;
+  const maxV = Math.max(...PR.flatMap(p => p.v));
+  const nm = d => d ? `“${LV[d - 1]}”` : "no analysis";
+  // a picture of each problem: the bot's own screen, a pear, a storm
+  function icon(i) {
+    if (i === 0) { const c = document.createElement("canvas"); c.width = PW; c.height = PH; c.className = "ico pix"; const s = newSim(); s.hp = 62; drawScene(c.getContext("2d"), s, 0.2); c.setAttribute("aria-hidden", "true"); return c; }
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("class", "ico"); svg.setAttribute("aria-hidden", "true");
+    if (i === 1) {
+      svg.setAttribute("viewBox", "-1.3 -1.5 2.6 2.7");
+      svg.innerHTML = `<path d="${PEAR}" fill="hsl(70,64%,54%)" stroke="#050607" stroke-width=".03"/><path d="M0,-1 C0.02,-1.15 0.06,-1.24 0.12,-1.3" stroke="#6b4a2b" stroke-width=".07" fill="none" stroke-linecap="round"/><path d="M0.06,-1.18 C0.25,-1.38 0.5,-1.32 0.58,-1.22 C0.42,-1.08 0.2,-1.08 0.06,-1.18Z" fill="#5b8f3a"/>`;
+    } else {
+      svg.setAttribute("viewBox", "-1.15 -1.15 2.3 2.3"); let d = "";
+      for (let k = 0; k < 3; k++) for (let j = 0; j <= 40; j++) { const th = j / 40 * 4.2, r = 0.14 * Math.exp(0.48 * th), a = -th + k * 2.094; d += (j ? "L" : "M") + (Math.cos(a) * r).toFixed(3) + "," + (Math.sin(a) * r).toFixed(3); }
+      svg.classList.add("spin"); svg.innerHTML = `<path d="${d}" fill="none" stroke="#aeb9cc" stroke-width=".07" stroke-linecap="round"/><circle r=".11" fill="#050607" stroke="#aeb9cc" stroke-width=".05"/>`;
+    }
+    return svg;
+  }
+  plan.appendChild(document.createElement("div"));
+  PR.forEach((p, i) => {
+    const h = document.createElement("div"); h.className = "phead"; h.dataset.problem = i; h.append(icon(i));
+    h.insertAdjacentHTML("beforeend", `<b>${p.name}</b><span class="goal">${p.goal}</span><span class="got" id="got${i}"></span>`);
+    plan.appendChild(h);
+  });
+  LV.forEach((lv, l) => {
+    plan.insertAdjacentHTML("beforeend", `<div class="prow">${lv}<span class="en">${EN[l]}</span></div>`);
+    PR.forEach((p, i) => {
+      const b = document.createElement("button"), c = p.c[l], v = p.v[l];
+      b.className = "cell"; b.dataset.lv = EN[l]; b.dataset.problem = i; b.dataset.level = lv;
+      b.innerHTML = `<span class="top">${p.t[l]}</span><span class="bar"><i style="width:${Math.max(3, v / maxV * 100) * 0.62}%"></i>+${v}<span class="price">${c === Infinity ? "∞" : c}</span></span>`;
+      b.setAttribute("aria-label", `${p.name}, ${lv}: ${p.t[l]}. Adds ${v} value; costs ${c === Infinity ? "infinite effort" : c}.`);
+      b.addEventListener("click", () => pick(i, l + 1, b));
+      b.addEventListener("keydown", e => {
+        const m = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }[e.key]; if (!m) return;
+        e.preventDefault(); cells[clamp(i + m[0], 0, 2)][clamp(l + m[1], 0, 5)].focus();
+      });
+      cells[i].push(b); plan.appendChild(b);
+    });
+  });
+  // Phones use the same three-column card grid as the Chinese edition, so DOM (and tab) order stays row by row.
+  const msg = h => $("#planMsg").innerHTML = h;
+  function deny(b, m) { b.classList.remove("deny"); void b.offsetWidth; b.classList.add("deny"); msg(`<span class="bad">${m}</span>`); }
+  function render() {
+    const left = BUDGET - spent();
+    PR.forEach((p, i) => {
+      cells[i].forEach((b, l) => {
+        const L1 = l + 1, extra = cum(p.c, L1) - cum(p.c, depth[i]);
+        b.classList.toggle("dug", L1 <= depth[i]); b.classList.toggle("cur", L1 === depth[i]);
+        b.classList.toggle("over", L1 > depth[i] && !(extra <= left));
+        b.setAttribute("aria-pressed", L1 <= depth[i]);
+      });
+      $("#got" + i).innerHTML = `<span>Cost ${cum(p.c, depth[i])}</span><i> · </i><span>Value ${cum(p.v, depth[i])}</span>`;
+    });
+    $("#budNum").textContent = spent();
+    [...$("#budBar").children].forEach((e, i) => e.style.width = cum(PR[i].c, depth[i]) / BUDGET * 100 + "%");
+    $("#gotNum").textContent = worth();
+  }
+  const bestMsg = () => `<span class="go">The same budget can bring back ${best.v}.</span> The bot stops at ${nm(best.d[0])}, the pear at ${nm(best.d[1])}, and the hurricane at ${nm(best.d[2])}. None goes all the way down. Each stops where it has enough.`;
+  function explain(i, a, b) {
+    const p = PR[i];
+    if (worth() === best.v) return msg(bestMsg());
+    if (b < a) return msg(`${p.name}: back to ${nm(b)}, saving ${cum(p.c, a) - cum(p.c, b)}. `);
+    let m = `${p.name}, ${LV[b - 1]}: costs ${cum(p.c, b) - cum(p.c, a)}, adds ${cum(p.v, b) - cum(p.v, a)} value. `;
+    if (i === 0) m += b === 1 ? "One pixel is enough for the bot." : "But it only needs “red or gray.” Almost all that extra effort is wasted.";
+    if (i === 1 && b === 4) m += "You can now estimate a color range for a new pear.";
+    if (i === 1 && b > 4) m += "Causality and mechanism cost a lot and add little value here.";
+    if (i === 2 && b === 4) m += "Knowing roughly where it will be in three days is enough to decide whether to evacuate.";
+    if (i === 2 && b === 5) m += "Knowing that warm seas strengthen it does little more to protect this city.";
+    if (BUDGET - spent() < 4) m += " Your budget is almost gone.";
+    msg(m);
+  }
+  function pick(i, l, b) {
+    const p = PR[i], nd = l === depth[i] ? l - 1 : l;
+    if (nd > depth[i]) {
+      const extra = cum(p.c, nd) - cum(p.c, depth[i]);
+      if (extra === Infinity) return deny(b, "No amount of time and effort can account for every butterfly. On this table, you cannot reach the bottom of the hurricane’s mechanism.");
+      if (spent() + extra > BUDGET) return deny(b, `Not enough time and effort: this level needs ${extra} more, but only ${BUDGET - spent()} remains. Free up some budget from another problem first.`);
+    }
+    const a = depth[i]; depth[i] = nd; render(); explain(i, a, nd);
+  }
+  const intro = "Three problems share 100 units of time and effort. Pick a cell to choose a depth. Click the deepest selected cell again to step back one level.";
+  $("#bestBtn").addEventListener("click", () => { best.d.forEach((v, i) => depth[i] = v); render(); msg(bestMsg()); });
+  $("#clearBtn").addEventListener("click", () => { depth.fill(0); render(); msg(intro); });
+  render(); msg(intro);
+})();
+</script>

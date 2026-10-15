@@ -42,10 +42,10 @@ Every article goes live in Chinese and English, dated by when it was written. Ch
    ```
 
    - `tags` come from the existing set: life, thinking, design, hack, out, book, ai, km, movie, game, plus `music` for a Favorites album essay and `poetry` for Che's own verse (owner's call, 2026-10-01: 我的手 and 掩上的门 are 诗, not 生活). Any other new tag is the owner's call.
-   - The tags decide the Index topic, through `article_topic` in `scripts/build_pages.py`:
-     - any `out` → 身体与现场;
-     - otherwise any `km`, `hack` or `design` → 造东西;
-     - everything else → 思考.
+   - The tags decide the Index topic, through `article_topic` in `scripts/page_home.py`:
+     - any `out` → 体验;
+     - otherwise any `km`, `hack`, `design` or `ai` → 创造;
+     - everything else → 其他.
    - A series adds `series` and `series_part`, using the same key in both languages. The display name lives in `data/site.json` `series`.
    - The H1 is the title everywhere: lists, feeds, prev/next, Favorites links. Put a platform line (`豆瓣：…`) last, so the list excerpt starts with the essay.
 3. **Translate** into `blogs/<slug>.en.md`, with the same frontmatter plus `translation: Claude Opus 5.5`. Follow the policy's Translation section. Keep one glossary across the batch, and search before settling any name.

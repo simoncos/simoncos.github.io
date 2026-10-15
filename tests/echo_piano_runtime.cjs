@@ -152,9 +152,9 @@ async function testPreloading(data) {
   assert.equal(pending.length, 0, 'samples load only in response to interaction');
   assert.equal(await player.prepare(), false, 'missing offline decoder retains the gesture-loading fallback');
   assert.equal(contexts, 0); assert.equal(pending.length, 0);
-  const manifest = JSON.parse(fs.readFileSync('gallery/music/assets/piano/ydp/manifest.json'));
+  const manifest = JSON.parse(fs.readFileSync('gallery/games/assets/piano/ydp/manifest.json'));
   assert.deepEqual(Array.from(sandbox.EchoPiano.roots), manifest.samples.map(sample => sample.rootMidi));
-  for (const sample of manifest.samples) assert.ok(fs.statSync('gallery/music/assets/piano/ydp/' + sample.file).size > 1000);
+  for (const sample of manifest.samples) assert.ok(fs.statSync('gallery/games/assets/piano/ydp/' + sample.file).size > 1000);
 
   const first = player.play([60, 64, 67]), newer = player.play([60, 63, 67]);
   assert.equal(pending.length, 3, 'concurrent clicks share nearest-sample requests');

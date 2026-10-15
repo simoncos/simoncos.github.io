@@ -17,11 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILD_TARGETS = (
     ("tsconfig.json", "src/js", ("src/js/*.js",)),
     (
-        "gallery/talks/pkm-2026-06-07/tsconfig.json",
-        "gallery/talks/pkm-2026-06-07",
+        "gallery/sharing/pkm-2026-06-07/tsconfig.json",
+        "gallery/sharing/pkm-2026-06-07",
         (
-            "gallery/talks/pkm-2026-06-07/deck.js",
-            "gallery/talks/pkm-2026-06-07/deck.mjs",
+            "gallery/sharing/pkm-2026-06-07/deck.js",
+            "gallery/sharing/pkm-2026-06-07/deck.mjs",
         ),
     ),
     (
