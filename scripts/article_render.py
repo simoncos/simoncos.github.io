@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import quote
 from pathlib import Path
 
+from piece_contact_foot import render_piece_contact_foot
 from site_shell import esc
 from article_content import ARTICLE_TEXT, BlogGenerationError, entry_for, estimate_reading_minutes, get_file_times_with_metadata, parse_page_assets, series_info, series_parts, tag_label, tag_slug
 from article_feeds import absolute_site_url, build_meta_description
@@ -211,6 +212,8 @@ def build_post_foot(post, article_group, article_groups, file_index, group_map, 
     post_nav = build_post_nav(neighbours, language)
     if post_nav:
         parts.append(post_nav)
+
+    parts.append(render_piece_contact_foot("../", lang=language))
 
     return '\n'.join(f'                {part}' for part in parts)
 

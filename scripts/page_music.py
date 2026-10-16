@@ -13,6 +13,7 @@ from site_shell import ROOT, bi, bi_value, esc, i18n_attrs, lang_pair, page_conf
 
 
 from page_common import load_json
+from piece_contact_foot import render_piece_contact_foot
 
 
 def clock(seconds: float) -> str:
@@ -135,6 +136,7 @@ def render_song(config: dict[str, Any], site: dict[str, Any], song: dict[str, An
         "        </section>",
         *score,
         "    </div>",
+        f"    {render_piece_contact_foot(up)}",
         "</main>",
     ])
     desc_en, desc_zh = lang_pair(work["desc"])
