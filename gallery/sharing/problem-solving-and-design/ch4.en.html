@@ -546,7 +546,7 @@ html[lang="en"] #pans .big{font-size:clamp(1.3rem,5vw,2rem);overflow-wrap:normal
     margin-top: 2.5rem;
     padding-top: 1.25rem;
     border-top: 1px solid var(--line, var(--border));
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.6;
     color: var(--muted, var(--text-muted));
 }
@@ -554,30 +554,29 @@ html[lang="en"] #pans .big{font-size:clamp(1.3rem,5vw,2rem);overflow-wrap:normal
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: 8px 10px;
+    gap: 0;
     margin: 0;
-}
-.piece-contact-label.k,
-.piece-contact-label {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted, var(--text-muted));
-    margin-right: 0;
+    font-size: inherit;
+    font-weight: 400;
 }
 .piece-contact a {
     color: var(--muted, var(--text-muted));
+    font-size: inherit;
+    font-weight: inherit;
     transition: color 0.2s;
 }
 .piece-contact a:hover {
     color: var(--ink, var(--text));
 }
 .piece-contact-sep {
-    color: var(--line-2, var(--line, var(--border)));
+    padding: 0 10px;
+    color: var(--muted, var(--text-muted));
+    opacity: 0.45;
     user-select: none;
+    font-size: inherit;
+    line-height: inherit;
 }</style>
-<footer class="piece-contact" aria-label="Contact and follow" data-zh-aria-label="联系与订阅" data-i18n="aria-label"><p class="piece-contact-line"><a href="../../../feed.en.xml">RSS EN</a><span class="piece-contact-sep" aria-hidden="true">·</span><span class="piece-contact-label k">Follow along:</span><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://github.com/simoncos">GitHub</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/chezhao/">LinkedIn</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://x.com/simonc_os">X</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="mailto:simonzhao1024@gmail.com">Email</a></p></footer>
+<footer class="piece-contact" aria-label="Contact and follow" data-zh-aria-label="联系与订阅" data-i18n="aria-label"><p class="piece-contact-line"><a href="../../../feed.en.xml">RSS EN</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://github.com/simoncos">GitHub</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/chezhao/">LinkedIn</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://x.com/simonc_os">X</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="mailto:simonzhao1024@gmail.com">Email</a></p></footer>
 <!-- piece-contact:end -->
 </div>
 

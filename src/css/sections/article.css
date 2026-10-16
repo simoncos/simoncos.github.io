@@ -795,6 +795,23 @@ h2.k {
     line-height: 1.35;
 }
 
+/* Match the article grid column so the site footer lines up with the reading
+   column; reserve space for the fixed back-to-top control on the right. */
+@media (min-width: 860px) {
+    .article-page .ftr {
+        box-sizing: border-box;
+        width: min(1004px, calc(100% - 2 * var(--pad)));
+        margin-inline: auto;
+        padding-inline: 242px calc(56px + var(--pad));
+    }
+}
+
+@media (max-width: 859.98px) {
+    .article-page .ftr {
+        padding-right: calc(56px + var(--pad));
+    }
+}
+
 .to-top {
     position: fixed;
     right: clamp(16px, 3vw, 32px);

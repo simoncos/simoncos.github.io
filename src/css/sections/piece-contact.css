@@ -2,7 +2,7 @@
     margin-top: 2.5rem;
     padding-top: 1.25rem;
     border-top: 1px solid var(--line);
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.6;
     color: var(--muted);
 }
@@ -11,16 +11,16 @@
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: 8px 10px;
+    gap: 0;
     margin: 0;
-}
-
-.piece-contact-label {
-    margin-right: 0;
+    font-size: inherit;
+    font-weight: 400;
 }
 
 .piece-contact a {
     color: var(--muted);
+    font-size: inherit;
+    font-weight: inherit;
     transition: color 0.2s;
 }
 
@@ -29,6 +29,10 @@
 }
 
 .piece-contact-sep {
-    color: var(--line-2);
+    padding: 0 10px;
+    color: var(--muted);
+    opacity: 0.45;
     user-select: none;
+    font-size: inherit;
+    line-height: inherit;
 }
