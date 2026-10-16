@@ -15,6 +15,48 @@ _LABELS = {
 
 _SOCIAL_ORDER = ("GitHub", "LinkedIn", "X")
 
+# Standalone work pages that do not load styles.css still need the block styled.
+PIECE_CONTACT_INLINE_CSS = """
+.piece-contact {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line, var(--border));
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--muted, var(--text-muted));
+}
+.piece-contact-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 10px;
+    margin: 0;
+}
+.piece-contact-label.k,
+.piece-contact-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted, var(--text-muted));
+    margin-right: 0;
+}
+.piece-contact a {
+    color: var(--muted, var(--text-muted));
+    transition: color 0.2s;
+}
+.piece-contact a:hover {
+    color: var(--ink, var(--text));
+}
+.piece-contact-sep {
+    color: var(--line-2, var(--line, var(--border)));
+    user-select: none;
+}
+""".strip()
+
+PIECE_CONTACT_START = "piece-contact:start"
+PIECE_CONTACT_END = "piece-contact:end"
+
 
 def load_about() -> dict[str, Any]:
     return json.loads((ROOT / "data/site.json").read_text(encoding="utf-8"))["about"]
@@ -66,6 +108,22 @@ def _social_links(about: dict[str, Any], asset_prefix: str, lang: str | None) ->
             )
     links.append(_email_label(lang, about["email"]))
     return links
+
+
+def render_piece_contact_block(
+    asset_prefix: str = "",
+    lang: str | None = None,
+    about: dict[str, Any] | None = None,
+    *,
+    inline_css: bool = False,
+) -> str:
+    """Marked block for hand-authored pages (optional scoped CSS)."""
+    parts = [f"<!-- {PIECE_CONTACT_START} -->"]
+    if inline_css:
+        parts.append(f"<style>{PIECE_CONTACT_INLINE_CSS}</style>")
+    parts.append(render_piece_contact_foot(asset_prefix, lang, about))
+    parts.append(f"<!-- {PIECE_CONTACT_END} -->")
+    return "\n".join(parts)
 
 
 def render_piece_contact_foot(
