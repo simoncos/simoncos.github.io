@@ -318,7 +318,7 @@ html[lang^="zh"] .cell .top{text-wrap:balance}
     <p class="eyebrow">An interactive essay · Adapted from the author’s 2014 essay · <a href="https://simoncos.github.io/blogs/the-limits-of-problem-analysis.en.html">Read the original essay</a></p>
     <h1>The <span class="hl">Limits</span> of Problem Analysis</h1>
     <p class="lede">A friend once described an RPG bot. It reads no game memory and knows no damage formulas. It watches one pixel on the screen. When that pixel turns from red to gray, it presses heal.</p>
-    <p class="lede" style="margin-top:0">It never tries to understand the whole game. That is what this essay is about: analysis may have no end, but we have to come back with a result.</p>
+    <p class="lede" style="margin-top:0">It never tries to understand the whole game. Same problem here: analysis can run forever, but we still have to come back with a result.</p>
   </div>
   <figure class="hero-fig">
     <canvas id="heroCv" tabindex="0" aria-label="A question tree grows downward. Each answer branches into two new questions, growing denser until they disappear into darkness. A horizontal line marks where analysis stops. Move it with the up and down arrow keys."></canvas>
@@ -329,10 +329,10 @@ html[lang^="zh"] .cell .top{text-wrap:balance}
   <details class="kp-card">
     <summary><h2 class="kp-h" id="kpH">Key points</h2><span class="kp-n">5 points</span></summary>
   <ul>
-    <li>Analysis can go on without end: each deeper level brings more answers and twice as many new questions, so it needs a boundary.</li>
-    <li>A game bot that watches one pixel of the health bar shows how a small, bounded piece of understanding can take over a loop, and how it fails outside its boundary.</li>
-    <li>Questions about data range from descriptive to mechanistic (Jeff Leek’s six types); each level asks for more information than the last.</li>
-    <li>In the Lorenz-63 hurricane illustration (largest Lyapunov exponent about <span data-lz="lambda">0.906</span>, so the gap doubles about every <span data-lz="dbl">0.77</span> days), raising observation points from 12 to 9,000 cuts error about <span data-lz="ratio">27</span>-fold but extends the useful forecast only from about <span data-lz="h12">7.4</span> to <span data-lz="h9000">11.1</span> days.</li>
+    <li>Each level deeper gives more answers—and twice as many new questions. Without a stopping line, you do not come back.</li>
+    <li>One pixel of the health bar can run a tiny loop—and outside that rule, the bot is blind.</li>
+    <li>From “what it looks like” to “why each variable changes” (Jeff Leek’s six types)—each level costs more.</li>
+    <li>Going from 12 observation points to 9,000 cuts the error about <span data-lz="ratio">27</span>-fold, but the useful forecast only stretches from about <span data-lz="h12">7.4</span> days to <span data-lz="h9000">11.1</span>. More data does not buy a matching amount of certainty.</li>
     <li>The first rule of analysis: come back with a finite result.</li>
   </ul>
   </details>
@@ -347,7 +347,7 @@ html[lang^="zh"] .cell .top{text-wrap:balance}
     <span class="secno">01 · One pixel</span>
     <h2>The bot watches one point</h2>
     <p>Watch the color of one point on the HP bar. When it turns <b>from red to gray</b>, health has fallen below a threshold: press heal. When it changes the other way, do nothing.</p>
-    <p>The game’s internal logic is a black box. But to be playable, it must give a <b>human</b> ways to provide input and read output. The bot connects those interfaces: take a small piece of output, apply one simple rule, and take over a tiny loop from a person’s eyes, brain and hands.</p>
+    <p>The game’s internal logic is a black box. But to be playable, it has to leave input and output interfaces for the <b>human</b>, so that person and machine together make up a complete game system. The bot exploits exactly this: take a small piece of output, apply one simple rule, and take over a tiny loop from a person’s eyes, brain and hands.</p>
   </div>
 
   <div class="bench wide game">
@@ -383,14 +383,14 @@ html[lang^="zh"] .cell .top{text-wrap:balance}
         <div><dt>Survived</dt><dd id="stT">0:00</dd></div>
         <div><dt>Downs</dt><dd id="stD">0</dd></div>
         <div><dt>Heals</dt><dd id="stH">0</dd></div>
-        <div><dt>Wasted HP</dt><dd id="stW">0</dd></div>
+        <div><dt>Heal wasted</dt><dd id="stW">0</dd></div>
       </dl>
       <p id="gameMsg" aria-live="polite"></p>
     </div>
   </div>
 
   <div class="col">
-    <p>The bot has no ambition to decode the whole system. It grasps just a little of the output. That is enough to free a person from this simple loop and leave their energy for more complex, more interesting things. It is a textbook case of modular thinking.</p>
+    <p>The bot has no ambition to decode the whole system. It grasps just a little of the output. That frees the person from this small, simple loop to put their abilities into something more complex and more interesting. It is a textbook case of modular thinking.</p>
     <p class="note">Try “Poison the hero.” The health bar turns green, but the bot only knows red and gray. It can no longer detect that red-to-gray transition. Its tiny piece of understanding works only within its boundaries. (The poison scenario was added for this interactive edition.)</p>
   </div>
 </section>
@@ -401,7 +401,7 @@ html[lang^="zh"] .cell .top{text-wrap:balance}
     <span class="bignum" aria-hidden="true">02</span>
     <span class="secno">02 · How deep to look</span>
     <h2>From description to mechanism</h2>
-    <p>In data science, analysis can be classified by its purpose, with increasing levels of difficulty. The simplest is <b>descriptive</b>: clearly describe the data you see. The deepest is <b>mechanistic</b>: understand which variables changed in each individual within the system that produced the data, and which other changes they caused.</p>
+    <p>In data science, the analysis we do on data can be divided into types by its goal, and the difficulty varies accordingly. The easiest is <b>descriptive</b>: only describe the data you see. The hardest is <b>mechanistic</b>: fully understand the system that produced the data—exactly which variables changed in each individual, and exactly what other changes those caused.</p>
     <p>Take a pear. Work down the levels to see how the questions deepen and how much more you need to answer them.</p>
   </div>
 
@@ -433,7 +433,7 @@ html[lang^="zh"] .cell .top{text-wrap:balance}
     <span class="bignum" aria-hidden="true">03</span>
     <span class="secno">03 · A hurricane and a butterfly</span>
     <h2>There is never enough information</h2>
-    <p>Ideally, we want mechanistic answers: to pick out, clearly and precisely, the flap of a butterfly’s wings within a hurricane. In practice, <b>the information we can get hold of is always far too little.</b></p>
+    <p>Ideally we would want results at the level of mechanistic analysis: to pick out, clearly and precisely, the flap of one butterfly’s wings inside a hurricane. In practice, though, <b>the information we can get hold of is always far too little</b>.</p>
     <p>Below are two identical worlds, with one difference: in one of them, a butterfly flaps its wings once.</p>
   </div>
 
@@ -456,7 +456,7 @@ html[lang^="zh"] .cell .top{text-wrap:balance}
   </div>
 
   <div class="col">
-    <p>Even in an age of enormous data production, what changes? We have more data, but extracting information becomes harder too. In this model, raising the number of observation points from 12 to 9,000 cuts error about <span data-lz="ratio">27</span>-fold, yet stretches the useful forecast only from about <span data-lz="h12">7.4</span> to about <span data-lz="h9000">11.1</span> days, a gain of <span data-lz="gain">3.7</span> days: each e-fold (about 2.7×) cut in error buys only about <span data-lz="invlam">1.1</span> days. Detecting the butterfly’s difference takes until day <span data-lz="d12">9.2</span> with 12 points and still until day <span data-lz="d9000">6.1</span> with 9,000, while the hurricanes part ways around day <span data-lz="split">14.5</span>. At times like this, we have to rein in our greed and advance one step at a time.</p>
+    <p>And what about now, in an age that produces enormous amounts of data? There is more data, certainly, but extracting information from it has become harder too. In this model, raising the number of observation points from 12 to 9,000 cuts error about <span data-lz="ratio">27</span>-fold, yet stretches the useful forecast only from about <span data-lz="h12">7.4</span> to about <span data-lz="h9000">11.1</span> days, a gain of <span data-lz="gain">3.7</span> days: each e-fold (about 2.7×) cut in error buys only about <span data-lz="invlam">1.1</span> days. Detecting the butterfly’s difference takes until day <span data-lz="d12">9.2</span> with 12 points and still until day <span data-lz="d9000">6.1</span> with 9,000, while the hurricanes part ways around day <span data-lz="split">14.5</span>. At times like this we have to rein in our greed and advance one step at a time.</p>
   </div>
 </section>
 
@@ -466,7 +466,7 @@ html[lang^="zh"] .cell .top{text-wrap:balance}
     <span class="bignum" aria-hidden="true">04</span>
     <span class="secno">04 · Bring something back</span>
     <h2>Come back when it is enough</h2>
-    <p>Sometimes, after weighing cost against return, we find that studying a problem to a certain depth and breadth already meets our needs, as with the bot. The resources left over are better spent where they count.</p>
+    <p>Sometimes, having weighed cost against return, we decide that studying a problem to a certain depth and breadth already meets our needs, as with that bot. Then we should spend the remaining resources where they count.</p>
     <p>The three problems below share one budget of time and effort. Each column runs down the same six levels of analysis. Choose a cell to decide how far to go.</p>
   </div>
 
@@ -483,7 +483,7 @@ html[lang^="zh"] .cell .top{text-wrap:balance}
   </div>
 
   <div class="col">
-    <p>To analyze a problem well, we need the focus and persistence to get to the bottom of it. But we must keep reminding ourselves: in the rough real world, a problem needs a boundary, one that keeps us from losing the way back as we dig our tunnel.</p>
+    <p>To analyse a problem system well, you certainly need the focus and persistence to get to the bottom of it. But we have to keep reminding ourselves that in the rough real world, the problem we are solving must have a boundary, one that keeps us from losing the way back while we dig our tunnel.</p>
   </div>
 
   <div class="coda col">
