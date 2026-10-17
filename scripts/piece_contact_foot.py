@@ -9,21 +9,56 @@ from page_common import href_attrs, pick
 from site_shell import ROOT, bi, esc, i18n_attrs, prefixed
 
 _LABELS = {
-    "en": {"follow": "Follow along:", "email": "Email", "aria": "Contact and follow"},
-    "zh": {"follow": "保持联系：", "email": "邮件", "aria": "联系与订阅"},
+    "en": {"email": "Email", "aria": "Contact and follow"},
+    "zh": {"email": "邮件", "aria": "联系与订阅"},
 }
 
 _SOCIAL_ORDER = ("GitHub", "LinkedIn", "X")
 
+# Standalone work pages that do not load styles.css still need the block styled.
+PIECE_CONTACT_INLINE_CSS = """
+.piece-contact {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line, var(--border));
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted, var(--text-muted));
+}
+.piece-contact-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0;
+    margin: 0;
+    font-size: inherit;
+    font-weight: 400;
+}
+.piece-contact a {
+    color: var(--muted, var(--text-muted));
+    font-size: inherit;
+    font-weight: inherit;
+    transition: color 0.2s;
+}
+.piece-contact a:hover {
+    color: var(--ink, var(--text));
+}
+.piece-contact-sep {
+    padding: 0 10px;
+    color: var(--muted, var(--text-muted));
+    opacity: 0.45;
+    user-select: none;
+    font-size: inherit;
+    line-height: inherit;
+}
+""".strip()
+
+PIECE_CONTACT_START = "piece-contact:start"
+PIECE_CONTACT_END = "piece-contact:end"
+
 
 def load_about() -> dict[str, Any]:
     return json.loads((ROOT / "data/site.json").read_text(encoding="utf-8"))["about"]
-
-
-def _follow_label(lang: str | None) -> str:
-    if lang in _LABELS:
-        return esc(_LABELS[lang]["follow"])
-    return bi(_LABELS["en"]["follow"], _LABELS["zh"]["follow"])
 
 
 def _email_label(lang: str | None, email: str) -> str:
@@ -68,6 +103,22 @@ def _social_links(about: dict[str, Any], asset_prefix: str, lang: str | None) ->
     return links
 
 
+def render_piece_contact_block(
+    asset_prefix: str = "",
+    lang: str | None = None,
+    about: dict[str, Any] | None = None,
+    *,
+    inline_css: bool = False,
+) -> str:
+    """Marked block for hand-authored pages (optional scoped CSS)."""
+    parts = [f"<!-- {PIECE_CONTACT_START} -->"]
+    if inline_css:
+        parts.append(f"<style>{PIECE_CONTACT_INLINE_CSS}</style>")
+    parts.append(render_piece_contact_foot(asset_prefix, lang, about))
+    parts.append(f"<!-- {PIECE_CONTACT_END} -->")
+    return "\n".join(parts)
+
+
 def render_piece_contact_foot(
     asset_prefix: str = "",
     lang: str | None = None,
@@ -76,16 +127,11 @@ def render_piece_contact_foot(
     """RSS plus follow links from about.contacts / email (godobject-style piece foot)."""
     about = about or load_about()
     sep = '<span class="piece-contact-sep" aria-hidden="true">·</span>'
+    links = _rss_links(about, asset_prefix, lang) + _social_links(about, asset_prefix, lang)
     chunks: list[str] = []
-    for index, link in enumerate(_rss_links(about, asset_prefix, lang)):
+    for index, link in enumerate(links):
         if index:
             chunks.append(sep)
-        chunks.append(link)
-    if chunks:
-        chunks.append(sep)
-    chunks.append(f'<span class="piece-contact-label k">{_follow_label(lang)}</span>')
-    for link in _social_links(about, asset_prefix, lang):
-        chunks.append(sep)
         chunks.append(link)
     inner = "".join(chunks)
     return (

@@ -12,6 +12,7 @@ check:
 	python3 scripts/generate_og_images.py --check
 	python3 scripts/check_blog_generation.py
 	python3 scripts/build_pages.py --check
+	python3 scripts/update_hand_work_contact_feet.py --check
 	python3 scripts/update_work_jsonld.py --check
 	python3 scripts/check_site.py
 	python3 scripts/check_performance.py
@@ -35,6 +36,7 @@ generate:
 	python3 scripts/update_image_dimensions.py
 	python3 generate_blog_pages.py
 	python3 scripts/build_pages.py
+	python3 scripts/update_hand_work_contact_feet.py
 	python3 scripts/update_favorites_pages.py
 
 serve:
