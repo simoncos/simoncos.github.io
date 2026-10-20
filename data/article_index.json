@@ -1,6 +1,35 @@
 {
-  "last_updated": "2026-10-04",
+  "last_updated": "2026-10-20",
   "groups": [
+    {
+      "id": "void-flower-making-of",
+      "date": "2026-10-20",
+      "tags": [
+        "movie",
+        "ai"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "把一场旧梦变为影像：《虚无之花》制作记",
+          "file": "void-flower-making-of.html",
+          "markdown": "void-flower-making-of.md",
+          "excerpt": "《虚无之花》是我的第一部艺术短片。从初版到定稿，我为它投入了数十小时。\n2012年11月，我信笔写下了《虚无之花》。灵感的源头是真实的梦境，短片开头的黑白混沌和中段无序飞旋的线迹、人们的呼叫，都是梦里的内容。\n多年以后，我把文章交给Claude，让它自主制作...",
+          "description": "真实梦境、AI的意外理解与数十小时的反复打磨：我的第一部艺术短片《虚无之花》的制作故事。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "Turning an Old Dream into a Film: Making Flower of the Void",
+          "file": "void-flower-making-of.en.html",
+          "markdown": "void-flower-making-of.en.md",
+          "excerpt": "Flower of the Void is my debut art film. From the initial version to the final cut, I spent dozens of hours on it.\nIn November 2012, I wrote a piece called Flower of the Void, drawing on dreams I had experienced. The black and white chaos at the start of the film, and the wild, whirling lines and voices calling out midway through it, all came from those dreams.\nYears later, I gave the piece to Claude and asked it to make an initial film on its own. The result exceeded my expectations. In the original text, I had...",
+          "description": "Real dreams, unexpected ideas from AI, and dozens of hours of refinement: the story behind my debut art film, Flower of the Void.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
     {
       "id": "personal-site-remake",
       "date": "2026-10-04",

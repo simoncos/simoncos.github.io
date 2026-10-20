@@ -28,6 +28,10 @@ A new generated page must exist before `update_site_shell.py` will accept its en
 
 Hand-authored pages outside this table: `series.html` and `tags.html` (redirects into the Articles page), the Sleep essay pages under `gallery/research/`, the talk deck under `gallery/`. The Zhihu research page is generated; see `docs/ZHIHU_RESEARCH.md`.
 
+### Film pages
+
+Film entries in `data/site.json` carry `film.youtube`, bilingual introductory copy and a local poster. `scripts/page_film.py`, called by `build_pages.py`, renders the screening page; the player is a responsive YouTube embed with a direct watch link. The making-of articles use the same video ID and `blogs/assets/film-embed.css`. An iframe's `data-poster`, `width` and `height` allow the article generator to use that local artwork for social previews. Video files stay on YouTube.
+
 ### Data
 
 - `data/site.json` — the hand-maintained record for the Index stage, the Work list and its topics, projects, the About page and the changelog.

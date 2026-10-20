@@ -1,6 +1,41 @@
 {
   "works": [
     {
+      "id": "void-flower",
+      "kind": {
+        "en": "Art film",
+        "zh": "艺术短片"
+      },
+      "work_topic": "film",
+      "home_topic": "build",
+      "date": "2026-10-20",
+      "title": {
+        "en": "Flower of the Void",
+        "zh": "虛無之花"
+      },
+      "home_desc": {
+        "en": "A dream from 2012, given sound and form. My debut art film.",
+        "zh": "让2012年的一场旧梦有了声音与画面。我的首部艺术短片。"
+      },
+      "desc": {
+        "en": "My debut art film, drawn from real dreams and a piece I wrote in 2012. Made with AI, shared without narrative subtitles.",
+        "zh": "我的首部艺术短片，源于真实梦境与2012年的同名文章。与AI协作完成，以无叙事字幕版呈现。"
+      },
+      "img": "gallery/film/assets/void-flower-poster.jpg",
+      "href": "gallery/film/void-flower.html",
+      "film": {
+        "youtube": "8evBsYyWCjM",
+        "intro": {
+          "en": "A finite life in a seemingly boundless universe. We wake from chaos, but the dream’s emotions linger, blooming into a black flower.",
+          "zh": "有限的个体，看似无垠的宇宙。从混沌中醒来，梦里的情绪仍留在身体里，绽放成一朵黑花。"
+        },
+        "note": {
+          "en": "It began as a piece I wrote in 2012, drawn from my own dreams. I spent dozens of hours working with AI, reviewing and refining the film to give those dreams sound and form. This version leaves the images and sound room to speak.",
+          "zh": "它来自真实梦境，也来自我2012年写下的同名文章。我与AI协作，花了数十小时反复观看、反馈和调整，让这场旧梦有了声音与画面。这个版本把更多解释空间留给声音与画面。"
+        }
+      }
+    },
+    {
       "id": "toolkit",
       "kind": {
         "en": "App",
@@ -700,6 +735,21 @@
       "desc": {
         "en": "Original songs, published with the recording and the lyrics.",
         "zh": "原创歌曲，连同录音和歌词一起发布。"
+      }
+    },
+    {
+      "id": "film",
+      "title": {
+        "en": "Films",
+        "zh": "影像"
+      },
+      "line": {
+        "en": "Dreams given sound and form.",
+        "zh": "让梦境有声音与画面。"
+      },
+      "desc": {
+        "en": "Art films, made from dreams, words, images and sound.",
+        "zh": "从梦境与文字出发，用画面和声音表达。"
       }
     }
   ],

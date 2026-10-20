@@ -16,7 +16,7 @@ AUTHOR = {"@type": "Person", "name": "simoncos", "alternateName": "Che ZHAO", "u
 # site.json kind (English) -> schema.org type
 TYPES = {"Research": "ScholarlyArticle", "Interactive essay": "Article", "Interactive essays": "Article",
          "Talk": "PresentationDigitalDocument", "App": "SoftwareApplication", "Game": "VideoGame",
-         "Original song": "MusicComposition"}
+         "Original song": "MusicComposition", "Art film": "VideoObject"}
 # Pages edited after first publication; keeps dateModified stable and reviewable.
 MODIFIED = {"problem-solving": "2026-10-13", "limits-of-problem-analysis": "2026-10-13", "designing-design": "2026-10-13",
             "lola-draft": "2026-10-13", "lola-matchups": "2026-10-13", "talk": "2026-10-13", "sleep": "2026-10-13"}
@@ -66,6 +66,12 @@ def block(work: dict, lang: str | None, s: str) -> str:
         data.update({"applicationCategory": "HealthApplication", "operatingSystem": "Web"})
     if data["@type"] == "MusicComposition":
         data["composer"] = AUTHOR
+    if data["@type"] == "VideoObject":
+        data.update({
+            "embedUrl": f"https://www.youtube-nocookie.com/embed/{work['film']['youtube']}",
+            "thumbnailUrl": f"{SITE}/{work['img']}",
+            "uploadDate": work["date"],
+        })
     body = json.dumps(data, ensure_ascii=False, indent=1)
     return f'{START}\n<script type="application/ld+json">\n{body}\n</script>\n{END}'
 

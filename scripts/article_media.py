@@ -72,6 +72,21 @@ def build_og_image(rendered_html, title):
             'alt': (video.get('aria-label') or title).strip() or title,
         }
 
+    # A hosted film can use an authored local poster without duplicating it
+    # as a visible image above the embedded player.
+    for frame in soup.select('iframe[data-poster]'):
+        poster = frame.get('data-poster', '').strip()
+        width, height = frame.get('width'), frame.get('height')
+        if (not poster or not urlparse(poster).path.lower().endswith(OG_SAFE_IMAGE_SUFFIXES)
+                or not width or not height or not str(width).isdigit() or not str(height).isdigit()
+                or int(width) < 600 or int(height) < 315):
+            continue
+        return {
+            'url': urljoin(absolute_site_url('blogs/'), poster),
+            'width': str(width), 'height': str(height),
+            'alt': frame.get('title') or title,
+        }
+
     return og_fallback_image()
 
 

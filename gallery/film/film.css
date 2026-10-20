@@ -1,0 +1,68 @@
+/* Quiet screening room; shares the site's light/dark palette and navigation. */
+.film-page {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: var(--page-top) var(--pad) 60px;
+}
+.film-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin: 36px 0 32px;
+}
+.film-kicker { margin: 0 0 14px; color: var(--muted); font-size: 12px; letter-spacing: .08em; }
+.film-heading h1 {
+    margin: 0;
+    font-size: clamp(36px, 4.5vw, 66px);
+    letter-spacing: -.035em;
+    font-weight: 500;
+    line-height: 1.12;
+}
+.film-heading h1 [data-l="zh"] { font-family: 'Songti SC', 'Noto Serif CJK SC', serif; letter-spacing: .13em; }
+.film-subtitle { margin: 12px 0 0; color: var(--muted); font-size: 16px; }
+.film-byline { margin: 0 0 3px; font-size: 13px; white-space: nowrap; }
+.film-byline a { color: var(--muted); }
+.film-screen { margin: 0; }
+.film-caption {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px 24px;
+    padding-top: 14px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+    text-align: left;
+}
+.film-caption a { color: var(--ink); border-bottom: 1px solid var(--line-2); }
+.film-story {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    padding: 64px 0 50px;
+}
+.film-story h2, .film-reading h2 { font-size: 17px; font-weight: 500; margin: 5px 0 0; }
+.film-prose { max-width: 680px; }
+.film-prose p { font-size: 16px; line-height: 1.85; margin: 0 0 20px; color: var(--ink-2); }
+.film-prose .film-intro { font-size: clamp(20px, 2vw, 26px); line-height: 1.65; color: var(--ink); }
+.film-reading {
+    border-top: 1px solid var(--line);
+    padding: 30px 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+.film-reading p { color: var(--muted); font-size: 14px; line-height: 1.7; max-width: 400px; margin: 12px 0 0; }
+.film-reading-links { display: grid; }
+.film-reading-links a { padding: 18px 0; display: flex; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--line); font-size: 16px; }
+.film-reading-links a:hover { color: var(--muted); }
+@media (max-width: 640px) {
+    .film-heading { margin-top: 28px; display: block; }
+    .film-byline { margin: 22px 0 0; }
+    .film-heading h1 { max-width: 10em; }
+    .film-story { display: block; padding: 40px 0 24px; }
+    .film-story h2 { margin-bottom: 24px; }
+    .film-reading { grid-template-columns: 1fr; gap: 16px; }
+    .film-caption { font-size: 11px; }
+}

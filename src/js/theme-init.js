@@ -18,6 +18,7 @@
         apps: { en: 'Apps', zh: '应用' },
         toolkit: { en: 'Sleep Toolkit', zh: 'Sleep Toolkit' },
         music: { en: 'Music', zh: '音乐' },
+        film: { en: 'Films', zh: '影像' },
         favorites: { en: 'Favorites', zh: '收藏' },
         about: { en: 'About', zh: '关于' },
     };
@@ -50,6 +51,8 @@
             return make('work', 'toolkit');
         if (/^\/gallery\/music\/[a-z0-9-]+\.html$/.test(path))
             return make('work', 'music');
+        if (/^\/gallery\/film\/[a-z0-9-]+\.html$/.test(path))
+            return make('work', 'film');
         if (path === '/favorites.html' || /^\/favorites\/[a-z]+\.html$/.test(path))
             return make('favorites', 'favorites');
         if (/^\/about(\.zh)?\.html$/.test(path))

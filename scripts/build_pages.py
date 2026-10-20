@@ -74,6 +74,7 @@ from page_music import (
 from page_work import (
     render_work,
 )
+from page_film import render_film
 
 
 SITE_DATA_PATH = ROOT / "data/site.json"
@@ -102,6 +103,9 @@ def build() -> dict[str, str]:
         outputs[project["href"][lang]] = render_board(config, site, lang)
     for song in site.get("songs", []):
         outputs[song["page"]] = render_song(config, site, song)
+    for work in site["works"]:
+        if work.get("film"):
+            outputs[work["href"]] = render_film(config, site, work)
     from update_work_jsonld import apply_to_outputs
     apply_to_outputs(outputs, site)  # work pages carry schema.org JSON-LD generated from site.json
     outputs.update(redirect_pages(outputs))

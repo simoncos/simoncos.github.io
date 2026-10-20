@@ -45,12 +45,12 @@
       },
       "limits": {
         "html_gzip_bytes": 9728,
-        "static_elements": 800,
+        "static_elements": 950,
         "initial_js_gzip_bytes": 12800,
         "initial_css_gzip_bytes": 24576,
         "eager_image_bytes": 0
       },
-      "limit_rationale": "2026-10-11: the Research type gained a fourth Work card (LoLA matchup map essay), about 0.3 KB gzip of bilingual card markup (after 2026-10-10: third card, LoLA draft essay, limit 8704 to 9216); no CSS or JS change. Original baseline remains recorded."
+      "limit_rationale": "2026-10-11: the Research type gained a fourth Work card (LoLA matchup map essay), about 0.3 KB gzip of bilingual card markup (after 2026-10-10: third card, LoLA draft essay, limit 8704 to 9216); no CSS or JS change. Original baseline remains recorded. 2026-10-20: add Films as a sixth type, its three wheel faces, category tabs, and one film card; measured 855 static elements, with a 950-element ceiling. Byte budgets remain unchanged."
     },
     "about.html": {
       "baseline": {
