@@ -150,6 +150,7 @@ TAG_LABELS = {
     'out': ('Outdoors', '户外'),
     'book': ('Books', '书籍'),
     'movie': ('Film', '影视'),
+    'art': ('Art', '艺术'),
     'music': ('Music', '音乐'),
     'game': ('Games', '游戏'),
 }

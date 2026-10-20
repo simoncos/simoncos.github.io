@@ -1,5 +1,5 @@
 ---
-tags: movie,ai
+tags: movie,art,ai
 date: 2026-10-20
 updated: 2026-10-20
 description: 真实梦境、AI的意外理解与数十小时的反复打磨：我的第一部艺术短片《虚无之花》的制作故事。

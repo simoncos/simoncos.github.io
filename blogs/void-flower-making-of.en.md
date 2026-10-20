@@ -1,5 +1,5 @@
 ---
-tags: movie,ai
+tags: movie,art,ai
 date: 2026-10-20
 updated: 2026-10-20
 description: Real dreams, unexpected ideas from AI, and dozens of hours of refinement: the story behind my debut art film, The Flower of Nothingness.
