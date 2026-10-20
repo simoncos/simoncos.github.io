@@ -9,7 +9,7 @@ styles: assets/film-embed.css?v=9b7a29796640
 # 把一场旧梦变为影像：《虚无之花》制作记
 
 <figure class="film-embed">
-<div class="film-frame"><iframe src="https://www.youtube-nocookie.com/embed/8evBsYyWCjM?playsinline=1" title="Flower of the Void · 虛無之花" width="1920" height="1080" data-poster="../gallery/film/assets/void-flower-poster.jpg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<div class="film-frame"><iframe src="https://www.youtube-nocookie.com/embed/8evBsYyWCjM?playsinline=1" title="The Flower of Nothingness · 虛無之花" width="1920" height="1080" data-poster="../gallery/film/assets/void-flower-poster.jpg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 <figcaption><span>无叙事字幕 · 建议戴耳机</span><span><a href="../gallery/film/void-flower.html?lang=zh">作品页面</a> · <a href="https://www.youtube.com/watch?v=8evBsYyWCjM" target="_blank" rel="noopener noreferrer">在 YouTube 观看 ↗</a></span></figcaption>
 </figure>
 

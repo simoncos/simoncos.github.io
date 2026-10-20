@@ -2,21 +2,21 @@
 tags: movie,ai
 date: 2026-10-20
 updated: 2026-10-20
-description: Real dreams, unexpected ideas from AI, and dozens of hours of refinement: the story behind my debut art film, Flower of the Void.
+description: Real dreams, unexpected ideas from AI, and dozens of hours of refinement: the story behind my debut art film, The Flower of Nothingness.
 styles: assets/film-embed.css?v=9b7a29796640
 translation: Codex (GPT-6)
 ---
 
-# Turning an Old Dream into a Film: Making *Flower of the Void*
+# Turning an Old Dream into a Film: Making *The Flower of Nothingness*
 
 <figure class="film-embed">
-<div class="film-frame"><iframe src="https://www.youtube-nocookie.com/embed/8evBsYyWCjM?playsinline=1" title="Flower of the Void · 虛無之花" width="1920" height="1080" data-poster="../gallery/film/assets/void-flower-poster.jpg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<div class="film-frame"><iframe src="https://www.youtube-nocookie.com/embed/8evBsYyWCjM?playsinline=1" title="The Flower of Nothingness · 虛無之花" width="1920" height="1080" data-poster="../gallery/film/assets/void-flower-poster.jpg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 <figcaption><span>Without narrative subtitles · Headphones recommended</span><span><a href="../gallery/film/void-flower.html?lang=en">Film page</a> · <a href="https://www.youtube.com/watch?v=8evBsYyWCjM" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></span></figcaption>
 </figure>
 
-*Flower of the Void* is my debut art film. From the initial version to the final cut, I spent dozens of hours on it.
+*The Flower of Nothingness* is my debut art film. From the initial version to the final cut, I spent dozens of hours on it.
 
-In November 2012, I wrote a piece called *Flower of the Void*, drawing on dreams I had experienced. The black and white chaos at the start of the film, and the wild, whirling lines and voices calling out midway through it, all came from those dreams.
+In November 2012, I wrote a piece called *The Flower of Nothingness*, drawing on dreams I had experienced. The black and white chaos at the start of the film, and the wild, whirling lines and voices calling out midway through it, all came from those dreams.
 
 Years later, I gave the piece to Claude and asked it to make an initial film on its own. The result exceeded my expectations. In the original text, I had compared the dream’s warmth and chaos to liquid inside an eggshell. Claude chose to add Doppler ultrasound sounds and a heartbeat, which made me wonder whether that experience might come from some distant memory of being in the womb. Near the end of the piece, I had described a dull ache in the chest and the urgent heartbeat felt by a hand pressed against it. Claude also picked up on the connection between the black flower and the heart, making the flower pulse and grow from a single drop of ink. That, too, was a wonderful surprise.
 
@@ -36,7 +36,7 @@ Next, at the AI’s suggestion, I gave the idea of a “game of probability with
 
 The original piece brings us from dream back to reality with a single sentence: “He slowly woke.” In the film, we get to see that awakening unfold. I used images of real curtains and bedsheets, which worked far better than the AI’s rough models.
 
-Then comes the final and most important shot. He returns from chaos to reality, but traces of the dream remain in his body, and the flower of the void keeps growing. The images and sound in this sequence went through many iterations. The black flower needed to move with the heartbeat without looking too much like a rubbery heart. It needed to retain the quality of ink, with variations in density and soft bleeding edges. I also tried adding motion around its edges, but that changed its original shape and pulse, making it feel less natural. Eventually, I returned to the original outline and rhythm, keeping only the changes that made the texture look more like ink.
+Then comes the final and most important shot. He returns from chaos to reality, but traces of the dream remain in his body, and the flower of nothingness keeps growing. The images and sound in this sequence went through many iterations. The black flower needed to move with the heartbeat without looking too much like a rubbery heart. It needed to retain the quality of ink, with variations in density and soft bleeding edges. I also tried adding motion around its edges, but that changed its original shape and pulse, making it feel less natural. Eventually, I returned to the original outline and rhythm, keeping only the changes that made the texture look more like ink.
 
 This was not the only time I went back to an earlier version. I tried adding detail and improving materials in some scenes. The result looked more realistic, but lost some of the expressive exaggeration.
 
@@ -46,4 +46,4 @@ The subtitles also took a great deal of work. For most of the process, I worked 
 
 Yet in the end, I preferred the version without subtitles. It lets viewers give more of their attention to the images and sound, while leaving more room for interpretation. I decided to make that the main release, and to consider later whether to release a subtitled version at all.
 
-There may be more to say, but that is the story behind *Flower of the Void*.
+There may be more to say, but that is the story behind *The Flower of Nothingness*.

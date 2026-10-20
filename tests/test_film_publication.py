@@ -29,9 +29,9 @@ class FilmPublicationTests(unittest.TestCase):
 
     def test_embedded_film_can_supply_its_share_poster(self):
         result = build_og_image('<iframe data-poster="../gallery/film/assets/void-flower-poster.jpg" '
-                                'width="1920" height="1080" title="Flower of the Void"></iframe>', "Essay")
+                                'width="1920" height="1080" title="The Flower of Nothingness"></iframe>', "Essay")
         self.assertEqual(result["url"], "https://simoncos.github.io/gallery/film/assets/void-flower-poster.jpg")
-        self.assertEqual(result["alt"], "Flower of the Void")
+        self.assertEqual(result["alt"], "The Flower of Nothingness")
 
     def test_invalid_embedded_poster_falls_back(self):
         for dimensions in ('width="100%" height="auto"', 'width="200" height="100"'):
