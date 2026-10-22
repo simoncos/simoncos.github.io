@@ -237,7 +237,7 @@ h2.k {
 .post-content {
     font-size: 18.7px;
     line-height: 1.7;
-    color: var(--ink);
+    color: var(--article-ink);
     text-wrap: pretty;
     overflow-wrap: break-word;
 }
@@ -247,6 +247,7 @@ h2.k {
 }
 
 .post-content :is(h2, h3, h4, h5, h6) {
+    color: var(--ink);
     scroll-margin-top: 96px;
     text-wrap: balance;
 }
