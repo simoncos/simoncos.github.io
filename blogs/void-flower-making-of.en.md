@@ -1,7 +1,7 @@
 ---
 tags: movie,art,ai
 date: 2026-10-20
-updated: 2026-10-20
+updated: 2026-10-22
 description: Real dreams, unexpected ideas from AI, and dozens of hours of refinement: the story behind my debut art film, The Flower of Nothingness.
 styles: assets/film-embed.css?v=9b7a29796640
 translation: Codex (GPT-6)
@@ -16,7 +16,7 @@ translation: Codex (GPT-6)
 
 *The Flower of Nothingness* is my debut art film. From the initial version to the final cut, I spent dozens of hours on it.
 
-In November 2012, I wrote a piece called *The Flower of Nothingness*, drawing on dreams I had experienced. The black and white chaos at the start of the film, and the wild, whirling lines and voices calling out midway through it, all came from those dreams.
+In November 2012, I wrote a piece called [*The Flower of Nothingness*](void-flower.en.html), drawing on dreams I had experienced. The black and white chaos at the start of the film, and the wild, whirling lines and voices calling out midway through it, all came from those dreams.
 
 More than a decade later, I gave the piece to Claude and asked it to make an initial film on its own. The result exceeded my expectations. In the original text, I had compared the dream’s warmth and chaos to liquid inside an eggshell. Claude chose to add Doppler ultrasound sounds and heartbeats, which made me wonder whether that experience might come from some distant memory of being in the womb. Near the end of the piece, I had described a dull ache in the chest and the urgent heartbeat felt by a hand pressed against it. Claude also picked up on the connection between the black flower and the heart, making the flower pulse and grow from a single drop of ink. That, too, was a wonderful surprise.
 

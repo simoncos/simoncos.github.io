@@ -1,8 +1,38 @@
 {
-  "last_updated": "2026-10-20",
+  "last_updated": "2026-10-22",
   "files": {
-    "void-flower-making-of.en.html": [],
-    "void-flower-making-of.html": [],
+    "void-flower-making-of.en.html": [
+      {
+        "group_id": "void-flower",
+        "date": "2012-11-01",
+        "languages": {
+          "zh": {
+            "title": "虚无之花",
+            "file": "void-flower.html"
+          },
+          "en": {
+            "title": "The Flower of Nothingness",
+            "file": "void-flower.en.html"
+          }
+        }
+      }
+    ],
+    "void-flower-making-of.html": [
+      {
+        "group_id": "void-flower",
+        "date": "2012-11-01",
+        "languages": {
+          "zh": {
+            "title": "虚无之花",
+            "file": "void-flower.html"
+          },
+          "en": {
+            "title": "The Flower of Nothingness",
+            "file": "void-flower.en.html"
+          }
+        }
+      }
+    ],
     "personal-site-remake.en.html": [],
     "personal-site-remake.html": [],
     "charity-gala-with-codex.en.html": [],
@@ -555,6 +585,38 @@
     "old-memories-may-rain.html": [],
     "my-hands.en.html": [],
     "my-hands.html": [],
+    "void-flower.en.html": [
+      {
+        "group_id": "void-flower-making-of",
+        "date": "2026-10-20",
+        "languages": {
+          "zh": {
+            "title": "把一场旧梦变为影像：《虚无之花》制作记",
+            "file": "void-flower-making-of.html"
+          },
+          "en": {
+            "title": "Turning an Old Dream into a Film: Making The Flower of Nothingness",
+            "file": "void-flower-making-of.en.html"
+          }
+        }
+      }
+    ],
+    "void-flower.html": [
+      {
+        "group_id": "void-flower-making-of",
+        "date": "2026-10-20",
+        "languages": {
+          "zh": {
+            "title": "把一场旧梦变为影像：《虚无之花》制作记",
+            "file": "void-flower-making-of.html"
+          },
+          "en": {
+            "title": "Turning an Old Dream into a Film: Making The Flower of Nothingness",
+            "file": "void-flower-making-of.en.html"
+          }
+        }
+      }
+    ],
     "old-memories-autumn.en.html": [],
     "old-memories-autumn.html": [],
     "the-door-pulled-shut.en.html": [],

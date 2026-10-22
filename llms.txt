@@ -23,7 +23,7 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 
 ## Key artifacts
 
-- [The Flower of Nothingness (虛無之花)](https://simoncos.github.io/gallery/film/void-flower.html): Che Zhao’s debut art film, drawn from real dreams and a 2012 prose piece. YouTube screening without narrative subtitles, with a bilingual making-of linked on the page.
+- [The Flower of Nothingness (虛無之花)](https://simoncos.github.io/gallery/film/void-flower.html): Che Zhao’s debut art film, drawn from real dreams and a 2012 prose piece. YouTube screening without narrative subtitles, with the original prose and making-of linked in Chinese and English. Original prose: [English](https://simoncos.github.io/blogs/void-flower.en.html) · [Chinese](https://simoncos.github.io/blogs/void-flower.html).
 
 - [The Limits of Problem Analysis (问题解析的极限)](https://simoncos.github.io/gallery/sharing/limits-of-problem-analysis/index.en.html): From a game bot watching one pixel to the layers of a pear: explore when to stop analyzing and bring back a result. Available in English and Chinese; switch languages on the page. Chinese edition (中文版): https://simoncos.github.io/gallery/sharing/limits-of-problem-analysis/index.html
 - [Designing Design (设计中的设计)](https://simoncos.github.io/gallery/sharing/designing-design/index.en.html): Reading Kenya Hara: let go of “I know,” follow a river, write in the sand, and make the familiar unfamiliar again. Available in English and Chinese; switch languages on the page. Chinese edition (中文版): https://simoncos.github.io/gallery/sharing/designing-design/index.html

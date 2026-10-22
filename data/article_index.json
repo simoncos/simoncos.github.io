@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-20",
+  "last_updated": "2026-10-22",
   "groups": [
     {
       "id": "void-flower-making-of",
@@ -15,7 +15,7 @@
           "title": "把一场旧梦变为影像：《虚无之花》制作记",
           "file": "void-flower-making-of.html",
           "markdown": "void-flower-making-of.md",
-          "excerpt": "《虚无之花》是我的第一部艺术短片。从初版到定稿，我为它投入了数十小时。\n2012年11月，我信笔写下了《虚无之花》。灵感的源头是真实的梦境，短片开头的黑白混沌和中段无序飞旋的线迹、人们的呼叫，都是梦里的内容。\n多年以后，我把文章交给Claude，让它自主制作...",
+          "excerpt": "《虚无之花》是我的第一部艺术短片。从初版到定稿，我为它投入了数十小时。\n2012年11月，我信笔写下了 《虚无之花》 。灵感的源头是真实的梦境，短片开头的黑白混沌和中段无序飞旋的线迹、人们的呼叫，都是梦里的内容。\n多年以后，我把文章交给Claude，让它自主制作...",
           "description": "真实梦境、AI的意外理解与数十小时的反复打磨：我的第一部艺术短片《虚无之花》的制作故事。",
           "image": "",
           "available": true
@@ -1632,6 +1632,35 @@
           "markdown": "my-hands.en.md",
           "excerpt": "Do you feel heavy\nI want to hold you\nwith my hands\ncut away your unease with a winter wind like a blade\nand let your good dreams stay the night\nAre you tired\nI want you to cry all you need, and sleep in peace\nbetween my hands\nWhen the night has soaked the hem of an old dream\nwhen a bowl of congee steams the morning light soft\nI hope my hands\nare not only the glow of lamps in the south\nbut can also be a fire close at hand\nlighting your hands\nand letting them light...",
           "description": "A short poem written in December 2012. Hai Zi's \"Your Hands\" is appended on the Chinese page.",
+          "image": "",
+          "available": true
+        }
+      }
+    },
+    {
+      "id": "void-flower",
+      "date": "2012-11-01",
+      "tags": [
+        "thinking",
+        "art"
+      ],
+      "series": null,
+      "languages": {
+        "zh": {
+          "title": "虚无之花",
+          "file": "void-flower.html",
+          "markdown": "void-flower.md",
+          "excerpt": "他梦见自己蜷缩在一团黑与白的混沌之中。\n世界浓稠而又轻盈、温暖而又柔软。用一个生硬的比喻：就像是被草草搅动过却仍处于完好蛋壳内的新鲜蛋液。唯一的两种颜色不均匀地散乱在壳内，暧昧而无界限。他在这片混沌中，安宁地，近乎沉眠。\n如...",
+          "description": "一场关于黑白混沌、凝固的过去与无垠宇宙的梦。写于2012年11月，同名艺术短片《虚无之花》的原文。",
+          "image": "",
+          "available": true
+        },
+        "en": {
+          "title": "The Flower of Nothingness",
+          "file": "void-flower.en.html",
+          "markdown": "void-flower.en.md",
+          "excerpt": "He dreamed he was curled up in a mass of black and white chaos.\nThe world was thick yet light, warm and soft. To use an awkward comparison: it was like the liquid of a fresh egg, roughly stirred but still inside its unbroken shell. The only two colours lay unevenly scattered within it, indistinct and without boundaries. In this chaos he was at peace, almost asleep.\nIf there were no light in the world, would colour cease to exist?\nHe had once visited a photography exhibition spanning the nineteenth century to the middle of the twentieth. In the dim...",
+          "description": "A dream of black and white, the unalterable past, and a universe whose infinity may itself be an illusion. The original prose behind The Flower of Nothingness.",
           "image": "",
           "available": true
         }

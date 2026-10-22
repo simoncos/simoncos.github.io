@@ -54,6 +54,7 @@
     gap: 32px;
 }
 .film-reading p { color: var(--muted); font-size: 14px; line-height: 1.7; max-width: 400px; margin: 12px 0 0; }
+.film-reading + .film-reading { margin-top: 32px; }
 .film-reading-links { display: grid; }
 .film-reading-links a { padding: 18px 0; display: flex; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--line); font-size: 16px; }
 .film-reading-links a:hover { color: var(--muted); }
