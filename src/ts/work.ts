@@ -204,9 +204,24 @@
     }
 
     let shown: string | null = null;
+    let pointed: HTMLElement | null = null;
+    let spotlight: HTMLElement | null = null;
+    let pointTimer = 0;
+    let clearTimer = 0;
+    const dismissEvents = ['pointerdown', 'keydown', 'wheel', 'touchstart', 'scroll', 'resize', 'pagehide'];
+
+    function clearPoint() {
+        window.clearTimeout(pointTimer);
+        window.clearTimeout(clearTimer);
+        pointed?.classList.remove('is-target');
+        pointed = null;
+        spotlight?.remove();
+        spotlight = null;
+        dismissEvents.forEach((name) => window.removeEventListener(name, clearPoint));
+    }
 
     // The card a #type/work address points at, once its type is showing.
-    // Focus follows the reader to the card a link sent them to, for screen readers and the next Tab. The wash already shows
+    // Focus follows the reader to the card a link sent them to, for screen readers and the next Tab. The spotlight already shows
     // which card it is, so the focus ring stays off until the reader moves focus themselves.
     function land(card: HTMLElement | null) {
         if (!card) return;
@@ -216,30 +231,51 @@
     }
 
     function pointAt(item: string) {
+        clearPoint();
         const current = topics.find((section) => section.classList.contains('is-current'));
         const cardCandidate = item && current ? current.querySelector<HTMLElement>(`[data-work="${CSS.escape(item)}"]`) : null;
         if (!cardCandidate) return null;
         const card = cardCandidate;
         card.scrollIntoView({ block: 'center' });
-        card.classList.remove('is-target');
-        void card.offsetWidth;
-        // Arriving from another page, the transition still covers the screen for about 0.45 s; ring the card after it lifts.
-        const arriving = document.documentElement.hasAttribute('data-arrive');
-        window.setTimeout(() => card.classList.add('is-target'), arriving ? 460 : 0);
-        // Other animations inside the card end too; only the ring's own end clears it.
-        const clear = (event: AnimationEvent) => {
-            if (event.animationName !== 'wcard-target') return;
-            card.classList.remove('is-target');
-            card.removeEventListener('animationend', clear);
-        };
-        card.addEventListener('animationend', clear);
+        pointed = card;
+        // Let the curtain and the topic's entrance settle before measuring the
+        // opening. The fixed shadow covers the header and every other region,
+        // while its transparent centre leaves the real card fully interactive.
+        pointTimer = window.setTimeout(() => {
+            card.classList.add('is-target');
+            if (!shell?.reduced) {
+                const rect = card.getBoundingClientRect();
+                spotlight = document.createElement('div');
+                spotlight.className = 'work-spotlight';
+                spotlight.setAttribute('aria-hidden', 'true');
+                Object.assign(spotlight.style, {
+                    left: `${rect.left - 12}px`, top: `${rect.top - 12}px`,
+                    width: `${rect.width + 24}px`, height: `${rect.height + 24}px`,
+                });
+                spotlight.addEventListener('animationend', clearPoint, { once: true });
+                document.body.appendChild(spotlight);
+            }
+            // Also clears the static reduced-motion cue, and acts as a fallback
+            // if an animation is interrupted or disabled by the browser.
+            clearTimer = window.setTimeout(clearPoint, 3200);
+        }, shell?.reduced ? 0 : 620);
+        // Browsing dismisses the cue, including during the entrance delay; a
+        // later route cannot revive an old card or leave a stale opening behind.
+        // Attach scroll after our own scrollIntoView event has been delivered.
+        dismissEvents.filter((name) => name !== 'scroll').forEach((name) => {
+            window.addEventListener(name, clearPoint, { passive: true });
+        });
+        requestAnimationFrame(() => {
+            if (pointed === card) window.addEventListener('scroll', clearPoint, { passive: true });
+        });
         return card;
     }
 
     function show(address: string) {
+        clearPoint();
         const [id, item = ''] = normalizeAddress(address).split('/');
         const index = topicIndex(id);
-        shown = index < 0 ? '' : id;
+        shown = index < 0 ? '' : item ? `${id}/${item}` : id;
         if (index < 0) {
             if (work.classList.contains('is-topic')) {
                 // Back on the wheel, face the type just left.
@@ -272,8 +308,9 @@
     function swap(address: string) {
         const [id, item = ''] = normalizeAddress(address).split('/');
         // A fragment link fires both hashchange and popstate; act once.
-        const target = topicIndex(id) < 0 ? '' : id;
-        if (target === shown && !item) return;
+        const target = topicIndex(id) < 0 ? '' : item ? `${id}/${item}` : id;
+        if (target === shown) return;
+        clearPoint();
         shown = target;
         const change = () => {
             window.scrollTo(0, 0);

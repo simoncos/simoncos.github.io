@@ -107,11 +107,22 @@
     outline-offset: -1px;
 }
 
-/* The card a #type/work address points at (the home page links works this
-   way): a warm wash behind it, the same --hl the archive and footnotes light
-   up on arrival, held for a moment and then faded, so the reader sees which
-   card they were sent to. Drawn on ::after and faded by opacity; an animated
-   outline colour did not repaint. */
+/* A #type/work arrival keeps the actual card clear while a fixed shadow
+   dims everything outside it, including the page chrome. Only opacity
+   animates; the opening is measured once, after the entrance has settled. */
+.work-spotlight {
+    position: fixed;
+    z-index: 70;
+    border-radius: 24px;
+    box-shadow: 0 0 0 100vmax rgb(0 0 0 / 58%);
+    pointer-events: none;
+    animation: wcard-target 3s ease both;
+}
+
+:root[data-theme="dark"] .work-spotlight {
+    box-shadow: 0 0 0 100vmax rgb(0 0 0 / 74%);
+}
+
 .wcard.is-target {
     position: relative;
     isolation: isolate;
@@ -122,20 +133,32 @@
     position: absolute;
     inset: -12px;
     z-index: -1;
-    background: var(--hl);
+    background: var(--bg);
+    box-shadow: inset 0 0 0 1px var(--line-2);
     border-radius: 24px;
     pointer-events: none;
-    animation: wcard-target 2.4s var(--ease) both;
+    animation: wcard-target 3s ease both;
 }
 
-/* Focus arrives with the wash; its ring would only frame the card in black. */
+/* Focus arrives with the spotlight; the next Tab restores the usual ring. */
 .wcard.is-landed:focus-visible {
     outline: none;
 }
 
 @keyframes wcard-target {
-    0%, 60% { opacity: 1; }
+    0% { opacity: 0; }
+    10%, 65% { opacity: 1; }
     100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .work-spotlight {
+        display: none;
+    }
+
+    .wcard.is-target::after {
+        animation: none;
+    }
 }
 
 .wcard-img img {
@@ -195,7 +218,7 @@
         transform: scale(1.04);
     }
 
-    .wgrid:has(a.wcard:hover) a.wcard:not(:hover) {
+    .wgrid:not(:has(.is-target)):has(a.wcard:hover) a.wcard:not(:hover) {
         opacity: 0.45;
     }
 

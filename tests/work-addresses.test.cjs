@@ -24,7 +24,7 @@ function openWork(hash) {
     const location = new URL(`https://simoncos.github.io/gallery.html?lang=zh&utm_source=old${hash}`);
     const document = { activeElement: null, documentElement: { hasAttribute: () => false }, addEventListener() {},
         querySelector: selector => selector === '[data-work]' ? work : wheel };
-    const window = { location, innerWidth: 1280, setTimeout() {}, scrollTo() {},
+    const window = { location, innerWidth: 1280, setTimeout() {}, clearTimeout() {}, scrollTo() {}, removeEventListener() {},
         addEventListener: (name, callback) => { listeners[name] = callback; } };
     const history = { replaceState: (_state, _unused, url) => { location.href = new URL(url, location).href; } };
     vm.runInNewContext(code, { window, document, history, location, CSS: { escape: s => s },
