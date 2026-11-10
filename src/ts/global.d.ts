@@ -18,6 +18,7 @@ interface SiteShell {
     reduced: boolean;
     navKey: string;
     lastKey: string;
+    pointer?: { x: number; y: number };
     setLang?: (lang: SiteLanguage) => void;
     onLang?: (listener: (lang: SiteLanguage) => void) => void;
     syncLangToggle?: () => void;

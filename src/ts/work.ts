@@ -207,17 +207,46 @@
     let pointed: HTMLElement | null = null;
     let spotlight: HTMLElement | null = null;
     let pointTimer = 0;
-    let clearTimer = 0;
+    let pointerOrigin: { x: number; y: number } | null = null;
+    const POINTER_DISMISS_PX = 64;
     const dismissEvents = ['pointerdown', 'keydown', 'wheel', 'touchstart', 'scroll', 'resize', 'pagehide'];
 
     function clearPoint() {
         window.clearTimeout(pointTimer);
-        window.clearTimeout(clearTimer);
         pointed?.classList.remove('is-target');
         pointed = null;
+        pointerOrigin = null;
         spotlight?.remove();
         spotlight = null;
         dismissEvents.forEach((name) => window.removeEventListener(name, clearPoint));
+        window.removeEventListener('pointerover', watchPointer);
+        window.removeEventListener('pointermove', watchPointer);
+    }
+
+    function watchPointer(event: PointerEvent) {
+        if (event.pointerType !== 'mouse') return;
+        // Direct visits have no departing click; the first mouse event then
+        // supplies the origin. A linked arrival already knows that position.
+        if (!pointerOrigin) {
+            pointerOrigin = { x: event.clientX, y: event.clientY };
+            return;
+        }
+        if (event.type !== 'pointermove'
+            || Math.hypot(event.clientX - pointerOrigin.x, event.clientY - pointerOrigin.y) < POINTER_DISMISS_PX) return;
+        window.removeEventListener('pointerover', watchPointer);
+        window.removeEventListener('pointermove', watchPointer);
+        if (!spotlight || shell?.reduced) {
+            clearPoint();
+            return;
+        }
+        const fading = spotlight;
+        const finish = () => {
+            if (spotlight === fading) clearPoint();
+        };
+        fading.animate([
+            { opacity: window.getComputedStyle(fading).opacity },
+            { opacity: 0 },
+        ], { duration: 280, easing: 'ease-out', fill: 'forwards' }).finished.then(finish, finish);
     }
 
     // The card a #type/work address points at, once its type is showing.
@@ -238,6 +267,7 @@
         const card = cardCandidate;
         card.scrollIntoView({ block: 'center' });
         pointed = card;
+        pointerOrigin = shell?.pointer ? { ...shell.pointer } : null;
         // Let the curtain and the topic's entrance settle before measuring the
         // opening. The fixed shadow covers the header and every other region,
         // while its transparent centre leaves the real card fully interactive.
@@ -252,13 +282,13 @@
                     left: `${rect.left - 12}px`, top: `${rect.top - 12}px`,
                     width: `${rect.width + 24}px`, height: `${rect.height + 24}px`,
                 });
-                spotlight.addEventListener('animationend', clearPoint, { once: true });
                 document.body.appendChild(spotlight);
             }
-            // Also clears the static reduced-motion cue, and acts as a fallback
-            // if an animation is interrupted or disabled by the browser.
-            clearTimer = window.setTimeout(clearPoint, 3200);
         }, shell?.reduced ? 0 : 620);
+        // Hold until the cursor clearly leaves its arrival position. Small
+        // movements do not shorten the reader's time to identify the work.
+        window.addEventListener('pointerover', watchPointer, { passive: true });
+        window.addEventListener('pointermove', watchPointer, { passive: true });
         // Browsing dismisses the cue, including during the entrance delay; a
         // later route cannot revive an old card or leave a stale opening behind.
         // Attach scroll after our own scrollIntoView event has been delivered.

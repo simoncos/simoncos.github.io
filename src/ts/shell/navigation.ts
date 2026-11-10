@@ -9,6 +9,12 @@ export function installNavigation(shell: SiteShell, root: HTMLElement, language:
     let covered = false;
     let timer = 0;
 
+    // Carry the resting mouse position across navigation so arrival cues can
+    // measure the very first movement on the destination page.
+    window.addEventListener('pointermove', (event) => {
+        if (event.pointerType === 'mouse') shell.pointer = { x: event.clientX, y: event.clientY };
+    }, { passive: true });
+
     function curtainEl() {
         if (!curtain) {
             curtain = document.createElement('div');
@@ -42,6 +48,7 @@ export function installNavigation(shell: SiteShell, root: HTMLElement, language:
             label: note.label || '',
             href: new URL(href, window.location.href).href,
             t: Date.now(),
+            pointer: shell.pointer,
         }));
         window.location.href = href;
         // If nothing happens (a refused or aborted load), do not stay covered.
@@ -104,6 +111,7 @@ export function installNavigation(shell: SiteShell, root: HTMLElement, language:
         if (link.target && link.target !== '_self') return;
         const url = new URL(link.href, window.location.href);
         if (url.origin !== window.location.origin) return;
+        if (event.detail > 0) shell.pointer = { x: event.clientX, y: event.clientY };
         if (url.pathname === window.location.pathname && url.search === window.location.search) return;
         const dest = shell.route(url.pathname);
         if (!dest || shell.reduced) return;

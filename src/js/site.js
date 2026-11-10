@@ -152,6 +152,9 @@
     let curtain = null;
     let covered = false;
     let timer = 0;
+    window.addEventListener("pointermove", (event) => {
+      if (event.pointerType === "mouse") shell.pointer = { x: event.clientX, y: event.clientY };
+    }, { passive: true });
     function curtainEl() {
       if (!curtain) {
         curtain = document.createElement("div");
@@ -180,7 +183,8 @@
         mode: note.mode,
         label: note.label || "",
         href: new URL(href, window.location.href).href,
-        t: Date.now()
+        t: Date.now(),
+        pointer: shell.pointer
       }));
       window.location.href = href;
       timer = window.setTimeout(reset, 8e3);
@@ -237,6 +241,7 @@
       if (link.target && link.target !== "_self") return;
       const url = new URL(link.href, window.location.href);
       if (url.origin !== window.location.origin) return;
+      if (event.detail > 0) shell.pointer = { x: event.clientX, y: event.clientY };
       if (url.pathname === window.location.pathname && url.search === window.location.search) return;
       const dest = shell.route(url.pathname);
       if (!dest || shell.reduced) return;

@@ -181,5 +181,8 @@
         if (arrive.mode === 'curtain')
             root.setAttribute('data-curtain', arrive.label || '');
     }
-    window.SITE_SHELL = { route, here, lang, labels: LABELS, reduced, navKey: NAV_KEY, lastKey: LAST_KEY };
+    const pointer = arrive?.pointer;
+    const arrivalPointer = pointer && Number.isFinite(pointer.x) && Number.isFinite(pointer.y)
+        ? { x: pointer.x, y: pointer.y } : undefined;
+    window.SITE_SHELL = { route, here, lang, labels: LABELS, reduced, navKey: NAV_KEY, lastKey: LAST_KEY, pointer: arrivalPointer };
 })();

@@ -142,7 +142,7 @@
 
     // Arrival: the departing page covered the screen (curtain) or faded
     // <main> out and left a note; finish the same motion on this side.
-    let arrive: { mode: string; label?: string } | null = null;
+    let arrive: { mode: string; label?: string; pointer?: { x: number; y: number } } | null = null;
     try {
         const raw = sessionStorage.getItem(NAV_KEY);
         sessionStorage.removeItem(NAV_KEY);
@@ -168,5 +168,8 @@
         if (arrive.mode === 'curtain') root.setAttribute('data-curtain', arrive.label || '');
     }
 
-    window.SITE_SHELL = { route, here, lang, labels: LABELS, reduced, navKey: NAV_KEY, lastKey: LAST_KEY };
+    const pointer = arrive?.pointer;
+    const arrivalPointer = pointer && Number.isFinite(pointer.x) && Number.isFinite(pointer.y)
+        ? { x: pointer.x, y: pointer.y } : undefined;
+    window.SITE_SHELL = { route, here, lang, labels: LABELS, reduced, navKey: NAV_KEY, lastKey: LAST_KEY, pointer: arrivalPointer };
 })();
