@@ -21,6 +21,7 @@ GENERATED_DATA = (
     "feed.zh.xml",
     "feed.en.xml",
     "blogs.html",
+    "blogs.zh.html",
 )
 
 RETIRED_DATA = (
@@ -40,11 +41,11 @@ def copy_path(source: Path, target: Path) -> None:
 
 
 def prepare_temp_repo(temp_root: Path) -> None:
-    for rel in ("generate_blog_pages.py", "requirements.txt", "scripts/site_shell.py"):
+    for rel in ("generate_blog_pages.py", "requirements.txt", "scripts/site_shell.py", "scripts/site_entities.py", "scripts/site_languages.py"):
         copy_path(ROOT / rel, temp_root / rel)
 
-    for module in (ROOT / "scripts").glob("article_*.py"):
-        copy_path(module, temp_root / "scripts" / module.name)
+    for source in (ROOT / "scripts").glob("article_*.py"):
+        copy_path(source, temp_root / "scripts" / source.name)
 
     for rel in ("scripts/piece_contact_foot.py", "scripts/page_common.py"):
         copy_path(ROOT / rel, temp_root / rel)

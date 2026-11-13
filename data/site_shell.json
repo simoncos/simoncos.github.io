@@ -189,14 +189,27 @@
       "asset_prefix": "",
       "script_profile": "home",
       "section": "home",
-      "canonical": "index.html"
+      "canonical": "index.html",
+      "language": "en",
+      "alternates": {
+        "en": "index.html",
+        "zh": "index.zh.html"
+      },
+      "lang_pair": {
+        "href": "index.zh.html",
+        "lang": "zh"
+      }
     },
     {
       "path": "templates/blogs-listing-template.html",
       "asset_prefix": "",
       "script_profile": "articles",
       "section": "articles",
-      "canonical": "blogs.html"
+      "canonical": "blogs.html",
+      "alternates": {
+        "en": "blogs.html",
+        "zh": "blogs.zh.html"
+      }
     },
     {
       "path": "templates/blog-template.html",
@@ -210,7 +223,16 @@
       "asset_prefix": "",
       "script_profile": "work",
       "section": "work",
-      "canonical": "gallery.html"
+      "canonical": "gallery.html",
+      "language": "en",
+      "alternates": {
+        "en": "gallery.html",
+        "zh": "gallery.zh.html"
+      },
+      "lang_pair": {
+        "href": "gallery.zh.html",
+        "lang": "zh"
+      }
     },
     {
       "path": "apps.html",
@@ -232,7 +254,8 @@
       "alternates": {
         "en": "apps/sleep-toolkit.en.html",
         "zh": "apps/sleep-toolkit.html"
-      }
+      },
+      "language": "en"
     },
     {
       "path": "apps/sleep-toolkit.html",
@@ -247,7 +270,8 @@
       "alternates": {
         "en": "apps/sleep-toolkit.en.html",
         "zh": "apps/sleep-toolkit.html"
-      }
+      },
+      "language": "zh"
     },
     {
       "path": "gallery/music/qingtian.html",
@@ -296,7 +320,16 @@
       "asset_prefix": "",
       "script_profile": "basic",
       "section": "about",
-      "canonical": "about.html"
+      "canonical": "about.html",
+      "language": "en",
+      "alternates": {
+        "en": "about.html",
+        "zh": "about.zh.html"
+      },
+      "lang_pair": {
+        "href": "about.zh.html",
+        "lang": "zh"
+      }
     },
     {
       "path": "404.html",
@@ -326,6 +359,151 @@
       "script_profile": "basic",
       "section": "work",
       "canonical": "gallery/film/void-flower.html"
+
+    },
+    {
+      "path": "index.zh.html",
+      "asset_prefix": "",
+      "script_profile": "home",
+      "section": "home",
+      "canonical": "index.zh.html",
+      "language": "zh",
+      "alternates": {
+        "en": "index.html",
+        "zh": "index.zh.html"
+      },
+      "lang_pair": {
+        "href": "index.html",
+        "lang": "en"
+      }
+    },
+    {
+      "path": "blogs.html",
+      "asset_prefix": "",
+      "script_profile": "articles",
+      "section": "articles",
+      "canonical": "blogs.html",
+      "language": "en",
+      "alternates": {
+        "en": "blogs.html",
+        "zh": "blogs.zh.html"
+      },
+      "lang_pair": {
+        "href": "blogs.zh.html",
+        "lang": "zh"
+      }
+    },
+    {
+      "path": "blogs.zh.html",
+      "asset_prefix": "",
+      "script_profile": "articles",
+      "section": "articles",
+      "canonical": "blogs.zh.html",
+      "language": "zh",
+      "alternates": {
+        "en": "blogs.html",
+        "zh": "blogs.zh.html"
+      },
+      "lang_pair": {
+        "href": "blogs.html",
+        "lang": "en"
+      }
+    },
+    {
+      "path": "gallery.zh.html",
+      "asset_prefix": "",
+      "script_profile": "work",
+      "section": "work",
+      "canonical": "gallery.zh.html",
+      "language": "zh",
+      "alternates": {
+        "en": "gallery.html",
+        "zh": "gallery.zh.html"
+      },
+      "lang_pair": {
+        "href": "gallery.html",
+        "lang": "en"
+      }
+    },
+    {
+      "path": "about.zh.html",
+      "asset_prefix": "",
+      "script_profile": "basic",
+      "section": "about",
+      "canonical": "about.zh.html",
+      "language": "zh",
+      "alternates": {
+        "en": "about.html",
+        "zh": "about.zh.html"
+      },
+      "lang_pair": {
+        "href": "about.html",
+        "lang": "en"
+      }
+    },
+    {
+      "path": "topics/personal-ai-system.en.html",
+      "asset_prefix": "../",
+      "script_profile": "basic",
+      "section": "work",
+      "canonical": "topics/personal-ai-system.en.html",
+      "language": "en",
+      "alternates": {
+        "en": "topics/personal-ai-system.en.html",
+        "zh": "topics/personal-ai-system.html"
+      },
+      "lang_pair": {
+        "lang": "zh",
+        "href": "personal-ai-system.html"
+      }
+    },
+    {
+      "path": "topics/personal-ai-system.html",
+      "asset_prefix": "../",
+      "script_profile": "basic",
+      "section": "work",
+      "canonical": "topics/personal-ai-system.html",
+      "language": "zh",
+      "alternates": {
+        "en": "topics/personal-ai-system.en.html",
+        "zh": "topics/personal-ai-system.html"
+      },
+      "lang_pair": {
+        "lang": "en",
+        "href": "personal-ai-system.en.html"
+      }
+    },
+    {
+      "path": "topics/long-term-sleep-data.en.html",
+      "asset_prefix": "../",
+      "script_profile": "basic",
+      "section": "work",
+      "canonical": "topics/long-term-sleep-data.en.html",
+      "language": "en",
+      "alternates": {
+        "en": "topics/long-term-sleep-data.en.html",
+        "zh": "topics/long-term-sleep-data.html"
+      },
+      "lang_pair": {
+        "lang": "zh",
+        "href": "long-term-sleep-data.html"
+      }
+    },
+    {
+      "path": "topics/long-term-sleep-data.html",
+      "asset_prefix": "../",
+      "script_profile": "basic",
+      "section": "work",
+      "canonical": "topics/long-term-sleep-data.html",
+      "language": "zh",
+      "alternates": {
+        "en": "topics/long-term-sleep-data.en.html",
+        "zh": "topics/long-term-sleep-data.html"
+      },
+      "lang_pair": {
+        "lang": "en",
+        "href": "long-term-sleep-data.en.html"
+      }
     }
   ],
   "site_url": "https://simoncos.github.io/"

@@ -1,15 +1,66 @@
 <!DOCTYPE html>
-<html lang="en" data-page-lang="en">
+<html lang="en" data-page-lang="en" data-lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zhihu Social Network Analysis (2): The Follow Network · Articles · simoncos</title>
     <meta name="description" content="Why is following the relation closest to a social network on Zhihu? Density, strongly connected components and shortest paths show how the big Vs cluster; PageRank, HITS and betwee...">
-    <meta name="author" content="simoncos">
+    <meta name="author" content="Che Zhao">
     <link rel="canonical" href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.en.html">
     <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.en.html">
     <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html">
     <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.en.html">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.en.html#article",
+      "url": "https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.en.html",
+      "mainEntityOfPage": "https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.en.html",
+      "headline": "Zhihu Social Network Analysis (2): The Follow Network",
+      "description": "Why is following the relation closest to a social network on Zhihu? Density, strongly connected components and shortest paths show how the big Vs cluster; PageRank, HITS and betwee...",
+      "inLanguage": "en",
+      "dateCreated": "2016-03-18",
+      "dateModified": "2026-10-01",
+      "isPartOf": {
+        "@id": "https://simoncos.github.io/#website"
+      },
+      "creditText": "Author: Che Zhao; Translation: Claude Opus 5.5",
+      "author": {
+        "@id": "https://simoncos.github.io/about.html#person"
+      },
+      "image": "https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-2-follow-network/4a34f5c65f7bddca379b8f8719e1f25f.jpg"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://simoncos.github.io/#website",
+      "url": "https://simoncos.github.io/",
+      "name": "simoncos",
+      "inLanguage": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://simoncos.github.io/about.html#person",
+      "name": "Che Zhao",
+      "alternateName": [
+        "趙澈",
+        "simoncos"
+      ],
+      "url": "https://simoncos.github.io/about.html",
+      "sameAs": [
+        "https://www.linkedin.com/in/chezhao/",
+        "https://x.com/simonc_os",
+        "https://github.com/simoncos"
+      ]
+    }
+  ]
+}
+    </script>
     <meta property="og:type" content="article">
     <meta property="og:title" content="Zhihu Social Network Analysis (2): The Follow Network">
     <meta property="og:description" content="Why is following the relation closest to a social network on Zhihu? Density, strongly connected components and shortest paths show how the big Vs cluster; PageRank, HITS and betwee...">
@@ -41,30 +92,30 @@
 </head>
 <body class="article-page" data-article-group="zhihu-social-network-analysis-2-follow-network">
     <!-- site-shell:header:start -->
-    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <a class="skip" href="#main"><span data-l="en">Skip to content</span></a>
     <header class="hdr">
-        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <a class="brand" href="../index.html" aria-label="simoncos — home"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
         <div class="hdr-right">
-            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
-                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            <nav class="hdr-nav" aria-label="Primary">
+                <a class="tab" href="../index.html"><span data-l="en">Index</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.html"><span data-l="en">About</span><span class="tab-dot" aria-hidden="true"></span></a>
             </nav>
             <div class="hdr-tools">
                 <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
-                <a class="lang-btn" href="zhihu-social-network-analysis-2-follow-network.html" hreflang="zh-Hans" data-lang-nav="zh"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
-                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+                <a class="lang-btn" href="zhihu-social-network-analysis-2-follow-network.html" hreflang="zh-Hans" data-lang-nav="zh"><span data-l="en" lang="zh-Hans">中文</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span></span><span class="menu-when-open"><span data-l="en">Close</span></span></button>
             </div>
         </div>
     </header>
-    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
-        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
-        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
-        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
-        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
-        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu">
+        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
     </nav>
     <!-- site-shell:header:end -->
     <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
@@ -78,8 +129,9 @@
             <aside class="toc" aria-label="Contents"><span class="k toc-k">Contents</span><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>Introduction: What Is a Social Network?</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>What We Analysed and How</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>Big Vs in a Huddle: Overall Features of the Network</span></a><a class="toc-link toc-h3" href="#heading-4"><span class="toc-dot" aria-hidden="true"></span><span>Ranking the Big Vs: Link Analysis of the Network</span></a><a class="toc-link toc-h3" href="#heading-5"><span class="toc-dot" aria-hidden="true"></span><span>Balance Within Imbalance: Closeness and Betweenness Centrality</span></a><a class="toc-link toc-h3" href="#heading-6"><span class="toc-dot" aria-hidden="true"></span><span>What the Big Vs Care About: Trending Topics</span></a></aside>
             <div class="article-main">
                 <div class="article-meta">
-                    <span class="meta-item"><span class="k">Created</span><span class="num">2016-03-18</span></span>
-                    <span class="meta-item"><span class="k">Updated</span><span class="num">2026-10-01</span></span>
+                    <span class="meta-item"><span class="k">Author</span><a href="../about.html" rel="author">Che Zhao</a></span>
+                    <span class="meta-item"><span class="k">Created</span><time class="num" datetime="2016-03-18">2016-03-18</time></span>
+                    <span class="meta-item"><span class="k">Updated</span><time class="num" datetime="2026-10-01">2026-10-01</time></span>
                     <span class="meta-item"><span class="k">Reading</span>20 min</span>
                     <span class="meta-item"><span class="k">Translation</span>Claude Opus 5.5</span>
                     <a class="meta-alt" href="zhihu-social-network-analysis-2-follow-network.html" hreflang="zh-Hans" lang="zh-Hans" data-lang-nav="zh">中文 ↗</a>
@@ -103,7 +155,7 @@
 <p>First, some basics about networks:</p>
 <p><strong>A network can be represented as a graph, which has two basic elements: vertices (or nodes) and edges (or links).</strong> Edges can have a direction, which means a node can have two kinds of edges: out-links and in-links. If the edges have directions, the graph is called a directed graph; otherwise it is an undirected graph. A graph reflects some kind of relation between nodes, and the edges express that relation.</p>
 <p>Back to Zhihu. We know that following and being followed are really two views of the same thing: A following B is equivalent to B being followed by A. In the data we crawled (see the overview diagram below), we know whom each of these 26,000 users follows. That is, we know all the out-links of the 26,000 user nodes. Seen from the other side, we know who follows whom among these 26,000 users (the part inside the blue circle), <strong>plus</strong> whom else they follow (the part outside the blue circle). So we can only analyse these 26,000 users (the filled red circles), because we don't know all the links of the other people (the hollow red circles). This comes from our breadth-first crawling: short of crawling the whole of Zhihu, there is no truly complete data (accounts that nobody follows can presumably be ignored).</p>
-<p><img alt="Diagram of the data: inside the blue circle are the 26,000 crawled users (filled dots), outside it the other users they follow (hollow dots)" decoding="async" height="1593" src="assets/images/zhihu-social-network-analysis-2-follow-network/4a34f5c65f7bddca379b8f8719e1f25f.jpg" width="1520"/></p>
+<p><img alt="Diagram of the data: inside the blue circle are the 26,000 crawled users (filled dots), outside it the other users they follow (hollow dots)" decoding="async" height="1593" src="assets/images/zhihu-social-network-analysis-2-follow-network/4a34f5c65f7bddca379b8f8719e1f25f.jpg" width="1520" /></p>
 <p>Besides, even with the part outside the blue circle removed, the number of edges involved is still very large, and computation would be a problem. So in this project we chose only two interesting subsets of the 26,000 users to analyse: users who have received more than 10,000 upvotes (1,895 people) and users who have received more than 50,000 upvotes (375 people). For convenience we named them <strong>Net10k</strong> and <strong>Net50k</strong>; you could say they are <strong>two tiers of Zhihu's "big Vs"</strong>, its big-name accounts.</p>
 <p>Next, the methods. A network graph contains only two things, nodes and edges, but it can hold all sorts of phenomena and properties of extreme complexity. In network analysis, or more broadly the field of complex networks, there are a great many concepts people have defined to describe network phenomena, and measures designed to quantify network features. The analysis that follows rests on some of the most basic of them. Introducing each in detail would make this piece much longer and add quite a few mathematical formulas, which is not what I want this piece to be. So I will try to explain what each one means from intuition, and even where I give a definition I won't try to be rigorous (only mathematical formulas can give the clearest, most rigorous definitions); the focus stays on thinking about the analysis. Also, since the Zhihu follow network we are discussing is a directed graph, <strong>all the measures and algorithms below are discussed for directed graphs only</strong>. Of course, readers who already have some background can skip the relevant paragraphs.</p>
 <h3 id="heading-3">Big Vs in a Huddle: Overall Features of the Network</h3>
@@ -134,8 +186,8 @@
 </li>
 </ul>
 <p>Tired of all these words? At last, some pictures. Below are diagrams of the strongly connected components of Net10k and Net50k:</p>
-<p><img alt="Strongly connected components of Net10k: node 43 stands for the giant component, and each of the other 42 single-node components has one line to it" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/0d7248a6b262eb8b610fab4e582a8446.jpg" width="800"/></p>
-<p><img alt="Strongly connected components of Net50k: node 7 stands for the giant component, and each of the other 7 single-node components has one line to it" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/74d99398168a270d1cc4210202622082.jpg" width="800"/></p>
+<p><img alt="Strongly connected components of Net10k: node 43 stands for the giant component, and each of the other 42 single-node components has one line to it" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/0d7248a6b262eb8b610fab4e582a8446.jpg" width="800" /></p>
+<p><img alt="Strongly connected components of Net50k: node 7 stands for the giant component, and each of the other 7 single-node components has one line to it" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/74d99398168a270d1cc4210202622082.jpg" width="800" /></p>
 <p>Each red circle stands for a strongly connected component, and each line (actually a very abstract arrow, orz) stands for a path. This alone doesn't tell us much, so let's look at some figures for the two:</p>
 <table>
 <thead>
@@ -210,7 +262,7 @@
 <h3 id="heading-4">Ranking the Big Vs: Link Analysis of the Network</h3>
 <p>The last section focused on the big Vs' follow network as a whole, which is certainly interesting; but perhaps more interesting still is each individual in that whole. They are all big Vs with high upvote counts, but can they be ranked against one another? Do they differ in the social behaviour of following, and how can we measure the difference? These are the questions this section deals with.</p>
 <p>Let's first imagine a simple follow network with only three people, A, B and C. A follows B, B follows A, A and B both follow C, and C follows nobody, as shown below:</p>
-<p><img alt="The follow network of A, B and C: A and B follow each other, and both follow C" decoding="async" height="781" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/02637d508cb2b7251f02052ea7e6cb3c.jpg" width="869"/></p>
+<p><img alt="The follow network of A, B and C: A and B follow each other, and both follow C" decoding="async" height="781" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/02637d508cb2b7251f02052ea7e6cb3c.jpg" width="869" /></p>
 <p>So, going by follows alone, who is the "biggest deal" among A, B and C? Intuitively, of course, C, because C gets the most follows of the three. But do more followers always mean a bigger deal? Building on this network, let's consider a few interesting cases:</p>
 <ol>
 <li>10 more users, each with 0 followers of their own, all follow A</li>
@@ -284,7 +336,7 @@
 <p>These are the big Vs standing at the very top of Zhihu's big Vs. Does it seem to make some sense? Compare the PageRank values of the top five in Net10k and Net50k: the former are smaller than the latter, mainly because the PageRank total of 1 is shared among more big Vs.</p>
 <p>Now let's consider one more point. What counts as "important" really depends on what we are after. If we want to read more good answers, or find someone to write a book or an article for us, we can go straight to the authors of good answers, and these authors tend to attract the most follows, so we only need to know who is followed most strongly (like C in the diagram below).</p>
 <p>But going by follows alone, we will miss <strong>good answerers</strong> who haven't yet been strongly followed (perhaps big Vs with potential who have just joined Zhihu), and we can't possibly dig out these good answerers one by one ourselves. What to do? Simple: if you can find a few users who act as <strong>matchmakers</strong> (like D in the diagram below), whose every follow you trust to be good and to your taste, things get easy. Just check from time to time whom they follow, and you will discover a bigger world. This is actually a workable idea for a user recommendation system, but I won't go into it here.</p>
-<p><img alt="The same network with D added; D follows only C" decoding="async" height="785" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/a12fc0d19fef8e0781d23433a3c23e6a.jpg" width="825"/></p>
+<p><img alt="The same network with D added; D follows only C" decoding="async" height="785" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/a12fc0d19fef8e0781d23433a3c23e6a.jpg" width="825" /></p>
 <p><strong>The HITS algorithm</strong> can do this using only the follow network: with <strong>Authority</strong> and <strong>Hub</strong> scores, it picks out good answerers and good matchmakers for us.</p>
 <p>Does the intuitive analysis above hold up? Let's look at the top five by authority and hub in Net10k and Net50k:</p>
 <table>
@@ -392,23 +444,23 @@
 </ul>
 <p>I have not yet found widely accepted Chinese names for these two centralities, so for now I have made up my own. Also, as with PageRank and HITS, the calculation of these measures is a bit complicated, so I won't go into detail here. But we used the implementations in the network analysis library NetworkX throughout, and readers interested in the details of the algorithms can look them up in its documentation.</p>
 <p>In this project we calculated the closeness and betweenness centrality of Net10k and Net50k and plotted their distributions. Because we didn't think it through at the time, the closeness centrality we calculated was based on out-links rather than in-links, which I don't think means much (you can always follow more people to get a higher closeness centrality), so I have decided to skip it in this piece. Below I will mainly discuss betweenness centrality; its distributions for Net10k and Net50k are as follows:</p>
-<p><img alt="Betweenness centrality in Net10k: the 1,895 big Vs across, betweenness up; the highest is about 0.066 and almost all the rest are near 0" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/7a0addd718be6bdf1de437753d9f7d2b.jpg" width="800"/></p>
-<p><img alt="Betweenness centrality in Net50k: the 375 big Vs across; the highest is about 0.04 and most are near 0" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/06cb6cf1d5dcd3bb03b9041b62c40201.jpg" width="800"/></p>
+<p><img alt="Betweenness centrality in Net10k: the 1,895 big Vs across, betweenness up; the highest is about 0.066 and almost all the rest are near 0" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/7a0addd718be6bdf1de437753d9f7d2b.jpg" width="800" /></p>
+<p><img alt="Betweenness centrality in Net50k: the 375 big Vs across; the highest is about 0.04 and most are near 0" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/06cb6cf1d5dcd3bb03b9041b62c40201.jpg" width="800" /></p>
 <p>Once again we have two long, long tails. The horizontal axis is each individual big V, and the vertical axis is that big V's betweenness centrality. The long tails show that most big Vs have a betweenness centrality close to 0, and even though a few people outside the long tail are far above the rest, their betweenness values are still very small. What does this tell us? That even if these big Vs left Zhihu, it would hardly affect the other big Vs' ability to form follow relations with each other. Without you, I still have many other shortest paths to another big V. And what does that tell us in turn? That <strong>the big Vs' follow network is remarkably robust</strong>, so robust that even losing many nodes would have almost no effect on the connectivity of the whole circle.</p>
 <p>Now compare Net50k and Net10k side by side, and you can see that <strong>as the circle grows, the power law gets stronger</strong>: apart from a few nodes, most people's betweenness centrality is even closer to 0, and the growth in numbers further dilutes most people's "uniqueness". Intuitively I believe that if we kept widening the circle, to Net5k, Net1k or even all Zhihu users, this robustness would only get stronger and stronger. Although <strong>people differ from one another exponentially</strong>, <strong>to the network itself, everyone is almost equally important, and equally unimportant</strong>. Perhaps this could be called a kind of balance within imbalance in Zhihu's follow network.</p>
 <h3 id="heading-6">What the Big Vs Care About: Trending Topics</h3>
 <p>Finally, we tried a way of finding the trending topics on Zhihu (the only analysis of content in this project). We first took the <strong>dominating sets</strong> of Net10k and Net50k (since I believe the results would not be significantly different without using this subset, I won't explain the concept here), then counted the question tags of all the answers written by the users in these sets, and finally sorted the topic tags by the number of times they appear. Here are the top 20 for each:</p>
-<p><strong>Top 20 trending topics in Net10k:</strong><br/>
-Surveys 3792, Daily Life 3096, History 1713, Romance 1464, Psychology 1432<br/>
-Film 1419, Interpersonal Relationships 1404, Society 1332, Internet 1214, Emotions 1197<br/>
-Politics 1028, Relations Between the Sexes 994, Education 897, China 823, Life 815<br/>
-Games 805, Literature 772, Zhihu 772, Law 750, Music 738<br/>
-Love 699, Culture 659, Startups 628, University 621, Programmers 619<br/>
+<p><strong>Top 20 trending topics in Net10k:</strong><br />
+Surveys 3792, Daily Life 3096, History 1713, Romance 1464, Psychology 1432<br />
+Film 1419, Interpersonal Relationships 1404, Society 1332, Internet 1214, Emotions 1197<br />
+Politics 1028, Relations Between the Sexes 994, Education 897, China 823, Life 815<br />
+Games 805, Literature 772, Zhihu 772, Law 750, Music 738<br />
+Love 699, Culture 659, Startups 628, University 621, Programmers 619<br />
 The Mind 617, How Do You Rate X 609, Women 604, Programming 585, What Is It Like to X 582</p>
-<p><strong>Top 20 trending topics in Net50k:</strong><br/>
-Daily Life 1435, Surveys 1365, Politics 1285, History 1204, Film 1084<br/>
-Health 996, Society 984, Medicine 941, Romance 717, China 695<br/>
-Relations Between the Sexes 688, English 678, Interpersonal Relationships 640, Psychology 634, Internet 595<br/>
+<p><strong>Top 20 trending topics in Net50k:</strong><br />
+Daily Life 1435, Surveys 1365, Politics 1285, History 1204, Film 1084<br />
+Health 996, Society 984, Medicine 941, Romance 717, China 695<br />
+Relations Between the Sexes 688, English 678, Interpersonal Relationships 640, Psychology 634, Internet 595<br />
 Law 587, Microsoft 555, United States 552, Fitness 538, Programming 511</p>
 <p>Personally, I think <strong>the topics of the questions the big Vs answer can reflect, to some extent, how popular each topic area is on Zhihu as a whole</strong>. I also think the topics at the very top go some way to explaining why big Vs from different fields stick together: whatever their professional field, <strong>people are always interested in the humanities and in broad entertainment topics such as life, history and film</strong>. Once they share those interests, and all have good insights to share, they naturally find it easier to appreciate one another.</p>
 <p>With that, this piece can at last come to a full stop. Comments and discussion are welcome. I also want to thank the three other people who worked on this project with me; it took the four of us together to get this far in so short a time (the project report has the details of who did what).</p>
@@ -417,13 +469,13 @@ Law 587, Microsoft 555, United States 552, Fitness 538, Programming 511</p>
                 <div class="article-tags"><h2 class="k">Tags</h2><a class="tag" href="../blogs.html#topic-hack">Hack</a></div>
                 <section class="xref-grid"><div class="xrefs"><h2 class="k">This article links to</h2><a class="xref" href="zhihu-social-network-analysis-1-basic-statistics.en.html"><span>Zhihu Social Network Analysis (1): Basic Statistics</span><span class="num">2016-02-28</span></a></div><div class="xrefs"><h2 class="k">Linked from</h2><a class="xref" href="zhihu-social-network-analysis-1-basic-statistics.en.html"><span>Zhihu Social Network Analysis (1): Basic Statistics</span><span class="num">2016-02-28</span></a></div></section>
                 <nav class="post-nav" aria-label="More reading"><a class="post-nav-card post-nav-newer" rel="prev" href="exponential-vs-power-law-distributions.en.html"><span class="k">Newer</span><span class="post-nav-title">Comparing the Plots of Exponential and Power-Law Distributions</span></a><a class="post-nav-card post-nav-older" rel="next" href="reading-2015-second-half.en.html"><span class="k">Older</span><span class="post-nav-title">Good Books I Read in the Second Half of 2015</span></a></nav>
-                <footer class="piece-contact" aria-label="Contact and follow" data-zh-aria-label="联系与订阅" data-i18n="aria-label"><p class="piece-contact-line"><a href="../feed.en.xml">RSS EN</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://github.com/simoncos">GitHub</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/chezhao/">LinkedIn</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://x.com/simonc_os">X</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="mailto:simonzhao1024@gmail.com">Email</a></p></footer>
+                <footer class="piece-contact" aria-label="Contact and follow"><p class="piece-contact-line"><a href="../feed.en.xml">RSS EN</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://github.com/simoncos">GitHub</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/chezhao/">LinkedIn</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://x.com/simonc_os">X</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="mailto:simonzhao1024@gmail.com">Email</a></p></footer>
             </div>
         </div>
     </main>
     <!-- site-shell:footer:start -->
     <footer class="ftr">
-        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Oct 22, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-10-22</span></span></span>
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Oct 22, 2026</span></span></span>
         <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
     </footer>
     <!-- site-shell:footer:end -->

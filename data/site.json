@@ -80,12 +80,12 @@
         "zh": "十年睡眠档案：数据分析"
       },
       "home_desc": {
-        "en": "A study of 3,656 nights, tracing sleep, body, and life across a decade.",
-        "zh": "基于 3,656 个夜晚的记录，回看十年的睡眠、身体与生活变化。"
+        "en": "A study of 3,656 sleep records, tracing sleep, body, and life across a decade.",
+        "zh": "基于 3,656 条睡眠记录，回看十年的睡眠、身体与生活变化。"
       },
       "desc": {
-        "en": "A study of 3,656 nights: sleep rhythms, the body, and changes across a decade.",
-        "zh": "从 3,656 个夜晚的记录，研究十年的睡眠节律、身体与生活变化。"
+        "en": "A study of 3,656 sleep records: sleep rhythms, the body, and changes across a decade.",
+        "zh": "从 3,656 条睡眠记录出发，研究十年的睡眠节律、身体与生活变化。"
       },
       "img": "gallery/assets/gallery-card-sleep-scatter.webp",
       "href": {
@@ -374,7 +374,8 @@
       },
       "img": "gallery/research/assets/hn-llm-research-cover.svg",
       "wheel_img": "gallery/research/assets/hn-llm-research-wheel.svg",
-      "href": "https://simoncos-hn-llm-research.vercel.app/"
+      "href": "https://simoncos-hn-llm-research.vercel.app/",
+      "state": "public_review"
     },
     {
       "id": "unannounced-1",
@@ -577,7 +578,8 @@
   ],
   "featured": [
     {
-      "work": "sleep"
+      "work": "sleep",
+      "direct": true
     },
     {
       "work": "talk"
@@ -676,6 +678,21 @@
             "zh": "apps/sleep-toolkit.html"
           },
           "arrow": "→"
+        },
+        {
+          "label": {
+            "en": "Long-term sleep data · reading companion",
+            "zh": "长期睡眠数据 · 伴读"
+          },
+          "kind": {
+            "en": "Reading",
+            "zh": "伴读"
+          },
+          "href": {
+            "en": "topics/long-term-sleep-data.en.html",
+            "zh": "topics/long-term-sleep-data.html"
+          },
+          "arrow": "→"
         }
       ]
     },
@@ -706,6 +723,21 @@
           "href": {
             "en": "blogs/my-personal-knowledge-management-system-2026-03.en.html",
             "zh": "blogs/my-personal-knowledge-management-system-2026-03.html"
+          },
+          "arrow": "→"
+        },
+        {
+          "label": {
+            "en": "Personal AI system · reading companion",
+            "zh": "个人 AI 系统 · 伴读"
+          },
+          "kind": {
+            "en": "Reading",
+            "zh": "伴读"
+          },
+          "href": {
+            "en": "topics/personal-ai-system.en.html",
+            "zh": "topics/personal-ai-system.html"
           },
           "arrow": "→"
         }
@@ -815,11 +847,12 @@
         {
           "label": "Sleep Toolkit Web App",
           "kind": {
-            "en": "Tool — upload a CSV",
-            "zh": "工具 —— 上传一份 CSV"
+            "en": "Unavailable · checked 2026-11-13",
+            "zh": "暂不可用 · 2026-11-13 核查"
           },
           "href": "https://sleep-toolkit-production.up.railway.app",
-          "arrow": "↗"
+          "arrow": "↗",
+          "unavailable": true
         },
         {
           "label": {
@@ -952,6 +985,10 @@
       "essay_href": {
         "en": "gallery/research/sleep-2016-2026.en.html",
         "zh": "gallery/research/sleep-2016-2026.html"
+      },
+      "availability_note": {
+        "en": "Web app unavailable: its public address returned “Application not found” on 2026-11-13. The project documentation and local workflow remain below.",
+        "zh": "网页应用暂不可用：公开入口在 2026-11-13 返回“Application not found”。下方保留项目说明与本地流程。"
       }
     },
     {
@@ -996,9 +1033,13 @@
     }
   ],
   "about": {
-    "who": {
-      "en": "Che Zhao · 趙澈 · Hong Kong",
-      "zh": "Che Zhao · 趙澈 · 香港"
+    "identity": {
+      "name": "Che Zhao",
+      "handle": "simoncos",
+      "location": {
+        "en": "Hong Kong",
+        "zh": "香港"
+      }
     },
     "native_name": {
       "text": "趙澈",
@@ -1148,7 +1189,11 @@
           "zh": "feed.zh.xml"
         }
       }
-    ]
+    ],
+    "who": {
+      "en": "Che Zhao · 趙澈 · Hong Kong",
+      "zh": "Che Zhao · 趙澈 · 香港"
+    }
   },
   "series": [
     {
@@ -1415,5 +1460,15 @@
         ]
       }
     }
-  ]
+  ],
+  "page_revisions": {
+    "index.zh.html": "2026-11-13",
+    "blogs.zh.html": "2026-11-13",
+    "gallery.zh.html": "2026-11-13",
+    "about.zh.html": "2026-11-13",
+    "topics/personal-ai-system.en.html": "2026-11-13",
+    "topics/personal-ai-system.html": "2026-11-13",
+    "topics/long-term-sleep-data.en.html": "2026-11-13",
+    "topics/long-term-sleep-data.html": "2026-11-13"
+  }
 }

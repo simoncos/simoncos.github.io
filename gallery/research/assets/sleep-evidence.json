@@ -1,0 +1,120 @@
+{
+  "version": "public-summary-v1",
+  "reviewed": "2026-10-05",
+  "data_as_of": "2026-03-18",
+  "source": "Existing public chart DATA payloads",
+  "payload_sha256": "aa865fc73ed255a3eba1294ad62cf84019203fe9863b25d581b2b14c6925df78",
+  "unit": "included SleepCycle record, not deduplicated calendar date or independent participant",
+  "records": 3656,
+  "distinct_record_dates": 2963,
+  "quality_mean": 83.29677242888403,
+  "tags": [
+    {
+      "tag": "massage",
+      "label": {
+        "zh": "按摩",
+        "en": "Massage"
+      },
+      "records": 264,
+      "from": "2017-02-22",
+      "through": "2026-03-16",
+      "quality_mean": 89.1,
+      "delta_pp": 5.8,
+      "comparison": "all included records; overlapping tags; no additional exclusions"
+    },
+    {
+      "tag": "tea/coffee",
+      "label": {
+        "zh": "茶 / 咖啡",
+        "en": "Tea / coffee"
+      },
+      "records": 139,
+      "from": "2017-06-15",
+      "through": "2026-03-15",
+      "quality_mean": 73.6,
+      "delta_pp": -9.6,
+      "comparison": "all included records; overlapping tags; no additional exclusions"
+    },
+    {
+      "tag": "travel",
+      "label": {
+        "zh": "旅行",
+        "en": "Travel"
+      },
+      "records": 135,
+      "from": "2017-08-19",
+      "through": "2026-02-09",
+      "quality_mean": 73.3,
+      "delta_pp": -10,
+      "comparison": "all included records; overlapping tags; no additional exclusions"
+    },
+    {
+      "tag": "break",
+      "label": {
+        "zh": "显式中断标签",
+        "en": "Explicit break tag"
+      },
+      "records": 192,
+      "from": "2018-10-31",
+      "through": "2026-03-08",
+      "quality_mean": 77.2,
+      "delta_pp": -6,
+      "comparison": "all included records; overlapping tags; no additional exclusions"
+    },
+    {
+      "tag": "Worked out",
+      "label": {
+        "zh": "运动标签",
+        "en": "Exercise tag"
+      },
+      "records": 674,
+      "from": "2016-03-07",
+      "through": "2026-03-14",
+      "quality_mean": 83.1,
+      "delta_pp": -0.2,
+      "comparison": "all included records; overlapping tags; no additional exclusions"
+    },
+    {
+      "tag": "wine",
+      "label": {
+        "zh": "饮酒",
+        "en": "Alcohol"
+      },
+      "records": 121,
+      "from": "2018-01-10",
+      "through": "2026-02-09",
+      "quality_mean": 76.8,
+      "delta_pp": -6.5,
+      "comparison": "all included records; overlapping tags; no additional exclusions"
+    }
+  ],
+  "bd_years": [
+    {
+      "year": "2023",
+      "bd_mean": 4.02,
+      "bd_n": 326
+    },
+    {
+      "year": "2024",
+      "bd_mean": 7.13,
+      "bd_n": 361
+    },
+    {
+      "year": "2025",
+      "bd_mean": 8.46,
+      "bd_n": 361
+    },
+    {
+      "year": "2026",
+      "bd_mean": 6.88,
+      "bd_n": 78
+    }
+  ],
+  "limitations": [
+    "Original raw CSV not rerun or republished.",
+    "The original deployed processing commit is not established by this fingerprint.",
+    "Tag date ranges are first/last matching records, not continuous tag coverage.",
+    "BD n is not supplied for several exercise/environment groups.",
+    "Public date field contains multiple records on some dates; no night reassignment applied."
+  ]
+}

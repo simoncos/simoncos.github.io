@@ -9,11 +9,14 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 from datetime import date
 from hashlib import sha256
 from html import escape
 from pathlib import Path
 from typing import Any
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from site_languages import canonical_url, language_document, section_path
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -120,6 +123,7 @@ def asset_version(rel_path: str) -> str:
     """A resource changes its cache key only when its bytes change."""
     return sha256((ROOT / rel_path).read_bytes()).hexdigest()[:12]
 
+
 def versioned_asset(rel_path: str, asset_prefix: str = "") -> str:
     return f"{prefixed(asset_prefix, rel_path)}?v={asset_version(rel_path)}"
 
@@ -162,20 +166,14 @@ def render_resource_block(config: dict[str, Any], page: dict[str, Any]) -> str:
                 f'title="{esc(feed["title"])}" href="{prefixed(asset_prefix, feed["href"])}">'
             )
 
-    # Shell pages serve both languages from one URL via ?lang=, so the Chinese
-    # variant needs to be declared or search engines only ever see English.
-    # Pages kept as one file per language (the project boards) name both
-    # files instead.
+    # Only full language documents declare alternates. A query parameter or
+    # an English summary of Chinese material is not a separate translation.
     site = config.get("site_url", "").rstrip("/")
     canonical = page.get("canonical")
     alternates = page.get("alternates")
     if alternates:
         for hreflang, rel in (("en", alternates["en"]), ("zh-Hans", alternates["zh"]), ("x-default", alternates["en"])):
-            lines.append(f'    <link rel="alternate" hreflang="{hreflang}" href="{site}/{rel}">')
-    elif canonical:
-        base = f"{site}/{canonical.lstrip('/')}" if canonical != "index.html" else f"{site}/"
-        for hreflang, href in (("en", base), ("zh-Hans", f"{base}?lang=zh"), ("x-default", base)):
-            lines.append(f'    <link rel="alternate" hreflang="{hreflang}" href="{href}">')
+            lines.append(f'    <link rel="alternate" hreflang="{hreflang}" href="{canonical_url(site, rel)}">')
 
     lines.extend([
         '    <link rel="preconnect" href="https://fonts.googleapis.com">',
@@ -206,7 +204,8 @@ def render_lang_toggle(page: dict[str, Any]) -> str:
         hreflang = "zh-Hans" if pair["lang"] == "zh" else "en"
         return (
             f'<a class="lang-btn" href="{esc(pair["href"])}" hreflang="{hreflang}" '
-            f'data-lang-nav="{pair["lang"]}">{label}</a>'
+            f'data-lang-nav="{pair["lang"]}"'
+            f'{" data-lang-peer" if page.get("language") else ""}>{label}</a>'
         )
     if page.get("lang_toggle") == "article":
         # Articles are one language per file; the generator fills in the
@@ -226,12 +225,16 @@ def render_header_block(config: dict[str, Any], page: dict[str, Any]) -> str:
     for number, (key, href, en, zh) in enumerate(NAV, start=1):
         current = ' aria-current="page"' if key == section else ""
         target = prefixed(asset_prefix, href)
+        zh_target = prefixed(asset_prefix, section_path(href, "zh"))
+        if href == "favorites.html":
+            zh_target += "?lang=zh"
+        target_attrs = i18n_attrs(href=(target, zh_target))
         tabs.append(
-            f'                <a class="tab" href="{target}"{current}>{bi(en, zh)}'
+            f'                <a class="tab"{target_attrs}{current}>{bi(en, zh)}'
             '<span class="tab-dot" aria-hidden="true"></span></a>'
         )
         sheet.append(
-            f'        <a class="sheet-link" href="{target}"{current}><span>{bi(en, zh)}</span>'
+            f'        <a class="sheet-link"{target_attrs}{current}><span>{bi(en, zh)}</span>'
             f'<span class="sheet-n" aria-hidden="true">{number:02d}</span></a>'
         )
 
@@ -240,7 +243,7 @@ def render_header_block(config: dict[str, Any], page: dict[str, Any]) -> str:
         f"    <!-- {HEADER_START} -->",
         f'    <a class="skip" href="#main">{bi("Skip to content", "跳到正文")}</a>',
         '    <header class="hdr">',
-        f'        <a class="brand" href="{home}"{i18n_attrs(aria_label=("simoncos — home", "simoncos — 首页"))}>'
+        f'        <a class="brand"{i18n_attrs(href=(home, prefixed(asset_prefix, "index.zh.html")), aria_label=("simoncos — home", "simoncos — 首页"))}>'
         '<span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>',
         '        <div class="hdr-right">',
         f'            <nav class="hdr-nav"{i18n_attrs(aria_label=("Primary", "主导航"))}>',
@@ -311,7 +314,7 @@ def apply_shell(text: str, config: dict[str, Any], page: dict[str, Any], label: 
         if replaced is None:
             raise ValueError(f"{label}: missing <!-- {start} --> block")
         text = replaced
-    return text
+    return language_document(text, page["language"], page, config["site_url"]) if page.get("language") else text
 
 
 def render_document(
@@ -343,7 +346,8 @@ def render_document(
     if tail:
         parts.append(tail.rstrip("\n"))
     parts.extend(["</body>", "</html>", ""])
-    return "\n".join(parts)
+    text = "\n".join(parts)
+    return language_document(text, page["language"], page, config["site_url"]) if page.get("language") else text
 
 
 def render_meta(
@@ -375,7 +379,7 @@ def render_meta(
     zh_title = f' data-zh="{esc(title_zh)}"' if title_zh != title_en else ""
     lines = [
         f"    <title{zh_title}>{esc(title_en)}</title>",
-        f'    <meta name="description" content="{esc(desc_en)}">',
+        f'    <meta name="description"{i18n_attrs(content=(desc_en, desc_zh))}>',
         '    <meta name="author" content="simoncos">',
     ]
     if robots:
@@ -385,8 +389,8 @@ def render_meta(
         lines.append(f'    <link rel="canonical" href="{url}">')
     lines.extend([
         f'    <meta property="og:type" content="{og_type}">',
-        f'    <meta property="og:title" content="{esc(title_en)}">',
-        f'    <meta property="og:description" content="{esc(desc_en)}">',
+        f'    <meta property="og:title"{i18n_attrs(content=(title_en, title_zh))}>',
+        f'    <meta property="og:description"{i18n_attrs(content=(desc_en, desc_zh))}>',
     ])
     if canonical is not None:
         lines.append(f'    <meta property="og:url" content="{url}">')
@@ -397,8 +401,8 @@ def render_meta(
         f'    <meta property="og:image:height" content="{image["height"]}">',
         f'    <meta property="og:image:alt" content="{esc(image["alt"])}">',
         '    <meta name="twitter:card" content="summary_large_image">',
-        f'    <meta name="twitter:title" content="{esc(title_en)}">',
-        f'    <meta name="twitter:description" content="{esc(desc_en)}">',
+        f'    <meta name="twitter:title"{i18n_attrs(content=(title_en, title_zh))}>',
+        f'    <meta name="twitter:description"{i18n_attrs(content=(desc_en, desc_zh))}>',
         f'    <meta name="twitter:image" content="{esc(image["url"])}">',
         f'    <meta name="twitter:image:alt" content="{esc(image["alt"])}">',
     ])

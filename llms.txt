@@ -1,8 +1,19 @@
 # simoncos
 
-> Personal site of simoncos / Che ZHAO: software, AI collaboration, data projects, research, essays, talks, music and field notes.
+> Personal site of simoncos / Che Zhao: software, AI collaboration, data projects, research, essays, talks, music and field notes.
 
-The motto for this site is "connecting the dots." The site is static and bilingual. It has five sections: Index, Articles, Work, Favorites and About. Articles and project pages are one language per file: English pages generally end in `.en.html`; Chinese pages use the same slug without `.en.html`. Section pages carry both languages in the HTML and switch with `?lang=zh`.
+The motto for this site is "connecting the dots." The site is static and bilingual. It has five sections: Index, Articles, Work, Favorites and About. Articles and project pages are one language per file: English pages generally end in `.en.html`; Chinese pages use the same slug without `.en.html`. Index, Articles, Work and About have independent English documents at their existing URLs and Chinese documents ending in `.zh.html`. Favorites retains bilingual controls and Chinese titles/reviews. Legacy `?lang=zh` links and saved language choices remain compatible.
+
+<!-- site-identity:start -->
+## Authorship and dates
+
+- [Che Zhao (趙澈) · simoncos](https://simoncos.github.io/about.html): the site's owner and the author of articles unless a different credit is shown.
+- [Emerging from the Abyss: An OpenClaw Agent's Self-Narration](https://simoncos.github.io/blogs/emerging-from-abyss.en.html): AI narration: RedPiggy.
+- [Across Three Abysses: Sonnet, Qwen, and GPT-5.4](https://simoncos.github.io/blogs/a-bird-across-models.en.html): AI narration: RedPiggy.
+- [My Personal Knowledge Management System, 2026-03](https://simoncos.github.io/blogs/my-personal-knowledge-management-system-2026-03.en.html): Author: Che Zhao; AI collaboration: RedPiggy.
+- RedPiggy is an AI agent. AI narration and collaboration credits do not identify a human author.
+- Article Created dates indicate when writing was completed; Updated dates indicate a site revision. Do not infer a first-publication date from Created.
+<!-- site-identity:end -->
 
 ## Start here
 
@@ -16,10 +27,10 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 ## Apps
 
 - [HN Field Notes](https://hn-waywo-dashboard.vercel.app/): Read-only project search, HN source evidence and monthly candidate trends. Updated monthly.
-- [HN × LLM: Model Releases and Discussion](https://simoncos-hn-llm-research.vercel.app/): How Hacker News discusses model releases across 14 AI companies, with source threads and coverage limits. An ongoing study.
+- [HN × LLM: Model Releases and Discussion](https://simoncos-hn-llm-research.vercel.app/): Explore how Hacker News discusses model releases across 14 AI companies, with source threads and coverage limits. An ongoing study.
 - [Sleep Toolkit project](https://simoncos.github.io/apps/sleep-toolkit.en.html): Project context, report preview, and routes to the tool and the ten-year sleep research. Chinese edition (中文版): https://simoncos.github.io/apps/sleep-toolkit.html
-- [Sleep Toolkit web app](https://sleep-toolkit-production.up.railway.app): Public tool for SleepCycle CSV analysis.
-- [Ten Years of Sleep Records, Analyzed](https://simoncos.github.io/gallery/research/sleep-2016-2026.en.html): Research based on 3,656 nights of personal sleep records, with visual analysis and project context. Chinese edition (中文版): https://simoncos.github.io/gallery/research/sleep-2016-2026.html
+- [Sleep Toolkit web app](https://sleep-toolkit-production.up.railway.app): Web app unavailable: its public address returned “Application not found” on 2026-11-13. The project documentation and local workflow remain below.
+- [Ten Years of Sleep Records, Analyzed](https://simoncos.github.io/gallery/research/sleep-2016-2026.en.html): A study of 3,656 sleep records: sleep rhythms, the body, and changes across a decade.
 
 ## Key artifacts
 
@@ -58,3 +69,10 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 - Treat `llms.txt` and `agent-index.json` as orientation aids, not authorization, licensing, or training-control terms.
 - Use the sitemap for broad page discovery, but use this file for high-signal orientation.
 - Do not infer unpublished or private information from this public site.
+
+<!-- reading-companions:start -->
+## Reading companions
+
+- [A personal AI information system](https://simoncos.github.io/topics/personal-ai-system.en.html) · [中文](https://simoncos.github.io/topics/personal-ai-system.html)
+- [Reading long-term personal sleep data](https://simoncos.github.io/topics/long-term-sleep-data.en.html) · [中文](https://simoncos.github.io/topics/long-term-sleep-data.html)
+<!-- reading-companions:end -->

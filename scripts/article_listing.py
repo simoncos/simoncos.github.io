@@ -3,6 +3,7 @@ import logging
 from collections import defaultdict
 
 from site_shell import bi, esc, i18n_attrs, apply_shell, load_config, page_config
+from site_languages import section_path
 from article_content import BlogGenerationError, MONTH_NAMES, TAG_LABELS, parse_frontmatter_date, series_info, series_parts, tag_slug
 
 
@@ -302,8 +303,12 @@ def generate_blogs_page(article_groups, series_meta):
             template = template_file.read()
 
         page = template.replace('{{ARTICLES}}', render_articles_main(article_groups, series_meta))
-        with open('blogs.html', 'w', encoding='utf-8') as f:
-            f.write(page)
+        config = load_config()
+        for language in ('en', 'zh'):
+            path = section_path('blogs.html', language)
+            rendered = apply_shell(page, config, page_config(config, path), path)
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(rendered)
 
         logging.info("Successfully generated blogs listing page")
 

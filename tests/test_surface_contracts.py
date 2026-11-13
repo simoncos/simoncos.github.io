@@ -11,6 +11,15 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 SITE_ORIGIN = "https://simoncos.github.io"
 NAV = ("index.html", "blogs.html", "gallery.html", "favorites.html", "about.html")
+NAV_ZH = ("index.zh.html", "blogs.zh.html", "gallery.zh.html", "favorites.html?lang=zh", "about.zh.html")
+
+
+def page_language(html: str) -> str:
+    marked = re.search(r'data-page-lang="(en|zh)"', html)
+    if marked:
+        return marked.group(1)
+    lang = re.search(r'<html[^>]*\slang="([^"]+)"', html)
+    return "zh" if lang and lang.group(1).startswith("zh") else "en"
 
 
 class TagParser(HTMLParser):
@@ -84,7 +93,8 @@ class SurfaceContractTests(unittest.TestCase):
                     self.assertIn(f"<!-- site-shell:{marker}:start -->", html)
                 nav = html.split('class="hdr-nav"', 1)[1].split("</nav>", 1)[0]
                 hrefs = re.findall(r'<a class="tab" href="([^"]+)"', nav)
-                self.assertEqual([href.split("/")[-1] for href in hrefs], list(NAV))
+                expected = NAV_ZH if page_language(html) == "zh" else NAV
+                self.assertEqual([href.split("/")[-1] for href in hrefs], list(expected))
                 self.assertLessEqual(nav.count('aria-current="page"'), 1)
 
     def test_pages_load_only_compiled_scripts_that_have_a_source(self):

@@ -639,6 +639,22 @@
 </section>
 
 <!-- ═══ 01 / 全量数据 ═══ -->
+<!-- sleep-evidence:start -->
+<section id="evidence-details" class="editorial-method" aria-labelledby="evidence-details-title"><div class="container"><div class="method-card">
+<p class="section-label">证据与定义</p><h2 id="evidence-details-title">把数值与分母一起读</h2>
+<p class="prose">作者 <a href="../../about.zh.html">Che Zhao (simoncos)</a> · 数据截至 <time datetime="2026-03-18">2026-03-18</time> · 证据复核 <time datetime="2026-10-05">2026-10-05</time></p>
+<p class="prose">公开散点包含 3,656 条记录、2,963 个不同日期值。原处理代码以开始记录的日期归属，一天可能出现多条记录，也可能涉及跨午夜记录。本表保留按记录加权的均值；不把记录条数当成独立夜数，不按日期去重。若重新定义“一个夜晚”，需要单独重算。</p>
+<div class="evidence-table-scroll" tabindex="0" role="region" aria-label="质量分均值与分母"><table class="evidence-table"><caption>均值与样本范围</caption><thead><tr><th>分组</th><th>n</th><th>均值</th></tr></thead><tbody><tr id="score-all"><th scope="row">全部有效记录</th><td>3,656</td><td>83.3%</td></tr><tr id="score-2019"><th scope="row">2019 年</th><td>364</td><td>88.3%</td></tr><tr id="score-2020"><th scope="row">2020 年 · 最高年均值</th><td>362</td><td>94.4%</td></tr><tr id="score-2021"><th scope="row">2021 年</th><td>363</td><td>87.9%</td></tr><tr id="score-nontravel"><th scope="row">没有旅行标签的记录</th><td>3,521</td><td>83.7%</td></tr></tbody></table></div>
+<div class="evidence-table-scroll" tabindex="0" role="region" aria-label="标签比较表；窄屏可横向滚动"><table class="evidence-table"><caption>标签：质量分与整体 83.3% 基线比较</caption><thead><tr><th>标签</th><th>n</th><th>首末标签记录</th><th>均值</th><th>差值（百分点）</th></tr></thead><tbody><tr id="tag-massage"><th scope="row">按摩</th><td>264</td><td>2017-02-22—2026-03-16</td><td>89.1%</td><td>+5.8</td></tr><tr id="tag-tea-coffee"><th scope="row">茶 / 咖啡</th><td>139</td><td>2017-06-15—2026-03-15</td><td>73.6%</td><td>-9.6</td></tr><tr id="tag-travel"><th scope="row">旅行</th><td>135</td><td>2017-08-19—2026-02-09</td><td>73.3%</td><td>-10.0</td></tr><tr id="tag-break"><th scope="row">显式中断标签</th><td>192</td><td>2018-10-31—2026-03-08</td><td>77.2%</td><td>-6.0</td></tr><tr id="tag-worked-out"><th scope="row">运动标签</th><td>674</td><td>2016-03-07—2026-03-14</td><td>83.1%</td><td>-0.2</td></tr><tr id="tag-wine"><th scope="row">饮酒</th><td>121</td><td>2018-01-10—2026-02-09</td><td>76.8%</td><td>-6.5</td></tr></tbody></table></div>
+<p class="prose">日期是标签首次与最后出现的记录，不能表示连续覆盖。标签相互重叠；每行不额外排除记录，比较组是全体记录，而非无该标签的补集。沿用已公开、已舍入的标签汇总。分组差异是观察性关联，不能当成干预效果。</p>
+<h3>BD 年均值：每个指标有自己的 n</h3><ul class="evidence-list"><li>2023: n=326, 4.02 次/小时</li><li>2024: n=361, 7.13 次/小时</li><li>2025: n=361, 8.46 次/小时</li><li>2026（1–3 月）: n=78, 6.88 次/小时</li></ul>
+<p class="prose">单独看 2026 年 3 月为 8.18 次/小时，公开月度汇总未列其 n。低步数运动代理组有 130 条质量分记录、BD 为 4.0，但未单列 BD 有效 n；环境组也缺指标各自的 n。不能以组总数代填，也不能当成覆盖相同的队列。</p>
+<h3>指标字典</h3><dl class="evidence-dictionary"><dt>SleepCycle 质量分（%）</dt><dd>App 分数；算法不透明，不能作为临床指标。</dd><dt>卧床 / 估计睡眠时长（小时）</dt><dd>不同字段。公开散点的 duration 是估计睡眠时长，已舍入到 0.01 小时。</dd><dt>BD（次/小时）</dt><dd>消费级呼吸中断估算。缺失不等于零；不等同于临床 AHI。</dd><dt>打呼噜（分钟）</dt><dd>当前处理代码把缺失打呼噜时长补零；其 n 是记录数，不能当成检测功能有效覆盖数。</dd><dt>醒来情绪</dt><dd>自报 Good / OK / Bad / Not set；不是诊断。</dd><dt>修正分</dt><dd>作者自定义的情绪与呼吸加权，不是经过验证的健康量表。</dd></dl>
+<p class="prose">当前源码保留卧床 ≥3 小时、估计睡眠 >0 且有质量分的记录。本轮只核对源码与公开汇总，没有重跑原始 CSV，也没有确立历史报告所用的处理提交。2025 年前后的睡眠阶段断裂，本身不能证明具体算法发布或生理变化。</p>
+<p class="prose">复核版本 <code>public-summary-v1</code> · <a href="assets/sleep-evidence.json">下载汇总证据与数据指纹</a> · <a href="../../apps/sleep-toolkit.html">Sleep Toolkit</a>. 指纹识别已有公开图表数据，不代表私人导出文件或原流水线版本。模型结果（质量模型 n=1,156、MAE=6.35、R²=0.50）保留为预测结果；本轮未重新训练、估计区间或做因果验证。</p>
+</div></div></section>
+<!-- sleep-evidence:end -->
+
 <div class="section" id="overview" role="region" aria-labelledby="overview-title">
   <div class="container">
     <p class="section-label">01 / 全量数据</p>

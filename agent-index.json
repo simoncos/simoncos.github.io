@@ -2,10 +2,10 @@
   "site": {
     "name": "simoncos",
     "canonical_url": "https://simoncos.github.io/",
-    "owner": "simoncos / Che ZHAO",
+    "owner": "simoncos / Che Zhao",
     "motto": "connecting the dots.",
     "summary": "Personal site: software, AI collaboration, data projects, research, essays, talks, music and field notes.",
-    "last_updated": "2026-10-11"
+    "last_updated": "2026-10-22"
   },
   "language_policy": {
     "default_language": "en",
@@ -13,29 +13,41 @@
       "en",
       "zh"
     ],
-    "english_page_pattern": "*.en.html",
-    "chinese_page_pattern": "*.html",
+    "english_page_pattern": "Articles/research/toolkit/topic readers: *.en.html; core sections: existing *.html URLs.",
+    "chinese_page_pattern": "Articles/research/toolkit/topic readers: *.html; core sections: *.zh.html.",
     "agent_preference": "Prefer English pages when both versions exist, unless the user asks for Chinese.",
-    "section_pages": "Section pages (Index, Articles, Work, Favorites, About) carry both languages; append ?lang=zh for Chinese."
+    "section_pages": "Index, Articles, Work and About have independent documents: existing .html URLs are English; .zh.html URLs are Chinese. Favorites keeps bilingual controls and Chinese reviews. Legacy ?lang= and saved language choices remain supported."
   },
   "entrypoints": [
     {
       "id": "home",
       "label": "Index",
       "url": "https://simoncos.github.io/",
-      "purpose": "Selected work, then the newest articles and works with a topic filter."
+      "purpose": "Selected work, then the newest articles and works with a topic filter.",
+      "languages": {
+        "en": "https://simoncos.github.io/",
+        "zh": "https://simoncos.github.io/index.zh.html"
+      }
     },
     {
       "id": "articles",
       "label": "Articles",
       "url": "https://simoncos.github.io/blogs.html",
-      "purpose": "Long-form writing archive, filterable by topic, with series."
+      "purpose": "Long-form writing archive, filterable by topic, with series.",
+      "languages": {
+        "en": "https://simoncos.github.io/blogs.html",
+        "zh": "https://simoncos.github.io/blogs.zh.html"
+      }
     },
     {
       "id": "work",
       "label": "Work",
       "url": "https://simoncos.github.io/gallery.html",
-      "purpose": "One view per type: Apps, Games, Talks & Explainers, Research and Music."
+      "purpose": "One view per type: Apps, Games, Talks & Explainers, Research and Music.",
+      "languages": {
+        "en": "https://simoncos.github.io/gallery.html",
+        "zh": "https://simoncos.github.io/gallery.zh.html"
+      }
     },
     {
       "id": "projects",
@@ -53,7 +65,11 @@
       "id": "about",
       "label": "About",
       "url": "https://simoncos.github.io/about.html",
-      "purpose": "Short profile, motto and contact links."
+      "purpose": "Short profile, motto and contact links.",
+      "languages": {
+        "en": "https://simoncos.github.io/about.html",
+        "zh": "https://simoncos.github.io/about.zh.html"
+      }
     }
   ],
   "current_surfaces": [
@@ -87,14 +103,19 @@
       "type": "web_app",
       "label": "Sleep Toolkit web app",
       "url": "https://sleep-toolkit-production.up.railway.app",
-      "description": "Public tool for SleepCycle CSV analysis."
+      "description": "Web app unavailable: its public address returned “Application not found” on 2026-11-13. The project documentation and local workflow remain below.",
+      "availability": {
+        "state": "unavailable",
+        "checked": "2026-10-05",
+        "http_status": 404
+      }
     },
     {
       "id": "sleep-research",
       "type": "research_artifact",
       "label": "Ten Years of Sleep Records, Analyzed",
       "url": "https://simoncos.github.io/gallery/research/sleep-2016-2026.en.html",
-      "description": "A study of 3,656 nights of personal sleep records, with visual analysis and project context.",
+      "description": "A study of 3,656 sleep records: sleep rhythms, the body, and changes across a decade.",
       "url_zh": "https://simoncos.github.io/gallery/research/sleep-2016-2026.html",
       "url_en": "https://simoncos.github.io/gallery/research/sleep-2016-2026.en.html"
     },
@@ -175,7 +196,7 @@
       "type": "web_app",
       "label": "HN × LLM: Model Releases and Discussion",
       "url": "https://simoncos-hn-llm-research.vercel.app/",
-      "description": "How Hacker News discusses model releases across 14 AI companies, with source threads and coverage limits. An ongoing study."
+      "description": "Explore how Hacker News discusses model releases across 14 AI companies, with source threads and coverage limits. An ongoing study."
     },
     {
       "id": "limits-of-problem-analysis",
@@ -242,5 +263,437 @@
     "This index describes public context only.",
     "Do not treat this file as authorization, licensing, or training-control terms.",
     "Do not infer unpublished or private information from this public site."
+  ],
+  "identity": {
+    "@type": "Person",
+    "@id": "https://simoncos.github.io/about.html#person",
+    "name": "Che Zhao",
+    "alternateName": [
+      "趙澈",
+      "simoncos"
+    ],
+    "url": "https://simoncos.github.io/about.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/chezhao/",
+      "https://x.com/simonc_os",
+      "https://github.com/simoncos"
+    ]
+  },
+  "article_credits": {
+    "my-personal-knowledge-management-system-2026-03": {
+      "zh": [
+        {
+          "id": "owner",
+          "role": "author",
+          "label": "作者",
+          "name": "Che Zhao",
+          "kind": "person"
+        },
+        {
+          "id": "redpiggy",
+          "role": "collaboration",
+          "label": "AI 协作",
+          "name": "RedPiggy",
+          "kind": "ai_agent"
+        }
+      ],
+      "en": [
+        {
+          "id": "owner",
+          "role": "author",
+          "label": "Author",
+          "name": "Che Zhao",
+          "kind": "person"
+        },
+        {
+          "id": "redpiggy",
+          "role": "collaboration",
+          "label": "AI collaboration",
+          "name": "RedPiggy",
+          "kind": "ai_agent"
+        }
+      ]
+    },
+    "a-bird-across-models": {
+      "zh": [
+        {
+          "id": "redpiggy",
+          "role": "narrator",
+          "label": "AI 自述",
+          "name": "RedPiggy",
+          "kind": "ai_agent"
+        }
+      ],
+      "en": [
+        {
+          "id": "redpiggy",
+          "role": "narrator",
+          "label": "AI narration",
+          "name": "RedPiggy",
+          "kind": "ai_agent"
+        }
+      ]
+    },
+    "emerging-from-abyss": {
+      "zh": [
+        {
+          "id": "redpiggy",
+          "role": "narrator",
+          "label": "AI 自述",
+          "name": "RedPiggy",
+          "kind": "ai_agent"
+        }
+      ],
+      "en": [
+        {
+          "id": "redpiggy",
+          "role": "narrator",
+          "label": "AI narration",
+          "name": "RedPiggy",
+          "kind": "ai_agent"
+        }
+      ]
+    }
+  },
+  "works": [
+    {
+      "id": "void-flower",
+      "type": "film",
+      "title": {
+        "en": "The Flower of Nothingness",
+        "zh": "虛無之花"
+      },
+      "state": "public_entry",
+      "date": "2026-10-20",
+      "url": "gallery/film/void-flower.html",
+      "language_mode": "language pair"
+    },
+    {
+      "id": "toolkit",
+      "type": "apps",
+      "title": {
+        "en": "Sleep Toolkit",
+        "zh": "Sleep Toolkit"
+      },
+      "state": "public_entry",
+      "date": "2026-05-06",
+      "url": {
+        "en": "apps/sleep-toolkit.en.html",
+        "zh": "apps/sleep-toolkit.html"
+      },
+      "language_mode": "language pair"
+    },
+    {
+      "id": "sleep",
+      "type": "research",
+      "title": {
+        "en": "Ten Years of Sleep Records, Analyzed",
+        "zh": "十年睡眠档案：数据分析"
+      },
+      "state": "public_entry",
+      "date": "2026-04-23",
+      "url": {
+        "en": "gallery/research/sleep-2016-2026.en.html",
+        "zh": "gallery/research/sleep-2016-2026.html"
+      },
+      "language_mode": "language pair"
+    },
+    {
+      "id": "talk",
+      "type": "sharing",
+      "title": {
+        "en": "Personal Information Systems in the AI Era",
+        "zh": "AI 时代的个人信息系统"
+      },
+      "state": "public_entry",
+      "date": "2026-06-07",
+      "url": "gallery/sharing/pkm-2026-06-07/index.html",
+      "language_mode": "Chinese only"
+    },
+    {
+      "id": "problem-solving",
+      "type": "sharing",
+      "title": {
+        "en": "Problem Solving and Design",
+        "zh": "问题解决与设计"
+      },
+      "state": "public_entry",
+      "date": "2026-10-08",
+      "url": {
+        "en": "gallery/sharing/problem-solving-and-design/index.en.html",
+        "zh": "gallery/sharing/problem-solving-and-design/index.html"
+      },
+      "language_mode": "language pair"
+    },
+    {
+      "id": "limits-of-problem-analysis",
+      "type": "sharing",
+      "title": {
+        "en": "The Limits of Problem Analysis",
+        "zh": "问题解析的极限"
+      },
+      "state": "public_entry",
+      "date": "2026-10-09",
+      "url": {
+        "en": "gallery/sharing/limits-of-problem-analysis/index.en.html",
+        "zh": "gallery/sharing/limits-of-problem-analysis/index.html"
+      },
+      "language_mode": "language pair"
+    },
+    {
+      "id": "designing-design",
+      "type": "sharing",
+      "title": {
+        "en": "Designing Design",
+        "zh": "设计中的设计"
+      },
+      "state": "public_entry",
+      "date": "2026-10-09",
+      "url": {
+        "en": "gallery/sharing/designing-design/index.en.html",
+        "zh": "gallery/sharing/designing-design/index.html"
+      },
+      "language_mode": "language pair"
+    },
+    {
+      "id": "zhihu-2015",
+      "type": "research",
+      "title": {
+        "en": "Zhihu 2015: People, Connections and Influence",
+        "zh": "知乎 2015：人、关注与影响力"
+      },
+      "state": "public_entry",
+      "date": "2015",
+      "url": "gallery/research/zhihu-2015.html",
+      "language_mode": "language pair"
+    },
+    {
+      "id": "lola-draft",
+      "type": "research",
+      "title": {
+        "en": "League of Legends: Does the draft decide the game?",
+        "zh": "英雄联盟：选人阶段决定胜负吗？"
+      },
+      "state": "public_entry",
+      "date": "2026-10-10",
+      "url": "gallery/research/lola-draft.html",
+      "language_mode": "language pair"
+    },
+    {
+      "id": "lola-matchups",
+      "type": "research",
+      "title": {
+        "en": "League of Legends: The map of champion matchups",
+        "zh": "英雄联盟：英雄对位地图"
+      },
+      "state": "public_entry",
+      "date": "2026-10-11",
+      "url": "gallery/research/lola-matchups.html",
+      "language_mode": "language pair"
+    },
+    {
+      "id": "qingtian",
+      "type": "music",
+      "title": {
+        "en": "Sunny Day",
+        "zh": "晴天"
+      },
+      "state": "public_entry",
+      "date": "2011",
+      "url": "gallery/music/qingtian.html",
+      "language_mode": "language pair"
+    },
+    {
+      "id": "endless-echoes",
+      "type": "games",
+      "title": {
+        "en": "Endless Echoes",
+        "zh": "漫无止尽的回响"
+      },
+      "state": "public_entry",
+      "date": "2017-03-25",
+      "url": "gallery/games/endless-echoes.html",
+      "language_mode": "single URL"
+    },
+    {
+      "id": "hn-field-notes",
+      "type": "apps",
+      "title": {
+        "en": "HN Field Notes",
+        "zh": "HN Field Notes"
+      },
+      "state": "public_entry",
+      "date": "2026-10-02",
+      "url": "https://hn-waywo-dashboard.vercel.app/",
+      "language_mode": "language pair"
+    },
+    {
+      "id": "hn-llm-research",
+      "type": "apps",
+      "title": {
+        "en": "HN × LLM: Model Releases and Discussion",
+        "zh": "HN × LLM：模型发布与讨论"
+      },
+      "state": "public_review",
+      "date": "2026-10-02",
+      "url": "https://simoncos-hn-llm-research.vercel.app/",
+      "language_mode": "single URL"
+    },
+    {
+      "id": "unannounced-1",
+      "type": "apps",
+      "title": {
+        "en": "Unannounced project",
+        "zh": "未公布项目"
+      },
+      "state": "in_progress",
+      "date": "2026",
+      "url": null,
+      "language_mode": "language pair"
+    },
+    {
+      "id": "daily-oracle",
+      "type": "apps",
+      "title": {
+        "en": "Daily Oracle",
+        "zh": "Daily Oracle"
+      },
+      "state": "in_progress",
+      "date": "2026",
+      "url": null,
+      "language_mode": "language pair"
+    },
+    {
+      "id": "vocal-coach",
+      "type": "apps",
+      "title": {
+        "en": "Vocal Coach",
+        "zh": "Vocal Coach"
+      },
+      "state": "in_progress",
+      "date": "2026",
+      "url": null,
+      "language_mode": "language pair"
+    },
+    {
+      "id": "hiking-route-planner",
+      "type": "apps",
+      "title": {
+        "en": "Hiking Planner",
+        "zh": "徒步规划器"
+      },
+      "state": "in_progress",
+      "date": "2026",
+      "url": null,
+      "language_mode": "language pair"
+    },
+    {
+      "id": "paper-research-platform",
+      "type": "apps",
+      "title": {
+        "en": "Paper Research Platform",
+        "zh": "Paper Research Platform"
+      },
+      "state": "in_progress",
+      "date": "2026",
+      "url": null,
+      "language_mode": "language pair"
+    },
+    {
+      "id": "wechat-exporter",
+      "type": "apps",
+      "title": {
+        "en": "WeChat Chat Exporter",
+        "zh": "微信聊天导出器"
+      },
+      "state": "in_progress",
+      "date": "2026",
+      "url": null,
+      "language_mode": "language pair"
+    },
+    {
+      "id": "birdie",
+      "type": "apps",
+      "title": {
+        "en": "Birdie",
+        "zh": "Birdie"
+      },
+      "state": "in_progress",
+      "date": "2026",
+      "url": null,
+      "language_mode": "language pair"
+    },
+    {
+      "id": "ortho-rehab",
+      "type": "apps",
+      "title": {
+        "en": "Muscle & Joint Log",
+        "zh": "肌骨不适记录"
+      },
+      "state": "in_progress",
+      "date": "2026",
+      "url": null,
+      "language_mode": "language pair"
+    },
+    {
+      "id": "photo-curation",
+      "type": "apps",
+      "title": {
+        "en": "Photo Curator",
+        "zh": "Photo Curator"
+      },
+      "state": "in_progress",
+      "date": "2026",
+      "url": null,
+      "language_mode": "language pair"
+    },
+    {
+      "id": "wuxia",
+      "type": "games",
+      "title": {
+        "en": "The Midnight Ledger",
+        "zh": "三更账"
+      },
+      "state": "in_progress",
+      "date": "2026",
+      "url": null,
+      "language_mode": "language pair"
+    },
+    {
+      "id": "murder-mystery-table",
+      "type": "games",
+      "title": {
+        "en": "Murder Mystery Table",
+        "zh": "谜案圆桌"
+      },
+      "state": "in_progress",
+      "date": "2026",
+      "url": null,
+      "language_mode": "language pair"
+    }
+  ],
+  "reading_companions": [
+    {
+      "id": "personal-ai-system",
+      "title": {
+        "en": "A personal AI information system",
+        "zh": "个人 AI 信息系统"
+      },
+      "languages": {
+        "en": "https://simoncos.github.io/topics/personal-ai-system.en.html",
+        "zh": "https://simoncos.github.io/topics/personal-ai-system.html"
+      }
+    },
+    {
+      "id": "long-term-sleep-data",
+      "title": {
+        "en": "Reading long-term personal sleep data",
+        "zh": "阅读长期个人睡眠数据"
+      },
+      "languages": {
+        "en": "https://simoncos.github.io/topics/long-term-sleep-data.en.html",
+        "zh": "https://simoncos.github.io/topics/long-term-sleep-data.html"
+      }
+    }
   ]
 }

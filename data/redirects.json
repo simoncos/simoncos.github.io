@@ -14,5 +14,12 @@
   "gallery/talks/problem-solving-and-design/ch4.html": "gallery/sharing/problem-solving-and-design/ch4.html",
   "gallery/talks/problem-solving-and-design/index.en.html": "gallery/sharing/problem-solving-and-design/index.en.html",
   "gallery/talks/problem-solving-and-design/index.html": "gallery/sharing/problem-solving-and-design/index.html",
-  "gallery/music/endless-echoes.html": "gallery/games/endless-echoes.html"
+  "gallery/music/endless-echoes.html": "gallery/games/endless-echoes.html",
+  "projects/sleep-2016-2026.en.html": "gallery/research/sleep-2016-2026.en.html",
+  "projects/sleep-2016-2026.html": "gallery/research/sleep-2016-2026.html",
+  "projects/sleep-toolkit.en.html": "apps/sleep-toolkit.en.html",
+  "projects/sleep-toolkit.html": "apps/sleep-toolkit.html",
+  "projects/sleep/index.html": "gallery/research/sleep-2016-2026.html",
+  "gallery/talks/pkm-2026-05-22/index.html": "gallery/sharing/pkm-2026-06-07/index.html",
+  "projects/hn-field-notes/index.html": "https://hn-waywo-dashboard.vercel.app/"
 }

@@ -11,8 +11,9 @@ import json
 import re
 import struct
 import sys
-from hashlib import sha256
 from html.parser import HTMLParser
+from hashlib import sha256
+from datetime import date as calendar_date
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 from xml.etree import ElementTree
@@ -158,6 +159,8 @@ def expected_sitemap_urls() -> set[str]:
             "about.html",
         )
     }
+    shell = json.loads((ROOT / "data/site_shell.json").read_text(encoding="utf-8"))
+    expected.update(site_url_for_path(page["path"]) for page in shell["pages"] if page.get("language"))
 
     article_index = json.loads((ROOT / "data/article_index.json").read_text(encoding="utf-8"))
     for group in article_index.get("groups", []):
@@ -603,11 +606,26 @@ def check_article_dates(errors: list[str]) -> None:
     for path in sorted((ROOT / "blogs").glob("*.md")):
         text = path.read_text(encoding="utf-8")
         head = text.split("\n---", 1)[0] if text.startswith("---\n") else ""
-        meta = dict(re.findall(r"^(date|written):[ \t]*(.*?)[ \t]*$", head, re.M))
+        meta = dict(re.findall(r"^(date|updated|written):[ \t]*(.*?)[ \t]*$", head, re.M))
         rel = path.relative_to(ROOT)
         date = meta.get("date", "")
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
             errors.append(f"{rel}: date must be the day the piece was written, as YYYY-MM-DD, got {date!r}")
+        else:
+            try:
+                calendar_date.fromisoformat(date)
+            except ValueError:
+                errors.append(f"{rel}: date is not a calendar day: {date!r}")
+        updated = meta.get("updated", "")
+        if updated:
+            try:
+                if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", updated):
+                    raise ValueError
+                calendar_date.fromisoformat(updated)
+                if updated < date:
+                    errors.append(f"{rel}: updated {updated} precedes writing date {date}")
+            except ValueError:
+                errors.append(f"{rel}: updated must be a calendar day as YYYY-MM-DD, got {updated!r}")
         if "written" in meta:
             errors.append(f"{rel}: written is retired; put the writing date in date (docs/ARTICLE_PUBLICATION.md#dates)")
 
@@ -623,6 +641,7 @@ def check_site_updated(errors: list[str]) -> None:
     for group in index.get("groups", []):
         for entry in (group.get("languages") or {}).values():
             dates.append(str(entry.get("date", ""))[:10])
+            dates.append(str(entry.get("updated", ""))[:10])
     dates = [value for value in dates if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value)]
     if dates and site_updated < max(dates):
         errors.append(

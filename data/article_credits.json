@@ -1,0 +1,20 @@
+{
+  "default": [
+    {"id": "owner", "role": "author"}
+  ],
+  "agents": {
+    "redpiggy": {"name": "RedPiggy"}
+  },
+  "articles": {
+    "emerging-from-abyss": [
+      {"id": "redpiggy", "role": "narrator"}
+    ],
+    "a-bird-across-models": [
+      {"id": "redpiggy", "role": "narrator"}
+    ],
+    "my-personal-knowledge-management-system-2026-03": [
+      {"id": "owner", "role": "author"},
+      {"id": "redpiggy", "role": "collaboration"}
+    ]
+  }
+}

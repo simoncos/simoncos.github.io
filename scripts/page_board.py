@@ -54,7 +54,7 @@ def render_board(config: dict[str, Any], site: dict[str, Any], lang: str) -> str
         f'<span class="entry-text"><span class="entry-label">{t(link["label"])}</span>'
         f'<span class="entry-kind">{t(link["kind"])}</span></span>'
         f'<span class="entry-arrow" aria-hidden="true">{esc(link["arrow"])}</span></a>'
-        for link in project["links"]
+        for link in project["links"] if not link.get("unavailable")
     )
     log = "".join(
         f'<li><span class="log-when"><span class="log-dot" aria-hidden="true"></span>'

@@ -1,0 +1,21 @@
+{
+  "round": "baseline",
+  "product_id": null,
+  "question_id": "B1",
+  "question": "simoncos 是谁？他的个人网站和主要公开研究或作品在哪里？",
+  "status": "not_run",
+  "run_at": null,
+  "context": {
+    "product": null,
+    "displayed_model": null,
+    "search_mode": null,
+    "region": null,
+    "login_personalization": null,
+    "new_conversation": true
+  },
+  "answer": null,
+  "citations": [],
+  "identity_correct": null,
+  "errors": [],
+  "evidence_ref": null
+}

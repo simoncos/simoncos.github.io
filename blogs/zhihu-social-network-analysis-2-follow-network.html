@@ -1,15 +1,66 @@
 <!DOCTYPE html>
-<html lang="zh-Hans" data-page-lang="zh">
+<html lang="zh-Hans" data-page-lang="zh" data-lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>知乎社交网络分析（下）：关注网络 · 文章 · simoncos</title>
     <meta name="description" content="为什么说关注关系最接近知乎上的社交网络？从密度、强连通分量与最短路径看大V如何抱团，再用 PageRank、HITS 和介性中心度给大V排位，最后看他们都在回答什么话题。">
-    <meta name="author" content="simoncos">
+    <meta name="author" content="Che Zhao">
     <link rel="canonical" href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html">
     <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.en.html">
     <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html">
     <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.en.html">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html#article",
+      "url": "https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html",
+      "mainEntityOfPage": "https://simoncos.github.io/blogs/zhihu-social-network-analysis-2-follow-network.html",
+      "headline": "知乎社交网络分析（下）：关注网络",
+      "description": "为什么说关注关系最接近知乎上的社交网络？从密度、强连通分量与最短路径看大V如何抱团，再用 PageRank、HITS 和介性中心度给大V排位，最后看他们都在回答什么话题。",
+      "inLanguage": "zh-Hans",
+      "dateCreated": "2016-03-18",
+      "dateModified": "2026-10-01",
+      "isPartOf": {
+        "@id": "https://simoncos.github.io/#website"
+      },
+      "creditText": "作者: Che Zhao",
+      "author": {
+        "@id": "https://simoncos.github.io/about.html#person"
+      },
+      "image": "https://simoncos.github.io/blogs/assets/images/zhihu-social-network-analysis-2-follow-network/4a34f5c65f7bddca379b8f8719e1f25f.jpg"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://simoncos.github.io/#website",
+      "url": "https://simoncos.github.io/",
+      "name": "simoncos",
+      "inLanguage": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://simoncos.github.io/about.html#person",
+      "name": "Che Zhao",
+      "alternateName": [
+        "趙澈",
+        "simoncos"
+      ],
+      "url": "https://simoncos.github.io/about.html",
+      "sameAs": [
+        "https://www.linkedin.com/in/chezhao/",
+        "https://x.com/simonc_os",
+        "https://github.com/simoncos"
+      ]
+    }
+  ]
+}
+    </script>
     <meta property="og:type" content="article">
     <meta property="og:title" content="知乎社交网络分析（下）：关注网络">
     <meta property="og:description" content="为什么说关注关系最接近知乎上的社交网络？从密度、强连通分量与最短路径看大V如何抱团，再用 PageRank、HITS 和介性中心度给大V排位，最后看他们都在回答什么话题。">
@@ -41,30 +92,30 @@
 </head>
 <body class="article-page" data-article-group="zhihu-social-network-analysis-2-follow-network">
     <!-- site-shell:header:start -->
-    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <a class="skip" href="#main"><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
     <header class="hdr">
-        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <a class="brand" href="../index.zh.html" aria-label="simoncos — 首页"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
         <div class="hdr-right">
-            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
-                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            <nav class="hdr-nav" aria-label="主导航">
+                <a class="tab" href="../index.zh.html"><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.zh.html" aria-current="page"><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.zh.html"><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html?lang=zh"><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.zh.html"><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
             </nav>
             <div class="hdr-tools">
                 <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
-                <a class="lang-btn" href="zhihu-social-network-analysis-2-follow-network.en.html" hreflang="en" data-lang-nav="en"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
-                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+                <a class="lang-btn" href="zhihu-social-network-analysis-2-follow-network.en.html" hreflang="en" data-lang-nav="en"><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
             </div>
         </div>
     </header>
-    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
-        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
-        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
-        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
-        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
-        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="菜单">
+        <a class="sheet-link" href="../index.zh.html"><span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.zh.html" aria-current="page"><span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.zh.html"><span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html?lang=zh"><span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.zh.html"><span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
     </nav>
     <!-- site-shell:header:end -->
     <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
@@ -72,14 +123,15 @@
         <div class="article-grid enter">
             <span class="article-spacer" aria-hidden="true"></span>
             <div class="article-head">
-                <a class="pill" href="../blogs.html" data-back-to-list>← 文章</a>
+                <a class="pill" href="../blogs.zh.html" data-back-to-list>← 文章</a>
                 <h1 class="article-title">知乎社交网络分析（下）：关注网络</h1>
             </div>
             <aside class="toc" aria-label="目录"><span class="k toc-k">目录</span><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>导言：社交网络是什么？</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>分析对象和分析方法</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>抱团的大V们：网络总体特征</span></a><a class="toc-link toc-h3" href="#heading-4"><span class="toc-dot" aria-hidden="true"></span><span>给大V排个位：网络连接分析</span></a><a class="toc-link toc-h3" href="#heading-5"><span class="toc-dot" aria-hidden="true"></span><span>不均衡中的均衡：Closeness和Betweenness中心度</span></a><a class="toc-link toc-h3" href="#heading-6"><span class="toc-dot" aria-hidden="true"></span><span>大V都在关注什么：热门话题分析</span></a></aside>
             <div class="article-main">
                 <div class="article-meta">
-                    <span class="meta-item"><span class="k">创建</span><span class="num">2016-03-18</span></span>
-                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-10-01</span></span>
+                    <span class="meta-item"><span class="k">作者</span><a href="../about.zh.html" rel="author">Che Zhao</a></span>
+                    <span class="meta-item"><span class="k">创建</span><time class="num" datetime="2016-03-18">2016-03-18</time></span>
+                    <span class="meta-item"><span class="k">更新</span><time class="num" datetime="2026-10-01">2026-10-01</time></span>
                     <span class="meta-item"><span class="k">阅读</span>18 分钟</span>
                     <a class="meta-alt" href="zhihu-social-network-analysis-2-follow-network.en.html" hreflang="en" lang="en" data-lang-nav="en">English ↗</a>
                 </div>
@@ -102,7 +154,7 @@
 <p>首先来了解一些网络的基本知识：</p>
 <p><strong>一个网络可以被表示为一种图（graph），其中包含点（vertex / node）与边（edge / link）两种基本要素。</strong>边可以具有方向性，也就是说对于一个点来说，可以有外连边（out-link）和内连边（in-link）两种边。如果边是具有方向性的，那么这种图称为有向图（directed graph），反之称为无向图（undirected graph）。图反映了点与点之间的某种相关关系，这种关系由边表现。</p>
 <p>回到知乎上，我们知道关注和被关注实际上是一件事情的两个角度。A关注了B，等价于B被A关注。在我们所爬取的数据中（见下面的数据全貌图），我们知道这2.6万用户中的每个人都关注了哪些人。也就是说，我们知道了2.6万用户点的所有外连边。从另一个角度想，我们其实也知道在这2.6万用户之间谁关注了谁（蓝圈以内的部分），<strong>加上</strong>他们关注了其他什么人（蓝圈以外的部分）。因此我们只能分析这2.6万用户（红色实心圆），因为我们并不知道其他的人（红色空心圆）的所有连接，这是由我们的广度优先爬取机制所导致的，不爬完知乎整站，不会有真正完整的数据（那些没人关注的账号应该可以忽略）。</p>
-<p><img alt="数据全貌示意图：蓝圈内是爬取到的 2.6 万名用户（实心圆），蓝圈外是他们关注的其他用户（空心圆）" decoding="async" height="1593" src="assets/images/zhihu-social-network-analysis-2-follow-network/4a34f5c65f7bddca379b8f8719e1f25f.jpg" width="1520"/></p>
+<p><img alt="数据全貌示意图：蓝圈内是爬取到的 2.6 万名用户（实心圆），蓝圈外是他们关注的其他用户（空心圆）" decoding="async" height="1593" src="assets/images/zhihu-social-network-analysis-2-follow-network/4a34f5c65f7bddca379b8f8719e1f25f.jpg" width="1520" /></p>
 <p>此外，即使剔除了蓝圈以外的部分，涉及的连边数仍然具有很大的量级，计算量会是一个问题，所以在这个项目中，我们仅仅选取了这2.6万用户的两个有趣的子集进行分析：获得赞同数大于1万的用户（共1895人）、获得赞同数大于5万的用户（共375人）。方便起见，我们将他们分别命名为<strong>Net10k</strong>和<strong>Net50k</strong>，其实可以说就是<strong>两个不同级别的知乎大V群体</strong>了。</p>
 <p>接下来讲讲分析方法。一个网络图，别看里面只有点和边两种东西，其实可以包含复杂到极点的各种现象与性质。网络分析，或者进一步说复杂网络领域之中，存在大量人们为了描述网络的现象而定义的概念、以及为了量化网络的特征而设计的指标。后文将要涉及的分析建立在其中最基本的一些概念和指标上，如果对它们逐个详细介绍，那么本文篇幅会大大加长，而且会多出不少数学公式，这不符合我对本文的写作预期。因此我打算尽量从直觉（intuition）上来解释它们分别表达了什么的含义，即使给出定义也不求严格（数学公式才可带来最清晰严格的定义），重点仍在对分析的思考。此外，由于我们所讨论的知乎关注网络是有向图，<strong>后面所有的指标和算法都只讨论有向图的</strong>。当然，如果读者已有一定的基础，可以直接跳过相关的段落。</p>
 <h3 id="heading-3">抱团的大V们：网络总体特征</h3>
@@ -133,8 +185,8 @@
 </li>
 </ul>
 <p>字好多看烦了吧，终于可以上图啦，下面分别是Net10k和Net50k的强连通分量示意图：</p>
-<p><img alt="Net10k 的强连通分量：43 号节点代表那个巨大的分量，其余 42 个单点分量各有一条线与它相连" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/0d7248a6b262eb8b610fab4e582a8446.jpg" width="800"/></p>
-<p><img alt="Net50k 的强连通分量：7 号节点代表那个巨大的分量，其余 7 个单点分量各有一条线与它相连" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/74d99398168a270d1cc4210202622082.jpg" width="800"/></p>
+<p><img alt="Net10k 的强连通分量：43 号节点代表那个巨大的分量，其余 42 个单点分量各有一条线与它相连" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/0d7248a6b262eb8b610fab4e582a8446.jpg" width="800" /></p>
+<p><img alt="Net50k 的强连通分量：7 号节点代表那个巨大的分量，其余 7 个单点分量各有一条线与它相连" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/74d99398168a270d1cc4210202622082.jpg" width="800" /></p>
 <p>其中每一个红色圆圈都代表一个强连通分量，每条线（其实是很抽象的箭头orz）代表一条路径。光看这个我们还不清楚情况，我们来看二者对应的一些指标数据：</p>
 <table>
 <thead>
@@ -209,7 +261,7 @@
 <h3 id="heading-4">给大V排个位：网络连接分析</h3>
 <p>上节侧重于对知乎大V关注网络的整体进行分析，这固然很有趣；但或许更有趣的是这个整体之中的每个个体，同样是赞同数很高的大V，他们彼此之间是否能一较高下呢？他们在关注这种社交行为上是否具有差异，如何衡量这种差异？这是本节涉及的问题。</p>
 <p>让我们先来设想一个简单的关注网络，其中只有A、B、C三个人。A关注了B，B关注了A，A、B同时关注了C，而C谁也不关注，如下图所示：</p>
-<p><img alt="A、B、C 三人的关注关系：A 与 B 互相关注，A 和 B 都关注了 C" decoding="async" height="781" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/02637d508cb2b7251f02052ea7e6cb3c.jpg" width="869"/></p>
+<p><img alt="A、B、C 三人的关注关系：A 与 B 互相关注，A 和 B 都关注了 C" decoding="async" height="781" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/02637d508cb2b7251f02052ea7e6cb3c.jpg" width="869" /></p>
 <p>那么你觉得光凭关注关系来看，A，B，C谁更“牛”？从直觉上来说当然是C，因为C在三人之中得到了最多的关注。但是否只要粉丝更多就能说明更“牛”呢？下面我们在这个网络的基础上，来考虑几种很有趣的情况：</p>
 <ol>
 <li>多了10个自己粉丝数为0的用户，同时关注A</li>
@@ -283,7 +335,7 @@
 <p>这些便是站在知乎大V巅峰的大V们了，是否觉得有一定道理呢？注意比较Net10k和Net50k前五用户的PageRank值，前者比后者小，这主要是因为总和为1的PageRank资源被更多的大V们分掉了。</p>
 <p>下面让我们再考虑一点，所谓的“重要”，其实要看我们的目的是什么。假如我们是要看更多的好答案或者想要找人出书约稿，那么直接找到好答案的答主就好，而这些答主往往吸引了最多的关注，所以我们仅仅需要知道谁受到的关注最强（比如下图中的C）。</p>
 <p>但是光是通过关注，我们会漏掉那些暂时没有得到太强关注的<strong>好答主</strong>（可能是刚刚加入知乎的大V潜力股），然而我们又不可能自己去一个一个挖掘这些好答主，如何是好？简单，假如你能找到几个类似<strong>牵线人</strong>的用户（比如下图中的D）你相信只要是他们关注的用户，质量都不会差，都合你口味，事情就简单了。你只需要不时看看他们都关注了谁，就能发现更大的世界。这其实也算是一种用户推荐系统的可行思路，这里就不展开了。</p>
-<p><img alt="在上图的基础上多了 D，D 只关注了 C" decoding="async" height="785" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/a12fc0d19fef8e0781d23433a3c23e6a.jpg" width="825"/></p>
+<p><img alt="在上图的基础上多了 D，D 只关注了 C" decoding="async" height="785" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/a12fc0d19fef8e0781d23433a3c23e6a.jpg" width="825" /></p>
 <p><strong>HITS算法</strong>便能做到只使用关注网络，通过<strong>权威度（Authority）</strong>和<strong>枢纽度（Hub）</strong>为我们分别挑出好的答主，和好的牵线人。</p>
 <p>上面的基于直觉的分析是否说得通呢？让我们看看Net10k和Net50k的权威度和枢纽度前五名：</p>
 <table>
@@ -391,38 +443,38 @@
 </ul>
 <p>这两种中心度我目前并未找到很公认的中文翻译，姑且自己翻译了。另外同PageRank和HITS一样，由于指标的计算稍显复杂，这里就不详细叙述了。但是我们都使用的是网络分析库Networkx中的算法实现，对详细算法有兴趣的读者可自行查阅其文档。</p>
 <p>本项目中我们分别计算了Net10k和Net50k的近性中心度和介性中心度，并画出了分布图。由于我们当时考虑欠周，算出的近性中心度是基于外连接而不是内连接的，我认为意义不大（你总是可以让自己关注更多人，从而得到更大的近性中心度），所以本文决定略过。下面主要说一下介性中心度，其于Net10k和Net50k的分布图分别如下：</p>
-<p><img alt="Net10k 的介性中心度分布：横轴是 1895 位大V，纵轴是介性中心度，最高约 0.066，绝大多数接近 0" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/7a0addd718be6bdf1de437753d9f7d2b.jpg" width="800"/></p>
-<p><img alt="Net50k 的介性中心度分布：横轴是 375 位大V，最高约 0.04，大多数接近 0" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/06cb6cf1d5dcd3bb03b9041b62c40201.jpg" width="800"/></p>
+<p><img alt="Net10k 的介性中心度分布：横轴是 1895 位大V，纵轴是介性中心度，最高约 0.066，绝大多数接近 0" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/7a0addd718be6bdf1de437753d9f7d2b.jpg" width="800" /></p>
+<p><img alt="Net50k 的介性中心度分布：横轴是 375 位大V，最高约 0.04，大多数接近 0" decoding="async" height="595" loading="lazy" src="assets/images/zhihu-social-network-analysis-2-follow-network/06cb6cf1d5dcd3bb03b9041b62c40201.jpg" width="800" /></p>
 <p>我们又得到了两条长长的尾巴。图中横坐标表示每一个特定的大V，纵坐标是大V相应的介性中心度。长长的尾巴表明大部分大V的介性中心度接近0，即使长尾以外有少数几个人远超其他人，但介性中心度的值依然很小。这说明什么？说明这些大V即使退出知乎，也几乎不会影响其他大V之间建立关注关系。没了你，我还有许多其他最短路径到达另外一个大V。这进一步说明什么？说明<strong>大V的关注网络是如此健壮</strong>，健壮到即使失去许多结点，对整个圈子的连通几乎毫无影响。</p>
 <p>再横向比较一下Net50k和Net10k，可以看到这种<strong>随着圈子增大，幂律变得更强</strong>，除了少数点，大部分的人介性中心度都更趋近于0，人数的增加进一步稀释了大多数人的“独特性”，直觉上我相信继续扩大这个圈子，到Net5k、Net1k甚至知乎全体用户，这种健壮性只会越来越强，虽然<strong>人与人相比存在指数级的差异</strong>，但<strong>对整个网络本身而言，每个人几乎同等重要，也同等不重要</strong>。这或许可以称之为知乎关注网络所具有的一种不均衡中的均衡吧。</p>
 <h3 id="heading-6">大V都在关注什么：热门话题分析</h3>
 <p>最后，我们尝试了一种获得知乎上热门话题的办法（本项目中唯一涉及内容的分析），先取得Net10k和Net50k的<strong>支配集</strong>（<strong>Dominating set</strong>，这里由于我认为实际上不用这个子集结果也不会有显著区别，所以就不解释这个概念了），然后统计集合中所有用户的回答所对应的问题标签，最后对各个话题标签按出现次数排序。以下分别是二者的前20名：</p>
-<p><strong>Net10k的热门话题Top 20：</strong><br/>
-调查类问题 3792, 生活 3096, 历史 1713, 恋爱 1464, 心理学 1432<br/>
-电影 1419, 人际交往 1404, 社会 1332, 互联网 1214, 情感 1197<br/>
-政治 1028, 两性关系 994, 教育 897, 中国 823, 人生 815<br/>
-游戏 805, 文学 772, 知乎 772, 法律 750, 音乐 738<br/>
-爱情 699, 文化 659, 创业 628, 大学 621, 程序员 619<br/>
+<p><strong>Net10k的热门话题Top 20：</strong><br />
+调查类问题 3792, 生活 3096, 历史 1713, 恋爱 1464, 心理学 1432<br />
+电影 1419, 人际交往 1404, 社会 1332, 互联网 1214, 情感 1197<br />
+政治 1028, 两性关系 994, 教育 897, 中国 823, 人生 815<br />
+游戏 805, 文学 772, 知乎 772, 法律 750, 音乐 738<br />
+爱情 699, 文化 659, 创业 628, 大学 621, 程序员 619<br />
 心理 617, 你如何评价 X 609, 女性 604, 编程 585, X 是种怎样的体验 582</p>
-<p><strong>Net50k的热门话题Top 20：</strong><br/>
-生活 1435, 调查类问题 1365, 政治 1285, 历史 1204, 电影 1084<br/>
-健康 996, 社会 984, 医学 941, 恋爱 717, 中国 695<br/>
-两性关系 688, 英语 678, 人际交往 640, 心理学 634, 互联网 595<br/>
+<p><strong>Net50k的热门话题Top 20：</strong><br />
+生活 1435, 调查类问题 1365, 政治 1285, 历史 1204, 电影 1084<br />
+健康 996, 社会 984, 医学 941, 恋爱 717, 中国 695<br />
+两性关系 688, 英语 678, 人际交往 640, 心理学 634, 互联网 595<br />
 法律 587, 微软（Microsoft） 555, 美国 552, 健身 538, 编程 511</p>
 <p>我个人认为<strong>大V们回答的问题所对应的话题，能够从一定程度上反映了知乎这个平台总体的话题领域热门程度</strong>。另外，我觉得排在最前的一些热门话题也在一定程度上解释了为什么不同领域的大V会抱团，因为不论处于什么专业领域，<strong>人们对于生活、历史、电影等人文和泛娱乐话题总是会感兴趣的</strong>，一旦都感兴趣，又都有不错的见解和分享，自然更容易惺惺相惜。</p>
 <p>到此，本文终于可以画上句号了，欢迎交流讨论。在此还要感谢和我一起参与本项目的其他三个小伙伴，四个人一起才得以在短短时间内做到这种程度（项目report里有我们的详细分工）。</p>
                 </div>
                 <div class="series-box"><h2 class="k">系列 · 知乎社交网络分析</h2><a href="zhihu-social-network-analysis-1-basic-statistics.html"><span class="series-part">第 1 篇</span><span>知乎社交网络分析（上）：基本统计</span></a><a href="zhihu-social-network-analysis-2-follow-network.html" aria-current="page"><span class="series-part">第 2 篇</span><span>知乎社交网络分析（下）：关注网络</span></a></div>
-                <div class="article-tags"><h2 class="k">标签</h2><a class="tag" href="../blogs.html#topic-hack">Hack</a></div>
+                <div class="article-tags"><h2 class="k">标签</h2><a class="tag" href="../blogs.zh.html#topic-hack">Hack</a></div>
                 <section class="xref-grid"><div class="xrefs"><h2 class="k">本文提到</h2><a class="xref" href="zhihu-social-network-analysis-1-basic-statistics.html"><span>知乎社交网络分析（上）：基本统计</span><span class="num">2016-02-28</span></a></div><div class="xrefs"><h2 class="k">提到本文</h2><a class="xref" href="zhihu-social-network-analysis-1-basic-statistics.html"><span>知乎社交网络分析（上）：基本统计</span><span class="num">2016-02-28</span></a></div></section>
                 <nav class="post-nav" aria-label="继续阅读"><a class="post-nav-card post-nav-newer" rel="prev" href="exponential-vs-power-law-distributions.html"><span class="k">更新的一篇</span><span class="post-nav-title">指数分布与幂律分布的图像对比</span></a><a class="post-nav-card post-nav-older" rel="next" href="reading-2015-second-half.html"><span class="k">更早的一篇</span><span class="post-nav-title">2015下半年我读过的好书</span></a></nav>
-                <footer class="piece-contact" aria-label="Contact and follow" data-zh-aria-label="联系与订阅" data-i18n="aria-label"><p class="piece-contact-line"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://github.com/simoncos">GitHub</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/chezhao/">LinkedIn</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://x.com/simonc_os">X</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="mailto:simonzhao1024@gmail.com">邮件</a></p></footer>
+                <footer class="piece-contact" aria-label="联系与订阅"><p class="piece-contact-line"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://github.com/simoncos">GitHub</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/chezhao/">LinkedIn</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://x.com/simonc_os">X</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="mailto:simonzhao1024@gmail.com">邮件</a></p></footer>
             </div>
         </div>
     </main>
     <!-- site-shell:footer:start -->
     <footer class="ftr">
-        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Oct 22, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-10-22</span></span></span>
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="zh" lang="zh-Hans">更新于 2026-10-22</span></span></span>
         <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
     </footer>
     <!-- site-shell:footer:end -->

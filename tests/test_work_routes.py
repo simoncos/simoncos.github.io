@@ -34,11 +34,15 @@ class WorkRouteTests(unittest.TestCase):
             with self.subTest(old=old):
                 self.assertNotIn(target, redirects, "redirect chains are not allowed")
                 old_doc = parse_html(ROOT / old)
-                new_doc = parse_html(ROOT / target)
-                canonical = f"https://simoncos.github.io/{target}"
+                external = target.startswith("https://") or target.startswith("http://")
+                canonical = target if external else f"https://simoncos.github.io/{target}"
                 self.assertEqual(old_doc.canonical(), canonical)
-                self.assertEqual(new_doc.canonical(), canonical)
                 self.assertIn("noindex", old_doc.meta(name="robots"))
+                if external:
+                    self.assertNotIn(f"https://simoncos.github.io/{old}", urls)
+                    continue
+                new_doc = parse_html(ROOT / target)
+                self.assertEqual(new_doc.canonical(), canonical)
                 self.assertNotIn("noindex", new_doc.meta(name="robots"))
                 self.assertIn(canonical, urls)
                 self.assertNotIn(f"https://simoncos.github.io/{old}", urls)

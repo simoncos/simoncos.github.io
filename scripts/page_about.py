@@ -9,8 +9,10 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from site_entities import about_name, profile_graph, render_json_ld
+from site_languages import section_path
 
-from site_shell import bi, bi_value, esc, page_config, render_document, render_meta
+from site_shell import bi, esc, page_config, render_document, render_meta
 
 
 from page_common import href_attrs, pick
@@ -24,8 +26,8 @@ def native_name(html: str, name: dict[str, str] | None) -> str:
     return html.replace(text, f'<span lang="{esc(name["lang"])}">{text}</span>')
 
 
-def render_about(config: dict[str, Any], site: dict[str, Any]) -> str:
-    page = page_config(config, "about.html")
+def render_about(config: dict[str, Any], site: dict[str, Any], language: str = "en") -> str:
+    page = page_config(config, section_path("about.html", language))
     about = site["about"]
 
     def paragraph(segments: list[list[str]], lang: str) -> str:
@@ -64,7 +66,7 @@ def render_about(config: dict[str, Any], site: dict[str, Any]) -> str:
         f'        <h1 class="visually-hidden">{bi("About", "关于")}</h1>',
         # The motto leads the page, set largest: Che's own line, in English in both languages.
         f'        <p class="about-motto" lang="en">{esc(about["motto"])}</p>',
-        f'        <p class="about-who">{native_name(bi_value(about["who"]), about.get("native_name"))}</p>',
+        f'        <p class="about-who" id="person">{native_name(bi(about_name(site, "en"), about_name(site, "zh")), about.get("native_name"))}</p>',
         *paragraphs,
         "    </section>",
         '    <section class="contacts">',
@@ -92,6 +94,7 @@ def render_about(config: dict[str, Any], site: dict[str, Any]) -> str:
         ),
         canonical="about.html",
     )
+    head += "\n" + render_json_ld(profile_graph(config, site, language=language, path=page["canonical"]))
     return render_document(config, page, head=head, main=main)
 
 

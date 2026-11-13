@@ -6,6 +6,7 @@ from collections import defaultdict
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
+from site_entities import article_credits
 from article_content import parse_frontmatter_date
 
 
@@ -112,6 +113,7 @@ def build_article_groups(posts):
                 'rendered_content': post.get('rendered_content', ''),
                 'excerpt': post.get('excerpt', ''),
                 'description': post.get('metadata', {}).get('description', ''),
+                'updated': post.get('metadata', {}).get('updated', '') or post.get('date', ''),
                 'image': post.get('image', ''),
                 'available': True,
             }
@@ -207,6 +209,8 @@ def build_article_index(article_groups, last_updated):
                 'markdown': entry.get('markdown', ''),
                 'excerpt': entry.get('excerpt', ''),
                 'description': entry.get('description', ''),
+                'updated': entry.get('updated', '') or group.get('date', ''),
+                'credits': article_credits(group['id'], language_code),
                 'image': entry.get('image', ''),
                 'available': entry.get('available', True),
             }

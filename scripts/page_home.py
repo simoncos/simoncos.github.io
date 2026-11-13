@@ -8,6 +8,8 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from site_entities import render_json_ld, website
+from site_languages import section_path
 
 from site_shell import bi, bi_value, esc, i18n_attrs, lang_pair, page_config, render_document, render_meta, updated_label
 
@@ -107,8 +109,8 @@ def home_rows(site: dict[str, Any], articles: dict[str, dict[str, Any]]) -> list
     return rows
 
 
-def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str, dict[str, Any]]) -> str:
-    page = page_config(config, "index.html")
+def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str, dict[str, Any]], language: str = "en") -> str:
+    page = page_config(config, section_path("index.html", language))
     panels = home_panels(site, articles)
     rows = home_rows(site, articles)
     count = len(panels)
@@ -199,15 +201,19 @@ def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str
         f'<a class="pill" href="blogs.html">{bi(f"All {n_articles} articles", f"全部 {n_articles} 篇文章")} <span aria-hidden="true">→</span></a>'
         f'<a class="pill" href="gallery.html">{bi("All work", "全部作品")} <span aria-hidden="true">→</span></a></div>',
         "    </section>",
+        '    <div class="newest-more">'
+        f'<a class="pill"{href_attrs({"en":"topics/personal-ai-system.en.html","zh":"topics/personal-ai-system.html"})}>{bi("Personal AI system", "个人 AI 信息系统")} →</a>'
+        f'<a class="pill"{href_attrs({"en":"topics/long-term-sleep-data.en.html","zh":"topics/long-term-sleep-data.html"})}>{bi("Long-term sleep data", "长期睡眠数据")} →</a></div>',
         "</main>",
     ])
     head = render_meta(
         config,
-        title=("simoncos", "simoncos"),
+        title=("simoncos", "首页 · simoncos"),
         description=(
             "Projects, writing, and field notes from simoncos: AI, data, personal systems, and long-form articles.",
             "simoncos 的项目、写作与现场记录：AI、数据、个人系统与长文。",
         ),
         canonical="index.html",
     )
+    head += "\n" + render_json_ld({"@context": "https://schema.org", **website(config, site)})
     return render_document(config, page, head=head, main=main)

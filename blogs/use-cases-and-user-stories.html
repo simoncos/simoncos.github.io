@@ -1,15 +1,66 @@
 <!DOCTYPE html>
-<html lang="zh-Hans" data-page-lang="zh">
+<html lang="zh-Hans" data-page-lang="zh" data-lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>挖掘用户需求：用例与用户故事 · 文章 · simoncos</title>
     <meta name="description" content="用例和用户故事这两种描述需求的方法，各适合什么样的产品，以及怎样讲好一个用户故事。原是在 1 号店做运营实习时的一次内部邮件分享。">
-    <meta name="author" content="simoncos">
+    <meta name="author" content="Che Zhao">
     <link rel="canonical" href="https://simoncos.github.io/blogs/use-cases-and-user-stories.html">
     <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/use-cases-and-user-stories.en.html">
     <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/use-cases-and-user-stories.html">
     <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/use-cases-and-user-stories.en.html">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://simoncos.github.io/blogs/use-cases-and-user-stories.html#article",
+      "url": "https://simoncos.github.io/blogs/use-cases-and-user-stories.html",
+      "mainEntityOfPage": "https://simoncos.github.io/blogs/use-cases-and-user-stories.html",
+      "headline": "挖掘用户需求：用例与用户故事",
+      "description": "用例和用户故事这两种描述需求的方法，各适合什么样的产品，以及怎样讲好一个用户故事。原是在 1 号店做运营实习时的一次内部邮件分享。",
+      "inLanguage": "zh-Hans",
+      "dateCreated": "2014-01-04",
+      "dateModified": "2026-09-30",
+      "isPartOf": {
+        "@id": "https://simoncos.github.io/#website"
+      },
+      "creditText": "作者: Che Zhao",
+      "author": {
+        "@id": "https://simoncos.github.io/about.html#person"
+      },
+      "image": "https://simoncos.github.io/blogs/assets/images/use-cases-and-user-stories/5dd272663d262a4c8e3cbdcde98fa520.jpg"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://simoncos.github.io/#website",
+      "url": "https://simoncos.github.io/",
+      "name": "simoncos",
+      "inLanguage": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://simoncos.github.io/about.html#person",
+      "name": "Che Zhao",
+      "alternateName": [
+        "趙澈",
+        "simoncos"
+      ],
+      "url": "https://simoncos.github.io/about.html",
+      "sameAs": [
+        "https://www.linkedin.com/in/chezhao/",
+        "https://x.com/simonc_os",
+        "https://github.com/simoncos"
+      ]
+    }
+  ]
+}
+    </script>
     <meta property="og:type" content="article">
     <meta property="og:title" content="挖掘用户需求：用例与用户故事">
     <meta property="og:description" content="用例和用户故事这两种描述需求的方法，各适合什么样的产品，以及怎样讲好一个用户故事。原是在 1 号店做运营实习时的一次内部邮件分享。">
@@ -41,30 +92,30 @@
 </head>
 <body class="article-page" data-article-group="use-cases-and-user-stories">
     <!-- site-shell:header:start -->
-    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <a class="skip" href="#main"><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
     <header class="hdr">
-        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <a class="brand" href="../index.zh.html" aria-label="simoncos — 首页"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
         <div class="hdr-right">
-            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
-                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            <nav class="hdr-nav" aria-label="主导航">
+                <a class="tab" href="../index.zh.html"><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.zh.html" aria-current="page"><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.zh.html"><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html?lang=zh"><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.zh.html"><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
             </nav>
             <div class="hdr-tools">
                 <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
-                <a class="lang-btn" href="use-cases-and-user-stories.en.html" hreflang="en" data-lang-nav="en"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
-                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+                <a class="lang-btn" href="use-cases-and-user-stories.en.html" hreflang="en" data-lang-nav="en"><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
             </div>
         </div>
     </header>
-    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
-        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
-        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
-        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
-        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
-        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="菜单">
+        <a class="sheet-link" href="../index.zh.html"><span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.zh.html" aria-current="page"><span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.zh.html"><span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html?lang=zh"><span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.zh.html"><span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
     </nav>
     <!-- site-shell:header:end -->
     <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
@@ -72,13 +123,14 @@
         <div class="article-grid enter">
             <span class="article-spacer" aria-hidden="true"></span>
             <div class="article-head">
-                <a class="pill" href="../blogs.html" data-back-to-list>← 文章</a>
+                <a class="pill" href="../blogs.zh.html" data-back-to-list>← 文章</a>
                 <h1 class="article-title">挖掘用户需求：用例与用户故事</h1>
             </div>
             <div class="article-main">
                 <div class="article-meta">
-                    <span class="meta-item"><span class="k">创建</span><span class="num">2014-01-04</span></span>
-                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-09-30</span></span>
+                    <span class="meta-item"><span class="k">作者</span><a href="../about.zh.html" rel="author">Che Zhao</a></span>
+                    <span class="meta-item"><span class="k">创建</span><time class="num" datetime="2014-01-04">2014-01-04</time></span>
+                    <span class="meta-item"><span class="k">更新</span><time class="num" datetime="2026-09-30">2026-09-30</time></span>
                     <span class="meta-item"><span class="k">阅读</span>2 分钟</span>
                     <a class="meta-alt" href="use-cases-and-user-stories.en.html" hreflang="en" lang="en" data-lang-nav="en">English ↗</a>
                 </div>
@@ -86,7 +138,7 @@
 
 <p><em>注:这是以前在1号店运营实习时做的一次内部邮件分享。后面本来还编了两个具体使用用户故事来挖掘真实需求的小例子，因为主要是针对那个平台的内容，所以这里暂时删掉了，之后考虑再做两个比较通用的例子。</em></p>
 <p>在软件开发领域，常常采用<strong>用例</strong>（Use Case，如图1）或者<strong>用户故事</strong>（User Story）来描述某种场景下用户与软件产品之间的互动关系以及用户在使用产品时可能体验到的流程，从而推导出相应的产品功能需求。前者更关注宏观上的不同场景，而后者侧重于塑造一个特征具体的、有群体代表性的虚拟用户在使用产品时发生的故事流程（或根本就是某个真实用户的真实经历）。</p>
-<p><img alt="一个餐馆的简单用例图：方框“Restaurant (simplified)”里有 Eat Food、Pay for Food、Drink Wine、Cook Food 四个用例，左边的角色 Food Critic 连着前三个，右边的角色 Chef 连着 Cook Food" decoding="async" height="304" src="assets/images/use-cases-and-user-stories/fa4d26f04ef52ecb61a4b707d7828637.jpg" width="513"/></p>
+<p><img alt="一个餐馆的简单用例图：方框“Restaurant (simplified)”里有 Eat Food、Pay for Food、Drink Wine、Cook Food 四个用例，左边的角色 Food Critic 连着前三个，右边的角色 Chef 连着 Cook Food" decoding="async" height="304" src="assets/images/use-cases-and-user-stories/fa4d26f04ef52ecb61a4b707d7828637.jpg" width="513" /></p>
 <p><strong>图1：一个餐馆的简单用例图（图片来源：Wikipedia「用例」词条）</strong></p>
 <p>原图 Kishorekumar 62 绘，Marcel Douwe Dekker 重绘，见 <a href="https://commons.wikimedia.org/wiki/File:Use_case_restaurant_model.svg">Wikimedia Commons</a>，CC BY-SA 3.0。</p>
 <p>依我个人看来，用例的方法更适合用于场景多、用户角色多、功能更具广度的产品上，比如我们的后台系统涉及到不同部门、分管不同业务的人员，而一个人员往往需要用到多种功能并通过这些功能与其他人员相联系，这时要描述清楚每个角色与系统的交互，<strong>用例图</strong>就非常实用。</p>
@@ -96,19 +148,19 @@
 <p>1.弄清我们的主人公是谁，他有哪些属性，这些属性会使他具有怎样的行为倾向；</p>
 <p>2.故事发生在怎样一个场景，场景有哪些特点和限制；</p>
 <p>3.使用拿手的叙述方式：可以什么都不借助，就用语言文字，也可以画一个像电影脚本的故事图（如果你绘画能力够强），甚至结合一些更为系统的流程图（如图2）。</p>
-<p><img alt="用户故事图的一个例子：左边是买家 TOM 的流程，从 List 页面、产品 Detail 页面到发起订单、订单详情；右边是卖家“黎叔”在交易管理页面处理订单、创建银行账号的流程；两个角色各配一张头像和年龄、所在地" decoding="async" height="431" loading="lazy" src="assets/images/use-cases-and-user-stories/5dd272663d262a4c8e3cbdcde98fa520.jpg" width="640"/></p>
+<p><img alt="用户故事图的一个例子：左边是买家 TOM 的流程，从 List 页面、产品 Detail 页面到发起订单、订单详情；右边是卖家“黎叔”在交易管理页面处理订单、创建银行账号的流程；两个角色各配一张头像和年龄、所在地" decoding="async" height="431" loading="lazy" src="assets/images/use-cases-and-user-stories/5dd272663d262a4c8e3cbdcde98fa520.jpg" width="640" /></p>
 <p><strong>图2：用户故事图的一个例子（图片来源：heidixie《交互设计那些事儿》）</strong></p>
                 </div>
-                <div class="article-tags"><h2 class="k">标签</h2><a class="tag" href="../blogs.html#topic-design">设计</a></div>
+                <div class="article-tags"><h2 class="k">标签</h2><a class="tag" href="../blogs.zh.html#topic-design">设计</a></div>
                 <section class="xref-grid"><div class="xrefs is-empty"><h2 class="k">提到本文</h2><span class="xrefs-empty">暂时还没有其他文章引用这篇。</span></div></section>
                 <nav class="post-nav" aria-label="继续阅读"><a class="post-nav-card post-nav-newer" rel="prev" href="data-information-knowledge-wisdom.html"><span class="k">更新的一篇</span><span class="post-nav-title">数据、信息、知识、智慧</span></a><a class="post-nav-card post-nav-older" rel="next" href="old-memories-moving-away.html"><span class="k">更早的一篇</span><span class="post-nav-title">远离</span></a></nav>
-                <footer class="piece-contact" aria-label="Contact and follow" data-zh-aria-label="联系与订阅" data-i18n="aria-label"><p class="piece-contact-line"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://github.com/simoncos">GitHub</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/chezhao/">LinkedIn</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://x.com/simonc_os">X</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="mailto:simonzhao1024@gmail.com">邮件</a></p></footer>
+                <footer class="piece-contact" aria-label="联系与订阅"><p class="piece-contact-line"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://github.com/simoncos">GitHub</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/chezhao/">LinkedIn</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://x.com/simonc_os">X</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="mailto:simonzhao1024@gmail.com">邮件</a></p></footer>
             </div>
         </div>
     </main>
     <!-- site-shell:footer:start -->
     <footer class="ftr">
-        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Oct 22, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-10-22</span></span></span>
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="zh" lang="zh-Hans">更新于 2026-10-22</span></span></span>
         <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
     </footer>
     <!-- site-shell:footer:end -->

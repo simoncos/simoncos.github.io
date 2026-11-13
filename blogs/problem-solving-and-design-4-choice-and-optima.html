@@ -1,15 +1,66 @@
 <!DOCTYPE html>
-<html lang="zh-Hans" data-page-lang="zh">
+<html lang="zh-Hans" data-page-lang="zh" data-lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>问题解决与设计（四）：纠结与最优解 · 文章 · simoncos</title>
     <meta name="description" content="为什么已有可行解仍然让人纠结？从价值函数与偏好系统，思考选择、最优解与模型复杂度。">
-    <meta name="author" content="simoncos">
+    <meta name="author" content="Che Zhao">
     <link rel="canonical" href="https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html">
     <link rel="alternate" hreflang="en" href="https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.en.html">
     <link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html">
     <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.en.html">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html#article",
+      "url": "https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html",
+      "mainEntityOfPage": "https://simoncos.github.io/blogs/problem-solving-and-design-4-choice-and-optima.html",
+      "headline": "问题解决与设计（四）：纠结与最优解",
+      "description": "为什么已有可行解仍然让人纠结？从价值函数与偏好系统，思考选择、最优解与模型复杂度。",
+      "inLanguage": "zh-Hans",
+      "dateCreated": "2017-05-10",
+      "dateModified": "2026-10-08",
+      "isPartOf": {
+        "@id": "https://simoncos.github.io/#website"
+      },
+      "creditText": "作者: Che Zhao",
+      "author": {
+        "@id": "https://simoncos.github.io/about.html#person"
+      },
+      "image": "https://simoncos.github.io/blogs/assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://simoncos.github.io/#website",
+      "url": "https://simoncos.github.io/",
+      "name": "simoncos",
+      "inLanguage": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://simoncos.github.io/about.html#person",
+      "name": "Che Zhao",
+      "alternateName": [
+        "趙澈",
+        "simoncos"
+      ],
+      "url": "https://simoncos.github.io/about.html",
+      "sameAs": [
+        "https://www.linkedin.com/in/chezhao/",
+        "https://x.com/simonc_os",
+        "https://github.com/simoncos"
+      ]
+    }
+  ]
+}
+    </script>
     <meta property="og:type" content="article">
     <meta property="og:title" content="问题解决与设计（四）：纠结与最优解">
     <meta property="og:description" content="为什么已有可行解仍然让人纠结？从价值函数与偏好系统，思考选择、最优解与模型复杂度。">
@@ -41,30 +92,30 @@
 </head>
 <body class="article-page" data-article-group="problem-solving-and-design-4-choice-and-optima">
     <!-- site-shell:header:start -->
-    <a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
+    <a class="skip" href="#main"><span data-l="zh" lang="zh-Hans">跳到正文</span></a>
     <header class="hdr">
-        <a class="brand" href="../index.html" aria-label="simoncos — home" data-zh-aria-label="simoncos — 首页" data-i18n="aria-label"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
+        <a class="brand" href="../index.zh.html" aria-label="simoncos — 首页"><span class="brand-dot" aria-hidden="true"></span><span>simoncos</span></a>
         <div class="hdr-right">
-            <nav class="hdr-nav" aria-label="Primary" data-zh-aria-label="主导航" data-i18n="aria-label">
-                <a class="tab" href="../index.html"><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../blogs.html" aria-current="page"><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../gallery.html"><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../favorites.html"><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
-                <a class="tab" href="../about.html"><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
+            <nav class="hdr-nav" aria-label="主导航">
+                <a class="tab" href="../index.zh.html"><span data-l="zh" lang="zh-Hans">首页</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../blogs.zh.html" aria-current="page"><span data-l="zh" lang="zh-Hans">文章</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../gallery.zh.html"><span data-l="zh" lang="zh-Hans">作品</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../favorites.html?lang=zh"><span data-l="zh" lang="zh-Hans">收藏</span><span class="tab-dot" aria-hidden="true"></span></a>
+                <a class="tab" href="../about.zh.html"><span data-l="zh" lang="zh-Hans">关于</span><span class="tab-dot" aria-hidden="true"></span></a>
             </nav>
             <div class="hdr-tools">
                 <button class="theme-btn" type="button" data-theme-toggle aria-label="Dark mode" title="Dark mode"><span class="i-moon" aria-hidden="true">☾</span><span class="i-sun" aria-hidden="true">☀</span></button>
-                <a class="lang-btn" href="problem-solving-and-design-4-choice-and-optima.en.html" hreflang="en" data-lang-nav="en"><span data-l="en" lang="zh-Hans">中文</span><span data-l="zh">EN</span></a>
-                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="en">Menu</span><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="en">Close</span><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
+                <a class="lang-btn" href="problem-solving-and-design-4-choice-and-optima.en.html" hreflang="en" data-lang-nav="en"><span data-l="zh">EN</span></a>
+                <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu-sheet"><span class="menu-when-closed"><span data-l="zh" lang="zh-Hans">菜单</span></span><span class="menu-when-open"><span data-l="zh" lang="zh-Hans">关闭</span></span></button>
             </div>
         </div>
     </header>
-    <nav class="sheet" id="menu-sheet" hidden aria-label="Menu" data-zh-aria-label="菜单" data-i18n="aria-label">
-        <a class="sheet-link" href="../index.html"><span><span data-l="en">Index</span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
-        <a class="sheet-link" href="../blogs.html" aria-current="page"><span><span data-l="en">Articles</span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
-        <a class="sheet-link" href="../gallery.html"><span><span data-l="en">Work</span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
-        <a class="sheet-link" href="../favorites.html"><span><span data-l="en">Favorites</span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
-        <a class="sheet-link" href="../about.html"><span><span data-l="en">About</span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
+    <nav class="sheet" id="menu-sheet" hidden aria-label="菜单">
+        <a class="sheet-link" href="../index.zh.html"><span><span data-l="zh" lang="zh-Hans">首页</span></span><span class="sheet-n" aria-hidden="true">01</span></a>
+        <a class="sheet-link" href="../blogs.zh.html" aria-current="page"><span><span data-l="zh" lang="zh-Hans">文章</span></span><span class="sheet-n" aria-hidden="true">02</span></a>
+        <a class="sheet-link" href="../gallery.zh.html"><span><span data-l="zh" lang="zh-Hans">作品</span></span><span class="sheet-n" aria-hidden="true">03</span></a>
+        <a class="sheet-link" href="../favorites.html?lang=zh"><span><span data-l="zh" lang="zh-Hans">收藏</span></span><span class="sheet-n" aria-hidden="true">04</span></a>
+        <a class="sheet-link" href="../about.zh.html"><span><span data-l="zh" lang="zh-Hans">关于</span></span><span class="sheet-n" aria-hidden="true">05</span></a>
     </nav>
     <!-- site-shell:header:end -->
     <div class="read-progress" aria-hidden="true"><div class="read-progress-bar" data-progress></div></div>
@@ -72,14 +123,15 @@
         <div class="article-grid enter">
             <span class="article-spacer" aria-hidden="true"></span>
             <div class="article-head">
-                <a class="pill" href="../blogs.html" data-back-to-list>← 文章</a>
+                <a class="pill" href="../blogs.zh.html" data-back-to-list>← 文章</a>
                 <h1 class="article-title">问题解决与设计（四）：纠结与最优解</h1>
             </div>
             <aside class="toc" aria-label="目录"><span class="k toc-k">目录</span><a class="toc-link toc-h3" href="#heading-1"><span class="toc-dot" aria-hidden="true"></span><span>纠结、选择与价值函数</span></a><a class="toc-link toc-h3" href="#heading-2"><span class="toc-dot" aria-hidden="true"></span><span>偏好系统</span></a><a class="toc-link toc-h3" href="#heading-3"><span class="toc-dot" aria-hidden="true"></span><span>以复杂对抗纠结</span></a></aside>
             <div class="article-main">
                 <div class="article-meta">
-                    <span class="meta-item"><span class="k">创建</span><span class="num">2017-05-10</span></span>
-                    <span class="meta-item"><span class="k">更新</span><span class="num">2026-10-08</span></span>
+                    <span class="meta-item"><span class="k">作者</span><a href="../about.zh.html" rel="author">Che Zhao</a></span>
+                    <span class="meta-item"><span class="k">创建</span><time class="num" datetime="2017-05-10">2017-05-10</time></span>
+                    <span class="meta-item"><span class="k">更新</span><time class="num" datetime="2026-10-08">2026-10-08</time></span>
                     <span class="meta-item"><span class="k">阅读</span>6 分钟</span>
                     <a class="meta-alt" href="problem-solving-and-design-4-choice-and-optima.en.html" hreflang="en" lang="en" data-lang-nav="en">English ↗</a>
                 </div>
@@ -89,7 +141,7 @@
 <blockquote>
 <p>交互版：<a href="../gallery/sharing/problem-solving-and-design/ch4.html">纠结与最优解</a>，正文压缩改写，原文配图都重绘成了可以动手的版本。整个系列见<a href="../gallery/sharing/problem-solving-and-design/index.html">问题解决与设计 · 交互文章</a>。</p>
 </blockquote>
-<p><img alt="TBBT里的扩展版剪刀石头布（注意里面的箭头）" decoding="async" height="521" src="assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg" width="695"/></p>
+<p><img alt="TBBT里的扩展版剪刀石头布（注意里面的箭头）" decoding="async" height="521" src="assets/images/problem-solving-and-design-4-choice-and-optima/c7d0e55bb78751618bff5ce78a96566b.jpg" width="695" /></p>
 <p>关键词：价值/损失函数 | 决策 | 偏好系统 | 最优解</p>
 <h3 id="heading-1">纠结、选择与价值函数</h3>
 <p>纠结是什么？让我们回归字面：一个纠缠打结的复杂线团，拆也不是、剪也不是，胡乱尝试之下甚至缠得更紧。</p>
@@ -146,7 +198,7 @@
 <p>受到了破坏。</p>
 <p>这意味着这个系统中可传递性与一致性不可共存，进一步可以推知在剪刀石头布这个环状结构（cycle）之中，永远找不到最优解。事实上我们早就认识到了这一点，当三人以上玩这个游戏的时候，我们将会抛弃可传递性，如果同时出现剪刀、石头和布，就会直接进入下一局，直至只出现两种的某局，从而分出胜负（这好像又变成了一个二分类问题，interesting）。</p>
 <p>这种类似的环状偏好系统还有很多，比如五行相克；在游戏设计中其实也经常用到，比如火焰纹章的剑斧枪，或者梦幻西游里的门派相克，但之所以不会有问题，是因为这种设计目的就是为了消除最优解，从而平衡游戏中的选择，而且大部分游戏里都不会出现三方混战的情形（即使很多多人游戏看起来很即时），根本不用考虑可传递性。</p>
-<p><img alt="火焰纹章中的属性相克" decoding="async" height="555" loading="lazy" src="assets/images/problem-solving-and-design-4-choice-and-optima/7149cd22c040cb6cd688aa6ab2f933fd.jpg" width="700"/></p>
+<p><img alt="火焰纹章中的属性相克" decoding="async" height="555" loading="lazy" src="assets/images/problem-solving-and-design-4-choice-and-optima/7149cd22c040cb6cd688aa6ab2f933fd.jpg" width="700" /></p>
 <p>所以说环，真是一个非常有趣的结构啊，突然又联系起PageRank（还有我之前参与的<a href="https://github.com/simoncos/lola">英雄联盟英雄强弱ranking...</a>）之类的东西，走远了赶紧刹住。</p>
 <p>一致性和可传递性以外，偏好系统其实还需要一个<strong>完整性（Completeness）</strong>。也就是说系统内任何选择之间都是可比的：</p>
 <blockquote>
@@ -160,20 +212,20 @@
 <p>没有通过形式化、通过<strong>足够复杂</strong>的模型对整个思考过程、对多个因素进行记录与审视。因而对于重要的问题，特别是将影响人生大方向的问题，我们隔三差五都在不自觉地重复同样的怪圈，甚至在一圈内死循环、不断随机goto到某一步。<strong>我们永远在建立新的偏好系统，但永远没有建立起一个同时具有完整性、可传递性和一致性的系统，从而，永远找不到最优解</strong>。</p>
 <p>我们的大脑是喜好简单的，假如有一个方法、一种因素可以解释万事万物，解决所有疑问（42？），为何要细致入微地、艰苦卓绝地考虑所有细枝末节呢？简化并不是一件坏事，比如<a href="problem-solving-and-design-3-open-problems.html">上一篇</a>里提到的抓大放小，是非常有用的策略（特别是对于开放问题）。但是正如本篇想要尝试表达的，<strong>过于简化是错误的，是对理性的逃避，只会使纠结更纠结。</strong></p>
 <p>当然，每个问题都有其比较适合的模型复杂度，太大太小均非好事，最佳莫过于刚刚好，这一点我将在接下来的文章里继续进一步的思考。</p>
-<hr/>
+<hr />
 <p>到此，这个系列已经从心理学教材硬生生扯到了决策/学习的基本概念，所以扯到游戏设计也算设计吧，我这样安慰自己:)</p>
                 </div>
                 <div class="series-box"><h2 class="k">系列 · 问题解决与设计</h2><a href="problem-solving-and-design-1-situation.html"><span class="series-part">第 1 篇</span><span>问题解决与设计（一）：问题情境</span></a><a href="problem-solving-and-design-2-feasible-solutions.html"><span class="series-part">第 2 篇</span><span>问题解决与设计（二）：可行解</span></a><a href="problem-solving-and-design-3-open-problems.html"><span class="series-part">第 3 篇</span><span>问题解决与设计（三）：开放问题</span></a><a href="problem-solving-and-design-4-choice-and-optima.html" aria-current="page"><span class="series-part">第 4 篇</span><span>问题解决与设计（四）：纠结与最优解</span></a></div>
-                <div class="article-tags"><h2 class="k">标签</h2><a class="tag" href="../blogs.html#topic-thinking">思考</a><a class="tag" href="../blogs.html#topic-design">设计</a></div>
+                <div class="article-tags"><h2 class="k">标签</h2><a class="tag" href="../blogs.zh.html#topic-thinking">思考</a><a class="tag" href="../blogs.zh.html#topic-design">设计</a></div>
                 <section class="xref-grid"><div class="xrefs"><h2 class="k">本文提到</h2><a class="xref" href="problem-solving-and-design-3-open-problems.html"><span>问题解决与设计（三）：开放问题</span><span class="num">2017-05-04</span></a></div><div class="xrefs is-empty"><h2 class="k">提到本文</h2><span class="xrefs-empty">暂时还没有其他文章引用这篇。</span></div></section>
                 <nav class="post-nav" aria-label="继续阅读"><a class="post-nav-card post-nav-newer" rel="prev" href="reading-2017-first-half.html"><span class="k">更新的一篇</span><span class="post-nav-title">2017上半年我读过的书</span></a><a class="post-nav-card post-nav-older" rel="next" href="problem-solving-and-design-3-open-problems.html"><span class="k">更早的一篇</span><span class="post-nav-title">问题解决与设计（三）：开放问题</span></a></nav>
-                <footer class="piece-contact" aria-label="Contact and follow" data-zh-aria-label="联系与订阅" data-i18n="aria-label"><p class="piece-contact-line"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://github.com/simoncos">GitHub</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/chezhao/">LinkedIn</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://x.com/simonc_os">X</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="mailto:simonzhao1024@gmail.com">邮件</a></p></footer>
+                <footer class="piece-contact" aria-label="联系与订阅"><p class="piece-contact-line"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://github.com/simoncos">GitHub</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/chezhao/">LinkedIn</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://x.com/simonc_os">X</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="mailto:simonzhao1024@gmail.com">邮件</a></p></footer>
             </div>
         </div>
     </main>
     <!-- site-shell:footer:start -->
     <footer class="ftr">
-        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="en">Updated Oct 22, 2026</span><span data-l="zh" lang="zh-Hans">更新于 2026-10-22</span></span></span>
+        <span class="ftr-l"><span>© 2026 simoncos</span><span class="num"><span data-l="zh" lang="zh-Hans">更新于 2026-10-22</span></span></span>
         <span class="ftr-r"><a href="../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><a href="../feed.en.xml">RSS EN</a></span>
     </footer>
     <!-- site-shell:footer:end -->

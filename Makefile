@@ -14,6 +14,9 @@ check:
 	python3 scripts/build_pages.py --check
 	python3 scripts/update_hand_work_contact_feet.py --check
 	python3 scripts/update_work_jsonld.py --check
+	python3 scripts/build_sleep_evidence.py --check
+	python3 scripts/build_topic_readers.py --check
+	python3 scripts/sync_discovery.py --check
 	python3 scripts/check_site.py
 	python3 scripts/check_performance.py
 	python3 scripts/sync_skills.py --check
@@ -37,7 +40,10 @@ generate:
 	python3 generate_blog_pages.py
 	python3 scripts/build_pages.py
 	python3 scripts/update_hand_work_contact_feet.py
+	python3 scripts/build_sleep_evidence.py
+	python3 scripts/build_topic_readers.py
 	python3 scripts/update_favorites_pages.py
+	python3 scripts/sync_discovery.py
 
 serve:
 	python3 -m http.server 8000

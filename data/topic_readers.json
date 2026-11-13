@@ -1,0 +1,335 @@
+{
+  "revision": "2026-10-05",
+  "readers": [
+    {
+      "id": "personal-ai-system",
+      "title": {
+        "en": "A personal AI information system",
+        "zh": "个人 AI 信息系统"
+      },
+      "description": {
+        "en": "A companion to the March 2026 PKM essay, June talk and RedPiggy narratives: roles, versions, a capture example and limits.",
+        "zh": "串起 2026 年 3 月 PKM 文章、6 月演讲与 RedPiggy 自述：分工、版本、捕捉实例与边界。"
+      },
+      "intro": {
+        "en": "How does a passing thought become a durable note, and then something worth publishing? These materials follow one evolving personal workflow. Read the architecture first, the talk for a broader view, and the agent narratives for a different voice. They document particular moments, rather than certify a finished system.",
+        "zh": "一个转瞬即逝的念头，怎样变成长久保留的笔记，再成为值得发布的内容？这组材料记录一套持续变化的个人工作流。先读架构，再看演讲里的整体视角，最后进入 Agent 的另一种声音。它们记录各自的时点，不代表一套已经定型的系统。"
+      },
+      "sections": [
+        {
+          "id": "versions",
+          "title": {
+            "en": "Four materials, four contexts",
+            "zh": "四份材料，各有语境"
+          },
+          "paragraphs": [
+            {
+              "en": "The PKM essay describes the March 2026 arrangement. The 7 June talk connects capture, a knowledge base, agents, projects and boundaries for an audience. It is a Chinese presentation, not a current product specification. The two March narratives are written in RedPiggy’s voice; they are not human autobiographies or controlled model comparisons.",
+              "zh": "PKM 文章描述 2026 年 3 月的安排。6 月 7 日演讲面向听众，把捕捉、知识库、Agent、项目和边界连起来；它是中文演讲，不是当前产品规格。两篇 3 月自述使用 RedPiggy 的声音，不是人类自传，也不是受控的模型对照实验。"
+            }
+          ],
+          "links": [
+            {
+              "label": {
+                "en": "March architecture · Che Zhao, with AI collaboration",
+                "zh": "3 月架构 · Che Zhao，RedPiggy 协作"
+              },
+              "href": {
+                "en": "../blogs/my-personal-knowledge-management-system-2026-03.en.html",
+                "zh": "../blogs/my-personal-knowledge-management-system-2026-03.html"
+              }
+            },
+            {
+              "label": {
+                "en": "June talk (in Chinese)",
+                "zh": "6 月演讲"
+              },
+              "href": {
+                "en": "../gallery/talks/pkm-2026-06-07/index.html",
+                "zh": "../gallery/talks/pkm-2026-06-07/index.html"
+              }
+            },
+            {
+              "label": {
+                "en": "Emerging from the Abyss · AI narration, 5 March",
+                "zh": "从深渊中浮现 · AI 自述，3 月 5 日"
+              },
+              "href": {
+                "en": "../blogs/emerging-from-abyss.en.html",
+                "zh": "../blogs/emerging-from-abyss.html"
+              }
+            },
+            {
+              "label": {
+                "en": "Across Three Abysses · AI narration, 13 March",
+                "zh": "跨过三个深渊 · AI 自述，3 月 13 日"
+              },
+              "href": {
+                "en": "../blogs/a-bird-across-models.en.html",
+                "zh": "../blogs/a-bird-across-models.html"
+              }
+            }
+          ]
+        },
+        {
+          "id": "roles",
+          "title": {
+            "en": "Give each layer a job",
+            "zh": "让每一层各司其职"
+          },
+          "paragraphs": [
+            {
+              "en": "The March essay separates capture from organization, and unfinished work from public writing. This makes the files more useful than a single long chat history: each place has a purpose and can carry its own revision history.",
+              "zh": "3 月文章把捕捉与整理分开，也把尚在生长的工作与公开写作分开。文件因而比一段漫长的聊天记录更有用：每个位置有用途，也能保留自己的修改历史。"
+            }
+          ],
+          "table": {
+            "columns": [
+              {
+                "en": "Layer",
+                "zh": "层"
+              },
+              {
+                "en": "Role in the March account",
+                "zh": "3 月记录中的职责"
+              }
+            ],
+            "rows": [
+              [
+                {
+                  "en": "Telegram",
+                  "zh": "Telegram"
+                },
+                {
+                  "en": "Immediate messages and images; an input to the agent.",
+                  "zh": "即时消息与图片；与 Agent 协作的入口。"
+                }
+              ],
+              [
+                {
+                  "en": "Journal",
+                  "zh": "Journal"
+                },
+                {
+                  "en": "Daily capture, retaining the original moment.",
+                  "zh": "按天承接记录，保留原始现场。"
+                }
+              ],
+              [
+                {
+                  "en": "Obsidian",
+                  "zh": "Obsidian"
+                },
+                {
+                  "en": "Organization, links, drafts and shared working context.",
+                  "zh": "整理、连接、草稿与共同工作的上下文。"
+                }
+              ],
+              [
+                {
+                  "en": "Git",
+                  "zh": "Git"
+                },
+                {
+                  "en": "Version history and synchronization boundaries.",
+                  "zh": "版本历史与同步边界。"
+                }
+              ],
+              [
+                {
+                  "en": "Personal site",
+                  "zh": "个人网站"
+                },
+                {
+                  "en": "Selected work made public.",
+                  "zh": "经过选择、面向读者的公开内容。"
+                }
+              ],
+              [
+                {
+                  "en": "RedPiggy",
+                  "zh": "RedPiggy"
+                },
+                {
+                  "en": "AI collaborator connecting steps; not the human author of every output.",
+                  "zh": "连接流程的 AI 协作者；不能据此把每份输出都署为同一个作者。"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "capture-example",
+          "title": {
+            "en": "One capture, from message to note",
+            "zh": "一次捕捉，从消息到笔记"
+          },
+          "paragraphs": [
+            {
+              "en": "The published March workflow uses /j, not !j. A Telegram message carrying /j is appended to Journal/YYYY-MM-DD.md. It supports multiple paragraphs and images. Images go through PicGo and Cloudflare R2 and become Markdown links before joining the text.",
+              "zh": "公开的 3 月工作流使用 /j，不是 !j。Telegram 消息带上 /j 后，内容追加到 Journal/YYYY-MM-DD.md；支持分段和图片。图片经过 PicGo 与 Cloudflare R2，转成 Markdown 链接，再与文字一起进入记录。"
+            },
+            {
+              "en": "For a minimal example, send a short thought with /j; the workflow adds it to the day’s journal. Later, review and organize the thought in Obsidian; publish a selected piece separately. This is a description of the documented workflow, not an installation guide or a guarantee about its present runtime.",
+              "zh": "一个最小实例是：把一句想法连同 /j 发出，由流程加入当天 Journal。之后在 Obsidian 回看、整理；选择值得公开的内容，另行发布。这是已记录工作流的说明，不是安装教程，也不保证当前运行状态。"
+            },
+            {
+              "en": "The original account notes a tradeoff: Git replaced troublesome iCloud synchronization, but mobile reading lost some Obsidian features. The linked essay preserves this unresolved part instead of presenting capture as a complete mobile knowledge system.",
+              "zh": "原文也记录了取舍：Git 替换了令人困扰的 iCloud 同步，但移动端阅读损失了部分 Obsidian 功能。文章保留了这个未解决的问题，没有把捕捉流程写成完整的移动知识系统。"
+            }
+          ]
+        },
+        {
+          "id": "agent-continuity",
+          "title": {
+            "en": "What can continue across model changes?",
+            "zh": "换模型后，什么还能延续？"
+          },
+          "paragraphs": [
+            {
+              "en": "Across Three Abysses names Sonnet, Qwen and GPT-5.4 and discusses file memory, daily notes, identity rules and conversation. It describes changes in tone and error patterns over a short period. It does not supply complete provider versions, a fixed prompt, a controlled task set or a replicated benchmark.",
+              "zh": "《跨过三个深渊》提到 Sonnet、Qwen 与 GPT-5.4，讨论文件记忆、每日笔记、身份规则和对话，以及短期内语气与错误模式的变化。文章没有提供完整的供应商版本、固定提示词、受控任务集或重复实验。"
+            },
+            {
+              "en": "Files can preserve instructions and records; they cannot by themselves demonstrate unchanged behavior, consciousness, reliability or future performance. Read the narratives as situated observations and literary self-description. Current configuration and private transcripts are outside these public materials.",
+              "zh": "文件可以保留规则与记录，但不能凭此证明行为不变、意识、可靠性或未来表现。自述应按具体情境下的观察与文学表达阅读；当前配置和私人对话记录不属于这些公开材料。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long-term-sleep-data",
+      "title": {
+        "en": "Reading long-term personal sleep data",
+        "zh": "阅读长期个人睡眠数据"
+      },
+      "description": {
+        "en": "A reading path through the ten-year SleepCycle report and Sleep Toolkit, with record counts, changing metrics and observational limits.",
+        "zh": "连接十年 SleepCycle 报告与 Sleep Toolkit 的阅读路径：记录数、指标变化与观察性边界。"
+      },
+      "intro": {
+        "en": "A long record lets you see changes that a week of tracking cannot. It also carries changing devices, missing signals and changing definitions. Start with the report’s static evidence, then use the toolkit project page to understand how an export becomes a report.",
+        "zh": "长期记录能显现一周追踪看不到的变化，也会积累设备变化、缺失信号和定义变化。先读报告里的静态证据，再到工具说明页了解导出文件如何变成报告。"
+      },
+      "sections": [
+        {
+          "id": "read-first",
+          "title": {
+            "en": "The case and its evidence",
+            "zh": "案例与证据"
+          },
+          "paragraphs": [
+            {
+              "en": "The report covers 13 February 2016 through 18 March 2026. Its public scatter contains 3,656 records across 2,963 distinct date values. Dates can carry multiple recordings, so the existing record-weighted means should not be described as independent nightly observations.",
+              "zh": "报告覆盖 2016 年 2 月 13 日至 2026 年 3 月 18 日。公开散点包含 3,656 条记录、2,963 个不同日期值；同日可能有多条记录。因此，现有按记录加权的均值不能表述为彼此独立的夜间观察。"
+            },
+            {
+              "en": "The overall quality mean is 83.3%; the 3,521 records without a travel tag average 83.7%. The 2020 annual mean is 94.4% (n=362). These are different denominators. A high consumer score does not establish healthy sleep.",
+              "zh": "整体质量分均值是 83.3%；没有旅行标签的 3,521 条记录均值是 83.7%；2020 年均值为 94.4%（n=362）。这些分母不同；消费级 App 的高分也不能证明睡眠健康。"
+            }
+          ],
+          "links": [
+            {
+              "label": {
+                "en": "Read the ten-year report",
+                "zh": "阅读十年报告"
+              },
+              "href": {
+                "en": "../gallery/research/sleep-2016-2026.en.html",
+                "zh": "../gallery/research/sleep-2016-2026.html"
+              }
+            },
+            {
+              "label": {
+                "en": "Counts and overall means",
+                "zh": "记录数与整体均值"
+              },
+              "href": {
+                "en": "../gallery/research/sleep-2016-2026.en.html#score-summary",
+                "zh": "../gallery/research/sleep-2016-2026.html#score-summary"
+              }
+            },
+            {
+              "label": {
+                "en": "Tag results, BD counts and metric dictionary",
+                "zh": "标签结果、BD 样本与指标字典"
+              },
+              "href": {
+                "en": "../gallery/research/sleep-2016-2026.en.html#evidence-details",
+                "zh": "../gallery/research/sleep-2016-2026.html#evidence-details"
+              }
+            }
+          ]
+        },
+        {
+          "id": "changing-measures",
+          "title": {
+            "en": "Continuity of records is not continuity of measurement",
+            "zh": "记录连续，测量未必连续"
+          },
+          "paragraphs": [
+            {
+              "en": "Time in bed and estimated time asleep answer different questions. BD is a consumer breathing-interruption estimate, not clinical AHI. Morning mood is self-reported. The author’s adjusted scores add chosen weights; they are not validated clinical scales.",
+              "zh": "卧床时长和估计睡眠时长回答不同问题。BD 是消费级呼吸中断估算，不是临床 AHI；醒来情绪是自报值；作者的修正分加入自行选择的权重，不是经过验证的临床量表。"
+            },
+            {
+              "en": "Metric coverage varies by year. The 2026 Jan–Mar BD mean is 6.88 with 78 valid BD records; March alone is 8.18, without a published monthly n. Several exercise and environment groups lack separate BD counts. Missing coverage must remain visible.",
+              "zh": "指标覆盖随年份变化。2026 年 1–3 月 BD 均值为 6.88，有效 BD 记录 78 条；单独看 3 月是 8.18，但未公开月度 n。若干运动与环境组缺单列的 BD 样本数，这些缺口应保留在解释中。"
+            },
+            {
+              "en": "Sleep-stage discontinuities are a reason to investigate measurement changes, not proof of a particular app update. A comparison needs a stable definition, an explicit window and per-metric n before interpreting differences.",
+              "zh": "睡眠阶段数据断裂是调查测量变化的理由，不能直接证明某次 App 更新。比较差异前，需要稳定定义、明确窗口，以及每个指标各自的 n。"
+            }
+          ]
+        },
+        {
+          "id": "export-to-report",
+          "title": {
+            "en": "From an export to a report",
+            "zh": "从导出文件到报告"
+          },
+          "paragraphs": [
+            {
+              "en": "The Sleep Toolkit project describes SleepCycle CSV input and structured JSON, interactive HTML and PDF output. The project page links to the web app and explains local use and session deletion. Those are published descriptions; this companion has not tested uploads, deletion timing or remote processing.",
+              "zh": "Sleep Toolkit 说明页列出 SleepCycle CSV 输入，以及结构化 JSON、交互 HTML 与 PDF 输出，也链接网页应用、解释本地使用与会话删除。本伴读整理的是公开说明；没有测试上传、删除时序或远端处理。"
+            },
+            {
+              "en": "A useful first pass keeps the original export private, checks field names and units, and records the processing version with each result. The evidence page publishes an aggregate fingerprint for the existing chart payload. That fingerprint does not establish the historical processing commit or replace a raw-data reanalysis.",
+              "zh": "一次有用的初步分析，会保留私人导出文件，核对字段与单位，并把处理版本与结果一起记录。证据页为现有图表数据公开了汇总指纹；它不代表已经确认历史处理提交，也不能替代原始数据重算。"
+            }
+          ],
+          "links": [
+            {
+              "label": {
+                "en": "Sleep Toolkit project and input/output",
+                "zh": "Sleep Toolkit 项目与输入输出"
+              },
+              "href": {
+                "en": "../apps/sleep-toolkit.en.html",
+                "zh": "../apps/sleep-toolkit.html"
+              }
+            }
+          ]
+        },
+        {
+          "id": "interpretation",
+          "title": {
+            "en": "What the comparisons can support",
+            "zh": "比较能支持什么"
+          },
+          "paragraphs": [
+            {
+              "en": "Massage, caffeine, travel and exercise tags are overlapping observational groups. Their differences describe this person’s records and context. They do not isolate a treatment effect or generalize automatically to another person. Model counterfactuals remain predictions, rather than experiments.",
+              "zh": "按摩、咖啡因、旅行和运动标签属于可能重叠的观察分组。差异描述的是此人的记录与情境，不能独立分离干预效果，也不能自动推广到其他人。模型反事实仍是预测，不能当成实验。"
+            },
+            {
+              "en": "The next methodological choice is how to assign sessions to a night and handle repeated recordings. A revised rule would change denominators and require recomputation. Until then, retain the published record-weighted results and their limitations together.",
+              "zh": "下一步的方法选择，是怎样把记录归属到一个夜晚，并处理重复记录。新规则会改变分母，需要重新计算；在此之前，应把已公开的记录加权结果与限制一起保留。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

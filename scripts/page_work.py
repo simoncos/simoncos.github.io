@@ -8,6 +8,8 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from site_languages import section_path
+from site_entities import render_json_ld, work_collection
 
 from site_shell import bi, bi_value, esc, i18n_attrs, lang_pair, page_config, render_document, render_meta
 
@@ -15,8 +17,8 @@ from site_shell import bi, bi_value, esc, i18n_attrs, lang_pair, page_config, re
 from page_common import count_label, href_attrs, work_title
 
 
-def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
-    page = page_config(config, "gallery.html")
+def render_work(config: dict[str, Any], site: dict[str, Any], language: str = "en") -> str:
+    page = page_config(config, section_path("gallery.html", language))
     topics = site["work_topics"]
     by_topic: dict[str, list[dict[str, Any]]] = {topic["id"]: [] for topic in topics}
     for work in site["works"]:
@@ -152,4 +154,5 @@ def render_work(config: dict[str, Any], site: dict[str, Any]) -> str:
         ),
         canonical="gallery.html",
     )
+    head += '\n' + render_json_ld(work_collection(config, site, language, page['path']))
     return render_document(config, page, head=head, main=main)

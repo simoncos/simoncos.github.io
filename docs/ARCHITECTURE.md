@@ -24,7 +24,7 @@ GitHub Pages serves the `master` tree as-is, with no build step, so generated HT
 
 A new generated page must exist before `update_site_shell.py` will accept its entry in `data/site_shell.json`, so run `python3 scripts/build_pages.py` once before the first `make generate`.
 
-`make generate` first syncs the shell into `templates/` and refreshes `data/image_dimensions.json` (both are inputs to article generation), then runs the article, page and Favorites generators. It is idempotent apart from the feeds' `lastBuildDate`. `scripts/site_shell.py` is the single definition of the shell: navigation, language and theme toggles, footer, meta tags and script tags. `data/site_shell.json` lists the pages, their section and their script profile, plus the `css_version` / `js_version` cache keys and `site_updated`.
+`make generate` first syncs the shell into `templates/` and refreshes `data/image_dimensions.json` (both are inputs to article generation), then runs the article, page and Favorites generators. It is idempotent apart from the feeds' `lastBuildDate`. `scripts/site_shell.py` is the single definition of the shell: navigation, language and theme toggles, footer, meta tags and script tags. `data/site_shell.json` lists the pages, their section, script profile and `site_updated`. Shared `src/js/*.js` and `src/css/styles.css` URLs use the first 12 hex characters of each file's SHA-256 as their `?v=` key. Unchanged assets keep their URL; there is no global version to bump. Compile TypeScript before updating the shell so hashes describe the shipped JavaScript. Topic-specific assets outside this shared shell keep their own loading/version policy.
 
 Hand-authored pages outside this table: `series.html` and `tags.html` (redirects into the Articles page), the Sleep essay pages under `gallery/research/`, the talk deck under `gallery/`. The Zhihu research page is generated; see `docs/ZHIHU_RESEARCH.md`.
 
@@ -32,12 +32,19 @@ Hand-authored pages outside this table: `series.html` and `tags.html` (redirects
 
 Film entries in `data/site.json` carry `film.youtube`, bilingual introductory copy and a local poster. `scripts/page_film.py`, called by `build_pages.py`, renders the screening page; the player is a responsive YouTube embed with a direct watch link. The making-of articles use the same video ID and `blogs/assets/film-embed.css`. An iframe's `data-poster`, `width` and `height` allow the article generator to use that local artwork for social previews. Video files stay on YouTube.
 
+### Generator modules
+
+`generate_blog_pages.py` owns the article CLI and two-pass orchestration. Its former helper API remains re-exported for existing callers. Implementation lives in `scripts/article_content.py` (parsing, metadata and labels), `article_media.py` (images and embeds), `article_relations.py` (bilingual groups, sequences and backlinks), `article_render.py` (article HTML), `article_listing.py` (listing and series views), and `article_feeds.py` (feeds). The relationship module builds the inverted link index once; rendering does not reparse the whole corpus for each article.
+
+`scripts/build_pages.py` owns page output selection and its CLI. Shared helpers are in `page_common.py`; page rendering lives in `page_home.py`, `page_work.py`, `page_apps.py`, `page_board.py`, `page_music.py` and `page_about.py`. Existing entrypoint imports remain available. Both generator drift checks exercise these modules from a temporary checkout and compare complete outputs.
+
 ### Data
 
 - `data/site.json` — the hand-maintained record for the Index stage, the Work list and its topics, projects, the About page and the changelog.
 - `gallery/music/*.peaks.json` — the waveform on a song's page: the recording's loudness in 120 bars. The build has no audio decoder, so `scripts/song_peaks.py <mp3>` measures it once (with ffmpeg) when a recording is added or replaced. A song's words, credits and lyrics are in `data/site.json` `songs`.
 - `data/article_index.json` — generated. Groups bilingual article variants and carries only lightweight fields (titles, dates, excerpts, topics, series, translations). Full article HTML stays in the article pages.
-- `data/backlinks_data.json` — generated relationship graph. Article pages render their "linked from" list from it at build time.
+- `data/article_credits.json` — default article authorship and explicit exceptions for AI narration/collaboration, shared by both languages. The human identity comes from `data/site.json` → `about.identity`, `native_name` and existing contact links; `scripts/site_entities.py` generates visible credits and JSON-LD from these same facts.
+- `data/backlinks_data.json` — generated relationship graph. Each language variant is parsed once to build an inverted link index; article pages and the JSON reuse that graph. Article pages render their "linked from" list from it at build time.
 - `data/favorites.json` — every five-star book, film, album and game from a one-off Douban export. `scripts/extract_favorites.py` writes it from the local Obsidian vault and is run by hand, never in `make check`.
 
 ### Article images
@@ -54,7 +61,7 @@ Film entries in `data/site.json` carry `film.youtube`, bilingual introductory co
 - Attributes that change with language are declared with `data-i18n="<attr>"` and a `data-zh-<attr>` value.
 - Articles and project boards are one language per file (`*.en.html` / `*.html`) and link their translation.
 - Article publishing policy (owner decision, 2026-09-28): every article must have both Chinese and English versions before going live. Use `blogs/<slug>.md` and `blogs/<slug>.en.md`, with matching dates, tags and series metadata. A Chinese-only local preview is not ready for publication. `scripts/check_site.py` rejects incomplete language pairs; do not push them to the Pages branch. Translation quality still needs review beyond this structural check.
-- An older piece republished here keeps its historical first-publication `date`, not the day it was added. The rules are under [Dates](ARTICLE_PUBLICATION.md#dates).
+- Article date evidence and revision rules are under [Dates](ARTICLE_PUBLICATION.md#dates).
 - Favorites: page chrome is bilingual, titles and reviews stay in Chinese.
 
 ### Client scripts
@@ -87,11 +94,15 @@ Both hand-authored Sleep essays load `gallery/research/assets/sleep-chart-loader
 
 The build also emits byte-identical compatibility copies at `sleep-2016-2026.js` and `sleep-2016-2026.en.js`. Keep these published URLs for essays/loaders cached before the shared-runtime migration; they require no separate source implementation or extra requests from current pages. The loader tracks the latest request per chart, including pending offscreen filters and retries, so an older rendering failure cannot clear the latest result.
 
-`scripts/update_sleep_assets.py` fingerprints the common runtime, loader, UI and pretext references in both essays. The chart payload remains one download at the first chart; individual charts still draw on approach, and failed loads offer retry. `scripts/test_sleep_charts.cjs` compares ordered default/filter Plotly calls against hashes captured from the pre-refactor bilingual bundles. The fixture covers 36 initial plots and 22 filter redraws per language; update it only after reviewing an intentional output change.
+`scripts/update_sleep_assets.py` fingerprints the common runtime, loader, UI and pretext references in both essays. `scripts/build_sleep_evidence.py` also reads the shared public JSON. The chart payload remains one download at the first chart; individual charts still draw on approach, and failed loads offer retry. `scripts/test_sleep_charts.cjs` compares ordered default/filter Plotly calls against hashes captured from the pre-refactor bilingual bundles. The fixture covers 36 initial plots and 22 filter redraws per language; update it only after reviewing an intentional output change.
 
 The fingerprint updater parses real script attributes, accepts legal quoting, and fails for missing, unexpected or duplicate required entries before writing either page. `check_site.py` also checks the local target of `data-runtime`. Regression checks exercise the frozen old loader and both compatibility bundles, malformed references, and out-of-order drawing failures.
 
 ### AI / agent-readable
+
+GEO improvements and remaining decisions are tracked in [GEO_IMPLEMENTATION.md](GEO_IMPLEMENTATION.md). Historical sleep, Field Notes, and old PKM talk URLs are listed in `data/redirects.json` with the later work-URL migrations; `scripts/page_redirects.py` writes the compatibility pages during `make generate`. These are HTML migrations on static hosting, not HTTP 301/308 responses. The old PKM talk path now points at the current `gallery/sharing/` canonical page.
+
+`scripts/sync_discovery.py` runs last in `make generate`: it derives article sitemap dates from the generated index, and maintains identity/exception credits in `agent-index.json` plus the marked authorship block in `llms.txt`. Other curated entries and non-article sitemap dates remain hand-maintained. `make check` checks discovery drift. `tests/test_entity_contracts.py` compares all article JSON-LD with visible attribution, canonical URL, language, source dates and sitemap dates; it also prevents AI credits from becoming human author entities.
 
 - `llms.txt` is the concise Markdown orientation file at the site root. It points agents to the highest-signal public surfaces rather than mirroring the sitemap.
 - `agent-index.json` is the structured companion for machines that prefer stable fields over prose.
@@ -110,11 +121,17 @@ The fingerprint updater parses real script attributes, accepts legal quoting, an
 ### Drift guards
 
 - Never hand-edit generated output; change the source or the generator and regenerate.
-- After a CSS or JS change, bump `css_version` / `js_version` in `data/site_shell.json` and regenerate, so browsers do not keep stale files.
+- After a shared CSS or JS change, run `make generate`; content hashes update only affected resource URLs. `scripts/check_site.py` verifies every shared resource key against its file bytes, and generated-output checks catch stale pages.
 - `site_updated` must not be older than the newest work, project or article; `scripts/check_site.py` enforces it.
 - Project skills exist twice, file for file: `.claude/skills/` for Claude Code and `.agents/skills/` for Codex, which alone also has `agents/openai.yaml`. After editing one copy, run `python3 scripts/sync_skills.py` (add `--from agents` when the Codex copy was edited). `make check` fails while the two differ.
 
 Run `make check` before publishing structural changes.
+
+### Performance baselines
+
+`data/performance_budgets.json` records the 2026-10-04 static baseline for ten representative pages and four key assets (the two Sleep assets now share one runtime). `make check-performance` (also included in `make check-all`) rejects growth beyond explicit limits: approximately 10% above baseline, rounded to 512 bytes or 50 elements. A zero baseline keeps a zero limit. `python3 scripts/check_performance.py --measure` prints current weights without changing the approved baseline or limits.
+
+The page measures are HTML gzip bytes, static HTML element count, local script/style gzip bytes and non-lazy image bytes. Gzip uses level 9 with a fixed timestamp; duplicate asset URLs count once. These are repeatable regression guards, not actual browser transfer sizes: responsive image selection, CSS images, dynamic requests, fonts and third-party resources are outside these totals. Measure browser loading, layout shifts and interactions separately before claiming a user-perceived speed improvement. Budget changes need an explicit rationale rather than automatic baseline renewal. The 2026-10-05 Sleep runtime retains the former Chinese runtime's gzip baseline and limit. Only the bilingual essays' element limits increased from 850 to 950 for separately authored evidence tables and a metric dictionary; original baseline counts and all byte limits remain recorded.
 
 ## Practical lessons
 
@@ -141,8 +158,14 @@ When adding a feature, ask first:
 2. If inferred, can the generator compute it once and write it into the page?
 3. Are we preserving the real source faithfully, or inventing another interpretation layer?
 
-### Generator modules and performance checks
+## Independent language documents and GEO sources
 
-Article generation delegates to six `scripts/article_*.py` modules; page generation delegates to seven `scripts/page_*.py` modules. Entrypoints retain their helper imports. Backlinks parse each source variant once and invert outgoing links while retaining original equal-date ordering.
+Core section authoring still uses bilingual helpers; `scripts/site_languages.py` selects one language at build time. Existing `index.html` (canonical `/`), `blogs.html`, `gallery.html` and `about.html` remain English; their `.zh.html` peers serve Chinese before any script runs. Each has real reciprocal alternates, a peer link and same-language core navigation. `?lang=zh/en`, saved preferences, filters and anchors are compatible through the shared head/toggle scripts. Without JavaScript, an old query URL returns the base English document and offers the real Chinese peer. Favorites retains Chinese reviews and bilingual controls; the Chinese talk has no fabricated full English alternate.
 
-Shared resources use per-file SHA-256 cache keys. `data/performance_budgets.json` keeps the established baseline and explicit limits; `make check-all` rejects source/output drift and budget growth. The Sleep static-element limits remain 850 in this engineering candidate; the separate GEO expansion is still uncommitted.
+`data/site.json.page_revisions` explicitly records meaningful non-article revisions, then `scripts/sync_discovery.py` updates sitemap. Do not stamp it daily. Article dates retain the publication guide's meanings. The section locale date is 2026-10-05; it does not change all article revision dates.
+
+`data/topic_readers.json` owns two reading companions, built by `scripts/build_topic_readers.py`, with language files under `topics/`. They explain relationships, versions and limits of existing sources, rather than duplicate tag filtering. Work related links, sitemap and discovery indexes link them.
+
+`build_sleep_evidence.py` extracts only already public chart data (`assets/sleep/data.json`, with legacy TS fallback). It generates a static bilingual evidence block and `sleep-evidence.json`, including valid record counts, tag windows, metric-specific BD n and a canonicalized payload SHA-256. The fingerprint is not a claim about the private CSV or historical processing commit. There are 3,656 records on 2,963 distinct date values; no date deduplication or nightly reassignment occurs in this generator. Never include private raw/derived files from the owning research repo.
+
+`agent-index.json.works` derives public entry/review/in-progress state from Work data; CollectionPage lists only linked public entries, without inventing software maturity. Owner decisions, consumer-answer measurement protocol and evidence are indexed in `docs/GEO_OWNER_REVIEW.md`.

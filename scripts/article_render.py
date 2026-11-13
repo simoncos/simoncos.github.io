@@ -9,6 +9,8 @@ from pathlib import Path
 
 from piece_contact_foot import render_piece_contact_foot
 from site_shell import esc
+from site_entities import article_credits, article_graph, credit_html, render_json_ld
+from site_languages import language_document
 from article_content import ARTICLE_TEXT, BlogGenerationError, entry_for, estimate_reading_minutes, get_file_times_with_metadata, parse_page_assets, series_info, series_parts, tag_label, tag_slug
 from article_feeds import absolute_site_url, build_meta_description
 from article_media import build_og_image, og_fallback_image
@@ -67,7 +69,7 @@ def meta_item(label, value):
     )
 
 
-def build_post_meta(metadata, language, created, updated, reading_minutes, paired_entry):
+def build_post_meta(metadata, language, created, updated, reading_minutes, paired_entry, credits=()):
     """Created / Updated / Reading, then the translator, then the link to the
     translation.
 
@@ -77,9 +79,10 @@ def build_post_meta(metadata, language, created, updated, reading_minutes, paire
     `date` is when the piece was written (owner's call, 2026-09-30).
     """
     text = ARTICLE_TEXT[language]
-    rows = [
-        meta_item(text['created'], f'<span class="num">{esc(created)}</span>'),
-        meta_item(text['updated'], f'<span class="num">{esc(updated)}</span>'),
+    rows = [meta_item(credit['label'], credit_html(credit, language)) for credit in credits]
+    rows += [
+        meta_item(text['created'], f'<time class="num" datetime="{esc(created)}">{esc(created)}</time>'),
+        meta_item(text['updated'], f'<time class="num" datetime="{esc(updated)}">{esc(updated)}</time>'),
         meta_item(text['reading'], esc(text['minutes'].format(n=reading_minutes))),
     ]
 
@@ -248,7 +251,16 @@ def render_blog_post(post, template, context):
         og_image = build_og_image(rendered_content, title)
         reading_minutes = estimate_reading_minutes(rendered_content)
         toc_aside, toc_box = build_toc(toc_entries, language)
-        post_meta = build_post_meta(metadata, language, created, updated, reading_minutes, paired_entry)
+        credits = article_credits(post['group_id'], language)
+        post_meta = build_post_meta(metadata, language, created, updated, reading_minutes, paired_entry, credits)
+        shell_config = json.loads(Path('data/site_shell.json').read_text(encoding='utf-8'))
+        structured_data = render_json_ld(article_graph(
+            shell_config, url=canonical_url, title=title, description=meta_description,
+            language=language, created=created, updated=updated, credits=credits,
+            # The generic site card is not an illustration of this article.
+            image=og_image['url'] if og_image['url'] != og_fallback_image()['url'] else None,
+            translation=(metadata.get('translation') or '').strip(),
+        ))
         post_foot = build_post_foot(
             post,
             article_group,
@@ -270,6 +282,8 @@ def render_blog_post(post, template, context):
             '{{TITLE_ATTR}}': html_lib.escape(title, quote=True),
             '{{SECTION_LABEL}}': text['section'],
             '{{META_DESCRIPTION}}': html_lib.escape(meta_description, quote=True),
+            '{{AUTHOR_NAMES}}': esc(', '.join(credit['name'] for credit in credits
+                                             if credit['role'] in ('author', 'narrator'))),
             '{{CANONICAL_URL}}': canonical_url,
             '{{OG_LOCALE}}': og_locale,
             '{{OG_IMAGE}}': html_lib.escape(og_image['url'], quote=True),
@@ -288,6 +302,7 @@ def render_blog_post(post, template, context):
         # Blocks that may be empty consume their own line.
         blocks = {
             '{{HREFLANG_ALTERNATES}}': build_hreflang_alternates(article_languages),
+            '{{STRUCTURED_DATA}}': structured_data,
             '{{TOC_ASIDE}}': toc_aside,
             '{{TOC_BOX}}': toc_box,
             '{{POST_META}}': post_meta,
@@ -300,6 +315,8 @@ def render_blog_post(post, template, context):
             page_content = page_content.replace(f'\n{placeholder}', f'\n{value}' if value else '')
         for placeholder, value in replacements.items():
             page_content = page_content.replace(placeholder, value)
+
+        page_content = language_document(page_content, language)
 
         with open(os.path.join('blogs', html_file), 'w', encoding='utf-8') as f:
             f.write(page_content)

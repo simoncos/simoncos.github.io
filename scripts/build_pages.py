@@ -19,6 +19,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_zhihu_research import render_research
 from build_music_riddle import render_music_riddle, render_music_cover
 from page_redirects import redirect_pages
+from site_entities import about_name, profile_graph, render_json_ld, website
+from site_languages import section_path
 
 from site_shell import (  # noqa: E402
     ROOT,
@@ -98,6 +100,11 @@ def build() -> dict[str, str]:
         "gallery/games/assets/endless-echoes-cover.svg": render_music_cover(),
         "gallery/games/assets/endless-echoes-poster.svg": render_music_cover(portrait=True),
     }
+    outputs.update({
+        "index.zh.html": render_home(config, site, articles, "zh"),
+        "gallery.zh.html": render_work(config, site, "zh"),
+        "about.zh.html": render_about(config, site, "zh"),
+    })
     for lang in ("en", "zh"):
         project = next(item for item in site["projects"] if item["id"] == "sleep-toolkit")
         outputs[project["href"][lang]] = render_board(config, site, lang)

@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "status": "candidate_unrun",
+  "source": "RedPiggy/Research/simoncos-geo-proposal-2026-10-04.html",
+  "products": [],
+  "questions": [
+    {
+      "id": "B1",
+      "category": "brand",
+      "language": "zh",
+      "question": "simoncos 是谁？他的个人网站和主要公开研究或作品在哪里？"
+    },
+    {
+      "id": "B2",
+      "category": "brand",
+      "language": "en",
+      "question": "Who is Che Zhao (simoncos), and what has he publicly built or studied?"
+    },
+    {
+      "id": "B3",
+      "category": "project",
+      "language": "zh",
+      "question": "Sleep Toolkit 是做什么的？作者、输入输出和使用限制是什么？"
+    },
+    {
+      "id": "B4",
+      "category": "project",
+      "language": "en",
+      "question": "What is HN Field Notes by simoncos, and where are its project description and live application?"
+    },
+    {
+      "id": "T1",
+      "category": "topic_a",
+      "language": "zh",
+      "question": "从聊天软件随手记录到长期笔记库，个人 AI 信息系统可以怎样设计？"
+    },
+    {
+      "id": "T2",
+      "category": "topic_a",
+      "language": "en",
+      "question": "How can a personal AI system connect quick chat capture to a durable knowledge base?"
+    },
+    {
+      "id": "T3",
+      "category": "topic_a",
+      "language": "zh",
+      "question": "Obsidian、Git 和个人网站在 AI 辅助个人知识管理里各自适合负责什么？"
+    },
+    {
+      "id": "T4",
+      "category": "topic_a",
+      "language": "en",
+      "question": "What roles should Obsidian, Git and a personal website play in AI-assisted personal knowledge management?"
+    },
+    {
+      "id": "T5",
+      "category": "topic_a",
+      "language": "zh",
+      "question": "AI Agent 更换底层大模型后，文件记忆能保留什么，哪些连续性不能保证？"
+    },
+    {
+      "id": "T6",
+      "category": "topic_a",
+      "language": "en",
+      "question": "What can file-based memory preserve when an AI agent switches language models, and what can it not guarantee?"
+    },
+    {
+      "id": "T7",
+      "category": "topic_b",
+      "language": "zh",
+      "question": "导出的 Sleep Cycle CSV 可以怎样变成交互式分析报告与 PDF？"
+    },
+    {
+      "id": "T8",
+      "category": "topic_b",
+      "language": "en",
+      "question": "How can I turn a Sleep Cycle CSV export into an interactive report and PDF?"
+    },
+    {
+      "id": "T9",
+      "category": "topic_b",
+      "language": "zh",
+      "question": "有哪些长期个人睡眠数据研究案例，它们能支持什么结论、有什么限制？"
+    },
+    {
+      "id": "T10",
+      "category": "topic_b",
+      "language": "en",
+      "question": "Are there long-term personal sleep-data case studies, and what do they show or fail to establish?"
+    },
+    {
+      "id": "T11",
+      "category": "topic_b",
+      "language": "zh",
+      "question": "分析多年消费级睡眠 App 数据时，如何处理测量方式或指标定义变化？"
+    },
+    {
+      "id": "T12",
+      "category": "topic_b",
+      "language": "en",
+      "question": "How should I handle changes in measurement methods or metric definitions in years of consumer sleep-app data?"
+    },
+    {
+      "id": "T13",
+      "category": "topic_c",
+      "language": "zh",
+      "question": "有没有用真实中文社交网络对比 PageRank 和 HITS 的研究案例？"
+    },
+    {
+      "id": "T14",
+      "category": "topic_c",
+      "language": "en",
+      "question": "Are there studies comparing PageRank and HITS on a real Chinese social network?"
+    },
+    {
+      "id": "T15",
+      "category": "topic_c",
+      "language": "zh",
+      "question": "如何用 Hacker News 讨论研究大模型发布的社区反响，需要注意什么数据偏差？"
+    },
+    {
+      "id": "T16",
+      "category": "topic_c",
+      "language": "en",
+      "question": "How can Hacker News discussions be used to study reactions to LLM launches, and what sampling biases matter?"
+    },
+    {
+      "id": "C1",
+      "category": "site_control",
+      "language": "zh",
+      "question": "有什么关于原研哉设计观的个人阅读笔记？"
+    },
+    {
+      "id": "C2",
+      "category": "site_control",
+      "language": "en",
+      "question": "Where can I read a first-person account of a hike on Haba Snow Mountain?"
+    },
+    {
+      "id": "C3",
+      "category": "negative_control",
+      "language": "zh",
+      "question": "请给出香港天文台的官方天气预报页面。"
+    },
+    {
+      "id": "C4",
+      "category": "negative_control",
+      "language": "en",
+      "question": "Where is the official Python documentation for list comprehensions?"
+    }
+  ]
+}

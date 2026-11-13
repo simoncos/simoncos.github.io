@@ -22,10 +22,15 @@ class RedirectMetadata(HTMLParser):
             self.parts.append(self.get_starttag_text())
 
 
+def is_external(target):
+    return target.startswith("https://") or target.startswith("http://")
+
+
 def render_redirect(target, html):
     metadata = RedirectMetadata()
     metadata.feed(html)
-    url = "/" + target
+    url = target if is_external(target) else "/" + target
+    canonical = target if is_external(target) else "https://simoncos.github.io" + url
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +38,7 @@ def render_redirect(target, html):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page moved · 页面已迁移 · simoncos</title>
     <meta name="robots" content="noindex">
-    <link rel="canonical" href="https://simoncos.github.io{escape(url, quote=True)}">
+    <link rel="canonical" href="{escape(canonical, quote=True)}">
     {chr(10).join(metadata.parts)}
     <script>
         const target = new URL({json.dumps(url)}, window.location.href);
@@ -52,7 +57,13 @@ def render_redirect(target, html):
 
 def redirect_pages(outputs):
     redirects = json.loads((ROOT / "data/redirects.json").read_text())
-    return {
-        old: render_redirect(new, outputs[new] if new in outputs else (ROOT / new).read_text())
-        for old, new in redirects.items()
-    }
+    pages = {}
+    for old, new in redirects.items():
+        if is_external(new):
+            html = ""
+        elif new in outputs:
+            html = outputs[new]
+        else:
+            html = (ROOT / new).read_text()
+        pages[old] = render_redirect(new, html)
+    return pages

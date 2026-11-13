@@ -142,7 +142,7 @@
       },
       "limits": {
         "html_gzip_bytes": 30720,
-        "static_elements": 850,
+        "static_elements": 950,
         "initial_js_gzip_bytes": 7168,
         "initial_css_gzip_bytes": 4096,
         "eager_image_bytes": 0
@@ -159,7 +159,7 @@
       },
       "limits": {
         "html_gzip_bytes": 29696,
-        "static_elements": 850,
+        "static_elements": 950,
         "initial_js_gzip_bytes": 7168,
         "initial_css_gzip_bytes": 4096,
         "eager_image_bytes": 0
