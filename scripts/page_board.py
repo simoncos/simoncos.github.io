@@ -41,6 +41,14 @@ def render_board(config: dict[str, Any], site: dict[str, Any], lang: str) -> str
         )
         descs.append(f'<p class="stage-desc{on}" data-stage-desc="{i}">{t(stage["desc"])}</p>')
 
+    unavailable = project["availability"]["state"] == "unavailable"
+    status = (
+        t(project["status"]) if unavailable else
+        f'<span class="live-dot" aria-hidden="true"></span>{t(project["status"])}'
+        f' · {esc(text["updated"])} {esc(project["updated"])}'
+    )
+    availability = f'<p class="intro-sum">{t(project["availability_note"])}</p>' if unavailable else ""
+
     privacy = "".join(
         f'<li><span class="priv-at">{esc(step["at"])}</span><span class="priv-label">{t(step["label"])}</span></li>'
         for step in project["privacy"]
@@ -73,19 +81,19 @@ def render_board(config: dict[str, Any], site: dict[str, Any], lang: str) -> str
 
     blocks = [
         block("intro", 7, 2, 0,
-              f'<span class="intro-status"><span class="live-dot" aria-hidden="true"></span>'
-              f'{t(project["status"])} · {esc(text["updated"])} {esc(project["updated"])}</span>'
+              f'<span class="intro-status">{status}</span>'
               f'<h1 class="intro-title">{t(project["title"])}</h1>'
               f'<span class="intro-sub">{t(project["subtitle"])}</span>'
-              f'<p class="intro-sum">{t(project["summary"])}</p>'),
+              f'<p class="intro-sum">{t(project["summary"])}</p>{availability}'
+              f'<p class="intro-sum"><a class="pill pill-ink" href="#report-preview">{esc(text["preview"])}</a></p>'),
         block("image", 5, 2, 1,
               f'<img class="block-img contain" src="{local(project["report_image"])}" alt="{t(project["report_caption"])}" decoding="async">'
               f'<span class="block-caption">{t(project["report_caption"])}</span>',
               # The report preview is a dark screenshot; its tile keeps that backdrop.
-              extra=" is-image", background="#141d2b"),
+              extra=" is-image", attrs=' id="report-preview" tabindex="-1"', background="#141d2b"),
         block("dots", 8, 1, 2,
               f'<div class="dots-head"><span class="dots-count" data-dots-count>3,656</span>'
-              f'<span class="block-k" data-dots-label data-default="{esc(text["nights"])}">{esc(text["nights"])}</span></div>'
+              f'<span class="block-k" data-dots-label data-default="{esc(text["records"])}">{esc(text["records"])}</span></div>'
               f'<canvas class="dots-canvas" data-dots aria-hidden="true"></canvas>'
               f'<span class="dots-note">{esc(text["dots_note"])}</span>'),
         block("metrics", 4, 1, 3, f'<dl class="metrics">{metrics}</dl>', extra=" is-ink"),
@@ -112,7 +120,7 @@ def render_board(config: dict[str, Any], site: dict[str, Any], lang: str) -> str
     main = "\n".join([
         '<main id="main" class="board enter" data-board tabindex="-1">',
         '    <div class="board-bar">',
-        f'        <div class="board-crumb"><a class="pill" href="{up}gallery.html">← {esc(text["back"])}</a>'
+        f'        <div class="board-crumb"><a class="pill" href="{up}gallery{".zh" if lang == "zh" else ""}.html#apps">← {esc(text["back"])}</a>'
         f'<span class="muted">{t(project["title"])}</span></div>',
         '        <div class="board-tools">',
         f'            <div class="seg" role="group" aria-label="{esc(text["modes"])}">'
@@ -134,7 +142,7 @@ def render_board(config: dict[str, Any], site: dict[str, Any], lang: str) -> str
     head = render_meta(
         config,
         title=(title, title),
-        description=(text["description"], text["description"]),
+        description=(f'{pick(project["status"], lang)}{"。" if lang == "zh" else ". "}{pick(project["summary"], lang)}',) * 2,
         canonical=rel_path,
         image={
             "url": f'{config["site_url"].rstrip("/")}/assets/og/og-sleep-toolkit.png',

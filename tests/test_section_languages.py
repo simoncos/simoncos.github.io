@@ -75,6 +75,34 @@ class SectionLanguages(unittest.TestCase):
             soup = BeautifulSoup((ROOT / section_path('index.html', language)).read_text(), 'html.parser')
             self.assertEqual(soup.select_one('a.panel')['href'], target)
 
+    def test_lola_pages_have_localized_body_and_reciprocal_metadata(self):
+        origin = "https://simoncos.github.io"
+        locations = {row.text for row in ET.parse(ROOT / "sitemap.xml").findall(".//{*}loc")}
+        for slug in ("lola-draft", "lola-matchups"):
+            links = {lang: f"{origin}/gallery/research/{slug}{suffix}.html"
+                     for lang, suffix in (("en", ""), ("zh-Hans", ".zh"))}
+            for lang, url in links.items():
+                with self.subTest(slug=slug, lang=lang):
+                    doc = BeautifulSoup((ROOT / url.removeprefix(origin + "/")).read_text(), "html.parser")
+                    self.assertEqual(doc.html["lang"], lang)
+                    self.assertEqual(doc.select_one("link[rel=canonical]")["href"], url)
+                    self.assertEqual(doc.select_one('meta[property="og:url"]')["content"], url)
+                    self.assertEqual({ln["hreflang"]: ln["href"] for ln in doc.head.select("link[hreflang]")},
+                                     {**links, "x-default": links["en"]})
+                    self.assertIn(url, locations)
+                    if lang == "zh-Hans":
+                        for key in ("h1", "#absList", ".foot-h"):
+                            self.assertRegex(doc.select_one(key).get_text(), r"[\u4e00-\u9fff]")
+
+    def test_film_search_matches_both_scripts_with_one_disclosure_button(self):
+        doc = BeautifulSoup((ROOT / "blogs.zh.html").read_text(), "html.parser")
+        for slug in ("void-flower", "void-flower-making-of"):
+            row = doc.select_one(f"#a-{slug}")
+            self.assertIn("虛無之花", row["data-search"])
+            self.assertIn("虚无之花", row["data-search"])
+            self.assertEqual(len(row.select("button[aria-controls]")), 1)
+            self.assertEqual(row.select_one(".arow-toggle")["aria-hidden"], "true")
+
 
 if __name__ == '__main__':
     unittest.main()

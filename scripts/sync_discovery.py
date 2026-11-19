@@ -110,15 +110,22 @@ def build() -> dict[str, str]:
         work_id = {'sleep-research':'sleep','hn-llm-research':'hn-llm-research'}.get(surface['id'])
         if work_id:
             surface['description'] = work_map[work_id]['desc']['en']
-        if surface['id']=='sleep-toolkit':
-            surface['description'] = toolkit['availability_note']['en']
-            surface['availability'] = {'state':'unavailable','checked':'2026-10-05','http_status':404}
+        if surface["id"] == "sleep-toolkit":
+            surface["description"] = toolkit["availability_note"]["en"]
+            surface["availability"] = toolkit["availability"]
+        if surface["id"] == "sleep-toolkit-project":
+            surface["description"] = work_map["toolkit"]["desc"]["en"]
+            surface["web_app_availability"] = toolkit["availability"]
+        if surface["id"] in {"lola-draft", "lola-matchups"}:
+            hrefs = work_map[surface["id"]]["href"]
+            for lang in ("en", "zh"):
+                surface[f"url_{lang}"] = canonical_url(config["site_url"], hrefs[lang])
     agent_index['reading_companions'] = [{'id':item['id'],'title':item['title'],
           'languages':{lang:config['site_url'].rstrip('/')+f'/topics/{item["id"]}{".en" if lang=="en" else ""}.html' for lang in ('en','zh')}}
           for item in json.loads((ROOT/'data/topic_readers.json').read_text())['readers']]
-    agent_index['language_policy']['english_page_pattern'] = 'Articles/research/toolkit/topic readers: *.en.html; core sections: existing *.html URLs.'
-    agent_index['language_policy']['chinese_page_pattern'] = 'Articles/research/toolkit/topic readers: *.html; core sections: *.zh.html.'
-    agent_index["language_policy"]["section_pages"] = "Index, Articles, Work and About have independent documents: existing .html URLs are English; .zh.html URLs are Chinese. Favorites keeps bilingual controls and Chinese reviews. Legacy ?lang= and saved language choices remain supported."
+    agent_index['language_policy']['english_page_pattern'] = 'Articles, Sleep Toolkit, sleep research and topic readers use *.en.html. Core sections and LoLA use the existing *.html English URLs.'
+    agent_index['language_policy']['chinese_page_pattern'] = 'Articles, Sleep Toolkit, sleep research and topic readers use *.html. Core sections and LoLA use *.zh.html.'
+    agent_index["language_policy"]["section_pages"] = "Index, Articles, Work and About have independent documents: existing .html URLs are English; .zh.html URLs are Chinese. Favorites keeps bilingual controls and Chinese reviews. Explicit language URLs keep their language. Legacy ?lang= remains supported, and the bare homepage honors a saved language choice."
     for entry in agent_index["entrypoints"]:
         path = {"home": "index.html", "articles": "blogs.html", "work": "gallery.html", "about": "about.html"}.get(entry["id"])
         if path:
@@ -129,11 +136,13 @@ def build() -> dict[str, str]:
         if path in SECTIONS:
             dates[canonical_url(config["site_url"], section_path(path, "zh"))] = revision
     llms = (ROOT / "llms.txt").read_text()
-    for surface_id in ('sleep-toolkit','sleep-research','hn-llm-research'):
+    for surface_id in ('sleep-toolkit','sleep-toolkit-project','sleep-research','hn-llm-research'):
         surface=next(item for item in agent_index['current_surfaces'] if item['id']==surface_id)
         url=surface['url'].rstrip('/')
         llms=re.sub(r'(?m)^(\- \[[^\n]+\]\('+re.escape(url)+r'/?\): )[^\n]+$',
-                    lambda match:match[1]+surface['description'],llms)
+                    lambda match: match[1] + surface["description"] + (
+                        f' Chinese edition (中文版): {surface["url_zh"]}' if surface_id == "sleep-toolkit-project" else ""
+                    ), llms)
     llms = llms.replace("Section pages carry both languages in the HTML and switch with `?lang=zh`.",
                         "Index, Articles, Work and About have independent English documents at their existing URLs and Chinese documents ending in `.zh.html`. Favorites retains bilingual controls and Chinese titles/reviews. Legacy `?lang=zh` links and saved language choices remain compatible.")
     companion_block='<!-- reading-companions:start -->\n## Reading companions\n\n'+ '\n'.join(

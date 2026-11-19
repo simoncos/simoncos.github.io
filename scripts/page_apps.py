@@ -33,7 +33,9 @@ def render_apps(config: dict[str, Any], site: dict[str, Any]) -> str:
             )
             continue
         project = next((project for project in site["projects"] if project["href"] == work["href"]), {})
-        facts = (f'<span class="prow-status"><span class="live-dot" aria-hidden="true"></span>{bi_value(project["status"])}</span>'
+        unavailable = project.get("availability", {}).get("state") == "unavailable"
+        dot = '' if unavailable else '<span class="live-dot" aria-hidden="true"></span>'
+        facts = (f'<span class="prow-status">{dot}{bi_value(project["status"])}</span>'
                  f'<span>{esc(project["years"])}</span><span>{bi_value(project["tags"])}</span>') if project else (
                      f'<span>{esc(work["date"])}</span><span>{bi_value(work["kind"])}</span>')
         rows.append(

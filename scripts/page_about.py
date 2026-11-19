@@ -12,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from site_entities import about_name, profile_graph, render_json_ld
 from site_languages import section_path
 
-from site_shell import bi, esc, page_config, render_document, render_meta
+from site_shell import bi, esc, i18n_attrs, page_config, render_document, render_meta
 
 
 from page_common import href_attrs, pick
@@ -101,7 +101,7 @@ def render_about(config: dict[str, Any], site: dict[str, Any], language: str = "
 def render_not_found(config: dict[str, Any]) -> str:
     page = page_config(config, "404.html")
     links = "".join(
-        f'<a class="pill" href="/{href}">{bi(en, zh)}</a>'
+        f'<a class="pill"{i18n_attrs(href=("/" + href, "/" + section_path(href, "zh")))}>{bi(en, zh)}</a>'
         for href, en, zh in (
             ("blogs.html", "Articles", "文章"),
             ("gallery.html", "Work", "作品"),
@@ -115,7 +115,7 @@ def render_not_found(config: dict[str, Any]) -> str:
         f'    <h1>{bi("Nothing here.", "这里什么都没有。")}</h1>',
         f'    <p class="nf-lede">{bi("The page you’re looking for doesn’t exist, or may have moved. Try one of these instead.", "你要找的页面不存在，或者已经搬走了。可以从这几个地方重新开始。")}</p>',
         '    <div class="nf-links">',
-        f'        <a class="pill pill-ink" href="/index.html">{bi("Back to home", "回到首页")} <span aria-hidden="true">→</span></a>{links}',
+        f'        <a class="pill pill-ink"{i18n_attrs(href=("/index.html", "/index.zh.html"))}>{bi("Back to home", "回到首页")} <span aria-hidden="true">→</span></a>{links}',
         "    </div>",
         "</main>",
     ])

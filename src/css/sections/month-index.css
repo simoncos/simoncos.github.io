@@ -389,6 +389,8 @@ a.dmi-cell.is-off > span {
 }
 
 .arow-toggle {
+    display: inline-grid;
+    place-items: center;
     flex: 0 0 auto;
     font-family: inherit;
     font-size: 22px;
@@ -403,7 +405,7 @@ a.dmi-cell.is-off > span {
     transition: transform 0.4s var(--ease);
 }
 
-.arow-toggle[aria-expanded="true"] {
+.arow.is-open .arow-toggle {
     transform: rotate(45deg);
 }
 

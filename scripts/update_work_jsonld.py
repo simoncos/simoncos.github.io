@@ -38,7 +38,7 @@ def meta(s: str, pattern: str) -> str | None:
     return html.unescape(m.group(1)) if m else None
 
 
-def block(work: dict, lang: str | None, s: str) -> str:
+def block(work: dict, lang: str | None, s: str, modified: str = "") -> str:
     page_lang = meta(s, r'<html[^>]*\slang="([^"]+)"') or "en"
     bilingual_one_page = lang is None and 'hreflang="zh-Hans"' in s and "?lang=zh" in s
     in_lang = ["en", "zh-Hans"] if bilingual_one_page else page_lang
@@ -55,7 +55,7 @@ def block(work: dict, lang: str | None, s: str) -> str:
         "author": AUTHOR,
         "creator": AUTHOR,
         "datePublished": work["date"],
-        "dateModified": max(work["date"], MODIFIED.get(work["id"], work["date"])),
+        "dateModified": max(work["date"], modified, MODIFIED.get(work["id"], work["date"])),
         "genre": work["kind"][title_lang],
         "about": sorted({t for t in (work.get("work_topic"), kind_en.lower()) if t}),
         "isPartOf": {"@type": "WebSite", "name": "simoncos", "url": f"{SITE}/"},
@@ -63,7 +63,7 @@ def block(work: dict, lang: str | None, s: str) -> str:
     if work.get("img"):
         data["image"] = f"{SITE}/{work['img']}"
     if data["@type"] == "SoftwareApplication":
-        data.update({"applicationCategory": "HealthApplication", "operatingSystem": "Web"})
+        data["applicationCategory"] = "HealthApplication"
     if data["@type"] == "MusicComposition":
         data["composer"] = AUTHOR
     if data["@type"] == "VideoObject":
@@ -83,25 +83,27 @@ def render(s: str, blk: str) -> str:
     return s[:m.end()] + blk + "\n" + s[m.end():]
 
 
-def apply(s: str, work: dict, lang: str | None) -> str:
-    return render(s, block(work, lang, s))
+def apply(s: str, work: dict, lang: str | None, modified: str = "") -> str:
+    return render(s, block(work, lang, s, modified))
 
 
 def apply_to_outputs(outputs: dict[str, str], site: dict) -> None:
     """Used by build_pages.py so generated work pages are written with their JSON-LD already in place."""
+    revisions = site.get("page_revisions", {})
     for work in site["works"]:
         for lang, rel in pages(work):
             if rel in outputs:
-                outputs[rel] = apply(outputs[rel], work, lang)
+                outputs[rel] = apply(outputs[rel], work, lang, revisions.get(rel, ""))
 
 
 def main(check: bool) -> int:
     site = json.loads((ROOT / "data/site.json").read_text(encoding="utf-8"))
     stale = []
+    revisions = site.get("page_revisions", {})
     for work in site["works"]:
         for lang, rel in pages(work):
             path = ROOT / rel
-            new = apply(path.read_text(encoding="utf-8"), work, lang)
+            new = apply(path.read_text(encoding="utf-8"), work, lang, revisions.get(rel, ""))
             if new != path.read_text(encoding="utf-8"):
                 stale.append(rel)
                 if not check:

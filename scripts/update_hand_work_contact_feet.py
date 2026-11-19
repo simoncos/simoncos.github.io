@@ -18,8 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 HAND_WORK_PAGES: tuple[tuple[str, str, str | None], ...] = (
     ("gallery/research/sleep-2016-2026.html", "../../", "zh"),
     ("gallery/research/sleep-2016-2026.en.html", "../../", "en"),
-    ("gallery/research/lola-matchups.html", "../../", None),
-    ("gallery/research/lola-draft.html", "../../", None),
+    ("gallery/research/lola-matchups.html", "../../", "en"),
+    ("gallery/research/lola-draft.html", "../../", "en"),
     ("gallery/sharing/designing-design/index.html", "../../../", "zh"),
     ("gallery/sharing/designing-design/index.en.html", "../../../", "en"),
     ("gallery/sharing/limits-of-problem-analysis/index.html", "../../../", "zh"),

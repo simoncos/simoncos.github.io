@@ -1,11 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>League of Legends: The map of champion matchups</title>
 <meta name="description" content="Every champion pair in 222,616 ranked League of Legends matches: 606 of 8,128 pairs show a clear edge, almost all from the stronger to the weaker champion.">
 <meta name="author" content="simoncos">
+<script>
+(() => {
+  const url = new URL(location.href);
+  const lang = url.searchParams.get('lang')?.toLowerCase();
+  if (!lang || !/^(en|zh)/.test(lang)) return;
+  const target = lang.startsWith('zh') ? '.zh.html' : '.html';
+  url.pathname = url.pathname.replace(/(?:\.zh)?\.html$/, target);
+  url.searchParams.delete('lang');
+  location.replace(url);
+})();
+</script>
 <link rel="canonical" href="https://simoncos.github.io/gallery/research/lola-matchups.html">
 <!-- work-jsonld:start -->
 <script type="application/ld+json">
@@ -16,10 +27,7 @@
  "headline": "League of Legends: The map of champion matchups",
  "description": "Every champion pair in 222,616 ranked League of Legends matches: 606 of 8,128 pairs show a clear edge, almost all from the stronger to the weaker champion.",
  "url": "https://simoncos.github.io/gallery/research/lola-matchups.html",
- "inLanguage": [
-  "en",
-  "zh-Hans"
- ],
+ "inLanguage": "en",
  "author": {
   "@type": "Person",
   "name": "simoncos",
@@ -33,7 +41,7 @@
   "url": "https://simoncos.github.io/about.html"
  },
  "datePublished": "2026-10-11",
- "dateModified": "2026-10-13",
+ "dateModified": "2026-11-19",
  "genre": "Research",
  "about": [
   "research"
@@ -64,7 +72,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/icons/apple-touch-icon.png">
 <link rel="alternate" hreflang="en" href="https://simoncos.github.io/gallery/research/lola-matchups.html">
-<link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/gallery/research/lola-matchups.html?lang=zh">
+<link rel="alternate" hreflang="zh-Hans" href="https://simoncos.github.io/gallery/research/lola-matchups.zh.html">
 <link rel="alternate" hreflang="x-default" href="https://simoncos.github.io/gallery/research/lola-matchups.html">
 <meta name="color-scheme" content="dark">
 <style>:root{
@@ -94,9 +102,9 @@ code{font-family:var(--mono);font-size:.82em;background:rgba(255,255,255,.07);pa
 .top>*{pointer-events:auto}
 .brand{display:flex;align-items:center;gap:8px;color:var(--gold);text-decoration:none;font-weight:700;letter-spacing:.14em;font-size:.82rem;background:rgba(6,9,18,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:7px 12px;border-radius:999px;border:1px solid var(--line)}
 .lang{display:flex;background:rgba(6,9,18,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:999px;padding:3px}
-.lang button{border:0;background:transparent;color:var(--mute);font:600 .8rem var(--sans);padding:6px 14px;border-radius:999px;cursor:pointer;transition:.25s}
-.lang button[aria-pressed="true"]{background:var(--gold);color:#1a1405}
-.lang button:hover:not([aria-pressed="true"]){color:var(--ink)}
+.lang a{border:0;background:transparent;color:var(--mute);font:600 .8rem var(--sans);padding:6px 14px;border-radius:999px;text-decoration:none;transition:.25s}
+.lang a[aria-current="page"]{background:var(--gold);color:#1a1405}
+.lang a:hover:not([aria-current="page"]){color:var(--ink)}
 
 .dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:14px;align-items:flex-end}
 .dots a{display:flex;align-items:center;gap:10px;color:var(--mute);text-decoration:none;font-size:.72rem;letter-spacing:.04em}
@@ -481,8 +489,8 @@ figcaption,.ct,.result,.net-detail,.map-side{overflow-wrap:anywhere}
 <header class="top">
   <a class="brand" href="#top" aria-label="LoLA"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 2l8.66 5v10L12 22 3.34 17V7z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7l4.33 2.5v5L12 17l-4.33-2.5v-5z" fill="currentColor" opacity=".85"/></svg><span>LoLA</span></a>
   <div class="lang" role="group" aria-label="Language / 语言">
-    <button type="button" data-lang="en" lang="en">EN</button>
-    <button type="button" data-lang="zh" lang="zh-Hans">中文</button>
+    <a href="lola-matchups.html" hreflang="en" lang="en" aria-current="page">EN</a>
+    <a href="lola-matchups.zh.html" hreflang="zh-Hans" lang="zh-Hans">中文</a>
   </div>
 </header>
 <nav class="dots" id="dots" data-i18n-aria="nav.aria" aria-label="Chapters"><a href="#read" data-for="read"><span>Reading a matchup</span><i></i></a><a href="#map" data-for="map"><span>The map</span><i></i></a><a href="#net" data-for="net"><span>The network</span><i></i></a><a href="#strength" data-for="strength"><span>Strength</span><i></i></a><a href="#real" data-for="real"><span>Is it real?</span><i></i></a><a href="#noise" data-for="noise"><span>Noise check</span><i></i></a><a href="#end" data-for="end"><span>Verdict</span><i></i></a></nav>
@@ -760,7 +768,7 @@ figcaption,.ct,.result,.net-detail,.map-side{overflow-wrap:anywhere}
     font-size: inherit;
     line-height: inherit;
 }</style>
-<footer class="piece-contact" aria-label="Contact and follow" data-zh-aria-label="联系与订阅" data-i18n="aria-label"><p class="piece-contact-line"><a href="../../feed.zh.xml">RSS <span lang="zh-Hans">中文</span></a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="../../feed.en.xml">RSS EN</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://github.com/simoncos">GitHub</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/chezhao/">LinkedIn</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://x.com/simonc_os">X</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="mailto:simonzhao1024@gmail.com"><span data-l="en">Email</span><span data-l="zh" lang="zh-Hans">邮件</span></a></p></footer>
+<footer class="piece-contact" aria-label="Contact and follow" data-zh-aria-label="联系与订阅" data-i18n="aria-label"><p class="piece-contact-line"><a href="../../feed.en.xml">RSS EN</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://github.com/simoncos">GitHub</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/chezhao/">LinkedIn</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="https://x.com/simonc_os">X</a><span class="piece-contact-sep" aria-hidden="true">·</span><a href="mailto:simonzhao1024@gmail.com">Email</a></p></footer>
 <!-- piece-contact:end -->
 </footer>
 
@@ -1258,20 +1266,27 @@ function mkRender(sel,draw){
 const textUpdates=[];
 
 /* ---------- language ---------- */
-function applyLang(l,persist){
-  lang=l;document.documentElement.lang=l==='zh'?'zh-Hans':'en';
-  document.title=t('meta.title');$('meta[name=description]').setAttribute('content',plain(t('meta.desc',FMT)));
-  $$('[data-i18n]').forEach(e=>{e.innerHTML=t(e.dataset.i18n,FMT)});
+function syncLanguageLinks(){
+  $$('.lang a').forEach(link=>{
+    const target=new URL(link.href);
+    target.search=location.search;
+    target.searchParams.delete('lang');
+    target.hash=location.hash;
+    link.href=target.href;
+  });
+}
+window.addEventListener('hashchange', syncLanguageLinks);
+function applyLang(){
+  lang=document.documentElement.lang==='zh-Hans'?'zh':'en';
+  syncLanguageLinks();
+  $$('[data-i18n]:not(.piece-contact)').forEach(e=>{e.innerHTML=t(e.dataset.i18n,FMT)});
   $$('[data-i18n-aria]').forEach(e=>e.setAttribute('aria-label',t(e.dataset.i18nAria)));
-  $$('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));
-  if(persist){try{localStorage.setItem('lola-lang',l)}catch(e){}}
   renderSegs();buildNav();fillProse();
   textUpdates.forEach(f=>f());
   redraws.forEach(o=>o.render());
   fillAbs();
 }
 function fillAbs(){const a=$('#absAnswer'),l=$('#absList');if(!a||!l)return;const s=$('#end .answer');a.innerHTML=s?s.innerHTML:'';l.innerHTML=$$('#end .vcol.yes li').slice(0,3).map(x=>'<li>'+x.innerHTML+'</li>').join('')}
-$$('.lang button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang,true)));
 const prose=(id,key,extra)=>{const e=$('#'+id);if(e)e.innerHTML=t(key,F(extra))};
 function fillProse(){
   const dir=S.val.fdr_edges_raw.share_direction_persists;
@@ -2014,15 +2029,12 @@ textUpdates.push(()=>{$('#noiseCap').innerHTML=t('noise.cap',F());});
 
 /* ---------- init ---------- */
 (function init(){
-  const norm=v=>{v=String(v||'').toLowerCase();return /^zh/.test(v)?'zh':/^en/.test(v)?'en':''};
-  let l=norm(Q.get('lang'));
-  if(!l){try{l=norm(localStorage.getItem('lola-lang'))}catch(e){}}
-  if(!l)l=(navigator.language||'en').toLowerCase().startsWith('zh')?'zh':'en';
   heroSlots();heroBg();heroCount();
   computeOrder();sizeHeat();renderSegs();
   heat.cv.style.touchAction='pan-y';
   state.sel=N.indexOf('Ahri');
-  applyLang(l==='zh'?'zh':'en',false);
+  applyLang();
+  document.documentElement.classList.remove('no-js');
   netRefresh();
   $('#chPick').value=String(state.sel);
   refreshMap();

@@ -2,6 +2,7 @@
 import json
 import sys
 import unittest
+from urllib.parse import urlsplit
 from pathlib import Path
 from bs4 import BeautifulSoup
 ROOT=Path(__file__).resolve().parents[1]
@@ -29,8 +30,12 @@ class Readers(unittest.TestCase):
                 self.assertTrue(all(soup.select_one('#'+part['id']) for part in reader['sections']))
                 self.assertIn(path,str([topic.get('related')for topic in site['work_topics']]))
                 for link in soup.select('main a[href]'):
-                    url=link['href'].split('#')[0]
-                    if url:self.assertTrue((ROOT/path).parent.joinpath(url).exists(),url)
+                    url = urlsplit(link['href'])
+                    target = (ROOT / path).parent / url.path if url.path else ROOT / path
+                    self.assertTrue(target.is_file(), link['href'])
+                    if url.fragment:
+                        target_html = BeautifulSoup(target.read_text(), 'html.parser')
+                        self.assertIsNotNone(target_html.find(id=url.fragment), link['href'])
         text=(ROOT/'topics/personal-ai-system.en.html').read_text();self.assertIn('/j, not !j',text)
         self.assertIn('not supply complete provider versions',text)
 

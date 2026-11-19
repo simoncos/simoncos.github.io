@@ -1,7 +1,7 @@
 """Film pages: a screening, a short introduction, and related reading."""
 
 from piece_contact_foot import render_piece_contact_foot
-from site_shell import bi, bi_value, esc, lang_pair, page_config, render_document, render_meta, versioned_asset
+from site_shell import bi, bi_value, esc, i18n_attrs, lang_pair, page_config, render_document, render_meta, versioned_asset
 
 
 def render_film(config, site, work):
@@ -25,12 +25,12 @@ def render_film(config, site, work):
         ]
     main = "\n".join([
         '<main id="main" class="film-page enter" tabindex="-1">',
-        f'  <a class="pill" href="{up}gallery.html#film">← {bi("Films", "影像")}</a>',
+        f'  <a class="pill"{i18n_attrs(href=(up + "gallery.html#film", up + "gallery.zh.html#film"))}>← {bi("Films", "影像")}</a>',
         '  <header class="film-heading">',
         f'    <div><p class="film-kicker">{bi("Debut art film", "首部艺术短片")} · 2026</p>',
         f'    <h1>{bi(en, zh)}</h1>',
         f'    <p class="film-subtitle">{bi(zh, en)}</p></div>',
-        '    <p class="film-byline"><a href="../../about.html">趙澈 Che Zhao · simoncos</a></p>',
+        f'    <p class="film-byline"><a{i18n_attrs(href=(up + "about.html", up + "about.zh.html"))}>趙澈 Che Zhao · simoncos</a></p>',
         '  </header>',
         '  <figure class="film-screen">',
         '    <div class="film-frame">',

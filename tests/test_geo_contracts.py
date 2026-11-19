@@ -90,12 +90,12 @@ class SleepEvidenceTests(unittest.TestCase):
                     cells = parser.rows[f"score-{group}"]
                     self.assertEqual(cells[1], f"{len(rows):,}")
                     self.assertEqual(cells[2], f"{statistics.mean(row['quality'] for row in rows):.1f}%")
-                # Later typography keeps published hero figures (currently 83.2% / 7.1h).
-                # The evidence table above is the contract for record-weighted scatter means.
                 hero = html.split('class="hero-stats"', 1)[1].split('class="hero-actions"', 1)[0]
-                self.assertIn("3,656", hero)
-                self.assertRegex(hero, r'class="hero-stat-num">\d+(?:\.\d+)?%</span>')
-                self.assertRegex(hero, r'class="hero-stat-num">\d+(?:\.\d+)?h</span>')
+                duration = statistics.mean(row["duration"] for row in records)
+                for value in (f"{len(records):,}", f"{overall:.1f}%", f"{duration:.1f}h"):
+                    self.assertIn(f'class="hero-stat-num">{value}</span>', hero)
+                self.assertNotRegex(hero, r"(?i)valid nights|有效夜晚")
+                self.assertNotRegex(html, r"ten-year peak in 2019|2019 年睡眠质量升到十年最高")
                 self.assertEqual(max(data["yearly_summary"], key=lambda year: data["yearly_summary"][year]["quality_mean"]), "2020")
 
 

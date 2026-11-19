@@ -77,6 +77,7 @@ from page_work import (
     render_work,
 )
 from page_film import render_film
+from page_lola import lola_pages
 
 
 SITE_DATA_PATH = ROOT / "data/site.json"
@@ -113,6 +114,7 @@ def build() -> dict[str, str]:
     for work in site["works"]:
         if work.get("film"):
             outputs[work["href"]] = render_film(config, site, work)
+    outputs.update(lola_pages(config, site))
     from update_work_jsonld import apply_to_outputs
     apply_to_outputs(outputs, site)  # work pages carry schema.org JSON-LD generated from site.json
     outputs.update(redirect_pages(outputs))

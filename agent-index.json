@@ -5,7 +5,7 @@
     "owner": "simoncos / Che Zhao",
     "motto": "connecting the dots.",
     "summary": "Personal site: software, AI collaboration, data projects, research, essays, talks, music and field notes.",
-    "last_updated": "2026-10-22"
+    "last_updated": "2026-11-19"
   },
   "language_policy": {
     "default_language": "en",
@@ -13,10 +13,10 @@
       "en",
       "zh"
     ],
-    "english_page_pattern": "Articles/research/toolkit/topic readers: *.en.html; core sections: existing *.html URLs.",
-    "chinese_page_pattern": "Articles/research/toolkit/topic readers: *.html; core sections: *.zh.html.",
+    "english_page_pattern": "Articles, Sleep Toolkit, sleep research and topic readers use *.en.html. Core sections and LoLA use the existing *.html English URLs.",
+    "chinese_page_pattern": "Articles, Sleep Toolkit, sleep research and topic readers use *.html. Core sections and LoLA use *.zh.html.",
     "agent_preference": "Prefer English pages when both versions exist, unless the user asks for Chinese.",
-    "section_pages": "Index, Articles, Work and About have independent documents: existing .html URLs are English; .zh.html URLs are Chinese. Favorites keeps bilingual controls and Chinese reviews. Legacy ?lang= and saved language choices remain supported."
+    "section_pages": "Index, Articles, Work and About have independent documents: existing .html URLs are English; .zh.html URLs are Chinese. Favorites keeps bilingual controls and Chinese reviews. Explicit language URLs keep their language. Legacy ?lang= remains supported, and the bare homepage honors a saved language choice."
   },
   "entrypoints": [
     {
@@ -94,19 +94,24 @@
       "type": "project",
       "label": "Sleep Toolkit",
       "url": "https://simoncos.github.io/apps/sleep-toolkit.en.html",
-      "description": "Project context, report preview, and routes to the web app and the ten-year sleep research.",
+      "description": "The web app is unavailable. Preview a report or use the local CLI to process SleepCycle exports.",
       "url_zh": "https://simoncos.github.io/apps/sleep-toolkit.html",
-      "url_en": "https://simoncos.github.io/apps/sleep-toolkit.en.html"
+      "url_en": "https://simoncos.github.io/apps/sleep-toolkit.en.html",
+      "web_app_availability": {
+        "state": "unavailable",
+        "checked": "2026-11-19",
+        "http_status": 404
+      }
     },
     {
       "id": "sleep-toolkit",
       "type": "web_app",
       "label": "Sleep Toolkit web app",
       "url": "https://sleep-toolkit-production.up.railway.app",
-      "description": "Web app unavailable: its public address returned “Application not found” on 2026-11-13. The project documentation and local workflow remain below.",
+      "description": "The web app returned a 404 on November 19, 2026. You can still preview a report or process an export on your own computer.",
       "availability": {
         "state": "unavailable",
-        "checked": "2026-10-05",
+        "checked": "2026-11-19",
         "http_status": 404
       }
     },
@@ -161,14 +166,18 @@
       "type": "research_artifact",
       "label": "League of Legends: Does the draft decide the game? (英雄联盟：选人阶段决定胜负吗？)",
       "url": "https://simoncos.github.io/gallery/research/lola-draft.html",
-      "description": "Bilingual interactive essay built from 222,652 ranked League of Legends matches (Pre-Season 2016): the draft alone predicts winners only modestly (AUC about 0.57), the game state at 10 and 20 minutes far better (0.78, 0.89), and champion-pair interactions do not help. Learning-curve and ban-salience results are exploratory; aggregated statistics only, not endorsed by Riot Games."
+      "description": "Bilingual interactive essay built from 222,652 ranked League of Legends matches (Pre-Season 2016): the draft alone predicts winners only modestly (AUC about 0.57), the game state at 10 and 20 minutes far better (0.78, 0.89), and champion-pair interactions do not help. Learning-curve and ban-salience results are exploratory; aggregated statistics only, not endorsed by Riot Games.",
+      "url_en": "https://simoncos.github.io/gallery/research/lola-draft.html",
+      "url_zh": "https://simoncos.github.io/gallery/research/lola-draft.zh.html"
     },
     {
       "id": "lola-matchups",
       "type": "research_artifact",
       "label": "League of Legends: The map of champion matchups (英雄联盟：英雄对位地图)",
       "url": "https://simoncos.github.io/gallery/research/lola-matchups.html",
-      "description": "Bilingual interactive essay on every champion pair from 222,616 ranked League of Legends matches (Pre-Season 2016): 606 of 8,128 pairs show a clear edge, nearly all pointing from the stronger to the weaker champion; champion strength explains about 97% of pair win-rate differences and pair-specific interaction about 1.2%; no rock-paper-scissors cycles. Predictive, not causal; exploratory; aggregated statistics only, not endorsed by Riot Games."
+      "description": "Bilingual interactive essay on every champion pair from 222,616 ranked League of Legends matches (Pre-Season 2016): 606 of 8,128 pairs show a clear edge, nearly all pointing from the stronger to the weaker champion; champion strength explains about 97% of pair win-rate differences and pair-specific interaction about 1.2%; no rock-paper-scissors cycles. Predictive, not causal; exploratory; aggregated statistics only, not endorsed by Riot Games.",
+      "url_en": "https://simoncos.github.io/gallery/research/lola-matchups.html",
+      "url_zh": "https://simoncos.github.io/gallery/research/lola-matchups.zh.html"
     },
     {
       "id": "reading-roundups",
@@ -476,7 +485,10 @@
       },
       "state": "public_entry",
       "date": "2026-10-10",
-      "url": "gallery/research/lola-draft.html",
+      "url": {
+        "en": "gallery/research/lola-draft.html",
+        "zh": "gallery/research/lola-draft.zh.html"
+      },
       "language_mode": "language pair"
     },
     {
@@ -488,7 +500,10 @@
       },
       "state": "public_entry",
       "date": "2026-10-11",
-      "url": "gallery/research/lola-matchups.html",
+      "url": {
+        "en": "gallery/research/lola-matchups.html",
+        "zh": "gallery/research/lola-matchups.zh.html"
+      },
       "language_mode": "language pair"
     },
     {

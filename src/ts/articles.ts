@@ -99,6 +99,7 @@
         } catch (_error) {
             // Not fatal: the list still filters.
         }
+        window.SITE_SHELL?.syncLangToggle?.();
         // A referrer drops the #topic-…, so the article's "← Articles" reads
         // the whole address from here.
         try {
@@ -143,21 +144,19 @@
         rows.forEach((other) => {
             const open = other === row && !other.classList.contains('is-open');
             other.classList.toggle('is-open', open);
-            other.querySelectorAll('.arow-title, .arow-toggle').forEach((button) => {
-                button.setAttribute('aria-expanded', open ? 'true' : 'false');
-            });
+            other.querySelector('.arow-title')?.setAttribute('aria-expanded', String(open));
         });
     }
 
     rows.forEach((row) => {
         // A click anywhere on the row opens or closes its excerpt, not only
-        // on the title or the toggle, which stay the controls for keyboards
-        // and screen readers. Links and other buttons keep their own action;
+        // on the title, which is the keyboard control. Links and other
+        // buttons keep their own action;
         // an open excerpt is left alone, so reading in it or selecting text
         // does not fold it away.
         row.addEventListener('click', (event) => {
             const target = event.target as Element;
-            if (!target.closest('.arow-title, .arow-toggle')) {
+            if (!target.closest('.arow-title')) {
                 if (target.closest('a, button, input, label, .arow-ex')) return;
                 const selection = window.getSelection();
                 if (selection && !selection.isCollapsed && selection.containsNode(row, true)) return;

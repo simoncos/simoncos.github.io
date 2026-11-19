@@ -11,7 +11,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from site_entities import render_json_ld, website
 from site_languages import section_path
 
-from site_shell import bi, bi_value, esc, i18n_attrs, lang_pair, page_config, render_document, render_meta, updated_label
+from site_shell import bi, bi_value, esc, i18n_attrs, lang_pair, page_config, render_document, render_meta
 
 
 from page_common import ARTICLE_KIND, NEWEST_SHOWN, TOPICS, href_attrs, work_place, work_title
@@ -169,7 +169,6 @@ def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str
         )
 
     n_articles = len(articles)
-    updated_en, updated_zh = updated_label(config["site_updated"])
     main = "\n".join([
         '<main id="main" class="home enter" tabindex="-1">',
         '    <section class="sel" data-sel aria-labelledby="sel-title">',
@@ -188,8 +187,7 @@ def render_home(config: dict[str, Any], site: dict[str, Any], articles: dict[str
         "    </section>",
         '    <section class="newest" aria-labelledby="newest-title">',
         '        <div class="newest-head">',
-        f'            <div class="newest-title"><h2 id="newest-title">{bi("Newest", "最新")}</h2>'
-        f'<span>{bi(updated_en, updated_zh)}</span></div>',
+        f'            <div class="newest-title"><h2 id="newest-title">{bi("Newest", "最新")}</h2></div>',
         f'            <div class="seg" role="group"{i18n_attrs(aria_label=("Topics", "主题"))}>',
         *chips,
         "            </div>",

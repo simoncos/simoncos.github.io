@@ -278,6 +278,10 @@ html {
   color: #e7faff;
 }
 
+#score-summary {
+  scroll-margin-top: 6.9rem;
+}
+
 .editorial-method {
   padding: 4.5rem 0;
   border-bottom: 1px solid var(--divider);

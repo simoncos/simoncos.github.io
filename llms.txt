@@ -2,7 +2,7 @@
 
 > Personal site of simoncos / Che Zhao: software, AI collaboration, data projects, research, essays, talks, music and field notes.
 
-The motto for this site is "connecting the dots." The site is static and bilingual. It has five sections: Index, Articles, Work, Favorites and About. Articles and project pages are one language per file: English pages generally end in `.en.html`; Chinese pages use the same slug without `.en.html`. Index, Articles, Work and About have independent English documents at their existing URLs and Chinese documents ending in `.zh.html`. Favorites retains bilingual controls and Chinese titles/reviews. Legacy `?lang=zh` links and saved language choices remain compatible.
+The motto for this site is "connecting the dots." The site is static and bilingual. It has five sections: Index, Articles, Work, Favorites and About. Articles and the sleep reports generally use `.en.html` for English and `.html` for Chinese. The LoLA research essays use `.html` for English and `.zh.html` for Chinese. Index, Articles, Work and About have independent English documents at their existing URLs and Chinese documents ending in `.zh.html`. Favorites retains bilingual controls and Chinese titles/reviews. Named English and Chinese pages keep their language. Legacy `?lang=zh` links are supported.
 
 <!-- site-identity:start -->
 ## Authorship and dates
@@ -19,7 +19,7 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 
 - [Index](https://simoncos.github.io/): Selected work, then the newest articles and works with a topic filter.
 - [About](https://simoncos.github.io/about.html): Short profile, motto and contact links.
-- [Apps (应用)](https://simoncos.github.io/apps.html): Every app in one list, live apps first, then those in progress; each opens to its own page or site.
+- [Apps (应用)](https://simoncos.github.io/apps.html): Every app in one list, public project pages first, then those in progress.
 - [Articles](https://simoncos.github.io/blogs.html): Long-form writing archive, filterable by topic, with series.
 - [Work](https://simoncos.github.io/gallery.html): One view per type: App, Games, Talks & Explainers, Research, Music and Films.
 - [Favorites (收藏)](https://simoncos.github.io/favorites.html): Every book, film, album and game rated five stars on Douban, newest first, with the short reviews as written there. Page chrome is bilingual; titles and reviews are in Chinese.
@@ -28,8 +28,8 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 
 - [HN Field Notes](https://hn-waywo-dashboard.vercel.app/): Read-only project search, HN source evidence and monthly candidate trends. Updated monthly.
 - [HN × LLM: Model Releases and Discussion](https://simoncos-hn-llm-research.vercel.app/): Explore how Hacker News discusses model releases across 14 AI companies, with source threads and coverage limits. An ongoing study.
-- [Sleep Toolkit project](https://simoncos.github.io/apps/sleep-toolkit.en.html): Project context, report preview, and routes to the tool and the ten-year sleep research. Chinese edition (中文版): https://simoncos.github.io/apps/sleep-toolkit.html
-- [Sleep Toolkit web app](https://sleep-toolkit-production.up.railway.app): Web app unavailable: its public address returned “Application not found” on 2026-11-13. The project documentation and local workflow remain below.
+- [Sleep Toolkit project](https://simoncos.github.io/apps/sleep-toolkit.en.html): The web app is unavailable. Preview a report or use the local CLI to process SleepCycle exports. Chinese edition (中文版): https://simoncos.github.io/apps/sleep-toolkit.html
+- [Sleep Toolkit web app](https://sleep-toolkit-production.up.railway.app): The web app returned a 404 on November 19, 2026. You can still preview a report or process an export on your own computer.
 - [Ten Years of Sleep Records, Analyzed](https://simoncos.github.io/gallery/research/sleep-2016-2026.en.html): A study of 3,656 sleep records: sleep rhythms, the body, and changes across a decade.
 
 ## Key artifacts
@@ -41,9 +41,9 @@ The motto for this site is "connecting the dots." The site is static and bilingu
 
 - [Zhihu 2015: People, Connections and Influence](https://simoncos.github.io/gallery/research/zhihu-2015.html): Bilingual interactive research page comparing the statistics, networks, influence rankings and topics from a 2015 sample. The two original articles remain in Articles.
 
-- [League of Legends: Does the draft decide the game? (英雄联盟：选人阶段决定胜负吗？)](https://simoncos.github.io/gallery/research/lola-draft.html): Bilingual interactive essay built from 222,652 ranked League of Legends matches (Pre-Season 2016): the draft alone predicts winners only modestly (AUC about 0.57), the game state at 10 and 20 minutes far better (0.78, 0.89), and champion-pair interactions do not help. Learning-curve and ban-salience results are exploratory; aggregated statistics only, not endorsed by Riot Games.
+- [League of Legends: Does the draft decide the game? (英雄联盟：选人阶段决定胜负吗？)](https://simoncos.github.io/gallery/research/lola-draft.html): Bilingual interactive essay built from 222,652 ranked League of Legends matches (Pre-Season 2016): the draft alone predicts winners only modestly (AUC about 0.57), the game state at 10 and 20 minutes far better (0.78, 0.89), and champion-pair interactions do not help. Learning-curve and ban-salience results are exploratory; aggregated statistics only, not endorsed by Riot Games. [中文版](https://simoncos.github.io/gallery/research/lola-draft.zh.html)
 
-- [League of Legends: The map of champion matchups (英雄联盟：英雄对位地图)](https://simoncos.github.io/gallery/research/lola-matchups.html): Bilingual interactive essay on every champion pair from 222,616 ranked League of Legends matches (Pre-Season 2016): 606 of 8,128 pairs show a clear edge, nearly all pointing from the stronger to the weaker champion; champion strength explains about 97% of pair win-rate differences and pair-specific interaction about 1.2%; no rock-paper-scissors cycles. Predictive, not causal; exploratory; aggregated statistics only, not endorsed by Riot Games.
+- [League of Legends: The map of champion matchups (英雄联盟：英雄对位地图)](https://simoncos.github.io/gallery/research/lola-matchups.html): Bilingual interactive essay on every champion pair from 222,616 ranked League of Legends matches (Pre-Season 2016): 606 of 8,128 pairs show a clear edge, nearly all pointing from the stronger to the weaker champion; champion strength explains about 97% of pair win-rate differences and pair-specific interaction about 1.2%; no rock-paper-scissors cycles. Predictive, not causal; exploratory; aggregated statistics only, not endorsed by Riot Games. [中文版](https://simoncos.github.io/gallery/research/lola-matchups.zh.html)
 
 - [Personal Information Systems in the AI Era](https://simoncos.github.io/gallery/sharing/pkm-2026-06-07/index.html): Talk slides on capture, memory, agents, projects, and boundaries. In Chinese only.
 - [Endless Echoes (漫无止尽的回响)](https://simoncos.github.io/gallery/games/endless-echoes.html): A game in Work → Games: a branching music riddle through 36 songs, first set in 2017 in Xiami playlist notes and restored from the Xiami archive and its Douban backup.

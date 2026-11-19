@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simoncos.github.io/</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/gallery.html</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/favorites.html</loc>
@@ -30,19 +30,19 @@
   </url>
   <url>
     <loc>https://simoncos.github.io/blogs.html</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/apps.html</loc>
-    <lastmod>2026-07-24</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/apps/sleep-toolkit.html</loc>
-    <lastmod>2026-07-24</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/apps/sleep-toolkit.en.html</loc>
-    <lastmod>2026-07-24</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/about.html</loc>
@@ -122,11 +122,11 @@
   </url>
   <url>
     <loc>https://simoncos.github.io/gallery/research/sleep-2016-2026.html</loc>
-    <lastmod>2026-04-23</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/gallery/research/sleep-2016-2026.en.html</loc>
-    <lastmod>2026-04-23</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/gallery/sharing/pkm-2026-06-07/index.html</loc>
@@ -582,11 +582,11 @@
   </url>
   <url>
     <loc>https://simoncos.github.io/gallery/research/lola-draft.html</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/gallery/research/lola-matchups.html</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/blogs/reading-2015-first-half.html</loc>
@@ -714,15 +714,15 @@
   </url>
   <url>
     <loc>https://simoncos.github.io/blogs.zh.html</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/gallery.zh.html</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/index.zh.html</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://simoncos.github.io/topics/long-term-sleep-data.en.html</loc>
@@ -739,5 +739,13 @@
   <url>
     <loc>https://simoncos.github.io/topics/personal-ai-system.html</loc>
     <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/gallery/research/lola-draft.zh.html</loc>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://simoncos.github.io/gallery/research/lola-matchups.zh.html</loc>
+    <lastmod>2026-11-19</lastmod>
   </url>
 </urlset>

@@ -94,7 +94,7 @@ def render_song(config: dict[str, Any], site: dict[str, Any], song: dict[str, An
     main = "\n".join([
         '<main id="main" class="board song enter" tabindex="-1">',
         '    <div class="board-bar">',
-        f'        <div class="board-crumb"><a class="pill" href="{up}gallery.html#music">← {bi("Work", "作品")}</a>'
+        f'        <div class="board-crumb"><a class="pill"{i18n_attrs(href=(up + "gallery.html#music", up + "gallery.zh.html#music"))}>← {bi("Work", "作品")}</a>'
         f'<span class="muted">{bi("Music", "音乐")}</span></div>',
         "    </div>",
         '    <div class="bento">',

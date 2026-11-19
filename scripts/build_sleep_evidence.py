@@ -72,7 +72,7 @@ def render(s,lang):
         for key, rows, en_label, zh_label in groups
     )
     scoretable = (
-        f'<div class="evidence-table-scroll" tabindex="0" role="region" aria-label="{choose("Quality means and their denominators", "质量分均值与分母")}"><table class="evidence-table"><caption>{choose("Which records does each average describe?", "均值与样本范围")}</caption><thead><tr><th>{choose("Group", "分组")}</th><th>n</th><th>{choose("Mean", "均值")}</th></tr></thead><tbody>{scorerows}</tbody></table></div>'
+        f'<div id="score-summary" class="evidence-table-scroll" tabindex="0" role="region" aria-label="{choose("Quality means and their denominators", "质量分均值与分母")}"><table class="evidence-table"><caption>{choose("Which records does each average describe?", "均值与样本范围")}</caption><thead><tr><th>{choose("Group", "分组")}</th><th>n</th><th>{choose("Mean", "均值")}</th></tr></thead><tbody>{scorerows}</tbody></table></div>'
     )
     bdrows=''.join(f'<li>{r["year"]}{choose(" (Jan–Mar)","（1–3 月）") if r["year"]=="2026" else ""}: n={r["bd_n"]}, {r["bd_mean"]:.2f} {choose("interruptions/h","次/小时")}</li>' for r in s['bd_years'])
     metrics=[

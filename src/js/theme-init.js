@@ -83,10 +83,10 @@
         const current = new URL(window.location.href);
         const query = current.searchParams.get('lang');
         const requested = query === 'en' || query === 'zh' ? query : null;
-        // The legacy English entry respects a saved choice. An explicit
-        // Chinese document keeps its language even when storage differs.
-        const legacyEntry = current.pathname === '/' || current.pathname.endsWith('/' + sectionEn);
-        const chosen = requested || (legacyEntry && read(localStorage, LANG_KEY) === 'zh' ? 'zh' : fixed);
+        // Only the bare home entry uses a saved preference. Named documents
+        // keep their language unless a legacy ?lang= explicitly overrides it.
+        const bareHome = current.pathname === '/' && !current.search && !current.hash;
+        const chosen = requested || (bareHome && read(localStorage, LANG_KEY) === 'zh' ? 'zh' : fixed);
         if (chosen === 'zh' || chosen === 'en') {
             try {
                 localStorage.setItem(LANG_KEY, chosen);

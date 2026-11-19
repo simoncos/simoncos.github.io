@@ -1,8 +1,9 @@
 """Article pipeline: listing."""
+import json
 import logging
 from collections import defaultdict
 
-from site_shell import bi, esc, i18n_attrs, apply_shell, load_config, page_config
+from site_shell import ROOT, bi, esc, i18n_attrs, apply_shell, load_config, page_config
 from site_languages import section_path
 from article_content import BlogGenerationError, MONTH_NAMES, TAG_LABELS, parse_frontmatter_date, series_info, series_parts, tag_slug
 
@@ -73,7 +74,7 @@ def render_date_index(month_counts):
     ])
 
 
-def render_article_row(group, article_groups, series_meta, is_open):
+def render_article_row(group, article_groups, series_meta, is_open, aliases=()):
     """One row of the Articles list: date, title, other-language title,
     series pill, and the folding excerpt."""
     languages = group.get('languages') or {}
@@ -114,7 +115,7 @@ def render_article_row(group, article_groups, series_meta, is_open):
             '<span class="series-go" aria-hidden="true">→</span></button>'
         )
 
-    search = ' '.join([title_en, title_zh, desc_en, desc_zh]).lower()
+    search = ' '.join([title_en, title_zh, desc_en, desc_zh, *aliases]).lower()
     bilingual = '<span class="arow-bi"><span lang="zh-Hans">中文</span> / EN</span>' if en and zh else ''
     tag_pills = ''.join(
         f'<span class="tag-label">{bi(*TAG_LABELS.get(tag, (tag, tag)))}</span>' for tag in tags
@@ -130,8 +131,7 @@ def render_article_row(group, article_groups, series_meta, is_open):
         f'{bi(title_en, title_zh)}</button>',
         f'                            {alt}{series_html}' if alt or series_html else '',
         '                        </span>',
-        f'                        <button class="arow-toggle" type="button" aria-expanded="{expanded}" aria-controls="ex-{esc(group_id)}"'
-        f'{i18n_attrs(aria_label=("Toggle excerpt", "展开摘要"))}>+</button>',
+        '                        <span class="arow-toggle" aria-hidden="true">+</span>',
         '                    </div>',
         f'                    <div class="arow-ex" id="ex-{esc(group_id)}">',
         '                        <div class="arow-ex-clip"><div class="arow-ex-in">',
@@ -225,6 +225,8 @@ def render_articles_main(article_groups, series_meta):
         f'<a class="rss-pill"{i18n_attrs(href=("feed.en.xml", "feed.zh.xml"))}>RSS <span aria-hidden="true">↗</span></a>'
     )
 
+    source = json.loads((ROOT / "data/site.json").read_text())
+    search_aliases = source.get("article_search_aliases", {})
     months = defaultdict(list)
     for group in groups:
         months[(group.get('date') or '')[:7]].append(group)
@@ -233,7 +235,7 @@ def render_articles_main(article_groups, series_meta):
     for key in sorted(months, reverse=True):
         rows = []
         for group in months[key]:
-            rows.append(render_article_row(group, groups, series_meta, first))
+            rows.append(render_article_row(group, groups, series_meta, first, search_aliases.get(group["id"], ())))
             first = False
         label_en, label_zh = month_label(key) if key else ('Undated', '未注明日期')
         n_en, n_zh = count_label(len(months[key]))

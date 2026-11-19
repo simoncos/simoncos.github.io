@@ -97,7 +97,7 @@ def render_music_riddle(config):
     path_html = '<div class="echo-path echo-js" data-path hidden><button type="button" class="echo-path-play" data-path-play aria-describedby="echo-path-caption"><span class="echo-path-icon" data-path-icon aria-hidden="true">▶</span><span data-path-label></span></button><p class="echo-path-caption" id="echo-path-caption" data-path-caption></p><ol class="echo-path-beads" data-path-beads aria-hidden="true"></ol></div>'
     finale_html = f'<div class="echo-finale-bar echo-js" data-finale-bar hidden role="group" {i18n_attrs(**{"aria-label": ("Finale", "终章")})}><span class="echo-finale-mark" aria-hidden="true">♫</span><span class="echo-finale-caption" data-finale-caption></span><button type="button" class="echo-finale-play" data-finale-play><span data-finale-icon aria-hidden="true">▶</span><span data-finale-label></span></button><span class="echo-sr" data-finale-status role="status" aria-live="polite"></span><i class="echo-finale-run" aria-hidden="true"></i></div>'
     main = f'''<main id="main" class="echo-main" tabindex="-1">
-    <div class="echo-top"><a href="../../gallery.html#games">← {b('Work · Games','作品 · 游戏')}</a><span>2017 / 2026</span></div>
+    <div class="echo-top"><a{i18n_attrs(href=("../../gallery.html#games", "../../gallery.zh.html#games"))}>← {b('Work · Games','作品 · 游戏')}</a><span>2017 / 2026</span></div>
     <header class="echo-intro">
       <div class="echo-intro-copy"><p class="echo-kicker">{b('A MUSIC RIDDLE · EXPANDED EDITION','音乐谜题 · 扩展版')}</p>
       <h1>{b('Endless','漫无止尽')}<br>{b('Echoes','的回响')}</h1>
