@@ -9,6 +9,7 @@ from statistics import median
 
 from bs4 import BeautifulSoup
 
+from lola_chart_text import localize_chart_text
 from piece_contact_foot import render_piece_contact_block
 from site_languages import canonical_url
 from site_shell import ROOT
@@ -57,7 +58,8 @@ def chinese_page(source: str, work: dict, origin: str) -> str:
     # The translation literal is JSON apart from its two language keys and trailing commas.
     raw = scripts.split("window.I18N = ", 1)[1].split("</script>", 1)[0]
     raw = re.sub(r"(?m)^(en|zh):", r'"\1":', raw)
-    translations = json.JSONDecoder().raw_decode(re.sub(r",(\s*[}])", r"\1", raw))[0]["zh"]
+    locales = json.JSONDecoder().raw_decode(re.sub(r",(\s*[}])", r"\1", raw))[0]
+    translations = locales["zh"]
     data = json.JSONDecoder().raw_decode(scripts.split("window.LOLA_DATA=", 1)[1])[0]
     icons = json.JSONDecoder().raw_decode(scripts)[0]
     is_matchups = work["id"] == "lola-matchups"
@@ -105,6 +107,8 @@ def chinese_page(source: str, work: dict, origin: str) -> str:
     put(soup.find(id="absAnswer"), soup.select_one("#end .answer").decode_contents())
     findings = soup.select("#end .vcol.yes li")
     put(soup.find(id="absList"), "".join(str(item) for item in findings[:3]))
+
+    localize_chart_text(soup, locales, is_matchups)
 
     slot = soup.find(id="slotCap")
     slot.string = "示意阵容：盖伦、李青、阿狸、金克丝、锤石对阵德莱厄斯、蔚、亚索、凯特琳、蕾欧娜。"

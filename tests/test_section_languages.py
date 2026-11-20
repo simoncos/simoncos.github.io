@@ -94,6 +94,31 @@ class SectionLanguages(unittest.TestCase):
                         for key in ("h1", "#absList", ".foot-h"):
                             self.assertRegex(doc.select_one(key).get_text(), r"[\u4e00-\u9fff]")
 
+    def test_lola_chinese_chart_captions_are_present_without_scripts(self):
+        snippets = {
+            "lola-draft": {
+                "#coneNote": ("出场不少于 200 次", "超出运气范围"),
+                "#matrixCap": ("8,128 个英雄组合",),
+            },
+            "lola-matchups": {
+                "#netCap": ("段位指", "37,065"),
+                "#netLegend": ("上单", "箭头"),
+                "#varCap": ("经验贝叶斯", "18,002"),
+                "#valCap": ("加权最小二乘拟合", "0.91 ± 0.02"),
+            },
+        }
+        for slug, chart_text in snippets.items():
+            with self.subTest(slug=slug):
+                doc = BeautifulSoup((ROOT / f"gallery/research/{slug}.zh.html").read_text(), "html.parser")
+                captions = doc.select("main figcaption")
+                self.assertTrue(captions)
+                for caption in captions:
+                    self.assertRegex(caption.get_text(), r"[一-鿿]")
+                for selector, phrases in chart_text.items():
+                    text = doc.select_one(selector).get_text(" ", strip=True)
+                    for phrase in phrases:
+                        self.assertIn(phrase, text)
+
     def test_film_search_matches_both_scripts_with_one_disclosure_button(self):
         doc = BeautifulSoup((ROOT / "blogs.zh.html").read_text(), "html.parser")
         for slug in ("void-flower", "void-flower-making-of"):
